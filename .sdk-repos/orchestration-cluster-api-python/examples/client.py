@@ -9,6 +9,7 @@ from camunda_orchestration_sdk import (
     CamundaClient,
     LiveClock,
     NullLogger,
+    SeededRandom,
 )
 
 
@@ -134,3 +135,14 @@ def clock_example() -> None:
     topology = client.get_topology()
     print(f"Fetched {topology.cluster_size} nodes in {client.clock.now() - started:.3f}s")
 # endregion Clock
+
+
+# region Random
+def random_example() -> None:
+    # SDK jitter -- worker startup staggering -- draws from this source. Seeding it makes
+    # that jitter reproducible; omit it and the live, unseeded source is used.
+    random = SeededRandom.from_env()
+    client = CamundaClient(random=random)
+
+    print(f"Replay this run with {client.random!r}")
+# endregion Random

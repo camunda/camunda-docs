@@ -32,13 +32,7 @@ A generic key-value metadata bag attached to the cluster variable. Values must b
 ### value
 
 ```ts
-value: object;
+value: unknown;
 ```
 
 The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
-
-#### Index Signature
-
-```ts
-[key: string]: unknown
-```
