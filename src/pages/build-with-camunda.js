@@ -908,8 +908,8 @@ function BuildWithCamunda() {
             <div className={styles.bundleFallbackContent}>
               <ol className={styles.bundleFallbackDesc}>
                 <li>
-                  Download, extract, and run the v{GETTING_STARTED.version}{" "}
-                  getting started bundle for a Camunda 8 Run environment.
+                  Download, extract, and run the getting started bundle for a
+                  Camunda 8 Run environment.
                 </li>
                 <li>
                   Follow the instructions in{" "}
