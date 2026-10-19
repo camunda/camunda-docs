@@ -598,6 +598,19 @@ async def readme_engine_clock() -> None:
                 await client.run_workers()
     # endregion ReadmeEngineClock
 
+
+async def readme_seeded_random() -> None:
+    # region ReadmeSeededRandom
+    from camunda_orchestration_sdk import CamundaAsyncClient, ManualClock, SeededRandom
+
+    # Seeded from CAMUNDA_TEST_SEED when it is set, otherwise from a fresh random seed.
+    random = SeededRandom.from_env()
+    print(f"jitter source: {random!r}")  # names the seed to replay on failure
+
+    async with CamundaAsyncClient(clock=ManualClock(), random=random) as client:
+        ...  # worker startup jitter is now exact and repeatable
+    # endregion ReadmeSeededRandom
+
 async def readme_handler_wait() -> None:
     # region ReadmeHandlerWait
     from camunda_orchestration_sdk import ConnectedJobContext

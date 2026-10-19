@@ -349,13 +349,13 @@ Refer to the dedicated sections and API explorers to learn details about the API
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/",
+href:"/docs/apis-tools/migration-manuals/migrate-to-camunda-api/",
 label: "Tasklist API migration guide",
 docId:"apis-tools/migration-manuals/migrate-to-camunda-api"
 },
 {
 type:"link",
-href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/",
+href:"/docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/",
 label: "Orchestration Cluster API (REST)",
 docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"
 }
