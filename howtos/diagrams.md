@@ -42,15 +42,17 @@ In request-oriented diagrams, arrows point from the caller to the service it cal
 
 > Arrows show request direction. Responses return on the same connection.
 
-For diagrams that instead show data flow, topology, or dependencies, define that meaning explicitly. Do not mix meanings without labeling the distinction.
+For diagrams that instead show data flow, topology, or dependencies, define that meaning explicitly. Deployment topology diagrams use solid neutral-gray (`#434343`) arrows labeled `Deployment relationship`, with the note "Arrows show deployment relationships, not network requests." These arrows do not specify a network protocol. Do not mix meanings without labeling the distinction.
 
-| Connection category              | Pattern | Legend wording                                             |
-| -------------------------------- | ------- | ---------------------------------------------------------- |
-| HTTP or HTTPS                    | Dashed  | `HTTP(S)`                                                  |
-| gRPC                             | Solid   | `gRPC`                                                     |
-| Identity or authentication calls | Dotted  | `Identity API (HTTP(S))` or `OIDC requests`, as applicable |
+| Connection category              | Color             | Pattern | Legend wording                                             |
+| -------------------------------- | ----------------- | ------- | ---------------------------------------------------------- |
+| HTTP or HTTPS                    | Black (`#000000`) | Solid   | `HTTP(S)`                                                  |
+| gRPC                             | Navy (`#1F2A44`)  | Dashed  | `gRPC`                                                     |
+| Identity or authentication calls | Pink (`#C629CD`)  | Dotted  | `Identity API (HTTP(S))` or `OIDC requests`, as applicable |
 
-If a storage box represents several backend families, identify the connection accordingly, for example `HTTP(S) / database protocol`. Do not label Optimize's Elasticsearch/OpenSearch connection as a separate generic TCP interface: it uses HTTP(S).
+Use dotted pink for Identity API and OIDC requests even though they use HTTP(S). Keep labels specific to the request type: an Identity API permission lookup is not an OIDC request. Ordinary browser or ingress HTTP(S) traffic uses solid black, including requests to the Management Identity web UI.
+
+Use solid black for database connections too, and retain accurate protocol labels. If a storage box represents several backend families, identify the connection accordingly, for example `HTTP(S) / database protocol`. Do not label Optimize's Elasticsearch/OpenSearch connection as a separate generic TCP interface: it uses HTTP(S).
 
 Place a separate legend in unused space, preferably at the top right, with a bold **Connections** heading. Match each sample's color, pattern, width, and arrowhead to its connections. Include only categories present in that diagram. Leave enough space that samples cannot be mistaken for connections from a nearby box, without widening the canvas unnecessarily.
 
@@ -58,19 +60,20 @@ Place a separate legend in unused space, preferably at the top right, with a bol
 
 Use black text on a white background for these text-heavy diagrams. This follows the Camunda Color Palette handbook guidance updated September 21, 2026. The roles below are conventions for this diagram set, not official product color assignments.
 
-| Role                                         | Brand color    | Hex       |
-| -------------------------------------------- | -------------- | --------- |
-| Orchestration Cluster                        | Orangemunda    | `#FC5D0D` |
-| Optimize                                     | Greenmunda     | `#26D07C` |
-| Management Identity                          | Bernd's Hoodie | `#0072CE` |
-| Connectors                                   | Sardinia       | `#A2191F` |
-| Infrastructure and neutral internal boxes    | Heat Shield    | `#434343` |
-| HTTP(S) connections in the reviewed diagrams | Icemunda       | `#00A7B5` |
-| gRPC connections                             | Look Up        | `#1F2A44` |
-| Identity and authentication connections      | Purple Wool    | `#C629CD` |
-| Replica-card fill                            | Spacecraft     | `#F7F7F7` |
-| Text                                         | Black          | `#000000` |
-| Canvas and front-card fill                   | White          | `#FFFFFF` |
+| Role                                      | Brand color    | Hex       |
+| ----------------------------------------- | -------------- | --------- |
+| Orchestration Cluster                     | Orangemunda    | `#FC5D0D` |
+| Optimize                                  | Greenmunda     | `#26D07C` |
+| Management Identity                       | Bernd's Hoodie | `#0072CE` |
+| Connectors                                | Sardinia       | `#A2191F` |
+| Infrastructure and neutral internal boxes | Heat Shield    | `#434343` |
+| HTTP(S) and database connections          | Black          | `#000000` |
+| gRPC connections                          | Look Up        | `#1F2A44` |
+| Identity and authentication connections   | Purple Wool    | `#C629CD` |
+| Deployment relationships                  | Heat Shield    | `#434343` |
+| Replica-card fill                         | Spacecraft     | `#F7F7F7` |
+| Text                                      | Black          | `#000000` |
+| Canvas and front-card fill                | White          | `#FFFFFF` |
 
 Keep role colors consistent across related diagrams. Connection patterns and labels must convey meaning without relying on color alone. Avoid adding a new color for every internal function.
 
@@ -83,9 +86,9 @@ A brand color is not automatically accessible in every use. Follow [WCAG text co
 - Check the actual background, including tinted replica cards. Ratios measured against white do not establish contrast against other backgrounds.
 - Review thin lines at rendered size. Scaling and antialiasing can weaken their appearance even when the source color passes a numerical check.
 
-The reviewed palette has two known limitations on white: Icemunda is approximately **2.92:1**, and Greenmunda is approximately **2.02:1**. Their selection during visual review does not establish WCAG conformance. Dashes and labels address color-only distinctions, but do not increase these contrast ratios.
+The reviewed palette retains one known limitation on white: Greenmunda is approximately **2.02:1**. Its selection during visual review does not establish WCAG conformance. Patterns and labels address color-only distinctions, but do not increase contrast ratios. Solid black HTTP(S) connections replace the previously reviewed Icemunda connections, which were below the 3:1 graphical contrast target.
 
-For new diagrams, use Teal Nova (`#007E89`, approximately 4.83:1 on white) for HTTP(S) connections when they require 3:1 contrast. Use Greenmunda as a decorative accent alongside a sufficiently contrasting boundary when that boundary carries meaning. Review these choices with the author before changing an established diagram's palette. Track unresolved contrast limitations in the PR rather than describing the whole set as WCAG compliant.
+Use Greenmunda as a decorative accent alongside a sufficiently contrasting boundary when that boundary carries meaning. Review these choices with the author before changing an established diagram's palette. Track unresolved contrast limitations in the PR rather than describing the whole set as WCAG compliant.
 
 ## Make text readable at page width
 
