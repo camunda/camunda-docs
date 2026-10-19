@@ -70,10 +70,6 @@ In the **Message** section, set the **Key** and the **Value** that will be sent 
 
 ## Schema strategies
 
-:::caution
-Use Schema strategies with caution, as this is an [alpha feature](/components/early-access/alpha/alpha-features.md). Functionality may not be comprehensive and could change.
-:::
-
 This connector supports different schema strategies, offering a compact, fast, and binary data exchange format for Kafka messages.
 
 When using a schema strategy, each message is serialized according to a specific schema written in JSON format. This schema defines the Kafka message structure, ensuring the data conforms to a predefined format, and enables schema evolution strategies.
