@@ -86,6 +86,7 @@ These are the exact Helm values that Camunda uses in its continuous realistic-lo
 |                                | vCPU \[cores\]      |       3 |     3 |
 |                                | Memory \[GB\]       |       4 |     4 |
 |                                | Disk \[GB\]         |         |    64 |
+|                                | Disk IOPS           |         | 4,000 |
 | **Connectors**                 |                     |         |       |
 | #                              | 1                   |         |       |
 |                                | vCPU \[cores\]      |     0.2 |   0.2 |
@@ -121,6 +122,20 @@ In our sizing, retention is set to one day for the Camunda Exporter and three da
 Primary storage must use low-latency **SSDs**, as HDD-backed volumes are not supported. Disk **latency**, rather than throughput, is the critical metric. Cloud providers often report similar throughput figures for HDD and SSD volumes, but the difference in latency is what matters for Camunda. In testing, HDD-backed primary storage reduced throughput by approximately 50% compared with SSDs, increased commit latency, and triggered additional Raft snapshot replication between brokers.
 
 See [Command processing path](data-flow.md#command-processing-path) for the architectural context on why disk latency sits on the critical path, the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
+
+### Disk IOPS
+
+Camunda is IOPS-heavy: every broker flushes the log to disk as part of Raft commits, so each broker's volume needs enough sustained IOPS, in addition to the latency requirements in [supported environments](/reference/supported-environments.md#performance). The IOPS a broker needs depends on your workload and scales with the number of partitions it hosts. A cluster with a low load and few partitions can run with far fewer IOPS.
+
+- **Recommended:** provision **4,000 sustained IOPS** per broker for production workloads comparable to the configuration in [Baseline resource configuration](#baseline-resource-configuration), where each broker hosts three partitions. This leaves headroom over what we measured in our load tests, so short bursts do not throttle the volume. Measure your own workload.
+- **Disk bandwidth:** bandwidth (MiB/s) was not a limiting factor. Brokers write many small blocks, so the volume's IOPS limit is reached long before its bandwidth limit, and IOPS is the figure to size for.
+- **Smaller clusters:** clusters with a lower load or fewer partitions per broker need fewer IOPS and can use smaller disks, provided the volume still sustains the IOPS your workload requires.
+
+:::warning
+Many cloud providers scale volume IOPS with disk capacity, or offer burstable volume types that rely on burst credits. A small or burstable volume can run fine until its credits are exhausted, then throttle and cause higher commit latency, backpressure, and lower throughput. Before choosing or shrinking a disk, check the **sustained** (not burst) IOPS the provider guarantees for that size, and size the volume to meet your target IOPS without relying on burst credits.
+:::
+
+Elasticsearch IOPS was not a limiting factor in our tests. See [Elasticsearch scaling](#elasticsearch-scaling) for secondary storage sizing.
 
 ### Disk space
 
