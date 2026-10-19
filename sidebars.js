@@ -1695,6 +1695,7 @@ module.exports = {
       items: [
         "components/saas/organization/manage-plan/create-account",
         "components/saas/organization/manage-plan/available-plans",
+        "components/saas/camunda-help-center",
       ],
     },
     {
@@ -1705,18 +1706,36 @@ module.exports = {
         id: "components/saas/clusters",
       },
       items: [
-        "components/saas/clusters/create-cluster",
-        "components/saas/clusters/manage-cluster",
-        "components/saas/clusters/manage-api-clients",
-        "components/saas/clusters/manage-secrets",
-        "components/saas/clusters/manage-alerts",
-        "components/saas/clusters/manage-ip-allowlists",
-        "components/saas/clusters/create-backups",
-        "components/saas/clusters/settings",
-        "components/saas/clusters/connect-external-identity-provider",
-        "components/saas/clusters/cluster-capacity",
-        "components/saas/clusters/configure-audit-log",
-        "components/saas/auto-updates",
+        {
+          type: "category",
+          label: "Create and manage",
+          items: [
+            "components/saas/clusters/create-cluster",
+            "components/saas/clusters/manage-cluster",
+            "components/saas/clusters/settings",
+            "components/saas/auto-updates",
+          ],
+        },
+        {
+          type: "category",
+          label: "Access and security",
+          items: [
+            "components/saas/clusters/manage-api-clients",
+            "components/saas/clusters/manage-secrets",
+            "components/saas/clusters/connect-external-identity-provider",
+            "components/saas/clusters/manage-ip-allowlists",
+            "components/saas/clusters/configure-audit-log",
+          ],
+        },
+        {
+          type: "category",
+          label: "Monitor and operate",
+          items: [
+            "components/saas/clusters/cluster-capacity",
+            "components/saas/clusters/manage-alerts",
+            "components/saas/clusters/create-backups",
+          ],
+        },
         "components/saas/clusters/troubleshoot-clusters",
       ],
     },
@@ -1728,16 +1747,28 @@ module.exports = {
         id: "components/saas/organization/organization",
       },
       items: [
-        "components/saas/organization/organization-ownership",
-        "components/saas/organization/create-manage-users",
-        "components/saas/organization/manage-user-groups",
-        "components/saas/organization/resource-based-auth",
-        "components/saas/organization/external-sso",
+        {
+          type: "category",
+          label: "Users and access",
+          items: [
+            "components/saas/organization/create-manage-users",
+            "components/saas/organization/manage-user-groups",
+            "components/saas/organization/resource-based-auth",
+            "components/saas/organization/external-sso",
+            "components/saas/organization/organization-ownership",
+          ],
+        },
+        {
+          type: "category",
+          label: "Plan and usage",
+          items: [
+            "components/saas/organization/usage-history",
+            "components/saas/organization/usage-alerts",
+            "components/saas/organization/manage-plan/update-billing-reservations",
+          ],
+        },
         "components/saas/organization/view-organization-activity",
         "components/saas/organization/enable-alpha-features",
-        "components/saas/organization/usage-history",
-        "components/saas/organization/usage-alerts",
-        "components/saas/organization/manage-plan/update-billing-reservations",
         "components/saas/organization/switch-organization",
         "components/saas/organization/delete-account",
       ],
@@ -1745,6 +1776,10 @@ module.exports = {
     {
       type: "category",
       label: "Security",
+      link: {
+        type: "doc",
+        id: "components/saas/security",
+      },
       items: [
         {
           type: "category",
@@ -1778,6 +1813,10 @@ module.exports = {
     {
       type: "category",
       label: "Data",
+      link: {
+        type: "doc",
+        id: "components/saas/data-overview",
+      },
       items: [
         "components/saas/regions",
         "components/saas/data-locations",
@@ -1822,7 +1861,7 @@ module.exports = {
         "components/saas/status",
       ],
     },
-    "components/saas/camunda-help-center",
+    "components/saas/architecture",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
