@@ -990,8 +990,9 @@ $ ./camunda-start.sh
                   <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
                 <span>
-                  Camunda 8 Run requires OpenJDK 21–25. Node.js/npm not required
-                  for getting started bundle.
+                  Camunda 8 Run includes a bundled Java runtime, so no local
+                  OpenJDK installation is required. Node.js/npm not required for
+                  getting started bundle.
                 </span>
               </p>
             </div>
