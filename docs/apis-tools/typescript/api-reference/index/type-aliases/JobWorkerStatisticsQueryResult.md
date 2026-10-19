@@ -22,9 +22,3 @@ items: JobWorkerStatisticsItem[];
 ```
 
 The list of per-worker statistics items.
-
-### page
-
-```ts
-page: SearchQueryPageResponse;
-```

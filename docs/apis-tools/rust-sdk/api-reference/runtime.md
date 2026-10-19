@@ -167,6 +167,25 @@ Real time.
 settles without waiting. That covers cadence in tests; it does not bind the engine's
 clock, which is what an engine-bound implementation is for.
 
+## LiveRandom
+
+The default source: a process-wide generator seeded once from OS entropy.
+
+Rust's standard library has no random-number API, so this seeds the same generator
+as `SeededRandom` from `std::hash::RandomState`, the only entropy std exposes.
+
+## Random
+
+A source of uniformly distributed values in `[0, 1)`.
+
+Implementations must be safe to share across tasks and threads.
+
+### Methods
+
+| Method     | Description                                |
+| ---------- | ------------------------------------------ |
+| `next_f64` | A uniformly distributed value in `[0, 1)`. |
+
 ## Result
 
 Convenience alias used throughout the SDK.
@@ -174,3 +193,22 @@ Convenience alias used throughout the SDK.
 ```rust
 pub type Result<T> = std::result::Result<T, CamundaError>;
 ```
+
+## SeededRandom
+
+A deterministic `Random`. Two sources with the same seed produce the same
+sequence, so a test can assert the exact delays the SDK schedules and replay a
+failure.
+
+The generator is SplitMix64, taking the top 53 bits of each output. It is specified
+across the Camunda SDKs, so one seed yields the same sequence in every language. It
+is lock-free and safe to share; concurrent callers then share one sequence in
+nondeterministic order.
+
+### Methods
+
+| Method     | Description                                                                                                                                                                                  |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `from_env` | Seeds from `CAMUNDA_TEST_SEED` when it is set, otherwise from a fresh seed. Either way the source reports its seed through `seed` and its `Display` form, so a failing test can be replayed. |
+| `new`      | A source that replays the sequence for `seed`.                                                                                                                                               |
+| `seed`     | The seed this source was created with.                                                                                                                                                       |
