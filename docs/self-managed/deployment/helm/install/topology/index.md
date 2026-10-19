@@ -17,7 +17,7 @@ This is the baseline topology for a new 8.10 production deployment. Each release
 
 The Hub release can be shared across environments. If you're adding an Orchestration Cluster to an existing Hub, update that Hub's cluster inventory and follow the Orchestration Cluster installation steps.
 
-A single `combined` release remains supported and remains the chart default. Use it for evaluation, proofs of concept, and 8.9 compatibility. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md).
+For other situations, including evaluation with a single `combined` release, see [choose your topology](../index.md#choose-your-topology).
 
 <HelmCliSupport />
 
@@ -36,7 +36,7 @@ A single `combined` release remains supported and remains the chart default. Use
 8.7, 8.8, and 8.9 charts older than the minimum versions above have no `global.topology` key. They silently ignore `global.topology.mode` and deploy a combined release, so check the chart version before you set the role.
 :::
 
-The chart validates each role's requirements at render time and fails with a `[camunda][error]` message naming the missing value, so a misconfigured topology doesn't reach the cluster. For the per-role requirements, see the installation pages linked in the Role column of the table above.
+The chart validates some of each role's requirements at render time and fails with a `[camunda][error]` message naming the missing value. It doesn't validate all of them. Before you install, review the per-role requirements on the installation pages linked in the Role column of the table above.
 
 ## Install order
 

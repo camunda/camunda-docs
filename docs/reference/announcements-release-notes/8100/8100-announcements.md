@@ -22,30 +22,6 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_h
 
 :::
 
-## Known issues
-
-:::warning Physical Tenants with multiple identity providers
-Camunda 8.10 has known authentication and tenant isolation issues in a specific deployment scenario. You are affected only if all of the following apply:
-
-- You run Camunda 8.10 Self-Managed.
-- Your cluster has more than one Physical Tenant.
-- Your Physical Tenants use separate identity providers (IdPs).
-
-See [camunda#65501](https://github.com/camunda/camunda/issues/65501), [camunda#65582](https://github.com/camunda/camunda/issues/65582), [camunda#65597](https://github.com/camunda/camunda/issues/65597) and [camunda#65607](https://github.com/camunda/camunda/issues/65607). If this scenario applies to you, don't use this setup in production until you have upgraded to Camunda 8.10.4, which fixes these issues. Camunda 8.10.4 is released latest by the end of this week.
-:::
-
-:::warning Multiple identity providers: named providers ignore the global claims
-In Camunda 8.10, a named identity provider does not use the global `username-claim`, `client-id-claim` and `prefer-username-claim`. You are affected only if all of the following apply:
-
-- You run Camunda 8.10 Self-Managed.
-- You configure identity providers under `camunda.security.authentication.providers.oidc.<provider-id>`.
-- You set `username-claim`, `client-id-claim` or `prefer-username-claim` only in `camunda.security.authentication.oidc.*`, and not on each provider.
-
-Tokens and logins from these providers then use the default claims. A user gets the value of the `sub` claim as username, and an M2M client is treated as a user. They lose the permissions that you gave to their username or client ID. In Camunda 8.9, the global claims applied to all providers.
-
-See [camunda#65633](https://github.com/camunda/camunda/issues/65633). If this scenario applies to you, set `username-claim`, `client-id-claim` and `prefer-username-claim` on each provider until you have upgraded to Camunda 8.10.4, which fixes this issue. Camunda 8.10.4 is released latest by the end of this week.
-:::
-
 ## Supported environments
 
 <div className="release-announcement-row">
@@ -180,6 +156,21 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 Camunda 8.10 adds support for the Montréal, North America (`northamerica-northeast1`) region in Camunda 8 SaaS.
 
 <p className="link-arrow">[Supported GCP regions](/components/saas/regions.md#google-cloud-platform-gcp-regions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### New AWS region
+
+Camunda 8.10 adds support for the Ireland, Europe (`eu-west-1`) region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
 </div>
 </div>
@@ -923,7 +914,7 @@ Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declare
 
 `combined` remains the default and preserves existing single-release behavior, so no existing deployment changes on upgrade. For a new production deployment, the split topology is the baseline.
 
-`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 
 **Action:** None required for an existing deployment. For a new production deployment, see [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
 

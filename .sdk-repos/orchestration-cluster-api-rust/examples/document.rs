@@ -40,7 +40,7 @@ async fn create_document_link(document_id: String) -> Result<(), Box<dyn std::er
             document_id,
             store_id: None,
             content_hash: None,
-            document_link_request: Some(DocumentLinkRequest::default()),
+            document_link_request: DocumentLinkRequest::default(),
         })
         .await?;
     println!("{}", result.url);

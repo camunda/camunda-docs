@@ -1416,7 +1416,7 @@ The field to sort by.
 
 ## TenantSearchQuerySortRequestField
 
-The field to sort by.
+The field to sort by. `key` is deprecated and should not be used anymore.
 
 | Value      | Description |
 | ---------- | ----------- |

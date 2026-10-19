@@ -12,7 +12,9 @@
     "noEmit": true,
     "paths": {
       "@camunda8/orchestration-cluster-api": ["../src/index.ts"],
-      "@camunda8/orchestration-cluster-api/effect": ["../src/effect/index.ts"]
+      "@camunda8/orchestration-cluster-api/effect": ["../src/effect/index.ts"],
+      "@camunda8/orchestration-cluster-api/fn": ["../src/fn/index.ts"],
+      "#platform": ["../src/runtime/platform/node.ts"]
     }
   },
   "include": ["./*.ts"]

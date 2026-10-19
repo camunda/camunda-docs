@@ -48,3 +48,22 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 
 </div>
 </div>
+
+## Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Grafana dashboards use the v2 dashboard schema and require Grafana 13 or later {#grafana-dashboards-v2-schema}
+
+Starting with Camunda 8.11, the Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/). Camunda 8.10 is the last release that provides the dashboards in the classic format, which [Camunda deprecated in 8.10](/reference/announcements-release-notes/8100/8100-announcements.md#classic-grafana-dashboard-format-deprecated). The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
+
+The dashboards of 8.11 require Grafana 13 or later. Earlier Grafana versions cannot import the v2 dashboard schema.
+
+**Action:** Before you move to the dashboards of 8.11, upgrade your Grafana instance to version 13 or later. To keep using the dashboards in the classic format, import them from the `stable/8.10` branch or from the branch of the release you run.
+
+</div>
+</div>

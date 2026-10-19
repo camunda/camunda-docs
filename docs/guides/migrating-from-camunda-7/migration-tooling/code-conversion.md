@@ -24,10 +24,11 @@ You must especially rewrite code that does the following:
 
 This guide covers tools and approaches to help with code conversion:
 
-1. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
-2. [Code Conversion Patterns](#code-conversion-patterns): Apply documented patterns in manual or AI-assisted migration
-3. [AI-assisted migration](#leverage-ai-for-migration): Use the Camunda migration agent skill for a guided Java migration
-4. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Optionally create a deterministic first diff for repeated, supported, primarily syntactic transformations
+1. [AI-assisted migration](#leverage-ai-for-migration): Use the Camunda migration agent skill for a guided Java migration
+2. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
+3. [Java API mapping reference](#key-api-mapping-reference): Look up Camunda 8 equivalents for Java types, test assertions, and imports
+4. [Code Conversion Patterns](#code-conversion-patterns): Apply documented patterns in manual or AI-assisted migration
+5. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Optionally create a deterministic first diff for repeated, supported, primarily syntactic transformations
 
 Additionally, you will find information about:
 
@@ -38,12 +39,18 @@ Additionally, you will find information about:
 
 Choose a Java migration path after you inventory your codebase. Before you use a path across a broad migration, run both paths on representative Java code and compare the results. Review is mandatory for both paths.
 
-| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior. |
-| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run OpenRewrite, then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup.                               |
+| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                                                             |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior.                                |
+| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run the [8.10.0 OpenRewrite recipes](#refactoring-recipes-using-openrewrite), then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup. |
 
 Neither path guarantees lower token use, cost, or migration time.
+
+## Leverage AI for migration
+
+Use the [Camunda migration agent skill](./index.md#agentic-migration) to migrate Java code and [process tests](./index.md#migrate-process-tests). The skill inventories your source code, then lets you select an AI-first, pattern-guided path or an optional recipe-assisted path.
+
+[Set up and run the skill](./index.md#set-up-and-run) from your Camunda 7 project directory. Use a capable coding model and review every conversion. Before migrating a broad codebase, compare both Java paths with representative code.
 
 ## API mapping guide
 
@@ -85,6 +92,76 @@ Use the API mapping guide to:
 - Check if a planned feature is on the roadmap
 - Plan your migration strategy based on API availability
   :::
+
+## Java API mapping reference {#key-api-mapping-reference}
+
+These tables summarize common Java API, test assertion, and import mappings between Camunda 7 and Camunda 8. Use them when you migrate code manually or review output from the agent skill or OpenRewrite recipes.
+
+### Type mappings
+
+| Camunda 7                                      | Camunda 8                                         |
+| ---------------------------------------------- | ------------------------------------------------- |
+| `ProcessEngine`                                | `CamundaClient`                                   |
+| `RuntimeService`                               | `CamundaClient` (methods directly on client)      |
+| `TaskService`                                  | `CamundaClient` (user task methods)               |
+| `RepositoryService`                            | `CamundaClient` (deployment/definition methods)   |
+| `ProcessInstance`                              | `ProcessInstanceEvent`                            |
+| `Task`                                         | `UserTask`                                        |
+| `Deployment`                                   | `DeploymentEvent`                                 |
+| `Batch`                                        | No direct equivalent (single instance operations) |
+| `VariableMap`                                  | `Map<String, Object>`                             |
+| `TypedValue` (IntegerValue, StringValue, etc.) | Plain Java types                                  |
+| `DelegateExecution`                            | `ActivatedJob`                                    |
+| `ExternalTask` + `ExternalTaskService`         | `JobClient` + `ActivatedJob`                      |
+| `BpmnError`                                    | `CamundaError.bpmnError(...)`                     |
+| `ProcessEngineException`                       | `CamundaError.jobError(...)`                      |
+
+### Parameter name changes
+
+:::warning
+The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanings** between Camunda 7 and Camunda 8. Review these carefully during migration.
+:::
+
+| Description                      | Camunda 7                  | Camunda 8                               |
+| -------------------------------- | -------------------------- | --------------------------------------- |
+| BPMN model identifier (from XML) | `processDefinitionKey`     | `bpmnProcessId` / `processDefinitionId` |
+| Unique key from deployment       | `processDefinitionId`      | `processDefinitionKey`                  |
+| Process instance identifier      | `String processInstanceId` | `Long processInstanceKey`               |
+
+### Test assertion mappings
+
+Camunda 7 assertions check the state once. Most [Camunda Process Test](/apis-tools/testing/assertions.md) (CPT) assertions wait until the expected state is reached or the [assertion timeout](/apis-tools/testing/assertions.md#assertion-timeout) ends (10 seconds by default). Before a negative assertion such as `hasNoActiveElements`, first assert a positive state, such as an active or completed element, so the negative check doesn't pass before the process gets there. For all public Camunda 7 assertions, see the [complete assertion mapping](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/40-test-assertions/10-assertions/80-assertion-mapping.md) in the pattern catalog.
+
+| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                                                                           |
+| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`, or `isTerminated()` for a canceled instance                                                           |
+| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                                                              |
+| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                                                                    |
+| `assertThat(pi).isNotWaitingAt("id")`           | `assertThat(pi).hasNoActiveElements("id")`                                                                                            |
+| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`, or `hasTerminatedElements("id")` for an element that a boundary event interrupted        |
+| `assertThat(pi).hasNotPassed("id")`             | No exact counterpart. Use `assertThat(pi).hasNotActivatedElements("id")` only if the element must never be activated                  |
+| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                                                                    |
+| `assertThat(pi).variables().containsKey(k)`     | `assertThat(pi).hasVariableNames(k)`                                                                                                  |
+| `assertThat(task()).hasName("x")`               | `assertThatUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey())).isCreated().hasName("x")`                        |
+| `assertThat(task()).isAssignedTo("u")`          | No direct counterpart. Search created user tasks by `pi.getProcessInstanceKey()`, assert exactly one result, then assert its assignee |
+| `complete(task())`                              | `processTestContext.completeUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey()))`                                |
+| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")`                                               |
+
+### Import replacements
+
+| Remove                                                                    | Add                                                              |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `org.camunda.bpm.engine.*`                                                | `io.camunda.client.*`                                            |
+| `org.camunda.bpm.engine.delegate.*`                                       | `io.camunda.client.api.worker.JobHandler`                        |
+| `org.camunda.bpm.engine.variable.*`                                       | (plain Java collections)                                         |
+| `org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*`            | `io.camunda.process.test.api.CamundaAssert.*`                    |
+| `org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*`             | `io.camunda.process.test.api.CamundaAssert.*`                    |
+| N/A                                                                       | `io.camunda.process.test.api.assertions.ElementSelectors.byName` |
+| N/A                                                                       | `io.camunda.process.test.api.assertions.UserTaskSelectors`       |
+| N/A                                                                       | `io.camunda.process.test.api.CamundaProcessTestContext`          |
+| N/A                                                                       | `io.camunda.process.test.api.CamundaSpringProcessTest`           |
+| `org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication` | `io.camunda.client.annotation.Deployment`                        |
 
 ## Code conversion patterns
 
@@ -147,6 +224,10 @@ Test code:
 - User task assertions
 - Message correlation
 - Job execution
+- Test setup (JUnit harness, test deployments, and Spring Boot tests)
+- Delegate, worker, call activity, and decision mocks
+- Decision tests
+- Coverage and scenario tests
 
 ### Accessing the patterns
 
@@ -164,7 +245,7 @@ The pattern catalog is actively maintained by Camunda consultants, partners, and
 The patterns inform the OpenRewrite recipe development. If you find a pattern that's not yet covered by the recipes, you can:
 
 1. Use the pattern for manual migration
-2. Reference the pattern when [extending the recipes](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/recipes/developer_guide.md)
+2. Reference the pattern when [extending the recipes](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/8.10.0/code-conversion/recipes/developer_guide.md)
 3. Contribute a new recipe based on the pattern
 
 ## Refactoring recipes (using OpenRewrite)
@@ -180,7 +261,9 @@ The Camunda 7 to 8 OpenRewrite recipes help you automatically refactor:
 - Client code using the Camunda 7 Java API
 - Java delegates and execution listeners (glue code)
 - External task workers
-- Unit tests (work in progress)
+- Test assertions from camunda-bpm-assert
+
+The recipes don't migrate test harnesses, test deployments, or timers in tests. To migrate complete tests to Camunda Process Test, use the [Camunda migration agent skill](./index.md#migrate-process-tests).
 
 :::note
 The recipes are still under development. Expect recipes to work out-of-the-box only in simple scenarios. For complex codebases, you may need to extend or customize them to suit your needs.
@@ -225,7 +308,7 @@ Add the following to your `pom.xml`:
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
                 <artifactId>rewrite-maven-plugin</artifactId>
-                <version>6.29.0</version>
+                <version>6.46.1</version>
                 <configuration>
                     <activeRecipes>
                         <recipe>io.camunda.migration.code.recipes.AllClientRecipes</recipe>
@@ -238,7 +321,7 @@ Add the following to your `pom.xml`:
                     <dependency>
                         <groupId>io.camunda</groupId>
                         <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
-                        <version>0.3.7</version>
+                        <version>8.10.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -299,12 +382,12 @@ Recipes do not resolve migration design decisions such as business behavior, eve
 If Camunda 7 code remains after applying recipes:
 
 1. Refer to the [code conversion patterns](#code-conversion-patterns) for manual migration guidance
-2. Extend the recipes for your specific use case (see the [developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/recipes/developer_guide.md))
+2. Extend the recipes for your specific use case (see the [developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/8.10.0/code-conversion/recipes/developer_guide.md))
 3. Remove or refactor the code if the functionality is no longer available
 
 ### Additional resources
 
-- [Recipe source code and developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/recipes)
+- [Recipe source code and developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/8.10.0/code-conversion/recipes)
 - [OpenRewrite documentation](https://docs.openrewrite.org/)
 - [Complete migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
 
@@ -319,76 +402,6 @@ The [Camunda migration agent skill](./index.md#agentic-migration) runs the Diagr
 :::
 
 For full documentation, see the [Diagram Converter guide](./diagram-converter.md).
-
-## Leverage AI for migration
-
-Use the [Camunda migration agent skill](./index.md#agentic-migration) to migrate Java code. The skill inventories your source code, then lets you select an AI-first, pattern-guided path or an optional recipe-assisted path.
-
-[Set up and run the skill](./index.md#set-up-and-run) from your Camunda 7 project directory. Use a capable coding model and review every conversion. Before migrating a broad codebase, compare both Java paths with representative code.
-
-### Key API mapping reference
-
-These tables summarize common mappings between Camunda 7 and Camunda 8. Use them to understand and review migration output.
-
-#### Type mappings
-
-| Camunda 7                                      | Camunda 8                                         |
-| ---------------------------------------------- | ------------------------------------------------- |
-| `ProcessEngine`                                | `CamundaClient`                                   |
-| `RuntimeService`                               | `CamundaClient` (methods directly on client)      |
-| `TaskService`                                  | `CamundaClient` (user task methods)               |
-| `RepositoryService`                            | `CamundaClient` (deployment/definition methods)   |
-| `ProcessInstance`                              | `ProcessInstanceEvent`                            |
-| `Task`                                         | `UserTask`                                        |
-| `Deployment`                                   | `DeploymentEvent`                                 |
-| `Batch`                                        | No direct equivalent (single instance operations) |
-| `VariableMap`                                  | `Map<String, Object>`                             |
-| `TypedValue` (IntegerValue, StringValue, etc.) | Plain Java types                                  |
-| `DelegateExecution`                            | `ActivatedJob`                                    |
-| `ExternalTask` + `ExternalTaskService`         | `JobClient` + `ActivatedJob`                      |
-| `BpmnError`                                    | `CamundaError.bpmnError(...)`                     |
-| `ProcessEngineException`                       | `CamundaError.jobError(...)`                      |
-
-#### Parameter name changes
-
-:::important
-The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanings** between Camunda 7 and Camunda 8. Review these carefully during migration.
-:::
-
-| Description                      | Camunda 7                  | Camunda 8                               |
-| -------------------------------- | -------------------------- | --------------------------------------- |
-| BPMN model identifier (from XML) | `processDefinitionKey`     | `bpmnProcessId` / `processDefinitionId` |
-| Unique key from deployment       | `processDefinitionId`      | `processDefinitionKey`                  |
-| Process instance identifier      | `String processInstanceId` | `Long processInstanceKey`               |
-
-#### Test assertion mappings
-
-| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                               |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                             |
-| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`                                                          |
-| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                |
-| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                      |
-| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`                                             |
-| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                      |
-| `assertThat(task()).hasName("x")`               | `assertThat(UserTaskSelectors.byTaskName("x")).hasName("x")`                            |
-| `assertThat(task()).isAssignedTo("u")`          | `assertThat(UserTaskSelectors.byTaskName("x")).hasAssignee("u")`                        |
-| `complete(task())`                              | `processTestContext.completeUserTask("name")`                                           |
-| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")` |
-
-#### Import replacements
-
-| Remove                                                                    | Add                                                              |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `org.camunda.bpm.engine.*`                                                | `io.camunda.client.*`                                            |
-| `org.camunda.bpm.engine.delegate.*`                                       | `io.camunda.client.api.worker.JobHandler`                        |
-| `org.camunda.bpm.engine.variable.*`                                       | (plain Java collections)                                         |
-| `org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*`            | `io.camunda.process.test.api.CamundaAssert.*`                    |
-| N/A                                                                       | `io.camunda.process.test.api.assertions.ElementSelectors.byName` |
-| N/A                                                                       | `io.camunda.process.test.api.assertions.UserTaskSelectors`       |
-| N/A                                                                       | `io.camunda.process.test.api.CamundaProcessTestContext`          |
-| N/A                                                                       | `io.camunda.process.test.api.CamundaSpringProcessTest`           |
-| `org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication` | `io.camunda.client.annotation.Deployment`                        |
 
 ## Example: Adjust a Spring Boot application
 

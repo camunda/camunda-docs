@@ -11,7 +11,7 @@ mdx:
 ## CamundaClient
 
 ```python
-class CamundaClient(configuration=None, auth_provider=None, logger=None, clock=None, **kwargs)
+class CamundaClient(configuration=None, auth_provider=None, logger=None, clock=None, random=None, **kwargs)
 ```
 
 Bases: `object`
@@ -24,6 +24,7 @@ Bases: `object`
 | `auth_provider` | [AuthProvider](runtime.md#camunda_orchestration_sdk.runtime.auth.AuthProvider)                                         |             |
 | `logger`        | [CamundaLogger](runtime.md#camunda_orchestration_sdk.runtime.logging.CamundaLogger) \| `None`                          |             |
 | `clock`         | `Clock` \| `None`                                                                                                      |             |
+| `random`        | `RandomSource` \| `None`                                                                                               |             |
 | `kwargs`        | `Any`                                                                                                                  |             |
 
 ### activate_ad_hoc_sub_process_activities()
@@ -991,6 +992,7 @@ Cancel process instance
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.NotFoundError** – If the response status code is 404. The process instance is not found.
+  - **errors.ConflictError** – If the response status code is 409. The process instance cannot be canceled, for example because it is already being terminated or because it is a child process instance. More details are provided in the response body.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.GatewayTimeoutError** – If the response status code is 504. The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response. Troubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists
@@ -1030,8 +1032,12 @@ Cancel process instances (batch)
 
 > Cancels multiple active or suspended process instances.
 >
-> Since only ACTIVE and SUSPENDED root instances can be cancelled, any given filters for state and
-> parentProcessInstanceKey are ignored and overridden during this batch operation.
+> Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch
+> to the given states. Requesting any state other than ACTIVE or SUSPENDED through the $eq or
+> $in operators is rejected. Other state operators ($neq, $exists, $like) are applied as
+> given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,
+> both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey
+> is ignored and overridden during this batch operation.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -1689,7 +1695,7 @@ def create_document_example() -> None:
 ### create_document_link()
 
 ```python
-def create_document_link(document_id, *, data=<camunda_orchestration_sdk.types.Unset object>, store_id=<camunda_orchestration_sdk.types.Unset object>, content_hash=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+def create_document_link(document_id, *, data, store_id=<camunda_orchestration_sdk.types.Unset object>, content_hash=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
 ```
 
 Create document link
@@ -1700,13 +1706,13 @@ Create document link
 
 **Parameters:**
 
-| Parameter      | Type                             | Description                                      |
-| -------------- | -------------------------------- | ------------------------------------------------ |
-| `document_id`  | `str`                            | Document Id that uniquely identifies a document. |
-| `store_id`     | `str` \| `Unset`                 |                                                  |
-| `content_hash` | `str` \| `Unset`                 |                                                  |
-| `data`         | `DocumentLinkRequest` \| `Unset` |                                                  |
-| `kwargs`       | `Any`                            |                                                  |
+| Parameter      | Type                  | Description                                      |
+| -------------- | --------------------- | ------------------------------------------------ |
+| `document_id`  | `str`                 | Document Id that uniquely identifies a document. |
+| `store_id`     | `str` \| `Unset`      |                                                  |
+| `content_hash` | `str` \| `Unset`      |                                                  |
+| `data`         | `DocumentLinkRequest` |                                                  |
+| `kwargs`       | `Any`                 |                                                  |
 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -1902,7 +1908,7 @@ def create_global_cluster_variable_example(name: ClusterVariableName) -> None:
     result = client.create_global_cluster_variable(
         data=CreateClusterVariableRequest(
             name=name,
-            value=CreateClusterVariableRequestValue.from_dict({"key": "my-value"}),
+            value={"key": "my-value"},
         ),
     )
 
@@ -1969,7 +1975,7 @@ Create group
 
 > Create a new group.
 >
-> The supplied groupId is validated against ^[a-zA-Z0-9_~@.+-]+$
+> The supplied groupId is validated against \`\` ^[a-zA-Z0-9_~@.+-]+$ \`\`
 > (max 256 characters) by IdentifierValidator.validateId in the
 > runtime. This strict validation applies wherever the Groups API
 > is available: in OIDC deployments that set
@@ -2302,7 +2308,7 @@ def create_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVar
         tenant_id=tenant_id,
         data=CreateClusterVariableRequest(
             name=name,
-            value=CreateClusterVariableRequestValue.from_dict({"key": "tenant-value"}),
+            value={"key": "tenant-value"},
         ),
     )
 
@@ -7450,6 +7456,13 @@ def publish_message_example() -> None:
     print(f"Message key: {result.message_key}")
 ```
 
+### _property_ random _: RandomSource_
+
+the injected source when supplied, else the live one.
+
+- **Type:**
+  Randomness behind SDK jitter
+
 ### reset_clock()
 
 ```python
@@ -7535,7 +7548,7 @@ def resolve_incident_example(incident_key: IncidentKey) -> None:
 ### resolve_incidents_batch_operation()
 
 ```python
-def resolve_incidents_batch_operation(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+def resolve_incidents_batch_operation(*, data, **kwargs)
 ```
 
 Resolve related incidents (batch)
@@ -7549,10 +7562,10 @@ Resolve related incidents (batch)
 
 **Parameters:**
 
-| Parameter | Type                                                                | Description                                                                                            |
-| --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `data`    | `ProcessInstanceIncidentResolutionBatchOperationRequest` \| `Unset` | The process instance filter that defines which process instances should have their incidents resolved. |
-| `kwargs`  | `Any`                                                               |                                                                                                        |
+| Parameter | Type                                                     | Description                                                                                            |
+| --------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `data`    | `ProcessInstanceIncidentResolutionBatchOperationRequest` | The process instance filter that defines which process instances should have their incidents resolved. |
+| `kwargs`  | `Any`                                                    |                                                                                                        |
 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
@@ -11880,7 +11893,7 @@ def update_global_cluster_variable_example(name: ClusterVariableName) -> None:
     result = client.update_global_cluster_variable(
         name=name,
         data=UpdateClusterVariableRequest(
-            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-value"}),
+            value={"key": "updated-value"},
         ),
     )
 
@@ -12271,7 +12284,7 @@ def update_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVar
         tenant_id=tenant_id,
         name=name,
         data=UpdateClusterVariableRequest(
-            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-tenant-value"}),
+            value={"key": "updated-tenant-value"},
         ),
     )
 
