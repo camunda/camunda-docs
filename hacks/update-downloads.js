@@ -620,7 +620,7 @@ function selectGithubRelease(releases, { prerelease, assetPrefix }) {
 async function fetchGettingStarted() {
   const releases = await fetchGithubReleases("camunda/camunda");
   const release = selectGithubRelease(releases, {
-    prerelease: false,
+    prerelease: true,
     assetPrefix: "camunda8-getting-started-bundle-",
   });
 
