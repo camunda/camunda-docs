@@ -85,10 +85,10 @@ The following sections cover changes that apply across the entire API, regardles
 
 The base URL has changed for both SaaS and Self-Managed deployments. Update any hardcoded URLs or environment variables in your integration.
 
-| Environment  | Web Modeler API v1                        | Camunda Hub API v2                    |
-| ------------ | ----------------------------------------- | ------------------------------------- |
-| SaaS         | `https://modeler.cloud.camunda.io/api/v1` | `https://hub.cloud.camunda.io/api/v2` |
-| Self-Managed | `http://localhost:8070/api/v1`            | `http://localhost:8088/api/v2`        |
+| Environment  | Web Modeler API v1                        | Camunda Hub API v2              |
+| ------------ | ----------------------------------------- | ------------------------------- |
+| SaaS         | `https://modeler.cloud.camunda.io/api/v1` | `https://hub.camunda.io/api/v2` |
+| Self-Managed | `http://localhost:8070/api/v1`            | `http://localhost:8088/api/v2`  |
 
 In Camunda 8 Self-Managed, the URLs depend on your configuration. The URLs and ports provided in this table are examples based on a [no-domain Helm deployment to a local kind cluster](/self-managed/deployment/helm/cloud-providers/kind.md#no-domain-mode-deployment).
 
@@ -884,7 +884,7 @@ Replace `{baseURL}` with the Camunda Hub base URL. The version keys must be for 
 For example:
 
 ```bash
-https://hub.cloud.camunda.io/diagrams/98634f96-52e9-4c00-8702-893a12803771/versions/2b6fd548-e107-4338-ae59-37a609f65202...78e0f8c5-0462-4521-bff9-5f432d689925
+https://hub.camunda.io/diagrams/98634f96-52e9-4c00-8702-893a12803771/versions/2b6fd548-e107-4338-ae59-37a609f65202...78e0f8c5-0462-4521-bff9-5f432d689925
 ```
 
 ## Info API
