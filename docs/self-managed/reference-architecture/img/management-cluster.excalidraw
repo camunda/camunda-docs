@@ -232,7 +232,7 @@
       "index": "a5"
     },
     {
-      "strokeColor": "#434343",
+      "strokeColor": "#0072CE",
       "backgroundColor": "#FFFFFF",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -1058,7 +1058,7 @@
       },
       "endBinding": {
         "elementId": "db",
-        "focus": 0.8636363636363636,
+        "focus": 0.7272727272727273,
         "gap": 4
       },
       "lastCommittedPoint": null,
@@ -1066,14 +1066,12 @@
       "type": "arrow",
       "x": 616,
       "y": 720,
-      "width": 166,
+      "width": 196,
       "height": 216,
       "points": [
         [0, 0],
-        [-96, 0],
-        [-96, 146],
-        [-166, 146],
-        [-166, 216]
+        [-196, 0],
+        [-196, 216]
       ],
       "index": "aQ"
     },
@@ -1106,7 +1104,7 @@
       "autoResize": false,
       "id": "mt_a",
       "type": "text",
-      "x": 540,
+      "x": 440,
       "y": 790,
       "width": 244,
       "height": 50,
