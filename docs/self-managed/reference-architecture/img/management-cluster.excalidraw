@@ -380,9 +380,6 @@
       "height": 25,
       "text": "REST API",
       "fontSize": 20,
-      "customData": {
-        "svgFontWeight": 700
-      },
       "index": "a9"
     },
     {
@@ -453,9 +450,6 @@
       "height": 25,
       "text": "WebSocket",
       "fontSize": 20,
-      "customData": {
-        "svgFontWeight": 700
-      },
       "index": "aB"
     },
     {
