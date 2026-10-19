@@ -74,7 +74,9 @@ Camunda Hub uses a separate Management Identity deployment, distinct from the em
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+<!-- Editable source: ./img/orchestration-cluster.excalidraw. Adapted from PR #10011. -->
+
+![Orchestration Cluster with Zeebe, Operate, Tasklist, and Admin, connected to clients and web UIs through ingress, Connectors, secondary storage, and an OIDC provider.](./img/orchestration-cluster.svg)
 
 The Orchestration Cluster is the core of Camunda.
 
@@ -92,6 +94,12 @@ This unified architecture ensures seamless communication, consistent state manag
 #### Optimize
 
 [Optimize](/components/optimize/what-is-optimize.md) is a business intelligence tool for analyzing bottlenecks and examining improvements in automated processes. It analyzes process data exported by an Orchestration Cluster.
+
+<!-- Editable source: ./img/optimize.excalidraw. Adapted from PR #10011. -->
+
+![Optimize deployment with Ingress forwarding web UI requests to Optimize, which queries secondary storage and either shared or dedicated Management Identity.](./img/optimize.svg)
+
+Optimize imports Zeebe records from Elasticsearch or OpenSearch and stores its own analytics data there. The exporters run in the Orchestration Cluster. Optimize calls the Management Identity API to retrieve permissions and tenant authorizations.
 
 Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. Optimize requires Management Identity and can't use the Orchestration Cluster's Admin. It can use the Management Identity in the management plane, shared with Camunda Hub, or a separate one when Physical Tenants need identical logical tenant IDs enforced independently. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants).
 
