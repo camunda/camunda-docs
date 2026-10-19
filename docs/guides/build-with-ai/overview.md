@@ -34,7 +34,7 @@ Build Camunda solutions with ProcessOS, agentic orchestration, and MCP integrati
 </div>
 
 <div style={{display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '50px'}}>
-<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Re-engineer processes with ProcessOS" href="../../../components/process-os/overview/">Re-engineer processes with ProcessOS</a>
+<p class="link-button" style={{margin: 0}}>[Re-engineer processes with ProcessOS](../../components/process-os/overview.md)</p>
 <a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')}>Set up your AI development environment</a>
 </div>
 

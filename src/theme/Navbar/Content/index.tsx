@@ -17,10 +17,29 @@ import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
 import SearchBar from "@theme/SearchBar";
 import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
 import NavbarLogo from "@theme/Navbar/Logo";
+import Link from "@docusaurus/Link";
+import { useActivePluginAndVersion } from "@docusaurus/plugin-content-docs/client";
 import styles from "./styles.module.css";
 
 function useNavbarItems() {
   return useThemeConfig().navbar.items;
+}
+
+// Badge linking to the release information page, shown only in the
+// unreleased (/next) docs version.
+function ReleaseInfoBadge(): JSX.Element | null {
+  const activeVersion = useActivePluginAndVersion()?.activeVersion;
+  if (activeVersion?.name !== "current") {
+    return null;
+  }
+  return (
+    <Link
+      className={styles.releaseInfoBadge}
+      to={`${activeVersion.path}/reference/announcements-release-notes/overview/`}
+    >
+      Release information
+    </Link>
+  );
 }
 
 export default function NavbarContent(): JSX.Element {
@@ -68,6 +87,7 @@ export default function NavbarContent(): JSX.Element {
               <NavbarItem {...item} />
             </ErrorCauseBoundary>
           ))}
+          <ReleaseInfoBadge />
         </div>
 
         <div className={styles.topRowRight}>
