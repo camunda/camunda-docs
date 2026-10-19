@@ -1312,139 +1312,6 @@ module.exports = {
         },
       ],
     },
-    {
-      type: "category",
-      label: "Camunda 8 SaaS",
-      link: {
-        type: "doc",
-        id: "components/saas/saas",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Clusters",
-          link: {
-            type: "doc",
-            id: "components/saas/clusters",
-          },
-          items: [
-            "components/saas/clusters/create-cluster",
-            "components/saas/clusters/manage-cluster",
-            "components/saas/clusters/manage-api-clients",
-            "components/saas/clusters/manage-secrets",
-            "components/saas/clusters/manage-alerts",
-            "components/saas/clusters/manage-ip-allowlists",
-            "components/saas/clusters/create-backups",
-            "components/saas/clusters/settings",
-            "components/saas/clusters/connect-external-identity-provider",
-            "components/saas/clusters/cluster-capacity",
-            "components/saas/clusters/configure-audit-log",
-            "components/saas/clusters/troubleshoot-clusters",
-          ],
-        },
-        {
-          type: "category",
-          label: "Organization",
-          link: {
-            type: "doc",
-            id: "components/saas/organization/organization",
-          },
-          items: [
-            "components/saas/organization/organization-ownership",
-            "components/saas/organization/create-manage-users",
-            "components/saas/organization/manage-user-groups",
-            "components/saas/organization/resource-based-auth",
-            "components/saas/organization/external-sso",
-            "components/saas/organization/view-organization-activity",
-            "components/saas/organization/enable-alpha-features",
-            "components/saas/organization/usage-history",
-            "components/saas/organization/usage-alerts",
-            "components/saas/organization/switch-organization",
-            "components/saas/organization/delete-account",
-            {
-              "Manage plan": [
-                "components/saas/organization/manage-plan/create-account",
-                "components/saas/organization/manage-plan/available-plans",
-                "components/saas/organization/manage-plan/update-billing-reservations",
-              ],
-            },
-          ],
-        },
-        "components/saas/regions",
-        "components/saas/data-locations",
-        {
-          type: "category",
-          label: "Monitoring",
-          link: {
-            type: "doc",
-            id: "components/saas/monitoring/overview",
-          },
-          items: [
-            {
-              type: "category",
-              label: "Cluster Metrics endpoint",
-              link: {
-                type: "doc",
-                id: "components/saas/monitoring/cluster-metrics-endpoint/overview",
-              },
-              items: [
-                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
-                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics",
-              ],
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Secure connectivity (AWS PrivateLink)",
-          link: {
-            type: "doc",
-            id: "components/saas/secure-connectivity/secure-connectivity-AWS",
-          },
-          items: [
-            "components/saas/secure-connectivity/enable-secure-connectivity",
-          ],
-        },
-
-        {
-          type: "category",
-          label: "Encryption",
-          link: {
-            type: "doc",
-            id: "components/saas/byok/overview",
-          },
-          items: [
-            "components/saas/encryption-at-rest",
-            "components/saas/byok/aws-external-encryption-setup",
-            "components/saas/byok/key-rotation-audit-logging",
-            "components/saas/byok/key-state-behavior",
-            "components/saas/byok/faq-and-troubleshooting",
-          ],
-        },
-
-        {
-          type: "category",
-          label: "Backup and restore",
-          link: {
-            type: "doc",
-            id: "components/saas/backup-restore-overview",
-          },
-          items: [
-            "components/saas/backups",
-            "components/saas/how-to-restore",
-            "components/saas/restore-scenarios",
-            "components/saas/restore-troubleshooting",
-            "components/saas/cross-region-cold-recovery",
-          ],
-        },
-        "components/saas/auto-updates",
-        "components/saas/data-retention",
-        "components/saas/camunda-help-center",
-        "components/saas/status",
-        "components/saas/saas-ip-addresses",
-      ],
-    },
-
     "reference/glossary",
   ],
   "APIs & Tools": [
@@ -1819,6 +1686,143 @@ module.exports = {
     },
     "reference/contact",
     "reference/legal",
+  ],
+  SaaS: [
+    "components/saas/saas",
+    {
+      type: "category",
+      label: "Get started",
+      items: [
+        "components/saas/organization/manage-plan/create-account",
+        "components/saas/organization/manage-plan/available-plans",
+      ],
+    },
+    {
+      type: "category",
+      label: "Clusters",
+      link: {
+        type: "doc",
+        id: "components/saas/clusters",
+      },
+      items: [
+        "components/saas/clusters/create-cluster",
+        "components/saas/clusters/manage-cluster",
+        "components/saas/clusters/manage-api-clients",
+        "components/saas/clusters/manage-secrets",
+        "components/saas/clusters/manage-alerts",
+        "components/saas/clusters/manage-ip-allowlists",
+        "components/saas/clusters/create-backups",
+        "components/saas/clusters/settings",
+        "components/saas/clusters/connect-external-identity-provider",
+        "components/saas/clusters/cluster-capacity",
+        "components/saas/clusters/configure-audit-log",
+        "components/saas/auto-updates",
+        "components/saas/clusters/troubleshoot-clusters",
+      ],
+    },
+    {
+      type: "category",
+      label: "Organization",
+      link: {
+        type: "doc",
+        id: "components/saas/organization/organization",
+      },
+      items: [
+        "components/saas/organization/organization-ownership",
+        "components/saas/organization/create-manage-users",
+        "components/saas/organization/manage-user-groups",
+        "components/saas/organization/resource-based-auth",
+        "components/saas/organization/external-sso",
+        "components/saas/organization/view-organization-activity",
+        "components/saas/organization/enable-alpha-features",
+        "components/saas/organization/usage-history",
+        "components/saas/organization/usage-alerts",
+        "components/saas/organization/manage-plan/update-billing-reservations",
+        "components/saas/organization/switch-organization",
+        "components/saas/organization/delete-account",
+      ],
+    },
+    {
+      type: "category",
+      label: "Security",
+      items: [
+        {
+          type: "category",
+          label: "Encryption",
+          link: {
+            type: "doc",
+            id: "components/saas/byok/overview",
+          },
+          items: [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
+            "components/saas/byok/faq-and-troubleshooting",
+          ],
+        },
+        {
+          type: "category",
+          label: "Secure connectivity (AWS PrivateLink)",
+          link: {
+            type: "doc",
+            id: "components/saas/secure-connectivity/secure-connectivity-AWS",
+          },
+          items: [
+            "components/saas/secure-connectivity/enable-secure-connectivity",
+          ],
+        },
+        "components/saas/saas-ip-addresses",
+      ],
+    },
+    {
+      type: "category",
+      label: "Data",
+      items: [
+        "components/saas/regions",
+        "components/saas/data-locations",
+        "components/saas/data-retention",
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "components/saas/backup-restore-overview",
+          },
+          items: [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting",
+            "components/saas/cross-region-cold-recovery",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Monitoring",
+      link: {
+        type: "doc",
+        id: "components/saas/monitoring/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Cluster Metrics endpoint",
+          link: {
+            type: "doc",
+            id: "components/saas/monitoring/cluster-metrics-endpoint/overview",
+          },
+          items: [
+            "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+            "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics",
+          ],
+        },
+        "components/saas/status",
+      ],
+    },
+    "components/saas/camunda-help-center",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

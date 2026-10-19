@@ -7,8 +7,24 @@ description: "Learn about Camunda 8 SaaS, the fully managed cloud-based service 
 import SaasComplianceImg from './img/saas-compliance.png';
 import AoGrid from '../react-components/\_ao-card';
 import { BoxesIcon, BuildingComplexIcon } from "@site/docs/components/assets/hub-icons";
+import OverviewImg from './img/hero-saas.png';
 
-Run Camunda 8 as a fully managed, cloud-based service. No technical setup or installation is needed, and maintenance and scaling is handled by Camunda.
+<h3 class="subheading">Run Camunda 8 as a fully managed, cloud-based service.</h3>
+
+<div class="double-column-container" style={{marginBottom: '50px'}}>
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+
+No technical setup or installation is needed. Camunda handles maintenance, updates, and scaling, so you can focus on building and running your processes.
+
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Create a cluster" href="./clusters/create-cluster/" style={{marginBottom: '30px', marginTop: '20px'}}>Create a cluster</a>
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+<img src={OverviewImg} alt="Image showing Camunda 8 SaaS components and features" title="Run Camunda 8 as a fully managed, cloud-based service" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+
+</div>
+</div>
 
 :::warning
 This documentation is a work in progress and may contain incomplete, placeholder, or evolving content.
