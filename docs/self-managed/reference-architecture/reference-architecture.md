@@ -39,7 +39,7 @@ A Camunda 8 Self-Managed deployment is built around one [management plane](/refe
 
 <!-- Editable source: ./img/deployment-topology.excalidraw -->
 
-![Management plane serving development, integration, and production Orchestration Clusters, each with an Optimize instance for its default tenant and production with another instance for Physical Tenant A.](./img/deployment-topology.svg)
+![Camunda Hub and Management Identity in a shared management plane above development, integration, and production Orchestration Clusters. Physical Tenants are shown inside each cluster, each connected to its own Optimize deployment. Production contains both the default tenant and Physical Tenant A.](./img/deployment-topology.svg)
 
 Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane maintains the cluster inventory and Management Identity permission and role configuration. With Keycloak, Management Identity also provisions workload clients. With Microsoft Entra ID or another generic OIDC provider, operators provision workload clients separately.
 
