@@ -57,7 +57,11 @@ When designing a reference architecture, it's essential to understand the differ
 
 <!-- Editable source: ./img/management-cluster.excalidraw. Adapted from PR #10011. -->
 
-![Management plane with ingress routing to Camunda Hub and Management Identity, an RDBMS for persistence, and an OIDC authentication provider.](./img/management-cluster.svg)
+![Management plane with Ingress routing to Camunda Hub and Management Identity, RDBMS persistence, and an OIDC authentication provider. Arrows point from callers to services.](./img/management-cluster.svg)
+
+Ingress routes browser requests to Camunda Hub and Management Identity. Camunda Hub calls the Management Identity API, and Management Identity connects to an OIDC authentication provider.
+
+Camunda Hub persists data in an RDBMS. Management Identity requires its own database when using a generic OIDC provider or Microsoft Entra ID, or when the `resource-permissions` or `multi-tenancy` feature flag is enabled with Keycloak. With the default Keycloak-based setup and neither feature flag enabled, Management Identity doesn't require its own database.
 
 The management plane can connect to multiple Orchestration Clusters across environments, such as development, integration, and production. It consists of:
 
