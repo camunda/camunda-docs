@@ -140,7 +140,7 @@ If an error occurs during record processing, the same record is retried continuo
 
 ### Performance impact
 
-Each loaded exporter introduces some performance overhead. A slow exporter will slow down all other exporters for the same partition and, in extreme cases, may block a processing thread entirely.
+Each loaded exporter introduces some performance overhead. In extreme cases, a slow exporter may block a processing thread entirely.
 
 Each partition passes the next record to its exporters only after every exporter has handled the current record. Therefore, a custom exporter with a slow `export()` method has the following effects:
 
@@ -148,7 +148,7 @@ Each partition passes the next record to its exporters only after every exporter
 - It holds back the exported position of the entire partition, delaying event log compaction and increasing disk usage.
 - When [flow-control throttling](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) is enabled, flow control measures the export rate and backlog across all exporters on the partition. A slow `export()` method reduces the export rate and increases the backlog. Consequently, throttling reduces the write rate of the entire partition, lowering user-visible throughput.
 
-Exporters handle each record sequentially, so an exporter with a slow `export()` method slows all exporters equally. Acknowledged positions do not expose this problem because each exporter determines when to acknowledge a position—for example, after flushing a batch.
+Exporters handle each record sequentially, so no exporter can progress faster than the slowest one. Acknowledged positions do not expose this problem because each exporter determines when to acknowledge a position—for example, after flushing a batch.
 
 To identify a slow exporter, compare the average export time for each exporter. Group the `zeebe_exporter_exporting_duration_seconds_sum` and `zeebe_exporter_exporting_duration_seconds_count` metrics by the `exporter` label, and divide the rate of the former by the rate of the latter. Check custom exporters first.
 
