@@ -44,6 +44,8 @@ Client responses are not sent until the command is fully processed by the engine
 
 This means command response latency is bounded below by Raft commit time, engine processing time, and processing queue length. In a healthy and stable cluster, this typically results in sub-second response latency for simple commands.
 
+Raft commit time depends on disk performance: the leader and enough followers to reach quorum must flush each appended batch to disk before the engine can process the command. Primary storage therefore needs low-latency SSDs with enough sustained IOPS per broker, otherwise throughput drops and latency rises. See [Disk IOPS](sizing-self-managed.md#disk-iops) for the recommended value.
+
 If the engine cannot process commands fast enough, for example, because disk I/O is saturated, network latency is high, or the backlog is large, the Command API applies backpressure to the client.
 
 See [internal processing](../../zeebe/technical-concepts/internal-processing.md) for more details.
