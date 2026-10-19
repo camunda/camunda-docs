@@ -68,7 +68,7 @@ Exporter behavior and performance is important for the system, because:
 
 - If an exporter falls behind, it holds up all exporters for that partition.
 - Slow secondary storage directly reduces process execution throughput.
-- A custom exporter runs in the same exporting step as the built-in exporters. A custom exporter with a slow `export()` method delays the exporter that writes to secondary storage, such as the Camunda Exporter, which makes data in Operate, Tasklist, and the REST Query API available later. With flow control throttling enabled, it also lowers the write rate of the partition. See [performance impact](/self-managed/concepts/exporters.md#performance-impact).
+- A custom exporter runs in the same export step as the built-in exporters. A custom exporter with a slow `export()` method delays exporters that write to secondary storage, such as the Camunda Exporter. As a result, data becomes available later in Operate, Tasklist, and the REST Query API. When flow-control throttling is enabled, it also reduces the partition’s write rate. See [performance impact](/self-managed/concepts/exporters.md#performance-impact).
 
 ## Query path
 

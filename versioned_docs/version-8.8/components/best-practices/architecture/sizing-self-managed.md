@@ -380,7 +380,7 @@ See [Secondary storage](sizing-your-environment.md#secondary-storage) for more d
 
 ## Custom exporter considerations
 
-Custom exporters share the exporting capacity of each partition with the built-in exporters. Test them under load, keep `export()` fast, and batch writes to the target system. See the [performance impact of exporters](/self-managed/concepts/exporters.md#performance-impact).
+Custom exporters share each partition’s export capacity with the built-in exporters. Test custom exporters under load, keep the `export()` method fast, and batch writes to the target system. See [performance impact of exporters](/self-managed/concepts/exporters.md#performance-impact).
 
 ## Next steps
 

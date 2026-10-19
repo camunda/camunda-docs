@@ -140,15 +140,17 @@ If an error occurs during record processing, the same record is retried continuo
 
 Each loaded exporter introduces some performance overhead. A slow exporter will slow down all other exporters for the same partition and, in extreme cases, may block a processing thread entirely.
 
-Each partition passes the next record to its exporters only after every exporter has handled the current one. A custom exporter with a slow `export()` method therefore has these effects:
+Each partition passes the next record to its exporters only after every exporter has handled the current record. Therefore, a custom exporter with a slow `export()` method has the following effects:
 
-- It delays all other exporters on the partition, including the exporter that writes to secondary storage, such as the Camunda Exporter. Data in Operate, Tasklist, and the REST Query API becomes available later.
-- It holds back the exported position of the whole partition, so the event log is compacted later and uses more disk.
-- With [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) throttling enabled, flow control measures the exporting rate and backlog across all exporters on the partition. The slow `export()` method lowers the exporting rate and grows the backlog, so throttling reduces the write rate of the whole partition and your user-visible throughput drops.
+- It delays all other exporters on the partition, including exporters that write to secondary storage, such as the Camunda Exporter. As a result, data becomes available later in Operate, Tasklist, and the REST Query API.
+- It holds back the exported position of the entire partition, delaying event log compaction and increasing disk usage.
+- When [flow-control throttling](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) is enabled, flow control measures the export rate and backlog across all exporters on the partition. A slow `export()` method reduces the export rate and increases the backlog. Consequently, throttling reduces the write rate of the entire partition, lowering user-visible throughput.
 
-Exporters handle each record in sequence, so one exporter with a slow `export()` method slows all exporters at the same pace. Acknowledged positions do not reveal it, because each exporter decides when to acknowledge, for example after a batch flush. To find it, compare the average export time of each exporter. Group the `zeebe_exporter_exporting_duration_seconds_sum` and `zeebe_exporter_exporting_duration_seconds_count` metrics by the `exporter` label and divide the rates of the two. Check your custom exporters first.
+Exporters handle each record sequentially, so an exporter with a slow `export()` method slows all exporters equally. Acknowledged positions do not expose this problem because each exporter determines when to acknowledge a position—for example, after flushing a batch.
 
-A different problem is an exporter that returns quickly from `export()` but acknowledges positions late or never, for example because it flushes batches asynchronously. Its `zeebe_exporter_last_updated_exported_position` falls behind the other exporters. This does not slow the other exporters, but it delays log compaction, so the event log in the broker's journal grows and uses more disk.
+To identify a slow exporter, compare the average export time for each exporter. Group the `zeebe_exporter_exporting_duration_seconds_sum` and `zeebe_exporter_exporting_duration_seconds_count` metrics by the `exporter` label, and divide the rate of the former by the rate of the latter. Check custom exporters first.
+
+A different problem occurs when an exporter returns quickly from `export()` but acknowledges positions late or not at all, for example, because it flushes batches asynchronously. Its `zeebe_exporter_last_updated_exported_position` falls behind those of the other exporters. This does not slow the other exporters, but it delays log compaction, causing the event log in the broker’s journal to grow and use more disk space.
 
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
