@@ -1,18 +1,23 @@
 ---
 id: create-account
 title: Create an account
-description: "Set up your Camunda 8 account to get started."
+description: "Get started with Camunda 8 SaaS by creating your Camunda 8 account."
 ---
 
-Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.
+import PageDescription from '@site/src/components/PageDescription';
 
-:::note
-We're gradually rolling out changes that affect this page to users; your experience may vary.
-:::
-
-Visit the [Camunda 8 sign-up page](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account.
+<PageDescription />
 
 ### Create an account
+
+Sign up and start your developer journey with Camunda 8 SaaS.
+
+1. Visit the [Camunda 8 sign-up page](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account.
+1. Fill out the signup form and click **Create account**.
+1. Click on the link in your confirmation email to verify your email address.
+1. Log in to Camunda 8 SaaS using either the email address and password you signed up with or the social login buttons. You can also log in to Camunda 8 SaaS directly at [camunda.io](https://weblogin.cloud.camunda.io/).
+
+See [available plans](/components/saas/organization/manage-plan/available-plans.md) to compare what each plan includes.
 
 Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
 

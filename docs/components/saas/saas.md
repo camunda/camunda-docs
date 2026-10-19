@@ -5,7 +5,7 @@ description: "Learn about Camunda 8 SaaS, the fully managed cloud-based service 
 ---
 
 import AoGrid from '../react-components/\_ao-card';
-import { RocketIcon, BriefcaseIcon, FileStackIcon, BoxesIcon, BuildingComplexIcon, KeyRoundIcon, ServerIcon, MonitorCloudIcon } from "@site/docs/components/assets/hub-icons";
+import { RocketIcon, BriefcaseIcon, FileStackIcon, BoxesIcon, BuildingComplexIcon, KeyRoundIcon, ServerIcon, MonitorCloudIcon, PencilRulerIcon } from "@site/docs/components/assets/hub-icons";
 import OverviewImg from './img/hero-saas.png';
 
 <h3 class="subheading">Run Camunda 8 as a fully managed, cloud-based service.</h3>
@@ -89,22 +89,10 @@ title: "Monitoring",
 image: MonitorCloudIcon,
 description: "Track your processes, cluster health, usage, and service availability.",
 },
+{
+link: "./architecture",
+title: "Architecture",
+image: PencilRulerIcon,
+description: "Learn how Camunda 8 SaaS is built, including how clusters and Zeebe run on the managed platform.",
+},
 ]} columns={3}/>
-
-To learn how the platform is built, see [SaaS architecture](./architecture.md).
-
-## Organization
-
-Manage your organization's [users and access](/components/saas/organization/index.md), review usage, and update your plan and billing reservations.
-
-## Security
-
-Protect your data with encryption, secure connectivity, and access controls. See [SaaS security](./security.md) for encryption, access controls, and compliance.
-
-## Data
-
-Choose where your data is hosted, how long it is kept, and how to back it up and restore it. See the [SaaS data overview](./data-overview.md).
-
-## Monitoring
-
-Track your processes, cluster health, usage, and service availability. See [Monitoring](./monitoring/index.md).

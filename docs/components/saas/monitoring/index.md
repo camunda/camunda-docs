@@ -1,10 +1,13 @@
 ---
 id: overview
-title: Monitoring
-description: Learn how to monitor Camunda 8 SaaS Orchestration Clusters using a secure metrics endpoint and your existing monitoring and observability tools.
+title: SaaS monitoring
+sidebar_label: Monitoring
+description: Monitor Camunda 8 SaaS Orchestration Clusters using a secure metrics endpoint and your existing monitoring and observability tools.
 ---
 
-Use your own monitoring and observability tools to observe the health and performance of your Camunda 8 SaaS Orchestration Clusters.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Monitoring options
 

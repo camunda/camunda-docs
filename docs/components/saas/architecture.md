@@ -5,6 +5,10 @@ sidebar_label: Architecture
 description: "Learn how Camunda 8 SaaS is built, including how clusters and Zeebe run on the managed platform."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 ## Clusters
 
 The Camunda 8 SaaS platform is built on Amazon Web Services (AWS) and based on a microservices architecture.

@@ -6,6 +6,11 @@ description: "Learn about encryption, secure connectivity, access controls, and 
 ---
 
 import SaasComplianceImg from './img/saas-compliance.png';
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Camunda 8 SaaS protects your data with encryption, secure connectivity, access controls, and compliance certifications.
 
