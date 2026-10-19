@@ -388,7 +388,13 @@ See [Secondary storage](sizing-your-environment.md#secondary-storage) for more d
 
 ## Custom exporter considerations
 
-Custom exporters share each partition’s export capacity with the built-in exporters. Test custom exporters under load, keep the `export()` method fast, and batch writes to the target system. See [performance impact of exporters](/self-managed/concepts/exporters.md#performance-impact).
+Custom exporters share each partition’s export capacity with the built-in exporters. Test custom exporters under a realistic, steady load before you use them in production. See [How we test](#how-we-test) for how Camunda tests, and [Run benchmarks](sizing-benchmarks.md) to run your own.
+
+- Compare the average export time of your exporter with the built-in exporters. See [performance impact of exporters](/self-managed/concepts/exporters.md#performance-impact) for the metrics.
+- Check that the acknowledged position of your exporter keeps advancing while the load runs. If it falls further and further behind, the exporter does not keep up and the broker cannot compact its log.
+- Measure how long data takes to become available in the secondary storage, and watch the target system for rejections and timeouts. Larger batches and longer flush delays increase the time to availability, and batches that are too large can overwhelm the target. Increase the batch size step by step to find the best value for your system.
+
+Keep the `export()` method fast and batch writes to the target system.
 
 ## Next steps
 

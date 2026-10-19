@@ -154,7 +154,7 @@ To identify a slow exporter, compare the average export time for each exporter. 
 
 A different problem occurs when an exporter returns quickly from `export()` but acknowledges positions late or not at all, for example, because it flushes batches asynchronously. Its `zeebe_exporter_last_updated_exported_position` falls behind those of the other exporters. This does not slow the other exporters, but it delays log compaction, causing the event log in the broker’s journal to grow and use more disk space.
 
-To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
+To avoid performance bottlenecks, keep exporters simple and lightweight. Delegate heavy data transformation or enrichment to external systems. Batch writes to the target system and acknowledge a position only after the flush succeeds. Larger batches and longer flush delays reduce per-request overhead on the target system, but data takes longer to become available there. Batches that are too large can overwhelm the target system or be rejected. Acknowledgement also comes later, which delays log compaction and increases disk usage.
 
 :::warning
 When you enable or change exporter-side filters on an existing cluster, the exported record stream can change shape.
