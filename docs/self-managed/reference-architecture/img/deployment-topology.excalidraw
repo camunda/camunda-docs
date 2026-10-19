@@ -76,6 +76,9 @@
       "versionNonce": 1326308400,
       "updated": 1792429630023,
       "text": "Camunda Hub\nManagement Identity",
+      "customData": {
+        "svgFontWeight": 700
+      },
       "fontSize": 22,
       "fontFamily": 2,
       "autoResize": false,
@@ -397,6 +400,9 @@
       "versionNonce": 1055278128,
       "updated": 1792429630023,
       "text": "Default tenant",
+      "customData": {
+        "svgFontWeight": 700
+      },
       "fontSize": 18,
       "fontFamily": 2,
       "autoResize": true,
@@ -471,6 +477,9 @@
       "versionNonce": 468598320,
       "updated": 1792429630023,
       "text": "Default tenant",
+      "customData": {
+        "svgFontWeight": 700
+      },
       "fontSize": 18,
       "fontFamily": 2,
       "autoResize": true,
@@ -545,6 +554,9 @@
       "versionNonce": 1239873584,
       "updated": 1792429630023,
       "text": "Default tenant",
+      "customData": {
+        "svgFontWeight": 700
+      },
       "fontSize": 18,
       "fontFamily": 2,
       "autoResize": true,
@@ -619,6 +631,9 @@
       "versionNonce": 1824027184,
       "updated": 1792429630023,
       "text": "Physical Tenant A",
+      "customData": {
+        "svgFontWeight": 700
+      },
       "fontSize": 18,
       "fontFamily": 2,
       "autoResize": true,
