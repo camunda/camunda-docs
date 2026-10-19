@@ -1121,7 +1121,7 @@
       "isDeleted": false,
       "locked": false,
       "link": null,
-      "originalText": "Identity database required for:\nGeneric OIDC or Microsoft Entra ID;\nKeycloak with resource permissions\nor multi-tenancy enabled.",
+      "originalText": "Identity database required for:\n• Generic OIDC or Microsoft Entra ID\n• Keycloak with resource permissions\n  or multi-tenancy enabled",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
@@ -1139,7 +1139,7 @@
       "y": 790,
       "width": 350,
       "height": 90,
-      "text": "Identity database required for:\nGeneric OIDC or Microsoft Entra ID;\nKeycloak with resource permissions\nor multi-tenancy enabled.",
+      "text": "Identity database required for:\n• Generic OIDC or Microsoft Entra ID\n• Keycloak with resource permissions\n  or multi-tenancy enabled",
       "fontSize": 18,
       "index": "aR"
     },
