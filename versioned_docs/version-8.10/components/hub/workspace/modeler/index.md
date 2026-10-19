@@ -30,15 +30,15 @@ Access the modeler in [Camunda Hub](/components/hub/index.md). No installation i
 
 ## Get started
 
-<DocCardList items={[{type:"link", href:"/docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/", label: "Model your first diagram", docId:"components/hub/workspace/modeler/modeling/model-your-first-diagram"},
+<DocCardList items={[{type:"link", href:"/docs/components/hub/workspace/modeler/modeling/model-your-first-diagram/", label: "Model your first diagram", docId:"components/hub/workspace/modeler/modeling/model-your-first-diagram"},
 {
-type:"link", href:"/docs/next/components/hub/workspace/modeler/collaboration/", label: "Collaborate with your team", docId:"components/hub/workspace/modeler/collaboration/collaboration",
+type:"link", href:"/docs/components/hub/workspace/modeler/collaboration/", label: "Collaborate with your team", docId:"components/hub/workspace/modeler/collaboration/collaboration",
 },
 {
-type:"link", href:"/docs/next/components/hub/workspace/modeler/run-or-publish-your-process/", label: "Run or publish your processes", docId:"components/hub/workspace/modeler/run-or-publish-your-process"
+type:"link", href:"/docs/components/hub/workspace/modeler/run-or-publish-your-process/", label: "Run or publish your processes", docId:"components/hub/workspace/modeler/run-or-publish-your-process"
 },
 {
-type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Orchestrate human tasks", docId:"guides/orchestrate-human-tasks"
+type:"link", href:"/docs/guides/orchestrate-human-tasks/", label: "Orchestrate human tasks", docId:"guides/orchestrate-human-tasks"
 }
 ]}/>
 
