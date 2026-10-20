@@ -35,29 +35,13 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ### Deployment topology
 
-A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity. The management plane serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
+A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity and shared across environments. Each environment, such as development, integration, or production, can have one or more Orchestration Cluster deployments. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant. Each Physical Tenant is served by its own Optimize deployment.
 
-<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
+<!-- Editable source: ./img/deployment-topology.excalidraw -->
 
-```mermaid
-graph TD
-    Hub["Management plane<br/>Camunda Hub + Management Identity"]
-    OCDev["Orchestration Cluster<br/>development"]
-    OCInt["Orchestration Cluster<br/>integration"]
-    OCProd["Orchestration Cluster<br/>production"]
-    OptDev["Optimize<br/>default tenant"]
-    OptInt["Optimize<br/>default tenant"]
-    OptProdA["Optimize<br/>default tenant"]
-    OptProdB["Optimize<br/>Physical Tenant A"]
+![Camunda Hub and Management Identity in a shared management plane above development, integration, and production Orchestration Clusters. Each Physical Tenant connects to its own Optimize deployment. Production shows the default tenant and Physical Tenant A, with stacked cards indicating additional Physical Tenants and their own Optimize deployments.](./img/deployment-topology.svg)
 
-    Hub --> OCDev
-    Hub --> OCInt
-    Hub --> OCProd
-    OCDev --> OptDev
-    OCInt --> OptInt
-    OCProd --> OptProdA
-    OCProd --> OptProdB
-```
+The stacked cards in the diagram represent additional Physical Tenants and their own Optimize deployments. Each Optimize deployment analyzes the data of its associated Physical Tenant.
 
 Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane maintains the cluster inventory and Management Identity permission and role configuration. With Keycloak, Management Identity also provisions workload clients. With Microsoft Entra ID or another generic OIDC provider, operators provision workload clients separately.
 
