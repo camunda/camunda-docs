@@ -2,7 +2,7 @@
 name: scan-product-hub
 description: Use when asked to scan, review, or re-check the Product Hub board for a Camunda minor or alpha release, to find what still needs to go into the release notes, announcements, or What's new page, or to report which epics changed since the last scan. Read-only. Reports in the conversation, writes no files.
 user-invocable: true
-argument-hint: "[version or alpha, e.g. 8.11-alpha1 or 8.11 — optional; read from Product Hub view 31 if omitted]"
+argument-hint: "<version or alpha, e.g. 8.11-alpha1 or 8.11>"
 ---
 
 # /scan-product-hub — what does this release still need in the docs?
@@ -15,13 +15,8 @@ Scan the Product Hub board (https://github.com/orgs/camunda/projects/9) for one 
 
 ## Step 1: Pick the target
 
-1. Use the user's version or alpha if given (`8.11-alpha1`, `8.11`).
-2. Otherwise read the filter of view 31 ("Next Alpha"), which names the labels in scope:
-
-   ```bash
-   gh api graphql -f query='query{organization(login:"camunda"){projectV2(number:9){view(number:31){name filter}}}}' --jq '.data.organization.projectV2.view'
-   ```
-
+1. The user must specify the release (`8.11-alpha1`, `8.11`). If they did not, ask which version or alpha to scan and wait for the answer. Do not guess or infer it from the board.
+2. On a rescan, reuse the target from the previous scan in the conversation unless the user names a different one.
 3. Match epics by label `version:`, `target:`, or `potential:` followed by the target. For an alpha, match that alpha only (`8.11-alpha1`). For a minor, match the minor and all of its alphas (`8.11`, `8.11.0`, `8.11-alpha*`). The `potential:` labels are lower confidence. Note them as such.
 4. Derive the docs folder by removing the dot from the version and adding `0` (`8.11` → `docs/reference/announcements-release-notes/8110/`). Files: `<dir>-release-notes.md`, `<dir>-announcements.md`, `whats-new-in-<ver>.md` (for example `whats-new-in-811.md`). If the folder does not exist, tell the user the minor has not been scaffolded yet and stop.
 5. State the target back in one line before scanning.
