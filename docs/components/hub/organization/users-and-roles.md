@@ -26,7 +26,7 @@ Where and how you manage users, and which roles are available, depends on the ed
 
 ## Manage users
 
-You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. This is where you configure organization access. SaaS has no separate Management Identity. The Organization Owner has all rights in the organization.
+You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. This is where you configure organization access. The Organization Owner has all rights in the organization.
 
 Use [roles](#roles-and-permissions) to control access to Camunda Hub.
 
@@ -129,7 +129,7 @@ Use [authorization-based access control](../../concepts/access-control/authoriza
 
 ## Manage users {#manage-users}
 
-You create users in your identity provider, and manage users, groups, and roles in Management Identity. This is where you configure organization access for Camunda Hub and Optimize. Management Identity is separate from [Admin](/components/admin/admin-introduction.md), which manages access to the Orchestration Cluster. See [how identity works](/self-managed/components/identity/how-identity-works.md).
+You create users in your identity provider, and manage users, groups, and roles in Management Identity. This is where you configure organization access for Camunda Hub and Optimize. It doesn't grant access to deployment environments.
 
 - [Management Identity user, group, and role management](/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage groups](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md)
