@@ -1,0 +1,161 @@
+---
+name: scan-product-hub
+description: Use when asked to scan, review, or re-check the Product Hub board for a Camunda minor or alpha release, to find what still needs to go into the release notes, announcements, or What's new page, or to report which epics changed since the last scan. Read-only. Reports in the conversation, writes no files.
+user-invocable: true
+argument-hint: "[version or alpha, e.g. 8.11-alpha1 or 8.11 — optional; read from Product Hub view 31 if omitted]"
+---
+
+# /scan-product-hub — what does this release still need in the docs?
+
+Scan the Product Hub board (https://github.com/orgs/camunda/projects/9) for one release and tell the user which epics need an entry in the release notes, announcements, or What's new page. Run it again at any time to get the current status and what changed since the last scan.
+
+- **Read-only.** Do not edit docs, add labels, or comment on epics unless the user asks.
+- **No files.** Show every report in the conversation. Do not write report or state files.
+- **Verify, do not guess.** If an epic is unclear, list it as a question for the user.
+
+## Step 1: Pick the target
+
+1. Use the user's version or alpha if given (`8.11-alpha1`, `8.11`).
+2. Otherwise read the filter of view 31 ("Next Alpha"), which names the labels in scope:
+
+   ```bash
+   gh api graphql -f query='query{organization(login:"camunda"){projectV2(number:9){view(number:31){name filter}}}}' --jq '.data.organization.projectV2.view'
+   ```
+
+3. Match epics by label `version:`, `target:`, or `potential:` followed by the target. For an alpha, match that alpha only (`8.11-alpha1`). For a minor, match the minor and all of its alphas (`8.11`, `8.11.0`, `8.11-alpha*`). The `potential:` labels are lower confidence. Note them as such.
+4. Derive the docs folder by removing the dot from the version and adding `0` (`8.11` → `docs/reference/announcements-release-notes/8110/`). Files: `<dir>-release-notes.md`, `<dir>-announcements.md`, `whats-new-in-<ver>.md` (for example `whats-new-in-811.md`). If the folder does not exist, tell the user the minor has not been scaffolded yet and stop.
+5. State the target back in one line before scanning.
+
+## Step 2: Fetch the epics
+
+The board has about 2,000 items and the query pages through all of them, so expect it to take under a minute. It needs the `read:project` scope. If `gh auth status` does not list it, ask the user to run `gh auth refresh -h github.com -s read:project`.
+
+Save the query below in a temporary file and replace `<target-regex>` in the filter (for example `8\\.11`):
+
+```graphql
+query ($endCursor: String) {
+  organization(login: "camunda") {
+    projectV2(number: 9) {
+      items(first: 100, after: $endCursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          status: fieldValueByName(name: "Status") {
+            ... on ProjectV2ItemFieldSingleSelectValue {
+              name
+            }
+          }
+          content {
+            ... on Issue {
+              number
+              title
+              url
+              state
+              repository {
+                nameWithOwner
+              }
+              assignees(first: 3) {
+                nodes {
+                  login
+                }
+              }
+              labels(first: 50) {
+                nodes {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+```bash
+gh api graphql --paginate -F query=@<query-file> --jq '.data.organization.projectV2.items.nodes[]
+  | select(.content.number != null)
+  | {n: .content.number, t: .content.title, url: .content.url, repo: .content.repository.nameWithOwner,
+     phase: .status.name, assignee: (.content.assignees.nodes[0].login // null),
+     labels: [.content.labels.nodes[].name]}
+  | select(any(.labels[]; test("^(version|target|potential):<target-regex>")))'
+```
+
+Then, for each in-scope epic, read the body and comments with `gh issue view <n> -R <repo> --json body,comments,labels`. Run these in parallel batches.
+
+## Step 3: Classify each epic
+
+For each epic, work out three things.
+
+**1. Is it eligible?** By board phase:
+
+| Phase                     | Eligible                                       |
+| ------------------------- | ---------------------------------------------- |
+| Done, Validate, Implement | Yes                                            |
+| Define, Discover          | No. List it and state the phase as the reason. |
+
+**2. Does it have release-note content?** The PM writes a `## Release Notes` section (or equivalent) in the epic body. Read the comments for scope changes, descopes, and renames that the section may not reflect.
+
+- Content exists → `Ready to draft`.
+- No content → `Needs content from PM`. Never infer an entry from the body or comments alone.
+- Internal change with no user-facing impact, or label `no-release-notes` → `No entry needed`. Say why.
+
+**3. Where does it belong?** Follow `.github/instructions/repo.instructions.md` section 7:
+
+- **Announcements:** supported-environment changes, breaking changes, deprecations, removals, or anything that needs action before upgrading.
+- **Release notes:** every notable feature or enhancement. Put it in the section for the tag where it first appears (alpha1, alpha2, GA).
+- **What's new:** only features significant enough to influence an upgrade decision. Flag these as candidates. Do not decide for the user.
+- An epic can belong in more than one place. If the placement is unclear, ask the user.
+
+**Is it already documented?** Search the target folder's files for the epic number or its title. Use the live files as the source of truth, not the `release-notes-added` label, which is often stale. If an entry exists, mark the epic `Already in docs` and link the file. For an epic spread across alphas, note what is already documented and ask the user what is new in this alpha.
+
+If helpful, check `camunda/camunda-docs` (including open PRs) for related feature documentation and mention it. Do not count other repositories as documentation.
+
+## Step 4: Report in the conversation
+
+Keep it short enough to read at a glance. Link every epic (`[#1234](url)`). Use this layout:
+
+1. **Header:** the target, the scan time, and counts by outcome.
+2. **Needs action:** a table of the epics that still need an entry or a decision, sorted by priority (`Ready to draft`, then `Needs content from PM`).
+
+   | Epic | Phase | Confidence | Where it goes | Status | Next step |
+   | ---- | ----- | ---------- | ------------- | ------ | --------- |
+
+   Confidence is `version`, `target`, or `potential`.
+
+3. **Already in docs / no entry needed / not eligible:** one line per epic, with the reason.
+4. **Questions for you:** decisions the skill cannot make (placement, naming, suspect epics, epics that left the board).
+5. **Snapshot:** a compact block for the next rescan (see below).
+
+Do not draft entries in this step. Afterwards, offer to draft the `Ready to draft` ones. If the user accepts, match the structure of the live target file and follow `.github/instructions/content.instructions.md`. Never touch `<!-- RELEASE_LINKS_PLACEHOLDER -->` or `versioned_docs/`.
+
+### Snapshot block
+
+End every report with a fenced block listing one line per in-scope epic, so the next scan can compare against it:
+
+```text
+snapshot 8.11-alpha1 2026-10-20
+#1234 | Implement | target | Ready to draft | rn:a1b2c3 | in-docs:no
+#1250 | Define | potential | Not eligible | rn:none | in-docs:no
+```
+
+`rn` is the first 6 characters of a hash of the epic's release-notes section (`rn:none` if there is no section). A changed hash means the PM edited the content. Hash it with `shasum`.
+
+## Step 5: Rescan
+
+When the user asks again ("review the board", "what changed since last time", "rescan"), run Steps 1 to 4 again, then compare against the **most recent snapshot block in this conversation**. If there is none, say this is the first scan and ask whether the user wants to paste a snapshot from an earlier session. Snapshots live only in the conversation. Nothing is saved between sessions unless the user keeps the block.
+
+Open the report with **What changed since the last scan**, listing only differences:
+
+- **New** in scope.
+- **Removed** from scope (labels dropped). Keep it in the report and ask the user what to do, especially if it already has an entry in the docs.
+- **Phase** moved (for example `Implement → Validate`), and whether it became eligible.
+- **Confidence** changed (`potential` → `target`).
+- **Release-note content** appeared or changed (`rn` hash differs).
+- **Newly documented** (an entry now exists in the docs).
+- **Reopened or closed** epics.
+
+If nothing changed, say so in one line and still show the current status table. Then show the full current status. Finish with a new snapshot block.
