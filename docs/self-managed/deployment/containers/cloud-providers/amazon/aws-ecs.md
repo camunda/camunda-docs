@@ -7,6 +7,7 @@ description: "Learn how to install Camunda 8 on AWS ECS."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CostManagement from "../../../_partials/_cost-management.md";
+import SingleRegionArchitecture from "./assets/aws-ecs-single-region.svg";
 
 This guide walks you through deploying the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) and Connectors on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL, and verifying that all components are working.
 
@@ -55,52 +56,11 @@ The result is a fully functioning Camunda Orchestration Cluster deployed in a hi
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-```mermaid
-
-architecture-beta
-    service users(internet)["Users and API clients"]
-
-    group vpc(logos:aws-vpc)["VPC · single region · three availability zones"]
-    group edge(cloud)["Public subnets · load balancers"] in vpc
-    group cluster(logos:aws-ecs)["ECS cluster · Fargate services in private subnets"] in vpc
-    group data(cloud)["Managed data services"] in vpc
-
-    service alb(logos:aws-elb)["ALB · web apps and REST API"] in edge
-    service nlb(logos:aws-elb)["NLB · gRPC"] in edge
-
-    service cmap(logos:aws-route53)["Cloud Map · Service Connect"] in cluster
-    service hub(logos:aws-fargate)["Camunda Hub"] in cluster
-    service identity(logos:aws-fargate)["Management Identity"] in cluster
-    service oc(logos:aws-fargate)["Orchestration Cluster"] in cluster
-    service connectors(logos:aws-fargate)["Connectors"] in cluster
-
-    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in data
-    service efs(disk)["EFS · Zeebe primary storage"] in data
-    service s3(logos:aws-s3)["S3 · node IDs and backups"] in data
-    junction jstore in data
-
-    users:B --> T:alb{group}
-    alb:R -- L:nlb
-
-    cmap:R -- L:hub
-    hub:R -- L:identity
-    identity:R -- L:oc
-    oc:R -- L:connectors
-
-    alb{group}:B --> T:oc{group}
-
-    oc:B --> T:jstore{group}
-    jstore:R -- L:s3
-    jstore:B -- T:efs
-    jstore:L -- R:aurora
-
-    identity:B --> T:aurora{group}
-    hub:B --> L:aurora{group}
-```
+<SingleRegionArchitecture role="img" title="Single-region Camunda 8 on Amazon ECS Fargate: an ALB, an NLB, and Cloud Map in the networking layer; Orchestration Cluster, Connectors, and optional Management Identity and Camunda Hub tasks; and EFS, two S3 buckets, and Aurora PostgreSQL as data services." />
 
 _Infrastructure diagram for the single-region ECS architecture. Management Identity and Camunda Hub are optional and are only deployed when you enable OIDC authentication._
 
-Arrows show the direction of traffic. Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, S3, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
+Arrows show the direction of traffic. Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, the S3 node-ID bucket, the S3 backup bucket, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
 
 After completing this guide, you will have:
 
