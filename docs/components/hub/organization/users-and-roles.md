@@ -8,11 +8,15 @@ import TabItem from "@theme/TabItem";
 
 Camunda Hub controls access to the workspaces, projects, environments, and clusters of your organization through users and roles. Organization admins assign roles and manage users to decide who can use these resources.
 
+:::note
+This page covers organization access: who can use Camunda Hub and Optimize. In SaaS, you manage it in Camunda Hub. In Self-Managed, you manage it in Management Identity, which is a Self-Managed-only component. Organization access does not control what a user can do in Operate, Tasklist, or the Orchestration Cluster REST API. You manage that for each cluster in [Admin](/components/admin/admin-introduction.md). See [identity types in Camunda 8](/components/concepts/access-control/access-control-overview.md#identity-types-in-camunda-8).
+:::
+
 Access is controlled on three levels:
 
 - **Organization**: Users are assigned organization-level roles. They decide what a user can do in Camunda Hub across the organization.
 - **Workspace**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
-- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in Admin, not by organization-level roles.
+- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, and Zeebe, is managed separately, with authorizations in [Admin](/components/admin/authorization.md) for each cluster, not by organization-level roles.
 
 Where and how you manage users, and which roles are available, depends on the edition of Camunda that you use. Select your edition to see the details.
 
@@ -26,7 +30,7 @@ Where and how you manage users, and which roles are available, depends on the ed
 
 ## Manage users
 
-You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. The Organization Owner has all rights in the organization.
+You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. This is where you configure organization access. SaaS has no separate Management Identity. The Organization Owner has all rights in the organization.
 
 Groups don't control access to Camunda Hub. They apply only to clusters on version 8.7 or earlier. Use [roles](#roles-and-permissions) to control access to Camunda Hub.
 
@@ -121,7 +125,7 @@ Use [authorization-based access control](../../concepts/access-control/authoriza
 
 ## Manage users {#manage-users-self-managed}
 
-You create users in your identity provider, and manage users, groups, and roles in Management Identity.
+You create users in your identity provider, and manage users, groups, and roles in Management Identity. This is where you configure organization access for Camunda Hub and Optimize. Management Identity is separate from [Admin](/components/admin/admin-introduction.md), which manages access to the Orchestration Cluster. See [how identity works](/self-managed/components/identity/how-identity-works.md).
 
 - [Management Identity user, group, and role management](/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage groups](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md)

@@ -18,24 +18,34 @@ Use identity access control to provide secure access for authorized users and sy
 
 ## Identity types in Camunda 8
 
-There are two types of identity in Camunda 8.
+Camunda 8 manages access in two separate places: one for Camunda Hub and Optimize, and one for each Orchestration Cluster.
 
-These identities serve different purposes: one controls access to process execution and runtime APIs, while the other controls access to management and modeling components.
+These identities serve different purposes. One controls access to process execution and runtime APIs, while the other controls access to management and modeling components.
 
 <table className="table-callout">
 <tr>
     <td width="30%">Orchestration Cluster Admin (formerly Orchestration Cluster Identity)</td>
-    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Admin governs access to process execution, task management, and related runtime resources.</p></td>
+    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Admin governs access to process execution, task management, and related runtime resources. Each cluster has its own Admin, and what you configure there applies to that cluster only. Admin is available in SaaS and Self-Managed.</p></td>
 </tr>
 <tr style={{ backgroundColor: 'var(--ifm-table-background)'}}>
-    <td width="30%">Management Identity</td>
-    <td><p>Used for managing the components Camunda Hub and Optimize.</p><p>Management Identity is typically required for platform administrators and developers, and is separate from the identities used for process orchestration.</p></td>
+    <td width="30%">Organization access (Camunda Hub and Optimize)</td>
+    <td><p>Used for managing who can use Camunda Hub and Optimize, and what they can do there. It is separate from the access you configure in Admin.</p><p>In SaaS, you manage organization access in Camunda Hub, on the <strong>Organization &gt; Manage organization</strong> page. SaaS has no separate identity component.</p><p>In Self-Managed, Management Identity provides organization access. Management Identity is a Self-Managed-only component.</p></td>
 </tr>
 </table>
 
-:::tip
-Understanding which identity is required for a given action helps you apply the correct access control policies.
-:::
+### Find out which identity you are configuring
+
+The screen you are working in tells you which identity you are configuring.
+
+| You are in                                                                    | You are configuring                                                                                           | Edition               |
+| :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :-------------------- |
+| Camunda Hub: **Organization > Manage organization**                           | Organization access: who can use Camunda Hub and Optimize, and their organization roles.                      | SaaS                  |
+| Management Identity                                                           | Organization access: who can use Camunda Hub and Optimize, and their roles.                                   | Self-Managed          |
+| Camunda Hub: **Environments**, select an environment, and then open **Admin** | Orchestration Cluster access for that cluster only: users, groups, roles, and authorizations for the runtime. | SaaS and Self-Managed |
+
+As a rule, access to Camunda Hub and Optimize is organization access. Access to Operate, Tasklist, Zeebe, and the Orchestration Cluster REST API is configured in Admin.
+
+In SaaS, the **Groups** tab in **Organization > Manage organization** applies only to clusters on version 8.7 or earlier. For clusters on version 8.8 or later, manage groups in Admin.
 
 :::note
 Identity object identifiers and names are limited to **256 characters**. This limit applies independently of the secondary storage backend used by the Orchestration Cluster.
@@ -43,12 +53,13 @@ Identity object identifiers and names are limited to **256 characters**. This li
 
 ## Identity provider (IdP) integration
 
-In production setups, both the Orchestration Cluster Admin and the Management Identity can integrate with an external OIDC IdP (such as Entra ID) for unified user management, single sign-on (SSO), and consistent security policies.
+In production setups, you can connect both Orchestration Cluster Admin and organization access to an external IdP (such as Entra ID) for unified user management, single sign-on (SSO), and consistent security policies. See [connect to an identity provider](./connect-to-identity-provider.md).
 
-| Identity type               | Description                                                                                                                                          | Default IdP              | External IdP support                  |
-| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :------------------------------------ |
-| Orchestration Cluster Admin | Built-in user management with support for external IdP integration via OIDC. Connects to enterprise IdPs such as Microsoft Entra ID, Okta, and more. | Built-in user management | OIDC integration with enterprise IdPs |
-| Management Identity         | Uses Keycloak by default, but can be configured with an external IdP via OIDC.                                                                       | Keycloak                 | OIDC integration with external IdPs   |
+| Identity type                             | Edition               | Description                                                                                                                                          | Default IdP              | External IdP support                          |
+| :---------------------------------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
+| Orchestration Cluster Admin               | SaaS and Self-Managed | Built-in user management with support for external IdP integration via OIDC. Connects to enterprise IdPs such as Microsoft Entra ID, Okta, and more. | Built-in user management | OIDC integration with enterprise IdPs         |
+| Organization access (Camunda Hub)         | SaaS                  | Organization-wide sign-in to Camunda Hub, managed by Camunda.                                                                                        | Camunda-managed sign-in  | SAML or Microsoft Entra ID (organization SSO) |
+| Organization access (Management Identity) | Self-Managed          | Uses Keycloak by default, but can be configured with an external IdP via OIDC.                                                                       | Keycloak                 | OIDC integration with external IdPs           |
 
 ## Authentication vs. authorization
 
@@ -65,10 +76,11 @@ Authorization determines what an authenticated user or client is allowed to acce
 
 For example, a user's authorizations allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
 
-| Identity type               | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
-| :-------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
-| Orchestration Cluster Admin | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Admin UI or API                |
-| Management Identity         | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Camunda Hub and Optimize.                                                                                   | Keycloak admin console or external IdP |
+| Identity type                             | Authorization model              | Description                                                                                                                                                                      | Management interface                                         |
+| :---------------------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------- |
+| Orchestration Cluster Admin               | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Admin UI or API                                      |
+| Organization access (Camunda Hub, SaaS)   | Role-based access control (RBAC) | Uses predefined organization roles to manage access to Camunda Hub and Optimize.                                                                                                 | Camunda Hub: **Organization > Manage organization**          |
+| Organization access (Management Identity) | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Camunda Hub and Optimize in Self-Managed.                                                                   | Management Identity, Keycloak admin console, or external IdP |
 
 ### How authentication and authorization work together
 
@@ -135,7 +147,14 @@ Tokens expire according to the `expires_in` field returned by the IdP. After exp
 
 ## Learn more
 
+### Organization access (Camunda Hub and Optimize)
+
+- [Manage users and roles in Camunda Hub](/components/hub/organization/users-and-roles.md)
+- [How identity works in Self-Managed](/self-managed/components/identity/how-identity-works.md)
+
 ### Orchestration Cluster authentication and authorization
+
+- [Introduction to Admin](/components/admin/admin-introduction.md)
 
 - [Set up OIDC-based authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 - [Orchestration Cluster authorization](./authorizations.md)
