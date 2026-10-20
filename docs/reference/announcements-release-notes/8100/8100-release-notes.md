@@ -32,7 +32,7 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
+<ul><li>[Camunda 8.10.5 (19.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.5)</li><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
