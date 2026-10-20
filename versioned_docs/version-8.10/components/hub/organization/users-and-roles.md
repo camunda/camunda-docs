@@ -115,14 +115,6 @@ If authorizations are disabled in the runtime, the user has full access to the r
 
 For clusters before version 8.8, access is controlled with resource-based authorizations and the legacy **Task user** and **Visitor** roles. See [manage resource-based authorizations](/components/saas/organization/resource-based-auth.md).
 
-### User task access restrictions
-
-:::note
-User task access restrictions were removed in Camunda 8.10 together with Tasklist V1.
-
-Use [authorization-based access control](../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
-:::
-
 </TabItem>
 
 <TabItem value='self-managed'>
@@ -153,7 +145,16 @@ Users are assigned organization-level roles. The following table shows what each
 
 ### Management Identity roles
 
-In Self-Managed, you assign roles in Management Identity. The **Hub Admin** role gives the access of an Organization Admin, and the **Hub** role the access of a Member. The **DevOps** and **Analyst** roles keep their names. The default roles **DevOps**, **Hub**, and **Hub Admin** were previously known as **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles still exist, grant the same permissions, and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
+In Self-Managed, you assign the organization-level roles by assigning roles in Management Identity. The following table shows which Management Identity role gives the access of each organization role.
+
+| Organization role  | Management Identity role | Previous name     |
+| :----------------- | :----------------------- | :---------------- |
+| Organization Admin | Hub Admin                | Web Modeler Admin |
+| Member             | Hub                      | Web Modeler       |
+| DevOps             | DevOps                   | Console           |
+| Analyst            | Analyst                  | –                 |
+
+The roles listed under **Previous name** still exist and grant the same permissions as the new roles. They are kept for backward compatibility, so existing assignments keep working. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
 
 ## Access to organization resources {#access-to-organization-resources}
 
@@ -206,14 +207,6 @@ Organization-level roles control what a user can do in Camunda Hub. They don't c
 If authorizations are disabled in the runtime, the user has full access to the runtime and its components.
 
 Authorizations for the runtime applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in Admin. See the [Admin overview](/self-managed/components/orchestration-cluster/admin/overview.md).
-
-### User task access restrictions {#user-task-access-restrictions}
-
-:::note
-User task access restrictions were removed in Camunda 8.10 together with Tasklist V1.
-
-Use [authorization-based access control](../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
-:::
 
 </TabItem>
 
