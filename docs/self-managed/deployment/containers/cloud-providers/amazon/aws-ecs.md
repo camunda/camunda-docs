@@ -7,7 +7,6 @@ description: "Learn how to install Camunda 8 on AWS ECS."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CostManagement from "../../../_partials/_cost-management.md";
-import SingleRegionArchitecture from "./assets/aws-ecs-single-region.svg";
 
 This guide walks you through deploying the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) and Connectors on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL, and verifying that all components are working.
 
@@ -56,11 +55,13 @@ The result is a fully functioning Camunda Orchestration Cluster deployed in a hi
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-<SingleRegionArchitecture role="img" title="Single-region Camunda 8 on Amazon ECS Fargate: an ALB, an NLB, and Cloud Map in the networking layer; Orchestration Cluster, Connectors, and optional Management Identity and Camunda Hub tasks; and EFS, two S3 buckets, and Aurora PostgreSQL as data services." />
+<!-- Editable source: ./assets/aws-ecs-single-region.excalidraw -->
+
+![A single AWS region with one VPC across three availability zones. Users and API clients reach an NLB over gRPC and an ALB over HTTP(S). The NLB forwards gRPC to the Orchestration Cluster, and the ALB routes to the ECS tasks. The Orchestration Cluster, Connectors, and the optional Management Identity and Camunda Hub tasks register with Cloud Map for service discovery. The Orchestration Cluster uses EFS over NFS, an S3 bucket for node IDs, an S3 bucket for backups, and Aurora PostgreSQL. Management Identity and Camunda Hub also use Aurora PostgreSQL.](./assets/aws-ecs-single-region.svg)
 
 _Infrastructure diagram for the single-region ECS architecture. Management Identity and Camunda Hub are optional and are only deployed when you enable OIDC authentication._
 
-Arrows show the direction of traffic. Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, the S3 node-ID bucket, the S3 backup bucket, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
+Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, the S3 node-ID bucket, the S3 backup bucket, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
 
 After completing this guide, you will have:
 
