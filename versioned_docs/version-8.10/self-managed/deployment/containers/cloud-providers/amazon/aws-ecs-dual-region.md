@@ -28,7 +28,7 @@ Active-active in this guide refers to the Zeebe data plane: one stretched cluste
 
 <!-- Editable source: ./assets/aws-ecs-dual-region.excalidraw -->
 
-![Clients reach an ingress in each of two AWS regions, eu-west-2 and eu-west-3, over HTTP(S) and gRPC. Each ingress forwards to an Orchestration Cluster of four Zeebe brokers on ECS Fargate, and the two clusters exchange Zeebe Raft traffic. Each region has an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions write to. Both regions connect to the writer cluster of an Aurora Global Database in eu-west-2, which replicates to a reader cluster in eu-west-3.](./assets/aws-ecs-dual-region.svg)
+![Clients reach the Ingress in each of two AWS regions, eu-west-2 and eu-west-3, over HTTP(S) and gRPC. Each Ingress forwards to an Orchestration Cluster of four Zeebe brokers on ECS Fargate, and the two clusters exchange Zeebe Raft traffic. Each region has an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions write to. Both regions connect to the writer cluster of an Aurora Global Database in eu-west-2, which replicates to a reader cluster in eu-west-3.](./assets/aws-ecs-dual-region.svg)
 
 Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease. Both regions connect to the Aurora global writer endpoint in region 0, and the writer replicates to the reader cluster in region 1.
 
