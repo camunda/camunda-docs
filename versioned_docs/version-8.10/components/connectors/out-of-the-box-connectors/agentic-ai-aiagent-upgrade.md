@@ -53,7 +53,7 @@ Use the `c8ctl element-template update` command to move legacy AI Agent elements
 
 Prerequisites:
 
-- [c8ctl](/apis-tools/c8ctl/getting-started.md#install) 4.4.0 or later.
+- [c8ctl](/apis-tools/c8ctl/getting-started.md#install) 4.6.0 or later.
 - The BPMN file sets the execution platform version to Camunda 8.10 or later. c8ctl does not change this version. Set it in Modeler or in the `modeler:executionPlatformVersion` attribute of the BPMN file.
 
 Each legacy template has one new template as its target. Use the element template IDs from the [table of legacy and new element templates](#legacy-and-new-element-templates). For a hybrid template, add the `-hybrid` suffix to both IDs. For example, upgrade `io.camunda.connectors.agenticai.aiagent.v1-hybrid` to `io.camunda.connectors.agenticai.ai-agent-task.v2-hybrid`.
@@ -75,36 +75,58 @@ To upgrade all legacy AI Agent elements in a BPMN file:
    c8ctl element-template sync
    ```
 
-2. Update the elements to the newest legacy template version. The migration recipe accepts only elements that use legacy template version 12 or later. If an element uses an older version, c8ctl rejects the recipe for it. Run the `update` command without the `--to` option:
-
-   ```shell
-   c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn --in-place
-   ```
-
-   c8ctl moves each element that uses the legacy template ID to the newest legacy template version that is compatible with the execution platform version of the BPMN file. The elements keep the legacy job type. To see the changes before you write the file, run the command with `--dry-run` first.
-
-3. Preview the upgrade. The `--dry-run` option prints a report and does not change the file:
+2. Preview the upgrade. The `--dry-run` option prints a report and does not change the file:
 
    ```shell
    c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn \
      --to io.camunda.connectors.agenticai.ai-agent-subprocess.v2 --dry-run
    ```
 
+   The migration recipe accepts only elements that use legacy template version 12 or later. If an element uses an older version, c8ctl first updates the element to legacy template version 12. Then c8ctl applies the recipe. The report shows this step. The example that follows shows the report for an AI Agent Sub-process element. The element uses legacy template version 7 and the Azure OpenAI provider:
+
+   ```text
+   AI Agent (AI_Agent)
+     AI Agent Sub-process v7  →  AI Agent Sub-process v1
+     io.camunda.connectors.agenticai.aiagent.jobworker.v1@7 → io.camunda.connectors.agenticai.ai-agent-subprocess.v2@1
+     recipe: embedded in io.camunda.connectors.agenticai.ai-agent-subprocess.v2
+     The element is on v7, which is too old for this recipe. Updating it to v12 first.
+
+     Model provider
+     ~ Provider               Azure OpenAI → OpenAI [openai]       set by recipe
+     + API                    Chat Completions [completions]       set by recipe
+     + Backend                Microsoft Foundry (Azure) [foundry]  set by recipe
+     > API endpoint           https://some-resource.azure.com      was Endpoint
+     > Authentication         Entra ID: Client credentials
+     > Client ID              some-client
+     > Client secret          [REDACTED]
+     > Tenant ID              some-tenant
+       keys renamed: provider.azureOpenAi.authentication.* → provider.openai.backend.foundry.authentication.* (4)
+
+     Model
+     > Model                  gpt-10-zeus                          was Model deployment name
+     + Effort                 default [modelDefault]               template default
+
+     Model options
+     > Max completion tokens  =24800                               was Model › Maximum tokens
+     > Temperature            =1                                   was Model › Temperature
+     > top P                  =10                                  was Model › top P
+
+     ✅ 13 updated, 16 kept unchanged, 0 lost
+
+   1 element updated. Dry run: nothing was written.
+   ```
+
    :::note
-   Look for moved values (marked `>`) and values that the recipe sets (marked `set by recipe`) in the report. If the report shows neither, c8ctl did not use the migration recipe and copies only the values with the same key. The report gives the reason for each element. Possible causes:
-
-   - The element uses a legacy template version older than 12. Do step 2, then run the dry run again.
-   - Your local template cache does not contain the newest template version with the migration recipe. Run `c8ctl element-template sync`, then run the dry run again.
-
+   Look for moved values (marked `>`) and values that the recipe sets (marked `set by recipe`) in the report. If the report shows neither, c8ctl did not use the migration recipe. c8ctl then copies only the values that have the same key. The report gives the reason for each element. A common cause is that your local template cache does not contain the newest template version with the migration recipe. In this case, run `c8ctl element-template sync`. Then do the dry run again.
    :::
 
-4. Read the report for each element. The report shows each added, changed, moved, and dropped value. It also shows the notes of the recipe, for example when the recipe turns on prompt caching. Compare the report with the **With c8ctl** notes in the [model provider configuration mapping](#model-provider-configuration-mapping).
+3. Read the report for each element. The report shows each added, changed, moved, and dropped value. It also shows the notes of the recipe, for example when the recipe turns on prompt caching. Compare the report with the **With c8ctl** notes in the [model provider configuration mapping](#model-provider-configuration-mapping).
 
    :::tip
    If an AI agent or a script reads the report, add the `--json` option to get machine-readable output.
    :::
 
-5. Write the upgrade to the file:
+4. Write the upgrade to the file:
 
    ```shell
    c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn \
@@ -113,7 +135,7 @@ To upgrade all legacy AI Agent elements in a BPMN file:
 
    The command upgrades all elements that use the legacy template ID. c8ctl writes the file only if all these elements migrate without data loss. If the report lists dropped values, set them manually after the upgrade, or add the `--allow-lossy` option to accept the loss. Use `--allow-lossy` only after you read the dropped values in the report.
 
-6. If the file also contains elements of the other legacy template, do steps 2 to 5 again. Use that legacy template ID and its new template ID from the [table of legacy and new element templates](#legacy-and-new-element-templates). For example, use `io.camunda.connectors.agenticai.aiagent.v1` with `--to io.camunda.connectors.agenticai.ai-agent-task.v2`.
+5. If the file also contains elements of the other legacy template, do steps 2 to 4 again. Use that legacy template ID and its new template ID from the [table of legacy and new element templates](#legacy-and-new-element-templates). For example, use `io.camunda.connectors.agenticai.aiagent.v1` with `--to io.camunda.connectors.agenticai.ai-agent-task.v2`.
 
 If c8ctl cannot use the recipe for an element, the report gives the reason. c8ctl then copies only the values with the same key, and the write requires `--allow-lossy`.
 
@@ -121,7 +143,13 @@ Run `c8ctl element-template update --help` to see all options.
 
 #### Stay on the legacy templates
 
-If you are not ready to move to the new templates, you can keep your elements on the legacy templates. Do steps 1 and 2 only. The report shows that the template is deprecated and lists the new template as the target for a later upgrade.
+If you are not ready for the new templates, you can keep your elements on the legacy templates. To update the elements to the newest legacy template version, refresh the template cache as in step 1. Then run the `update` command without the `--to` option:
+
+```shell
+c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn --in-place
+```
+
+c8ctl moves each element that uses the legacy template ID to the newest compatible legacy template version. The execution platform version of the BPMN file sets which versions are compatible. The elements keep the legacy job type. The report shows that the template is deprecated. The report also gives the new template as the target for a later upgrade.
 
 ### Upgrade manually in Modeler
 
