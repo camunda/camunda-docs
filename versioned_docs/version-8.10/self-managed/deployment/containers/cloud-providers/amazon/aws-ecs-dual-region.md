@@ -403,6 +403,8 @@ cd ../vpc && terraform destroy
 The reference architecture sets `s3_force_destroy = true` by default so `terraform destroy` removes backup S3 buckets without manual emptying. Flip `s3_force_destroy` to `false` in `terraform/infra/terraform.tfvars` and re-apply the infra layer before running any real workload through the stack. Otherwise, `terraform destroy` will delete backup data permanently.
 :::
 
+With `db_force_destroy = true` (the default), `terraform destroy` detaches the regional clusters from the Aurora Global Database before it deletes the global cluster, even after a failover changed the topology Terraform recorded. This setting doesn't protect your data. If you set it to `false`, `terraform destroy` still deletes both regional clusters without a final snapshot, then stops on the global cluster. To recover, see [Teardown after a failover](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/README.md#teardown-after-a-failover). To keep the data, enable deletion protection or final snapshots on the clusters.
+
 ## Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of each Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).

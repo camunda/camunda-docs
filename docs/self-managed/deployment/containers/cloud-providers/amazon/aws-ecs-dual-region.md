@@ -436,6 +436,8 @@ cd ../vpc && terraform destroy
 The reference architecture sets `s3_force_destroy = true` by default so `terraform destroy` removes backup S3 buckets without manual emptying. Flip `s3_force_destroy` to `false` in `terraform/infra/terraform.tfvars` and re-apply the infra layer before running any real workload through the stack. Otherwise, `terraform destroy` will delete backup data permanently.
 :::
 
+With `db_force_destroy = true` (the default), `terraform destroy` detaches the regional clusters from the Aurora Global Database before it deletes the global cluster, even after a failover changed the topology Terraform recorded. This setting doesn't protect your data. If you set it to `false`, `terraform destroy` still deletes both regional clusters without a final snapshot, then stops on the global cluster. To recover, see [`terraform destroy` hangs on the Aurora resources](#terraform-destroy-hangs-on-the-aurora-resources). To keep the data, enable deletion protection or final snapshots on the clusters.
+
 ## Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of each Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
@@ -642,7 +644,7 @@ aws ecs execute-command \
 
 **Symptom:** `terraform destroy` in `terraform/infra` doesn't finish while it deletes the Aurora Global Database resources.
 
-**Cause:** the Aurora writer is no longer in region 0, for example after an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost), and Terraform still expects the original topology.
+**Cause:** `db_force_destroy` is `false` and the Aurora writer is no longer in region 0, for example after an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost), and Terraform still expects the original topology.
 
 **Fix:** move the writer back with `./procedure/failback.sh --failed-region 0 --switch-writer`, then run `terraform destroy` again. If that's not possible, remove the Aurora resources manually and drop them from the Terraform state:
 
