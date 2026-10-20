@@ -25,31 +25,35 @@ These identities serve different purposes. One controls access to process execut
 <table className="table-callout">
 <tr>
     <td width="30%">Orchestration Cluster Admin (formerly Orchestration Cluster Identity)</td>
-    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Admin governs access to process execution, task management, and related runtime resources. Each cluster has its own Admin, and what you configure there applies to that cluster only. Admin is available in SaaS and Self-Managed.</p></td>
+    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Admin governs access to process execution, task management, and related runtime resources. Each cluster has its own Admin, and what you configure there applies to that cluster only.</p></td>
 </tr>
 <tr style={{ backgroundColor: 'var(--ifm-table-background)'}}>
     <td width="30%">Organization access (Camunda Hub and Optimize)</td>
-    <td><p>Used for managing who can use Camunda Hub and Optimize, and what they can do there. It is separate from the access you configure in Admin.</p><p>In SaaS, you manage organization access in Camunda Hub, on the <strong>Organization &gt; Manage organization</strong> page. SaaS has no separate identity component.</p><p>In Self-Managed, Management Identity provides organization access. Management Identity is a Self-Managed-only component.</p></td>
+    <td>
+
+Used for managing who can use Camunda Hub and Optimize, and what permissions they have. It is separate from the access you configure in Admin.
+
+In SaaS, you manage organization access in Camunda Hub, from the [Organization management view](/components/hub/organization/users-and-roles.md).
+
+In Self-Managed, [Management Identity](/self-managed/components/management-identity/overview.md) provides organization access. Management Identity is a Self-Managed-only component.
+
+</td>
 </tr>
 </table>
+
+:::note
+Identity object identifiers and names are limited to **256 characters**. This limit applies independently of the secondary storage backend used by the Orchestration Cluster.
+:::
 
 ### Find out which identity you are configuring
 
 The screen you are working in tells you which identity you are configuring.
 
-| You are in                                                                    | You are configuring                                                                                           | Edition               |
-| :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :-------------------- |
-| Camunda Hub: **Organization > Manage organization**                           | Organization access: who can use Camunda Hub and Optimize, and their organization roles.                      | SaaS                  |
-| Management Identity                                                           | Organization access: who can use Camunda Hub and Optimize, and their roles.                                   | Self-Managed          |
-| Camunda Hub: **Environments**, select an environment, and then open **Admin** | Orchestration Cluster access for that cluster only: users, groups, roles, and authorizations for the runtime. | SaaS and Self-Managed |
-
-As a rule, access to Camunda Hub and Optimize is organization access. Access to Operate, Tasklist, Zeebe, and the Orchestration Cluster REST API is configured in Admin.
-
-In SaaS, the **Groups** tab in **Organization > Manage organization** applies only to clusters on version 8.7 or earlier. For clusters on version 8.8 or later, manage groups in Admin.
-
-:::note
-Identity object identifiers and names are limited to **256 characters**. This limit applies independently of the secondary storage backend used by the Orchestration Cluster.
-:::
+| You are in                                                                      | You are configuring                                                                                                              | Edition               |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------- |
+| [Organization management](/components/hub/organization/users-and-roles.md)      | Organization access: who can use Camunda Hub and Optimize, and their organization roles.                                         | SaaS                  |
+| [Management Identity](/self-managed/components/management-identity/overview.md) | Organization access: who can use Camunda Hub and Optimize, and their roles.                                                      | Self-Managed          |
+| [Orchestration Cluster Admin](/components/admin/admin-introduction.md)          | Access to a deployment environment, its runtime applications (Operate, Tasklist, Admin), and the Orchestration Cluster REST API. | SaaS and Self-Managed |
 
 ## Identity provider (IdP) integration
 
