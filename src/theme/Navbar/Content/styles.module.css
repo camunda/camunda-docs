@@ -57,47 +57,6 @@
   top: calc(100% + 2px);
 }
 
-/* Release information badge (shown only in /next).
-   Same shape and size as the release announcement badges, in neutral grey. */
-.releaseInfoBadge {
-  display: inline-block;
-  padding: var(--ifm-badge-padding-vertical) var(--ifm-badge-padding-horizontal);
-  border: 1px solid #e5e5e5;
-  border-radius: var(--ifm-badge-border-radius);
-  background-color: #f5f5f5;
-  color: #525252;
-  font-size: 75%;
-  font-weight: 500;
-  line-height: 1;
-  white-space: nowrap;
-  transition: all 0.2s;
-}
-
-.releaseInfoBadge:hover {
-  border-color: #a3a3a3;
-  background-color: #e5e5e5;
-  color: #171717;
-  text-decoration: none;
-}
-
-[data-theme="dark"] .releaseInfoBadge {
-  border-color: #404040;
-  background-color: #1f1f1f;
-  color: #a3a3a3;
-}
-
-[data-theme="dark"] .releaseInfoBadge:hover {
-  border-color: #737373;
-  background-color: #333333;
-  color: #ffffff;
-}
-
-@media (max-width: 996px) {
-  .releaseInfoBadge {
-    display: none;
-  }
-}
-
 /* ---- Bottom row: Navigation links ---- */
 
 .bottomRow {
