@@ -83,29 +83,35 @@ Then, for each in-scope epic, read the body and comments with `gh issue view <n>
 
 ## Step 3: Classify each epic
 
-For each epic, work out three things.
+For each epic, work out four things.
 
-**1. Is it eligible?** By board phase:
+**1. Is it a candidate?** By board phase:
 
-| Phase                     | Eligible                                       |
-| ------------------------- | ---------------------------------------------- |
-| Done, Validate, Implement | Yes                                            |
-| Define, Discover          | No. List it and state the phase as the reason. |
+| Phase            | Candidate                                                                                                            |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Validate, Done   | Yes                                                                                                                  |
+| Implement        | Maybe. Epics here (especially `potential:`) may need an entry, but this needs a human decision. Flag, do not decide. |
+| Define, Discover | No. List it and state the phase as the reason.                                                                       |
 
-**2. Does it have release-note content?** The PM writes a `## Release Notes` section (or equivalent) in the epic body. Read the comments for scope changes, descopes, and renames that the section may not reflect.
+**2. What do the release labels say?** Rely on these labels on the epic:
 
-- Content exists → `Ready to draft`.
-- No content → `Needs content from PM`. Never infer an entry from the body or comments alone.
-- Internal change with no user-facing impact, or label `no-release-notes` → `No entry needed`. Say why.
+| Label                  | Meaning                                                                                                                                                                                                    |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `no-release-notes`     | No entry is needed. Mark `No entry needed` and say the label is the reason.                                                                                                                                |
+| `release-notes-needed` | The epic is a candidate. Read the epic description for a `## Release Notes` section. If it has content → `Ready to draft`. If it is missing or empty → `Action needed: PM must add Release Notes section`. |
+| `release-notes-added`  | The epic must have an entry in the release notes page. Search the target files (see below). If found → `Already in docs`. If not found → `Action needed: label says added, but no entry found`.            |
+| none of the above      | Unlabeled. If it is a Validate or Done candidate, flag `Action needed: no release label` and ask the user whether it needs one.                                                                            |
 
-**3. Where does it belong?** Follow `.github/instructions/repo.instructions.md` section 7:
+If an epic has more than one of these labels, report the conflict as a question. Never infer an entry from the body or comments alone. Read the comments for scope changes, descopes, and renames that the Release Notes section may not reflect.
+
+**3. Is the entry really in the docs?** Search the target folder's files for the epic number or its title. The live files are the source of truth. For an epic spread across alphas, note what is already documented and ask the user what is new in this alpha.
+
+**4. Where does it belong?** Follow `.github/instructions/repo.instructions.md` section 7:
 
 - **Announcements:** supported-environment changes, breaking changes, deprecations, removals, or anything that needs action before upgrading.
 - **Release notes:** every notable feature or enhancement. Put it in the section for the tag where it first appears (alpha1, alpha2, GA).
 - **What's new:** only features significant enough to influence an upgrade decision. Flag these as candidates. Do not decide for the user.
 - An epic can belong in more than one place. If the placement is unclear, ask the user.
-
-**Is it already documented?** Search the target folder's files for the epic number or its title. Use the live files as the source of truth, not the `release-notes-added` label, which is often stale. If an entry exists, mark the epic `Already in docs` and link the file. For an epic spread across alphas, note what is already documented and ask the user what is new in this alpha.
 
 If helpful, check `camunda/camunda-docs` (including open PRs) for related feature documentation and mention it. Do not count other repositories as documentation.
 
@@ -114,7 +120,7 @@ If helpful, check `camunda/camunda-docs` (including open PRs) for related featur
 Keep it short enough to read at a glance. Link every epic (`[#1234](url)`). Use this layout:
 
 1. **Header:** the target, the scan time, and counts by outcome.
-2. **Needs action:** a table of the epics that still need an entry or a decision, sorted by priority (`Ready to draft`, then `Needs content from PM`).
+2. **Needs action:** a table of the epics that still need an entry or a decision, sorted by priority (`Action needed` first, then `Ready to draft`, then Implement-phase epics flagged for a human decision).
 
    | Epic | Phase | Confidence | Where it goes | Status | Next step |
    | ---- | ----- | ---------- | ------------- | ------ | --------- |
@@ -133,8 +139,8 @@ End every report with a fenced block listing one line per in-scope epic, so the 
 
 ```text
 snapshot 8.11-alpha1 2026-10-20
-#1234 | Implement | target | Ready to draft | rn:a1b2c3 | in-docs:no
-#1250 | Define | potential | Not eligible | rn:none | in-docs:no
+#1234 | Validate | target | release-notes-needed | Ready to draft | rn:a1b2c3 | in-docs:no
+#1250 | Define | potential | none | Not eligible | rn:none | in-docs:no
 ```
 
 `rn` is the first 6 characters of a hash of the epic's release-notes section (`rn:none` if there is no section). A changed hash means the PM edited the content. Hash it with `shasum`.
@@ -147,7 +153,8 @@ Open the report with **What changed since the last scan**, listing only differen
 
 - **New** in scope.
 - **Removed** from scope (labels dropped). Keep it in the report and ask the user what to do, especially if it already has an entry in the docs.
-- **Phase** moved (for example `Implement → Validate`), and whether it became eligible.
+- **Phase** moved (for example `Implement → Validate`), and whether it became a candidate.
+- **Release label** changed (for example `release-notes-needed` → `release-notes-added`).
 - **Confidence** changed (`potential` → `target`).
 - **Release-note content** appeared or changed (`rn` hash differs).
 - **Newly documented** (an entry now exists in the docs).
