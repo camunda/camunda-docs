@@ -5,8 +5,6 @@ description: "Reference architecture for Camunda 8 Self-Managed on AWS ECS Farga
 sidebar_position: 2
 ---
 
-import DualRegionArchitecture from './assets/aws-ecs-dual-region.svg';
-
 This reference architecture deploys Camunda 8 Self-Managed across two AWS regions on ECS Fargate in an active-active configuration, with Aurora Global Database as secondary storage and Camunda 8.10 unified `/v2/*` REST API.
 
 :::note Reference architecture
@@ -29,9 +27,11 @@ The reference architecture creates two identically configured ECS Fargate cluste
 Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby: region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit operator step during failover, not an automatic property of the deployment. See [Recover when the Aurora writer's region is lost](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost).
 :::
 
-<DualRegionArchitecture role="img" title="Two AWS regions, eu-west-2 and eu-west-3, each running ECS Fargate workloads behind an ALB and NLB, with an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions share. The regions connect through VPC peering or Transit Gateway, and an Aurora Global Database has its writer in eu-west-2 and a reader in eu-west-3." />
+<!-- Editable source: ./assets/aws-ecs-dual-region.excalidraw -->
 
-Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease.
+![Clients reach an ingress in each of two AWS regions, eu-west-2 and eu-west-3, over HTTP(S) and gRPC. Each ingress forwards to an Orchestration Cluster of four Zeebe brokers on ECS Fargate, and the two clusters exchange Zeebe Raft traffic. Each region has an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions write to. Both regions connect to the writer cluster of an Aurora Global Database in eu-west-2, which replicates to a reader cluster in eu-west-3.](./assets/aws-ecs-dual-region.svg)
+
+Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease. Both regions connect to the Aurora global writer endpoint in region 0, and the writer replicates to the reader cluster in region 1.
 
 :::note
 This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
