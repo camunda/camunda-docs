@@ -2,7 +2,7 @@
 id: data-overview
 title: SaaS data
 sidebar_label: Data
-description: "Learn where your Camunda 8 SaaS data is hosted, how long it is kept, and how to back it up."
+description: "Choose where your Camunda 8 SaaS data is hosted, how long it is kept, and how to back it up."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';

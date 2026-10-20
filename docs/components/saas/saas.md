@@ -8,7 +8,7 @@ import AoGrid from '../react-components/\_ao-card';
 import { RocketIcon, BriefcaseIcon, FileStackIcon, BoxesIcon, BuildingComplexIcon, KeyRoundIcon, ServerIcon, MonitorCloudIcon, PencilRulerIcon } from "@site/docs/components/assets/hub-icons";
 import OverviewImg from './img/hero-saas.png';
 
-<h3 class="subheading">Run Camunda 8 as a fully managed, cloud-based service.</h3>
+<h3 class="subheading">Get started with Camunda 8 as a fully managed, cloud-based service.</h3>
 
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
