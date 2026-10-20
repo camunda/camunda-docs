@@ -53,6 +53,25 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
+
+The Camunda 8.11 Helm chart (16.x) keeps the 8.10 behavior. It warns about each chart-owned key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The check doesn't cover `global` values, the values of dependency charts, or free-form maps such as annotations and labels.
+
+Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
+
+**Action:** Remove or correct the keys that the `[camunda][warning] UNKNOWN VALUES KEY` messages name. To make unknown keys fail now, set `global.strictValues: true`.
+
+<p className="link-arrow">[Find unknown keys in your values](/self-managed/deployment/helm/operational-tasks/helm-values-schema-validation.md#find-unknown-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
