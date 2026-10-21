@@ -23,7 +23,7 @@ A static write rate limit can prevent throughput peaks, and write rate throttlin
 These write limits are enabled by default in SaaS and disabled in Self-Managed. For most use cases, write rate limits can be enabled as needed if an issue arises.
 :::
 
-Flow control is configured in your Zeebe Broker's `application.yaml` file. The default values can be found in the `# flowControl` section of the Zeebe Broker [configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) templates.
+Flow control is configured in your Zeebe Broker's `application.yaml` file. The default values can be found in the `# flowControl` section of the Zeebe Broker [configuration](https://github.com/camunda/camunda/blob/stable/8.9/dist/src/main/config/defaults.yaml) templates.
 
 ```yaml
 zeebe:

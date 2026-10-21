@@ -46,7 +46,7 @@ For the maximum throughput this configuration can achieve under stress using a m
 | Data availability (query API latency)           | < 5 seconds                                    |
 
 :::important
-These numbers reflect Camunda 8.9, measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
+These numbers reflect Camunda 8.9, measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/stable/8.9/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/stable/8.9/docs/testing/reliability-testing.md).
 :::
 
 The realistic reference process starts one root process instance, which spawns 50 sub-process instances via call activities. It covers a wide variety of BPMN elements, including call activities, multi-instance, sub-processes, and DMN. The process is based on the [Credit Card Fraud Dispute Handling](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling) blueprint from the Camunda Marketplace.
@@ -57,12 +57,12 @@ Camunda runs these load tests as part of its **reliability testing** practices. 
 
 The numbers presented here reflect a configuration that Camunda has repeatedly demonstrated can sustain this load reliably.
 
-These tests run on a dedicated Kubernetes cluster, using the same [load-tester](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) application and [Helm-based setup](https://github.com/camunda/camunda/blob/main/load-tests/README.md) used to validate every release before it ships. Reliability testing focuses on two test types, run against `main` and every supported `stable/*` branch:
+These tests run on a dedicated Kubernetes cluster, using the same [load-tester](https://github.com/camunda/camunda/tree/stable/8.9/load-tests/load-tester) application and [Helm-based setup](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/README.md) used to validate every release before it ships. Reliability testing focuses on two test types, run against `main` and every supported `stable/*` branch:
 
 | Test type                                                                                                                    | Process model                                                            |                          PI/s target | FNI/s target | Purpose                                                                               |
 | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -----------------------------------: | -----------: | ------------------------------------------------------------------------------------- |
-| **[Weekly (endurance)](https://github.com/camunda/camunda/blob/main/load-tests/README.md#weekly-load-tests-endurance-test)** | Credit card fraud dispute process (call activities, multi-instance, DMN) | 1 root PIs (50 sub PIs)<sup>\*</sup> |          560 | Validates sustained reliability over four weeks (used for the numbers on this page)   |
-| [Daily (stress)](https://github.com/camunda/camunda/blob/main/load-tests/README.md#daily-load-tests-stress-test)             | Single service task                                                      |                                  300 |          900 | Puts the system under stress and finds the throughput ceiling in a bounded 3-hour run |
+| **[Weekly (endurance)](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/README.md#weekly-load-tests-endurance-test)** | Credit card fraud dispute process (call activities, multi-instance, DMN) | 1 root PIs (50 sub PIs)<sup>\*</sup> |          560 | Validates sustained reliability over four weeks (used for the numbers on this page)   |
+| [Daily (stress)](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/README.md#daily-load-tests-stress-test)             | Single service task                                                      |                                  300 |          900 | Puts the system under stress and finds the throughput ceiling in a bounded 3-hour run |
 
 <sup>\*</sup> One root process instance per second fans out into 50 sub-process instances via call activities, so completed PI/s includes both.
 
@@ -72,7 +72,7 @@ The endurance run supports the numbers on this page:
 - A configuration is considered validated only after sustaining a continuous, production-like load—not merely a short burst.
 - The stress run answers a different question: how far can the system be pushed? Its ceiling of 300 PI/s is not a target for capacity planning.
 
-See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md) for the full test-type taxonomy and [load test metrics](https://github.com/camunda/camunda/blob/main/load-tests/docs/metrics.md) for how a run is judged healthy.
+See [reliability testing](https://github.com/camunda/camunda/blob/stable/8.9/docs/testing/reliability-testing.md) for the full test-type taxonomy and [load test metrics](https://github.com/camunda/camunda/blob/main/load-tests/docs/metrics.md) for how a run is judged healthy.
 
 ## Baseline resource configuration
 
