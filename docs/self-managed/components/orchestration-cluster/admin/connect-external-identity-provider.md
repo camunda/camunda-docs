@@ -111,6 +111,7 @@ If your OIDC provider needs to be reached using different URLs from the browser 
 :::
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
+- **Issuer URI**: Set `issuer-uri` to the issuer your IdP declares in its discovery document (`<issuer-uri>/.well-known/openid-configuration`). If your value differs from it only by a trailing slash, Camunda fetches the discovery document of the other form and uses the issuer your IdP declares. This happens, for example, when Microsoft Entra ID or Okta are configured with an extra trailing `/`, or Auth0 without its trailing `/`. Access tokens must carry the issuer your IdP declares in their `iss` claim. Any other difference between the configured and the declared issuer still fails.
 
 :::info
 If you're using Camunda Hub and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/properties.md#available-authentication-methods)),

@@ -106,6 +106,10 @@ camunda.security.authentication.providers.oidc.entraid.scope:
 The `issuer-uri` property is required for each provider configuration.
 :::
 
+:::note
+Two providers whose `issuer-uri` values differ only by a trailing slash, such as `https://idp.example.com` and `https://idp.example.com/`, name the same issuer: your IdP declares one of the two forms, and both providers resolve to it. Camunda gives the tokens of that issuer to the provider configured first, and logs a warning that names the other provider. Configure each issuer for one provider only.
+:::
+
 You can repeat these variables for any number of OIDC IdPs by using a unique `<provider-id>` for each.
 
 ### Configure global OIDC claims
