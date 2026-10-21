@@ -1,0 +1,523 @@
+---
+id: list-runtime-backups
+title: "List runtime backups"
+sidebar_label: "List runtime backups"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"List runtime backups"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/backups/runtime"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Returns a list of all available runtime backups of the physical tenant, with their
+state and additional info, sorted in descending order of backupId.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "BACKUP", permissionType: "READ" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "prefix",
+      in: "query",
+      required: false,
+      description:
+        "A prefix that backup ids must match, ending in a single '*'. If omitted, all\nbackups are returned.\n",
+      schema: {
+        title: "Backup ID Prefix",
+        description:
+          "A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id\nstarting with the given prefix.\n",
+        type: "string",
+        pattern: "^\\d*\\*$",
+        example: "17567*",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The list of runtime backups.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              title: "Backup Info",
+              description:
+                "Detailed status of a runtime backup. The aggregated state is computed from the backup\nstate of each partition as:\n- If the backup of all partitions is 'COMPLETED', the overall state is 'COMPLETED'.\n- If one partition is 'FAILED', the overall state is 'FAILED'.\n- Otherwise, if one partition is 'DOES_NOT_EXIST', the overall state is 'INCOMPLETE'.\n- Otherwise, if one partition is 'IN_PROGRESS', the overall state is 'IN_PROGRESS'.\n",
+              type: "object",
+              properties: {
+                backupId: {
+                  description: "The id of the backup.",
+                  readOnly: true,
+                  allOf: [
+                    {
+                      title: "Backup ID",
+                      description:
+                        "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                      type: "integer",
+                      format: "int64",
+                      example: 1,
+                      minimum: 1,
+                    },
+                  ],
+                },
+                state: {
+                  description: "The aggregated state of the backup.",
+                  readOnly: true,
+                  allOf: [
+                    {
+                      title: "Runtime Backup State",
+                      description:
+                        "The aggregated state of the backup, computed from the state of each partition.",
+                      type: "string",
+                      enum: [
+                        "DOES_NOT_EXIST",
+                        "IN_PROGRESS",
+                        "COMPLETED",
+                        "FAILED",
+                        "INCOMPLETE",
+                        "DELETED",
+                      ],
+                      example: "IN_PROGRESS",
+                    },
+                  ],
+                },
+                failureReason: {
+                  description: "Reason for failure if the state is 'FAILED'.",
+                  type: "string",
+                  nullable: true,
+                  example: "",
+                },
+                details: {
+                  readOnly: true,
+                  description:
+                    "Detailed status of the backup per partition. Always contains every partition of\nthe physical tenant.\n",
+                  type: "array",
+                  items: {
+                    title: "Partition Backup Info",
+                    description:
+                      "Detailed info of the backup for a given partition.",
+                    type: "object",
+                    properties: {
+                      partitionId: {
+                        description: "The id of the partition.",
+                        readOnly: true,
+                        allOf: [
+                          {
+                            title: "Partition ID",
+                            description:
+                              "The id of a partition. Always a positive number greater than or equal to 1.",
+                            type: "integer",
+                            format: "int32",
+                            minimum: 1,
+                            example: 3,
+                          },
+                        ],
+                      },
+                      state: {
+                        description:
+                          "The state of the backup on this partition.",
+                        readOnly: true,
+                        allOf: [
+                          {
+                            title: "Runtime Backup State",
+                            description:
+                              "The aggregated state of the backup, computed from the state of each partition.",
+                            type: "string",
+                            enum: [
+                              "DOES_NOT_EXIST",
+                              "IN_PROGRESS",
+                              "COMPLETED",
+                              "FAILED",
+                              "INCOMPLETE",
+                              "DELETED",
+                            ],
+                            example: "IN_PROGRESS",
+                          },
+                        ],
+                      },
+                      failureReason: {
+                        description: "Failure reason if the state is 'FAILED'.",
+                        type: "string",
+                        nullable: true,
+                        example: "",
+                      },
+                      createdAt: {
+                        description:
+                          "The timestamp at which the backup was started on this partition.",
+                        readOnly: true,
+                        type: "string",
+                        format: "date-time",
+                        nullable: true,
+                        example: "2022-09-15T13:10:38.176514094Z",
+                      },
+                      lastUpdatedAt: {
+                        description:
+                          "The timestamp at which the backup was last updated on this partition, e.g. changed\nstate from 'IN_PROGRESS' to 'COMPLETED'.\n",
+                        readOnly: true,
+                        type: "string",
+                        format: "date-time",
+                        nullable: true,
+                        example: "2022-09-15T13:10:38.176514094Z",
+                      },
+                      snapshotId: {
+                        description:
+                          "The id of the snapshot which is included in this backup.",
+                        type: "string",
+                        readOnly: true,
+                        nullable: true,
+                        example: "238632143-55-690906332-690905294",
+                      },
+                      firstLogPosition: {
+                        description:
+                          "The first log position included in this backup.",
+                        type: "integer",
+                        format: "int64",
+                        readOnly: true,
+                        nullable: true,
+                        example: 5,
+                      },
+                      checkpointPosition: {
+                        description:
+                          "The position of the checkpoint for this backup.",
+                        type: "integer",
+                        format: "int64",
+                        readOnly: true,
+                        nullable: true,
+                        example: 10,
+                      },
+                      brokerId: {
+                        description:
+                          "The id of the broker from which the backup was taken for this partition.",
+                        type: "integer",
+                        format: "int32",
+                        readOnly: true,
+                        nullable: true,
+                        example: 0,
+                        minimum: 0,
+                      },
+                      brokerVersion: {
+                        description:
+                          "The version of the broker from which the backup was taken for this partition.\n",
+                        type: "string",
+                        readOnly: true,
+                        nullable: true,
+                        example: "8.10.0",
+                      },
+                    },
+                    required: [
+                      "partitionId",
+                      "state",
+                      "failureReason",
+                      "createdAt",
+                      "lastUpdatedAt",
+                      "snapshotId",
+                      "firstLogPosition",
+                      "checkpointPosition",
+                      "brokerId",
+                      "brokerVersion",
+                    ],
+                  },
+                },
+              },
+              required: ["backupId", "state", "failureReason", "details"],
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

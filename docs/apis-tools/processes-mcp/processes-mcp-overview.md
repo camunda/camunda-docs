@@ -24,7 +24,7 @@ The Processes MCP Server is not part of the [Camunda 8 public API](/reference/pu
 :::note
 This is the Processes MCP Server documentation. If you are looking to:
 
-- Give AI agents access to Camunda's operational capabilities, such as incidents, user tasks, and process instances, see the [Orchestration Cluster MCP Server](../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
+- Give [AI agents](/reference/glossary.md#ai-agent) access to Camunda's operational capabilities, such as incidents, user tasks, and process instances, see the [Orchestration Cluster MCP Server](../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
 - Connect an AI agent running inside a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
   :::
 

@@ -7,7 +7,7 @@ description: "Focused walkthrough for teams choosing an external RDBMS as second
 
 This guide is a focused walkthrough for teams using an external relational database (RDBMS) as secondary storage in the Helm production installation flow, instead of a document-store secondary backend (Elasticsearch or OpenSearch).
 
-Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
+To install the releases, see [choose your topology](./index.md#choose-your-topology), and apply the [production hardening](./production/index.md) settings. Use this page when you want additional RDBMS-specific examples for that flow.
 
 If you deploy on AWS EKS, use [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) for the cluster, Ingress, and AWS-managed service setup, then return to this page for the RDBMS-specific Helm configuration and installation steps.
 
@@ -38,7 +38,7 @@ In this topology:
 Before you begin:
 
 1. **Kubernetes cluster**: 1.24+ with sufficient resources for Camunda pods.
-2. **Helm CLI v4**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/). Helm v3 is not supported for Camunda 8.10 and later.
+2. **Helm CLI v4**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/).
 3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
 5. **Document-store backend (Elasticsearch/OpenSearch)** (for Optimize): Required if you deploy Optimize alongside Camunda.
@@ -134,15 +134,9 @@ orchestration:
                 # Optional: Configure history retention
                 history:
                   default-history-ttl: P30D
-
-# Disable default Elasticsearch subchart
-elasticsearch:
-  enabled: false
-# If deploying Optimize, you still need Elasticsearch/OpenSearch
-# Uncomment below and configure as needed:
-# opensearch:
-#   enabled: true
 ```
+
+If you deploy Optimize, set its connection under `optimize.database.elasticsearch` or `optimize.database.opensearch`. See [component storage requirements](#important-component-storage-requirements).
 
 ### Step 5: Create the Kubernetes secret for database credentials
 
@@ -194,7 +188,17 @@ For other driver sources (e.g., private repositories), adjust the `wget` command
 
 #### Option B: ConfigMap (GitOps-friendly)
 
-Store the driver JAR in a ConfigMap and mount it:
+Store the driver JAR in a ConfigMap and mount it. A ConfigMap can't exceed 1 MiB, so this option only fits small drivers. The Oracle driver in Option A is larger than that limit.
+
+Create the ConfigMap from the JAR file. The command stores the JAR in the `binaryData` field:
+
+```bash
+kubectl create configmap jdbc-drivers \
+  --from-file=driver.jar=<path-to-driver-jar> \
+  -n camunda
+```
+
+For GitOps, commit the equivalent manifest instead. Store the base64-encoded JAR in `binaryData`, not in `data`:
 
 ```yaml
 apiVersion: v1
@@ -202,9 +206,13 @@ kind: ConfigMap
 metadata:
   name: jdbc-drivers
   namespace: camunda
-data:
-  ojdbc.jar: <base64-encoded JAR content>
----
+binaryData:
+  driver.jar: <base64-encoded JAR content>
+```
+
+Then mount the ConfigMap in your `values-rdbms.yaml`:
+
+```yaml
 orchestration:
   extraVolumeMounts:
     - name: jdbcdrivers
@@ -241,13 +249,13 @@ Check that tables were created and data is being written:
 kubectl port-forward -n camunda svc/postgres 5432:5432
 
 # Connect and verify
-psql -h localhost -U camunda -d camunda -c "SELECT * FROM zeebe_process;"
+psql -h localhost -U camunda -d camunda -c "SELECT COUNT(*) FROM process_instance;"
 ```
 
 Deploy a test process using Web Modeler and verify it appears in the database:
 
 ```sql
-SELECT COUNT(*) FROM process_instances;
+SELECT COUNT(*) FROM process_instance;
 ```
 
 For a full post-deployment checklist, see [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
@@ -266,7 +274,7 @@ orchestration:
         url: jdbc:postgresql://my-aurora-cluster.xxxxxxx.us-east-1.rds.amazonaws.com:5432/camunda
 ```
 
-Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).
+Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql--mysql).
 
 ### Oracle with Kubernetes init container
 
@@ -304,9 +312,9 @@ orchestration:
         url: jdbc:oracle:thin:@//my-oracle-host:1521/FREEPDB1
 ```
 
-### Multi-namespace deployment (Orchestration + Management)
+### Multi-namespace deployment (Orchestration Cluster + management plane) {#multi-namespace-deployment-orchestration--management}
 
-In production, separate the Orchestration Cluster from management components (WebModeler, Console, Identity, Optimize):
+In production, separate the Orchestration Cluster from the management plane (Camunda Hub and Management Identity) and Optimize:
 
 #### Namespace 1: Orchestration + Connectors
 
@@ -323,39 +331,38 @@ orchestration:
 connectors:
   enabled: true
 
-# Disable management components
-console:
+# Disable the management plane and Optimize
+camundaHub:
   enabled: false
 optimize:
-  enabled: false
-webModeler:
   enabled: false
 identity:
   enabled: false
 ```
 
-#### Namespace 2: Management components (with document-store secondary storage)
+#### Namespace 2: Management plane and Optimize (with document-store secondary storage) {#namespace-2-management-components-with-document-store-secondary-storage}
 
 ```yaml
 orchestration:
   enabled: false
 
-console:
+camundaHub:
   enabled: true
 optimize:
   enabled: true
-webModeler:
-  enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 identity:
   enabled: true
-
-# Optimize requires Elasticsearch/OpenSearch
-opensearch:
-  enabled: true
-  # or
-  # elasticsearch:
-  #   enabled: true
 ```
+
+For the Optimize connection settings, see [use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md).
 
 ## Configuration reference
 
@@ -377,12 +384,17 @@ orchestration:
 
 optimize:
   enabled: true
-# Choose one secondary storage for Optimize:
-# opensearch:
-#   enabled: true
-# elasticsearch:
-#   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 ```
+
+For OpenSearch, set `optimize.database.opensearch` instead. See [use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md).
 
 Mixing storage types (RDBMS for Orchestration, Elasticsearch/OpenSearch for Optimize) is supported and tested.
 

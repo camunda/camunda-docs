@@ -1,0 +1,641 @@
+---
+id: search-decision-requirements
+title: "Search decision requirements"
+sidebar_label: "Search decision requirements"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search decision requirements"} <MarkerAddedInVersion version="8.6" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/decision-requirements/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for decision requirements based on given criteria.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "DECISION_REQUIREMENTS_DEFINITION",
+      permissionType: "READ",
+    },
+  ]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                              "x-added-in-version": "8.8",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                              "x-added-in-version": "8.8",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "decisionRequirementsKey",
+                      "decisionRequirementsName",
+                      "version",
+                      "decisionRequirementsId",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "DecisionRequirementsSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description: "Decision requirements search filter.",
+                  type: "object",
+                  properties: {
+                    decisionRequirementsName: {
+                      type: "string",
+                      description: "The DMN name of the decision requirements.",
+                    },
+                    decisionRequirementsId: {
+                      type: "string",
+                      description: "the DMN ID of the decision requirements.",
+                    },
+                    decisionRequirementsKey: {
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      description:
+                        "System-generated key for a deployed decision requirements definition.",
+                      format: "DecisionRequirementsKey",
+                      example: "2251799813683346",
+                      type: "string",
+                      title: "DecisionRequirementsKey",
+                    },
+                    version: {
+                      type: "integer",
+                      format: "int32",
+                      description:
+                        "The assigned version of the decision requirements.",
+                    },
+                    tenantId: {
+                      description:
+                        "The tenant ID of the decision requirements.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    resourceName: {
+                      type: "string",
+                      description:
+                        "The name of the resource from which the decision requirements were parsed",
+                      "x-added-in-version": "8.8",
+                    },
+                  },
+                  title: "DecisionRequirementsFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision requirements search result.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["items"],
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                        "x-added-in-version": "8.8",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                        "x-added-in-version": "8.8",
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                        "x-added-in-version": "8.8",
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  required: [
+                    "decisionRequirementsId",
+                    "decisionRequirementsKey",
+                    "decisionRequirementsName",
+                    "resourceName",
+                    "tenantId",
+                    "version",
+                  ],
+                  type: "object",
+                  properties: {
+                    decisionRequirementsId: {
+                      type: "string",
+                      description: "The DMN ID of the decision requirements.",
+                    },
+                    decisionRequirementsKey: {
+                      allOf: [
+                        {
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          description:
+                            "System-generated key for a deployed decision requirements definition.",
+                          format: "DecisionRequirementsKey",
+                          example: "2251799813683346",
+                          type: "string",
+                          title: "DecisionRequirementsKey",
+                        },
+                      ],
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                    decisionRequirementsName: {
+                      type: "string",
+                      description: "The DMN name of the decision requirements.",
+                    },
+                    resourceName: {
+                      type: "string",
+                      description:
+                        "The name of the resource from which this decision requirements was parsed.",
+                    },
+                    tenantId: {
+                      description:
+                        "The tenant ID of the decision requirements.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    version: {
+                      type: "integer",
+                      format: "int32",
+                      description:
+                        "The assigned version of the decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsResult",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -16,7 +16,7 @@ const ArchitectureCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
-const ReferenceArchitecture = () => {
+const ReferenceArchitecture = ({ hideHeading = false }) => {
   const architectureItems = [
     {
       title: "Kubernetes",
@@ -36,7 +36,7 @@ const ReferenceArchitecture = () => {
 
   return (
     <div className="sm-reference-architecture">
-      <h2>Reference Architecture</h2>
+      {!hideHeading && <h2>Reference Architecture</h2>}
       <p>
         Reference architectures provide a comprehensive blueprint for designing
         and implementing scalable, robust, and adaptable systems.

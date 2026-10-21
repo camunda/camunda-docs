@@ -8,7 +8,7 @@ Use these blueprints to quickly implement common Camunda–ServiceNow integratio
 
 ![Camunda ServiceNow integration blueprint](./img/sn-blueprint-template.png)
 
-Download the blueprint from the [Camunda Marketplace](https://marketplace.camunda.com/) and import it directly into Camunda Modeler.  
+Download the blueprint from the [Camunda Marketplace](https://marketplace.camunda.com/) and import it directly into Camunda Hub or Desktop Modeler.  
 It provides **pre-configured processes** demonstrating best practices, reusable patterns, and realistic business use cases.
 
 ### Supported integration patterns

@@ -12,7 +12,7 @@ Only the three most recent successful backups of each type are kept, meaning you
 
 ## Create a manual backup
 
-You can create a manual backup every five hours.
+You can create a manual backup every 15 minutes.
 
 To create a manual backup, take the following steps:
 

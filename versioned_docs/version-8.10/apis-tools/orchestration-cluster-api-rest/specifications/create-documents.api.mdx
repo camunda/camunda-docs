@@ -1,0 +1,720 @@
+---
+id: create-documents
+title: "Upload multiple documents"
+sidebar_label: "Upload multiple documents"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Upload multiple documents"} <MarkerAddedInVersion version="8.7" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/documents/batch"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Upload multiple documents to the Camunda 8 cluster.
+
+The caller must provide a file name for each document, which will be used in case of a multi-status response
+to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
+of the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These
+are matched with the files based on index, and must have the same length as the files array.
+To pass homogenous metadata for all files, spread the metadata over the metadata array.
+A filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header
+of the file part.
+
+In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
+each of which contains the file name of the document that failed to upload and the reason for the failure.
+The client can choose to retry the whole batch or individual documents based on the response.
+
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "DOCUMENT", permissionType: "CREATE" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description:
+        "The ID of the document store to upload the documents to. Currently, only a single document store is supported per cluster. However, this attribute is included to allow for potential future support of multiple document stores.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          properties: {
+            files: {
+              type: "array",
+              description: "The documents to upload.",
+              items: { type: "string", format: "binary" },
+              minItems: 1,
+            },
+            metadataList: {
+              description:
+                "Optional JSON array of metadata object whose index aligns with each file entry. The metadata array must have the same length as the files array.\n",
+              type: "array",
+              items: {
+                description: "Information about the document.",
+                type: "object",
+                properties: {
+                  contentType: {
+                    type: "string",
+                    description: "The content type of the document.",
+                  },
+                  fileName: {
+                    type: "string",
+                    description: "The name of the file.",
+                  },
+                  expiresAt: {
+                    type: "string",
+                    format: "date-time",
+                    description: "The date and time when the document expires.",
+                  },
+                  size: {
+                    type: "integer",
+                    format: "int64",
+                    description: "The size of the document in bytes.",
+                  },
+                  processDefinitionId: {
+                    allOf: [
+                      {
+                        description:
+                          "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                        format: "ProcessDefinitionId",
+                        type: "string",
+                        example: "new-account-onboarding-workflow",
+                        title: "ProcessDefinitionId",
+                      },
+                    ],
+                    description:
+                      "The ID of the process definition that created the document.",
+                  },
+                  processInstanceKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
+                    description:
+                      "The key of the process instance that created the document.",
+                  },
+                  customProperties: {
+                    type: "object",
+                    description: "Custom properties of the document.",
+                    additionalProperties: true,
+                  },
+                },
+                title: "DocumentMetadata",
+              },
+              "x-added-in-version": "8.8",
+            },
+          },
+          required: ["files"],
+        },
+        encoding: {
+          files: {
+            headers: {
+              "X-Document-Metadata": {
+                description: "DEPRECATED - prefer metadataList.",
+                schema: {
+                  description: "Information about the document.",
+                  type: "object",
+                  properties: {
+                    contentType: {
+                      type: "string",
+                      description: "The content type of the document.",
+                    },
+                    fileName: {
+                      type: "string",
+                      description: "The name of the file.",
+                    },
+                    expiresAt: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The date and time when the document expires.",
+                    },
+                    size: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The size of the document in bytes.",
+                    },
+                    processDefinitionId: {
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                      description:
+                        "The ID of the process definition that created the document.",
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                      description:
+                        "The key of the process instance that created the document.",
+                    },
+                    customProperties: {
+                      type: "object",
+                      description: "Custom properties of the document.",
+                      additionalProperties: true,
+                    },
+                  },
+                  "x-properties-added-in-version": [
+                    { propertyName: "contentType", addedInVersion: "8.6" },
+                    { propertyName: "fileName", addedInVersion: "8.6" },
+                    { propertyName: "expiresAt", addedInVersion: "8.6" },
+                    { propertyName: "size", addedInVersion: "8.6" },
+                    {
+                      propertyName: "processDefinitionId",
+                      addedInVersion: "8.7",
+                    },
+                    {
+                      propertyName: "processInstanceKey",
+                      addedInVersion: "8.7",
+                    },
+                    { propertyName: "customProperties", addedInVersion: "8.7" },
+                  ],
+                  title: "DocumentMetadata",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "All documents were uploaded successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            allOf: [
+              {
+                type: "object",
+                required: ["failedDocuments", "createdDocuments"],
+                properties: {
+                  failedDocuments: {
+                    type: "array",
+                    description: "Documents that were successfully created.",
+                    items: {
+                      type: "object",
+                      required: ["detail", "fileName", "status", "title"],
+                      properties: {
+                        fileName: {
+                          type: "string",
+                          description:
+                            "The name of the file that failed to upload.",
+                        },
+                        status: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The HTTP status code of the failure.",
+                          "x-added-in-version": "8.9",
+                        },
+                        title: {
+                          type: "string",
+                          description:
+                            "A short, human-readable summary of the problem type.",
+                          "x-added-in-version": "8.9",
+                        },
+                        detail: {
+                          type: "string",
+                          description:
+                            "A human-readable explanation specific to this occurrence of the problem.",
+                        },
+                      },
+                      title: "DocumentCreationFailureDetail",
+                    },
+                  },
+                  createdDocuments: {
+                    type: "array",
+                    description: "Documents that failed creation.",
+                    items: {
+                      type: "object",
+                      required: [
+                        "camunda.document.type",
+                        "storeId",
+                        "documentId",
+                        "contentHash",
+                        "metadata",
+                      ],
+                      properties: {
+                        "camunda.document.type": {
+                          type: "string",
+                          description:
+                            'Document discriminator. Always set to "camunda".',
+                          enum: ["camunda"],
+                        },
+                        storeId: {
+                          type: "string",
+                          description: "The ID of the document store.",
+                        },
+                        documentId: {
+                          allOf: [
+                            {
+                              description:
+                                "Document Id that uniquely identifies a document.",
+                              format: "DocumentId",
+                              type: "string",
+                              title: "DocumentId",
+                            },
+                          ],
+                          description: "The ID of the document.",
+                        },
+                        contentHash: {
+                          type: "string",
+                          description: "The hash of the document.",
+                          nullable: true,
+                        },
+                        metadata: {
+                          description:
+                            "Information about the document that is returned in responses.",
+                          type: "object",
+                          required: [
+                            "fileName",
+                            "expiresAt",
+                            "size",
+                            "contentType",
+                            "customProperties",
+                            "processDefinitionId",
+                            "processInstanceKey",
+                          ],
+                          properties: {
+                            contentType: {
+                              type: "string",
+                              description: "The content type of the document.",
+                            },
+                            fileName: {
+                              type: "string",
+                              description: "The name of the file.",
+                            },
+                            expiresAt: {
+                              type: "string",
+                              format: "date-time",
+                              description:
+                                "The date and time when the document expires.",
+                              nullable: true,
+                            },
+                            size: {
+                              type: "integer",
+                              format: "int64",
+                              description: "The size of the document in bytes.",
+                            },
+                            processDefinitionId: {
+                              allOf: [
+                                {
+                                  description:
+                                    "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                  format: "ProcessDefinitionId",
+                                  type: "string",
+                                  example: "new-account-onboarding-workflow",
+                                  title: "ProcessDefinitionId",
+                                },
+                              ],
+                              description:
+                                "The ID of the process definition that created the document.",
+                              nullable: true,
+                            },
+                            processInstanceKey: {
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                              ],
+                              description:
+                                "The key of the process instance that created the document.",
+                              nullable: true,
+                            },
+                            customProperties: {
+                              type: "object",
+                              description: "Custom properties of the document.",
+                              additionalProperties: true,
+                            },
+                          },
+                          title: "DocumentMetadataResponse",
+                        },
+                      },
+                      title: "DocumentReference",
+                    },
+                  },
+                },
+              },
+            ],
+            title: "DocumentCreationBatchResponse",
+          },
+        },
+      },
+    },
+    "207": {
+      description: "Some documents were uploaded successfully, others failed.",
+      content: {
+        "application/json": {
+          schema: {
+            allOf: [
+              {
+                type: "object",
+                required: ["failedDocuments", "createdDocuments"],
+                properties: {
+                  failedDocuments: {
+                    type: "array",
+                    description: "Documents that were successfully created.",
+                    items: {
+                      type: "object",
+                      required: ["detail", "fileName", "status", "title"],
+                      properties: {
+                        fileName: {
+                          type: "string",
+                          description:
+                            "The name of the file that failed to upload.",
+                        },
+                        status: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The HTTP status code of the failure.",
+                          "x-added-in-version": "8.9",
+                        },
+                        title: {
+                          type: "string",
+                          description:
+                            "A short, human-readable summary of the problem type.",
+                          "x-added-in-version": "8.9",
+                        },
+                        detail: {
+                          type: "string",
+                          description:
+                            "A human-readable explanation specific to this occurrence of the problem.",
+                        },
+                      },
+                      title: "DocumentCreationFailureDetail",
+                    },
+                  },
+                  createdDocuments: {
+                    type: "array",
+                    description: "Documents that failed creation.",
+                    items: {
+                      type: "object",
+                      required: [
+                        "camunda.document.type",
+                        "storeId",
+                        "documentId",
+                        "contentHash",
+                        "metadata",
+                      ],
+                      properties: {
+                        "camunda.document.type": {
+                          type: "string",
+                          description:
+                            'Document discriminator. Always set to "camunda".',
+                          enum: ["camunda"],
+                        },
+                        storeId: {
+                          type: "string",
+                          description: "The ID of the document store.",
+                        },
+                        documentId: {
+                          allOf: [
+                            {
+                              description:
+                                "Document Id that uniquely identifies a document.",
+                              format: "DocumentId",
+                              type: "string",
+                              title: "DocumentId",
+                            },
+                          ],
+                          description: "The ID of the document.",
+                        },
+                        contentHash: {
+                          type: "string",
+                          description: "The hash of the document.",
+                          nullable: true,
+                        },
+                        metadata: {
+                          description:
+                            "Information about the document that is returned in responses.",
+                          type: "object",
+                          required: [
+                            "fileName",
+                            "expiresAt",
+                            "size",
+                            "contentType",
+                            "customProperties",
+                            "processDefinitionId",
+                            "processInstanceKey",
+                          ],
+                          properties: {
+                            contentType: {
+                              type: "string",
+                              description: "The content type of the document.",
+                            },
+                            fileName: {
+                              type: "string",
+                              description: "The name of the file.",
+                            },
+                            expiresAt: {
+                              type: "string",
+                              format: "date-time",
+                              description:
+                                "The date and time when the document expires.",
+                              nullable: true,
+                            },
+                            size: {
+                              type: "integer",
+                              format: "int64",
+                              description: "The size of the document in bytes.",
+                            },
+                            processDefinitionId: {
+                              allOf: [
+                                {
+                                  description:
+                                    "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                  format: "ProcessDefinitionId",
+                                  type: "string",
+                                  example: "new-account-onboarding-workflow",
+                                  title: "ProcessDefinitionId",
+                                },
+                              ],
+                              description:
+                                "The ID of the process definition that created the document.",
+                              nullable: true,
+                            },
+                            processInstanceKey: {
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                              ],
+                              description:
+                                "The key of the process instance that created the document.",
+                              nullable: true,
+                            },
+                            customProperties: {
+                              type: "object",
+                              description: "Custom properties of the document.",
+                              additionalProperties: true,
+                            },
+                          },
+                          title: "DocumentMetadataResponse",
+                        },
+                      },
+                      title: "DocumentReference",
+                    },
+                  },
+                },
+              },
+            ],
+            title: "DocumentCreationBatchResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "415": {
+      description:
+        "The server cannot process the request because the media type (Content-Type) of the request payload is not supported\nby the server for the requested resource and method.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

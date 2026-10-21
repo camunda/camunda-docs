@@ -1,39 +1,23 @@
 ---
 id: model-your-first-diagram
-title: Model your first diagram
-description: "After you've created a BPMN diagram, you can start modeling it."
+title: Start modeling
+description: "A brief tour of the Camunda Hub modeling interface."
 ---
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
-After you've created a BPMN diagram, you can start modeling it.
+A brief tour of the Camunda Hub modeling interface.
 
 A new diagram contains a single start event, the starting point of every process. From here, you can add elements to build out your process.
 
-![Initial diagram](./img/model-your-first-diagram/model-1.png)
-
-Use the plus icon in the **context pad** to append your first element, such as a task.
-
-![Append menu](./img/model-your-first-diagram/model-2.png)
-
-To change the type of an element, use the replace icon in the **context pad**. For example, you can turn a generic task into a user task.
-
-![Replace menu](./img/model-your-first-diagram/model-3.png)
-
-You can also use the **context pad** to link resources, such as forms, to an element.
-
-![Properties panel](./img/model-your-first-diagram/model-4.png)
-
-Use the **properties panel** on the right side to inspect and edit the technical properties of each element.
-
-![Properties panel](./img/model-your-first-diagram/model-5.png)
-
-To revert or reapply changes, use the **Undo** and **Redo** buttons on the canvas.
+1. In the modeling interface, next to the start event, click the **Append element** icon. This connects the start event to the next step in the process.
+2. Select **Task**.
+3. With the task selected, click the **Change element** icon in the floating menu. With this, you can change the element type.
+4. Select **User task**.
+5. With the user task selected, click the **Link form** icon in the floating menu. If you have already created a form, you can select the form from this menu.
+6. At the top left of the modeling interface, make sure you're in **Implement** mode. In **Implement** mode, you can view all properties of an element.
+7. With the user task selected, on the right side of the modeling interface, open the **Details** panel.
+8. Inspect and edit the technical properties of the element.
+9. On the left side of the modeling canvas, at the bottom of the actions menu, select the **Undo** or **Redo** icon to revert or your reapply changes.
 
 :::note
 Undo and redo behavior has limitations when [collaborating](../collaboration/collaboration.md#undoredo-management-limitations) and [importing a diagram](import-diagram.md#undoredo-management-limitations).
 :::
-
-## Additional resources
-
-- [Camunda Academy: Camunda 8 Web Modeler Overview](https://academy.camunda.com/c8-web-modeler-overview)

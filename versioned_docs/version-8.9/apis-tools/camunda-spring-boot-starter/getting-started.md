@@ -77,6 +77,42 @@ To use the Spring Boot 3 module, replace the default dependency in your project:
 </dependency>
 ```
 
+:::caution Micrometer version requirement
+`camunda-spring-boot-3-starter` requires **Micrometer 1.16 or newer** if you enable Micrometer-based metrics. Spring Boot 3.5.x's own dependency management defaults to an older Micrometer version (~1.15.x), which does not satisfy this requirement.
+
+If your application resolves a Micrometer version below 1.16 while metrics are enabled, job workers appear to activate jobs normally, but handler methods never run — jobs keep expiring and getting re-activated indefinitely, with no error in the logs.
+
+To avoid this, explicitly pin Micrometer to 1.16 or newer:
+
+**Maven**, import the Micrometer BOM as the first entry in `<dependencyManagement>`, before your Spring Boot BOM import (import order matters when two BOMs manage the same dependency):
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-bom</artifactId>
+      <version>1.16.6</version>
+      <scope>import</scope>
+      <type>pom</type>
+    </dependency>
+    <!-- your Spring Boot BOM import goes after this -->
+  </dependencies>
+</dependencyManagement>
+```
+
+**Gradle**, add a constraint:
+
+```groovy
+dependencies {
+  constraints {
+    implementation("io.micrometer:micrometer-core:1.16.6")
+  }
+}
+```
+
+:::
+
 ## Get started
 
 ### Step 1: Add the dependency

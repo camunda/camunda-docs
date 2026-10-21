@@ -153,6 +153,17 @@ state: ProcessInstanceStateEnum;
 
 ---
 
+### suspendedDate
+
+```ts
+suspendedDate: string | null;
+```
+
+The time this process instance most recently entered the `SUSPENDED` state.
+This is `null` if the process instance is not currently suspended.
+
+---
+
 ### tags
 
 ```ts

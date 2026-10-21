@@ -9,6 +9,29 @@ mdx:
 
 ## Properties
 
+### \_\_camundaComponent?
+
+```ts
+optional __camundaComponent?: "CamundaCore" | "CamundaClient";
+```
+
+**`Internal`**
+
+Explicit component discriminator for support diagnostics. Set only by SDK-internal
+subclasses: `CamundaClientBase` passes `'CamundaClient'` so the construction log names
+the real component even when a consumer subclasses the public `CamundaCore` (where
+`new.target !== CamundaCore` alone could not distinguish core-subclass from client).
+
+---
+
+### clock?
+
+```ts
+optional clock?: Clock;
+```
+
+---
+
 ### config?
 
 ```ts
@@ -34,6 +57,7 @@ optional config?: Partial<{
   CAMUNDA_OAUTH_TIMEOUT_MS: number;
   CAMUNDA_OAUTH_URL: string;
   CAMUNDA_REST_ADDRESS: string;
+  CAMUNDA_REST_ADDRESS_EXACT: boolean;
   CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS: number;
   CAMUNDA_SDK_BACKPRESSURE_FLOOR: number;
   CAMUNDA_SDK_BACKPRESSURE_HEALTHY_RECOVERY_MULTIPLIER: number;
@@ -114,6 +138,14 @@ optional level?: LogLevel;
 
 ```ts
 optional transport?: LogTransport;
+```
+
+---
+
+### random?
+
+```ts
+optional random?: RandomSource;
 ```
 
 ---

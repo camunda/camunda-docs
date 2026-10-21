@@ -9,12 +9,11 @@ import SuperUserModeImg from '../img/super-user-mode.png';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
 ## Projects
 
-Files and folders are stored in projects.
-The user access on files and folders is defined at the project level.
+In SaaS, projects contain process applications. Process applications contain files and folders. In Self-Managed, projects can contain files, folders, and process applications. However, in preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), Camunda recommends storing files and folders in process applications, regardless of your deployment.
+
+User access to files and folders is defined at the project level.
 
 When you access Web Modeler via the Camunda 8 dashboard, you can note the **Home** page with all the projects you can access:
 ![home page](img/web-modeler-home.png)
@@ -77,81 +76,31 @@ Refer to the documentation pages about [assigning roles](../../../../self-manage
 
 ### Add users to projects
 
+Invite collaborators by taking the steps below:
+
+1. Open a project.
+2. On the right side of the project view, under **Collaborators**, click **Add user**.
+3. Choose a role for your new collaborators.
+4. Search for and select the collaborators from your organization to invite to the project. To add collaborators who are not already members of the organization, provide their email addresses.
+5. Write a message to your new collaborators about their invitation to the project.
+6. Click **Add users**.
+
+Your new collaborators will be added to the project and notified via email. Users without email addresses will not receive any kind of notification about project invitations.
+
 :::note
-Users without email addresses will not receive any kind of notification about project invitations.
-:::
-
-<Tabs groupId="addingUsers" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value='saas'>
-
-On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
-
-1. Click **Add user**.
-   ![invite user](img/web-modeler-collaborator-invite-modal-opened.png)
-
-2. Choose a role for your new collaborator.
-   ![invite choose role](img/web-modeler-collaborator-invite-choose-role.png)
-
-3. Begin typing the name or email of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
-   ![invite suggestions](img/web-modeler-collaborator-invite-suggestions.png)
-
-4. Write a message to your new collaborator about their invitation to the project.
-   ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
-
-5. Click **Add collaborator**. Your new collaborator will be added to the project and notified via email.
-   ![invite added](img/web-modeler-collaborator-invite-added.png)
-   ![invite email](img/web-modeler-collaborator-invite-email.png)
-
 If the individual is not a member of your organization, they will first receive an organization invitation.
 After accepting the invitation and logging into Web Modeler, they will be added to the project.
-They will appear as "invited" in the collaborator list until they accept.
-
-![invite sent](img/web-modeler-collaborator-invite-sent.png)
-
-#### Invite the entire organization
-
-You can invite all existing members of your Camunda 8 organization to the project at once by using the **All users in the organization** option.
-
-<img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
-
-</TabItem>
-
-<TabItem value='self-managed'>
-
-On the right side of a project, view a list of your collaborators and invite more by following the steps below:
-
-1. Click **Add user**.
-   ![invite user](img/web-modeler-collaborator-invite-modal-opened.png)
-
-2. Choose a role for your new collaborator.
-   ![invite choose role](img/web-modeler-collaborator-invite-choose-role.png)
-
-3. Begin typing the individual's name or email. Web Modeler will suggest members who have already logged into Web Modeler at least once and whom you can invite to the project.
-   ![invite suggestions](img/web-modeler-collaborator-invite-suggestions.png)
-
-4. Write a message to your new collaborator about their invitation to the project.
-   ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
-
-5. Click **Add collaborator**. Your new collaborator will be added to the project and notified via email.
-   ![invite added](img/web-modeler-collaborator-invite-added.png)
-   ![invite email](img/web-modeler-collaborator-invite-email.png)
-
-If the member has not logged into Web Modeler before, they will not appear in the suggestions, but you can still invite them by typing their full email address.
-They will appear as "invited" in the collaborator list until they log into Web Modeler for the first time.
-After logging in, they will be added to the project.
-
-![invite sent](img/web-modeler-collaborator-invite-sent.png)
+They will have a "pending" label in the collaborator list until they accept.
+:::
 
 #### Invite the entire organization
 
-You can invite all members who logged into Web Modeler at least once to the project at once by using the **All users in the organization** option.
+To invite all existing members of your Camunda 8 organization to a project at once:
 
-<img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
+1. Open a project.
+2. On the right side of the project view, under **Collaborators**, click **Add user**.
+3. Choose a role for your new collaborators.
+4. Click the email address input field, and select **All users in the organization**.
 
 :::info Self-Managed license restrictions
 For Self-Managed non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
@@ -159,72 +108,63 @@ For Self-Managed non-production installations, the number of collaborators per p
 For more information, refer to the [licensing documentation](/reference/licenses.md#web-modeler).
 :::
 
-</TabItem>
-
-</Tabs>
-
 ### Folders
 
-You can create folders in a project to semantically group and organize your diagrams.
-The user access on a folder is inherited from the project.
+Use folders to semantically group and organize your diagrams.
+
+In SaaS, folders are stored in process applications, the root-level container within a project. In Self-Managed, you can store folders in process applications or directly in the project. However, in preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), Camunda recommends storing all files and folders in process applications, regardless of your deployment.
+
+User access to a folder is inherited from the project.
 
 ## Sharing and embedding diagrams
 
 Diagrams can also be shared with others in read-only mode via a sharing link.
 This link can also be protected with an additional password.
 
-1. Navigate to a diagram and click on the share icon button.
-   ![share button](img/web-modeler-share-icon-button.png)
+1. Open a diagram.
+2. In the top right corner of the modeler view, open the vertical ellipsis menu, and select **Share**.
+3. Click **Create link**.
+4. (Optional: Protect this link with a password) At the bottom of the modal, next to **Password protect**, click **Add**, and type a password.
+5. Share or use the link with one of the following methods:
+   - Click **Copy** to share the URL directly.
+   - Click **Embed** to copy an `iframe` HTML tag.
+   - Click **Email** to share the new link with multiple email recipients.
 
-2. Click **Create link**.
-   ![share create link](img/web-modeler-share-modal.png)
-
-3. Click **Copy** to copy the link to your clipboard.
-   ![share copy link](img/web-modeler-share-modal-create.png)
-
-4. Click **Add** and type a new password to protect your link.
-   ![share copy link](img/web-modeler-share-modal-password-protect.png)
-
-5. Click **Email** to share the new link with multiple recipients.
-   ![share copy link](img/web-modeler-share-modal-email.png)
-
-Similar to the sharing link, a diagram can be embedded into HTML pages via an iframe tag. The iframe tag can be copied from the sharing dialog via the **Embed** button.
-
-For wiki systems like [Confluence](https://www.atlassian.com/software/confluence), we recommend using the HTML macro and adding the iframe tag from the sharing dialog. This way, diagrams can be easily included in documentation pages. To adjust the dimensions of the diagram, the width and height values of the iframe tag can be modified.
+:::tip
+For wiki systems like [Confluence](https://www.atlassian.com/software/confluence), we recommend using the HTML macro and adding the iframe tag from the sharing dialog. This way, diagrams can be easily included in documentation pages. To adjust the dimensions of the diagram, the width and height values of the `iframe` tag can be modified.
+:::
 
 ## Comments
 
-When selecting an element of the BPMN diagram, a discussion can be attached to this element. If no element is selected, the discussion will be attached directly to the diagram.
-Switch between the **Properties Panel** and **Comments** using the two tabs present at the top of the right side panel.
-![comment](img/web-modeler-comment-type-here.png)
+Use comments to discuss your diagram:
 
-New comments can be added to the discussion by any collaborator with Admin, Editor, or Commenter access rights.
+1. Open a diagram.
+2. On the right side of the modeler view, in the **Details** panel next to **Properties** and **Test**, select the **Comments** icon.
 
-Afterwards, the comment can be edited or deleted via the context menu icon.
-![comment context menu](img/web-modeler-comment-with-context-menu.png)
+If a single element is selected, the comments in this panel only apply to the selected element. Otherwise, they apply to the entire diagram.
 
-Elements with discussions attached will always have a visible blue overlay, so you can easily identify discussion points.
-![comment context menu](img/web-modeler-comment-overlay-on-diagram.png)
+:::tip
+Elements with comments have a **Comment** icon in the diagram.
+:::
+
+If you have Admin, Editor, or Commenter access rights, you can:
+
+- Add a new comment.
+- Edit or delete a comment with the vertical ellipsis menu on the comment.
 
 ### Mention others in comments
 
-By typing the **@** character, you are able to filter the collaborators on the project and select one of them.
-![comment suggestion](img/web-modeler-comment-mention-suggestions.png)
-
-When submitting the comment, this user will receive an email as a notification about the new comment.
+When leaving a comment, type the **@** character to filter and select a project collaborator. When submitting the comment, this user will receive an email as a notification about the new comment.
 
 :::note
 Users without email addresses will not receive any kind of notification about being mentioned in a comment.
 :::
 
-![comment suggestion email](img/web-modeler-comment-mention-email.png)
-
 ## Interact with your collaborators
 
 ### Model a diagram together
 
-When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also note who is in the diagram with you.
-![real time collaboration](../img/real-time-collaboration.png)
+When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also see who is in the diagram with you.
 
 ### Canvas lock
 

@@ -21,7 +21,7 @@ When a document flows through a process, it follows one of two paths. Understand
 
 ### Path 1: Document Store (opaque pass-through)
 
-The document is a blob that moves through the process. You don't need to read or manipulate its content — you just route it. The process never "looks inside" the file.
+The document is a blob that moves through the process. You don't need to read or manipulate its content. You just route it. The process never "looks inside" the file.
 
 Typical examples:
 
@@ -32,7 +32,7 @@ On this path, the document is held in the [Camunda document store](/components/d
 
 ### Path 2: Inline (data the process works with)
 
-The content _is_ actual process data, and it is not stored in the document store. It flows as regular process variables — strings or JSON objects — that happen to be written to or read from an external system. You either:
+The content _is_ actual process data, and it is not stored in the document store. It flows as regular process variables, such as strings or JSON objects, that happen to be written to or read from an external system. You either:
 
 - **Write it**: construct a `.json`, `.csv`, or `.txt` file from process variables and upload it to storage (for example, an error report built from process data). See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
 - **Read it**: download content from storage as JSON or text and use the values directly in FEEL expressions downstream. See [return formats](/components/document-handling/send-document-to-external-system.md#return-formats).

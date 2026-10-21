@@ -19,4 +19,4 @@ type GetStatusErrors = object;
 503: unknown;
 ```
 
-The cluster is DOWN and does not have any partition with a healthy leader.
+The default physical tenant is DOWN and does not have any partition with a healthy leader.

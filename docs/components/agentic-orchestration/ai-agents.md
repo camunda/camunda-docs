@@ -6,8 +6,9 @@ keywords: ["agentic ai", "AI agents"]
 ---
 
 import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Build and integrate AI agents into your end-to-end processes.
+<PageDescription />
 
 ## About AI agents
 
@@ -15,12 +16,16 @@ An AI agent is an addressable execution of an LLM-driven loop with shared memory
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
+### Agent types
+
 Camunda supports two types of agents:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
-- **[External agents](/reference/glossary.md#external-agent)** run their loop in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
+- **[External agents](/reference/glossary.md#external-agent)** run their [agent loop](/reference/glossary.md#agent-loop) in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
 
-The rest of this page describes how to build a Camunda AI agent using the AI Agent connector.
+:::note
+Camunda represents every agent with an [agent definition and agent instances](/components/agentic-orchestration/agent-definitions-and-instances.md).
+:::
 
 ## The AI Agent connector
 
@@ -38,13 +43,13 @@ See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/ag
 
 The recommended approach for most use cases is to use the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) implementation due to its simplified configuration and support for event sub-processes.
 
-In this approach, you integrate the agent using an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) and the AI Agent connector in a tool feedback loop, where the agent understands the process goal and uses the available tools to complete it.
+In this approach, you integrate the agent using an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) and the AI Agent connector in an [agent loop](/reference/glossary.md#agent-loop), where the agent understands the process goal and uses the available tools to complete it.
 
 <p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Example AI agent integration diagram" className="img-700"/></p>
 
-#### How the feedback loop works
+#### How the agent loop works
 
-The AI Agent connector operates in a feedback loop between the LLM and Camunda:
+The AI Agent connector operates in an agent loop between the LLM and Camunda:
 
 1. A user prompt is sent to the connector. The LLM evaluates the prompt, the system prompt, and the available tool definitions.
 1. If the LLM determines that a tool call is needed, Camunda activates the corresponding BPMN activity in the ad-hoc sub-process.
@@ -57,8 +62,22 @@ Decision-making and execution are intentionally split:
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
 :::tip
-Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
+
+#### Example: an export compliance agent
+
+Consider an export shipment process where the compliance details arrive as free text instead of pre-parsed fields, and a shipment must be checked before it can proceed. An AI agent extracts what it needs from the text and calls tools built from real connector calls:
+
+- **Verify genetic marker**: a SQL query against a genetic marker database.
+- **Check destination country**: a GraphQL query that resolves the destination to an ISO country code.
+- **Compute compliance score**: a REST connector call that scores the shipment from the marker and country.
+
+The agent extracts the marker and destination country from the shipment notes, decides which tools to call, and returns a decision. Camunda then applies deterministic routing: an exclusive [gateway](/reference/glossary.md#gateway) sends cleared shipments to an automatic notification, and flagged shipments to a [human task](/reference/glossary.md#human-task) for review.
+
+![Export compliance agent BPMN process, showing an AI agent ad-hoc sub-process followed by a gateway that routes to either an automatic notification or a human review task](img/seed-export-compliance-agent.png)
+
+See the [export compliance agent example](https://github.com/camunda/camunda-8-tutorials/tree/main/examples/task-agent) for the full BPMN models and setup instructions.
 
 ## AI agent integration features
 
@@ -75,7 +94,7 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
 </tr>
 <tr>
     <td>[AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
-    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
+    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in an agent loop, providing automated tool selection.</td>
 </tr>
 <tr>
     <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>

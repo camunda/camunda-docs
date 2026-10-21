@@ -43,8 +43,31 @@ Operations are executed in a multi-threaded manner.
 ```yaml
 camunda.operate:
   operationExecutor:
-  	threadsCount: 3
+    threadsCount: 3
 ```
+
+## Tasklist link
+
+Operate shows an **Open Tasklist** link for user tasks in the process instance **Details** tab and in the operations log. The link targets the Tasklist of the same Orchestration Cluster.
+
+| Name                         | Description                                                                                                                       | Default value                                  |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| camunda.operate.tasklist-url | Base URL of Tasklist used for the link. Accepts an absolute URL or a path relative to the Operate host (for example `/tasklist`). | `<context-path>/tasklist` (derived, see below) |
+
+If the property is not set and the Operate and Tasklist UIs are served by the same application, Operate derives the default from the configured context path, so the link works without extra configuration.
+
+If Tasklist is served by a separate application, the property remains unset and Operate hides the Tasklist links, even if a proxy exposes Tasklist on the same host. In this case, set the property explicitly, for example in a split deployment:
+
+```yaml
+camunda.operate:
+  tasklist-url: https://tasklist.example.com
+```
+
+:::note
+The derived default and support for relative paths such as `/tasklist` are only available in patch releases that include this fix. In earlier patch releases, the property has no default and requires an absolute URL, so set an absolute URL to show the links.
+:::
+
+The corresponding environment variable is `CAMUNDA_OPERATE_TASKLISTURL`.
 
 ## Monitoring Operate
 

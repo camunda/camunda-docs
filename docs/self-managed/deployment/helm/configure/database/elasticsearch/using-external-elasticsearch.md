@@ -12,7 +12,7 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 This page applies to the Orchestration Cluster only. If you also deploy Optimize, configure Optimize separately using [use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md).
 
 :::note
-The bundled Elasticsearch Bitnami subchart (`elasticsearch.enabled: true`) is deprecated and will be removed in a future release. For production deployments, use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
+The bundled Elasticsearch Bitnami subchart is removed starting with chart 15.x (Camunda 8.10); `elasticsearch.enabled` no longer exists. Use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
 :::
 
 ## Prerequisites
@@ -43,12 +43,6 @@ Before configuring, collect the following information about your external Elasti
 | `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                                    |
 | `orchestration.index.prefix`                                                      | string | `""`    | Index prefix in Elasticsearch for the new Camunda exporter and the Orchestration Cluster.             |
 
-#### Bundled Elasticsearch subchart (deprecated)
-
-| values.yaml option      | type    | default | description                                             |
-| ----------------------- | ------- | ------- | ------------------------------------------------------- |
-| `elasticsearch.enabled` | boolean | `false` | Enables or disables the bundled Elasticsearch subchart. |
-
 ### Example usage
 
 #### Connect to external Elasticsearch without a certificate
@@ -66,9 +60,6 @@ orchestration:
           username: elastic
           secret:
             inlineSecret: pass
-
-elasticsearch:
-  enabled: false
 ```
 
 #### Connect to external Elasticsearch with a self-signed certificate
@@ -77,14 +68,14 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
 
 1. Create an `externaldb.jks` file from the Elasticsearch certificate file. For example, using the `keytool` CLI:
 
-   ```yaml
+   ```shell
    keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file elastic.crt -storepass changeit -noprompt
    ```
 
 1. Create a Kubernetes secret from the `externaldb.jks` file before installing Camunda:
 
-   ```yaml
-   kubectl  create secret -n camunda generic elastic-jks --from-file=externaldb.jks
+   ```shell
+   kubectl create secret -n camunda generic elastic-jks --from-file=externaldb.jks
    ```
 
 1. Configure the Camunda 8 Self-Managed Helm chart:
@@ -104,9 +95,6 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
              secret:
                existingSecret: elastic-jks
                existingSecretKey: externaldb.jks
-
-   elasticsearch:
-     enabled: false
    ```
 
 ### Connect to external Elasticsearch with a publicly trusted certificate
@@ -124,9 +112,6 @@ orchestration:
           username: elastic
           secret:
             inlineSecret: pass
-
-elasticsearch:
-  enabled: false
 ```
 
 ### Connect to external Elasticsearch with custom index prefixes
@@ -146,9 +131,6 @@ orchestration:
             inlineSecret: pass
   index:
     prefix: my-env-camunda # Prefix for Orchestration Cluster indices
-
-elasticsearch:
-  enabled: false
 ```
 
 For more details on index prefix configuration, including Optimize-specific settings when Optimize is enabled, see [prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
@@ -165,7 +147,7 @@ If Zeebe pods fail, check for the following error:
 
 ## References
 
-- [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md) (8.8 version not yet available)
+- [Camunda production installation guide with Kubernetes and Helm](/self-managed/deployment/helm/install/production/index.md)
 - [Use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md)
 - [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md)
 

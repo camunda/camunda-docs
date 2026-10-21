@@ -10,6 +10,8 @@ A high-level overview of the **Batch Operations** page in Camunda 8 Operate.
 
 Use the **Batch Operations** page to monitor all batch operations performed across any process instance.
 
+![The Batch Operations page, listing operations with their operation type, batch state, items, actor, and start date.](./img/batch-operations-overview.png)
+
 ## Batch operations table
 
 In the table, you can review these details about each batch operation:

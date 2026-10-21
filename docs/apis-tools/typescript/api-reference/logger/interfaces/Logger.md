@@ -16,7 +16,8 @@ code(
    level,
    code,
    msg,
-   data?): void;
+   data?
+): void;
 ```
 
 #### Parameters

@@ -59,6 +59,14 @@ import ProcessInstanceCreation from './partials/\_process-instance-creation.md'
 
 <ProcessInstanceCreation />
 
+import Processing from './partials/\_processing.md'
+
+<Processing />
+
+import Secrets from './partials/\_secrets.md'
+
+<Secrets />
+
 import Security from './partials/\_security.md'
 
 <Security />

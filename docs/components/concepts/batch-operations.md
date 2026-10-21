@@ -31,6 +31,8 @@ Here are the types of available batch operations:
 | Resolve incidents         | Resolves the [incidents](./incidents.md) associated with a batch of process instances.             |
 | Modify process instances  | [Moves](./process-instance-modification.md) a batch of process instances from one node to another. |
 | Migrate process instances | [Migrates](./process-instance-migration.md) a batch of process instances to a new process version. |
+| Suspend process instances | [Suspends](./process-instance-suspension.md) a batch of process instances.                         |
+| Resume process instances  | [Resumes](./process-instance-suspension.md) a batch of suspended process instances.                |
 | Cancel process instances  | Cancels a batch of process instances.                                                              |
 | Delete process instances  | [Deletes](./process-instance-deletion.md) a batch of process instances.                            |
 | Delete decision instances | [Deletes](./decision-instance-deletion.md) a batch of decision instances.                          |
@@ -40,6 +42,28 @@ Furthermore, depending on the status of the batch operation, you may be able to 
 :::warning
 Canceling a batch operation does not rollback any changes that have already been produced.
 :::
+
+## Filter process instances for batch operations
+
+Batch process instance operations only act on instances in a state the operation supports. The following rules apply to the modify, migrate, resolve incidents, suspend, resume, and cancel operations, but not to the delete operations.
+
+| Operation         | Required state           |
+| :---------------- | :----------------------- |
+| Modify            | `ACTIVE`                 |
+| Migrate           | `ACTIVE`                 |
+| Resolve incidents | `ACTIVE`                 |
+| Suspend           | `ACTIVE`                 |
+| Resume            | `SUSPENDED`              |
+| Cancel            | `ACTIVE` and `SUSPENDED` |
+
+Your filter only narrows the batch. Camunda narrows your `state` filter with the required state, so the batch never includes instances outside the required state.
+
+- A top-level `state` filter that uses `$eq` or `$in` with a state the operation doesn't support is rejected with `400 Bad Request`.
+- States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances.
+- The `$neq`, `$exists`, and `$like` operators on a top-level `state` are applied as given, and the batch remains limited to the required states.
+- A `parentProcessInstanceKey` filter is applied as given. Cancel only acts on root instances, so a filter that matches only child instances selects no instances.
+
+To resolve a rejected request, remove the conflicting top-level `state` filter or move it into an `$or` branch.
 
 ## States
 

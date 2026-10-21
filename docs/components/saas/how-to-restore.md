@@ -1,7 +1,7 @@
 ---
 id: how-to-restore
 title: Restore a cluster from backup
-description: "Restore a Camunda 8 SaaS cluster from a selected backup in Console."
+description: "Restore a Camunda 8 SaaS cluster from a selected backup in Hub."
 ---
 
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
@@ -27,10 +27,10 @@ Restore is destructive for current cluster data and causes cluster unavailabilit
 
 <!-- TODO(restore-from-backup): Add concrete user-facing downtime guidance once validated restore timing guidance is published. -->
 
-## Restore in Console
+## Restore in Hub
 
-1. Open **Console** and select your organization.
-2. Open the target cluster and go to **Backups**.
+1. In Camunda Hub, in the left navigation under **Clusters**, select your cluster.
+2. Click the **Backups** tab.
 3. In the backup list, find the backup you want to restore.
 4. Click **Restore** on that backup row.
 5. In the confirmation modal, verify:
@@ -53,7 +53,7 @@ During restore:
 - Restore-conflicting actions are disabled.
 - Backups tab shows active restore context.
 
-Phase-level progress is not shown in Console in this release.
+Phase-level progress is not shown in Hub in this release.
 
 ## Confirm outcome
 

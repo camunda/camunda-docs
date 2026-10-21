@@ -10,7 +10,6 @@ page_rank: 90
 import "./react-components/\_release-table.css";
 import ReleasesGrid from './react-components/\_release-card';
 import { gettingStartedCards, securityCards } from './react-components/\_release-card-data';
-import AskAi from './react-components/\_banner-ask-ai.md'
 import OverviewImg from './img/hero-reference.png';
 
 <h3 class="subheading">Camunda 8 reference, including release, security, and support information.</h3>
@@ -49,5 +48,3 @@ Reference information including published security notices, licensing, supported
 ## Support and feedback
 
 [Get support](contact.md) for Camunda or send us your feedback.
-
-<AskAi/>

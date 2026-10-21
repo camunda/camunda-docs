@@ -25,6 +25,32 @@ Filter cluster variables by truncation status of their stored values. When true,
 
 ---
 
+### kind?
+
+```ts
+optional kind?: ClusterVariableKindFilterProperty;
+```
+
+The kind filter for cluster variables.
+
+---
+
+### metadata?
+
+```ts
+optional metadata?: object;
+```
+
+Filter by metadata entries. A map of metadata key to an advanced filter on that key's value. Metadata values are strings or numbers.
+
+#### Index Signature
+
+```ts
+[key: string]: AdvancedMetadataValueFilter
+```
+
+---
+
 ### name?
 
 ```ts

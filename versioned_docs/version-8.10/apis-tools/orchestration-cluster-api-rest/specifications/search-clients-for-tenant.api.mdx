@@ -1,0 +1,331 @@
+---
+id: search-clients-for-tenant
+title: "Search clients for tenant"
+sidebar_label: "Search clients for tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search clients for tenant"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/tenants/{tenantId}/clients/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Retrieves a filtered and sorted list of clients for a specified tenant.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "TENANT", permissionType: "READ" }]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["clientId"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "TenantClientSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "TenantClientSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search result of users for the tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["items"],
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching clients.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    clientId: {
+                      description: "The ID of the client.",
+                      allOf: [
+                        {
+                          example: "my-application",
+                          description:
+                            "The unique identifier of an OAuth client.\nMinted outside the Camunda REST API: in SaaS by Console, in Self-Managed\nwith OIDC by the external identity provider (e.g. EntraID, Keycloak,\nOkta). In Self-Managed with Basic authentication, machine-to-machine\napplications are modelled as users instead — see the user identifier.\n",
+                          format: "ClientId",
+                          type: "string",
+                          title: "ClientId",
+                        },
+                      ],
+                    },
+                  },
+                  required: ["clientId"],
+                  title: "TenantClientResult",
+                },
+              },
+            },
+            title: "TenantClientSearchResult",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

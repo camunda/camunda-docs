@@ -55,9 +55,9 @@ Content-Type: application/json
 Processes running in the `dev-environment` tenant automatically use the development API configuration, while all other tenants use the production configuration.
 :::
 
-## Step 3: Access the variable in Modeler
+## Step 3: Access the variable when modeling
 
-Open Camunda Modeler and create or open a BPMN process. Add a service task to your process that calls the payment API.
+Open Camunda Hub or Desktop Modeler, and create or open a BPMN process. Add a service task to your process that calls the payment API.
 
 To use your cluster variable in a service task:
 
@@ -86,7 +86,7 @@ Your service task now has access to both the `apiUrl` and `timeoutMs` variables,
 1. Complete your BPMN diagram by adding any additional tasks and an end event.
 2. Click **Deploy** to deploy your process to the cluster.
 3. Create a process instance by clicking **Run** (or start it via API).
-4. Navigate to Operate to view your process instance.
+4. [Navigate to Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate) to view your process instance.
 5. Inspect the process variables to see that the cluster variables were resolved correctly based on your tenant context.
 
 **What happens during execution**

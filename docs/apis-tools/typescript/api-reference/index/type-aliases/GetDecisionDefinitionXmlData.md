@@ -30,7 +30,7 @@ path: object;
 #### decisionDefinitionKey
 
 ```ts
-decisionDefinitionKey: DecisionDefinitionKey;
+decisionDefinitionKey: DecisionDefinitionKeyWritable;
 ```
 
 The assigned key of the decision definition, which acts as a unique identifier for this decision.

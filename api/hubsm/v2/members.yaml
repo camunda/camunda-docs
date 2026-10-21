@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Member resource paths and schemas
 paths:
@@ -16,7 +17,7 @@ paths:
         user has not logged in yet, a workspace invitation is created and an
         email is sent instead, and the person becomes an actual member once
         they log in for the first time.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-establishes:
         kind: WorkspaceMemberMembership
         shape: edge
@@ -61,7 +62,7 @@ paths:
       operationId: removeMember
       summary: Remove a member
       description: Removes a member from the workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: WorkspaceMemberMembership
         bind:
@@ -95,7 +96,7 @@ paths:
       description: >
         Returns members matching the given search criteria. A workspace key
         filter is required — members cannot be searched across workspaces.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:

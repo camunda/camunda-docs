@@ -570,12 +570,59 @@ components:
           description: The user task search filters.
     UserTaskFilter:
       description: User task filter request.
+      allOf:
+        - $ref: "#/components/schemas/UserTaskFilterFields"
+        - type: object
+          x-properties-added-in-version:
+            - propertyName: $or
+              addedInVersion: "8.10"
+          properties:
+            $or:
+              description: |
+                Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+
+                Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+                <br>
+                <em>Example:</em>
+
+                ```json
+                {
+                  "assignee": "user1",
+                  "$or": [
+                    { "candidateGroup": "groupA" },
+                    { "candidateUser": "user2" }
+                  ]
+                }
+                ```
+                This matches user tasks that:
+
+                <ul style="padding-left: 20px; margin-left: 20px;">
+                  <li style="list-style-type: disc;">are assigned to <em>user1</em></li>
+                  <li style="list-style-type: disc;">and match either:
+                    <ul style="padding-left: 20px; margin-left: 20px;">
+                      <li style="list-style-type: circle;"><code>candidateGroup</code> is <em>groupA</em>, or</li>
+                      <li style="list-style-type: circle;"><code>candidateUser</code> is <em>user2</em></li>
+                    </ul>
+                  </li>
+                </ul>
+                <br>
+                <p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.
+              type: array
+              items:
+                $ref: "#/components/schemas/UserTaskFilterFields"
+    UserTaskFilterFields:
+      description: User task filter fields.
       type: object
       properties:
         state:
           allOf:
             - $ref: "#/components/schemas/UserTaskStateFilterProperty"
           description: The user task state.
+        isSuspended:
+          description: |
+            Whether the user task is suspended because its owning process instance is suspended.
+          type: boolean
+          nullable: true
         assignee:
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
@@ -685,6 +732,8 @@ components:
           addedInVersion: "8.9"
         - propertyName: businessId
           addedInVersion: "8.10"
+        - propertyName: isSuspended
+          addedInVersion: "8.11"
     UserTaskSearchQueryResult:
       description: User task search query response.
       required:
@@ -718,6 +767,7 @@ components:
         - creationDate
         - customHeaders
         - priority
+        - isSuspended
         - tags
         - assignee
         - completionDate
@@ -795,6 +845,10 @@ components:
           minimum: 0
           maximum: 100
           default: 50
+        isSuspended:
+          type: boolean
+          description: |
+            Whether the user task is suspended because its owning process instance is suspended.
         userTaskKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/UserTaskKey"
@@ -889,6 +943,8 @@ components:
           addedInVersion: "8.10"
         - propertyName: formKey
           addedInVersion: "8.6"
+        - propertyName: isSuspended
+          addedInVersion: "8.11"
         - propertyName: tags
           addedInVersion: "8.9"
     UserTaskCompletionRequest:
@@ -906,6 +962,8 @@ components:
           nullable: true
     UserTaskAssignmentRequest:
       type: object
+      required:
+        - assignee
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
@@ -1036,6 +1094,13 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskVariableFilter"
           description: The user task variable search filters.
+      x-properties-added-in-version:
+        - propertyName: page
+          addedInVersionOverride: "8.8"
+        - propertyName: sort
+          addedInVersionOverride: "8.8"
+        - propertyName: filter
+          addedInVersionOverride: "8.8"
     UserTaskAuditLogSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"

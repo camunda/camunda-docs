@@ -9,6 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 import IdentitySecret from './\_partials/\_identity-secret.md'
+import DeploymentReadinessCheck from './\_partials/\_deployment-readiness-check.md'
 
 With this guide, you'll deploy Camunda 8 Self-Managed to a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). The setup is optimized for learning, development, and testing, with reduced resource requirements suitable for a personal machine.
 
@@ -74,7 +75,9 @@ Before you begin, you'll need:
   - [Podman](https://podman.io/docs/installation)
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
-- [Helm](https://helm.sh/docs/intro/install/)
+- [Helm CLI v4](https://helm.sh/docs/intro/install/) (recommended; see [supported versions](/reference/supported-environments.md#clients)).
+- [yq](https://github.com/mikefarah/yq#install)
+- [jq](https://jqlang.org/download/)
 - [envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) (Domain mode only; part of the `gettext` package)
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
@@ -96,7 +99,7 @@ By the end of this tutorial, you'll have:
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
 
 :::info Other installation profiles
-With this guide, you deploy the full Camunda 8 platform with all components. For lighter setups or specific use cases, see the [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md), which covers different installation profiles, such as core only, with Connectors, and with Web Modeler.
+With this guide, you deploy the full Camunda 8 platform with all components. For lighter setups or specific use cases, see the [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md), which covers different installation profiles, such as core only, with Connectors, and with Camunda Hub.
 :::
 
 ## Download the reference architecture
@@ -262,7 +265,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
 :::note Secondary storage alternatives
-This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS is a supported alternative for the Orchestration Cluster (see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines). To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 :::
 
 Run the operator deployment script, specifying the domain deployment mode:
@@ -294,10 +297,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 </details>
 
-:::note Using RDBMS instead of Elasticsearch
-If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
-:::
-
 This uses the following Helm values:
 
 <details>
@@ -318,7 +317,7 @@ The deployment script layers the following shared operator values before the kin
 - [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
 - [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
 - [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
+- [`camunda-hub-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml): Configures Camunda Hub to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -388,10 +387,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 </details>
 
-:::note Using RDBMS instead of Elasticsearch
-If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
-:::
-
 This uses the following Helm values:
 
 <details>
@@ -412,7 +407,7 @@ The deployment script layers the following shared operator values before the kin
 - [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
 - [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
 - [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
+- [`camunda-hub-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml): Configures Camunda Hub to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -426,15 +421,14 @@ kubectl get pods -n camunda -w
 
 Wait until all pods show `Running` status. This may take 5–10 minutes depending on your internet connection and system resources.
 
-You can also use the deployment readiness check script from the root directory of the `camunda-deployment-references` repository. This script requires [jq](https://jqlang.github.io/jq/) to be installed:
+You can also use the deployment readiness check script, run from the reference architecture directory `get-your-copy.sh` left you in. This script requires [jq](https://jqlang.github.io/jq/) to be installed:
 
 ```bash
 export CAMUNDA_NAMESPACE=camunda
+../../../generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck />
 
 Finally, verify the Helm release:
 
@@ -504,8 +498,7 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Admin                | http://localhost:8080/admin        | All                                  |
 | Management Identity  | http://localhost:8085              | All                                  |
 | Optimize             | http://localhost:8083              | Elasticsearch secondary storage only |
-| Web Modeler          | http://localhost:8070              | All                                  |
-| Console              | http://localhost:8087              | All                                  |
+| Camunda Hub          | http://localhost:8070              | All                                  |
 | Connectors           | http://localhost:8088              | All                                  |
 | Keycloak             | http://keycloak-service:18080/auth | All                                  |
 
@@ -561,10 +554,10 @@ Alternatively, you can clean up manually:
 kind delete cluster --name camunda-platform-local
 
 # (domain mode) Remove hosts entries (requires sudo)
-sudo sed -i '/camunda.example.com/d' /etc/hosts
+sudo sed -i.bak '/camunda.example.com/d' /etc/hosts
 
 # (no-domain mode) Remove Keycloak hosts entry (requires sudo)
-sudo sed -i '/keycloak-service/d' /etc/hosts
+sudo sed -i.bak '/keycloak-service/d' /etc/hosts
 
 # (domain mode) Clean certificates
 rm -rf .certs

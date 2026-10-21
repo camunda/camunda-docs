@@ -4,20 +4,20 @@ title: "Amazon EC2"
 description: "Learn how to install Camunda 8 on AWS EC2 instances."
 ---
 
+import CostManagement from "../../../_partials/_cost-management.md";
+
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services provided by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is functioning correctly.
 
-This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. Web Modeler and Console are not covered in this manual deployment approach, as these components are not supported on virtual machines. To deploy Web Modeler and Console, explore the available options for [Kubernetes-based deployments](/self-managed/deployment/helm/install/quick-install.md#install-web-modeler).
+This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#camunda-hub-vs-orchestration-cluster) for Camunda 8. Camunda Hub is not covered in this manual deployment approach, as this component is not supported on virtual machines. To deploy Camunda Hub, explore the available options for [Kubernetes-based deployments](/self-managed/deployment/helm/install/quick-install.md).
+
+<CostManagement />
+
+For a starting point, see this [example calculation](https://calculator.aws/#/estimate?id=ca54a43f3b3b7eb42fe8836854775e60d8c7e04d) for a comparable three-node deployment, which you can adapt to your use case.
 
 :::note Using other cloud providers
 This guide is based on tools and services provided by AWS but is not limited to them. The scripts and concepts included can be adapted for other cloud providers and use cases.
 
 When using a different cloud provider, you are responsible for configuring and maintaining the resulting infrastructure. Support is limited to questions related to this guide—not to the specific tools or services of your chosen cloud provider.
-:::
-
-:::danger Cost management
-Following this guide will incur costs on your cloud provider account—primarily for EC2 instances and OpenSearch. Visit AWS and their [pricing calculator](https://calculator.aws/#/) for detailed cost estimates, as pricing varies by region.
-
-You may refer to this [example calculation](https://calculator.aws/#/estimate?id=ca54a43f3b3b7eb42fe8836854775e60d8c7e04d), which can be further optimized for your specific use case.
 :::
 
 ## Architecture
@@ -308,7 +308,7 @@ This guide does not cover the VPN client setup, as it requires specific manual c
 ```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
 # retrieves the first IP from the camunda_ips array
-export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
+export CAMUNDA_IP=$(terraform output -json camunda_ips | jq -r '.[0]')
 
 ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 ```
@@ -368,7 +368,7 @@ The following commands can be run from within the Terraform folder to bind remot
 ```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
 # retrieves the first IP from the camunda_ips array
-export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
+export CAMUNDA_IP=$(terraform output -json camunda_ips | jq -r '.[0]')
 
 # 26500 - gRPC; 8080 - WebUI; 9090 - Connectors
 ssh -L 26500:${CAMUNDA_IP}:26500 -L 8080:${CAMUNDA_IP}:8080 -L 9090:${CAMUNDA_IP}:9090 admin@${BASTION_HOST}
@@ -376,7 +376,7 @@ ssh -L 26500:${CAMUNDA_IP}:26500 -L 8080:${CAMUNDA_IP}:8080 -L 9090:${CAMUNDA_IP
 
 ### Turn off bastion host (optional)
 
-If you used the [bastion host](#turn-off-bastion-host-optional) for access, it can be turned off when longer needed for direct access to the EC2 instances.
+If you used the [bastion host](#connect-to-remote-machines-via-bastion-host-optional) for access, it can be turned off when no longer needed for direct access to the EC2 instances.
 
 To turn off the bastion host, set the `enable_jump_host` variable to `false` in the `variables.tf` file, and reapply Terraform.
 

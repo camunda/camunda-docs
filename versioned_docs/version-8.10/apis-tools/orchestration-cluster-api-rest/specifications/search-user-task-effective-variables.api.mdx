@@ -1,0 +1,593 @@
+---
+id: search-user-task-effective-variables
+title: "Search user task effective variables"
+sidebar_label: "Search user task effective variables"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWw1vGzeT/it8tz1Ayq0+7HzU2TbtObbSU5rYriU7fes1bGp3JLFekSrJta0IAu5H3C+8X3IYkvslrWynd8D7Hi4Bilq75HBmODN8Zji79DSdKC+48M4USKKpuvEufU/MQVLNBO/HXuApoDKa4oAhVTe98RgizW7hnEpGRwkoz/cURKlkeuEFF0tvBFSC3E/11AsuLlf+0htRxaL8waXvxaAiyea4hBd4IQ/5xcVp79ez/mnv8Oqkd/qxPxj0j48GASze3/3+23tNfzv6TD+9TqNF/9Wn54pFs/PPo+fni7/vnp/Bb2+T/h+Cnb17f/Jr93x4tvO6d3r2+/vhTXI2OHt93Gd3LPr5fDH6lHyOdpPbUXL6Mvr5jB2z94PTs3e933beDobdo3dnO0fjwdnL4Xnv3fGv3TM2Pt95fXlpmds/POwdXvWPrs57p8hZsNfey94dHB8N+oNh7+jg70HvvHc0PNv/YN8NjObIWEiip0AgUx25zXRHxJhQkmbKb5PhlCkCPJ4LxjWRoFPJFYkhTucJi6iGOOTF7LspSCBAo2lOknA6A0Lnc6BSEarJTChNBI+gTT5NgRtOFI6pzoB7prQKOc5IE83mCRAViTmQBG4hUYS5qebZlIFE2Ra+eXhLkxTIWIqZ+ck4B2nWtaMbUSIUKB1yLcyAXOAm0fQGFJlLiCAGw6VRAVM4aJwmRnsStGRwy/jETKeRTmlCZMo1mwFRmmoIuRiX9EoVUQCcjBbVBdvk7YLEMKZpon2SCD4p9GCkyAWVoOaCKyBUQsi1TLlRf9vzvTmVdAYapDIGj/rzAi91HvILLDzfY2jZc6qnnu9J+DNlEmIv0DKFdfMfToHcwAJNocoqOlY0hRn1gqWnF3NcRGnJ+MTzvbGQM6rzJz+cFav/6K0vMVgoDbPWBDg6NsRmPVRs2fa8FfqqEyaT99zoJJPnzxTkoiLQmCZqQyJrZzIF0nCqbj5d16RQtTVYuwQZp0myMR/HWyexO7Ohr5EQCVDurTDsINug9FsRL3DIhhSR4Bq4xnd0bv2NCd75Q6FUyxLxqrh57KzxcGKjJzGaI46BNjlTxvfHCnRrRBXEZE4njJv1iODJoh1yz8+EEKM/INJoeBJDs2agkIs5ncAmNycFocJOUTc0SY7HxmDXyWqmE3xwXM/QxsLo6JsLD43nx3CPlsw0zBTRAp1TaqcF9F+c2y5EY1zDBGTZoBnXz3c935sxzmbpzAu6K99L2Izp+jVn9B7HEZ7ORiAri1vTQCsTHHLtP2l1Z7hesNPtVnhZrS5XvqeErGFnIKQmYwZJTCLJNEhGS6tRKakJDcheyUa3bK+hUy+yXQK1iwuOFqVF8gABHPm98IyneL51bN/TwCnX/djzvcxGbcAyodr+OZciAqX6XGnKI/MQZRYyBlnPkHmFer6bsmiac2Z9OzEhx/D8EKP7gwPP9w57gwPvsqR/9zyzUVTxMa7Ww2mrVTkYXTidXRbDs7CYoRV7JP+K3oiUTq1JGDpjlmgrX+Epm5Lm8XLDxe181X7Ub22I3b7MwGiGuEkLcsf01IY/Gt/ihsTZkhGd0xFLGFLGdQWHqovnSs700bunkSYzqqPpxinxEZ+CKp3ogKOTRdvDkyEjsZ8x4RS2TiZ/bxd3w9Yi0BNpvUXkWBJ7neLDiv4W/tw014MpRDfKnH7wZ0oTlmkYxZ5LcctiiK38m9a68r1v+SNUGf9rdC0C20qaWXgQpVIC14V12GklkvmR53vfMv4YvZzOzO0+5TkUqXKtnhDKMnGMnoTuf/nyHCP1/3x9g2UesY6E3UAdtPoifit8IkW3xQb/p/O5kBj87lgSR1TGJJpSSSOME4hdAhz1jFw/uw5ygp9BCh/PK58IWWDxYmLbTPmpNMUMVoxPyuMMB59q1o0oJyMgoCI6N6zpKRnR6EYlVE19Z8I28gfkOgyfXTsw4nz2A7uBd9ZdzWFYirY2ctmXJ05T3mbCd4QJh9vjLIoa+Lk1bGfrbZB6Ykiuo72RyZbOhuJcsCeMhafGbHa73fozMH0CDJSg0sQgkL+INc+34ErLYF1ILB+P1l0uH8KC5eEGYF5+Mexk3KIp/JuORGpxQEUDtadkeWktNE36hl3fm1L1UUgYlp8ZXHmQSiWkwRCx+3uD3RKlzW3Ddw4uGmfKMswa9FaPFV+9wDi7yeDGUn0em/zdJO16CrYkcF1wd+3O3ClVZISpa4RJfEziFAyeMikcMThYZak8ZpNVGkwRShJxB5KMRMpjQnlczpkLkJzLa8VnikwkUG0Yo1la5sJXFtJqD5nyTtQ6RmTeZUUCIckEtM40PZdwy0SqMN8wQSEzEMyRiDa1AMvN9QjGQsK1Q79YOeEEuEqRVAnb8zRJ0EWybPshNGezE8cg44Ru+FWaYPZiCOf7jgnSqxd1UPaezuYmyHz63F8cDXvPj4c3Lz4OP+4eH0b3Hw/fx2UkW9KbySkKI/5yNXK4109QIR1rkP+rGgQe/4P018vVtbosx/dSGD+hEzh1sdHbMqZ4vxE62JaoYZJO5z15yekhdFKJwWqYFThMDobZ2caxth7m8wIJkqyLndu2KCf0KIUyjy5XrMkDn5ZASiH0SU0SuS0T2gYPmCrhgxrMnPNSyaYKK4pSpcUMZEuBvGURbIA7c25z9mcKhMXANRszGx3RWyz1iuUOC+G3ZVj5kBqwYl6R/mGNdKuqOh9KD7cX88rKynk+r+xSoZzd3Zc7371+vbfz/NXe892972pk2sbC7wAjID0+YaasokQqI1vEbLynt9TW+hQeoAn7DLGpxhqazQcU90HwCfJYBpRl3uvBXyb8pjpze/xrujTT22Tf1bARNU9FEpdrzDzGI1KCAq4VAWaOdcpDDgnMMEnLcLQNjW9PPh4R51PE3QlkP4uRWkEyrpy1mzXfQeFqRcr/ZMnW16xYS43bbjGa193vXrz6ZzSaGhEwG3yyftZ3r6Kfnn35BP3svfpu7/U/o35qRKgkcZlxbXc4FyCtZ9hLqIr/IZqMmQQsHuFtC8PyPHknZGZ7LXOpVLrK8h1OUfVecQMLOz8RES2uAdamFayFXM0hYmMWbewmaWCO5hOVjtwyPplQDXd04RO4Ba59AjpqN3PBoCxXyDcECw0Mrjks/1rg+f/ono9Z2oZB1B6gW2BHLYArEcdpm1onw22vMnPTYp7ZMT5W2mLgWn7zC1N3v2kROFPmsoe4M8QYQEw1DfkIUN8G3Yvt1BgoEpmsLcaVb0EqTLr32q/xfMG6u7QnyVMR/VezXDfL+xaNY4hbjLecer3A22u/rqQTGUw5NfnOW1qbTVioX1PRwXxuw57JgS3TVS6eNwBwOZnYoPypVGiwWSMabjYeLYQLXVc4rpHMJkxWPm+1fUSWUrlhK997sa1elldN0eKRNS408sniB+pjcylGCcz+9bE62T45sSNJDJqyhNg8B83DDhxZl7k4fXdAXr94+d1lY6r1XAWdzt3dXVuOoxbETAvZFnLSkeMI/8NxTRMYJGaAC9wfGscM16QJKbab5KePa3hwbBPUdP3VbqX4he8yDZsCi06VyV1QFHMZb420ptplyD7QLpBKtnljQ85O+1kCtCgqMyWeyzeininqBaOE8puKm2cajEWk2hGdpTymbSY6dM46t7vtbrZ7LSSpOiMat2RWaM0N6rF6/D5R6WxGZflsqPBZ8POWxuS0WMDpsVjhwevfdXP99+HwhFgSJBIxFFmHY6Cy9ovKrbH9Ze+pveBVF2+03WY+Li8ncD9PaNYcUBWacTITEpyVV8V3ohd3Fhczev9ejNRQ7GN5GquRl5jYoOONANsFFMQmrGT29YgltSSMQWLbzhabwgaYDcMSkk3YuiRV1ju3u50/xEh1qGUUaZaDjnPuQ6tDG2he1gWafSxHa5DonyClkERE5gotxqvqJD+pM95KVbCvEehrBPoagb5GoKdGoNVWsLhnKGvg+MT2DN5gXlI3PisJ23mIImegpwIbcedCmVtsbCoMvA7eN7Ywl1WdZan3cNXJrx9beZ7csXVk06orb7PGxVQmXuAtbQRbBZ3OciqUXgVLvPZZdW53SzVeY7X42ka6zBFNPj61jG1aLL7gpcveY4n31do2F5ODJFV433TaGwzJzzYFN3ncPG+uypbZ6+51a1fAoU+gvn/SJ1ZyVxosYna2BIaO2iXs4C9dxDQcZn3RAyRhVVjujs5N261tVjJI3AzyfPfHu8zg338aIvulfurtJHCMsVg8qE6LzsdeZuLFTa7t5+vmXXY7JjzYFreLvBEt7yRzfWCmMQulLBqnXPNoqQsE74INl1mLYa369k/6aGq5y3TbO+4AppEuET6wEd2lg+DigTXjLPRPmJ6mo3YkZh13AOT/Z0phM+tqI1Kc9E0sjcRslnJz0POJbYygJFtzj0SWW9NY8c035EBwrBahS9sn3xDsSXOpVkQRU9gucDSJlmIx+ASb3czhE2dQw5YCFKFRBHNt2m/sXHM/F/JYRCkWsLJrWNIwrUt2F8n1/sGwf9679sm1CVRw7Zu69PW+/WW7lyn2jhn6mPchJJqnutkm2d2XIjS5owvTc23vvykXqIgkl0NNxR235Q1WoAuzjUYhpqoxBzljSmHnQybdCKb0lmFlRJnbwVwXJDL6Yxi7keWQM0WePeNCP3uGB0Hh1nPguEOoOpyksZGF/Nd//CcZHP6iSFGrQDMO+SZ/2ASOJhnpbLCQyqAnCQaSccFbucQhz9RvSzlRwrA0gyy7EqaQ2nbdLQiNpFDKMOI7HYZcgbtzX9ciqSox21kLxxIWAV5Dblr7B/uGnLvyzk67+yVWP0rEqDOjjHfcEqpzsP/x7Ohwv/Whf9A7GvRaO+1uW9/bNkg8ZWaUl/hwnzE81N+i1iPnsoDPX7/v+Pp9x/+t7zvckarhXnfmCWWmvm/8benQ14VXoC/P94Lqtx81AMwgLwPBLn0Hoy685RI7Ic5kslrhY/t1hSmBMoWztnxfUfatf9ynFrVKsrB24+ORDNIauJAR/kJJG6cuP22Sh76YqWUr68vgizIzGbvlzTONOFOgBuHkOP3ActEa2rQ4o7DRuIfXjHbGvjltHxxbhvYnx4Mhwj33ZcpMxDhH0jvMy+md5VYYrdiGEny29BLKJ6kBcZ6liQGcVoHhGpYsN/1V9bFc2hFDcQN8tcrVo/G367G5b2HiOTDYw+YQyAIC5cUcBmbj8CijI8DDaXD4C9q9KdljZjszaH3prizc8XZgzlffJM+k9BUTWdmAE3r/5k6yvY4oo8eWw2MtOmeh9z0GZKoWPCLjlEfm3H/sy0UHhRshJ6RkBEGZjZA3yRIHRIIrTRwr5E2dEI2m4SIb67qf3hB6R1k+tf0YV4YdQpZllsjKz54ibaY08GgRkCVB0mfzofioAvKy2+2SFVnh0IwVDK8Ny0/u0XmLWNv2/v30E7m4dGJa5kUC7URMGtffLvMbCTxGVuQNKT0yprO6xrUILrsyHuBM4mShpyah3WIOZnedUq4qO3ul4hvirMVpo2os9tkZV5D/XejKD3kTZY9h7CzgCjV5hRHiKg/NV3lovnJYulGMulkzgiZp/UiOBMeGbaMiiwnfkLXttyonxc7bge2nsOEExX8VRt5Ufjlx85XY2FybMJUVTBrlnfWtjppBQXtsWgjNRWV5ZGkE/ptLxnVjHOa3OwHBXbc2EHrN8j4ffLN9j1MDe52W2pXkrz2Ib4yNztNRwiJzyuO3HsaFUe9k8ET3LQeNks80Q+4s2nKBUtdvXPvA+HLuvsSMXXdfO/QxpvaR/7W9LAwze8rhjnxBH3qjWbCGPbAICBvIY9GYkG+naQRuumhRrHjgvPoTdjZ/YBwa367vrvXpI7fF39u56159mqoHQjzmj1tdOgjonKkgKAyazlkQPKbRE/yKUX0f8keI46GZqCD4Ar0+TrRiJ+Uzhj8ptjQyA6xEFvuZBMYpjCv2tvSHRtMnb8X9D/GCE6XjIDDXFUHQw//9+GO2lwnoLVYcBBhRr4DfNpo/5eaC49fCUWEUTwtMT9ugsrFtyOxX32UA8cpiy8DEVn/b/E2erhzfBjFfuVJDQAZiBo0qlfLZ8ASDCAKHohvNNXbKv1fNkgpNdPjp+9w5TYPtengtK8fE1oT/rRF6y1Xo+bYjFyNryefsH8c3jUazueaBP4tHIVYj5KEOvfFMhyb7DnWGW0KvplKwFVa1JqJzu9NFIubEsSL5eJNGgjdPDYmNSN/7JSbaH1OlS0G7EVba5l4+3+uGXtPMeJZNOYK7L4uXIWdjw+ff3hDOEtyAULvvgUHKkK9CPp7p9gnuxrgRev9yG4Yct8MK2UTE+99sF3J4
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search user task effective variables"}{" "}
+  <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/{userTaskKey}/effective-variables/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for the effective variables of a user task. This endpoint returns deduplicated
+variables where each variable name appears at most once. When the same variable name exists
+at multiple scope levels in the scope hierarchy, the value from the innermost scope (closest
+to the user task) takes precedence. This is useful for retrieving the actual runtime state
+of variables as seen by the user task. By default, long variable values in the response are
+truncated.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "READ_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task.",
+      schema: {
+        type: "string",
+        format: "string<UserTaskKey>",
+        description: "System-generated key for a user task.",
+      },
+    },
+    {
+      name: "truncateValues",
+      in: "query",
+      required: false,
+      description:
+        "When true (default), long variable values in the response are truncated. When false, full variable values are returned.",
+      schema: { type: "boolean" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "User task effective variable search query request. Uses offset-based pagination only.\n",
+          type: "object",
+          properties: {
+            page: {
+              description: "Pagination parameters.",
+              allOf: [
+                {
+                  type: "object",
+                  title: "Offset-based pagination",
+                  properties: {
+                    from: {
+                      description:
+                        "The index of items to start searching from.",
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                    },
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 0,
+                    },
+                  },
+                },
+              ],
+            },
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "value",
+                      "name",
+                      "tenantId",
+                      "variableKey",
+                      "scopeKey",
+                      "processInstanceKey",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserTaskVariableSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              allOf: [
+                {
+                  description: "The user task variable search filters.",
+                  type: "object",
+                  properties: {
+                    name: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description: "Name of the variable.",
+                    },
+                  },
+                  title: "UserTaskVariableFilter",
+                },
+              ],
+              description: "The user task variable search filters.",
+            },
+          },
+          title: "UserTaskEffectiveVariableSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task effective variable search result.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Variable search query response.",
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching variables.",
+                type: "array",
+                items: {
+                  required: ["isTruncated", "value"],
+                  description: "Variable search response item.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Variable response item.",
+                      type: "object",
+                      required: [
+                        "name",
+                        "processInstanceKey",
+                        "tenantId",
+                        "variableKey",
+                        "scopeKey",
+                        "rootProcessInstanceKey",
+                      ],
+                      properties: {
+                        name: {
+                          description: "Name of this variable.",
+                          type: "string",
+                        },
+                        tenantId: {
+                          allOf: [
+                            {
+                              example: "customer-service",
+                              description:
+                                "The unique identifier of the tenant.",
+                              format: "TenantId",
+                              type: "string",
+                              title: "TenantId",
+                            },
+                          ],
+                          description: "Tenant ID of this variable.",
+                        },
+                        variableKey: {
+                          allOf: [
+                            {
+                              description:
+                                "System-generated key for a variable.",
+                              format: "VariableKey",
+                              example: "2251799813683287",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "VariableKey",
+                            },
+                          ],
+                          description: "The key for this variable.",
+                        },
+                        scopeKey: {
+                          allOf: [
+                            {
+                              description:
+                                "System-generated key for a scope. A scope can hold variables and represents either an\nelement instance in a BPMN process or the process instance itself.\n",
+                              type: "string",
+                              format: "ScopeKey",
+                              oneOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                              title: "ScopeKey",
+                            },
+                          ],
+                          description:
+                            "The key of the scope where this variable is directly defined. For process-level\nvariables, this is the process instance key. For local variables, this is the key of the\nspecific element instance (task, subprocess, gateway, event, etc.) where the variable is\ndirectly defined.\n",
+                        },
+                        processInstanceKey: {
+                          allOf: [
+                            {
+                              description:
+                                "System-generated key for a process instance.",
+                              format: "ProcessInstanceKey",
+                              example: "2251799813690746",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "ProcessInstanceKey",
+                            },
+                          ],
+                          description:
+                            "The key of the process instance of this variable.",
+                        },
+                        rootProcessInstanceKey: {
+                          description:
+                            "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
+                          nullable: true,
+                          allOf: [
+                            {
+                              description:
+                                "System-generated key for a process instance.",
+                              format: "ProcessInstanceKey",
+                              example: "2251799813690746",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "ProcessInstanceKey",
+                            },
+                          ],
+                          "x-added-in-version": "8.9",
+                        },
+                      },
+                      title: "VariableResultBase",
+                    },
+                  ],
+                  properties: {
+                    value: {
+                      description: "Value of this variable. Can be truncated.",
+                      type: "string",
+                    },
+                    isTruncated: {
+                      description: "Whether the value is truncated or not.",
+                      type: "boolean",
+                    },
+                  },
+                  title: "VariableSearchResult",
+                },
+              },
+            },
+            title: "VariableSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

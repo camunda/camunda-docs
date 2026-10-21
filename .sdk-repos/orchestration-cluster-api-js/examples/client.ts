@@ -66,6 +66,28 @@ async function getTopologyExample() {
 }
 //#endregion GetTopology
 
+//#region GetClusterTopology
+async function getClusterTopologyExample() {
+  const camunda = createCamundaClient();
+
+  // Returns the full cluster topology: brokers, physical tenants (in a
+  // multi-tenant cluster), cluster size, and gateway version.
+  const topology = await camunda.getClusterTopology();
+
+  console.log(
+    `Cluster ${topology.clusterId} — ${topology.clusterSize} broker(s), gateway ${topology.gatewayVersion}`
+  );
+  for (const broker of topology.brokers) {
+    console.log(`  Broker ${broker.brokerId}: ${broker.host}:${broker.port} (${broker.version})`);
+  }
+  for (const tenant of topology.physicalTenants) {
+    console.log(
+      `  Physical tenant ${tenant.physicalTenantId}: ${tenant.partitionsCount} partition(s), replication ${tenant.replicationFactor}`
+    );
+  }
+}
+//#endregion GetClusterTopology
+
 //#region ChangeClusterMode
 async function changeClusterModeExample() {
   const camunda = createCamundaClient();
@@ -78,12 +100,39 @@ async function changeClusterModeExample() {
     dryRun: true,
   });
 
+  // Operations are grouped by physical tenant; a null tenant means the operation
+  // is not scoped to one, such as a broker lifecycle operation.
   console.log(`Cluster change ${change.changeId}:`);
-  for (const op of change.plannedChanges) {
-    console.log(`  ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    for (const op of group.operations) {
+      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+    }
   }
 }
 //#endregion ChangeClusterMode
+
+//#region ChangeClusterModeAsClusterAdmin
+async function changeClusterModeAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // The cluster-admin variant can target a single physical tenant. Omit
+  // `physicalTenantId` to apply the change to every physical tenant.
+  const change = await camunda.changeClusterModeAsClusterAdmin({
+    mode: 'RECOVERING',
+    physicalTenantId: 'default',
+    dryRun: true,
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    for (const op of group.operations) {
+      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+    }
+  }
+}
+//#endregion ChangeClusterModeAsClusterAdmin
 
 //#region Restore
 async function restoreExample() {
@@ -97,11 +146,55 @@ async function restoreExample() {
   });
 
   console.log(`Cluster change ${change.changeId}:`);
-  for (const op of change.plannedChanges) {
-    console.log(`  ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    for (const op of group.operations) {
+      const mode = 'mode' in op ? op.mode : undefined;
+      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ''}`);
+    }
   }
 }
 //#endregion Restore
+
+//#region RestoreAsClusterAdmin
+async function restoreAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // The cluster-admin variant can target a specific physical tenant and supports
+  // per-tenant overrides. Omit `physicalTenantId` to restore every physical
+  // tenant. Provide either backup IDs (one per partition) or a time range
+  // (`from`/`to`), but not both.
+  const change = await camunda.restoreAsClusterAdmin({
+    backupIds: [200, 201],
+    physicalTenantId: 'default',
+    dryRun: true,
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    for (const op of group.operations) {
+      const mode = 'mode' in op ? op.mode : undefined;
+      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ''}`);
+    }
+  }
+}
+//#endregion RestoreAsClusterAdmin
+
+//#region GetRestoreStatus
+async function getRestoreStatusExample() {
+  const camunda = createCamundaClient();
+
+  const status = await camunda.getRestoreStatus();
+
+  console.log(`Restore status: ${status.status} (change ${status.changeId})`);
+  for (const broker of status.brokers) {
+    console.log(
+      `  Broker ${broker.brokerId}: ${broker.partitionsRestored}/${broker.partitionsToRestore} partitions restored`
+    );
+  }
+}
+//#endregion GetRestoreStatus
 
 //#region ResultClient
 async function resultClientExample() {
@@ -220,6 +313,11 @@ void createClientWithConfigExample;
 void createClientOAuthExample;
 void getTopologyExample;
 void changeClusterModeExample;
+void changeClusterModeAsClusterAdminExample;
+void getRestoreStatusExample;
+void restoreExample;
+void restoreAsClusterAdminExample;
+void getClusterTopologyExample;
 void resultClientExample;
 void customFetchExample;
 void configExample;

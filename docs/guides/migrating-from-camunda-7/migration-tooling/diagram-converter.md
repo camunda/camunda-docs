@@ -8,9 +8,9 @@ description: "Learn how to use the Diagram Converter to analyze and convert Camu
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 diagram files (BPMN or DMN) and generates a list of tasks required for the migration.
+With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 BPMN, DMN, and Camunda 7 form definition files (`.form`) and generates a list of tasks required for the migration.
 
-In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces and renames XML properties, if needed.
+In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces, renames XML properties, and updates form metadata, if needed.
 
 All BPMN elements supported by Camunda 8 can be transformed. For the full list see the [BPMN coverage page](../../../components/modeler/bpmn/bpmn-coverage.md).
 
@@ -30,15 +30,7 @@ The results are available as:
 
 - **XLSX**: A Microsoft Excel file, including pre-built pivot tables for data exploration.
 - **CSV**: A plain-text comma-separated file, compatible with any spreadsheet tool.
-
-In the following sections, you'll learn how to:
-
-- [Install the Diagram Converter](#install-the-diagram-converter)
-- [Analyze your diagrams using the web interface](#analyze-your-diagrams-using-the-web-interface)
-- [Use the CLI](#use-the-cli)
-- [Convert your diagrams](#convert-your-diagrams)
-- [Extend the conversion logic](#extend-the-conversion-logic)
-- [Convert expressions](#convert-expressions)
+- **JSON**: A flat, machine-readable report for AI assistants and other automation.
 
 ## Install the Diagram Converter
 
@@ -103,7 +95,7 @@ Open the Diagram Converter:
 - For a local installation, open [http://localhost:8080/](http://localhost:8080/).
 - For the hosted SaaS version, open [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/).
 
-Upload one or more diagrams, then configure the conversion target:
+Upload one or more BPMN, DMN, or `.form` files, then configure the conversion target:
 
 ![Upload your diagrams](../../img/analyzer-screenshot-1.png)
 
@@ -120,10 +112,11 @@ Review the results:
 On this screen you can:
 
 - See the total number of findings for the selected target version
-- Review findings per model, and open a per-model preview
-- Download converted models individually, or download all converted models as a ZIP
+- Review findings per file, and open a preview for BPMN, DMN, or form files
+- Download converted files individually, or download all converted files as a ZIP
 - Download the analyzer results as a Microsoft Excel file (XLSX)
 - Download the analyzer results as a CSV file
+- Download the analyzer results as a JSON file for AI-assisted migration tooling
 
 Analysis results contain a list of items where each row represents an action item required for migrating your solution to Camunda 8. Findings are calculated for the selected target Camunda 8 version and grouped by severity:
 
@@ -137,6 +130,13 @@ This allows you to focus on the most important findings. Tasks can also be group
 Pivot tables can help you identify tasks that appear multiple times across different files, providing a comprehensive overview of migration efforts.
 
 Next, you'll learn how to use those results.
+
+### Download JSON analysis results
+
+Download the analysis results as a JSON file to use them with AI-assisted migration tools or other automation.
+
+- In the web interface, click **Download JSON**.
+- In the CLI, add `--json` to your command.
 
 ### Analyze results in Microsoft Excel
 
@@ -176,11 +176,13 @@ The CLI supports two modes:
 
 ### Local mode
 
+The local CLI accepts a file or directory. When you provide a directory, it scans the directory and its subdirectories for `.bpmn`, `.bpmn20.xml`, `.dmn`, `.dmn11.xml`, and `.form` files by default, then processes every supported file it finds (use `-nr, --not-recursive` to disable recursion).
+
 ```shell
-java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpmn --xlsx
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpmn --json --xlsx
 ```
 
-To process all diagrams in a directory (including subdirectories):
+To process all BPMN, DMN, and form files in a directory and its subdirectories:
 
 <Tabs groupId="os" defaultValue="maclinux" values={[
 { label: 'Mac OS + Linux', value: 'maclinux' },
@@ -211,6 +213,7 @@ Key options for `local` mode:
 | -------------------- | ------------------------------------------------------------- |
 | `--platform-version` | Semantic version of the target platform (defaults to latest)  |
 | `--csv`              | Create a CSV file with analysis results                       |
+| `--json`             | Create a JSON file with analysis results                      |
 | `--xlsx`             | Create an XLSX file with analysis results                     |
 | `--prefix`           | Prefix for the generated file name (default: `converted-c8-`) |
 | `-o, --override`     | Override existing files                                       |
@@ -226,11 +229,12 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
 
 | Parameter                                              | Description                                                                     |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| `<file>`                                               | File to convert or directory to scan for diagrams                               |
+| `<file>`                                               | File to convert or directory to scan for diagrams and forms                     |
 | `--add-data-migration-execution-listener`              | Add an execution listener on blank start events for the Camunda 7 Data Migrator |
 | `--always-use-default-job-type`                        | Always use the configured default job type                                      |
 | `--check`                                              | Analyze only, without exporting converted diagrams                              |
 | `--csv`                                                | Create a CSV file with analysis results                                         |
+| `--json`                                               | Create a JSON file with analysis results                                        |
 | `-d, --documentation`                                  | Also append messages to diagram documentation                                   |
 | `--data-migration-execution-listener-job-type=<value>` | Override the listener job type from `converter-properties.properties`           |
 | `--default-job-type=<value>`                           | Override the default job type from `converter-properties.properties`            |
@@ -252,7 +256,7 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
 Use engine mode to process diagrams directly from a running Camunda 7 engine via its REST API:
 
 ```shell
-java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine http://localhost:8080/engine-rest
+java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine http://localhost:8080/engine-rest --json --xlsx
 ```
 
 Key options for `engine` mode:
@@ -264,6 +268,7 @@ Key options for `engine` mode:
 | `-p, --password`         | Password for Basic authentication                              |
 | `-t, --target-directory` | Directory to save the .bpmn files (default: current directory) |
 | `--csv`                  | Create a CSV file with analysis results                        |
+| `--json`                 | Create a JSON file with analysis results                       |
 | `--xlsx`                 | Create an XLSX file with analysis results                      |
 
 To see all available options:
@@ -282,6 +287,7 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine --help
 | `--always-use-default-job-type`                        | Always use the configured default job type                                            |
 | `--check`                                              | Analyze only, without exporting converted diagrams                                    |
 | `--csv`                                                | Create a CSV file with analysis results                                               |
+| `--json`                                               | Create a JSON file with analysis results                                              |
 | `-d, --documentation`                                  | Also append messages to diagram documentation                                         |
 | `--data-migration-execution-listener-job-type=<value>` | Override the listener job type from `converter-properties.properties`                 |
 | `--default-job-type=<value>`                           | Override the default job type from `converter-properties.properties`                  |
@@ -311,6 +317,12 @@ This includes:
 - Transforming expressions
 
 Converted files can be downloaded via the web interface or generated via the CLI.
+
+## Convert Camunda 7 forms
+
+The Diagram Converter supports Camunda 7 form definition files (`.form`). You can upload forms through the web interface or include them in a local CLI conversion to update them for Camunda 8. The web interface provides a form preview, and the converter reports items that need review.
+
+For generated task forms, use the [Camunda migration agent skill](./index.md#agentic-migration), which creates or adapts a standard Camunda 8 form during the agentic migration flow.
 
 ## Extend the conversion logic
 

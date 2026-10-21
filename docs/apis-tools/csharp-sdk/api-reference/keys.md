@@ -7,16 +7,13 @@ mdx:
 
 # Key Types
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 Strongly-typed domain key types provide compile-time safety for entity identifiers. Each key wraps a string value and ensures type-safe API calls.
 
 ## Overview
 
 | Key Type                        | Description                                                                                                                                                                                                                    |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `AgentDefinitionKey`            | System-generated key for an agent definition.                                                                                                                                                                                  |
 | `AgentHistoryItemKey`           | System-generated key for an agent history item.                                                                                                                                                                                |
 | `AgentInstanceKey`              | System-generated key for an agent instance.                                                                                                                                                                                    |
 | `AuditLogEntityKey`             | System-generated entity key for an audit log entry.                                                                                                                                                                            |
@@ -57,6 +54,14 @@ All key types share these methods:
 | `ToString()`           | Returns the string representation.               |
 
 ## Details
+
+### AgentDefinitionKey
+
+System-generated key for an agent definition.
+
+```csharp
+public readonly record struct AgentDefinitionKey : ICamundaKey, IEquatable<AgentDefinitionKey>
+```
 
 ### AgentHistoryItemKey
 

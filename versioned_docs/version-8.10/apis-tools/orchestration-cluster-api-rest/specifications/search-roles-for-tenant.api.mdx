@@ -1,0 +1,653 @@
+---
+id: search-roles-for-tenant
+title: "Search roles for tenant"
+sidebar_label: "Search roles for tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search roles for tenant"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/tenants/{tenantId}/roles/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Retrieves a filtered and sorted list of roles for a specified tenant.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "ROLE", permissionType: "READ" }]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Role search request.",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["name", "roleId"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "RoleSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              allOf: [
+                {
+                  description: "Role filter request",
+                  allOf: [
+                    {
+                      description: "Role filter request",
+                      type: "object",
+                      properties: {
+                        roleId: {
+                          description: "The role ID search filters.",
+                          allOf: [
+                            {
+                              description:
+                                "String property with full advanced search capabilities.",
+                              oneOf: [
+                                {
+                                  type: "string",
+                                  title: "Exact match",
+                                  description: "Matches the value exactly.",
+                                },
+                                {
+                                  title: "Advanced filter",
+                                  description: "Advanced string filter.",
+                                  allOf: [
+                                    {
+                                      title: "Advanced filter",
+                                      description:
+                                        "Basic advanced string filter.",
+                                      type: "object",
+                                      properties: {
+                                        $eq: {
+                                          description:
+                                            "Checks for equality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $neq: {
+                                          description:
+                                            "Checks for inequality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $exists: {
+                                          description:
+                                            "Checks if the current property exists.",
+                                          type: "boolean",
+                                        },
+                                        $in: {
+                                          description:
+                                            "Checks if the property matches any of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                        $notIn: {
+                                          description:
+                                            "Checks if the property matches none of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                      },
+                                    },
+                                    {
+                                      type: "object",
+                                      properties: {
+                                        $like: {
+                                          type: "string",
+                                          description:
+                                            "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                          title: "LikeFilter",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              ],
+                              title: "StringFilterProperty",
+                            },
+                          ],
+                        },
+                        name: {
+                          description: "The role name search filters.",
+                          allOf: [
+                            {
+                              description:
+                                "String property with full advanced search capabilities.",
+                              oneOf: [
+                                {
+                                  type: "string",
+                                  title: "Exact match",
+                                  description: "Matches the value exactly.",
+                                },
+                                {
+                                  title: "Advanced filter",
+                                  description: "Advanced string filter.",
+                                  allOf: [
+                                    {
+                                      title: "Advanced filter",
+                                      description:
+                                        "Basic advanced string filter.",
+                                      type: "object",
+                                      properties: {
+                                        $eq: {
+                                          description:
+                                            "Checks for equality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $neq: {
+                                          description:
+                                            "Checks for inequality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $exists: {
+                                          description:
+                                            "Checks if the current property exists.",
+                                          type: "boolean",
+                                        },
+                                        $in: {
+                                          description:
+                                            "Checks if the property matches any of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                        $notIn: {
+                                          description:
+                                            "Checks if the property matches none of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                      },
+                                    },
+                                    {
+                                      type: "object",
+                                      properties: {
+                                        $like: {
+                                          type: "string",
+                                          description:
+                                            "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                          title: "LikeFilter",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              ],
+                              title: "StringFilterProperty",
+                            },
+                          ],
+                        },
+                      },
+                      title: "RoleFilterFields",
+                    },
+                    {
+                      type: "object",
+                      properties: {
+                        $or: {
+                          description:
+                            'Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  "name": "Admin",\n  "$or": [\n    { "roleId": "role-1" },\n    { "roleId": "role-2" }\n  ]\n}\n```\nThis matches roles that:\n\n<ul style="padding-left: 20px; margin-left: 20px;">\n  <li style="list-style-type: disc;">have name equal to <em>Admin</em></li>\n  <li style="list-style-type: disc;">and match either:\n    <ul style="padding-left: 20px; margin-left: 20px;">\n      <li style="list-style-type: circle;"><code>roleId</code> is <em>role-1</em>, or</li>\n      <li style="list-style-type: circle;"><code>roleId</code> is <em>role-2</em></li>\n    </ul>\n  </li>\n</ul>\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n',
+                          type: "array",
+                          nullable: true,
+                          items: {
+                            description: "Role filter request",
+                            type: "object",
+                            properties: {
+                              roleId: {
+                                description: "The role ID search filters.",
+                                allOf: [
+                                  {
+                                    description:
+                                      "String property with full advanced search capabilities.",
+                                    oneOf: [
+                                      {
+                                        type: "string",
+                                        title: "Exact match",
+                                        description:
+                                          "Matches the value exactly.",
+                                      },
+                                      {
+                                        title: "Advanced filter",
+                                        description: "Advanced string filter.",
+                                        allOf: [
+                                          {
+                                            title: "Advanced filter",
+                                            description:
+                                              "Basic advanced string filter.",
+                                            type: "object",
+                                            properties: {
+                                              $eq: {
+                                                description:
+                                                  "Checks for equality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $neq: {
+                                                description:
+                                                  "Checks for inequality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $exists: {
+                                                description:
+                                                  "Checks if the current property exists.",
+                                                type: "boolean",
+                                              },
+                                              $in: {
+                                                description:
+                                                  "Checks if the property matches any of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                              $notIn: {
+                                                description:
+                                                  "Checks if the property matches none of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: "object",
+                                            properties: {
+                                              $like: {
+                                                type: "string",
+                                                description:
+                                                  "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                                title: "LikeFilter",
+                                              },
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                    title: "StringFilterProperty",
+                                  },
+                                ],
+                              },
+                              name: {
+                                description: "The role name search filters.",
+                                allOf: [
+                                  {
+                                    description:
+                                      "String property with full advanced search capabilities.",
+                                    oneOf: [
+                                      {
+                                        type: "string",
+                                        title: "Exact match",
+                                        description:
+                                          "Matches the value exactly.",
+                                      },
+                                      {
+                                        title: "Advanced filter",
+                                        description: "Advanced string filter.",
+                                        allOf: [
+                                          {
+                                            title: "Advanced filter",
+                                            description:
+                                              "Basic advanced string filter.",
+                                            type: "object",
+                                            properties: {
+                                              $eq: {
+                                                description:
+                                                  "Checks for equality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $neq: {
+                                                description:
+                                                  "Checks for inequality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $exists: {
+                                                description:
+                                                  "Checks if the current property exists.",
+                                                type: "boolean",
+                                              },
+                                              $in: {
+                                                description:
+                                                  "Checks if the property matches any of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                              $notIn: {
+                                                description:
+                                                  "Checks if the property matches none of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: "object",
+                                            properties: {
+                                              $like: {
+                                                type: "string",
+                                                description:
+                                                  "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                                title: "LikeFilter",
+                                              },
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                    title: "StringFilterProperty",
+                                  },
+                                ],
+                              },
+                            },
+                            title: "RoleFilterFields",
+                          },
+                          "x-added-in-version": "8.10",
+                        },
+                      },
+                    },
+                  ],
+                  title: "RoleFilter",
+                },
+              ],
+              description: "The role search filters.",
+            },
+          },
+          title: "RoleSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search result of roles for the tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["items"],
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching roles.",
+                type: "array",
+                items: {
+                  description: "Role search response item.",
+                  type: "object",
+                  properties: {
+                    name: { type: "string", description: "The role name." },
+                    roleId: {
+                      description: "The role id.",
+                      allOf: [
+                        {
+                          example: "admin",
+                          description: "The unique identifier of a role.",
+                          format: "RoleId",
+                          type: "string",
+                          title: "RoleId",
+                        },
+                      ],
+                    },
+                    description: {
+                      type: "string",
+                      nullable: true,
+                      description: "The description of the role.",
+                    },
+                  },
+                  required: ["roleId", "name", "description"],
+                  title: "RoleResult",
+                },
+              },
+            },
+            title: "TenantRoleSearchResult",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

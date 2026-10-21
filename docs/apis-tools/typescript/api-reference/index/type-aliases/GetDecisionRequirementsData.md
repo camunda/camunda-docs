@@ -30,7 +30,7 @@ path: object;
 #### decisionRequirementsKey
 
 ```ts
-decisionRequirementsKey: DecisionRequirementsKey;
+decisionRequirementsKey: DecisionRequirementsKeyWritable;
 ```
 
 The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.

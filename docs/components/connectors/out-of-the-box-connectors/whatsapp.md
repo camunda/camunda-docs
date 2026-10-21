@@ -28,8 +28,8 @@ The **WhatsApp connector** supports authentication through Meta access tokens. T
 Once the token is obtained, put it in the **Access token** field of the **Authentication** section.
 
 :::note
-Use Camunda secrets to avoid exposing your WhatsApp access token credentials as plain text.
-See our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your WhatsApp access token credentials as plain text.
+See our documentation on [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
 :::
 
 ## Sender and recipient

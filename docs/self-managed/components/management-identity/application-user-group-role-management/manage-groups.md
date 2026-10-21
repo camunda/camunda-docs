@@ -1,10 +1,10 @@
 ---
 id: manage-groups
 title: "Groups"
-description: "Groups are a way to apply a set of roles and permissions to users for Camunda 8 management and modeling components (Web Modeler, Console, Optimize)."
+description: "Groups are a way to apply a set of roles and permissions to users for Camunda 8 management and modeling components (Camunda Hub and Optimize)."
 ---
 
-Use groups to manage and organize user access to Camunda 8 management and modeling components (Web Modeler, Console, and Optimize).
+Use groups to manage and organize user access to Camunda 8 management and modeling components (Camunda Hub and Optimize).
 
 ## About groups
 
@@ -73,6 +73,6 @@ On confirmation, the modal closes, the table updates, and your assigned roles ar
 
 2. Navigate to the **Roles** tab.
 
-3. Click the trash icon next to the user you want to remove from the group.
+3. Click the trash icon next to the role you want to remove from the group.
 
 On confirmation, the modal closes, the table updates, and your role is removed from the group.

@@ -5,13 +5,15 @@ sidebar_label: "Overview"
 description: "Management Identity is the component within Camunda 8 Self-Managed responsible for authentication and authorization for Camunda Hub and Optimize."
 ---
 
+import ManagementIdentityAvailability from './\_partials/\_management-identity-availability.md';
+
 The Management Identity component in Camunda 8 Self-Managed is used to manage authentication, access, and authorization for components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md): [Camunda Hub](../hub/index.md) and [Optimize](../optimize/overview.md).
 
-Management Identity controls who can sign in to Camunda Hub and Optimize, which is separate from the cluster identity stack provided by [Admin (formerly Orchestration Cluster Identity)](/self-managed/components/orchestration-cluster/admin/overview.md). Admin controls access to Zeebe, Operate, Tasklist, and the Orchestration Cluster API within each cluster.
+Management Identity controls who can sign in to Camunda Hub and Optimize, which is separate from the cluster identity stack provided by [Admin (formerly Orchestration Cluster Identity)](/self-managed/components/orchestration-cluster/admin/overview.md). Admin controls access to Zeebe, Operate, Tasklist, and the Orchestration Cluster API within each cluster. See [how identity works in Camunda](/self-managed/components/identity/how-identity-works.md) for a decision tree covering which one to configure.
 
 ## About Management Identity
 
-Management Identity is included in the full and standalone Camunda Hub [Docker Compose configurations](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration) and in the default [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md). These configurations use the packaged Keycloak instance as an identity provider (IdP). The lightweight Docker Compose configuration uses Orchestration Cluster Admin and does not start Management Identity or Keycloak.
+<ManagementIdentityAvailability />
 
 - Administrators can use Management Identity to manage Camunda 8 users, groups, roles, permissions, and applications.
 - Users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) are supported, using secure authorization based on OAuth 2.0 standards.
@@ -54,7 +56,7 @@ Control who can access what by assigning permissions through roles.
 ### Multi-tenancy
 
 :::note
-This section describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+This section describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the [Optimize deployment guidance](/self-managed/concepts/physical-tenants/index.md#optimize-deployment).
 :::
 
 Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/admin/tenant.md).

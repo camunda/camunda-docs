@@ -7,7 +7,7 @@ page_rank: 80
 ---
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
-import HelmV4Required from './\_partials/\_helm-v4-required.md'
+import HelmCliSupport from './_partials/_helm-cli-support.md';
 
 Camunda recommends using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production environments.
 
@@ -15,7 +15,11 @@ There are many ways to provision and configure a Kubernetes cluster, and several
 
 Camunda provides continuously improved Helm charts that are not tied to any specific cloud provider allowing you to choose your preferred Kubernetes platform. These charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform). To provide feedback or report issues, use the [Helm GitHub repository](https://github.com/camunda/camunda-platform-helm/issues).
 
-<HelmV4Required />
+:::note Helm CLI support
+<HelmCliSupport />
+
+Use Helm CLI v4 for new installations.
+:::
 
 ## What is Helm?
 
@@ -29,7 +33,7 @@ For details, see the full list of [Helm values](https://artifacthub.io/packages/
 
 For guidance on sizing and deployment patterns, see the [Kubernetes reference architecture](/self-managed/reference-architecture/kubernetes.md).
 
-When you install the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, the default installation includes the Orchestration Cluster components (Zeebe, Operate, Tasklist, and Admin). Other components from the reference architecture, such as Web Modeler and Console, require additional configuration and an external Identity Provider (IdP).
+When you install the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, the default installation includes the Orchestration Cluster components (Zeebe, Operate, Tasklist, and Admin). Other components from the reference architecture, such as Camunda Hub, require additional configuration and an external Identity Provider (IdP).
 
 ## Versioning
 

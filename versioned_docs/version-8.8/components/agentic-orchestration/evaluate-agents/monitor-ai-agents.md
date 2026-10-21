@@ -11,8 +11,9 @@ import TabItem from "@theme/TabItem";
 import ProcessInstance from '../img/process-instance-overview.png';
 import InstanceHistory from '../img/instance-history.png';
 import Variables from '../img/variables.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Monitor and troubleshoot your AI agent process instances in real time using Operate.
+<PageDescription />
 
 ## About
 
@@ -166,19 +167,7 @@ In Modeler, within the AI Agent sub-process, you can define how the conversation
 By default, agent memory uses the **In Process** type, which stores it as part of the agent context.
 With this option, you can view it in Operate within the agent context, as you did in the previous step, [Analyze the agent context](#step-5-analyze-the-agent-context).
 
-With the **Camunda Document Storage** option instead:
-
-- You can't view the full conversation and chain-of-thought traces in Operate. Operate only show a **document reference** and metadata.
-- Use this option for long conversations, where Operate variable limits might be exceeded.
-
-See [Memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
-
-:::note Agent memory storage
-
-- Use **In Process** for testing and debugging scenarios: Better visibility in Operate.
-- Use **Camunda Document Storage** for production scenarios: Better scalability and runtime behavior for long contexts.
-
-:::
+Other available options include **Camunda Document Storage** and a custom implementation. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
 
 ## Step 7: Review the results
 

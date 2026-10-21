@@ -1,0 +1,395 @@
+---
+id: get-form-by-key
+title: "Get form by key"
+sidebar_label: "Get form by key"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get form by key"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/forms/{formKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Get a form by its unique form key.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "RESOURCE", permissionType: "READ" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "formKey",
+      in: "path",
+      required: true,
+      description: "The form key.",
+      schema: {
+        type: "string",
+        format: "string<FormKey>",
+        example: "2251799813684365",
+        description: "System-generated key for a deployed form.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The form is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["tenantId", "formId", "schema", "version", "formKey"],
+            properties: {
+              tenantId: {
+                description: "The tenant ID of the form.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+              formId: {
+                description: "The user-provided identifier of the form.",
+                allOf: [
+                  {
+                    description: "The user-defined id for the form",
+                    type: "string",
+                    format: "FormId",
+                    example: "Form_1nx5hav",
+                    title: "FormId",
+                  },
+                ],
+              },
+              schema: {
+                description:
+                  "The form schema as a JSON document serialized as a string.",
+                type: "string",
+              },
+              version: {
+                description: "The version of the the deployed form.",
+                type: "integer",
+                format: "int64",
+              },
+              formKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a deployed form.",
+                    format: "FormKey",
+                    example: "2251799813684365",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "FormKey",
+                  },
+                ],
+                description:
+                  "The assigned key, which acts as a unique identifier for this form.",
+              },
+            },
+            title: "FormResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The form with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

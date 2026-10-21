@@ -8,7 +8,7 @@ description: "Learn how Admin is bundled with your default orchestration cluster
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Admin (formerly Orchestration Cluster Identity) is included by default with the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) in all Self-Managed installation methods. Within a cluster, Admin provides unified, cluster-level identity management and authorization.
+Admin (formerly Orchestration Cluster Identity) is included by default with the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) in all Self-Managed installation methods. Within a cluster, Admin provides unified, cluster-level identity management and authorization. See [how identity works in Camunda](/self-managed/components/identity/how-identity-works.md) for how Admin relates to Management Identity and which one to configure.
 
 :::note Profile transition
 In Camunda 8.9, the `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9. The `identity` profile is deprecated and will be removed in a future version.

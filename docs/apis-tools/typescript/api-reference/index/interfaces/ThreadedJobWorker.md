@@ -112,6 +112,11 @@ get stopped(): boolean;
 start(): void;
 ```
 
+Begin polling for jobs. Safe to call at any point: the request is buffered
+until the shared thread pool is ready, and redundant calls (including an
+explicit call on an `autoStart` worker) are dropped rather than starting a
+second poll loop. Once the worker is stopped, `start()` is a no-op.
+
 #### Returns
 
 `void`
@@ -133,10 +138,7 @@ stop(): void;
 ### stopGracefully()
 
 ```ts
-stopGracefully(opts?): Promise<{
-  remainingJobs: number;
-  timedOut: boolean;
-}>;
+stopGracefully(opts?): Promise<GracefulStopResult>;
 ```
 
 #### Parameters
@@ -153,7 +155,4 @@ stopGracefully(opts?): Promise<{
 
 #### Returns
 
-`Promise`\<\{
-`remainingJobs`: `number`;
-`timedOut`: `boolean`;
-\}\>
+`Promise`\<`GracefulStopResult`\>

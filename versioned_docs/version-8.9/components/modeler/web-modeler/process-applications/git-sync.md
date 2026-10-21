@@ -305,7 +305,7 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
-1. In your connected process application, click **Sync with _GitProvider_** button.
+1. In your connected process application, click **Sync with \<GitProvider\>** button.
 2. Enter a [version number](process-applications.md#process-application-versioning) to create a new version for your process application. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
@@ -315,13 +315,13 @@ Once the pull is complete and any merge conflicts are resolved, Web Modeler will
 
 ## Manage existing configurations
 
-Existing Git configurations can be edited from the gear icon beside the **Sync with _GitProvider_** button. Permission to update these settings are limited to **project administrators**.
+Existing Git configurations can be edited from the gear icon beside the **Sync with \<GitProvider\>** button. Permission to update these settings are limited to **project administrators**.
 
 ## Change Git provider
 
 To switch between Git providers, update your configuration with the following steps:
 
-1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with _GitProvider_** button, and clicking the **Delete provider connection** button at the bottom of the modal.
+1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with \<GitProvider\>** button, and clicking the **Delete provider connection** button at the bottom of the modal.
 2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository), [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository), [Azure](./git-sync.md?platform=azure#connect-to-a-remote-repository), or [Bitbucket Cloud](./git-sync.md?platform=bitbucket#connect-to-a-remote-repository).
 
 ## Advanced use cases
@@ -346,7 +346,7 @@ To use Git sync for parallel feature development:
 
 1. Create a new [process application](create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
-3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
+3. Work on your feature in Modeler, using **Sync with \<GitProvider\>** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
 
 To perform hotfixes or patches of production or production-bound processes, sync a copy of the process application to the `main` branch.
@@ -374,6 +374,7 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ### Synchronization
 
+- In SaaS, the Git sync payload size must not exceed 4MB. In Self-Managed, you can [configure the `max-in-memory-size`](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync). If your sync fails because you've exceeded this limit, contact [Camunda success](https://camunda.com/services/support/) for assistance.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
 - Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.

@@ -135,10 +135,12 @@ paths:
                         - tasklist
                     deployment:
                       isMultiTenancyEnabled: false
+                      isTenantsApiEnabled: false
                       maxRequestSize: 4194304
                     authentication:
                       canLogout: true
                       isLoginDelegated: false
+                      isCamundaGroupsEnabled: true
                     cloud:
                       stage: prod
         "401":
@@ -277,10 +279,15 @@ components:
       type: object
       required:
         - isMultiTenancyEnabled
+        - isTenantsApiEnabled
         - maxRequestSize
       properties:
         isMultiTenancyEnabled:
           description: Whether multi-tenancy is enabled.
+          type: boolean
+          example: false
+        isTenantsApiEnabled:
+          description: Whether the tenants management API and UI are enabled.
           type: boolean
           example: false
         maxRequestSize:
@@ -288,12 +295,16 @@ components:
           type: integer
           format: int64
           example: 4194304
+      x-properties-added-in-version:
+        - propertyName: isTenantsApiEnabled
+          addedInVersion: "8.11"
     AuthenticationConfigurationResponse:
       description: Configuration for authentication and session management.
       type: object
       required:
         - canLogout
         - isLoginDelegated
+        - isCamundaGroupsEnabled
       properties:
         canLogout:
           description: Whether users can log out (false for SaaS deployments).
@@ -303,6 +314,13 @@ components:
           description: Whether login is delegated to an external identity provider.
           type: boolean
           example: false
+        isCamundaGroupsEnabled:
+          description: Whether Camunda manages group membership locally, as opposed to delegating it to the identity provider via a groups claim.
+          type: boolean
+          example: true
+      x-properties-added-in-version:
+        - propertyName: isCamundaGroupsEnabled
+          addedInVersion: "8.11"
     CloudConfigurationResponse:
       description: Configuration for SaaS/cloud-specific settings.
       type: object

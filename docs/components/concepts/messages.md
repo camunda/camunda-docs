@@ -174,7 +174,15 @@ When both a correlation key and a business ID are provided, the message correlat
 
 ### Matching semantics
 
-A business ID on a message is an optional narrowing filter. A message with no business ID correlates on name and correlation key alone, regardless of the subscription's business ID. A message that carries a business ID correlates only to a subscription whose business ID matches exactly; a subscription with no business ID does not match a message that carries one. A business ID never replaces the correlation key.
+A business ID on a message is an optional narrowing filter, on top of — never a replacement for — the correlation key. Matching is asymmetric between the two sides:
+
+| Message business ID | Subscription business ID | Correlates?                                      |
+| :------------------ | :----------------------- | :----------------------------------------------- |
+| Not set             | Not set                  | Yes — matches on name and correlation key alone. |
+| Not set             | Set                      | Yes — the subscription's business ID is ignored. |
+| Set                 | Not set                  | No.                                              |
+| Set                 | Set, same value          | Yes.                                             |
+| Set                 | Set, different value     | No.                                              |
 
 A message subscription snapshots the process instance's business ID at the time the subscription is opened.
 

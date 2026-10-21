@@ -58,10 +58,10 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 
 ## I cannot connect to an orchestration cluster {#i-cannot-connect-to-zeebe}
 
-You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
+You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 :::tip
-If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](/components/saas/clusters.md#auto-pause).
 :::
 
 To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
@@ -70,13 +70,13 @@ Additionally, if authorizations are enabled, ensure that your [client](/componen
 
 ## I cannot connect to a local orchestration cluster {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (i.e., to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
+You try to connect (i.e., to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
 
 ## Cannot connect to an orchestration cluster in a local network
 
-Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to orchestration cluster" error.
+Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to Camunda 8" error.
 
 Verify that your operating system allows Desktop Modeler to access the local network.
 
@@ -103,11 +103,11 @@ See [control access to your local network](https://support.apple.com/en-gb/guide
 
 ## How to configure a REST connection
 
-You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Configure a REST connection to a Camunda 8 cluster."
+You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Configure a REST connection to Camunda 8."
 
-Some features of Desktop Modeler, such as task testing, require a REST connection to a Camunda 8 cluster. Orchestration clusters from version 8.6 support connections with gRPC or the newer [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Depending on the provided URL, the corresponding client will be used. Ensure you use the REST URL in your deployment configuration:
+Some features of Desktop Modeler, such as task testing, require a REST connection to Camunda 8. Orchestration clusters from version 8.6 support connections with gRPC or the newer [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Depending on the provided URL, the corresponding client will be used. Ensure you use the REST URL in your deployment configuration:
 
-- If you are using Camunda 8 SaaS clusters, create an [API client](../../hub/organization/manage-clusters/manage-api-clients.md) and use the value of `Camunda REST API`.
+- If you are using Camunda 8 SaaS clusters, create an [API client](../../saas/clusters/manage-api-clients.md) and use the value of `Camunda REST API`.
 - If you are using [Camunda 8 Run](../../../self-managed/quickstart/developer-quickstart/c8run.md), you should use the value of `Orchestration Cluster API`.
 
 :::tip
@@ -123,7 +123,7 @@ You try to connect to Zeebe from both Desktop Modeler _and_ community-supported 
 Ensure your computer has access to the (remote) network.
 
 :::tip
-If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](/components/saas/clusters.md#auto-pause).
 :::
 
 ### The connection to Zeebe happens through a proxy

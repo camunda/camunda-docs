@@ -9,8 +9,9 @@ toc_max_heading_level: 2
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/apis-tools/testing/getting-started.md).
+<PageDescription />
 
 ## About
 
@@ -96,6 +97,10 @@ camunda:
           access-key: ${AWS_LLM_BEDROCK_ACCESS_KEY}
           secret-key: ${AWS_LLM_BEDROCK_SECRET_KEY}
 ```
+
+:::note Bedrock IAM requirements
+The AWS principal must have `bedrock:InvokeModel` permission on each model ARN you configure, and each model must be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the configured region. If you also configure an embedding model through Bedrock for [semantic similarity assertions](#verify-with-semantic-similarity), it requires a separate IAM grant.
+:::
 
 </TabItem>
 

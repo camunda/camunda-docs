@@ -38,7 +38,7 @@ Manual backups refer to the user-initiated process of creating a consistent snap
 To ensure system stability, backup operations are subject to rate limits. Specifically, you can perform a backup operation every 15 minutes.
 However, users can delete an existing backup to create a new one before the rate limit period ends.
 
-The system retains the five most recent completed manual backups per cluster. Manual and scheduled backups are counted separately, so manual backups do not evict scheduled ones. See [scheduled backups](#scheduled-backups) for scheduled backup retention. Failed backup attempts do not count toward the retention count. When a new backup is successful and the retention count is reached, the oldest backup is automatically deleted.
+The system retains the three most recent completed manual backups per cluster. Manual and scheduled backups are counted separately, so manual backups do not evict scheduled ones. See [scheduled backups](#scheduled-backups) for scheduled backup retention. Failed backup attempts do not count toward the retention count. When a new backup is successful and the retention count is reached, the oldest backup is automatically deleted.
 
 ## Scheduled backups
 
@@ -46,7 +46,7 @@ Scheduled backups are created periodically (e.g daily, weekly). They are configu
 
 ### Retention
 
-A backup schedule retains the last five successful and failed backups. Failed backups are retained to allow further root-cause analysis for backup failures. If a backup fails, it is not retried immediately as the failure can lead to instability.
+A backup schedule retains the last three successful and failed backups. Failed backups are retained to allow further root-cause analysis for backup failures. If a backup fails, it is not retried immediately as the failure can lead to instability.
 
 :::note
 If you require more retained backups or more frequent backups, [contact Camunda support](https://camunda.com/services/support/) to discuss your specific needs.
@@ -60,10 +60,11 @@ For detailed information on using the API, refer to the [Administration API refe
 
 ## Restore
 
-You can restore your cluster from a selected backup directly in Console or through the Administration API.
+You can restore your cluster from a selected backup directly in Camunda Hub or through the Administration API.
 
 - See [backup and restore overview](./backup-restore-overview.md).
 - See [restore a cluster from backup](./how-to-restore.md).
+- See [restore scenarios](./restore-scenarios.md).
 - See [restore troubleshooting](./restore-troubleshooting.md).
 
 If the restore action is not available in your organization yet, [contact Camunda support](https://camunda.com/services/support/).

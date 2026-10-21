@@ -14,7 +14,7 @@ Processes are the algorithms that determine how an organization runs based on in
 
 Take the following example where we've outlined a process in a BPMN diagram to send an email. Don't worry too much about the symbols as we'll get to that shortly. For now, recognize the start and end of the process, comprised of entering a message, and sending the email.
 
-![sending email bmmn diagram](./img/simple-bpmn-process.png)
+![sending email bpmn diagram](./img/simple-bpmn-process.png)
 
 BPMN offers control and visibility over your critical business processes in a way that is understandable for both experienced engineers and business stakeholders. The workflow engine orchestrates processes that span across a wide variety of elements, including APIs, microservices, business decisions and rules, human work, IoT devices, RPA bots, and more.
 
@@ -27,8 +27,10 @@ To get started, ensure you’ve [created a Camunda 8 account](/components/consol
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Within Modeler, click **Create new > BPMN diagram**.
-2. Right after creating your diagram, you can name it by replacing the **New BPMN Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
+1. Within Modeler, click **New project**.
+2. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. In the process application, click **Create new > BPMN diagram**.
+4. Right after creating your diagram, you can name it by replacing the **New BPMN Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
 
 ### BPMN elements
 

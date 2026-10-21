@@ -1,10 +1,10 @@
 import React from "react";
 import { activeVersionURLPath as linkBase } from "../Versions";
 
-const Introduction = () => {
+const Introduction = ({ hideHeading = false }) => {
   return (
     <div style={{ marginBottom: "3rem" }}>
-      <h2>Self-Managed or SaaS?</h2>
+      {!hideHeading && <h2>Self-Managed or SaaS?</h2>}
       <p>
         The main difference between Camunda 8 Self-Managed and Camunda 8 SaaS
         is responsibility for infrastructure and operations.

@@ -30,7 +30,7 @@ path: object;
 #### processDefinitionKey
 
 ```ts
-processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKeyWritable;
 ```
 
 The process key.

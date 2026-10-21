@@ -15,17 +15,17 @@ description: "Enable TLS for Camunda 8 Self-Managed component connections to dat
 | Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | `global.tls.caBundle`                                                                                                                                                                         |
 | Browser / external client → Ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes Ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, _not_ `global.tls.caBundle`. See [Ingress configuration](./ingress/ingress-setup.md). |
 
-In-cluster pod-to-pod traffic is not covered by this overlay — see [In-cluster transport (service mesh required)](#in-cluster-transport-service-mesh-required).
+In-cluster pod-to-pod traffic isn't covered by this overlay. See [Encrypt in-cluster transport](#in-cluster-transport-service-mesh-required).
 
 ## How it works
 
 Camunda components span three trust ecosystems that each require a different CA input format:
 
-| Runtime             | Components                                                                                       | Trust input                                           |
-| ------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| OS / OpenSSL native | libcurl, Go `crypto/x509`, OpenSearch native client (post-8.6.7), PostgreSQL JDBC `sslrootcert=` | PEM via `SSL_CERT_FILE`                               |
-| JVM                 | Operate, Tasklist, Optimize, Web Modeler restapi, Identity, Connectors, Zeebe broker             | PKCS12/JKS keystore via `-Djavax.net.ssl.trustStore=` |
-| Node.js             | Console, Web Modeler websockets                                                                  | PEM via `NODE_EXTRA_CA_CERTS`                         |
+| Runtime             | Components                                                                                              | Trust input                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| OS / OpenSSL native | libcurl, Go `crypto/x509`, OpenSearch native client (post-8.6.7), PostgreSQL JDBC `sslrootcert=`        | PEM via `SSL_CERT_FILE`                               |
+| JVM                 | Operate, Tasklist, Optimize, Camunda Hub restapi (includes Console), Identity, Connectors, Zeebe broker | PKCS12/JKS keystore via `-Djavax.net.ssl.trustStore=` |
+| Node.js             | Camunda Hub websockets                                                                                  | PEM via `NODE_EXTRA_CA_CERTS`                         |
 
 The `values-tls.yaml` overlay bridges all three from a single PEM bundle:
 
@@ -50,7 +50,7 @@ Python-based connector containers are an exception: `requests` reads `REQUESTS_C
 
 ### Prerequisites
 
-- Helm 3.10+
+- Helm CLI 3.10+ or 4.x
 - A PEM-encoded CA bundle file (`your-ca-bundle.pem`) containing the root and any intermediate certs that signed your datastore / IdP certs
 
 ### 1. Create the CA bundle Secret
@@ -279,12 +279,10 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 ## Legacy: per-component JKS truststore (deprecated)
 
-Deprecated as of chart 15.x. Affected fields:
+The `global.elasticsearch.*` and `global.opensearch.*` trees were removed in chart 15.x, including their `tls.secret.*` and `tls.jks.secret.*` password-injection blocks. Setting any key under them fails the render. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#migrate-globalelasticsearch-and-globalopensearch) for the migration mapping.
 
-- `global.elasticsearch.tls.secret.existingSecret` / `existingSecretKey`
-- `global.opensearch.tls.secret.existingSecret` / `existingSecretKey`
-- `global.elasticsearch.tls.jks.secret.*`
-- `global.opensearch.tls.jks.secret.*`
+The following per-component fields still work in chart 15.x, but are deprecated:
+
 - `orchestration.data.secondaryStorage.elasticsearch.tls.secret.*`
 - `orchestration.data.secondaryStorage.opensearch.tls.secret.*`
 - `optimize.database.elasticsearch.tls.secret.*`
@@ -309,15 +307,11 @@ If a legacy JKS field and `global.tls.caBundle` are both set, the legacy field t
 
 The init container builds a PKCS12 truststore; the chart omits `-Djavax.net.ssl.trustStoreType` to match the JVM default. If you supply a legacy JKS via `tls.secret.existingSecret`, add `-Djavax.net.ssl.trustStoreType=jks` to `javaOpts` explicitly.
 
-### Bitnami PostgreSQL `tls.certCAFilename` enables mTLS
+### Camunda Hub websockets are Node.js {#console-and-web-modeler-websockets-are-nodejs}
 
-Do not set `tls.certCAFilename` on the bundled Bitnami PostgreSQL subchart. It switches PostgreSQL into `clientcert=verify-full` mode (`pg_hba.conf`) and breaks plain clients. Use `tls.certFilename` and `tls.certKeyFilename` only.
+The chart sets both `SSL_CERT_FILE` and `NODE_EXTRA_CA_CERTS` on Node.js components automatically. Do not add `NODE_EXTRA_CA_CERTS` via `camundaHub.websockets.env` (or the deprecated `webModeler.websockets.env`) — Kubernetes last-wins env semantics make the value undefined.
 
-### Console and Web Modeler websockets are Node.js
-
-The chart sets both `SSL_CERT_FILE` and `NODE_EXTRA_CA_CERTS` on Node.js components automatically. Do not add `NODE_EXTRA_CA_CERTS` via `console.env` or `webModeler.websockets.env` — Kubernetes last-wins env semantics make the value undefined.
-
-## In-cluster transport (service mesh required)
+## Encrypt in-cluster transport {#in-cluster-transport-service-mesh-required}
 
 `global.tls.caBundle` covers component-to-datastore and component-to-IdP connections only.
 The following in-cluster connections are plaintext by default:
@@ -328,7 +322,7 @@ The following in-cluster connections are plaintext by default:
 | Web Modeler / Console / Optimize → Identity     | REST     |
 | Spring Boot management / metrics (probes)       | HTTP     |
 
-Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the
+Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). For the Orchestration REST and gRPC servers, you can instead enable pod-level TLS with the opt-in Helm values in [Orchestration TLS modes](./orchestration-tls-modes.md). See the
 [TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) for the full connection inventory.
 
 ## Related

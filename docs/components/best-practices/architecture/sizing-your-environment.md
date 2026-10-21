@@ -36,6 +36,8 @@ In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or a
 
 You can configure retention times for data stored in secondary storage.
 
+For Self-Managed, see [Disk space](sizing-self-managed.md#disk-space) for the formula and mechanics behind Zeebe's primary storage disk usage.
+
 ### Impact of Optimize
 
 Optimize is an optional component that provides process analytics and reporting. When enabled, it has significant implications for sizing.
@@ -91,7 +93,7 @@ Variables account for most of Optimize's storage and CPU usage in the secondary 
 Almost all of this cost comes from Optimize's indices. The following three levers are listed from most to least aggressive:
 
 - **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) at the exporter to drop all variable records. This is the only lever that also recovers throughput because the exporter write path is the bottleneck at maximum load.
-- **Export only the variables you need (name and prefix filters).** Keep a subset with name or prefix filters, for example only `customer`-prefixed variables. Use this when some variables drive Optimize reports, but most are noise. On SaaS, configure variable name filters in [cluster settings](/components/hub/organization/manage-clusters/settings.md#data-filters). On Self-Managed, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+- **Export only the variables you need (name and prefix filters).** Keep a subset with name or prefix filters, for example only `customer`-prefixed variables. Use this when some variables drive Optimize reports, but most are noise. On SaaS, configure variable name filters in [cluster settings](/components/saas/clusters/settings.md#data-filters). On Self-Managed, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
 - **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** Available on all supported versions; achieves the storage savings but does not recover throughput, because the records are still written by the exporter.
 
 **Trade-off:** Filtered variables are unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. These levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
@@ -151,7 +153,7 @@ The default `minimum-age` of `30d` provides sufficient headroom. If you reduced 
 
 **Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned `ACTIVE` documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/components/optimize/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
 
-The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
+The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides a baseline configuration, including Optimize's resource impact, for each secondary storage backend to help you plan accordingly.
 
 ### Latency and cycle time
 
@@ -206,6 +208,7 @@ Consider these general rules for payload size:
 
 - The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly three MB.
 - Camunda does not recommend storing large amounts of data in your process context. Refer to our [best practices on handling data in processes](/components/best-practices/development/handling-data-in-processes.md) for more details.
+- An AI agent's [agent context](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-context-and-memory) is a process variable that grows with each loop iteration, so it counts toward this limit. Switch the agent's memory to [Camunda document storage](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#choose-a-memory-storage-backend) when a long conversation would outgrow it.
 - Each [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to one GB of payload in total. Larger payloads can lead to slower processing. For example,
   one million process instances with four KB each is about 3.9 GB, so you need at least four partitions. In practice, you’d typically use six partitions, since the number of partitions is usually a multiple of the replication factor (three by default).
 
@@ -216,6 +219,20 @@ In most scenarios, your load will be volatile rather than constant. For example,
 In this example, that single peak day defines your overall throughput requirements.
 
 In addition, sizing for peaks may mean you shouldn’t assume a full 24-hour day. Instead, you might size for just the eight business hours, or even the busiest two hours—depending on your workload.
+
+### Job worker capacity
+
+Even when your cluster has spare throughput capacity, an undersized job worker can still allow jobs to accumulate in the backlog. Worker capacity requires its own sizing exercise, separate from cluster sizing.
+
+The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [Job streaming pushes a job as soon as it becomes available for activation](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs), while polling is the only path that drains jobs already queued in the backlog.
+
+Therefore, healthy throughput does not indicate whether the backlog is draining; they are independent signals. The backlog can continue to grow after workers recover from an outage, even when throughput appears to have fully recovered. See [impact of worker downtime on a realistic load test](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details.
+
+:::note
+There is currently no built-in metric that directly reports the size of this backlog.
+:::
+
+Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
 ### Secondary storage
 
@@ -241,12 +258,11 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 
 - A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#supported-rdbms).
 - A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
-- Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
+- Write throughput is approximately **70% of Elasticsearch** on equivalent hardware. See [RDBMS benchmarking results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md) for the full methodology and caveats.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
-- **Scales primarily vertically** rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
+- **Scales primarily vertically** rather than horizontally like Elasticsearch, since its schema has no table partitioning and each broker opens a connection pool per physical tenant. Plan initial sizing with more headroom, as adding capacity is more disruptive.
 - Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
   <!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
-  <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
 
 ### Throughput
 

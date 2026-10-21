@@ -1,14 +1,14 @@
 ---
 id: process-documentation-with-readme-files
 title: Process documentation with README files
-description: "The README feature brings project documentation directly into the modeling workspace to help capture important context in a way that’s versioned, visible, and easy to maintain."
+description: "The README feature brings process application documentation directly into the modeling workspace to help capture important context in a way that’s versioned, visible, and easy to maintain."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-The README feature brings project documentation directly into the modeling workspaces of business users, developers, and project owners to help capture important context in a way that’s versioned, visible, and maintainable.
+The README feature brings process application documentation directly into the modeling workspaces of business users, developers, and project owners to help capture important context in a way that’s versioned, visible, and maintainable.
 
-![project with readme](img/project-with-readme.png)
+![process application with readme](img/project-with-readme.png)
 
 ## Why use READMEs
 
@@ -17,18 +17,18 @@ With README support in Web Modeler, you can:
 
 - Document your processes **right where you build them**.
 - Keep information **versioned and automatically synced** with Git.
-- Make your projects **easier to understand** for everyone involved — from team members to stakeholders.
+- Make your process applications **easier to understand** for everyone involved — from team members to stakeholders.
 
 ## What you can document
 
-- Project goals, scope, and stakeholders
+- Process application goals, scope, and stakeholders
 - Links to related assets
-- Go-live dates, status updates, and project health
+- Go-live dates, status updates, and process application health
 - Requirements, process owners, and change logs
 
 ## Where READMEs appear
 
-- In every project, process application, and folder (each can have its own README)
+- In every process application and folder (each can have its own README)
   ![process application with readme](img/process-application-with-readme.png)
   > Git-connected process applications sync README content just like any other file
 - In the [process landscape view](../process-landscape-visualization.md) as context for a node or the entire app
@@ -40,9 +40,9 @@ Each README is unique to its folder and can’t be moved through the UI. However
 
 ## Writing a README
 
-README files use standard [Markdown](https://www.markdownguide.org/), a lightweight markup language. A README should provide a snapshot of what your project, process application, or folder is about. Consider including:
+README files use standard [Markdown](https://www.markdownguide.org/), a lightweight markup language. A README should provide a snapshot of what your process application or folder is about. Consider including:
 
-- What this project, application, or folder is for
+- What this process application or folder is for
 - Who owns or maintains it
 - Key requirements and business rules
 - Links to related documentation or dashboards

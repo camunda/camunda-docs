@@ -7,6 +7,8 @@ description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import CostManagement from "../../../../_partials/_cost-management.md";
+
 This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
@@ -48,22 +50,18 @@ This approach allows you to extend and customize the codebase according to your 
 
 :::
 
-:::danger Cost management
-
-Following this guide will incur costs on your Azure account, including charges for Azure Kubernetes Service (AKS), the compute (virtual machine instances) for the underlying nodes, Azure Managed Disks for persistent volumes, and Azure DNS zones for domain resolution. For more information, refer to the [AKS pricing page](https://azure.microsoft.com/pricing/details/kubernetes-service/) and the [Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/), as costs depend on region and configuration choices.
-
-:::
+<CostManagement />
 
 ### Variants
 
 This guide supports two secondary storage variants for the Orchestration Cluster. Choose the one that fits your requirements:
 
-| Aspect                 | Elasticsearch                                                                                                                   | RDBMS (PostgreSQL)                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#deploy-elasticsearch) | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md) |
-| Optimize               | Supported                                                                                                                       | Not available (requires Elasticsearch)                                                     |
-| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                                        | AKS + PostgreSQL only (lighter footprint)                                                  |
-| Orchestration database | Not required                                                                                                                    | Additional `camunda_orchestration` database                                                |
+| Aspect                 | Elasticsearch                                                                                                                       | RDBMS (PostgreSQL)                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md) |
+| Optimize               | Supported                                                                                                                           | Not available (requires Elasticsearch)                                                     |
+| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                                            | AKS + PostgreSQL only (lighter footprint)                                                  |
+| Orchestration database | Not required                                                                                                                        | Additional `camunda_orchestration` database                                                |
 
 For more details on secondary storage, see [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md).
 
@@ -238,7 +236,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+Replace `<appId>` and `<tenant-id>` with the actual values of your Service Principal.
 
 Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
 
@@ -271,7 +269,7 @@ az login --service-principal \
 
 You will be prompted to enter the password interactively.
 
-Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+Replace `<appId>` and `<tenant-id>` with the actual values of your Service Principal.
 
 Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
 
@@ -315,6 +313,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
 
+```bash
+az account show --query "id" -o tsv
+```
+
 ##### terraform_sp_app_id
 
 This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
@@ -340,6 +342,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 ##### subscription_id
 
 This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
+
+```bash
+az account show --query "id" -o tsv
+```
 
 ##### terraform_sp_app_id
 

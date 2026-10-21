@@ -44,9 +44,8 @@ queryString
 values={[
 { label: "application.yaml", value: "yaml" },
 { label: "Environment variables", value: "env" }
-]}
-
-> <TabItem value="yaml">
+]}>
+<TabItem value="yaml">
 
 ```yaml
 camunda.security.authentication.providers.oidc.<provider-id>.client-id: <YOUR_CLIENTID>

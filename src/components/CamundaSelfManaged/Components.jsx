@@ -21,9 +21,9 @@ const ComponentCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
-const Components = () => {
+const Components = ({ hideHeading = false }) => {
   const docsVersion = useActiveVersion();
-  const isNextVersion = docsVersion?.name === "current";
+  const isBeforeCamundaHub = ["8.8", "8.9"].includes(docsVersion?.label);
 
   const componentItems = [
     {
@@ -47,17 +47,8 @@ const Components = () => {
         "Business intelligence and analytics for enterprise customers.",
       link: "/self-managed/components/optimize/overview",
     },
-    ...(isNextVersion
+    ...(isBeforeCamundaHub
       ? [
-          {
-            title: "Camunda Hub",
-            icon: ConsoleIcon,
-            description:
-              "Manage deployments and model your BPMN diagrams in one place.",
-            link: "/self-managed/components/hub",
-          },
-        ]
-      : [
           {
             title: "Web Modeler",
             icon: ModelerIcon,
@@ -72,6 +63,15 @@ const Components = () => {
               "Manage and monitor your Camunda 8 Self-Managed deployments.",
             link: "/self-managed/components/console/overview",
           },
+        ]
+      : [
+          {
+            title: "Camunda Hub",
+            icon: ConsoleIcon,
+            description:
+              "Manage deployments and model your BPMN diagrams in one place.",
+            link: "/self-managed/components/hub",
+          },
         ]),
     {
       title: "Management Identity",
@@ -84,7 +84,7 @@ const Components = () => {
 
   return (
     <div className="sm-components">
-      <h2>Components</h2>
+      {!hideHeading && <h2>Components</h2>}
       <p>
         Camunda 8 components reference, including detailed configuration
         guidance and application upgrade instructions.

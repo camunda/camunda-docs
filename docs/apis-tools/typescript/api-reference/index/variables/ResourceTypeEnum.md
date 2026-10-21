@@ -27,6 +27,12 @@ readonly AUDIT_LOG: "AUDIT_LOG" = 'AUDIT_LOG';
 readonly AUTHORIZATION: "AUTHORIZATION" = 'AUTHORIZATION';
 ```
 
+### BACKUP
+
+```ts
+readonly BACKUP: "BACKUP" = 'BACKUP';
+```
+
 ### BATCH
 
 ```ts
@@ -61,6 +67,12 @@ readonly DECISION_REQUIREMENTS_DEFINITION: "DECISION_REQUIREMENTS_DEFINITION" = 
 
 ```ts
 readonly DOCUMENT: "DOCUMENT" = 'DOCUMENT';
+```
+
+### EXPORTER
+
+```ts
+readonly EXPORTER: "EXPORTER" = 'EXPORTER';
 ```
 
 ### EXPRESSION
@@ -109,6 +121,12 @@ readonly RESOURCE: "RESOURCE" = 'RESOURCE';
 
 ```ts
 readonly ROLE: "ROLE" = 'ROLE';
+```
+
+### SECRET
+
+```ts
+readonly SECRET: "SECRET" = 'SECRET';
 ```
 
 ### SYSTEM

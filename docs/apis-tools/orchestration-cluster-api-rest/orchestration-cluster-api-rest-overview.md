@@ -40,6 +40,7 @@ Key features include:
 
 - This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
 - To learn more about the Orchestration Cluster, see [Orchestration Cluster](/components/orchestration-cluster.md).
+- In Self-Managed clusters running [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), most endpoints below are addressed per tenant by prefixing the path with `/physical-tenants/{physicalTenantId}`, while cluster-wide operations use the `/cluster/v2/...` prefix instead. See [API routing for Physical Tenants](/self-managed/concepts/physical-tenants/api-routing.md).
 
 :::
 
@@ -102,7 +103,7 @@ curl https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/to
 ```
 
 Replace the placeholders with the values for your environment.
-See [Base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self-managed setups.
+See [base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self-managed setups.
 
 #### Using Postman
 
@@ -114,12 +115,12 @@ This request returns information about your cluster topology, confirming that yo
 
 If you're just getting started with process automation, try this simple workflow:
 
-1. **Model a process** – Create a simple BPMN process with a user task using [Camunda Modeler](https://camunda.com/download/modeler/)
+1. **Model a process** – Create a simple BPMN process with a user task using [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md)
 2. **Deploy the process** – Use [`POST /deployments`](./specifications/create-deployment.api.mdx) to deploy your BPMN file
 3. **Start a process instance** – Use [`POST /process-instances`](./specifications/create-process-instance.api.mdx) to create a new process instance
 4. **Complete a user task** – Use [`POST /user-tasks/{userTaskKey}/completion`](./specifications/complete-user-task.api.mdx) to complete the task
 
-For a complete walkthrough with code examples, see our [Getting Started Tutorial](/guides/getting-started-example.md).
+For a complete walkthrough with code examples, see our [getting started tutorial](/guides/getting-started-example.md).
 
 ### Explore the API
 
@@ -133,15 +134,18 @@ This section covers the technical details and conventions you need to understand
 
 #### SaaS
 
-In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**.
+In Camunda Hub:
 
-- For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/v2/`
+1. In the left navigation, under **Clusters**, select a cluster.
+1. Under **Cluster Details**, find your **Region Id** and **Cluster Id**.
 
-- For secure connectivity (AWS PrivateLink), use the private base URL shown in Console. For the Orchestration Cluster REST API, the pattern is:
+For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/v2/`
 
-  `${BASE_URL} = https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/`
+For secure connectivity (AWS PrivateLink), use the private base URL shown in Hub. For the Orchestration Cluster REST API, the pattern is:
 
-  For example: `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
+`${BASE_URL} = https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/`
+
+For example: `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
 
 #### Self-Managed
 

@@ -1,10 +1,10 @@
 ---
 id: monitoring
 title: "Monitoring"
-description: "Web Modeler provides health check and metrics endpoints for monitoring the restapi and websocket components in Self-Managed deployments."
+description: "Camunda Hub provides health check and metrics endpoints for monitoring the restapi and websocket components in Self-Managed deployments."
 ---
 
-Web Modeler Self-Managed consists of two components (`restapi` and `websocket`), each exposing their own endpoints for health monitoring and metrics collection.
+Camunda Hub Self-Managed consists of two components (`restapi` and `websocket`), each exposing their own endpoints for health monitoring and metrics collection.
 
 For configuration details, including the default Actuator settings and the management port, see the [Monitoring and health probes](./configuration/properties.md#monitoring) section on the configuration page.
 

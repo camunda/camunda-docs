@@ -2,12 +2,9 @@
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
-description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
+description: "Build a Camunda 8 process with a user task, then route the process based on user decision."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
@@ -22,13 +19,17 @@ import RunProcessImg from './img/run-process.png';
 import RunProcessSM from './img/run-process-sm.png';
 import OperateHumanTasks from './img/operate-human-tasks.png';
 import FormEditorImg from './img/form-editor.png';
-import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
@@ -72,9 +73,10 @@ In this step, you will design a process that demonstrates how to route the proce
 <TabItem value="saas">
 
 1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
-2. Name your project and select **Create new > BPMN diagram**.
-3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
+2. In the project, create a process application. Storing files in a process application is required for SaaS.
+3. In the process application, click **Create new > BPMN diagram**.
+4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
+5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
 
 </TabItem>
 <TabItem value="sm">
@@ -181,8 +183,7 @@ Once the form is designed, you must link it to your process.
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in **[Step 1](#step-1-create-a-new-process)**.
-   <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
+1. Navigate to the process you created in [Step 1](#step-1-create-a-new-process).
 2. Select the user task. Click the blue **form link icon** to open the form menu.
 3. Select the form you just created, and click **link** to confirm.
    <img src={FormLinkingImg} style={{width: 400}} alt="Selecting a form from the project" />

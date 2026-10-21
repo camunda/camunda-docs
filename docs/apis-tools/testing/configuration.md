@@ -891,6 +891,95 @@ private static final CamundaProcessTestExtension EXTENSION =
 
 </Tabs>
 
+## Query page limit
+
+CPT paginates the individual search requests used by assertions, utilities, and the coverage report, with a default page limit of 100 results. If your process tests create a lot of data, such as many process instances or a process with a multi-instance activity, assertions can fail or the coverage report can be incomplete. In that case, increase the query page limit.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    query-page-limit: 1000
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+queryPageLimit=1000
+```
+
+</TabItem>
+
+</Tabs>
+
+### Property reference
+
+| Property           | Type      | Default | Description                                              |
+| ------------------ | --------- | ------- | -------------------------------------------------------- |
+| `query-page-limit` | `integer` | `100`   | The maximum number of results to return per paged query. |
+
+## Test cleanup settings {#test-cleanup-settings}
+
+After each test, CPT resets the Camunda runtime clock and deletes all runtime data by default. You can disable either behavior to inspect the process state after a test run.
+
+:::info
+Disabling clock reset or data deletion means state from one test can affect subsequent tests.
+:::
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    # Keep the Camunda runtime clock as-is after each test
+    clock-reset-enabled: false
+    # Skip runtime data deletion after each test
+    data-deletion-mode: none
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Keep the Camunda runtime clock as-is after each test
+clockResetEnabled=false
+# Skip runtime data deletion after each test
+dataDeletionMode=NONE
+```
+
+</TabItem>
+
+</Tabs>
+
+### Property reference
+
+| Property              | Type              | Default         | Description                                                                                                                                          |
+| --------------------- | ----------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clock-reset-enabled` | `boolean`         | `true`          | When `true`, resets the Camunda runtime clock after each test. Set to `false` to keep the clock at its current value for post-run inspection.        |
+| `data-deletion-mode`  | `string` (`enum`) | `CLUSTER_PURGE` | Controls how CPT deletes runtime data after each test. `CLUSTER_PURGE` (default) purges the full cluster state. `NONE` skips data deletion entirely. |
+
 ## Process Test Coverage
 
 CPT generates an HTML and JSON coverage report of your BPMN processes and DMN decision tables. You can configure the
@@ -1085,6 +1174,12 @@ camunda:
 
 Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
+
+:::note
+The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) in the chosen region.
+
+If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate `bedrock:InvokeModel` grant; access to one does not imply access to the other.
+:::
 
 | Property                                  | Required                       | Type       | Description                                                                                    |
 | ----------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
@@ -1571,6 +1666,12 @@ camunda:
 
 It supports Bedrock long-term API keys or AWS IAM credentials. It falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
+
+:::note
+The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured embedding model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) in the chosen region.
+
+If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate bedrock:InvokeModel grant; access to one does not imply access to the other.
+:::
 
 | Property                                            | Required                       | Type       | Description                                                                                    |
 | --------------------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |

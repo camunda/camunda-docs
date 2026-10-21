@@ -5,7 +5,7 @@ description: Reference for the `agent-tool-output-key` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
-import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
+import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
 
 Tools within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) return their results to the agent through the `toolCallResult` variable. The rule reports one warning per tool in either of the following situations:
 
@@ -54,7 +54,7 @@ An output mapping targets `toolCallResult` or one of its fields, such as `toolCa
 
 <DeclaringAgenticSubprocess />
 
-## References
+## See also
 
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
 - [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/agent-tool-output-key.js)

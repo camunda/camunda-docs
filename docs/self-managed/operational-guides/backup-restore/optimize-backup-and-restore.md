@@ -1,6 +1,6 @@
 ---
 id: optimize-backup-and-restore
-sidebar_label: "Optimize — independent backup"
+sidebar_label: "Optimize"
 title: "Back up and restore Optimize independently"
 description: "Learn how to back up and restore Optimize independently of the Orchestration Cluster, including when the Orchestration Cluster uses RDBMS as secondary storage."
 keywords:
@@ -357,29 +357,26 @@ export BACKUP_ID=1748937221
 
 ### Step 3: Stop Optimize
 
-If you are using an external Elasticsearch/OpenSearch and Kubernetes, you could temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
+Stop Optimize now, before you continue with Step 4. Only Steps 1 and 2 need Optimize running.
 
-In a manual setup, you can simply stop Optimize component.
+If you are using an external Elasticsearch/OpenSearch and Kubernetes, temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
 
-If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling Optimize in the `values.yml`.
+With Helm, disable Optimize in `values.yml`:
 
 ```yaml
-elasticsearch:
-  enabled: true
-
 optimize:
   enabled: false
 ```
 
 ### Step 4: Delete all existing Optimize indices
 
-Delete the indices created during startup so they do not block the snapshot restore:
+Delete the indices created during startup so they do not block the snapshot restore. The commands match only indices that start with the default index prefix `optimize-`. If you configured a custom index prefix (see [Elasticsearch index settings](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-index-settings) or [OpenSearch index settings](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-index-settings)), use it instead.
 
 <Tabs groupId="search-engine">
   <TabItem value="elasticsearch" label="Elasticsearch" default>
 
 ```bash
-for index in $(curl -s "$ELASTIC_ENDPOINT/_cat/indices?h=index" | grep optimize); do
+for index in $(curl -s "$ELASTIC_ENDPOINT/_cat/indices?h=index" | grep '^optimize-'); do
   echo "Deleting index: $index"
   curl -X DELETE "$ELASTIC_ENDPOINT/$index"
 done
@@ -389,7 +386,7 @@ done
   <TabItem value="opensearch" label="OpenSearch">
 
 ```bash
-for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" | grep optimize); do
+for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" | grep '^optimize-'); do
   echo "Deleting index: $index"
   curl -X DELETE "$OPENSEARCH_ENDPOINT/$index"
 done

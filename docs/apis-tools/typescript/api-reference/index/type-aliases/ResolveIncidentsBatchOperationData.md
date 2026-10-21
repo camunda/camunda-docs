@@ -13,10 +13,10 @@ type ResolveIncidentsBatchOperationData = object;
 
 ## Properties
 
-### body?
+### body
 
 ```ts
-optional body?: ProcessInstanceIncidentResolutionBatchOperationRequest;
+body: ProcessInstanceIncidentResolutionBatchOperationRequest;
 ```
 
 ---

@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Cluster resource paths and schemas
 paths:
@@ -11,7 +12,8 @@ paths:
       operationId: getClusterRegistrations
       summary: Get all cluster registrations
       description: Returns all cluster registrations.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       responses:
@@ -35,7 +37,8 @@ paths:
         provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires
         dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its
         registration will be updated.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       requestBody:
@@ -64,7 +67,8 @@ paths:
         Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration
         Cluster API of the target cluster, so it must additionally include the read:* permission for the
         orchestration-api audience.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       parameters:
@@ -112,7 +116,8 @@ paths:
         Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual
         cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic
         cluster management to be enabled.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       parameters:
@@ -322,6 +327,8 @@ components:
       type: object
       required:
         - id
+        - status
+        - unavailableReason
         - processInstances
         - decisionInstances
         - taskUsers
@@ -330,23 +337,55 @@ components:
         id:
           description: The cluster ID.
           type: string
+        status:
+          $ref: "#/components/schemas/UsageMetricsStatus"
+        unavailableReason:
+          description: Why the usage metrics are unavailable. Only set if `status` is `UNAVAILABLE`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/UsageMetricsUnavailableReason"
         processInstances:
-          description: Process instance metrics.
-          allOf:
-            - $ref: "#/components/schemas/MetricTotal"
-        decisionInstances:
-          description: Decision instance metrics.
-          allOf:
-            - $ref: "#/components/schemas/MetricTotal"
-        taskUsers:
-          description: Task user metrics.
-          allOf:
-            - $ref: "#/components/schemas/TaskUsersMetric"
-        activeTenants:
-          description: Active tenant metrics.
+          description: Process instance metrics. Not set if the usage metrics are unavailable.
           nullable: true
           allOf:
             - $ref: "#/components/schemas/MetricTotal"
+        decisionInstances:
+          description: Decision instance metrics. Not set if the usage metrics are unavailable.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+        taskUsers:
+          description: Task user metrics. Not set if the usage metrics are unavailable.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/TaskUsersMetric"
+        activeTenants:
+          description: Active tenant metrics. Not set if the cluster does not report them.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+
+    UsageMetricsStatus:
+      description: >-
+        Whether the cluster could provide usage metrics. A cluster without data is `UNAVAILABLE`, never
+        reported as zero.
+      type: string
+      enum:
+        - AVAILABLE
+        - UNAVAILABLE
+
+    UsageMetricsUnavailableReason:
+      description: >-
+        Why a cluster could not provide usage metrics.
+
+        * `UNSUPPORTED`: The cluster does not offer usage metrics, as is the case for clusters below 8.8.
+        * `NOT_CONFIGURED`: The cluster has no URL to request usage metrics from.
+        * `UNREACHABLE`: The cluster did not answer, or answered with an error.
+      type: string
+      enum:
+        - UNSUPPORTED
+        - NOT_CONFIGURED
+        - UNREACHABLE
 
     MetricTotal:
       type: object

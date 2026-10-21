@@ -1,0 +1,360 @@
+---
+id: suspend-process-instance
+title: "Suspend process instance"
+sidebar_label: "Suspend process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Suspend process instance"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/suspension"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Suspends a running process instance, pausing further processing until it is resumed.
+Only process instances in the ACTIVE state can be suspended.
+A child process instance can be suspended independently of its parent or root process
+instance; suspension does not cascade to or from related instances.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "SUSPEND_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance to suspend.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          nullable: true,
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          title: "SuspendProcessInstanceRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is suspended." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The process instance is not in the ACTIVE state and cannot be suspended.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

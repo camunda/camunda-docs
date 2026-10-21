@@ -19,6 +19,8 @@ Before you try to migrate process instances, learn about the [limitations](/comp
 
 The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the element mapping (bottom panel).
 
+![The migration view showing the source and target process diagrams at the top, and the source-to-target element mapping table below.](./img/process-instance-migration.png)
+
 ## Select a target process version
 
 Above the target process diagram, enter a target process into the **Target** box, and select a version from the dropdown. This will be the process version where all selected process instances are migrated to.

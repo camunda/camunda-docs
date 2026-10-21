@@ -1,7 +1,6 @@
-import IconIdpImg from "../assets/icon-idp.png";
 import IconRpaImg from "../assets/icon-rpa.png";
-import IconAgenticImg from "../assets/icon-agentic.png";
 import IconDocsImg from "../assets/icon-docs.png";
+import IconOperateImg from "../assets/icon-operate.png";
 import IconIntegrationImg from "../assets/icon-integration.png";
 import IconEarlyAccessImg from "../assets/icon-earlyaccess.png";
 import IconModelerImg from "../assets/icon-modeler.png";
@@ -41,12 +40,6 @@ export const featuresCards = [
 
 export const usingCamundaCards = [
   {
-    link: "./modeler/about-modeler/",
-    title: "Modeler",
-    image: IconModelerImg,
-    description: "Model your BPMN diagrams.",
-  },
-  {
     link: "./concepts/bpmn-dmn-feel/",
     title: "BPMN, DMN, and FEEL",
     image: IconBpmnImg,
@@ -58,6 +51,19 @@ export const usingCamundaCards = [
     title: "Orchestration Cluster",
     image: IconOrchClusterImg,
     description: "Get started with Zeebe, Operate, Tasklist, and Identity.",
+  },
+  {
+    link: "./hub/",
+    title: "Camunda Hub",
+    image: IconConsoleImg,
+    description:
+      "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.",
+  },
+  {
+    link: "./modeler/desktop-modeler/",
+    title: "Desktop Modeler",
+    image: IconModelerImg,
+    description: "Model your BPMN diagrams locally.",
   },
   {
     link: "./connectors/introduction-to-connectors/",
@@ -73,29 +79,9 @@ export const usingCamundaCards = [
     description:
       "Business intelligence and analytics for enterprise customers.",
   },
-  {
-    link: "./hub/",
-    title: "Camunda Hub",
-    image: IconConsoleImg,
-    description:
-      "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.",
-  },
 ];
 
 export const featuresPageCards = [
-  {
-    link: "../agentic-orchestration/agentic-orchestration-overview",
-    title: "Agentic orchestration",
-    image: IconAgenticImg,
-    description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
-  },
-  {
-    link: "../hub/workspace/modeler/idp/",
-    title: "Intelligent document processing (IDP)",
-    image: IconIdpImg,
-    description: "Integrate automated document processing into your processes.",
-  },
   {
     link: "../rpa/overview/",
     title: "Robotic process automation (RPA)",
@@ -107,5 +93,11 @@ export const featuresPageCards = [
     title: "Document handling",
     image: IconDocsImg,
     description: "Store, track, and manage documents.",
+  },
+  {
+    link: "../wait-states/overview/",
+    title: "Wait states",
+    image: IconOperateImg,
+    description: "See what an active process instance is waiting for.",
   },
 ];

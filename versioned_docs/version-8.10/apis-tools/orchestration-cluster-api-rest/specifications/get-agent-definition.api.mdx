@@ -1,0 +1,469 @@
+---
+id: get-agent-definition
+title: "Get agent definition"
+sidebar_label: "Get agent definition"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get agent definition"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/agent-definitions/{agentDefinitionKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns an agent definition by key.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "READ_PROCESS_DEFINITION",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "agentDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the agent definition, which acts as a unique identifier for this agent definition.",
+      schema: {
+        type: "string",
+        format: "string<AgentDefinitionKey>",
+        example: "2251799813691958",
+        description: "System-generated key for an agent definition.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The agent definition is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "An agent definition, created at deploy time for the process element it belongs to.",
+            type: "object",
+            required: [
+              "agentDefinitionKey",
+              "agentType",
+              "name",
+              "elementId",
+              "processDefinitionId",
+              "processDefinitionKey",
+              "processDefinitionVersion",
+              "processDefinitionVersionTag",
+              "tenantId",
+            ],
+            properties: {
+              agentDefinitionKey: {
+                description:
+                  "The unique key for this agent definition. Unique across process definition versions.\n",
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for an agent definition.",
+                    format: "AgentDefinitionKey",
+                    example: "2251799813691958",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "AgentDefinitionKey",
+                  },
+                ],
+              },
+              agentType: {
+                description: "The kind of agent an agent definition describes.",
+                type: "string",
+                enum: [
+                  "AI_AGENT_SUB_PROCESS",
+                  "AI_AGENT_TASK",
+                  "EXTERNAL_AGENT",
+                ],
+                title: "AgentDefinitionTypeEnum",
+              },
+              name: {
+                description:
+                  "The human-readable name of the process element that owns the agent definition. Falls\nback to elementId when the element has no BPMN name configured.\n",
+                type: "string",
+              },
+              elementId: {
+                description:
+                  "The BPMN element ID of the process element that owns the agent definition.",
+                allOf: [
+                  {
+                    description: "The model-defined id of an element.",
+                    format: "ElementId",
+                    type: "string",
+                    example: "Activity_106kosb",
+                    title: "ElementId",
+                  },
+                ],
+              },
+              processDefinitionId: {
+                description:
+                  "The BPMN process ID of the process definition that owns the agent definition.",
+                allOf: [
+                  {
+                    description:
+                      "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                    format: "ProcessDefinitionId",
+                    type: "string",
+                    example: "new-account-onboarding-workflow",
+                    title: "ProcessDefinitionId",
+                  },
+                ],
+              },
+              processDefinitionKey: {
+                description:
+                  "The key of the process definition that owns the agent definition.",
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for a deployed process definition.",
+                    format: "ProcessDefinitionKey",
+                    example: "2251799813686749",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessDefinitionKey",
+                  },
+                ],
+              },
+              processDefinitionVersion: {
+                type: "integer",
+                format: "int32",
+                description:
+                  "The version of the process definition that owns the agent definition.",
+              },
+              processDefinitionVersionTag: {
+                type: "string",
+                nullable: true,
+                description:
+                  "The version tag of the process definition that owns the agent definition.",
+              },
+              tenantId: {
+                description: "The tenant ID of this agent definition.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+            },
+            title: "AgentDefinitionResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The agent definition with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

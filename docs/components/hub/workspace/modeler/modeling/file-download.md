@@ -1,33 +1,26 @@
 ---
 id: file-download
-title: File download
-description: Learn how to download files from Web Modeler and export diagrams in different image formats.
+title: Download files
+description: Learn how to download files from Camunda Hub and export diagrams in different image formats.
 ---
 
-import SingleFileDownloadImg from './img/download/single-file-download.png'
-import MultiFileDownloadImg from './img/download/multi-file-download.png'
-import DownloadBpmnImg from './img/download/download-bpmn.png'
-import DownloadDmnImg from './img/download/download-dmn.png'
-import DownloadFormImg from './img/download/download-form.png'
-import DownloadConnectorTemplateImg from './img/download/download-connector-template.png'
-
-<span class="badge badge--cloud">Camunda 8 only</span>
-
-You can download all the files stored in Web Modeler to your local computer for offline editing or integration into version control.
+You can download all the files stored in Camunda Hub to your local computer for offline editing or integration into version control.
 You may also export BPMN diagrams in different image formats.
 
 ### Download from the project or folder page
 
-To download a single file or folder, use the **Download** option in the list item's action menu:
+To download a single file or folder:
 
-<p><img src={SingleFileDownloadImg} style={{width: 720}} alt="Download a single file or folder" /></p>
+1. In the project view, next to the file or folder, open the vertical ellipsis menu.
+2. Click **Download**.
 
 A file will be downloaded in form of its XML or JSON definition (depending on the file type).
 A folder will be downloaded as a zip archive containing all the folder's files and subfolders.
 
-To download multiple files or folders together as a zip archive, use the **Download** option in the multi-select action bar:
+To download multiple files or folders together as a zip archive:
 
-<p><img src={MultiFileDownloadImg} style={{width: 720}} alt="Download multiple files or folders" /></p>
+1. In the project view, select multiple files or folders.
+2. At the top of the file list, from the multi-select actions, click **Download**.
 
 :::note Download limit
 You can download up to 100 files and 20 folders at the same time.
@@ -35,24 +28,14 @@ You can download up to 100 files and 20 folders at the same time.
 
 ### Download from the file page
 
-#### BPMN and DMN diagrams
+1. Open a project file.
+2. At the top right of the modeling interface, open the vertical ellipses menu.
+3. From this menu, you can perform the following actions:
 
-You can download the diagram's BPMN 2.0/DMN 1.3-compliant XML definition from the action menu.
-For BPMN, you also find the options to export the diagram as a PNG or SVG image there:
+| File type | Actions                                                                            |
+| :-------- | :--------------------------------------------------------------------------------- |
+| DMN       | Download the DMN 1.3-compliant XML definition.                                     |
+| BPMN      | Download the BPMN 2.0 XML definition, or export the diagram as a PNG or SVG image. |
+| Form      | Download or copy the form's JSON definition.                                       |
 
-<p>
-<img src={DownloadBpmnImg} style={{width: 300}} alt="Download a BPMN diagram's XML definition or export it as an image" />
-<img src={DownloadDmnImg} style={{width: 280, marginLeft: 20, verticalAlign: "top"}} alt="Download a DMN diagram's XML definition" />
-</p>
-
-#### Forms
-
-You can download the form's JSON definition (or copy it to the clipboard) from the action menu:
-
-<img src={DownloadFormImg} style={{width: 280}} alt="Download or copy a form's JSON definition" />
-
-#### Other file types
-
-You can download the file's contents by clicking the download button in the toolbar:
-
-<img src={DownloadConnectorTemplateImg} style={{width: 220}} alt="Download a file's contents" />
+For other file types, a download button replaces the menu.

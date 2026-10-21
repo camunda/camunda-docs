@@ -19,11 +19,11 @@ Before you begin, make sure you have the **Admin** user role.
 
 ## Create new client credentials
 
-Create an API client with Web Modeler API permissions.
+Create an API client with Hub API permissions.
 
-1. In Camunda Hub, under **Organization overview**, click **Admin APIs**.
-2. From the **Administration API** management page, click **Create new credentials**.
-3. Name the client, and grant it access to the **Web Modeler API** with the necessary permissions.
+1. In Camunda Hub, in the left navigation, click **Organization > Manage organization**.
+2. In the **Administration API** tab, click **Create new credentials**.
+3. Name the client, and grant it access to the **Hub API** with the necessary permissions.
 4. Click **Create**, and capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
@@ -72,7 +72,7 @@ For example, send a request to the Camunda Hub API's `/info` endpoint:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
-     https://hub.cloud.camunda.io/api/v2/info
+     https://hub.camunda.io/api/v2/info
 ```
 
 ## Organization-level access

@@ -1,0 +1,408 @@
+---
+id: get-decision-requirements
+title: "Get decision requirements"
+sidebar_label: "Get decision requirements"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get decision requirements"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/decision-requirements/{decisionRequirementsKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns Decision Requirements as JSON.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "DECISION_REQUIREMENTS_DEFINITION",
+      permissionType: "READ",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "decisionRequirementsKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.",
+      schema: {
+        type: "string",
+        format: "string<DecisionRequirementsKey>",
+        example: "2251799813683346",
+        description:
+          "System-generated key for a deployed decision requirements definition.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision requirements is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            required: [
+              "decisionRequirementsId",
+              "decisionRequirementsKey",
+              "decisionRequirementsName",
+              "resourceName",
+              "tenantId",
+              "version",
+            ],
+            type: "object",
+            properties: {
+              decisionRequirementsId: {
+                type: "string",
+                description: "The DMN ID of the decision requirements.",
+              },
+              decisionRequirementsKey: {
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description:
+                      "System-generated key for a deployed decision requirements definition.",
+                    format: "DecisionRequirementsKey",
+                    example: "2251799813683346",
+                    type: "string",
+                    title: "DecisionRequirementsKey",
+                  },
+                ],
+                description:
+                  "The assigned key, which acts as a unique identifier for this decision requirements.",
+              },
+              decisionRequirementsName: {
+                type: "string",
+                description: "The DMN name of the decision requirements.",
+              },
+              resourceName: {
+                type: "string",
+                description:
+                  "The name of the resource from which this decision requirements was parsed.",
+              },
+              tenantId: {
+                description: "The tenant ID of the decision requirements.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+              version: {
+                type: "integer",
+                format: "int32",
+                description:
+                  "The assigned version of the decision requirements.",
+              },
+            },
+            title: "DecisionRequirementsResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision requirements with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

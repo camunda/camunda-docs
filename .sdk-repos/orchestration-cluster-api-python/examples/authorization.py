@@ -8,7 +8,10 @@ from camunda_orchestration_sdk import (
     AuthorizationIdBasedRequestResourceType,
     AuthorizationKey,
     AuthorizationSearchQuery,
+    AuthorizationSearchQueryFilter,
+    AuthorizationSearchQueryFilterResourceType,
     CamundaClient,
+    LimitBasedPagination,
     OwnerTypeEnum,
     Unset,
 )
@@ -59,6 +62,25 @@ def search_authorizations_example() -> None:
         for auth in result.items:
             print(f"Authorization: {auth.authorization_key}")
 # endregion SearchAuthorizations
+
+
+# region SearchOwnAuthorizations
+def search_own_authorizations_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_own_authorizations(
+        data=AuthorizationSearchQuery(
+            filter_=AuthorizationSearchQueryFilter(
+                resource_type=AuthorizationSearchQueryFilterResourceType.PROCESS_DEFINITION,
+            ),
+            page=LimitBasedPagination(limit=20),
+        )
+    )
+
+    if not isinstance(result.items, Unset):
+        for auth in result.items:
+            print(f"Resource: {auth.resource_id}, permissions: {auth.permission_types}")
+# endregion SearchOwnAuthorizations
 
 
 # region UpdateAuthorization

@@ -1,0 +1,403 @@
+---
+id: get-cluster-topology
+title: "Get the topology of the whole cluster"
+sidebar_label: "Get the topology of the whole cluster"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get the topology of the whole cluster"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/cluster/v2/topology"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Obtains the topology of the whole cluster, aggregated over all physical tenants. Cluster-level information is reported once; partition layout, replication and per-partition role, health and state are reported per physical tenant.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/topology` for the topology of a single physical tenant.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The topology of the whole cluster, aggregated over all physical tenants.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The topology of the whole cluster, aggregated over all physical tenants.",
+            type: "object",
+            required: [
+              "brokers",
+              "clusterId",
+              "clusterSize",
+              "gatewayVersion",
+              "physicalTenants",
+            ],
+            properties: {
+              brokers: {
+                description:
+                  "The brokers that are part of this cluster, across all physical tenants.",
+                type: "array",
+                items: {
+                  description:
+                    "Provides information on a broker node, independent of any physical tenant.",
+                  type: "object",
+                  required: ["brokerId", "host", "port", "version"],
+                  properties: {
+                    brokerId: {
+                      description:
+                        "The unique (within a cluster) broker identifier. When the cluster is not zoned, then it's a string that represents the nodeId (an integer). When the cluster is zoned, instead, it's of the form \"$zoneName_$nodeId\", providing uniqueness even across zones.\n",
+                      type: "string",
+                      example: "eu-west-1_0",
+                    },
+                    host: {
+                      description: "The hostname for reaching the broker.",
+                      type: "string",
+                      example: "zeebe-0.zeebe-broker-service",
+                    },
+                    port: {
+                      description: "The port for reaching the broker.",
+                      type: "integer",
+                      format: "int32",
+                      example: 26501,
+                    },
+                    version: {
+                      description: "The broker version.",
+                      type: "string",
+                      example: "8.10.0",
+                    },
+                  },
+                  title: "ClusterBrokerInfo",
+                },
+              },
+              clusterId: {
+                description: "The cluster Id.",
+                type: "string",
+                nullable: true,
+              },
+              clusterSize: {
+                description: "The number of brokers in the cluster.",
+                type: "integer",
+                format: "int32",
+                example: 3,
+              },
+              gatewayVersion: {
+                description:
+                  "The version of the Orchestration Cluster Gateway.",
+                type: "string",
+                nullable: true,
+                example: "8.10.0",
+              },
+              physicalTenants: {
+                description:
+                  "The topology of each physical tenant of this cluster.",
+                type: "array",
+                items: {
+                  description: "The topology of a single physical tenant.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "partitionsCount",
+                    "replicationFactor",
+                    "lastCompletedChangeId",
+                    "brokers",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    partitionsCount: {
+                      description:
+                        "The number of partitions spread across this physical tenant.",
+                      type: "integer",
+                      format: "int32",
+                      example: 3,
+                    },
+                    replicationFactor: {
+                      description:
+                        "The configured replication factor for this physical tenant.",
+                      type: "integer",
+                      format: "int32",
+                      example: 3,
+                    },
+                    lastCompletedChangeId: {
+                      description:
+                        "ID of the last completed change of this physical tenant.",
+                      type: "string",
+                      example: "-1",
+                    },
+                    brokers: {
+                      description:
+                        "The brokers holding partitions of this physical tenant.",
+                      type: "array",
+                      items: {
+                        description:
+                          "The partitions of one physical tenant that one broker manages or replicates.",
+                        type: "object",
+                        required: ["brokerId", "partitions"],
+                        properties: {
+                          brokerId: {
+                            description:
+                              "The unique (within a cluster) identifier of the broker, as reported in the cluster-level broker list.\n",
+                            type: "string",
+                            example: "eu-west-1_0",
+                          },
+                          partitions: {
+                            description:
+                              "The partitions of this physical tenant managed or replicated on this broker.",
+                            type: "array",
+                            items: {
+                              description:
+                                "Provides information on a partition within a broker node.",
+                              type: "object",
+                              required: [
+                                "partitionId",
+                                "role",
+                                "health",
+                                "state",
+                              ],
+                              properties: {
+                                partitionId: {
+                                  description:
+                                    "The unique ID of this partition.",
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 1,
+                                },
+                                role: {
+                                  description:
+                                    "Describes the Raft role of the broker for a given partition.",
+                                  type: "string",
+                                  example: "leader",
+                                  enum: ["leader", "follower", "inactive"],
+                                },
+                                health: {
+                                  description:
+                                    "Describes the current health of the partition.",
+                                  type: "string",
+                                  example: "healthy",
+                                  enum: ["healthy", "unhealthy", "dead"],
+                                },
+                                state: {
+                                  description:
+                                    "Describes the current operational state of the partition within the cluster configuration.\n",
+                                  type: "string",
+                                  example: "active",
+                                  enum: [
+                                    "unknown",
+                                    "joining",
+                                    "active",
+                                    "leaving",
+                                    "recovering",
+                                    "learner",
+                                  ],
+                                },
+                              },
+                              title: "Partition",
+                            },
+                          },
+                        },
+                        title: "PhysicalTenantBrokerTopology",
+                      },
+                    },
+                  },
+                  title: "PhysicalTenantTopology",
+                },
+              },
+            },
+            title: "ClusterTopologyResponse",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

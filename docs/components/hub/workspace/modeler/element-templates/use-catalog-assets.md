@@ -32,7 +32,55 @@ When the CoE publishes a newer version of a template you already use, Hub offers
 
 If the CoE unpublishes an asset you already use, the template is deprecated. Elements that reference it keep working but show a deprecation hint in the properties panel, signaling that you should migrate to a newer version or a different template.
 
+## Find reusable assets in the modeling menus
+
+When you create, append, or change an element, the compact menu separates what you can insert into two tabs:
+
+- **BPMN**: The standard BPMN elements, in their usual categories.
+- **Reusable assets**: Catalog assets, connectors, and templates from your project, together with resources the project already contains, such as forms, called processes, decisions, and RPA scripts.
+
+For the preferred cross-source view, select **Browse all** at the top of the menu. The [resource discovery guide](../modeling/browse-all-resources.md) explains how to search and filter catalog, shared, and project assets alongside standard elements and Marketplace connectors.
+
+To insert a catalog asset, select **Browse all > Catalog**, then select the asset. If **Browse all** isn't offered, open the **Reusable assets** tab and select the asset. This creates a new element with the template already applied.
+
+To apply a template to an element that already exists, use **Change element** from the context pad or follow [apply assets while modeling](#apply-assets-while-modeling).
+
+### Search the compact menu
+
+The compact menu's search field searches both tabs. Search matches asset names, descriptions, and template IDs. While you search, the tabs are hidden and matches appear as a single ranked list.
+
+Within **Reusable assets**, entries are grouped with resources already in your project first, followed by named categories, remaining templates, and connectors.
+
+## Find outdated assets in a diagram
+
+When an element references a template version that isn't the latest one, Camunda Hub flags it in two places in the modeler:
+
+- The problems panel reports `Element has updated template available.` as an information-level hint. Select the hint to focus the affected element on the canvas.
+- The properties panel of the focused element shows an **Update available** dropdown. It reports the version you can move to, for example `A new version of the template is available: 3`, and offers the **Update** and **Unlink** actions.
+
+Select **Update** to apply the latest version of the template to the element. The hint is reported once per affected element, and an element that already uses the latest version produces no hint.
+
+This signal covers every element template available to your diagram, whether it comes from the catalog or from your project.
+
+## Review catalog updates for a project
+
+The project page collects the same information for a whole project, so you don't have to open each diagram to find outdated assets.
+
+To review the catalog assets a project uses:
+
+1. Open the project in your workspace.
+2. In the right sidebar of the project page, find the **Catalog updates** tile.
+
+The tile lists only the catalog assets that need attention — assets whose status is **Update available** or **Deprecated**. Assets that are up to date aren't listed. For each asset you see its name and status, followed by links to the diagrams in the project that use it. An asset used in more than two diagrams shows a **+N more files** control that expands the full list.
+
+Use the filter in the tile header to narrow the list to **All**, **Update available**, or **Deprecated**. Assets load five at a time, a **Showing X of Y** counter tracks how many are listed against the total, and **Load N more assets** appends the next batch.
+
+When the project has nothing to act on, including when it uses no catalog assets at all, the tile shows `All catalog assets in this project are up to date.`
+
+The tile is visible to any project member with read access, so you don't need catalog administrator permissions to see it. Updating a template still happens in the diagram — the tile points you to the diagrams that need the change.
+
 ## Next steps
 
+- [Find resources with Browse all](../modeling/browse-all-resources.md).
 - Learn more about [element templates](/components/hub/workspace/modeler/element-templates/using-templates.md).
-- For CoE members: Learn how to [manage the catalog](/components/hub/organization/manage-catalog/index.md).
+- For CoE members: Learn how to [manage the catalog](/components/hub/organization/manage-catalog/index.md) and [track catalog asset usage](/components/hub/organization/manage-catalog/track-asset-usage.md) across your organization.

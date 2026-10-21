@@ -30,7 +30,7 @@ path: object;
 #### userTaskKey
 
 ```ts
-userTaskKey: UserTaskKey;
+userTaskKey: UserTaskKeyWritable;
 ```
 
 The user task key.

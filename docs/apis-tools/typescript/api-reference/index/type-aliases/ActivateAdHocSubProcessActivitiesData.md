@@ -30,7 +30,7 @@ path: object;
 #### adHocSubProcessInstanceKey
 
 ```ts
-adHocSubProcessInstanceKey: ElementInstanceKey;
+adHocSubProcessInstanceKey: ElementInstanceKeyWritable;
 ```
 
 The key of the ad-hoc sub-process instance that contains the activities.

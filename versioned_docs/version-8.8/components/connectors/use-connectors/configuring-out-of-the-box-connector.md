@@ -106,4 +106,3 @@ In [Operate](/components/operate/operate-introduction.md), you will now see the 
 - [Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
-- [Camunda Academy: How To Configure the SendGrid Connector](https://academy.camunda.com/c8-h2-sendgrid-connector/)

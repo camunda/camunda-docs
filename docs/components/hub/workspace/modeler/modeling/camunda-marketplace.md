@@ -6,68 +6,70 @@ description: "Visit the Camunda Marketplace to browse available resources, and i
 
 Discover the **Camunda Marketplace**, your go-to destination for leveraging various contributions from the Camunda community, trusted partners, and the Camunda team.
 
-Follow our intuitive guides to explore and harness connectors and blueprints using Web Modeler. If you prefer to utilize these resources within Desktop Modeler, download them directly from the [Camunda Marketplace website](https://marketplace.camunda.com).
+## About
 
-If you are a **[Camunda Hub Self-Managed](/self-managed/components/hub/index.md)** user, be aware that your organization may restrict access to marketplace resources. If you are unsure about your organization's access, contact your organization's owner for clarification.
+Follow our intuitive guides to explore and harness connectors and blueprints using Camunda Hub. If you prefer to utilize these resources within Desktop Modeler, download them directly from the [Camunda Marketplace website](https://marketplace.camunda.com).
 
-## Browse Marketplace connectors
+In **[Camunda Hub Self-Managed](/self-managed/components/hub/index.md)**, an administrator can [disable Marketplace](/self-managed/components/hub/configuration/properties.md#feature-flags). When Marketplace is disabled, it doesn't appear in **Browse all** or the element-template selector.
 
-:::note
-Connectors created by partners or the community are not part of the commercial Camunda product. Camunda does not support these connectors as part of its commercial services to enterprise customers. Please evaluate each client to make sure it meets your requirements before using.
-:::
+## Browse Marketplace connectors while modeling
 
-To navigate to the Camunda Marketplace, take the following steps:
+Connectors created by partners or the community aren't part of the commercial Camunda product. Camunda doesn't support these connectors as part of its commercial services to enterprise customers. Evaluate each connector to make sure it meets your requirements before using it.
 
-1. Log in to your Camunda account.
-2. Click on an existing project, or create a new project by clicking **New project > Create new > BPMN diagram**.
-3. While modeling your BPMN diagram, you can incorporate Marketplace connectors from the append menu. The append menu can be accessed in three ways:
+To browse Marketplace connectors from a modeling menu:
 
-- From the canvas, select an element and click the **Change element** icon.
-- From the properties panel on the right side of the screen, navigate to the **Template** section and click **Select**.
-- From the side palette, click the **Create element** icon.
-  ![change element](../img/change-element.png)
+1. In Camunda Hub, navigate to your workspace.
+2. Create or open a project.
+3. In the project, click **Create new > BPMN diagram**.
+4. Open the **Create element**, **Append element**, or **Change element** menu.
+5. Select **Browse all**.
+6. Under **Show**, select **Marketplace** or search across all sources.
+7. Select **View details** for a connector.
 
-4. Click the **blue shop icon** next to Change element to open the Camunda Marketplace modal.
-   ![marketplace icon](../img/marketplace-icon.png)
-5. Browse [available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific connector by typing in the **Search for a connector** search bar.
-   ![camunda marketplace](../img/connector-marketplace.png)
+Marketplace cards don't report whether a connector is already in the project. The details check the selected connector. **Included elements** can be added to the project. **Available elements** are already usable in the project.
 
-:::note
-Want to learn more about a connector before applying it to your diagram? Every connector in the Camunda Marketplace offers additional documentation by clicking the **Documentation** link inside the connector's box. This will open a new tab in your browser of the [Camunda Marketplace](https://marketplace.camunda.com/) and additional details for the connector you selected.
-:::
+For a complete guide to source filters, project availability, and direct modeling actions, see [find resources with Browse all](./browse-all-resources.md#browse-marketplace-connectors).
 
-## Download a connector to your diagram
+### Browse Marketplace from the element-template selector
 
-Once you find a connector you want to integrate into your BPMN diagram, click **Download to project**. The resource is then downloaded from the Camunda Marketplace into your project.
+The element-template selector remains a separate Marketplace path for applying a template to an existing compatible element.
 
-Scroll down in the change type context menu and click on your downloaded connector to change the type of existing task. You can then add the required details in the properties panel on the right side of the screen.
+1. Select an element in the diagram.
+2. Go to **Details > Properties > Template > Select**.
+3. In **Choose element template**, click the blue shop icon.
 
-After downloading, you may view a modal reading **Connector already exists**:
+For complete template-selection steps, see [using templates in Camunda Hub](../element-templates/using-templates.md#applying-templates).
 
-- By clicking **Save as copy**, you are not overwriting the current connector. Instead, you are saving this as a new file you can edit.
-- By clicking **Replace resource**, you are replacing the current connector. If you are downloading a connector from the Camunda Marketplace, it is read-only and you can view it if you are opening the template using the Camunda template editor. To edit the connector, click **Customize template** to duplicate this template.
+## Add a Marketplace connector to your project
 
-:::note
-You can also host custom connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted connectors**](/components/connectors/custom-built-connectors/host-custom-connector.md).
+Connector details show which elements are already available in the current project.
 
-For the out-of-the-box connectors provided by Camunda, the connectors Bundle project provides a set of all connector templates related to one release version. These are templates that are reusing the built-in connectors via the [Protocol connector Approach](/components/connectors/protocol/rest.md).
+- If no elements are available, review **Included elements** and select **Add to project**.
+- If some elements are available, use them directly or select **Add remaining elements**.
+- If all applicable elements are available, select a **Create**, **Append**, or **Change** action under **Available elements**.
 
-This means a developer created a template and reused one of the built-in connectors. Only for these templates is direct **Download to project** available.
-:::
+The details can also explain when an installed connector isn't available for the modeling action you started. For a change-element action, Marketplace matching is based on BPMN type only, so confirm the connector's configuration and runtime requirements before using it.
+
+Self-hosted connector cards open **View setup instructions** instead of offering **Add to project**. Follow the linked [self-hosted connector guidance](/components/connectors/custom-built-connectors/host-custom-connector.md) to configure the connector in your environment.
+
+## Connector template versions
+
+The Camunda Marketplace always serves the **latest** version of a connector template. If that version's [`engines.camunda`](/components/modeler/element-templates/template-metadata.md#engine-compatibility-engines) range doesn't cover your cluster version, the connector is listed under **Requires newer Camunda version** and can't be applied to your diagram.
+
+To use an older version, obtain the template file from the connector's source and [upload it as an element template](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#importing-an-existing-element-template) yourself. Camunda's built-in connectors publish previous versions in the `element-templates/versioned` directory of the [`camunda/connectors`](https://github.com/camunda/connectors) repository. For partner and community connectors, availability of previous versions depends on the connector creator.
 
 ## Browse Marketplace blueprints
 
-1. Log in to your Camunda account and navigate to Web Modeler by clicking the Camunda components icon in the top left corner of your console, and then select Modeler.
-2. Select an existing project or create a new one within the projects tab.
-3. If you initiate a project with a pre-defined blueprint, navigate to the Marketplace modal by clicking on **Browse blueprints**. If you wish to incorporate it into an existing project, open the **Create new** dropdown and select **Browse blueprints**.
-   ![Browse-blueprints-ctas](../img/browse-blueprints-ctas.png)
-4. Within the modal, you'll discover a variety of blueprints submitted by Camunda, partners, or community members to the **Camunda Marketplace**. These can include BPMN, DMN, and/or Form files. Utilize the sidebar to filter blueprints by use case, or leverage the sub-navigation to search and filter by industry, creator, or supported Camunda version.
-   ![Marketplace-modal-blueprints](../img/marketplace-modal-blueprints.png)
-5. Once you've found the desired blueprint, click **Use blueprint** to open it in Web Modeler and start your work. The blueprint will be automatically saved within the project you initiated.
+1. In Camunda Hub, navigate to your workspace.
+2. Create or open a project.
+3. If you initiate a project with a pre-defined blueprint, navigate to the Marketplace modal by clicking on **Browse blueprints**. If you wish to incorporate it into an existing project, click **Create new > Browse blueprints**.
+4. Within the modal, you'll discover a variety of blueprints submitted by Camunda, partners, or community members to the **Camunda Marketplace**. These include BPMN, DMN, and/or Form files. Utilize the sidebar to filter blueprints by use case, or leverage the sub-navigation to search and filter by industry, creator, or supported Camunda version.
+5. Once you've found the desired blueprint, click **Use blueprint** to open it in Camunda Hub and start your work. The blueprint will be automatically saved within the project you initiated.
 6. If you can't find the right blueprint, you can suggest ideas in our [Idea Portal](https://marketplace.camunda.com/en-US/pages/connectorsIdeaPortal) or contribute your own process to the [Camunda Marketplace](https://marketplace.camunda.com/en-US/pages/submissionMenu).
 
 ## Additional resources
 
-- Learn more about our available [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+- [Find resources with Browse all](./browse-all-resources.md).
+- Learn more about available [built-in connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 - Understand different [Connector types](/components/connectors/connector-types.md).
 - Learn how to modify BPMN elements with [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) to create custom modeling experiences.

@@ -21,9 +21,11 @@ The form-js project is made of three core libraries: the [form editor](https://g
 
 ### Form editor
 
-The [form editor](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-editor) <GHIcon /> allows to design forms with a drag'n'drop interface, and uses [FEEL expressions](/components/modeler/feel/what-is-feel.md) to execute form logic, such as visibility conditions, in realtime. Learn more about using the form editor in the [getting started guide](/components/modeler/forms/utilizing-forms.md).
+You can use the [form editor](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-editor) <GHIcon /> to design forms with a drag-and-drop interface. It uses [FEEL expressions](/components/modeler/feel/what-is-feel.md) to execute form logic in realtime, such as visibility conditions. Learn more about using the form editor in the [getting started guide](/components/modeler/desktop-modeler/utilize-forms.md).
 
-The form editor as it is shipped in Camunda 8 actually uses the [form playground](#form-playground), which provides realtime preview and validation functionality.
+:::note
+The Camunda 8 form editor uses the [form playground](#form-playground) as it provides real-time preview and validation functionality.
+:::
 
 ### Form viewer
 
@@ -37,7 +39,7 @@ See the following example form using the form viewer, and interact with it:
 
 The [form playground](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-playground) <GHIcon /> is a tool to preview forms, simulate their behavior, and explore form-js in a playful manner. It combines the [editor](#form-editor) and the [viewer](#form-viewer) with mock data input and output panels to test a form and form editor features instantly.
 
-There is also a [Camunda-flavored version of the form playground](https://github.com/camunda/form-playground) <GHIcon />, which closely resembles the form editor experience in Camunda Web and Desktop Modeler, and supports rapid development.
+There is also a [Camunda-flavored version of the form playground](https://github.com/camunda/form-playground) <GHIcon />, which closely resembles the form editor experience in [Camunda Hub](/components/hub/workspace/modeler/index.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md), and supports rapid development.
 
 The form playground mainly comprises the following areas:
 

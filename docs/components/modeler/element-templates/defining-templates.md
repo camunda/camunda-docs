@@ -95,7 +95,7 @@ You can create and edit element templates in the text editor of your choice.
 Connector templates are a specific type of element template, so the same applies to them.
 If your editor supports the [JSON schema](https://json-schema.org/), it will recognize the structure of the template and provide additional editing support, such as formatting, code completion, and error highlighting.
 
-[Camunda Hub](/components/connectors/manage-connector-templates.md) offers a built-in template editor with validation and error highlighting, as well as a live preview of the properties panel with the applied template.
+[Camunda Hub](/components/hub/workspace/modeler/element-templates/manage-element-templates.md) offers a built-in template editor with validation and error highlighting, as well as a live preview of the properties panel with the applied template.
 
 ## Further reading
 

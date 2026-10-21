@@ -1,6 +1,11 @@
 module.exports = {
-  "Element templates": [
-    "components/modeler/element-templates/about-templates",
+  type: "category",
+  label: "Element templates",
+  link: {
+    type: "doc",
+    id: "components/modeler/element-templates/about-templates",
+  },
+  items: [
     {
       type: "category",
       label: "Defining templates",

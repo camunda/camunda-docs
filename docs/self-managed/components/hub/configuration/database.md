@@ -1,19 +1,19 @@
 ---
 id: database
 title: "Database"
-description: "Learn how to configure Web Modeler to connect securely to supported databases, including PostgreSQL, H2, MariaDB, MSSQL, MySQL, and Oracle."
+description: "Learn how to configure Camunda Hub to connect securely to supported databases, including PostgreSQL, H2, MariaDB, MSSQL, MySQL, and Oracle."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](properties.md#database).
+This page describes advanced database connection configuration for Camunda Hub. For a general setup guide, visit the [configuration overview](properties.md#database).
 
 :::tip Need end-to-end guidance?
-For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Camunda Hub, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
 :::
 
-Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaDB, and Microsoft SQL Server. You can choose the one that best fits your environment.
+Camunda Hub supports multiple database vendors such as PostgreSQL, MySQL, MariaDB, and Microsoft SQL Server. You can choose the one that best fits your environment.
 
 | Database   | Default driver included | Notes                                                                  |
 | ---------- | ----------------------- | ---------------------------------------------------------------------- |
@@ -26,7 +26,7 @@ Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaD
 
 ## Configuring SSL for the database connection
 
-To configure SSL between Web Modeler and the database:
+To configure SSL between Camunda Hub and the database:
 
 - Modify the JDBC URL using `SPRING_DATASOURCE_URL` and add connection parameters.
 - Provide SSL certificates and keys to the `restapi` component, if required.
@@ -50,7 +50,7 @@ No certificates are required for this mode.
 
 ### SSL mode `verify-full`
 
-Web Modeler verifies the server’s identity by checking its certificate.  
+Camunda Hub verifies the server’s identity by checking its certificate.  
 This mode prevents person-in-the-middle attacks.
 
 1. Provide the root certificate that signed the server certificate:  
@@ -63,7 +63,7 @@ This mode prevents person-in-the-middle attacks.
 
 ### SSL mode `verify-full` with client certificates
 
-In this mode, both the server and Web Modeler authenticate each other using certificates.
+In this mode, both the server and Camunda Hub authenticate each other using certificates.
 
 1. Mount client certificates:
    - `myClientCertificate.pk8 -> ~/.postgresql/postgresql.pk8`
@@ -76,9 +76,9 @@ In this mode, both the server and Web Modeler authenticate each other using cert
    ```
 4. Configure the database server to verify client certificates. See the [PostgreSQL SSL documentation](https://www.postgresql.org/docs/current/ssl-tcp.html).
 
-## Running Web Modeler on Amazon Aurora PostgreSQL
+## Running Camunda Hub on Amazon Aurora PostgreSQL
 
-Web Modeler supports connecting to **Amazon Aurora PostgreSQL**.  
+Camunda Hub supports connecting to **Amazon Aurora PostgreSQL**.  
 To connect, update the following environment variables:
 
 1. Set the JDBC URL:
@@ -87,7 +87,7 @@ To connect, update the following environment variables:
    ```
 2. Set the driver class:
    ```bash
-   SPRING_DATASOURCE_DRIVER_CLASS_NAME="software.amazon.jdbc.Driver"
+   SPRING_DATASOURCE_DRIVERCLASSNAME="software.amazon.jdbc.Driver"
    ```
 
 For all available driver parameters, see the [AWS Advanced JDBC Driver documentation](https://github.com/awslabs/aws-advanced-jdbc-wrapper/wiki/UsingTheJdbcDriver#aws-advanced-jdbc-driver-parameters).
@@ -110,14 +110,14 @@ To enable IAM database authentication for Aurora PostgreSQL:
    unset SPRING_DATASOURCE_PASSWORD
    ```
 
-When using IAM authentication, ensure Web Modeler has permission to generate IAM authentication tokens (for example, through an attached IAM role or access key).
+When using IAM authentication, ensure Camunda Hub has permission to generate IAM authentication tokens (for example, through an attached IAM role or access key).
 
 ## Using alternative database vendors
 
 ### H2
 
 The H2 driver is included by default.  
-To use a different driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver.  
+To use a different driver, set `SPRING_DATASOURCE_DRIVERCLASSNAME` to the fully qualified class name of your driver.  
 Otherwise, omit this variable.
 
 <Tabs groupId="h2-config" defaultValue="envVars" queryString values={[
@@ -132,7 +132,7 @@ Otherwise, omit this variable.
 SPRING_DATASOURCE_URL="jdbc:h2:mem:[DB_NAME]" # See https://www.h2database.com/html/features.html
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
-SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional
+SPRING_DATASOURCE_DRIVERCLASSNAME="[YOUR_CUSTOM_DRIVER]" # Optional
 ```
 
 </TabItem>
@@ -140,15 +140,15 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:h2:mem:[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
-      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+      - name: SPRING_DATASOURCE_DRIVERCLASSNAME
         value: "[YOUR_CUSTOM_DRIVER]"
 ```
 
@@ -184,7 +184,7 @@ jdbc:h2:mem:[DB_NAME];INIT=CREATE SCHEMA IF NOT EXISTS [CUSTOM_SCHEMA]\;SET SCHE
 
 The MariaDB driver is provided by default, so no additional steps are necessary to provide the driver.
 
-To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVERCLASSNAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
 
 <Tabs groupId="mariadb-config" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars'},
@@ -198,7 +198,7 @@ To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to th
 SPRING_DATASOURCE_URL="jdbc:mariadb://[DB_HOST]:[DB_PORT]/[DB_NAME]"
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
-SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MariaDB driver
+SPRING_DATASOURCE_DRIVERCLASSNAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MariaDB driver
 ```
 
 </TabItem>
@@ -206,15 +206,15 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:mariadb://[DB_HOST]:[DB_PORT]/[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
-      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+      - name: SPRING_DATASOURCE_DRIVERCLASSNAME
         value: "[YOUR_CUSTOM_DRIVER]"
 ```
 
@@ -248,7 +248,7 @@ a field named `amount` and another named `Amount` would be treated as identical 
 ### MSSQL
 
 The MSSQL driver is provided by default, so no additional steps are required.  
-To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver.  
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVERCLASSNAME` to the fully qualified class name of your driver.  
 Otherwise, omit this variable.
 
 <Tabs groupId="mssql-config" defaultValue="envVars" queryString values={[
@@ -263,7 +263,7 @@ Otherwise, omit this variable.
 SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
-SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MSSQL driver
+SPRING_DATASOURCE_DRIVERCLASSNAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MSSQL driver
 ```
 
 </TabItem>
@@ -271,15 +271,15 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
-      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MSSQL driver
+      - name: SPRING_DATASOURCE_DRIVERCLASSNAME # Optional; omit to use default MSSQL driver
         value: "[YOUR_CUSTOM_DRIVER]"
 ```
 
@@ -310,7 +310,7 @@ This means that if you have a field named `amount`, you cannot create another fi
 
 #### Custom schema
 
-MSSQL supports custom schemas, but this is not configurable within Web Modeler.  
+MSSQL supports custom schemas, but this is not configurable within Camunda Hub.  
 To use a custom schema, set the database user’s **default schema**.
 
 ### MySQL
@@ -323,7 +323,7 @@ You must download and provide it manually for the application to load.
 2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location:  
    `/driver-lib`. It will be automatically loaded by the application.
 
-To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver.  
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVERCLASSNAME` to the fully qualified class name of your driver.  
 Otherwise, omit this variable.
 
 <Tabs groupId="mysql-config" defaultValue="envVars" queryString values={[
@@ -338,7 +338,7 @@ Otherwise, omit this variable.
 SPRING_DATASOURCE_URL="jdbc:mysql://[DB_HOST]:[DB_PORT]/[DB_NAME]"
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
-SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MySQL driver
+SPRING_DATASOURCE_DRIVERCLASSNAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MySQL driver
 ```
 
 </TabItem>
@@ -346,15 +346,15 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:mysql://[DB_HOST]:[DB_PORT]/[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
-      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MySQL driver
+      - name: SPRING_DATASOURCE_DRIVERCLASSNAME # Optional; omit to use default MySQL driver
         value: "[YOUR_CUSTOM_DRIVER]"
     extraVolumeMounts:
       - name: mysql-driver
@@ -415,7 +415,7 @@ You must download and provide it manually for the application to load.
 2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location:  
    `/driver-lib`. It will be automatically loaded by the application.
 
-To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver.  
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVERCLASSNAME` to the fully qualified class name of your driver.  
 Otherwise, omit this variable.
 
 <Tabs groupId="oracle-config" defaultValue="envVars" queryString values={[
@@ -430,7 +430,7 @@ Otherwise, omit this variable.
 SPRING_DATASOURCE_URL="jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
-SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default Oracle driver
+SPRING_DATASOURCE_DRIVERCLASSNAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default Oracle driver
 ```
 
 </TabItem>
@@ -438,15 +438,15 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
-      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default Oracle driver
+      - name: SPRING_DATASOURCE_DRIVERCLASSNAME # Optional; omit to use default Oracle driver
         value: "[YOUR_CUSTOM_DRIVER]"
     extraVolumeMounts:
       - name: oracle-driver

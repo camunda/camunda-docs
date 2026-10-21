@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
 :::note
-Clients using a valid generated token have access to all resources within an organization, similar to [super-user mode](/components/hub/workspace/modeler/collaboration/collaboration.md#super-user-mode).
+Clients using a valid generated token have access to all resources within an organization, similar to [organization admin and owner access](/components/hub/organization/users-and-roles.md#elevated-workspace-access).
 
 While there's no project-level access control enforced in the API, access is still dependent on the [CRUD operations assigned](#generate-a-token).
 :::
@@ -27,7 +27,7 @@ While there's no project-level access control enforced in the API, access is sti
 
 <TabItem value='saas'>
 
-1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
+1. Create client credentials by clicking **Organization > Manage organization > Administration API > Create new credentials**.
 2. Add permissions to this client for **Web Modeler API** with the needed CRUD permissions.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->

@@ -20,11 +20,12 @@ When creating custom-built element templates, consider the [recommended best pra
 
 ## Generate a BPMN element template
 
-1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
-2. Click **Create new**, then select **Element template** to open the **Create new element template** screen.  
+1. Select the Web Modeler project where you want to create the template.
+2. Create a process application to hold your template. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. Click **Create new**, then select **Element template** to open the **Create new element template** screen.  
    ![Create the new element template](./img/element-template-generator/configure-element-template-details.png)
 
-3. Select the template starting point:
+4. Select the template starting point:
    - **Call activity**: Start from a call activity template.
    - **Event**: Start from an event template.  
      You can choose from predefined event templates, such as message event, timer event, signal event.
@@ -43,11 +44,12 @@ You can start from a blank template or import an existing API definition such as
 
 To generate a connector template:
 
-1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
-2. Click **Create new**, select **Element template**, and then choose the **Connector** tab.  
+1. Select the Web Modeler project where you want to create the template.
+2. Create a process application to hold your template. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. Click **Create new**, select **Element template**, and then choose the **Connector** tab.  
    ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-connector-template-details.png)
 
-3. Select the template starting point:
+4. Select the template starting point:
    - **From API definition**: Import an existing API definition file as a starting point. The **Import data source** section will appear below the template details.
    - **From blank**: Start from a blank template.
 

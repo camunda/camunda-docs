@@ -1,17 +1,11 @@
 ---
 id: agentic-ai-aiagent-customization
-sidebar_label: Customization
-title: AI Agent connector customization
-description: Customization of the AI Agent connector in self-managed or hybrid deployments
+sidebar_label: Customize in Self-Managed
+title: Customize the AI Agent connector
+description: Customize the AI Agent connector in Self-Managed or hybrid deployments to suit your specific needs.
 ---
 
-In a Self-Managed or [hybrid](../../../reference/glossary.md#hybrid-mode) environment, you can customize and extend the [AI Agent connector](./agentic-ai-aiagent.md) to suit your specific needs.
-
-For example, you can:
-
-- Implement custom storage backends for conversation history
-- Add support for additional AI models
-- Inject additional logic into the agent execution flow
+Customize the [AI Agent connector](./agentic-ai-aiagent.md) in Self-Managed or [hybrid](../../../reference/glossary.md#hybrid-mode) deployments by implementing custom conversation storage, supporting additional AI models, or adding logic to the agent execution flow.
 
 ## HTTP proxy configuration
 
@@ -28,7 +22,11 @@ To disable proxy support entirely (for example, if only an HTTPS-based proxy is 
 - **Spring Boot property:** `camunda.connector.agenticai.http.proxy-support.enabled=false`.
 - **Environment variable:** `CAMUNDA_CONNECTOR_AGENTICAI_HTTP_PROXYSUPPORT_ENABLED=false`.
 
-## Extending the AI Agent connector
+## Extend the AI Agent connector
+
+:::note
+The agentic AI ecosystem evolves quickly. The APIs used for these customizations can change between minor releases. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md).
+:::
 
 ### Prerequisites
 
@@ -93,54 +91,97 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 5. If the default AI Agent connector is already connected to your engine (for example, if you are connecting to SaaS), you can override the registered AI Agent connector job worker type by setting one of the following type environment variables to a custom value (such as `my-ai-agent`) when starting your application.
    This allows you to use your custom connector in combination with an [element template configured](../use-connectors-in-hybrid-mode.md) for the `my-ai-agent` job worker type.
 
-| Variable                             | Description                                                                                            |
-| :----------------------------------- | :----------------------------------------------------------------------------------------------------- |
-| `CONNECTOR_AI_AGENT_JOB_WORKER_TYPE` | Overrides the type of the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) job worker.       |
-| `CONNECTOR_AI_AGENT_TYPE`            | Overrides the type of the [AI Agent Task](./agentic-ai-aiagent-task.md) outbound connector job worker. |
+| Variable                             | Description                                                                                                                                           |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CONNECTOR_AI_AGENT_TASK_TYPE`       | Overrides the type of the [AI Agent Task](./agentic-ai-aiagent-task.md) connector (default `io.camunda.agenticai:aiagent:task:2`).                    |
+| `CONNECTOR_AI_AGENT_SUBPROCESS_TYPE` | Overrides the type of the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connector (default `io.camunda.agenticai:aiagent:subprocess:2`). |
+
+If you previously overrode the job types of the legacy element templates, see [job type overrides](./agentic-ai-aiagent-upgrade.md#job-type-overrides).
 
 ### Customize individual components
 
+Each component of the AI Agent connector is registered as a default Spring bean. You can override any default component by registering your own implementation as a Spring bean in your custom project.
+
+The following sections show how to add a custom chat model provider and a custom conversation store.
+
 :::tip
-Instead of the example below, you can also use other Spring mechanisms to customize the AI Agent connector, such as using Aspect Oriented Programming (AOP) to intercept and modify method calls.
+You can also use other Spring mechanisms to customize the AI Agent connector, such as using Aspect Oriented Programming (AOP) to intercept and modify method calls.
 :::
 
-Each component of the AI Agent connector is registered as a Spring bean and annotated with the `@ConditionalOnMissingBean` annotation. This means you can override any component by defining your own bean of the same type in your custom project.
+### Custom chat model provider
 
-For example, to customize the agent initialization logic, you can create a new bean that implements the `AgentInitializer` interface and register it in your Spring context. In the example below, this is done using the `@Component` annotation, but other Spring Boot mechanisms—like `@Bean` producer methods—work as well.
+Add support for an LLM provider that the connector doesn't include by registering a `ChatModelFactory` bean. The AI Agent connector routes requests to your factory when a process uses the **Custom implementation** model provider with a matching **Provider type**.
 
-The following example wraps the default initialization implementation with additional logging, but you can insert any custom logic as needed:
+A custom provider needs two pieces:
+
+- A `ChatModelFactory` bean: `supports(...)` decides whether the factory handles a configuration, and `create(...)` builds the `ChatModel`.
+- A `ChatModel`: `execute(...)` performs one round-trip against the provider and returns a `ChatResult`. The connector calls `close()` once the agent request is done.
+
+The following skeleton handles the provider type `my-provider`:
 
 ```java
-
 @Component
-public class MyCustomAgentInitializer implements AgentInitializer {
+public class MyChatModelFactory implements ChatModelFactory {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyCustomAgentInitializer.class);
+    public static final String PROVIDER_TYPE = "my-provider";
 
-    private final AgentInitializer delegate;
-
-    public MyCustomAgentInitializer(
-        AgentToolsResolver agentToolsResolver,
-        GatewayToolHandlerRegistry gatewayToolHandlers) {
-        this.delegate = new AgentInitializerImpl(agentToolsResolver, gatewayToolHandlers);
+    @Override
+    public boolean supports(ChatModelConfiguration configuration) {
+        return configuration instanceof CustomProviderConfiguration custom
+            && PROVIDER_TYPE.equals(custom.providerType());
     }
 
     @Override
-    public AgentInitializationResult initializeAgent(AgentExecutionContext executionContext) {
-        LOGGER.info(">>> Initializing agent");
-
-        final var result = delegate.initializeAgent(executionContext);
-
-        LOGGER.info("<<< Agent initialized. Result: {}", result);
-
-        return result;
+    public ChatModel create(ChatModelConfiguration configuration) {
+        final var custom = (CustomProviderConfiguration) configuration;
+        // custom.model() is the model ID, custom.parameters() the provider parameters
+        return new MyChatModel(custom.model(), custom.parameters());
     }
 }
 ```
 
+```java
+public class MyChatModel implements ChatModel {
+
+    public MyChatModel(String model, Map<String, Object> parameters) {
+        // set up your provider client
+    }
+
+    @Override
+    public ChatResult execute(ChatRequest request) {
+        // 1. Convert request.snapshot() to your provider's request format.
+        // 2. Call the provider.
+        // 3. Convert the response to an AssistantMessage and fill in the AgentMetrics
+        //    (model calls, token usage).
+        return new ChatResult.Completed(assistantMessage, metrics);
+    }
+
+    @Override
+    public void close() {
+        // release provider client resources
+    }
+}
+```
+
+Return `ChatResult.Continuation` instead of `ChatResult.Completed` if the provider pauses mid-turn and must be called again to continue the same turn.
+
+:::note
+The connector throws an error if no factory, or more than one factory, supports a configuration. Make sure `supports(...)` only matches your own provider type.
+:::
+
+To use the provider in a process:
+
+1. Apply the new **AI Agent Task** or **AI Agent Sub-process** element template, version 2.
+2. In the **Model provider** group, set **Provider** to **Custom implementation**.
+3. Set **Provider type** to the value your factory matches (`my-provider` in the example above).
+4. Set **Model** to the model ID your implementation expects.
+5. (Optional) Set **Provider parameters** to a FEEL context that your factory reads, for example `={apiKey: "{{secrets.MY_API_KEY}}"}`.
+
+To build on a built-in provider instead of calling an API yourself, inject the built-in factory bean, such as `OpenAiChatModelFactory`, and call it directly from your factory.
+
 ### Custom conversation storage
 
-The AI Agent connector includes a set of default storage backends for conversation history, but you can also implement your own to meet specific needs. Similar to the agent initialization example above, you can register a bean that implements the `ConversationStore` interface to provide your own storage implementation.
+The AI Agent connector includes a set of default storage backends for conversation history, but you can also implement your own to meet specific needs. Like other components, you can register a bean that implements the `ConversationStore` interface to provide your own storage implementation.
 
 A custom store needs three pieces:
 
@@ -221,7 +262,25 @@ public record MyConversationContext(String conversationId, UUID recordId)
         implements ConversationContext {}
 ```
 
-Register the subtype with the runtime `ObjectMapper` so the connector can deserialize the context back from the process variable. For example via a `Jackson2ObjectMapperBuilderCustomizer` bean calling `registerSubtypes(MyConversationContext.class)`.
+Register the subtype with the connector runtime's `ObjectMapper` instances so the connector can deserialize the context back from the process variable. The runtime builds its own mappers, which Spring Boot's `Jackson2ObjectMapperBuilderCustomizer` and `JsonMapperBuilderCustomizer` beans don't configure. Use a `BeanPostProcessor` that registers the subtype on every `ObjectMapper` bean instead:
+
+```java
+@Component
+public class ConversationContextSubTypesBeanPostProcessor implements BeanPostProcessor {
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) {
+        if (bean instanceof ObjectMapper objectMapper) {
+            objectMapper.registerSubtypes(MyConversationContext.class);
+        }
+        return bean;
+    }
+}
+```
+
+:::tip Serialize with the connector object mapper
+If your store serializes messages to JSON, use the connector runtime's `ObjectMapper` bean (qualifier `@ConnectorsObjectMapper`) instead of creating your own. It already supports the connector data types that messages can contain, such as document references.
+:::
 
 :::note Storage contract
 `storeMessages` must always write to a **new** record (or document, or branch) and return a `ConversationContext` pointing to it.

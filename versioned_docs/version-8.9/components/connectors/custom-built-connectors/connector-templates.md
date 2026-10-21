@@ -14,9 +14,9 @@ Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/modeling
 
 Before developing one, you'll need to decide what you would like to achieve with your connector. Currently, the options are:
 
-- Starting a BPMN process, triggered by external service - Use [inbound start event connector template](#inbound-start-event-connector-templates).
-- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
-- Trigger an external service - Use [outbound connector template](#outbound-connector-templates).
+- Starting a BPMN process, triggered by external service. Use [inbound start event connector template](#inbound-start-event-connector-templates).
+- Continue process with an intermediate catch event emitted by external service call. Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
+- Trigger an external service. Use [outbound connector template](#outbound-connector-templates).
 
 :::note
 Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
@@ -1175,7 +1175,7 @@ You can, for example, allow the user to model and configure the following **REST
 
 You can develop connector templates using the [`element template` feature](/components/modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
-## Providing and using connector templates
+## Make custom Connector templates available
 
 When using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can create **Connector templates** [directly within the application](/components/connectors/manage-connector-templates.md) and share them with your respective organization.
 

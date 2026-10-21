@@ -8,12 +8,12 @@ description: Configure relational databases for the Orchestration Cluster and Ca
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide provides a unified approach to configuring relational databases for Camunda 8 across the Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) and Web Modeler. It answers the key setup questions and links to detailed, component-specific configuration reference.
+This guide provides a unified approach to configuring relational databases for Camunda 8 across the Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) and Camunda Hub. It answers the key setup questions and links to detailed, component-specific configuration reference.
 
 :::info
 
 - For **Orchestration Cluster configuration reference**, see [RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md).
-- For **Web Modeler configuration reference**, see [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md).
+- For **Camunda Hub configuration reference**, see [Camunda Hub database configuration](/self-managed/components/hub/configuration/database.md).
 - For **supported vendors and versions**, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - For **deployment-specific setup**, see [Helm RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md) or [manual RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md).
   :::
@@ -22,12 +22,12 @@ This guide provides a unified approach to configuring relational databases for C
 
 Before provisioning, choose whether to use a **shared database** or **separate databases** for each component.
 
-| Aspect       | Shared database                                                         | Separate databases                                                |
-| ------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| **Use case** | Small deployments, unified DBA team                                     | Large production, multi-team environments                         |
-| **Setup**    | Single instance with different schemas/databases for OC and Web Modeler | Independent instances per component                               |
-| **Pros**     | Simplified administration, single backup policy                         | Independent scaling, isolated credentials, easier troubleshooting |
-| **Cons**     | Shared resources, requires schema/database separation                   | Additional operational overhead, higher infrastructure costs      |
+| Aspect       | Shared database                                                 | Separate databases                                                |
+| ------------ | --------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **Use case** | Small deployments, unified DBA team                             | Large production, multi-team environments                         |
+| **Setup**    | Single instance with different schemas/databases for OC and Hub | Independent instances per component                               |
+| **Pros**     | Simplified administration, single backup policy                 | Independent scaling, isolated credentials, easier troubleshooting |
+| **Cons**     | Shared resources, requires schema/database separation           | Additional operational overhead, higher infrastructure costs      |
 
 Both topologies are fully supported. Choose based on your organizational model and scaling needs.
 
@@ -38,7 +38,7 @@ Both topologies are fully supported. Choose based on your organizational model a
 - **Supported RDBMS**: PostgreSQL (recommended), MariaDB, MySQL, SQL Server, Oracle, or H2 (development only).
 - **Versions**: See the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - **Network and credentials**: Ensure reachable database and user with DDL permissions (CREATE TABLE, ALTER TABLE) for schema initialization.
-- **SSL/TLS**: Optional but recommended. See [Web Modeler SSL configuration](/self-managed/components/hub/configuration/database.md#configuring-ssl-for-the-database-connection) for guidance on JDBC URL parameters.
+- **SSL/TLS**: Optional but recommended. See [Camunda Hub SSL configuration](/self-managed/components/hub/configuration/database.md#configuring-ssl-for-the-database-connection) for guidance on JDBC URL parameters.
 
 ### Create database and user
 
@@ -53,11 +53,12 @@ Choose your topology (shared or separate) and database vendor:
 <TabItem value="postgres">
 
 ```sql
--- Shared topology: single database for both OC and Web Modeler
+-- Shared topology: single database for both OC and Hub
 CREATE DATABASE camunda ENCODING 'UTF8';
 CREATE USER camunda WITH PASSWORD 'your-secure-password';
 GRANT CONNECT ON DATABASE camunda TO camunda;
 GRANT USAGE ON SCHEMA public TO camunda;
+GRANT CREATE ON SCHEMA public TO camunda;
 GRANT CREATE ON DATABASE camunda TO camunda;
 
 -- Separate topology: independent instances
@@ -65,6 +66,7 @@ GRANT CREATE ON DATABASE camunda TO camunda;
 -- CREATE USER camunda_oc WITH PASSWORD 'oc-password';
 -- GRANT CONNECT ON DATABASE camunda_oc TO camunda_oc;
 -- GRANT USAGE ON SCHEMA public TO camunda_oc;
+-- GRANT CREATE ON SCHEMA public TO camunda_oc;
 -- GRANT CREATE ON DATABASE camunda_oc TO camunda_oc;
 ```
 
@@ -94,7 +96,7 @@ For SQL Server and Oracle, follow your database vendor's user provisioning guide
 
 ## Step 3: Configure connections and authentication
 
-Configuration is component-specific but follows consistent principles across OC and Web Modeler.
+Configuration is component-specific but follows consistent principles across OC and Hub.
 
 ### Orchestration Cluster connection
 
@@ -141,9 +143,9 @@ For full manual setup, see [RDBMS configuration for manual installations](/self-
 
 </Tabs>
 
-### Web Modeler connection
+### Camunda Hub connection
 
-Web Modeler uses Spring Boot datasource configuration (separate from Orchestration Cluster).
+Camunda Hub uses Spring Boot datasource configuration (separate from Orchestration Cluster).
 
 <Tabs groupId="wm-deployment" defaultValue="helm" queryString values={[
 {label: "Helm", value: "helm"},
@@ -155,7 +157,7 @@ Web Modeler uses Spring Boot datasource configuration (separate from Orchestrati
 In your `values.yaml`:
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
       enabled: true
@@ -166,13 +168,13 @@ webModeler:
       # Or use existingSecret for production
 ```
 
-For full Web Modeler reference, see [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md).
+For full Camunda Hub reference, see [Camunda Hub database configuration](/self-managed/components/hub/configuration/database.md).
 
 </TabItem>
 
 <TabItem value="manual">
 
-Set environment variables before starting Web Modeler:
+Set environment variables before starting Camunda Hub:
 
 ```bash
 export SPRING_DATASOURCE_URL="jdbc:postgresql://postgres.example.com:5432/camunda_wm"
@@ -220,25 +222,28 @@ orchestration:
     secondaryStorage:
       type: rdbms
       rdbms:
-        url: "jdbc:postgresql://aurora-cluster.123456789012.us-east-1.rds.amazonaws.com:5432/camunda?sslmode=require"
+        url: "jdbc:aws-wrapper:postgresql://aurora-cluster.123456789012.us-east-1.rds.amazonaws.com:5432/camunda?wrapperPlugins=iam&sslmode=require"
         username: db_user # IAM database user
         # No password needed; IAM token generated at runtime
         # Requires IAM role attached to pod (IRSA or Karpenter)
 ```
 
-**Web Modeler (Helm)**:
+**Camunda Hub (Helm)**:
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
       enabled: true
       url: "jdbc:aws-wrapper:postgresql://aurora-cluster.123456789012.us-east-1.rds.amazonaws.com:5432/camunda?wrapperPlugins=iam"
       username: db_user # IAM database user
       # No password needed; IAM token generated at runtime
+    env:
+      - name: SPRING_DATASOURCE_DRIVERCLASSNAME
+        value: software.amazon.jdbc.Driver
 ```
 
-For detailed Aurora setup, see [Orchestration Cluster RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and [Web Modeler configuration](/self-managed/components/hub/configuration/database.md).
+For detailed Aurora setup, see [Orchestration Cluster RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and [Camunda Hub configuration](/self-managed/components/hub/configuration/database.md).
 
 ## Step 4: JDBC driver management
 
@@ -248,15 +253,15 @@ For detailed driver provisioning strategies (init containers, custom images, vol
 
 - **Helm**: [JDBC driver management in Helm](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 - **Manual**: [Manual installation driver setup](/self-managed/deployment/manual/rdbms/configuration.md#jdbc-driver-management)
-- **Web Modeler**: [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md)
+- **Camunda Hub**: [Camunda Hub database configuration](/self-managed/components/hub/configuration/database.md)
 
 ## Step 5: Schema management
 
-**Orchestration Cluster uses Liquibase** → automatically creates and updates schema on startup (configurable via `autoDDL: true/false`).
+**Orchestration Cluster uses Liquibase** → automatically creates and updates schema on startup (configurable via `camunda.data.secondary-storage.rdbms.auto-ddl`).
 
-**Web Modeler uses Flyway** → migrations applied automatically on startup; **manual DBA execution not supported**.
+**Camunda Hub uses Flyway** → migrations applied automatically on startup; **manual DBA execution not supported**.
 
-This is the key difference: Orchestration Cluster schema can be managed manually by a DBA if preferred, while Web Modeler schema is automatic only.
+This is the key difference: Orchestration Cluster schema can be managed manually by a DBA if preferred, while Camunda Hub schema is automatic only.
 
 For access to SQL/Liquibase scripts or manual DBA procedures, see [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
@@ -270,7 +275,7 @@ For access to SQL/Liquibase scripts or manual DBA procedures, see [Access SQL an
 3. Verify database schema was initialized. See [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md) for the complete table list for your database platform.
 4. Run [RDBMS validation tests](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
 
-### Web Modeler checklist
+### Camunda Hub checklist
 
 1. Confirm the database connection is configured.
 2. Check logs for Flyway schema initialization.
@@ -289,14 +294,14 @@ For access to SQL/Liquibase scripts or manual DBA procedures, see [Access SQL an
 For detailed troubleshooting, see:
 
 - [RDBMS troubleshooting](/self-managed/deployment/helm/configure/database/rdbms-troubleshooting.md)
-- [Web Modeler database troubleshooting](/self-managed/components/hub/troubleshooting/troubleshoot-database-connection.md)
+- [Camunda Hub database troubleshooting](/self-managed/components/hub/troubleshooting/troubleshoot-database-connection.md)
 
 ## Step 7: Backup and restore
 
 Both components require RDBMS backups:
 
 - **Orchestration Cluster**: Zeebe exports data to RDBMS; backups are DBA responsibility.
-- **Web Modeler**: All data stored in RDBMS; backups are DBA responsibility.
+- **Camunda Hub**: All data stored in RDBMS; backups are DBA responsibility.
 
 Use vendor-native tools: PostgreSQL (`pg_dump`), MariaDB/MySQL (`mysqldump`), SQL Server (native backup), Oracle (RMAN).
 

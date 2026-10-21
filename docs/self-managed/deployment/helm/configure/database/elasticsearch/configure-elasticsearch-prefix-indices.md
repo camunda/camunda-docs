@@ -62,37 +62,56 @@ The Camunda Exporter is enabled by default. It creates Orchestration Cluster ind
 
 ### Legacy Zeebe Exporter
 
-The Legacy Zeebe Exporter creates `zeebe-record` indices. This exporter is disabled by default. Optimize reads from the `zeebe-record` indices. When Optimize is enabled, the Legacy Zeebe Exporter is automatically enabled to provide these indices.
+The legacy Zeebe Exporter creates `zeebe-record` indices. Optimize reads these indices. The Optimize instance can run in the same release or in a separate `optimize` release.
 
-- **Helm configuration**: `global.elasticsearch.prefix` or `global.opensearch.prefix`
+- **Helm configuration**: `orchestration.exporters.zeebe.index.prefix`. If this value is empty, the chart uses `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`.
 - **Default value**: `zeebe-record`
-- **Controlled by**: `orchestration.exporters.zeebe.enabled: false` (default)
+- **Enabled by**: Optimize with an Elasticsearch or OpenSearch backend in the same release, or `orchestration.exporters.zeebe.enabled: true`
 
-:::info When the Legacy Zeebe Exporter is used
-The legacy Zeebe Exporter is automatically enabled when:
+:::note When the legacy Zeebe Exporter is used
+In single-region deployments, the chart automatically enables the legacy Zeebe Exporter when Optimize and its Elasticsearch or OpenSearch backend are enabled in the same release. Without Optimize in the release, set `orchestration.exporters.zeebe.enabled: true` to enable it against the Elasticsearch or OpenSearch secondary storage, and set its prefix with `orchestration.exporters.zeebe.index.prefix`. This is how a separate Optimize release gets its records. See [export records for Optimize](/self-managed/deployment/helm/install/topology/orchestration-release.md#export-records-for-optimize).
 
-- Optimize is enabled (`optimize.enabled: true`)
-- You explicitly enable it (`orchestration.exporters.zeebe.enabled: true`)
-- Data migration from pre-8.8 versions is required
-  :::
+When Optimize is disabled, `optimize.database.elasticsearch.prefix` and `optimize.database.opensearch.prefix` don't configure Optimize. The legacy Zeebe Exporter still uses them as its prefix when `orchestration.exporters.zeebe.index.prefix` is empty, so check them before you rely on the default `zeebe-record`. You can still configure the Camunda Exporter prefix with `orchestration.index.prefix`.
+:::
+
+## Prefixes in the split topology
+
+Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) in the [deployment topology](/self-managed/deployment/helm/install/topology/index.md) needs its own index prefixes.
+
+The Orchestration Cluster writes records and Optimize reads them. Optimize runs in the orchestration release or in a separate Optimize release per Physical Tenant. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Prefixes keep the data of each cluster and tenant apart. To restrict who can read it, also use the access controls of your Elasticsearch or OpenSearch backend.
+
+| Prefix family                     | Configuration                                                                                                                                                     | Requirement                                                         |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Orchestration application indices | Default: `orchestration.index.prefix`. Physical Tenant: `camunda.physical-tenants.<id>.data.secondary-storage.<backend>.index-prefix`                             | Unique per cluster and tenant                                       |
+| Legacy exporter writer            | Default: `orchestration.exporters.zeebe.index.prefix`, or the exporter assigned to an explicit `default` entry. Physical Tenant: its exporter `args.index.prefix` | Unique per cluster and tenant                                       |
+| Optimize reader                   | `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`                                                                                 | Must exactly equal that tenant's Legacy exporter writer prefix      |
+| Optimize application indices      | `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` in `optimize.env`                                   | Unique per Optimize release, and different from every writer prefix |
+
+Every prefix in this table must also follow the [requirements](#requirements), across every cluster, tenant, and Optimize release that shares the storage. Being distinct isn't sufficient: `alpha` and `alpha-tenant` are distinct, but `alpha*` matches both. The only exception is each tenant's Optimize reader prefix, which must equal its writer prefix.
+
+A wrong prefix doesn't cause an error:
+
+- If you reuse a prefix, the records of one cluster or tenant show in the Operate, Tasklist, or Optimize data of another.
+- If the writer and reader prefixes are different, Optimize starts against the wrong record set or an empty record set. Similar values aren't sufficient.
 
 ## Configuration reference
 
-| Configuration                 | Default        | Used By                                 | Purpose                                                  |
-| ----------------------------- | -------------- | --------------------------------------- | -------------------------------------------------------- |
-| `orchestration.index.prefix`  | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for Orchestration Cluster indices                 |
-| `global.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices (consumed by Optimize) |
-| `global.opensearch.prefix`    | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices when using OpenSearch  |
+| Configuration                                | Default        | Used By                                               | Purpose                                                                                                                                                                |
+| -------------------------------------------- | -------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.index.prefix`                 | `""`           | Camunda Exporter, Orchestration Cluster               | Prefix for Orchestration Cluster indices                                                                                                                               |
+| `orchestration.exporters.zeebe.index.prefix` | `""`           | Legacy Zeebe Exporter                                 | Prefix for `zeebe-record` indices. When empty, falls back to `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, then to `zeebe-record` |
+| `optimize.database.elasticsearch.prefix`     | `zeebe-record` | Optimize, and the Legacy Zeebe Exporter as a fallback | Optimize reader prefix for `zeebe-record` indices (Elasticsearch). The exporter uses it only when `orchestration.exporters.zeebe.index.prefix` is empty                |
+| `optimize.database.opensearch.prefix`        | `zeebe-record` | Optimize, and the Legacy Zeebe Exporter as a fallback | Optimize reader prefix for `zeebe-record` indices (OpenSearch). The exporter uses it only when `orchestration.exporters.zeebe.index.prefix` is empty                   |
 
 ### Optimize-specific configuration
 
 When you use a custom prefix for `zeebe-record` indices and Optimize is enabled, you must also configure Optimize to use the same prefixes. If these values do not match the exporter prefix exactly, Optimize can start but does not display process data.
 
-| Environment Variable                                   | Purpose                                                                |
-| ------------------------------------------------------ | ---------------------------------------------------------------------- |
-| `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` | Prefix for Optimize's own indices (Elasticsearch)                      |
-| `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX`    | Prefix for Optimize's own indices (OpenSearch)                         |
-| `CAMUNDA_OPTIMIZE_ZEEBE_NAME`                          | Must match `global.elasticsearch.prefix` or `global.opensearch.prefix` |
+| Environment Variable                                   | Purpose                                                                                      |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` | Prefix for Optimize's own indices (Elasticsearch)                                            |
+| `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX`    | Prefix for Optimize's own indices (OpenSearch)                                               |
+| `CAMUNDA_OPTIMIZE_ZEEBE_NAME`                          | Must match `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix` |
 
 ## Configure index prefixes
 
@@ -117,6 +136,9 @@ If Optimize is not enabled, configure only the Camunda Exporter prefix.
 
 ```yaml
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
   index:
     prefix: custom-camunda # Orchestration Cluster indices prefix
 ```
@@ -125,13 +147,10 @@ orchestration:
 <TabItem value="opensearch">
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-
 orchestration:
+  data:
+    secondaryStorage:
+      type: opensearch
   index:
     prefix: custom-camunda # Orchestration Cluster indices prefix
 ```
@@ -143,7 +162,7 @@ orchestration:
 
 When Optimize is enabled, configure:
 
-- The Legacy Zeebe Exporter prefix (`global.elasticsearch.prefix` or `global.opensearch.prefix`)
+- The Legacy Zeebe Exporter prefix (`optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`)
 - The Camunda Exporter prefix (`orchestration.index.prefix`)
 - Optimize environment variables so Optimize can find the correct indices
 
@@ -155,46 +174,48 @@ When Optimize is enabled, configure:
 <TabItem value="elasticsearch">
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: true
-    prefix: custom-zeebe # Legacy Zeebe Exporter prefix (read by Optimize)
-
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
   index:
     prefix: custom-camunda # Camunda Exporter prefix
 
 optimize:
   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      prefix: custom-zeebe # Legacy Zeebe Exporter prefix (read by Optimize)
   env:
     - name: CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX
       value: custom-optimize # Optimize's own indices
     - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
-      value: custom-zeebe # Must match global.elasticsearch.prefix
+      value: custom-zeebe # Must match optimize.database.elasticsearch.prefix
 ```
 
 </TabItem>
 <TabItem value="opensearch">
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    prefix: custom-zeebe # Legacy Zeebe Exporter prefix (read by Optimize)
-
 orchestration:
+  data:
+    secondaryStorage:
+      type: opensearch
   index:
     prefix: custom-camunda # Camunda Exporter prefix
 
 optimize:
   enabled: true
+  database:
+    opensearch:
+      enabled: true
+      prefix: custom-zeebe # Legacy Zeebe Exporter prefix (read by Optimize)
   env:
     - name: CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX
       value: custom-optimize # Optimize's own indices
     - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
-      value: custom-zeebe # Must match global.opensearch.prefix
+      value: custom-zeebe # Must match optimize.database.opensearch.prefix
   migration:
     env:
       - name: CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX

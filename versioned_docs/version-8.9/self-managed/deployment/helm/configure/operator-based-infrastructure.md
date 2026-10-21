@@ -70,11 +70,12 @@ This deployment approach separates infrastructure management from application de
 ## Infrastructure components
 
 This approach uses three operator-managed infrastructure components, each maintained by their respective project teams:
-| Component | Purpose | Official Documentation |
+
+| Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/) |
-| **[Elasticsearch with ECK](#elasticsearch-deployment)** | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) |
-| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)               |
+| **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
+| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
 ## Quick start
 
@@ -364,7 +365,7 @@ The Keycloak deployment provides:
 
 - **Database integration**: Connects to CloudNativePG-managed PostgreSQL cluster
 - **Authentication path**: Configured to serve under `/auth` path prefix
-- **Flexible domain support**: Options for local development, [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
+- **Flexible domain support**: Options for local development, [Contour](https://projectcontour.io/), [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
 - **Resource optimization**: Sized appropriately for typical Camunda authentication loads
 - **Custom Ingress management**: Uses dedicated Ingress manifests integrated within the operator configuration for subpath management constraints
 
@@ -414,6 +415,19 @@ In certain setups, Keycloak is configured to use its service name as the hostnam
 :::
 
 </TabItem>
+  <TabItem value="domain-contour" label="Contour">
+
+Production Keycloak instance with Contour, the controller the reference architectures deploy.
+
+**Save as** `keycloak-instance-domain-contour.yml`:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-contour.yml
+```
+
+**Use case**: Production deployment with external domain using the [Contour Ingress controller](https://projectcontour.io/).
+
+</TabItem>
   <TabItem value="domain-nginx" label="nginx-ingress">
 
 Production Keycloak instance with nginx-ingress.
@@ -424,7 +438,7 @@ Production Keycloak instance with nginx-ingress.
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
 ```
 
-**Use case**: Production deployment with external domain using [nginx-ingress controller](https://kubernetes.github.io/ingress-nginx/).
+**Use case**: Production deployment with external domain using [nginx-ingress controller](https://kubernetes.github.io/ingress-nginx/). [Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/); use Contour for new deployments.
 
 </TabItem>
   <TabItem value="domain-openshift" label="OpenShift Route">
@@ -449,6 +463,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 3. **Review instance configuration**: `cat keycloak-instance-no-domain.yml` to verify Keycloak instance settings
 4. **Adapt configuration if needed**: Choose appropriate instance configuration for your setup:
    - `keycloak-instance-no-domain.yml` for local development
+   - `keycloak-instance-domain-contour.yml` for Contour
    - `keycloak-instance-domain-nginx.yml` for nginx-ingress
    - `keycloak-instance-domain-openshift.yml` for OpenShift Routes
 5. **Execute deployment**: `./deploy.sh`
@@ -523,6 +538,7 @@ Before deploying Camunda, ensure you have saved all required configuration files
 | PostgreSQL           | `postgresql-clusters.yml`                | PostgreSQL cluster definitions   | Infrastructure deployment |
 | Elasticsearch        | `elasticsearch-cluster.yml`              | Elasticsearch cluster definition | Infrastructure deployment |
 | Keycloak (Local)     | `keycloak-instance-no-domain.yml`        | Local Keycloak instance          | Infrastructure deployment |
+| Keycloak (Contour)   | `keycloak-instance-domain-contour.yml`   | Production Keycloak with Contour | Infrastructure deployment |
 | Keycloak (NGINX)     | `keycloak-instance-domain-nginx.yml`     | Production Keycloak with NGINX   | Infrastructure deployment |
 | Keycloak (OpenShift) | `keycloak-instance-domain-openshift.yml` | OpenShift Keycloak instance      | Infrastructure deployment |
 
@@ -719,7 +735,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Security
 
-- **Network policies**: Implement network policies to restrict traffic between components
+- **Network policies**: Implement network policies to restrict traffic between components. See [required network traffic](/self-managed/deployment/helm/install/production/index.md#required-network-traffic).
 - **TLS encryption**: Enable TLS for all inter-component communication
 - **Secret management**: Use external secret management systems in production
 - **RBAC**: Configure proper role-based access control for infrastructure and applications

@@ -16,19 +16,34 @@ Optimize offers business intelligence tooling for Camunda customers. By leveragi
 
 With Optimize, review heatmap displays for instances which took longer than average to discover long-running flow nodes. As a result, reap actionable insights and rapidly identify the constraints of your system.
 
-For an in-depth overview of Optimize’s capabilities, visit our [Optimize documentation](/components/optimize/what-is-optimize.md).
+For an in-depth overview of Optimize's capabilities, visit our [Optimize documentation](/components/optimize/what-is-optimize.md).
 
-## Set up
+## Before you begin
 
-Within Camunda 8, you can launch Optimize from Camunda Hub — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md) before getting started with Optimize for SaaS users.
+Before getting started with Optimize:
+
+1. If using SaaS, [create a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md).
+1. [Create a cluster](/components/saas/clusters/create-cluster.md) in Camunda Hub.
 
 :::note
 So long as you are operating with [Camunda 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
 :::
 
-Once you’ve [created a cluster](/components/hub/organization/manage-clusters/create-cluster.md), click the square-shaped icon in the top left corner of the page and select **Optimize**.
-
 You can begin analyzing reports and dashboards with just two process versions. However, the more process versions you work with in Optimize, the more performance attributes and data trends you’ll be able to study. For the purposes of this guide, we’ve preconfigured several processes to demonstrate Optimize’s capabilities.
+
+## Open Optimize
+
+From Camunda Hub, you can open Optimize in any [environment](/components/concepts/environments.md) you have access to:
+
+1. Log in to Camunda Hub.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Optimize.
+1. Under **Applications**, on the **Optimize** card, click **Open**. This opens Optimize for the environment in a new tab.
+
+You can also expand an environment in the left navigation, and select Optimize from its applications.
+
+:::tip
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
+:::
 
 ## Create and analyze dashboards
 

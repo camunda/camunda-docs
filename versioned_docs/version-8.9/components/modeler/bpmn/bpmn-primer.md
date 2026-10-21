@@ -216,6 +216,10 @@ When the event is triggered, the subprocess is interrupted, regardless which of 
 
 Refer to the [subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
 
+:::note
+Swim lanes (pools and lanes) are only available at the top-level process or collaboration level. They cannot be added inside a subprocess. This is a constraint of the BPMN 2.0 specification.
+:::
+
 ## Additional resources
 
 - [BPMN specification](http://www.bpmn.org/)

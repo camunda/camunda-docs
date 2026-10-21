@@ -59,7 +59,7 @@ Define a _moderator_ to avoid too many detours and keep your POC on track.
 
 ### Planning the technical environment
 
-Make the necessary technological choices. Typically, POCs _run on Camunda 8 SaaS_ unless your goal is to validate that Camunda 8 runs in your Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do load or performance tests, for which you need bigger clusters. Reach out to us in such cases.
+Make the necessary technological choices. Typically, POCs _run on Camunda 8 SaaS_ unless your goal is to validate that Camunda 8 runs in your Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do load or performance tests, for which you need bigger clusters. Reach out to us in such cases. If your POC includes [AI agents](/reference/glossary.md#ai-agent), SaaS also gives you [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), so you can run them within a provided budget instead of setting up an LLM provider account first.
 
 To access _third party systems_ during your POC, set up proper test systems for those and verify that they are usable.
 

@@ -30,7 +30,7 @@ path: object;
 #### processInstanceKey
 
 ```ts
-processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKeyWritable;
 ```
 
 The key of the process instance that should be modified.

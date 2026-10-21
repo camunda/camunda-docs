@@ -69,16 +69,16 @@ Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.
 
 The exporter can be configured by providing `args`. The table below explains all the different options, and the default values for these options:
 
-| Option                  | Description                                                                                                                                                                                      | Default                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
-| url                     | Valid URLs as a comma-separated string.                                                                                                                                                          | `http://localhost:9200` |
-| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                                                                                                                               | `30000`                 |
-| index                   | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                            |                         |
-| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                       |                         |
-| retention               | Refer to [retention](#retention) for the retention configuration options.                                                                                                                        |                         |
-| authentication          | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                         |                         |
-| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                                                                                                                          |                         |
-| include-enabled-records | If `true`, exports all enabled record types configured under `index`. If `optimize-mode-enabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
+| Option                  | Description                                                                                                                                                                                    | Default                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| url                     | Valid URLs as a comma-separated string.                                                                                                                                                        | `http://localhost:9200` |
+| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                                                                                                                             | `30000`                 |
+| index                   | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                          |                         |
+| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                     |                         |
+| retention               | Refer to [retention](#retention) for the retention configuration options.                                                                                                                      |                         |
+| authentication          | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                       |                         |
+| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                                                                                                                        |                         |
+| include-enabled-records | If `true`, exports all enabled record types configured under `index`. If `optimizeModeEnabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
 
@@ -159,13 +159,16 @@ For Optimize-specific filtering, see [Optimize export filtering](/self-managed/c
 | variableValueTypeInclusion          | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. Use to drop large object or array payloads at export time.                                                                                                                                                                                                                | `[]`         |
 
 :::note
-The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `3` shards:
+The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `5` shards:
 
 - `zeebe-record-job`
 - `zeebe-record-process-instance`
-- `zeebe-record-user-task`
 
-If you set `number-of-shards`, it overrides the template defaults for all indices, including the three listed above.
+The exporter routes every record by its partition ID, so an index only ever sees as many distinct routing values as your cluster has partitions. Five is the smallest shard count that places the records of a three-partition cluster on three distinct shards.
+
+The number of shards is a static index setting, so only newly created dated indices use these defaults. An existing index keeps the shard count it was created with.
+
+If you set `number-of-shards`, it overrides the template defaults for all indices, including the two listed above.
 :::
 
 </TabItem>
@@ -272,8 +275,8 @@ camunda:
           retention:
             enabled: true
             minimumAge: 30d
-            policyName: zeebe-records-retention-policy
-            policyDescription: Zeebe records retention policy
+            policyName: zeebe-record-retention-policy
+            policyDescription: Zeebe record retention policy
 
           authentication:
             username: opensearch
@@ -287,6 +290,9 @@ camunda:
           index:
             prefix: zeebe-record
             createTemplate: true
+
+            # Optimize mode (default: true) overrides the per-value-type flags below, such as job.
+            optimizeModeEnabled: false
 
             command: false
             event: true
@@ -343,7 +349,7 @@ In this case, it is recommended to create a new custom trust store based on the 
 
     Set any password, so long as it's at least 6 characters.
 
-2.  Add your custom certificate to to the new trust store. For example, if your custom certificate is located at `/tmp/myCustomCertificate.pem`:
+2.  Add your custom certificate to the new trust store. For example, if your custom certificate is located at `/tmp/myCustomCertificate.pem`:
 
     ```sh
     keytool -import -alias MyCustomCertificate -keystore zeebeTrustStore.jks -file /tmp/myCustomCertificate.pem
@@ -367,7 +373,7 @@ In this case, it is recommended to create a new custom trust store based on the 
     - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 
     The following example uses a trust store location of `/tmp/zeebeTrustStore.jks`, and a password of `changeme`. When using the official distribution
-    (whether Docker image or the bundled shell scripts), these propertiescan be provided using the following environment variable:
+    (whether Docker image or the bundled shell scripts), these properties can be provided using the following environment variable:
 
     ```sh
     JAVA_OPTS="-Djavax.net.ssl.trustStore=/tmp/zeebeTrustStore.jks -Djavax.net.ssl.trustStorePassword=changeme ${JAVA_OPTS}"
@@ -384,7 +390,7 @@ By default, they emit only the record value types and intents required by Optimi
 
 To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.
 
-When you enable exporter-side filters (`optimize-mode-enabled`, `variable-name`,
+When you enable exporter-side filters (`optimizeModeEnabled`, `variable-name`,
 `variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
 :::info Upgrade notes

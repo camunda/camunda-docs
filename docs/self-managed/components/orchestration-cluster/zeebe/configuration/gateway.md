@@ -45,9 +45,9 @@ Each section includes a table with:
 
 The configuration name appears as the section header. Table fields show the property used to set the configuration.
 
-For deployments, environment variables are typically easier to use. Table entries use the standalone prefix (`ZEEBE_GATEWAY_*`). For an embedded gateway, replace this prefix with `ZEEBE_BROKER_GATEWAY_*` as described earlier.
+For deployments, environment variables are typically easier to use. Table entries use the standalone prefix (`ZEEBE_GATEWAY_*`). Because the embedded gateway is the default, replace this prefix with `ZEEBE_BROKER_GATEWAY_*` unless you run a standalone gateway.
 
-If you deploy Camunda 8 with Helm (the recommended approach), you can configure the gateway using Helm chart parameters. See the [Zeebe Gateway Helm chart configuration options](https://artifacthub.io/packages/helm/camunda/camunda-platform#zeebe-gateway-parameters).
+If you deploy Camunda 8 with Helm (the recommended approach), the gateway runs embedded in the Orchestration Cluster and you configure it through the [global and orchestration cluster parameters](/self-managed/deployment/helm/chart-parameters.md#global-and-orchestration-cluster-configuration) of the chart.
 
 :::note
 The Zeebe Gateway is a Spring Boot application.
@@ -61,16 +61,16 @@ See the [Spring Boot application properties reference](https://docs.spring.io/sp
 
 The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
 
-| Field | Description                                                                                                               | Example value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host  | Sets the host the REST server binds to. This setting can also be overridden using the environment variable `SERVER_HOST`. | 0.0.0.0       |
-| port  | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`. | 8080          |
+| Field   | Description                                                                                                                     | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| address | Sets the address the REST server binds to. This setting can also be overridden using the environment variable `SERVER_ADDRESS`. | 0.0.0.0       |
+| port    | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`.       | 8080          |
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                                       | Example value |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                                        | Example value |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESSION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -86,7 +86,7 @@ Allows you to configure the SSL security for the REST server.
 
 ```yaml
 server:
-  host: 0.0.0.0
+  address: 0.0.0.0
   port: 8080
   compression:
     enabled: true
@@ -115,7 +115,7 @@ The `management.server` configuration allows you to configure the management ser
 
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
+| address   | Sets the address the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_ADDRESS`.                                                                                                                                      | 0.0.0.0       |
 | port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
@@ -123,7 +123,7 @@ The `management.server` configuration allows you to configure the management ser
 
 ```yaml
 management.server:
-  host: 0.0.0.0
+  address: 0.0.0.0
   port: 9600
   base-path: /
 ```
@@ -132,14 +132,16 @@ management.server:
 
 The network configuration allows configuration of the host and port details for the gateway.
 
-| Field                | Description                                                                                                                                                                                                                                                                                                                                              | Example value |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host                 | Sets the host the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_HOST`.                                                                                                                                                                                                                     | 0.0.0.0       |
-| port                 | Sets the port the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_PORT`.                                                                                                                                                                                                                     | 26500         |
-| minKeepAliveInterval | Sets the minimum keep alive interval. This setting specifies the minimum accepted interval between keep alive pings. This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes, or 'h' for hours. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL`. | 30s           |
-| maxMessageSize       | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). Apply the same setting on the broker too, see `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MAXMESSAGESIZE`.                                                                  | 4MB           |
-| socketReceiveBuffer  | Sets the size of the socket's receive buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETRECEIVEBUFFER`.                                                                                                                                                | 4MB           |
-| socketSendBuffer     | Sets the size of the socket's send buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETSENDBUFFER`.                                                                                                                                                      | 4MB           |
+| Field                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Example value |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| host                  | Sets the host the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_HOST`.                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 0.0.0.0       |
+| port                  | Sets the port the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_PORT`.                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 26500         |
+| minKeepAliveInterval  | Sets the minimum keep alive interval. This setting specifies the minimum accepted interval between keep alive pings. This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes, or 'h' for hours. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL`.                                                                                                                                                                                                                             | 30s           |
+| maxMessageSize        | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). Apply the same setting on the broker too, see `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MAXMESSAGESIZE`.                                                                                                                                                                                                                                                                                              | 4MB           |
+| maxConnectionAge      | Sets the maximum age of a gRPC connection before the gateway proactively closes it (via GOAWAY), forcing the client to reconnect. This lets client-side load balancing pick a different node, keeping request distribution more even, and forces a refresh of the client's name resolution so nodes that weren't yet available when the client's original connections were established can still be discovered. If omitted, the connection age is unbounded (disabled). This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MAXCONNECTIONAGE`. |               |
+| maxConnectionAgeGrace | Sets the grace period, after `maxConnectionAge` elapses, during which existing calls on the connection may finish before it's forcibly terminated. Only takes effect when `maxConnectionAge` is set. If omitted, the grace period is infinite (disabled). This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MAXCONNECTIONAGEGRACE`.                                                                                                                                                                                                          |               |
+| socketReceiveBuffer   | Sets the size of the socket's receive buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETRECEIVEBUFFER`.                                                                                                                                                                                                                                                                                                                                                                            | 4MB           |
+| socketSendBuffer      | Sets the size of the socket's send buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETSENDBUFFER`.                                                                                                                                                                                                                                                                                                                                                                                  | 4MB           |
 
 #### YAML snippet
 
@@ -149,6 +151,8 @@ network:
   port: 26500
   minKeepAliveInterval: 30s
   maxMessageSize: 4MB
+  maxConnectionAge: null
+  maxConnectionAgeGrace: null
   socketReceiveBuffer: 4MB
   socketSendBuffer: 4MB
 ```
@@ -272,7 +276,7 @@ security:
     password: null
 ```
 
-### zeebe.gateway.cluster.security.authentication
+### zeebe.gateway.security.authentication
 
 | Field | Description                                                                                                                                                                                                                                                                                                                                                                                                   | Example value |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -286,7 +290,7 @@ security:
     mode: none
 ```
 
-### zeebe.gateway.cluster.security.authentication.identity
+### zeebe.gateway.security.authentication.identity
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
@@ -341,7 +345,7 @@ To handle many concurrent incoming requests, the user can do two things: scale t
 The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
 During benchmarking and when increasing the thread count, it may also make sense to increase the given resources, which are quite small in the Helm chart.
 
-For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
+With the Helm charts, the gateway is embedded in the Orchestration Cluster nodes, so the number of gateways follows `orchestration.clusterSize`. Running more than one node enables quick failover: if one node dies, the remaining nodes can handle the traffic.
 
 A separate thread pool is used to run the gRPC business logic. The thread pool is elastic (meaning it will start/stop threads dynamically), but will always keep a minimum number of threads, and only start up to a maximum number of threads. By default, this range is from one thread per core, up to two threads per core.
 

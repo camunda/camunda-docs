@@ -10,10 +10,9 @@ toc_max_heading_level: 2
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-
-Run your first fully-automated BPMN process locally with Camunda 8.
+<PageDescription />
 
 ## About
 
@@ -91,7 +90,7 @@ Data needs to sync to Operate, so your process instance may not be visible immed
 
 ### Watch the timer
 
-Your process instance pauses at the **Countdown T-10** task for 10 seconds. Open the instance in Operate and watch the token move through the countdown in real time.
+Your process instance pauses at the **Countdown T-10** task for 10 seconds. Open the instance in Operate and watch the [token](/reference/glossary.md#token-process-instance) — the marker showing the current point of execution — move through the countdown in real time.
 
 ### Inspect variables
 

@@ -98,7 +98,7 @@ If the KMS policy does not grant Camunda's AWS Role the required permissions:
 - Behavior mirrors a disabled key.
 
 **Recovery:**  
-Update the KMS key policy using the Tenant Role ARN displayed in Console.
+Update the KMS key policy using the Tenant Role ARN displayed in Hub.
 
 ## Error handling and user-visible messages
 

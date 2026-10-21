@@ -23,6 +23,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with Helm 3.x installed.
 - kubectl configured to access your cluster.
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 :::note
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
@@ -168,7 +169,7 @@ Unlike the OIDC client secrets, these passwords initialize the component databas
 You can choose any values.
 
 :::tip Alternative secret management
-For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
+For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
 :::
 
 ## Configure Camunda components
