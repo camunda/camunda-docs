@@ -12,7 +12,7 @@ Access is controlled on three levels:
 
 - **Organization**: Users are assigned organization-level roles. They decide what a user can do in Camunda Hub across the organization.
 - **Workspace**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
-- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, and Zeebe, is managed separately, with authorizations in [Admin](/components/admin/authorization.md) for each cluster, not by organization-level roles.
+- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in [Admin](/components/admin/authorization.md) for each cluster, not by organization-level roles.
 
 Where and how you manage users, and which roles are available, depends on the edition of Camunda that you use. Select your edition to see the details.
 
@@ -40,7 +40,7 @@ People who do not yet have a Camunda 8 account can also be invited to an organiz
 
 ## Groups (legacy)
 
-Groups in Camunda Hub are a legacy feature for organizing users in SaaS. They apply only to clusters on version 8.7 or earlier, and they don't control access to Camunda Hub. Use [roles](#roles-and-permissions) to control access to Camunda Hub.
+Groups in Camunda Hub are a legacy feature for organizing users in SaaS. They apply only to clusters on version 8.7 or earlier, and they don't control access to Camunda Hub.
 
 To manage groups, click **Organization > Manage organization**, and then open the **Groups** tab. See [manage user groups](/components/saas/organization/manage-user-groups.md).
 

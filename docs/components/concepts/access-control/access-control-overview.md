@@ -49,11 +49,11 @@ Identity object identifiers and names are limited to **256 characters**. This li
 
 The screen you are working in tells you which identity you are configuring.
 
-| You are in                                                                      | You are configuring                                                                                                              | Edition               |
-| :------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------- |
-| [Organization management](/components/hub/organization/users-and-roles.md)      | Organization access: who can use Camunda Hub and Optimize, and their organization roles.                                         | SaaS                  |
-| [Management Identity](/self-managed/components/management-identity/overview.md) | Organization access: who can use Camunda Hub and Optimize, and their roles.                                                      | Self-Managed          |
-| [Orchestration Cluster Admin](/components/admin/admin-introduction.md)          | Access to a deployment environment, its runtime applications (Operate, Tasklist, Admin), and the Orchestration Cluster REST API. | SaaS and Self-Managed |
+| You are in                                                                      | You are configuring                                                                                                                         | Edition               |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------- |
+| [Organization management](/components/hub/organization/users-and-roles.md)      | Organization access: who can use Camunda Hub and Optimize, and their organization roles.                                                    | SaaS                  |
+| [Management Identity](/self-managed/components/management-identity/overview.md) | Organization access: who can use Camunda Hub and Optimize, and their roles.                                                                 | Self-Managed          |
+| [Orchestration Cluster Admin](/components/admin/admin-introduction.md)          | Access to a deployment environment, its runtime applications (Operate, Tasklist, Admin, and Zeebe), and the Orchestration Cluster REST API. | SaaS and Self-Managed |
 
 ## Identity provider (IdP) integration
 
