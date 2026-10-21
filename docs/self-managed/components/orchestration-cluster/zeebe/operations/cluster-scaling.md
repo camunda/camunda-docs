@@ -725,7 +725,7 @@ kubectl scale statefulset <zone-a-statefulset> --replicas=3
 
 ## API reference
 
-OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml).
 
 ### Reconfiguration API
 
@@ -899,7 +899,7 @@ This operation does not re-distribute the partitions that were in the removed br
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml):
 
 ```
 {
@@ -1327,7 +1327,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml):
 
 ```
 {
