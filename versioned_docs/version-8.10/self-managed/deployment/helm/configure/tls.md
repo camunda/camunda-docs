@@ -285,7 +285,7 @@ The procedure builds a copy of the image truststore without the CA and stores th
 
 Don't combine this procedure with `global.tls.caBundle`. The chart adds its own `-Djavax.net.ssl.trustStore` flag after yours, and the JVM uses the last one. If you need a private CA, import it into the new truststore in step 1 and remove `global.tls.caBundle` from your values.
 
-This procedure covers the Java components of this chart only. It doesn't change the OS CA bundle, Node.js components, or Elasticsearch and Keycloak.
+This procedure covers the Camunda Java components in step 3. It doesn't change the OS CA bundle or other components.
 
 ### 1. Build the truststore
 
@@ -313,8 +313,10 @@ docker run --rm --user 0 --entrypoint sh \
 Make sure the CA is gone. The command must print `0`:
 
 ```bash
-docker run --rm --entrypoint sh -v "$PWD/truststore:/in:ro" "$CAMUNDA_IMAGE" \
-  -c 'keytool -list -keystore /in/cacerts -storepass changeit | grep -ciE "^[^,]*emsign[^,]*ecc[^,]*g3"'
+docker run --rm --entrypoint sh \
+  -v "$PWD/truststore:/in:ro" -e REMOVE_PATTERN="$REMOVE_PATTERN" \
+  "$CAMUNDA_IMAGE" -c 'keytool -list -keystore /in/cacerts -storepass changeit \
+    | grep -ciE "^[^,]*${REMOVE_PATTERN}"'
 ```
 
 (Optional) Import your private CA:
@@ -397,10 +399,12 @@ If you already set `javaOpts` or `env` for a component, merge these entries into
 
 ### 4. Verify the truststore
 
-Make sure the Java process uses the new truststore. The output must contain `Picked up JAVA_TOOL_OPTIONS` with `/etc/camunda/jvm-truststore/cacerts`:
+Make sure each Java process uses the new truststore. Each Java pod must print a `Picked up JAVA_TOOL_OPTIONS` line with `/etc/camunda/jvm-truststore/cacerts`:
 
 ```bash
-kubectl -n "$NAMESPACE" logs -l app.kubernetes.io/component=zeebe-broker --tail=-1 | grep -m1 'Picked up JAVA_TOOL_OPTIONS'
+for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-of=camunda-platform); do
+  echo "$pod: $(kubectl -n "$NAMESPACE" logs "$pod" --all-containers | grep -m1 'Picked up JAVA_TOOL_OPTIONS')"
+done
 ```
 
 To update the truststore, build it again, replace the Secret, and restart the pods as in [Updating the CA](#updating-the-ca).
