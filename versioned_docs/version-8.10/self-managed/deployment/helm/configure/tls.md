@@ -277,6 +277,134 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 :::
 
+## Remove a CA from the JVM truststore
+
+To stop the Java components from trusting a CA that is in the image's default truststore, replace the truststore. `global.tls.caBundle` can only add CAs. It can't remove a CA.
+
+The procedure builds a copy of the image truststore without the CA and stores the copy in a Secret. Then it points each Java component to the copy with `-Djavax.net.ssl.trustStore`. Use it as an interim measure until you upgrade to images that no longer contain the CA.
+
+Don't combine this procedure with `global.tls.caBundle`. The chart adds its own `-Djavax.net.ssl.trustStore` flag after yours, and the JVM uses the last one. If you need a private CA, import it into the new truststore in step 1 and remove `global.tls.caBundle` from your values.
+
+This procedure covers the Java components of this chart only. It doesn't change the OS CA bundle, Node.js components, or Elasticsearch and Keycloak.
+
+### 1. Build the truststore
+
+Copy the truststore from the Orchestration Cluster image that you run, and remove the CA entries that match a pattern. The example removes `emSign ECC Root CA - G3`:
+
+```bash
+CAMUNDA_IMAGE=camunda/camunda:8.10.X # set to the image tag you run
+REMOVE_PATTERN='emsign[^,]*ecc[^,]*g3'
+
+mkdir -p truststore
+docker run --rm --user 0 --entrypoint sh \
+  -v "$PWD/truststore:/out" -e REMOVE_PATTERN="$REMOVE_PATTERN" \
+  "$CAMUNDA_IMAGE" -c '
+    keytool -importkeystore -noprompt \
+      -srckeystore "$JAVA_HOME/lib/security/cacerts" -srcstorepass changeit \
+      -destkeystore /out/cacerts -deststoretype PKCS12 -deststorepass changeit
+    keytool -list -keystore /out/cacerts -storepass changeit \
+      | grep -iE "^[^,]*${REMOVE_PATTERN}" | cut -d, -f1 \
+      | while IFS= read -r alias; do
+          keytool -delete -alias "$alias" -keystore /out/cacerts -storepass changeit
+        done
+    chmod 644 /out/cacerts'
+```
+
+Make sure the CA is gone. The command must print `0`:
+
+```bash
+docker run --rm --entrypoint sh -v "$PWD/truststore:/in:ro" "$CAMUNDA_IMAGE" \
+  -c 'keytool -list -keystore /in/cacerts -storepass changeit | grep -ciE "^[^,]*emsign[^,]*ecc[^,]*g3"'
+```
+
+(Optional) Import your private CA:
+
+```bash
+docker run --rm --user 0 --entrypoint sh \
+  -v "$PWD/truststore:/out" -v "$PWD/your-private-ca.pem:/ca.pem:ro" \
+  "$CAMUNDA_IMAGE" -c 'keytool -importcert -noprompt -alias your-private-ca \
+    -file /ca.pem -keystore /out/cacerts -storepass changeit'
+```
+
+The truststore contains public certificates only, so the default `changeit` password is not a secret.
+
+### 2. Create the truststore Secret
+
+```bash
+kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
+  --from-file=cacerts=./truststore/cacerts
+```
+
+### 3. Point the Java components to the truststore
+
+Mount the Secret on each Java component and set the truststore flags:
+
+| Component             | Values key           | Where to set the flags                                        |
+| --------------------- | -------------------- | ------------------------------------------------------------- |
+| Orchestration Cluster | `orchestration`      | `javaOpts`. Keep the chart default options.                   |
+| Optimize              | `optimize`           | `javaOpts`                                                    |
+| Connectors            | `connectors`         | `JAVA_TOOL_OPTIONS` in `env`                                  |
+| Management Identity   | `identity`           | `JAVA_TOOL_OPTIONS` in `env`                                  |
+| Camunda Hub REST API  | `camundaHub.restapi` | `JAVA_TOOL_OPTIONS` in `env`. `javaOpts` sets `JAVA_OPTIONS`. |
+
+```yaml
+orchestration:
+  javaOpts: >-
+    -XX:+HeapDumpOnOutOfMemoryError
+    -XX:HeapDumpPath=/usr/local/camunda/data
+    -XX:ErrorFile=/usr/local/camunda/data/camunda_error%p.log
+    -XX:+ExitOnOutOfMemoryError
+    -Djavax.net.ssl.trustStore=/etc/camunda/jvm-truststore/cacerts
+    -Djavax.net.ssl.trustStorePassword=changeit
+  extraVolumes: &jvmTruststoreVolumes
+    - name: jvm-truststore
+      secret:
+        secretName: camunda-jvm-truststore
+  extraVolumeMounts: &jvmTruststoreMounts
+    - name: jvm-truststore
+      mountPath: /etc/camunda/jvm-truststore
+      readOnly: true
+
+optimize:
+  javaOpts: >-
+    -Djavax.net.ssl.trustStore=/etc/camunda/jvm-truststore/cacerts
+    -Djavax.net.ssl.trustStorePassword=changeit
+  extraVolumes: *jvmTruststoreVolumes
+  extraVolumeMounts: *jvmTruststoreMounts
+
+connectors:
+  env: &jvmTruststoreEnv
+    - name: JAVA_TOOL_OPTIONS
+      value: >-
+        -Djavax.net.ssl.trustStore=/etc/camunda/jvm-truststore/cacerts
+        -Djavax.net.ssl.trustStorePassword=changeit
+  extraVolumes: *jvmTruststoreVolumes
+  extraVolumeMounts: *jvmTruststoreMounts
+
+identity:
+  env: *jvmTruststoreEnv
+  extraVolumes: *jvmTruststoreVolumes
+  extraVolumeMounts: *jvmTruststoreMounts
+
+camundaHub:
+  restapi:
+    env: *jvmTruststoreEnv
+    extraVolumes: *jvmTruststoreVolumes
+    extraVolumeMounts: *jvmTruststoreMounts
+```
+
+If you already set `javaOpts` or `env` for a component, merge these entries into your values. Run `helm upgrade` with the file.
+
+### 4. Verify the truststore
+
+Make sure the Java process uses the new truststore. The output must contain `Picked up JAVA_TOOL_OPTIONS` with `/etc/camunda/jvm-truststore/cacerts`:
+
+```bash
+kubectl -n "$NAMESPACE" logs -l app.kubernetes.io/component=zeebe-broker --tail=-1 | grep -m1 'Picked up JAVA_TOOL_OPTIONS'
+```
+
+To update the truststore, build it again, replace the Secret, and restart the pods as in [Updating the CA](#updating-the-ca).
+
 ## Legacy: per-component JKS truststore (deprecated)
 
 The `global.elasticsearch.*` and `global.opensearch.*` trees were removed in chart 15.x, including their `tls.secret.*` and `tls.jks.secret.*` password-injection blocks. Setting any key under them fails the render. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#migrate-globalelasticsearch-and-globalopensearch) for the migration mapping.
