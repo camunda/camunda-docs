@@ -289,21 +289,21 @@ This procedure covers the Camunda Java components in step 3. It doesn't change t
 
 ### 1. Build the truststore
 
-Copy the truststore from the Orchestration Cluster image that you run, and remove the CA entries that match a pattern. The example removes `emSign ECC Root CA - G3`:
+Copy the truststore from the Orchestration Cluster image that you run. Then remove each certificate whose subject starts with the common name (CN) that you set. The example removes `emSign ECC Root CA - G3`:
 
 ```bash
 CAMUNDA_IMAGE=camunda/camunda:8.9.X # set to the image tag you run
-REMOVE_PATTERN='emsign[^,]*ecc[^,]*g3'
+REMOVE_CN='emSign ECC Root CA - G3'
 
 mkdir -p truststore
 docker run --rm --user 0 --entrypoint sh \
-  -v "$PWD/truststore:/out" -e REMOVE_PATTERN="$REMOVE_PATTERN" \
+  -v "$PWD/truststore:/out" -e REMOVE_CN="$REMOVE_CN" \
   "$CAMUNDA_IMAGE" -c '
     keytool -importkeystore -noprompt \
       -srckeystore "$JAVA_HOME/lib/security/cacerts" -srcstorepass changeit \
       -destkeystore /out/cacerts -deststoretype PKCS12 -deststorepass changeit
-    keytool -list -keystore /out/cacerts -storepass changeit \
-      | grep -iE "^[^,]*${REMOVE_PATTERN}" | cut -d, -f1 \
+    keytool -list -v -keystore /out/cacerts -storepass changeit \
+      | awk -v cn="CN=${REMOVE_CN}," "/^Alias name: /{alias=substr(\$0, 13)} /^Owner: / && index(\$0 \",\", cn) {print alias}" \
       | while IFS= read -r alias; do
           keytool -delete -alias "$alias" -keystore /out/cacerts -storepass changeit
         done
@@ -314,9 +314,9 @@ Make sure the CA is gone. The command must print `0`:
 
 ```bash
 docker run --rm --entrypoint sh \
-  -v "$PWD/truststore:/in:ro" -e REMOVE_PATTERN="$REMOVE_PATTERN" \
-  "$CAMUNDA_IMAGE" -c 'keytool -list -keystore /in/cacerts -storepass changeit \
-    | grep -ciE "^[^,]*${REMOVE_PATTERN}"'
+  -v "$PWD/truststore:/in:ro" -e REMOVE_CN="$REMOVE_CN" \
+  "$CAMUNDA_IMAGE" -c 'keytool -list -v -keystore /in/cacerts -storepass changeit \
+    | grep -c "^Owner: CN=${REMOVE_CN},"'
 ```
 
 (Optional) Import your private CA:
