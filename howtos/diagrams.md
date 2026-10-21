@@ -58,7 +58,7 @@ Place a separate legend in unused space, preferably at the top right, with a bol
 
 ## Apply the brand palette by role
 
-Use black text on a white background for these text-heavy diagrams. This follows the Camunda Color Palette handbook guidance updated September 21, 2026. The roles below are conventions for this diagram set, not official product color assignments.
+Follow [Camunda Brand Guidelines v3.5](https://docs.google.com/presentation/d/1tJBLBW0jQdWwN1kjKvWXLhZ_mksT9Nj62WskQivtjrs) and the contrast grid linked from its **Color Guidance** slide. Use black text on a white background for these text-heavy diagrams. Backgrounds should primarily be white, black, or neutrals. The roles below are conventions for this diagram set, not official product color assignments.
 
 | Role                                      | Brand color    | Hex       |
 | ----------------------------------------- | -------------- | --------- |
@@ -76,6 +76,23 @@ Use black text on a white background for these text-heavy diagrams. This follows
 | Canvas and front-card fill                | White          | `#FFFFFF` |
 
 Keep role colors consistent across related diagrams. Connection patterns and labels must convey meaning without relying on color alone. Avoid adding a new color for every internal function.
+
+### Optional and reserved v3.5 colors
+
+These additional colors are optional, not replacements for existing semantic categories.
+
+| Color          | Hex       |
+| -------------- | --------- |
+| Neptune        | `#002D9C` |
+| Industry       | `#0043CE` |
+| True Blue      | `#0F62FE` |
+| Advance        | `#78A9FF` |
+| Oasis          | `#82CFFF` |
+| Agentic Purple | `#6967FF` |
+| Wave           | `#280892` |
+| Freundly       | `#FFF56F` |
+
+Do not use optional colors for protocol meanings or assign them to a component type without documenting a stable semantic role. Reserve Agentic Purple for an explicitly agentic component or workflow if such a role is introduced; it must not replace Purple Wool for Identity API or OIDC connections. Before using any optional color for meaningful text, boundaries, or connectors, validate the actual foreground/background combination against the v3.5 contrast grid and the WCAG requirements below.
 
 ### Check contrast separately from brand membership
 
