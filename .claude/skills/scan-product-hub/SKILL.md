@@ -2,12 +2,12 @@
 name: scan-product-hub
 description: Use when asked to scan, review, or re-check the Product Hub board for a Camunda minor or alpha release, to find what still needs to go into the release notes, announcements, or What's new page, or to report which epics changed since the last scan. Read-only. Reports in the conversation, writes no files.
 user-invocable: true
-argument-hint: "<version or alpha, e.g. 8.11-alpha1 or 8.11>"
+argument-hint: "<version or alpha, e.g. 8.11-alpha1> <Product Hub board or view link>"
 ---
 
 # /scan-product-hub — what does this release still need in the docs?
 
-Scan the Product Hub board (https://github.com/orgs/camunda/projects/9) for one release and tell the user which epics need an entry in the release notes, announcements, or What's new page. Run it again at any time to get the current status and what changed since the last scan.
+Scan the Product Hub board for one release and tell the user which epics need an entry in the release notes, announcements, or What's new page. Run it again at any time to get the current status and what changed since the last scan.
 
 - **Read-only.** Do not edit docs, add labels, or comment on epics unless the user asks.
 - **No files.** Show every report in the conversation. Do not write report or state files.
@@ -15,22 +15,35 @@ Scan the Product Hub board (https://github.com/orgs/camunda/projects/9) for one 
 
 ## Step 1: Pick the target
 
-1. The user must specify the release (`8.11-alpha1`, `8.11`). If they did not, ask which version or alpha to scan and wait for the answer. Do not guess or infer it from the board.
-2. On a rescan, reuse the target from the previous scan in the conversation unless the user names a different one.
-3. Match epics by label `version:`, `target:`, or `potential:` followed by the target. For an alpha, match that alpha only (`8.11-alpha1`). For a minor, match the minor and all of its alphas (`8.11`, `8.11.0`, `8.11-alpha*`). The `potential:` labels are lower confidence. Note them as such.
-4. Derive the docs folder by removing the dot from the version and adding `0` (`8.11` → `docs/reference/announcements-release-notes/8110/`). Files: `<dir>-release-notes.md`, `<dir>-announcements.md`, `whats-new-in-<ver>.md` (for example `whats-new-in-811.md`). If the folder does not exist, tell the user the minor has not been scaffolded yet and stop.
-5. State the target back in one line before scanning.
+1. The user must give **both** of these:
+   - The release to scan (`8.11-alpha1`, `8.11`).
+   - The Product Hub link: the board (`https://github.com/orgs/<org>/projects/<number>`) or a view of it (`.../projects/<number>/views/<view>`).
+
+   If either is missing, ask for it and wait for the answer. Do not guess or infer the release or the board.
+
+2. Read the organization and project number from the link. If the link names a view, read that view's filter and use it to cross-check the scope in step 4. Tell the user if the filter names a different release than the one they asked for.
+
+   ```bash
+   gh api graphql -f query='query{organization(login:"<org>"){projectV2(number:<number>){view(number:<view>){name filter}}}}' --jq '.data.organization.projectV2.view'
+   ```
+
+3. On a rescan, reuse the release and link from the previous scan in the conversation unless the user gives different ones.
+4. Match epics by label `version:`, `target:`, or `potential:` followed by the release. For an alpha, match that alpha only (`8.11-alpha1`). For a minor, match the minor and all of its alphas (`8.11`, `8.11.0`, `8.11-alpha*`). Treat the labels as confidence levels:
+   - `version:` is confirmed for the release.
+   - `target:` and `potential:` are lower confidence. The epic is aimed at the release but may still slip. Note this in the report.
+5. Derive the docs folder by removing the dot from the version and adding `0` (`8.11` → `docs/reference/announcements-release-notes/8110/`). Files: `<dir>-release-notes.md`, `<dir>-announcements.md`, `whats-new-in-<ver>.md` (for example `whats-new-in-811.md`). If the folder does not exist, tell the user the minor has not been scaffolded yet and stop.
+6. State the release and board back in one line before scanning.
 
 ## Step 2: Fetch the epics
 
 The board has about 2,000 items and the query pages through all of them, so expect it to take under a minute. It needs the `read:project` scope. If `gh auth status` does not list it, ask the user to run `gh auth refresh -h github.com -s read:project`.
 
-Save the query below in a temporary file and replace `<target-regex>` in the filter (for example `8\\.11`):
+Save the query below in a temporary file, replace `<org>` and `<number>` with the values from the link, and replace `<target-regex>` in the filter (for example `8\\.11`):
 
 ```graphql
 query ($endCursor: String) {
-  organization(login: "camunda") {
-    projectV2(number: 9) {
+  organization(login: "<org>") {
+    projectV2(number: <number>) {
       items(first: 100, after: $endCursor) {
         pageInfo {
           hasNextPage
@@ -87,11 +100,11 @@ For each epic, work out four things.
 
 **1. Is it a candidate?** By board phase:
 
-| Phase            | Candidate                                                                                                            |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Validate, Done   | Yes                                                                                                                  |
-| Implement        | Maybe. Epics here (especially `potential:`) may need an entry, but this needs a human decision. Flag, do not decide. |
-| Define, Discover | No. List it and state the phase as the reason.                                                                       |
+| Phase            | Candidate                                                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Validate, Done   | Yes                                                                                                                                |
+| Implement        | Maybe. Epics here (especially `potential:` and `target:`) may need an entry, but this needs a human decision. Flag, do not decide. |
+| Define, Discover | No. List it and state the phase as the reason.                                                                                     |
 
 **2. What do the release labels say?** Rely on these labels on the epic:
 
@@ -125,7 +138,7 @@ Keep it short enough to read at a glance. Link every epic (`[#1234](url)`). Use 
    | Epic | Phase | Confidence | Where it goes | Status | Next step |
    | ---- | ----- | ---------- | ------------- | ------ | --------- |
 
-   Confidence is `version`, `target`, or `potential`.
+   Confidence is `version` (confirmed), or `target` or `potential` (lower confidence, may still slip).
 
 3. **Already in docs / no entry needed / not eligible:** one line per epic, with the reason.
 4. **Questions for you:** decisions the skill cannot make (placement, naming, suspect epics, epics that left the board).
@@ -155,7 +168,7 @@ Open the report with **What changed since the last scan**, listing only differen
 - **Removed** from scope (labels dropped). Keep it in the report and ask the user what to do, especially if it already has an entry in the docs.
 - **Phase** moved (for example `Implement → Validate`), and whether it became a candidate.
 - **Release label** changed (for example `release-notes-needed` → `release-notes-added`).
-- **Confidence** changed (`potential` → `target`).
+- **Confidence** changed (for example `potential` → `target` → `version`).
 - **Release-note content** appeared or changed (`rn` hash differs).
 - **Newly documented** (an entry now exists in the docs).
 - **Reopened or closed** epics.
