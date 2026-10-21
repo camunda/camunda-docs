@@ -9,8 +9,10 @@ Use this guide to quickly install the Camunda 8 orchestration cluster for testin
 
 <!-- TODO: add links to explain the Orchestration Cluster and management plane -->
 
-:::tip Need a Kubernetes cluster?
-If you don't have a Kubernetes cluster yet, check out our setup guides:
+:::tip Recommended local setup
+For local development, use the [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) by default. Camunda tests that setup automatically. Use this guide only when you need a minimal Orchestration Cluster for a short test.
+
+If you do not have a Kubernetes cluster yet, see the setup guides:
 
 - **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster.
 - **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift.
@@ -27,7 +29,7 @@ In this guide, you deploy the Orchestration Cluster with Basic authentication an
 
 ## Orchestration Cluster only
 
-The Helm chart deploys the Camunda Orchestration Cluster with **Basic authentication** and **RDBMS** as secondary storage (using embedded H2 when no external database URL is provided), intended only for testing and development. No external database or identity provider is required.
+The Helm chart deploys the Camunda Orchestration Cluster with **Basic authentication** and **RDBMS** as secondary storage (embedded H2), intended only for testing and development. No external database or identity provider is required.
 
 :::warning H2 topology limitations
 Embedded H2 is non-production only and valid only with a single broker and a single partition.
@@ -62,16 +64,11 @@ In production, Camunda 8 is typically deployed together with additional componen
 
    ```bash
    helm install camunda camunda/camunda-platform \
-     --set orchestration.exporters.rdbms.enabled=true \
-     --set orchestration.clusterSize=1 \
-     --set orchestration.partitionCount=1 \
-     --set orchestration.replicationFactor=1 \
-     --set-string 'orchestration.env[0].name=CAMUNDA_PERSISTENT_SESSIONS_ENABLED' \
-     --set-string 'orchestration.env[0].value=false' \
+     --values https://helm.camunda.io/camunda-platform/values/camunda-8.10/values-quick-install.yaml \
      -n orchestration
    ```
 
-This enables the RDBMS exporter with embedded H2 as secondary storage. The cluster is configured with a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
+The Helm chart provides the [`values-quick-install.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-quick-install.yaml) file. This file enables the RDBMS exporter and sets a file-based embedded H2 database as secondary storage. It also sets a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
 
 The embedded H2 database is local to each broker. Running multiple brokers would result in separate, independent databases and incomplete query results.
 
@@ -83,35 +80,6 @@ If you already have an invalid H2 setup:
 2. For clustered use, migrate secondary storage to an external persistent backend.
 
 Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. You must explicitly enable a secondary storage backend (RDBMS, Elasticsearch, or OpenSearch) in your Helm values.
-
-   <!-- TODO before 8.9 GA:
-     The install command below includes a temporary workaround:
-       --set-string orchestration.env[0].name=CAMUNDA_PERSISTENT_SESSIONS_ENABLED
-       --set-string orchestration.env[0].value=false
-
-     Why: The Helm chart (PR #5098) now enables persistent web sessions for RDBMS,
-     but the application image does not yet include the PersistentWebSessionClient
-     bean for the RDBMS backend. This causes a Spring bean injection failure
-     (NoSuchBeanDefinitionException: PersistentWebSessionClient) at startup,
-     crashing all Zeebe brokers in CrashLoopBackOff.
-
-     The env var override disables persistent sessions until the app catches up.
-
-     Before GA:
-     - Remove the workaround once the app image supports persistent sessions with RDBMS
-       (tracking: https://github.com/camunda/camunda-platform-helm/issues/5099)
-     - Replace the install command with:
-       ```
-       helm install camunda camunda/camunda-platform \
-         --set orchestration.exporters.rdbms.enabled=true \
-         --set orchestration.clusterSize=1 \
-         --set orchestration.partitionCount=1 \
-         --set orchestration.replicationFactor=1 \
-         -n orchestration
-       ```
-     - Confirm the Connectors service port in the chart NOTES matches the actual port (currently NOTES say 8086, service is 8080)
-     - Validate that a plain `helm install` without any `--set` gives a clear error message guiding the user to choose a secondary storage
-   -->
 
 4. **Access the components:**
 
@@ -177,6 +145,14 @@ To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler
 2. Look for `Events` entries such as `Insufficient cpu`, `Insufficient memory`, or an unbound `PersistentVolumeClaim`.
 3. Add node capacity, or reduce resource requests in your values file, to match what's actually available.
 
+### The Orchestration Cluster fails with `Cannot determine the database vendor`
+
+**Observed behavior:** The orchestration pod restarts, and its log shows `Cannot determine the database vendor ... from JDBC URL ''`.
+
+**Why this happens:** You enabled the RDBMS exporter, but `orchestration.data.secondaryStorage.rdbms.url` is empty. Some Helm chart versions render this empty URL, and Camunda 8.10 and later do not select embedded H2 for an empty URL.
+
+**How to fix:** Install with the values file from step 3 of [Orchestration Cluster only](#orchestration-cluster-only), or set `orchestration.data.secondaryStorage.rdbms.url` to a JDBC URL.
+
 ### A pod is running but never becomes ready
 
 **Observed behavior:** `kubectl get pods` shows a pod in `Running` state, but it doesn't reach `Ready`, or it restarts repeatedly.
@@ -206,7 +182,7 @@ helm install camunda camunda/camunda-platform \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-This command sets only the application image versions. Because the chart doesn't provision a secondary storage backend by default, also enable one, for example with the flags from step 3 of [Orchestration Cluster only](#orchestration-cluster-only).
+This command sets only the application image versions. Because the chart doesn't provision a secondary storage backend by default, also enable one, for example with the values file from step 3 of [Orchestration Cluster only](#orchestration-cluster-only).
 
 To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.8 is `13`:
 
