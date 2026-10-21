@@ -2,7 +2,7 @@
 id: project-setup
 title: Set up your organization for ProcessOS Harness
 sidebar_label: Organizational setup
-description: "Prepare your organization for a ProcessOS project by running the first engagement with a partner or a Camunda Field Delivery Engineer, and by completing the Camunda Academy learning path."
+description: "Prepare your organization for a ProcessOS project by running the first engagement with a partner or a Camunda Field Delivery Engineer, and by completing the Camunda Academy overview course."
 keywords: ["ProcessOS Harness", "onboarding", "Camunda Academy"]
 ---
 
@@ -18,13 +18,13 @@ The first journey is where an unfamiliar interaction model costs the most. Someo
 
 Contact your Camunda account team to arrange this.
 
-## Complete the Camunda Academy learning path
+## Complete the Camunda Academy overview course
 
-Complete the ProcessOS Harness learning path in [Camunda Academy](https://academy.camunda.com/) before you start a project.
+Complete the ProcessOS Harness overview course in [Camunda Academy](https://academy.camunda.com/camunda-8-processos-harness-overview) before you start a project.
 
 Academy is where you build the capability to work with ProcessOS Harness, including the mindset shift that working with non-deterministic AI output requires. This documentation is written for a builder who has already done that, and it's here to keep you unblocked rather than to teach the approach from scratch.
 
-Treat the learning path as a prerequisite for your first project.
+Treat the overview course as a prerequisite for your first project.
 
 ## Plan the effort
 
