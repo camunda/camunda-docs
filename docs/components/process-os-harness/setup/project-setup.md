@@ -20,7 +20,7 @@ Contact your Camunda account team to arrange this.
 
 ## Complete the Camunda Academy learning path
 
-Complete the ProcessOS Harness learning path in [Camunda Academy](https://academy.camunda.com/) before you start a project.
+Complete the ProcessOS Harness learning path in [Camunda Academy](https://academy.camunda.com/camunda-8-processos-harness-overview) before you start a project.
 
 Academy is where you build the capability to work with ProcessOS Harness, including the mindset shift that working with non-deterministic AI output requires. This documentation is written for a builder who has already done that, and it's here to keep you unblocked rather than to teach the approach from scratch.
 
