@@ -10,13 +10,10 @@ Use this guide to quickly install the Camunda 8 orchestration cluster for testin
 <!-- TODO: add links to explain the Orchestration Cluster and management plane -->
 
 :::tip Recommended local setup
-For local development, use the [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) by default. Camunda tests that setup automatically. Use this guide only when you need a minimal Orchestration Cluster for a short test.
+For local development, use the [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) by default. Camunda tests that setup automatically.
 
-If you do not have a Kubernetes cluster yet, see the setup guides:
-
-- **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster.
-- **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift.
-  :::
+Use this guide when you need only the Orchestration Cluster on an existing Kubernetes cluster, with no external database and no identity provider. For example, use it to try the Helm chart or to follow a training course.
+:::
 
 :::note
 In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
@@ -68,15 +65,13 @@ In production, Camunda 8 is typically deployed together with additional componen
      -n orchestration
    ```
 
-The Helm chart provides the [`values-quick-install.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-quick-install.yaml) file. This file enables the RDBMS exporter and sets a file-based embedded H2 database as secondary storage. It also sets a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
+The Helm chart provides the [`values-quick-install.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-quick-install.yaml) file. This file enables the RDBMS exporter and sets a file-based embedded H2 database as secondary storage. It also sets a single broker and a single partition.
 
 The file contains the following values:
 
 ```yaml reference referenceLinkText="Source" title="values-quick-install.yaml"
 https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-quick-install.yaml
 ```
-
-The embedded H2 database is local to each broker. Running multiple brokers would result in separate, independent databases and incomplete query results.
 
 If you need multiple brokers, switch to a shared external backend (for example, PostgreSQL) instead of H2.
 
@@ -157,7 +152,7 @@ To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler
 
 **Why this happens:** You enabled the RDBMS exporter, but `orchestration.data.secondaryStorage.rdbms.url` is empty. Some Helm chart versions render this empty URL, and Camunda 8.10 and later do not select embedded H2 for an empty URL.
 
-**How to fix:** Install with the values file from step 3 of [Orchestration Cluster only](#orchestration-cluster-only), or set `orchestration.data.secondaryStorage.rdbms.url` to a JDBC URL.
+**How to fix:** Install with the values file from step 3 of [Orchestration Cluster only](#orchestration-cluster-only), or set `orchestration.data.secondaryStorage.rdbms.url` to a JDBC URL. For embedded H2, use `jdbc:h2:file:/usr/local/camunda/data/h2db`.
 
 ### A pod is running but never becomes ready
 
