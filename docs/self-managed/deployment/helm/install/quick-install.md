@@ -70,6 +70,12 @@ In production, Camunda 8 is typically deployed together with additional componen
 
 The Helm chart provides the [`values-quick-install.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.11/values-quick-install.yaml) file. This file enables the RDBMS exporter and sets a file-based embedded H2 database as secondary storage. It also sets a single broker, a single partition, and a replication factor of 1. The replication factor must be less than or equal to the cluster size. For a single-broker cluster, the only valid replication factor is 1.
 
+The file contains the following values:
+
+```yaml reference referenceLinkText="Source" title="values-quick-install.yaml"
+https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.11/values-quick-install.yaml
+```
+
 The embedded H2 database is local to each broker. Running multiple brokers would result in separate, independent databases and incomplete query results.
 
 If you need multiple brokers, switch to a shared external backend (for example, PostgreSQL) instead of H2.
