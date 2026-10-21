@@ -47,7 +47,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **A client to send API requests**
   - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger) interface
   - Programmatic access: Use the [Java client](/apis-tools/java-client/getting-started.md) or [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
-  - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
+  - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
   - Universal client: [Postman collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest)
 
 ### Authentication
@@ -204,4 +204,4 @@ Now that you're familiar with the Orchestration Cluster REST API, here are some 
 - [Build a job worker using the Spring SDK](../camunda-spring-boot-starter/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
 - [Migrate from v1 component REST APIs to the v2 Orchestration Cluster REST API](../migration-manuals/migrate-to-camunda-api.md)
-- [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema
+- [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema
