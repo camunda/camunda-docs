@@ -15,7 +15,7 @@ Camunda recommends completing the [organizational setup](setup/project-setup.md)
 ## Install ProcessOS Harness
 
 :::note For Camunda Enterprise customers and partners
-ProcessOS Harness is available to Camunda Enterprise customers and Camunda partners. To download it, you need access to the [Camunda Download Center (Enterprise Releases)](https://downloads.camunda.cloud/enterprise-release/) with your Camunda Enterprise credentials. If you don't have credentials, contact your Customer Success Manager. Partners: contact your Partner Manager.
+ProcessOS Harness is available to Camunda Enterprise customers and Camunda partners. To download it, you need access to the [Camunda Download Center (Enterprise Releases)](https://downloads.camunda.cloud/enterprise-release/) with your Camunda Enterprise credentials. If you don't have credentials, contact your Customer Success Manager. If you’re a Camunda partner, contact your Partner Manager instead.
 :::
 
 ### Choose a target
