@@ -21,6 +21,7 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - Existing partitions continue processing data, but you may notice temporary performance impacts until scaling completes. Plan scaling ahead of anticipated load increases to minimize disruption.
 - When adding new partitions or brokers, partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the load per broker. Use the API endpoints in [dry run](#dry-run) mode to preview partition distribution.
 - Always take a backup before scaling to ensure you can restore if needed.
+- When you add partitions, each new partition is bootstrapped from a snapshot of the global state of partition 1, such as process definitions, decisions, forms, and identity data. This snapshot is transferred in chunks of [`camunda.cluster.raft.snapshot-chunk-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterraft), and each request must complete within `camunda.cluster.raft.bootstrap-snapshot-request-timeout`. The chunk size defaults to `1GB`, so on a cluster with a large global state, lower it, for example to `8MB`, before scaling. If a partition bootstrap still fails with snapshot request timeouts, increase the timeout.
 
 ## Scale up brokers
 
