@@ -436,7 +436,7 @@ cd ../vpc && terraform destroy
 The reference architecture sets `s3_force_destroy = true` by default so `terraform destroy` removes backup S3 buckets without manual emptying. Flip `s3_force_destroy` to `false` in `terraform/infra/terraform.tfvars` and re-apply the infra layer before running any real workload through the stack. Otherwise, `terraform destroy` will delete backup data permanently.
 :::
 
-With `db_force_destroy = true` (the default), `terraform destroy` detaches the regional clusters from the Aurora Global Database before it deletes the global cluster, even after a failover changed the topology Terraform recorded. This setting doesn't protect your data. If you set it to `false`, `terraform destroy` still deletes both regional clusters without a final snapshot, then stops on the global cluster. To recover, see [`terraform destroy` hangs on the Aurora resources](#terraform-destroy-hangs-on-the-aurora-resources). To keep the data, enable deletion protection or final snapshots on the clusters.
+`db_force_destroy` (default `true`) lets `terraform destroy` detach any member that is still attached to the Aurora Global Database when it deletes the global cluster. It doesn't cover a teardown after a failover. While the writer is in region 1, `terraform destroy` hangs on the Aurora resources, whatever the value of `db_force_destroy`. Move the writer back to region 0 before you destroy. See [`terraform destroy` hangs on the Aurora resources](#terraform-destroy-hangs-on-the-aurora-resources). This setting doesn't protect your data either. If you set it to `false`, `terraform destroy` still deletes both regional clusters without a final snapshot. To keep the data, enable deletion protection or final snapshots on the clusters.
 
 ## Verify connectivity to Camunda 8
 
@@ -644,7 +644,7 @@ aws ecs execute-command \
 
 **Symptom:** `terraform destroy` in `terraform/infra` doesn't finish while it deletes the Aurora Global Database resources.
 
-**Cause:** `db_force_destroy` is `false` and the Aurora writer is no longer in region 0, for example after an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost), and Terraform still expects the original topology.
+**Cause:** the Aurora writer is no longer in region 0, for example after a failover or an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost), and Terraform still expects the original topology. `db_force_destroy` doesn't prevent this.
 
 **Fix:** move the writer back with `./procedure/failback.sh --failed-region 0 --switch-writer`, then run `terraform destroy` again. If that's not possible, remove the Aurora resources manually and drop them from the Terraform state:
 
