@@ -26,45 +26,11 @@ The reference architecture creates two identically configured ECS Fargate cluste
 Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby — region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit step during failover, not an automatic property of the deployment.
 :::
 
-```mermaid
+<!-- Editable source: ./assets/aws-ecs-dual-region.excalidraw -->
 
-architecture-beta
-    group regions(cloud)["Camunda dual region"]
-    group r0(cloud)["Region 0 · eu-west-2"] in regions
-    group r1(cloud)["Region 1 · eu-west-3"] in regions
-    group aurora_global(logos:aws-rds)["Aurora Global Database"] in regions
+![Clients reach the Ingress in each of two AWS regions, eu-west-2 and eu-west-3, over HTTP(S) and gRPC. Each Ingress forwards to an Orchestration Cluster of four Zeebe brokers on ECS Fargate, and the two clusters exchange Zeebe Raft traffic. Each region has an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions write to. Both regions connect to the writer cluster of an Aurora Global Database in eu-west-2, which replicates to a reader cluster in eu-west-3.](./assets/aws-ecs-dual-region.svg)
 
-    service ingress0(logos:aws-elb)["ALB and NLB ingress"] in r0
-    service tasks0(logos:aws-ecs)["ECS Fargate workloads"] in r0
-    service s3id0(logos:aws-s3)["S3 broker-ID lease"] in r0
-    service s3bk0(logos:aws-s3)["S3 backup repository"] in r0
-    service peer0(internet)["Cross-region link"] in r0
-
-    service ingress1(logos:aws-elb)["ALB and NLB ingress"] in r1
-    service tasks1(logos:aws-ecs)["ECS Fargate workloads"] in r1
-    service s3id1(logos:aws-s3)["S3 broker-ID lease"] in r1
-    service s3bk1(logos:aws-s3)["S3 backup repository"] in r1
-    service peer1(internet)["Cross-region link"] in r1
-
-    service db_primary(logos:aws-rds)["Primary writer · eu-west-2"] in aurora_global
-    service db_secondary(logos:aws-rds)["Secondary reader · eu-west-3"] in aurora_global
-    db_primary:R --> L:db_secondary
-
-    ingress0:B -- T:tasks0
-    tasks0:L -- R:s3id0
-    tasks0:B -- T:s3bk0
-    tasks0:R -- L:peer0
-
-
-    peer0{group}:R <--> L:peer1{group}
-    peer0{group}:B --> T:db_primary{group}
-    peer1{group}:B --> T:db_secondary{group}
-
-    ingress1:B -- T:tasks1
-    tasks1:R -- L:s3id1
-    tasks1:B -- T:s3bk1
-    tasks1:L -- R:peer1
-```
+Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease. Both regions connect to the Aurora global writer endpoint in region 0, and the writer replicates to the reader cluster in region 1.
 
 :::note
 This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
@@ -103,7 +69,7 @@ Dual-region deployments may require quota increases. Before deploying, verify th
 
 | Tool                     | Purpose                                                                                                                                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `terraform`              | Infrastructure provisioning. Pin to the version in [`.tool-versions`](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions).                                          |
+| `terraform`              | Infrastructure provisioning. Pin to the version in [`.tool-versions`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/.tool-versions).                                   |
 | `aws` CLI v2             | AWS resource inspection and authentication.                                                                                                                                                        |
 | `jq`                     | JSON parsing in verification commands.                                                                                                                                                             |
 | `session-manager-plugin` | Required only for the [Session Manager access path](#method-b--session-manager-port-forward). Install with `brew install --cask session-manager-plugin` on macOS or follow the [AWS instructions]. |
@@ -127,7 +93,7 @@ Configure valid AWS credentials before starting. The [AWS Terraform provider](ht
 Download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references). The reference architectures are versioned according to Camunda releases (for example, `stable/8.x`). The copy lets you reuse and extend the provided Terraform examples without the constraints of a third-party-maintained module:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/procedure/get-your-copy.sh
 ```
 
 With the reference architecture in place, you can proceed with the remaining steps. Make sure you're in the correct directory before continuing.
@@ -203,7 +169,7 @@ BYO-VPC is the preferred path for customers integrating with an existing AWS lan
 | `region_N_public_subnet_ids`       | At least three public subnet IDs in distinct AZs with an internet gateway route (used by ALB). |
 | `region_N_private_route_table_ids` | At least one private route table ID per region (for cross-region routes).                      |
 
-The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
+The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
 
 ### Secondary storage replication lag
 
@@ -289,7 +255,7 @@ registry_password      = "<your-registry-pass>"
 ```hcl
 aws_profile      = "<your-aws-profile>" # optional; omit when authenticating via env vars
 camunda_image    = "registry.camunda.cloud/camunda/camunda:<camunda-version>"      # 8.10 or later
-connectors_image = "camunda/connectors-bundle:<connectors-bundle-version>"          # for example, 8.10.0-alpha2
+connectors_image = "camunda/connectors-bundle:<connectors-bundle-version>"          # for example, 8.10.0
 default_tags     = { Environment = "reference", Team = "<your-team>" }
 ```
 
@@ -501,7 +467,7 @@ Use this method when the ALB is not reachable from your machine — for example,
 
 Requirements:
 
-- `task_enable_execute_command = true` on the orchestration cluster module. The reference architecture sets this to `true` by default — see [`terraform/app/camunda.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/app/camunda.tf).
+- `task_enable_execute_command = true` on the orchestration cluster module. The reference architecture sets this to `true` by default — see [`terraform/app/camunda.tf`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/terraform/app/camunda.tf).
 - The task IAM role must allow `ssmmessages:CreateControlChannel`, `ssmmessages:CreateDataChannel`, `ssmmessages:OpenControlChannel`, and `ssmmessages:OpenDataChannel`. The `ecs_exec_policy` in the orchestration-cluster module already grants these.
 - [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) installed locally (`brew install --cask session-manager-plugin` on macOS).
 
@@ -551,7 +517,7 @@ open http://localhost:8080
 
 The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies, with two dual-region specifics to keep in mind:
 
-- **Backups are per region.** Each orchestration cluster writes to its local S3 backup bucket via `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`. The infra layer exposes both bucket names as outputs: `backup_bucket_region_0_name` and `backup_bucket_region_1_name`. Trigger backups against either region's API; ensure your backup tooling reads the correct bucket for that region.
+- **Backups share one bucket.** The infra layer creates a single S3 backup bucket in region 0, exposed as the `backup_bucket_region_0_name` output. Both orchestration clusters write to it through `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`, and region 1 brokers set `CAMUNDA_DATA_BACKUP_S3_REGION` to region 0 so they reach the bucket cross-region. All backup data stays in one place, whichever region you trigger the backup from. If you lose region 0, you lose access to the backup bucket until the region recovers, so plan S3 replication yourself if you need the backups in both regions.
 - **Restore is not exposed by the dual-region app layer.** The underlying orchestration-cluster module supports an init-container restore (`restore_enabled`, `restore_backup_id` — see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore-application.md#restore-options)), but these variables are not surfaced in `terraform/app/camunda.tf` in this reference. Enabling restore for a dual-region deployment requires customizing the app layer to pass the restore variables to both regional module invocations and to coordinate broker IDs that span both regions. Treat dual-region restore as an advanced scenario; validate it against your specific topology before relying on it.
 
 :::note

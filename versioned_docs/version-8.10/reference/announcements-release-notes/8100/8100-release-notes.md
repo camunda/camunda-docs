@@ -32,7 +32,7 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
+<ul><li>[Camunda 8.10.5 (19.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.5)</li><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.1 (20.10.2026)](https://github.com/camunda/connectors/releases/tag/8.10.1)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -86,6 +86,14 @@ Your AI agents can now use Claude models hosted by Microsoft Foundry (Azure), th
 The custom or compatible endpoint backends for both the Anthropic and OpenAI providers now support **OAuth 2.0 client credentials**. Use this authentication method with internal gateways that issue bearer tokens instead of accepting static API keys.
 
 <p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
+
+#### Mistral AI provider
+
+<!-- https://github.com/camunda/connectors/issues/8052 -->
+
+Your AI agents can now use Mistral models through the new native **Mistral AI** provider of the AI Agent element templates. Connect to the Mistral API with an API key, or to a custom Mistral-compatible endpoint with no authentication, an API key, or OAuth 2.0 client credentials. The provider supports tool calling, structured output, PDF and image input, and reasoning models. The Mistral AI provider is available from Camunda 8.10.5.
+
+<p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#mistral-ai)</p>
 
 ### AI agent testing with Camunda Process Test
 

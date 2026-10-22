@@ -40,19 +40,19 @@ The following documented alpha features are currently available:
 items={[
 {
 type: 'link',
-href: '/docs/next/components/early-access/alpha/bpmn-copilot/',
+href: '/docs/components/early-access/alpha/bpmn-copilot/',
 label: 'BPMN Copilot',
 docId: 'components/early-access/alpha/bpmn-copilot/bpmn-copilot',
 },
 {
 type: 'link',
-href: '/docs/next/components/early-access/alpha/feel-copilot/',
+href: '/docs/components/early-access/alpha/feel-copilot/',
 label: 'FEEL Copilot',
 docId: 'components/early-access/alpha/feel-copilot/feel-copilot',
 },
 {
 type: 'link',
-href: '/docs/next/components/early-access/alpha/a2a-client/',
+href: '/docs/components/early-access/alpha/a2a-client/',
 label: 'A2A Client',
 docId: 'components/early-access/alpha/a2a-client/a2a-client',
 },

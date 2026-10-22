@@ -32,7 +32,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - A namespace to host Camunda; in this guide we will reference `camunda` as the target namespace.
 - (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. This guide installs them directly from source to provide full control over versions and configuration.
-  For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
+  For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
 ## Architecture
 
@@ -81,7 +81,7 @@ To streamline execution of the following commands, we recommend exporting multip
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/chart-env.sh
 ```
 
 ### Export database values
@@ -98,7 +98,7 @@ Verify the configuration of your environment variables by running the following 
 <TabItem value="elasticsearch">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -108,7 +108,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 The RDBMS variant requires additional orchestration database variables (`DB_ORCHESTRATION_NAME`, `DB_ORCHESTRATION_USERNAME`, `DB_ORCHESTRATION_PASSWORD`) on top of the base configuration:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region-rdbms/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -134,13 +134,13 @@ To monitor your Ingress setup using Azure Monitor, you may find the official gui
 Set the following values for your Ingress configuration:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-ingress-setup-vars.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/export-ingress-setup-vars.sh
 ```
 
 Additionally, before proceeding, export the following environment variables. These will be used throughout this guide for configuring DNS, certificates, and other Azure resources:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/export-domain-setup-vars.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/export-domain-setup-vars.sh
 ```
 
 These variables will be referenced in later steps, so make sure they are set in your current shell session before continuing.
@@ -152,7 +152,7 @@ These variables will be referenced in later steps, so make sure they are set in 
 The following installs `contour` in the `projectcontour` namespace via Helm. For more configuration options, consult the [Contour Helm chart](https://projectcontour.github.io/helm-charts/).
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-contour.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/install-contour.sh
 ```
 
 The installation script applies AKS-specific settings, such as the Azure load balancer health-probe path and `externalTrafficPolicy: Local`, so that the Azure load balancer health probe targets the Kubernetes `healthCheckNodePort` and the client source IP is preserved.
@@ -168,7 +168,7 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 To enable external-dns to work with Azure Managed Identities, create the Kubernetes secret directly using the exported environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/external-dns-azure-config.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/external-dns-azure-config.sh
 ```
 
 :::danger Uniqueness of txtOwnerId for DNS
@@ -179,7 +179,7 @@ In the example below, it's set to `external-dns` and should be changed if this i
 :::
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-external-dns.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/install-external-dns.sh
 ```
 
 ### cert-manager
@@ -189,13 +189,13 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#3-install-customresourcedefinitions) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-cert-manager-crds.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/install-cert-manager-crds.sh
 ```
 
 The following installs `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, consult the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager). The supplied settings also configure `cert-manager` to ease the certificate creation by setting a default issuer, which allows you to add a single annotation on an Ingress to request the relevant certificates.
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-cert-manager.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/install-cert-manager.sh
 ```
 
 Create a `ClusterIssuer` via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/):
@@ -203,7 +203,7 @@ Create a `ClusterIssuer` via `kubectl` to enable cert-manager to request certifi
 After exporting the above values, follow up with:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-cert-manager-issuer.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/install-cert-manager-issuer.sh
 ```
 
 ## Identity Provider (IdP) setup
@@ -248,7 +248,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 <TabItem value="elasticsearch">
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/helm-values/values-domain.yml
 ```
 
 </TabItem>
@@ -258,7 +258,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 The RDBMS values file disables Elasticsearch and Optimize, and configures PostgreSQL as the secondary storage for the orchestration cluster:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region-rdbms/helm-values/values-domain.yml
 ```
 
 </TabItem>
@@ -286,7 +286,7 @@ To create the secrets, run the following commands:
 <TabItem value="elasticsearch">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
@@ -296,7 +296,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 The RDBMS variant creates an additional `orchestration-postgres-secret` for the secondary storage database:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
@@ -314,7 +314,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 <TabItem value="elasticsearch">
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
 </TabItem>
@@ -324,7 +324,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 The RDBMS values file disables Elasticsearch and Optimize, and configures PostgreSQL as the secondary storage for the orchestration cluster:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region-rdbms/helm-values/values-no-domain.yml
 ```
 
 </TabItem>
@@ -346,7 +346,7 @@ To create the secrets, run the following command for your selected variant:
 <TabItem value="elasticsearch">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
@@ -356,7 +356,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 The RDBMS variant creates an additional `orchestration-postgres-secret` for the secondary storage database:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
@@ -433,14 +433,14 @@ Skip directly to [filling your deployment with actual values](#fill-your-deploym
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 :::note Web Modeler SMTP secret
 If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/hub/configuration/properties.md#smtp--email)):
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-webmodeler-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/azure/kubernetes/aks-single-region/procedure/create-webmodeler-secret.sh
 ```
 
 :::
@@ -450,7 +450,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/install-chart.sh
 ```
 
 This script:
@@ -563,7 +563,7 @@ For a detailed guide on generating and using a token, consult the relevant docum
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
 ```
 
   </TabItem>
@@ -578,7 +578,7 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
 ```
 
   </TabItem>
@@ -588,7 +588,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Generate a temporary token to access the Orchestration Cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration Cluster REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -597,7 +597,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   <summary>Example output</summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
 </details>

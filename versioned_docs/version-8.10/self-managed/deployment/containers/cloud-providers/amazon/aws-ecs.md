@@ -17,11 +17,11 @@ If you are new to AWS ECS or Terraform, consider reviewing the [AWS ECS document
 ## Prerequisites
 
 - **AWS account** – An AWS account to provision resources with permissions for **ecs**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **rds** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/example/policy.json).
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/containers/ecs-single-region-fargate/example/policy.json).
 - **Terraform** – Infrastructure as code tool (v1.7 or later). [Install Terraform](https://developer.hashicorp.com/terraform/install).
 - **AWS CLI** – Command-line tool to manage AWS resources, used for `local-exec` to trigger the initial Aurora PostgreSQL user seeding. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+For the exact tool versions used during testing, refer to the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/.tool-versions) file.
 
 ### Considerations
 
@@ -55,52 +55,13 @@ The result is a fully functioning Camunda Orchestration Cluster deployed in a hi
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-```mermaid
+<!-- Editable source: ./assets/aws-ecs-single-region.excalidraw -->
 
-architecture-beta
-    service users(internet)["Users and API clients"]
-
-    group vpc(logos:aws-vpc)["VPC · single region · three availability zones"]
-    group edge(cloud)["Public subnets · load balancers"] in vpc
-    group cluster(logos:aws-ecs)["ECS cluster · Fargate services in private subnets"] in vpc
-    group data(cloud)["Managed data services"] in vpc
-
-    service alb(logos:aws-elb)["ALB · web apps and REST API"] in edge
-    service nlb(logos:aws-elb)["NLB · gRPC"] in edge
-
-    service cmap(logos:aws-route53)["Cloud Map · Service Connect"] in cluster
-    service hub(logos:aws-fargate)["Camunda Hub"] in cluster
-    service identity(logos:aws-fargate)["Management Identity"] in cluster
-    service oc(logos:aws-fargate)["Orchestration Cluster"] in cluster
-    service connectors(logos:aws-fargate)["Connectors"] in cluster
-
-    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in data
-    service efs(disk)["EFS · Zeebe primary storage"] in data
-    service s3(logos:aws-s3)["S3 · node IDs and backups"] in data
-    junction jstore in data
-
-    users:B --> T:alb{group}
-    alb:R -- L:nlb
-
-    cmap:R -- L:hub
-    hub:R -- L:identity
-    identity:R -- L:oc
-    oc:R -- L:connectors
-
-    alb{group}:B --> T:oc{group}
-
-    oc:B --> T:jstore{group}
-    jstore:R -- L:s3
-    jstore:B -- T:efs
-    jstore:L -- R:aurora
-
-    identity:B --> T:aurora{group}
-    hub:B --> L:aurora{group}
-```
+![A single AWS region with one VPC across three availability zones. Users and API clients reach an NLB over gRPC and an ALB over HTTP(S). The NLB forwards gRPC to the Orchestration Cluster, and the ALB routes to the ECS tasks. The Orchestration Cluster, Connectors, and the optional Management Identity and Camunda Hub tasks register with Cloud Map for service discovery. The Orchestration Cluster uses EFS over NFS, an S3 bucket for node IDs, an S3 bucket for backups, and Aurora PostgreSQL. Management Identity and Camunda Hub also use Aurora PostgreSQL.](./assets/aws-ecs-single-region.svg)
 
 _Infrastructure diagram for the single-region ECS architecture. Management Identity and Camunda Hub are optional and are only deployed when you enable OIDC authentication._
 
-Arrows show the direction of traffic. Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, S3, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
+Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, the S3 node-ID bucket, the S3 backup bucket, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
 
 After completing this guide, you will have:
 
@@ -143,7 +104,7 @@ Start by downloading a copy of the reference architecture from the GitHub reposi
 The reference architecture repository allows you to reuse and extend the provided Terraform examples. This flexible implementation avoids the constraints of relying on third-party-maintained Terraform modules:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/containers/ecs-single-region-fargate/procedure/get-your-copy.sh
 ```
 
 With the reference architecture in place, you can proceed with the remaining steps in this documentation. Make sure you're in the correct directory before continuing with the instructions.
@@ -199,25 +160,25 @@ Next, follow these steps to create an S3 bucket with versioning enabled:
 2. Run the following command to create an S3 bucket for storing your Terraform state. Be sure to choose a unique bucket name, and ensure that the `AWS_REGION` environment variable is already set:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
    ```
 
 3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
    ```
 
 4. Secure the bucket by blocking public access:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/common/procedure/s3-bucket/s3-bucket-private.sh
    ```
 
 5. Verify versioning is enabled on the bucket:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
 The S3 bucket is now ready to securely store your Terraform state files, with versioning enabled for added protection.
@@ -233,7 +194,7 @@ Make sure you are in the `terraform/cluster` subfolder: `camunda-deployment-refe
 :::
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
 Terraform will now use the S3 bucket to manage the state file, ensuring remote and persistent storage.
@@ -246,7 +207,7 @@ While each Camunda component is kept as a separate module to abstract the need o
 
 If wanting to deploy multiple Camunda 8 setups, it may make sense to abstract the root workspace to a common module as well to allow easier scaling.
 
-If not otherwise indicated, the `.tf` file is corresponding to the [root workspace path](https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate/terraform/cluster).
+If not otherwise indicated, the `.tf` file is corresponding to the [root workspace path](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/containers/ecs-single-region-fargate/terraform/cluster).
 
 ### Elastic Container Service
 
@@ -277,7 +238,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 
 - EFS file system
 
-The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/orchestration-cluster).
+The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/ecs/fargate/orchestration-cluster).
 
 `../../modules/ecs/fargate/connectors` is a secondary component `Connectors` and contains the definitions for:
 
@@ -285,7 +246,7 @@ The base terraform documentation for this module can be found [alongside the rep
 - Task specific IAM role to allow access to AWS services isolated to this component
 - Load Balancer related configurations to add listener rules to a shared Load Balancer between Orchestration Cluster and Connectors
 
-The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/connectors).
+The base terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/ecs/fargate/connectors).
 
 `camunda.tf` contains the module invocations with an example base configuration for the Orchestration Cluster and Connectors:
 
@@ -399,7 +360,7 @@ Add this as part of your module environment usages to let Spring know to load th
 
 #### Terraform Configuration
 
-The base terraform documentation for the Orchestration can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/orchestration-cluster) as well as for [Connectors](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/connectors).
+The base terraform documentation for the Orchestration can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/ecs/fargate/orchestration-cluster) as well as for [Connectors](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/ecs/fargate/connectors).
 
 Some common topics to potentially change:
 
@@ -570,7 +531,7 @@ Management Identity uses a dedicated `identity` database on the shared Aurora Po
 
 In generic OIDC mode, Management Identity validates tokens and handles login. The identity provider owns clients and users, and role-to-principal mapping is done on the Camunda side.
 
-The base Terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/management-identity).
+The base Terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/ecs/fargate/management-identity).
 
 ### How components authenticate in OIDC mode
 
@@ -638,7 +599,7 @@ Alongside the module, the root workspace creates a dedicated `camunda-hub` datab
 
 Camunda Hub connects to the Orchestration Cluster over ECS Service Connect using the signed-in user's bearer token, so no additional cluster credentials are required.
 
-The base Terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/camunda-hub).
+The base Terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/ecs/fargate/camunda-hub).
 
 ### Use the private Camunda registry
 
@@ -677,7 +638,7 @@ If that is not wanted or can't be done then please either execute it as two step
 2. Perform a final initialization to apply any changes made throughout this guide:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
 3. Plan the configuration files:

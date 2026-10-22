@@ -13,6 +13,14 @@ type RoleUserSearchQueryRequest = SearchQueryRequest & object;
 
 ## Type Declaration
 
+### filter?
+
+```ts
+optional filter?: RoleUserFilterRequest;
+```
+
+The user filter criteria.
+
 ### sort?
 
 ```ts

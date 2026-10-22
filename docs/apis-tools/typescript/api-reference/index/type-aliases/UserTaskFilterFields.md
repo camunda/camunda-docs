@@ -115,6 +115,16 @@ The user task follow-up date.
 
 ---
 
+### isSuspended?
+
+```ts
+optional isSuspended?: boolean | null;
+```
+
+Whether the user task is suspended because its owning process instance is suspended.
+
+---
+
 ### localVariables?
 
 ```ts

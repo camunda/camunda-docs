@@ -2368,12 +2368,44 @@ ul ul .table-of-contents__link--active {
 .letter-link:has(a):hover {
   border-color: var(--ifm-color-primary);
 }
+/* Whole letter box is the link target */
+.letter-link a {
+  display: block;
+}
+.letter-link a,
+.letter-link:not(:has(a)) {
+  padding: 0.25rem 0;
+}
+.markdown .letter-link a,
+.markdown .letter-link a:hover,
+[data-theme="dark"] .markdown .letter-link a,
+[data-theme="dark"] .markdown .letter-link a:hover,
+.docs-doc-id-reference\/glossary
+  .markdown
+  .letter-link
+  a[href^="#"]:not(.hash-link),
+.docs-doc-id-reference\/glossary
+  .markdown
+  .letter-link
+  a[href^="#"]:not(.hash-link):hover,
+.docs-doc-id-glossary .markdown .letter-link a[href^="#"]:not(.hash-link),
+.docs-doc-id-glossary
+  .markdown
+  .letter-link
+  a[href^="#"]:not(.hash-link):hover {
+  text-decoration: none;
+}
+[data-theme="dark"] .markdown .letter-link a {
+  color: #fff;
+  font-weight: 400;
+}
 /* For browsers that don't support :has() selector */
 .letter-link a:hover {
   color: var(--ifm-color-primary);
 }
 /* Style for letter divs without links - muted appearance */
 .letter-link:not(:has(a)) {
+  padding: 0.25rem 0;
   opacity: 0.5;
   cursor: default;
 }
