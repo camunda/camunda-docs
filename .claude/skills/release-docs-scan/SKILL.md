@@ -144,7 +144,7 @@ Keep it short enough to read at a glance. Link every epic (`[#1234](url)`). Use 
 4. **Questions for you:** decisions the skill cannot make (placement, naming, suspect epics, epics that left the board).
 5. **Snapshot:** a compact block for the next rescan (see below).
 
-Do not draft entries in this step. Afterwards, offer to draft the `Ready to draft` ones. If the user accepts, match the structure of the live target file and follow `.github/instructions/content.instructions.md`. Never touch `<!-- RELEASE_LINKS_PLACEHOLDER -->` or `versioned_docs/`.
+Do not draft entries in this step. Afterwards, offer to draft the `Ready to draft` ones. If the user accepts, match the structure of the live target file and follow `.github/instructions/content.instructions.md`. Do not touch the `<!-- RELEASE_LINKS_PLACEHOLDER -->` block. A bot maintains it.
 
 ### Snapshot block
 
