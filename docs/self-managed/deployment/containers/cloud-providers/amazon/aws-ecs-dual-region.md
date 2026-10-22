@@ -644,9 +644,9 @@ aws ecs execute-command \
 
 **Symptom:** `terraform destroy` in `terraform/infra` doesn't finish while it deletes the Aurora Global Database resources.
 
-**Cause:** the Aurora writer is no longer in region 0, for example after a failover or an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost). Terraform deletes region 1's cluster first, because Terraform created it as the secondary. Aurora doesn't delete the last instance of the writer while region 0 is still attached, so Terraform retries until the delete timeout. `db_force_destroy` only acts when Terraform deletes the global cluster, which comes last, so it doesn't prevent this.
+**Cause:** the Aurora writer is no longer in region 0. This happens, for example, after a failover or an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost). Terraform deletes region 1's cluster first, because Terraform created it as the secondary. Aurora doesn't delete the last instance of the writer while region 0 is still attached, so Terraform retries until the delete timeout. `db_force_destroy` only acts when Terraform deletes the global cluster. Terraform deletes the global cluster last, so the setting doesn't prevent this.
 
-**Fix:** move the writer back with `./procedure/failback.sh --failed-region 0 --switch-writer`, then run `terraform destroy` again. If that's not possible, remove the Aurora resources manually and drop them from the Terraform state:
+**Fix:** move the writer back with `./procedure/failback.sh --failed-region 0 --switch-writer`, then run `terraform destroy` again. If that's not possible, remove the Aurora resources manually and drop them from the Terraform state. The commands call the AWS API in both regions, so run them only when region 0 is reachable:
 
 ```bash
 # 1. Detach both clusters from the global cluster: the secondary (region 0) first, then the writer (region 1)
