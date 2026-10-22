@@ -85,7 +85,7 @@ If you can't upgrade immediately, use one of these workarounds:
 - Replace the `requireAuth` value with a positive list of allowed methods on your current version, as described above.
 - Connect to PostgreSQL with `sslmode=verify-full`.
 
-## Notice 68
+## Notice 69
 
 ### Publication date
 
