@@ -18,7 +18,7 @@ export const overviewCards = [
 
 export const helmIndexCards = [
   {
-    link: "./890-to-8100",
+    link: "./890-to-810",
     title: "Upgrade Camunda 8.9 to 8.10 using Helm",
     image: IconArrow,
     description:

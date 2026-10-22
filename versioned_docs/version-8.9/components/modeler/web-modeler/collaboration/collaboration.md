@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 
 ## Projects
 
-In SaaS, projects contain process applications. Process applications contain files and folders. In Self-Managed, projects can contain files, folders, and process applications. However, in preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), Camunda recommends storing files and folders in process applications, regardless of your deployment.
+In SaaS, projects contain process applications. Process applications contain files and folders. In Self-Managed, projects can contain files, folders, and process applications. However, in preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), Camunda recommends storing files and folders in process applications, regardless of your deployment.
 
 User access to files and folders is defined at the project level.
 
@@ -112,7 +112,7 @@ For more information, refer to the [licensing documentation](/reference/licenses
 
 Use folders to semantically group and organize your diagrams.
 
-In SaaS, folders are stored in process applications, the root-level container within a project. In Self-Managed, you can store folders in process applications or directly in the project. However, in preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), Camunda recommends storing all files and folders in process applications, regardless of your deployment.
+In SaaS, folders are stored in process applications, the root-level container within a project. In Self-Managed, you can store folders in process applications or directly in the project. However, in preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), Camunda recommends storing all files and folders in process applications, regardless of your deployment.
 
 User access to a folder is inherited from the project.
 

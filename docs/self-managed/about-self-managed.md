@@ -44,7 +44,7 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 :::info Upgrade to Camunda 8.10
 
 - Existing customer? Upgrade your Self-Managed deployment to 8.10 using the [upgrade to 8.10 guide](/self-managed/upgrade/index.md).
-- See [what's new in Camunda 8.11](/reference/announcements-release-notes/8110/whats-new-in-811.md), [release announcements](/reference/announcements-release-notes/8110/8110-announcements.md), and [release notes](/reference/announcements-release-notes/8110/8110-release-notes.md).
+- See [what's new in Camunda 8.11](/reference/release-information/811/whats-new-in-811.md), [release announcements](/reference/release-information/811/811-announcements.md), and [release notes](/reference/release-information/811/811-release-notes.md).
 
 :::
 

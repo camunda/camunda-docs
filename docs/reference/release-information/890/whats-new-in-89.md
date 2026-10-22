@@ -94,7 +94,7 @@ Important changes in Camunda 8.9 are summarized as follows:
 
 :::info learn more and upgrade
 
-- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md) for a full summary of what's included in Camunda 8.9, including all breaking changes and deprecations, and supported environment changes.
+- See [release announcements](/reference/release-information/890/890-announcements.md) and [release notes](/reference/release-information/890/890-release-notes.md) for a full summary of what's included in Camunda 8.9, including all breaking changes and deprecations, and supported environment changes.
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.8 to 8.9.
 
 :::
@@ -156,7 +156,7 @@ The Camunda 8 Run CLI and configuration is enhanced to:
 These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
 
 :::info Breaking change
-The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/announcements-release-notes/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
+The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/release-information/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
 :::
 
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
@@ -238,7 +238,7 @@ All secret configuration must now use the new standardized pattern:
 
 You are affected if your `values.yaml` uses any of the legacy secret keys (such as `global.elasticsearch.auth.existingSecret`, `identity.firstUser.password`, `connectors.security.authentication.oidc.existingSecret`, or similar).
 
-See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
+See the [release announcements](/reference/release-information/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
 
 ## Reference architectures {#reference-architectures}
 

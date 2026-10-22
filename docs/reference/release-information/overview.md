@@ -38,7 +38,7 @@ Key dates for the Camunda 8.11 release.
 | 8.11.0-alpha1 | Alpha        | 10 November 2026 | -                            |
 
 :::info Release policy
-Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
+Review the [release policy](/reference/release-information/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
 :::
 
 ## Changelogs
@@ -68,21 +68,21 @@ Release dates and information for previous Camunda 8 releases that are still mai
 <td>8.10</td>
 <td>13 October 2026</td>
 <td>11 April 2028</td>
-<td><ul><li>[Announcements](/reference/announcements-release-notes/8100/8100-announcements.md)</li><li>[Release notes](/reference/announcements-release-notes/8100/8100-release-notes.md)</li></ul></td>
+<td><ul><li>[Announcements](/reference/release-information/810/810-announcements.md)</li><li>[Release notes](/reference/release-information/810/810-release-notes.md)</li></ul></td>
 <td><ul><li>[Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul></td>
 </tr>
 <tr>
 <td>8.9</td>
 <td>14 April 2026</td>
 <td>12 October 2027</td>
-<td><ul><li>[Announcements](/reference/announcements-release-notes/890/890-announcements.md)</li><li>[Release notes](/reference/announcements-release-notes/890/890-release-notes.md)</li></ul></td>
+<td><ul><li>[Announcements](/reference/release-information/890/890-announcements.md)</li><li>[Release notes](/reference/release-information/890/890-release-notes.md)</li></ul></td>
 <td><ul><li>[Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul></td>
 </tr>
 <tr>
 <td>8.8</td>
 <td>14 October 2025</td>
 <td>13 April 2027</td>
-<td><ul><li>[Announcements](/reference/announcements-release-notes/880/880-announcements.md)</li><li>[Release notes](/reference/announcements-release-notes/880/880-release-notes.md)</li></ul></td>
+<td><ul><li>[Announcements](/reference/release-information/880/880-announcements.md)</li><li>[Release notes](/reference/release-information/880/880-release-notes.md)</li></ul></td>
 <td><ul><li>[Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul></td>
 </tr>
 </table>

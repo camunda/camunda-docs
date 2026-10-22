@@ -211,6 +211,18 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/ [R=301,L]
 
+# Announcements and release notes moved to release information
+
+RewriteRule ^docs/next/reference/(announcements-release-notes|release-information)/8100/8100-(announcements|release-notes)/?$ /docs/next/reference/release-information/810/810-$2/ [R=301,L]
+RewriteRule ^docs/next/reference/(announcements-release-notes|release-information)/8100/(.*)$ /docs/next/reference/release-information/810/$2 [R=301,L]
+RewriteRule ^docs/next/reference/(announcements-release-notes|release-information)/8110/8110-(announcements|release-notes)/?$ /docs/next/reference/release-information/811/811-$2/ [R=301,L]
+RewriteRule ^docs/next/reference/(announcements-release-notes|release-information)/8110/(.*)$ /docs/next/reference/release-information/811/$2 [R=301,L]
+RewriteRule ^docs/next/reference/announcements-release-notes/(.*)$ /docs/next/reference/release-information/$1 [R=301,L]
+
+# The 8.9 to 8.10 upgrade guides were renamed
+
+RewriteRule ^docs/next/self-managed/upgrade/(components|helm)/890-to-8100/?$ /docs/next/self-managed/upgrade/$1/890-to-810/ [R=301,L]
+
 # Product links still pointing at /next
 
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]

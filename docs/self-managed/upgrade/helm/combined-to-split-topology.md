@@ -27,7 +27,7 @@ If none of those apply, staying on a combined release is a fully supported long-
 
 | Prerequisite                | Detail                                                                                                                                                                                                      |
 | :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Already on 8.10 and healthy | Complete [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md) first. Don't combine a version upgrade with a topology change                                                  |
+| Already on 8.10 and healthy | Complete [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-810.md) first. Don't combine a version upgrade with a topology change                                                   |
 | External data services      | Management Identity and Camunda Hub databases, and Orchestration Cluster secondary storage, all externally managed. See [migrate off the bundled databases first](#migrate-off-the-bundled-databases-first) |
 | OIDC with a pinned issuer   | Basic authentication isn't supported for Hub topology connections or Physical Tenants. See [pin the issuer](/self-managed/deployment/helm/install/topology/orchestration-release.md#pin-the-issuer)         |
 | Tested backup and restore   | A verified restore of every data store: broker volumes, secondary storage, and both relational databases                                                                                                    |
@@ -39,7 +39,7 @@ This procedure applies only to releases on the 8.10 chart. It doesn't apply to r
 
 The Hub release takes over the Management Identity and Camunda Hub databases the combined release already uses, so those databases must live outside the Helm chart before you start. Camunda 8.10 removes the bundled Bitnami PostgreSQL subcharts.
 
-If you still use the bundled databases, you can't upgrade to 8.10. Migrate them on 8.9 first. See [migrate off the bundled PostgreSQL databases](/self-managed/upgrade/helm/890-to-8100.md#migrate-off-the-bundled-postgresql-databases).
+If you still use the bundled databases, you can't upgrade to 8.10. Migrate them on 8.9 first. See [migrate off the bundled PostgreSQL databases](/self-managed/upgrade/helm/890-to-810.md#migrate-off-the-bundled-postgresql-databases).
 
 ## What moves and what doesn't
 
@@ -176,7 +176,7 @@ orchestration:
           - orchestration-api
 ```
 
-On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-8100.md#backwards-compatible-audiences-replace-the-audience-list).
+On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-810.md#backwards-compatible-audiences-replace-the-audience-list).
 
 ## Moving a cluster to a different release, namespace, or Kubernetes cluster
 

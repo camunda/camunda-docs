@@ -25,7 +25,7 @@ Details are provided for each integration type, including what changed, why, and
 | Custom integrations    | Custom code that calls the Camunda REST API directly.     |
 
 <!--- >:::info
-For a full list of changes, see the [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
+For a full list of changes, see the [8.10 release announcements](/reference/release-information/810/810-announcements.md) and [release notes](/reference/release-information/810/810-release-notes.md).
 ::: --->
 
 ## Upgrade steps
@@ -283,7 +283,7 @@ Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you s
 
 1. Re-compile and run your test suite against the 8.10 API.
 
-<!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
+<!--- 1. Review [8.10 release announcements](/reference/release-information/810/810-announcements.md) for additional context on each change. --->
 
 [Get resource]: ../orchestration-cluster-api-rest/specifications/get-resource.api.mdx
 [Get resource content]: ../orchestration-cluster-api-rest/specifications/get-resource-content.api.mdx

@@ -491,7 +491,7 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage/m
 :::note
 Set `orchestration.data.secondaryStorage.type` to a single backend.
 To run in engine-only mode without secondary storage, set `global.noSecondaryStorage=true`.
-The `global.elasticsearch.*` and `global.opensearch.*` values were removed in Camunda 8.10. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#migrate-globalelasticsearch-and-globalopensearch) for the migration mapping.
+The `global.elasticsearch.*` and `global.opensearch.*` values were removed in Camunda 8.10. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-810.md#migrate-globalelasticsearch-and-globalopensearch) for the migration mapping.
 :::
 
   </TabItem>

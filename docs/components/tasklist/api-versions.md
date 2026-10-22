@@ -9,7 +9,7 @@ Tasklist in Camunda 8.10 and later uses only the [Orchestration Cluster REST API
 
 The legacy Tasklist V1 API and the Tasklist V1 UI mode were removed in 8.10.
 
-For the release-level summary of these removals, see the [8.10 release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
+For the release-level summary of these removals, see the [8.10 release announcement](/reference/release-information/810/810-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
 
 ## What changed in 8.10
 

@@ -142,7 +142,7 @@ Orchestration Cluster broker PVCs are StatefulSet volume claim templates and don
 
 This guide covers fresh releases.
 
-To upgrade an existing 8.9 deployment, first complete the in-place version upgrade while preserving the existing release name, namespace, Orchestration Cluster primary storage, and external data services. See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md).
+To upgrade an existing 8.9 deployment, first complete the in-place version upgrade while preserving the existing release name, namespace, Orchestration Cluster primary storage, and external data services. See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-810.md).
 
 Adopting this topology afterwards is a separate operation with its own data and rollback planning. See [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
 

@@ -1,5 +1,5 @@
 ---
-id: 8100-announcements
+id: 810-announcements
 title: "8.10 Release announcements"
 sidebar_label: Release announcements
 description: "Supported environment changes, breaking changes, and deprecations in Camunda 8.10."
@@ -11,13 +11,13 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_h
 
 <PageDescription />
 
-| Minor release date | End of standard maintenance | Release notes                                                                           | Upgrade guides                                                                                        |
-| ------------------ | --------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| 13 October 2026    | 11 April 2028               | [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                 | Upgrade guides                                                                               |
+| ------------------ | --------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 13 October 2026    | 11 April 2028               | [8.10 release notes](/reference/release-information/810/810-release-notes.md) | [8.10 upgrade guides](/reference/release-information/810/whats-new-in-810.md#upgrade-guides) |
 
 :::info 8.10 resources
 
-- See [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) to learn more about new features and enhancements.
+- See [release notes](/reference/release-information/810/810-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
 
 :::
@@ -221,7 +221,7 @@ Camunda 8.10 introduces new (`v2`) element templates for the AI Agent Task and A
 - Prompt caching configuration, where the provider supports it.
 - Decoupled providers and backends, for example Anthropic through AWS Bedrock Mantle or Microsoft Foundry, OpenAI through Microsoft Foundry, and Google Gemini through the Gemini API or Vertex AI.
 - A custom chat model provider option, for Self-Managed and hybrid deployments.
-- Support for [agent visibility and monitoring](/reference/announcements-release-notes/8100/8100-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/announcements-release-notes/8100/8100-release-notes.md#improved-agent-tool-configuration).
+- Support for [agent visibility and monitoring](/reference/release-information/810/810-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/release-information/810/810-release-notes.md#improved-agent-tool-configuration).
 
 The legacy templates keep working and don't receive new provider capabilities. Process definitions you deployed earlier keep running on the legacy job workers until you deploy a new version that uses a new template.
 
@@ -379,7 +379,7 @@ The following items are removed:
 
 #### Console SM and Web Modeler APIs deprecated
 
-With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Camunda Hub API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-camunda-hub-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
+With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Camunda Hub API](/reference/release-information/810/810-release-notes.md#public-camunda-hub-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
 
 **Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Camunda Hub API before 8.12.
 
@@ -448,7 +448,7 @@ The broker ping configuration namespace is renamed from `camunda.console.ping` t
 
 A cluster upgraded without these changes stops reporting license information to Camunda Hub.
 
-**Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-8100.md#broker-ping-configuration) in the upgrade guide.
+**Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-810.md#broker-ping-configuration) in the upgrade guide.
 
 <p className="link-arrow">[Camunda Hub ping configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration)</p>
 
@@ -844,7 +844,7 @@ The deprecated keys continue to work in 8.10. When you set one to a non-default 
 
 **Action:** Move the deprecated keys in your `values.yaml` to the component's `extraConfiguration`. If you set both, the `extraConfiguration` value takes precedence. Use the deprecation messages from your own upgrade as the up-to-date list of keys for your chart version.
 
-<p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys)</p>
+<p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-810.md#deprecated-application-configuration-helm-keys)</p>
 
 </div>
 </div>
@@ -897,7 +897,7 @@ With Helm v3, the chart shows a warning in the notes that `helm install` and `he
 
 The 8.9 to 8.10 Camunda Hub database migration is controlled by `camundaHub.upgrade.phase`. Use `quiesce` to stop all Hub workloads so you can take a verified database backup, `migrate` to run the startup schema migration on a single pod without serving traffic, and `normal` to restore serving capacity. Fresh installs stay on `normal`.
 
-**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-web-modeler-and-console-to-camunda-hub).
+**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-810.md#migrate-web-modeler-and-console-to-camunda-hub).
 
 </div>
 </div>
@@ -972,7 +972,7 @@ Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/
 
 **Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
 
-<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
+<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-810.md#environments)</p>
 <br />
 <p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
 
@@ -993,7 +993,7 @@ Camunda Hub still accepts the legacy properties in 8.10 and translates the recog
 
 **Action:** Update your Camunda Hub configuration to the new settings ahead of that removal.
 
-<p className="link-arrow">[Migrate Web Modeler settings in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#migrate-web-modeler-settings)</p>
+<p className="link-arrow">[Migrate Web Modeler settings in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-810.md#migrate-web-modeler-settings)</p>
 <br/>
 <p className="link-arrow">[Property reference](/self-managed/components/hub/configuration/properties.md)</p>
 
@@ -1014,7 +1014,7 @@ The authentication properties Optimize used through 8.9 are deprecated in favor 
 
 **Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
-<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-810.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -1038,7 +1038,7 @@ A new `Analyst` role is also introduced: Hub modeling access, management access 
 
 **Action:** If you rely on least-privilege access to cluster management, review who holds the `Console` and `Web Modeler Admin` / `Hub Admin` roles before upgrading.
 
-<p className="link-arrow">[Management Identity roles and permissions in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#management-identity-roles-and-permissions)</p>
+<p className="link-arrow">[Management Identity roles and permissions in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-810.md#management-identity-roles-and-permissions)</p>
 <br />
 <p className="link-arrow">[Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)</p>
 
@@ -1083,7 +1083,7 @@ Optimize accepts its 8.9 authentication settings in 8.10 and translates the reco
 
 **Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
-<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-810.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
@@ -1211,7 +1211,7 @@ The Optimize login and API security keys used through 8.9 are deprecated in favo
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
-**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-810.md#component-specific-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
 
 </div>
 </div>

@@ -9,7 +9,7 @@ Use Camunda's [SAP](/reference/glossary.md#sap) integration to bring SAP functio
 This integration provides modular components that can be used independently or together to automate business-critical scenarios across SAP and non-SAP systems.
 
 :::note
-The SAP BTP plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration. For details, see the [Camunda 8.10 announcements](/reference/announcements-release-notes/8100/8100-announcements.md).
+The SAP BTP plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration. For details, see the [Camunda 8.10 announcements](/reference/release-information/810/810-announcements.md).
 :::
 
 ## Purpose

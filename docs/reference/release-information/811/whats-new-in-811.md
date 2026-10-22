@@ -21,7 +21,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 :::note Release information
 
-For a full summary of what's included in Camunda 8.11, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/announcements-release-notes/8110/8110-announcements.md) and [release notes](/reference/announcements-release-notes/8110/8110-release-notes.md).
+For a full summary of what's included in Camunda 8.11, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/release-information/811/811-announcements.md) and [release notes](/reference/release-information/811/811-release-notes.md).
 
 :::
 

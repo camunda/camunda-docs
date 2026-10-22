@@ -114,4 +114,4 @@ helm upgrade camunda camunda/camunda-platform \
   -f values.yaml 2>&1 | grep 'DEPRECATION'
 ```
 
-For the keys deprecated at the time of writing, and the tables mapping each one to its replacement, see [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md).
+For the keys deprecated at the time of writing, and the tables mapping each one to its replacement, see [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-810.md).

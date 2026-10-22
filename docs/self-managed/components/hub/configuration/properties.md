@@ -71,7 +71,7 @@ When running the `restapi` component in a container (Docker / Kubernetes), use t
 
 ### Clusters
 
-To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
+To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-810.md#camunda-hub).
 
 The Camunda 8.10 Helm chart can deploy one Hub release with orchestration releases from supported chart versions:
 

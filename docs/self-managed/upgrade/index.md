@@ -40,15 +40,15 @@ Camunda 8 upgrades must be performed sequentially. If your deployment is running
 
 The 8.9 to 8.10 upgrade spans several guides. Work through them in this order, rather than treating them as separate destinations.
 
-| Step | What you do                                                                                                                           | Guide                                                                                      |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| 1    | Confirm upgrade eligibility, review platform changes in 8.10, and verify infrastructure compatibility.                                | [Prepare for upgrade](prepare-for-upgrade.md)                                              |
-| 2    | Run the Camunda Helm Toolkit, complete manual actions, render and test the full configuration, then back up data and run the upgrade. | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-8100.md)                            |
-| 3    | Monitor and validate the upgrade before returning the deployment to normal use.                                                       | [Monitor and validate the upgrade](./helm/890-to-8100.md#monitor-and-validate-the-upgrade) |
+| Step | What you do                                                                                                                           | Guide                                                                                     |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| 1    | Confirm upgrade eligibility, review platform changes in 8.10, and verify infrastructure compatibility.                                | [Prepare for upgrade](prepare-for-upgrade.md)                                             |
+| 2    | Run the Camunda Helm Toolkit, complete manual actions, render and test the full configuration, then back up data and run the upgrade. | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-810.md)                            |
+| 3    | Monitor and validate the upgrade before returning the deployment to normal use.                                                       | [Monitor and validate the upgrade](./helm/890-to-810.md#monitor-and-validate-the-upgrade) |
 
 For Helm-managed installations, start values-file preparation with the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md). It produces migrated overrides and a report of remaining actions. Follow the [Helm upgrade flow](./helm/index.md#upgrade-flow) and the version-specific guide even when the report has no findings.
 
-Review [component changes from 8.9 to 8.10](./components/890-to-8100.md) alongside these steps for behavior changes affecting the components you run.
+Review [component changes from 8.9 to 8.10](./components/890-to-810.md) alongside these steps for behavior changes affecting the components you run.
 
 <!-- TODO: Update this when we have content
 
@@ -64,7 +64,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually upgrade each component by following the component upgrade guide:
 
-<p class="link-arrow">[Component upgrade from 8.9 to 8.10](./components/890-to-8100.md)</p>
+<p class="link-arrow">[Component upgrade from 8.9 to 8.10](./components/890-to-810.md)</p>
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
@@ -74,9 +74,9 @@ For production environments, use Kubernetes with the official Camunda Helm chart
 
 Learn about new features, breaking changes, and deprecations in Camunda 8.10:
 
-- [What's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md)
-- [8.10 Release announcements](/reference/announcements-release-notes/8100/8100-announcements.md)
-- [8.10 Release notes](/reference/announcements-release-notes/8100/8100-release-notes.md)
+- [What's new in Camunda 8.10](/reference/release-information/810/whats-new-in-810.md)
+- [8.10 Release announcements](/reference/release-information/810/810-announcements.md)
+- [8.10 Release notes](/reference/release-information/810/810-release-notes.md)
 
 ## Upgrading from an earlier version
 

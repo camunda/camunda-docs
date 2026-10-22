@@ -11,13 +11,13 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | End of standard maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
-| ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 12 October 2027             | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                | Upgrade guides                                                                             |
+| ------------------ | --------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 14 April 2026      | 12 October 2027             | [8.9 release notes](/reference/release-information/890/890-release-notes.md) | [8.9 upgrade guides](/reference/release-information/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
-- See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
+- See [release notes](/reference/release-information/890/890-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
   :::
 
@@ -156,7 +156,7 @@ The following key changes were also released as part of an 8.9.x patch release o
 
 #### MCP Client and MCP Remote Client connectors
 
-[Camunda 8.9.0-alpha2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) introduces breaking changes to the [MCP Client](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) element templates and runtime configuration.
+[Camunda 8.9.0-alpha2](/reference/release-information/890/890-release-notes.md#890-alpha2) introduces breaking changes to the [MCP Client](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) element templates and runtime configuration.
 
 **Action:** To remain compatible, you should update your MCP Client and MCP Remote Client connectors to use element template version `1`.
 
@@ -182,7 +182,7 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 #### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
-[Camunda 8.9.1](/reference/announcements-release-notes/890/890-release-notes.md) unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.9.1 or any later 8.9.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
+[Camunda 8.9.1](/reference/release-information/890/890-release-notes.md) unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.9.1 or any later 8.9.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
 
 A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and is available in 8.9.9.
 
@@ -680,7 +680,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 
 #### Deprecated: Operate Connector
 
-The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
+The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/release-information/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
 
 Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md).
 
@@ -1709,7 +1709,7 @@ As part of this improvement, we have removed the automatic deployment of [linked
 This change supports more predictable deployments and helps teams manage updates with greater confidence and flexibility.
 
 :::info
-To learn more, see the [8.9.0-alpha5 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+To learn more, see the [8.9.0-alpha5 release notes](/reference/release-information/890/890-release-notes.md).
 :::
 
 </div>

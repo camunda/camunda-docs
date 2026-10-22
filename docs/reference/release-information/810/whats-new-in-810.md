@@ -49,7 +49,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 :::note Release information
 
-For a full summary of what's included in Camunda 8.10, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
+For a full summary of what's included in Camunda 8.10, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/release-information/810/810-announcements.md) and [release notes](/reference/release-information/810/810-release-notes.md).
 
 :::
 
@@ -191,7 +191,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/release-information/810/810-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Agentic control plane
@@ -551,7 +551,7 @@ In Camunda 8.10, with Camunda Hub replacing Web Modeler and Console, the new Cam
 
 In 8.10, Console and Web Modeler configurations have been merged to form [Camunda Hub properties](/self-managed/components/hub/configuration/properties.md). Configuration keys have been updated to support feature changes.
 
-<p class="link-arrow">[Self-Managed migration](/self-managed/upgrade/components/890-to-8100.md#camunda-hub)</p>
+<p class="link-arrow">[Self-Managed migration](/self-managed/upgrade/components/890-to-810.md#camunda-hub)</p>
 
 For Helm, Console is no longer a standalone deployment. The new `camunda/hub` image serves both feature sets. The `camundaHub` key enables and configures Camunda Hub:
 
@@ -575,9 +575,9 @@ camundaHub:
         memory: 1Gi
 ```
 
-Additionally, when you upgrade, your data is [migrated](/self-managed/upgrade/components/890-to-8100.md#data-migration) to the [new file structure](#new-file-structure-and-requirements).
+Additionally, when you upgrade, your data is [migrated](/self-managed/upgrade/components/890-to-810.md#data-migration) to the [new file structure](#new-file-structure-and-requirements).
 
-<p class="link-arrow">[Upgrade from Helm 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md)</p>
+<p class="link-arrow">[Upgrade from Helm 8.9 to 8.10](/self-managed/upgrade/helm/890-to-810.md)</p>
 
 ### Web Modeler data
 
@@ -804,7 +804,7 @@ When you search in the create, append, or change element menu, the operations of
 
 Two changes come with this:
 
-- Connectors that provide a single operation are [renamed after the operation they perform](/reference/announcements-release-notes/8100/8100-announcements.md#connectors-with-a-single-operation-are-renamed-after-the-operation). Existing process models keep running unchanged.
+- Connectors that provide a single operation are [renamed after the operation they perform](/reference/release-information/810/810-announcements.md#connectors-with-a-single-operation-are-renamed-after-the-operation). Existing process models keep running unchanged.
 - Element templates support the `steps` and `presets` keys, so your own templates can offer the same guided operation selection.
 
 <p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
@@ -888,7 +888,7 @@ Important changes to Optimize in 8.10 are as follows:
 
 The component-specific Optimize login and API security keys are deprecated in favor of `camunda.security.*`. Camunda plans to remove them in a future release, with the component-specific configuration and its `optimize.security.csl.enabled=false` fallback.
 
-`CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping.
+`CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-810.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -939,7 +939,7 @@ Important changes for APIs & Tools in 8.10 are as follows:
 
 In 8.10, Camunda removes the legacy component APIs and related features that were deprecated in 8.8, such as legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test.
 
-<p class="link-arrow">[Release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test)</p>
+<p class="link-arrow">[Release announcement](/reference/release-information/810/810-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test)</p>
 
 ### C# SDK
 
@@ -966,18 +966,18 @@ The Go SDK additionally contains support for gRPC job streaming. During 8.10 the
 
 ## Supported environments
 
-Camunda 8.10 updates several platform and environment baselines. For complete details, including breaking changes and deprecations, see [release announcements](./8100-announcements.md) and [supported environments](/reference/supported-environments.md).
+Camunda 8.10 updates several platform and environment baselines. For complete details, including breaking changes and deprecations, see [release announcements](./810-announcements.md) and [supported environments](/reference/supported-environments.md).
 
 Highlights include:
 
-| Environment                                                                                                                                | Description                                                                             |
-| :----------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
-| [Amazon Aurora PostgreSQL](/reference/announcements-release-notes/8100/8100-announcements.md#amazon-aurora-postgresql-14-removed-18-added) | Version 14 removed, version 18 added. Supported versions are now 15, 16, 17, and 18.    |
-| [Elasticsearch](/reference/announcements-release-notes/8100/8100-announcements.md#elasticsearch-92-and-93-no-longer-supported)             | Minimum supported 9.x version raised to 9.4. Supported versions are now 8.19+ and 9.4+. |
-| [H2](/reference/announcements-release-notes/8100/8100-announcements.md#h2-23-no-longer-supported)                                          | Version 2.3 no longer supported. Only 2.4 is now supported (dev/test/evaluation only).  |
-| [MariaDB](/reference/announcements-release-notes/8100/8100-announcements.md#mariadb-123-now-supported)                                     | Version 12.3 LTS now supported. Supported versions are now 10.11, 11.4, 11.8, and 12.3. |
-| [Microsoft SQL Server](/reference/announcements-release-notes/8100/8100-announcements.md#microsoft-sql-server-2019-no-longer-supported)    | Version 2019 no longer supported. Supported versions are now 2022 and 2025.             |
-| [MySQL](/reference/announcements-release-notes/8100/8100-announcements.md#mysql-97-now-supported)                                          | Version 9.7 LTS now supported. Supported versions are now 8.4 and 9.7.                  |
-| [OpenSearch](/reference/announcements-release-notes/8100/8100-announcements.md#opensearch-34-and-35-no-longer-supported)                   | Minimum supported 3.x version raised to 3.6. Supported versions are now 2.19+ and 3.6+. |
-| [Oracle](/reference/announcements-release-notes/8100/8100-announcements.md#oracle-23ai-rebranded-as-oracle-26ai)                           | Oracle 23ai rebranded as Oracle AI Database 26ai. Supported versions are 19c and 26ai.  |
-| [PostgreSQL](/reference/announcements-release-notes/8100/8100-announcements.md#postgresql-14-no-longer-supported)                          | Version 14 no longer supported. Supported versions are now 15, 16, 17, and 18.          |
+| Environment                                                                                                                      | Description                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| [Amazon Aurora PostgreSQL](/reference/release-information/810/810-announcements.md#amazon-aurora-postgresql-14-removed-18-added) | Version 14 removed, version 18 added. Supported versions are now 15, 16, 17, and 18.    |
+| [Elasticsearch](/reference/release-information/810/810-announcements.md#elasticsearch-92-and-93-no-longer-supported)             | Minimum supported 9.x version raised to 9.4. Supported versions are now 8.19+ and 9.4+. |
+| [H2](/reference/release-information/810/810-announcements.md#h2-23-no-longer-supported)                                          | Version 2.3 no longer supported. Only 2.4 is now supported (dev/test/evaluation only).  |
+| [MariaDB](/reference/release-information/810/810-announcements.md#mariadb-123-now-supported)                                     | Version 12.3 LTS now supported. Supported versions are now 10.11, 11.4, 11.8, and 12.3. |
+| [Microsoft SQL Server](/reference/release-information/810/810-announcements.md#microsoft-sql-server-2019-no-longer-supported)    | Version 2019 no longer supported. Supported versions are now 2022 and 2025.             |
+| [MySQL](/reference/release-information/810/810-announcements.md#mysql-97-now-supported)                                          | Version 9.7 LTS now supported. Supported versions are now 8.4 and 9.7.                  |
+| [OpenSearch](/reference/release-information/810/810-announcements.md#opensearch-34-and-35-no-longer-supported)                   | Minimum supported 3.x version raised to 3.6. Supported versions are now 2.19+ and 3.6+. |
+| [Oracle](/reference/release-information/810/810-announcements.md#oracle-23ai-rebranded-as-oracle-26ai)                           | Oracle 23ai rebranded as Oracle AI Database 26ai. Supported versions are 19c and 26ai.  |
+| [PostgreSQL](/reference/release-information/810/810-announcements.md#postgresql-14-no-longer-supported)                          | Version 14 no longer supported. Supported versions are now 15, 16, 17, and 18.          |

@@ -26,7 +26,7 @@ To use the BPMN Copilot in Web Modeler, take the following steps:
 1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 2. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 3. Click **New project**.
-4. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+4. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 5. In the process application, click **Create new > BPMN diagram** to open the Camunda Copilot chat window.
 
 <img src={CopilotImg} alt="bpmn copilot chat window" width="500px" />

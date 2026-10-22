@@ -1,5 +1,5 @@
 ---
-id: 8100-release-notes
+id: 810-release-notes
 title: "8.10 Release notes"
 sidebar_label: Release notes
 description: "Release notes for new features included in the 8.10 minor release, including alpha feature releases."
@@ -14,14 +14,14 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 
 <PageDescription />
 
-| Minor release date | End of standard maintenance | Changelog(s)                                                                 | Upgrade guides                                                                                        |
-| :----------------- | :-------------------------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| 13 October 2026    | 11 April 2028               | [Patch Releases and Changelogs](#technical-changelogs-for-all-810x-releases) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Changelog(s)                                                                 | Upgrade guides                                                                               |
+| :----------------- | :-------------------------- | :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| 13 October 2026    | 11 April 2028               | [Patch Releases and Changelogs](#technical-changelogs-for-all-810x-releases) | [8.10 upgrade guides](/reference/release-information/810/whats-new-in-810.md#upgrade-guides) |
 
 :::info 8.10 resources
 
-- See [What's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md) for important changes to consider when planning your upgrade from Camunda 8.9.
-- See [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
+- See [What's new in Camunda 8.10](/reference/release-information/810/whats-new-in-810.md) for important changes to consider when planning your upgrade from Camunda 8.9.
+- See [release announcements](/reference/release-information/810/810-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
 
 :::
@@ -57,7 +57,7 @@ Use the Optimize agentic control plane dashboard to monitor AI agent adoption, t
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-<p class="link-arrow">[SPI and package changes for custom extensions](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes)</p>
+<p class="link-arrow">[SPI and package changes for custom extensions](/reference/release-information/810/810-announcements.md#ai-agent-connector-spi-and-package-changes)</p>
 
 #### New native element templates
 
@@ -184,7 +184,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/release-information/810/810-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Skills repository for pro-code AI enablement
@@ -224,7 +224,7 @@ A new public Camunda Hub API is provided under `/v2/` for programmatic access to
 
 - The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 - The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
-- See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
+- See the [release announcement](/reference/release-information/810/810-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
 <p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
 
@@ -521,7 +521,7 @@ Helm chart values that only proxy a single application property are deprecated i
 
 Starting in 8.10, the Camunda Helm chart no longer includes the bundled Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Helm installations must connect to external infrastructure, such as managed databases and search services, Kubernetes operators, or customer-owned images.
 
-If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10. The 8.10 Helm chart has no Bitnami-based fallback. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#bitnami-subcharts-removed-from-the-helm-chart) for details.
+If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10. The 8.10 Helm chart has no Bitnami-based fallback. See the [release announcement](/reference/release-information/810/810-announcements.md#bitnami-subcharts-removed-from-the-helm-chart) for details.
 
 <p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
 
@@ -554,7 +554,7 @@ Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, 
 - Moving your values under `camundaHub` is cleanup that you can do later. The upgrade guide documents the steps.
 - Review `camundaHub.restapi.resources` after upgrading, because Console now runs in the Hub REST API pod.
 
-<p class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</p>
+<p class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-810.md#consolidate-console-and-web-modeler-into-camunda-hub)</p>
 
 ### Helm chart version matrix improvements
 
@@ -1119,7 +1119,7 @@ Dark mode and light mode preferences now persist across Admin, Operate, and Task
 
 The default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. RocksDB memory is now allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB.
 
-To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
+To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/release-information/810/810-announcements.md#rocksdb-memory-allocation-strategy) for more details.
 
 <p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
@@ -1685,7 +1685,7 @@ Provider and backend selection are now decoupled: for example, the Anthropic pro
 
 This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) for more details.
+See the [release announcement](/reference/release-information/810/810-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) for more details.
 
 :::note
 The legacy connector is deprecated in 8.10, but is not removed and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
@@ -1729,7 +1729,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/release-information/810/810-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Camunda design system
@@ -2216,7 +2216,7 @@ Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, 
 - Moving your values under `camundaHub` is cleanup that you can do later. The upgrade guide documents the steps.
 - Review `camundaHub.restapi.resources` after upgrading, because Console now runs in the Hub REST API pod.
 
-<p class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</p>
+<p class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-810.md#consolidate-console-and-web-modeler-into-camunda-hub)</p>
 
 ### Operate
 
@@ -2397,7 +2397,7 @@ Adding a workspace member through the public API — `PUT /v1/collaborators` or 
 A new Camunda Hub API is provided under `/v2/` for programmatic access to the resources previously managed in Console and Web Modeler. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
 The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
+See the [release announcement](/reference/release-information/810/810-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
 <p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
 
@@ -2857,7 +2857,7 @@ Start forms can now be defined and edited in both modelers, ensuring a seamless 
 
 The Camunda Helm chart no longer includes the bundled Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Helm installations must connect to external infrastructure, such as managed databases and search services, Kubernetes operators, or customer-owned images.
 
-If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#bitnami-subcharts-removed-from-the-helm-chart) for details.
+If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See the [release announcement](/reference/release-information/810/810-announcements.md#bitnami-subcharts-removed-from-the-helm-chart) for details.
 
 <p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
 
@@ -2905,7 +2905,7 @@ With this, you can configure setups such as:
 
 The default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. RocksDB memory is now allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB.
 
-To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
+To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/release-information/810/810-announcements.md#rocksdb-memory-allocation-strategy) for more details.
 
 <p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
@@ -2954,7 +2954,7 @@ Execution listeners can now be configured on the enclosing body of multi-instanc
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes) for more details.
+See the [release announcement](/reference/release-information/810/810-announcements.md#ai-agent-connector-spi-and-package-changes) for more details.
 
 #### Camunda-provided LLM for SaaS
 
