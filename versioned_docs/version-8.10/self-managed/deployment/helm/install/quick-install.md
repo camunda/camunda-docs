@@ -150,7 +150,7 @@ To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler
 
 **Observed behavior:** The orchestration pod restarts, and its log shows `Cannot determine the database vendor ... from JDBC URL ''`.
 
-**Why this happens:** You enabled the RDBMS exporter, but `orchestration.data.secondaryStorage.rdbms.url` is empty. Some Helm chart versions render this empty URL, and Camunda 8.10 and later do not select embedded H2 for an empty URL.
+**Why this happens:** You enabled the RDBMS exporter, but `orchestration.data.secondaryStorage.rdbms.url` is empty. The Helm chart does not set a default URL, and Camunda 8.10 and later do not select embedded H2 for an empty URL.
 
 **How to fix:** Install with the values file from step 3 of [Orchestration Cluster only](#orchestration-cluster-only), or set `orchestration.data.secondaryStorage.rdbms.url` to a JDBC URL. For embedded H2, use `jdbc:h2:file:/usr/local/camunda/data/h2db`.
 
