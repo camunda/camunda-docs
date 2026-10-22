@@ -150,7 +150,7 @@ Complete this step before you trigger the Zeebe restore. The Restore API switche
 
 ### 3. Trigger the restore {#trigger-the-restore}
 
-There are multiple ways to define your restore point objective depending on your backup strategy. Requests that combine `backupIds` with `from` or `to`, or that specify a time range without continuous backups enabled, are rejected with `400`. A request that references a backup with no completed state on a partition is rejected with `404`, with the detail `No completed backup found for partition {partitionId} with backup id {backupId}`.
+There are multiple ways to define your restore point objective depending on your backup strategy. Requests that combine `backupIds` with `from` or `to`, or that specify a time range without continuous backups enabled, are rejected with `400`. A request that references an invalid or incomplete backup id is rejected with `404`.
 
 [Provide the restore parameters](/apis-tools/orchestration-cluster-api-rest/specifications/restore.api.mdx). Camunda validates the request, resolves the backups for every partition, and acknowledges the request with `202` before the restore itself runs:
 
