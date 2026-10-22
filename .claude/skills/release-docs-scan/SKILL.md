@@ -36,7 +36,7 @@ Scan the Product Hub board for one release and tell the user which epics need an
 
 ## Step 2: Fetch the epics
 
-The board has about 2,000 items and the query pages through all of them, so expect it to take under a minute. It needs the `read:project` scope. If `gh auth status` does not list it, ask the user to run `gh auth refresh -h github.com -s read:project`.
+The query needs the `read:project` scope. If `gh auth status` does not list it, ask the user to run `gh auth refresh -h github.com -s read:project`.
 
 Save the query below in a temporary file, replace `<org>` and `<number>` with the values from the link, and replace `<target-regex>` in the filter (for example `8\\.11`):
 
