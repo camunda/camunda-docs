@@ -142,13 +142,17 @@ Keep it short enough to read at a glance. Link every epic (`[#1234](url)`). Use 
 
 3. **Already in docs / no entry needed / not eligible:** one line per epic, with the reason.
 4. **Questions for you:** decisions the skill cannot make (placement, naming, suspect epics, epics that left the board).
-5. **Snapshot:** a compact block for the next rescan (see below).
+5. **Snapshot:** a collapsed block for the next rescan (see below).
 
 Do not draft entries in this step. Afterwards, offer to draft the `Ready to draft` ones. If the user accepts, match the structure of the live target file and follow `.github/instructions/content.instructions.md`. Do not touch the `<!-- RELEASE_LINKS_PLACEHOLDER -->` block. A bot maintains it.
 
 ### Snapshot block
 
-End every report with a fenced block listing one line per in-scope epic, so the next scan can compare against it:
+End every report with the snapshot in a collapsed `<details>` block, so it does not clutter the report. List one line per in-scope epic, so the next scan can compare against it:
+
+````markdown
+<details>
+<summary>Snapshot for the next rescan</summary>
 
 ```text
 snapshot 8.11-alpha1 2026-10-20
@@ -156,11 +160,14 @@ snapshot 8.11-alpha1 2026-10-20
 #1250 | Define | potential | none | Not eligible | rn:none | in-docs:no
 ```
 
+</details>
+````
+
 `rn` is the first 6 characters of a hash of the epic's release-notes section (`rn:none` if there is no section). A changed hash means the PM edited the content. Hash it with `shasum`.
 
 ## Step 5: Rescan
 
-When the user asks again ("review the board", "what changed since last time", "rescan"), run Steps 1 to 4 again, then compare against the **most recent snapshot block in this conversation**. If there is none, say this is the first scan and ask whether the user wants to paste a snapshot from an earlier session. Snapshots live only in the conversation. Nothing is saved between sessions unless the user keeps the block.
+When the user asks again ("review the board", "what changed since last time", "rescan"), run Steps 1 to 4 again, then compare against the **most recent snapshot in this conversation** (inside the `<details>` block). If there is none, say this is the first scan and ask whether the user wants to paste a snapshot from an earlier session. Snapshots live only in the conversation. Nothing is saved between sessions unless the user keeps the block.
 
 Open the report with **What changed since the last scan**, listing only differences:
 
