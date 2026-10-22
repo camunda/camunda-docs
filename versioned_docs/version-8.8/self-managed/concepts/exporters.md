@@ -28,7 +28,7 @@ Zeebe loads exporters only if they are configured via the main Zeebe YAML config
 
 Once configured, the exporter starts receiving records the next time Zeebe is restarted. Exporters are guaranteed to see only records produced after they're configured.
 
-A reference implementation is available via the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter).
+A reference implementation is available via the Zeebe-maintained [Elasticsearch exporter](https://github.com/camunda/camunda/tree/stable/8.8/zeebe/exporters/elasticsearch-exporter).
 
 Exporters reduce the need for Zeebe to store data indefinitely. Once data is no longer required internally, Zeebe queries its exporters to determine if it can be safely deleted. If so, it is permanently removed, reducing disk usage.
 
@@ -51,7 +51,7 @@ When implementing or activating a custom exporter:
 To detect this early, monitor the broker's disk usage and the exporter throughput metric (`zeebe_exporter_events_total`). See [metrics](../operational-guides/monitoring/metrics.md) for details.
 :::
 
-All exporters—whether loaded from an external JAR or not—interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
+All exporters—whether loaded from an external JAR or not—interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
 
 ## Loading
 
@@ -101,7 +101,7 @@ This design allows different exporters to depend on the same third-party librari
 System classes and those bundled with the Zeebe JAR are loaded via the system class loader.
 :::
 
-Exporter-specific configuration is defined in the `[exporters.args]` nested map. This map is passed as a `Map<String, Object>` to the exporter's `Exporter#configure(Configuration)` method using the [Configuration](https://github.com/camunda/camunda/tree/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object.
+Exporter-specific configuration is defined in the `[exporters.args]` nested map. This map is passed as a `Map<String, Object>` to the exporter's `Exporter#configure(Configuration)` method using the [Configuration](https://github.com/camunda/camunda/tree/stable/8.8/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object.
 
 Configuration takes place in two phases: once during broker startup and again each time a partition elects a new leader.
 
@@ -109,7 +109,7 @@ Configuration takes place in two phases: once during broker startup and again ea
 
 At any given time, there is exactly one leader node for each partition.
 
-When a node becomes the leader for a partition, it starts an instance of the [exporter stream processor](https://github.com/camunda/camunda/tree/main/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
+When a node becomes the leader for a partition, it starts an instance of the [exporter stream processor](https://github.com/camunda/camunda/tree/stable/8.8/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
 
 This stream processor creates exactly one instance of each configured exporter and forwards every record on the stream to each exporter in sequence.
 

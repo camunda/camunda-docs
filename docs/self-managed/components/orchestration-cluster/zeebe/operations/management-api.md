@@ -117,7 +117,7 @@ The enable and disable functionality is specifically useful for [dual region dep
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
 
 :::info
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/exporter-api.yaml).
 :::
 
 :::note
@@ -199,7 +199,7 @@ An exporter can also report `CONFIG_NOT_FOUND`. It is still enabled in the dynam
 
 ## Cluster API
 
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml).
 
 ### Monitoring API
 
@@ -213,7 +213,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
+The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml) for details:
 
 ```
 {
@@ -374,7 +374,7 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 #### Response {#partitioning-response}
 
-The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
+The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml) for details:
 
 ```
 {
