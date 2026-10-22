@@ -40,7 +40,7 @@ If you enable Camunda Hub or Optimize without enabling Management Identity, thes
 
 ## Camunda Hub
 
-Enable Camunda Hub with the following configuration options. If you're upgrading from Camunda 8.9, see the [Camunda Hub consolidation migration steps](/self-managed/upgrade/helm/890-to-810.md#consolidate-console-and-web-modeler-into-camunda-hub).
+Enable Camunda Hub with the following configuration options. If you're upgrading from Camunda 8.9, see the [Camunda Hub consolidation migration steps](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub).
 
 - Set `camundaHub.enabled: true`.
 - Enable Management Identity for authentication. See [authentication and authorization](./authentication-and-authorization/index.md).

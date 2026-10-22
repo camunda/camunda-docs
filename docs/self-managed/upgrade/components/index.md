@@ -29,8 +29,8 @@ Additional steps may be required if your deployment:
 
 For release context, see:
 
-- [What’s new in Camunda 8.10](/reference/release-information/810/whats-new-in-810.md)
-- [8.10 release notes](/reference/release-information/810/810-release-notes.md).
+- [What’s new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md)
+- [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
 
 :::
 
@@ -38,4 +38,4 @@ For release context, see:
 
 This section links to component-level guidance for the 8.9 to 8.10 upgrade.
 
-<p class="link-arrow">[Upgrade Camunda components from 8.9 to 8.10](890-to-810.md)</p>
+<p class="link-arrow">[Upgrade Camunda components from 8.9 to 8.10](890-to-8100.md)</p>

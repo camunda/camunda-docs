@@ -13,7 +13,7 @@ To launch Web Modeler, follow the steps below:
 1. After [creating an account and logging in](/components/console/manage-plan/create-account.md) to Camunda, you are automatically taken to Web Modeler. Navigate between the components by clicking the square-shaped **Camunda components** icon in the top left corner of the page.
 2. Select **Create new project**:
    ![web modeler empty home](img/web-modeler-new-user-home.png)
-3. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 4. Name the default diagram that comes with the process application. You can go back and change the name any time by clicking on the project name and **Edit name**.
 5. Select **Browse blueprints** to open the blueprints dialog and browse blueprints for various use cases as a starting point for your first diagram.
    ![web modeler blueprint browsing](img/web-modeler-blueprint.png)

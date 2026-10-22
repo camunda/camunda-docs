@@ -31,7 +31,7 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 :::info Upgrade to Camunda 8.10
 
 - Existing customer? Upgrade your APIs & tools to 8.10 using the [APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md).
-- See [what's new in Camunda 8.11](/reference/release-information/811/whats-new-in-811.md), [release announcements](/reference/release-information/811/811-announcements.md), and [release notes](/reference/release-information/811/811-release-notes.md).
+- See [what's new in Camunda 8.11](/reference/announcements-release-notes/8110/whats-new-in-811.md), [release announcements](/reference/announcements-release-notes/8110/8110-announcements.md), and [release notes](/reference/announcements-release-notes/8110/8110-release-notes.md).
 
 :::
 

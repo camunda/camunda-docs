@@ -88,7 +88,7 @@ orchestration:
               api-enabled: true # Enables multi-tenancy API for tenant management
 ```
 
-For the full list of deprecated Helm keys and their replacements, see [Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-810.md#deprecated-application-configuration-helm-keys).
+For the full list of deprecated Helm keys and their replacements, see [Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys).
 
 :::warning
 Disabling multi-tenancy after it has been enabled can cause unexpected behavior if active tenants exist.

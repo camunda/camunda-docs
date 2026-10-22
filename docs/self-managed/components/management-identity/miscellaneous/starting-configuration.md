@@ -26,7 +26,7 @@ The Hub client IDs (`web-modeler`, `web-modeler-api`) are retained for backward 
 
 ## Roles
 
-Both `Web Modeler`/`Web Modeler Admin` and the equivalent `Hub`/`Hub Admin` roles are provisioned and grant identical permissions. See [Management Identity roles and permissions](../../../upgrade/components/890-to-810.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for details.
+Both `Web Modeler`/`Web Modeler Admin` and the equivalent `Hub`/`Hub Admin` roles are provisioned and grant identical permissions. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for details.
 
 | Name                   | Created/updated with component |
 | :--------------------- | :----------------------------- |

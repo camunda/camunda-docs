@@ -169,4 +169,4 @@ The Web UI has no authentication. Keep the `127.0.0.1` port binding and don't ex
 
 Treat input files, migrated files, and reports as potentially sensitive. They can contain configuration values, including credentials. Review them before sharing or committing them.
 
-After reviewing the results, continue with [upgrading Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-810.md). The toolkit doesn't replace backups, non-production testing, or the required deployment and data-migration steps.
+After reviewing the results, continue with [upgrading Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md). The toolkit doesn't replace backups, non-production testing, or the required deployment and data-migration steps.

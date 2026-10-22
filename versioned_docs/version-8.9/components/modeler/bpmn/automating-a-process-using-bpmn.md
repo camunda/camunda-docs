@@ -28,7 +28,7 @@ To get started, ensure you’ve [created a Camunda 8 account](/components/consol
 Once logged in to your Camunda 8 account, take the following steps:
 
 1. Within Modeler, click **New project**.
-2. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+2. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 3. In the process application, click **Create new > BPMN diagram**.
 4. Right after creating your diagram, you can name it by replacing the **New BPMN Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
 

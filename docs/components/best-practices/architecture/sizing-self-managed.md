@@ -349,7 +349,7 @@ As of 8.10, `FRACTION` is the shipped default for primary storage: no action is 
 
 `FRACTION` scales with the broker's actual memory automatically, unlike `PARTITION` and `BROKER`, which are absolute limits: if you resize a broker's memory or change its partition count, you have to remember to retune the limit too, or RocksDB's share of memory silently stays where it was. This also mirrors the direction Camunda SaaS already takes for primary storage.
 
-If you're upgrading from a version before 8.10 and previously relied on the `PARTITION` default, your effective RocksDB memory allocation changes on upgrade unless you set the strategy explicitly. See the [8.10 release notes](/reference/release-information/810/810-release-notes.md#default-rocksdb-memory-allocation-strategy-changed-to-fraction) for details.
+If you're upgrading from a version before 8.10 and previously relied on the `PARTITION` default, your effective RocksDB memory allocation changes on upgrade unless you set the strategy explicitly. See the [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md#default-rocksdb-memory-allocation-strategy-changed-to-fraction) for details.
 
 ```yaml
 camunda:

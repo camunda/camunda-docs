@@ -26,7 +26,7 @@ The Camunda Spring Boot Starter is part of the Camunda 8 [public API](/reference
 - Spring Zeebe SDK will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 
-See the [migration guide](/reference/release-information/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-starter) for details.
+See the [migration guide](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-starter) for details.
 :::
 
 ## What you can build with it
@@ -63,7 +63,7 @@ What this means for your application:
 - **Spring framework patches:** After June 2026, Spring will no longer provide open-source security or bug-fix patches for Spring Boot 3.x. Security patches remain available through Spring Commercial support (Broadcom).
   :::
 
-For details on how Camunda handles major version transitions and end-of-support windows, see [Spring Boot/Framework/Security updates](/reference/release-information/release-policy.md#spring-bootframeworksecurity-updates).
+For details on how Camunda handles major version transitions and end-of-support windows, see [Spring Boot/Framework/Security updates](/reference/announcements-release-notes/release-policy.md#spring-bootframeworksecurity-updates).
 
 To use the Spring Boot 3 module, replace the default dependency in your project:
 

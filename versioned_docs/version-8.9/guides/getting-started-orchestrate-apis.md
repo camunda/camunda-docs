@@ -37,7 +37,7 @@ The concept of a [connector](/reference/glossary.md#connector) consists of two p
 To use a REST connector in your process, follow the steps below:
 
 1. In Web Modeler, click **New project**.
-2. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+2. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 3. In the process application, click **Create new > BPMN diagram**.
 4. With your new diagram open, make sure you're in [**Implement** mode](/components/modeler/web-modeler/collaboration/implement-your-process.md).
 5. With no diagram elements selected, open the **Details** panel on the right side of the modeling interface.

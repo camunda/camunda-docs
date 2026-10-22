@@ -70,7 +70,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 
 :::info
 
-- See [release announcements](/reference/release-information/880/880-announcements.md) and [release notes](/reference/release-information/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
 
 :::
@@ -390,11 +390,11 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
     <td>Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.</td>
 </tr>
 <tr>
-    <td>[Tasklist GraphQL API](/reference/release-information/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)</td>
+    <td>[Tasklist GraphQL API](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)</td>
     <td>The previously deprecated Tasklist GraphQL API is removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster REST API, which provides a more unified and consistent interface for managing tasks and workflows.</td>
 </tr>
 <tr>
-    <td>[Zeebe gRPC API endpoints](/reference/release-information/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)</td>
+    <td>[Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)</td>
     <td>With the 8.8 release, the gRPC API continues but will be disabled by default starting with the 8.10 release.</td>
 </tr>
 </table>

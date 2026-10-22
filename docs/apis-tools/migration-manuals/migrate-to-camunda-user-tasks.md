@@ -180,7 +180,7 @@ Repeat these steps for all user tasks in the process. Then, deploy the process t
 ## How Tasklist API (V1) compares to Orchestration Cluster REST API (V2)
 
 :::note
-The Tasklist REST API is [deprecated with the 8.8 release and will be deleted with the 8.10 release](/reference/release-information/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis).
+The Tasklist REST API is [deprecated with the 8.8 release and will be deleted with the 8.10 release](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis).
 :::
 
 The following table provides a breakdown of which operations are supported in which API, and for which user tasks.

@@ -10,14 +10,14 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release.
 
-| Minor release date | End of standard maintenance | Release notes                                                                | Release blog | Upgrade guides                                                                         |
-| ------------------ | --------------------------- | ---------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027               | [8.8 release notes](/reference/release-information/880/880-release-notes.md) | -            | [Upgrade guides](/reference/release-information/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Release blog | Upgrade guides                                                                                 |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027               | [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
-- See [release notes](/reference/release-information/880/880-release-notes.md) to learn more about new features and enhancements.
-- See [What's new in Camunda 8.8](/reference/release-information/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- See [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn more about new features and enhancements.
+- See [What's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::

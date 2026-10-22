@@ -179,7 +179,7 @@ Add the section under `global.identity` to the `global` configuration you create
 Management Identity stores its data in a dedicated PostgreSQL database. Connect it to the `pg-identity` cluster created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment), or to a managed database. Chart `15.x` no longer bundles the `identityPostgresql` subchart, so this connection has to be configured explicitly.
 
 :::note
-Chart 15.x (Camunda 8.10) rejects the flat `global.identity.keycloak.auth.existingSecret` and `auth.existingSecretKey` form used by earlier charts. Use the nested `auth.secret.*` form shown above. In charts 14.x (Camunda 8.8 and 8.9) the flat form still works but logs a deprecation warning. For the full list of values removed in 8.10, see [Remove keys rejected by chart 15.x](/self-managed/upgrade/helm/890-to-810.md#remove-keys-rejected-by-chart-15x).
+Chart 15.x (Camunda 8.10) rejects the flat `global.identity.keycloak.auth.existingSecret` and `auth.existingSecretKey` form used by earlier charts. Use the nested `auth.secret.*` form shown above. In charts 14.x (Camunda 8.8 and 8.9) the flat form still works but logs a deprecation warning. For the full list of values removed in 8.10, see [Remove keys rejected by chart 15.x](/self-managed/upgrade/helm/890-to-8100.md#remove-keys-rejected-by-chart-15x).
 :::
 The `identity.firstUser` field defines the initial user that Management Identity creates in Keycloak with full access to all Camunda components.
 By default, this user is named `demo`. To use a different name, set `identity.firstUser.username`.

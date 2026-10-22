@@ -416,7 +416,7 @@ In Camunda 8 SaaS, a generation is the release identifier for the version set ru
 
 A generation is not a process definition version, a version tag, or a [file version](#version-file) or [project snapshot](#snapshot-project).
 
-- [Generation names](/reference/release-information/release-policy.md#generation-names)
+- [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
 
 ### GPAI model
 

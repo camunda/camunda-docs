@@ -42,7 +42,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 ## Configuration
 
-Upgrading from Camunda 8.9? Console's cluster-management pages are now part of the Hub UI application, so a separate OIDC application/client for Console is no longer needed. See [Management Identity roles and permissions](/self-managed/upgrade/components/890-to-810.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide.
+Upgrading from Camunda 8.9? Console's cluster-management pages are now part of the Hub UI application, so a separate OIDC application/client for Console is no longer needed. See [Management Identity roles and permissions](/self-managed/upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide.
 
 <Tabs groupId="authPlatform" defaultValue="generic" queryString values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
 <TabItem value="generic">

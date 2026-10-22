@@ -11,14 +11,14 @@ page_rank: 90
 
 These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
-| Minor release date | End of standard maintenance | Changelog(s)                                                                | Release blog | Upgrade guides                                                                         |
-| ------------------ | --------------------------- | --------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027               | [Patch Releases and Changelogs](#technical-changelogs-for-all-88x-releases) | -            | [Upgrade guides](/reference/release-information/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Changelog(s)                                                                | Release blog | Upgrade guides                                                                                 |
+| ------------------ | --------------------------- | --------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027               | [Patch Releases and Changelogs](#technical-changelogs-for-all-88x-releases) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
-- See [release announcements](/reference/release-information/880/880-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
-- See [What's new in Camunda 8.8](/reference/release-information/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
+- See [What's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
@@ -508,7 +508,7 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 - The new unified exporter architecture improves cluster management and data migration, bringing importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also harmonized.
 - The unified configuration for Orchestration Cluster components allows you to define cluster and component behavior.
 
-<p><a href="../../../../reference/release-information/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+<p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
 
 ### Archive by ID for Elasticsearch and OpenSearch
 
@@ -563,7 +563,7 @@ In Camunda 8.8, Orchestration Cluster Identity and Management Identity are two s
 - **Identity**: Access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.
 - **Management Identity**: Continues to manage access for platform components such as Web Modeler, Console, and Optimize.
 
-<p><a href="../../../../reference/release-information/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+<p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
 
 ### Migrate taken sequence flows flowing to the joining gateway
 

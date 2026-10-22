@@ -46,7 +46,7 @@ camundaHub:
               topologyKey: topology.kubernetes.io/zone
 ```
 
-Apply the same pattern to `camundaHub.websockets`. If you're upgrading from 8.9, [move existing `webModeler.*` overrides to `camundaHub.*`](/self-managed/upgrade/helm/890-to-810.md#consolidate-console-and-web-modeler-into-camunda-hub).
+Apply the same pattern to `camundaHub.websockets`. If you're upgrading from 8.9, [move existing `webModeler.*` overrides to `camundaHub.*`](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub).
 
 The same `podLabels` and `affinity` pairing applies to every component listed in [Configure scheduling values](#configure-scheduling-values). Prefer a label you own over chart-managed labels such as `app.kubernetes.io/component`, because their values can change between chart versions.
 

@@ -19,7 +19,7 @@ A Camunda 8.10 deployment is one or more Helm releases, and each release declare
 | Several Orchestration Clusters, one Hub         | One `hub` release, one `orchestration` release per cluster                                                                                      | [Install an Orchestration Cluster release](./topology/orchestration-release.md)                                |
 | Analytics for a tenant of the split topology    | One `optimize` release per Physical Tenant                                                                                                      | [Install an Optimize release](./topology/optimize-release.md)                                                  |
 | Existing single-release production deployment   | One `combined` release                                                                                                                          | [Install for production](./production/index.md)                                                                |
-| Upgrading an existing 8.9 deployment            | Stay on one `combined` release and upgrade in place first                                                                                       | [Upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-810.md)                             |
+| Upgrading an existing 8.9 deployment            | Stay on one `combined` release and upgrade in place first                                                                                       | [Upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md)                            |
 | Moving a combined release to the split topology | `hub` and `orchestration` releases. Optimize either stays in the `orchestration` release or moves to one `optimize` release per Physical Tenant | [Move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md) |
 
 For a new production deployment, the split topology is the baseline. A `combined` release remains supported, remains the chart default, and is the right choice for evaluation, proofs of concept, and 8.9 compatibility.
@@ -50,4 +50,4 @@ Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Camund
 
 ## Upgrading instead of installing
 
-To move an existing deployment to 8.10, see [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-810.md). Upgrade in place first; adopting the split topology is a separate step, covered in [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
+To move an existing deployment to 8.10, see [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md). Upgrade in place first; adopting the split topology is a separate step, covered in [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).

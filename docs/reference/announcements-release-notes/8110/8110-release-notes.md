@@ -1,5 +1,5 @@
 ---
-id: 811-release-notes
+id: 8110-release-notes
 title: "8.11 Release notes"
 sidebar_label: Release notes
 description: "Release notes for new features included in the 8.11 minor release, including alpha feature releases."

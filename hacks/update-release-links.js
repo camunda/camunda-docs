@@ -162,20 +162,14 @@ async function findReleaseNotesFiles() {
  * Extract version information from file path
  */
 function extractVersionFromPath(filePath) {
-  // Try to extract from filename (e.g., "890-release-notes.md" -> 8.9, "810-release-notes.md" -> 8.10, "811-release-notes.md" -> 8.11)
+  // Try to extract from filename (e.g., "890-release-notes.md" -> 8.9, "8100-release-notes.md" -> 8.10)
   const filenameMatch = path
     .basename(filePath)
-    .match(/^(\d)(\d+)-release-notes\.md$/);
+    .match(/^(\d)(\d+)0-release-notes\.md$/);
   if (filenameMatch) {
-    // Minors below 10 carry a trailing 0 (890 -> 8.9); 810 and later do not.
-    const digits = filenameMatch[2];
-    const minor =
-      digits.length === 2 && digits[1] === "0" && digits !== "10"
-        ? digits[0]
-        : digits;
     return {
       major: parseInt(filenameMatch[1]),
-      minor: parseInt(minor),
+      minor: parseInt(filenameMatch[2]),
     };
   }
 

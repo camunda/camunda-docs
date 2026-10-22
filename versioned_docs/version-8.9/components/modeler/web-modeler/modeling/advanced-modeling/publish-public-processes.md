@@ -29,7 +29,7 @@ This documentation provides step-by-step instructions on how to leverage public 
 To create a form for public access, follow these steps:
 
 1. Navigate to your project root.
-2. Create or open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+2. Create or open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 3. In the process application, click **Create new > Form**.
 4. Name your form.
 5. Design your form using the **component palette**.

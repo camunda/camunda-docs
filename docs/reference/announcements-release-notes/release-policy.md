@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the specific clarifications detailed on this page.
 
 :::info
-You can find deprecation and support announcements on the [announcements](/reference/release-information/overview.md#announcements) page.
+You can find deprecation and support announcements on the [announcements](/reference/announcements-release-notes/overview.md#announcements) page.
 :::
 
 ![Stable and alpha channels when provisioning a cluster](../img/diagram-releases.png)
@@ -28,7 +28,7 @@ Refers to a feature or component released as an alpha version, in an early state
 
 ### Alpha release
 
-Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.10.0-alpha1`, `8.10.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/release-information/overview.md#release-notes).
+Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.10.0-alpha1`, `8.10.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
 
 :::note
 
@@ -118,7 +118,7 @@ In our managed service, Camunda reserves the right to force update or restart a 
 
 ## Self-Managed
 
-You can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/release-information/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+You can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### Helm chart
 

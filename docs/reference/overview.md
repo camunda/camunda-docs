@@ -19,7 +19,7 @@ import OverviewImg from './img/hero-reference.png';
 
 See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information.
 
-<p class="link-button">[8.11 release information](./release-information/overview.md)</p>
+<p class="link-button">[8.11 release information](./announcements-release-notes/overview.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -36,7 +36,7 @@ What's new, release notes, announcements, and supporting information for Camunda
 <ReleasesGrid releases={gettingStartedCards} />
 
 :::info Release policy
-Learn about the [Camunda release policy](/reference/release-information/release-policy.md) and specific clarifications about provisioning in SaaS and Self-Managed.
+Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) and specific clarifications about provisioning in SaaS and Self-Managed.
 :::
 
 ## Security, licensing, and support information

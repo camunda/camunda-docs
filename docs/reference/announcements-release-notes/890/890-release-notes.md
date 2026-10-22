@@ -14,14 +14,14 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 
 <PageDescription />
 
-| Minor release date | End of standard maintenance | Changelog(s)                                                                | Upgrade guides                                                                             |
-| :----------------- | :-------------------------- | :-------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| 14 April 2026      | 12 October 2027             | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/release-information/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
+| :----------------- | :-------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 12 October 2027             | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
-- See [What's new in Camunda 8.9](/reference/release-information/890/whats-new-in-89.md) for important changes to consider when planning your upgrade from Camunda 8.8.
-- See [release announcements](/reference/release-information/890/890-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
+- See [What's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md) for important changes to consider when planning your upgrade from Camunda 8.8.
+- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::

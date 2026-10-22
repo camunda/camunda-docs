@@ -37,7 +37,7 @@ import CreateCluster from '../../../components/react-components/create-cluster.m
    - <a href="/bpmn/connectors/approve-receipt.form" download>`approve-receipt.form`</a>: A form for approving receipts.
 2. Log in to your Camunda 8 account.
 3. In Web Modeler, create or open a project.
-4. In your project, click **Create process application**, and name your process application `Expense process`. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+4. In your project, click **Create process application**, and name your process application `Expense process`. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 5. In your process application, delete the default diagram, and click **Create new > Upload files**.
 6. Upload `submit-expense.bpmn`, `upload-receipt.form`, and `approve-receipt.form`.
 

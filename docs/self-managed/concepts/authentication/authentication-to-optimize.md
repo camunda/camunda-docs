@@ -31,7 +31,7 @@ See the [OIDC configuration properties reference](/self-managed/components/orche
 Note the following:
 
 - `issuer-uri` must match the issuer your IdP puts in the `id_token`.
-- `audiences` must contain every audience your IdP issues for Optimize, plus the audience of any other application that calls Optimize on a user's behalf, such as Camunda Hub. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-810.md#component-specific-security-configuration-keys-are-deprecated) for the audiences the component-specific keys covered.
+- `audiences` must contain every audience your IdP issues for Optimize, plus the audience of any other application that calls Optimize on a user's behalf, such as Camunda Hub. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the audiences the component-specific keys covered.
 - Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token it can't classify as an M2M client's is treated as a user's, and checked against your configured Optimize permission.
 
 :::note
@@ -67,7 +67,7 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 If you're deploying Camunda 8.10 for the first time, none of this applies to you: configure the `camunda.security.*` properties above and skip this section and the next one.
 
-See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-810.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping, precedence rules, and the keys that no longer have any effect.
+See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping, precedence rules, and the keys that no longer have any effect.
 
 ## Fall back to the 8.9 component-specific configuration
 

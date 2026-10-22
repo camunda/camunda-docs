@@ -10,21 +10,21 @@ import IconDataImg from "../img/icon-reference-data.png";
 
 export const gettingStartedCards = [
   {
-    link: "./release-information/overview/",
+    link: "./announcements-release-notes/overview/",
     title: "8.11 release information",
     image: IconReleasesImg,
     description:
       "What's new, release notes, announcements, and supporting information for Camunda 8.11.",
   },
   {
-    link: "./release-information/811/811-announcements/",
+    link: "./announcements-release-notes/8110/8110-announcements/",
     title: "8.11 release announcements",
     image: IconReleaseAnnouncementsImg,
     description:
       "Supported environment changes and breaking changes/deprecations.",
   },
   {
-    link: "./release-information/811/811-release-notes/",
+    link: "./announcements-release-notes/8110/8110-release-notes/",
     title: "8.11 release notes",
     image: IconReleaseNotesImg,
     description:
@@ -34,21 +34,21 @@ export const gettingStartedCards = [
 
 export const releaseInfoCards = [
   {
-    link: "../811/whats-new-in-811/",
+    link: "../8110/whats-new-in-811/",
     title: "What's new in Camunda 8.11",
     image: IconReleasesImg,
     description:
       "Important changes to consider when upgrading from Camunda 8.10.",
   },
   {
-    link: "../811/811-announcements/",
+    link: "../8110/8110-announcements/",
     title: "8.11 release announcements",
     image: IconReleaseAnnouncementsImg,
     description:
       "Supported environment changes and breaking changes/deprecations.",
   },
   {
-    link: "../811/811-release-notes/",
+    link: "../8110/8110-release-notes/",
     title: "8.11 release notes",
     image: IconReleaseNotesImg,
     description:

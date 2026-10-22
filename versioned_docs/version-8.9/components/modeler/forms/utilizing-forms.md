@@ -21,7 +21,7 @@ To start building a form, log in to your [Camunda 8](https://camunda.io) account
 
 1. Navigate to Web Modeler.
 2. Open any project from your Web Modeler home view.
-3. In the project, create or open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/release-information/810/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. In the project, create or open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 4. In the process application, click **Create new**, and choose **Form**.
 
 :::tip
