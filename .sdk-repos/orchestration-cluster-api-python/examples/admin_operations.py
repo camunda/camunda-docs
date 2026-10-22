@@ -343,6 +343,16 @@ def get_status_example() -> None:
 # endregion GetStatus
 
 
+# region GetClock
+def get_clock_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_clock()
+
+    print(f"Engine time: {result.timestamp.isoformat()}")
+# endregion GetClock
+
+
 # region PinClock
 def pin_clock_example() -> None:
     client = CamundaClient()
