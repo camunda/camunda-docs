@@ -11,7 +11,7 @@ import DeleteMapImg from './img/mapping-rule-delete-modal.png';
 
 Mapping rules provide flexible access to Orchestration Cluster resources based on claims in a user's or client's OIDC access token.
 
-In Self-Managed, the Mapping Rules UI is always available. In SaaS, it becomes available once you [connect an external identity provider](/components/saas/clusters/connect-external-identity-provider.md) to the cluster. The mapping rules API works regardless, but without an external identity provider there are no custom claims to map against.
+In Self-Managed, the Mapping Rules UI is always available. In SaaS, it becomes available once you [connect an external identity provider](/components/saas/clusters/connect-external-identity-provider.md) to the cluster. The mapping rules API works regardless, but without an external identity provider there are no custom claims to map against, and assigning mapping rules to roles and groups, or unassigning them, is rejected with `403 Forbidden`.
 
 :::info
 To learn more, see [mapping rules](../concepts/access-control/mapping-rules.md).

@@ -137,7 +137,7 @@ The client is removed from the group.
 <span class="badge badge--platform">Self-Managed only</span>
 
 :::note
-[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication. They aren't available on [SaaS](../concepts/access-control/mapping-rules.md#mapping-rules-in-saas-and-self-managed).
+[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication. They aren't available on [SaaS](../concepts/access-control/mapping-rules.md#mapping-rules-in-saas-and-self-managed), where the API also rejects assigning them to roles and groups with `403 Forbidden`.
 :::
 
 ### Assign mapping rules to a group
