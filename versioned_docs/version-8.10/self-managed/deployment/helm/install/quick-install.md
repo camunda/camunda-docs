@@ -61,7 +61,7 @@ In production, Camunda 8 is typically deployed together with additional componen
 
    ```bash
    helm install camunda camunda/camunda-platform \
-     --values https://helm.camunda.io/camunda-platform/values/camunda-8.10/values-quick-install.yaml \
+     --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.10/values-quick-install.yaml \
      -n orchestration
    ```
 
