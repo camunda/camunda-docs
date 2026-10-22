@@ -111,7 +111,7 @@ The enable and disable functionality is specifically useful for [dual region dep
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
 
 :::info
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/stable/8.9/dist/src/main/resources/api/cluster/exporter-api.yaml).
 :::
 
 :::note

@@ -53,7 +53,7 @@ When implementing or activating a custom exporter:
 To detect this early, monitor the broker's disk usage and the exporter throughput metric (`zeebe_exporter_events_total`). See [metrics](../operational-guides/monitoring/metrics.md) for details.
 :::
 
-All exporters—whether loaded from an external JAR or not—interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
+All exporters—whether loaded from an external JAR or not—interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
 
 ## Loading
 
@@ -103,7 +103,7 @@ This design allows different exporters to depend on the same third-party librari
 System classes and those bundled with the Zeebe JAR are loaded via the system class loader.
 :::
 
-Exporter-specific configuration is defined in the `[exporters.args]` nested map. This map is passed as a `Map<String, Object>` to the exporter's `Exporter#configure(Configuration)` method using the [Configuration](https://github.com/camunda/camunda/tree/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object.
+Exporter-specific configuration is defined in the `[exporters.args]` nested map. This map is passed as a `Map<String, Object>` to the exporter's `Exporter#configure(Configuration)` method using the [Configuration](https://github.com/camunda/camunda/tree/stable/8.9/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object.
 
 Configuration takes place in two phases: once during broker startup and again each time a partition elects a new leader.
 
@@ -111,7 +111,7 @@ Configuration takes place in two phases: once during broker startup and again ea
 
 At any given time, there is exactly one leader node for each partition.
 
-When a node becomes the leader for a partition, it starts an instance of the [exporter stream processor](https://github.com/camunda/camunda/tree/main/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
+When a node becomes the leader for a partition, it starts an instance of the [exporter stream processor](https://github.com/camunda/camunda/tree/stable/8.9/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
 
 This stream processor creates exactly one instance of each configured exporter and forwards every record on the stream to each exporter in sequence.
 
@@ -196,14 +196,14 @@ All resources required for purging need to be closed afterwards to avoid memory 
 
 ## Custom exporter to filter specific records
 
-The exporter interface supports record filtering through the [`Context#RecordFilter`](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java) interface.
+The exporter interface supports record filtering through the [`Context#RecordFilter`](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Context.java) interface.
 
 At a high level, filtering happens in two phases:
 
 - Metadata-level filtering via `acceptType`, `acceptValue`, and `acceptIntent`, which runs before records are deserialized and is very cheap.
 - Record-level filtering via `acceptRecord(Record<?>)`, which can inspect the fully deserialized record value when you need richer conditions (for example, inspecting variables or BPMN process IDs).
 
-Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
+Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
 
 For example, you can implement a custom exporter that only exports records with:
 
