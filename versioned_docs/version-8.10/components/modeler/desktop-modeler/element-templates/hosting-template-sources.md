@@ -8,7 +8,7 @@ Desktop Modeler can load element templates from a remote source over HTTP or HTT
 
 ## Create a source index
 
-The index is a JSON object whose keys are template identifiers. Each value is an array of available versions for that template. Each version entry includes a nonnegative integer `version` and an absolute HTTP or HTTPS `ref` URL to a JSON element template file. The index key must match the referenced template's `id`, and the index version must match the template's `version`. You can optionally include an `engine` object with a `camunda` semantic version range to limit which Camunda versions can use the template. The template itself uses an `engines` object to describe compatible engines.
+The index is a JSON object whose keys are template identifiers. Each value is an array of available versions for that template. Each version entry includes a nonnegative integer `version` and an absolute `ref` URL to a JSON element template file. The index key must match the referenced template's `id`, and the index version must match the template's `version`. You can optionally include an `engine` object with a `camunda` semantic version range to limit which Camunda versions can use the template. The template itself uses an `engines` object to describe compatible engines.
 
 ```json
 {
