@@ -72,7 +72,7 @@ For example, send a request to the Camunda Hub API's `/info` endpoint:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
-     https://hub.cloud.camunda.io/api/v2/info
+     https://hub.camunda.io/api/v2/info
 ```
 
 ## Organization-level access

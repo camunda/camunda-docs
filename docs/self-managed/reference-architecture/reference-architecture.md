@@ -35,29 +35,13 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ### Deployment topology
 
-A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity. The management plane serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
+A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity and shared across environments. Each environment, such as development, integration, or production, can have one or more Orchestration Cluster deployments. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant. Each Physical Tenant is served by its own Optimize deployment.
 
-<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
+<!-- Editable source: ./img/deployment-topology.excalidraw -->
 
-```mermaid
-graph TD
-    Hub["Management plane<br/>Camunda Hub + Management Identity"]
-    OCDev["Orchestration Cluster<br/>development"]
-    OCInt["Orchestration Cluster<br/>integration"]
-    OCProd["Orchestration Cluster<br/>production"]
-    OptDev["Optimize<br/>default tenant"]
-    OptInt["Optimize<br/>default tenant"]
-    OptProdA["Optimize<br/>default tenant"]
-    OptProdB["Optimize<br/>Physical Tenant A"]
+![Camunda Hub and Management Identity in a shared management plane above development, integration, and production Orchestration Clusters. Each Physical Tenant connects to its own Optimize deployment. Production shows the default tenant and Physical Tenant A, with stacked cards indicating additional Physical Tenants and their own Optimize deployments.](./img/deployment-topology.svg)
 
-    Hub --> OCDev
-    Hub --> OCInt
-    Hub --> OCProd
-    OCDev --> OptDev
-    OCInt --> OptInt
-    OCProd --> OptProdA
-    OCProd --> OptProdB
-```
+The stacked cards in the diagram represent additional Physical Tenants and their own Optimize deployments. Each Optimize deployment analyzes the data of its associated Physical Tenant.
 
 Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane maintains the cluster inventory and Management Identity permission and role configuration. With Keycloak, Management Identity also provisions workload clients. With Microsoft Entra ID or another generic OIDC provider, operators provision workload clients separately.
 
@@ -71,9 +55,13 @@ When designing a reference architecture, it's essential to understand the differ
 
 #### Management plane {#camunda-hub}
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
+<!-- Editable source: ./img/management-cluster.excalidraw. Adapted from PR #10011. -->
 
-![Camunda Hub](./img/management-cluster.jpg)
+![Management plane with Ingress routing to Camunda Hub and Management Identity, RDBMS persistence, and an OIDC authentication provider. Arrows point from callers to services.](./img/management-cluster.svg)
+
+Ingress routes browser requests to Camunda Hub and Management Identity. Camunda Hub calls the Management Identity API, and Management Identity connects to an OIDC authentication provider.
+
+Camunda Hub persists data in an RDBMS. Management Identity requires its own database when using a generic OIDC provider or Microsoft Entra ID, or when the `resource-permissions` or `multi-tenancy` feature flag is enabled with Keycloak. With the default Keycloak-based setup and neither feature flag enabled, Management Identity doesn't require its own database.
 
 The management plane can connect to multiple Orchestration Clusters across environments, such as development, integration, and production. It consists of:
 
@@ -86,7 +74,9 @@ Camunda Hub uses a separate Management Identity deployment, distinct from the em
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+<!-- Editable source: ./img/orchestration-cluster.excalidraw. Adapted from PR #10011. -->
+
+![Orchestration Cluster with Zeebe, Operate, Tasklist, and Admin, connected to clients and web UIs through ingress, Connectors, secondary storage, and an OIDC provider.](./img/orchestration-cluster.svg)
 
 The Orchestration Cluster is the core of Camunda.
 
@@ -104,6 +94,12 @@ This unified architecture ensures seamless communication, consistent state manag
 #### Optimize
 
 [Optimize](/components/optimize/what-is-optimize.md) is a business intelligence tool for analyzing bottlenecks and examining improvements in automated processes. It analyzes process data exported by an Orchestration Cluster.
+
+<!-- Editable source: ./img/optimize.excalidraw. Adapted from PR #10011. -->
+
+![Optimize deployment with Ingress forwarding web UI requests to Optimize, which queries secondary storage and either shared or dedicated Management Identity.](./img/optimize.svg)
+
+Optimize imports Zeebe records from Elasticsearch or OpenSearch and stores its own analytics data there. The exporters run in the Orchestration Cluster. Optimize calls the Management Identity API to retrieve permissions and tenant authorizations.
 
 Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. Optimize requires Management Identity and can't use the Orchestration Cluster's Admin. It can use the Management Identity in the management plane, shared with Camunda Hub, or a separate one when Physical Tenants need identical logical tenant IDs enforced independently. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants).
 
