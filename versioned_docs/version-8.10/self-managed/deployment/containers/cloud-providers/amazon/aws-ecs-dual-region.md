@@ -26,45 +26,11 @@ The reference architecture creates two identically configured ECS Fargate cluste
 Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby — region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit step during failover, not an automatic property of the deployment.
 :::
 
-```mermaid
+<!-- Editable source: ./assets/aws-ecs-dual-region.excalidraw -->
 
-architecture-beta
-    group regions(cloud)["Camunda dual region"]
-    group r0(cloud)["Region 0 · eu-west-2"] in regions
-    group r1(cloud)["Region 1 · eu-west-3"] in regions
-    group aurora_global(logos:aws-rds)["Aurora Global Database"] in regions
+![Clients reach the Ingress in each of two AWS regions, eu-west-2 and eu-west-3, over HTTP(S) and gRPC. Each Ingress forwards to an Orchestration Cluster of four Zeebe brokers on ECS Fargate, and the two clusters exchange Zeebe Raft traffic. Each region has an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions write to. Both regions connect to the writer cluster of an Aurora Global Database in eu-west-2, which replicates to a reader cluster in eu-west-3.](./assets/aws-ecs-dual-region.svg)
 
-    service ingress0(logos:aws-elb)["ALB and NLB ingress"] in r0
-    service tasks0(logos:aws-ecs)["ECS Fargate workloads"] in r0
-    service s3id0(logos:aws-s3)["S3 broker-ID lease"] in r0
-    service s3bk0(logos:aws-s3)["S3 backup repository"] in r0
-    service peer0(internet)["Cross-region link"] in r0
-
-    service ingress1(logos:aws-elb)["ALB and NLB ingress"] in r1
-    service tasks1(logos:aws-ecs)["ECS Fargate workloads"] in r1
-    service s3id1(logos:aws-s3)["S3 broker-ID lease"] in r1
-    service s3bk1(logos:aws-s3)["S3 backup repository"] in r1
-    service peer1(internet)["Cross-region link"] in r1
-
-    service db_primary(logos:aws-rds)["Primary writer · eu-west-2"] in aurora_global
-    service db_secondary(logos:aws-rds)["Secondary reader · eu-west-3"] in aurora_global
-    db_primary:R --> L:db_secondary
-
-    ingress0:B -- T:tasks0
-    tasks0:L -- R:s3id0
-    tasks0:B -- T:s3bk0
-    tasks0:R -- L:peer0
-
-
-    peer0{group}:R <--> L:peer1{group}
-    peer0{group}:B --> T:db_primary{group}
-    peer1{group}:B --> T:db_secondary{group}
-
-    ingress1:B -- T:tasks1
-    tasks1:R -- L:s3id1
-    tasks1:B -- T:s3bk1
-    tasks1:L -- R:peer1
-```
+Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease. Both regions connect to the Aurora global writer endpoint in region 0, and the writer replicates to the reader cluster in region 1.
 
 :::note
 This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
@@ -551,7 +517,7 @@ open http://localhost:8080
 
 The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies, with two dual-region specifics to keep in mind:
 
-- **Backups are per region.** Each orchestration cluster writes to its local S3 backup bucket via `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`. The infra layer exposes both bucket names as outputs: `backup_bucket_region_0_name` and `backup_bucket_region_1_name`. Trigger backups against either region's API; ensure your backup tooling reads the correct bucket for that region.
+- **Backups share one bucket.** The infra layer creates a single S3 backup bucket in region 0, exposed as the `backup_bucket_region_0_name` output. Both orchestration clusters write to it through `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`, and region 1 brokers set `CAMUNDA_DATA_BACKUP_S3_REGION` to region 0 so they reach the bucket cross-region. All backup data stays in one place, whichever region you trigger the backup from. If you lose region 0, you lose access to the backup bucket until the region recovers, so plan S3 replication yourself if you need the backups in both regions.
 - **Restore is not exposed by the dual-region app layer.** The underlying orchestration-cluster module supports an init-container restore (`restore_enabled`, `restore_backup_id` — see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore-application.md#restore-options)), but these variables are not surfaced in `terraform/app/camunda.tf` in this reference. Enabling restore for a dual-region deployment requires customizing the app layer to pass the restore variables to both regional module invocations and to coordinate broker IDs that span both regions. Treat dual-region restore as an advanced scenario; validate it against your specific topology before relying on it.
 
 :::note

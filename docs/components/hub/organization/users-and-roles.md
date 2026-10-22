@@ -12,11 +12,11 @@ Access is controlled on three levels:
 
 - **Organization**: Users are assigned organization-level roles. They decide what a user can do in Camunda Hub across the organization.
 - **Workspace**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
-- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in Admin, not by organization-level roles.
+- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in [Admin](/components/admin/authorization.md) for each cluster, not by organization-level roles.
 
 Where and how you manage users, and which roles are available, depends on the edition of Camunda that you use. Select your edition to see the details.
 
-<Tabs groupId="edition" defaultValue="saas" queryString values={
+<Tabs lazy groupId="edition" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
 {label: 'Self-Managed', value: 'self-managed' },
@@ -26,9 +26,9 @@ Where and how you manage users, and which roles are available, depends on the ed
 
 ## Manage users
 
-You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. The Organization Owner has all rights in the organization.
+You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. This is where you configure organization access. The Organization Owner has all rights in the organization.
 
-Groups don't control access to Camunda Hub. They apply only to clusters on version 8.7 or earlier. Use [roles](#roles-and-permissions) to control access to Camunda Hub.
+Use [roles](#roles-and-permissions) to control access to Camunda Hub.
 
 - [Create and manage users](/components/saas/organization/create-manage-users.md)
 - [Manage user groups](/components/saas/organization/manage-user-groups.md)
@@ -37,6 +37,14 @@ Groups don't control access to Camunda Hub. They apply only to clusters on versi
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
 People who do not yet have a Camunda 8 account can also be invited to an organization. To access the organization, the invited individual must first create a Camunda 8 account by following the instructions in the invitation email.
+
+## Groups (legacy)
+
+Groups in Camunda Hub are a legacy feature for organizing users in SaaS. They apply only to clusters on version 8.7 or earlier, and they don't control access to Camunda Hub.
+
+To manage groups, click **Organization > Manage organization**, and then open the **Groups** tab. See [manage user groups](/components/saas/organization/manage-user-groups.md).
+
+For clusters on version 8.8 or later, manage [groups](/components/admin/group.md) and authorizations in Admin.
 
 ## Roles and permissions
 
@@ -107,27 +115,19 @@ If authorizations are disabled in the runtime, the user has full access to the r
 
 For clusters before version 8.8, access is controlled with resource-based authorizations and the legacy **Task user** and **Visitor** roles. See [manage resource-based authorizations](/components/saas/organization/resource-based-auth.md).
 
-### User task access restrictions
-
-:::note
-User task access restrictions were removed in Camunda 8.10 together with Tasklist V1.
-
-Use [authorization-based access control](../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
-:::
-
 </TabItem>
 
 <TabItem value='self-managed'>
 
-## Manage users {#manage-users-self-managed}
+## Manage users {#manage-users}
 
-You create users in your identity provider, and manage users, groups, and roles in Management Identity.
+You create users in your identity provider, and manage users, groups, and roles in Management Identity. This is where you configure organization access for Camunda Hub and Optimize. It doesn't grant access to deployment environments.
 
 - [Management Identity user, group, and role management](/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage groups](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md)
 - [Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)
 
-## Roles and permissions {#roles-and-permissions-self-managed}
+## Roles and permissions {#roles-and-permissions}
 
 Users are assigned organization-level roles. The following table shows what each role can do.
 
@@ -143,20 +143,29 @@ Users are assigned organization-level roles. The following table shows what each
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 
-### Management Identity roles {#management-identity-roles-self-managed}
+### Management Identity roles
 
-In Self-Managed, you assign roles in Management Identity. The **Hub Admin** role gives the access of an Organization Admin, and the **Hub** role the access of a Member. The **DevOps** and **Analyst** roles keep their names. The default roles **DevOps**, **Hub**, and **Hub Admin** were previously known as **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles still exist, grant the same permissions, and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
+In Self-Managed, you assign the organization-level roles by assigning roles in Management Identity. The following table shows which Management Identity role gives the access of each organization role.
 
-## Access to organization resources {#access-to-organization-resources-self-managed}
+| Organization role  | Management Identity role | Previous name     |
+| :----------------- | :----------------------- | :---------------- |
+| Organization Admin | Hub Admin                | Web Modeler Admin |
+| Member             | Hub                      | Web Modeler       |
+| DevOps             | DevOps                   | Console           |
+| Analyst            | Analyst                  | –                 |
+
+The roles listed under **Previous name** still exist and grant the same permissions as the new roles. They are kept for backward compatibility, so existing assignments keep working. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
+
+## Access to organization resources {#access-to-organization-resources}
 
 The organization-level roles of a user set the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
 
-### Workspace and project access {#workspace-and-project-access-self-managed}
+### Workspace and project access {#workspace-and-project-access}
 
-- **Manage**: Full access to every workspace and project in the organization. Organization Admin has this level. See [elevated workspace access](#elevated-workspace-access-self-managed).
+- **Manage**: Full access to every workspace and project in the organization. Organization Admin has this level. See [elevated workspace access](#elevated-workspace-access).
 - **Create and collaborate**: Create and collaborate on workspaces and projects. DevOps, Analyst, and Member have this level. What a user can do inside a workspace also depends on their [workspace role](./manage-workspaces/manage-workspace-members.md#workspace-roles).
 
-### Elevated workspace access {#elevated-workspace-access-self-managed}
+### Elevated workspace access {#elevated-workspace-access}
 
 Organization admins always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
 
@@ -172,40 +181,32 @@ If the role is not pre-existing, it can be created with the following permission
 
 Refer to the documentation pages about [assigning roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
 
-### Catalog access {#catalog-access-self-managed}
+### Catalog access {#catalog-access}
 
 - **Manage**: Browse and use catalog items, and also see usage statistics and adoption data. Analyst and Organization Admin have this level.
 - **Read-only**: Browse and use catalog items. Member and DevOps have this level.
 
-### Business value access {#business-value-access-self-managed}
+### Business value access {#business-value-access}
 
 Access to Optimize includes access to the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md), where users view metrics and set targets. The same roles that grant access to Optimize also grant access to business value: Analyst and Organization Admin.
 
-### Cluster visibility {#cluster-visibility-self-managed}
+### Cluster visibility {#cluster-visibility}
 
 - **Manage**: View all clusters and their details. In Self-Managed, you provision clusters outside Camunda Hub, and Camunda Hub is read-only for clusters. Organization Admin and DevOps have this level.
 - **None**: No access to the cluster pages. Analyst and Member have this level.
 
-### Environment visibility {#environment-visibility-self-managed}
+### Environment visibility {#environment-visibility}
 
 - **Manage**: View all environments. Organization Admin and DevOps have this level. Organization Admin can assign environments to any workspace. DevOps can assign environments to workspaces where the user is an editor or a workspace admin.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
 
-## Access to runtime environments {#access-to-runtime-environments-self-managed}
+## Access to runtime environments {#access-to-runtime-environments}
 
 Organization-level roles control what a user can do in Camunda Hub. They don't control what the user can do in the runtime of an environment, which includes Operate, Tasklist, Admin, and Zeebe. Starting with version 8.8, access to the runtime is managed independently of organization-level roles. To control what a user can access there, define their authorizations in [Admin](/components/admin/authorization.md).
 
 If authorizations are disabled in the runtime, the user has full access to the runtime and its components.
 
 Authorizations for the runtime applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in Admin. See the [Admin overview](/self-managed/components/orchestration-cluster/admin/overview.md).
-
-### User task access restrictions {#user-task-access-restrictions-self-managed}
-
-:::note
-User task access restrictions were removed in Camunda 8.10 together with Tasklist V1.
-
-Use [authorization-based access control](../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
-:::
 
 </TabItem>
 
