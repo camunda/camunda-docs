@@ -1743,24 +1743,15 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Release announcements and release notes",
+      label: "Release information",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
       },
       items: [
-        {
-          type: "category",
-          label: "8.11",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/8110/8110-release-notes",
-          },
-          items: [
-            "reference/announcements-release-notes/8110/8110-announcements",
-            "reference/announcements-release-notes/8110/8110-release-notes",
-          ],
-        },
+        "reference/announcements-release-notes/8110/whats-new-in-811",
+        "reference/announcements-release-notes/8110/8110-announcements",
+        "reference/announcements-release-notes/8110/8110-release-notes",
         {
           type: "category",
           label: "8.10",
@@ -1800,9 +1791,9 @@ module.exports = {
             "reference/announcements-release-notes/880/880-release-notes",
           ],
         },
-        "reference/announcements-release-notes/release-policy",
       ],
     },
+    "reference/announcements-release-notes/release-policy",
     "reference/notices",
     "reference/licenses",
     "reference/public-api",
