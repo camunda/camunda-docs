@@ -41,7 +41,7 @@ October 22, 2026
 
 ### Products affected
 
-- Camunda Web Modeler Self-Managed
+- Web Modeler Self-Managed 8.7 and 8.8
 
 ### Impact
 
