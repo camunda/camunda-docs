@@ -8,7 +8,7 @@ import {
   HistoryItemId,
   type JobKey,
   type JobLeaseToken,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region GetAgentInstance
 async function getAgentInstanceExample(agentInstanceKey: AgentInstanceKey) {
@@ -30,8 +30,8 @@ async function searchAgentInstancesExample() {
 
   const result = await camunda.searchAgentInstances(
     {
-      filter: { status: { $eq: 'IDLE' } },
-      sort: [{ field: 'creationDate', order: 'DESC' }],
+      filter: { status: { $eq: "IDLE" } },
+      sort: [{ field: "creationDate", order: "DESC" }],
       page: { limit: 10 },
     },
     { consistency: { waitUpToMs: 5000 } }
@@ -60,14 +60,16 @@ async function createAgentInstanceExample(
     jobLeaseToken,
     history: [
       {
-        historyItemId: HistoryItemId.assumeExists('configuration-1'),
+        historyItemId: HistoryItemId.assumeExists("configuration-1"),
         loopIteration: 1,
-        role: 'CONFIGURATION',
+        role: "CONFIGURATION",
         content: [],
         producedAt: new Date().toISOString(),
-        model: 'gpt-4o',
-        provider: 'openai',
-        systemPrompt: [{ contentType: 'TEXT', text: 'You are a helpful assistant.' }],
+        model: "gpt-4o",
+        provider: "openai",
+        systemPrompt: [
+          { contentType: "TEXT", text: "You are a helpful assistant." },
+        ],
       },
     ],
   });
@@ -90,13 +92,13 @@ async function updateAgentInstanceExample(
     elementInstanceKey,
     jobKey,
     jobLeaseToken,
-    status: 'THINKING',
+    status: "THINKING",
     history: [
       {
-        historyItemId: HistoryItemId.assumeExists('assistant-1'),
+        historyItemId: HistoryItemId.assumeExists("assistant-1"),
         loopIteration: 1,
-        role: 'ASSISTANT',
-        content: [{ contentType: 'TEXT', text: 'How can I help you?' }],
+        role: "ASSISTANT",
+        content: [{ contentType: "TEXT", text: "How can I help you?" }],
         producedAt: new Date().toISOString(),
         metrics: { inputTokens: 150, outputTokens: 50, durationMs: 820 },
       },
@@ -108,14 +110,16 @@ async function updateAgentInstanceExample(
 //#endregion UpdateAgentInstance
 
 //#region SearchAgentInstanceHistory
-async function searchAgentInstanceHistoryExample(agentInstanceKey: AgentInstanceKey) {
+async function searchAgentInstanceHistoryExample(
+  agentInstanceKey: AgentInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchAgentInstanceHistory(
     {
       agentInstanceKey,
-      filter: { role: { $eq: 'ASSISTANT' } },
-      sort: [{ field: 'producedAt', order: 'ASC' }],
+      filter: { role: { $eq: "ASSISTANT" } },
+      sort: [{ field: "producedAt", order: "ASC" }],
       page: { limit: 20 },
     },
     { consistency: { waitUpToMs: 5000 } }
