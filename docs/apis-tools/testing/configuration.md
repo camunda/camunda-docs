@@ -648,24 +648,12 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 
 ### Prerequisites
 
-- Install a Camunda 8 runtime, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+- Install a Camunda 8 runtime with version 8.11 or later, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+  CPT changes the runtime clock through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md),
+  which supports these clock operations from version 8.11.
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
-- Enable the management clock endpoint to allow clock manipulations
-
-You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configuration-options) by
-defining a `application.yaml` file with:
-
-```yaml
-zeebe.clock.controlled: true
-```
-
-By default, Camunda 8 Run loads the `application.yaml` from the distribution's root directory. If you use a different
-path, then you need to set the path when starting the application with the command line argument
-`--config=application.yaml`:
-
-```
-./start.sh --config=application.yaml
-```
+- If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, grant the CPT client the
+  `READ` and `UPDATE` permissions on the `SYSTEM` resource to allow clock manipulations
 
 ### Usage
 
