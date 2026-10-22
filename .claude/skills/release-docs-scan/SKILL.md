@@ -1,13 +1,13 @@
 ---
 name: release-docs-scan
-description: Use when asked to scan, review, or re-check the Product Hub board for a Camunda minor or alpha release, to find what still needs to go into the release notes, announcements, or What's new page, or to report which epics changed since the last scan. Read-only. Reports in the conversation, writes no files.
+description: Use when asked to scan, review, or re-check the Product Hub board for a Camunda minor or alpha release, to find what needs to go into the release notes, or announcements page, or to report which epics changed since the last scan. Read-only. Reports in the conversation, writes no files.
 user-invocable: true
 argument-hint: "<version or alpha, e.g. 8.11-alpha1> <Product Hub board or view link>"
 ---
 
 # /release-docs-scan — what does this release still need in the docs?
 
-Scan the Product Hub board for one release and tell the user which epics need an entry in the release notes, announcements, or What's new page. Run it again at any time to get the current status and what changed since the last scan.
+Scan the Product Hub board for one release and tell the user which epics need an entry in the release notes, or announcements page. Run it again at any time to get the current status and what changed since the last scan.
 
 - **Read-only.** Do not edit docs, add labels, or comment on epics unless the user asks.
 - **No files.** Show every report in the conversation. Do not write report or state files.
