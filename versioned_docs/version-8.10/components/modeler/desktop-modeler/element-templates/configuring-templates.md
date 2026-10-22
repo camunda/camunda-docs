@@ -82,7 +82,7 @@ Configure remote template sources in the **Settings** window to make templates a
 
 <img src={AddTemplateSourceImg} alt="Add element template source dialog over Settings, with the Element template sources section and Camunda connectors source visible." class="img-noborder img-600"/>
 
-The built-in **Camunda connectors** source provides templates from the Camunda Marketplace. Use the toggle on a source row to enable or disable it. Use the row's **Edit** or **Remove** options to change or remove a custom source. You cannot reorder sources.
+The built-in **Camunda connectors** source provides templates from the [Camunda Marketplace](../../../hub/workspace/modeler/modeling/camunda-marketplace.md). Use the toggle on a source row to enable or disable it. Use the row's **Edit** or **Remove** options to change or remove a custom source. You cannot reorder sources.
 
 For details about filesystem locations for templates and other Desktop Modeler resources, see [Search paths](../search-paths/search-paths.md).
 
