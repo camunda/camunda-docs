@@ -48,7 +48,8 @@ If this scope is included, your OIDC provider issues a refresh token to Camunda 
 
 If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 
-If a refresh fails because the refresh token is no longer valid (for example, it expired or was revoked, and the provider returns `invalid_grant`), the user is logged out and must sign in again. If a refresh fails because the provider is unavailable or returns a server error, the session is kept and the request fails with HTTP `503 Service Unavailable`. The next request after the provider recovers refreshes the token, so users don't have to sign in again.
+If a refresh fails because the refresh token is no longer valid (for example, because it has expired or been revoked and the provider returns `invalid_grant`) the user is logged out and must sign in again. If the refresh fails because the provider is unavailable or returns a server error, the session is retained, and the request fails with an HTTP `503 Service Unavailable` response. The first request after the provider recovers refreshes the token, so the user does not need to sign in again.
+
 :::
 
 To allow users to successfully authenticate with Entra ID, you must either configure an [admin consent workflow](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent).
