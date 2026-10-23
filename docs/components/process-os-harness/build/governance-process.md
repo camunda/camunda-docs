@@ -31,7 +31,7 @@ The engagement runs through four phases in order. The output of one phase is the
 
 ## Phase cycle
 
-Each phase starts with you defining the run configuration for the [Builder task](builder-task.md). After the Builder task is done, subject matter experts (SMEs) are involved for the review. The Builder has to judge the consolidated results of the review and decide if another iteration is required. It is possible to adjust the configuration for the next iteration.
+Each phase starts with defining the run configuration for the [Builder task](builder-task.md). After the Builder task is complete, subject matter experts (SMEs) review the results. The Builder then evaluates the consolidated review feedback and determines whether another iteration is required. You can adjust the configuration for the next iteration.
 
 ![Phase cycle with Builder task, SME review, and iteration decision](../img/phase-cycle.png)
 
