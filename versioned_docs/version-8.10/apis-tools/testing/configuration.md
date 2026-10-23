@@ -145,9 +145,6 @@ connectorsEnvVars.env_2=value_2
 # Set Connectors secrets
 connectorsSecrets.secret_1=value_1
 connectorsSecrets.secret_2=value_2
-# Set cluster secrets
-clusterSecrets.secret_1=value_1
-clusterSecrets.secret_2=value_2
 # Expose additional Connectors ports
 connectorsExposedPorts[0]=9010
 connectorsExposedPorts[1]=9011
@@ -199,8 +196,8 @@ public class MyProcessTest {
 ### Cluster secrets
 
 Cluster secrets let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. Set them with the
-`cluster-secrets` property (Spring), `clusterSecrets` (properties file), or `withClusterSecret(name, value)` and
-`withClusterSecrets(map)` (Java builder).
+`cluster-secrets` property (Spring) or `withClusterSecret(name, value)` and `withClusterSecrets(map)` (Java builder).
+You can't set cluster secrets in `camunda-container-runtime.properties`.
 
 - In a managed or shared runtime, CPT writes each secret to a temporary file, copies the file into the Camunda container,
   and sets `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`.
