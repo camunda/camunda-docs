@@ -3324,7 +3324,7 @@
                   },
                   {
                     "type": "category",
-                    "label": "UNTAGGED",
+                    "label": "Cluster Configuration",
                     "items": [
                       {
                         "type": "doc",
@@ -3358,15 +3358,15 @@
                       },
                       {
                         "type": "doc",
-                        "id": "apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster",
-                        "label": "Purge data from the cluster",
-                        "className": "api-method post"
-                      },
-                      {
-                        "type": "doc",
                         "id": "apis-tools/management-api/specifications/cluster/get-current-topology",
                         "label": "Get current topology",
                         "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/reconfigure-cluster",
+                        "label": "Reconfigure cluster",
+                        "className": "api-method patch"
                       },
                       {
                         "type": "doc",
@@ -3379,12 +3379,6 @@
                         "id": "apis-tools/management-api/specifications/cluster/list-configuration-changes",
                         "label": "List configuration changes",
                         "className": "api-method get"
-                      },
-                      {
-                        "type": "doc",
-                        "id": "apis-tools/management-api/specifications/cluster/reconfigure-cluster",
-                        "label": "Reconfigure cluster",
-                        "className": "api-method patch"
                       },
                       {
                         "type": "doc",
@@ -3415,12 +3409,30 @@
                         "id": "apis-tools/management-api/specifications/cluster/migrate-a-zone-to-a-zone-aware-topology",
                         "label": "Migrate a zone to a zone-aware topology",
                         "className": "api-method put"
-                      },
+                      }
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "Physical tenant",
+                    "items": [
                       {
                         "type": "doc",
                         "id": "apis-tools/management-api/specifications/cluster/remove-a-disabled-physical-tenant",
                         "label": "Remove a disabled physical tenant",
                         "className": "api-method delete"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "Data",
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster",
+                        "label": "Purge data from the cluster",
+                        "className": "api-method post"
                       }
                     ]
                   }
@@ -3430,11 +3442,11 @@
                 "Exporters": [
                   {
                     "type": "doc",
-                    "id": "apis-tools/management-api/specifications/exporters/exporters-api"
+                    "id": "apis-tools/management-api/specifications/exporters/exporters-management-api"
                   },
                   {
                     "type": "category",
-                    "label": "UNTAGGED",
+                    "label": "Exporter",
                     "items": [
                       {
                         "type": "doc",
@@ -3472,7 +3484,7 @@
                   },
                   {
                     "type": "category",
-                    "label": "UNTAGGED",
+                    "label": "Runtime backup",
                     "items": [
                       {
                         "type": "doc",
@@ -3515,7 +3527,13 @@
                         "id": "apis-tools/management-api/specifications/backups/force-write-backup-metadata-for-all-partitions",
                         "label": "Force-write backup metadata for all partitions",
                         "className": "api-method post"
-                      },
+                      }
+                    ]
+                  },
+                  {
+                    "type": "category",
+                    "label": "History backup",
+                    "items": [
                       {
                         "type": "doc",
                         "id": "apis-tools/management-api/specifications/backups/takes-a-backup-of-history-data",
@@ -3552,7 +3570,7 @@
                   },
                   {
                     "type": "category",
-                    "label": "UNTAGGED",
+                    "label": "Upgrade readiness",
                     "items": [
                       {
                         "type": "doc",

@@ -70,14 +70,66 @@ jobs:
           sparse-checkout: dist/src/main/resources/api
           sparse-checkout-cone-mode: false
 
-      - name: Sync cluster management API specs
+      - name: Sync cluster management API specs (next version)
         run: |
           cd docs
           spec_dir=../mgmt-spec/dist/src/main/resources/api
           cp "$spec_dir"/cluster/*.yaml api/cluster/
           cp "$spec_dir"/backup-management-api.yaml api/cluster/
-          npm i
+          npm ci
           npm run api:generate:cluster
+
+      - name: Sync cluster management API specs (older stable versions)
+        run: |
+          cd docs
+          for version in $(jq -r '.[]' versions.json); do
+            version_dir="api/cluster/version-$version"
+
+            # Skip versions that don't have a directory in the docs repo
+            if [ ! -d "$version_dir" ]; then
+              echo "No version directory for $version, skipping..."
+              continue
+            fi
+
+            stable_branch="stable/$version"
+
+            # Skip if no stable branch exists in camunda/camunda
+            if ! git ls-remote --exit-code --heads https://github.com/camunda/camunda "$stable_branch" > /dev/null 2>&1; then
+              echo "No stable branch for version $version, skipping..."
+              continue
+            fi
+
+            echo "Syncing REST API spec from $stable_branch..."
+
+            spec_sparse_path=dist/src/main/resources/api
+
+            # Clone only the spec from the stable branch using sparse checkout
+            rm -rf "../mgmt-spec-$version"
+            git clone --depth 1 --branch "$stable_branch" --no-checkout "https://github.com/camunda/camunda" "../mgmt-spec-$version"
+            pushd "../mgmt-spec-$version"
+            git sparse-checkout set "$spec_sparse_path"
+            git checkout
+            popd
+
+            spec_dir="../mgmt-spec-$version/$spec_sparse_path"
+
+            # v2 path is a directory with modular specs; copy the whole directory
+            if [ -d "$spec_dir" ]; then
+              echo "Copying spec files for version $version"
+              cp -r "$spec_dir"/cluster/* "$version_dir"
+              cp -r "$spec_dir"/backup-management-api.yaml "$version_dir"
+              
+              echo "Generate docs"
+              npm run api:generate -- cluster "$version"
+              npm run api:generate -- clusterexporters "$version"
+              npm run api:generate -- clusterupgradereadiness "$version"
+              npm run api:generate -- clusterbackups "$version"
+            else
+              echo "Spec directory not found for version $version at expected path, skipping..."
+            fi
+
+            rm -rf "../mgmt-spec-$version"
+          done
 
       - name: Check for changes
         id: check_changes

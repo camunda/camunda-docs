@@ -20,7 +20,7 @@ The management port is typically not publicly exposed. If the machine where you 
 | API                                                                                            | Base path                                            |
 | :--------------------------------------------------------------------------------------------- | :--------------------------------------------------- |
 | [Cluster topology management](specifications/cluster/cluster-topology-management-api.info.mdx) | `/actuator/cluster`                                  |
-| [Exporters](specifications/exporters/exporters-api.info.mdx)                                   | `/actuator/exporters`                                |
+| [Exporters](specifications/exporters/exporters-management-api.info.mdx)                        | `/actuator/exporters`                                |
 | [Backups](specifications/backups/backup-management-api.info.mdx)                               | `/actuator/backupRuntime`, `/actuator/backupHistory` |
 | [Upgrade readiness](specifications/upgrade-readiness/upgrade-readiness-api.info.mdx)           | `/actuator/upgradeReadiness`                         |
 

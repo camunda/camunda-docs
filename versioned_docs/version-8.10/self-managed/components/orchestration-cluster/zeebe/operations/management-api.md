@@ -117,7 +117,7 @@ The enable and disable functionality is specifically useful for [dual region dep
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
 
 :::info
-See the [Exporters API reference](/apis-tools/management-api/specifications/exporters/exporters-api.info.mdx) for all endpoints and schemas.
+See the [Exporters API reference](/apis-tools/management-api/specifications/exporters/exporters-management-api.info.mdx) for all endpoints and schemas.
 :::
 
 :::note

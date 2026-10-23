@@ -387,7 +387,15 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {},
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/cluster-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/cluster",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -410,7 +418,15 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {},
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/exporter-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/exporters",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -433,7 +449,15 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {},
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/upgrade-readiness-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/upgrade-readiness",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -455,7 +479,15 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {},
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/backup-management-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/backups",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
