@@ -8,7 +8,7 @@ description: "Learn how to use Camunda 8 connectors in Desktop Modeler."
 
 Use [Camunda 8 connectors](../../connectors/introduction.md) to access a growing range of external services or communication protocols.
 
-Desktop Modeler includes a built-in element template source, **Camunda connectors**, that provides templates for [pre-built connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) from the [Camunda Marketplace](https://marketplace.camunda.com/en-US/listing?pl=3038&attr=20486&cat=107792&locale=en-US). You can enable or disable it in **Settings > Element template sources**. You can also [configure custom element template sources](./element-templates/configuring-templates.md#remote-template-sources).
+Desktop Modeler includes a built-in element template source, **Camunda connectors**, that provides templates for [pre-built connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) from the [Camunda Marketplace](../../hub/workspace/modeler/modeling/camunda-marketplace.md). You can enable or disable it in **Settings > Element template sources**. You can also [configure custom element template sources](./element-templates/configuring-templates.md#remote-template-sources).
 
 ## Automatic connector template fetching
 
@@ -16,7 +16,7 @@ The built-in **Camunda connectors** source is enabled by default. Desktop Modele
 
 Desktop Modeler does not show a notification when the source has no new templates. It notifies you when new templates are available or when it cannot retrieve or process a source or template. If a fetch fails, cached templates remain available.
 
-![Error updating Camunda Connector templates notification](./img/use-connectors/error.png)
+![Error updating Camunda connector templates notification](./img/use-connectors/error.png)
 
 Once available, you can use connector templates in the Camunda 8 BPMN editor.
 
