@@ -58,6 +58,10 @@ Before `camunda.secrets.<name>` can resolve, its store must hold the secret valu
    - In a connector or credential field, read the reference from a cluster variable of kind `SECRET_REFERENCE`. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
 1. **Remove the legacy configuration.** Once no model contains a `{{secrets.<name>}}` reference, set `camunda.connector.secret-resolver.legacy.mode` back to `ON` (or remove the setting) and remove the connector secret provider configuration.
 
+## Testing
+
+To supply cluster secrets when you test processes with Camunda Process Test, see [cluster secrets in Camunda Process Test](/apis-tools/testing/connectors.md#cluster-secrets).
+
 ## Related resources
 
 - [Secrets](/components/concepts/secrets.md) provides an overview of secret references, stores, and access control across Camunda.
