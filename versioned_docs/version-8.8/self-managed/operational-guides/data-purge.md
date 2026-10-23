@@ -60,7 +60,7 @@ done
 <TabItem value='java'>
 
 :::note
-This example relies on code generated from [this OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml),
+This example relies on code generated from [this OpenAPI spec](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/cluster-api.yaml),
 bundled with the distribution.
 :::
 
@@ -112,7 +112,7 @@ To purge data from your cluster, send a `POST` request to the `/actuator/cluster
 curl -X POST 'http://localhost:9600/actuator/cluster/purge'
 ```
 
-The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a [JSON object](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
 ```json
 {

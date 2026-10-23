@@ -31,7 +31,7 @@ import OverviewImg from './assets/hero-self-managed.png';
 
 Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Developer and administrator quickstart" href="../quickstart/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
+<p class="link-button">[Developer and administrator quickstart](./quickstart/overview.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -44,7 +44,7 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 :::info Upgrade to Camunda 8.10
 
 - Existing customer? Upgrade your Self-Managed deployment to 8.10 using the [upgrade to 8.10 guide](/self-managed/upgrade/index.md).
-- See [what's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md), [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md), and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
+- See [what's new in Camunda 8.11](/reference/announcements-release-notes/8110/whats-new-in-811.md), [release announcements](/reference/announcements-release-notes/8110/8110-announcements.md), and [release notes](/reference/announcements-release-notes/8110/8110-release-notes.md).
 
 :::
 

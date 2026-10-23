@@ -17,7 +17,7 @@ import OverviewImg from './img/hero-get-started.png';
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
+<p class="link-button">[Run your first BPMN process with Camunda 8](./getting-started-hello-world.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

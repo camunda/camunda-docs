@@ -25,7 +25,7 @@ You can pass environment variables to each component via `camundaHub.restapi.env
 For which settings belong in the chart and which belong here, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md). The recommended path for the properties on this page is `camundaHub.restapi.extraConfiguration`.
 :::
 
-For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Camunda Hub](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Camunda Hub](https://github.com/camunda/camunda-distributions/blob/main/docker-compose/versions/camunda-8.10/docker-compose-hub.yaml) (`docker-compose-hub.yaml`). For how to run it, see [deploy with Camunda Hub](/self-managed/quickstart/developer-quickstart/docker-compose/connectors-and-modeling.md#deploy-with-camunda-hub) in the Docker Compose quickstart.
 
 ## Licensing
 
