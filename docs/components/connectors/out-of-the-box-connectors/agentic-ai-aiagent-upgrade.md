@@ -53,7 +53,7 @@ Use the `c8ctl element-template update` command to move legacy AI Agent elements
 
 Prerequisites:
 
-- [c8ctl](/apis-tools/c8ctl/getting-started.md#install) 4.6.0 or later.
+- [c8ctl](/apis-tools/c8ctl/getting-started.md#install) 4.6.1 or later. Earlier versions do not sync the migration recipe that the new templates contain.
 - The BPMN file sets the execution platform version to Camunda 8.10 or later. c8ctl does not change this version. Set it in Modeler or in the `modeler:executionPlatformVersion` attribute of the BPMN file.
 
 Each legacy template has one new template as its target. Use the element template IDs from the [table of legacy and new element templates](#legacy-and-new-element-templates). For a hybrid template, add the `-hybrid` suffix to both IDs. For example, upgrade `io.camunda.connectors.agenticai.aiagent.v1-hybrid` to `io.camunda.connectors.agenticai.ai-agent-task.v2-hybrid`.
