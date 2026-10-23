@@ -152,6 +152,93 @@ public class MyProcessTest {
 
 </Tabs>
 
+## Cluster secrets
+
+Cluster secrets let processes that reference `=camunda.secrets.<NAME>` resolve in your tests.
+
+Choose the property that matches the secret syntax in your process:
+
+| Secret syntax            | Test property                                                        |
+| ------------------------ | -------------------------------------------------------------------- |
+| `{{secrets.X}}` (legacy) | `connectors-secrets`, `connectorsSecrets`, or `withConnectorsSecret` |
+| `=camunda.secrets.X`     | `cluster-secrets`, `clusterSecrets`, or `withClusterSecret`          |
+
+`connectors-secrets` doesn't populate the cluster secret store, so `=camunda.secrets.X` references don't resolve from it. To learn more, see [secrets](/components/concepts/secrets.md), [secret resolution](/components/concepts/secret-resolution.md), and [migrate secrets](/components/connectors/use-connectors/migrate-secrets.md).
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
+[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]
+}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    connectors-enabled: true
+    cluster-secrets:
+      GITHUB_TOKEN: ghp_secret
+      SLACK_TOKEN: xoxb-secret
+```
+
+Or, on your test class:
+
+```java
+@SpringBootTest(
+    properties = {
+        "camunda.process-test.connectors-enabled=true",
+        "camunda.process-test.cluster-secrets.GITHUB_TOKEN=ghp_secret",
+        "camunda.process-test.cluster-secrets.SLACK_TOKEN=xoxb-secret"
+    }
+)
+@CamundaSpringProcessTest
+public class MyProcessTest {
+    //
+}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+connectorsEnabled=true
+
+clusterSecrets.GITHUB_TOKEN=ghp_secret
+clusterSecrets.SLACK_TOKEN=xoxb-secret
+```
+
+Or, via JUnit extension:
+
+```java
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+            .withConnectorsEnabled(true)
+            .withClusterSecret("GITHUB_TOKEN", "ghp_secret")
+            .withClusterSecret("SLACK_TOKEN", "xoxb-secret");
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::warning
+CPT drops trailing newlines from cluster secret values. This is a known issue ([camunda/camunda#66616](https://github.com/camunda/camunda/issues/66616)).
+:::
+
+In a remote runtime, for example a real cluster or Camunda 8 Run, the cluster owns its secret store. CPT ignores the test properties and logs a warning. Configure the secrets on the cluster instead.
+
 ## Invoke an inbound connector
 
 You can retrieve the URL address to invoke an inbound connector in your test from the `CamundaProcessTestContext`.
@@ -336,10 +423,46 @@ using [Connectors secrets](/components/connectors/use-connectors/index.md#using-
 tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/test"`.
 :::
 
+If your process references the URL as a [cluster secret](#cluster-secrets), set the URL expression to
+`=camunda.secrets.BASE_URL + "/test"` and provide the value with `cluster-secrets` instead of `connectors-secrets`.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
+[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]
+}>
+
+<TabItem value='spring-sdk'>
+
+```java
+@SpringBootTest(
+    properties = {
+        "camunda.process-test.connectors-enabled=true",
+        "camunda.process-test.cluster-secrets.BASE_URL=http://host.testcontainers.internal:9999"
+    })
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+```java
+new CamundaProcessTestExtension()
+    .withConnectorsEnabled(true)
+    .withClusterSecret("BASE_URL", "http://host.testcontainers.internal:9999");
+```
+
+</TabItem>
+
+</Tabs>
+
 ## Custom connectors
 
-By default, the runtime uses the built-in connectors bundle in the same version as the Maven module. You can change the
-version or use a custom connectors bundle in the following way.
+By default, the runtime uses the built-in connectors bundle in a fixed, published version. Connectors have a separate
+release cycle, so this version isn't tied to the Camunda version or patch release of the Maven module. If you need a
+specific Connectors version, set `connectors-docker-image-version` explicitly. You can also use a custom connectors
+bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
