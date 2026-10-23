@@ -112,23 +112,30 @@ jobs:
             echo "Syncing REST API spec from $stable_branch..."
 
             spec_sparse_path=dist/src/main/resources/api
+            zeebe_sparse_path=zeebe/dynamic-config/openapi/src/main/resources/api
 
-            # Clone only the spec from the stable branch using sparse checkout
+            # Clone only the specs from the stable branch using sparse checkout
             rm -rf "../mgmt-spec-$version"
             git clone --depth 1 --branch "$stable_branch" --no-checkout "https://github.com/camunda/camunda" "../mgmt-spec-$version"
             pushd "../mgmt-spec-$version"
-            git sparse-checkout set "$spec_sparse_path"
+            git sparse-checkout set "$spec_sparse_path" "$zeebe_sparse_path"
             git checkout
             popd
 
             spec_dir="../mgmt-spec-$version/$spec_sparse_path"
+            zeebe_dir="../mgmt-spec-$version/$zeebe_sparse_path"
 
             # v2 path is a directory with modular specs; copy the whole directory
             if [ -d "$spec_dir" ]; then
               echo "Copying spec files for version $version"
               cp -r "$spec_dir"/cluster/* "$version_dir"
               cp -r "$spec_dir"/backup-management-api.yaml "$version_dir"
-              
+
+              # Some specs moved to the zeebe module after stable/8.10
+              if [ -d "$zeebe_dir" ]; then
+                cp "$zeebe_dir"/*.yaml "$version_dir"
+              fi
+
               echo "Generate docs"
               npm run api:generate -- cluster "$version"
               npm run api:generate -- clusterexporters "$version"
