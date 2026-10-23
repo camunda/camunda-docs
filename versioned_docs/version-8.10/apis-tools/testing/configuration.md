@@ -81,7 +81,7 @@ In your `application.yml` (or `application.properties`):
 camunda:
   process-test:
     # Change the version of the Camunda Docker image
-    camunda-docker-image-version: 8.8.0
+    camunda-docker-image-version: 8.10.6
     # Change the Camunda Docker image
     camunda-docker-image-name: camunda/camunda
     # Set additional Camunda environment variables
@@ -122,7 +122,7 @@ In your `/camunda-container-runtime.properties` file:
 
 ```properties
 # Change the version of the Camunda Docker image
-camundaDockerImageVersion=8.8.0
+camundaDockerImageVersion=8.10.6
 # Change the Camunda Docker image
 camundaDockerImageName=camunda/camunda
 # Set additional Camunda environment variables
@@ -167,7 +167,7 @@ public class MyProcessTest {
     private static final CamundaProcessTestExtension EXTENSION =
             new CamundaProcessTestExtension()
                     // Change the version of the Camunda Docker image
-                    .withCamundaDockerImageVersion("8.8.0")
+                    .withCamundaDockerImageVersion("8.10.6")
                     // Change the Camunda Docker image
                     .withCamundaDockerImageName("camunda/camunda")
                     // Set additional Camunda environment variables
