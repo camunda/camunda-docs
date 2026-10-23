@@ -289,10 +289,10 @@ This procedure covers the Camunda Java components in step 3. It doesn't change t
 
 ### 1. Build the truststore
 
-Copy the truststore from the Orchestration Cluster image that you run. Then remove each certificate whose subject starts with the common name (CN) that you set. The example removes `emSign ECC Root CA - G3`:
+Copy the truststore from the Orchestration Cluster image that runs in your cluster. Replace `X` in the image tag with your patch version. A truststore from another image can contain other CAs. Then remove each certificate whose subject starts with the common name (CN) that you set. The example removes `emSign ECC Root CA - G3`:
 
 ```bash
-CAMUNDA_IMAGE=camunda/camunda:8.11.X # set to the image tag you run
+CAMUNDA_IMAGE=camunda/camunda:8.11.X
 REMOVE_CN='emSign ECC Root CA - G3'
 
 mkdir -p truststore
@@ -336,6 +336,8 @@ The truststore contains public certificates only, so the default `changeit` pass
 kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
   --from-file=cacerts=./truststore/cacerts
 ```
+
+Create the Secret before you run `helm upgrade` in step 3. If the Secret doesn't exist, the pods stay in `ContainerCreating`.
 
 ### 3. Point the Java components to the truststore
 
@@ -406,6 +408,8 @@ for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-
   echo "$pod: $(kubectl -n "$NAMESPACE" logs "$pod" --all-containers | grep -m1 'Picked up JAVA_TOOL_OPTIONS')"
 done
 ```
+
+The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. Make sure each Java component from step 3 is in the output. If the value after a pod name is empty, that pod doesn't use the new truststore.
 
 To update the truststore, build it again, replace the Secret, and restart the pods as in [Updating the CA](#updating-the-ca).
 
