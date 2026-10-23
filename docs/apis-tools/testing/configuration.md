@@ -195,7 +195,8 @@ public class MyProcessTest {
 
 ### Cluster secrets
 
-Cluster secrets let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. Set them with the
+Cluster secrets let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
+Set them with the
 `cluster-secrets` property (Spring) or `withClusterSecret(name, value)` and `withClusterSecrets(map)` (Java builder).
 You can't set cluster secrets in `camunda-container-runtime.properties`.
 
