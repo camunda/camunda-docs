@@ -161,7 +161,7 @@ Choose the property that matches the secret syntax in your process:
 | Secret syntax            | Test property                                                        |
 | ------------------------ | -------------------------------------------------------------------- |
 | `{{secrets.X}}` (legacy) | `connectors-secrets`, `connectorsSecrets`, or `withConnectorsSecret` |
-| `=camunda.secrets.X`     | `cluster-secrets`, `clusterSecrets`, or `withClusterSecret`          |
+| `=camunda.secrets.X`     | `cluster-secrets` or `withClusterSecret`                             |
 
 `connectors-secrets` doesn't populate the cluster secret store, so `=camunda.secrets.X` references don't resolve from it. To learn more, see [secrets](/components/concepts/secrets.md), [secret resolution](/components/concepts/secret-resolution.md), and [migrate secrets](/components/connectors/use-connectors/migrate-secrets.md).
 
@@ -205,16 +205,7 @@ public class MyProcessTest {
 
 <TabItem value='java-client'>
 
-In your `/camunda-container-runtime.properties` file:
-
-```properties
-connectorsEnabled=true
-
-clusterSecrets.GITHUB_TOKEN=ghp_secret
-clusterSecrets.SLACK_TOKEN=xoxb-secret
-```
-
-Or, via JUnit extension:
+Register the JUnit extension and use the fluent builder:
 
 ```java
 // No annotation: @CamundaProcessTest
