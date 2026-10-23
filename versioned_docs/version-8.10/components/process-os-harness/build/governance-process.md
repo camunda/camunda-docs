@@ -16,11 +16,9 @@ The governance process is the Camunda Solution Methodology implemented as an exe
 
 The governance process on the Camunda cluster is started as part of `/process-os-governance-start`. From this point, the process guides you through all phases along certain milestones. Your input is required for gates, jobs, and tasks.
 
-## Control the governance process with `next`
-
-The governance process is controlled via the AI coding agent. As soon as you are done with a job, or you are unsure about the next thing to do, you ask the agent what's `next`. The AI coding agent interacts with Camunda and the governance process to provide the right guidance according to the current state of the project.
-
 ## Phases and milestones
+
+![Governance process overview showing phases and milestones](../img/governance-process-overview.png)
 
 The engagement runs through four phases in order. The output of one phase is the input to the next.
 
@@ -31,7 +29,11 @@ The engagement runs through four phases in order. The output of one phase is the
 | Transform | Transform the as-is process into a to-be process.                           | To-be models finalized        |
 | Implement | Generate and implement the executable Camunda solution.                     | Executable solution generated |
 
-Each phase starts with you defining the run configuration for the upcoming iteration. The configuration can be adjusted after each run.
+## Phase cycle
+
+Each phase starts with you defining the run configuration for the [Builder task](builder-task.md). After the Builder task is done, subject matter experts (SMEs) are involved for the review. The Builder has to judge the consolidated results of the review and decide if another iteration is required. It is possible to adjust the configuration for the next iteration.
+
+![Phase cycle with Builder task, SME review, and iteration decision](../img/phase-cycle.png)
 
 ## Gates and tasks
 
@@ -43,6 +45,10 @@ The governance process needs human input to ensure the right outcomes.
 | Phase configuration             | Camunda Tasklist, using a form.                                                                      | Each phase has configuration parameters.                                                        |
 | Human gates                     | Skills define human gates. These are directly raised in the AI coding agent session in the terminal. | Skill-specific questions the agent needs input for.                                             |
 | [Builder task](builder-task.md) | The AI coding agent, driven by a ProcessOS Harness skill.                                            | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
+
+## Control the governance process with `next`
+
+The governance process is controlled via the AI coding agent. As soon as you are done with a job, or you are unsure about the next thing to do, you ask the agent what's `next`. The AI coding agent interacts with Camunda and the governance process to provide the right guidance according to the current state of the project.
 
 ## Next steps
 
