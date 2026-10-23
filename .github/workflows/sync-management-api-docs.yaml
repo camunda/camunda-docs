@@ -67,15 +67,25 @@ jobs:
           repository: camunda/camunda
           path: mgmt-spec
           ref: ${{ steps.compute_branch.outputs.camunda_branch }}
-          sparse-checkout: dist/src/main/resources/api
+          sparse-checkout: |
+            dist/src/main/resources/api
+            zeebe/dynamic-config/openapi/src/main/resources/api
           sparse-checkout-cone-mode: false
 
       - name: Sync cluster management API specs (next version)
         run: |
           cd docs
-          spec_dir=../mgmt-spec/dist/src/main/resources/api
-          cp "$spec_dir"/cluster/*.yaml api/cluster/
-          cp "$spec_dir"/backup-management-api.yaml api/cluster/
+
+          dist_dir=../mgmt-spec/dist/src/main/resources/api
+          cp "$dist_dir"/cluster/*.yaml api/cluster/
+          cp "$dist_dir"/backup-management-api.yaml api/cluster/
+
+          # Some specs moved to the zeebe module after stable/8.10
+          zeebe_dir=../mgmt-spec/zeebe/dynamic-config/openapi/src/main/resources/api
+          if [ -d "$zeebe_dir" ]; then
+            cp "$zeebe_dir"/*.yaml api/cluster/
+          fi
+
           npm ci
           npm run api:generate:cluster
 
