@@ -154,7 +154,7 @@ public class MyProcessTest {
 
 ## Cluster secrets
 
-Cluster secrets let processes that reference `=camunda.secrets.<NAME>` resolve in your tests.
+Cluster secrets let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
 
 Choose the property that matches the secret syntax in your process:
 
