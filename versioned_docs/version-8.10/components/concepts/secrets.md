@@ -106,3 +106,4 @@ In Self-Managed, [set up the secret store](/self-managed/components/orchestratio
 - [Using secrets](/components/connectors/use-connectors/index.md#using-secrets) covers referencing secrets from connector fields.
 - [Cluster secrets](/components/saas/clusters/manage-secrets.md) covers creating and managing secret values in SaaS.
 - [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets) covers configuring connector secret providers.
+- [Cluster secrets in Camunda Process Test](/apis-tools/testing/connectors.md#cluster-secrets) covers supplying secrets when you test processes.
