@@ -31,6 +31,62 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 69
+
+### Publication date
+
+October 26, 2026
+
+### Products affected
+
+- Hub Self-Managed 8.10
+- Web Modeler Self-Managed 8.7, 8.8, and 8.9
+
+### Impact
+
+Two critical vulnerabilities in PHP ([CVE-2026-109618](https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w) and [CVE-2026-109619](https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp)) were disclosed on 20 October 2026.
+Our security and engineering teams have analyzed both in detail. We found no way to exploit them in any Camunda product.
+Out of an abundance of caution, we have released updated images with the fixed PHP version.
+
+#### Which products are concerned
+
+- SaaS: Camunda SaaS does not use PHP and is not affected.
+- Self-Managed: The websockets component of Hub (version ≤ 8.10.3) and Web Modeler (versions ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27) runs PHP 8.5.11, a version in the affected range.
+- No other Camunda 8 component uses PHP.
+
+#### Why the vulnerabilities cannot be exploited
+
+Both vulnerabilities are in the way PHP processes incoming web requests when it runs inside a web server (for example
+PHP-FPM or Apache with mod_php). The websockets component does not run PHP that way. It runs as a standalone process
+that reads and validates requests itself, never uses PHP's request handling, and accepts only small, size-limited
+messages. None of the attack paths described in the CVE advisories can reach it.
+
+#### What you need to do
+
+No immediate action is required. We recommend updating to the new images as part of your normal update process.
+
+If your own policy requires it, you can stop the websockets component until you have updated.
+Web Modeler and Hub keep working, and all modeling, saving, deployment, versioning and Git sync functionality is unaffected.
+Only features that rely on real-time updates are affected while the component is stopped.
+
+- Real-time collaboration: online presence, live diagram updates, live comments, attention markers and live changes to project permissions are not delivered. Collaborators see each other's changes only after reloading the page, concurrent changes might conflict / overwrite each other.
+- AI copilot (8.8 and later): copilot responses are delivered through the websockets component and are not returned while it is stopped.
+- Intelligent Document Processing (8.8 and later): extraction results are delivered through the websockets component and are not shown in the modeler while it is stopped.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Hub ≤ 8.10.3
+- Web Modeler ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix (update to PHP 8.5.12):
+
+- Hub 8.10.4
+- Web Modeler 8.9.13, 8.8.24, 8.7.28
+
 ## Notice 68
 
 ### Publication date
