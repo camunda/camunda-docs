@@ -21,13 +21,13 @@ Open the **Settings** window either from the application menu or by using the `C
 
 The following Desktop Modeler settings are available:
 
-| Setting                  | Description                                                                                                                                                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Enable new context pad   | Enables the alternative context pad interface.                                                                                                                                                                      |
-| Disable plugins          | Disables all installed plugins when running Desktop Modeler.                                                                                                                                                        |
-| Camunda 8 connections    | Add and manage connections to Camunda 8 clusters. See [connect to Camunda 8](../connect-to-camunda-8.md) for connection setup instructions.                                                                         |
-| Element template sources | (Camunda 8 only) Manage the built-in Camunda connector template source and add custom remote sources. See [configure templates](../element-templates/configuring-templates.md#remote-template-sources) for details. |
-| Default versions         | Sets the default [execution platform versions](/reference/glossary.md#execution-platform-version) for new Camunda 7 and Camunda 8 diagrams.                                                                         |
+| Setting                  | Description                                                                                                                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Enable new context pad   | Enables the alternative context pad interface.                                                                                                                                                                          |
+| Disable plugins          | Disables all installed plugins when running Desktop Modeler.                                                                                                                                                            |
+| Camunda 8 connections    | Add and manage connections to Camunda 8 clusters. See [connect to Camunda 8](../connect-to-camunda-8.md) for connection setup instructions.                                                                             |
+| Element template sources | (Camunda 8 only) Manage the built-in Camunda connector template source and add custom remote sources. See [remote template sources](../element-templates/configuring-templates.md#remote-template-sources) for details. |
+| Default versions         | Sets the default [execution platform versions](/reference/glossary.md#execution-platform-version) for new Camunda 7 and Camunda 8 diagrams.                                                                             |
 
 :::note
 Plugins may also provide their own settings in the **Settings** window.

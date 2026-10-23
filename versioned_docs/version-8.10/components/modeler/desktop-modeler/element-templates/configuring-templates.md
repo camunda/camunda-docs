@@ -12,7 +12,7 @@ import AddTemplateSourceImg from './img/add-template-source.png';
 
 ## Global templates
 
-For templates to be available for all diagrams store them in the `resources/element-templates` directory containing the Camunda Modeler executable. Alternatively, for element templates to be available across Camunda Modeler installations, you can store them in the `resources/element-templates` directory in the modeler's [user data directory](../search-paths/search-paths.md#user-data-directory).
+For templates to be available for all diagrams, store them in the `resources/element-templates` directory containing the Camunda Modeler executable. Alternatively, for element templates to be available across Camunda Modeler installations, you can store them in the `resources/element-templates` directory in the modeler's [user data directory](../search-paths/search-paths.md#user-data-directory).
 
 ### Examples
 
