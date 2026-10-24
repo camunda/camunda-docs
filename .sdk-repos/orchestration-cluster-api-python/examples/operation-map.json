@@ -531,6 +531,13 @@
       "label": "Get a batch operation"
     }
   ],
+  "get_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetClock",
+      "label": "Get the cluster clock"
+    }
+  ],
   "get_cluster_exporting_status": [
     {
       "file": "exporting.py",

@@ -1046,12 +1046,11 @@ Cancel process instances (batch)
 
 > Cancels multiple active or suspended process instances.
 >
-> Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch
-> to the given states. Requesting any state other than ACTIVE or SUSPENDED through the $eq or
-> $in operators is rejected. Other state operators ($neq, $exists, $like) are applied as
-> given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,
-> both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey
-> is ignored and overridden during this batch operation.
+> Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled
+> together with their root instance. The given filter only narrows the batch, except for
+> parentProcessInstanceKey: a top-level filter is ignored, and an $or branch on it matches
+> nothing. Other state operators ($neq, $notIn, $exists, $like) are applied as given
+> and are not validated.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -1063,7 +1062,7 @@ Cancel process instances (batch)
 | `kwargs`  | `Any`                                              |                                                                                      |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE or SUSPENDED through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -3870,6 +3869,51 @@ def get_batch_operation_example(batch_operation_key: BatchOperationKey) -> None:
     )
 
     print(f"Batch operation: {result.batch_operation_key}")
+```
+
+### get_clock()
+
+```python
+async def get_clock(**kwargs)
+```
+
+Get internal clock
+
+> Returns the current time of the Zeebe engine’s internal clock.
+>
+> If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time
+> and this is the engine’s current time.
+>
+> Use this endpoint to check the time that the engine uses, for example after pinning the
+> clock with PUT /v2/clock or resetting it with POST /v2/clock/reset. A pin or reset
+> reaches all partitions shortly after it is accepted, so a request sent right after it may
+> still return the previous time.
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ClockResult
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  ClockResult
+
+#### Examples
+
+**Get the cluster clock:**
+
+```python
+def get_clock_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_clock()
+
+    print(f"Engine time: {result.timestamp.isoformat()}")
 ```
 
 ### get_cluster_exporting_status()
@@ -7113,8 +7157,7 @@ Migrate process instances (batch)
 
 > Migrate multiple process instances.
 >
-> Since only process instances with ACTIVE state can be migrated, any given
-> filters for state are ignored and overridden during this batch operation.
+> Only ACTIVE process instances are migrated. The given filter only narrows the batch.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -7126,7 +7169,7 @@ Migrate process instances (batch)
 | `kwargs`  | `Any`                                           |             |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -7223,8 +7266,7 @@ Modify process instances (batch)
 
 > Modify multiple process instances.
 >
-> Since only process instances with ACTIVE state can be modified, any given
-> filters for state are ignored and overridden during this batch operation.
+> Only ACTIVE process instances are modified. The given filter only narrows the batch.
 > In contrast to single modification operation, it is not possible to add variable instructions or
 > modify by element key.
 > It is only possible to use the element id of the source and target.
@@ -7239,7 +7281,7 @@ Modify process instances (batch)
 | `kwargs`  | `Any`                                              |                                                                                                                                                       |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -7383,6 +7425,7 @@ Pin internal clock (alpha)
 >
 > When the clock is pinned, it remains at the specified time and does not advance.
 > To change the time, the clock must be pinned again with a new timestamp.
+> Use GET /v2/clock to read the current time of the clock.
 >
 > This endpoint is an alpha feature and may be subject to change
 > in future releases.
@@ -7491,6 +7534,7 @@ Reset internal clock (alpha)
 > time.
 > This operation is useful for returning the clock to
 > normal behavior after it has been pinned to a specific time.
+> Use GET /v2/clock to read the current time of the clock.
 >
 > This endpoint is an alpha feature and may be subject to change
 > in future releases.
@@ -7571,8 +7615,7 @@ Resolve related incidents (batch)
 
 > Resolves multiple instances of process instances.
 >
-> Since only process instances with ACTIVE state can have unresolved incidents, any given
-> filters for state are ignored and overridden during this batch operation.
+> Only incidents of ACTIVE process instances are resolved. The given filter only narrows the batch.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -7584,7 +7627,7 @@ Resolve related incidents (batch)
 | `kwargs`  | `Any`                                                    |                                                                                                        |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -8046,10 +8089,11 @@ Resume process instances (batch)
 
 > Resumes multiple suspended process instances.
 >
-> Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only
-> SUSPENDED process instances can be resumed and resumption does not cascade between parent
-> and child instances, so child instances are resumed independently of their parent or root
-> instance.
+> Only SUSPENDED process instances are resumed. The given filter only narrows the batch.
+> Other state operators ($neq, $notIn, $exists, $like) are applied as given and are
+> not validated. Resumption does not cascade, so child instances are resumed independently of their
+> parent
+> or root instance.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -8061,7 +8105,7 @@ Resume process instances (batch)
 | `kwargs`  | `Any`                                            |                                                                                     |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than SUSPENDED through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -10586,10 +10630,11 @@ Suspend process instances (batch)
 
 > Suspends multiple running process instances.
 >
-> Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only
-> ACTIVE process instances can be suspended and suspension does not cascade between parent
-> and child instances, so child instances are suspended independently of their parent or
-> root instance.
+> Only ACTIVE process instances are suspended. The given filter only narrows the batch.
+> Other state operators ($neq, $notIn, $exists, $like) are applied as given and are
+> not validated. Suspension does not cascade, so child instances are suspended independently of their
+> parent
+> or root instance.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -10601,7 +10646,7 @@ Suspend process instances (batch)
 | `kwargs`  | `Any`                                            |                                                                                       |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
