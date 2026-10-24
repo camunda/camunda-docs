@@ -1,7 +1,7 @@
 // Compilable usage examples for exporting operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
+import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
 
 //#region PauseExporting
 async function pauseExportingExample() {

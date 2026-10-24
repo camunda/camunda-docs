@@ -19,7 +19,7 @@ type CancelProcessInstancesBatchOperationErrors = object;
 400: ProblemDetail;
 ```
 
-The process instance batch operation failed. More details are provided in the response body.
+The process instance batch operation failed, for example because the filter requests a top-level `state` other than ACTIVE or SUSPENDED through `$eq` or `$in`. States inside `$or` branches are not validated. More details are provided in the response body.
 
 ---
 

@@ -829,8 +829,16 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         __brand: "IncidentKey";
       }
         | null;
-     processDefinitionId: string;
-     processDefinitionKey: string;
+     processDefinitionId:   | {
+      [key: number]: string;
+        __brand: "ProcessDefinitionId";
+      }
+        | null;
+     processDefinitionKey:   | {
+      [key: number]: string;
+        __brand: "ProcessDefinitionKey";
+      }
+        | null;
      processInstanceKey: string;
      rootProcessInstanceKey:   | {
       [key: number]: string;
@@ -3225,8 +3233,16 @@ signatures), matching the runtime wrappers the constructor installs.
 `__brand`: `"IncidentKey"`;
 \}
 \| `null`;
-`processDefinitionId`: `string`;
-`processDefinitionKey`: `string`;
+`processDefinitionId`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"ProcessDefinitionId"`;
+\}
+\| `null`;
+`processDefinitionKey`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"ProcessDefinitionKey"`;
+\}
+\| `null`;
 `processInstanceKey`: `string`;
 `rootProcessInstanceKey`: \| \{
 \[`key`: `number`\]: `string`;

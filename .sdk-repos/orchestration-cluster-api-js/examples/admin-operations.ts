@@ -10,7 +10,7 @@ import {
   type GlobalListenerId,
   type ProcessDefinitionKey,
   type TenantId,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region GetGlobalClusterVariable
 async function getGlobalClusterVariableExample(name: ClusterVariableName) {
@@ -58,7 +58,10 @@ async function deleteGlobalClusterVariableExample(name: ClusterVariableName) {
 //#endregion DeleteGlobalClusterVariable
 
 //#region GetTenantClusterVariable
-async function getTenantClusterVariableExample(tenantId: TenantId, name: ClusterVariableName) {
+async function getTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   const variable = await camunda.getTenantClusterVariable(
@@ -74,13 +77,16 @@ async function getTenantClusterVariableExample(tenantId: TenantId, name: Cluster
 //#endregion GetTenantClusterVariable
 
 //#region CreateTenantClusterVariable
-async function createTenantClusterVariableExample(tenantId: TenantId, name: ClusterVariableName) {
+async function createTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createTenantClusterVariable({
     tenantId,
     name,
-    value: { region: 'us-east-1' },
+    value: { region: "us-east-1" },
   });
 
   console.log(`Created: ${result.name}`);
@@ -88,19 +94,25 @@ async function createTenantClusterVariableExample(tenantId: TenantId, name: Clus
 //#endregion CreateTenantClusterVariable
 
 //#region UpdateTenantClusterVariable
-async function updateTenantClusterVariableExample(tenantId: TenantId, name: ClusterVariableName) {
+async function updateTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   await camunda.updateTenantClusterVariable({
     tenantId,
     name,
-    value: { region: 'eu-west-1' },
+    value: { region: "eu-west-1" },
   });
 }
 //#endregion UpdateTenantClusterVariable
 
 //#region DeleteTenantClusterVariable
-async function deleteTenantClusterVariableExample(tenantId: TenantId, name: ClusterVariableName) {
+async function deleteTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   await camunda.deleteTenantClusterVariable({
@@ -133,8 +145,8 @@ async function createGlobalTaskListenerExample(id: GlobalListenerId) {
 
   const result = await camunda.createGlobalTaskListener({
     id,
-    eventTypes: ['completing'],
-    type: 'audit-log-listener',
+    eventTypes: ["completing"],
+    type: "audit-log-listener",
   });
 
   console.log(`Created listener: ${result.id}`);
@@ -160,8 +172,8 @@ async function updateGlobalTaskListenerExample(id: GlobalListenerId) {
 
   await camunda.updateGlobalTaskListener({
     id,
-    eventTypes: ['completing'],
-    type: 'updated-audit-listener',
+    eventTypes: ["completing"],
+    type: "updated-audit-listener",
   });
 }
 //#endregion UpdateGlobalTaskListener
@@ -229,7 +241,7 @@ async function getStatusExample() {
 
   await camunda.getStatus();
 
-  console.log('Cluster is healthy');
+  console.log("Cluster is healthy");
 }
 //#endregion GetStatus
 
@@ -264,7 +276,9 @@ async function triggerClusterRebalanceExample() {
 
   console.log(`Cluster balance state: ${balance.state}`);
   if (balance.runningRebalance) {
-    console.log(`Rebalance started: id=${balance.runningRebalance.rebalanceId}`);
+    console.log(
+      `Rebalance started: id=${balance.runningRebalance.rebalanceId}`
+    );
   }
 }
 //#endregion TriggerClusterRebalance
@@ -293,7 +307,9 @@ async function cancelClusterRebalanceExample() {
 
   const result = await camunda.cancelClusterRebalance();
 
-  console.log(`Cancel requested; was a rebalance running? ${result.wasRunning}`);
+  console.log(
+    `Cancel requested; was a rebalance running? ${result.wasRunning}`
+  );
 }
 //#endregion CancelClusterRebalance
 
@@ -305,7 +321,7 @@ async function pinClockExample() {
     timestamp: 1735689599000,
   });
 
-  console.log('Clock pinned');
+  console.log("Clock pinned");
 }
 //#endregion PinClock
 
@@ -315,7 +331,7 @@ async function resetClockExample() {
 
   await camunda.resetClock();
 
-  console.log('Clock reset');
+  console.log("Clock reset");
 }
 //#endregion ResetClock
 
@@ -337,7 +353,7 @@ async function evaluateExpressionExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.evaluateExpression({
-    expression: '= x + y',
+    expression: "= x + y",
     variables: { x: 10, y: 20 },
   });
 
@@ -376,7 +392,9 @@ async function getResourceContentExample(resourceKey: ProcessDefinitionKey) {
 //#endregion GetResourceContent
 
 //#region GetResourceContentBinary
-async function getResourceContentBinaryExample(resourceKey: ProcessDefinitionKey) {
+async function getResourceContentBinaryExample(
+  resourceKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const content = await camunda.getResourceContentBinary(
@@ -426,8 +444,8 @@ async function getUsageMetricsExample() {
 
   const metrics = await camunda.getUsageMetrics(
     {
-      startTime: '2025-01-01T00:00:00Z',
-      endTime: '2025-12-31T23:59:59Z',
+      startTime: "2025-01-01T00:00:00Z",
+      endTime: "2025-12-31T23:59:59Z",
     },
     { consistency: { waitUpToMs: 5000 } }
   );
@@ -474,7 +492,10 @@ async function searchCorrelatedMessageSubscriptionsExample() {
 async function getAuditLogExample(auditLogKey: AuditLogKey) {
   const camunda = createCamundaClient();
 
-  const log = await camunda.getAuditLog({ auditLogKey }, { consistency: { waitUpToMs: 5000 } });
+  const log = await camunda.getAuditLog(
+    { auditLogKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   console.log(`Audit log: ${log.operationType}`);
 }
@@ -507,7 +528,9 @@ async function getProcessInstanceStatisticsByErrorExample() {
   );
 
   for (const stat of result.items ?? []) {
-    console.log(`Error: ${stat.errorMessage}, count: ${stat.activeInstancesWithErrorCount}`);
+    console.log(
+      `Error: ${stat.errorMessage}, count: ${stat.activeInstancesWithErrorCount}`
+    );
   }
 }
 //#endregion GetProcessInstanceStatisticsByError
@@ -540,9 +563,9 @@ async function getJobErrorStatisticsExample() {
   const result = await camunda.getJobErrorStatistics(
     {
       filter: {
-        from: '2025-01-01T00:00:00Z',
-        to: '2025-12-31T23:59:59Z',
-        jobType: 'payment-processing',
+        from: "2025-01-01T00:00:00Z",
+        to: "2025-12-31T23:59:59Z",
+        jobType: "payment-processing",
       },
     },
     { consistency: { waitUpToMs: 5000 } }
@@ -561,9 +584,9 @@ async function getJobTimeSeriesStatisticsExample() {
   const result = await camunda.getJobTimeSeriesStatistics(
     {
       filter: {
-        from: '2025-01-01T00:00:00Z',
-        to: '2025-12-31T23:59:59Z',
-        jobType: 'payment-processing',
+        from: "2025-01-01T00:00:00Z",
+        to: "2025-12-31T23:59:59Z",
+        jobType: "payment-processing",
       },
     },
     { consistency: { waitUpToMs: 5000 } }
@@ -579,7 +602,10 @@ async function getJobTimeSeriesStatisticsExample() {
 async function getJobTypeStatisticsExample() {
   const camunda = createCamundaClient();
 
-  const result = await camunda.getJobTypeStatistics({}, { consistency: { waitUpToMs: 5000 } });
+  const result = await camunda.getJobTypeStatistics(
+    {},
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   for (const stat of result.items ?? []) {
     console.log(`Type: ${stat.jobType}, workers: ${stat.workers}`);
@@ -594,9 +620,9 @@ async function getJobWorkerStatisticsExample() {
   const result = await camunda.getJobWorkerStatistics(
     {
       filter: {
-        from: '2025-01-01T00:00:00Z',
-        to: '2025-12-31T23:59:59Z',
-        jobType: 'payment-processing',
+        from: "2025-01-01T00:00:00Z",
+        to: "2025-12-31T23:59:59Z",
+        jobType: "payment-processing",
       },
     },
     { consistency: { waitUpToMs: 5000 } }
@@ -614,8 +640,8 @@ async function getGlobalJobStatisticsExample() {
 
   const result = await camunda.getGlobalJobStatistics(
     {
-      from: '2025-01-01T00:00:00Z',
-      to: '2025-12-31T23:59:59Z',
+      from: "2025-01-01T00:00:00Z",
+      to: "2025-12-31T23:59:59Z",
     },
     { consistency: { waitUpToMs: 5000 } }
   );
