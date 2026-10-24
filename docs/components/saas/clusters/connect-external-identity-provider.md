@@ -47,9 +47,9 @@ Back in the configuration dialog, fill in the following fields:
 | **Client ID**            | The client ID from [step 2](#step-2-register-an-application-in-your-idp).                                                                                                                                                                  | Yes                        |
 | **Client secret**        | The client secret from [step 2](#step-2-register-an-application-in-your-idp). Stored securely and never displayed again. When you edit an existing configuration, leave this blank to keep the current secret.                             | Yes on first configuration |
 | **Scopes**               | Space-separated OIDC scopes to request. Defaults to `openid profile`.                                                                                                                                                                      | No                         |
-| **Username claim**       | The access token claim Camunda uses as the username. Defaults to `sub`.                                                                                                                                                                    | No                         |
+| **Username claim**       | The claim Camunda uses as the username. See [which token Camunda reads](#which-token-camunda-reads). Defaults to `sub`.                                                                                                                    | No                         |
 | **Client ID claim**      | The access token claim Camunda uses to identify machine-to-machine (M2M) clients. See [considerations for Microsoft Entra ID](#considerations-for-microsoft-entra-id) before you set this.                                                 | No                         |
-| **Audiences**            | Space-separated audience (`aud`) values Camunda accepts in tokens from this provider.                                                                                                                                                      | No                         |
+| **Audiences**            | Space-separated audience (`aud`) values Camunda accepts in access tokens from this provider. Camunda doesn't check them against the ID token used at sign-in.                                                                              | No                         |
 | **Additional JWKS URLs** | Space-separated HTTPS URLs, for providers that publish more than one JSON Web Key Set (JWKS) endpoint (for example, Ping Identity).                                                                                                        | No                         |
 
 Confirm the checkbox acknowledging the lockout risk, then click **Save**.
@@ -65,15 +65,61 @@ A misconfigured identity provider can prevent its users from signing in. Camunda
 - **Edit** the configuration to change any field. Leave **Client secret** blank to keep the current secret. Saving an edit doesn't immediately restart the cluster: the new secret syncs to the cluster in the background, which can take up to a minute.
 - **Delete configuration** permanently removes the provider configuration and its client secret, and restarts your cluster. To use the provider again, enter the full configuration and a new client secret.
 
+## Grant initial access
+
+Users who sign in through your provider have no access to the cluster until a mapping rule or authorization applies to them. Before the first sign-in, create a mapping rule for your first user and assign it to the `admin` role:
+
+1. Sign in to Admin in your cluster with your Camunda login.
+2. [Create a mapping rule](/components/admin/mapping-rules.md#create-a-mapping-rule) with **Claim name** set to your username claim, for example `preferred_username`, and **Claim value** set to your username in the provider.
+3. [Assign the mapping rule](/components/admin/role.md#assign-mapping-rules-to-a-role) to the `admin` role.
+
+The first user to sign in through your provider then has admin access, and can create further mapping rules and authorizations for other users.
+
 ## Map claims to roles, groups, and authorizations
 
-The external identity provider configuration has no groups claim. Instead, use [mapping rules](/components/admin/mapping-rules.md) in the Orchestration Cluster Admin UI to map claims from your provider's access tokens to [roles](/components/admin/role.md), [groups](/components/admin/group.md), [tenants](/components/admin/tenant.md), or [authorizations](/components/concepts/access-control/authorizations.md). Mapping rules become available in Admin as soon as you configure an external identity provider for the cluster.
+The external identity provider configuration has no groups claim. Instead, use [mapping rules](/components/admin/mapping-rules.md) in the Orchestration Cluster Admin UI to map claims from the token Camunda reads (see [which token Camunda reads](#which-token-camunda-reads)) to [roles](/components/admin/role.md), [groups](/components/admin/group.md), [tenants](/components/admin/tenant.md), or [authorizations](/components/concepts/access-control/authorizations.md). Mapping rules become available in Admin as soon as you configure an external identity provider for the cluster.
+
+## Which token Camunda reads
+
+For API requests, Camunda reads claims from the access token of the request.
+
+For sign-in, Camunda tries to validate the access token it receives from your provider and reads claims from it. If Camunda can't validate that token, it reads claims from the ID token and the UserInfo response instead. Camunda doesn't combine claims from the access token and the ID token.
+
+The username claim and your mapping rules use the claims of whichever token Camunda reads.
 
 ## Considerations for Microsoft Entra ID
+
+Microsoft Entra ID issues a Microsoft Graph access token when you request only `openid profile`. Camunda can't validate that token, so sign-ins with Entra use the ID token claims. To check which claims your mapping rules can match, [inspect the ID token](#inspect-the-id-token).
 
 Console doesn't let you change the order Camunda uses to resolve a token to a user or to a client. By default, Camunda checks the **Client ID claim** first: if the claim is present in a token, Camunda treats the request as coming from a client; otherwise, it falls back to the **Username claim**.
 
 Microsoft Entra ID includes an `azp` (authorized party) claim in both user and application tokens. If you set **Client ID claim** to `azp`, user sign-ins can be misidentified as client authentications. Leave **Client ID claim** blank unless you specifically need machine-to-machine (M2M) authentication through this provider, and if you do set it, use a claim that only appears in your application tokens.
+
+### Settings for sign-in with Entra
+
+| Field               | Value                                                                                                                                                    |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Issuer URL**      | `https://login.microsoftonline.com/<tenant-id>/v2.0`                                                                                                     |
+| **Scopes**          | `openid profile`. Add `email` if a mapping rule uses the `email` claim, and confirm that the claim is present in your [ID token](#inspect-the-id-token). |
+| **Username claim**  | `preferred_username`                                                                                                                                     |
+| **Client ID claim** | Leave blank.                                                                                                                                             |
+| **Audiences**       | Not needed for sign-in. Camunda doesn't check audiences against the ID token.                                                                            |
+
+### Inspect the ID token
+
+To see the claims Camunda reads when a user signs in with Entra, decode an ID token from your app registration:
+
+1. In your Entra app registration, enable **ID tokens** for implicit and hybrid flows.
+2. Add `https://jwt.ms` as a redirect URI.
+3. Open the following URL in your browser. Replace `<tenant-id>` and `<client-id>` with your values.
+
+   ```text
+   https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/authorize?client_id=<client-id>&response_type=id_token&redirect_uri=https://jwt.ms&scope=openid%20profile%20email&nonce=1
+   ```
+
+4. Sign in. jwt.ms shows the decoded token.
+
+The token identifies a user, so don't share it. When you're done, remove the jwt.ms redirect URI and disable the implicit flow.
 
 ## Known limitations
 
@@ -98,6 +144,10 @@ Your provider's discovery document doesn't include one or more endpoints OIDC di
 ### The issuer URL is rejected before Camunda even checks for a provider
 
 Camunda also rejects an issuer URL that doesn't use `https`, contains credentials, or contains a query string or a fragment. Remove these from the URL and try again.
+
+### You signed in but have no access, or a role is missing
+
+Camunda matches your mapping rules against the claims of the token it reads for the session. For Entra, these are the ID token claims. [Inspect the ID token](#inspect-the-id-token) and confirm that the claim name and value in your mapping rule match exactly.
 
 ## Further resources
 
