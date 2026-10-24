@@ -278,6 +278,19 @@ public static class AdminExamples
     // </GetStatus>
     #endregion GetStatus
 
+    #region GetClock
+
+    // <GetClock>
+    public static async Task GetClockExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var clock = await client.GetClockAsync();
+        Console.WriteLine($"Engine time: {clock.Timestamp:O}");
+    }
+    // </GetClock>
+    #endregion GetClock
+
     #region PinClock
 
     // <PinClock>

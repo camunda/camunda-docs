@@ -2245,6 +2245,36 @@ public static async Task GetAuthenticationExample()
 }
 ```
 
+#### GetClockAsync(CancellationToken)
+
+```csharp
+public Task<ClockResult> GetClockAsync(CancellationToken ct = default)
+```
+
+Get internal clock
+
+Returns the current time of the Zeebe engine's internal clock. If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time and this is the engine's current time.
+
+Use this endpoint to check the time that the engine uses, for example after pinning the clock with `PUT /v2/clock` or resetting it with `POST /v2/clock/reset`. A pin or reset reaches all partitions shortly after it is accepted, so a request sent right after it may still return the previous time.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClockResult>`
+
+**Example**
+
+```csharp
+public static async Task GetClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    var clock = await client.GetClockAsync();
+    Console.WriteLine($"Engine time: {clock.Timestamp:O}");
+}
+```
+
 #### GetClusterTopologyAsync(CancellationToken)
 
 ```csharp
@@ -2347,7 +2377,7 @@ public Task PinClockAsync(ClockPinRequest body, CancellationToken ct = default)
 
 Pin internal clock (alpha)
 
-Set a precise, static time for the Zeebe engine's internal clock. When the clock is pinned, it remains at the specified time and does not advance. To change the time, the clock must be pinned again with a new timestamp.
+Set a precise, static time for the Zeebe engine's internal clock. When the clock is pinned, it remains at the specified time and does not advance. To change the time, the clock must be pinned again with a new timestamp. Use `GET /v2/clock` to read the current time of the clock.
 
 This endpoint is an alpha feature and may be subject to change in future releases.
 
@@ -2380,7 +2410,7 @@ public Task ResetClockAsync(CancellationToken ct = default)
 
 Reset internal clock (alpha)
 
-Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time. This operation is useful for returning the clock to normal behavior after it has been pinned to a specific time.
+Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time. This operation is useful for returning the clock to normal behavior after it has been pinned to a specific time. Use `GET /v2/clock` to read the current time of the clock.
 
 This endpoint is an alpha feature and may be subject to change in future releases.
 
@@ -2725,7 +2755,7 @@ public Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsy
 
 Cancel process instances (batch)
 
-Cancels multiple active or suspended process instances. Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch to the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or `$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter, both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey is ignored and overridden during this batch operation. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Cancels multiple active or suspended process instances. Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled together with their root instance. The given filter only narrows the batch, except for parentProcessInstanceKey: a top-level filter is ignored, and an `$or` branch on it matches nothing. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are not validated. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                               | Description |
 | --------- | -------------------------------------------------- | ----------- |
@@ -3138,7 +3168,7 @@ public Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAs
 
 Migrate process instances (batch)
 
-Migrate multiple process instances. Since only process instances with ACTIVE state can be migrated, any given filters for state are ignored and overridden during this batch operation. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Migrate multiple process instances. Only ACTIVE process instances are migrated. The given filter only narrows the batch. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                            | Description |
 | --------- | ----------------------------------------------- | ----------- |
@@ -3209,7 +3239,7 @@ public Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsy
 
 Modify process instances (batch)
 
-Modify multiple process instances. Since only process instances with ACTIVE state can be modified, any given filters for state are ignored and overridden during this batch operation. In contrast to single modification operation, it is not possible to add variable instructions or modify by element key. It is only possible to use the element id of the source and target. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Modify multiple process instances. Only ACTIVE process instances are modified. The given filter only narrows the batch. In contrast to single modification operation, it is not possible to add variable instructions or modify by element key. It is only possible to use the element id of the source and target. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                               | Description |
 | --------- | -------------------------------------------------- | ----------- |
@@ -3240,7 +3270,7 @@ public Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(Pro
 
 Resolve related incidents (batch)
 
-Resolves multiple instances of process instances. Since only process instances with ACTIVE state can have unresolved incidents, any given filters for state are ignored and overridden during this batch operation. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Resolves multiple instances of process instances. Only incidents of ACTIVE process instances are resolved. The given filter only narrows the batch. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                                     | Description |
 | --------- | -------------------------------------------------------- | ----------- |
@@ -3333,7 +3363,7 @@ public Task<BatchOperationCreatedResult> ResumeProcessInstancesBatchOperationAsy
 
 Resume process instances (batch)
 
-Resumes multiple suspended process instances. Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only SUSPENDED process instances can be resumed and resumption does not cascade between parent and child instances, so child instances are resumed independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Resumes multiple suspended process instances. Only SUSPENDED process instances are resumed. The given filter only narrows the batch. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are not validated. Resumption does not cascade, so child instances are resumed independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                             | Description |
 | --------- | ------------------------------------------------ | ----------- |
@@ -3471,7 +3501,7 @@ public Task<BatchOperationCreatedResult> SuspendProcessInstancesBatchOperationAs
 
 Suspend process instances (batch)
 
-Suspends multiple running process instances. Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only ACTIVE process instances can be suspended and suspension does not cascade between parent and child instances, so child instances are suspended independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Suspends multiple running process instances. Only ACTIVE process instances are suspended. The given filter only narrows the batch. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are not validated. Suspension does not cascade, so child instances are suspended independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                             | Description |
 | --------- | ------------------------------------------------ | ----------- |
