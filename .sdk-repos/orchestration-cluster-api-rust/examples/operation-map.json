@@ -489,6 +489,13 @@
       "label": "Get agent instance"
     }
   ],
+  "getClock": [
+    {
+      "file": "clock.rs",
+      "region": "GetClock",
+      "label": "Get the internal clock"
+    }
+  ],
   "getAuditLog": [
     {
       "file": "audit_log.rs",

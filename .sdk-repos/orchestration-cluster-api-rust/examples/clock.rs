@@ -8,6 +8,17 @@ use camunda_orchestration_sdk::apis::clock_api::PinClockParams;
 use camunda_orchestration_sdk::models::ClockPinRequest;
 use camunda_orchestration_sdk::CamundaClient;
 
+// region GetClock
+async fn get_clock() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let clock = client.get_clock().await?;
+    println!("Engine clock: {}", clock.timestamp.to_rfc3339());
+
+    Ok(())
+}
+// endregion GetClock
+
 // region PinClock
 async fn pin_clock() -> Result<(), Box<dyn std::error::Error>> {
     let client = CamundaClient::from_env()?;

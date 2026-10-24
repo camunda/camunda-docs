@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **262** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **263** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -102,6 +102,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_authentication`](#get_authentication)                                                                         | Get current user (`GET /authentication/me`).                                                                                                                                                                                                                                                 |
 | [`get_authorization`](#get_authorization)                                                                           | Get authorization (`GET /authorizations/{authorizationKey}`).                                                                                                                                                                                                                                |
 | [`get_batch_operation`](#get_batch_operation)                                                                       | Get batch operation (`GET /batch-operations/{batchOperationKey}`).                                                                                                                                                                                                                           |
+| [`get_clock`](#get_clock)                                                                                           | Get internal clock (`GET /clock`).                                                                                                                                                                                                                                                           |
 | [`get_cluster_exporting_status`](#get_cluster_exporting_status)                                                     | Get exporting status of the whole cluster (`GET /cluster/v2/exporting`).                                                                                                                                                                                                                     |
 | [`get_cluster_rebalance`](#get_cluster_rebalance)                                                                   | Report the cluster's current leadership balance (`GET /cluster/v2/rebalance`).                                                                                                                                                                                                               |
 | [`get_cluster_status`](#get_cluster_status)                                                                         | Get the status of the whole cluster (`GET /cluster/v2/status`).                                                                                                                                                                                                                              |
@@ -2448,6 +2449,27 @@ async fn get_batch_operation(
         })
         .await?;
     println!("{}", result.batch_operation_key);
+
+    Ok(())
+}
+```
+
+### get_clock
+
+```rust
+pub async fn get_clock(&self) -> Result<models::ClockResult>
+```
+
+Get internal clock (`GET /clock`).
+
+**Example**
+
+```rust
+async fn get_clock() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let clock = client.get_clock().await?;
+    println!("Engine clock: {}", clock.timestamp.to_rfc3339());
 
     Ok(())
 }
@@ -5319,7 +5341,9 @@ async fn search_jobs() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
     for item in result.items {
-        println!("{}", item.process_definition_id);
+        if let Some(process_definition_id) = item.process_definition_id {
+            println!("{process_definition_id}");
+        }
     }
 
     Ok(())
