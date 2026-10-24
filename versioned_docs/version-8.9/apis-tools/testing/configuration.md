@@ -62,8 +62,9 @@ speed up the test execution.
 
 ### Usage
 
-By default, the runtime uses the same version of the Camunda Docker images as the Maven module. You can change the
-Docker images and other runtime properties in the following way.
+By default, the runtime uses the same version of the Camunda Docker image as the Maven module. The Connectors Docker
+image uses a fixed, published Connectors version instead, because Connectors have a separate release cycle. You can
+change the Docker images and other runtime properties in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
