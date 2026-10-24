@@ -36,11 +36,13 @@ You can treat files in a project as a single bundle or as independent resources.
 - [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md) to an [environment](./environments.md) assigned to its workspace.
 - [Deploy individual project resources](../hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process).
 
+When you turn on [git sync](../hub/workspace/manage-projects/git-sync.md) or download a project, Hub writes the project link into `camunda.json`, so your local folder knows where it lives in Hub. Hub never overwrites a link that points to a different project.
+
 ## Projects in local development
 
 In local development with [Desktop Modeler](/components/modeler/desktop-modeler/projects.md) and [`c8ctl`](/apis-tools/c8ctl/getting-started.md), a project is a folder with a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file (an empty `{}` is enough).
 
-A project works without Camunda Hub. When you deploy a directory inside a project with [`c8 deploy`](/apis-tools/c8ctl/development-workflows.md#deploy-a-directory), `c8ctl` deploys the whole project. Unlike in Camunda Hub, Desktop Modeler always deploys all project resources together.
+A project works without Camunda Hub. When you deploy a directory inside a project with [`c8 deploy`](/apis-tools/c8ctl/development-workflows.md#deploy-a-directory), `c8ctl` deploys the whole project. Connect the project to Hub later via git sync. Unlike in Camunda Hub, Desktop Modeler always deploys all project resources together.
 
 ### Migrate from process applications
 

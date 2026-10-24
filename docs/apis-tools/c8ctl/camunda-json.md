@@ -26,7 +26,7 @@ All fields are optional. An empty `camunda.json` (`{}`) is valid and simply mark
 
 ### hub.projectId
 
-Links the local project to a project in [Camunda Hub](/components/hub/index.md).
+Links the local project to a project in [Camunda Hub](/components/hub/index.md). Hub writes the link for you when you turn on git sync or download a project. Hub never overwrites a link that points to a different project: if git sync from project B finds a link to project A, Hub warns instead of replacing the link.
 
 A project does not need a Hub link. You can create a folder with `camunda.json`, build, and deploy locally with `c8 deploy`, and connect it to Hub later.
 
