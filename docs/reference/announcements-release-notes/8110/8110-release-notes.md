@@ -52,11 +52,9 @@ This helps address a known compliance gap (for example, PCI DSS 4.0 Requirement 
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
-Desktop Modeler now uses the Camunda Design System, so it looks consistent with the rest of Camunda 8. The application UI, the BPMN, DMN, and form editors, the properties panel, and shared panels such as the variables outline and task testing all use Camunda Design System components and tokens.
+Desktop Modeler now uses the Camunda Design System. The application UI, the BPMN, DMN, and form editors, the properties panel, and side panels such as the variables outline and task testing all use Camunda Design System components and style.
 
-Desktop Modeler no longer ships Carbon styles. If your plugin relies on Carbon classes or styles, update it to use Camunda Design System tokens instead.
-
-<p class="link-arrow">[Migrate plugins to the Camunda Design System](/components/modeler/desktop-modeler/plugins/plugins.md)</p>
+Desktop Modeler no longer ships Carbon or its previous global styles. If your plugin relies on Carbon components, classes, or styles, replace them with Camunda Design System components and tokens, or remove them.
 
 ### Orchestration Cluster
 
