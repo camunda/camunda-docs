@@ -28,7 +28,11 @@ Treat the overview course as a prerequisite for your first project.
 
 ## Plan the effort
 
-ProcessOS Harness runs many agent iterations, so a journey has a real token cost. Plan for six to eight hours for one journey from discovery through implementation. Token cost depends on the scenario:
+ProcessOS Harness runs many agent iterations. Plan for six to eight hours for one journey from discovery through implementation.
+
+### Token cost
+
+A journey has a real token cost that depends on the scenario:
 
 | Scenario                                   | Token cost (USD) |
 | ------------------------------------------ | ---------------- |
@@ -42,6 +46,8 @@ Treat these ranges as a planning input rather than a fixed price. The following 
 - Discovery input: size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading text based files (e.g. BPMN.
 - Number of review iterations until you agree on the result.
 - Transformation tier: a lift-and-shift costs less than a radical transformation.
+
+### SME involvement
 
 Involve your SMEs early. ProcessOS Harness changes their role from main contributor to reviewer, which reduces their total effort, but they still need to be available at the review gates in each phase. A project stalls when a review cycle has no reviewer.
 
