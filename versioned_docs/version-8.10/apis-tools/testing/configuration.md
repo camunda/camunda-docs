@@ -63,10 +63,9 @@ speed up the test execution.
 ### Usage
 
 By default, the runtime uses the same version of the Camunda Docker image as the Maven module. The Connectors Docker
-image doesn't follow the Camunda version because Connectors have a separate release cycle. Instead, the runtime uses a
-fixed, published Connectors version that is set per CPT release and isn't tied to the Camunda patch version. If you
-need a specific Connectors version, set `connectors-docker-image-version` explicitly. You can change the Docker images
-and other runtime properties in the following way.
+image doesn't follow the Camunda version. The runtime uses a fixed, published Connectors version for each CPT release.
+To use another version, set `connectors-docker-image-version`. You can change the Docker images and other runtime
+properties in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -193,18 +192,19 @@ public class MyProcessTest {
 
 </Tabs>
 
-### Cluster secrets
+### Set cluster secrets
 
-Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
-Set them with the
-`cluster-secrets` property (Spring) or `withClusterSecret(name, value)` and `withClusterSecrets(map)` (Java builder).
-You can't set cluster secrets in `camunda-container-runtime.properties`.
+Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference
+`=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
+
+Set cluster secrets with the `cluster-secrets` property (Spring) or `withClusterSecret(name, value)` and
+`withClusterSecrets(map)` (Java builder). You can't set cluster secrets in `camunda-container-runtime.properties`.
 
 - In a managed or shared runtime, CPT writes each secret to a temporary file, copies the file into the Camunda container,
   and sets `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`.
 - CPT fixes the secrets when the runtime starts. You can't change them per test.
 - Use `connectors-secrets` only for the legacy `{{secrets.X}}` syntax. It doesn't populate the cluster secret store. See
-  [Connectors](./connectors.md#cluster-secrets) for examples.
+  [Connectors](./connectors.md#set-cluster-secrets) for examples.
 - To learn how secrets resolve, see [secrets](/components/concepts/secrets.md) and
   [secret resolution](/components/concepts/secret-resolution.md).
 
@@ -680,9 +680,6 @@ path, then you need to set the path when starting the application with the comma
 
 You need to set the following property to switch to a remote runtime.
 
-In a remote runtime, the cluster owns its secret store. CPT ignores `cluster-secrets` and logs a warning. Configure
-secrets on the cluster instead.
-
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
@@ -732,6 +729,9 @@ public class MyProcessTest {
 </TabItem>
 
 </Tabs>
+
+In a remote runtime, the cluster owns its secret store. CPT ignores `cluster-secrets` and logs a warning. Configure
+secrets on the cluster instead.
 
 ### Change the connection
 
