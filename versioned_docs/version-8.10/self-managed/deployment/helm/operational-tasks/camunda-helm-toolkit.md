@@ -37,7 +37,7 @@ Provide your own override files, such as the files you pass to Helm with `-f`, r
 - Keep a copy of your original overrides. For layered configurations, keep the files separate and record their Helm `-f` order.
 - Identify the source and target Camunda versions. The examples on this page migrate 8.9 overrides to 8.10.
 
-The examples use the [public Docker image](https://hub.docker.com/r/camunda/camunda-helm-toolkit/tags). Its `SNAPSHOT` tag is a rolling build, not a versioned release, and can change between pulls. The CLI examples use a POSIX-compatible shell on macOS or Linux. The Web UI avoids host-path mount commands.
+The examples use the [public Docker image](https://hub.docker.com/r/camunda/camunda-helm-toolkit/tags). Its `latest` tag points to the newest published image. Use `--pull always` to avoid a stale local copy. The CLI examples use a POSIX-compatible shell on macOS or Linux. The Web UI avoids host-path mount commands.
 
 ## Use the local Web UI
 
@@ -46,7 +46,7 @@ Start the toolkit in Docker to migrate and validate files through your browser.
 ```bash
 docker run --rm --pull always \
   -p 127.0.0.1:8080:8080 \
-  camunda/camunda-helm-toolkit:SNAPSHOT
+  camunda/camunda-helm-toolkit:latest
 ```
 
 Open [the local toolkit](http://localhost:8080) in your browser. If port 8080 is occupied, change the first port in the mapping and use that port in the browser URL.
@@ -81,7 +81,7 @@ From the directory containing `values-8.9.yaml`, run:
 docker run --rm --pull always \
   --user "$(id -u):$(id -g)" --workdir /tmp \
   -v "$PWD":/work:ro \
-  camunda/camunda-helm-toolkit:SNAPSHOT migrate \
+  camunda/camunda-helm-toolkit:latest migrate \
   --input /work/values-8.9.yaml \
   --source 8.9 --target 8.10 \
   --output - > values-8.10.yaml
@@ -106,7 +106,7 @@ docker run --rm --pull always \
   --env TMPDIR=/output \
   -v "$PWD":/input:ro \
   -v "$PWD/migrated":/output \
-  camunda/camunda-helm-toolkit:SNAPSHOT migrate \
+  camunda/camunda-helm-toolkit:latest migrate \
   --input /input/base.yaml --input /input/production.yaml \
   --source 8.9 --target 8.10 \
   --output-dir /output \
@@ -131,7 +131,7 @@ Run `validate` to check an existing or edited override without migrating it.
 docker run --rm --pull always \
   --user "$(id -u):$(id -g)" --workdir /tmp \
   -v "$PWD":/work:ro \
-  camunda/camunda-helm-toolkit:SNAPSHOT validate \
+  camunda/camunda-helm-toolkit:latest validate \
   --input /work/values-8.10.yaml --target 8.10 \
   --output-format markdown
 ```
@@ -159,7 +159,7 @@ Without `--report-file`, reports go to standard output, except when `migrate --o
 | `2`       | Warnings or manual follow-up required.                |
 | `3`       | Validation errors, or warnings when using `--strict`. |
 
-Inspect both the migrated YAML and the report. Some findings recommend changes the toolkit can't safely automate. For all command options, run `docker run --rm camunda/camunda-helm-toolkit:SNAPSHOT migrate --help` or replace `migrate` with `validate`.
+Inspect both the migrated YAML and the report. Some findings recommend changes the toolkit can't safely automate. For all command options, run `docker run --rm camunda/camunda-helm-toolkit:latest migrate --help` or replace `migrate` with `validate`.
 
 ## Keep configuration local
 
