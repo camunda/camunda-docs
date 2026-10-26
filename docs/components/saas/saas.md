@@ -47,7 +47,7 @@ image: BriefcaseIcon,
 description: "Compare what each Camunda 8 plan includes.",
 },
 {
-link: "./help-center",
+link: "./camunda-help-center",
 title: "Help Center",
 image: FileStackIcon,
 description: "Find learning resources, the automation project guide, Camunda Academy, and ways to share feedback.",
