@@ -6,7 +6,6 @@ description: "Configure local, global, and remote element template sources for D
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import AddTemplateSourceImg from './img/add-template-source.png';
 
 [Element templates](/components/modeler/element-templates/about-templates.md) extend the modeling elements available in Desktop Modeler. You can load templates from files on your computer or configure a remote source that Desktop Modeler can retrieve over HTTP or HTTPS.
 
@@ -79,8 +78,6 @@ Configure remote template sources in the **Settings** window to make templates a
 2. Select **Add source**.
 3. Enter a **Name** and an **Index URL**, then select **Add**.
 4. Select **Done** and restart Desktop Modeler when prompted.
-
-<img src={AddTemplateSourceImg} alt="Add element template source dialog over Settings, with the Element template sources section and Camunda connectors source visible." class="img-noborder img-600"/>
 
 The built-in **Camunda connectors** source provides templates from the [Camunda Marketplace](../../../hub/workspace/modeler/modeling/camunda-marketplace.md). Use the toggle on a source row to enable or disable it. Use the row's **Edit** or **Remove** options to change or remove a custom source. You cannot reorder sources.
 
