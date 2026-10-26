@@ -33,6 +33,47 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 71
+
+### Publication date
+
+October 26, 2026
+
+### Products affected
+
+- Keycloak images provided by Camunda: `camunda/keycloak` and `registry.camunda.cloud/keycloak-ee/keycloak`
+
+### Impact
+
+Keycloak includes `brotli4j` 1.23.0, which is affected by [CVE-2026-111497](https://github.com/hyperxpro/Brotli4j/security/advisories/GHSA-x524-jrqf-vwq6), an out-of-bounds write in the Brotli decoder. Keycloak gets `brotli4j` as a transitive dependency of `quarkus-vertx-http`. Vulnerability scanners report this finding for the Keycloak images that Camunda provides.
+
+Camunda and the Keycloak maintainers analyzed the vulnerability ([keycloak/keycloak#54333](https://github.com/keycloak/keycloak/issues/54333)). In the default configuration, the vulnerable decoder is not reachable:
+
+- Keycloak uses the Apache HTTP client for outbound requests. This client does not decode Brotli responses.
+- Request decompression on the inbound Keycloak listener is disabled.
+
+The only reachable path is the experimental `http-client:v2` feature, introduced in Keycloak 26.8.0. When you enable this feature, a malicious or compromised server that Keycloak contacts can send a crafted Brotli response.
+
+The Camunda Keycloak images and the Camunda Helm chart do not enable experimental Keycloak features. Keycloak versions earlier than 26.8.0 do not include the `http-client:v2` feature.
+
+Camunda SaaS is not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected only if you enable the experimental `http-client:v2` feature, for example with `--features=http-client:v2` or the `KC_FEATURES` environment variable.
+
+If you do not enable this feature, the vulnerable code is present in the image but cannot be exploited.
+
+### Solution
+
+No action is necessary if you do not enable the experimental `http-client:v2` feature. Do not enable this feature.
+
+The fix for `brotli4j` (version 1.24.0) is available, but no Keycloak release includes it yet. Camunda does not patch Keycloak dependencies. Camunda rebuilds its Keycloak images automatically when an upstream base image publishes a new Keycloak release. The base of `camunda/keycloak` is the official Keycloak image on Quay.io. The base of `registry.camunda.cloud/keycloak-ee/keycloak` is the Bitnami Premium image. When a Keycloak release with the fix is available, update to the latest image tag for your Keycloak line.
+
+The Keycloak project fixes vulnerabilities only in the current `major.minor` release, or in the next one for lower-severity issues. It does not usually issue CVE fixes for experimental features. For details, see the [Keycloak security policy](https://github.com/keycloak/keycloak/blob/main/SECURITY.md#supported-versions). Older Keycloak lines, such as 26.7, do not receive this fix. To get it, update to a current Keycloak version that is compatible with your Camunda version.
+
+The `camunda/keycloak:26.3.3` image, the default of the bundled Keycloak subchart in Camunda 8.7, 8.8, and 8.9, receives no further updates. For migration options, see [Notice 67](#notice-67).
+
 ## Notice 70
 
 ### Publication date
