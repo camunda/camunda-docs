@@ -39,11 +39,9 @@ ProcessOS Harness runs many agent iterations, so a journey has a real token cost
 Treat these ranges as a planning input rather than a fixed price. The following factors influence the cost:
 
 - Complexity and size of the process.
-- Discovery input: size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading an XML export.
+- Discovery input: size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading text based files (e.g. BPMN.
 - Number of review iterations until you agree on the result.
 - Transformation tier: a lift-and-shift costs less than a radical transformation.
-
-Run configuration also impacts token usage.
 
 Involve your SMEs early. ProcessOS Harness changes their role from main contributor to reviewer, which reduces their total effort, but they still need to be available at the review gates in each phase. A project stalls when a review cycle has no reviewer.
 
