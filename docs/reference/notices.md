@@ -63,8 +63,6 @@ Camunda has provided the following releases which contain the fix (Node.js 24.22
 
 - Web Modeler Self-Managed 8.7.28, 8.8.24
 
-If you cannot update immediately, restrict the outbound network access of the Web Modeler webapp container so that it can only reach the hosts it needs (the Web Modeler REST API, Management Identity, and your identity provider). This blocks the fetch of attacker-controlled URLs.
-
 No action is necessary for Camunda SaaS.
 
 ## Notice 69
