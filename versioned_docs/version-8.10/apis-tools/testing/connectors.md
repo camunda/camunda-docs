@@ -81,11 +81,9 @@ public class MyProcessTest {
 
 ## Set cluster secrets
 
-Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference
-`=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
+Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
 
-To learn more, see [secrets](/components/concepts/secrets.md) and
-[secret resolution](/components/concepts/secret-resolution.md).
+To learn more, see [secrets](/components/concepts/secrets.md) and [secret resolution](/components/concepts/secret-resolution.md).
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -146,20 +144,15 @@ public class MyProcessTest {
 
 </Tabs>
 
-CPT drops trailing newlines from cluster secret values. For details, see the
-[cluster secrets configuration](./configuration.md#set-cluster-secrets).
+CPT drops trailing newlines from cluster secret values. For details, see the [cluster secrets configuration](./configuration.md#set-cluster-secrets).
 
-In a remote runtime, for example a real cluster or Camunda 8 Run, the cluster owns its secret store. CPT ignores the
-test properties and logs a warning. Configure the secrets on the cluster instead.
+In a remote runtime, for example a real cluster or Camunda 8 Run, the cluster owns its secret store. CPT ignores the test properties and logs a warning. Configure the secrets on the cluster instead.
 
-If your process still uses the legacy `{{secrets.X}}` syntax, see [Connector secrets](#connector-secrets). To move to
-cluster secrets, see [migrate secrets](/components/connectors/use-connectors/migrate-secrets.md).
+If your process still uses the legacy `{{secrets.X}}` syntax, see [Connector secrets](#connector-secrets). To move to cluster secrets, see [migrate secrets](/components/connectors/use-connectors/migrate-secrets.md).
 
 ## Connector secrets
 
-If your processes use [connector secrets](/components/connectors/use-connectors/index.md#using-secrets) with the legacy
-`{{secrets.X}}` syntax, you can add the secrets to the test runtime in the following way. These properties don't
-populate the cluster secret store. For `=camunda.secrets.X` references, use [cluster secrets](#set-cluster-secrets).
+If your processes use [connector secrets](/components/connectors/use-connectors/index.md#using-secrets) with the legacy `{{secrets.X}}` syntax, you can add the secrets to the test runtime in the following way. These properties don't populate the cluster secret store. For `=camunda.secrets.X` references, use [cluster secrets](#set-cluster-secrets).
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -413,8 +406,7 @@ using [Connectors secrets](/components/connectors/use-connectors/index.md#using-
 tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/test"`.
 :::
 
-If your process references the URL as a [cluster secret](#set-cluster-secrets), set the URL expression to
-`=camunda.secrets.BASE_URL + "/test"` and provide the value with `cluster-secrets` instead of `connectors-secrets`.
+If your process references the URL as a [cluster secret](#set-cluster-secrets), set the URL expression to `=camunda.secrets.BASE_URL + "/test"` and provide the value with `cluster-secrets` instead of `connectors-secrets`.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -449,9 +441,7 @@ new CamundaProcessTestExtension()
 
 ## Custom connectors
 
-By default, the runtime uses the built-in connectors bundle in a fixed, published version. This version isn't tied to
-the Camunda version or the Maven module version. To use another version, set `connectors-docker-image-version`. You can
-also use a custom connectors bundle in the following way.
+By default, the runtime uses the built-in connectors bundle in a fixed, published version. This version isn't tied to the Camunda version or the Maven module version. To use another version, set `connectors-docker-image-version`. You can also use a custom connectors bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
