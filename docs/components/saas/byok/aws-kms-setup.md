@@ -229,6 +229,106 @@ Once a key is applied, it cannot be edited or replaced. To change keys, you must
 You are responsible for monitoring key usage and access logs within your AWS account. Use AWS CloudTrail, Amazon CloudWatch, and Amazon EventBridge to detect misconfigurations or unauthorized access.
 :::
 
+## Configure external encryption with the Administration API
+
+You can use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) to create the cluster and associate your AWS KMS key, instead of using Camunda Hub for Step 1 and Step 3.
+
+The Administration API doesn't return the **AWS Role ARN** of the cluster. You still copy it from Camunda Hub to write the key policy.
+
+### Prerequisites for the Administration API
+
+- Your organization is on an Enterprise plan, and the cluster uses an AWS region. Otherwise, the API returns `403 Forbidden`.
+- You have an Administration API client with the **Cluster** scopes **Create**, **Get**, and **Update encryption**. See [client credentials and scopes](/apis-tools/administration-api/authentication.md#client-credentials-and-scopes).
+- You have an access token in the `TOKEN` environment variable. See [generate a token](/apis-tools/administration-api/authentication.md#generate-a-token).
+
+### Create the cluster with external encryption
+
+1. Get the IDs of the plan type, channel, generation, and region:
+
+   ```bash
+   curl --header "Authorization: Bearer ${TOKEN}" \
+        https://api.cloud.camunda.io/clusters/parameters
+   ```
+
+   Use the `uuid` values from `clusterPlanTypes`, `channels`, `channels[].allowedGenerations`, and `regions`. For a dual-region backup, use a `uuid` from `regions[].backups`.
+
+1. Create the cluster with `encryption` set to `External`:
+
+   ```bash
+   curl --request POST https://api.cloud.camunda.io/clusters \
+        --header "Authorization: Bearer ${TOKEN}" \
+        --header "Content-Type: application/json" \
+        --data '{
+          "name": "my-byok-cluster",
+          "planTypeId": "<plan-type-uuid>",
+          "channelId": "<channel-uuid>",
+          "generationId": "<generation-uuid>",
+          "regionId": "<region-uuid>",
+          "encryption": "External"
+        }'
+   ```
+
+   For a dual-region backup, also add `"backupRegionId": "<backup-uuid>"`. The response contains the ID of the new cluster:
+
+   ```json
+   { "clusterId": "<cluster-id>" }
+   ```
+
+1. In Camunda Hub, open the cluster and copy the **AWS Role ARN**.
+1. Create the AWS KMS key as described in [Step 2](#step-2-create-and-configure-an-aws-kms-key).
+
+### Associate the AWS KMS key with the cluster
+
+Send the key ARN to the `PUT /clusters/{clusterId}/encryption` endpoint:
+
+```bash
+curl --request PUT https://api.cloud.camunda.io/clusters/<cluster-id>/encryption \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "Content-Type: application/json" \
+     --data '{
+       "primaryEncryptionKeyId": "arn:aws:kms:eu-west-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+     }'
+```
+
+| Field                      | Required         | Description                                                                                                                                                   |
+| -------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `primaryEncryptionKeyId`   | Yes              | The ARN of the AWS KMS key in the cluster's region. Single-region keys and multi-Region keys (`mrk-...`) are supported.                                       |
+| `secondaryEncryptionKeyId` | Dual region only | The ARN of the AWS KMS key in the backup region. It must be a different key from `primaryEncryptionKeyId`. Don't send this field for a single-region cluster. |
+
+The API returns `400 Bad Request` if an ARN is not a valid AWS KMS key ARN or is in the wrong region. It returns `409 Conflict` if the cluster wasn't created with `"encryption": "External"`.
+
+### Check the encryption status
+
+Get the cluster and read `encryption.status`:
+
+```bash
+curl --header "Authorization: Bearer ${TOKEN}" \
+     https://api.cloud.camunda.io/clusters/<cluster-id>
+```
+
+```json
+{
+  "encryption": {
+    "type": "External",
+    "primaryKeyArn": "arn:aws:kms:eu-west-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+    "status": "Ready"
+  }
+}
+```
+
+Repeat the request until the status is `Ready`.
+
+| Status                             | Camunda Hub shows                                               |
+| ---------------------------------- | --------------------------------------------------------------- |
+| `Ready`                            | Encrypted                                                       |
+| `ExternalEncryptionKeyNotSupplied` | Unconfigured                                                    |
+| `ExternalEncryptionKeyNotReady`    | External encryption key is not ready                            |
+| `EncryptedStorageNotReady`         | Encrypted Storage is not ready                                  |
+| `ProviderError`                    | There was an error communicating with the external key provider |
+| `CreationError`                    | An error occurred while setting up encryption                   |
+
+If the status is `ProviderError` or stays `ExternalEncryptionKeyNotReady`, check the key policy and the key state. See [troubleshooting external encryption keys](/components/saas/byok/faq-and-troubleshooting.md#troubleshooting-external-encryption-keys).
+
 ## Additional considerations
 
 - **Key rotation**: Enable [automatic rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) or rotate manually in AWS KMS.
