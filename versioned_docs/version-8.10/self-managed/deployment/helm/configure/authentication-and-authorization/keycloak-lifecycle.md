@@ -34,7 +34,7 @@ Camunda provides Keycloak images that add Camunda-specific content, such as the 
 - `docker.io/camunda/keycloak:quay-*` and `docker.io/camunda/keycloak:quay-optimized-*` use the official Keycloak image on Quay.io as their base.
 - `registry.camunda.cloud/keycloak-ee/keycloak` uses the Bitnami Premium image as its base. This image is available to enterprise customers.
 
-These images depend on the Keycloak releases that the base image vendors publish. Camunda provides these images for convenience and takes no responsibility for vulnerabilities in Keycloak or its dependencies. The Keycloak community project gives no service-level agreement (SLA) and does not guarantee that a fix will be available for a vulnerability.
+These images depend on the Keycloak releases that the base image vendors publish. Bitnami only packages the Keycloak releases of the Keycloak community project. Camunda provides these images for convenience and takes no responsibility for vulnerabilities in Keycloak or its dependencies. The vendors give no service-level agreement (SLA) and do not guarantee that a fix will be available for a vulnerability.
 
 Camunda does not patch Keycloak or its dependencies. Camunda rebuilds these images when the base image publishes a new Keycloak release. For each Keycloak major version, Camunda rebuilds only the latest release. Tags for older Keycloak releases stay available, but do not receive updates.
 
