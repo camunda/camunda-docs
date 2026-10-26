@@ -18,13 +18,6 @@ Learn more about CycloneDX SBOMs (International Standard for Bill of Materials) 
 | Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/4905/latest)</li><li>Attribution: [TXT](https://portal.fossa.com/p/camunda/release/4904/latest)</li></ul> |
 | Source code  | Access the source code for Camunda 8 at [github.com/camunda/camunda](https://github.com/camunda/camunda).                                                                                                                                                                                                              |
 
-## Optimize
-
-| Type         | Description                                                                                                                                                                                                                                                                                                              |
-| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/11295/latest)</li><li>Attribution: [TXT](https://portal.fossa.com/p/camunda/release/11294/latest)</li></ul> |
-| Source code  | Access the source code for Optimize at [github.com/camunda/camunda/tree/main/optimize](https://github.com/camunda/camunda/tree/main/optimize).                                                                                                                                                                           |
-
 ## Desktop Modeler
 
 | Type         | Description                                                                                                                                                                                                                                                                                                            |
@@ -59,3 +52,10 @@ Learn more about CycloneDX SBOMs (International Standard for Bill of Materials) 
 | :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/5086/latest)</li><li>Attribution: [TXT](https://portal.fossa.com/p/camunda/release/5085/latest)</li></ul> |
 | Source code  | Access to source code is provided [on demand](mailto:dependency-request@camunda.com).                                                                                                                                                                                                                                  |
+
+## Optimize
+
+| Type         | Description                                                                                                                                                                                                                                                                                                              |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/11295/latest)</li><li>Attribution: [TXT](https://portal.fossa.com/p/camunda/release/11294/latest)</li></ul> |
+| Source code  | Access the source code for Optimize at [github.com/camunda/camunda/tree/main/optimize](https://github.com/camunda/camunda/tree/main/optimize).                                                                                                                                                                           |
