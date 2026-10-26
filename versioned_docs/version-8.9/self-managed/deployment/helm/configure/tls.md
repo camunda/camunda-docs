@@ -289,12 +289,21 @@ This procedure covers the Camunda Java components in step 3. It doesn't change t
 
 ### 1. Build the truststore
 
-Copy the truststore from the Orchestration Cluster image that runs in your cluster. Replace `X` in the image tag with your patch version. A truststore from another image can contain other CAs. Then remove each certificate whose subject starts with the common name (CN) that you set. The example removes `emSign ECC Root CA - G3`:
+Copy the truststore from the Orchestration Cluster image that runs in your cluster. Replace `X` in the image tag with your patch version. A truststore from another image can contain other CAs. Then remove each certificate whose subject has the common name (CN) that you set. The example removes `emSign ECC Root CA - G3`:
 
 ```bash
 CAMUNDA_IMAGE=camunda/camunda:8.9.X
 REMOVE_CN='emSign ECC Root CA - G3'
 
+docker run --rm --entrypoint sh -e REMOVE_CN="$REMOVE_CN" "$CAMUNDA_IMAGE" -c \
+  'keytool -list -v -cacerts -storepass changeit | grep -c -E "^Owner: (.*, )?CN=${REMOVE_CN}(,|$)"'
+```
+
+Make sure the image contains the CA. The command must print `1` or more. If it prints `0`, the image doesn't contain the CA and you don't need this procedure.
+
+Then build the truststore without the CA:
+
+```bash
 mkdir -p truststore
 docker run --rm --user 0 --entrypoint sh \
   -v "$PWD/truststore:/out" -e REMOVE_CN="$REMOVE_CN" \
@@ -310,13 +319,13 @@ docker run --rm --user 0 --entrypoint sh \
     chmod 644 /out/cacerts'
 ```
 
-Make sure the CA is gone. The command must print `0`:
+Make sure the CA is gone. The command must print `0`. `grep` exits with code `1` when it prints `0`:
 
 ```bash
 docker run --rm --entrypoint sh \
   -v "$PWD/truststore:/in:ro" -e REMOVE_CN="$REMOVE_CN" \
   "$CAMUNDA_IMAGE" -c 'keytool -list -v -keystore /in/cacerts -storepass changeit \
-    | grep -c -E "^Owner: CN=${REMOVE_CN}(,|$)"'
+    | grep -c -E "^Owner: (.*, )?CN=${REMOVE_CN}(,|$)"'
 ```
 
 (Optional) Import your private CA:
@@ -334,7 +343,7 @@ The truststore contains public certificates only, so the default `changeit` pass
 
 ```bash
 kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
-  --from-file=cacerts=./truststore/cacerts
+  --from-file=cacerts=./truststore/cacerts --save-config
 ```
 
 Create the Secret before you run `helm upgrade` in step 3. If the Secret doesn't exist, the pods stay in `ContainerCreating`.
@@ -409,7 +418,7 @@ for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-
 done
 ```
 
-The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. Make sure each Java component from step 3 is in the output. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as the Web Modeler `webapp` and `websockets`, print an empty value.
+The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. Make sure each Java component from step 3 is in the output. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as Console and the Web Modeler `webapp` and `websockets`, print an empty value. Run the loop after `kubectl rollout status` finishes for each workload. Pods that are shutting down also print an empty value.
 
 To update the truststore, build it again as in step 1. Then replace the Secret and restart the pods:
 
