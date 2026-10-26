@@ -33,6 +33,40 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 70
+
+### Publication date
+
+October 26, 2026
+
+### Products affected
+
+- Web Modeler Self-Managed 8.7 and 8.8
+
+### Impact
+
+Web Modeler Self-Managed is affected by [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/CVE-2026-111497), a critical-severity out-of-bounds write in the Node.js Brotli decoder that can allow remote code execution.
+
+The Web Modeler Self-Managed 8.7 and 8.8 webapp images contain a Node.js runtime. An authenticated Web Modeler user can reach the affected decoder through the "import resources from URL" capability: the webapp server fetches URLs that the user supplies and automatically decodes Brotli-compressed responses. A server controlled by an attacker can return a crafted Brotli response that triggers the out-of-bounds write in the Node.js process.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.7.27, or ≤ 8.8.23
+
+### Solution
+
+Camunda has provided the following releases which contain the fix (Node.js 24.22.1):
+
+- Web Modeler Self-Managed 8.7.28, 8.8.24
+
+If you cannot update immediately, restrict the outbound network access of the Web Modeler webapp container so that it can only reach the hosts it needs (the Web Modeler REST API, Management Identity, and your identity provider). This blocks the fetch of attacker-controlled URLs.
+
+No action is necessary for Camunda SaaS.
+
 ## Notice 69
 
 ### Publication date
