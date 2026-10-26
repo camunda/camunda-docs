@@ -43,12 +43,12 @@ October 26, 2026
 
 ### Impact
 
-Keycloak includes `brotli4j` 1.23.0, which is affected by [CVE-2026-111497](https://github.com/hyperxpro/Brotli4j/security/advisories/GHSA-x524-jrqf-vwq6), an out-of-bounds write in the Brotli decoder. Keycloak gets `brotli4j` as a transitive dependency of `quarkus-vertx-http`. Vulnerability scanners report this finding for the Keycloak images that Camunda provides.
+Keycloak includes `brotli4j` 1.23.0, which contains [CVE-2026-111497](https://github.com/hyperxpro/Brotli4j/security/advisories/GHSA-x524-jrqf-vwq6), an out-of-bounds write in the Brotli decoder. Keycloak gets `brotli4j` as a transitive dependency of `quarkus-vertx-http`. Vulnerability scanners report this finding for the Keycloak images that Camunda provides.
 
 Camunda and the Keycloak maintainers analyzed the vulnerability ([keycloak/keycloak#54333](https://github.com/keycloak/keycloak/issues/54333)). In the default configuration, the vulnerable decoder is not reachable:
 
 - Keycloak uses the Apache HTTP client for outbound requests. This client does not decode Brotli responses.
-- Request decompression on the inbound Keycloak listener is disabled.
+- Keycloak does not decompress requests on its inbound listener.
 
 The only reachable path is the experimental `http-client:v2` feature, introduced in Keycloak 26.8.0. When you enable this feature, a malicious or compromised server that Keycloak contacts can send a crafted Brotli response.
 
@@ -68,7 +68,7 @@ No action is necessary if you do not enable the experimental `http-client:v2` fe
 
 The fix for `brotli4j` (version 1.24.0) is available, but no Keycloak release includes it yet. Camunda does not patch Keycloak dependencies. Camunda rebuilds its Keycloak images automatically when an upstream base image publishes a new Keycloak release. The base of `camunda/keycloak` is the official Keycloak image on Quay.io. The base of `registry.camunda.cloud/keycloak-ee/keycloak` is the Bitnami Premium image. When a Keycloak release with the fix is available, update to the latest image tag for your Keycloak line.
 
-The Keycloak project fixes vulnerabilities only in the current `major.minor` release, or in the next one for lower-severity issues. It does not usually issue CVE fixes for experimental features. For details, see the [Keycloak security policy](https://github.com/keycloak/keycloak/blob/main/SECURITY.md#supported-versions). Older Keycloak lines, such as 26.7, do not receive this fix. To get it, update to a current Keycloak version that is compatible with your Camunda version.
+The Keycloak project fixes vulnerabilities only in the current `major.minor` release, or in the next one for lower-severity issues. It does not usually issue CVE fixes for experimental features. For details, see the [Keycloak security policy](https://github.com/keycloak/keycloak/blob/main/SECURITY.md#supported-versions). As a result, older Keycloak lines, such as 26.7, might not receive this fix. To get it, update to a current Keycloak version that is compatible with your Camunda version.
 
 The `camunda/keycloak:26.3.3` image, the default of the bundled Keycloak subchart in Camunda 8.7, 8.8, and 8.9, receives no further updates. For migration options, see [Notice 67](#notice-67).
 
