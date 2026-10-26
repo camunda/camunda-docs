@@ -37,6 +37,10 @@ To check whether your Helm deployment is affected:
 
 October 26, 2026
 
+:::note
+This notice is for information only. Keycloak is an external dependency, and Camunda does not take responsibility for vulnerabilities in Keycloak. Camunda does not publish further security notices for Keycloak vulnerabilities. For details, see [Manage the Keycloak lifecycle](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-lifecycle.md).
+:::
+
 ### Products affected
 
 - Keycloak images provided by Camunda: `camunda/keycloak` and `registry.camunda.cloud/keycloak-ee/keycloak`
