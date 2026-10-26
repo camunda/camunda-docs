@@ -276,7 +276,7 @@ Make sure the CA is gone. The command must print `0`:
 docker run --rm --entrypoint sh \
   -v "$PWD/truststore:/in:ro" -e REMOVE_CN="$REMOVE_CN" \
   "$CAMUNDA_IMAGE" -c 'keytool -list -v -keystore /in/cacerts -storepass changeit \
-    | grep -c "^Owner: CN=${REMOVE_CN},"'
+    | grep -c -E "^Owner: CN=${REMOVE_CN}(,|$)"'
 ```
 
 (Optional) Import your private CA:
@@ -369,9 +369,17 @@ for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-
 done
 ```
 
-The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. Make sure each Java component from step 3 is in the output. If the value after a pod name is empty, that pod doesn't use the new truststore.
+The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. Make sure each Java component from step 3 is in the output. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as the Web Modeler `webapp` and `websockets`, print an empty value.
 
-To update the truststore, build it again, replace the Secret, and restart the pods as in [Updating the CA](#updating-the-ca).
+To update the truststore, build it again as in step 1. Then replace the Secret and restart the pods:
+
+```bash
+kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
+  --from-file=cacerts=./truststore/cacerts \
+  --dry-run=client -o yaml | kubectl -n "$NAMESPACE" apply -f -
+kubectl -n "$NAMESPACE" rollout restart statefulset,deployment \
+  -l app.kubernetes.io/part-of=camunda-platform
+```
 
 ## Legacy: per-component JKS truststore (deprecated)
 
