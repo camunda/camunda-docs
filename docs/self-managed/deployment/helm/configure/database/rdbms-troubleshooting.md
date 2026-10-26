@@ -39,6 +39,17 @@ kubectl get secret camunda-db-secret -o jsonpath='{.data.<key>}' -n camunda | ba
 
 **Fix:** Confirm the JDBC URL, hostname, port, and network policies allow traffic between pods and database.
 
+## MariaDB SSL errors after upgrading to 8.11
+
+**Symptom:** After upgrading to Camunda 8.11, the pod fails at startup with one of these errors:
+
+- `Trying to connect with ssl, but ssl not enabled in the server`
+- `Self signed certificates. Either set sslMode=trust, use password with a MitM-Proof authentication plugin or provide server certificate to client`
+
+**Cause:** Starting with 8.11, the bundled MariaDB JDBC driver connects with TLS by default and verifies the server certificate. The first error means the MariaDB server doesn't have TLS enabled. The second means the driver can't verify the server certificate.
+
+**Fix:** Enable TLS on the MariaDB server and, if it uses a self-signed or private certificate, set `serverSslCert` in the JDBC URL. To connect without TLS instead, add `sslMode=disable` to the JDBC URL. See [TLS/SSL configuration](#tlsssl-configuration).
+
 ## Authentication errors
 
 **Symptom:** "Authentication failed" or "Invalid password" in logs.
@@ -221,7 +232,9 @@ orchestration:
 </TabItem>
 <TabItem value="mariadb">
 
-MariaDB and MySQL enable SSL via the JDBC URL:
+MariaDB and MySQL enable SSL via the JDBC URL.
+
+Starting with Camunda 8.11, the bundled MariaDB driver connects with TLS by default and verifies the server certificate. If the server uses a self-signed certificate or one from a private certificate authority, set `serverSslCert` to that certificate, for example `?serverSslCert=/path/to/ca-cert.pem`. To connect without TLS, set `sslMode=disable`.
 
 ```yaml
 orchestration:
