@@ -143,6 +143,11 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
   --ifm-navbar-link-color: #1c1e21;
 }
 
+/* Match h5 size to paragraph body text */
+:root {
+  --ifm-h5-font-size: var(--ifm-font-size-base);
+}
+
 /* Match Algolia colours to the Hub design system's neutral primary */
 :root {
   --docsearch-muted-color: rgb(140, 140, 140) !important;
