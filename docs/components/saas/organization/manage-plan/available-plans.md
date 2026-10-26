@@ -4,6 +4,10 @@ title: Available plans
 description: "Let's take a closer look at Camunda's current plan options."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 The following Camunda 8 plans are available:
 
 | Plan       | Description                                                                    |

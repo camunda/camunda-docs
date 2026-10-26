@@ -4,6 +4,10 @@ title: Create cluster backups
 description: "If your organization works within Camunda's Enterprise plan, you can create cluster backups."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 If your organization works within Camunda's [Enterprise](https://camunda.com/pricing/) plan, you can create a manual and scheduled [backups](/components/saas/backups.md) of your cluster.
 
 :::note

@@ -4,6 +4,10 @@ title: "Key rotation and audit logging"
 description: "Camunda cannot rotate customer-managed keys. Any key rotation must be performed manually within your AWS account."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Learn more about key rotation and audit logging when using AWS BYOK with Camunda 8 SaaS.
 
 :::note Disclaimer

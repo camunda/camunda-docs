@@ -4,7 +4,9 @@ title: Manage connector secrets
 description: Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.
 ---
 
-Create [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret) and reference them in your connectors without exposing sensitive information in your BPMN processes.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::note
 This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md), and [connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md).

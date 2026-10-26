@@ -4,7 +4,9 @@ title: View usage alerts
 description: "As an organization owner or admin, set up alerts for process instances, decision instances and task users."
 ---
 
-Set up alerts for process instances, decision instances and task users.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About usage alerts
 

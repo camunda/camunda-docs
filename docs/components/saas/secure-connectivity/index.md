@@ -4,7 +4,9 @@ title: Secure connectivity (AWS PrivateLink)
 description: Connect to Camunda 8 SaaS Orchestration Clusters from your AWS VPC using AWS PrivateLink.
 ---
 
-Secure connectivity allows you to connect to Camunda 8 SaaS Orchestration Clusters from your AWS Virtual Private Cloud (VPC) using AWS PrivateLink.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 When enabled, traffic from your AWS VPC to an Orchestration Cluster is routed over private AWS networking rather than the public internet.
 

@@ -4,6 +4,10 @@ title: Backup and restore overview
 description: "Understand what Camunda 8 SaaS backups include, how same-cluster restore works, and which limits apply."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
 Camunda 8 SaaS lets you create backups and restore a cluster from a selected backup in Camunda Hub, without opening a support ticket.

@@ -4,6 +4,10 @@ title: "Backups"
 description: "Learn more about Backups in Camunda 8 SaaS."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
 You can use the backup feature of Camunda 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) with _zero downtime_. In case of failures that lead to data loss, you can restore a cluster from a backup.

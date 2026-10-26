@@ -4,6 +4,10 @@ title: Update billing reservations
 description: "Let's manage our hardware packages and edit reservations."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 :::note
 This setting is only visible in the **Enterprise plan** for owners and admins.
 :::

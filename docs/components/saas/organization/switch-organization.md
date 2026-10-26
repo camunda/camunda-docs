@@ -1,7 +1,12 @@
 ---
 id: switch-organization
 title: Switch organization
+description: "Switch between organizations if you are assigned to more than one."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 If you're assigned to more than one organization, you can change between them:
 
