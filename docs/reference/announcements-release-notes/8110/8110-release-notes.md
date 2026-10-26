@@ -17,6 +17,20 @@ import PageDescription from '@site/src/components/PageDescription';
 | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 November 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.11.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.11.0-alpha1)</li></ul> |
 
+### Desktop Modeler
+
+#### Camunda Design System in Desktop Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3873 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Desktop Modeler now uses the Camunda Design System, so it looks consistent with the rest of Camunda 8. The application UI, the BPMN, DMN, and form editors, the properties panel, and shared panels such as the variables outline and task testing all use Camunda Design System components and tokens.
+
+Desktop Modeler no longer ships Carbon styles. If your plugin relies on Carbon classes or styles, update it to use Camunda Design System tokens instead.
+
+<p class="link-arrow">[Migrate plugins to the Camunda Design System](/components/modeler/desktop-modeler/plugins/plugins.md)</p>
+
 ### Orchestration Cluster
 
 #### Evenly distributed record indices in Elasticsearch and OpenSearch
