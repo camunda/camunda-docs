@@ -43,7 +43,7 @@ A journey has a real token cost that depends on the scenario:
 Treat these ranges as a planning input rather than a fixed price. The following factors influence the cost:
 
 - Complexity and size of the process.
-- Discovery input: size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading text based files (e.g. BPMN.
+- Discovery input: size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading text based files (e.g. BPMN).
 - Number of review iterations until you agree on the result.
 - Transformation tier: a lift-and-shift costs less than a radical transformation.
 
