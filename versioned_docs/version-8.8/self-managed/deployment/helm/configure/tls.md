@@ -378,7 +378,7 @@ for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-
 done
 ```
 
-The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. Make sure each Java component from step 3 is in the output. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as Console and the Web Modeler `webapp` and `websockets`, print an empty value. Run the loop after `kubectl rollout status` finishes for each workload. Pods that are shutting down also print an empty value.
+The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as Console and the Web Modeler `webapp` and `websockets`, print an empty value. Run the loop after `kubectl rollout status` finishes for each workload. Pods that are shutting down also print an empty value.
 
 To update the truststore, build it again as in step 1. Then replace the Secret and restart the pods:
 
