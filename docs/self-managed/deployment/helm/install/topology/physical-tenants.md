@@ -98,7 +98,7 @@ Every tenant needs its own writer, reader, and Optimize application prefixes, an
 
 ## Override the secret store per tenant
 
-`orchestration.secretStore.physicalTenants` deep-overlays the root secret store for a named tenant. Tenant IDs here may contain letters, digits, underscores, and hyphens.
+`orchestration.secretStore.physicalTenants` deep-overlays the root secret store for a named tenant. Tenant IDs here can contain only lowercase letters and digits, up to 64 characters.
 
 A tenant must use the same provider and the same `default` store ID as the root store it overrides. Exactly one default store applies per tenant.
 
