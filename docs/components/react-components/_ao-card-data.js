@@ -42,27 +42,14 @@ export const fundamentalCards = [
     description: "Understand how Camunda models AI agents.",
   },
   {
-    link: "../ao-design/",
-    title: "Design and architecture",
-    image: IconAoDesignImg,
-    description: "Plan and design your agentic orchestration solutions.",
-  },
-  {
     link: "../agent-states-and-metrics/",
     title: "States and usage metrics",
     image: IconAoDesignImg,
     description: "Understand agent states and usage metrics.",
   },
-  {
-    link: "../evaluate-agents/evaluate-agents-overview/",
-    title: "Evaluate AI agents",
-    image: IconTest,
-    description:
-      "Evaluate the performance and effectiveness of your AI agents.",
-  },
 ];
 
-// Fundamentals cards on introduction page
+// Evaluate cards on the Evaluate landing page
 export const fundamentalCards_monitoring = [
   {
     link: "../monitor-ai-agents/",
@@ -90,8 +77,21 @@ export const fundamentalCards_monitoring = [
   },
 ];
 
-// Recommendation cards on introduction page
-export const recommendationCards = [
+// Evaluate cards on introduction page (links relative to the introduction page)
+export const evaluateCards = fundamentalCards_monitoring.map((card) => ({
+  ...card,
+  link: card.link.replace("../", "../evaluate-agents/"),
+}));
+
+// Build cards on introduction page
+export const buildCards = [
+  {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
+  },
   {
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
@@ -116,6 +116,16 @@ export const recommendationCards = [
     image: IconMCP,
     description:
       "Configure a BPMN process as a callable MCP tool for AI agents.",
+  },
+];
+
+// Best practices cards on introduction page
+export const bestPracticeCards = [
+  {
+    link: "../ao-design/",
+    title: "Design and architecture",
+    image: IconAoDesignImg,
+    description: "Plan and design your agentic orchestration solutions.",
   },
   {
     link: "../choose-right-model-agentic/",
