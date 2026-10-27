@@ -104,12 +104,12 @@ Download an object from an Amazon S3 bucket.
 
 #### Input parameters
 
-| Property        | Type     | Required             | Description                                                                                                                                                                                              | Example |
-| :-------------- | :------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| AWS bucket      | String   | Yes                  | The targeted Amazon S3 bucket that the document is downloaded from.                                                                                                                                      |         |
-| AWS key         | String   | Yes                  | The key that uniquely identifies the object in the bucket.                                                                                                                                               |         |
-| Response format | Dropdown | Yes                  | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **as text**, or **as JSON**. |         |
-| Encoding        | String   | Yes, for **as text** | The character set used to decode the content. The default is `UTF-8`.                                                                                                                                    |         |
+| Property        | Type     | Required | Description                                                                                                                                                                                              | Example |
+| :-------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS bucket      | String   | Yes      | The targeted Amazon S3 bucket that the document is downloaded from.                                                                                                                                      |         |
+| AWS key         | String   | Yes      | The key that uniquely identifies the object in the bucket.                                                                                                                                               |         |
+| Response format | Dropdown | Yes      | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **as text**, or **as JSON**. |         |
+| Encoding        | String   | No       | The character set used to decode the content. The default is `UTF-8`.                                                                                                                                    |         |
 
 To learn more about FEEL expressions, see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 
@@ -119,10 +119,10 @@ The following JSON response is returned after a successful document download:
 
 - `bucket`: Echoes back the bucket of the downloaded document.
 - `key`: Echoes back the unique key of the downloaded document.
-- `element`: Represents the downloaded content. Its value depends on the selected **Response format**:
-  - **Document reference**: `element` contains a reference to the document created in the Camunda document store.
-  - **as text**: `element` contains the content decoded as a string.
-  - **as JSON**: `element` contains the content parsed as JSON.
+- `element`: An object that holds the downloaded content. Its field depends on the selected **Response format**:
+  - **Document reference**: `element.document` contains a reference to the document created in the Camunda document store.
+  - **as text**: `element.content` contains the content decoded as a string.
+  - **as JSON**: `element.content` contains the content parsed as JSON.
 
 :::note
 **as text** and **as JSON** return the content directly in a process variable and are subject to a size guard (approximately 1.5 MiB). A larger object fails the job with an incident. Use **Document reference** for large files. **as JSON** fails the job when the content is not valid JSON.
@@ -137,14 +137,16 @@ With **Document reference**:
   "bucket": "mybucket",
   "key": "report.json",
   "element": {
-    "storeId": "in-memory",
-    "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
-    "metadata": {
-      "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
-      "size": 311032,
-      "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
-    },
-    "camunda.document.type": "camunda"
+    "document": {
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "application/json",
+        "size": 311032,
+        "fileName": "report.json"
+      },
+      "camunda.document.type": "camunda"
+    }
   }
 }
 ```
@@ -156,7 +158,9 @@ With **as JSON**:
   "bucket": "mybucket",
   "key": "report.json",
   "element": {
-    "testKey": "testValue"
+    "content": {
+      "testKey": "testValue"
+    }
   }
 }
 ```

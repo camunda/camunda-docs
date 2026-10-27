@@ -48,9 +48,9 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ### Region
 
-| Property | Type   | Required | Description                          | Example |
-| :------- | :----- | :------- | :----------------------------------- | :------ |
-| Region   | String | Yes      | The region of the deployed endpoint. |         |
+| Property | Type   | Required | Description                          | Example     |
+| :------- | :----- | :------- | :----------------------------------- | :---------- |
+| Region   | String | Yes      | The region of the deployed endpoint. | `us-east-1` |
 
 ## Operations
 
