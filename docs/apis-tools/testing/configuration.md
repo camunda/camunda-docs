@@ -62,8 +62,7 @@ speed up the test execution.
 
 ### Usage
 
-By default, the runtime uses the same version of the Camunda Docker images as the Maven module. You can change the
-Docker images and other runtime properties in the following way.
+By default, the runtime uses the same version of the Camunda Docker image as the Maven module. The Connectors Docker image doesn't follow the Camunda version. The runtime uses a fixed, published Connectors version for each CPT release. To use another version, set `connectors-docker-image-version`. You can change the Docker images and other runtime properties in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -78,7 +77,7 @@ In your `application.yml` (or `application.properties`):
 camunda:
   process-test:
     # Change the version of the Camunda Docker image
-    camunda-docker-image-version: 8.8.0
+    camunda-docker-image-version: 8.10.6
     # Change the Camunda Docker image
     camunda-docker-image-name: camunda/camunda
     # Set additional Camunda environment variables
@@ -98,7 +97,10 @@ camunda:
     # Set additional Connectors environment variables
     connectors-env-vars:
       env_1: value_1
-    # Set Connectors secrets
+    # Set cluster secrets
+    cluster-secrets:
+      secret_1: value_1
+    # Set legacy Connectors secrets
     connectors-secrets:
       secret_1: value_1
     # Expose additional Connectors ports
@@ -116,7 +118,7 @@ In your `/camunda-container-runtime.properties` file:
 
 ```properties
 # Change the version of the Camunda Docker image
-camundaDockerImageVersion=8.8.0
+camundaDockerImageVersion=8.10.6
 # Change the Camunda Docker image
 camundaDockerImageName=camunda/camunda
 # Set additional Camunda environment variables
@@ -136,7 +138,7 @@ connectorsDockerImageName=camunda/connectors
 # Set additional Connectors environment variables
 connectorsEnvVars.env_1=value_1
 connectorsEnvVars.env_2=value_2
-# Set Connectors secrets
+# Set legacy Connectors secrets
 connectorsSecrets.secret_1=value_1
 connectorsSecrets.secret_2=value_2
 # Expose additional Connectors ports
@@ -161,7 +163,7 @@ public class MyProcessTest {
     private static final CamundaProcessTestExtension EXTENSION =
             new CamundaProcessTestExtension()
                     // Change the version of the Camunda Docker image
-                    .withCamundaDockerImageVersion("8.8.0")
+                    .withCamundaDockerImageVersion("8.10.6")
                     // Change the Camunda Docker image
                     .withCamundaDockerImageName("camunda/camunda")
                     // Set additional Camunda environment variables
@@ -176,7 +178,9 @@ public class MyProcessTest {
                     .withConnectorsDockerImageVersion("8.8.0")
                     // Set additional Connectors environment variables
                     .withConnectorsEnv("env_1", "value_1")
-                    // Set Connectors secrets
+                    // Set cluster secrets
+                    .withClusterSecret("secret_1", "value_1")
+                    // Set legacy Connectors secrets
                     .withConnectorsSecret("secret_1", "value_1");
 }
 ```
@@ -184,6 +188,21 @@ public class MyProcessTest {
 </TabItem>
 
 </Tabs>
+
+### Set cluster secrets
+
+Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
+
+Set cluster secrets with the `cluster-secrets` property (Spring) or `withClusterSecret(name, value)` and `withClusterSecrets(map)` (Java builder). You can't set cluster secrets in `camunda-container-runtime.properties`.
+
+- In a managed or shared runtime, CPT writes each secret to a temporary file, copies the file into the Camunda container, and sets `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`.
+- CPT fixes the secrets when the runtime starts. You can't change them per test.
+- Use `connectors-secrets` only for the legacy `{{secrets.X}}` syntax. It doesn't populate the cluster secret store. See [Connectors](./connectors.md#set-cluster-secrets) for examples.
+- To learn how secrets resolve, see [secrets](/components/concepts/secrets.md) and [secret resolution](/components/concepts/secret-resolution.md).
+
+:::warning
+CPT drops trailing newlines from cluster secret values. Don't rely on a trailing newline in a value. This is a known issue ([camunda/camunda#66616](https://github.com/camunda/camunda/issues/66616)).
+:::
 
 ### Shared runtime
 
@@ -701,6 +720,8 @@ public class MyProcessTest {
 </TabItem>
 
 </Tabs>
+
+In a remote runtime, the cluster owns its secret store. CPT ignores `cluster-secrets` and logs a warning. Configure secrets on the cluster instead.
 
 ### Change the connection
 

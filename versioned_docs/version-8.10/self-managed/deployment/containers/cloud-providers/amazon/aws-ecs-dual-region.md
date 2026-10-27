@@ -357,7 +357,7 @@ The verification commands use `http://` because TLS is not configured by default
 
 ### Step 6 — Cleanup
 
-Destroy resources in reverse order to respect layer dependencies:
+If you failed over and the Aurora writer is still in region 1, move it back first with `./procedure/failback.sh --failed-region 0 --switch-writer` (see [Failover and failback](#failover-and-failback)). Then destroy resources in reverse order to respect layer dependencies:
 
 ```bash
 cd terraform/app && terraform destroy
@@ -368,6 +368,8 @@ cd ../vpc && terraform destroy
 :::warning Cleanup caveat
 The reference architecture sets `s3_force_destroy = true` by default so `terraform destroy` removes backup S3 buckets without manual emptying. Flip `s3_force_destroy` to `false` in `terraform/infra/terraform.tfvars` and re-apply the infra layer before running any real workload through the stack. Otherwise, `terraform destroy` will delete backup data permanently.
 :::
+
+If `terraform destroy` fails, check the teardown inputs `s3_force_destroy` and `db_force_destroy` in the [infra layer README](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/terraform/infra/README.md).
 
 ## Verify connectivity to Camunda 8
 
