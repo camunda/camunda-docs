@@ -654,8 +654,9 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 - Install a Camunda 8 runtime of the same version as CPT or later, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
   CPT doesn't support older Camunda runtimes.
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
-- If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, grant the CPT client the
-  `READ` and `UPDATE` permissions on the `SYSTEM` resource to allow clock manipulations
+- If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, grant the `READ` and `UPDATE`
+  permissions on the `SYSTEM` resource to the user or client that CPT uses to connect to the runtime. CPT needs these
+  permissions to change the clock. You set up this user or client in the [client configuration](#client-configuration).
 
 ### Usage
 
