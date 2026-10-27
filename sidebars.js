@@ -159,11 +159,26 @@ module.exports = {
         id: "components/agentic-orchestration/agentic-orchestration-overview",
       },
       items: [
-        "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/camunda-provided-llm",
-        "components/agentic-orchestration/agent-definitions-and-instances",
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/agent-states-and-metrics",
+        {
+          type: "category",
+          label: "Fundamentals",
+          items: [
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/agent-definitions-and-instances",
+            "components/agentic-orchestration/agent-states-and-metrics",
+          ],
+        },
+        {
+          type: "category",
+          label: "Build",
+          items: [
+            "components/agentic-orchestration/camunda-provided-llm",
+            "components/agentic-orchestration/add-tool-to-ai-agent",
+            "components/agentic-orchestration/rag-ai-agents",
+            "components/agentic-orchestration/connect-external-agent",
+            "components/agentic-orchestration/expose-process-as-mcp-tool",
+          ],
+        },
         {
           type: "category",
           label: "Evaluate AI agents",
@@ -178,12 +193,15 @@ module.exports = {
             "components/agentic-orchestration/evaluate-agents/test-ai-agents",
           ],
         },
-        "components/agentic-orchestration/add-tool-to-ai-agent",
-        "components/agentic-orchestration/rag-ai-agents",
-        "components/agentic-orchestration/connect-external-agent",
-        "components/agentic-orchestration/expose-process-as-mcp-tool",
-        "components/agentic-orchestration/choose-right-model-agentic",
-        "components/agentic-orchestration/model-recommendations-agentic",
+        {
+          type: "category",
+          label: "Best practices",
+          items: [
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic",
+          ],
+        },
       ],
     },
     {
