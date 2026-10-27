@@ -92,24 +92,24 @@ To upgrade all legacy AI Agent elements in a BPMN file:
      The element is on v7, which is too old for this recipe. Updating it to v12 first.
 
      Model provider
-     ~ Provider               Azure OpenAI → OpenAI [openai]       set by recipe
-     + API                    Chat Completions [completions]       set by recipe
-     + Backend                Microsoft Foundry (Azure) [foundry]  set by recipe
-     > API endpoint           https://some-resource.azure.com      was Endpoint
+     ~ Provider               Azure OpenAI → OpenAI [openai]          set by recipe
+     + API                    Chat Completions [completions]          set by recipe
+     + Backend                Microsoft Foundry (Azure) [foundry]     set by recipe
+     > API endpoint           https://your-resource.openai.azure.com  was Endpoint
      > Authentication         Entra ID: Client credentials
-     > Client ID              some-client
+     > Client ID              your-client-id
      > Client secret          [REDACTED]
-     > Tenant ID              some-tenant
+     > Tenant ID              your-tenant-id
        keys renamed: provider.azureOpenAi.authentication.* → provider.openai.backend.foundry.authentication.* (4)
 
      Model
-     > Model                  gpt-10-zeus                          was Model deployment name
-     + Effort                 default [modelDefault]               template default
+     > Model                  gpt-6-sol                               was Model deployment name
+     + Effort                 default [modelDefault]                  template default
 
      Model options
-     > Max completion tokens  =24800                               was Model › Maximum tokens
-     > Temperature            =1                                   was Model › Temperature
-     > top P                  =10                                  was Model › top P
+     > Max completion tokens  =4096                                   was Model › Maximum tokens
+     > Temperature            =1                                      was Model › Temperature
+     > top P                  =1                                      was Model › top P
 
      ✅ 13 updated, 16 kept unchanged, 0 lost
 
