@@ -2,17 +2,25 @@
 id: amazon-s3
 sidebar_label: AWS S3
 title: Amazon S3 connector
-description: Interact with Amazon S3 services from your BPMN process.
+description: Upload, download, and delete documents in Amazon S3 from your BPMN process.
 ---
 
-The **Amazon S3 connector** is an outbound connector that allows you to interact
-with [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
+
+Use the Amazon S3 connector to upload, download, and delete objects in [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
+
+## About this connector
+
+The **Amazon S3 connector** is an outbound connector that works with documents. It can upload a document to a bucket, download an object from a bucket, and delete an object from a bucket.
+
+Starting from version 8.7.0, the connector uploads documents from (and downloads documents to) the Camunda document store. For details and limitations, see [document handling](/components/document-handling/getting-started.md).
 
 ## Prerequisites
 
-To use the **Amazon S3 connector**, you will need an AWS account with an access key and secret key.
+To use the **Amazon S3 connector**, you need an AWS account with an access key and secret key.
 
-The key will need the following permissions:
+The key needs the following permissions:
 
 - `GetObject`
 - `DeleteObject`
@@ -25,134 +33,108 @@ Use secrets to store credentials and avoid exposing sensitive information from t
 See [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
-## Create an Amazon S3 connector task
+<OutboundConnectorBasics />
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+## Configuration
 
-<ConnectorTask/>
+### Authentication
 
-## Authentication
+| Property       | Type          | Required                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Example |
+| :------------- | :------------ | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS credential | Configuration | No                                            | Select a saved AWS credential with an optional default region, or enter the authentication details and a region in the fields below. Learn more about [credentials](/components/hub/organization/credentials/index.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
+| Authentication | Dropdown      | Yes, if no AWS credential is set              | <p>The AWS authentication strategy:</p><ul><li><p>**Credentials** (SaaS/Self-Managed): Use this option if you have a valid pair of access and secret keys provided by your AWS account administrator.</p></li><li><p>**Default Credentials Chain** (Hybrid/Self-Managed only): Use this option if your system is configured for implicit authentication, such as role-based authentication, credentials supplied through environment variables, or files on the target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve the required credentials.</p></li></ul> |         |
+| Access key     | String        | Yes, if **Authentication** is **Credentials** | The access key of an IAM user with permissions to the Amazon S3 actions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
+| Secret key     | String        | Yes, if **Authentication** is **Credentials** | The secret key of the IAM user with the access key above.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |         |
 
-Select an authentication type from the **Authentication** dropdown.
+### Region
 
-- **Credentials** (SaaS/Self-Managed): Select this option if you have a valid pair of access and secret keys provided by
-  your AWS account administrator. This option is supported for both SaaS and Self-Managed users.
+| Property | Type   | Required                                     | Description                                                                                                | Example     |
+| :------- | :----- | :------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------- |
+| Region   | String | Yes, if no AWS credential is set             | The region of the deployed endpoint.                                                                       | `us-east-1` |
+| Region   | String | Yes, if the credential has no default region | Overrides the default region of the selected AWS credential. Shown when an **AWS credential** is selected. |             |
 
-- **Default Credentials Chain** (Hybrid/Self-Managed only): Select this option if your system is
-  configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via
-  environment variables, or files on target host. This option is only supported for Self-Managed or hybrid
-  distributions. This approach uses
-  the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
-  to resolve required credentials.
+## Operations
 
-If you select **Credentials**, you must supply the appropriate
-credentials:
+Select the operation in the **Action** dropdown. The properties that apply depend on the action.
 
-- **Access key**: Provide an access key of a user with permissions to the Amazon S3 actions.
-- **Secret key**: Provide the secret key of the user with the access key provided above.
+### Upload object
 
-:::note
-The **Access key** and the **Secret key** are required properties and must be provided to use the connector.
-:::
+Upload a document to an Amazon S3 bucket.
 
-## Region
+#### Input parameters
 
-In the **Region** field, enter the region of the deployed endpoint.
-
-## Action
-
-The Amazon S3 connector supports the following actions:
-
-- `Upload Document`
-- `Download Document`
-- `Delete Document`
-
-### Upload Document
-
-Upload a document to S3.
-
-#### Parameters
-
-| Parameter    | Description                                                                                                                                                                                                                                            |
-| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AWS bucket` | The targeted AWS S3 bucket where the document should be uploaded.                                                                                                                                                                                      |
-| `AWS key`    | (Optional) The key of the document that uniquely identifies the object in an Amazon S3 bucket. Will fallback to the document filename if not set                                                                                                       |
-| `Document`   | The document to upload. Select a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. |
+| Property         | Type     | Required                                     | Description                                                                                                                                                           | Example |
+| :--------------- | :------- | :------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS bucket       | String   | Yes                                          | The targeted Amazon S3 bucket where the document is uploaded.                                                                                                         |         |
+| AWS key          | String   | No                                           | The key that uniquely identifies the object in the bucket. If not set, the file name from the document metadata is used.                                              |         |
+| Document source  | Dropdown | Yes                                          | The [document source](/components/document-handling/send-document-to-external-system.md#document-sources): **Camunda Document**, **Inline Content**, or **From URL**. |         |
+| Camunda document | String   | Yes, for **Camunda Document**                | A FEEL expression with the reference to the document in the Camunda document store.                                                                                   |         |
+| Content          | String   | Yes, for **Inline Content**                  | The content of the document, built from process data.                                                                                                                 |         |
+| File name        | String   | Yes, for **Inline Content** and **From URL** | The file name of the uploaded document.                                                                                                                               |         |
+| Content type     | String   | Yes, for **Inline Content**                  | The content type of the document, for example `application/json`.                                                                                                     |         |
+| URL              | String   | Yes, for **From URL**                        | The URL of the external document.                                                                                                                                     |         |
 
 :::note
-Use **inline content** to build a file (for example, a `.json` error report) directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
+Use **Inline Content** to build a file (for example, a `.json` error report) directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
 :::
 
-:::info
-To learn more about Friendly Enough Expression Language (FEEL) expressions,
-see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
-:::
+To learn more about Friendly Enough Expression Language (FEEL) expressions, see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 
-#### Response Structure
+#### Output
 
-The following JSON response is returned after a successful document upload operation:
+The following JSON response is returned after a successful document upload:
 
 - `bucket`: Echoes back the bucket of the uploaded document.
 - `key`: Echoes back the unique key of the uploaded document.
 - `link`: The document link.
 
-:::note
-Starting from version 8.7.0, the Amazon S3 connector supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
-:::
-
-#### Example Response
-
-The following example shows a successful send upload operation response:
+Example response:
 
 ```json
 {
-  "bucket": "Example Subject",
-  "key": true,
+  "bucket": "mybucket",
+  "key": "test",
   "link": "https://mybucket.s3.amazonaws.com/test"
 }
 ```
 
-### Download Document
+### Download object
 
-Download the document from AWS S3.
+Download an object from an Amazon S3 bucket.
 
-#### Parameters
+#### Input parameters
 
-| Parameter       | Description                                                                                                                                                                                                                                         |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AWS bucket`    | The targeted AWS S3 bucket that the document should be downloaded from.                                                                                                                                                                             |
-| `AWS key`       | The key of the document that uniquely identifies the object in an Amazon S3 bucket.                                                                                                                                                                 |
-| `Return format` | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **As text** (with an optional encoding, default UTF-8), or **As JSON**. |
+| Property        | Type     | Required             | Description                                                                                                                                                                                              | Example |
+| :-------------- | :------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS bucket      | String   | Yes                  | The targeted Amazon S3 bucket that the document is downloaded from.                                                                                                                                      |         |
+| AWS key         | String   | Yes                  | The key that uniquely identifies the object in the bucket.                                                                                                                                               |         |
+| Response format | Dropdown | Yes                  | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **as text**, or **as JSON**. |         |
+| Encoding        | String   | Yes, for **as text** | The character set used to decode the content. The default is `UTF-8`.                                                                                                                                    |         |
 
-:::info
-To learn more about Friendly Enough Expression Language (FEEL) expressions,
-see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
-:::
+To learn more about FEEL expressions, see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 
-#### Response Structure
+#### Output
 
-The following JSON response is returned after a successful document download operation:
+The following JSON response is returned after a successful document download:
 
 - `bucket`: Echoes back the bucket of the downloaded document.
 - `key`: Echoes back the unique key of the downloaded document.
-- `element`: Represents the downloaded content. Its value depends on the selected **Return format**:
+- `element`: Represents the downloaded content. Its value depends on the selected **Response format**:
   - **Document reference**: `element` contains a reference to the document created in the Camunda document store.
-  - **As text**: `element` contains the content decoded as a string.
-  - **As JSON**: `element` contains the content parsed as JSON.
+  - **as text**: `element` contains the content decoded as a string.
+  - **as JSON**: `element` contains the content parsed as JSON.
 
 :::note
-**As text** and **As JSON** return the content directly in a process variable and are subject to a size guard (approximately 1.5 MiB). A larger object fails the job with an incident. Use **Document reference** for large files. **As JSON** fails the job when the content is not valid JSON.
+**as text** and **as JSON** return the content directly in a process variable and are subject to a size guard (approximately 1.5 MiB). A larger object fails the job with an incident. Use **Document reference** for large files. **as JSON** fails the job when the content is not valid JSON.
 :::
 
-#### Example Response
-
-The following examples show a successful download operation response.
+The following examples show a successful download response.
 
 With **Document reference**:
 
 ```json
 {
-  "bucket": "Example Subject",
+  "bucket": "mybucket",
   "key": "report.json",
   "element": {
     "storeId": "in-memory",
@@ -167,11 +149,11 @@ With **Document reference**:
 }
 ```
 
-With **As JSON**:
+With **as JSON**:
 
 ```json
 {
-  "bucket": "Example Subject",
+  "bucket": "mybucket",
   "key": "report.json",
   "element": {
     "testKey": "testValue"
@@ -179,36 +161,33 @@ With **As JSON**:
 }
 ```
 
-### Delete Document
+### Delete object
 
-Delete the document from AWS S3.
+Delete an object from an Amazon S3 bucket.
 
-#### Parameters
+#### Input parameters
 
-| Parameter    | Description                                                                         |
-| :----------- | :---------------------------------------------------------------------------------- |
-| `AWS bucket` | The targeted AWS S3 bucket that the document should be deleted from.                |
-| `AWS key`    | The key of the document that uniquely identifies the object in an Amazon S3 bucket. |
+| Property   | Type   | Required | Description                                                    | Example |
+| :--------- | :----- | :------- | :------------------------------------------------------------- | :------ |
+| AWS bucket | String | Yes      | The targeted Amazon S3 bucket that the object is deleted from. |         |
+| AWS key    | String | Yes      | The key that uniquely identifies the object in the bucket.     |         |
 
-:::info
-To learn more about Friendly Enough Expression Language (FEEL) expressions,
-see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
-:::
+To learn more about FEEL expressions, see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 
-#### Response Structure
+#### Output
 
-The following JSON response is returned after a successful document deletion operation:
+The following JSON response is returned after a successful deletion:
 
-- `bucket`: Echoes back the bucket of the uploaded document.
-- `key`: Echoes back the unique key of the uploaded document.
+- `bucket`: Echoes back the bucket of the deleted document.
+- `key`: Echoes back the unique key of the deleted document.
 
-#### Example Response
-
-The following example shows a successful deletion operation response:
+Example response:
 
 ```json
 {
-  "bucket": "Example Subject",
+  "bucket": "mybucket",
   "key": "document.txt"
 }
 ```
+
+<ErrorHandling />
