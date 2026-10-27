@@ -1413,6 +1413,24 @@ table .badge:nth-of-type(1) {
   border: 1px solid #4589ff;
 }
 
+.badge--scope {
+  background-color: #393939;
+  color: #ffffff;
+  margin-bottom: 0 !important;
+  margin-left: 0.5rem !important;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  vertical-align: baseline;
+  position: relative;
+  top: -5px;
+}
+
+[data-theme="dark"] .badge--scope {
+  background-color: #262626;
+  color: #e0e0e0;
+  border: 1px solid #6f6f6f;
+}
+
 /* Required permissions (RBAC) section */
 .required-permissions__table {
   display: table;
