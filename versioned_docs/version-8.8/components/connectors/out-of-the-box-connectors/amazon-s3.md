@@ -75,8 +75,12 @@ To learn more about Friendly Enough Expression Language (FEEL) expressions, see 
 The following JSON response is returned after a successful document upload:
 
 - `bucket`: Echoes back the bucket of the uploaded document.
-- `key`: Echoes back the unique key of the uploaded document.
-- `link`: The document link.
+- `key`: Echoes back the **AWS key** you set.
+- `link`: The document link, built from the bucket and the **AWS key** you set.
+
+:::note
+If you leave **AWS key** empty, the connector stores the object under the file name of the document. The `key` in the response is then `null`, and the `link` ends with `null`.
+:::
 
 Example response:
 

@@ -63,16 +63,16 @@ Upload a document to an Amazon S3 bucket.
 
 #### Input parameters
 
-| Property         | Type     | Required                                     | Description                                                                                                                                                           | Example |
-| :--------------- | :------- | :------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| AWS bucket       | String   | Yes                                          | The targeted Amazon S3 bucket where the document is uploaded.                                                                                                         |         |
-| AWS key          | String   | No                                           | The key that uniquely identifies the object in the bucket. If not set, the file name from the document metadata is used.                                              |         |
-| Document source  | Dropdown | Yes                                          | The [document source](/components/document-handling/send-document-to-external-system.md#document-sources): **Camunda Document**, **Inline Content**, or **From URL**. |         |
-| Camunda document | String   | Yes, for **Camunda Document**                | A FEEL expression with the reference to the document in the Camunda document store.                                                                                   |         |
-| Content          | String   | Yes, for **Inline Content**                  | The content of the document, built from process data.                                                                                                                 |         |
-| File name        | String   | Yes, for **Inline Content** and **From URL** | The file name of the uploaded document.                                                                                                                               |         |
-| Content type     | String   | Yes, for **Inline Content**                  | The content type of the document, for example `application/json`.                                                                                                     |         |
-| URL              | String   | Yes, for **From URL**                        | The URL of the external document.                                                                                                                                     |         |
+| Property         | Type     | Required                      | Description                                                                                                                                                                              | Example |
+| :--------------- | :------- | :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS bucket       | String   | Yes                           | The targeted Amazon S3 bucket where the document is uploaded.                                                                                                                            |         |
+| AWS key          | String   | No                            | The key that uniquely identifies the object in the bucket. If not set, the file name from the document metadata is used.                                                                 |         |
+| Document source  | Dropdown | Yes                           | The [document source](/components/document-handling/send-document-to-external-system.md#document-sources): **Camunda Document**, **Inline Content**, or **From URL**.                    |         |
+| Camunda document | String   | Yes, for **Camunda Document** | A FEEL expression with the reference to the document in the Camunda document store.                                                                                                      |         |
+| Content          | String   | Yes, for **Inline Content**   | The content of the document, built from process data.                                                                                                                                    |         |
+| File name        | String   | No                            | The file name of the uploaded document. For **Inline Content**, a unique name is generated if you leave it empty.                                                                        |         |
+| Content type     | String   | No                            | The MIME type of the content, for **Inline Content** only. If you leave it empty, the type is inferred from the extension of the file name, with `application/octet-stream` as fallback. |         |
+| URL              | String   | Yes, for **From URL**         | The URL of the external document.                                                                                                                                                        |         |
 
 :::note
 Use **Inline Content** to build a file (for example, a `.json` error report) directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
@@ -85,8 +85,12 @@ To learn more about Friendly Enough Expression Language (FEEL) expressions, see 
 The following JSON response is returned after a successful document upload:
 
 - `bucket`: Echoes back the bucket of the uploaded document.
-- `key`: Echoes back the unique key of the uploaded document.
-- `link`: The document link.
+- `key`: Echoes back the **AWS key** you set.
+- `link`: The document link, built from the bucket and the **AWS key** you set.
+
+:::note
+If you leave **AWS key** empty, the connector stores the object under the file name of the document. The `key` in the response is then `null`, and the `link` ends with `null`.
+:::
 
 Example response:
 
