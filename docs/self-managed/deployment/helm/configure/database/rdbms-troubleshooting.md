@@ -232,18 +232,47 @@ orchestration:
 </TabItem>
 <TabItem value="mariadb">
 
-MariaDB and MySQL enable SSL via the JDBC URL.
+**MariaDB**
 
-Starting with Camunda 8.11, the bundled MariaDB driver connects with TLS by default and verifies the server certificate. If the server uses a self-signed certificate or one from a private certificate authority, set `serverSslCert` to that certificate, for example `?serverSslCert=/path/to/ca-cert.pem`. To connect without TLS, set `sslMode=disable`.
+Starting with Camunda 8.11, the bundled MariaDB driver connects with TLS by default and verifies the server certificate. You don't need to add SSL parameters to the JDBC URL if the server has TLS enabled and uses a certificate from a trusted certificate authority:
 
 ```yaml
 orchestration:
   data:
     secondaryStorage:
       rdbms:
-        # MariaDB
-        url: jdbc:mariadb://hostname:3306/camunda?sslMode=verify-full
-        # MySQL
+        url: jdbc:mariadb://hostname:3306/camunda
+```
+
+If the server uses a self-signed certificate or one from a private certificate authority, set `serverSslCert` to that certificate:
+
+```yaml
+orchestration:
+  data:
+    secondaryStorage:
+      rdbms:
+        url: jdbc:mariadb://hostname:3306/camunda?serverSslCert=/path/to/ca-cert.pem
+```
+
+If the server doesn't have TLS enabled, set `sslMode=disable` to connect without TLS:
+
+```yaml
+orchestration:
+  data:
+    secondaryStorage:
+      rdbms:
+        url: jdbc:mariadb://hostname:3306/camunda?sslMode=disable
+```
+
+**MySQL**
+
+MySQL enables SSL via the JDBC URL:
+
+```yaml
+orchestration:
+  data:
+    secondaryStorage:
+      rdbms:
         url: jdbc:mysql://hostname:3306/camunda?useSSL=true&requireSSL=true
 ```
 
