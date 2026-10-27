@@ -114,7 +114,7 @@ Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
    Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run) on your machine.
-   Use version 8.11 or later. See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1).
+   Use the same version as CPT or later. See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1).
 
 2. **Start Camunda 8 Run**.
 
