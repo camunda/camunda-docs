@@ -101,6 +101,12 @@ Each minor release has three files under `docs/reference/announcements-release-n
 - Did it ship in a specific alpha or GA tag? **Release Notes** (always)
 - Is it significant enough to influence an upgrade decision? **What's New** (optional, curated)
 
+**Where AI-related entries go in release notes:**
+
+- **Agentic orchestration**: AI agents, agent tooling, and related AI capabilities, including intelligent document processing (IDP), the AI Agent connector, MCP servers and start events, agent monitoring, and AI developer tooling such as the Skills repository.
+- **ProcessOS**: ProcessOS and ProcessOS Harness. ProcessOS is a product in its own right, so it has its own section, matching the "What's new" page.
+- Do not introduce an umbrella heading such as "AI". If an entry fits neither section, raise it with the documentation team before adding a new section.
+
 ## 8. AI-ready documentation outputs
 
 At build time, `docusaurus-plugin-llms` auto-generates machine-readable outputs for external AI agents and LLMs that consume Camunda documentation:
