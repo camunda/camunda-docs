@@ -177,11 +177,11 @@
   },
   "additionalReleases": {
     "orchestrationCluster": {
-      "version": "8.10.6",
-      "date": "Oct 22, 2026",
+      "version": "8.10.7",
+      "date": "Oct 26, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/camunda/releases/tag/8.10.6"
+        "url": "https://github.com/camunda/camunda/releases/tag/8.10.7"
       },
       "previousVersions": "https://github.com/camunda/camunda/releases"
     },
