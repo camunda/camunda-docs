@@ -207,6 +207,12 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Evaluate AI agents landing page removed (agentic orchestration sidebar restructure)
+RewriteRule ^docs/next/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/next/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+RewriteRule ^docs/8.9/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/8.9/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/8.8/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+
 # The property changes page is documented only in 8.10 and was removed from next
 
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/ [R=301,L]
@@ -1211,9 +1217,6 @@ RewriteRule ^docs/components/agentic-orchestration/monitor-ai-agents/?$ /docs/co
 RewriteRule ^docs/components/agentic-orchestration/test-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/test-ai-agents/ [R=301,L]
 RewriteRule ^docs/8.8/components/agentic-orchestration/analyze-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
 RewriteRule ^docs/8.8/components/agentic-orchestration/monitor-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
-RewriteRule ^docs/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
-RewriteRule ^docs/8.9/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/8.9/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
-RewriteRule ^docs/8.8/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/8.8/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
 
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
