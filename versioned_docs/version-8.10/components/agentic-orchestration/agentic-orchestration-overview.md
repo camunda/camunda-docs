@@ -38,7 +38,7 @@ Get started with Camunda agentic orchestration.
 
 Understand the key concepts of Camunda agentic orchestration.
 
-<AoGrid ao={fundamentalCards} columns={2}/>
+<AoGrid ao={fundamentalCards} columns={3}/>
 
 ## Build
 
