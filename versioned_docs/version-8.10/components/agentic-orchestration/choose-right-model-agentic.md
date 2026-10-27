@@ -109,5 +109,5 @@ See [Camunda-provided LLM](./camunda-provided-llm.md) for more details.
 
 Selecting and benchmarking a model is only the first step. Once your agent is running, validate and continuously evaluate its behavior in practice:
 
-- [Evaluate your AI agents](./evaluate-agents/evaluate-agents-overview.md): Monitor agents in real time with Operate and improve their performance over time with Optimize.
+- [Evaluate your AI agents](./agentic-orchestration-overview.md#evaluate): Monitor agents in real time with Operate and improve their performance over time with Optimize.
 - [Test with CPT](./evaluate-agents/test-ai-agents.md): Write integration tests that assert on tool usage, action completion, and agent output.

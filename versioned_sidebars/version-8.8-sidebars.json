@@ -91,19 +91,11 @@
         {
           "type": "category",
           "label": "Fundamentals",
-          "link": {
-            "type": "doc",
-            "id": "components/agentic-orchestration/fundamentals-overview"
-          },
           "items": ["components/agentic-orchestration/ai-agents"]
         },
         {
           "type": "category",
           "label": "Build",
-          "link": {
-            "type": "doc",
-            "id": "components/agentic-orchestration/build-overview"
-          },
           "items": [
             "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/add-tool-to-ai-agent",
@@ -113,10 +105,6 @@
         {
           "type": "category",
           "label": "Evaluate",
-          "link": {
-            "type": "doc",
-            "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
-          },
           "items": [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
             "components/agentic-orchestration/evaluate-agents/analyze-ai-agents"
@@ -125,10 +113,6 @@
         {
           "type": "category",
           "label": "Best practices",
-          "link": {
-            "type": "doc",
-            "id": "components/agentic-orchestration/best-practices-overview"
-          },
           "items": [
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",

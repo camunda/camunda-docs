@@ -36,33 +36,27 @@ export const fundamentalCards = [
   },
 ];
 
-// Evaluate cards on the Evaluate landing page
-export const fundamentalCards_monitoring = [
+// Evaluate cards on introduction page
+export const evaluateCards = [
   {
-    link: "../monitor-ai-agents/",
+    link: "../evaluate-agents/monitor-ai-agents/",
     title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
   },
   {
-    link: "../analyze-ai-agents/",
+    link: "../evaluate-agents/analyze-ai-agents/",
     title: "Analyze with Optimize",
     image: IconOptimize,
     description: "Analyze your AI agents with Optimize.",
   },
   {
-    link: "../test-ai-agents/",
+    link: "../evaluate-agents/test-ai-agents/",
     title: "Test with CPT",
     image: IconTest,
     description: "Test your AI agents with Camunda Process Test.",
   },
 ];
-
-// Evaluate cards on introduction page (links relative to the introduction page)
-export const evaluateCards = fundamentalCards_monitoring.map((card) => ({
-  ...card,
-  link: card.link.replace("../", "../evaluate-agents/"),
-}));
 
 // Build cards on introduction page
 export const buildCards = [

@@ -48,7 +48,7 @@ Build AI agents and connect them to LLMs, tools, memory, and other agents.
 
 ## Evaluate
 
-Monitor, analyze, and test your AI agents.
+Evaluate your AI agents by monitoring them in real time with Operate, improving performance over time with Optimize, and testing them with Camunda Process Test.
 
 <AoGrid ao={evaluateCards} columns={2}/>
 
