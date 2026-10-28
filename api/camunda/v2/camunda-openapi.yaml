@@ -136,6 +136,8 @@ paths:
     $ref: "batch-operations.yaml#/paths/~1batch-operations~1{batchOperationKey}~1suspension"
   /clock:
     $ref: "clock.yaml#/paths/~1clock"
+  /clock/add:
+    $ref: "clock.yaml#/paths/~1clock~1add"
   /clock/reset:
     $ref: "clock.yaml#/paths/~1clock~1reset"
   /cluster-variables/global:

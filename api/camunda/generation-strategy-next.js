@@ -66,6 +66,7 @@ function processModularSpec(mainSpecPath, specDir, version) {
     if (content.includes("paths:")) {
       addEventualConsistencyAdmonition(filePath);
       addAddedInVersionAnnotation(filePath);
+      addScopeAnnotation(filePath);
       addRequiredPermissionsAnnotation(filePath);
     }
   }
@@ -254,6 +255,7 @@ function processSingleFileSpec(specFilePath, version) {
   fs.writeFileSync(specFilePath, updatedSpec);
   addEventualConsistencyAdmonition(specFilePath);
   addAddedInVersionAnnotation(specFilePath);
+  addScopeAnnotation(specFilePath);
   addRequiredPermissionsAnnotation(specFilePath);
   removeVendorExtensions(specFilePath);
 }
@@ -269,6 +271,9 @@ function postGenerateDocs(config) {
   // Replace added-in-version marker tokens with MDX components and add imports
   replaceAddedInVersionMarkersWithComponents(config.outputDir);
   console.log(`✅ Replaced added-in-version markers in generated MDX files`);
+  // Replace scope marker tokens with MDX components and add imports
+  replaceScopeMarkersWithComponents(config.outputDir);
+  console.log(`✅ Replaced scope markers in generated MDX files`);
   // Replace required-permissions marker tokens with MDX components and add imports
   replaceRequiredPermissionsMarkersWithComponents(config.outputDir);
   console.log(
@@ -750,6 +755,87 @@ function addAddedInVersionAnnotation(specFilePath) {
 }
 
 /**
+ * Add a scope token for endpoints annotated with x-scope
+ * ("cluster-wide" | "physical-tenant").
+ */
+function addScopeAnnotation(specFilePath) {
+  const SCOPE_EXTENSION = "x-scope";
+  const SCOPES = ["cluster-wide", "physical-tenant"];
+  const METHODS = [
+    "get",
+    "post",
+    "put",
+    "patch",
+    "delete",
+    "options",
+    "head",
+    "trace",
+  ];
+  try {
+    const spec = yaml.load(fs.readFileSync(specFilePath, "utf8"));
+    if (!spec || !spec.paths) {
+      return;
+    }
+
+    let annotationsAdded = 0;
+    Object.values(spec.paths).forEach((pathItem) => {
+      Object.keys(pathItem || {}).forEach((method) => {
+        const operation = pathItem[method];
+        if (
+          !METHODS.includes(method) ||
+          !operation ||
+          typeof operation !== "object"
+        ) {
+          return;
+        }
+
+        const scope = operation[SCOPE_EXTENSION];
+        if (!SCOPES.includes(scope)) {
+          return;
+        }
+
+        const token = `\n\n[[SCOPE:${scope}]]\n\n`;
+        const currentDescription =
+          typeof operation.description === "string"
+            ? operation.description
+            : "";
+        const cleanedDescription = currentDescription
+          .replace(/\n*\[\[SCOPE:[^\]]+\]\]\n*/g, "\n\n")
+          .trim();
+        const updatedDescription = cleanedDescription
+          ? token + cleanedDescription
+          : token.trim();
+
+        if (operation.description !== updatedDescription) {
+          operation.description = updatedDescription;
+          annotationsAdded++;
+        }
+      });
+    });
+
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      quotingType: '"',
+      forceQuotes: false,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, forceQuoteRefs(updatedYaml), "utf8");
+
+    if (annotationsAdded > 0) {
+      console.log(
+        `  ✅ Added ${annotationsAdded} scope markers to ${path.basename(specFilePath)}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `  ❌ Error processing scope in ${path.basename(specFilePath)}:`,
+      error.message
+    );
+  }
+}
+
+/**
  * Add a required-permissions token for endpoints annotated with x-required-permissions.
  *
  * The extension is an array of entries (ANDed together), where each entry is one of:
@@ -1098,6 +1184,78 @@ function replaceAddedInVersionMarkersWithComponents(outputDir) {
       "❌ Error replacing added-in-version markers in output MDX:",
       err
     );
+  }
+}
+
+function replaceScopeMarkersWithComponents(outputDir) {
+  try {
+    const tokenPattern = /\[\[SCOPE:(cluster-wide|physical-tenant)\]\]/;
+    const importLine = 'import MarkerScope from "@site/src/mdx/MarkerScope";';
+
+    const files = listFilesRecursive(outputDir).filter((f) =>
+      f.endsWith(".mdx")
+    );
+    for (const file of files) {
+      const content = fs.readFileSync(file, "utf8");
+      const match = tokenPattern.exec(content);
+      if (!match) continue;
+      const badge = `<MarkerScope scope="${match[1]}" />`;
+
+      let updated = content;
+
+      // Add import after frontmatter if not already present
+      if (!updated.includes(importLine)) {
+        const lines = updated.split("\n");
+        let insertIdx = 0;
+        if (lines[0] && lines[0].startsWith("---")) {
+          const endIdx = lines.indexOf("---", 1);
+          insertIdx = endIdx >= 0 ? endIdx + 1 : 0;
+        }
+        lines.splice(insertIdx, 0, importLine, "");
+        updated = lines.join("\n");
+      }
+
+      // Remove all tokens (they were in descriptions)
+      updated = updated
+        .replace(new RegExp(tokenPattern.source, "g"), "")
+        .replace(/\n{3,}/g, "\n\n");
+
+      // Place the badge inline with the h1 title, after any version badge
+      updated = updated.replace(
+        /(<Heading[\s\S]*?as=\{"h1"\}[\s\S]*?)children=\{("(?:[^"\\]|\\.)*")\}\s*>\s*<\/Heading>/,
+        (_, before, titleStr) =>
+          `${before}>\n  {${titleStr}} ${badge}\n</Heading>`
+      );
+      if (!updated.includes(badge)) {
+        updated = updated.replace(
+          /(<Heading[\s\S]*?as=\{"h1"\}[\s\S]*?)\n<\/Heading>/,
+          (_, before) => `${before} ${badge}\n</Heading>`
+        );
+      }
+
+      // Clean component tags from frontmatter description (they leak via spec description)
+      const fmEnd = updated.indexOf("\n---", 1);
+      if (fmEnd > 0) {
+        const frontmatter = updated.substring(0, fmEnd);
+        const rest = updated.substring(fmEnd);
+        const cleanedFm = frontmatter.replace(
+          /^(description:\s*)(.*)$/m,
+          (_, prefix, val) => {
+            const cleaned = val
+              .replace(/<MarkerScope scope="[a-z-]+" \/>/g, "")
+              .replace(/^["'\s]+|["'\s]+$/g, "")
+              .trim();
+            if (!cleaned) return "";
+            return `${prefix}"${cleaned}"`;
+          }
+        );
+        updated = cleanedFm.replace(/\n{2,}/g, "\n") + rest;
+      }
+
+      if (updated !== content) fs.writeFileSync(file, updated, "utf8");
+    }
+  } catch (err) {
+    console.error("❌ Error replacing scope markers in output MDX:", err);
   }
 }
 

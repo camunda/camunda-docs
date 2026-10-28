@@ -205,6 +205,16 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 </div>
 </div>
 
+## Key changes
+
+### 8.10.x patch releases
+
+The following key changes were also released as part of an 8.10.x patch release or a Camunda 8 SaaS generation update.
+
+| Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
+| :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+
 ## Agentic orchestration
 
 <div className="release-announcement-row">
@@ -935,6 +945,37 @@ Deployment change 1 description.
 
 </div>
 </div> -->
+
+## Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch cancellation filtered by parent process instance cancels all root process instances {#batch-cancel-parent-process-instance-filter}
+
+**Affected versions:** 8.10.0–8.10.6. Fixed in 8.10.7.
+
+Camunda 8.10.0 introduced a regression in which a batch cancellation filtered by `parentProcessInstanceKey` ignores that filter. Instead of canceling only the called process instances of the given parent, the batch operation cancels every active and suspended root process instance that matches the remaining filter criteria and that the user is authorized to cancel. If `parentProcessInstanceKey` is the only narrowing criterion, this includes every running root process instance in the cluster. Canceled process instances can't be restored.
+
+You're affected if you cancel process instances in either of the following ways:
+
+- **Operate:** You open a process instance, click **View all called instances**, select all listed instances, and click **Cancel**. The confirmation dialog shows only the selected instances (for example, 1 instance), but the resulting batch operation cancels all running root process instances.
+- **Orchestration Cluster API:** You call [`POST /v2/process-instances/cancellation`](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx) with a filter that includes `parentProcessInstanceKey`.
+
+This regression affects both Camunda 8 SaaS and Self-Managed.
+
+**Fix:** Starting with 8.10.7, the batch operation keeps the `parentProcessInstanceKey` filter and adds the root-only condition to it. A batch cancellation filtered by `parentProcessInstanceKey` now matches no process instances, because called process instances can't be canceled directly. They're canceled together with their root process instance. This matches the behavior of Camunda 8.9 and earlier.
+
+**Action:**
+
+- **Running 8.10.0–8.10.6:** Don't use select all and **Cancel** on the **View all called instances** page in Operate, and don't include `parentProcessInstanceKey` in batch cancellation filters. To cancel called process instances, cancel their root process instance instead, which also cancels all of its called process instances.
+- **Upgrading to 8.10.7+:** The regression is fixed. If your integration sends batch cancellation requests filtered by `parentProcessInstanceKey` and expects the called process instances to be canceled, target the root process instance instead.
+
+</div>
+</div>
 
 ## Hub
 

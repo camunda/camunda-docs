@@ -371,6 +371,128 @@ module.exports = {
       },
     ],
     [
+      // Cluster management API docs generation (cluster-api.yaml)
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-cluster-openapi",
+        docsPluginId: "default",
+        config: {
+          cluster: {
+            specPath: "api/cluster/cluster-api.yaml",
+            outputDir: "docs/apis-tools/management-api/specifications/cluster",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/cluster-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/cluster",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
+      // Cluster management API docs generation (exporter-api.yaml)
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-clusterexporters-openapi",
+        docsPluginId: "default",
+        config: {
+          clusterexporters: {
+            specPath: "api/cluster/exporter-api.yaml",
+            outputDir:
+              "docs/apis-tools/management-api/specifications/exporters",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/exporter-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/exporters",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
+      // Cluster management API docs generation (upgrade-readiness-api.yaml)
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-clusterupgradereadiness-openapi",
+        docsPluginId: "default",
+        config: {
+          clusterupgradereadiness: {
+            specPath: "api/cluster/upgrade-readiness-api.yaml",
+            outputDir:
+              "docs/apis-tools/management-api/specifications/upgrade-readiness",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/upgrade-readiness-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/upgrade-readiness",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
+      // Cluster management API docs generation (backup-management-api.yaml)
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-clusterbackups-openapi",
+        docsPluginId: "default",
+        config: {
+          clusterbackups: {
+            specPath: "api/cluster/backup-management-api.yaml",
+            outputDir: "docs/apis-tools/management-api/specifications/backups",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              "8.10": {
+                specPath: "api/cluster/version-8.10/backup-management-api.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/management-api/specifications/backups",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
       // Hub API Self-Managed docs generation
       "@camunda8/docusaurus-plugin-openapi-docs",
       {

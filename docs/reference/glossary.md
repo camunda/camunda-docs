@@ -170,7 +170,7 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                 |
 | [Camunda Hub](/components/hub/index.md)              | The design and management platform for Camunda. Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub. Part of the [management plane](#management-plane).                                                                                                                                         |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeling interface](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties.                                                                                                                        |
+| [Management Identity](#management-identity)          | Self-Managed only. Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties.                                                                                                     |
 
 ### Camunda AI agent
 
@@ -181,6 +181,10 @@ It is implemented via the [AI Agent connector](/components/connectors/out-of-the
 :::note
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
 :::
+
+### Camunda project
+
+A [project](#project), the unit you build, test, and deploy together. The term Camunda project distinguishes it from other project concepts, such as a software project in your IDE.
 
 ### Catalog
 
@@ -561,7 +565,7 @@ Camunda groups an agent's conversation history by loop iteration in Operate, mak
 
 ### Management Identity
 
-The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties. Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
+The Management Identity component, available in Self-Managed only, provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties. Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
 
 ### Management plane
 
@@ -655,6 +659,12 @@ In Camunda, a process is [modeled using BPMN](#process-model), then [deployed as
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
+### Process application
+
+The former name of the [project](#project): a Web Modeler entity before Camunda 8.10, and a Desktop Modeler concept recognized by a `.process-application` marker file. During the transition, Desktop Modeler and `c8ctl` recognize both `.process-application` and `camunda.json`, so existing process applications keep working.
+
+- [Project](#project)
+
 ### Process definition
 
 A [process model](#process-model) that has been deployed to the engine and versioned.  
@@ -722,7 +732,9 @@ The governance process of [ProcessOS](#processos). ProcessOS Harness is delivere
 
 ### Project
 
-A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
+The unit you build, test, and deploy together to form a Camunda solution. Also called a Camunda project where it needs to be distinguished from other project concepts, such as a software project in your IDE. It supersedes the [process application](#process-application).
+
+In Camunda Hub, a project is an entity within a workspace; locally (Desktop Modeler, `c8ctl`), it is a folder with a `camunda.json` file.
 
 - [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)

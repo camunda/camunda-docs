@@ -28,6 +28,7 @@ How brokers are identified and scaled depends on whether the cluster is [zone-aw
 - Existing partitions continue processing data, but you may notice temporary performance impacts until scaling completes. Plan scaling ahead of anticipated load increases to minimize disruption.
 - When adding new partitions or brokers, partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the load per broker. Use the API endpoints in [dry run](#dry-run) mode to preview partition distribution.
 - Always take a backup before scaling to ensure you can restore if needed.
+- When you add partitions, each new partition is bootstrapped from a snapshot of the global state of partition 1, such as process definitions, decisions, forms, and identity data. This snapshot is transferred in chunks of [`camunda.cluster.raft.snapshot-chunk-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterraft), and each request must complete within `camunda.cluster.raft.bootstrap-snapshot-request-timeout`. If a partition bootstrap repeatedly fails with snapshot request timeouts on a cluster with a large global state, increase that timeout.
 - Scaling is a planned configuration change. The cluster rejects a new configuration change while another one is still running.
 - A dynamic scaling operation does not require a rolling restart. Static configuration changes, such as adding a Physical Tenant, still follow the [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md) restart procedure.
 - Gateway replicas are scaled separately from brokers and partitions. In Helm deployments, adjust `zeebe-gateway.replicas`. Gateway scaling changes shared request capacity but does not change partition placement.
@@ -38,13 +39,13 @@ How brokers are identified and scaled depends on whether the cluster is [zone-aw
 
 In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), each tenant owns its own partition group, while brokers, gateways, and the replication factor are shared. Which scaling dimension you change therefore determines whether the operation is tenant-scoped or cluster-wide.
 
-| Dimension                          | Scope        | How to target it                                                                                    |
-| ---------------------------------- | ------------ | --------------------------------------------------------------------------------------------------- |
-| Partition count                    | Per tenant   | `PATCH /actuator/cluster?physicalTenant={physicalTenantId}`                                         |
-| Broker count                       | Cluster-wide | `PATCH /actuator/cluster` or `POST /actuator/cluster/brokers`, without a `physicalTenant` parameter |
-| Replication factor                 | Cluster-wide | `PATCH /actuator/cluster`, without a `physicalTenant` parameter                                     |
-| Partition join, leave, or priority | Per tenant   | `POST` or `DELETE /actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=`    |
-| Routing state                      | Per tenant   | `PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`                           |
+| Dimension                          | Scope        | How to target it                                                                                                                                                                                                                                                                                                                                                                         |
+| ---------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Partition count                    | Per tenant   | [`PATCH /actuator/cluster?physicalTenant={physicalTenantId}`](/apis-tools/management-api/specifications/cluster/reconfigure-cluster.api.mdx)                                                                                                                                                                                                                                             |
+| Broker count                       | Cluster-wide | [`PATCH /actuator/cluster`](/apis-tools/management-api/specifications/cluster/reconfigure-cluster.api.mdx) or [`POST /actuator/cluster/brokers`](/apis-tools/management-api/specifications/cluster/reconfigure-the-cluster-with-the-given-brokers.api.mdx), without a `physicalTenant` parameter                                                                                         |
+| Replication factor                 | Cluster-wide | [`PATCH /actuator/cluster`](/apis-tools/management-api/specifications/cluster/reconfigure-cluster.api.mdx), without a `physicalTenant` parameter                                                                                                                                                                                                                                         |
+| Partition join, leave, or priority | Per tenant   | `POST` ([add or change priority](/apis-tools/management-api/specifications/cluster/add-a-broker-to-a-partitions-replication-group-or-change-its-priority.api.mdx)) or `DELETE` ([remove](/apis-tools/management-api/specifications/cluster/remove-a-broker-from-a-partitions-replication-group.api.mdx)) `/actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=` |
+| Routing state                      | Per tenant   | [`PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`](/apis-tools/management-api/specifications/cluster/update-the-routing-state.api.mdx)                                                                                                                                                                                                                          |
 
 Partition ids restart at `1` in every Physical Tenant, so a partition is only identified by its id together with its tenant.
 
@@ -68,7 +69,7 @@ A partition count change sent **without** the `physicalTenant` parameter targets
 
 ### Verify a tenant-scoped scaling operation
 
-Monitor the change with the [monitoring API](#monitoring-api) or `GET /actuator/cluster/changes`, then confirm the result through topology:
+Monitor the change with the [monitoring API](#monitoring-api) or [`GET /actuator/cluster/changes`](/apis-tools/management-api/specifications/cluster/list-configuration-changes.api.mdx), then confirm the result through topology:
 
 ```
 curl "http://localhost:8080/physical-tenants/tenanta/v2/topology"
@@ -725,7 +726,7 @@ kubectl scale statefulset <zone-a-statefulset> --replicas=3
 
 ## API reference
 
-OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/resources/api/cluster/cluster-api.yaml).
 
 ### Reconfiguration API
 
@@ -899,7 +900,7 @@ This operation does not re-distribute the partitions that were in the removed br
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
 ```
 {
@@ -1327,7 +1328,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
 ```
 {

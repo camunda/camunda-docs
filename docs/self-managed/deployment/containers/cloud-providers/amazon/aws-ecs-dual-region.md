@@ -27,45 +27,11 @@ The reference architecture creates two identically configured ECS Fargate cluste
 Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby: region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit operator step during failover, not an automatic property of the deployment. See [Recover when the Aurora writer's region is lost](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost).
 :::
 
-```mermaid
+<!-- Editable source: ./assets/aws-ecs-dual-region.excalidraw -->
 
-architecture-beta
-    group regions(cloud)["Camunda dual region"]
-    group r0(cloud)["Region 0 · eu-west-2"] in regions
-    group r1(cloud)["Region 1 · eu-west-3"] in regions
-    group aurora_global(logos:aws-rds)["Aurora Global Database"] in regions
+![Clients reach the Ingress in each of two AWS regions, eu-west-2 and eu-west-3, over HTTP(S) and gRPC. Each Ingress forwards to an Orchestration Cluster of four Zeebe brokers on ECS Fargate, and the two clusters exchange Zeebe Raft traffic. Each region has an S3 bucket for the broker-ID lease. Only region 0 has an S3 backup bucket, which both regions write to. Both regions connect to the writer cluster of an Aurora Global Database in eu-west-2, which replicates to a reader cluster in eu-west-3.](./assets/aws-ecs-dual-region.svg)
 
-    service ingress0(logos:aws-elb)["ALB and NLB ingress"] in r0
-    service tasks0(logos:aws-ecs)["ECS Fargate workloads"] in r0
-    service s3id0(logos:aws-s3)["S3 broker-ID lease"] in r0
-    service s3bk0(logos:aws-s3)["S3 backup repository (shared)"] in r0
-    service peer0(internet)["Cross-region link"] in r0
-
-    service ingress1(logos:aws-elb)["ALB and NLB ingress"] in r1
-    service tasks1(logos:aws-ecs)["ECS Fargate workloads"] in r1
-    service s3id1(logos:aws-s3)["S3 broker-ID lease"] in r1
-    service peer1(internet)["Cross-region link"] in r1
-
-    service db_primary(logos:aws-rds)["Primary writer · eu-west-2"] in aurora_global
-    service db_secondary(logos:aws-rds)["Secondary reader · eu-west-3"] in aurora_global
-    db_primary:R --> L:db_secondary
-
-    ingress0:B -- T:tasks0
-    tasks0:L -- R:s3id0
-    tasks0:B -- T:s3bk0
-    tasks0:R -- L:peer0
-
-
-    peer0{group}:R <--> L:peer1{group}
-    peer0{group}:B --> T:db_primary{group}
-    peer1{group}:B --> T:db_secondary{group}
-
-    ingress1:B -- T:tasks1
-    tasks1:R -- L:s3id1
-    tasks1:L -- R:peer1
-```
-
-Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease.
+Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease. Both regions connect to the Aurora global writer endpoint in region 0, and the writer replicates to the reader cluster in region 1.
 
 :::note
 This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
@@ -436,6 +402,8 @@ cd ../vpc && terraform destroy
 The reference architecture sets `s3_force_destroy = true` by default so `terraform destroy` removes backup S3 buckets without manual emptying. Flip `s3_force_destroy` to `false` in `terraform/infra/terraform.tfvars` and re-apply the infra layer before running any real workload through the stack. Otherwise, `terraform destroy` will delete backup data permanently.
 :::
 
+If `terraform destroy` fails, check the teardown inputs `s3_force_destroy` and `db_force_destroy` in the [infra layer README](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/infra/README.md).
+
 ## Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of each Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
@@ -636,43 +604,6 @@ aws ecs execute-command \
   --container orchestration-cluster \
   --command "/bin/sh" \
   --interactive
-```
-
-### `terraform destroy` hangs on the Aurora resources
-
-**Symptom:** `terraform destroy` in `terraform/infra` doesn't finish while it deletes the Aurora Global Database resources.
-
-**Cause:** the Aurora writer is no longer in region 0, for example after an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost), and Terraform still expects the original topology.
-
-**Fix:** move the writer back with `./procedure/failback.sh --failed-region 0 --switch-writer`, then run `terraform destroy` again. If that's not possible, remove the Aurora resources manually and drop them from the Terraform state:
-
-```bash
-# 1. Detach both clusters from the global cluster: the secondary (region 0) first, then the writer (region 1)
-aws rds remove-from-global-cluster --region <region-0> \
-  --global-cluster-identifier <global-id> \
-  --db-cluster-identifier <region-0-cluster-arn>
-aws rds remove-from-global-cluster --region <region-1> \
-  --global-cluster-identifier <global-id> \
-  --db-cluster-identifier <region-1-cluster-arn>
-
-# 2. Delete the instances in both regions (skip the final snapshot only for non-production)
-aws rds delete-db-instance --db-instance-identifier <r0-instance> --skip-final-snapshot --region <region-0>
-aws rds delete-db-instance --db-instance-identifier <r1-instance> --skip-final-snapshot --region <region-1>
-
-# 3. Wait for the instances to be deleted, then delete the clusters
-aws rds delete-db-cluster --db-cluster-identifier <r0-cluster> --skip-final-snapshot --region <region-0>
-aws rds delete-db-cluster --db-cluster-identifier <r1-cluster> --skip-final-snapshot --region <region-1>
-
-# 4. Delete the global cluster
-aws rds delete-global-cluster --global-cluster-identifier <global-id>
-
-# 5. Remove the Aurora resources from the Terraform state and continue the destroy
-terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster_instance.primary[0]'
-terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster_instance.secondary[0]'
-terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster.primary'
-terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster.secondary'
-terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_global_cluster.this'
-terraform -chdir=terraform/infra destroy
 ```
 
 For general troubleshooting, see the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).

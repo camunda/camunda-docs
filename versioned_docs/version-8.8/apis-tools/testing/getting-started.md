@@ -7,7 +7,7 @@ description: "Integrate the Camunda Process Test library in your project."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Use the [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) Java library to test your BPMN processes and your process application.
+Use the [Camunda Process Test](https://github.com/camunda/camunda/tree/stable/8.8/testing/camunda-process-test-java) (CPT) Java library to test your BPMN processes and your process application.
 
 ## About
 
@@ -346,7 +346,7 @@ Refer to the [API documentation](https://javadoc.io/doc/io.camunda/camunda-proce
 
 ## Examples
 
-Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
+Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/stable/8.8/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
 
 ## Process Test Coverage
 

@@ -53,7 +53,7 @@ components:
         expression:
           type: string
           description: The expression to evaluate (e.g., "=x + y")
-          example: "=x + y"
+          example: =x + y
         tenantId:
           type: string
           description: Required when the expression references tenant-scoped cluster variables
@@ -89,7 +89,7 @@ components:
         expression:
           type: string
           description: The evaluated expression
-          example: "=x + y"
+          example: =x + y
         result:
           description: The result value. Its type can vary.
           example: 30

@@ -1413,6 +1413,24 @@ table .badge:nth-of-type(1) {
   border: 1px solid #4589ff;
 }
 
+.badge--scope {
+  background-color: #393939;
+  color: #ffffff;
+  margin-bottom: 0 !important;
+  margin-left: 0.5rem !important;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  vertical-align: baseline;
+  position: relative;
+  top: -5px;
+}
+
+[data-theme="dark"] .badge--scope {
+  background-color: #262626;
+  color: #e0e0e0;
+  border: 1px solid #6f6f6f;
+}
+
 /* Required permissions (RBAC) section */
 .required-permissions__table {
   display: table;
@@ -2632,6 +2650,60 @@ h3.subheading {
   background-color: #ffffff;
   color: var(--ifm-color-black) !important;
   border: 1px solid #171c29;
+}
+
+/* Markdown link styled as a hero button: <p class="link-button">[Text](page.md)</p> */
+p.link-button {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+p.link-button > a {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ifm-button-padding-vertical)
+    var(--ifm-button-padding-horizontal);
+  border: 1px solid #171717;
+  border-radius: var(--ifm-button-border-radius);
+  background-color: #171717;
+  color: #fff;
+  font-size: 0.925rem;
+  font-weight: var(--ifm-button-font-weight);
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+p.link-button > a:hover {
+  background-color: #333333;
+  border-color: #333333;
+  color: #fff;
+  text-decoration: none;
+}
+
+p.link-button > a::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right-white.png") no-repeat center / 12px
+    12px;
+  margin-left: 8px; /* spacing between text and icon */
+}
+
+p.link-button > a:hover::after,
+p.link-button > a:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] p.link-button > a {
+  border-color: #ffffff;
+  background-color: transparent;
+}
+
+[data-theme="dark"] p.link-button > a:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black);
 }
 
 .link-arrow {
