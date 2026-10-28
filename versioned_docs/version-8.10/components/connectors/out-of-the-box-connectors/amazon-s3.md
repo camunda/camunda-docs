@@ -55,7 +55,7 @@ See [managing secrets](/components/saas/clusters/manage-secrets.md).
 
 ## Operations
 
-Select the operation in the **Action** dropdown. The properties that apply depend on the action.
+Select the operation in the **Action** dropdown. **Upload object** is selected by default. The properties that apply depend on the action.
 
 ### Upload object
 
@@ -63,16 +63,16 @@ Upload a document to an Amazon S3 bucket.
 
 #### Input parameters
 
-| Property         | Type     | Required                      | Description                                                                                                                                                                              | Example |
-| :--------------- | :------- | :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| AWS bucket       | String   | Yes                           | The targeted Amazon S3 bucket where the document is uploaded.                                                                                                                            |         |
-| AWS key          | String   | No                            | The key that uniquely identifies the object in the bucket. If not set, the file name from the document metadata is used.                                                                 |         |
-| Document source  | Dropdown | Yes                           | The [document source](/components/document-handling/send-document-to-external-system.md#document-sources): **Camunda Document**, **Inline Content**, or **From URL**.                    |         |
-| Camunda document | String   | Yes, for **Camunda Document** | A FEEL expression with the reference to the document in the Camunda document store.                                                                                                      |         |
-| Content          | String   | Yes, for **Inline Content**   | The content of the document, built from process data.                                                                                                                                    |         |
-| File name        | String   | No                            | The file name of the uploaded document. For **Inline Content**, a unique name is generated if you leave it empty.                                                                        |         |
-| Content type     | String   | No                            | The MIME type of the content, for **Inline Content** only. If you leave it empty, the type is inferred from the extension of the file name, with `application/octet-stream` as fallback. |         |
-| URL              | String   | Yes, for **From URL**         | The URL of the external document.                                                                                                                                                        |         |
+| Property         | Type     | Required                                    | Description                                                                                                                                                                              | Example |
+| :--------------- | :------- | :------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS bucket       | String   | Yes                                         | The targeted Amazon S3 bucket where the document is uploaded.                                                                                                                            |         |
+| AWS key          | String   | No                                          | The key that uniquely identifies the object in the bucket. If not set, the file name from the document metadata is used.                                                                 |         |
+| Document source  | Dropdown | Yes                                         | The [document source](/components/document-handling/send-document-to-external-system.md#document-sources): **Camunda Document**, **Inline Content**, or **From URL**.                    |         |
+| Camunda document | String   | Yes, for **Camunda Document**               | A FEEL expression with the reference to the document in the Camunda document store.                                                                                                      |         |
+| Content          | String   | Yes, for **Inline Content**                 | The content of the document, built from process data.                                                                                                                                    |         |
+| File name        | String   | No, for **Inline Content** and **From URL** | The file name of the uploaded document. Shown for **Inline Content** and **From URL**. For **Inline Content**, a unique name is generated if you leave it empty.                         |         |
+| Content type     | String   | No, for **Inline Content**                  | The MIME type of the content, for **Inline Content** only. If you leave it empty, the type is inferred from the extension of the file name, with `application/octet-stream` as fallback. |         |
+| URL              | String   | Yes, for **From URL**                       | The URL of the external document.                                                                                                                                                        |         |
 
 :::note
 Use **Inline Content** to build a file (for example, a `.json` error report) directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
@@ -108,12 +108,12 @@ Download an object from an Amazon S3 bucket.
 
 #### Input parameters
 
-| Property        | Type     | Required | Description                                                                                                                                                                                              | Example |
-| :-------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| AWS bucket      | String   | Yes      | The targeted Amazon S3 bucket that the document is downloaded from.                                                                                                                                      |         |
-| AWS key         | String   | Yes      | The key that uniquely identifies the object in the bucket.                                                                                                                                               |         |
-| Response format | Dropdown | Yes      | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **as text**, or **as JSON**. |         |
-| Encoding        | String   | No       | The character set used to decode the content. The default is `UTF-8`.                                                                                                                                    |         |
+| Property        | Type     | Required            | Description                                                                                                                                                                                              | Example |
+| :-------------- | :------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS bucket      | String   | Yes                 | The targeted Amazon S3 bucket that the document is downloaded from.                                                                                                                                      |         |
+| AWS key         | String   | Yes                 | The key that uniquely identifies the object in the bucket.                                                                                                                                               |         |
+| Response format | Dropdown | Yes                 | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **as text**, or **as JSON**. |         |
+| Encoding        | String   | No, for **as text** | The character set used to decode the content. Shown when **Response format** is **as text**. The default is `UTF-8`.                                                                                     |         |
 
 To learn more about FEEL expressions, see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 

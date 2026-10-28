@@ -8,7 +8,7 @@ description: Upload, download, and delete documents in Amazon S3 from your BPMN 
 import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
 import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-Use the Amazon S3 connector to upload, download, and delete documents in [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
+Use the Amazon S3 connector to upload, download, and delete objects in [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/S3/) from your BPMN process.
 
 ## About this connector
 
