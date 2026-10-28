@@ -42,11 +42,11 @@ A journey has a real token cost that depends on the scenario:
 
 Treat these ranges as planning inputs rather than fixed prices. The following factors influence the cost:
 
-- To get good results from ProcessOS, we recommend using a capable model (e.g., Opus or similar). Each model comes with its own price tag.
-- Complexity and size of the process.
-- Discovery input: size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading text based files (e.g. BPMN).
-- Number of review iterations until you agree on the result.
-- Transformation tier: a lift-and-shift costs less than a radical transformation.
+- Model: For good results with ProcessOS, we recommend using a capable model, such as Opus or a comparable model. Pricing varies by model.
+- Process complexity and size.
+- Discovery input: Its size, format, scope, and quality. For example, extracting a process from images in a PDF costs more than reading text-based files, such as BPMN files.
+- Review iterations: The number of iterations required to reach an agreed-upon result.
+- Transformation tier: A lift-and-shift transformation costs less than a radical transformation.
 
 ### SME involvement
 
