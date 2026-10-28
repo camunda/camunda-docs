@@ -254,8 +254,6 @@ To provide dynamic content from process variables, reference them in **Template 
 }
 ```
 
-## Troubleshooting
-
 <ErrorHandling />
 
 ### Request failed with a SendGrid status code
