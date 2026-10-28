@@ -105,8 +105,6 @@ To map the response into process variables, use **Result variable** to store the
 }
 ```
 
-## Troubleshooting
-
 <ErrorHandling />
 
 ## Further resources
