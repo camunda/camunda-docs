@@ -29,7 +29,7 @@ You need these prerequisites before following the steps in this guide:
 - A Git repository where you'll store your element templates.
 - CI/CD infrastructure for that repository.
 
-This guide assumes you store your catalog assets in a single repository. If you store your assets across several repositories, [consolidate them into one repository](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) before publishing them.
+This guide uses a single repository. You can also [publish assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) into the same catalog.
 
 ## Use the example repository
 
@@ -158,16 +158,20 @@ The job calls a single ingestion endpoint:
 PUT <camunda-hub-api-base-url>/api/v2/catalog/assets/ingestion
 ```
 
-The request body is `multipart/form-data` and represents the **complete desired state** of the catalog. For each asset, the request includes two parts:
+The request body is `multipart/form-data` and represents the **complete desired state** of the catalog for one source. For each asset, the request includes two parts:
 
 - `readme`: The `README.md` file.
 - `template`: The element template `.json` file
+
+The request also accepts an optional `source` field:
+
+- `source`: An identifier that scopes the submission, for example the repository that sends it. The [sync script](https://github.com/camunda/catalog-template/blob/main/scripts/sync-catalog.sh) sets it automatically. To [publish from multiple repositories](./sync-multiple-repositories.md), give each repository its own source.
 
 :::tip
 For the full request and response schema, see the **Ingest catalog assets** reference for [SaaS](/apis-tools/hub-api-saas/specifications/ingest-catalog-assets.api.mdx) and [Self-Managed](/apis-tools/hub-api-sm/specifications/ingest-catalog-assets.api.mdx).
 :::
 
-Because the submission represents the full desired state, Camunda Hub [unpublishes](./manage-asset-lifecycle.md#unpublish-an-asset) any asset that exists in the catalog but is absent from the submission.
+Because the submission represents the full desired state, Camunda Hub [unpublishes](./manage-asset-lifecycle.md#unpublish-an-asset) any asset of the same source that exists in the catalog but is absent from the submission. Assets ingested with a different source stay untouched.
 
 :::note
 For large submissions, review the [ingestion limits](#ingestion-limits).
@@ -270,5 +274,5 @@ When you publish a new version of an asset, an **Update** option is displayed in
 ## Next steps
 
 - [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) — unpublish and delete catalog assets.
-- [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — consolidate templates from several repositories before syncing.
+- [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — publish assets from several repositories into the same catalog.
 - [Use catalog assets in Hub](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) — learn how delivery teams discover and apply published assets while modeling.
