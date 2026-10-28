@@ -6,11 +6,11 @@ description: "Replace the JVM truststore of the Camunda Java components with a c
 
 To stop the Camunda Java components from trusting a CA that is in the image's default truststore, replace the truststore. The Helm chart has no option to remove a CA from the image truststore.
 
-The procedure builds a copy of the image truststore without the CA and stores the copy in a Secret. Then it points each Java component to the copy with `-Djavax.net.ssl.trustStore`. Use it as an interim measure until you upgrade to images that no longer contain the CA.
+The procedure creates a copy of the image truststore without the CA and stores the copy in a Secret. Then it points each Java component to the copy with `-Djavax.net.ssl.trustStore`. Use it as an interim measure until you upgrade to images that no longer contain the CA.
 
 Don't combine this procedure with `global.elasticsearch.tls.existingSecret` or `global.opensearch.tls.existingSecret`. Both set `-Djavax.net.ssl.trustStore`, and the JVM uses only one truststore. If you need the CA from that Secret, import it into the new truststore in step 1 and remove the `existingSecret` value.
 
-This procedure covers the Camunda Java components in step 3. It doesn't change the OS CA bundle or other components.
+This procedure covers the Camunda Java components listed in step 3. It doesn't change the OS CA bundle or other components.
 
 ## 1. Build the truststore
 
@@ -24,7 +24,7 @@ docker run --rm --entrypoint sh -e REMOVE_CN="$REMOVE_CN" "$CAMUNDA_IMAGE" -c \
   'keytool -list -v -cacerts -storepass changeit | grep -c -E "^Owner: (.*, )?CN=${REMOVE_CN}(,|$)"'
 ```
 
-Make sure the image contains the CA. The command must print `1` or more. If it prints `0`, the image doesn't contain the CA and you don't need this procedure.
+Make sure the image contains the CA. The command must return `1` or more. If it returns `0`, the image doesn't contain the CA and you don't need this procedure.
 
 Then build the truststore without the CA:
 
@@ -44,7 +44,7 @@ docker run --rm --user 0 --entrypoint sh \
     chmod 644 /out/cacerts'
 ```
 
-Make sure the CA is gone. The command must print `0`. `grep` exits with code `1` when it prints `0`:
+Verify that the CA has been removed. The command must return `0`. `grep` exits with code `1` when it prints `0`:
 
 ```bash
 docker run --rm --entrypoint sh \
@@ -79,8 +79,8 @@ Mount the Secret on each Java component and set the truststore flags:
 
 | Component            | Values key           | Where to set the flags                                        |
 | -------------------- | -------------------- | ------------------------------------------------------------- |
-| Zeebe                | `zeebe`              | `javaOpts`. Keep the chart default options.                   |
-| Zeebe Gateway        | `zeebeGateway`       | `javaOpts`. Keep the chart default options.                   |
+| Zeebe                | `zeebe`              | `javaOpts`. Keep the chart's default options.                 |
+| Zeebe Gateway        | `zeebeGateway`       | `javaOpts`. Keep the chart's default options.                 |
 | Operate              | `operate`            | `javaOpts`                                                    |
 | Tasklist             | `tasklist`           | `javaOpts`                                                    |
 | Optimize             | `optimize`           | `javaOpts`                                                    |
@@ -145,11 +145,11 @@ webModeler:
     extraVolumeMounts: *jvmTruststoreMounts
 ```
 
-If you already set `javaOpts` or `env` for a component, merge these entries into your values. Run `helm upgrade` with the file.
+If you have already set `javaOpts` or `env` for a component, merge these entries into your values. Run `helm upgrade` with the file.
 
 ## 4. Verify the truststore
 
-Make sure each Java process uses the new truststore. Each Java pod must print a `Picked up JAVA_TOOL_OPTIONS` line with `/etc/camunda/jvm-truststore/cacerts`:
+Make sure each Java process uses the new truststore. Each Java pod must return a `Picked up JAVA_TOOL_OPTIONS` line with `/etc/camunda/jvm-truststore/cacerts`:
 
 ```bash
 for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-of=camunda-platform); do
@@ -159,7 +159,7 @@ done
 
 The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as Console and the Web Modeler `webapp` and `websockets`, print an empty value. Run the loop after `kubectl rollout status` finishes for each workload. Pods that are shutting down also print an empty value.
 
-To update the truststore, build it again as in step 1. Then replace the Secret and restart the pods:
+To update the truststore, rebuild it by following step 1. Then replace the Secret and restart the pods:
 
 ```bash
 kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
