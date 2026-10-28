@@ -1,7 +1,7 @@
 ---
 id: usage-history
 title: View usage history
-description: "Let's monitor our workflow usage."
+description: "Learn how to monitor your workflow usage in Camunda Hub."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';

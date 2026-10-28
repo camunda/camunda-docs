@@ -11,9 +11,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## About
 
-Like any service, Camunda 8 SaaS might occasionally undergo availability changes. When availability changes, Camunda makes sure to provide you with a current service status.
+Camunda 8 SaaS can occasionally experience availability changes. When availability changes, Camunda provides you with current and past service status and availability.
 
-To see current and past service availability, visit [Camunda 8 SaaS Status](https://status.camunda.io).
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Build with AI" href="https://status.camunda.io" style={{marginBottom: '30px', marginTop: '20px'}}>Camunda 8 SaaS Status</a>
 
 ## Subscribe to updates
 

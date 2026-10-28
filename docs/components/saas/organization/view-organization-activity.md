@@ -1,7 +1,7 @@
 ---
 id: view-organization-activity
 title: View organization activity
-description: "The Activity tab allows you to view details of all activity within an organization, such as cluster creation, deletion, updates, and user invitations."
+description: "View details of organization activity, such as cluster creation, deletion, updates, and user invitations."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -9,6 +9,8 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 ## About organization activity
+
+The **Activity** tab allows you to view details of all activity within an organization, such as cluster creation, deletion, updates, and user invitations.
 
 This feature is only available in SaaS.
 

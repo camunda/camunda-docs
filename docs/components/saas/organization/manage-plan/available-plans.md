@@ -1,25 +1,22 @@
 ---
 id: available-plans
 title: Available plans
-description: "Let's take a closer look at Camunda's current plan options."
+description: "Learn more about Camunda's currently available SaaS plan options."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-The following Camunda 8 plans are available:
+The following Camunda 8 plans are currently available:
 
-| Plan       | Description                                                                    |
-| :--------- | :----------------------------------------------------------------------------- |
-| Free trial | Create a free account to try Camunda in our cloud.                             |
-| Enterprise | Made for high volume automation and end-to-end process orchestration. We host. |
+| Plan       | Description                                                                          |
+| :--------- | :----------------------------------------------------------------------------------- |
+| Free trial | Create a free account to try Camunda in our cloud.                                   |
+| Enterprise | Made for high volume automation and end-to-end process orchestration. Camunda hosts. |
 
 :::note
-
-- To sign up for Camunda 8 and compare plan features, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
-- For more information on Camunda 8, refer to [Camunda 8 product](https://camunda.com/products/cloud/).
-
+To sign up for Camunda 8 and compare plan features, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 :::
 
 ## Upgrade to an Enterprise plan

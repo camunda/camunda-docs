@@ -1,7 +1,7 @@
 ---
 id: update-billing-reservations
 title: Update billing reservations
-description: "Let's manage our hardware packages and edit reservations."
+description: "Manage your hardware packages and cluster reservations."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
