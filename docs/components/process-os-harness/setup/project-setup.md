@@ -40,7 +40,7 @@ A journey has a real token cost that depends on the scenario:
 | Lift-and-shift, medium-sized process       | 800 to 1,500+    |
 | AI transformation, medium-to-large process | 1,000 to 2,000+  |
 
-Treat these ranges as a planning input rather than a fixed price. The following factors influence the cost:
+Treat these ranges as planning inputs rather than fixed prices. The following factors influence the cost:
 
 - To get good results from ProcessOS, we recommend using a capable model (e.g., Opus or similar). Each model comes with its own price tag.
 - Complexity and size of the process.
