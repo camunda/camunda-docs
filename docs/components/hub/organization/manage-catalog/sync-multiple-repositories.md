@@ -1,49 +1,36 @@
 ---
 id: sync-multiple-repositories
 title: Sync assets from multiple repositories
-description: "Consolidate element templates spread across several repositories into a single collection repository before syncing to the Hub catalog."
+description: "Publish element templates to the Hub catalog from several repositories, with each submission scoped to the repository that sends it."
 keywords: [catalog, element templates, hub, monorepo, multiple repositories]
 ---
 
-Consolidate element templates spread across several repositories into a single collection repository before syncing to the Hub catalog.
+Publish element templates to the Camunda Hub catalog from more than one repository. Each submission is scoped to a source, so a sync only manages the assets of its own repository.
 
-## When to use this guide
+## How sources work
 
-The catalog syncs from a single repository. Depending on your setup, you may or may not need this guide:
+Every submission to the catalog carries a **source** identifier. The [example repository](https://github.com/camunda/catalog-template) sets the source automatically: the GitHub Actions workflow uses the `owner/repo` name of the repository, and the sync script uses the `owner/repo` name of the `origin` remote for local runs. No configuration is needed to publish from several repositories at the same time.
 
-- ❌ If your element templates already live together in one repository, [sync from it directly](/components/hub/organization/manage-catalog/getting-started.md). You do not need this guide.
-- ✅ If your element templates are spread across several repositories, you need to consolidate them before syncing. This guide shows you how.
+The source controls which assets a sync manages:
 
-## Consolidate templates into a collection repository
+- A sync publishes and updates the submitted assets, and unpublishes only the missing assets of its own source. Assets that other repositories ingested with a different source stay untouched.
+- When a submission contains a template `id` that another source published before, the catalog adopts the asset: it moves to the new source and stays published. The last successful sync wins.
+- If the adopted template content is unchanged, no version increment is needed. If the content changed, the [version rules](./getting-started.md#version-your-element-templates) apply, and the version must be greater than the latest stored version.
 
-Camunda recommends using a CI/CD job in each source repository that copies its element templates and READMEs into a dedicated collection repository whenever a new version is created. For example:
+## Migrate from a single repository (8.10)
 
-```yaml
-# Example: GitHub Actions workflow in a source repository
-name: Push templates to collection repo
+In 8.10, the catalog syncs from a single repository, and all assets are stored without a source. To split this repository into several project repositories after the upgrade, move each asset to its new repository before you remove it from the old one. This order keeps the asset published in Hub during the whole migration:
 
-on:
-  push:
-    branches: [main]
+1. Create one project repository per team or domain from the [example catalog repository](https://github.com/camunda/catalog-template), or add the current sync script to your existing repositories.
+1. Copy the asset directories from the existing repository into each project repository. Do not change the template content or the `version` field.
+1. Run the sync in the project repository. The catalog adopts the assets, moves them to the source of the project repository, and keeps them published.
+1. Remove the asset directories from the old repository, and run its sync. The sync only unpublishes assets of its own source, so the adopted assets stay published.
 
-jobs:
-  push-to-collection:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v4
+:::warning
+Do not remove the assets from the old repository before the project repository has synced. If the old repository syncs first, it unpublishes the assets, and their templates are [deprecated](./manage-asset-lifecycle.md#unpublish-an-asset) until the project repository syncs.
+:::
 
-      - name: Push element templates to collection repo
-        run: |
-          git clone https://x-access-token:${{ secrets.COLLECTION_REPO_TOKEN }}@github.com/your-org/catalog-collection.git
-          cp -r element-templates/payment-connector catalog-collection/payment-connector
-          cd catalog-collection
-          git add .
-          git commit -m "Update payment-connector templates"
-          git push
-```
-
-The collection repository then [syncs to Camunda Hub](./getting-started.md#run-the-sync).
+To change the content of a template during the move, increment its `version`. A moved template with changed content and a stale version is rejected with a `400 Bad Request`.
 
 ## Next steps
 
