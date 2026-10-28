@@ -17,6 +17,45 @@ import PageDescription from '@site/src/components/PageDescription';
 | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 November 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.11.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.11.0-alpha1)</li></ul> |
 
+### Hub
+
+#### Configurable session idle timeout
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Hub Console</span></div>
+
+Camunda now supports configurable session idle timeout for SaaS and Self-Managed.
+
+- Administrators can set an organization-wide default idle timeout and override it per cluster and connected IdP.
+- Camunda automatically ends the session if a user's session goes idle beyond the configured period, measured by keyboard and mouse inactivity rather than background application traffic.
+- You can configure your organization's idle timeout policy in Hub Console.
+
+This helps address a known compliance gap (for example, PCI DSS 4.0 Requirement 8.2.8), and gives security and compliance administrators a verifiable, enforced control to reference in an audit.
+
+<!-- https://github.com/camunda/camunda-security-library/issues/597, https://github.com/camunda/camunda-security-library/issues/692, https://github.com/camunda/camunda/issues/60021, https://github.com/camunda/camunda/issues/60196, https://github.com/camunda/camunda/issues/60201, https://github.com/camunda/camunda/issues/60208, https://github.com/camunda/camunda-cloud-management-apps/issues/9658, https://github.com/camunda/camunda-cloud-management-apps/issues/9732, https://github.com/camunda/camunda-cloud-management-apps/issues/10097. The customer-facing "Cluster defaults" tab is behind the console.orgClusterDefaults flag, which was dev-only when it merged. -->
+
+##### Cluster configuration
+
+- **Idle timeout**: Set `camunda.security.session.max-inactive-interval` to configure the idle timeout. The default is `30m` (30 minutes).
+- **Timeout based on user activity**: If you set `camunda.security.session.heartbeat.enabled=true`, only keyboard and mouse activity in the browser keeps a session alive. Background polling no longer keeps a session alive. The Orchestration Cluster web application, Operate, Tasklist, and Admin all send this heartbeat.
+- **Re-login after a timeout on SaaS**: Camunda sends the timeout to Auth0 as `max_age`, so an expired session asks the user to log in again instead of being silently renewed.
+
+##### Console (SaaS)
+
+- **Per cluster**: Set the idle timeout and the heartbeat setting in Hub Console cluster settings. This applies to clusters on 8.10.0-alpha5 or later.
+- **Organization default**: Set a default idle timeout for new clusters. The default applies only when you create a cluster. Existing clusters keep their own value, which you can still edit.
+
+### Modeler
+
+#### Camunda Design System in Desktop Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3873 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Desktop Modeler now uses the Camunda Design System. The application UI, the BPMN, DMN, and form editors, the properties panel, and side panels such as the variables outline and task testing all use Camunda Design System components and style.
+
+Desktop Modeler no longer ships Carbon or its previous global styles. If your plugin relies on Carbon components, classes, or styles, replace them with Camunda Design System components and tokens, or remove them.
+
 ### Orchestration Cluster
 
 #### Evenly distributed record indices in Elasticsearch and OpenSearch
