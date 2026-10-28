@@ -7,7 +7,7 @@ description: Example integration using the AI Agent Task connector to implement 
 
 import AgentTaskImg from '../img/ai-agent-task-loop.png';
 
-This worked example demonstrates how to use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model an AI Agent [agent loop for tools and response interaction](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#agent-loop-use-cases).
+This worked example demonstrates how to use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model an AI Agent [agent loop for tools and response interaction](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-concepts.md#agent-loop-use-cases).
 
 ## Create an AI Agent element
 
