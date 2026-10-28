@@ -203,8 +203,6 @@ For example, to read a field from a JSON blob, use a result expression such as:
 = {"invoiceId": response.content.invoiceId}
 ```
 
-## Troubleshooting
-
 <ErrorHandling />
 
 ## Further resources

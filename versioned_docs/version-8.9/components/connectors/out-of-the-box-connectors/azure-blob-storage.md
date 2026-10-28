@@ -143,8 +143,6 @@ If **Return document as reference** is cleared, the content is returned directly
 }
 ```
 
-## Troubleshooting
-
 <ErrorHandling />
 
 ## Further resources

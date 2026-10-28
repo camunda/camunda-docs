@@ -181,8 +181,6 @@ To get the content, use the following FEEL expression as the **Result expression
 = {"orderId": response.content.orderId}
 ```
 
-## Troubleshooting
-
 <ErrorHandling />
 
 ## Further resources
