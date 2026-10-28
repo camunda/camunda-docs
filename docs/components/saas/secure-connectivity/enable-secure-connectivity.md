@@ -169,8 +169,6 @@ The [prerequisites](#prerequisites) for the cluster and your organization also a
 
 1. Request an access token for the client. See [generate a token](/apis-tools/administration-api/authentication.md#generate-a-token).
 
-If the client does not have the required scope, the API returns `403`.
-
 ### Endpoints
 
 All endpoints use the base URL `https://api.cloud.camunda.io`. Replace `<cluster-id>` with the ID of your cluster. The `curl` examples read the cluster ID from `CLUSTER_ID` and the access token from `ACCESS_TOKEN`.
@@ -182,6 +180,17 @@ All endpoints use the base URL `https://api.cloud.camunda.io`. Replace `<cluster
 | Deactivate | `DELETE` | `/clusters/<cluster-id>/secure-connectivity` | **Deactivate** |
 
 For the full request and response schemas, see the [Administration API reference](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
+
+### Status codes
+
+The status codes in the following table apply to all three endpoints. The sections for each endpoint list the other status codes.
+
+| Status | Meaning                                                                                                                                                                    |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `403`  | The client does not have the required scope, or the cluster belongs to a different organization.                                                                           |
+| `404`  | The cluster does not exist. For `GET`, `404` can also mean that secure connectivity is not active. See [get the status](#get-the-secure-connectivity-status-with-the-api). |
+
+The API returns `403`, not `404`, for a cluster of a different organization.
 
 ### Activate secure connectivity with the API
 
@@ -204,13 +213,11 @@ curl --request POST "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secure-
 
 The API returns the following status codes:
 
-| Status | Meaning                                                                                        |
-| ------ | ---------------------------------------------------------------------------------------------- |
-| `201`  | Camunda started to provision the VPC endpoint service. Provisioning can take up to 10 minutes. |
-| `400`  | The request body is not valid. The response describes the field that failed validation.        |
-| `403`  | The client does not have the **Activate** scope, or the cluster is not in your organization.   |
-| `404`  | The cluster does not exist.                                                                    |
-| `409`  | Secure connectivity is already active, or another activation for this cluster is in progress.  |
+| Status | Meaning                                                                                                                                                            |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `201`  | Camunda started to provision the VPC endpoint service. To find out when provisioning is complete, see [wait for provisioning](#wait-for-provisioning-to-complete). |
+| `400`  | The request body is not valid. The response describes the field that failed validation.                                                                            |
+| `409`  | Secure connectivity is already active, or another activation for this cluster is in progress.                                                                      |
 
 ### Get the secure connectivity status with the API
 
@@ -247,7 +254,42 @@ The response contains the configuration and the provisioning state of the endpoi
 
 Use `status.status.endpoint.serviceName` as the service name when you [create a VPC interface endpoint in AWS](#create-a-vpc-interface-endpoint-in-aws).
 
-If secure connectivity is not active for the cluster, the API returns `404`.
+The API returns the following status codes:
+
+| Status | Meaning                                                                                    |
+| ------ | ------------------------------------------------------------------------------------------ |
+| `200`  | Secure connectivity is active, or Camunda is provisioning it. The body contains its state. |
+| `404`  | Secure connectivity is not active for the cluster, or the cluster does not exist.          |
+
+The `404` response is the same in both cases. To find out which case applies, get the cluster with `GET /clusters/<cluster-id>`. This call needs the **Get** scope of the **Cluster** scope group. If it returns `200`, the cluster exists and secure connectivity is not active.
+
+### Wait for provisioning to complete
+
+Provisioning starts when the activation returns `201`, and it can take up to 10 minutes. To find out when it is complete, send the `GET` request again at an interval, for example every 30 seconds.
+
+Provisioning is complete when the `conditions` list in `status.status` contains the condition `Ready` with the status `"True"`. Hub uses the same condition to show **Ready** or **Pending**. While provisioning runs, the response can have no `conditions` and no `endpoint`, or the `Ready` condition has the status `"False"`. The `reason` and `message` fields of the condition describe the current state.
+
+When provisioning is complete, `status.status.endpoint.serviceName` contains the service name.
+
+The following script waits until provisioning is complete or 15 minutes have passed. It needs [jq](https://jqlang.org/):
+
+```bash
+for attempt in $(seq 1 30); do
+  READY=$(curl --silent --fail \
+    "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secure-connectivity" \
+    --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+    | jq --raw-output '.status.status.conditions[]? | select(.type == "Ready") | .status')
+  if [ "${READY}" = "True" ]; then
+    echo "Secure connectivity is ready."
+    exit 0
+  fi
+  sleep 30
+done
+echo "Secure connectivity is not ready after 15 minutes." >&2
+exit 1
+```
+
+Use the same check in your infrastructure automation, for example in Terraform, before you create the VPC interface endpoint in AWS. If the `Ready` condition does not have the status `"True"` after 15 minutes, read the `reason` and `message` fields of the condition, and contact support if you need help.
 
 ### Deactivate secure connectivity with the API
 
@@ -256,7 +298,9 @@ curl --request DELETE "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secur
   --header "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 
-The API returns `204` when it removes the VPC endpoint service. If secure connectivity is not active for the cluster, the API returns `409`.
+The API returns `204` when it starts to remove the VPC endpoint service. If secure connectivity is not active for the cluster, the API also returns `204` and does nothing. Thus, you can send the request again safely.
+
+To find out when the endpoint service is removed, send the `GET` request again at an interval until it returns `404`.
 
 :::note
 The Administration API cannot change the allowed principals or supported regions of an active endpoint service. To change them, use the **Private networking** tab in Hub. See [manage allowed principals and regions](#manage-allowed-principals-and-regions).
