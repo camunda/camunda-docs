@@ -10,15 +10,11 @@ import { connectorCards, fundamentalCards } from '../../react-components/\_aiage
 
 Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI agents to build solutions using [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md).
 
-## About
+## About this connector
 
 The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in an [agent loop](/reference/glossary.md#agent-loop), providing automated tool selection.
 
 For example, use this connector to enable an AI agent to autonomously select and execute tasks within ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response.
-
-:::note
-You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process.
-:::
 
 Core features include:
 
@@ -65,7 +61,7 @@ The right implementation depends on your use case.
 The **recommended approach** for most use cases is to use the **AI Agent Sub-process** implementation due to the simplified configuration and support for event sub-processes.
 :::
 
-### Compare configuration
+#### Compare implementations
 
 The following table summarizes the key configuration differences between the two implementations.
 
