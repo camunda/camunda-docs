@@ -2,6 +2,8 @@ import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconBpmnImg from "../assets/icon-bpmn.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconConfig from "../assets/icon-config.png";
+import IconLlmImg from "../assets/icon-llm.png";
+import IconIdpImg from "../assets/icon-idp.png";
 
 // Implementation cards on the AI Agent connector page
 export const connectorCards = [
@@ -24,11 +26,11 @@ export const connectorCards = [
 // Fundamentals cards on the AI Agent connector page
 export const fundamentalCards = [
   {
-    link: "../agentic-ai-aiagent-concepts/",
-    title: "Concepts",
+    link: "../agentic-ai-aiagent-execution-model/",
+    title: "Execution model",
     image: IconAoAgentImg,
     description:
-      "Learn how prompts, the agent loop, agent context, and response format work.",
+      "Learn how prompts, the agent loop, agent context, and responses work together at runtime.",
   },
   {
     link: "../agentic-ai-aiagent-tool-definitions/",
@@ -43,5 +45,30 @@ export const fundamentalCards = [
     image: IconAoDesignImg,
     description:
       "Learn which migration scenarios are supported for running AI agents.",
+  },
+];
+
+// Configure and extend cards on the AI Agent connector page
+export const configureCards = [
+  {
+    link: "../agentic-ai-aiagent-model-providers/",
+    title: "Model providers",
+    image: IconLlmImg,
+    description:
+      "Learn how to configure the LLM provider and model used by the connector.",
+  },
+  {
+    link: "../agentic-ai-aiagent-documents/",
+    title: "Document support",
+    image: IconIdpImg,
+    description:
+      "Learn how the connector passes documents and images to the LLM.",
+  },
+  {
+    link: "../agentic-ai-aiagent-customization/",
+    title: "Customize in Self-Managed",
+    image: IconConfig,
+    description:
+      "Learn how to configure a proxy and extend the connector in Self-Managed.",
   },
 ];

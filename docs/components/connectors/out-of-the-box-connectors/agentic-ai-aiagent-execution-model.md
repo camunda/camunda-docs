@@ -1,11 +1,11 @@
 ---
-id: agentic-ai-aiagent-concepts
-sidebar_label: Concepts
-title: AI Agent connector concepts
-description: Learn the core concepts behind the AI Agent connector, including prompts, the agent loop, agent context, and response format.
+id: agentic-ai-aiagent-execution-model
+sidebar_label: Execution model
+title: AI Agent execution model
+description: Learn how the AI Agent connector runs, including prompts, the agent loop, agent context, and response format.
 ---
 
-Understand how the AI Agent connector works, including prompts, tool descriptions, the agent loop, agent context, and response handling.
+Understand how the AI Agent connector runs, including prompts, tool descriptions, the agent loop, agent context, and response handling.
 
 ## System prompt, user prompt, and tool descriptions
 
