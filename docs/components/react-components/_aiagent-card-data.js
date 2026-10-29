@@ -29,7 +29,8 @@ export const fundamentalCards = [
     link: "../agentic-ai-aiagent-execution-model/",
     title: "Execution model",
     image: IconAoAgentImg,
-    description: "Understand how an AI agent runs, from prompts to responses.",
+    description:
+      "Learn how the AI Agent connector runs, from prompts to responses.",
   },
   {
     link: "../agentic-ai-aiagent-tool-definitions/",
