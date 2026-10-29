@@ -29,7 +29,7 @@ Core features include:
 New to agentic orchestration?
 
 - The [Build your first AI Agent](../../../guides/getting-started-agentic-orchestration.md) guide provides a quick introduction to agentic orchestration and how to use the AI Agent Sub-process connector using a blueprint.
-- See the [example AI Agent connector integration](agentic-ai-aiagent-subprocess-example.md) for a worked example of a simple AI agent loop model.
+- The [agentic orchestration overview](../../agentic-orchestration/agentic-orchestration-overview.md) explains how AI agents work in Camunda.
 - See [further resources](#explore-further-resources) for examples of how you can use the AI Agent connector.
 
 :::
