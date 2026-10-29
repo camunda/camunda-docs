@@ -29,22 +29,20 @@ export const fundamentalCards = [
     link: "../agentic-ai-aiagent-execution-model/",
     title: "Execution model",
     image: IconAoAgentImg,
-    description:
-      "Learn how prompts, the agent loop, agent context, and responses work together at runtime.",
+    description: "Understand how an AI agent runs, from prompts to responses.",
   },
   {
     link: "../agentic-ai-aiagent-tool-definitions/",
     title: "Tool definitions",
     image: IconConfig,
-    description:
-      "Learn how the connector resolves tools and how to define their parameters and responses.",
+    description: "Understand how tools are resolved and defined for the LLM.",
   },
   {
     link: "../agentic-ai-aiagent-migration/",
     title: "Process instance migration",
     image: IconAoDesignImg,
     description:
-      "Learn which migration scenarios are supported for running AI agents.",
+      "Review which migration scenarios are supported for running AI agents.",
   },
 ];
 
@@ -54,21 +52,20 @@ export const configureCards = [
     link: "../agentic-ai-aiagent-model-providers/",
     title: "Model providers",
     image: IconLlmImg,
-    description:
-      "Learn how to configure the LLM provider and model used by the connector.",
+    description: "Configure the LLM provider and model used by the connector.",
   },
   {
     link: "../agentic-ai-aiagent-documents/",
     title: "Document support",
     image: IconIdpImg,
     description:
-      "Learn how the connector passes documents and images to the LLM.",
+      "Understand how the connector passes documents and images to the LLM.",
   },
   {
     link: "../agentic-ai-aiagent-customization/",
     title: "Customize in Self-Managed",
     image: IconConfig,
     description:
-      "Learn how to configure a proxy and extend the connector in Self-Managed.",
+      "Set up an HTTP proxy and extend the connector in Self-Managed.",
   },
 ];
