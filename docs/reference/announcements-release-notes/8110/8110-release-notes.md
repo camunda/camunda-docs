@@ -43,6 +43,22 @@ Unlike pinning, adding time keeps the clock running from the new time, so job ti
 
 ### Orchestration Cluster
 
+#### Protect sensitive variables with REDACT
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/camunda/issues/64644 -->
+
+With variable protection, you can mark a process variable as sensitive when you create a process instance. The `REDACT` protection mode irrecoverably replaces the variable value before it reaches secondary storage, so the value is never readable through the API. Variable search results show which variables are protected.
+
+:::warning
+In 8.11.0-alpha1, protection is incomplete. Variable values can still appear in other places, such as job, message, and signal payloads or incident messages. You can set protection only when you create a process instance.
+:::
+
+- [Variable protection](/components/concepts/variable-protection.md)
+- [Search variables](/apis-tools/orchestration-cluster-api-rest/specifications/search-variables.api.mdx)
+- [Create process instance](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx)
+
 #### Evenly distributed record indices in Elasticsearch and OpenSearch
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
