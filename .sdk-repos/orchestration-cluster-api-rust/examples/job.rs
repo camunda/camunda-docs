@@ -211,7 +211,9 @@ async fn search_jobs() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
     for item in result.items {
-        println!("{}", item.process_definition_id);
+        if let Some(process_definition_id) = item.process_definition_id {
+            println!("{process_definition_id}");
+        }
     }
 
     Ok(())
