@@ -33,9 +33,7 @@ New to [agentic orchestration](../../agentic-orchestration/agentic-orchestration
 
 :::
 
-## AI Agent connectors
-
-### Prerequisites
+## Prerequisites
 
 The following prerequisites are required to use this connector:
 
@@ -43,7 +41,7 @@ The following prerequisites are required to use this connector:
 | :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
-### Choose an implementation
+## Choose an implementation
 
 The AI Agent connector family includes two connectors, each with different capabilities, suited for different use cases, and available with a dedicated element template:
 
@@ -61,7 +59,7 @@ The right implementation depends on your use case.
 The **recommended approach** for most use cases is to use the **AI Agent Sub-process** implementation due to the simplified configuration and support for event sub-processes.
 :::
 
-#### Compare implementations
+### Compare implementations
 
 The following table summarizes the key configuration differences between the two implementations.
 
