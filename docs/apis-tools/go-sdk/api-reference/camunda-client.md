@@ -16,7 +16,7 @@ Cluster API. It wraps the generated REST client with configuration,
 authentication, adaptive backpressure, and transient retry. Its per-operation
 methods are generated in facade_generated.go.
 
-`CamundaClient` exposes **252** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **254** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ```go
 import camunda "github.com/camunda/orchestration-cluster-api-go/v11"
@@ -39,6 +39,7 @@ a ready-to-use client. Options take precedence over the environment.
 | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`ActivateAdHocSubProcessActivities`](#activateadhocsubprocessactivities)                                 | ActivateAdHocSubProcessActivities calls the ActivateAdHocSubProcessActivities operation.                                                                                 |
 | [`ActivateJobs`](#activatejobs)                                                                           | ActivateJobs calls the ActivateJobs operation.                                                                                                                           |
+| [`AddClock`](#addclock)                                                                                   | AddClock calls the AddClock operation.                                                                                                                                   |
 | [`AssignClientToGroup`](#assignclienttogroup)                                                             | AssignClientToGroup calls the AssignClientToGroup operation.                                                                                                             |
 | [`AssignClientToTenant`](#assignclienttotenant)                                                           | AssignClientToTenant calls the AssignClientToTenant operation.                                                                                                           |
 | [`AssignGroupToTenant`](#assigngrouptotenant)                                                             | AssignGroupToTenant calls the AssignGroupToTenant operation.                                                                                                             |
@@ -113,6 +114,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`GetAuthentication`](#getauthentication)                                                                 | GetAuthentication calls the GetAuthentication operation.                                                                                                                 |
 | [`GetAuthorization`](#getauthorization)                                                                   | GetAuthorization calls the GetAuthorization operation.                                                                                                                   |
 | [`GetBatchOperation`](#getbatchoperation)                                                                 | GetBatchOperation calls the GetBatchOperation operation.                                                                                                                 |
+| [`GetClock`](#getclock)                                                                                   | GetClock calls the GetClock operation.                                                                                                                                   |
 | [`GetClusterExportingStatus`](#getclusterexportingstatus)                                                 | GetClusterExportingStatus calls the GetClusterExportingStatus operation.                                                                                                 |
 | [`GetClusterRebalance`](#getclusterrebalance)                                                             | GetClusterRebalance calls the GetClusterRebalance operation.                                                                                                             |
 | [`GetClusterStatus`](#getclusterstatus)                                                                   | GetClusterStatus calls the GetClusterStatus operation.                                                                                                                   |
@@ -338,6 +340,27 @@ if err != nil {
 for _, job := range result.GetJobs() {
 	fmt.Printf("activated job %v\n", job.GetJobKey())
 }
+```
+
+### AddClock
+
+```go
+func (c *CamundaClient) AddClock(ctx context.Context, body ClockAddRequest, opts ...func(ApiAddClockRequest) ApiAddClockRequest) (*ClockResult, error)
+```
+
+**Types:** [`ClockAddRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ClockAddRequest), [`ApiAddClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiAddClockRequest), [`ClockResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ClockResult)
+
+AddClock calls the AddClock operation.
+
+Example:
+
+```go
+// Move the cluster clock forward by an ISO 8601 duration (negative moves it back).
+clock, err := client.AddClock(ctx, *camunda.NewClockAddRequest("PT1H"))
+if err != nil {
+	return err
+}
+fmt.Println("cluster clock is now:", clock.GetTimestamp().Format(time.RFC3339))
 ```
 
 ### AssignClientToGroup
@@ -1778,6 +1801,27 @@ if err != nil {
 	return err
 }
 fmt.Printf("%v\n", op)
+```
+
+### GetClock
+
+```go
+func (c *CamundaClient) GetClock(ctx context.Context, opts ...func(ApiGetClockRequest) ApiGetClockRequest) (*ClockResult, error)
+```
+
+**Types:** [`ApiGetClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiGetClockRequest), [`ClockResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ClockResult)
+
+GetClock calls the GetClock operation.
+
+Example:
+
+```go
+// Read the cluster clock. While the clock is pinned this reports the pinned instant.
+clock, err := client.GetClock(ctx)
+if err != nil {
+	return err
+}
+fmt.Println("cluster clock:", clock.GetTimestamp().Format(time.RFC3339))
 ```
 
 ### GetClusterExportingStatus
