@@ -117,7 +117,7 @@ To make this agent reliable, treat each activity in the ad-hoc sub-process as a 
 
 For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
 
-For prompt configuration details, see [AI Agent connector: System prompt, user prompt, and tool descriptions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
+For prompt configuration details, see [AI Agent connector: System prompt, user prompt, and tool descriptions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model.md#system-prompt-user-prompt-and-tool-descriptions).
 :::
 
 ## Step 2: Configure the AI Agent connector
