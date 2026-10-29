@@ -58,8 +58,8 @@ function delete_document(CamundaClient $client, DocumentId $documentId, ?string 
 /**
  * Create document link.
  */
-function create_document_link(CamundaClient $client, DocumentId $documentId, ?string $storeId = null, ?string $contentHash = null, ?\Camunda\Orchestration\Api\Model\DocumentLinkRequest $documentLinkRequest = null): void
+function create_document_link(CamundaClient $client, DocumentId $documentId, \Camunda\Orchestration\Api\Model\DocumentLinkRequest $documentLinkRequest, ?string $storeId = null, ?string $contentHash = null): void
 {
-    $client->createDocumentLink((string) $documentId, $storeId, $contentHash, $documentLinkRequest);
+    $client->createDocumentLink(documentId: (string) $documentId, documentLinkRequest: $documentLinkRequest, storeId: $storeId, contentHash: $contentHash);
 }
 // endregion CreateDocumentLink
