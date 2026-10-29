@@ -5,7 +5,14 @@ title: Amazon Bedrock AgentCore Long-Term Memory connector
 description: Retrieve persistent knowledge from AWS Bedrock AgentCore Long-Term Memory in your BPMN process.
 ---
 
-With the **Amazon Bedrock AgentCore Long-Term Memory** outbound connector, you can retrieve persistent knowledge, such as facts, preferences, and summaries, from [AWS Bedrock AgentCore Long-Term Memory](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/long-term-memory-long-term.html) in your BPMN process.
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
+
+Use the Amazon Bedrock AgentCore Long-Term Memory connector to retrieve persistent knowledge, such as facts, preferences, and summaries, from [AWS Bedrock AgentCore Long-Term Memory](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/long-term-memory-long-term.html) in your BPMN process.
+
+## About this connector
+
+The **Amazon Bedrock AgentCore Long-Term Memory connector** is an outbound connector that reads memory records from an AgentCore Memory resource. It can search for records with a natural language query, or list all records in a namespace.
 
 ## Prerequisites
 
@@ -18,69 +25,77 @@ To use the **Amazon Bedrock AgentCore Long-Term Memory connector**, you need the
 Learn more about Amazon Bedrock AgentCore Long-Term Memory in the [official documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/long-term-memory-long-term.html).
 
 :::note
-Use secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
+Use secrets to store credentials and avoid exposing sensitive information from the process.
+See [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
-## Create an Amazon Bedrock AgentCore Long-Term Memory connector task
-
-import ConnectorTask from '../../../components/react-components/connector-task.md'
-
-<ConnectorTask/>
-
-## Authentication
-
-To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
-
-- **Credentials**: Select this option if you have a valid pair of access and secret keys provided by your AWS account administrator.
-
-:::note
-This option is applicable for both SaaS and Self-Managed users.
-:::
-
-- **Default Credentials Chain**: Select this option if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
-
-:::note
-This option is applicable only for Self-Managed or hybrid distributions.
-:::
+<OutboundConnectorBasics />
 
 ## Configuration
 
-1. In the **Region** field, enter the AWS region where your AgentCore Memory resource is deployed. For example, `us-east-1`.
-1. In the **Memory ID** field, enter the identifier of the AgentCore Memory resource you want to query.
-1. In the **Namespace** field, enter a namespace prefix to scope memory records. For example, `customer/12345`. This is required by AWS to organize and isolate memory records.
+### Authentication
+
+| Property       | Type          | Required                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Example |
+| :------------- | :------------ | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| AWS credential | Configuration | No                                            | Select a saved AWS credential with an optional default region, or enter the authentication details and a region in the fields below. Learn more about [credentials](/components/hub/organization/credentials/index.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
+| Authentication | Dropdown      | Yes, if no AWS credential is set              | <p>The AWS authentication strategy:</p><ul><li><p>**Credentials** (SaaS/Self-Managed): Use this option if you have a valid pair of access and secret keys provided by your AWS account administrator.</p></li><li><p>**Default Credentials Chain** (Hybrid/Self-Managed only): Use this option if your system is configured for implicit authentication, such as role-based authentication, credentials supplied through environment variables, or files on the target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve the required credentials.</p></li></ul> |         |
+| Access key     | String        | Yes, if **Authentication** is **Credentials** | The access key of an IAM user with permissions to read memory records.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
+| Secret key     | String        | Yes, if **Authentication** is **Credentials** | The secret key of the IAM user with the access key above.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |         |
+
+### Memory
+
+| Property  | Type   | Required | Description                                                                                         | Example          |
+| :-------- | :----- | :------- | :-------------------------------------------------------------------------------------------------- | :--------------- |
+| Memory ID | String | Yes      | The identifier of the AgentCore Memory resource you want to query.                                  |                  |
+| Namespace | String | Yes      | A namespace prefix to scope memory records. AWS requires it to organize and isolate memory records. | `customer/12345` |
+
+### Region
+
+| Property | Type   | Required                                     | Description                                                                                                | Example     |
+| :------- | :----- | :------------------------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------- |
+| Region   | String | Yes, if no AWS credential is set             | The AWS region where your AgentCore Memory resource is deployed.                                           | `us-east-1` |
+| Region   | String | Yes, if the credential has no default region | Overrides the default region of the selected AWS credential. Shown when an **AWS credential** is selected. |             |
 
 ## Operations
 
-The **Amazon Bedrock AgentCore Long-Term Memory connector** supports the following operations.
+Select the operation in the **Operation** dropdown. **Retrieve Memory Records** is selected by default. The properties that apply depend on the operation.
 
 ### Retrieve memory records
 
 Perform a semantic search to find relevant memory records based on a natural language query.
 
-#### Parameters
+#### Input parameters
 
-| Parameter              | Required | Description                                                                      |
-| :--------------------- | :------- | :------------------------------------------------------------------------------- |
-| **Search query**       | Yes      | Semantic search query to find relevant memory records (up to 10,000 characters). |
-| **Memory strategy ID** | No       | Limits the search to memories created by a specific extraction strategy.         |
-| **Max results**        | No       | Maximum number of results to return (1–100). Defaults to 10.                     |
-| **Next token**         | No       | Pagination token from a previous response to fetch the next page.                |
+| Property           | Type   | Required | Description                                                                      | Example |
+| :----------------- | :----- | :------- | :------------------------------------------------------------------------------- | :------ |
+| Search query       | String | Yes      | Semantic search query to find relevant memory records (up to 10,000 characters). |         |
+| Memory strategy ID | String | No       | Limits the search to memories created by a specific extraction strategy.         |         |
+| Max results        | Number | No       | Maximum number of results to return (1–100). Defaults to 10.                     | `10`    |
+| Pagination token   | String | No       | Pagination token from a previous response to fetch the next page.                |         |
+
+#### Output
+
+The operation returns the [response structure](#response) described below.
 
 ### List memory records
 
 List all memory records within the configured namespace.
 
-#### Parameters
+#### Input parameters
 
-| Parameter              | Required | Description                                                       |
-| :--------------------- | :------- | :---------------------------------------------------------------- |
-| **Memory strategy ID** | No       | Filter memory records by a specific extraction strategy.          |
-| **Max results**        | No       | Maximum number of results to return (1–100). Defaults to 20.      |
-| **Next token**         | No       | Pagination token from a previous response to fetch the next page. |
+| Property           | Type   | Required | Description                                                       | Example |
+| :----------------- | :----- | :------- | :---------------------------------------------------------------- | :------ |
+| Memory strategy ID | String | No       | Filter memory records by a specific extraction strategy.          |         |
+| Max results        | Number | No       | Maximum number of results to return (1–100). Defaults to 20.      | `20`    |
+| Pagination token   | String | No       | Pagination token from a previous response to fetch the next page. |         |
+
+#### Output
+
+The operation returns the [response structure](#response) described below.
 
 ## Response
 
-The connector operations use the following response structure:
+Both operations use the following response structure:
 
 | Field         | Description                                                                                  |
 | :------------ | :------------------------------------------------------------------------------------------- |
@@ -100,12 +115,11 @@ Each record in the `records` list contains:
 | `score`            | Relevance score (only present for retrieve operations). |
 | `metadata`         | Key-value metadata associated with the record.          |
 
-## Output mapping
+The connector returns only records that have text content, and `resultCount` counts only these records. In `metadata`, the connector includes only entries with string values.
 
-1. Use **Result Variable** to store the response in a process variable. For example, `memoryResult`.
-2. Use **Result Expression** to map specific fields from the response into process variables.
+To continue reading, pass the `nextToken` value of a response into the **Pagination token** field of the next call.
 
-For example, to extract the content from all records:
+Use the **Result variable** to store the response in a process variable, or the **Result expression** to map specific fields into process variables. For example, to extract the content from all records:
 
 ```feel
 = {
@@ -114,7 +128,7 @@ For example, to extract the content from all records:
 }
 ```
 
-## Example response
+### Example response
 
 The following is an example of the connector response:
 
@@ -149,3 +163,9 @@ The following is an example of the connector response:
   "nextToken": null
 }
 ```
+
+<ErrorHandling />
+
+### AGENTCORE_MEMORY_FAILED
+
+The connector throws an error with the code `AGENTCORE_MEMORY_FAILED` when AgentCore Memory returns an error. The error message contains the details from AWS.
