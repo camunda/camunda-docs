@@ -33,8 +33,7 @@ When a cluster loses access to its KMS key:
 - All encryption/decryption requests fail immediately.
 - Zeebe, Elasticsearch, and backup operations **freeze**.
 - Camunda Hub may still show the cluster as **Healthy**, even though no work can proceed.
-- Within ~15 minutes, the **Encryption at rest** panel displays:
-  > **External encryption key is not ready**
+- Within ~15 minutes, the **Encryption at rest** tab shows the status of each key, and what to do. See [key statuses](#key-statuses).
 
 ### Timeline of effects
 
@@ -65,7 +64,7 @@ When a cluster loses access to its KMS key:
   - All operations freeze.
   - Suspend/resume does not complete.
   - Backup operations get stuck.
-- Camunda Hub eventually shows: **External encryption key is not ready**
+- Camunda Hub eventually shows the status **Your key is disabled** or **Your key cannot be used** for the key. See [key statuses](#key-statuses).
 
 **Recovery:**  
 Re-enable the KMS key. Cluster resumes automatically, but recovery time increases the longer the key was disabled.
