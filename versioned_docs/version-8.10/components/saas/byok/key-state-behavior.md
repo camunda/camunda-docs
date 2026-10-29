@@ -100,15 +100,59 @@ If the KMS policy does not grant Camunda's AWS Role the required permissions:
 **Recovery:**  
 Update the KMS key policy using the Tenant Role ARN displayed in Hub.
 
-## Error handling and user-visible messages
+## Key statuses {#key-statuses}
 
-Currently, Camunda displays a single unified message:
+The **Encryption at rest** tab of the cluster in Camunda Hub shows one card for each external key. A single-region cluster has one key, the primary key. A dual-region cluster also has a secondary key.
 
-```yaml
-External encryption key is not ready
-```
+Each card shows the status of the key. If Camunda cannot use the key, the card also shows what to do, and a **Details** line. The **Details** line gives the exact request that failed, for example `Grant for StorageReplicationSource: KMS denied kms:CreateGrant on the key`. When you contact Camunda support, give them the cluster ID and this line.
 
-More granular messaging is planned for future iterations.
+| Status                                     | Meaning                                                                   | Action                                    |
+| ------------------------------------------ | ------------------------------------------------------------------------- | ----------------------------------------- |
+| **Ready**                                  | Camunda can use the key and all its grants.                               | None.                                     |
+| **Camunda is checking your key**           | Camunda checks that it can use the key. This usually takes a few minutes. | None.                                     |
+| **Camunda is not allowed to use your key** | AWS KMS denied a request from Camunda to the key.                         | [Fix the key policy](#key-access-denied). |
+| **Your key cannot be used**                | The key exists, but AWS KMS cannot use it for the request of Camunda.     | [Fix the key](#key-not-usable).           |
+| **Your key is disabled**                   | The key is disabled or scheduled for deletion.                            | [Enable the key](#key-not-enabled).       |
+| **AWS KMS is temporarily unavailable**     | AWS KMS did not answer in time, or limited the rate of requests.          | None. Camunda retries automatically.      |
+| **Camunda cannot check your key**          | A problem on the side of Camunda stops the check.                         | None.                                     |
+
+If the status **AWS KMS is temporarily unavailable** or **Camunda cannot check your key** stays for more than one hour, contact Camunda support.
+
+If you changed the key or its policy, wait a few minutes. AWS KMS can take several minutes to apply a change, so the status usually clears within 10 minutes.
+
+### Camunda is not allowed to use your key {#key-access-denied}
+
+The key policy must allow the tenant role of the cluster to use the key and to create grants on it. The cluster has one tenant role for all its keys. The **Encryption at rest** tab shows the ARN of the tenant role.
+
+1. Make sure that the key policy contains both Camunda statements from the [key policy template](/components/saas/byok/aws-kms-setup.md), with the tenant role ARN:
+   - "Allow Camunda tenant IAM Role basic key access"
+   - "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes"
+2. Make sure that no resource control policy in your AWS organization denies the tenant role access to the key.
+3. Find the denied request in AWS CloudTrail, in the account and Region of the key. The event shows the policy that denied the request.
+4. Make sure that the key ARN points to an existing key. AWS KMS gives the same denial for a key that does not exist.
+
+A deleted key also shows this status. If the key was deleted, AWS cannot restore it, and Camunda cannot recover the data that it encrypts. See [permanently deleted key](#permanently-deleted-key).
+
+If the key policy is correct and nothing in your organization denies the request, contact Camunda support.
+
+### Your key cannot be used {#key-not-usable}
+
+The key must be enabled, symmetric, and below its quota for grants. The **Details** line tells you which condition failed.
+
+1. Make sure that the key is enabled. If the key is scheduled for deletion, cancel the deletion, then enable the key.
+2. Make sure that the key is a symmetric key for encryption and decryption. In the AWS KMS console, the key type is **Symmetric** and the key usage is **Encrypt and decrypt**.
+3. Make sure that the key has not reached its AWS KMS quota for grants. If it has, contact Camunda support.
+
+A disabled key can show this status or **Your key is disabled**. For both, enable the key.
+
+### Your key is disabled {#key-not-enabled}
+
+The cluster cannot read or write its data until the key is enabled again.
+
+1. If the key is scheduled for deletion, cancel the deletion.
+2. Enable the key in AWS KMS.
+
+The cluster recovers automatically after the key is enabled.
 
 ## Operator responsibilities and best practices
 
