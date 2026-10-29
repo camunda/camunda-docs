@@ -17,7 +17,7 @@ const features = [
       "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
-    title: "Build with AI",
+    title: "Agentic orchestration",
     imageUrl: iconBuildWithAi,
     url: "/docs/guides/build-with-ai/overview/",
     description:

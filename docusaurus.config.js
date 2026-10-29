@@ -701,7 +701,7 @@ module.exports = {
         {
           type: "doc",
           docId: "guides/build-with-ai/overview",
-          label: "Build with AI",
+          label: "Agentic orchestration",
           position: "left",
         },
         {

@@ -2706,6 +2706,53 @@ p.link-button > a:focus-visible::after {
   color: var(--ifm-color-black);
 }
 
+/* On mobile, stack the banner button below the text. */
+@media (max-width: 996px) {
+  .build-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .build-banner-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 66%;
+  }
+
+  /* Align the button with the text, past the 64px icon and 20px gap. */
+  .build-banner .button--banner {
+    margin-left: 84px;
+  }
+
+  /* Keep the fade to white, but stay purple under the text. */
+  .build-banner > [aria-hidden="true"] {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 60%,
+      transparent 100%
+    ) !important;
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 60%,
+      transparent 100%
+    ) !important;
+  }
+}
+
+/* Banner button: outlined in dark mode, like p.link-button above. */
+[data-theme="dark"] .button.button--primary.button--banner {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .button.button--primary.button--banner:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black);
+}
+
 .link-arrow {
   position: relative;
   display: inline-flex;
