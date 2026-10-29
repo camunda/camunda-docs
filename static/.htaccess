@@ -143,8 +143,8 @@ RewriteRule ^docs/components/process-os-harness/run-a-project/review-cycle/?$ /d
 RewriteRule ^docs/(next/)?components/connectors/out-of-the-box-connectors/aws-dynamodb/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/ [R=301,L]
 RewriteRule ^docs/(next/)?components/connectors/out-of-the-box-connectors/aws-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/ [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns-outbound/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
@@ -744,6 +744,9 @@ RewriteRule ^docs/components/modeler/web-modeler/use-shared-project-for-organiza
 
 ## Current component moves and removals
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/email/?$ /docs/components/connectors/out-of-the-box-connectors/email-outbound/ [R=301,L]
+RewriteCond %{QUERY_STRING} amazonsns=inbound
+RewriteRule ^docs/(next/|8\.9/|8\.8/)?components/connectors/out-of-the-box-connectors/amazon-sns/?$ /docs/$1components/connectors/out-of-the-box-connectors/amazon-sns-inbound/? [R=301,L]
+RewriteRule ^docs/(next/|8\.9/|8\.8/)?components/connectors/out-of-the-box-connectors/amazon-sns/?$ /docs/$1components/connectors/out-of-the-box-connectors/amazon-sns-outbound/? [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/operate/?$ /docs/reference/announcements-release-notes/890/890-announcements/ [R=301,L]
 RewriteRule ^docs/components/early-access/alpha/ms-teams/?$ /docs/components/camunda-integrations/ms-teams/ms-teams/ [R=301,L]
 RewriteRule ^docs/components/identity/access-control/?$ /docs/components/admin/access-control/ [R=301,L]

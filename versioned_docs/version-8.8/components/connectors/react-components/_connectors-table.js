@@ -131,14 +131,14 @@ const SearchableTable = () => {
       name: "Amazon SNS inbound",
       description: "Trigger your process with an Amazon SNS notification.",
       type: "Inbound",
-      link: "../amazon-sns/?amazonsns=inbound",
+      link: "../amazon-sns-inbound/",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SNS outbound",
       description: "Send messages to Amazon SNS from your processes.",
       type: "Outbound",
-      link: "../amazon-sns/?amazonsns=outbound",
+      link: "../amazon-sns-outbound/",
       image: AmazonSnsImg,
     },
     {
