@@ -14,7 +14,11 @@ Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI
 
 The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in an [agent loop](/reference/glossary.md#agent-loop), providing automated tool selection.
 
-For example, use this connector to enable an AI agent to autonomously select and execute tasks within ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response. You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process to define the tools an AI agent can use.
+For example, use this connector to enable an AI agent to autonomously select and execute tasks within ad-hoc sub-processes by evaluating the current process context and determining the relevant tasks and tools to use in response.
+
+:::note
+You can also use the AI Agent connector independently, although it is designed to be used with an ad-hoc sub-process.
+:::
 
 Core features include:
 
@@ -26,10 +30,9 @@ Core features include:
 
 :::tip
 
-New to agentic orchestration?
+New to [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md)?
 
 - The [Build your first AI Agent](../../../guides/getting-started-agentic-orchestration.md) guide provides a quick introduction to agentic orchestration and how to use the AI Agent Sub-process connector using a blueprint.
-- The [agentic orchestration overview](../../agentic-orchestration/agentic-orchestration-overview.md) explains how AI agents work in Camunda.
 - See [further resources](#explore-further-resources) for examples of how you can use the AI Agent connector.
 
 :::
