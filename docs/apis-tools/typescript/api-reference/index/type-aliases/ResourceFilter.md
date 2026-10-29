@@ -18,7 +18,7 @@ Resource search filter.
 ### deploymentKey?
 
 ```ts
-optional deploymentKey?: DeploymentKeyFilterProperty;
+deploymentKey?: DeploymentKeyFilterProperty;
 ```
 
 Deployment key of this resource.
@@ -28,7 +28,7 @@ Deployment key of this resource.
 ### resourceId?
 
 ```ts
-optional resourceId?: StringFilterProperty;
+resourceId?: StringFilterProperty;
 ```
 
 Resource ID of this resource.
@@ -38,7 +38,7 @@ Resource ID of this resource.
 ### resourceKey?
 
 ```ts
-optional resourceKey?: ResourceKeyFilterProperty;
+resourceKey?: ResourceKeyFilterProperty;
 ```
 
 The key for this resource.
@@ -48,7 +48,7 @@ The key for this resource.
 ### resourceName?
 
 ```ts
-optional resourceName?: StringFilterProperty;
+resourceName?: StringFilterProperty;
 ```
 
 Resource name of this resource.
@@ -58,7 +58,7 @@ Resource name of this resource.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 Tenant ID of this resource.
@@ -68,7 +68,7 @@ Tenant ID of this resource.
 ### version?
 
 ```ts
-optional version?: IntegerFilterProperty;
+version?: IntegerFilterProperty;
 ```
 
 Version of this resource.
@@ -78,7 +78,7 @@ Version of this resource.
 ### versionTag?
 
 ```ts
-optional versionTag?: StringFilterProperty;
+versionTag?: StringFilterProperty;
 ```
 
 Version tag of this resource.

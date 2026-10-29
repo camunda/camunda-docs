@@ -18,7 +18,7 @@ Role user filter request
 ### username?
 
 ```ts
-optional username?: StringFilterProperty;
+username?: StringFilterProperty;
 ```
 
 The username search filters.

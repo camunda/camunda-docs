@@ -26,5 +26,5 @@ The field to sort the incident error statistics by.
 ### order?
 
 ```ts
-optional order?: SortOrderEnum;
+order?: SortOrderEnum;
 ```

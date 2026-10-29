@@ -16,7 +16,7 @@ type GetMappingRuleData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The ID of the mapping rule to get.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

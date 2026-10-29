@@ -56,39 +56,28 @@ new EventualConsistencyTimeout(args): EventualConsistencyTimeout;
 
 #### Inherited from
 
-```ts
-Data.TaggedError('EventualConsistencyTimeout')<{
-  readonly attempts?: number;
-  readonly elapsedMs?: number;
-  readonly message: string;
-  readonly cause?: unknown;
-}>.constructor
-```
+`Data.TaggedError('EventualConsistencyTimeout')<{ readonly attempts?: number; readonly elapsedMs?: number; readonly message: string; readonly cause?: unknown; }>.constructor`
 
 ## Properties
 
 ### attempts?
 
 ```ts
-readonly optional attempts?: number;
+readonly attempts?: number;
 ```
 
 #### Inherited from
 
-```ts
-Data.TaggedError("EventualConsistencyTimeout").attempts;
-```
+`Data.TaggedError('EventualConsistencyTimeout').attempts`
 
 ---
 
 ### elapsedMs?
 
 ```ts
-readonly optional elapsedMs?: number;
+readonly elapsedMs?: number;
 ```
 
 #### Inherited from
 
-```ts
-Data.TaggedError("EventualConsistencyTimeout").elapsedMs;
-```
+`Data.TaggedError('EventualConsistencyTimeout').elapsedMs`

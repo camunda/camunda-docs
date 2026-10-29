@@ -33,5 +33,5 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order?: SortOrderEnum;
+order?: SortOrderEnum;
 ```

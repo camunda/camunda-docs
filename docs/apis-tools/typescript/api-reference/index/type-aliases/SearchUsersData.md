@@ -16,7 +16,7 @@ type SearchUsersData = object;
 ### body?
 
 ```ts
-optional body?: UserSearchQueryRequest;
+body?: UserSearchQueryRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: UserSearchQueryRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

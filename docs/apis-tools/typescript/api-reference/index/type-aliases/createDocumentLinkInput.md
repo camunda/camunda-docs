@@ -16,7 +16,7 @@ type createDocumentLinkInput = createDocumentLinkBody & object;
 ### contentHash?
 
 ```ts
-optional contentHash?: createDocumentLinkQueryParam_contentHash;
+contentHash?: createDocumentLinkQueryParam_contentHash;
 ```
 
 ### documentId
@@ -28,5 +28,5 @@ documentId: createDocumentLinkPathParam_documentId;
 ### storeId?
 
 ```ts
-optional storeId?: createDocumentLinkQueryParam_storeId;
+storeId?: createDocumentLinkQueryParam_storeId;
 ```

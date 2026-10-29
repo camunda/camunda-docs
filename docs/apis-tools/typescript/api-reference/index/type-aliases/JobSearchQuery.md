@@ -18,7 +18,7 @@ Job search request.
 ### filter?
 
 ```ts
-optional filter?: JobFilter;
+filter?: JobFilter;
 ```
 
 The job search filters.
@@ -26,7 +26,7 @@ The job search filters.
 ### sort?
 
 ```ts
-optional sort?: JobSearchQuerySortRequest[];
+sort?: JobSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

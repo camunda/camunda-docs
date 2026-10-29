@@ -16,7 +16,7 @@ type SearchClientsForTenantData = object;
 ### body?
 
 ```ts
-optional body?: TenantClientSearchQueryRequest;
+body?: TenantClientSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

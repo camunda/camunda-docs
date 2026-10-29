@@ -16,7 +16,7 @@ type SearchAgentDefinitionsData = object;
 ### body?
 
 ```ts
-optional body?: AgentDefinitionSearchQuery;
+body?: AgentDefinitionSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: AgentDefinitionSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

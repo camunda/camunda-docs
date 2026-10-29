@@ -25,6 +25,4 @@ new CancelError(): CancelError;
 
 #### Overrides
 
-```ts
-Error.constructor;
-```
+`Error.constructor`

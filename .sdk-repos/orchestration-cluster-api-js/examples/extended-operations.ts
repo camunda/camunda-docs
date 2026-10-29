@@ -9,11 +9,13 @@ import {
   type ProcessDefinitionKey,
   type ProcessInstanceKey,
   type VariableKey,
-} from '@camunda8/orchestration-cluster-api';
-import { z } from 'zod';
+} from "@camunda8/orchestration-cluster-api";
+import { z } from "zod";
 
 //#region DeleteProcessInstance
-async function deleteProcessInstanceExample(processInstanceKey: ProcessInstanceKey) {
+async function deleteProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   await camunda.deleteProcessInstance({ processInstanceKey });
@@ -59,7 +61,9 @@ async function modifyProcessInstanceExample(
 //#endregion ModifyProcessInstance
 
 //#region GetProcessInstanceStatistics
-async function getProcessInstanceStatisticsExample(processInstanceKey: ProcessInstanceKey) {
+async function getProcessInstanceStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.getProcessInstanceStatistics(
@@ -91,7 +95,9 @@ async function getProcessInstanceWaitStateStatisticsExample(
 //#endregion GetProcessInstanceWaitStateStatistics
 
 //#region GetProcessInstanceSequenceFlows
-async function getProcessInstanceSequenceFlowsExample(processInstanceKey: ProcessInstanceKey) {
+async function getProcessInstanceSequenceFlowsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.getProcessInstanceSequenceFlows(
@@ -106,7 +112,9 @@ async function getProcessInstanceSequenceFlowsExample(processInstanceKey: Proces
 //#endregion GetProcessInstanceSequenceFlows
 
 //#region GetProcessInstanceCallHierarchy
-async function getProcessInstanceCallHierarchyExample(processInstanceKey: ProcessInstanceKey) {
+async function getProcessInstanceCallHierarchyExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.getProcessInstanceCallHierarchy(
@@ -119,7 +127,9 @@ async function getProcessInstanceCallHierarchyExample(processInstanceKey: Proces
 //#endregion GetProcessInstanceCallHierarchy
 
 //#region SearchProcessInstanceIncidents
-async function searchProcessInstanceIncidentsExample(processInstanceKey: ProcessInstanceKey) {
+async function searchProcessInstanceIncidentsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchProcessInstanceIncidents(
@@ -136,17 +146,23 @@ async function searchProcessInstanceIncidentsExample(processInstanceKey: Process
 //#endregion SearchProcessInstanceIncidents
 
 //#region ResolveProcessInstanceIncidents
-async function resolveProcessInstanceIncidentsExample(processInstanceKey: ProcessInstanceKey) {
+async function resolveProcessInstanceIncidentsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
-  const result = await camunda.resolveProcessInstanceIncidents({ processInstanceKey });
+  const result = await camunda.resolveProcessInstanceIncidents({
+    processInstanceKey,
+  });
 
   console.log(`Batch operation key: ${result.batchOperationKey}`);
 }
 //#endregion ResolveProcessInstanceIncidents
 
 //#region GetProcessDefinition
-async function getProcessDefinitionExample(processDefinitionKey: ProcessDefinitionKey) {
+async function getProcessDefinitionExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const definition = await camunda.getProcessDefinition(
@@ -154,12 +170,16 @@ async function getProcessDefinitionExample(processDefinitionKey: ProcessDefiniti
     { consistency: { waitUpToMs: 5000 } }
   );
 
-  console.log(`Process: ${definition.processDefinitionId} v${definition.version}`);
+  console.log(
+    `Process: ${definition.processDefinitionId} v${definition.version}`
+  );
 }
 //#endregion GetProcessDefinition
 
 //#region GetProcessDefinitionXml
-async function getProcessDefinitionXmlExample(processDefinitionKey: ProcessDefinitionKey) {
+async function getProcessDefinitionXmlExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const xml = await camunda.getProcessDefinitionXml(
@@ -183,7 +203,9 @@ async function searchProcessDefinitionsExample() {
   );
 
   for (const def of result.items ?? []) {
-    console.log(`${def.processDefinitionKey}: ${def.processDefinitionId} v${def.version}`);
+    console.log(
+      `${def.processDefinitionKey}: ${def.processDefinitionId} v${def.version}`
+    );
   }
 }
 //#endregion SearchProcessDefinitions
@@ -206,7 +228,9 @@ async function searchProcessDefinitionVariableNamesExample(
 //#endregion SearchProcessDefinitionVariableNames
 
 //#region GetProcessDefinitionStatistics
-async function getProcessDefinitionStatisticsExample(processDefinitionKey: ProcessDefinitionKey) {
+async function getProcessDefinitionStatisticsExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.getProcessDefinitionStatistics(
@@ -264,10 +288,11 @@ async function getProcessDefinitionInstanceVersionStatisticsExample(
 async function getProcessDefinitionMessageSubscriptionStatisticsExample() {
   const camunda = createCamundaClient();
 
-  const result = await camunda.getProcessDefinitionMessageSubscriptionStatistics(
-    {},
-    { consistency: { waitUpToMs: 5000 } }
-  );
+  const result =
+    await camunda.getProcessDefinitionMessageSubscriptionStatistics(
+      {},
+      { consistency: { waitUpToMs: 5000 } }
+    );
 
   for (const stat of result.items ?? []) {
     console.log(
@@ -278,7 +303,9 @@ async function getProcessDefinitionMessageSubscriptionStatisticsExample() {
 //#endregion GetProcessDefinitionMessageSubscriptionStatistics
 
 //#region GetStartProcessForm
-async function getStartProcessFormExample(processDefinitionKey: ProcessDefinitionKey) {
+async function getStartProcessFormExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const form = await camunda.getStartProcessForm(
@@ -326,7 +353,9 @@ async function searchVariablesExample(processInstanceKey: ProcessInstanceKey) {
 //#endregion SearchVariables
 
 //#region SearchVariablesAsDto
-async function searchVariablesAsDtoExample(processInstanceKey: ProcessInstanceKey) {
+async function searchVariablesAsDtoExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   // The Zod schema is the DTO: its keys are the variable names to fetch, and its
@@ -337,22 +366,26 @@ async function searchVariablesAsDtoExample(processInstanceKey: ProcessInstanceKe
     amount: z.number().optional(), // optional
   });
 
-  const map = await camunda.searchVariablesAsDto(OrderVariables, { processInstanceKey });
+  const map = await camunda.searchVariablesAsDto(OrderVariables, {
+    processInstanceKey,
+  });
 
   // Lenient access: defensive reads that never throw on missing variables.
-  if (map.has('amount')) {
-    console.log('Amount:', map.get('amount'));
+  if (map.has("amount")) {
+    console.log("Amount:", map.get("amount"));
   }
 
   // Strict access: returns a fully-typed object, or throws a ZodError when a
   // required variable is missing or malformed.
   const order = map.validate(); // { orderId: string; amount?: number }
-  console.log('Order:', order.orderId);
+  console.log("Order:", order.orderId);
 }
 //#endregion SearchVariablesAsDto
 
 //#region GetElementInstance
-async function getElementInstanceExample(elementInstanceKey: ElementInstanceKey) {
+async function getElementInstanceExample(
+  elementInstanceKey: ElementInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const element = await camunda.getElementInstance(
@@ -365,7 +398,9 @@ async function getElementInstanceExample(elementInstanceKey: ElementInstanceKey)
 //#endregion GetElementInstance
 
 //#region SearchElementInstances
-async function searchElementInstancesExample(processInstanceKey: ProcessInstanceKey) {
+async function searchElementInstancesExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchElementInstances(
@@ -385,7 +420,9 @@ async function searchElementInstancesExample(processInstanceKey: ProcessInstance
 //#endregion SearchElementInstances
 
 //#region SearchElementInstanceIncidents
-async function searchElementInstanceIncidentsExample(elementInstanceKey: ElementInstanceKey) {
+async function searchElementInstanceIncidentsExample(
+  elementInstanceKey: ElementInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchElementInstanceIncidents(
@@ -400,7 +437,9 @@ async function searchElementInstanceIncidentsExample(elementInstanceKey: Element
 //#endregion SearchElementInstanceIncidents
 
 //#region SearchElementInstanceWaitStates
-async function searchElementInstanceWaitStatesExample(processInstanceKey: ProcessInstanceKey) {
+async function searchElementInstanceWaitStatesExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchElementInstanceWaitStates(
@@ -416,9 +455,9 @@ async function searchElementInstanceWaitStatesExample(processInstanceKey: Proces
   for (const waitState of result.items ?? []) {
     const { details } = waitState;
     let description: string;
-    if (details.waitStateType === 'JOB') {
+    if (details.waitStateType === "JOB") {
       description = `waiting on job '${details.jobType}'`;
-    } else if (details.waitStateType === 'MESSAGE') {
+    } else if (details.waitStateType === "MESSAGE") {
       description = `waiting for message '${details.messageName}'`;
     } else {
       description = `waiting (${details.waitStateType})`;
@@ -429,12 +468,14 @@ async function searchElementInstanceWaitStatesExample(processInstanceKey: Proces
 //#endregion SearchElementInstanceWaitStates
 
 //#region CreateElementInstanceVariables
-async function createElementInstanceVariablesExample(elementInstanceKey: ElementInstanceKey) {
+async function createElementInstanceVariablesExample(
+  elementInstanceKey: ElementInstanceKey
+) {
   const camunda = createCamundaClient();
 
   await camunda.createElementInstanceVariables({
     elementInstanceKey,
-    variables: { orderId: 'ORD-12345', status: 'processing' },
+    variables: { orderId: "ORD-12345", status: "processing" },
   });
 }
 //#endregion CreateElementInstanceVariables

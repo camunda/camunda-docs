@@ -18,7 +18,7 @@ Variable search query request.
 ### filter?
 
 ```ts
-optional filter?: VariableFilter;
+filter?: VariableFilter;
 ```
 
 The variable search filters.
@@ -26,7 +26,7 @@ The variable search filters.
 ### sort?
 
 ```ts
-optional sort?: VariableSearchQuerySortRequest[];
+sort?: VariableSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

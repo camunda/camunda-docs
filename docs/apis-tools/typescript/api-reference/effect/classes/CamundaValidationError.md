@@ -66,16 +66,7 @@ new CamundaValidationError(args): CamundaValidationError;
 
 #### Inherited from
 
-```ts
-Data.TaggedError('CamundaValidationError')<{
-  readonly side: 'request' | 'response';
-  readonly operationId?: string;
-  readonly summary: string;
-  readonly issues: string[];
-  readonly message: string;
-  readonly cause?: unknown;
-}>.constructor
-```
+Data.TaggedError('CamundaValidationError')\<\{ readonly side: 'request' \| 'response'; readonly operationId?: string; readonly summary: string; readonly issues: string\[\]; readonly message: string; readonly cause?: unknown; \}\>.constructor
 
 ## Properties
 
@@ -87,23 +78,19 @@ readonly issues: string[];
 
 #### Inherited from
 
-```ts
-Data.TaggedError("CamundaValidationError").issues;
-```
+`Data.TaggedError('CamundaValidationError').issues`
 
 ---
 
 ### operationId?
 
 ```ts
-readonly optional operationId?: string;
+readonly operationId?: string;
 ```
 
 #### Inherited from
 
-```ts
-Data.TaggedError("CamundaValidationError").operationId;
-```
+`Data.TaggedError('CamundaValidationError').operationId`
 
 ---
 
@@ -115,9 +102,7 @@ readonly side: "request" | "response";
 
 #### Inherited from
 
-```ts
-Data.TaggedError("CamundaValidationError").side;
-```
+`Data.TaggedError('CamundaValidationError').side`
 
 ---
 
@@ -129,6 +114,4 @@ readonly summary: string;
 
 #### Inherited from
 
-```ts
-Data.TaggedError("CamundaValidationError").summary;
-```
+`Data.TaggedError('CamundaValidationError').summary`

@@ -16,7 +16,7 @@ type GetResourceContentData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The unique key identifying the RPA resource.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -18,7 +18,7 @@ Process definition variable name search query request.
 ### filter?
 
 ```ts
-optional filter?: ProcessDefinitionVariableNameFilter;
+filter?: ProcessDefinitionVariableNameFilter;
 ```
 
 The process definition variable name search filters.

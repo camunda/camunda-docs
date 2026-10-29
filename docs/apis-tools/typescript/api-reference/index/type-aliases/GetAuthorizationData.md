@@ -16,7 +16,7 @@ type GetAuthorizationData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the authorization to get.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

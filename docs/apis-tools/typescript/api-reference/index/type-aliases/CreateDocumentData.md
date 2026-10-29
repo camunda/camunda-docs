@@ -28,7 +28,7 @@ file: Blob | File;
 #### metadata?
 
 ```ts
-optional metadata?: DocumentMetadata;
+metadata?: DocumentMetadata;
 ```
 
 ---
@@ -36,7 +36,7 @@ optional metadata?: DocumentMetadata;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -44,13 +44,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### documentId?
 
 ```ts
-optional documentId?: DocumentId;
+documentId?: DocumentId;
 ```
 
 The ID of the document to upload. If not provided, a new ID will be generated. Specifying an existing ID will result in an error if the document already exists.
@@ -58,7 +58,7 @@ The ID of the document to upload. If not provided, a new ID will be generated. S
 #### storeId?
 
 ```ts
-optional storeId?: string;
+storeId?: string;
 ```
 
 The ID of the document store to upload the documents to. Currently, only a single document store is supported per cluster. However, this attribute is included to allow for potential future support of multiple document stores.

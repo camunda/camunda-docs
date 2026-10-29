@@ -18,7 +18,7 @@ Describes a restore request. Provide either a list of backup IDs or a time range
 ### backupIds?
 
 ```ts
-optional backupIds?: number[] | null;
+backupIds?: number[] | null;
 ```
 
 The IDs of the backups to restore from, one per partition.
@@ -28,7 +28,7 @@ The IDs of the backups to restore from, one per partition.
 ### from?
 
 ```ts
-optional from?: string | null;
+from?: string | null;
 ```
 
 The start of the time range to restore from, as an ISO 8601 timestamp.
@@ -38,7 +38,7 @@ The start of the time range to restore from, as an ISO 8601 timestamp.
 ### to?
 
 ```ts
-optional to?: string | null;
+to?: string | null;
 ```
 
 The end of the time range to restore from, as an ISO 8601 timestamp.

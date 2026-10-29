@@ -16,7 +16,7 @@ type GroupUpdateRequest = object;
 ### description?
 
 ```ts
-optional description?: string;
+description?: string;
 ```
 
 The new description of the group.

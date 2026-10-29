@@ -9,7 +9,7 @@ import {
   type RoleId,
   type TenantId,
   type Username,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateTenant
 async function createTenantExample(tenantId: TenantId) {
@@ -17,7 +17,7 @@ async function createTenantExample(tenantId: TenantId) {
 
   const result = await camunda.createTenant({
     tenantId,
-    name: 'Customer Service',
+    name: "Customer Service",
   });
 
   console.log(`Created tenant: ${result.tenantId}`);
@@ -28,7 +28,10 @@ async function createTenantExample(tenantId: TenantId) {
 async function getTenantExample(tenantId: TenantId) {
   const camunda = createCamundaClient();
 
-  const tenant = await camunda.getTenant({ tenantId }, { consistency: { waitUpToMs: 5000 } });
+  const tenant = await camunda.getTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   console.log(`Tenant: ${tenant.name}`);
 }
@@ -57,7 +60,7 @@ async function updateTenantExample(tenantId: TenantId) {
 
   await camunda.updateTenant({
     tenantId,
-    name: 'Customer Service Team',
+    name: "Customer Service Team",
   });
 }
 //#endregion UpdateTenant
@@ -71,7 +74,10 @@ async function deleteTenantExample(tenantId: TenantId) {
 //#endregion DeleteTenant
 
 //#region AssignUserToTenant
-async function assignUserToTenantExample(tenantId: TenantId, username: Username) {
+async function assignUserToTenantExample(
+  tenantId: TenantId,
+  username: Username
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignUserToTenant({
@@ -82,7 +88,10 @@ async function assignUserToTenantExample(tenantId: TenantId, username: Username)
 //#endregion AssignUserToTenant
 
 //#region UnassignUserFromTenant
-async function unassignUserFromTenantExample(tenantId: TenantId, username: Username) {
+async function unassignUserFromTenantExample(
+  tenantId: TenantId,
+  username: Username
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignUserFromTenant({
@@ -93,7 +102,10 @@ async function unassignUserFromTenantExample(tenantId: TenantId, username: Usern
 //#endregion UnassignUserFromTenant
 
 //#region AssignGroupToTenant
-async function assignGroupToTenantExample(tenantId: TenantId, groupId: GroupId) {
+async function assignGroupToTenantExample(
+  tenantId: TenantId,
+  groupId: GroupId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignGroupToTenant({
@@ -104,7 +116,10 @@ async function assignGroupToTenantExample(tenantId: TenantId, groupId: GroupId) 
 //#endregion AssignGroupToTenant
 
 //#region UnassignGroupFromTenant
-async function unassignGroupFromTenantExample(tenantId: TenantId, groupId: GroupId) {
+async function unassignGroupFromTenantExample(
+  tenantId: TenantId,
+  groupId: GroupId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignGroupFromTenant({
@@ -126,7 +141,10 @@ async function assignRoleToTenantExample(tenantId: TenantId, roleId: RoleId) {
 //#endregion AssignRoleToTenant
 
 //#region UnassignRoleFromTenant
-async function unassignRoleFromTenantExample(tenantId: TenantId, roleId: RoleId) {
+async function unassignRoleFromTenantExample(
+  tenantId: TenantId,
+  roleId: RoleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromTenant({
@@ -137,7 +155,10 @@ async function unassignRoleFromTenantExample(tenantId: TenantId, roleId: RoleId)
 //#endregion UnassignRoleFromTenant
 
 //#region AssignClientToTenant
-async function assignClientToTenantExample(tenantId: TenantId, clientId: ClientId) {
+async function assignClientToTenantExample(
+  tenantId: TenantId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignClientToTenant({
@@ -148,7 +169,10 @@ async function assignClientToTenantExample(tenantId: TenantId, clientId: ClientI
 //#endregion AssignClientToTenant
 
 //#region UnassignClientFromTenant
-async function unassignClientFromTenantExample(tenantId: TenantId, clientId: ClientId) {
+async function unassignClientFromTenantExample(
+  tenantId: TenantId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignClientFromTenant({
@@ -159,7 +183,10 @@ async function unassignClientFromTenantExample(tenantId: TenantId, clientId: Cli
 //#endregion UnassignClientFromTenant
 
 //#region AssignMappingRuleToTenant
-async function assignMappingRuleToTenantExample(tenantId: TenantId, mappingRuleId: MappingRuleId) {
+async function assignMappingRuleToTenantExample(
+  tenantId: TenantId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignMappingRuleToTenant({

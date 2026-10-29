@@ -16,7 +16,7 @@ type SetVariableRequest = object;
 ### local?
 
 ```ts
-optional local?: boolean;
+local?: boolean;
 ```
 
 If set to `true`, the variables are merged strictly into the local scope (as specified
@@ -39,7 +39,7 @@ default, with local set to `false`, scope '1' will be { "foo": 5 } and scope '2'
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```
 
 ---

@@ -40,7 +40,7 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

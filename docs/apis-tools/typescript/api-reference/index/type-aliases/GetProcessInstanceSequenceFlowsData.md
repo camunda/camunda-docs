@@ -16,7 +16,7 @@ type GetProcessInstanceSequenceFlowsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the process instance, which acts as a unique identifier for 
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -16,5 +16,5 @@ type listRuntimeBackupsInput = object;
 ### prefix?
 
 ```ts
-optional prefix?: listRuntimeBackupsQueryParam_prefix;
+prefix?: listRuntimeBackupsQueryParam_prefix;
 ```

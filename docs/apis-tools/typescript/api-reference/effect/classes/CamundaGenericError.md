@@ -46,9 +46,4 @@ new CamundaGenericError(args): CamundaGenericError;
 
 #### Inherited from
 
-```ts
-Data.TaggedError('CamundaGenericError')<{
-  readonly message: string;
-  readonly cause?: unknown;
-}>.constructor
-```
+`Data.TaggedError('CamundaGenericError')<{ readonly message: string; readonly cause?: unknown; }>.constructor`

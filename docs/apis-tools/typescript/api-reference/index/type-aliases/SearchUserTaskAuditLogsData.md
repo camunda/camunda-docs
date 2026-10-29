@@ -16,7 +16,7 @@ type SearchUserTaskAuditLogsData = object;
 ### body?
 
 ```ts
-optional body?: UserTaskAuditLogSearchQueryRequest;
+body?: UserTaskAuditLogSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the user task.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -16,7 +16,7 @@ type SearchDecisionDefinitionsData = object;
 ### body?
 
 ```ts
-optional body?: DecisionDefinitionSearchQuery;
+body?: DecisionDefinitionSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: DecisionDefinitionSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

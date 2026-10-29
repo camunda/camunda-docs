@@ -16,7 +16,7 @@ type GetFormByKeyData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The form key.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

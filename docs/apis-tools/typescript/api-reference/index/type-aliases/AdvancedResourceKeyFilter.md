@@ -20,7 +20,7 @@ Advanced ResourceKey filter.
 ### $eq?
 
 ```ts
-optional $eq?: ResourceKey;
+$eq?: ResourceKey;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: ResourceKey[];
+$in?: ResourceKey[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq?: ResourceKey;
+$neq?: ResourceKey;
 ```
 
 Checks for inequality with the provided value.
@@ -60,7 +60,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn?: ResourceKey[];
+$notIn?: ResourceKey[];
 ```
 
 Checks if the property matches none of the provided values.

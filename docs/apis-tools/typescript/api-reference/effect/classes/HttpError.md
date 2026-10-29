@@ -56,39 +56,28 @@ new HttpError(args): HttpError;
 
 #### Inherited from
 
-```ts
-Data.TaggedError('HttpError')<{
-  readonly status?: number;
-  readonly body?: unknown;
-  readonly message: string;
-  readonly cause?: unknown;
-}>.constructor
-```
+`Data.TaggedError('HttpError')<{ readonly status?: number; readonly body?: unknown; readonly message: string; readonly cause?: unknown; }>.constructor`
 
 ## Properties
 
 ### body?
 
 ```ts
-readonly optional body?: unknown;
+readonly body?: unknown;
 ```
 
 #### Inherited from
 
-```ts
-Data.TaggedError("HttpError").body;
-```
+`Data.TaggedError('HttpError').body`
 
 ---
 
 ### status?
 
 ```ts
-readonly optional status?: number;
+readonly status?: number;
 ```
 
 #### Inherited from
 
-```ts
-Data.TaggedError("HttpError").status;
-```
+`Data.TaggedError('HttpError').status`

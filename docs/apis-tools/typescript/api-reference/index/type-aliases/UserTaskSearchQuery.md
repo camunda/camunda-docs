@@ -18,7 +18,7 @@ User task search query request.
 ### filter?
 
 ```ts
-optional filter?: UserTaskFilter;
+filter?: UserTaskFilter;
 ```
 
 The user task search filters.
@@ -26,7 +26,7 @@ The user task search filters.
 ### sort?
 
 ```ts
-optional sort?: UserTaskSearchQuerySortRequest[];
+sort?: UserTaskSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

@@ -16,7 +16,7 @@ type SearchGroupIdsForTenantData = object;
 ### body?
 
 ```ts
-optional body?: TenantGroupSearchQueryRequest;
+body?: TenantGroupSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

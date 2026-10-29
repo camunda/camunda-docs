@@ -18,7 +18,7 @@ User task filter fields.
 ### assignee?
 
 ```ts
-optional assignee?: StringFilterProperty;
+assignee?: StringFilterProperty;
 ```
 
 The assignee of the user task.
@@ -28,7 +28,7 @@ The assignee of the user task.
 ### businessId?
 
 ```ts
-optional businessId?: StringFilterProperty;
+businessId?: StringFilterProperty;
 ```
 
 The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found.
@@ -38,7 +38,7 @@ The business ID of the owning process instance the user task belongs to. This on
 ### candidateGroup?
 
 ```ts
-optional candidateGroup?: StringFilterProperty;
+candidateGroup?: StringFilterProperty;
 ```
 
 The candidate group for this user task.
@@ -48,7 +48,7 @@ The candidate group for this user task.
 ### candidateUser?
 
 ```ts
-optional candidateUser?: StringFilterProperty;
+candidateUser?: StringFilterProperty;
 ```
 
 The candidate user for this user task.
@@ -58,7 +58,7 @@ The candidate user for this user task.
 ### completionDate?
 
 ```ts
-optional completionDate?: DateTimeFilterProperty;
+completionDate?: DateTimeFilterProperty;
 ```
 
 The user task completion date.
@@ -68,7 +68,7 @@ The user task completion date.
 ### creationDate?
 
 ```ts
-optional creationDate?: DateTimeFilterProperty;
+creationDate?: DateTimeFilterProperty;
 ```
 
 The user task creation date.
@@ -78,7 +78,7 @@ The user task creation date.
 ### dueDate?
 
 ```ts
-optional dueDate?: DateTimeFilterProperty;
+dueDate?: DateTimeFilterProperty;
 ```
 
 The user task due date.
@@ -88,7 +88,7 @@ The user task due date.
 ### elementId?
 
 ```ts
-optional elementId?: ElementId;
+elementId?: ElementId;
 ```
 
 The element ID of the user task.
@@ -98,7 +98,7 @@ The element ID of the user task.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKey;
+elementInstanceKey?: ElementInstanceKey;
 ```
 
 The key of the element instance.
@@ -108,7 +108,7 @@ The key of the element instance.
 ### followUpDate?
 
 ```ts
-optional followUpDate?: DateTimeFilterProperty;
+followUpDate?: DateTimeFilterProperty;
 ```
 
 The user task follow-up date.
@@ -118,7 +118,7 @@ The user task follow-up date.
 ### isSuspended?
 
 ```ts
-optional isSuspended?: boolean | null;
+isSuspended?: boolean | null;
 ```
 
 Whether the user task is suspended because its owning process instance is suspended.
@@ -128,7 +128,7 @@ Whether the user task is suspended because its owning process instance is suspen
 ### localVariables?
 
 ```ts
-optional localVariables?: VariableValueFilterProperty[];
+localVariables?: VariableValueFilterProperty[];
 ```
 
 The local variables of the user task.
@@ -138,7 +138,7 @@ The local variables of the user task.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
@@ -148,7 +148,7 @@ The task name. This only works for data created with 8.8 and onwards. Instances 
 ### priority?
 
 ```ts
-optional priority?: IntegerFilterProperty;
+priority?: IntegerFilterProperty;
 ```
 
 The priority of the user task.
@@ -158,7 +158,7 @@ The priority of the user task.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: ProcessDefinitionIdFilterProperty;
+processDefinitionId?: ProcessDefinitionIdFilterProperty;
 ```
 
 The ID of the process definition.
@@ -168,7 +168,7 @@ The ID of the process definition.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The key of the process definition.
@@ -178,7 +178,7 @@ The key of the process definition.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of the process instance.
@@ -188,7 +188,7 @@ The key of the process instance.
 ### processInstanceVariables?
 
 ```ts
-optional processInstanceVariables?: VariableValueFilterProperty[];
+processInstanceVariables?: VariableValueFilterProperty[];
 ```
 
 The variables of the process instance.
@@ -198,7 +198,7 @@ The variables of the process instance.
 ### state?
 
 ```ts
-optional state?: UserTaskStateFilterProperty;
+state?: UserTaskStateFilterProperty;
 ```
 
 The user task state.
@@ -208,7 +208,7 @@ The user task state.
 ### tags?
 
 ```ts
-optional tags?: TagSet;
+tags?: TagSet;
 ```
 
 ---
@@ -216,7 +216,7 @@ optional tags?: TagSet;
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 Tenant ID of this user task.
@@ -226,7 +226,7 @@ Tenant ID of this user task.
 ### userTaskKey?
 
 ```ts
-optional userTaskKey?: UserTaskKey;
+userTaskKey?: UserTaskKey;
 ```
 
 The key for this user task.

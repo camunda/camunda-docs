@@ -16,7 +16,7 @@ type GetAuditLogData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The audit log key.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -16,7 +16,7 @@ type MappingRuleSearchQueryRequest = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: MappingRuleFilter;
+filter?: MappingRuleFilter;
 ```
 
 The mapping rule search filters.
@@ -24,7 +24,7 @@ The mapping rule search filters.
 ### sort?
 
 ```ts
-optional sort?: MappingRuleSearchQuerySortRequest[];
+sort?: MappingRuleSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

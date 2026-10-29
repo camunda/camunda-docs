@@ -16,7 +16,7 @@ type CreateRoleData = object;
 ### body?
 
 ```ts
-optional body?: RoleCreateRequest;
+body?: RoleCreateRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: RoleCreateRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

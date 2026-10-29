@@ -40,7 +40,7 @@ The key of the job to update.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

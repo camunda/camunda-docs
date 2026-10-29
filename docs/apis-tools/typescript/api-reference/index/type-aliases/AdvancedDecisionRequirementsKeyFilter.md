@@ -20,7 +20,7 @@ Advanced DecisionRequirementsKey filter.
 ### $eq?
 
 ```ts
-optional $eq?: DecisionRequirementsKey;
+$eq?: DecisionRequirementsKey;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: DecisionRequirementsKey[];
+$in?: DecisionRequirementsKey[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq?: DecisionRequirementsKey;
+$neq?: DecisionRequirementsKey;
 ```
 
 Checks for inequality with the provided value.
@@ -60,7 +60,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn?: DecisionRequirementsKey[];
+$notIn?: DecisionRequirementsKey[];
 ```
 
 Checks if the property matches none of the provided values.

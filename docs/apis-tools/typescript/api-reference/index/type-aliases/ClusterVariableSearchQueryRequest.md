@@ -18,7 +18,7 @@ Cluster variable search query request.
 ### filter?
 
 ```ts
-optional filter?: ClusterVariableSearchQueryFilterRequest;
+filter?: ClusterVariableSearchQueryFilterRequest;
 ```
 
 The cluster variable search filters.
@@ -26,7 +26,7 @@ The cluster variable search filters.
 ### sort?
 
 ```ts
-optional sort?: ClusterVariableSearchQuerySortRequest[];
+sort?: ClusterVariableSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

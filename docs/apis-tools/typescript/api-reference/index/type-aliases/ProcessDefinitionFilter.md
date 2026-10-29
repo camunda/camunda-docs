@@ -18,7 +18,7 @@ Process definition search filter.
 ### hasStartForm?
 
 ```ts
-optional hasStartForm?: boolean;
+hasStartForm?: boolean;
 ```
 
 Indicates whether the start event of the process has an associated Form Key.
@@ -28,7 +28,7 @@ Indicates whether the start event of the process has an associated Form Key.
 ### isLatestVersion?
 
 ```ts
-optional isLatestVersion?: boolean;
+isLatestVersion?: boolean;
 ```
 
 Whether to only return the latest version of each process definition.
@@ -41,7 +41,7 @@ When using this filter, sorting is limited to `processDefinitionId` and `tenantI
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 Name of this process definition.
@@ -51,7 +51,7 @@ Name of this process definition.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 Process definition ID of this process definition.
@@ -61,7 +61,7 @@ Process definition ID of this process definition.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKey;
+processDefinitionKey?: ProcessDefinitionKey;
 ```
 
 The key for this process definition.
@@ -71,7 +71,7 @@ The key for this process definition.
 ### resourceName?
 
 ```ts
-optional resourceName?: string;
+resourceName?: string;
 ```
 
 Resource name of this process definition.
@@ -81,7 +81,7 @@ Resource name of this process definition.
 ### state?
 
 ```ts
-optional state?: "ACTIVE" | "DRAINING" | "DELETED";
+state?: "ACTIVE" | "DRAINING" | "DELETED";
 ```
 
 Filter by the process definition's state.
@@ -97,7 +97,7 @@ retained in secondary storage.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 Tenant ID of this process definition.
@@ -107,7 +107,7 @@ Tenant ID of this process definition.
 ### version?
 
 ```ts
-optional version?: number;
+version?: number;
 ```
 
 Version of this process definition.
@@ -117,7 +117,7 @@ Version of this process definition.
 ### versionTag?
 
 ```ts
-optional versionTag?: string;
+versionTag?: string;
 ```
 
 Version tag of this process definition.

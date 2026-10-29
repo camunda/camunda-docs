@@ -18,7 +18,7 @@ Role filter request
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The role name search filters.
@@ -28,7 +28,7 @@ The role name search filters.
 ### roleId?
 
 ```ts
-optional roleId?: StringFilterProperty;
+roleId?: StringFilterProperty;
 ```
 
 The role ID search filters.

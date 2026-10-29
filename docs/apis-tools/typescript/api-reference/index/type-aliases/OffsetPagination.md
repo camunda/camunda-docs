@@ -18,7 +18,7 @@ Offset-based pagination
 ### from?
 
 ```ts
-optional from?: number;
+from?: number;
 ```
 
 The index of items to start searching from.
@@ -28,7 +28,7 @@ The index of items to start searching from.
 ### limit?
 
 ```ts
-optional limit?: number;
+limit?: number;
 ```
 
 The maximum number of items to return in one request.

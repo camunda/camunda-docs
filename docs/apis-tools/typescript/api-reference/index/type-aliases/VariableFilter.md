@@ -18,7 +18,7 @@ Variable filter request.
 ### isTruncated?
 
 ```ts
-optional isTruncated?: boolean;
+isTruncated?: boolean;
 ```
 
 Whether the value is truncated or not.
@@ -28,7 +28,7 @@ Whether the value is truncated or not.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 Name of the variable.
@@ -38,17 +38,28 @@ Name of the variable.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of the process instance of this variable.
 
 ---
 
+### protectionMode?
+
+```ts
+protectionMode?: ProtectionModeFilterProperty;
+```
+
+The protection applied to the variable. A variable matches when it has at least one of
+the given protection modes.
+
+---
+
 ### scopeKey?
 
 ```ts
-optional scopeKey?: ScopeKeyFilterProperty;
+scopeKey?: ScopeKeyFilterProperty;
 ```
 
 The key of the scope that defines where this variable is directly defined. This can be a
@@ -62,7 +73,7 @@ variables from parent scopes that would be visible through the scope hierarchy.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 Tenant ID of this variable.
@@ -72,7 +83,7 @@ Tenant ID of this variable.
 ### value?
 
 ```ts
-optional value?: StringFilterProperty;
+value?: StringFilterProperty;
 ```
 
 The value of the variable.
@@ -85,7 +96,7 @@ appropriate escaping for special characters in JSON strings when constructing fi
 ### variableKey?
 
 ```ts
-optional variableKey?: VariableKeyFilterProperty;
+variableKey?: VariableKeyFilterProperty;
 ```
 
 The key for this variable.

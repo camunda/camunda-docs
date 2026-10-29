@@ -20,7 +20,7 @@ args: any[];
 ### code?
 
 ```ts
-optional code?: string;
+code?: string;
 ```
 
 ---
@@ -28,7 +28,7 @@ optional code?: string;
 ### data?
 
 ```ts
-optional data?: any;
+data?: any;
 ```
 
 ---

@@ -14,7 +14,7 @@ Per-call options for individual SDK method invocations.
 ### retry?
 
 ```ts
-optional retry?: false | Partial<HttpRetryPolicy>;
+retry?: false | Partial<HttpRetryPolicy>;
 ```
 
 Override retry behaviour for this call.

@@ -16,7 +16,7 @@ type CompleteJobData = object;
 ### body?
 
 ```ts
-optional body?: JobCompletionRequest;
+body?: JobCompletionRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the job to complete.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

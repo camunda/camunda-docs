@@ -16,7 +16,7 @@ type UnassignUserTaskData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the user task.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

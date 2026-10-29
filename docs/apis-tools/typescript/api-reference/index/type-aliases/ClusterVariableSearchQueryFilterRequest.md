@@ -18,7 +18,7 @@ Cluster variable filter request.
 ### isTruncated?
 
 ```ts
-optional isTruncated?: boolean;
+isTruncated?: boolean;
 ```
 
 Filter cluster variables by truncation status of their stored values. When true, returns only variables whose stored values are truncated (i.e., the value exceeds the storage size limit and is truncated in storage). When false, returns only variables with non-truncated stored values. This filter is based on the underlying storage characteristic, not the response format.
@@ -28,7 +28,7 @@ Filter cluster variables by truncation status of their stored values. When true,
 ### kind?
 
 ```ts
-optional kind?: ClusterVariableKindFilterProperty;
+kind?: ClusterVariableKindFilterProperty;
 ```
 
 The kind filter for cluster variables.
@@ -38,7 +38,7 @@ The kind filter for cluster variables.
 ### metadata?
 
 ```ts
-optional metadata?: object;
+metadata?: object;
 ```
 
 Filter by metadata entries. A map of metadata key to an advanced filter on that key's value. Metadata values are strings or numbers.
@@ -54,7 +54,7 @@ Filter by metadata entries. A map of metadata key to an advanced filter on that 
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 Name of the cluster variable.
@@ -64,7 +64,7 @@ Name of the cluster variable.
 ### scope?
 
 ```ts
-optional scope?: ClusterVariableScopeFilterProperty;
+scope?: ClusterVariableScopeFilterProperty;
 ```
 
 The scope filter for cluster variables.
@@ -74,7 +74,7 @@ The scope filter for cluster variables.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 Tenant ID of this variable.
@@ -84,7 +84,7 @@ Tenant ID of this variable.
 ### value?
 
 ```ts
-optional value?: StringFilterProperty;
+value?: StringFilterProperty;
 ```
 
 The value of the cluster variable.

@@ -16,7 +16,7 @@ type SearchRolesForTenantData = object;
 ### body?
 
 ```ts
-optional body?: RoleSearchQueryRequest;
+body?: RoleSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

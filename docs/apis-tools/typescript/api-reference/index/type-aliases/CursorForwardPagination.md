@@ -18,7 +18,7 @@ Cursor-based forward pagination
 ### after?
 
 ```ts
-optional after?: EndCursor;
+after?: EndCursor;
 ```
 
 Use the `endCursor` value from the previous response to fetch the next page of results.
@@ -28,7 +28,7 @@ Use the `endCursor` value from the previous response to fetch the next page of r
 ### limit?
 
 ```ts
-optional limit?: number;
+limit?: number;
 ```
 
 The maximum number of items to return in one request.

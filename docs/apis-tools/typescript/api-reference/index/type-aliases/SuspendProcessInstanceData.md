@@ -16,7 +16,7 @@ type SuspendProcessInstanceData = object;
 ### body?
 
 ```ts
-optional body?: SuspendProcessInstanceRequest;
+body?: SuspendProcessInstanceRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the process instance to suspend.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

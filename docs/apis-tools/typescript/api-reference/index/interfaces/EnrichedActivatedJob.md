@@ -31,16 +31,14 @@ type parameter, and keeping this name non-generic preserves back-compat.
 ### acknowledged?
 
 ```ts
-optional acknowledged?: boolean;
+acknowledged?: boolean;
 ```
 
 Set true once any acknowledgement method is invoked.
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.acknowledged;
-```
+`EnrichedActivatedJobActions.acknowledged`
 
 ---
 
@@ -67,9 +65,7 @@ means a test that pins the client's clock also drives the handler.
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.clock;
-```
+`EnrichedActivatedJobActions.clock`
 
 ---
 
@@ -163,9 +159,7 @@ log: Logger;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.log;
-```
+`EnrichedActivatedJobActions.log`
 
 ---
 
@@ -191,9 +185,7 @@ Extend the timeout for the job by setting a new timeout
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.modifyJobTimeout;
-```
+`EnrichedActivatedJobActions.modifyJobTimeout`
 
 ---
 
@@ -217,9 +209,7 @@ modifyRetries: (__namedParameters) => Promise<void>;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.modifyRetries;
-```
+`EnrichedActivatedJobActions.modifyRetries`
 
 ---
 
@@ -383,9 +373,7 @@ cancelWorkflow(): Promise<"JOB_ACTION_RECEIPT">;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.cancelWorkflow;
-```
+`EnrichedActivatedJobActions.cancelWorkflow`
 
 ---
 
@@ -413,9 +401,7 @@ complete(variables?, result?): Promise<"JOB_ACTION_RECEIPT">;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.complete;
-```
+`EnrichedActivatedJobActions.complete`
 
 ---
 
@@ -437,9 +423,7 @@ error(error): Promise<"JOB_ACTION_RECEIPT">;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.error;
-```
+`EnrichedActivatedJobActions.error`
 
 ---
 
@@ -461,9 +445,7 @@ fail(body): Promise<"JOB_ACTION_RECEIPT">;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.fail;
-```
+`EnrichedActivatedJobActions.fail`
 
 ---
 
@@ -479,6 +461,4 @@ ignore(): Promise<"JOB_ACTION_RECEIPT">;
 
 #### Inherited from
 
-```ts
-EnrichedActivatedJobActions.ignore;
-```
+`EnrichedActivatedJobActions.ignore`

@@ -42,7 +42,7 @@ are flagged via isDuplicate in the response instead. Must be non-blank.
 ### limits?
 
 ```ts
-optional limits?: AgentInstanceLimits;
+limits?: AgentInstanceLimits;
 ```
 
 The operational limits as of this entry. CONFIGURATION items only; omit for other
@@ -63,7 +63,7 @@ The loop iteration this item belongs to.
 ### metrics?
 
 ```ts
-optional metrics?:
+metrics?:
   | AgentInstanceHistoryItemMetricsRequest
   | null;
 ```
@@ -75,7 +75,7 @@ Per-call token and latency metrics. Present on ASSISTANT items only.
 ### model?
 
 ```ts
-optional model?: string;
+model?: string;
 ```
 
 The LLM model identifier as of this entry. CONFIGURATION items only; omit for other
@@ -96,7 +96,7 @@ The agent-side timestamp of when this message was produced.
 ### provider?
 
 ```ts
-optional provider?: string;
+provider?: string;
 ```
 
 The LLM provider as of this entry. CONFIGURATION items only; omit for other roles.
@@ -116,7 +116,7 @@ The role of this history item in the conversation.
 ### systemPrompt?
 
 ```ts
-optional systemPrompt?:
+systemPrompt?:
   | AgentInstanceMessageContent[]
   | null;
 ```
@@ -130,7 +130,7 @@ be non-empty.
 ### toolCalls?
 
 ```ts
-optional toolCalls?: AgentInstanceToolCall[] | null;
+toolCalls?: AgentInstanceToolCall[] | null;
 ```
 
 Tool calls associated with this history item.
@@ -143,7 +143,7 @@ Omit for USER items.
 ### tools?
 
 ```ts
-optional tools?: AgentTool[] | null;
+tools?: AgentTool[] | null;
 ```
 
 The complete list of tools available to the agent as of this entry. CONFIGURATION

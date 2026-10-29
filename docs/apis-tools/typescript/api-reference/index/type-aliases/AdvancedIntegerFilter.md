@@ -20,7 +20,7 @@ Advanced integer (int32) filter.
 ### $eq?
 
 ```ts
-optional $eq?: number;
+$eq?: number;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $gt?
 
 ```ts
-optional $gt?: number;
+$gt?: number;
 ```
 
 Greater than comparison with the provided value.
@@ -50,7 +50,7 @@ Greater than comparison with the provided value.
 ### $gte?
 
 ```ts
-optional $gte?: number;
+$gte?: number;
 ```
 
 Greater than or equal comparison with the provided value.
@@ -60,7 +60,7 @@ Greater than or equal comparison with the provided value.
 ### $in?
 
 ```ts
-optional $in?: number[];
+$in?: number[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -70,7 +70,7 @@ Checks if the property matches any of the provided values.
 ### $lt?
 
 ```ts
-optional $lt?: number;
+$lt?: number;
 ```
 
 Lower than comparison with the provided value.
@@ -80,7 +80,7 @@ Lower than comparison with the provided value.
 ### $lte?
 
 ```ts
-optional $lte?: number;
+$lte?: number;
 ```
 
 Lower than or equal comparison with the provided value.
@@ -90,7 +90,7 @@ Lower than or equal comparison with the provided value.
 ### $neq?
 
 ```ts
-optional $neq?: number;
+$neq?: number;
 ```
 
 Checks for inequality with the provided value.

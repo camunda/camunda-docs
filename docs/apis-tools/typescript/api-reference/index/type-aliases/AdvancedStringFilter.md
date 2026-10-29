@@ -20,5 +20,5 @@ Advanced string filter.
 ### $like?
 
 ```ts
-optional $like?: LikeFilter;
+$like?: LikeFilter;
 ```

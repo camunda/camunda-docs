@@ -16,7 +16,7 @@ type GetUsageMetricsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -54,7 +54,7 @@ The start date for usage metrics, including this date. Value in ISO 8601 format.
 #### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 Restrict results to a specific tenant ID. If not provided, results for all tenants are returned.
@@ -62,7 +62,7 @@ Restrict results to a specific tenant ID. If not provided, results for all tenan
 #### withTenants?
 
 ```ts
-optional withTenants?: boolean;
+withTenants?: boolean;
 ```
 
 Whether to return tenant metrics in addition to the total metrics or not. Default false.

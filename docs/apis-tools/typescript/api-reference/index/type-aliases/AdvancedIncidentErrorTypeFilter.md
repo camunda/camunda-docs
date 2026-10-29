@@ -20,7 +20,7 @@ Advanced IncidentErrorTypeEnum filter
 ### $eq?
 
 ```ts
-optional $eq?: IncidentErrorTypeEnum;
+$eq?: IncidentErrorTypeEnum;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: IncidentErrorTypeEnum[];
+$in?: IncidentErrorTypeEnum[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like?: LikeFilter;
+$like?: LikeFilter;
 ```
 
 ---
@@ -58,7 +58,7 @@ optional $like?: LikeFilter;
 ### $neq?
 
 ```ts
-optional $neq?: IncidentErrorTypeEnum;
+$neq?: IncidentErrorTypeEnum;
 ```
 
 Checks for inequality with the provided value.
@@ -68,7 +68,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn?: IncidentErrorTypeEnum[];
+$notIn?: IncidentErrorTypeEnum[];
 ```
 
 Checks if the property does not match any of the provided values.

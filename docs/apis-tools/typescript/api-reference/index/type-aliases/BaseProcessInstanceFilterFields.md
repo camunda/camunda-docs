@@ -18,7 +18,7 @@ Base process instance search filter.
 ### ~~batchOperationId?~~
 
 ```ts
-optional batchOperationId?: StringFilterProperty;
+batchOperationId?: StringFilterProperty;
 ```
 
 The batch operation id.
@@ -31,7 +31,7 @@ The batch operation id.
 ### batchOperationKey?
 
 ```ts
-optional batchOperationKey?: StringFilterProperty;
+batchOperationKey?: StringFilterProperty;
 ```
 
 The batch operation key.
@@ -41,7 +41,7 @@ The batch operation key.
 ### businessId?
 
 ```ts
-optional businessId?: StringFilterProperty;
+businessId?: StringFilterProperty;
 ```
 
 The business id associated with the process instance.
@@ -51,7 +51,7 @@ The business id associated with the process instance.
 ### elementId?
 
 ```ts
-optional elementId?: StringFilterProperty;
+elementId?: StringFilterProperty;
 ```
 
 The element id associated with the process instance.
@@ -61,7 +61,7 @@ The element id associated with the process instance.
 ### elementInstanceState?
 
 ```ts
-optional elementInstanceState?: ElementInstanceStateFilterProperty;
+elementInstanceState?: ElementInstanceStateFilterProperty;
 ```
 
 The state of the element instances associated with the process instance.
@@ -71,7 +71,7 @@ The state of the element instances associated with the process instance.
 ### endDate?
 
 ```ts
-optional endDate?: DateTimeFilterProperty;
+endDate?: DateTimeFilterProperty;
 ```
 
 The end date.
@@ -81,7 +81,7 @@ The end date.
 ### errorMessage?
 
 ```ts
-optional errorMessage?: StringFilterProperty;
+errorMessage?: StringFilterProperty;
 ```
 
 The error message related to the process.
@@ -91,7 +91,7 @@ The error message related to the process.
 ### hasElementInstanceIncident?
 
 ```ts
-optional hasElementInstanceIncident?: boolean;
+hasElementInstanceIncident?: boolean;
 ```
 
 Whether the element instance has an incident or not.
@@ -101,7 +101,7 @@ Whether the element instance has an incident or not.
 ### hasIncident?
 
 ```ts
-optional hasIncident?: boolean;
+hasIncident?: boolean;
 ```
 
 Whether this process instance has a related incident or not.
@@ -111,7 +111,7 @@ Whether this process instance has a related incident or not.
 ### hasRetriesLeft?
 
 ```ts
-optional hasRetriesLeft?: boolean;
+hasRetriesLeft?: boolean;
 ```
 
 Whether the process has failed jobs with retries left.
@@ -121,7 +121,7 @@ Whether the process has failed jobs with retries left.
 ### incidentErrorHashCode?
 
 ```ts
-optional incidentErrorHashCode?: IntegerFilterProperty;
+incidentErrorHashCode?: IntegerFilterProperty;
 ```
 
 The incident error hash code, associated with this process.
@@ -131,7 +131,7 @@ The incident error hash code, associated with this process.
 ### parentElementInstanceKey?
 
 ```ts
-optional parentElementInstanceKey?: ElementInstanceKeyFilterProperty;
+parentElementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The parent element instance key.
@@ -141,7 +141,7 @@ The parent element instance key.
 ### parentProcessInstanceKey?
 
 ```ts
-optional parentProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
+parentProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The parent process instance key.
@@ -151,7 +151,7 @@ The parent process instance key.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of this process instance.
@@ -161,7 +161,7 @@ The key of this process instance.
 ### startDate?
 
 ```ts
-optional startDate?: DateTimeFilterProperty;
+startDate?: DateTimeFilterProperty;
 ```
 
 The start date.
@@ -171,7 +171,7 @@ The start date.
 ### state?
 
 ```ts
-optional state?: ProcessInstanceStateFilterProperty;
+state?: ProcessInstanceStateFilterProperty;
 ```
 
 The process instance state.
@@ -181,7 +181,7 @@ The process instance state.
 ### suspendedDate?
 
 ```ts
-optional suspendedDate?: DateTimeFilterProperty;
+suspendedDate?: DateTimeFilterProperty;
 ```
 
 The time this process instance most recently entered the SUSPENDED state.
@@ -192,7 +192,7 @@ This is cleared (null) again once the process instance is resumed.
 ### tags?
 
 ```ts
-optional tags?: TagSet;
+tags?: TagSet;
 ```
 
 ---
@@ -200,7 +200,7 @@ optional tags?: TagSet;
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant id.
@@ -210,7 +210,7 @@ The tenant id.
 ### variables?
 
 ```ts
-optional variables?: VariableValueFilterProperty[];
+variables?: VariableValueFilterProperty[];
 ```
 
 The process instance variables.
