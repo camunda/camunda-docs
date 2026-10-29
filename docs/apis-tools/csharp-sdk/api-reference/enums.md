@@ -7,7 +7,7 @@ mdx:
 
 # Enums
 
-Enumeration types (110 enums).
+Enumeration types (111 enums).
 
 ## AgentDefinitionSearchQuerySortRequestField
 
@@ -1247,6 +1247,14 @@ Process instance states
 | `COMPLETED`  |             |
 | `SUSPENDED`  |             |
 | `TERMINATED` |             |
+
+## ProtectionModeEnum
+
+The kind of protection applied to a variable value. `REDACT` irrecoverably replaces the value before it reaches secondary storage.
+
+| Value    | Description |
+| -------- | ----------- |
+| `REDACT` |             |
 
 ## ResourceSearchQuerySortRequestField
 
