@@ -27,7 +27,7 @@ This page is part of the Elasticsearch/OpenSearch [restore procedure](./restore.
 
 With Camunda 8.10 and later, a Restore API recovery runs during a downtime window while the cluster is in recovery mode. It runs in four phases, driven by two API requests:
 
-1. **Entering recovery mode**: every broker deactivates its partitions and switches to a restricted partition manager. While the cluster is in recovery mode it processes no work, and only read-only operations and restore remain available.
+1. **Entering recovery mode**: every broker deactivates its partitions and switches to a restricted partition manager. While the cluster is in recovery mode it processes no work, and only read-only operations and restore remain available. Secondary-storage requests for a physical tenant whose secondary storage is not ready — such as searches — are rejected with `503` and a `Retry-After` header until that tenant recovers.
 2. **Restoring secondary storage**: while the cluster is in recovery mode, restore the Elasticsearch/OpenSearch snapshots for the intended backup ID.
 3. **Restoring the partitions**: the cluster plans a single change that, for every broker and partition, first drops the local partition data and then restores that partition from the selected backup. The steps of that plan run one at a time across the cluster.
 4. **Returning to processing**: once every partition is restored, the same change switches all brokers back to `PROCESSING` and the partitions become active again.
