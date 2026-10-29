@@ -45,7 +45,7 @@ The following prerequisites are required to use this connector:
 
 ### Choose an implementation
 
-The AI Agent connector is available in two variants, each with different capabilities, suited for different use cases, and available with a dedicated element template:
+The AI Agent connector family includes two connectors, each with different capabilities, suited for different use cases, and available with a dedicated element template:
 
 <AoGrid ao={connectorCards} columns={2}/>
 
