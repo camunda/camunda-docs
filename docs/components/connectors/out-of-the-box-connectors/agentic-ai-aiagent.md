@@ -6,7 +6,7 @@ description: AI agent connector implementing an agent loop for tool calls with a
 ---
 
 import AoGrid from '../../react-components/\_ao-card';
-import { fundamentalCards } from '../../react-components/\_aiagent-card-data';
+import { connectorCards, fundamentalCards } from '../../react-components/\_aiagent-card-data';
 
 Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI agents to build solutions using [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md).
 
@@ -36,10 +36,19 @@ New to agentic orchestration?
 
 ## AI Agent connectors
 
+### Prerequisites
+
+The following prerequisites are required to use this connector:
+
+| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
+
+### Choose an implementation
+
 The AI Agent connector is available in two variants, each with different capabilities, suited for different use cases, and available with a dedicated element template:
 
-- [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md).
-- [AI Agent Task](./agentic-ai-aiagent-task.md).
+<AoGrid ao={connectorCards} columns={2}/>
 
 The right implementation depends on your use case.
 
@@ -76,14 +85,6 @@ The following table summarizes the key configuration differences between the two
 :::note
 Execution listeners behave differently between the two implementations. On the AI Agent Sub-process, they only run when entering and exiting the ad-hoc sub-process, not on every loop iteration. On the AI Agent Task, they are triggered on every job execution.
 :::
-
-### Prerequisites
-
-The following prerequisites are required to use this connector:
-
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
 ## Learn the fundamentals
 

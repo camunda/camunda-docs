@@ -1,6 +1,25 @@
 import IconAoAgentImg from "../assets/icon-agentic.png";
+import IconBpmnImg from "../assets/icon-bpmn.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconConfig from "../assets/icon-config.png";
+
+// Implementation cards on the AI Agent connector page
+export const connectorCards = [
+  {
+    link: "../agentic-ai-aiagent-subprocess/",
+    title: "AI Agent Sub-process",
+    image: IconAoAgentImg,
+    description:
+      "Recommended for most use cases. Handles tool resolution and the agent loop automatically.",
+  },
+  {
+    link: "../agentic-ai-aiagent-task/",
+    title: "AI Agent Task",
+    image: IconBpmnImg,
+    description:
+      "Run one-shot LLM calls, or model the agent loop explicitly for full control.",
+  },
+];
 
 // Fundamentals cards on the AI Agent connector page
 export const fundamentalCards = [
