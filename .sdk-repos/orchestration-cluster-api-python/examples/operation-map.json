@@ -14,6 +14,13 @@
       "imports": "from camunda_orchestration_sdk import CamundaAsyncClient"
     }
   ],
+  "add_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "AddClock",
+      "label": "Add time to the cluster clock"
+    }
+  ],
   "assign_client_to_group": [
     {
       "file": "group.py",
@@ -529,6 +536,13 @@
       "file": "batch_operation.py",
       "region": "GetBatchOperation",
       "label": "Get a batch operation"
+    }
+  ],
+  "get_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetClock",
+      "label": "Get the cluster clock"
     }
   ],
   "get_cluster_exporting_status": [

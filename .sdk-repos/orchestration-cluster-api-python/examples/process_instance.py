@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from camunda_orchestration_sdk import (
+    BusinessId,
     CamundaClient,
     LimitBasedPagination,
     ProcessCreationById,
@@ -137,7 +138,7 @@ def assign_process_instance_business_id_example(process_instance_key: ProcessIns
     client.assign_process_instance_business_id(
         process_instance_key=process_instance_key,
         data=ProcessInstanceBusinessIdAssignmentInstruction(
-            business_id="order-12345",
+            business_id=BusinessId("order-12345"),
         ),
     )
 # endregion AssignProcessInstanceBusinessId
