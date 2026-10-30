@@ -15,7 +15,7 @@ This reference covers the hand-written ergonomic surface of the Go SDK: the clie
 
 | Page                               | Contents                                                             |
 | ---------------------------------- | -------------------------------------------------------------------- |
-| [CamundaClient](camunda-client.md) | The client and its 252 API methods.                                  |
+| [CamundaClient](camunda-client.md) | The client and its 254 API methods.                                  |
 | [Configuration](configuration.md)  | Client configuration, authentication, TLS, and retry policy.         |
 | [Job workers](job-workers.md)      | REST and gRPC job workers, their options, and the handler contract.  |
 | [Runtime](runtime.md)              | Error types, error classification, and eventual-consistency polling. |

@@ -363,6 +363,25 @@ func IsNotFound(err error) bool
 
 IsNotFound reports whether err is (or wraps) an *APIError with HTTP 404.
 
+### OperationServerOrigin
+
+```go
+func OperationServerOrigin(restAddress string, exact bool) (string, error)
+```
+
+OperationServerOrigin derives the origin (scheme://host[:port]) that
+operation-level servers — the cluster-admin /cluster/v2/* operations, whose
+spec template is "{schema}://{host}:{port}" with no path — resolve against.
+It is the configured REST address with any base path stripped: the spec paths
+for these operations already carry their own prefix, so appending the REST
+base path (/v2, or a gateway-fronted path under ExactRestAddress) would
+double it. The origin is serialized through url.URL, not concatenated, so an
+IPv6 literal keeps its brackets and a scoped literal keeps its
+percent-escaped zone identifier (url.Parse decodes %25 in u.Host; a plain
+scheme+"://"+host join would emit an invalid URL containing a raw "%eth0").
+A REST address that is not a valid http(s) URL is an error, never a
+best-guess origin.
+
 ### Poll
 
 ```go

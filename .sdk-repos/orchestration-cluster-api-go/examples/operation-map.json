@@ -160,6 +160,20 @@
       "label": "Pin internal clock (alpha)"
     }
   ],
+  "getClock": [
+    {
+      "file": "clock.go",
+      "region": "GetClock",
+      "label": "Get internal clock (alpha)"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "clock.go",
+      "region": "AddClock",
+      "label": "Add time to internal clock (alpha)"
+    }
+  ],
   "resetClock": [
     {
       "file": "clock.go",
