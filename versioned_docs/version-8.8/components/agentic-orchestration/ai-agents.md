@@ -7,6 +7,7 @@ keywords: ["agentic ai", "AI agents"]
 
 import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
 import PageDescription from '@site/src/components/PageDescription';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <PageDescription />
 
@@ -90,3 +91,5 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 </table>
+
+<AoGetStartedBanner />

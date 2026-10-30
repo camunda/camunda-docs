@@ -7,6 +7,7 @@ keywords: ["agentic ai", "AI agents"]
 
 import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
 import PageDescription from '@site/src/components/PageDescription';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <PageDescription />
 
@@ -18,10 +19,11 @@ AI agents can perform a variety of functions, including making decisions, solvin
 
 ### Agent types
 
-Camunda supports two types of agents:
+Camunda supports two types of agent:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
-- **[External agents](/reference/glossary.md#external-agent)** run their [agent loop](/reference/glossary.md#agent-loop) in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task). To give a Camunda AI agent tools, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+
+- **[External agents](/reference/glossary.md#external-agent)** run their [agent loop](/reference/glossary.md#agent-loop) in an external runtime, such as LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine. Camunda orchestrates when the agent runs as part of the process, but it can only surface what the runtime reports back. To make an external agent visible in Camunda, see [connect an external agent](/components/agentic-orchestration/connect-external-agent.md).
 
 :::note
 Camunda represents every agent with an [agent definition and agent instances](/components/agentic-orchestration/agent-definitions-and-instances.md).
@@ -115,3 +117,5 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 </table>
+
+<AoGetStartedBanner />

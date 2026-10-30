@@ -20,15 +20,15 @@ Camunda AI features and capabilities currently include:
 <td>**Description**</td>
 </tr>
 <tr>
-<td>[Agentic orchestration](../../components/agentic-orchestration/agentic-orchestration-overview.md)</td>
+<td>[Agentic orchestration](./agentic-orchestration-overview.md)</td>
 <td>Embed AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.</td>
 </tr>
 <tr>
-<td>[Camunda Copilot](../../components/early-access/alpha/bpmn-copilot/bpmn-copilot.md)</td>
+<td>[Camunda Copilot](../early-access/alpha/bpmn-copilot/bpmn-copilot.md)</td>
 <td>AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.</td>
 </tr>
 <tr>
-<td>[Intelligent Document Processing (IDP)](../../components/modeler/web-modeler/intelligent-document-processing.md)</td>
+<td>[Intelligent Document Processing (IDP)](../modeler/web-modeler/intelligent-document-processing.md)</td>
 <td>Automated document analysis and structured data extraction, connecting to your chosen document AI provider.</td>
 </tr>
 </table>
@@ -226,6 +226,12 @@ Users interacting with AI-driven processes should know they are doing so. Make s
 - AI-driven interactions are clearly identified.
 - Users know how to escalate or get help.
 - There is a plan for communicating disruptions or incidents, both internally and, where required, externally.
+
+The same applies to interfaces you build on top of Camunda's AI features. When you present AI interactions or AI-generated content to your users, make it clear that AI is involved.
+
+[Article 50 of the EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) provides transparency requirements for certain AI systems that interact with people or generate content. Camunda identifies the AI-generated content it produces as part of its responsibilities as a provider. When you expose an agent or its output through your own interface, add appropriate transparency notices for your users.
+
+For example, identify a chat assistant as AI-powered or label AI-generated text and documents before presenting them to end users.
 
 ### Bias and fairness
 
