@@ -13,11 +13,23 @@ const {
   syncPages,
 } = require("./update-process-os-changelog");
 
-const PAGE =
-  '---\nid: changelog\ntitle: ProcessOS Harness changelog\ndescription: "Changes."\n---\n';
+const FRONT =
+  '---\nid: changelog\ntitle: ProcessOS Harness changelog\ndescription: "Changes."\n---\n\nUse the latest stable release.\n';
 
+// A page with the given section contents, each a list of page-form entries.
+const page = (stable = [], alpha = []) =>
+  [FRONT, "## Stable", ...stable, "## Alpha", ...alpha].join("\n\n") + "\n";
+const PAGE = page();
+
+// An entry as its release asset carries it.
 const entry = (version, body = "- A change", date = "2026-11-02") =>
   `## ${version} (${date})\n\n${body}\n`;
+
+// The same entry as the page holds it.
+const onPage = (version, body = "- A change", date = "2026-11-02") =>
+  version.includes("-alpha.")
+    ? `<details>\n<summary>${version} (${date})</summary>\n\n${body}\n\n</details>`
+    : `### ${version} (${date})\n\n${body}`;
 
 function release(
   version,
@@ -61,28 +73,68 @@ describe("update-process-os-changelog", () => {
   });
 
   test("ignores headings that are not entries", () => {
-    const page = `${PAGE}\n## Release channels\n\n${entry("1.0.0")}`;
-    expect(versions(page)).toEqual(["1.0.0"]);
+    const p = page(
+      ["### Release channels", onPage("1.0.0")],
+      [onPage("1.1.0-alpha.1")]
+    );
+    expect(versions(p)).toEqual(["1.0.0", "1.1.0-alpha.1"]);
   });
 
-  test("appends the first entry after the front matter", () => {
-    expect(insertEntry(PAGE, entry("1.0.0"))).toBe(
-      `${PAGE}\n${entry("1.0.0")}`
+  test("adds a first entry to the end of its section", () => {
+    expect(insertEntry(PAGE, entry("1.0.0"))).toBe(page([onPage("1.0.0")]));
+    expect(insertEntry(PAGE, entry("1.1.0-alpha.1"))).toBe(
+      page([], [onPage("1.1.0-alpha.1")])
     );
   });
 
-  test("inserts between existing entries, newest first", () => {
-    const page = `${PAGE}\n${entry("1.1.0")}\n${entry("1.0.0")}`;
-    expect(insertEntry(page, entry("1.1.0-alpha.1"))).toBe(
-      `${PAGE}\n${entry("1.1.0")}\n${entry("1.1.0-alpha.1")}\n${entry("1.0.0")}`
+  test("collapses an alpha entry and moves its headings down a level", () => {
+    const body = "### Features\n\n- Add a thing";
+    expect(insertEntry(PAGE, entry("1.1.0-alpha.1", body))).toBe(
+      page([], [onPage("1.1.0-alpha.1", "#### Features\n\n- Add a thing")])
+    );
+    expect(insertEntry(PAGE, entry("1.1.0", body))).toBe(
+      page([onPage("1.1.0", "#### Features\n\n- Add a thing")])
+    );
+  });
+
+  test("inserts between existing entries of a section, newest first", () => {
+    const p = page(
+      [onPage("1.1.0"), onPage("1.0.0")],
+      [onPage("1.2.0-alpha.2"), onPage("1.1.0-alpha.1")]
+    );
+    expect(insertEntry(p, entry("1.0.1"))).toBe(
+      page(
+        [onPage("1.1.0"), onPage("1.0.1"), onPage("1.0.0")],
+        [onPage("1.2.0-alpha.2"), onPage("1.1.0-alpha.1")]
+      )
+    );
+    expect(insertEntry(p, entry("1.2.0-alpha.1"))).toBe(
+      page(
+        [onPage("1.1.0"), onPage("1.0.0")],
+        [
+          onPage("1.2.0-alpha.2"),
+          onPage("1.2.0-alpha.1"),
+          onPage("1.1.0-alpha.1"),
+        ]
+      )
+    );
+  });
+
+  test("refuses a page without the entry's section", () => {
+    const p = FRONT + "\n## Stable\n";
+    expect(() => insertEntry(p, entry("1.1.0-alpha.1"))).toThrow(
+      'The page has no "## Alpha" section'
     );
   });
 
   test("keeps a CRLF page CRLF", () => {
-    const page = `${PAGE}\n${entry("1.0.0")}`.replace(/\n/g, "\r\n");
-    const out = insertEntry(page, entry("1.1.0"));
+    const p = page([onPage("1.0.0")]).replace(/\n/g, "\r\n");
+    const out = insertEntry(
+      insertEntry(p, entry("1.1.0")),
+      entry("1.2.0-alpha.1")
+    );
     expect(out).not.toMatch(/(?<!\r)\n/);
-    expect(versions(out)).toEqual(["1.1.0", "1.0.0"]);
+    expect(versions(out)).toEqual(["1.1.0", "1.0.0", "1.2.0-alpha.1"]);
   });
 
   test("skips drafts and tags that are not release versions", () => {
@@ -107,7 +159,10 @@ describe("update-process-os-changelog", () => {
     expect(errors).toEqual([]);
     expect(added).toEqual([["1.1.0-alpha.1", "1.0.0"]]);
     expect(pages[0]).toBe(
-      `${PAGE}\n${entry("1.1.0-alpha.1")}\n${entry("1.0.0", CONFIG.placeholder, "2026-10-13")}`
+      page(
+        [onPage("1.0.0", CONFIG.placeholder, "2026-10-13")],
+        [onPage("1.1.0-alpha.1")]
+      )
     );
   });
 
@@ -127,15 +182,14 @@ describe("update-process-os-changelog", () => {
   });
 
   test("leaves a hand-edited entry untouched", async () => {
-    const edited =
-      "## 1.0.0 (2026-10-13)\n\nRewritten by a technical writer.\n";
+    const edited = "### 1.0.0 (2026-10-13)\n\nRewritten by a technical writer.";
     const { pages, added } = await syncPages({
-      pages: [`${PAGE}\n${edited}`],
+      pages: [page([edited])],
       releases: [release("1.0.0"), release("1.1.0")],
       fetchAsset: fetchFrom({ "1.1.0": entry("1.1.0") }),
     });
     expect(added).toEqual([["1.1.0"]]);
-    expect(pages[0]).toBe(`${PAGE}\n${entry("1.1.0")}\n${edited}`);
+    expect(pages[0]).toBe(page([onPage("1.1.0"), edited]));
   });
 
   test("changes nothing on a second run", async () => {
