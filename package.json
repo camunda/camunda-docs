@@ -42,6 +42,7 @@
     "config-reference:generate:camunda-spring-boot-starter:8.8": "npm run config-reference:generate:camunda-spring-boot-starter 8.8",
     "config-reference:generate:camunda-spring-boot-starter:8.9": "npm run config-reference:generate:camunda-spring-boot-starter 8.9",
     "update-release-links": "node hacks/update-release-links.js",
+    "update-process-os-changelog": "node hacks/update-process-os-changelog.js",
     "update-downloads": "node hacks/update-downloads.js",
     "check-downloads": "node hacks/update-downloads.js --check"
   },
