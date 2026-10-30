@@ -14,6 +14,8 @@ With minimal configuration for administrative access, the Management Identity co
 
 Use this guide if you already have an existing Keycloak instance and want Camunda to automatically configure the required Keycloak entities.
 
+For Keycloak support scope, security fixes, and upgrades, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
+
 If you prefer Camunda to also create and manage a Keycloak pod, see the [internal Keycloak guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
 
 :::info

@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUVTU0FHRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -55,6 +57,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IlJlc29sdmVkIGZyb20gdGhlIG1hdGNoZWQgc3Vic2NyaXB0aW9uIOKAlCBDUkVBVEVfUFJPQ0VTU19JTlNUQU5DRSAoc3RhcnQtZXZlbnQpIG9yIFVQREFURV9QUk9DRVNTX0lOU1RBTkNFIChpbnRlcm1lZGlhdGUpIG9uIFBST0NFU1NfREVGSU5JVElPTi4ifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -105,6 +109,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -158,6 +164,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -679,7 +687,11 @@ components:
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
-          description: The process definition key associated with this correlated message subscription.
+          description: |
+            The process definition key associated with this correlated message subscription.
+            This field is not present for correlations to message subscriptions of a running
+            process instance (catch, boundary and receive task events) written by version 8.8.
+          nullable: true
         processInstanceKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
