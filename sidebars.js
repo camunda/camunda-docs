@@ -2728,6 +2728,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
                 "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component",
               ],
             },
             "self-managed/components/management-identity/authentication",
