@@ -108,4 +108,4 @@ description: "Give your AI agents access to Camunda’s operational capabilities
 
 ## Use AI responsibly
 
-Review our [AI usage guidelines](./ai-usage-guidelines.md) for requirements on security, legality, data handling, human oversight, and prohibited use cases.
+Review our [AI usage guidelines](../../components/agentic-orchestration/ai-usage-guidelines.md) for requirements on security, legality, data handling, human oversight, and prohibited use cases.
