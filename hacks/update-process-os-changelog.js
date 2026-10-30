@@ -9,7 +9,12 @@
  * followed by the changes, already escaped for MDX. This script:
  * 1. Finds the changelog page in `docs/` and in every `versioned_docs/` version
  * 2. Lists the published releases of camunda/process-os
- * 3. Inserts each missing version's entry, newest first
+ * 3. Inserts each missing version's entry into its section, newest first
+ *
+ * The page has two sections, `## Stable` and `## Alpha`. A stable entry is
+ * inserted as a `### <version> (<yyyy-mm-dd>)` heading; an alpha entry as a
+ * `<details>` block, collapsed by default, with the heading as its summary.
+ * The entry's own headings move down one level to sit below either.
  *
  * Rules:
  * - An entry already on a page is never rewritten, so an edit made on the
@@ -32,13 +37,21 @@ const CONFIG = {
   // The page, relative to `docs/` and to each `versioned_docs/version-*/`.
   page: "components/process-os-harness/changelog.md",
   placeholder: "No changelog available for this release.",
+  // The `## ` headings of the page's sections.
+  sections: { stable: "Stable", alpha: "Alpha" },
 };
 
+const V = String.raw`\d+\.\d+\.\d+(?:-alpha\.\d+)?`;
 const VERSION = /^(\d+)\.(\d+)\.(\d+)(?:-alpha\.(\d+))?$/;
-const RELEASE_TAG = /^v(\d+\.\d+\.\d+(?:-alpha\.\d+)?)$/;
-// An entry is identified by its heading alone: an HTML comment marker is a
-// syntax error in MDX.
-const ENTRY_HEADING = /^## (\d+\.\d+\.\d+(?:-alpha\.\d+)?)(?=[ \t]|\r?$)/gm;
+const RELEASE_TAG = new RegExp(String.raw`^v(${V})$`);
+// The heading an asset starts with.
+const ASSET_HEADING = new RegExp(String.raw`^## (${V})(?=[ \t]|\r?$)`, "m");
+// An entry on the page is identified by its heading or its summary alone: an
+// HTML comment marker is a syntax error in MDX.
+const PAGE_ENTRY = new RegExp(
+  String.raw`^(?:### (${V})(?=[ \t]|\r?$)|<details>\r?\n<summary>(${V})(?=[ \t<]))`,
+  "gm"
+);
 
 /**
  * Order two release versions by semver precedence: `1.1.0-alpha.2` < `1.1.0`.
@@ -56,35 +69,76 @@ function compareVersions(a, b) {
   return Number(pa[4]) - Number(pb[4]);
 }
 
+const isAlpha = (version) => version.includes("-alpha.");
+
 /**
- * Every entry heading on a page, in page order.
+ * Every entry on a page, in page order.
  */
 function findEntries(page) {
-  return [...page.matchAll(ENTRY_HEADING)].map((m) => ({
-    version: m[1],
+  return [...page.matchAll(PAGE_ENTRY)].map((m) => ({
+    version: m[1] ?? m[2],
     offset: m.index,
   }));
 }
 
 /**
- * Insert one entry, newest first: before the first entry with a lower
- * version, or at the end of the page. Nothing else on the page moves.
+ * The version an asset's heading names, or undefined.
  */
-function insertEntry(page, entry) {
-  const version = findEntries(entry)[0]?.version;
+function assetVersion(asset) {
+  return ASSET_HEADING.exec(asset)?.[1];
+}
+
+/**
+ * Turn an asset into the form its section holds, with LF line endings.
+ */
+function formatEntry(asset) {
+  const [heading, ...rest] = asset.replace(/\r\n/g, "\n").trim().split("\n");
+  const title = heading.replace(/^## /, "");
+  const body = rest
+    .join("\n")
+    .trim()
+    .replace(/^(#{1,5}) /gm, "#$1 ");
+  if (!isAlpha(assetVersion(asset))) return `### ${title}\n\n${body}`;
+  return `<details>\n<summary>${title}</summary>\n\n${body}\n\n</details>`;
+}
+
+/**
+ * Where a section's content starts and ends on a page.
+ */
+function findSection(page, name) {
+  const heading = new RegExp(String.raw`^## ${name}[ \t]*\r?$`, "m").exec(page);
+  if (!heading) throw new Error(`The page has no "## ${name}" section`);
+  const start = heading.index + heading[0].length;
+  const next = /^## /m.exec(page.slice(start));
+  return { start, end: next ? start + next.index : page.length };
+}
+
+/**
+ * Insert one entry into its section, newest first: before the first entry
+ * in that section with a lower version, or at the end of the section.
+ * Nothing else on the page moves.
+ */
+function insertEntry(page, asset) {
+  const version = assetVersion(asset);
   if (!version) throw new Error("Entry has no version heading");
+  const section = CONFIG.sections[isAlpha(version) ? "alpha" : "stable"];
+  const { start, end } = findSection(page, section);
   const eol = page.includes("\r\n") ? "\r\n" : "\n";
-  const text = entry.replace(/\r\n/g, "\n").trimEnd().split("\n").join(eol);
+  const text = formatEntry(asset).split("\n").join(eol);
   const next = findEntries(page).find(
-    (e) => compareVersions(e.version, version) < 0
+    (e) =>
+      e.offset >= start &&
+      e.offset < end &&
+      compareVersions(e.version, version) < 0
   );
   if (next) {
     return (
       page.slice(0, next.offset) + text + eol + eol + page.slice(next.offset)
     );
   }
-  if (page.trim() === "") return text + eol;
-  return page.replace(/(\r?\n)+$/, "") + eol + eol + text + eol;
+  const before = page.slice(0, end).replace(/(\r?\n)+$/, "");
+  const after = end < page.length ? eol + page.slice(end) : "";
+  return before + eol + eol + text + eol + after;
 }
 
 /**
@@ -145,7 +199,7 @@ async function syncPages({ pages, releases, fetchAsset }) {
       return `## ${r.version} (${r.date})\n\n${CONFIG.placeholder}\n`;
     if (!cache.has(r.version)) cache.set(r.version, await fetchAsset(r.asset));
     const entry = cache.get(r.version);
-    const version = findEntries(entry)[0]?.version;
+    const version = assetVersion(entry);
     if (version !== r.version) {
       throw new Error(
         `${r.version}: ${CONFIG.asset} is headed ${version ?? "with no version"}`
@@ -278,6 +332,7 @@ module.exports = {
   compareVersions,
   findEntries,
   findPages,
+  formatEntry,
   githubClient,
   insertEntry,
   planPage,
