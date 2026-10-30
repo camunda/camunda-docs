@@ -145,14 +145,14 @@ const SearchableTable = () => {
       name: "Amazon SQS",
       description: "Send messages to Amazon SQS from your processes.",
       type: "Outbound",
-      link: "../amazon-sqs/?amazonsqs=outbound",
+      link: "../amazon-sqs-outbound/",
       image: AmazonSqsImg,
     },
     {
       name: "Amazon SQS",
       description: "Receive messages from Amazon SQS in your processes.",
       type: "Inbound",
-      link: "../amazon-sqs/?amazonsqs=inbound",
+      link: "../amazon-sqs-inbound/",
       image: AmazonSqsImg,
     },
     {

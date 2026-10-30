@@ -145,8 +145,11 @@ RewriteRule ^docs/(next/)?components/connectors/out-of-the-box-connectors/aws-ev
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=inbound [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/ [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs-outbound/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/ [R=301,L]
+RewriteCond %{QUERY_STRING} amazonsqs=inbound
+RewriteRule ^docs/((?:next|8\.(?:8|9|10))/)?components/connectors/out-of-the-box-connectors/amazon-sqs/?$ /docs/$1components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/? [R=301,L]
+RewriteRule ^docs/((?:next|8\.(?:8|9|10))/)?components/connectors/out-of-the-box-connectors/amazon-sqs/?$ /docs/$1components/connectors/out-of-the-box-connectors/amazon-sqs-outbound/? [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=inbound [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/?rabbitmq=inbound [R=301,L]
