@@ -161,7 +161,7 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ### Camunda 8
 
-Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
+Camunda 8 is an agentic orchestration platform. Build [Camunda AI agents](#camunda-ai-agent) directly in your processes, and orchestrate them together with [external agents](#external-agent), people, and systems in end-to-end processes that combine deterministic steps with dynamic steps decided by AI agents at runtime. Built for the enterprise, Camunda 8 provides the security, compliance, availability, and scale that mission-critical processes need. Camunda 8 consists of the following key components:
 
 | Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                  |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
