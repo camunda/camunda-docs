@@ -82,6 +82,11 @@
   margin-bottom: 0 !important;
 }
 
+.downloadsHero::after {
+  top: calc(100% - 4.5rem);
+  height: auto;
+}
+
 /* ─── OS Tabs ─── */
 .osTabs {
   display: flex;
