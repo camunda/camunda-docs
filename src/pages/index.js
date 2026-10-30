@@ -17,11 +17,10 @@ const features = [
       "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
-    title: "Build with AI",
+    title: "Agentic orchestration",
     imageUrl: iconBuildWithAi,
     url: "/docs/guides/build-with-ai/overview/",
-    description:
-      "Build Camunda solutions with AI-ready workflows and agentic orchestration.",
+    description: "Orchestrate agents, people, and systems in one process.",
   },
   {
     title: "Using Camunda",

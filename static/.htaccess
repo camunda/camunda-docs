@@ -207,6 +207,15 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# AI usage guidelines moved into agentic orchestration best practices
+RewriteRule ^docs/next/guides/build-with-ai/ai-usage-guidelines/?$ /docs/next/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
+
+# Evaluate AI agents landing page removed (agentic orchestration sidebar restructure)
+RewriteRule ^docs/next/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/next/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+RewriteRule ^docs/8.9/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/8.9/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/8.8/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
+
 # The property changes page is documented only in 8.10 and was removed from next
 
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/ [R=301,L]

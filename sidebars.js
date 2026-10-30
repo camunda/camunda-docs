@@ -83,14 +83,58 @@ module.exports = {
   BuildWithAI: [
     {
       type: "category",
-      label: "Build with AI",
+      label: "Agentic orchestration",
       link: {
         type: "doc",
         id: "guides/build-with-ai/overview",
       },
-      items: [],
+      items: [
+        {
+          type: "category",
+          label: "Get started",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
+          },
+          items: [
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/agent-definitions-and-instances",
+            "components/agentic-orchestration/agent-states-and-metrics",
+          ],
+        },
+        {
+          type: "category",
+          label: "Build",
+          items: [
+            "components/agentic-orchestration/camunda-provided-llm",
+            "components/agentic-orchestration/add-tool-to-ai-agent",
+            "components/agentic-orchestration/rag-ai-agents",
+            "components/agentic-orchestration/connect-external-agent",
+            "components/agentic-orchestration/expose-process-as-mcp-tool",
+          ],
+        },
+        {
+          type: "category",
+          label: "Evaluate",
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          items: [
+            "components/agentic-orchestration/ai-usage-guidelines",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic",
+          ],
+        },
+      ],
     },
-    "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
       label: "ProcessOS",
@@ -149,78 +193,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Agentic orchestration",
-      link: {
-        type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration-overview",
-      },
-      items: [
-        "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/camunda-provided-llm",
-        "components/agentic-orchestration/agent-definitions-and-instances",
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/agent-states-and-metrics",
-        {
-          type: "category",
-          label: "Evaluate AI agents",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
-          },
-          items: [
-            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
-            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
-            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
-            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
-          ],
-        },
-        "components/agentic-orchestration/add-tool-to-ai-agent",
-        "components/agentic-orchestration/rag-ai-agents",
-        "components/agentic-orchestration/connect-external-agent",
-        "components/agentic-orchestration/expose-process-as-mcp-tool",
-        "components/agentic-orchestration/choose-right-model-agentic",
-        "components/agentic-orchestration/model-recommendations-agentic",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/hub/workspace/modeler/idp",
-      },
-      items: [
-        "components/hub/workspace/modeler/idp/idp-configuration",
-        "components/hub/workspace/modeler/idp/idp-projects",
-        "components/hub/workspace/modeler/idp/idp-document-classification",
-        {
-          type: "category",
-          label: "Document extraction",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-            "components/hub/workspace/modeler/idp/idp-structured-extraction",
-          ],
-        },
-        // "components/hub/workspace/modeler/idp/idp-document-automation",
-        {
-          type: "category",
-          label: "Integrate IDP into your processes",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp/idp-integrate",
-          },
-          items: ["components/hub/workspace/modeler/idp/idp-example"],
-        },
-        "components/hub/workspace/modeler/idp/idp-key-concepts",
-        "components/hub/workspace/modeler/idp/idp-reference",
       ],
     },
     "reference/mcp-docs/docs-mcp",
@@ -418,6 +390,43 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
+        {
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-configuration",
+            "components/hub/workspace/modeler/idp/idp-projects",
+            "components/hub/workspace/modeler/idp/idp-document-classification",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+              },
+              items: [
+                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+                "components/hub/workspace/modeler/idp/idp-structured-extraction",
+              ],
+            },
+            // "components/hub/workspace/modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/hub/workspace/modeler/idp/idp-integrate",
+              },
+              items: ["components/hub/workspace/modeler/idp/idp-example"],
+            },
+            "components/hub/workspace/modeler/idp/idp-key-concepts",
+            "components/hub/workspace/modeler/idp/idp-reference",
+          ],
+        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",

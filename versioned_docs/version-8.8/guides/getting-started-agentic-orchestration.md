@@ -114,7 +114,7 @@ The example includes a form linked to the start event, allowing you to submit re
 :::tip Understand the decision model behind this example
 To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [Design and architecture: Define your agent tools](/components/agentic-orchestration/design-architecture.md#define-your-agent-tools).
 
-For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [AI agents: How the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works).
 
 For prompt configuration details, see [AI Agent connector: System prompt, user prompt, and tool descriptions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
 :::
