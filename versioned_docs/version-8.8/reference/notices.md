@@ -31,6 +31,41 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 79
+
+### Publication date
+
+October 30, 2026
+
+### Products affected
+
+- Zeebe
+- Operate
+- Tasklist
+- Optimize
+
+### Impact
+
+CVE-2026-71290 is a TLS hostname verification bypass in the asynchronous client of Apache HttpClient 5 (httpclient5 5.4
+through 5.6.3). Camunda uses it to connect to Elasticsearch and OpenSearch. An attacker in a network position to
+intercept traffic (for example through DNS spoofing or a compromised neighbor on a shared segment) can impersonate the
+search backend with a valid certificate for another domain. This can expose Basic authentication credentials sent to the
+backend, expose or modify process data in transit, and allow forged responses.
+
+### How to determine if the installation is affected
+
+You are using one of the following components with TLS to Elasticsearch/OpenSearch:
+
+- Zeebe, Operate, Tasklist before 8.6.40
+- Optimize before 8.6.28
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe, Operate, Tasklist: 8.6.40
+- Optimize: 8.6.28
+
 ## Notice 70
 
 ### Publication date
