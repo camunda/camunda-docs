@@ -16,7 +16,7 @@ type SearchBatchOperationItemsData = object;
 ### body?
 
 ```ts
-optional body?: BatchOperationItemSearchQuery;
+body?: BatchOperationItemSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: BatchOperationItemSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

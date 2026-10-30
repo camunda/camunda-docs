@@ -16,7 +16,7 @@ type GetProcessInstanceCallHierarchyData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the process instance to fetch the hierarchy for.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

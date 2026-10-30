@@ -16,7 +16,7 @@ type IncidentProcessInstanceStatisticsByErrorQuery = object;
 ### page?
 
 ```ts
-optional page?: OffsetPagination;
+page?: OffsetPagination;
 ```
 
 Pagination parameters for process instance statistics grouped by incident error.
@@ -26,7 +26,7 @@ Pagination parameters for process instance statistics grouped by incident error.
 ### sort?
 
 ```ts
-optional sort?: IncidentProcessInstanceStatisticsByErrorQuerySortRequest[];
+sort?: IncidentProcessInstanceStatisticsByErrorQuerySortRequest[];
 ```
 
 Sorting criteria for process instance statistics grouped by incident error.

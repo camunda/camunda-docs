@@ -40,7 +40,7 @@ The key of the user task to assign.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

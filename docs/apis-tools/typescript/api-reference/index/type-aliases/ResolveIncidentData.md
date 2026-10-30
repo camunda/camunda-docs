@@ -16,7 +16,7 @@ type ResolveIncidentData = object;
 ### body?
 
 ```ts
-optional body?: IncidentResolutionRequest;
+body?: IncidentResolutionRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ Key of the incident to resolve.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

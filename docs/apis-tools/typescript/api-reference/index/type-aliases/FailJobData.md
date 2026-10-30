@@ -16,7 +16,7 @@ type FailJobData = object;
 ### body?
 
 ```ts
-optional body?: JobFailRequest;
+body?: JobFailRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the job to fail.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

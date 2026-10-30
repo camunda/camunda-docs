@@ -16,7 +16,7 @@ type GetProcessDefinitionMessageSubscriptionStatisticsData = object;
 ### body?
 
 ```ts
-optional body?: ProcessDefinitionMessageSubscriptionStatisticsQuery;
+body?: ProcessDefinitionMessageSubscriptionStatisticsQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ProcessDefinitionMessageSubscriptionStatisticsQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

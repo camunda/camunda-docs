@@ -16,7 +16,7 @@ type SearchRolesForGroupData = object;
 ### body?
 
 ```ts
-optional body?: RoleSearchQueryRequest;
+body?: RoleSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The group ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

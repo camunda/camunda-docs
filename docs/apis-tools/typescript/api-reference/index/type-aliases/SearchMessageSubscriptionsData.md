@@ -16,7 +16,7 @@ type SearchMessageSubscriptionsData = object;
 ### body?
 
 ```ts
-optional body?: MessageSubscriptionSearchQuery;
+body?: MessageSubscriptionSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: MessageSubscriptionSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

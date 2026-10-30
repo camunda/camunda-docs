@@ -16,5 +16,5 @@ type IncidentResolutionRequest = object;
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

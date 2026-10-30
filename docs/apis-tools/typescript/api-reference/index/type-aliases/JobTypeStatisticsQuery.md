@@ -18,7 +18,7 @@ Job type statistics query.
 ### filter?
 
 ```ts
-optional filter?: JobTypeStatisticsFilter;
+filter?: JobTypeStatisticsFilter;
 ```
 
 ---
@@ -26,7 +26,7 @@ optional filter?: JobTypeStatisticsFilter;
 ### page?
 
 ```ts
-optional page?: CursorForwardPagination;
+page?: CursorForwardPagination;
 ```
 
 Search cursor pagination.

@@ -24,7 +24,7 @@ from: getGlobalJobStatisticsQueryParam_from;
 ### jobType?
 
 ```ts
-optional jobType?: getGlobalJobStatisticsQueryParam_jobType;
+jobType?: getGlobalJobStatisticsQueryParam_jobType;
 ```
 
 ---

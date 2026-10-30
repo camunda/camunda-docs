@@ -18,7 +18,7 @@ Process instance search request.
 ### filter?
 
 ```ts
-optional filter?: ProcessInstanceFilter;
+filter?: ProcessInstanceFilter;
 ```
 
 The process instance search filters.
@@ -26,7 +26,7 @@ The process instance search filters.
 ### sort?
 
 ```ts
-optional sort?: ProcessInstanceSearchQuerySortRequest[];
+sort?: ProcessInstanceSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

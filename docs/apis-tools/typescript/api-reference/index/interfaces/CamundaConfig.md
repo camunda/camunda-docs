@@ -26,19 +26,19 @@ auth: object;
 #### basic?
 
 ```ts
-optional basic?: object;
+basic?: object;
 ```
 
 ##### basic.password?
 
 ```ts
-optional password?: string;
+password?: string;
 ```
 
 ##### basic.username?
 
 ```ts
-optional username?: string;
+username?: string;
 ```
 
 #### strategy
@@ -152,7 +152,7 @@ defaultTenantId: string;
 ### eventual?
 
 ```ts
-optional eventual?: object;
+eventual?: object;
 ```
 
 #### pollDefaultMs
@@ -200,49 +200,49 @@ logLevel: "trace" | "error" | "silent" | "warn" | "info" | "debug";
 ### mtls?
 
 ```ts
-optional mtls?: object;
+mtls?: object;
 ```
 
 #### ca?
 
 ```ts
-optional ca?: string;
+ca?: string;
 ```
 
 #### caPath?
 
 ```ts
-optional caPath?: string;
+caPath?: string;
 ```
 
 #### cert?
 
 ```ts
-optional cert?: string;
+cert?: string;
 ```
 
 #### certPath?
 
 ```ts
-optional certPath?: string;
+certPath?: string;
 ```
 
 #### key?
 
 ```ts
-optional key?: string;
+key?: string;
 ```
 
 #### keyPassphrase?
 
 ```ts
-optional keyPassphrase?: string;
+keyPassphrase?: string;
 ```
 
 #### keyPath?
 
 ```ts
-optional keyPath?: string;
+keyPath?: string;
 ```
 
 ---
@@ -256,19 +256,19 @@ oauth: object;
 #### cacheDir?
 
 ```ts
-optional cacheDir?: string;
+cacheDir?: string;
 ```
 
 #### clientId?
 
 ```ts
-optional clientId?: string;
+clientId?: string;
 ```
 
 #### clientSecret?
 
 ```ts
-optional clientSecret?: string;
+clientSecret?: string;
 ```
 
 #### grantType
@@ -304,7 +304,7 @@ max: number;
 #### scope?
 
 ```ts
-optional scope?: string;
+scope?: string;
 ```
 
 #### timeoutMs
@@ -323,10 +323,18 @@ restAddress: string;
 
 ---
 
+### restAddressExact
+
+```ts
+restAddressExact: boolean;
+```
+
+---
+
 ### supportLog?
 
 ```ts
-optional supportLog?: object;
+supportLog?: object;
 ```
 
 #### enabled
@@ -346,7 +354,7 @@ filePath: string;
 ### telemetry?
 
 ```ts
-optional telemetry?: object;
+telemetry?: object;
 ```
 
 #### correlation
@@ -400,35 +408,35 @@ res: ValidationMode;
 ### workerDefaults?
 
 ```ts
-optional workerDefaults?: object;
+workerDefaults?: object;
 ```
 
 #### jobTimeoutMs?
 
 ```ts
-optional jobTimeoutMs?: number;
+jobTimeoutMs?: number;
 ```
 
 #### maxParallelJobs?
 
 ```ts
-optional maxParallelJobs?: number;
+maxParallelJobs?: number;
 ```
 
 #### pollTimeoutMs?
 
 ```ts
-optional pollTimeoutMs?: number;
+pollTimeoutMs?: number;
 ```
 
 #### startupJitterMaxSeconds?
 
 ```ts
-optional startupJitterMaxSeconds?: number;
+startupJitterMaxSeconds?: number;
 ```
 
 #### workerName?
 
 ```ts
-optional workerName?: string;
+workerName?: string;
 ```

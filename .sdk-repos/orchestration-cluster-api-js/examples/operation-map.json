@@ -1283,6 +1283,20 @@
       "label": "Pin the cluster clock"
     }
   ],
+  "getClock": [
+    {
+      "file": "admin-operations.ts",
+      "region": "GetClock",
+      "label": "Get the cluster clock"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "admin-operations.ts",
+      "region": "AddClock",
+      "label": "Add time to the cluster clock"
+    }
+  ],
   "resetClock": [
     {
       "file": "admin-operations.ts",

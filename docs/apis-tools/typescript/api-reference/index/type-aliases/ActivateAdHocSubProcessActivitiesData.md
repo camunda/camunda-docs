@@ -40,7 +40,7 @@ The key of the ad-hoc sub-process instance that contains the activities.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

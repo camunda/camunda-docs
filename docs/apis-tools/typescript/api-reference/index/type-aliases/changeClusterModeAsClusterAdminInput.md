@@ -16,7 +16,7 @@ type changeClusterModeAsClusterAdminInput = object;
 ### dryRun?
 
 ```ts
-optional dryRun?: changeClusterModeAsClusterAdminQueryParam_dryRun;
+dryRun?: changeClusterModeAsClusterAdminQueryParam_dryRun;
 ```
 
 ---
@@ -32,5 +32,5 @@ mode: changeClusterModeAsClusterAdminQueryParam_mode;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: changeClusterModeAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: changeClusterModeAsClusterAdminQueryParam_physicalTenantId;
 ```

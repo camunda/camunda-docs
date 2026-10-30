@@ -18,7 +18,7 @@ Instruction describing an element to activate.
 ### ancestorElementInstanceKey?
 
 ```ts
-optional ancestorElementInstanceKey?: ElementInstanceKey;
+ancestorElementInstanceKey?: ElementInstanceKey;
 ```
 
 The key of the ancestor scope the element instance should be created in.
@@ -41,7 +41,7 @@ The id of the element to activate.
 ### variableInstructions?
 
 ```ts
-optional variableInstructions?: ModifyProcessInstanceVariableInstruction[];
+variableInstructions?: ModifyProcessInstanceVariableInstruction[];
 ```
 
 Instructions describing which variables to create or update.

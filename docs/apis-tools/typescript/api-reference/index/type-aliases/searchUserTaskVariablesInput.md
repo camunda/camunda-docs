@@ -16,7 +16,7 @@ type searchUserTaskVariablesInput = searchUserTaskVariablesBody & object;
 ### truncateValues?
 
 ```ts
-optional truncateValues?: searchUserTaskVariablesQueryParam_truncateValues;
+truncateValues?: searchUserTaskVariablesQueryParam_truncateValues;
 ```
 
 ### userTaskKey

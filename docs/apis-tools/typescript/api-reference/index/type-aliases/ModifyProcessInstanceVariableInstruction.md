@@ -18,7 +18,7 @@ Instruction describing which variables to create or update.
 ### scopeId?
 
 ```ts
-optional scopeId?: string;
+scopeId?: string;
 ```
 
 The id of the element in which scope the variables should be created.

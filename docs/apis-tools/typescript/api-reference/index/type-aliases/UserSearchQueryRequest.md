@@ -16,7 +16,7 @@ type UserSearchQueryRequest = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: UserFilter;
+filter?: UserFilter;
 ```
 
 The user search filters.
@@ -24,7 +24,7 @@ The user search filters.
 ### sort?
 
 ```ts
-optional sort?: UserSearchQuerySortRequest[];
+sort?: UserSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

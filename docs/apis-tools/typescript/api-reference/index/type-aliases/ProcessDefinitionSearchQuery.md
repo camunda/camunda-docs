@@ -16,7 +16,7 @@ type ProcessDefinitionSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: ProcessDefinitionFilter;
+filter?: ProcessDefinitionFilter;
 ```
 
 The process definition search filters.
@@ -24,7 +24,7 @@ The process definition search filters.
 ### sort?
 
 ```ts
-optional sort?: ProcessDefinitionSearchQuerySortRequest[];
+sort?: ProcessDefinitionSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

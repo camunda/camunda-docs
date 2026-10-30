@@ -16,7 +16,7 @@ type changeClusterModeInput = object;
 ### dryRun?
 
 ```ts
-optional dryRun?: changeClusterModeQueryParam_dryRun;
+dryRun?: changeClusterModeQueryParam_dryRun;
 ```
 
 ---

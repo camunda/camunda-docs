@@ -16,7 +16,7 @@ type GlobalListenerBase = object;
 ### afterNonGlobal?
 
 ```ts
-optional afterNonGlobal?: boolean;
+afterNonGlobal?: boolean;
 ```
 
 Whether the listener should run after model-level listeners.
@@ -26,7 +26,7 @@ Whether the listener should run after model-level listeners.
 ### priority?
 
 ```ts
-optional priority?: number;
+priority?: number;
 ```
 
 The priority of the listener. Higher priority listeners are executed before lower priority ones.
@@ -36,7 +36,7 @@ The priority of the listener. Higher priority listeners are executed before lowe
 ### retries?
 
 ```ts
-optional retries?: number;
+retries?: number;
 ```
 
 Number of retries for the listener job.
@@ -46,7 +46,7 @@ Number of retries for the listener job.
 ### type?
 
 ```ts
-optional type?: string;
+type?: string;
 ```
 
 The name of the job type, used as a reference to specify which job workers request the respective listener job.

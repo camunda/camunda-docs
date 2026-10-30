@@ -24,5 +24,5 @@ backupId: getHistoryBackupAsClusterAdminPathParam_backupId;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: getHistoryBackupAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: getHistoryBackupAsClusterAdminQueryParam_physicalTenantId;
 ```

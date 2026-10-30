@@ -17,7 +17,7 @@ type searchUserTaskEffectiveVariablesInput =
 ### truncateValues?
 
 ```ts
-optional truncateValues?: searchUserTaskEffectiveVariablesQueryParam_truncateValues;
+truncateValues?: searchUserTaskEffectiveVariablesQueryParam_truncateValues;
 ```
 
 ### userTaskKey

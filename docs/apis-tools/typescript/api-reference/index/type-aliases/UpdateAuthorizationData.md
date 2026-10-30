@@ -40,7 +40,7 @@ The key of the authorization to delete.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

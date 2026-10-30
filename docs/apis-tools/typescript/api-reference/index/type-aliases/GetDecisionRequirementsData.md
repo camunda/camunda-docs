@@ -16,7 +16,7 @@ type GetDecisionRequirementsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the decision requirements, which acts as a unique identifier
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

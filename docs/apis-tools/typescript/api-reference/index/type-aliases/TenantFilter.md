@@ -18,7 +18,7 @@ Tenant filter request
 ### name?
 
 ```ts
-optional name?: string;
+name?: string;
 ```
 
 The name of the tenant.
@@ -28,7 +28,7 @@ The name of the tenant.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 The unique identifier of the tenant.

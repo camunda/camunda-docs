@@ -28,7 +28,7 @@ The id of the element that, once completed or terminated, will cause the process
 ### type?
 
 ```ts
-optional type?: string;
+type?: string;
 ```
 
 The type of the runtime instruction

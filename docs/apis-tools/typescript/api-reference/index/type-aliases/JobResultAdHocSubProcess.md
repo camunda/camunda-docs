@@ -34,7 +34,7 @@ Job result details for an ad‑hoc sub‑process, including elements to activate
 #### activateElements?
 
 ```ts
-optional activateElements?: JobResultActivateElement[];
+activateElements?: JobResultActivateElement[];
 ```
 
 Indicates which elements need to be activated in the ad-hoc subprocess.
@@ -42,7 +42,7 @@ Indicates which elements need to be activated in the ad-hoc subprocess.
 #### isCancelRemainingInstances?
 
 ```ts
-optional isCancelRemainingInstances?: boolean;
+isCancelRemainingInstances?: boolean;
 ```
 
 Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.
@@ -50,7 +50,7 @@ Indicates whether the remaining instances of the ad-hoc subprocess should be can
 #### isCompletionConditionFulfilled?
 
 ```ts
-optional isCompletionConditionFulfilled?: boolean;
+isCompletionConditionFulfilled?: boolean;
 ```
 
 Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.
@@ -58,7 +58,7 @@ Indicates whether the completion condition of the ad-hoc subprocess is fulfilled
 #### type?
 
 ```ts
-optional type?: string;
+type?: string;
 ```
 
 Used to distinguish between different types of job results.

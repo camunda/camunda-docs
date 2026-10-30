@@ -16,7 +16,7 @@ type JobFailRequest = object;
 ### errorMessage?
 
 ```ts
-optional errorMessage?: string;
+errorMessage?: string;
 ```
 
 An optional error message describing why the job failed; if not provided, an empty string is used.
@@ -26,7 +26,7 @@ An optional error message describing why the job failed; if not provided, an emp
 ### jobLeaseToken?
 
 ```ts
-optional jobLeaseToken?: JobLeaseToken | null;
+jobLeaseToken?: JobLeaseToken | null;
 ```
 
 The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.
@@ -38,7 +38,7 @@ A job that was activated without a lease requires no token.
 ### retries?
 
 ```ts
-optional retries?: number;
+retries?: number;
 ```
 
 The amount of retries the job should have left
@@ -48,7 +48,7 @@ The amount of retries the job should have left
 ### retryBackOff?
 
 ```ts
-optional retryBackOff?: number;
+retryBackOff?: number;
 ```
 
 An optional retry back off for the failed job. The job will not be retryable before the current time plus the back off time. The default is 0 which means the job is retryable immediately.
@@ -58,7 +58,7 @@ An optional retry back off for the failed job. The job will not be retryable bef
 ### variables?
 
 ```ts
-optional variables?: object;
+variables?: object;
 ```
 
 JSON object that will instantiate the variables at the local scope of the job's associated task.

@@ -16,5 +16,5 @@ type createDocumentsInput = createDocumentsBody & object;
 ### storeId?
 
 ```ts
-optional storeId?: createDocumentsQueryParam_storeId;
+storeId?: createDocumentsQueryParam_storeId;
 ```

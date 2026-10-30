@@ -18,13 +18,13 @@ User task search query request.
 ### filter?
 
 ```ts
-optional filter?: UserTaskAuditLogFilter;
+filter?: UserTaskAuditLogFilter;
 ```
 
 ### sort?
 
 ```ts
-optional sort?: AuditLogSearchQuerySortRequest[];
+sort?: AuditLogSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

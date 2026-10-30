@@ -17,5 +17,5 @@ type takeHistoryBackupAsClusterAdminInput =
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: takeHistoryBackupAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: takeHistoryBackupAsClusterAdminQueryParam_physicalTenantId;
 ```

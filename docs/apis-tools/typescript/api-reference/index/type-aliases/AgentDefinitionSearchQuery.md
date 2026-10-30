@@ -18,7 +18,7 @@ Agent definition search request.
 ### filter?
 
 ```ts
-optional filter?: AgentDefinitionFilter;
+filter?: AgentDefinitionFilter;
 ```
 
 The agent definition search filters.
@@ -26,7 +26,7 @@ The agent definition search filters.
 ### sort?
 
 ```ts
-optional sort?: AgentDefinitionSearchQuerySortRequest[];
+sort?: AgentDefinitionSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

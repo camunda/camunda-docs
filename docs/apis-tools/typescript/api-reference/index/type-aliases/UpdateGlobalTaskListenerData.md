@@ -40,7 +40,7 @@ The id of the global user task listener to update.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

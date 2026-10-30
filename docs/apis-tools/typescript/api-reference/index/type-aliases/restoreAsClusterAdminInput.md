@@ -16,11 +16,11 @@ type restoreAsClusterAdminInput = restoreAsClusterAdminBody & object;
 ### dryRun?
 
 ```ts
-optional dryRun?: restoreAsClusterAdminQueryParam_dryRun;
+dryRun?: restoreAsClusterAdminQueryParam_dryRun;
 ```
 
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: restoreAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: restoreAsClusterAdminQueryParam_physicalTenantId;
 ```

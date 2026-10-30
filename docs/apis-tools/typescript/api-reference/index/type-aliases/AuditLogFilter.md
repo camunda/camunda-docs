@@ -18,7 +18,7 @@ Audit log filter request
 ### actorId?
 
 ```ts
-optional actorId?: StringFilterProperty;
+actorId?: StringFilterProperty;
 ```
 
 The actor ID search filter.
@@ -28,7 +28,7 @@ The actor ID search filter.
 ### actorType?
 
 ```ts
-optional actorType?: AuditLogActorTypeFilterProperty;
+actorType?: AuditLogActorTypeFilterProperty;
 ```
 
 The actor type search filter.
@@ -38,7 +38,7 @@ The actor type search filter.
 ### agentElementId?
 
 ```ts
-optional agentElementId?: StringFilterProperty;
+agentElementId?: StringFilterProperty;
 ```
 
 The agent element ID search filter.
@@ -48,7 +48,7 @@ The agent element ID search filter.
 ### auditLogKey?
 
 ```ts
-optional auditLogKey?: AuditLogKeyFilterProperty;
+auditLogKey?: AuditLogKeyFilterProperty;
 ```
 
 The audit log key search filter.
@@ -58,7 +58,7 @@ The audit log key search filter.
 ### batchOperationType?
 
 ```ts
-optional batchOperationType?: BatchOperationTypeFilterProperty;
+batchOperationType?: BatchOperationTypeFilterProperty;
 ```
 
 The batch operation type search filter.
@@ -68,7 +68,7 @@ The batch operation type search filter.
 ### category?
 
 ```ts
-optional category?: CategoryFilterProperty;
+category?: CategoryFilterProperty;
 ```
 
 The category search filter.
@@ -78,7 +78,7 @@ The category search filter.
 ### decisionDefinitionId?
 
 ```ts
-optional decisionDefinitionId?: StringFilterProperty;
+decisionDefinitionId?: StringFilterProperty;
 ```
 
 The decision definition ID search filter.
@@ -88,7 +88,7 @@ The decision definition ID search filter.
 ### decisionDefinitionKey?
 
 ```ts
-optional decisionDefinitionKey?: DecisionDefinitionKeyFilterProperty;
+decisionDefinitionKey?: DecisionDefinitionKeyFilterProperty;
 ```
 
 The decision definition key search filter.
@@ -98,7 +98,7 @@ The decision definition key search filter.
 ### decisionEvaluationKey?
 
 ```ts
-optional decisionEvaluationKey?: DecisionEvaluationKeyFilterProperty;
+decisionEvaluationKey?: DecisionEvaluationKeyFilterProperty;
 ```
 
 The decision evaluation key search filter.
@@ -108,7 +108,7 @@ The decision evaluation key search filter.
 ### decisionRequirementsId?
 
 ```ts
-optional decisionRequirementsId?: StringFilterProperty;
+decisionRequirementsId?: StringFilterProperty;
 ```
 
 The decision requirements ID search filter.
@@ -118,7 +118,7 @@ The decision requirements ID search filter.
 ### decisionRequirementsKey?
 
 ```ts
-optional decisionRequirementsKey?: DecisionRequirementsKeyFilterProperty;
+decisionRequirementsKey?: DecisionRequirementsKeyFilterProperty;
 ```
 
 The decision requirements key search filter.
@@ -128,7 +128,7 @@ The decision requirements key search filter.
 ### deploymentKey?
 
 ```ts
-optional deploymentKey?: DeploymentKeyFilterProperty;
+deploymentKey?: DeploymentKeyFilterProperty;
 ```
 
 The deployment key search filter.
@@ -138,7 +138,7 @@ The deployment key search filter.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The element instance key search filter.
@@ -148,7 +148,7 @@ The element instance key search filter.
 ### entityDescription?
 
 ```ts
-optional entityDescription?: StringFilterProperty;
+entityDescription?: StringFilterProperty;
 ```
 
 The entity description filter.
@@ -158,7 +158,7 @@ The entity description filter.
 ### entityKey?
 
 ```ts
-optional entityKey?: AuditLogEntityKeyFilterProperty;
+entityKey?: AuditLogEntityKeyFilterProperty;
 ```
 
 The entity key search filter.
@@ -168,7 +168,7 @@ The entity key search filter.
 ### entityType?
 
 ```ts
-optional entityType?: EntityTypeFilterProperty;
+entityType?: EntityTypeFilterProperty;
 ```
 
 The entity type search filter.
@@ -178,7 +178,7 @@ The entity type search filter.
 ### formKey?
 
 ```ts
-optional formKey?: FormKeyFilterProperty;
+formKey?: FormKeyFilterProperty;
 ```
 
 The form key search filter.
@@ -188,7 +188,7 @@ The form key search filter.
 ### inboundChannelToolName?
 
 ```ts
-optional inboundChannelToolName?: StringFilterProperty;
+inboundChannelToolName?: StringFilterProperty;
 ```
 
 The inbound channel tool name search filter.
@@ -198,7 +198,7 @@ The inbound channel tool name search filter.
 ### inboundChannelType?
 
 ```ts
-optional inboundChannelType?: StringFilterProperty;
+inboundChannelType?: StringFilterProperty;
 ```
 
 The inbound channel type search filter (e.g. MCP).
@@ -208,7 +208,7 @@ The inbound channel type search filter (e.g. MCP).
 ### jobKey?
 
 ```ts
-optional jobKey?: JobKeyFilterProperty;
+jobKey?: JobKeyFilterProperty;
 ```
 
 The job key search filter.
@@ -218,7 +218,7 @@ The job key search filter.
 ### operationType?
 
 ```ts
-optional operationType?: OperationTypeFilterProperty;
+operationType?: OperationTypeFilterProperty;
 ```
 
 The operation type search filter.
@@ -228,7 +228,7 @@ The operation type search filter.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition ID search filter.
@@ -238,7 +238,7 @@ The process definition ID search filter.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key search filter.
@@ -248,7 +248,7 @@ The process definition key search filter.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The process instance key search filter.
@@ -258,7 +258,7 @@ The process instance key search filter.
 ### relatedEntityKey?
 
 ```ts
-optional relatedEntityKey?: AuditLogEntityKeyFilterProperty;
+relatedEntityKey?: AuditLogEntityKeyFilterProperty;
 ```
 
 The related entity key search filter.
@@ -268,7 +268,7 @@ The related entity key search filter.
 ### relatedEntityType?
 
 ```ts
-optional relatedEntityType?: EntityTypeFilterProperty;
+relatedEntityType?: EntityTypeFilterProperty;
 ```
 
 The related entity type search filter.
@@ -278,7 +278,7 @@ The related entity type search filter.
 ### resourceKey?
 
 ```ts
-optional resourceKey?: ResourceKeyFilterProperty;
+resourceKey?: ResourceKeyFilterProperty;
 ```
 
 The resource key search filter.
@@ -288,7 +288,7 @@ The resource key search filter.
 ### result?
 
 ```ts
-optional result?: AuditLogResultFilterProperty;
+result?: AuditLogResultFilterProperty;
 ```
 
 The result search filter.
@@ -298,7 +298,7 @@ The result search filter.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant ID search filter.
@@ -308,7 +308,7 @@ The tenant ID search filter.
 ### timestamp?
 
 ```ts
-optional timestamp?: DateTimeFilterProperty;
+timestamp?: DateTimeFilterProperty;
 ```
 
 The timestamp search filter.
@@ -318,7 +318,7 @@ The timestamp search filter.
 ### userTaskKey?
 
 ```ts
-optional userTaskKey?: BasicStringFilterProperty;
+userTaskKey?: BasicStringFilterProperty;
 ```
 
 The user task key search filter.

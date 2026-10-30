@@ -24,7 +24,7 @@ Options for the Effect client's `.paginate`.
 ### consistency?
 
 ```ts
-readonly optional consistency?: ConsistencyOptions<TData>;
+readonly consistency?: ConsistencyOptions<TData>;
 ```
 
 Eventual-consistency controls forwarded to the underlying search call. Defaults
@@ -36,7 +36,7 @@ is under way an empty page is end-of-results, not a not-yet-consistent read.
 ### maxPages?
 
 ```ts
-readonly optional maxPages?: number;
+readonly maxPages?: number;
 ```
 
 Safety cap on pages fetched (default: unbounded). A non-positive value fetches
@@ -47,7 +47,7 @@ no pages at all — the cap is enforced _before_ the first request.
 ### mode?
 
 ```ts
-readonly optional mode?: PaginationMode;
+readonly mode?: PaginationMode;
 ```
 
 How to advance. `auto` prefers a cursor, falls back to offset.

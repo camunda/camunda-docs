@@ -50,7 +50,7 @@ the persisted attribute's value.
 #### assignee?
 
 ```ts
-optional assignee?: string | null;
+assignee?: string | null;
 ```
 
 Assignee of the task.
@@ -58,7 +58,7 @@ Assignee of the task.
 #### candidateGroups?
 
 ```ts
-optional candidateGroups?: string[] | null;
+candidateGroups?: string[] | null;
 ```
 
 The list of candidate groups of the task.
@@ -66,7 +66,7 @@ The list of candidate groups of the task.
 #### candidateUsers?
 
 ```ts
-optional candidateUsers?: string[] | null;
+candidateUsers?: string[] | null;
 ```
 
 The list of candidate users of the task.
@@ -74,7 +74,7 @@ The list of candidate users of the task.
 #### dueDate?
 
 ```ts
-optional dueDate?: string | null;
+dueDate?: string | null;
 ```
 
 The due date of the task.
@@ -82,7 +82,7 @@ The due date of the task.
 #### followUpDate?
 
 ```ts
-optional followUpDate?: string | null;
+followUpDate?: string | null;
 ```
 
 The follow-up date of the task.
@@ -90,7 +90,7 @@ The follow-up date of the task.
 #### priority?
 
 ```ts
-optional priority?: number | null;
+priority?: number | null;
 ```
 
 The priority of the task.

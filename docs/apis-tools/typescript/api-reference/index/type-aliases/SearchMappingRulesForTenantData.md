@@ -16,7 +16,7 @@ type SearchMappingRulesForTenantData = object;
 ### body?
 
 ```ts
-optional body?: MappingRuleSearchQueryRequest;
+body?: MappingRuleSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

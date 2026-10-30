@@ -18,7 +18,7 @@ Message subscription search filter.
 ### businessId?
 
 ```ts
-optional businessId?: StringFilterProperty;
+businessId?: StringFilterProperty;
 ```
 
 Filter by the business id inherited from the subscribing process instance when the
@@ -30,7 +30,7 @@ subscription was opened. Supports advanced string filtering, including `$like` w
 ### correlationKey?
 
 ```ts
-optional correlationKey?: StringFilterProperty;
+correlationKey?: StringFilterProperty;
 ```
 
 The correlation key of the message subscription.
@@ -40,7 +40,7 @@ The correlation key of the message subscription.
 ### elementId?
 
 ```ts
-optional elementId?: StringFilterProperty;
+elementId?: StringFilterProperty;
 ```
 
 The element ID associated with this message subscription.
@@ -50,7 +50,7 @@ The element ID associated with this message subscription.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The element instance key associated with this message subscription.
@@ -60,7 +60,7 @@ The element instance key associated with this message subscription.
 ### inboundConnectorType?
 
 ```ts
-optional inboundConnectorType?: StringFilterProperty;
+inboundConnectorType?: StringFilterProperty;
 ```
 
 Filter by inbound connector type extracted from the `inbound.type` zeebe:property.
@@ -70,7 +70,7 @@ Filter by inbound connector type extracted from the `inbound.type` zeebe:propert
 ### lastUpdatedDate?
 
 ```ts
-optional lastUpdatedDate?: DateTimeFilterProperty;
+lastUpdatedDate?: DateTimeFilterProperty;
 ```
 
 The last updated date of the message subscription.
@@ -80,7 +80,7 @@ The last updated date of the message subscription.
 ### messageName?
 
 ```ts
-optional messageName?: StringFilterProperty;
+messageName?: StringFilterProperty;
 ```
 
 The name of the message associated with the message subscription.
@@ -90,7 +90,7 @@ The name of the message associated with the message subscription.
 ### messageSubscriptionKey?
 
 ```ts
-optional messageSubscriptionKey?: MessageSubscriptionKeyFilterProperty;
+messageSubscriptionKey?: MessageSubscriptionKeyFilterProperty;
 ```
 
 The message subscription key associated with this message subscription.
@@ -100,7 +100,7 @@ The message subscription key associated with this message subscription.
 ### messageSubscriptionState?
 
 ```ts
-optional messageSubscriptionState?: MessageSubscriptionStateFilterProperty;
+messageSubscriptionState?: MessageSubscriptionStateFilterProperty;
 ```
 
 The message subscription state.
@@ -110,7 +110,7 @@ The message subscription state.
 ### messageSubscriptionType?
 
 ```ts
-optional messageSubscriptionType?: MessageSubscriptionTypeFilterProperty;
+messageSubscriptionType?: MessageSubscriptionTypeFilterProperty;
 ```
 
 The type of message subscription to filter by. When omitted, both
@@ -122,7 +122,7 @@ created with Camunda 8.10 or later.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition ID associated with this message subscription.
@@ -132,7 +132,7 @@ The process definition ID associated with this message subscription.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key associated with this correlated message subscription. This only works for data created with 8.9 and later.
@@ -142,7 +142,7 @@ The process definition key associated with this correlated message subscription.
 ### processDefinitionName?
 
 ```ts
-optional processDefinitionName?: StringFilterProperty;
+processDefinitionName?: StringFilterProperty;
 ```
 
 The name of the process definition associated with this message subscription.
@@ -152,7 +152,7 @@ The name of the process definition associated with this message subscription.
 ### processDefinitionVersion?
 
 ```ts
-optional processDefinitionVersion?: IntegerFilterProperty;
+processDefinitionVersion?: IntegerFilterProperty;
 ```
 
 The version of the process definition associated with this message subscription.
@@ -162,7 +162,7 @@ The version of the process definition associated with this message subscription.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The process instance key associated with this message subscription.
@@ -172,7 +172,7 @@ The process instance key associated with this message subscription.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The unique external tenant ID.
@@ -182,7 +182,7 @@ The unique external tenant ID.
 ### toolName?
 
 ```ts
-optional toolName?: StringFilterProperty;
+toolName?: StringFilterProperty;
 ```
 
 Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.

@@ -26,7 +26,7 @@ Filter criteria for the aggregated process instance statistics.
 ### page?
 
 ```ts
-optional page?: OffsetPagination;
+page?: OffsetPagination;
 ```
 
 Pagination parameters for the aggregated process instance statistics.
@@ -36,7 +36,7 @@ Pagination parameters for the aggregated process instance statistics.
 ### sort?
 
 ```ts
-optional sort?: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest[];
+sort?: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest[];
 ```
 
 Sorting criteria for process instance statistics grouped by process definition.

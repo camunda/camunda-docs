@@ -29,7 +29,7 @@ Same as JobWorkerConfig but replaces `jobHandler` with `handlerModule`.
 ### autoStart?
 
 ```ts
-optional autoStart?: boolean;
+autoStart?: boolean;
 ```
 
 Immediately start polling for work - default `true`
@@ -39,7 +39,7 @@ Immediately start polling for work - default `true`
 ### customHeadersSchema?
 
 ```ts
-optional customHeadersSchema?: Headers;
+customHeadersSchema?: Headers;
 ```
 
 Zod schema for custom headers in the activated job
@@ -49,7 +49,7 @@ Zod schema for custom headers in the activated job
 ### fetchVariables?
 
 ```ts
-optional fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
+fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
 Optional list of variable names to fetch during activation
@@ -70,7 +70,7 @@ The function signature must be: `(job, client) => Promise<JobActionReceipt>`
 ### inputSchema?
 
 ```ts
-optional inputSchema?: In;
+inputSchema?: In;
 ```
 
 Zod schema for variables in the activated job
@@ -80,7 +80,7 @@ Zod schema for variables in the activated job
 ### jobTimeoutMs?
 
 ```ts
-optional jobTimeoutMs?: number;
+jobTimeoutMs?: number;
 ```
 
 Job activation timeout in ms — default `60000`. Overridden by CAMUNDA_WORKER_TIMEOUT env var.
@@ -100,7 +100,7 @@ Zeebe job type
 ### maxParallelJobs?
 
 ```ts
-optional maxParallelJobs?: number;
+maxParallelJobs?: number;
 ```
 
 Concurrency limit — default `10`. Overridden by CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var.
@@ -110,7 +110,7 @@ Concurrency limit — default `10`. Overridden by CAMUNDA_WORKER_MAX_CONCURRENT_
 ### outputSchema?
 
 ```ts
-optional outputSchema?: Out;
+outputSchema?: Out;
 ```
 
 Zod schema for variables in the complete command
@@ -120,7 +120,7 @@ Zod schema for variables in the complete command
 ### pollBackoffMaxMs?
 
 ```ts
-optional pollBackoffMaxMs?: number;
+pollBackoffMaxMs?: number;
 ```
 
 Ceiling (ms) of the between-failed-poll exponential backoff. Default `30000`.
@@ -130,7 +130,7 @@ Ceiling (ms) of the between-failed-poll exponential backoff. Default `30000`.
 ### pollBackoffMinMs?
 
 ```ts
-optional pollBackoffMinMs?: number;
+pollBackoffMinMs?: number;
 ```
 
 Floor (ms) of the exponential backoff applied between _failed_ activation
@@ -144,7 +144,7 @@ zero on the first successful poll. Default `1000`. Set to `0` to disable backoff
 ### pollIntervalMs?
 
 ```ts
-optional pollIntervalMs?: number;
+pollIntervalMs?: number;
 ```
 
 Backoff between polls - default 1ms
@@ -154,7 +154,7 @@ Backoff between polls - default 1ms
 ### pollTimeoutMs?
 
 ```ts
-optional pollTimeoutMs?: number;
+pollTimeoutMs?: number;
 ```
 
 The request will be completed when at least one job is activated or after the requestTimeout.
@@ -166,7 +166,7 @@ To immediately complete the request when no job is activated set the requestTime
 ### startupJitterMaxSeconds?
 
 ```ts
-optional startupJitterMaxSeconds?: number;
+startupJitterMaxSeconds?: number;
 ```
 
 Maximum random delay (in seconds) before the worker starts polling.
@@ -179,7 +179,7 @@ initial activation requests to avoid saturating the server.
 ### threadPoolSize?
 
 ```ts
-optional threadPoolSize?: number;
+threadPoolSize?: number;
 ```
 
 Number of threads in the shared pool (used only when the pool is first created;
@@ -191,7 +191,7 @@ Default: number of CPU cores available to the process.
 ### validateSchemas?
 
 ```ts
-optional validateSchemas?: boolean;
+validateSchemas?: boolean;
 ```
 
 Validate any provided input, output, customheader schema
@@ -202,7 +202,7 @@ default: false
 ### withLease?
 
 ```ts
-optional withLease?: boolean;
+withLease?: boolean;
 ```
 
 Activate jobs with a lease — default `false`.
@@ -220,7 +220,7 @@ fenced commands automatically, so handlers do not read it directly.
 ### workerName?
 
 ```ts
-optional workerName?: string;
+workerName?: string;
 ```
 
 Optional explicit name

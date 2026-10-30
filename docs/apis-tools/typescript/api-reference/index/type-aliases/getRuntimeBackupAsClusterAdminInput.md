@@ -24,5 +24,5 @@ backupId: getRuntimeBackupAsClusterAdminPathParam_backupId;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: getRuntimeBackupAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: getRuntimeBackupAsClusterAdminQueryParam_physicalTenantId;
 ```

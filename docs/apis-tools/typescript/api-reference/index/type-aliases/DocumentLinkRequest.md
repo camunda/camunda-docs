@@ -16,7 +16,7 @@ type DocumentLinkRequest = object;
 ### timeToLive?
 
 ```ts
-optional timeToLive?: number;
+timeToLive?: number;
 ```
 
 The time-to-live of the document link in ms.

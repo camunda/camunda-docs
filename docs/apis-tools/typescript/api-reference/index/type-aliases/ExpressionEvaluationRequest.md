@@ -26,7 +26,7 @@ The expression to evaluate (e.g., "=x + y")
 ### scopeKey?
 
 ```ts
-optional scopeKey?: ScopeKey;
+scopeKey?: ScopeKey;
 ```
 
 Key of the process instance or element instance whose variables should be made visible
@@ -40,7 +40,7 @@ and request-body variables.
 ### tenantId?
 
 ```ts
-optional tenantId?: string;
+tenantId?: string;
 ```
 
 Required when the expression references tenant-scoped cluster variables
@@ -50,7 +50,7 @@ Required when the expression references tenant-scoped cluster variables
 ### variables?
 
 ```ts
-optional variables?:
+variables?:
   | {
 [key: string]: unknown;
 }

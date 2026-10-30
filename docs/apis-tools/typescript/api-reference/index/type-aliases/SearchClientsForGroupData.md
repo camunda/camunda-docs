@@ -16,7 +16,7 @@ type SearchClientsForGroupData = object;
 ### body?
 
 ```ts
-optional body?: GroupClientSearchQueryRequest;
+body?: GroupClientSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The group ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

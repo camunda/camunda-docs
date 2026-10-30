@@ -16,7 +16,7 @@ type ResumeProcessInstanceData = object;
 ### body?
 
 ```ts
-optional body?: ResumeProcessInstanceRequest;
+body?: ResumeProcessInstanceRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the process instance to resume.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -16,7 +16,7 @@ type UpdateMappingRuleData = object;
 ### body?
 
 ```ts
-optional body?: MappingRuleUpdateRequest;
+body?: MappingRuleUpdateRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The ID of the mapping rule to update.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

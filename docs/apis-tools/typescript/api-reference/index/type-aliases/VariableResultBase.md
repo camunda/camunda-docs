@@ -15,6 +15,16 @@ Variable response item.
 
 ## Properties
 
+### metadata
+
+```ts
+metadata: VariableMetadata | null;
+```
+
+Metadata of this variable. `null` when the variable has no metadata.
+
+---
+
 ### name
 
 ```ts

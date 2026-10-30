@@ -18,7 +18,7 @@ Element instance search request.
 ### filter?
 
 ```ts
-optional filter?: ElementInstanceFilter;
+filter?: ElementInstanceFilter;
 ```
 
 The element instance search filters.
@@ -26,7 +26,7 @@ The element instance search filters.
 ### sort?
 
 ```ts
-optional sort?: ElementInstanceSearchQuerySortRequest[];
+sort?: ElementInstanceSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

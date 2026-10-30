@@ -8,5 +8,5 @@ mdx:
 # Variable: CamundaClient
 
 ```ts
-CamundaClient: (options?) => CamundaClient & typeof CamundaClientBase;
+CamundaClient: (new (options?) => CamundaClient) & typeof CamundaClientBase;
 ```

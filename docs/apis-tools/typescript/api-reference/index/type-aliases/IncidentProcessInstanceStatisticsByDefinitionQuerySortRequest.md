@@ -26,5 +26,5 @@ The aggregated field by which the process instance statistics are sorted.
 ### order?
 
 ```ts
-optional order?: SortOrderEnum;
+order?: SortOrderEnum;
 ```

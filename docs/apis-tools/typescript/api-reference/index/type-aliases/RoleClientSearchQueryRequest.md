@@ -16,7 +16,7 @@ type RoleClientSearchQueryRequest = SearchQueryRequest & object;
 ### sort?
 
 ```ts
-optional sort?: RoleClientSearchQuerySortRequest[];
+sort?: RoleClientSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

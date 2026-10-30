@@ -33,6 +33,16 @@ The resource is not found.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+The process definition is still draining, so its history cannot be deleted yet. Retry with `deleteHistory` set to `true` once the definition is fully deleted; the batch operation is then created immediately.
+
+---
+
 ### 500
 
 ```ts

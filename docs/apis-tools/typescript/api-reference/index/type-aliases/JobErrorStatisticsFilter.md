@@ -18,7 +18,7 @@ Job error statistics search filter.
 ### errorCode?
 
 ```ts
-optional errorCode?: StringFilterProperty;
+errorCode?: StringFilterProperty;
 ```
 
 Optional error code filter with advanced search capabilities.
@@ -28,7 +28,7 @@ Optional error code filter with advanced search capabilities.
 ### errorMessage?
 
 ```ts
-optional errorMessage?: StringFilterProperty;
+errorMessage?: StringFilterProperty;
 ```
 
 Optional error message filter with advanced search capabilities.

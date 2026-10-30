@@ -16,5 +16,5 @@ type syncRuntimeBackupStateAsClusterAdminInput = object;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: syncRuntimeBackupStateAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: syncRuntimeBackupStateAsClusterAdminQueryParam_physicalTenantId;
 ```
