@@ -75,7 +75,7 @@ Only one bundle can be installed at a time. To move to a different agent, run `c
 
 ### Keep an installation up to date
 
-To install a newer archive, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`. The `c8 os install` command doesn't run while a distribution is installed.
+To install a newer archive, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`. The `c8 os install` command doesn't run while a distribution is installed. To see what changed in each release, read the [changelog](changelog.md).
 
 | Command                                      | What it does                                                     |
 | -------------------------------------------- | ---------------------------------------------------------------- |
