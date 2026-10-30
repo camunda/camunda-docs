@@ -50,7 +50,6 @@ October 30, 2026
 - Camunda Web Modeler (8.7, 8.8)
 - Camunda Console Self-Managed (8.7, 8.8, 8.9)
 - Camunda Keycloak image (`camunda/keycloak`)
-- Camunda 8 Run
 
 ### Impact
 
@@ -70,8 +69,6 @@ You are using:
 - Camunda Optimize ≤ 8.10.5, ≤ 8.9.25, ≤ 8.8.43, or ≤ 8.7.29
 - Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, or ≤ 8.7.29
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, or ≤ 8.8.19, or Camunda Identity ≤ 8.7.26
-- Camunda 8 Run 8.10, any version
-- Camunda 8 Run 8.8 or 8.9, if the Java runtime that you installed trusts the root certificates
 - Camunda Hub ≤ 8.10.3 or ≤ 8.9.12
 - Camunda Web Modeler ≤ 8.8.23 or ≤ 8.7.27
 - Camunda Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
@@ -93,11 +90,7 @@ Camunda has provided the following releases which contain the fix:
 
 Camunda rebuilds only the latest release of each Keycloak major version. Images for older Keycloak releases and for Keycloak 23, 24, and 25 do not get the fix. The public Bitnami-based `camunda/keycloak` images, such as `26.3.3` and `bitnami-*`, receive no more updates. For details, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
 
-A fix for the Java runtime bundled with Camunda 8 Run 8.10 is not available yet. We will update this notice when we release the fix.
-
-Camunda 8.6 reached its end of life and does not get a fix. Upgrade to a supported version.
-
-Camunda 8 Run 8.8 and 8.9 do not include a Java runtime. Remove the root certificates from the truststore of the Java runtime that you installed.
+Camunda 8.6 reached its end of life. Upgrade to a supported version.
 
 If you can't upgrade immediately, remove the root certificates from the Java truststore. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore).
 
