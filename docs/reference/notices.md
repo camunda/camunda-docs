@@ -42,7 +42,7 @@ October 30, 2026
 ### Products affected
 
 - Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
-- Camunda Zeebe (8.6, 8.7)
+- Camunda Zeebe (8.7)
 - Camunda Optimize
 - Camunda Management Identity
 - Camunda Connectors
@@ -65,7 +65,7 @@ We have no evidence that an attacker used this against Camunda. This issue does 
 You are using:
 
 - Camunda Orchestration Cluster ≤ 8.10.5, ≤ 8.9.25, or ≤ 8.8.43
-- Camunda Zeebe ≤ 8.7.43 or ≤ 8.6.40
+- Camunda Zeebe ≤ 8.7.43
 - Camunda Optimize ≤ 8.10.5, ≤ 8.9.25, ≤ 8.8.43, or ≤ 8.7.29
 - Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, or ≤ 8.7.29
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
@@ -77,13 +77,15 @@ You are using:
 Camunda has provided the following releases which contain the fix:
 
 - Camunda Orchestration Cluster 8.10.6, 8.9.26, 8.8.44
-- Camunda Zeebe 8.7.44, 8.6.41
+- Camunda Zeebe 8.7.44
 - Camunda Optimize 8.10.6, 8.9.26, 8.8.44, 8.7.30
 - Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30
 - Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
 - `camunda/keycloak`: Camunda published the fixed image again under the existing tags. Pull the image again to get the fix.
 
 A fix for Hub, Web Modeler, and Console Self-Managed is not available yet. We will update this notice when we release the fix.
+
+Camunda 8.6 reached its end of life and does not get a fix. Upgrade to a supported version.
 
 If you can't upgrade immediately, remove the root certificates from the Java truststore. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore).
 
