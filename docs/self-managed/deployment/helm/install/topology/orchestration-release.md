@@ -131,7 +131,7 @@ connectors:
           existingSecretKey: client-secret
 ```
 
-`orchestration.security.authentication.oidc.redirectUrl` is deprecated and logs a deprecation warning, but it's used here because one value sets three properties: the OIDC callback (`<redirectUrl>/sso-callback`) and the Operate and Tasklist redirect roots. To remove the warning, set `camunda.security.authentication.oidc.redirect-uri`, `camunda.operate.identity.redirectRootUrl`, and `camunda.tasklist.identity.redirectRootUrl` in `orchestration.extraConfiguration` instead. The key is removed in chart v16 (Camunda 8.11).
+`orchestration.security.authentication.oidc.redirectUrl` is deprecated and logs a deprecation warning, but it's used here because one value sets three properties: the OIDC callback (`<redirectUrl>/sso-callback`) and the Operate and Tasklist redirect roots. To remove the warning, set `camunda.security.authentication.oidc.redirect-uri`, `camunda.operate.identity.redirectRootUrl`, and `camunda.tasklist.identity.redirectRootUrl` in `orchestration.extraConfiguration` instead. The key is removed in chart v17 (Camunda 8.12).
 
 This example uses Elasticsearch as secondary storage, and the `secondary-storage` Secret must exist in the orchestration namespace. For OpenSearch, relational database, and TLS configuration, see [database configuration](/self-managed/deployment/helm/configure/database/index.md).
 
