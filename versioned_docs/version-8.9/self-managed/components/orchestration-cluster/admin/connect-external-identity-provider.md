@@ -602,6 +602,45 @@ For hostname and context path configuration, adjust the URL accordingly. For exa
 http://localhost:8080/orchestration/post-logout
 ```
 
+#### Refresh token revocation
+
+On logout, Camunda can ask the identity provider to revoke the session's refresh token, so that a
+copy of it cannot be used to obtain new access tokens after the user has signed out. This is an
+[RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009) revocation request sent from Camunda to
+the provider, separate from the browser redirect used for RP-initiated logout.
+
+Revocation is disabled by default. To enable it for a provider, set `revocation-enabled: true`:
+
+```yaml
+camunda:
+  security:
+    authentication:
+      oidc:
+        revocation-enabled: true
+```
+
+With this set, the endpoint is read from the provider's `revocation_endpoint` in its discovery
+document, as published by Keycloak, Okta, and Auth0. Where the provider does not publish one, set
+it explicitly:
+
+```yaml
+camunda:
+  security:
+    authentication:
+      oidc:
+        revocation-enabled: true
+        revocation-endpoint-uri: https://<YOUR_IDP>/oauth2/revoke
+```
+
+Two consequences are worth planning for once revocation is enabled:
+
+- Logout now makes an outbound call from Camunda to the identity provider, so the provider must be
+  reachable from the Camunda deployment. The call is bounded at roughly three seconds and fails
+  soft: if the provider is unreachable or rejects the request, the user is still logged out locally
+  and a warning is logged.
+- Microsoft Entra ID publishes no revocation endpoint, so refresh tokens are not revoked there even
+  with revocation enabled. Entra deployments are otherwise unaffected.
+
 ## Troubleshooting
 
 ### General authentication issues
@@ -628,6 +667,20 @@ Ensure you either:
 
 - Configure the `issuer-uri` so Admin can retrieve the logout endpoint from the OIDC discovery document, or
 - Explicitly set the `end-session-endpoint-uri`.
+
+#### Refresh token was not revoked
+
+If the identity provider cannot be reached, or rejects the revocation request, logout still
+completes and a warning similar to the following is logged:
+
+```
+Failed to revoke the refresh token for OIDC registration '<id>' at <endpoint> [...]. The local
+session is still terminated, but the refresh token may remain valid until it expires.
+```
+
+Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
+client credentials Camunda uses are accepted there. To disable revocation for the provider instead,
+set `revocation-enabled: false`.
 
 #### No client registration found
 
