@@ -6,7 +6,6 @@ description: "Build Camunda solutions with AI-ready workflows, including agentic
 keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconConnectorsImg from '../../components/assets/icon-connectors.png';
@@ -23,7 +22,7 @@ import IconIdpImg from '../../components/assets/icon-idp.png';
 import IconDocsImg from '../../components/assets/icon-docs.png';
 import IconOrchClusterImg from '../../components/assets/icon-orchcluster.png';
 import IconMcpImg from '../../components/assets/icon-mcp.png';
-import IconBuildImg from '../../components/assets/icon-build-with-camunda.svg';
+import AoGetStartedBanner from '../../components/react-components/\_ao-get-started-banner';
 
 <h3 class="subheading">Orchestrate agents, people, and systems in one process.</h3>
 
@@ -241,14 +240,4 @@ description: "Expose your Camunda processes as MCP tools that AI agents can invo
 },
 ]} />
 
-<div class="build-banner" style={{position: 'relative', overflow: 'hidden', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: '28px 32px', marginTop: '80px', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '12px', background: 'var(--ifm-background-surface-color)'}}>
-<div aria-hidden="true" style={{position: 'absolute', inset: 0, backgroundColor: '#5148c6', backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px)', backgroundSize: '16px 16px', WebkitMaskImage: 'linear-gradient(90deg, #000 0%, #000 40%, transparent 85%)', maskImage: 'linear-gradient(90deg, #000 0%, #000 40%, transparent 85%)'}}></div>
-<div class="build-banner-text" style={{position: 'relative', display: 'flex', alignItems: 'center', gap: '20px', flex: '0 1 60%', minWidth: '280px', color: '#ffffff'}}>
-<IconBuildImg role="img" aria-hidden="true" width="64" height="64" style={{flexShrink: 0, color: '#ffffff'}} />
-<div>
-<div style={{fontSize: '1.25rem', fontWeight: 600, marginBottom: '4px'}}>Start building with Camunda</div>
-<div style={{color: 'rgba(255, 255, 255, 0.88)'}}>Set up your AI development environment with your AI tools, MCP servers, and Camunda Skills.</div>
-</div>
-</div>
-<a class="button button--primary button--md button--banner" style={{position: 'relative'}} title="Build with Camunda" href={useBaseUrl('/build-with-camunda')}>Start building</a>
-</div>
+<AoGetStartedBanner href="../../getting-started-agentic-orchestration/" />
