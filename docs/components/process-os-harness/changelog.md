@@ -6,38 +6,15 @@ description: "Changes in each ProcessOS Harness release, alpha and stable, newes
 keywords: ["ProcessOS Harness", "changelog", "release notes"]
 ---
 
-Every ProcessOS Harness release, alpha and stable, gets an entry on this page, newest first. To install a release, see [installation](installation.md). To move an existing project to a newer release, see [keep an installation up to date](installation.md#keep-an-installation-up-to-date).
+Camunda recommends using the latest [stable](#stable) ProcessOS Harness release. [Alpha](#alpha) releases preview the next minor version, so you can try upcoming changes early.
 
-## 1.1.0-alpha.2 (2026-10-26)
+Each section lists its releases newest first. To install a release, see [installation](installation.md). To move an existing project to a newer release, see [keep an installation up to date](installation.md#keep-an-installation-up-to-date).
 
-### Features
+## Stable
 
-- Implement color guideline for deliberate signaling
+### 1.0.0 (2026-10-13)
 
-### Bug fixes
-
-- Read AI Agent provider.type from the element template
-- Check handedit-regenerated structurally, not by token
-
-## 1.1.0-alpha.1 (2026-10-21)
-
-### Features
-
-- Add source field and show it as context in every projection
-- Require c8ctl 4.6.0 and document instance migration and modification
-
-### Bug fixes
-
-- Keep plugin inputs away from the orchestrator and built-in specialists
-- Enable provenance by default
-- Pin the 8.10 java client and match the cpt engine image to it
-- Keep a rejected answer unresolved and record why
-- Verify c8ctl writes, re-check edit pass, cap fix loops, drop hardwired q2c
-- Resolve activities from the per-phase discovery layout
-
-## 1.0.0 (2026-10-13)
-
-### Features
+#### Features
 
 - Group generated bpmns
 - Track source artifacts through transformation and artifact generation
@@ -53,7 +30,7 @@ Every ProcessOS Harness release, alpha and stable, gets an entry on this page, n
 - Clean up the java and typescript blueprints
 - Give every run-config key a concrete value
 
-### Bug fixes
+#### Bug fixes
 
 - Sort Python imports and align build gate guidance
 - Source the system-category examples and update renamed products
@@ -68,3 +45,38 @@ Every ProcessOS Harness release, alpha and stable, gets an entry on this page, n
 - Follow the project's camunda-version
 - Use spring boot 4 camunda artifacts for 8.8 clients
 - Stop the java build gate when no jdk or maven is available
+
+## Alpha
+
+<details>
+<summary>1.1.0-alpha.2 (2026-10-26)</summary>
+
+#### Features
+
+- Implement color guideline for deliberate signaling
+
+#### Bug fixes
+
+- Read AI Agent provider.type from the element template
+- Check handedit-regenerated structurally, not by token
+
+</details>
+
+<details>
+<summary>1.1.0-alpha.1 (2026-10-21)</summary>
+
+#### Features
+
+- Add source field and show it as context in every projection
+- Require c8ctl 4.6.0 and document instance migration and modification
+
+#### Bug fixes
+
+- Keep plugin inputs away from the orchestrator and built-in specialists
+- Enable provenance by default
+- Pin the 8.10 java client and match the cpt engine image to it
+- Keep a rejected answer unresolved and record why
+- Verify c8ctl writes, re-check edit pass, cap fix loops, drop hardwired q2c
+- Resolve activities from the per-phase discovery layout
+
+</details>
