@@ -15,18 +15,45 @@ import ConfigurationOutputMappingTask from './agentic-ai/aiagent/configuration/\
 import ConfigurationErrorHandling from './agentic-ai/aiagent/configuration/\_error-handling.md';
 import ConfigurationRetries from './agentic-ai/aiagent/configuration/\_retries.md';
 import ConfigurationExecutionListeners from './agentic-ai/aiagent/configuration/\_execution-listeners.md';
+import AgentTaskImg from '../img/ai-agent-task-simple.png';
 import AgentTaskLoopImg from '../img/ai-agent-task-loop.png';
+import AgentTaskFollowUpImg from '../img/ai-agent-task-follow-up.png';
+import AgentTaskLoopAdvancedImg from '../img/ai-agent-task-loop-advanced.png';
 
 Implement an AI agent using an AI Agent connector applied to a service task, paired with an optional ad-hoc sub-process to provide tools usable by the AI.
 
+## About this implementation
+
+This is the original AI Agent connector implementation. It relies on a BPMN [service task](../../../components/modeler/bpmn/service-tasks/service-tasks.md) in combination with a multi-instance ad-hoc sub-process. Unlike the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation, you must model the [agent loop](/reference/glossary.md#agent-loop) explicitly in the BPMN diagram, leading to a more complex configuration.
+
+This implementation is best suited for:
+
+- Simple, one-shot tasks using the AI Agent connector as a generic LLM connector without any tool calling.
+- Advanced use cases where you want to model the agent loop explicitly, for example to pre-process or post-process tool calls for approval or auditing.
+
 :::info
-
-- For more information and usage examples, see [AI Agent Task](./agentic-ai-aiagent.md#ai-agent-task).
-- The [example integration](agentic-ai-aiagent-task-example.md) page outlines how to model an agentic AI process using the AI Agent Task implementation.
-
+The [example integration](agentic-ai-aiagent-task-example.md) page outlines how to model an agentic AI process using the AI Agent Task implementation.
 :::
 
+### Example models
+
+A very simple example of using the AI Agent Task connector for a non-agentic task is as follows:
+
+<img src={AgentTaskImg} alt="Simple AI Agent Task" class="img-500"/>
+
+You can make the connector agentic by adding a multi-instance ad-hoc sub-process and gateways to create an agent loop. The connector can then call tools until it reaches its goal or a configured limit. The multi-instance ad-hoc sub-process acts as a toolbox:
+
 <img src={AgentTaskLoopImg} alt="AI Agent Task with tool calling loop" class="img-800"/>
+
+You can also add a response follow-up outside the agent loop. When the AI agent completes its task and does not request any tool calls, a task (such as a user task or another LLM acting as a judge) can verify its response, and the process can loop back to the AI agent if required.
+
+This allows you to create a [human-in-the-loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl) process, for example a chat where the user can ask follow-up questions:
+
+<img src={AgentTaskFollowUpImg} alt="AI Agent Task with response follow-up" class="img-800"/>
+
+If you need more control over the agent loop, you can model pre-processing and post-processing of tool calls with additional tasks, such as approval or tool call auditing.
+
+<img src={AgentTaskLoopAdvancedImg} alt="AI Agent Task with agent loop pre-/post-processing" class="img-600"/>
 
 ## Configuration
 
