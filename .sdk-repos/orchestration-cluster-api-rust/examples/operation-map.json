@@ -13,6 +13,13 @@
       "label": "Activate jobs"
     }
   ],
+  "addClock": [
+    {
+      "file": "clock.rs",
+      "region": "AddClock",
+      "label": "Add a duration to the internal clock (alpha)"
+    }
+  ],
   "assignClientToGroup": [
     {
       "file": "group.rs",
@@ -487,6 +494,13 @@
       "file": "agent_instance.rs",
       "region": "GetAgentInstance",
       "label": "Get agent instance"
+    }
+  ],
+  "getClock": [
+    {
+      "file": "clock.rs",
+      "region": "GetClock",
+      "label": "Get the internal clock"
     }
   ],
   "getAuditLog": [

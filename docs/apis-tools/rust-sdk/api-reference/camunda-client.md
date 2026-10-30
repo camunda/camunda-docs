@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **262** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **265** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -20,6 +20,7 @@ HTTP client, OAuth token cache, and worker registry.
 | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`activate_ad_hoc_sub_process_activities`](#activate_ad_hoc_sub_process_activities)                                 | Activate activities within an ad-hoc sub-process (`POST /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation`).                                                                                                                                                      |
 | [`activate_jobs`](#activate_jobs)                                                                                   | Activate jobs of a given type. Prefer `CamundaClient::create_job_worker` for continuous polling.                                                                                                                                                                                             |
+| [`add_clock`](#add_clock)                                                                                           | Add a relative offset to the cluster's internal clock (`POST /clock/add`).                                                                                                                                                                                                                   |
 | [`assign_client_to_group`](#assign_client_to_group)                                                                 | Assign a client to a group (`PUT /groups/{groupId}/clients/{clientId}`).                                                                                                                                                                                                                     |
 | [`assign_client_to_tenant`](#assign_client_to_tenant)                                                               | Assign a client to a tenant (`PUT /tenants/{tenantId}/clients/{clientId}`).                                                                                                                                                                                                                  |
 | [`assign_group_to_tenant`](#assign_group_to_tenant)                                                                 | Assign a group to a tenant (`PUT /tenants/{tenantId}/groups/{groupId}`).                                                                                                                                                                                                                     |
@@ -52,7 +53,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`create_admin_user`](#create_admin_user)                                                                           | Create admin user (`POST /setup/user`).                                                                                                                                                                                                                                                      |
 | [`create_agent_instance`](#create_agent_instance)                                                                   | Create agent instance (`POST /agent-instances`).                                                                                                                                                                                                                                             |
 | [`create_authorization`](#create_authorization)                                                                     | Create authorization (`POST /authorizations`).                                                                                                                                                                                                                                               |
-| [`create_deployment`](#create_deployment)                                                                           | Deploy resources (`POST /deployments`).                                                                                                                                                                                                                                                      |
+| [`create_deployment`](#create_deployment)                                                                           | Deploy resources (`POST /deployments`). The configured default tenant id is applied when the params carry no `tenant_id`.                                                                                                                                                                    |
 | [`create_document`](#create_document)                                                                               | Upload document (`POST /documents`).                                                                                                                                                                                                                                                         |
 | [`create_document_link`](#create_document_link)                                                                     | Create document link (`POST /documents/{documentId}/links`).                                                                                                                                                                                                                                 |
 | [`create_documents`](#create_documents)                                                                             | Upload multiple documents (`POST /documents/batch`).                                                                                                                                                                                                                                         |
@@ -89,9 +90,9 @@ HTTP client, OAuth token cache, and worker registry.
 | [`delete_tenant_cluster_variable`](#delete_tenant_cluster_variable)                                                 | Delete a tenant-scoped cluster variable (`DELETE /cluster-variables/tenants/{tenantId}/{name}`).                                                                                                                                                                                             |
 | [`delete_user`](#delete_user)                                                                                       | Delete user (`DELETE /users/{username}`).                                                                                                                                                                                                                                                    |
 | [`deploy_resources`](#deploy_resources)                                                                             | Deploy one or more resources (BPMN, DMN, forms) from local file paths. The configured default tenant id is applied when `tenant_id` is `None`.                                                                                                                                               |
-| [`evaluate_conditionals`](#evaluate_conditionals)                                                                   | Evaluate root level conditional start events (`POST /conditionals/evaluation`).                                                                                                                                                                                                              |
+| [`evaluate_conditionals`](#evaluate_conditionals)                                                                   | Evaluate root level conditional start events (`POST /conditionals/evaluation`). The configured default tenant id is applied when the instruction carries no `tenant_id`.                                                                                                                     |
 | [`evaluate_decision`](#evaluate_decision)                                                                           | Evaluate a decision (DMN). The configured default tenant id is applied when unset.                                                                                                                                                                                                           |
-| [`evaluate_expression`](#evaluate_expression)                                                                       | Evaluate an expression (`POST /expression/evaluation`).                                                                                                                                                                                                                                      |
+| [`evaluate_expression`](#evaluate_expression)                                                                       | Evaluate an expression (`POST /expression/evaluation`). The configured default tenant id is applied when the request carries no `tenant_id`.                                                                                                                                                 |
 | [`eventual`](#eventual)                                                                                             | Poll a read operation until it returns `Ok`, retrying `404 Not Found` (the typical symptom of a not-yet-replicated read) until the eventual-consistency window elapses.                                                                                                                      |
 | [`eventual_until`](#eventual_until)                                                                                 | Poll a read operation until `predicate` is satisfied by its result, retrying `404` and ignoring consistent-but-not-yet-matching reads, until the eventual-consistency window elapses.                                                                                                        |
 | [`fail_job`](#fail_job)                                                                                             | Fail a job, decrementing retries.                                                                                                                                                                                                                                                            |
@@ -102,6 +103,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_authentication`](#get_authentication)                                                                         | Get current user (`GET /authentication/me`).                                                                                                                                                                                                                                                 |
 | [`get_authorization`](#get_authorization)                                                                           | Get authorization (`GET /authorizations/{authorizationKey}`).                                                                                                                                                                                                                                |
 | [`get_batch_operation`](#get_batch_operation)                                                                       | Get batch operation (`GET /batch-operations/{batchOperationKey}`).                                                                                                                                                                                                                           |
+| [`get_clock`](#get_clock)                                                                                           | Get internal clock (`GET /clock`).                                                                                                                                                                                                                                                           |
 | [`get_cluster_exporting_status`](#get_cluster_exporting_status)                                                     | Get exporting status of the whole cluster (`GET /cluster/v2/exporting`).                                                                                                                                                                                                                     |
 | [`get_cluster_rebalance`](#get_cluster_rebalance)                                                                   | Report the cluster's current leadership balance (`GET /cluster/v2/rebalance`).                                                                                                                                                                                                               |
 | [`get_cluster_status`](#get_cluster_status)                                                                         | Get the status of the whole cluster (`GET /cluster/v2/status`).                                                                                                                                                                                                                              |
@@ -239,6 +241,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`search_users_for_tenant`](#search_users_for_tenant)                                                               | Search users for tenant (`POST /tenants/{tenantId}/users/search`).                                                                                                                                                                                                                           |
 | [`search_variables`](#search_variables)                                                                             | Search variables, returning the raw generated result.                                                                                                                                                                                                                                        |
 | [`search_variables_as`](#search_variables_as)                                                                       | Search variables and deserialize each variable's JSON `value` into a typed `T`.                                                                                                                                                                                                              |
+| [`search_variables_with_options`](#search_variables_with_options)                                                   | Search variables with an explicit `truncateValues` query parameter.                                                                                                                                                                                                                          |
 | [`spawn_worker`](#spawn_worker)                                                                                     | Spawn a managed job worker and register it for lifecycle control. The returned handle can stop the individual worker; `CamundaClient::stop_all_workers` stops every registered worker. The worker is also retained by the client so it keeps running even if the returned handle is dropped. |
 | [`stop_all_workers`](#stop_all_workers)                                                                             | Gracefully stop every registered worker, letting in-flight jobs drain, and await their completion. Clears the registry.                                                                                                                                                                      |
 | [`suspend_batch_operation`](#suspend_batch_operation)                                                               | Suspend Batch operation (`POST /batch-operations/{batchOperationKey}/suspension`).                                                                                                                                                                                                           |
@@ -348,6 +351,40 @@ async fn activate_jobs() -> Result<(), Box<dyn std::error::Error>> {
     for job in activated.jobs {
         println!("Activated job {} for {}", job.job_key, job.element_id);
     }
+
+    Ok(())
+}
+```
+
+### add_clock
+
+```rust
+pub async fn add_clock(&self, params: AddClockParams) -> Result<models::ClockResult>
+```
+
+Add a relative offset to the cluster's internal clock (`POST /clock/add`).
+
+Unlike most operations this is **not idempotent** — each call shifts the clock by
+the supplied offset — so it deliberately runs under the backpressure gate _without_
+the transient-retry policy (`Self::guarded_once`). Auto-retrying a lost 5xx or
+network response would risk applying the offset twice. Callers that want at-least /
+exactly-once semantics must handle an uncertain outcome themselves (e.g. by reading
+the clock back).
+
+**Example**
+
+```rust
+async fn add_clock() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let clock = client
+        .add_clock(AddClockParams {
+            clock_add_request: ClockAddRequest {
+                offset: "PT1H".to_string(),
+            },
+        })
+        .await?;
+    println!("Clock advanced to: {}", clock.timestamp.to_rfc3339());
 
     Ok(())
 }
@@ -1201,7 +1238,11 @@ async fn create_authorization() -> Result<(), Box<dyn std::error::Error>> {
 pub async fn create_deployment(&self, params: CreateDeploymentParams) -> Result<models::DeploymentResult>
 ```
 
-Deploy resources (`POST /deployments`).
+Deploy resources (`POST /deployments`). The configured default tenant id is applied
+when the params carry no `tenant_id`.
+
+This is the params-struct twin of `CamundaClient::deploy_resources`, kept so the
+generated-facade surface applies the default tenant like the sibling SDKs do.
 
 **Example**
 
@@ -2163,7 +2204,8 @@ configured default tenant id is applied when `tenant_id` is `None`.
 pub async fn evaluate_conditionals(&self, params: EvaluateConditionalsParams) -> Result<models::EvaluateConditionalResult>
 ```
 
-Evaluate root level conditional start events (`POST /conditionals/evaluation`).
+Evaluate root level conditional start events (`POST /conditionals/evaluation`). The
+configured default tenant id is applied when the instruction carries no `tenant_id`.
 
 **Example**
 
@@ -2226,7 +2268,8 @@ async fn evaluate_decision() -> Result<(), Box<dyn std::error::Error>> {
 pub async fn evaluate_expression(&self, params: EvaluateExpressionParams) -> Result<models::ExpressionEvaluationResult>
 ```
 
-Evaluate an expression (`POST /expression/evaluation`).
+Evaluate an expression (`POST /expression/evaluation`). The configured default
+tenant id is applied when the request carries no `tenant_id`.
 
 **Example**
 
@@ -2448,6 +2491,27 @@ async fn get_batch_operation(
         })
         .await?;
     println!("{}", result.batch_operation_key);
+
+    Ok(())
+}
+```
+
+### get_clock
+
+```rust
+pub async fn get_clock(&self) -> Result<models::ClockResult>
+```
+
+Get internal clock (`GET /clock`).
+
+**Example**
+
+```rust
+async fn get_clock() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let clock = client.get_clock().await?;
+    println!("Engine clock: {}", clock.timestamp.to_rfc3339());
 
     Ok(())
 }
@@ -5319,7 +5383,9 @@ async fn search_jobs() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
     for item in result.items {
-        println!("{}", item.process_definition_id);
+        if let Some(process_definition_id) = item.process_definition_id {
+            println!("{process_definition_id}");
+        }
     }
 
     Ok(())
@@ -5972,6 +6038,11 @@ pub async fn search_variables(&self, request: models::VariableSearchQuery) -> Re
 
 Search variables, returning the raw generated result.
 
+Long variable values are truncated in the response (`truncateValues=true`, the
+server-side default) to match the sibling SDKs. Use
+`CamundaClient::search_variables_with_options` to pass an explicit
+`truncateValues` (for example `false` to read full values).
+
 **Example**
 
 ```rust
@@ -6002,6 +6073,17 @@ Search variables and deserialize each variable's JSON `value` into a typed `T`.
 
 Returns the deserialized values in result order; variables whose `value` is absent
 are skipped.
+
+### search_variables_with_options
+
+```rust
+pub async fn search_variables_with_options(&self, request: models::VariableSearchQuery, truncate_values: Option<bool>) -> Result<models::VariableSearchQueryResult>
+```
+
+Search variables with an explicit `truncateValues` query parameter.
+
+`truncate_values` defaults to `true` (the server-side default) when `None`, so the
+parameter is always sent; pass `Some(false)` to read full, untruncated values.
 
 ### spawn_worker
 
