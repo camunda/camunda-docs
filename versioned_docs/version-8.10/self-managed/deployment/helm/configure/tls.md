@@ -281,7 +281,7 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 To stop the Java components from trusting a CA that is in the image's default truststore, replace the truststore. `global.tls.caBundle` can only add CAs. It can't remove a CA.
 
-The procedure creates a copy of the image truststore without the CA and stores the copy in a Secret. Then it points each Java component to the copy with `-Djavax.net.ssl.trustStore`. Use it as an interim measure until you upgrade to images that no longer contain the CA.
+The procedure copies the image truststore without the listed CAs. It stores the copy in a Secret. Then it points each Java component to the copy with `-Djavax.net.ssl.trustStore`. Use it as an interim measure until you upgrade to images that no longer contain the CAs.
 
 Don't combine this procedure with `global.tls.caBundle`. The chart adds its own `-Djavax.net.ssl.trustStore` flag after yours, and the JVM uses the last one. If you need a private CA, import it into the new truststore in step 1 and remove `global.tls.caBundle` from your values.
 
@@ -289,43 +289,57 @@ This procedure covers the Camunda Java components listed in step 3. It doesn't c
 
 ### 1. Build the truststore
 
-Copy the truststore from the Orchestration Cluster image that runs in your cluster. Replace `X` in the image tag with your patch version. A truststore from another image can contain other CAs. Then remove each certificate whose subject has the common name (CN) that you set. The example removes `emSign ECC Root CA - G3`:
+Copy the truststore from the Orchestration Cluster image that runs in your cluster. Replace `X` in the image tag with your patch version. A truststore from another image can contain other CAs. List the common names (CNs) of the certificates to remove, one per line. The example lists two CAs:
 
 ```bash
 CAMUNDA_IMAGE=camunda/camunda:8.10.X
-REMOVE_CN='emSign ECC Root CA - G3'
+REMOVE_CNS='emSign ECC Root CA - G3
+AAA Certificate Services'
 
-docker run --rm --entrypoint sh -e REMOVE_CN="$REMOVE_CN" "$CAMUNDA_IMAGE" -c \
-  'keytool -list -v -cacerts -storepass changeit | grep -c -E "^Owner: (.*, )?CN=${REMOVE_CN}(,|$)"'
+docker run --rm --entrypoint sh -e REMOVE_CNS="$REMOVE_CNS" "$CAMUNDA_IMAGE" -c '
+  certs="$(keytool -list -v -cacerts -storepass changeit)" || exit 1
+  printf "%s\n" "$REMOVE_CNS" | while IFS= read -r cn; do
+    printf "%s: " "$cn"
+    printf "%s\n" "$certs" | awk -v cn="CN=${cn}," "/^Owner: / && index(\$0 \",\", cn) {count++} END {print count+0}"
+  done'
 ```
 
-Make sure the image contains the CA. The command must return `1` or more. If it returns `0`, the image doesn't contain the CA and you don't need this procedure.
+Verify the count for each CA. A count of `1` or more means the image contains the CA. If every count is `0`, you don't need this procedure.
 
-Then build the truststore without the CA:
+Then build the truststore without the listed CAs. Each run starts again from the image truststore, so list every CA to remove in each run:
 
 ```bash
 mkdir -p truststore
 docker run --rm --user 0 --entrypoint sh \
-  -v "$PWD/truststore:/out" -e REMOVE_CN="$REMOVE_CN" \
+  -v "$PWD/truststore:/out" -e REMOVE_CNS="$REMOVE_CNS" \
   "$CAMUNDA_IMAGE" -c '
+    set -e
+    rm -f /out/cacerts
     keytool -importkeystore -noprompt \
       -srckeystore "$JAVA_HOME/lib/security/cacerts" -srcstorepass changeit \
       -destkeystore /out/cacerts -deststoretype PKCS12 -deststorepass changeit
-    keytool -list -v -keystore /out/cacerts -storepass changeit \
-      | awk -v cn="CN=${REMOVE_CN}," "/^Alias name: /{alias=substr(\$0, 13)} /^Owner: / && index(\$0 \",\", cn) {print alias}" \
-      | while IFS= read -r alias; do
-          keytool -delete -alias "$alias" -keystore /out/cacerts -storepass changeit
-        done
+    printf "%s\n" "$REMOVE_CNS" | while IFS= read -r cn; do
+      certs="$(keytool -list -v -keystore /out/cacerts -storepass changeit)"
+      printf "%s\n" "$certs" \
+        | awk -v cn="CN=${cn}," "/^Alias name: /{alias=substr(\$0, 13)} /^Owner: / && index(\$0 \",\", cn) {print alias}" \
+        | while IFS= read -r alias; do
+            keytool -delete -alias "$alias" -keystore /out/cacerts -storepass changeit
+          done
+    done
     chmod 644 /out/cacerts'
 ```
 
-Verify that the CA has been removed. The command must return `0`. `grep` exits with code `1` when it prints `0`:
+Verify the truststore. The command must return `0` for every listed CA:
 
 ```bash
 docker run --rm --entrypoint sh \
-  -v "$PWD/truststore:/in:ro" -e REMOVE_CN="$REMOVE_CN" \
-  "$CAMUNDA_IMAGE" -c 'keytool -list -v -keystore /in/cacerts -storepass changeit \
-    | grep -c -E "^Owner: (.*, )?CN=${REMOVE_CN}(,|$)"'
+  -v "$PWD/truststore:/in:ro" -e REMOVE_CNS="$REMOVE_CNS" \
+  "$CAMUNDA_IMAGE" -c '
+    certs="$(keytool -list -v -keystore /in/cacerts -storepass changeit)" || exit 1
+    printf "%s\n" "$REMOVE_CNS" | while IFS= read -r cn; do
+      printf "%s: " "$cn"
+      printf "%s\n" "$certs" | awk -v cn="CN=${cn}," "/^Owner: / && index(\$0 \",\", cn) {count++} END {print count+0}"
+    done'
 ```
 
 (Optional) Import your private CA:
