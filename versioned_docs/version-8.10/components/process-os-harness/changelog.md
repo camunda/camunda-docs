@@ -6,6 +6,8 @@ description: "Changes in each ProcessOS Harness release, alpha and stable, newes
 keywords: ["ProcessOS Harness", "changelog", "release notes"]
 ---
 
+Every ProcessOS Harness release, alpha and stable, gets an entry on this page, newest first. To install a release, see [installation](installation.md). To move an existing project to a newer release, see [keep an installation up to date](installation.md#keep-an-installation-up-to-date).
+
 ## 1.1.0-alpha.2 (2026-10-26)
 
 ### Features
