@@ -181,6 +181,7 @@ CVE-2026-42585 is an HTTP request smuggling flaw in Netty. It comes from incorre
 ### How to determine if the installation is affected
 
 You are using the following components behind a reverse proxy, load balancer or ingress:
+
 - Zeebe, Operate, Tasklist before 8.6.40
 - Identity before 8.6.31
 - Optimize before 8.6.27
