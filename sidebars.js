@@ -315,6 +315,7 @@ module.exports = {
         "components/concepts/signals",
         "components/concepts/conditionals",
         "components/concepts/variables",
+        "components/concepts/variable-protection",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
         "components/concepts/decision-instance-deletion",
