@@ -90,7 +90,6 @@
       },
       "items": []
     },
-    "guides/build-with-ai/ai-usage-guidelines",
     {
       "type": "category",
       "label": "ProcessOS",
@@ -193,6 +192,7 @@
           "type": "category",
           "label": "Best practices",
           "items": [
+            "components/agentic-orchestration/ai-usage-guidelines",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"

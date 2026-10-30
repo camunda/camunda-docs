@@ -20,19 +20,19 @@ Camunda AI features and capabilities currently include:
 <td>**Description**</td>
 </tr>
 <tr>
-<td>[Process OS Harness](../../components/process-os-harness/overview.md)</td>
+<td>[Process OS Harness](../process-os-harness/overview.md)</td>
 <td>Discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions.</td>
 </tr>
 <tr>
-<td>[Agentic orchestration](../../components/agentic-orchestration/agentic-orchestration-overview.md)</td>
+<td>[Agentic orchestration](./agentic-orchestration-overview.md)</td>
 <td>Embed AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.</td>
 </tr>
 <tr>
-<td>[Camunda Copilot](../../components/early-access/alpha/bpmn-copilot/bpmn-copilot.md)</td>
+<td>[Camunda Copilot](../early-access/alpha/bpmn-copilot/bpmn-copilot.md)</td>
 <td>AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.</td>
 </tr>
 <tr>
-<td>[Intelligent Document Processing (IDP)](../../components/hub/workspace/modeler/intelligent-document-processing.md)</td>
+<td>[Intelligent Document Processing (IDP)](../hub/workspace/modeler/intelligent-document-processing.md)</td>
 <td>Automated document analysis and structured data extraction, connecting to your chosen document AI provider.</td>
 </tr>
 </table>
