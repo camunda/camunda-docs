@@ -68,8 +68,7 @@ You are using:
 - Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, or ≤ 8.7.29
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
 - Camunda Hub, Web Modeler, or Console Self-Managed, any version
-- A `camunda/keycloak` image for Keycloak 23, 24, or 25, any tag
-- A `camunda/keycloak` image for Keycloak 26 with a date tag earlier than `2026-10-22`, or a moving tag that you pulled before October 22, 2026
+- A Camunda Keycloak image built before October 22, 2026, or a Camunda Keycloak image for Keycloak 23, 24, or 25
 
 ### Solution
 
@@ -80,9 +79,9 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Optimize 8.10.6, 8.9.26, 8.8.44, 8.7.30
 - Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30
 - Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
-- `camunda/keycloak` for Keycloak 26 only: the images with a date tag of `2026-10-22` or later. The moving tags (for example `26.3.3`, `quay-26.8.1`, and `latest`) point to these images. If you use a moving tag, pull the image again. Images with an earlier date tag do not get the fix.
+- Camunda Keycloak images for the latest Keycloak 26 release, built on or after October 22, 2026: `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag, and `registry.camunda.cloud/keycloak-ee/keycloak`. If you use one of these tags, pull the image again.
 
-Keycloak 23, 24, and 25 images do not get a fix. They serve Camunda 8.7 and earlier.
+Camunda rebuilds only the latest release of each Keycloak major version. Images for older Keycloak releases and for Keycloak 23, 24, and 25 do not get the fix. The public Bitnami-based `camunda/keycloak` images, such as `26.3.3` and `bitnami-*`, receive no more updates. For details, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
 
 A fix for Hub, Web Modeler, and Console Self-Managed is not available yet. We will update this notice when we release the fix.
 
