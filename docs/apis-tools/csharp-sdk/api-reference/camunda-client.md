@@ -1360,10 +1360,10 @@ Requires the cluster-admin security chain. Although this operation lists `bearer
 
 **Returns:** `Task<Object>`
 
-#### ListSecretsAsync(SecretListRequest, CancellationToken)
+#### ListSecretsAsync(SecretListRequest?, CancellationToken)
 
 ```csharp
-public Task<SecretListResult> ListSecretsAsync(SecretListRequest body, CancellationToken ct = default)
+public Task<SecretListResult> ListSecretsAsync(SecretListRequest? body = null, CancellationToken ct = default)
 ```
 
 List secrets
@@ -1655,10 +1655,10 @@ public static async Task ResumeExportingExample()
 }
 ```
 
-#### SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery, ConsistencyOptions\<AgentDefinitionSearchQueryResult\>?, CancellationToken)
+#### SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery?, ConsistencyOptions\<AgentDefinitionSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery body, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery? body = null, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search agent definitions
@@ -1699,10 +1699,10 @@ public static async Task SearchAgentDefinitionsExample()
 }
 ```
 
-#### SearchAgentInstanceHistoryAsync(AgentInstanceKey, AgentInstanceHistorySearchQuery, ConsistencyOptions\<AgentInstanceHistorySearchQueryResult\>?, CancellationToken)
+#### SearchAgentInstanceHistoryAsync(AgentInstanceKey, AgentInstanceHistorySearchQuery?, ConsistencyOptions\<AgentInstanceHistorySearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery body, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery? body = null, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search agent instance history
@@ -1747,10 +1747,10 @@ public static async Task SearchAgentInstanceHistoryExample(AgentInstanceKey agen
 }
 ```
 
-#### SearchAgentInstancesAsync(AgentInstanceSearchQuery, ConsistencyOptions\<AgentInstanceSearchQueryResult\>?, CancellationToken)
+#### SearchAgentInstancesAsync(AgentInstanceSearchQuery?, ConsistencyOptions\<AgentInstanceSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(AgentInstanceSearchQuery body, ConsistencyOptions<AgentInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<AgentInstanceSearchQueryResult> SearchAgentInstancesAsync(AgentInstanceSearchQuery? body = null, ConsistencyOptions<AgentInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search agent instances
@@ -1781,10 +1781,10 @@ public static async Task SearchAgentInstancesExample()
 }
 ```
 
-#### SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions\<GlobalTaskListenerSearchQueryResult\>?, CancellationToken)
+#### SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest?, ConsistencyOptions\<GlobalTaskListenerSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest body, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest? body = null, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search global user task listeners
@@ -1816,10 +1816,10 @@ public static async Task SearchGlobalTaskListenersExample()
 }
 ```
 
-#### SearchUsersAsync(UserSearchQueryRequest, ConsistencyOptions\<UserSearchResult\>?, CancellationToken)
+#### SearchUsersAsync(UserSearchQueryRequest?, ConsistencyOptions\<UserSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<UserSearchResult> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<UserSearchResult> SearchUsersAsync(UserSearchQueryRequest? body = null, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search users
@@ -1949,10 +1949,10 @@ Requires the cluster-admin security chain. Although this operation lists `bearer
 
 **Returns:** `Task<ClusterTakeHistoryBackupResponse>`
 
-#### TakeRuntimeBackupAsync(TakeRuntimeBackupRequest, CancellationToken)
+#### TakeRuntimeBackupAsync(TakeRuntimeBackupRequest?, CancellationToken)
 
 ```csharp
-public Task<TakeRuntimeBackupResponse> TakeRuntimeBackupAsync(TakeRuntimeBackupRequest body, CancellationToken ct = default)
+public Task<TakeRuntimeBackupResponse> TakeRuntimeBackupAsync(TakeRuntimeBackupRequest? body = null, CancellationToken ct = default)
 ```
 
 Take a runtime backup
@@ -1985,10 +1985,10 @@ public static async Task TakeRuntimeBackupExample(BackupId backupId)
 }
 ```
 
-#### TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest, string?, CancellationToken)
+#### TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest?, string?, CancellationToken)
 
 ```csharp
-public Task<ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest body, string? physicalTenantId = null, CancellationToken ct = default)
+public Task<ClusterTakeRuntimeBackupResponse> TakeRuntimeBackupAsClusterAdminAsync(TakeRuntimeBackupRequest? body = null, string? physicalTenantId = null, CancellationToken ct = default)
 ```
 
 Take a runtime backup on one or every physical tenant
@@ -2009,10 +2009,10 @@ Requires the cluster-admin security chain. Although this operation lists `bearer
 
 **Returns:** `Task<ClusterTakeRuntimeBackupResponse>`
 
-#### TriggerClusterRebalanceAsync(ClusterRebalanceRequest, bool?, CancellationToken)
+#### TriggerClusterRebalanceAsync(ClusterRebalanceRequest?, bool?, CancellationToken)
 
 ```csharp
-public Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest body, bool? dryRun = null, CancellationToken ct = default)
+public Task<ClusterBalanceResponse> TriggerClusterRebalanceAsync(ClusterRebalanceRequest? body = null, bool? dryRun = null, CancellationToken ct = default)
 ```
 
 Trigger a cluster-wide leadership rebalance
@@ -2217,6 +2217,45 @@ public static void GetBackpressureStateExample()
 }
 ```
 
+#### AddClockAsync(ClockAddRequest, CancellationToken)
+
+```csharp
+public Task<ClockResult> AddClockAsync(ClockAddRequest body, CancellationToken ct = default)
+```
+
+Add time to internal clock
+
+Moves the Zeebe engine's internal clock forward or backward by the given offset. Unlike pinning, the clock keeps ticking in real time after the offset is added. If the clock is pinned, it stays pinned and moves to the pinned time plus the offset.
+
+Each request adds to the time of the clock, so adding `PT1H` twice moves the clock two hours ahead. Use `POST /v2/clock/reset` to remove all added time and return the clock to the system time.
+
+The response contains the new time of the clock. The change reaches all partitions shortly after it is accepted, so a request sent right after it may still use the previous time.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `body`    | `ClockAddRequest`   |             |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClockResult>`
+
+**Example**
+
+```csharp
+public static async Task AddClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Advance the engine's internal clock by one hour (ISO 8601 duration).
+    // Use a negative duration such as "-PT1H" to move the clock backward.
+    var clock = await client.AddClockAsync(new ClockAddRequest
+    {
+        Offset = "PT1H",
+    });
+
+    Console.WriteLine($"Engine time is now: {clock.Timestamp:O}");
+}
+```
+
 #### GetAuthenticationAsync(CancellationToken)
 
 ```csharp
@@ -2242,6 +2281,36 @@ public static async Task GetAuthenticationExample()
 
     var result = await client.GetAuthenticationAsync();
     Console.WriteLine($"Authenticated user: {result.Username}");
+}
+```
+
+#### GetClockAsync(CancellationToken)
+
+```csharp
+public Task<ClockResult> GetClockAsync(CancellationToken ct = default)
+```
+
+Get internal clock
+
+Returns the current time of the Zeebe engine's internal clock. If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time and this is the engine's current time.
+
+Use this endpoint to check the time that the engine uses, for example after pinning the clock with `PUT /v2/clock`, adding time with `POST /v2/clock/add`, or resetting it with `POST /v2/clock/reset`. A pin, add, or reset reaches all partitions shortly after it is accepted, so a request sent right after it may still return the previous time.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClockResult>`
+
+**Example**
+
+```csharp
+public static async Task GetClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    var clock = await client.GetClockAsync();
+    Console.WriteLine($"Engine time: {clock.Timestamp:O}");
 }
 ```
 
@@ -2347,7 +2416,7 @@ public Task PinClockAsync(ClockPinRequest body, CancellationToken ct = default)
 
 Pin internal clock (alpha)
 
-Set a precise, static time for the Zeebe engine's internal clock. When the clock is pinned, it remains at the specified time and does not advance. To change the time, the clock must be pinned again with a new timestamp.
+Set a precise, static time for the Zeebe engine's internal clock. When the clock is pinned, it remains at the specified time and does not advance. To change the time, the clock must be pinned again with a new timestamp. To move the clock without stopping it, use `POST /v2/clock/add` instead. Use `GET /v2/clock` to read the current time of the clock.
 
 This endpoint is an alpha feature and may be subject to change in future releases.
 
@@ -2380,7 +2449,7 @@ public Task ResetClockAsync(CancellationToken ct = default)
 
 Reset internal clock (alpha)
 
-Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time. This operation is useful for returning the clock to normal behavior after it has been pinned to a specific time.
+Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time. This operation is useful for returning the clock to normal behavior after it has been pinned to a specific time or moved with `POST /v2/clock/add`. Use `GET /v2/clock` to read the current time of the clock.
 
 This endpoint is an alpha feature and may be subject to change in future releases.
 
@@ -2434,10 +2503,10 @@ public static async Task DeployResourcesFromFilesExample()
 }
 ```
 
-#### DeleteResourceAsync(ResourceKey, DeleteResourceRequest, CancellationToken)
+#### DeleteResourceAsync(ResourceKey, DeleteResourceRequest?, CancellationToken)
 
 ```csharp
-public Task<DeleteResourceResponse> DeleteResourceAsync(ResourceKey resourceKey, DeleteResourceRequest body, CancellationToken ct = default)
+public Task<DeleteResourceResponse> DeleteResourceAsync(ResourceKey resourceKey, DeleteResourceRequest? body = null, CancellationToken ct = default)
 ```
 
 Delete resource
@@ -2447,6 +2516,8 @@ Deletes a deployed resource. This can be a process definition, decision requirem
 Once a resource has been deleted it cannot be recovered. If the resource needs to be available again, a new deployment of the resource is required.
 
 By default, only the resource itself is deleted from the runtime state. To also delete the historic data associated with a resource, set the `deleteHistory` flag in the request body to `true`. History deletion is supported for process definitions and decision requirements definitions; for other resource types (forms, generic resources) the flag is ignored and no history is deleted.
+
+Deleting a process definition that is already draining is accepted again and changes nothing: the definition stays `DRAINING` until its running instances finish. The one repeated deletion that is rejected is one with `deleteHistory` set to `true`, because the history cannot be deleted before the drain finishes.
 
 The two supported types differ in how the history is removed. For a decision requirements definition the history is deleted asynchronously via a batch operation whose details are returned in the `batchOperation` field of the response. For a process definition that still exists in the runtime state, the definition first drains its running instances and its history is deleted asynchronously once the definition is fully removed cluster-wide; no batch operation is returned in the response. If the process definition has already been removed from the runtime state and the deletion is later re-triggered with `deleteHistory` set to `true`, a batch operation is created immediately and returned in the `batchOperation` field.
 
@@ -2551,10 +2622,10 @@ public static async Task GetResourceContentBinaryExample(ResourceKey resourceKey
 }
 ```
 
-#### SearchResourcesAsync(ResourceSearchQuery, ConsistencyOptions\<ResourceSearchQueryResult\>?, CancellationToken)
+#### SearchResourcesAsync(ResourceSearchQuery?, ConsistencyOptions\<ResourceSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ResourceSearchQueryResult> SearchResourcesAsync(ResourceSearchQuery body, ConsistencyOptions<ResourceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ResourceSearchQueryResult> SearchResourcesAsync(ResourceSearchQuery? body = null, ConsistencyOptions<ResourceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search resources
@@ -2686,10 +2757,10 @@ public static async Task AssignProcessInstanceBusinessIdExample(ProcessInstanceK
 }
 ```
 
-#### CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)
+#### CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest?, CancellationToken)
 
 ```csharp
-public Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
+public Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest? body = null, CancellationToken ct = default)
 ```
 
 Cancel process instance
@@ -2725,7 +2796,7 @@ public Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsy
 
 Cancel process instances (batch)
 
-Cancels multiple active or suspended process instances. Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch to the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or `$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter, both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey is ignored and overridden during this batch operation. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Cancels multiple active or suspended process instances. Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled together with their root instance. The given filter only narrows the batch, so a filter on parentProcessInstanceKey matches no instances. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are not validated. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                               | Description |
 | --------- | -------------------------------------------------- | ----------- |
@@ -2756,7 +2827,7 @@ public Task<CreateProcessInstanceResult> CreateProcessInstanceAsync(ProcessInsta
 
 Create process instance
 
-Creates and starts an instance of the specified process. The process definition to use to create the instance can be specified either using its unique key (as returned by Deploy resources), or using the BPMN process id and a version. If only the process definition id is given, the latest ACTIVE version is used. If no ACTIVE version exists, the request is rejected as not found.
+Creates and starts an instance of the specified process. The process definition to use to create the instance can be specified either using its unique key (as returned by Deploy resources), or using the BPMN process id and either a version or a version tag. If only the process definition id is given, the latest ACTIVE version is used. If no ACTIVE version exists, the request is rejected as not found.
 
 Waits for the completion of the process instance before returning a result when awaitCompletion is enabled.
 
@@ -2795,10 +2866,10 @@ public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey 
 }
 ```
 
-#### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
+#### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest?, CancellationToken)
 
 ```csharp
-public Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
+public Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest? body = null, CancellationToken ct = default)
 ```
 
 Delete process instance
@@ -3024,10 +3095,10 @@ public static async Task GetProcessInstanceStatisticsByDefinitionExample()
 }
 ```
 
-#### GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery, ConsistencyOptions\<IncidentProcessInstanceStatisticsByErrorQueryResult\>?, CancellationToken)
+#### GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery?, ConsistencyOptions\<IncidentProcessInstanceStatisticsByErrorQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery? body = null, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get process instance statistics by error
@@ -3138,7 +3209,7 @@ public Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAs
 
 Migrate process instances (batch)
 
-Migrate multiple process instances. Since only process instances with ACTIVE state can be migrated, any given filters for state are ignored and overridden during this batch operation. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Migrate multiple process instances. Only ACTIVE process instances are migrated. The given filter only narrows the batch. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                            | Description |
 | --------- | ----------------------------------------------- | ----------- |
@@ -3209,7 +3280,7 @@ public Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsy
 
 Modify process instances (batch)
 
-Modify multiple process instances. Since only process instances with ACTIVE state can be modified, any given filters for state are ignored and overridden during this batch operation. In contrast to single modification operation, it is not possible to add variable instructions or modify by element key. It is only possible to use the element id of the source and target. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Modify multiple process instances. Only ACTIVE process instances are modified. The given filter only narrows the batch. In contrast to single modification operation, it is not possible to add variable instructions or modify by element key. It is only possible to use the element id of the source and target. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                               | Description |
 | --------- | -------------------------------------------------- | ----------- |
@@ -3240,7 +3311,7 @@ public Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(Pro
 
 Resolve related incidents (batch)
 
-Resolves multiple instances of process instances. Since only process instances with ACTIVE state can have unresolved incidents, any given filters for state are ignored and overridden during this batch operation. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Resolves multiple instances of process instances. Only incidents of ACTIVE process instances are resolved. The given filter only narrows the batch. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                                     | Description |
 | --------- | -------------------------------------------------------- | ----------- |
@@ -3294,10 +3365,10 @@ public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceK
 }
 ```
 
-#### ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest, CancellationToken)
+#### ResumeProcessInstanceAsync(ProcessInstanceKey, ResumeProcessInstanceRequest?, CancellationToken)
 
 ```csharp
-public Task ResumeProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ResumeProcessInstanceRequest body, CancellationToken ct = default)
+public Task ResumeProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ResumeProcessInstanceRequest? body = null, CancellationToken ct = default)
 ```
 
 Resume process instance
@@ -3333,7 +3404,7 @@ public Task<BatchOperationCreatedResult> ResumeProcessInstancesBatchOperationAsy
 
 Resume process instances (batch)
 
-Resumes multiple suspended process instances. Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only SUSPENDED process instances can be resumed and resumption does not cascade between parent and child instances, so child instances are resumed independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Resumes multiple suspended process instances. Only SUSPENDED process instances are resumed. The given filter only narrows the batch. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are not validated. Resumption does not cascade, so child instances are resumed independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                             | Description |
 | --------- | ------------------------------------------------ | ----------- |
@@ -3359,10 +3430,10 @@ public static async Task ResumeProcessInstancesBatchOperationExample()
 }
 ```
 
-#### SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery, ConsistencyOptions\<IncidentSearchQueryResult\>?, CancellationToken)
+#### SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery?, ConsistencyOptions\<IncidentSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery? body = null, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search related incidents
@@ -3398,10 +3469,10 @@ public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKe
 }
 ```
 
-#### SearchProcessInstancesAsync(ProcessInstanceSearchQuery, ConsistencyOptions\<ProcessInstanceSearchQueryResult\>?, CancellationToken)
+#### SearchProcessInstancesAsync(ProcessInstanceSearchQuery?, ConsistencyOptions\<ProcessInstanceSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery body, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery? body = null, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search process instances
@@ -3432,10 +3503,10 @@ public static async Task SearchProcessInstancesExample()
 }
 ```
 
-#### SuspendProcessInstanceAsync(ProcessInstanceKey, SuspendProcessInstanceRequest, CancellationToken)
+#### SuspendProcessInstanceAsync(ProcessInstanceKey, SuspendProcessInstanceRequest?, CancellationToken)
 
 ```csharp
-public Task SuspendProcessInstanceAsync(ProcessInstanceKey processInstanceKey, SuspendProcessInstanceRequest body, CancellationToken ct = default)
+public Task SuspendProcessInstanceAsync(ProcessInstanceKey processInstanceKey, SuspendProcessInstanceRequest? body = null, CancellationToken ct = default)
 ```
 
 Suspend process instance
@@ -3471,7 +3542,7 @@ public Task<BatchOperationCreatedResult> SuspendProcessInstancesBatchOperationAs
 
 Suspend process instances (batch)
 
-Suspends multiple running process instances. Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only ACTIVE process instances can be suspended and suspension does not cascade between parent and child instances, so child instances are suspended independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Suspends multiple running process instances. Only ACTIVE process instances are suspended. The given filter only narrows the batch. Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are not validated. Suspension does not cascade, so child instances are suspended independently of their parent or root instance. This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 | Parameter | Type                                             | Description |
 | --------- | ------------------------------------------------ | ----------- |
@@ -3604,10 +3675,10 @@ public static async Task ActivateJobsExample()
 }
 ```
 
-#### CompleteJobAsync(JobKey, JobCompletionRequest, CancellationToken)
+#### CompleteJobAsync(JobKey, JobCompletionRequest?, CancellationToken)
 
 ```csharp
-public Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest body, CancellationToken ct = default)
+public Task CompleteJobAsync(JobKey jobKey, JobCompletionRequest? body = null, CancellationToken ct = default)
 ```
 
 Complete job
@@ -3635,10 +3706,10 @@ public static async Task CompleteJobExample(JobKey jobKey)
 }
 ```
 
-#### FailJobAsync(JobKey, JobFailRequest, CancellationToken)
+#### FailJobAsync(JobKey, JobFailRequest?, CancellationToken)
 
 ```csharp
-public Task FailJobAsync(JobKey jobKey, JobFailRequest body, CancellationToken ct = default)
+public Task FailJobAsync(JobKey jobKey, JobFailRequest? body = null, CancellationToken ct = default)
 ```
 
 Fail job
@@ -3846,10 +3917,10 @@ public static async Task GetJobWorkerStatisticsExample()
 }
 ```
 
-#### SearchJobsAsync(JobSearchQuery, ConsistencyOptions\<JobSearchQueryResult\>?, CancellationToken)
+#### SearchJobsAsync(JobSearchQuery?, ConsistencyOptions\<JobSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<JobSearchQueryResult> SearchJobsAsync(JobSearchQuery body, ConsistencyOptions<JobSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<JobSearchQueryResult> SearchJobsAsync(JobSearchQuery? body = null, ConsistencyOptions<JobSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search jobs
@@ -4156,10 +4227,10 @@ public static async Task GetElementInstanceExample(ElementInstanceKey elementIns
 }
 ```
 
-#### SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery, ConsistencyOptions\<ElementInstanceWaitStateQueryResult\>?, CancellationToken)
+#### SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery?, ConsistencyOptions\<ElementInstanceWaitStateQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery body, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery? body = null, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search element instance wait states
@@ -4206,10 +4277,10 @@ public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceK
 }
 ```
 
-#### SearchElementInstancesAsync(ElementInstanceSearchQuery, ConsistencyOptions\<ElementInstanceSearchQueryResult\>?, CancellationToken)
+#### SearchElementInstancesAsync(ElementInstanceSearchQuery?, ConsistencyOptions\<ElementInstanceSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery? body = null, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search element instances
@@ -4297,10 +4368,10 @@ Assigns a user to a group, making the user a member of the group. Group members 
 
 **Returns:** `Task`
 
-#### CreateGroupAsync(GroupCreateRequest, CancellationToken)
+#### CreateGroupAsync(GroupCreateRequest?, CancellationToken)
 
 ```csharp
-public Task<GroupCreateResult> CreateGroupAsync(GroupCreateRequest body, CancellationToken ct = default)
+public Task<GroupCreateResult> CreateGroupAsync(GroupCreateRequest? body = null, CancellationToken ct = default)
 ```
 
 Create group
@@ -4368,10 +4439,10 @@ Get a group by its ID.
 
 **Returns:** `Task<GroupResult>`
 
-#### SearchClientsForGroupAsync(GroupId, GroupClientSearchQueryRequest, ConsistencyOptions\<GroupClientSearchResult\>?, CancellationToken)
+#### SearchClientsForGroupAsync(GroupId, GroupClientSearchQueryRequest?, ConsistencyOptions\<GroupClientSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<GroupClientSearchResult> SearchClientsForGroupAsync(GroupId groupId, GroupClientSearchQueryRequest body, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<GroupClientSearchResult> SearchClientsForGroupAsync(GroupId groupId, GroupClientSearchQueryRequest? body = null, ConsistencyOptions<GroupClientSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search group clients
@@ -4387,10 +4458,10 @@ Search clients assigned to a group.
 
 **Returns:** `Task<GroupClientSearchResult>`
 
-#### SearchGroupsAsync(GroupSearchQueryRequest, ConsistencyOptions\<GroupSearchQueryResult\>?, CancellationToken)
+#### SearchGroupsAsync(GroupSearchQueryRequest?, ConsistencyOptions\<GroupSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<GroupSearchQueryResult> SearchGroupsAsync(GroupSearchQueryRequest body, ConsistencyOptions<GroupSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<GroupSearchQueryResult> SearchGroupsAsync(GroupSearchQueryRequest? body = null, ConsistencyOptions<GroupSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search groups
@@ -4421,10 +4492,10 @@ public static async Task SearchGroupsExample()
 }
 ```
 
-#### SearchMappingRulesForGroupAsync(GroupId, MappingRuleSearchQueryRequest, ConsistencyOptions\<GroupMappingRuleSearchResult\>?, CancellationToken)
+#### SearchMappingRulesForGroupAsync(GroupId, MappingRuleSearchQueryRequest?, ConsistencyOptions\<GroupMappingRuleSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(GroupId groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<GroupMappingRuleSearchResult> SearchMappingRulesForGroupAsync(GroupId groupId, MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<GroupMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search group mapping rules
@@ -4440,10 +4511,10 @@ Search mapping rules assigned to a group.
 
 **Returns:** `Task<GroupMappingRuleSearchResult>`
 
-#### SearchUsersForGroupAsync(GroupId, GroupUserSearchQueryRequest, ConsistencyOptions\<GroupUserSearchResult\>?, CancellationToken)
+#### SearchUsersForGroupAsync(GroupId, GroupUserSearchQueryRequest?, ConsistencyOptions\<GroupUserSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<GroupUserSearchResult> SearchUsersForGroupAsync(GroupId groupId, GroupUserSearchQueryRequest body, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<GroupUserSearchResult> SearchUsersForGroupAsync(GroupId groupId, GroupUserSearchQueryRequest? body = null, ConsistencyOptions<GroupUserSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search group users
@@ -4764,10 +4835,10 @@ public static async Task GetUsageMetricsExample()
 }
 ```
 
-#### SearchClientsForTenantAsync(TenantId, TenantClientSearchQueryRequest, ConsistencyOptions\<TenantClientSearchResult\>?, CancellationToken)
+#### SearchClientsForTenantAsync(TenantId, TenantClientSearchQueryRequest?, ConsistencyOptions\<TenantClientSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, TenantClientSearchQueryRequest? body = null, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search clients for tenant
@@ -4783,10 +4854,10 @@ Retrieves a filtered and sorted list of clients for a specified tenant.
 
 **Returns:** `Task<TenantClientSearchResult>`
 
-#### SearchGroupIdsForTenantAsync(TenantId, TenantGroupSearchQueryRequest, ConsistencyOptions\<TenantGroupSearchResult\>?, CancellationToken)
+#### SearchGroupIdsForTenantAsync(TenantId, TenantGroupSearchQueryRequest?, ConsistencyOptions\<TenantGroupSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest body, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest? body = null, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search groups for tenant
@@ -4820,10 +4891,10 @@ public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
 }
 ```
 
-#### SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions\<TenantMappingRuleSearchResult\>?, CancellationToken)
+#### SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest?, ConsistencyOptions\<TenantMappingRuleSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<TenantMappingRuleSearchResult> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<TenantMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search mapping rules for tenant
@@ -4839,10 +4910,10 @@ Retrieves a filtered and sorted list of MappingRules for a specified tenant.
 
 **Returns:** `Task<TenantMappingRuleSearchResult>`
 
-#### SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions\<TenantRoleSearchResult\>?, CancellationToken)
+#### SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest?, ConsistencyOptions\<TenantRoleSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<TenantRoleSearchResult> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest? body = null, ConsistencyOptions<TenantRoleSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search roles for tenant
@@ -4858,10 +4929,10 @@ Retrieves a filtered and sorted list of roles for a specified tenant.
 
 **Returns:** `Task<TenantRoleSearchResult>`
 
-#### SearchTenantsAsync(TenantSearchQueryRequest, ConsistencyOptions\<TenantSearchQueryResult\>?, CancellationToken)
+#### SearchTenantsAsync(TenantSearchQueryRequest?, ConsistencyOptions\<TenantSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<TenantSearchQueryResult> SearchTenantsAsync(TenantSearchQueryRequest body, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<TenantSearchQueryResult> SearchTenantsAsync(TenantSearchQueryRequest? body = null, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search tenants
@@ -4892,10 +4963,10 @@ public static async Task SearchTenantsExample()
 }
 ```
 
-#### SearchUsersForTenantAsync(TenantId, TenantUserSearchQueryRequest, ConsistencyOptions\<TenantUserSearchResult\>?, CancellationToken)
+#### SearchUsersForTenantAsync(TenantId, TenantUserSearchQueryRequest?, ConsistencyOptions\<TenantUserSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, TenantUserSearchQueryRequest? body = null, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search users for tenant
@@ -5122,10 +5193,10 @@ Assigns the specified role to the user. The user will inherit the authorizations
 
 **Returns:** `Task`
 
-#### CreateRoleAsync(RoleCreateRequest, CancellationToken)
+#### CreateRoleAsync(RoleCreateRequest?, CancellationToken)
 
 ```csharp
-public Task<RoleCreateResult> CreateRoleAsync(RoleCreateRequest body, CancellationToken ct = default)
+public Task<RoleCreateResult> CreateRoleAsync(RoleCreateRequest? body = null, CancellationToken ct = default)
 ```
 
 Create role
@@ -5190,10 +5261,10 @@ Get a role by its ID.
 
 **Returns:** `Task<RoleResult>`
 
-#### SearchClientsForRoleAsync(RoleId, RoleClientSearchQueryRequest, ConsistencyOptions\<RoleClientSearchResult\>?, CancellationToken)
+#### SearchClientsForRoleAsync(RoleId, RoleClientSearchQueryRequest?, ConsistencyOptions\<RoleClientSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<RoleClientSearchResult> SearchClientsForRoleAsync(RoleId roleId, RoleClientSearchQueryRequest body, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<RoleClientSearchResult> SearchClientsForRoleAsync(RoleId roleId, RoleClientSearchQueryRequest? body = null, ConsistencyOptions<RoleClientSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search role clients
@@ -5209,10 +5280,10 @@ Search clients with assigned role.
 
 **Returns:** `Task<RoleClientSearchResult>`
 
-#### SearchGroupsForRoleAsync(RoleId, RoleGroupSearchQueryRequest, ConsistencyOptions\<RoleGroupSearchResult\>?, CancellationToken)
+#### SearchGroupsForRoleAsync(RoleId, RoleGroupSearchQueryRequest?, ConsistencyOptions\<RoleGroupSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(RoleId roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(RoleId roleId, RoleGroupSearchQueryRequest? body = null, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search role groups
@@ -5228,10 +5299,10 @@ Search groups with assigned role.
 
 **Returns:** `Task<RoleGroupSearchResult>`
 
-#### SearchMappingRulesForRoleAsync(RoleId, MappingRuleSearchQueryRequest, ConsistencyOptions\<RoleMappingRuleSearchResult\>?, CancellationToken)
+#### SearchMappingRulesForRoleAsync(RoleId, MappingRuleSearchQueryRequest?, ConsistencyOptions\<RoleMappingRuleSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(RoleId roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<RoleMappingRuleSearchResult> SearchMappingRulesForRoleAsync(RoleId roleId, MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<RoleMappingRuleSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search role mapping rules
@@ -5247,10 +5318,10 @@ Search mapping rules with assigned role.
 
 **Returns:** `Task<RoleMappingRuleSearchResult>`
 
-#### SearchRolesAsync(RoleSearchQueryRequest, ConsistencyOptions\<RoleSearchQueryResult\>?, CancellationToken)
+#### SearchRolesAsync(RoleSearchQueryRequest?, ConsistencyOptions\<RoleSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<RoleSearchQueryResult> SearchRolesAsync(RoleSearchQueryRequest body, ConsistencyOptions<RoleSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<RoleSearchQueryResult> SearchRolesAsync(RoleSearchQueryRequest? body = null, ConsistencyOptions<RoleSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search roles
@@ -5281,10 +5352,10 @@ public static async Task SearchRolesExample()
 }
 ```
 
-#### SearchRolesForGroupAsync(GroupId, RoleSearchQueryRequest, ConsistencyOptions\<GroupRoleSearchResult\>?, CancellationToken)
+#### SearchRolesForGroupAsync(GroupId, RoleSearchQueryRequest?, ConsistencyOptions\<GroupRoleSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<GroupRoleSearchResult> SearchRolesForGroupAsync(GroupId groupId, RoleSearchQueryRequest body, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<GroupRoleSearchResult> SearchRolesForGroupAsync(GroupId groupId, RoleSearchQueryRequest? body = null, ConsistencyOptions<GroupRoleSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search group roles
@@ -5300,10 +5371,10 @@ Search roles assigned to a group.
 
 **Returns:** `Task<GroupRoleSearchResult>`
 
-#### SearchUsersForRoleAsync(RoleId, RoleUserSearchQueryRequest, ConsistencyOptions\<RoleUserSearchResult\>?, CancellationToken)
+#### SearchUsersForRoleAsync(RoleId, RoleUserSearchQueryRequest?, ConsistencyOptions\<RoleUserSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<RoleUserSearchResult> SearchUsersForRoleAsync(RoleId roleId, RoleUserSearchQueryRequest body, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<RoleUserSearchResult> SearchUsersForRoleAsync(RoleId roleId, RoleUserSearchQueryRequest? body = null, ConsistencyOptions<RoleUserSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search role users
@@ -5445,10 +5516,10 @@ public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
 }
 ```
 
-#### CompleteUserTaskAsync(UserTaskKey, UserTaskCompletionRequest, CancellationToken)
+#### CompleteUserTaskAsync(UserTaskKey, UserTaskCompletionRequest?, CancellationToken)
 
 ```csharp
-public Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest body, CancellationToken ct = default)
+public Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionRequest? body = null, CancellationToken ct = default)
 ```
 
 Complete user task
@@ -5536,10 +5607,10 @@ public static async Task GetUserTaskFormExample(UserTaskKey userTaskKey)
 }
 ```
 
-#### SearchUserTaskAuditLogsAsync(UserTaskKey, UserTaskAuditLogSearchQueryRequest, ConsistencyOptions\<AuditLogSearchQueryResult\>?, CancellationToken)
+#### SearchUserTaskAuditLogsAsync(UserTaskKey, UserTaskAuditLogSearchQueryRequest?, ConsistencyOptions\<AuditLogSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest? body = null, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user task audit logs
@@ -5573,10 +5644,10 @@ public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
 }
 ```
 
-#### SearchUserTaskEffectiveVariablesAsync(UserTaskKey, UserTaskEffectiveVariableSearchQueryRequest, bool?, ConsistencyOptions\<VariableSearchQueryResult\>?, CancellationToken)
+#### SearchUserTaskEffectiveVariablesAsync(UserTaskKey, UserTaskEffectiveVariableSearchQueryRequest?, bool?, ConsistencyOptions\<VariableSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, UserTaskEffectiveVariableSearchQueryRequest? body = null, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user task effective variables
@@ -5593,10 +5664,10 @@ Search for the effective variables of a user task. This endpoint returns dedupli
 
 **Returns:** `Task<VariableSearchQueryResult>`
 
-#### SearchUserTaskVariablesAsync(UserTaskKey, UserTaskVariableSearchQueryRequest, bool?, ConsistencyOptions\<VariableSearchQueryResult\>?, CancellationToken)
+#### SearchUserTaskVariablesAsync(UserTaskKey, UserTaskVariableSearchQueryRequest?, bool?, ConsistencyOptions\<VariableSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, UserTaskVariableSearchQueryRequest? body = null, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user task variables
@@ -5613,10 +5684,10 @@ Search for user task variables based on given criteria. This endpoint returns al
 
 **Returns:** `Task<VariableSearchQueryResult>`
 
-#### SearchUserTasksAsync(UserTaskSearchQuery, ConsistencyOptions\<UserTaskSearchQueryResult\>?, CancellationToken)
+#### SearchUserTasksAsync(UserTaskSearchQuery?, ConsistencyOptions\<UserTaskSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<UserTaskSearchQueryResult> SearchUserTasksAsync(UserTaskSearchQuery body, ConsistencyOptions<UserTaskSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<UserTaskSearchQueryResult> SearchUserTasksAsync(UserTaskSearchQuery? body = null, ConsistencyOptions<UserTaskSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user tasks
@@ -5675,10 +5746,10 @@ public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
 }
 ```
 
-#### UpdateUserTaskAsync(UserTaskKey, UserTaskUpdateRequest, CancellationToken)
+#### UpdateUserTaskAsync(UserTaskKey, UserTaskUpdateRequest?, CancellationToken)
 
 ```csharp
-public Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest body, CancellationToken ct = default)
+public Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest? body = null, CancellationToken ct = default)
 ```
 
 Update user task
@@ -5743,15 +5814,31 @@ public static async Task BroadcastSignalExample()
 
 ### Batch Operations
 
+#### CancelBatchOperationAsync(BatchOperationKey, object, CancellationToken)
+
+```csharp
+public Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
+```
+
+Cancel Batch operation
+
+Cancels a running batch operation. This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter           | Type                | Description |
+| ------------------- | ------------------- | ----------- |
+| `batchOperationKey` | `BatchOperationKey` |             |
+| `body`              | `Object`            |             |
+| `ct`                | `CancellationToken` |             |
+
+**Returns:** `Task`
+
 #### CancelBatchOperationAsync(BatchOperationKey, CancellationToken)
 
 ```csharp
 public Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
 ```
 
-Cancel Batch operation
-
-Cancels a running batch operation. This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Overload without a request body. Sends an empty JSON object (`{}`).
 
 | Parameter           | Type                | Description |
 | ------------------- | ------------------- | ----------- |
@@ -5803,15 +5890,31 @@ public static async Task GetBatchOperationExample(BatchOperationKey batchOperati
 }
 ```
 
+#### ResumeBatchOperationAsync(BatchOperationKey, object, CancellationToken)
+
+```csharp
+public Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
+```
+
+Resume Batch operation
+
+Resumes a suspended batch operation. This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter           | Type                | Description |
+| ------------------- | ------------------- | ----------- |
+| `batchOperationKey` | `BatchOperationKey` |             |
+| `body`              | `Object`            |             |
+| `ct`                | `CancellationToken` |             |
+
+**Returns:** `Task`
+
 #### ResumeBatchOperationAsync(BatchOperationKey, CancellationToken)
 
 ```csharp
 public Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
 ```
 
-Resume Batch operation
-
-Resumes a suspended batch operation. This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Overload without a request body. Sends an empty JSON object (`{}`).
 
 | Parameter           | Type                | Description |
 | ------------------- | ------------------- | ----------- |
@@ -5831,10 +5934,10 @@ public static async Task ResumeBatchOperationExample(BatchOperationKey batchOper
 }
 ```
 
-#### SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery, ConsistencyOptions\<BatchOperationItemSearchQueryResult\>?, CancellationToken)
+#### SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery?, ConsistencyOptions\<BatchOperationItemSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery body, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery? body = null, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search batch operation items
@@ -5866,10 +5969,10 @@ public static async Task SearchBatchOperationItemsExample()
 }
 ```
 
-#### SearchBatchOperationsAsync(BatchOperationSearchQuery, ConsistencyOptions\<BatchOperationSearchQueryResult\>?, CancellationToken)
+#### SearchBatchOperationsAsync(BatchOperationSearchQuery?, ConsistencyOptions\<BatchOperationSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(BatchOperationSearchQuery body, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(BatchOperationSearchQuery? body = null, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search batch operations
@@ -5901,15 +6004,31 @@ public static async Task SearchBatchOperationsExample()
 }
 ```
 
+#### SuspendBatchOperationAsync(BatchOperationKey, object, CancellationToken)
+
+```csharp
+public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, object body, CancellationToken ct = default)
+```
+
+Suspend Batch operation
+
+Suspends a running batch operation. This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter           | Type                | Description |
+| ------------------- | ------------------- | ----------- |
+| `batchOperationKey` | `BatchOperationKey` |             |
+| `body`              | `Object`            |             |
+| `ct`                | `CancellationToken` |             |
+
+**Returns:** `Task`
+
 #### SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)
 
 ```csharp
 public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
 ```
 
-Suspend Batch operation
-
-Suspends a running batch operation. This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+Overload without a request body. Sends an empty JSON object (`{}`).
 
 | Parameter           | Type                | Description |
 | ------------------- | ------------------- | ----------- |
@@ -6000,10 +6119,10 @@ public static async Task PublishMessageExample()
 }
 ```
 
-#### SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery, ConsistencyOptions\<CorrelatedMessageSubscriptionSearchQueryResult\>?, CancellationToken)
+#### SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery?, ConsistencyOptions\<CorrelatedMessageSubscriptionSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery? body = null, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search correlated message subscriptions
@@ -6035,10 +6154,10 @@ public static async Task SearchCorrelatedMessageSubscriptionsExample()
 }
 ```
 
-#### SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery, ConsistencyOptions\<MessageSubscriptionSearchQueryResult\>?, CancellationToken)
+#### SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery?, ConsistencyOptions\<MessageSubscriptionSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery body, ConsistencyOptions<MessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery? body = null, ConsistencyOptions<MessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search message subscriptions
@@ -6182,10 +6301,10 @@ public static async Task GetAuthorizationExample(AuthorizationKey authorizationK
 }
 ```
 
-#### SearchAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions\<AuthorizationSearchResult\>?, CancellationToken)
+#### SearchAuthorizationsAsync(AuthorizationSearchQuery?, ConsistencyOptions\<AuthorizationSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<AuthorizationSearchResult> SearchAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<AuthorizationSearchResult> SearchAuthorizationsAsync(AuthorizationSearchQuery? body = null, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search authorizations
@@ -6217,10 +6336,10 @@ public static async Task SearchAuthorizationsExample()
 }
 ```
 
-#### SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions\<OwnAuthorizationSearchResult\>?, CancellationToken)
+#### SearchOwnAuthorizationsAsync(AuthorizationSearchQuery?, ConsistencyOptions\<OwnAuthorizationSearchResult\>?, CancellationToken)
 
 ```csharp
-public Task<OwnAuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<OwnAuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<OwnAuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery? body = null, ConsistencyOptions<OwnAuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search own authorizations
@@ -6702,10 +6821,10 @@ public static async Task GetVariableExample(VariableKey variableKey)
 }
 ```
 
-#### SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest, bool?, ConsistencyOptions\<ClusterVariableSearchQueryResult\>?, CancellationToken)
+#### SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest?, bool?, ConsistencyOptions\<ClusterVariableSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest body, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ClusterVariableSearchQueryResult> SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest? body = null, bool? truncateValues = null, ConsistencyOptions<ClusterVariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
@@ -6736,10 +6855,10 @@ public static async Task SearchClusterVariablesExample()
 }
 ```
 
-#### SearchVariablesAsync(VariableSearchQuery, bool?, ConsistencyOptions\<VariableSearchQueryResult\>?, CancellationToken)
+#### SearchVariablesAsync(VariableSearchQuery?, bool?, ConsistencyOptions\<VariableSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<VariableSearchQueryResult> SearchVariablesAsync(VariableSearchQuery? body = null, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search variables
@@ -6800,10 +6919,10 @@ Updates the value of an existing tenant-scoped cluster variable. The variable mu
 
 ### Mappings
 
-#### CreateMappingRuleAsync(MappingRuleCreateRequest, CancellationToken)
+#### CreateMappingRuleAsync(MappingRuleCreateRequest?, CancellationToken)
 
 ```csharp
-public Task<MappingRuleCreateResult> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
+public Task<MappingRuleCreateResult> CreateMappingRuleAsync(MappingRuleCreateRequest? body = null, CancellationToken ct = default)
 ```
 
 Create mapping rule
@@ -6870,10 +6989,10 @@ Gets the mapping rule with the given ID.
 
 **Returns:** `Task<MappingRuleResult>`
 
-#### SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions\<MappingRuleSearchQueryResult\>?, CancellationToken)
+#### SearchMappingRuleAsync(MappingRuleSearchQueryRequest?, ConsistencyOptions\<MappingRuleSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest? body = null, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search mapping rules
@@ -6888,10 +7007,10 @@ Search for mapping rules based on given criteria.
 
 **Returns:** `Task<MappingRuleSearchQueryResult>`
 
-#### UpdateMappingRuleAsync(MappingRuleId, MappingRuleUpdateRequest, CancellationToken)
+#### UpdateMappingRuleAsync(MappingRuleId, MappingRuleUpdateRequest?, CancellationToken)
 
 ```csharp
-public Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(MappingRuleId mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
+public Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(MappingRuleId mappingRuleId, MappingRuleUpdateRequest? body = null, CancellationToken ct = default)
 ```
 
 Update mapping rule
@@ -6908,10 +7027,10 @@ Update a mapping rule.
 
 ### Decision Instances
 
-#### DeleteDecisionInstanceAsync(DecisionEvaluationKey, DeleteDecisionInstanceRequest, CancellationToken)
+#### DeleteDecisionInstanceAsync(DecisionEvaluationKey, DeleteDecisionInstanceRequest?, CancellationToken)
 
 ```csharp
-public Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest body, CancellationToken ct = default)
+public Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest? body = null, CancellationToken ct = default)
 ```
 
 Delete decision instance
@@ -7002,10 +7121,10 @@ public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKe
 }
 ```
 
-#### SearchDecisionInstancesAsync(DecisionInstanceSearchQuery, ConsistencyOptions\<DecisionInstanceSearchQueryResult\>?, CancellationToken)
+#### SearchDecisionInstancesAsync(DecisionInstanceSearchQuery?, ConsistencyOptions\<DecisionInstanceSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery body, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery? body = null, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search decision instances
@@ -7116,10 +7235,10 @@ public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
 }
 ```
 
-#### SearchAuditLogsAsync(AuditLogSearchQueryRequest, ConsistencyOptions\<AuditLogSearchQueryResult\>?, CancellationToken)
+#### SearchAuditLogsAsync(AuditLogSearchQueryRequest?, ConsistencyOptions\<AuditLogSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<AuditLogSearchQueryResult> SearchAuditLogsAsync(AuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<AuditLogSearchQueryResult> SearchAuditLogsAsync(AuditLogSearchQueryRequest? body = null, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search audit logs
@@ -7217,10 +7336,10 @@ public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey d
 }
 ```
 
-#### SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery, ConsistencyOptions\<DecisionDefinitionSearchQueryResult\>?, CancellationToken)
+#### SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery?, ConsistencyOptions\<DecisionDefinitionSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<DecisionDefinitionSearchQueryResult> SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery body, ConsistencyOptions<DecisionDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<DecisionDefinitionSearchQueryResult> SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery? body = null, ConsistencyOptions<DecisionDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search decision definitions
@@ -7318,10 +7437,10 @@ public static async Task GetDecisionRequirementsXmlExample(DecisionRequirementsK
 }
 ```
 
-#### SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery, ConsistencyOptions\<DecisionRequirementsSearchQueryResult\>?, CancellationToken)
+#### SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery?, ConsistencyOptions\<DecisionRequirementsSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<DecisionRequirementsSearchQueryResult> SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery body, ConsistencyOptions<DecisionRequirementsSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<DecisionRequirementsSearchQueryResult> SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery? body = null, ConsistencyOptions<DecisionRequirementsSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search decision requirements
@@ -7385,10 +7504,10 @@ public static async Task GetIncidentExample(IncidentKey incidentKey)
 }
 ```
 
-#### ResolveIncidentAsync(IncidentKey, IncidentResolutionRequest, CancellationToken)
+#### ResolveIncidentAsync(IncidentKey, IncidentResolutionRequest?, CancellationToken)
 
 ```csharp
-public Task ResolveIncidentAsync(IncidentKey incidentKey, IncidentResolutionRequest body, CancellationToken ct = default)
+public Task ResolveIncidentAsync(IncidentKey incidentKey, IncidentResolutionRequest? body = null, CancellationToken ct = default)
 ```
 
 Resolve incident
@@ -7455,10 +7574,10 @@ public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKe
 }
 ```
 
-#### SearchIncidentsAsync(IncidentSearchQuery, ConsistencyOptions\<IncidentSearchQueryResult\>?, CancellationToken)
+#### SearchIncidentsAsync(IncidentSearchQuery?, ConsistencyOptions\<IncidentSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery? body = null, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search incidents
@@ -7523,10 +7642,10 @@ public static async Task GetProcessDefinitionExample(ProcessDefinitionKey proces
 }
 ```
 
-#### GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery, ConsistencyOptions\<ProcessDefinitionInstanceStatisticsQueryResult\>?, CancellationToken)
+#### GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery?, ConsistencyOptions\<ProcessDefinitionInstanceStatisticsQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery body, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ProcessDefinitionInstanceStatisticsQueryResult> GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery? body = null, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get process instance statistics
@@ -7599,10 +7718,10 @@ public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(Pr
 }
 ```
 
-#### GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery, ConsistencyOptions\<ProcessDefinitionMessageSubscriptionStatisticsQueryResult\>?, CancellationToken)
+#### GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery?, ConsistencyOptions\<ProcessDefinitionMessageSubscriptionStatisticsQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery body, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult> GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery? body = null, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get message subscription statistics
@@ -7634,10 +7753,10 @@ public static async Task GetProcessDefinitionMessageSubscriptionStatisticsExampl
 }
 ```
 
-#### GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey, ProcessDefinitionElementStatisticsQuery, ConsistencyOptions\<ProcessDefinitionElementStatisticsQueryResult\>?, CancellationToken)
+#### GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey, ProcessDefinitionElementStatisticsQuery?, ConsistencyOptions\<ProcessDefinitionElementStatisticsQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery? body = null, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get process definition statistics
@@ -7735,10 +7854,10 @@ public static async Task GetStartProcessFormExample(ProcessDefinitionKey process
 }
 ```
 
-#### SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey, ProcessDefinitionVariableNameSearchQuery, ConsistencyOptions\<ProcessDefinitionVariableNameSearchQueryResult\>?, CancellationToken)
+#### SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey, ProcessDefinitionVariableNameSearchQuery?, ConsistencyOptions\<ProcessDefinitionVariableNameSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionVariableNameSearchQuery body, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ProcessDefinitionVariableNameSearchQueryResult> SearchProcessDefinitionVariableNamesAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionVariableNameSearchQuery? body = null, ConsistencyOptions<ProcessDefinitionVariableNameSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search process definition variable names
@@ -7772,10 +7891,10 @@ public static async Task SearchProcessDefinitionVariableNamesExample(ProcessDefi
 }
 ```
 
-#### SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery, ConsistencyOptions\<ProcessDefinitionSearchQueryResult\>?, CancellationToken)
+#### SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery?, ConsistencyOptions\<ProcessDefinitionSearchQueryResult\>?, CancellationToken)
 
 ```csharp
-public Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery body, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery? body = null, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search process definitions
