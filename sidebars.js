@@ -2070,7 +2070,17 @@ module.exports = {
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
+                    {
+                      type: "category",
+                      label: "Internal Keycloak",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
+                      },
+                      items: [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades",
+                      ],
+                    },
                     {
                       type: "category",
                       label: "External OIDC provider",
