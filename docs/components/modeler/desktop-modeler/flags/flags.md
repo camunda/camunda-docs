@@ -195,7 +195,7 @@ To use the new context pad, configure your `flags.json` as follows:
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-To [disable automatic connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
+To disable the built-in Camunda connector template source, configure your `flags.json` as follows. This flag overrides the source toggle in **Settings** and locks the built-in source setting. It does not affect custom sources.
 
 ```json
 {
