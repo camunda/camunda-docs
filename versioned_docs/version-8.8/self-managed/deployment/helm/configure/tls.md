@@ -266,7 +266,7 @@ docker run --rm --entrypoint sh -e REMOVE_CNS="$REMOVE_CNS" "$CAMUNDA_IMAGE" -c 
 
 Verify the count for each CA. A count of `1` or more means the image contains the CA. If every count is `0`, you don't need this procedure.
 
-Then build the truststore without the listed CAs:
+Then build the truststore without the listed CAs. Each run starts again from the image truststore, so list every CA to remove in each run:
 
 ```bash
 mkdir -p truststore
@@ -274,6 +274,7 @@ docker run --rm --user 0 --entrypoint sh \
   -v "$PWD/truststore:/out" -e REMOVE_CNS="$REMOVE_CNS" \
   "$CAMUNDA_IMAGE" -c '
     set -e
+    rm -f /out/cacerts
     keytool -importkeystore -noprompt \
       -srckeystore "$JAVA_HOME/lib/security/cacerts" -srcstorepass changeit \
       -destkeystore /out/cacerts -deststoretype PKCS12 -deststorepass changeit
