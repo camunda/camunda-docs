@@ -57,6 +57,10 @@ If you set `propagateAllParentVariables` to `false`, variables that exist at hig
 - Input mappings
 - [Start execution listeners](/components/concepts/execution-listeners.md) that complete with variables
 - Variables set on the call activity instance, for example through the API or Operate, or while resolving an incident
+- The [multi-instance](../multi-instance/multi-instance.md#variable-mappings) variables of a multi-instance call activity, such as the input element and `loopCounter`
+- Variables scoped to the call activity when you [modify the process instance](/components/concepts/process-instance-modification.md)
+
+The copied local variables follow the same rules as all other variables of the created process instance when it completes. If `propagateAllChildVariables` is enabled, they are propagated back to the caller, and a variable with the same name at a higher scope is overwritten when its value differs. See [internal engine variables](/components/concepts/variables.md#internal-engine-variables) for the multi-instance variables.
 
 For how a call activity compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
