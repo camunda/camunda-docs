@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="53" viewBox="0 0 37 53">
+  <!-- camunda.com purple-600 band grid (platform-band-grid-dark.svg), with the
+       opaque field removed so it can overlay other artwork. Bars are
+       purple-500 at 38% opacity, which composites to the site's #5F5EE3 over
+       the #5958D1 field. 8px vertical bars on an 18.5px pitch, 1.5px
+       hairlines on a 17.667px pitch; the 37x53 tile repeats seamlessly. -->
+  <g fill="#6967FF" fill-opacity="0.38">
+    <rect x="0" y="0" width="8" height="53" />
+    <rect x="18.5" y="0" width="8" height="53" />
+    <rect x="0" y="0" width="37" height="1.5" />
+    <rect x="0" y="17.667" width="37" height="1.5" />
+    <rect x="0" y="35.333" width="37" height="1.5" />
+  </g>
+</svg>

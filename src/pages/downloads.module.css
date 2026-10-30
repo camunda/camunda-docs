@@ -55,20 +55,9 @@
   max-width: 700px;
 }
 
-/* ─── Last section: gradient bg + extra bottom space ─── */
+/* ─── Last section: extra bottom space (sand bg comes from darkSection) ─── */
 .lastSectionSpaced {
   padding-bottom: 8rem !important;
-  background: linear-gradient(
-    180deg,
-    #1c1a52 0%,
-    #100e36 35%,
-    #0d0b2a 70%,
-    #161616 100%
-  ) !important;
-}
-
-[data-theme="dark"] .lastSectionSpaced {
-  background: var(--ifm-background-color) !important;
 }
 
 /* ─── More ways: 3-up wide grid ─── */
@@ -91,6 +80,22 @@
 .heroIntroTight {
   padding: 4rem 0 2.5rem !important;
   margin-bottom: 0 !important;
+}
+
+.downloadsHero::after {
+  top: calc(100% - 4.5rem);
+  height: auto;
+}
+
+/* Dark mode: drop the purple hero field, stripe, grid and fade */
+[data-theme="dark"] .downloadsHero {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .downloadsHero::before,
+[data-theme="dark"] .downloadsHero::after,
+[data-theme="dark"] .downloadsHeroGlow {
+  display: none;
 }
 
 /* ─── OS Tabs ─── */
