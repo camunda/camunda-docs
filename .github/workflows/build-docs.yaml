@@ -76,8 +76,17 @@ jobs:
           path: build
       - name: Install hyperlink
         run: npm install -g @untitaker/hyperlink
+      - name: Install GitHub CLI for hyperlink attestation
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSL --retry 3 -o gh.tar.gz https://github.com/cli/cli/releases/download/v2.103.3/gh_2.103.3_linux_amd64.tar.gz
+          echo '4c806978ffce1cec70853302a56d70ac6da4f19bae7adca4e1a8ab00633dd91d  gh.tar.gz' | sha256sum -c -
+          tar -xzf gh.tar.gz gh_2.103.3_linux_amd64/bin/gh
+          echo "$RUNNER_TEMP/gh_2.103.3_linux_amd64/bin" >> "$GITHUB_PATH"
       - name: Check internal links
         uses: untitaker/hyperlink@9375bc4063712ad490d5eb3d54df0b6aade15e54 # 0.3.2
+        env:
+          HYPERLINK_FORCE_ATTESTATION: 1
         with:
           args: build/
       - name: Remove https redirect
