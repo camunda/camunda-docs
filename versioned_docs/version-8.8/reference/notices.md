@@ -176,12 +176,11 @@ Zeebe, Operate, Tasklist, Identity, Optimize
 
 ### Impact
 
-CVE-2026-42585 is an HTTP request smuggling flaw in Netty. It comes from incorrect parsing of malformed `Transfer-Encoding` headers. If an affected component sits behind a reverse proxy, load balancer or ingress that parses the request boundary differently, an attacker can smuggle a second request past front-end checks such as authentication or WAF rules. Depending on the setup, this can lead to unauthorized access to protected endpoints, cache poisoning or session abuse. HTTPS does not prevent it.
+CVE-2026-42585 is an HTTP request smuggling flaw in Netty. It comes from incorrect parsing of malformed `Transfer-Encoding` headers. If an affected component sits behind a reverse proxy, load balancer or Ingress that parses the request boundary differently, an attacker can smuggle a second request past front-end checks such as authentication or WAF rules. Depending on the setup, this can lead to unauthorized access to protected endpoints, cache poisoning or session abuse. HTTPS does not prevent it.
 
 ### How to determine if the installation is affected
 
-You are using the following components behind a reverse proxy, load balancer or ingress:
-
+You are using the following components behind a reverse proxy, load balancer or Ingress:
 - Zeebe, Operate, Tasklist before 8.6.40
 - Identity before 8.6.31
 - Optimize before 8.6.27
