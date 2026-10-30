@@ -46,18 +46,16 @@ October 30, 2026
 
 ### Impact
 
-CVE-2026-71290 is a TLS hostname verification bypass in the asynchronous client of Apache HttpClient 5 (httpclient5 5.4
-through 5.6.3). Camunda uses it to connect to Elasticsearch and OpenSearch. An attacker in a network position to
-intercept traffic (for example through DNS spoofing or a compromised neighbor on a shared segment) can impersonate the
-search backend with a valid certificate for another domain. This can expose Basic authentication credentials sent to the
-backend, expose or modify process data in transit, and allow forged responses.
+[CVE-2026-71290](https://nvd.nist.gov/vuln/detail/CVE-2026-71290) is a TLS hostname verification bypass in the asynchronous client of Apache HttpClient 5 (`httpclient5` 5.4 through 5.6.3). Camunda uses this client to connect to Elasticsearch and OpenSearch. An attacker in a network position to intercept traffic (for example, through DNS spoofing or a compromised host on a shared network segment) can impersonate the search backend with a valid certificate for another domain. This can expose Basic authentication credentials sent to the backend, expose or modify process data in transit, and allow forged responses.
+
+This notice covers the 8.6 line. For the 8.7 fixes, see [Notice 60](#notice-60).
 
 ### How to determine if the installation is affected
 
-You are using one of the following components with TLS to Elasticsearch/OpenSearch:
+You are using one of the following components, and it connects to Elasticsearch or OpenSearch over TLS:
 
-- Zeebe, Operate, Tasklist before 8.6.40
-- Optimize before 8.6.28
+- Zeebe, Operate, or Tasklist ≤ 8.6.39
+- Optimize ≤ 8.6.27
 
 ### Solution
 
