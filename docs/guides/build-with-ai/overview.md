@@ -109,7 +109,7 @@ description: "Embed LLM-powered agents in your processes with the AI Agent conne
 },
 ]} />
 
-## Monitor and improve
+## Evaluate
 
 Monitor your AI agents in real time with Operate, improve performance over time with Optimize, and test them with Camunda Process Test.
 

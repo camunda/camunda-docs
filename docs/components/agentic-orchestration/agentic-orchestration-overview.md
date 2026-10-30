@@ -1,7 +1,7 @@
 ---
 id: agentic-orchestration-overview
-title: Agentic orchestration overview
-sidebar_label: Overview
+title: Get started with agentic orchestration
+sidebar_label: Get started with agentic orchestration
 description: "Agentic orchestration combines deterministic BPMN process logic with LLM-driven flexibility, so AI agents, people, and systems collaborate in one governed, end-to-end process."
 keywords: ["agentic orchestration", "AI agents", "BPMN", "governance"]
 ---
@@ -16,7 +16,7 @@ import OverviewDiagramImg from './img/ao-overview-diagram.svg';
 
 Agentic orchestration is a hybrid orchestration model that combines the power of deterministic logic with LLM-driven flexibility.
 
-An [AI agent](/components/agentic-orchestration/ai-agents.md) evaluates the prompt, decides which tools to execute, and decides when the goal is achieved, while Camunda orchestrates the process around it with governance and auditability.
+An [AI agent](/reference/glossary.md#ai-agent) evaluates the prompt, decides which tools to execute, and decides when the goal is achieved, while Camunda orchestrates the process around it with governance and auditability.
 
 Use agentic orchestration to run the non-deterministic parts of a process, where the path to the outcome can't be fully defined in advance, on the proven foundation of BPMN.
 

@@ -92,8 +92,11 @@ module.exports = {
         {
           type: "category",
           label: "Get started",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
+          },
           items: [
-            "components/agentic-orchestration/agentic-orchestration-overview",
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/agent-definitions-and-instances",
             "components/agentic-orchestration/agent-states-and-metrics",
@@ -112,7 +115,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Monitor and improve",
+          label: "Evaluate",
           items: [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
             "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
