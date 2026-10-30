@@ -47,7 +47,7 @@ Identity
 
 CVE-2026-68763 is an uncontrolled resource consumption flaw in Apache Tomcat. A memory leak occurs in the HTTP/2 handling when a client resets a stream.
 
-Identity enables HTTP/2 by default, so an attacker who can reach its HTTP port can exhaust memory and cause a denial of service without authenticating. It does not allow reading or changing data. Because Identity is central to Multi-Tenancy, an outage can disrupt the wider automation stack.
+Identity enables HTTP/2 by default, so an attacker who can reach its HTTP port can exhaust memory and cause a denial of service without authenticating. The flaw does not allow reading or changing data. Because Identity is central to multi-tenancy, an outage can disrupt the wider automation stack.
 
 ### How to determine if the installation is affected
 
@@ -164,7 +164,7 @@ You are using Zeebe before 8.6.40, with the gateway endpoint reachable by untrus
 
 Camunda has provided the following releases which contain the fix:
 
-- Zeebe 8.6.40
+- Zeebe: 8.6.40
 
 ## Notice 73
 
@@ -235,9 +235,9 @@ Zeebe, Operate, Tasklist, Identity, Optimize
 
 ### Impact
 
-CVE-2026-34282 is a flaw in the networking component of the Oracle JDK shipped in Camunda container images (OpenJDK 21.0.10). A TLS peer can cause a blocking network call to hang indefinitely. This pins the handling thread. Enough requests can exhaust the web server's thread pool and make the component unresponsive to all users, a denial of service.
+CVE-2026-34282 is a flaw in the networking component of the Oracle JDK shipped in Camunda container images (OpenJDK 21.0.10). A TLS peer can cause a blocking network call to hang indefinitely, which pins the handling thread. Enough requests can exhaust the web server's thread pool and make the component unresponsive to all users (denial of service).
 
-Exploitation has strong preconditions. The component must run with OIDC/identity authentication against an identity provider reached over HTTPS, and the attacker must control or sit on the path to that identity provider. Confidentiality and integrity are not affected.
+Exploitation has strong preconditions. The component must run with OpenID Connect (OIDC) authentication against an identity provider reached over HTTPS, and the attacker must control or sit on the path to that identity provider. Confidentiality and integrity are not affected.
 
 ### How to determine if the installation is affected
 
