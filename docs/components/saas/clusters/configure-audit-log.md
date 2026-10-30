@@ -4,6 +4,10 @@ title: Configure the audit log
 description: "Configure the audit log to determine which user and client operations are recorded."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Configure the [audit log](../../audit-log/overview.md) in Camunda 8 SaaS.
 
 ## About

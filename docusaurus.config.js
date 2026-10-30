@@ -718,6 +718,12 @@ module.exports = {
         },
         {
           type: "doc",
+          docId: "components/saas/saas",
+          label: "SaaS",
+          position: "left",
+        },
+        {
+          type: "doc",
           docId: "apis-tools/working-with-apis-tools",
           label: "APIs & tools",
           position: "left",

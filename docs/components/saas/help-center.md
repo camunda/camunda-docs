@@ -2,21 +2,21 @@
 id: camunda-help-center
 title: Help Center
 sidebar_label: Help Center
-description: "Get recommendations for additional learning, step through the automation project guide, access Camunda Academy, share feedback, and more."
+description: "Camunda 8 SaaS provides a Help Center where you can access additional documentation, step through various use cases in Camunda, share your feedback, and more."
 keywords: [help-center, help, support]
 ---
 
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+import PageDescription from '@site/src/components/PageDescription';
 
-Camunda 8 SaaS offers a Help Center to all users, where you can access additional documentation, step through various use cases in Camunda, share your feedback, and more.
+<PageDescription />
 
-## Visiting the Help Center
+## Open the Help Center
 
-You can visit the Help Center directly from your Camunda 8 account. From Camunda Hub, click the **Open Help Center** icon in the top right corner of the navigation bar:
+You can open the Help Center directly from your Camunda 8 account.
+
+In Camunda Hub, click the **Open Help Center** icon in the top right corner of the navigation bar.
 
 ![question mark icon to open the help center](./img/open-help-center.png)
-
-This launches a modal for the Help Center, where you are taken to the **Your recommendations** tab.
 
 ## New user survey
 

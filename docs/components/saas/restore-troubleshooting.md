@@ -4,6 +4,10 @@ title: Restore troubleshooting
 description: "Troubleshoot restore failures by phase, symptom, and corrective action."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
 Use this guide to diagnose and recover from restore failures.

@@ -5,6 +5,10 @@ keywords: [SSO, AzureAD, SAML]
 description: "For enterprise customers, we support integrating external identity providers."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Enterprise plan customers can integrate an external identity provider (IdP) with Camunda. This means users within your organization do not need to sign up by creating a Camunda account.
 
 ## Onboarding procedure

@@ -3,6 +3,10 @@ title: "Manage resource-based authorizations"
 description: "Legacy feature for clusters before version 8.8. Control the access of a user to specific resources with resource-based authorizations."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 :::warning Legacy feature
 Resource-based authorizations are a legacy feature, and they apply only to clusters before version 8.8. For clusters on version 8.8 and later, manage the access of users with [authorizations in Admin](/components/admin/authorization.md).
 :::

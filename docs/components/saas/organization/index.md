@@ -1,9 +1,15 @@
 ---
 id: organization
-title: Organization in SaaS
+title: SaaS organizations
 sidebar_label: Organization
-description: "Learn how to manage your Camunda 8 SaaS organization, including its users, access, usage, and plan."
+description: "Manage your Camunda 8 SaaS organization, including its users, access, usage, and plan."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 An organization is the top-level entity in Camunda 8 SaaS.
 

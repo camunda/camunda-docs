@@ -4,7 +4,10 @@ title: "Regions"
 description: "After creating a cluster, specify a region for that cluster. Read on for details of Google Cloud Platform regions currently supported in Camunda 8 SaaS."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
 import RegionMapImg from './img/diagram-regions-map.png';
+
+<PageDescription />
 
 When you [create a cluster](/components/saas/clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
 

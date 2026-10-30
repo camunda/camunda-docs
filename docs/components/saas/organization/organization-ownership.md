@@ -4,6 +4,10 @@ title: Organization ownership
 description: "Learn how organization ownership works in Camunda 8 SaaS, and how to transfer it to another user."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 The first user to sign up for Camunda 8 from an organization, company, or group becomes the Organization Owner. The organization owns Camunda Hub workspaces, projects, and clusters, and the owner and any Organization Admins they assign control access to them.
 
 ## Organization Owner

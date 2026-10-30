@@ -4,6 +4,10 @@ title: Restore a cluster from backup
 description: "Restore a Camunda 8 SaaS cluster from a selected backup in Hub."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
 Use this guide to restore a SaaS cluster from an existing backup.

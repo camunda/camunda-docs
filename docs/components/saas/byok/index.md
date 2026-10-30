@@ -4,6 +4,10 @@ title: Encryption
 description: Learn how to configure AWS BYOK (Bring Your Own Key) for Camunda 8 SaaS clusters.
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Camunda 8 SaaS encrypts all cluster data at rest. By default, encryption uses cloud provider–managed keys. For stricter compliance or control, you can configure **Bring Your Own Key (BYOK)** with **AWS KMS**, available for clusters hosted in AWS Regions.
 
 ## Encryption overview

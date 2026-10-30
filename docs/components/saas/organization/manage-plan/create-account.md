@@ -1,24 +1,29 @@
 ---
 id: create-account
 title: Create an account
-description: "Set up your Camunda 8 account to get started."
+description: "Get started with Camunda 8 SaaS by creating your Camunda 8 account."
 ---
 
-Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## Create an account
+
+Sign up and start your developer journey with Camunda 8 SaaS.
+
+1. Visit the [Camunda 8 sign-up page](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=cta&utm_campaign=saas_trial_acquisition) to create your account.
+1. Fill out the signup form and click **Create account**, or sign up using the social sign up buttons (Google or GitHub).
+1. Click on the link in your confirmation email to verify your email address.
+1. Log in to Camunda 8 SaaS using either the email address and password you signed up with or the social login buttons. You can also log in to Camunda 8 SaaS directly at [camunda.io](https://weblogin.cloud.camunda.io/).
 
 :::note
-We're gradually rolling out changes that affect this page to users; your experience may vary.
+
+- See [available plans](/components/saas/organization/manage-plan/available-plans.md) to compare what each plan includes.
+- If you choose to create an account using the social sign up buttons, you are redirected directly to [Camunda Hub](/components/hub/index.md).
+  Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
+
 :::
-
-Visit the [Camunda 8 sign-up page](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account.
-
-### Create an account
-
-Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
-
-When you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address.
-
-If you choose to create an account through the social sign up buttons, you'll be redirected to [Camunda Hub](/components/hub/index.md) directly.
 
 ## Log in to your Camunda 8 account
 
