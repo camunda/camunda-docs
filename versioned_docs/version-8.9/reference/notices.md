@@ -45,7 +45,7 @@ Identity
 
 ### Impact
 
-CVE-2026-68763 is an uncontrolled resource consumption flaw in Apache Tomcat. A memory leak occurs in the HTTP/2 handling when a client resets a stream.
+[CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763) is an uncontrolled resource consumption flaw in Apache Tomcat. A memory leak occurs in the HTTP/2 handling when a client resets a stream.
 
 Identity enables HTTP/2 by default, so an attacker who can reach its HTTP port can exhaust memory and cause a denial of service without authenticating. The flaw does not allow reading or changing data. Because Identity is central to multi-tenancy, an outage can disrupt the wider automation stack.
 
@@ -57,10 +57,9 @@ You are using Identity before 8.6.34, with the default `server.http2.enabled: tr
 
 Camunda has provided the following releases which contain the fix:
 
-- Camunda: 8.6.41
-- Identity: 8.6.34
+- Identity: 8.6.34 (included in the Camunda 8.6.41 Docker image)
 
-As a workaround, set `server.http2.enabled` to `false`
+As a workaround, set `server.http2.enabled` to `false`.
 
 ## Notice 77
 
@@ -74,7 +73,7 @@ Operate, Tasklist
 
 ### Impact
 
-CVE-2026-41720 is a flaw in Spring LDAP: bind requests with a non-empty username and an empty or null password are not rejected. In Operate or Tasklist with legacy LDAP authentication enabled (`ldap-auth` profile), an attacker who knows a valid username may authenticate with a blank password and gain access to the web application, if the LDAP directory accepts such binds. Other deployments are not affected.
+[CVE-2026-41720](https://nvd.nist.gov/vuln/detail/CVE-2026-41720) is a flaw in Spring LDAP: bind requests with a non-empty username and an empty or null password are not rejected. In Operate or Tasklist with legacy LDAP authentication enabled (`ldap-auth` profile), an attacker who knows a valid username may authenticate with a blank password and gain access to the web application, if the LDAP directory accepts such binds. Other deployments are not affected.
 
 ### How to determine if the installation is affected
 
@@ -100,7 +99,7 @@ Zeebe, Operate, Tasklist, Identity, and Optimize
 
 ### Impact
 
-CVE-2026-40984 is a denial of service in Micrometer's HTTP request instrumentation. Spring Boot applies it automatically to all HTTP endpoints. An unauthenticated attacker who can reach any HTTP endpoint can send a specially crafted request that drives the instrumentation into excessive resource use, making the component unresponsive until restart. Availability only; data is not exposed or modified.
+[CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984) is a denial of service in Micrometer's HTTP request instrumentation. Spring Boot applies it automatically to all HTTP endpoints. An unauthenticated attacker who can reach any HTTP endpoint can send a specially crafted request that drives the instrumentation into excessive resource use, making the component unresponsive until restart. This affects availability only; it does not expose or modify data.
 
 ### How to determine if the installation is affected
 
@@ -130,7 +129,7 @@ Zeebe
 
 ### Impact
 
-CVE-2026-40983 is a denial of service in Micrometer's gRPC server instrumentation. The Zeebe Gateway applies this interceptor to its public gRPC API with no way to disable it. An unauthenticated attacker with network access can send crafted gRPC requests and exhaust resources, making the gateway unresponsive until it is restarted. All client operations (job polling, deployments, message publication, process instance creation) are interrupted. Operate, Tasklist and Identity include the library but do not run a gRPC server, so they are not exploitable.
+[CVE-2026-40983](https://nvd.nist.gov/vuln/detail/CVE-2026-40983) is a denial of service in Micrometer's gRPC server instrumentation. The Zeebe Gateway applies this interceptor to its public gRPC API with no way to disable it. An unauthenticated attacker with network access can send crafted gRPC requests and exhaust resources, making the gateway unresponsive until it is restarted. All client operations (job polling, deployments, message publication, and process instance creation) are interrupted. Operate, Tasklist, and Identity include the library but do not run a gRPC server, so they are not exploitable.
 
 ### How to determine if the installation is affected
 
@@ -154,7 +153,7 @@ Zeebe
 
 ### Impact
 
-CVE-2026-42587 is a decompression limit bypass in Netty. The `maxAllocation` limit is not enforced when the content encoding is Brotli, zstd or Snappy. An unauthenticated attacker can send a small compressed payload that causes unbounded memory allocation. This leads to an out-of-memory denial of service on the Zeebe Gateway, whose Netty HTTP/2 endpoint is reachable from outside the cluster. Other components have a much lower likelihood. Data is not disclosed or modified.
+[CVE-2026-42587](https://nvd.nist.gov/vuln/detail/CVE-2026-42587) is a decompression limit bypass in Netty. The `maxAllocation` limit is not enforced when the content encoding is Brotli, zstd, or Snappy. An unauthenticated attacker can send a small compressed payload that causes unbounded memory allocation. This leads to an out-of-memory denial of service on the Zeebe Gateway, whose Netty HTTP/2 endpoint is reachable from outside the cluster. Other components have a much lower likelihood. Data is not disclosed or modified.
 
 ### How to determine if the installation is affected
 
@@ -174,15 +173,15 @@ October 30, 2026
 
 ### Products affected
 
-Zeebe, Operate, Tasklist, Identity, Optimize
+Zeebe, Operate, Tasklist, Identity, and Optimize
 
 ### Impact
 
-CVE-2026-42585 is an HTTP request smuggling flaw in Netty. It comes from incorrect parsing of malformed `Transfer-Encoding` headers. If an affected component sits behind a reverse proxy, load balancer or Ingress that parses the request boundary differently, an attacker can smuggle a second request past front-end checks such as authentication or WAF rules. Depending on the setup, this can lead to unauthorized access to protected endpoints, cache poisoning or session abuse. HTTPS does not prevent it.
+[CVE-2026-42585](https://nvd.nist.gov/vuln/detail/CVE-2026-42585) is an HTTP request smuggling flaw in Netty. It comes from incorrect parsing of malformed `Transfer-Encoding` headers. If an affected component sits behind a reverse proxy, load balancer, or Ingress that parses the request boundary differently, an attacker can smuggle a second request past front-end checks such as authentication or WAF rules. Depending on the setup, this can lead to unauthorized access to protected endpoints, cache poisoning, or session abuse. HTTPS does not prevent it.
 
 ### How to determine if the installation is affected
 
-You are using the following components behind a reverse proxy, load balancer or Ingress:
+You are using the following components behind a reverse proxy, load balancer, or Ingress:
 
 - Zeebe, Operate, Tasklist before 8.6.40
 - Identity before 8.6.31
@@ -204,24 +203,24 @@ October 30, 2026
 
 ### Products affected
 
-Operate, Tasklist, Zeebe Java client (`io.camunda:zeebe-client-java`)
+Operate, Tasklist, and Zeebe Java Client (`io.camunda:zeebe-client-java`)
 
 ### Impact
 
-CVE-2026-68494 is an incomplete fix for a number-length limit bypass in the non-blocking parser of `jackson-core`. The Camunda Zeebe Java client (`io.camunda:zeebe-client-java`) uses that parser to read chunked API responses. A malicious or compromised response could make the client process hang or run out of memory.
+[CVE-2026-68494](https://nvd.nist.gov/vuln/detail/CVE-2026-68494) is an incomplete fix for a number-length limit bypass in the non-blocking parser of `jackson-core`. The Zeebe Java Client (`io.camunda:zeebe-client-java`) uses that parser to read chunked API responses. Operate and Tasklist use the Zeebe Java Client and can be affected transitively. A malicious or compromised response could make the client process hang or run out of memory.
 
 ### How to determine if the installation is affected
 
 You are using:
 
-- Operate, Tasklist before 8.6.40
-- Zeebe Java client (`io.camunda:zeebe-client-java`) before 8.6.40 with a `jackson-core` version in the affected range, connecting to an endpoint you do not fully trust
+- Operate or Tasklist before 8.6.40, because these components use the affected Zeebe Java Client dependency
+- Zeebe Java Client (`io.camunda:zeebe-client-java`) before 8.6.40 with a `jackson-core` version in the affected range, connecting to an endpoint you do not fully trust
 
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Operate, Tasklist, Zeebe Java client (`io.camunda:zeebe-client-java`): 8.6.40
+- Operate, Tasklist, and Zeebe Java Client (`io.camunda:zeebe-client-java`): 8.6.40
 
 ## Notice 71
 
@@ -231,11 +230,11 @@ October 30, 2026
 
 ### Products affected
 
-Zeebe, Operate, Tasklist, Identity, Optimize
+Zeebe, Operate, Tasklist, Identity, and Optimize
 
 ### Impact
 
-CVE-2026-34282 is a flaw in the networking component of the Oracle JDK shipped in Camunda container images (OpenJDK 21.0.10). A TLS peer can cause a blocking network call to hang indefinitely, which pins the handling thread. Enough requests can exhaust the web server's thread pool and make the component unresponsive to all users (denial of service).
+[CVE-2026-34282](https://nvd.nist.gov/vuln/detail/CVE-2026-34282) is a flaw in the networking component of the Oracle JDK shipped in Camunda container images (OpenJDK 21.0.10). A TLS peer can cause a blocking network call to hang indefinitely, which pins the handling thread. Enough requests can exhaust the web server's thread pool and make the component unresponsive to all users (denial of service).
 
 Exploitation has strong preconditions. The component must run with OpenID Connect (OIDC) authentication against an identity provider reached over HTTPS, and the attacker must control or sit on the path to that identity provider. Confidentiality and integrity are not affected.
 
