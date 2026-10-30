@@ -3,7 +3,7 @@ title: Enable secure connectivity
 description: Configure AWS PrivateLink connectivity for a Camunda 8 SaaS Orchestration Cluster in Camunda Hub.
 ---
 
-This guide explains how to enable secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration Cluster.
+This guide explains how to enable secure connectivity (AWS PrivateLink) for an AWS-hosted Camunda 8 SaaS Orchestration Cluster in Camunda Hub or with the [Administration API](#manage-secure-connectivity-with-the-administration-api).
 
 Secure connectivity must be enabled per cluster.
 
@@ -149,6 +149,162 @@ For detailed instructions, see the [AWS documentation on creating an interface e
 In the **Private networking** tab, select **Deactivate service** to remove the VPC endpoint service for the cluster.
 
 Public connectivity remains available.
+
+## Manage secure connectivity with the Administration API
+
+You can also view, activate, and deactivate secure connectivity with the [Administration API](/apis-tools/administration-api/administration-api-reference.md). Use the API to automate the setup, for example from an infrastructure pipeline.
+
+The [prerequisites](#prerequisites) for the cluster and your organization also apply to the API.
+
+### Create an API client
+
+1. Create Administration API client credentials as described in [authentication](/apis-tools/administration-api/authentication.md#generate-a-token).
+1. In the **Secure connectivity** scope group, select the scopes the client needs:
+
+   | Scope          | Allows the client to                                    |
+   | -------------- | ------------------------------------------------------- |
+   | **Get**        | View the secure connectivity status of a cluster.       |
+   | **Activate**   | Activate the PrivateLink endpoint service.              |
+   | **Deactivate** | Deactivate and remove the PrivateLink endpoint service. |
+
+1. Request an access token for the client. See [generate a token](/apis-tools/administration-api/authentication.md#generate-a-token).
+
+### Endpoints
+
+All endpoints use the base URL `https://api.cloud.camunda.io`. Replace `<cluster-id>` with the ID of your cluster. The `curl` examples read the cluster ID from `CLUSTER_ID` and the access token from `ACCESS_TOKEN`.
+
+| Action     | Method   | Path                                         | Required scope |
+| ---------- | -------- | -------------------------------------------- | -------------- |
+| Get status | `GET`    | `/clusters/<cluster-id>/secure-connectivity` | **Get**        |
+| Activate   | `POST`   | `/clusters/<cluster-id>/secure-connectivity` | **Activate**   |
+| Deactivate | `DELETE` | `/clusters/<cluster-id>/secure-connectivity` | **Deactivate** |
+
+For the full request and response schemas, see the [Administration API reference](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
+
+### Status codes
+
+The status codes in the following table apply to all three endpoints. The sections for each endpoint list the other status codes.
+
+| Status | Meaning                                                                                                                                                                    |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `403`  | The client does not have the required scope, or the cluster belongs to a different organization.                                                                           |
+| `404`  | The cluster does not exist. For `GET`, `404` can also mean that secure connectivity is not active. See [get the status](#get-the-secure-connectivity-status-with-the-api). |
+
+The API returns `403`, not `404`, for a cluster of a different organization.
+
+### Activate secure connectivity with the API
+
+Send the allowed principals and the supported regions in the request body:
+
+```bash
+curl --request POST "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secure-connectivity" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "allowedPrincipals": ["arn:aws:iam::123456789012:root"],
+    "allowedRegions": ["eu-central-1"]
+  }'
+```
+
+| Field               | Description                                                                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowedPrincipals` | The ARNs of the AWS principals that can connect. Provide between 1 and 10 valid AWS ARNs.                                                    |
+| `allowedRegions`    | The AWS regions that can connect. Provide between 1 and 10 PrivateLink regions. To match the Hub default, include the region of the cluster. |
+
+The API returns the following status codes:
+
+| Status | Meaning                                                                                                                                                            |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `201`  | Camunda started to provision the VPC endpoint service. To find out when provisioning is complete, see [wait for provisioning](#wait-for-provisioning-to-complete). |
+| `400`  | The request body is not valid. The response describes the field that failed validation.                                                                            |
+| `409`  | Secure connectivity is already active, or another activation for this cluster is in progress.                                                                      |
+
+### Get the secure connectivity status with the API
+
+```bash
+curl --request GET "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secure-connectivity" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}"
+```
+
+The response contains the configuration and the provisioning state of the endpoint service. The following example is shortened:
+
+```json
+{
+  "status": {
+    "spec": {
+      "allowedPrincipals": ["arn:aws:iam::123456789012:root"],
+      "allowedRegions": ["eu-central-1"]
+    },
+    "status": {
+      "conditions": [{ "type": "Ready", "status": "True" }],
+      "endpoint": {
+        "region": "eu-central-1",
+        "serviceName": "com.amazonaws.vpce.eu-central-1.vpce-svc-0123456789abcdef0",
+        "type": "Interface",
+        "privateDnsName": "<private-dns-name>"
+      },
+      "endpointConnectionCount": 1,
+      "endpointConnections": [
+        { "endpointId": "vpce-0123456789abcdef0", "state": "available" }
+      ]
+    }
+  }
+}
+```
+
+Use `status.status.endpoint.serviceName` as the service name when you [create a VPC interface endpoint in AWS](#create-a-vpc-interface-endpoint-in-aws).
+
+The API returns the following status codes:
+
+| Status | Meaning                                                                                    |
+| ------ | ------------------------------------------------------------------------------------------ |
+| `200`  | Secure connectivity is active, or Camunda is provisioning it. The body contains its state. |
+| `404`  | Secure connectivity is not active for the cluster, or the cluster does not exist.          |
+
+The `404` response is the same in both cases. To find out which case applies, get the cluster with `GET /clusters/<cluster-id>`. This call needs the **Get** scope of the **Cluster** scope group. If it returns `200`, the cluster exists and secure connectivity is not active.
+
+### Wait for provisioning to complete
+
+Provisioning starts when the activation returns `201`, and it can take up to 10 minutes. To find out when it is complete, send the `GET` request again at an interval, for example every 30 seconds.
+
+Provisioning is complete when the `conditions` list in `status.status` contains the condition `Ready` with the status `"True"`. Hub uses the same condition to show **Ready** or **Pending**. While provisioning runs, the response can have no `conditions` and no `endpoint`, or the `Ready` condition has the status `"False"`. The `reason` and `message` fields of the condition describe the current state.
+
+When provisioning is complete, `status.status.endpoint.serviceName` contains the service name.
+
+The following script waits until provisioning is complete or 15 minutes have passed. It needs [jq](https://jqlang.org/):
+
+```bash
+for attempt in $(seq 1 30); do
+  READY=$(curl --silent --fail \
+    "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secure-connectivity" \
+    --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+    | jq --raw-output '.status.status.conditions[]? | select(.type == "Ready") | .status')
+  if [ "${READY}" = "True" ]; then
+    echo "Secure connectivity is ready."
+    exit 0
+  fi
+  sleep 30
+done
+echo "Secure connectivity is not ready after 15 minutes." >&2
+exit 1
+```
+
+Use the same check in your infrastructure automation, for example in Terraform, before you create the VPC interface endpoint in AWS. If the `Ready` condition does not have the status `"True"` after 15 minutes, read the `reason` and `message` fields of the condition, and contact support if you need help.
+
+### Deactivate secure connectivity with the API
+
+```bash
+curl --request DELETE "https://api.cloud.camunda.io/clusters/${CLUSTER_ID}/secure-connectivity" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}"
+```
+
+The API returns `204` when it starts to remove the VPC endpoint service. If secure connectivity is not active for the cluster, the API also returns `204` and does nothing. Thus, you can send the request again safely.
+
+To find out when the endpoint service is removed, send the `GET` request again at an interval until it returns `404`.
+
+:::note
+The Administration API cannot change the allowed principals or supported regions of an active endpoint service. To change them, use the **Private networking** tab in Hub. See [manage allowed principals and regions](#manage-allowed-principals-and-regions).
+:::
 
 ## View-only access
 

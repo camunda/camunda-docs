@@ -92,6 +92,7 @@ A client can have one or multiple permissions from the following groups:
 - **Connector Secrets**: [Manage secrets](/components/saas/clusters/manage-secrets.md) of your clusters.
 - **Members**: [Manage users](/components/hub/organization/users-and-roles.md) in your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
+- **Secure connectivity**: View, activate, and deactivate [secure connectivity (AWS PrivateLink)](/components/saas/secure-connectivity/enable-secure-connectivity.md#manage-secure-connectivity-with-the-administration-api) for your AWS-hosted clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
 
