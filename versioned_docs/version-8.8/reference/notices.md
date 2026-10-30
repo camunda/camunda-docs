@@ -31,6 +31,49 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 80
+
+### Publication date
+
+October 30, 2026
+
+### Products affected
+
+- Camunda 8 Self-Managed images with a Java runtime: Zeebe, Orchestration Cluster, Optimize, Identity, Management Identity, Connectors, and Web Modeler REST API
+- Camunda Keycloak image
+- Camunda 8 Run (c8run) with the bundled Java runtime
+- Console Self-Managed
+
+### Impact
+
+The certificate authority eMudhra reported that an attacker compromised some of its intermediate certificate authorities.
+The trust stores in the affected images trust these intermediates through the root certificates "emSign ECC Root CA - G3" and "AAA Certificate Services".
+
+The risk is not direct. To use it, an attacker must also have a position on the network path, for example through DNS poisoning or a compromised network device. The attacker can then do a man-in-the-middle attack on outgoing TLS connections from Camunda components, with a certificate that a compromised intermediate signed.
+
+We have no evidence that an attacker used this against Camunda. This issue does not affect Camunda keys and secrets, and you do not have to rotate them. No public Camunda endpoint uses an eMudhra certificate.
+
+### How to determine if the installation is affected
+
+You are using a Self-Managed release earlier than the versions in [Solution](#solution).
+
+### Solution
+
+Camunda provides the following releases, which do not trust the compromised certificate authorities:
+
+- Camunda 8.10: Orchestration Cluster, Optimize, and Identity 8.10.6, Connectors 8.10.2, Management Identity 8.10.2
+- Camunda 8.9: Orchestration Cluster, Optimize, and Identity 8.9.26, Connectors 8.9.17, Management Identity 8.9.12
+- Camunda 8.8: Orchestration Cluster, Optimize, and Identity 8.8.44, Connectors 8.8.24, Management Identity 8.8.20
+- Camunda 8.7: Zeebe, Operate, Tasklist, and Identity 8.7.44, Optimize 8.7.30, Connectors 8.7.30, Management Identity 8.7.27
+- Camunda 8.6: Zeebe 8.6.41
+- Camunda Keycloak image: Camunda published the fixed image again under the existing tags. Pull the image again to get it.
+
+A fix for the Web Modeler REST API and Console Self-Managed images is not available yet. We will update this notice when we release the fix.
+
+If you cannot update now, or you use an image without a fix, remove the root certificates from the Java trust store. Refer to [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore).
+
+Camunda updated the SaaS clusters that run supported versions. If your SaaS cluster runs a version that is no longer supported, update it to a supported version.
+
 ## Notice 70
 
 ### Publication date
