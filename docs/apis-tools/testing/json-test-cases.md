@@ -1687,7 +1687,7 @@ Example:
 
 ### MOCK_JOB_WORKER_COMPLETE_JOB
 
-An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for more details.
+An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for more details, and [dynamic variables](utilities.md#complete-with-dynamic-variables) for the behavior of `variablesExpression`.
 
 <table>
   <tbody><tr>
@@ -1719,6 +1719,24 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
     <td></td>
   </tr>
   <tr>
+    <td>variablesExpression</td>
+    <td>
+      A FEEL expression that is evaluated with the job's variables as context to derive the variables to complete the job with. The expression must evaluate to an object and must not be blank. The leading <code>=</code> is optional. If the expression fails or doesn't evaluate to an object, the job fails.
+    </td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>variablesTable</td>
+    <td>
+      A list of rows to select the variables to complete the job with. Each row has a <code>when</code> object, which is matched against the job's variables, and a <code>variables</code> object to complete the job with. The first matching row is used. If no row matches, the job completes without variables.
+    </td>
+    <td>array of objects</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
     <td>useExampleData</td>
     <td>Whether to use example data from the BPMN element. If true, the variables property is ignored.</td>
     <td>boolean</td>
@@ -1726,6 +1744,18 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
     <td>false</td>
   </tr>
 </tbody></table>
+
+The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
+
+When you use `variablesExpression` or a non-empty `variablesTable`, it must be the only source of variables. The instruction
+fails if you also use another source:
+
+- A non-empty `variables` object.
+- `useExampleData` set to `true`.
+- Both `variablesExpression` and a non-empty `variablesTable`.
+
+An empty `variables` object, an empty `variablesTable`, and `useExampleData` set to `false` don't count. Without
+`variablesExpression` or `variablesTable`, the properties `variables` and `useExampleData` behave as before.
 
 Example:
 
@@ -1737,6 +1767,39 @@ Example:
     "trajectory": "optimal",
     "fuelConsumption": 450
   }
+}
+```
+
+Example with a FEEL expression that derives the variables from the job's variables:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesExpression": "{ sampleType: if loopCounter = 1 then \"regolith\" else \"basalt\" }"
+}
+```
+
+Example with a variables table:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesTable": [
+    {
+      "when": { "loopCounter": 1 },
+      "variables": { "sampleType": "regolith" }
+    },
+    {
+      "when": { "loopCounter": 2 },
+      "variables": { "sampleType": "basalt" }
+    },
+    {
+      "when": {},
+      "variables": { "sampleType": "unknown" }
+    }
+  ]
 }
 ```
 
