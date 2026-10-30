@@ -79,7 +79,7 @@ Only one bundle can be installed at a time.
 
 ### Keep an installation up to date
 
-To install a newer bundle, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`.
+To install a newer bundle, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`. To see what changed in each release, read the [changelog](changelog.md).
 
 | Command                                  | What it does                                          |
 | ---------------------------------------- | ----------------------------------------------------- |
