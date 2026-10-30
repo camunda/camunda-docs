@@ -12,7 +12,7 @@ Send events from your BPMN process to an [Amazon EventBridge](https://aws.amazon
 
 ## About this connector
 
-The **Amazon EventBridge connector** is an outbound connector that integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/). Use it to publish events from your workflows, which EventBridge rules can then route to other AWS services or API destinations.
+The **Amazon EventBridge connector** is an outbound connector that integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/). Use it to publish events from your processes, which EventBridge rules can then route to other AWS services or API destinations. For example, use it to publish an order-created event that triggers a fulfillment rule in EventBridge.
 
 To receive events from Amazon EventBridge and start or continue a process, see the [Amazon EventBridge Webhook connector](./amazon-eventbridge-inbound.md).
 
@@ -20,7 +20,10 @@ For more information, refer to the [Amazon EventBridge documentation](https://do
 
 ## Prerequisites
 
-Before using the **Amazon EventBridge connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information. The access key and secret key aren't required if you use the default credentials chain (hybrid/Self-Managed only) or a saved AWS credential.
+To use the **Amazon EventBridge connector**, you need:
+
+- An AWS account with permission to send events to EventBridge. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
+- An access key and secret key of a user with the appropriate permissions. They aren't required if you use the default credentials chain (hybrid/Self-Managed only) or a saved AWS credential.
 
 :::note
 Use secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
@@ -32,22 +35,12 @@ Use secrets to avoid exposing your AWS IAM credentials as plain text. Refer to o
 
 ### Authentication
 
-Select an authentication method for the connector. Learn more about the available options in [AWS authentication types](#aws-authentication-types).
-
-| Property       | Type          | Required | Description                                                                                                                                                                                                                                                       | Example                         |
-| :------------- | :------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
-| AWS credential | Configuration | No       | Select a saved AWS credential, which can include a default region. When you select a credential, the **Authentication**, **Access key**, and **Secret key** fields are hidden. Learn more about [credentials](/components/hub/organization/credentials/index.md). |                                 |
-| Authentication | Dropdown      | Yes      | The AWS authentication strategy: **Credentials**, or **Default Credentials Chain (Hybrid/Self-Managed only)**. Shown when no AWS credential is selected.                                                                                                          | **Credentials**                 |
-| Access key     | String        | Yes      | IAM access key of a user with permission to send events to Amazon EventBridge. Shown when **Authentication** is **Credentials** and no AWS credential is selected.                                                                                                | `{{secrets.MY_AWS_ACCESS_KEY}}` |
-| Secret key     | String        | Yes      | IAM secret key of a user with permission to send events to Amazon EventBridge. Shown when **Authentication** is **Credentials** and no AWS credential is selected.                                                                                                | `{{secrets.MY_AWS_SECRET_KEY}}` |
-
-### AWS authentication types
-
-You can authenticate the connector with AWS in the following ways:
-
-- **Credentials**: Use this option if your AWS account administrator provided a pair of access and secret keys. It applies to SaaS and Self-Managed.
-- **Default Credentials Chain (Hybrid/Self-Managed only)**: Use this option if your system relies on an implicit authentication mechanism, such as role-based authentication, credentials supplied through environment variables, or files on the target host. It applies only to Self-Managed or hybrid distributions, and uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
-- **AWS credential**: Select a saved credential instead of entering authentication details on the task.
+| Property       | Type          | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Example                         |
+| :------------- | :------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
+| AWS credential | Configuration | No       | Select a saved AWS credential, which can include a default region. When you select a credential, the **Authentication**, **Access key**, and **Secret key** fields are hidden. Learn more about [credentials](/components/hub/organization/credentials/index.md).                                                                                                                                                                                                                                                                                                                                                                                                    |                                 |
+| Authentication | Dropdown      | Yes      | <p>The AWS authentication strategy:</p><ul><li><p>**Credentials** (SaaS/Self-Managed): Use this option if you have a pair of access and secret keys from your AWS account administrator.</p></li><li><p>**Default Credentials Chain (Hybrid/Self-Managed only)**: Use this option if your system relies on implicit authentication, such as role-based authentication, credentials supplied through environment variables, or files on the target host. It uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.</p></li></ul>Shown when no AWS credential is selected. | **Credentials**                 |
+| Access key     | String        | Yes      | IAM access key of a user with permission to send events to Amazon EventBridge. Shown when **Authentication** is **Credentials** and no AWS credential is selected.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | `{{secrets.MY_AWS_ACCESS_KEY}}` |
+| Secret key     | String        | Yes      | IAM secret key of a user with permission to send events to Amazon EventBridge. Shown when **Authentication** is **Credentials** and no AWS credential is selected.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | `{{secrets.MY_AWS_SECRET_KEY}}` |
 
 ### Region
 

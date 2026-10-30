@@ -12,7 +12,7 @@ Start a BPMN process instance, or continue a running one, when an event arrives 
 
 ## About this connector
 
-The **Amazon EventBridge Webhook connector** is an inbound connector that exposes a webhook URL. Amazon EventBridge delivers events to this URL through an API destination, and the connector triggers your process with the event.
+The **Amazon EventBridge Webhook connector** is an inbound connector that exposes a webhook URL. Amazon EventBridge delivers events to this URL through an API destination, and the connector triggers your process with the event. For example, use it to start a process instance when an EventBridge rule detects a new shipment.
 
 You can use the connector with the following BPMN elements:
 
@@ -39,7 +39,7 @@ Some properties apply only to certain BPMN elements. These are marked in the **D
 
 | Property       | Type     | Required | Description                                                                                                                                                                          | Example  |
 | :------------- | :------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- |
-| Webhook method | Dropdown | Yes      | The HTTP method the webhook accepts: **Any**, **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it is not essential to specify a method. Defaults to **Any**.             | **Post** |
+| Webhook method | Dropdown | Yes      | The HTTP method the webhook accepts: **Any**, **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it isn't essential to specify a method. Defaults to **Any**.              | **Post** |
 | Webhook ID     | String   | Yes      | The ID (path) of the webhook. It becomes part of the webhook URL. By default, the Modeler pre-fills a random value. Learn more in [Activate the connector](#activate-the-connector). |          |
 
 ### Authorization
@@ -91,7 +91,7 @@ Learn more about activation conditions and message IDs in [HTTP Webhook connecto
 
 ### Correlation
 
-Correlation applies to the **Message start event** (optional), **Intermediate catch event**, **Boundary event**, and **Receive task**. It does not apply to the **Start event**.
+Correlation applies to the **Message start event** (optional), **Intermediate catch event**, **Boundary event**, and **Receive task**. It doesn't apply to the **Start event**.
 
 | Property                  | Type     | Required | Description                                                                                                                                                                                                                                            | Example                         |
 | :------------------------ | :------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
@@ -148,9 +148,9 @@ to extract `customer_id` and `order_total` as `customerId` and `orderTotal`, use
 To configure Amazon EventBridge to send events to the connector, follow these steps:
 
 1. Go to the [AWS Management Console](https://aws.amazon.com/console/).
-2. Set the required permissions for EventBridge by navigating to: https://aws.permissions.cloud/iam/events.
+2. Set the required permissions for EventBridge by navigating to [EventBridge permissions](https://aws.permissions.cloud/iam/events).
 3. Access the [Amazon EventBridge](https://aws.amazon.com/eventbridge/) service.
-4. Click **Integration > API Destination**.
+4. Select **Integration > API Destination**.
 5. Switch to the **Connection** tab.
 6. Create a new connection with the required authorization type (basic, API key, OAuth).
 7. Create a new API destination with the following information:
@@ -165,5 +165,5 @@ To configure Amazon EventBridge to send events to the connector, follow these st
 ## Further resources
 
 - [Amazon EventBridge](https://aws.amazon.com/eventbridge/)
-- [Amazon EventBridge Connector](./amazon-eventbridge-outbound.md)
+- [Amazon EventBridge connector](./amazon-eventbridge-outbound.md)
 - [HTTP Webhook connector](../protocol/http-webhook.md)

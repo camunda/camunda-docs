@@ -11,7 +11,7 @@ Use the Amazon EventBridge Webhook connector to start a process instance or cont
 
 ## About this connector
 
-The **Amazon EventBridge Webhook connector** is an inbound connector that exposes a webhook URL. Amazon EventBridge sends events to this URL through an API destination, and the connector triggers your process.
+The **Amazon EventBridge Webhook connector** is an inbound connector that exposes a webhook URL. Amazon EventBridge sends events to this URL through an API destination, and the connector triggers your process. For example, use it to start a process instance when an EventBridge rule detects a new shipment.
 
 You can use the connector with the following BPMN elements:
 
@@ -39,10 +39,10 @@ Properties differ by BPMN element. Unless noted otherwise, a property is availab
 
 ### Webhook configuration
 
-| Property       | Type     | Required | Description                                                                                                                                                                                       | Example |
-| :------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------ |
-| Webhook method | Dropdown | Yes      | The HTTP method of the webhook: **Any**, **Get**, **Post**, **Put**, or **Delete**. Select **Any** if the method doesn't matter. The default is **Any**.                                          |         |
-| Webhook ID     | String   | Yes      | The ID (path) of the webhook. It is part of the webhook URL. By default, it is pre-filled with a random value. See [activating the connector](#activate-the-connector-by-deploying-your-diagram). |         |
+| Property       | Type     | Required | Description                                                                                                                                                                                     | Example |
+| :------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Webhook method | Dropdown | Yes      | The HTTP method of the webhook: **Any**, **Get**, **Post**, **Put**, or **Delete**. Select **Any** if the method doesn't matter. The default is **Any**.                                        |         |
+| Webhook ID     | String   | Yes      | The ID (path) of the webhook. It's part of the webhook URL. By default, it's pre-filled with a random value. See [activating the connector](#activate-the-connector-by-deploying-your-diagram). |         |
 
 ### Authorization
 
@@ -75,10 +75,10 @@ No authentication is required. Anyone can trigger the webhook without credential
 
 #### API key
 
-| Property        | Type   | Required | Description                                                                                                                                       | Example                                                                             |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------- |
-| API key         | String | Yes      | The API key that must be provided in the request to authenticate the webhook.                                                                     |                                                                                     |
-| API key locator | String | Yes      | A FEEL expression that extracts the API key from the request. It is evaluated in the connector runtime. The default is `=request.headers.apikey`. | `=split(request.headers.authorization, " ")[2]` or `request.headers.mycustomapikey` |
+| Property        | Type   | Required | Description                                                                                                                                      | Example                                                                             |
+| :-------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| API key         | String | Yes      | The API key that must be provided in the request to authenticate the webhook.                                                                    |                                                                                     |
+| API key locator | String | Yes      | A FEEL expression that extracts the API key from the request. It's evaluated in the connector runtime. The default is `=request.headers.apikey`. | `=split(request.headers.authorization, " ")[2]` or `request.headers.mycustomapikey` |
 
 ### Activation
 
@@ -113,13 +113,13 @@ the example condition triggers the connector only when the `detail-type` is `MyE
 
 ### Correlation
 
-Correlation applies to the message start event, intermediate catch event, boundary event, and receive task. It is not available for the start event. Learn more about [correlation](/components/connectors/use-connectors/index.md#correlation).
+Correlation applies to the message start event, intermediate catch event, boundary event, and receive task. It isn't available for the start event. Learn more about [correlation](/components/connectors/use-connectors/index.md#correlation).
 
 | Property                  | Type     | Required                                                                                              | Description                                                                                                                                                                                               | Example                         |
 | :------------------------ | :------- | :---------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
 | Correlation required      | Dropdown | Yes (message start event only)                                                                        | Indicates whether correlation is required: **Correlation not required** or **Correlation required**. Needed for event-based subprocess message start events. The default is **Correlation not required**. |                                 |
 | Correlation key (process) | String   | Yes, for all elements except the start event; for the message start event, if correlation is required | A FEEL expression that sets up the correlation key from process variables. Corresponds to the **Correlation key** property of a regular message catch event.                                              | `=myCorrelationKey`             |
-| Correlation key (payload) | String   | Yes, for all elements except the start event; for the message start event, if correlation is required | A FEEL expression that extracts the correlation key from the incoming event payload. It is evaluated in the connector runtime.                                                                            | `=request.body.detail.shipment` |
+| Correlation key (payload) | String   | Yes, for all elements except the start event; for the message start event, if correlation is required | A FEEL expression that extracts the correlation key from the incoming event payload. It's evaluated in the connector runtime.                                                                             | `=request.body.detail.shipment` |
 
 For example, to correlate by the `shipment` property in the `detail` of the event above, set **Correlation key (process)** to `=myCorrelationKey`, where `myCorrelationKey` is a process variable, and **Correlation key (payload)** to `=request.body.detail.shipment`.
 
@@ -163,9 +163,9 @@ The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 S
 To send events from Amazon EventBridge to the webhook, follow these steps:
 
 1. Go to the [AWS Management Console](https://aws.amazon.com/console/).
-2. Set the required permissions for EventBridge at https://aws.permissions.cloud/iam/events.
+2. Set the required permissions for EventBridge at [EventBridge permissions](https://aws.permissions.cloud/iam/events).
 3. Open [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
-4. Click **Integration > API Destination**.
+4. Select **Integration > API Destination**.
 5. Switch to the **Connection** tab.
 6. Create a new connection with the required authorization type (basic, API key, OAuth).
 7. Create a new API destination with the following information:

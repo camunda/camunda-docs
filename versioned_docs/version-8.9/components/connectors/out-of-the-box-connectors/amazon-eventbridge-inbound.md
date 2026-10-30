@@ -12,7 +12,7 @@ Start a process instance, or continue a running one, when an event arrives from 
 
 ## About this connector
 
-The **Amazon EventBridge Webhook connector** is an inbound connector that exposes a webhook endpoint. Amazon EventBridge sends events to this endpoint through an API destination, which triggers your BPMN process.
+The **Amazon EventBridge Webhook connector** is an inbound connector that exposes a webhook endpoint. Amazon EventBridge sends events to this endpoint through an API destination, which triggers your BPMN process. For example, use it to start a process instance when an EventBridge rule detects a new shipment.
 
 You can use the connector with the following BPMN elements:
 
@@ -36,10 +36,10 @@ Some properties apply only to specific BPMN elements. The description of these p
 
 ### Webhook configuration
 
-| Property       | Type     | Required | Description                                                                                                                                                                                                                                                 | Example |
-| :------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| Webhook method | Dropdown | Yes      | The HTTP method of the webhook: **Any**, **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it is not essential to specify a method for the webhook trigger. **Any** is selected by default.                                                      |         |
-| Webhook ID     | String   | Yes      | The ID that is part of the webhook URL. By default, it is pre-filled with a random value. See [webhook activation](/components/connectors/protocol/http-webhook.md#activate-the-http-webhook-connector-by-deploying-your-diagram) for how the URL is built. |         |
+| Property       | Type     | Required | Description                                                                                                                                                                                                                                                | Example |
+| :------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Webhook method | Dropdown | Yes      | The HTTP method of the webhook: **Any**, **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it isn't essential to specify a method for the webhook trigger. **Any** is selected by default.                                                      |         |
+| Webhook ID     | String   | Yes      | The ID that is part of the webhook URL. By default, it's pre-filled with a random value. See [webhook activation](/components/connectors/protocol/http-webhook.md#activate-the-http-webhook-connector-by-deploying-your-diagram) for how the URL is built. |         |
 
 ### Authorization
 
@@ -145,9 +145,9 @@ to extract `customer_id` and `order_total` as process variables `customerId` and
 To configure Amazon EventBridge, follow the steps below:
 
 1. Go to the [AWS Management Console](https://aws.amazon.com/console/).
-2. Set the required permissions for EventBridge by navigating to: https://aws.permissions.cloud/iam/events.
+2. Set the required permissions for EventBridge by navigating to [EventBridge permissions](https://aws.permissions.cloud/iam/events).
 3. Access Amazon EventBridge service by going to [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
-4. Click **Integration > API Destination**.
+4. Select **Integration > API Destination**.
 5. Switch to the **Connection** tab.
 6. Create a new connection with the required authorization type (basic, API key, OAuth).
 7. Create a new API destination with the following information:

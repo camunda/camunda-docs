@@ -12,7 +12,7 @@ Send events from your BPMN process to [Amazon EventBridge](https://aws.amazon.co
 
 ## About this connector
 
-The **Amazon EventBridge connector** is an outbound connector that integrates your BPMN service with Amazon EventBridge. It provides event-driven integration within your business processes by sending an event to an event bus.
+The **Amazon EventBridge connector** is an outbound connector that integrates your BPMN service with Amazon EventBridge. It provides event-driven integration within your business processes by sending an event to an event bus. For example, use it to publish an order-created event that triggers a fulfillment rule in EventBridge.
 
 To start a process instance from an event in Amazon EventBridge, see the [Amazon EventBridge Webhook connector](./amazon-eventbridge-inbound.md).
 
@@ -20,7 +20,10 @@ For more information, refer to the [Amazon EventBridge documentation](https://do
 
 ## Prerequisites
 
-Before using the **Amazon EventBridge connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
+To use the **Amazon EventBridge connector**, you need:
+
+- An AWS account with permission to send events to EventBridge. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
+- An access key and secret key of a user with the appropriate permissions.
 
 :::note
 Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
@@ -32,11 +35,11 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 ### Authentication
 
-| Property       | Type     | Required                                      | Description                                                                                                                                            | Example |
-| :------------- | :------- | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| Authentication | Dropdown | Yes                                           | The AWS authentication strategy: **Credentials**, or **Default Credentials Chain (Hybrid/Self-Managed only)**. **Credentials** is selected by default. |         |
-| Access key     | String   | Yes, if **Authentication** is **Credentials** | The access key of an IAM user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).                             |         |
-| Secret key     | String   | Yes, if **Authentication** is **Credentials** | The secret key of the IAM user with the access key above.                                                                                              |         |
+| Property       | Type     | Required                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Example |
+| :------------- | :------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Authentication | Dropdown | Yes                                           | <p>The AWS authentication strategy:</p><ul><li><p>**Credentials** (SaaS/Self-Managed): Use this option if you have a pair of access and secret keys from your AWS account administrator.</p></li><li><p>**Default Credentials Chain (Hybrid/Self-Managed only)**: Use this option if your system relies on implicit authentication, such as role-based authentication, credentials supplied through environment variables, or files on the target host. It uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.</p></li></ul>Shown when no AWS credential is selected. |         |
+| Access key     | String   | Yes, if **Authentication** is **Credentials** | The access key of an IAM user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |         |
+| Secret key     | String   | Yes, if **Authentication** is **Credentials** | The secret key of the IAM user with the access key above.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |         |
 
 #### AWS authentication types
 

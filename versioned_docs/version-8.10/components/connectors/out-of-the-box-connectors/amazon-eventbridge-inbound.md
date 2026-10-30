@@ -12,7 +12,9 @@ Start a process instance or continue a running one when an event from [Amazon Ev
 
 ## About this connector
 
-The **Amazon EventBridge Webhook connector** is an inbound connector that receives events from [Amazon EventBridge](https://aws.amazon.com/eventbridge/) through a webhook. You can use it with the following BPMN elements:
+The **Amazon EventBridge Webhook connector** is an inbound connector that receives events from [Amazon EventBridge](https://aws.amazon.com/eventbridge/) through a webhook. For example, use it to start a process instance when an EventBridge rule detects a new shipment.
+
+You can use it with the following BPMN elements:
 
 - Start event
 - Message start event
@@ -36,7 +38,7 @@ Some properties apply only to certain BPMN elements. The **Description** column 
 
 | Property       | Type     | Required | Description                                                                                                                                                                                                                                                                               | Example |
 | :------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| Webhook method | Dropdown | Yes      | The HTTP method that triggers the webhook: **Any** (default), **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it is not essential to specify a method for the webhook trigger.                                                                                               |         |
+| Webhook method | Dropdown | Yes      | The HTTP method that triggers the webhook: **Any** (default), **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it isn't essential to specify a method for the webhook trigger.                                                                                                |         |
 | Webhook ID     | String   | Yes      | The ID is part of the webhook URL. The URL has the pattern `http(s)://<base URL>/webhooks/<webhook ID>`. Learn how to [find the webhook URL](/components/connectors/protocol/http-webhook.md#activate-the-http-webhook-connector-by-deploying-your-diagram) after deploying your diagram. |         |
 
 ### Authorization
@@ -52,7 +54,7 @@ Some properties apply only to certain BPMN elements. The **Description** column 
 | Username                     | String   | Yes, for **Basic**   | The username to authenticate the webhook.                                                                                                                                   |                                                                                   |
 | Password                     | String   | Yes, for **Basic**   | The password for the username.                                                                                                                                              |                                                                                   |
 | API key                      | String   | Yes, for **API key** | The API key that the request must provide to authenticate the webhook.                                                                                                      |                                                                                   |
-| API key locator              | String   | Yes, for **API key** | A FEEL expression that extracts the API key from the request. It is evaluated in the connector runtime. The template default is `=request.headers.apikey`.                  | `=split(request.headers.authorization, " ")[2]`, `request.headers.mycustomapikey` |
+| API key locator              | String   | Yes, for **API key** | A FEEL expression that extracts the API key from the request. It's evaluated in the connector runtime. The template default is `=request.headers.apikey`.                   | `=split(request.headers.authorization, " ")[2]`, `request.headers.mycustomapikey` |
 
 ### Activation
 
@@ -95,7 +97,7 @@ The properties apply only to elements that correlate events to a running process
 | :------------------------ | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------- |
 | Correlation required      | Dropdown | Yes      | Whether correlation is required: **Correlation not required** (default) or **Correlation required**. Message start event only. Select **Correlation required** for event-based subprocess message start events. |                                      |
 | Correlation key (process) | String   | Yes      | A FEEL expression that defines the correlation key of the subscription. Intermediate catch event, boundary event, and receive task. For a message start event, shown when **Correlation required** is selected. | `=myCorrelationKey`                  |
-| Correlation key (payload) | String   | Yes      | A FEEL expression that extracts the correlation key from the incoming message. It is evaluated in the connector runtime. Same elements as **Correlation key (process)**.                                        | `=request.body.detail.shipment`      |
+| Correlation key (payload) | String   | Yes      | A FEEL expression that extracts the correlation key from the incoming message. It's evaluated in the connector runtime. Same elements as **Correlation key (process)**.                                         | `=request.body.detail.shipment`      |
 | Message ID expression     | String   | No       | An expression that extracts a unique identifier from the incoming message. Not available for the start event.                                                                                                   | `=request.body.detail.transactionId` |
 
 For example, if your correlation key is a process variable `myCorrelationKey`, and you want to correlate by the `shipment` property in the event `detail` shown in the [activation condition example](#activation-condition-example), set **Correlation key (process)** to `=myCorrelationKey` and **Correlation key (payload)** to `=request.body.detail.shipment`.
@@ -135,9 +137,9 @@ the following **Result expression** extracts the `customer_id` and `order_total`
 To configure Amazon EventBridge to send events to the connector, follow these steps:
 
 1. Go to the [AWS Management Console](https://aws.amazon.com/console/).
-2. Set the required permissions for EventBridge by navigating to: https://aws.permissions.cloud/iam/events.
+2. Set the required permissions for EventBridge by navigating to [EventBridge permissions](https://aws.permissions.cloud/iam/events).
 3. Access Amazon EventBridge service by going to [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
-4. Click **Integration > API Destination**.
+4. Select **Integration > API Destination**.
 5. Switch to the **Connection** tab.
 6. Create a new connection with the required authorization type (basic, API key, OAuth).
 7. Create a new API destination with the following information:
