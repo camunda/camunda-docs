@@ -10,6 +10,10 @@ Camunda Hub design system: neutral gray primary (orange is reserved for the
 logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
 */
 :root {
+  /* Brand purple, matching camunda.com marketing bands. Used by the
+     Build with Camunda page. */
+  --camunda-brand-purple: #5958d1; /* camunda.com purple-600 */
+  --camunda-brand-purple-tint: rgba(89, 88, 209, 0.1);
   --ifm-color-primary: #171717;
   --ifm-color-primary-dark: #141414;
   --ifm-color-primary-darker: #0f0f0f;

@@ -31,12 +31,16 @@
   --check-text: var(--ifm-font-color-base);
   --explore-bg: var(--ifm-background-surface-color);
   --explore-border-top: var(--ifm-color-emphasis-300);
+  --sand-bg: #f5f3ed; /* camunda.com sand-50 */
+  --sand-line: #dfddd8; /* camunda.com sand-100 */
   background: var(--page-bg);
   color: var(--page-color);
   min-height: 100vh;
 }
 
 [data-theme="dark"] .page {
+  --sand-bg: var(--ifm-background-surface-color);
+  --sand-line: var(--ifm-color-emphasis-300);
   --inline-code-bg: rgba(120, 169, 255, 0.12);
   --inline-code-color: #78a9ff;
   --card-hover-shadow: rgba(120, 169, 255, 0.1);
@@ -83,25 +87,51 @@
 .heroWrapper {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    #1c1a52 0%,
-    #100e36 25%,
-    #0d0b2a 50%,
-    #161616 100%
-  );
+  background-color: var(--camunda-brand-purple);
 }
 
+/* Orange/green arc stripe from the camunda.com CTA band, raised to run behind
+   the hero cards. The image field is purple-600, matching the wrapper; the
+   mask fades the bottom edge so no seam shows. */
+.heroWrapper::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  bottom: 200px;
+  width: max(100%, 1600px);
+  aspect-ratio: 2880 / 984;
+  transform: translateX(-50%);
+  background: url("/img/brand-purple-stripe-band.webp") center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+  pointer-events: none;
+}
+
+/* camunda.com purple band grid (37x53 tile), drawn over the stripe */
 .heroGlow {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(
-    ellipse 70% 55% at 50% 65%,
-    rgba(28, 26, 82, 0.55) 0%,
-    transparent 80%
-  );
+  background: url("/img/brand-purple-band-grid.svg") 0 0 / 37px 53px repeat;
+  opacity: 0.5;
+  /* Grid fades out toward the bottom, ahead of the page-bg fade */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+}
+
+/* Fade the hero's purple, grid and stripe into the page background */
+.heroWrapper::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background: linear-gradient(180deg, transparent 0%, var(--page-bg) 90%);
+  pointer-events: none;
 }
 
 .heroSparkles {
@@ -255,8 +285,8 @@
 
 .terminalHeroSub {
   font-size: 1.2rem;
-  font-weight: normal;
-  color: rgba(255, 255, 255, 0.78);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.5;
   margin: 0 auto;
   max-width: 620px;
@@ -411,67 +441,42 @@
   color: #3c4257;
 }
 
-[data-theme="dark"] .heroCard .heroCardCtaAlt {
-  background: #ffffff;
-  color: #1a1f36 !important;
-  border-color: #d9d9d9;
-}
-
-[data-theme="dark"] .heroCard .heroCardCtaAlt:hover {
-  background: #f5f6f8;
-  border-color: #0076d6;
-  color: #1a1f36 !important;
-}
-
-[data-theme="dark"] .heroCardIcon {
-  background: rgba(120, 169, 255, 0.18);
-}
-
 .heroCard:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 .heroCardPriority {
-  border: 2px solid #78a9ff;
+  border: 2px solid #ffffff;
   padding: 3rem 2rem 2rem;
   background:
     linear-gradient(
       155deg,
-      rgba(120, 169, 255, 0.08) 0%,
-      rgba(252, 93, 13, 0.04) 100%
+      var(--camunda-brand-purple-tint) 0%,
+      transparent 60%
     ),
     #ffffff;
   box-shadow:
-    0 20px 50px rgba(120, 169, 255, 0.28),
-    0 0 0 6px rgba(120, 169, 255, 0.06);
+    0 20px 50px rgba(16, 12, 64, 0.35),
+    0 0 0 6px rgba(255, 255, 255, 0.12);
 }
 
 .heroCardPriority:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 24px 60px rgba(120, 169, 255, 0.35),
-    0 0 0 6px rgba(120, 169, 255, 0.08);
+    0 24px 60px rgba(16, 12, 64, 0.45),
+    0 0 0 6px rgba(255, 255, 255, 0.18);
 }
 
 [data-theme="dark"] .heroCardPriority {
   background:
     linear-gradient(
       155deg,
-      rgba(120, 169, 255, 0.08) 0%,
-      rgba(252, 93, 13, 0.04) 100%
+      var(--camunda-brand-purple-tint) 0%,
+      transparent 60%
     ),
     #ffffff;
-  border-color: #78a9ff;
-  box-shadow:
-    0 20px 50px rgba(120, 169, 255, 0.28),
-    0 0 0 6px rgba(120, 169, 255, 0.08);
-}
-
-.heroCardPriority .heroCardIcon {
-  background: rgba(120, 169, 255, 0.2);
-  width: 56px;
-  height: 56px;
+  border-color: #ffffff;
 }
 
 .heroCardPriority .heroCardTitle {
@@ -481,18 +486,26 @@
 .heroCardPriority .heroCardCta {
   padding: 0.85rem 1.5rem;
   font-size: 1rem;
-  box-shadow: 0 6px 18px lab(38.4009% 52.6132 -92.3857 / 0.4);
 }
 
+/* Outside the always-white hero cards, invert in dark mode like
+   .button--primary does */
+[data-theme="dark"] .heroCardCta:not(.heroCard .heroCardCta) {
+  background: #fafafa;
+  color: #171717 !important;
+}
+
+[data-theme="dark"] .heroCardCta:not(.heroCard .heroCardCta):hover {
+  background: #e5e5e5;
+  color: #171717 !important;
+}
+
+/* Brand line icons (as on the docs banners). Cards stay white in both
+   themes, so the stroke is always near-black. */
 .heroCardIcon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: rgba(120, 169, 255, 0.12);
-  margin-bottom: 1rem;
+  color: #171717;
+  margin-bottom: 0.75rem;
 }
 
 .heroCardTitle {
@@ -541,10 +554,11 @@
   align-items: center;
   justify-content: center;
   padding: 0.7rem 1.5rem;
-  border-radius: 999px;
+  border-radius: var(--ifm-button-border-radius);
   font-size: 0.92rem;
   font-weight: 600;
-  background: lab(38.4009% 52.6132 -92.3857);
+  /* Black CTA, matching the landing-page link buttons */
+  background: #171717;
   color: #ffffff !important;
   text-decoration: none !important;
   transition:
@@ -554,8 +568,7 @@
 }
 
 .heroCardCta:hover {
-  background: lab(38.4009% 52.6132 -92.3857);
-  filter: brightness(1.1);
+  background: #333333;
   color: #ffffff !important;
   text-decoration: none !important;
   transform: translateY(-1px);
@@ -566,25 +579,37 @@
   align-items: center;
   justify-content: center;
   padding: 0.7rem 1.5rem;
-  border-radius: 999px;
+  border-radius: var(--ifm-button-border-radius);
   font-size: 0.92rem;
   font-weight: 600;
-  background: var(--card-bg);
-  color: var(--heading-color) !important;
-  border: 1px solid var(--card-border);
+  /* Outline partner to the black .heroCardCta. Hero cards stay white in both
+     themes, so the colours are fixed. */
+  background: transparent;
+  color: #171717 !important;
+  border: 1px solid #171717;
   text-decoration: none !important;
   transition:
     background 0.15s,
-    border-color 0.15s,
+    color 0.15s,
     transform 0.15s;
 }
 
 .heroCardCtaAlt:hover {
-  background: var(--section-alt-bg);
-  border-color: var(--card-hover-border);
-  color: var(--heading-color) !important;
+  background: #171717;
+  color: #ffffff !important;
   text-decoration: none !important;
   transform: translateY(-1px);
+}
+
+/* Outside the always-white hero cards, flip to a light outline in dark mode */
+[data-theme="dark"] .heroCardCtaAlt:not(.heroCard .heroCardCtaAlt) {
+  border-color: #fafafa;
+  color: #fafafa !important;
+}
+
+[data-theme="dark"] .heroCardCtaAlt:not(.heroCard .heroCardCtaAlt):hover {
+  background: #fafafa;
+  color: #171717 !important;
 }
 
 /* CLI install detail block */
@@ -730,22 +755,20 @@
 }
 
 .pillSeparator {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   margin: 6rem 0 4rem;
 }
 
-.pillSeparator::before {
+/* Rules either side of the pill, so the line never crosses its label */
+.pillSeparator::before,
+.pillSeparator::after {
   content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  flex: 1;
   height: 1px;
   background: var(--ifm-color-emphasis-300);
-  z-index: 0;
 }
 
 .sectionPill {
@@ -753,13 +776,18 @@
   z-index: 1;
   display: inline-block;
   padding: 0.4rem 1rem;
-  background: var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-800);
+  background: var(--camunda-brand-purple-tint);
+  color: var(--camunda-brand-purple);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 999px;
+}
+
+[data-theme="dark"] .sectionPill {
+  background: rgba(165, 158, 255, 0.16);
+  color: #c7c2ff;
 }
 
 .cliInstallSection {
@@ -768,77 +796,74 @@
 }
 
 /* Dark bg "More ways to run" section */
+/* Bottom sections ("More ways to run", downloads): camunda.com sand-50 with
+   white cards. Dark mode falls back to the surface colour. */
 .darkSection {
-  background: #1c1a52 !important;
-  color: rgba(255, 255, 255, 0.92);
+  background: var(--sand-bg) !important;
   margin-top: 0 !important;
-  border-top: 1px solid var(--ifm-color-emphasis-300) !important;
+  border-top: none !important;
 }
 
-[data-theme="dark"] .darkSection {
-  background: var(--ifm-background-color) !important;
-  border-top-color: var(--ifm-color-emphasis-300) !important;
+/* Hairline where the white page meets the first sand section, as on
+   camunda.com (sand-100) */
+.moreSection.darkSection:not(.noTopBorder) {
+  border-top: 1px solid var(--sand-line) !important;
 }
 
-.darkSection .sectionTitle {
-  color: #ffffff;
+/* Cards in the bottom sections match the AO cards (_ao-table.css) */
+.darkSection .wayCard,
+.exploreSection .deployCard,
+.exploreSection .archBox,
+.exploreSection .agenticCard,
+.exploreSection .exploreCard {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.darkSection .sectionSub {
-  color: rgba(255, 255, 255, 0.78);
+.darkSection .wayCard:hover,
+.exploreSection .deployCard:hover,
+.exploreSection .archBox:hover,
+.exploreSection .agenticCard:hover,
+.exploreSection .exploreCard:hover {
+  transform: translateY(-5px);
+  border-color: #d9d9d9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.darkSection .wayCard {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.9) !important;
+.darkSection .wayCard p,
+.exploreSection .deployCard p,
+.exploreSection .agenticCard p,
+.exploreSection .exploreCard p {
+  color: #555;
 }
 
-.darkSection .wayCard:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #78a9ff;
-  color: #ffffff !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+[data-theme="dark"] .darkSection .wayCard,
+[data-theme="dark"] .exploreSection .deployCard,
+[data-theme="dark"] .exploreSection .archBox,
+[data-theme="dark"] .exploreSection .agenticCard,
+[data-theme="dark"] .exploreSection .exploreCard {
+  background: #1c1c1c;
+  border-color: #3b3a3a;
+  box-shadow: 0 8px 16px 4px #00000033;
 }
 
-.darkSection .wayCard h3 {
-  color: #ffffff;
-}
-
-.darkSection .wayCard p {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.darkSection .wayCard .inlineCode,
-.darkSection .wayCard code {
-  background: rgba(120, 169, 255, 0.18);
-  color: #c8e1ff;
-}
-
-.darkSection.exploreSectionLast {
-  background: linear-gradient(
-    180deg,
-    #1c1a52 0%,
-    #100e36 35%,
-    #0d0b2a 70%,
-    #161616 100%
-  ) !important;
-}
-
-[data-theme="dark"] .darkSection.exploreSectionLast {
-  background: var(--ifm-background-color) !important;
-}
-
-.darkSection .heroCardCtaAlt {
+[data-theme="dark"] .darkSection .wayCard:hover,
+[data-theme="dark"] .exploreSection .deployCard:hover,
+[data-theme="dark"] .exploreSection .archBox:hover,
+[data-theme="dark"] .exploreSection .agenticCard:hover,
+[data-theme="dark"] .exploreSection .exploreCard:hover {
   background: transparent;
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #ffffff !important;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 8px 16px 4px #78a9ff33;
 }
 
-.darkSection .heroCardCtaAlt:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #ffffff;
-  color: #ffffff !important;
+[data-theme="dark"] .darkSection .wayCard p,
+[data-theme="dark"] .exploreSection .deployCard p,
+[data-theme="dark"] .exploreSection .agenticCard p,
+[data-theme="dark"] .exploreSection .exploreCard p {
+  color: #c6c6c6;
 }
 
 /* Get started with Camunda downloads section bg */
@@ -1003,31 +1028,18 @@
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.8rem;
-  background: linear-gradient(
-    90deg,
-    #6366f1 0%,
-    #6366f1 35%,
-    #8b5cf6 50%,
-    #6366f1 65%,
-    #6366f1 100%
-  );
-  background-size: 250% 100%;
-  animation: shimmerBadge 8s linear infinite;
-  color: #ffffff;
+  padding: 0.3rem 0.75rem;
+  /* Outline style. White fill keeps the label readable where the badge
+     straddles the purple hero and the card edge. */
+  background: #ffffff;
+  border: 1px solid var(--camunda-brand-purple);
+  color: var(--camunda-brand-purple);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
   white-space: nowrap;
-}
-
-@keyframes shimmerBadge {
-  to {
-    background-position: -200% 0;
-  }
 }
 
 .downloadHighlight .recommendedBadge {
@@ -2240,7 +2252,18 @@
   justify-content: center;
   margin-top: 4rem;
   padding-top: 1rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 5rem;
+}
+
+.aiExamplesCta .heroCardCta {
+  padding: 1.25rem 3rem;
+  font-size: 1.3rem;
+  gap: 0.5rem;
+}
+
+.aiExamplesCta .heroCardCta svg {
+  width: 20px;
+  height: 20px;
 }
 
 .commandGridCta {
@@ -2385,84 +2408,14 @@
   flex-shrink: 0;
 }
 
-/* ─── Explore docs (dark variant matching darkSection) ─── */
+/* ─── Explore docs (sand, matching darkSection) ─── */
 .exploreSection {
-  background: #1c1a52;
-  color: rgba(255, 255, 255, 0.92);
+  background: var(--sand-bg);
   padding: 3rem 0 4rem;
 }
 
-[data-theme="dark"] .exploreSection {
-  background: var(--ifm-background-color);
-}
-
 .exploreSectionLast {
-  background: linear-gradient(
-    180deg,
-    #1c1a52 0%,
-    #100e36 35%,
-    #0d0b2a 70%,
-    #161616 100%
-  );
-}
-
-[data-theme="dark"] .exploreSectionLast {
-  background: var(--ifm-background-color);
-}
-
-.exploreSection .sectionTitle {
-  color: #ffffff;
-}
-
-.exploreSection .sectionSub {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-.exploreSection .deployCard,
-.exploreSection .archBox,
-.exploreSection .agenticCard,
-.exploreSection .exploreCard {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.exploreSection .deployCard:hover,
-.exploreSection .archBox:hover,
-.exploreSection .agenticCard:hover,
-.exploreSection .exploreCard:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #78a9ff;
-  color: #ffffff !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
-
-.exploreSection .deployCard h3,
-.exploreSection .deployCard h4,
-.exploreSection .archBox strong,
-.exploreSection .agenticCard h3,
-.exploreSection .agenticCard h4,
-.exploreSection .exploreCard h3,
-.exploreSection .exploreCard h4,
-.exploreSection .archGroupTitle {
-  color: #ffffff;
-}
-
-.exploreSection .deployCard p,
-.exploreSection .archBox span,
-.exploreSection .agenticCard p,
-.exploreSection .exploreCard p {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.exploreSection .archBoxPrimary {
-  background: rgba(120, 169, 255, 0.12);
-  border-color: #78a9ff;
-}
-
-.exploreSection .archGroupHighlight {
-  background: rgba(120, 169, 255, 0.06);
-  border-color: #78a9ff;
+  background: var(--sand-bg);
 }
 
 /* ─── Agentic orchestration ─── */
