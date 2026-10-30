@@ -87,6 +87,17 @@
   height: auto;
 }
 
+/* Dark mode: drop the purple hero field, stripe, grid and fade */
+[data-theme="dark"] .downloadsHero {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .downloadsHero::before,
+[data-theme="dark"] .downloadsHero::after,
+[data-theme="dark"] .downloadsHeroGlow {
+  display: none;
+}
+
 /* ─── OS Tabs ─── */
 .osTabs {
   display: flex;

@@ -636,7 +636,7 @@ function Downloads() {
       <div className={bwcStyles.page}>
         {/* ─── Hero ─── */}
         <div className={clsx(bwcStyles.heroWrapper, styles.downloadsHero)}>
-          <div className={bwcStyles.heroGlow} />
+          <div className={clsx(bwcStyles.heroGlow, styles.downloadsHeroGlow)} />
           <svg
             className={styles.heroBgIcon}
             viewBox="0 0 24 24"
