@@ -12,7 +12,7 @@ Use the Amazon SNS inbound connector to start a process instance, or continue a 
 
 ## About this connector
 
-The **Amazon SNS inbound connector** receives messages from Amazon SNS through an HTTPS subscription. It exposes a webhook URL that you register as the endpoint of an SNS subscription, and it can start or continue a process when a notification arrives.
+The **Amazon SNS inbound connector** receives messages from Amazon SNS through an HTTPS subscription. It exposes a webhook URL that you register as the endpoint of an SNS subscription, and it can start or continue a process when a notification arrives. For example, use it to start an incident-handling process when a monitoring topic publishes an alert.
 
 You can use the connector with a **Start Event**, **Message Start Event**, **Intermediate Catch Event**, **Boundary Event**, or **Receive Task**. To publish messages to a topic from a process, use the [Amazon SNS outbound connector](./amazon-sns-outbound.md).
 
@@ -41,7 +41,7 @@ To use the **Amazon SNS inbound connector**, you need an Amazon SNS topic and pe
 
 ### Correlation
 
-The **Correlation** section configures message correlation. It is not available for the plain **Start Event** template, because plain start events are triggered by process instance creation and don't rely on message correlation.
+The **Correlation** section configures message correlation. It's not available for the plain **Start Event** template, because plain start events are triggered by process instance creation and don't rely on message correlation.
 
 | Property                        | Type     | Required | Description                                                                                                                                                                                                                                                                                              | Example                                           |
 | :------------------------------ | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------ |
@@ -61,7 +61,7 @@ Learn more about correlation keys in the [messages guide](/components/concepts/m
 
 ### Deduplication
 
-Not available for the plain **Start Event**.
+The **Deduplication** section controls how the connector identifies duplicate events. It's not available for the plain **Start Event**.
 
 | Property         | Type    | Required                  | Description                                                                                                            | Example |
 | :--------------- | :------ | :------------------------ | :--------------------------------------------------------------------------------------------------------------------- | :------ |
@@ -94,7 +94,8 @@ In that case, Modeler doesn't display the connector deployments and URLs.
 3. Select the topic, and then select **Create subscription**.
 4. In the **Protocol** dropdown list, select **HTTPS**.
 5. In the **Endpoint** field, paste the URL from the **Webhooks** tab of your BPMN diagram, and then select **Create subscription**.
-6. A confirmation message is displayed. Select **Close**. The **Status** of your new subscription shows **PendingConfirmation**. Shortly after, the connector confirms the subscription, assuming **Allow to receive messages from topic(s)** allows the SNS topic ARN.
+6. When the confirmation message appears, select **Close**. The **Status** of your new subscription shows **PendingConfirmation**.
+7. Wait for the connector to confirm the subscription. It confirms if **Allow to receive messages from topic(s)** allows the SNS topic ARN.
 
 ## Security considerations
 
@@ -129,7 +130,7 @@ For example, the following expression extracts the message and the subject of an
 
 The following example shows a subscription confirmation request that Amazon SNS sends when you create a subscription:
 
-```
+```http
 POST https://<base URL>/inbound/<subscription ID>
 
 connection: close
@@ -158,7 +159,7 @@ x-amz-sns-message-type: SubscriptionConfirmation
 
 The following example shows a notification:
 
-```
+```http
 POST https://<base URL>/inbound/<subscription ID>
 
 connection: close
@@ -191,3 +192,9 @@ x-amz-sns-message-type: Notification
 ```
 
 <ErrorHandling />
+
+## Further resources
+
+- [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+- [Amazon SNS HTTP/HTTPS endpoints](https://docs.aws.amazon.com/sns/latest/dg/sns-http-https-endpoint-as-subscriber.html)
+- [Amazon SNS outbound connector](./amazon-sns-outbound.md)
