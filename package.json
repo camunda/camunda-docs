@@ -51,10 +51,10 @@
     "@bpmn-io/form-js": "^2.0.0",
     "@camunda8/docusaurus-plugin-openapi-docs": "4.6.9",
     "@camunda8/docusaurus-theme-openapi-docs": "4.6.9",
-    "@docusaurus/core": "~3.9.2",
-    "@docusaurus/faster": "~3.9.2",
-    "@docusaurus/preset-classic": "~3.9.2",
-    "@docusaurus/theme-mermaid": "~3.9.2",
+    "@docusaurus/core": "~3.10.0",
+    "@docusaurus/faster": "~3.10.0",
+    "@docusaurus/preset-classic": "~3.10.0",
+    "@docusaurus/theme-mermaid": "~3.10.0",
     "@iconify-json/logos": "^1.2.11",
     "@mdx-js/react": "^3.1.0",
     "@saucelabs/theme-github-codeblock": "^0.3.0",
@@ -85,7 +85,7 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/jest": "^30.0.0",
-    "docusaurus-plugin-llms": "^0.4.0",
+    "docusaurus-plugin-llms": "^0.6.0",
     "husky": "^9.1.7",
     "jest": "^30.0.0",
     "lint-staged": "^17.0.0",
@@ -101,12 +101,12 @@
   "overrides": {
     "react-live": ">=3.1.1 <4.2.0",
     "postman-code-generators": "2.1.0",
-    "@docusaurus/plugin-content-docs": "3.9.2"
+    "@docusaurus/plugin-content-docs": "3.10.2"
   },
   "resolutions": {
     "react-live": ">=3.1.1 <4.2.0",
     "postman-code-generators": "2.1.0",
-    "@docusaurus/plugin-content-docs": "3.9.2"
+    "@docusaurus/plugin-content-docs": "3.10.2"
   },
   "engines": {
     "node": ">=18.0"
