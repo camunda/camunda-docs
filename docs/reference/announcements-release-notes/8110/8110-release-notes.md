@@ -49,10 +49,10 @@ Unlike pinning, adding time keeps the clock running from the new time, so job ti
 
 <!-- https://github.com/camunda/camunda/issues/64644 -->
 
-With variable protection, you can mark a process variable as sensitive when you create a process instance. The `REDACT` protection mode irrecoverably replaces the variable value before it reaches secondary storage, so the value is never readable through the API. Variable search results show which variables are protected.
+With variable protection, you can mark a process variable as sensitive when you create a process instance. The `REDACT` protection mode irrecoverably replaces the variable value before it is exported to secondary storage, so the value is not readable through search or variable endpoints. Variable search results show which variables are protected.
 
 :::warning
-In 8.11.0-alpha1, protection is incomplete. Variable values can still appear in other places, such as job, message, and signal payloads or incident messages. You can set protection only when you create a process instance.
+In 8.11.0-alpha1, protection is incomplete. Variable values can still appear in other places, such as job, message, and signal payloads or incident messages.
 :::
 
 - [Variable protection](/components/concepts/variable-protection.md)
