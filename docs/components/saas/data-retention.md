@@ -15,6 +15,8 @@ The following time-to-live settings are configured in SaaS for each application.
 - **Zeebe**: 7 days
 - **Usage metrics**: 730 days (2 years)
 
+Organization [activity](/components/saas/organization/view-organization-activity.md) entries are not part of this list. Camunda keeps them indefinitely.
+
 If there are specific requirements for your use-case, [reach out to us](/reference/contact.md) to discuss your data retention needs under an Enterprise plan.
 
 ## Additional information
