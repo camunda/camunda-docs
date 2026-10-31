@@ -24,7 +24,7 @@ permissions:
 jobs:
   publish:
     runs-on: gcp-core-16-release
-    container: node:24
+    container: node:26
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Dependencies
@@ -61,7 +61,7 @@ jobs:
   # we can remove the old server deployment job.
   publish-aws:
     runs-on: gcp-core-16-release
-    container: node:24
+    container: node:26
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Dependencies
