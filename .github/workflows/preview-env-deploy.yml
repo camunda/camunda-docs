@@ -21,7 +21,7 @@ jobs:
     # by a job steps may starve the runner agent to the point where communication is lost,
     # forcing GitHub to consider it offline. To prevent this, we can use a separate container
     # with its own resources for the job execution.
-    container: node:24
+    container: node:26
 
     name: build-docs
     steps:
