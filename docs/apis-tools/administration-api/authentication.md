@@ -85,7 +85,7 @@ Client credentials are created for an organization, and therefore can access all
 
 A client can have one or multiple permissions from the following groups:
 
-- **Cluster**: [Manage your clusters](/components/saas/clusters/create-cluster.md).
+- **Cluster**: [Manage your clusters](/docs/components/saas/clusters/create-cluster.md) ([View live docs page](https://docs.camunda.io/docs/components/saas/clusters/create-cluster/))
 - **Zeebe Client**: [Manage API clients](/components/saas/clusters/manage-api-clients.md) for your cluster.
 - **Hub API**: Interact with the [Camunda Hub API](../hub-api-saas/overview.md).
 - **IP allowlist**: Configure [IP allowlist](/components/saas/clusters/manage-ip-allowlists.md) rules.
