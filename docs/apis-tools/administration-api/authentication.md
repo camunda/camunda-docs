@@ -85,13 +85,13 @@ Client credentials are created for an organization, and therefore can access all
 
 A client can have one or multiple permissions from the following groups:
 
-- **Cluster**: [Manage your clusters](/components/saas/clusters/create-cluster.md).
-- **Zeebe Client**: [Manage API clients](/components/saas/clusters/manage-api-clients.md) for your cluster.
+- **Cluster**: [Manage your clusters](/docs/components/saas/clusters/create-cluster.md).
+- **Zeebe Client**: [Manage API clients](/docs/components/saas/clusters/manage-api-clients.md) for your cluster.
 - **Hub API**: Interact with the [Camunda Hub API](../hub-api-saas/overview.md).
-- **IP allowlist**: Configure [IP allowlist](/components/saas/clusters/manage-ip-allowlists.md) rules.
-- **Connector Secrets**: [Manage secrets](/components/saas/clusters/manage-secrets.md) of your clusters.
-- **Members**: [Manage users](/components/hub/organization/users-and-roles.md) in your organization.
-- **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
+- **IP allowlist**: Configure [IP allowlist](/docs/components/saas/clusters/manage-ip-allowlists.md) rules.
+- **Connector Secrets**: [Manage secrets](/docs/components/saas/clusters/manage-secrets.md) of your clusters.
+- **Members**: [Manage users](/docs/components/hub/organization/users-and-roles.md) in your organization.
+- **Backups**: Manage [backups](/docs/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
 
