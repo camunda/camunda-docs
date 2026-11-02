@@ -79,7 +79,7 @@ Bitnami Premium images offer key advantages over open-source variants:
 
 ## Dependency and supply-chain considerations
 
-The Bitnami subcharts bundled in the Camunda Helm chart depend on Debian-based container images maintained and distributed by Bitnami (Broadcom). Camunda does not build or control these upstream images.
+The Bitnami subcharts bundled in the Camunda Helm chart depend on Debian-based container images maintained and distributed by Bitnami (Broadcom). Camunda does not build or control these upstream images. The exception is the Keycloak image: Camunda builds `registry.camunda.cloud/keycloak-ee/keycloak` on top of the Bitnami Premium image on a best-effort basis, with no SLA or patch guarantee. For details, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
 
 Key points to be aware of:
 
@@ -185,10 +185,11 @@ Working with Bitnami images requires understanding CVE (Common Vulnerabilities a
 
 Security responsibilities differ by component:
 
-| Component Type         | Examples                                                 | Security Responsibility | CVE Handling                                                                                   |
-| ---------------------- | -------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------- |
-| **Camunda components** | Zeebe, Operate, Tasklist, Optimize, Connectors, Identity | Camunda                 | Regular updates and patches in Camunda releases. See [Security notices](/reference/notices.md) |
-| **Vendor components**  | Bitnami PostgreSQL, Elasticsearch, Keycloak              | Bitnami (Broadcom)      | Camunda facilitates upgrades to latest vendor versions                                         |
+| Component Type         | Examples                                                 | Security Responsibility                    | CVE Handling                                                                                                                                                    |
+| ---------------------- | -------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda components** | Zeebe, Operate, Tasklist, Optimize, Connectors, Identity | Camunda                                    | Regular updates and patches in Camunda releases. See [Security notices](/reference/notices.md)                                                                  |
+| **Vendor components**  | Bitnami PostgreSQL, Elasticsearch                        | Bitnami (Broadcom)                         | Camunda facilitates upgrades to latest vendor versions                                                                                                          |
+| **Keycloak**           | Keycloak (any image)                                     | You (Keycloak community project for fixes) | See [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md) |
 
 If a vendor determines a vulnerability has no practical impact, Camunda may accept that assessment or migrate to alternatives.
 
@@ -229,7 +230,7 @@ When using Bitnami images, consider these constraints:
 
 | Camunda version | Bitnami subchart status                                        |
 | --------------- | -------------------------------------------------------------- |
-| 8.7 and earlier | Fully supported                                                |
+| 8.7 and earlier | Functional; the public Bitnami images receive no updates       |
 | 8.8             | Functional; production use discouraged for new deployments     |
 | 8.9             | Deprecated; disabled by default in new installs                |
 | 8.10            | **Removed** — subcharts are not available in Helm chart `15.x` |

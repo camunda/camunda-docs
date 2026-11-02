@@ -42,56 +42,50 @@ export const fundamentalCards = [
     description: "Understand how Camunda models AI agents.",
   },
   {
-    link: "../ao-design/",
-    title: "Design and architecture",
-    image: IconAoDesignImg,
-    description: "Plan and design your agentic orchestration solutions.",
-  },
-  {
     link: "../agent-states-and-metrics/",
     title: "States and usage metrics",
     image: IconAoDesignImg,
     description: "Understand agent states and usage metrics.",
   },
-  {
-    link: "../evaluate-agents/evaluate-agents-overview/",
-    title: "Evaluate AI agents",
-    image: IconTest,
-    description:
-      "Evaluate the performance and effectiveness of your AI agents.",
-  },
 ];
 
-// Fundamentals cards on introduction page
-export const fundamentalCards_monitoring = [
+// Evaluate cards on introduction page
+export const evaluateCards = [
   {
-    link: "../monitor-ai-agents/",
+    link: "../evaluate-agents/monitor-ai-agents/",
     title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
   },
   {
-    link: "../detect-off-rail-agents/",
+    link: "../evaluate-agents/detect-off-rail-agents/",
     title: "Detect off-rail agents",
     image: IconAoAgentImg,
     description: "Identify a stuck or looping AI agent before it fails.",
   },
   {
-    link: "../analyze-ai-agents/",
+    link: "../evaluate-agents/analyze-ai-agents/",
     title: "Analyze with Optimize",
     image: IconOptimize,
     description: "Analyze your AI agents with Optimize.",
   },
   {
-    link: "../test-ai-agents/",
+    link: "../evaluate-agents/test-ai-agents/",
     title: "Test with CPT",
     image: IconTest,
     description: "Test your AI agents with Camunda Process Test.",
   },
 ];
 
-// Recommendation cards on introduction page
-export const recommendationCards = [
+// Build cards on introduction page
+export const buildCards = [
+  {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
+  },
   {
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
@@ -116,6 +110,16 @@ export const recommendationCards = [
     image: IconMCP,
     description:
       "Configure a BPMN process as a callable MCP tool for AI agents.",
+  },
+];
+
+// Best practices cards on introduction page
+export const bestPracticeCards = [
+  {
+    link: "../ao-design/",
+    title: "Design and architecture",
+    image: IconAoDesignImg,
+    description: "Plan and design your agentic orchestration solutions.",
   },
   {
     link: "../choose-right-model-agentic/",

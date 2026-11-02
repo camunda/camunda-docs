@@ -18,7 +18,7 @@ The governance process on the Camunda cluster is started as part of `/process-os
 
 ## Phases and milestones
 
-![Governance process overview showing phases and milestones](../img/governance-process-overview.png)
+<div bpmn="components/process-os-harness/governance-process-overview.bpmn" />
 
 The engagement runs through four phases in order. The output of one phase is the input to the next.
 
@@ -33,7 +33,7 @@ The engagement runs through four phases in order. The output of one phase is the
 
 Each phase starts with defining the run configuration for the [Builder task](builder-task.md). After the Builder task is complete, subject matter experts (SMEs) review the results. The Builder then evaluates the consolidated review feedback and determines whether another iteration is required. You can adjust the configuration for the next iteration.
 
-![Phase cycle with Builder task, SME review, and iteration decision](../img/phase-cycle.png)
+<div bpmn="components/process-os-harness/phase-cycle.bpmn" />
 
 ## Gates and tasks
 

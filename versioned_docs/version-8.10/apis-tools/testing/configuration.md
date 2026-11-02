@@ -64,6 +64,9 @@ speed up the test execution.
 
 By default, the runtime uses the same version of the Camunda Docker image as the Maven module. The Connectors Docker image doesn't follow the Camunda version. The runtime uses a fixed, published Connectors version for each CPT release. To use another version, set `connectors-docker-image-version`. You can change the Docker images and other runtime properties in the following way.
 
+If you change the version of the Camunda Docker image, use the same version as CPT or later. CPT doesn't support older
+Camunda runtimes.
+
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
@@ -648,7 +651,8 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 
 ### Prerequisites
 
-- Install a Camunda 8 runtime, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+- Install a Camunda 8 runtime of the same version as CPT or later, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+  CPT doesn't support older Camunda runtimes.
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
 - Enable the management clock endpoint to allow clock manipulations
 
