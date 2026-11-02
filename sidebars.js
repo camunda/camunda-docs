@@ -191,6 +191,7 @@ module.exports = {
                 "components/process-os-harness/best-practices/data-handling",
               ],
             },
+            "components/process-os-harness/changelog",
           ],
         },
       ],

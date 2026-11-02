@@ -336,8 +336,8 @@ components:
       properties:
         status:
           description: |
-            Filter by usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`
-            (see the description of the `usage.status` response field for their meaning).
+            Filter by usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`,
+            `RETIRED` (see the description of the `usage.status` response field for their meaning).
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
 
@@ -414,13 +414,15 @@ components:
             * `UP_TO_DATE`: The asset is active (= neither unpublished nor deprecated), and only its current latest version is used.
             * `UPDATE_AVAILABLE`: The asset is active, but at least one usage is on an older version.
             * `DEPRECATED`: The asset is unpublished, or its latest version is deprecated, but it is still in use. Takes priority over `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).
-            * `UNUSED`: The asset is not used at all. Takes priority over `DEPRECATED` (for unpublished/deprecated assets that are not used).
+            * `UNUSED`: The asset is active (= neither unpublished nor deprecated), but not used at all.
+            * `RETIRED`: The asset is unpublished, or its latest version is deprecated, and it is not used at all. Takes priority over `UNUSED` (for unpublished/deprecated assets that are not used).
           type: string
           enum:
             - UP_TO_DATE
             - UPDATE_AVAILABLE
             - DEPRECATED
             - UNUSED
+            - RETIRED
         workspaceCount:
           description: The number of distinct workspaces in which the asset is used.
           type: integer
