@@ -7,7 +7,7 @@ description: "Keep sensitive process variable values, such as card numbers or pe
 
 Process [variables](./variables.md) often carry sensitive data, such as card numbers or personal details. By default, variable values are exported to secondary storage, such as Elasticsearch, OpenSearch, or an RDBMS, where anyone with access to that storage or to the search APIs can read them.
 
-With variable protection, you mark individual variables as sensitive so their values are not exported to secondary storage. You keep using the variables in your process, and you can still see which variables exist and which are protected.
+With variable protection, you mark individual variables as sensitive so their values aren't exported to secondary storage. You keep using the variables in your process, and you can still see which variables exist and which are protected.
 
 Variable protection is available from 8.11.0-alpha1 as an alpha feature.
 
@@ -15,13 +15,13 @@ Variable protection is available from 8.11.0-alpha1 as an alpha feature.
 In 8.11.0-alpha1, variable protection is incomplete. Redaction applies to variables that you read through the variable and user task variable endpoints, but values can still appear in other places. Before you rely on this feature for sensitive data, see [Known issues and planned changes](#known-issues-and-planned-changes).
 :::
 
-## REDACT
+## Redact variable values
 
 The `REDACT` protection mode irrecoverably replaces the value of a variable before it is exported to secondary storage. Searching or reading the variable through the API returns the redacted value, not the original.
 
 The variable itself stays visible in secondary storage, only without its value. For example, you can still see its `name`, `variableKey`, `scopeKey`, `processInstanceKey`, `tenantId`, and `metadata.protectionModes`.
 
-The original value is not removed from the engine. Components that work with primary storage still receive it, for example a job worker that activates a job and gets the process variables.
+The original value isn't removed from the engine. Components that work with primary storage still receive it, for example a job worker that activates a job and gets the process variables.
 
 ### Protect a variable when you create a process instance
 
@@ -44,11 +44,11 @@ The following request creates a process instance with two variables and protects
 }
 ```
 
-| Property                                   | Description                                                                                                                                                                                           |
-| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `variables`                                | The variables to set on the process instance, as a map from variable name to value.                                                                                                                   |
-| `variablesMetadata`                        | Optional. A map from variable name to its metadata. Variables without an entry are not protected. Every name must also be in `variables`, otherwise the request is rejected with a bad request error. |
-| `variablesMetadata.<name>.protectionModes` | The protection modes to apply to the variable. Set it to `["REDACT"]`.                                                                                                                                |
+| Property                                   | Description                                                                                                                                                                                          |
+| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `variables`                                | The variables to set on the process instance, as a map from variable name to value.                                                                                                                  |
+| `variablesMetadata`                        | Optional. A map from variable name to its metadata. Variables without an entry aren't protected. Every name must also be in `variables`, otherwise the request is rejected with a bad request error. |
+| `variablesMetadata.<name>.protectionModes` | The protection modes to apply to the variable. Set it to `["REDACT"]`.                                                                                                                               |
 
 ### Update variables
 
@@ -71,7 +71,7 @@ The following request sets a new value for `cardNumber` and protects it:
 }
 ```
 
-The result depends on whether the variable already exists, whether it's already protected, and what you send.
+The following table shows the result for each combination of existing variable state and request.
 
 :::warning
 Not all update cases are finalized. The cases below can change before the final release.
@@ -163,18 +163,18 @@ The following limitations apply to 8.11.0-alpha1. They are planned to be address
 
 ### Redaction doesn't cover every place a value can appear
 
-Variable values can be carried by many records and endpoints beyond variable search. In 8.11.0-alpha1, `REDACT` should not be treated as a guarantee that a value never appears in the following places:
+Variable values can be carried by many records and endpoints beyond variable search. In 8.11.0-alpha1, don't rely on `REDACT` to keep a value out of the following places:
 
 - Responses and records that contain variable lists, such as job activation, job completion, user task completion, message publication and correlation, signal broadcast, and process instance results.
 - Records that quote a variable value in free text, such as incident error messages, job error messages, and decision evaluation failure messages.
 - Values derived from a variable, such as decision inputs and outputs, FEEL expression results, message correlation keys, and multi-instance input collections.
 - The process instance creation request and response.
 
-Use these limitations to decide if a variable is suitable for protection. For example, avoid using a protected variable as a message correlation key or as the input of a decision.
+Consider these limitations when you decide which variables to protect. For example, avoid using a protected variable as a message correlation key or as the input of a decision.
 
 ### Update behavior is not finalized
 
-Some cases of [updating variables](#update-variables) are not finalized, for example removing protection from a variable. They can change before the final release.
+Some cases of [updating variables](#update-variables) aren't finalized, for example removing protection from a variable. They can change before the final release.
 
 ### The redacted value is the string `"null"`
 
@@ -182,6 +182,6 @@ In 8.11.0-alpha1, the search response returns a redacted value as the string `"n
 
 ## Next steps
 
-- Learn how variables work in [variables](./variables.md).
-- Learn about [process instance creation](./process-instance-creation.md).
+- [Learn how variables work](./variables.md).
+- [Learn about process instance creation](./process-instance-creation.md).
 - See the [Orchestration Cluster REST API overview](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
