@@ -2,13 +2,13 @@
 id: changelog
 title: ProcessOS Harness changelog
 sidebar_label: Changelog
-description: "Changes in each ProcessOS Harness release, alpha and stable, newest first."
+description: "Changes in each ProcessOS Harness alpha and stable release, listed newest first."
 keywords: ["ProcessOS Harness", "changelog", "release notes"]
 ---
 
 Camunda recommends using the latest [stable](#stable) ProcessOS Harness release. [Alpha](#alpha) releases preview the next minor version, so you can try upcoming changes early.
 
-Each section lists its releases newest first. To install a release, see [installation](installation.md). To move an existing project to a newer release, see [keep an installation up to date](installation.md#keep-an-installation-up-to-date).
+Releases in each section are listed newest first. For installation instructions, see [installation](installation.md). To upgrade an existing installation, see [keep an installation up to date](installation.md#keep-an-installation-up-to-date).
 
 ## Stable
 
