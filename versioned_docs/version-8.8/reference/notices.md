@@ -70,8 +70,8 @@ You are using:
 - Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, ≤ 8.7.29, or ≤ 8.6.33
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
 - Camunda Identity ≤ 8.6.33
-- Hub Self-Managed ≤ 8.10.3
-- Web Modeler Self-Managed ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27, or any 8.6 version
+- Hub Self-Managed 8.10, any version
+- Web Modeler Self-Managed 8.6, 8.7, 8.8, or 8.9, any version
 - Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
 - A Camunda Keycloak image built before October 22, 2026, or a Camunda Keycloak image for Keycloak 23, 24, or 25
 
@@ -88,8 +88,6 @@ Camunda has provided the following releases which contain the fix (the root cert
 - Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30, 8.6.34
 - Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
 - Camunda Identity 8.6.34
-- Hub Self-Managed 8.10.4
-- Web Modeler Self-Managed 8.9.13, 8.8.24, 8.7.28
 - Console Self-Managed 8.9.130, 8.8.147, 8.7.115
 - Camunda Keycloak images built on or after October 22, 2026:
   - `camunda/keycloak` with the `26.3.3` tag. This is the default image of the bundled `identityKeycloak` subchart in Camunda 8.7 to 8.9. This tag receives no more updates. For details, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
@@ -100,7 +98,7 @@ If you use one of these Keycloak tags, pull the image again and restart Keycloak
 
 The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
 
-A fix for Web Modeler Self-Managed 8.6 is not available yet. Use the workaround below. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
+A fix for Hub Self-Managed and Web Modeler Self-Managed is not available yet. Their REST API images still trust both root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
 
 If you can't upgrade immediately, remove both root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, see [Remove a CA from the JVM truststore in 8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) and [in 8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
 
