@@ -37,7 +37,7 @@ To check whether your Helm deployment is affected:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -65,7 +65,7 @@ As a workaround, set `server.http2.enabled` to `false`.
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -91,7 +91,7 @@ As a workaround, configure your LDAP server to reject unauthenticated (empty-pas
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -121,7 +121,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -145,7 +145,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -169,7 +169,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -199,7 +199,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
@@ -226,7 +226,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
