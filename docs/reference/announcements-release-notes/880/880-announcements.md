@@ -477,7 +477,7 @@ To enhance predictability and offer a more stable experience for developers, Cam
 
 #### Spring SDK: workers with legacy `ActivatedJob` don't fetch all variables {#spring-legacy-activatedjob-fetch-variables}
 
-**Affected versions:** All 8.8.x releases.
+**Affected versions:** All 8.8.x releases from 8.8.0 through 8.8.44.
 
 In Camunda 8.8, a job worker in the Camunda Spring Boot Starter fetches all variables only if it injects an `ActivatedJob` parameter of the new type `io.camunda.client.api.response.ActivatedJob`. Workers that still inject the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` don't get this behavior. Instead, the fetched variables are inferred only from `@Variable` (or `@VariablesAsType`) parameters.
 
