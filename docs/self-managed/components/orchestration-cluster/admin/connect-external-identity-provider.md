@@ -624,6 +624,12 @@ of it cannot be used to obtain new access tokens after the user has signed out. 
 [RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009) revocation request sent from Camunda to
 the provider, separate from the browser redirect used for RP-initiated logout.
 
+Camunda also revokes the refresh token when a web session expires, for example after the
+[session idle timeout](../core-settings/configuration/properties.md), without a logout. This
+requires persistent web sessions (`camunda.security.session.persistent.enabled: true`). Sessions
+kept only in memory are revoked at logout only. The revocation runs in the background after the
+expired session is deleted, so the user does not wait for the identity provider.
+
 Revocation is enabled by default and requires no configuration where the provider publishes a
 `revocation_endpoint` in its discovery document, as Keycloak, Okta, and Auth0 do. Where it does not,
 set the endpoint explicitly:
@@ -641,10 +647,10 @@ endpoint that was discovered, so it is the way to opt out of the default behavio
 
 Two consequences are worth planning for:
 
-- Logout now makes an outbound call from Camunda to the identity provider, so the provider must be
-  reachable from the Camunda deployment. The call is bounded at roughly three seconds and fails
-  soft: if the provider is unreachable or rejects the request, the user is still logged out locally
-  and a warning is logged.
+- Logout and session expiry now make an outbound call from Camunda to the identity provider, so the
+  provider must be reachable from the Camunda deployment. The call is bounded at roughly three
+  seconds and fails soft: if the provider is unreachable or rejects the request, the user is still
+  logged out locally and a warning is logged.
 - Microsoft Entra ID publishes no revocation endpoint, so refresh tokens are not revoked there. Entra
   deployments are otherwise unaffected.
 
@@ -677,12 +683,20 @@ Ensure you either:
 
 #### Refresh token was not revoked
 
-If the identity provider cannot be reached, or rejects the revocation request, logout still
-completes and a warning similar to the following is logged:
+If the identity provider cannot be reached, or rejects the revocation request, logout or session
+expiry still completes and a warning similar to the following is logged:
 
 ```
 Failed to revoke the refresh token for OIDC registration '<id>' at <endpoint> [...]. The local
 session is still terminated, but the refresh token may remain valid until it expires.
+```
+
+If many sessions expire while the identity provider is slow or unreachable, Camunda stops queueing
+revocations and logs this warning once:
+
+```
+Dropping refresh-token revocations of expired web sessions: 1000 are already queued, likely because
+the identity provider is slow or unreachable. [...]
 ```
 
 Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
