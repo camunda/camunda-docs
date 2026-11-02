@@ -55,7 +55,14 @@ October 30, 2026
 ### Impact
 
 The certificate authority eMudhra reported that an attacker compromised some of its intermediate certificate authorities.
-The trust stores in the affected images trust these intermediates through the root certificates "emSign ECC Root CA - G3" and "AAA Certificate Services".
+Oracle published two Java security alerts for this compromise:
+
+- [CVE-2026-91403](https://www.cve.org/CVERecord?id=CVE-2026-91403) removes the root certificates "emSign ECC Root CA - G3" and "AAA Certificate Services" from the Java trust store.
+- [CVE-2026-114820](https://www.cve.org/CVERecord?id=CVE-2026-114820) also removes "emSign Root CA - G1" and "emSign Root CA - G2".
+
+Severity: Critical (CVSS 9.1, CVE-2026-114820).
+
+The trust stores in the affected images contain some of these root certificates.
 
 Exploitation requires an attacker who also controls the network path, for example through DNS poisoning or a compromised network device. The attacker can then do a man-in-the-middle attack on outgoing TLS connections from Camunda components, with a certificate that a compromised intermediate signed.
 
@@ -81,7 +88,7 @@ To see when an image was built, run `docker inspect -f '{{.Created}}' <image>`.
 
 ### Solution
 
-Camunda has provided the following releases which contain the fix (the root certificates are removed from the trust stores):
+Camunda has provided the following releases which contain the fix for CVE-2026-91403 ("emSign ECC Root CA - G3" and "AAA Certificate Services" are removed from the trust stores):
 
 - Camunda Orchestration Cluster 8.10.6, 8.9.26, 8.8.44
 - Camunda Zeebe, Operate, and Tasklist 8.7.44
@@ -100,9 +107,11 @@ If you use one of these Keycloak tags, pull the image again and restart Keycloak
 
 The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
 
-A fix for Hub Self-Managed and Web Modeler Self-Managed is not available yet. Their REST API images still trust both root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
+The releases above still trust "emSign Root CA - G1", which CVE-2026-114820 also removes. Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, remove it with the workaround below. We will update this notice when we release images without it.
 
-If you can't upgrade immediately, remove both root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, see [Remove a CA from the JVM truststore in 8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) and [in 8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
+A fix for Hub Self-Managed and Web Modeler Self-Managed is not available yet. Their REST API images still trust the root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
+
+If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, see [Remove a CA from the JVM truststore in 8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) and [in 8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
 
 On Camunda 8 SaaS, if you disabled the automatic upgrade of your clusters, we recommend that you update them to the latest available patch version.
 
