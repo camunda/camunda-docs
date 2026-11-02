@@ -64,6 +64,14 @@ Suspending a root process instance does not automatically suspend its call-activ
 
 If an active call activity has an interrupting boundary event and the child fires a matching event (for example, an error or escalation) while the parent is suspended, the call activity element of the suspended process instance transitions to terminated, while the boundary event becomes active. Completion of the boundary event is deferred until resume, but this means a suspended instance's state can change for this specific edge case.
 
+### User tasks
+
+All actions on user tasks of a suspended process instance, including user task variable modification, are rejected. The only exception is cancellation.
+
+If a user task has `canceling` [user task listeners](./user-task-listeners.md) defined, canceling the task during suspension still creates and executes the listener job.
+
+User task listener jobs that were already created before suspension behave like other jobs during suspension. See [Jobs](#jobs).
+
 ## Allowed actions on suspended instances
 
 External commands against a suspended process instance are blocked, with the following exceptions:
