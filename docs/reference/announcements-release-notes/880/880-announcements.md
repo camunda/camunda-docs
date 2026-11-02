@@ -168,6 +168,32 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 </div>
 <div className="release-announcement-content">
 
+#### Spring SDK: workers with legacy `ActivatedJob` don't fetch all variables {#spring-legacy-activatedjob-fetch-variables}
+
+**Affected versions:** All 8.8.x releases from 8.8.0 through 8.8.44.
+
+In Camunda 8.8, a job worker in the Camunda Spring Boot Starter fetches all variables only if it injects an `ActivatedJob` parameter of the new type `io.camunda.client.api.response.ActivatedJob`. Workers that still inject the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` don't get this behavior. Instead, the fetched variables are inferred only from `@Variable` (or `@VariablesAsType`) parameters.
+
+As a result, variables that your handler reads only through the job (for example, via `job.getVariablesAsMap()`) are silently missing, without any warning or incident. In 8.7, these workers received all variables. This regression affects both Camunda 8 SaaS and Self-Managed.
+
+**Example:** A worker injects the legacy `ActivatedJob` and one `@Variable("orderId")` parameter, and reads `amount` through `job.getVariablesAsMap()`. Only `orderId` is fetched, so `amount` is `null`.
+
+A fix is tracked in [camunda/camunda#67704](https://github.com/camunda/camunda/issues/67704).
+
+**Action:** If your 8.8 Spring workers use the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` type, do one of the following:
+
+- Set `@JobWorker(fetchAllVariables = true)`, or list the required variable names in `@JobWorker(fetchVariables = {...})`.
+- Migrate the worker to the `io.camunda.client` types, as described in the [Camunda Spring Boot Starter migration guide](/apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
 #### Webhook alerts JSON format
 
 In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/saas/clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
@@ -465,32 +491,6 @@ To enhance predictability and offer a more stable experience for developers, Cam
 - This document explicitly identifies the components and interfaces that are covered by our semantic versioning guarantees.
 
 - By formally defining the public API, Camunda commits to avoiding breaking changes in minor and patch releases for these areas. This empowers you to build on Camunda 8 with greater confidence and reduced maintenance effort.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Regression</span>
-</div>
-<div className="release-announcement-content">
-
-#### Spring SDK: workers with legacy `ActivatedJob` don't fetch all variables {#spring-legacy-activatedjob-fetch-variables}
-
-**Affected versions:** All 8.8.x releases from 8.8.0 through 8.8.44.
-
-In Camunda 8.8, a job worker in the Camunda Spring Boot Starter fetches all variables only if it injects an `ActivatedJob` parameter of the new type `io.camunda.client.api.response.ActivatedJob`. Workers that still inject the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` don't get this behavior. Instead, the fetched variables are inferred only from `@Variable` (or `@VariablesAsType`) parameters.
-
-As a result, variables that your handler reads only through the job (for example, via `job.getVariablesAsMap()`) are silently missing, without any warning or incident. In 8.7, these workers received all variables. This regression affects both Camunda 8 SaaS and Self-Managed.
-
-**Example:** A worker injects the legacy `ActivatedJob` and one `@Variable("orderId")` parameter, and reads `amount` through `job.getVariablesAsMap()`. Only `orderId` is fetched, so `amount` is `null`.
-
-A fix is tracked in [camunda/camunda#67704](https://github.com/camunda/camunda/issues/67704).
-
-**Action:** If your 8.8 Spring workers use the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` type, do one of the following:
-
-- Set `@JobWorker(fetchAllVariables = true)`, or list the required variable names in `@JobWorker(fetchVariables = {...})`.
-- Migrate the worker to the `io.camunda.client` types, as described in the [Camunda Spring Boot Starter migration guide](/apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter.md).
 
 </div>
 </div>
