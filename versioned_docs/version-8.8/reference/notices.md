@@ -41,8 +41,9 @@ October 30, 2026
 
 - Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
 - Camunda Zeebe, Operate, and Tasklist (8.7)
+- Camunda Zeebe (8.6)
 - Camunda Optimize
-- Camunda Management Identity
+- Camunda Management Identity (Identity in 8.6)
 - Camunda Connectors
 - Hub Self-Managed 8.10
 - Web Modeler Self-Managed 8.7, 8.8, and 8.9
@@ -64,9 +65,11 @@ You are using:
 
 - Camunda Orchestration Cluster ≤ 8.10.5, ≤ 8.9.25, or ≤ 8.8.43
 - Camunda Zeebe, Operate, or Tasklist ≤ 8.7.43
+- Camunda Zeebe ≤ 8.6.40
 - Camunda Optimize ≤ 8.10.5, ≤ 8.9.25, ≤ 8.8.43, or ≤ 8.7.29
 - Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, or ≤ 8.7.29
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
+- Camunda Identity ≤ 8.6.33
 - Hub Self-Managed ≤ 8.10.3
 - Web Modeler Self-Managed ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27
 - Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
@@ -80,9 +83,11 @@ Camunda has provided the following releases which contain the fix (the root cert
 
 - Camunda Orchestration Cluster 8.10.6, 8.9.26, 8.8.44
 - Camunda Zeebe, Operate, and Tasklist 8.7.44
+- Camunda Zeebe 8.6.41
 - Camunda Optimize 8.10.6, 8.9.26, 8.8.44, 8.7.30
 - Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30
 - Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
+- Camunda Identity 8.6.34
 - Hub Self-Managed 8.10.4
 - Web Modeler Self-Managed 8.9.13, 8.8.24, 8.7.28
 - Console Self-Managed 8.9.130, 8.8.147, 8.7.115
@@ -95,7 +100,7 @@ If you use one of these Keycloak tags, pull the image again and restart Keycloak
 
 The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
 
-Camunda 8.6 reached its end of life. Upgrade to a supported version.
+Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
 
 If you can't upgrade immediately, remove both root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console.
 
