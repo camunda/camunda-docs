@@ -74,30 +74,14 @@ jobs:
         with:
           name: docs-build
           path: build
-      # The runner image ships a gh CLI without `gh attestation`, which the hyperlink
-      # action's install script needs to verify its binary. Remove once the image is updated.
-      - name: Install a current gh CLI
-        env:
-          GH_VERSION: 2.65.0
-        run: |
-          case "$(uname -m)" in
-            x86_64) arch=amd64 ;;
-            aarch64) arch=arm64 ;;
-            *) echo "Unsupported arch: $(uname -m)"; exit 1 ;;
-          esac
-          base="https://github.com/cli/cli/releases/download/v${GH_VERSION}"
-          archive="gh_${GH_VERSION}_linux_${arch}.tar.gz"
-          mkdir -p "$RUNNER_TEMP/gh"
-          cd "$RUNNER_TEMP/gh"
-          curl -fsSLO "${base}/${archive}"
-          curl -fsSLO "${base}/gh_${GH_VERSION}_checksums.txt"
-          grep " ${archive}\$" "gh_${GH_VERSION}_checksums.txt" | sha256sum -c -
-          tar -xzf "$archive" --strip-components=1
-          echo "$RUNNER_TEMP/gh/bin" >> "$GITHUB_PATH"
       - name: Install hyperlink
         run: npm install -g @untitaker/hyperlink
       - name: Check internal links
         uses: untitaker/hyperlink@9375bc4063712ad490d5eb3d54df0b6aade15e54 # 0.3.2
+        env:
+          # The runner image ships a gh CLI (2.45.0) without `gh attestation`, which the install
+          # script uses to verify its binary. Skip the check, as before gh was added to the image.
+          HYPERLINK_SKIP_ATTESTATION: 1
         with:
           args: build/
       - name: Remove https redirect
