@@ -40,8 +40,3 @@ If your agent runs outside Camunda, for example in LangGraph or on Amazon Bedroc
 Make your BPMN processes available as tools to agents built in Camunda or elsewhere.
 
 <AoGrid ao={buildExposeCards} columns={3}/>
-
-## Next steps
-
-- [Evaluate your AI agents](/components/agentic-orchestration/evaluate-agents/evaluate-ai-agents.md) with testing, monitoring, and analysis.
-- Review the [best practices](/components/agentic-orchestration/best-practices-agentic.md) for designing reliable and responsible agents.

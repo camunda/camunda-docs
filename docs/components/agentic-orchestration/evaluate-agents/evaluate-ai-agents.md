@@ -23,8 +23,3 @@ import { evaluateCards } from '../../react-components/\_ao-card-data';
 Evaluating an AI agent means checking that it reaches its goal reliably, before you release it and while it runs. Use these guides to test, monitor, and analyze your agents.
 
 <AoGrid ao={evaluateCards} columns={3}/>
-
-## Next steps
-
-- [Build AI agents](/components/agentic-orchestration/build-agents.md) if you need to change how an agent is modeled.
-- Review the [best practices](/components/agentic-orchestration/best-practices-agentic.md) for choosing models and designing prompts.
