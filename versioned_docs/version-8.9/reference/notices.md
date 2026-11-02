@@ -37,7 +37,7 @@ To check whether your Helm deployment is affected:
 
 ### Publication date
 
-October 30, 2026
+November 2, 2026
 
 ### Products affected
 
