@@ -14,19 +14,14 @@ keywords:
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import AoGrid from '../react-components/\_ao-card';
+import { bestPracticeCards } from '../react-components/\_ao-card-data';
 
 <PageDescription />
 
 Use these guides to design agentic solutions that are reliable, governed, and responsible.
 
-## Find best practice guidance
-
-| If you want to                                                               | Read                                                                                                            |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
-| Meet requirements for security, legality, data handling, and human oversight | [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md)                                 |
-| Plan your solution and follow the recommended architecture                   | [Design and architecture](/components/agentic-orchestration/ao-design.md)                                       |
-| Pick a model that reliably runs your agent's tasks                           | [Choose the right LLM](/components/agentic-orchestration/choose-right-model-agentic.md)                         |
-| Compare model recommendations and write effective prompts                    | [LLM recommendations for agentic processes](/components/agentic-orchestration/model-recommendations-agentic.md) |
+<AoGrid ao={bestPracticeCards} columns={3}/>
 
 ## Next steps
 

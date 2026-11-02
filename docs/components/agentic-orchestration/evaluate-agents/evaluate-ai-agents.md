@@ -15,21 +15,14 @@ keywords:
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import AoGrid from '../../react-components/\_ao-card';
+import { evaluateCards } from '../../react-components/\_ao-card-data';
 
 <PageDescription />
 
-Evaluating an AI agent means checking that it reaches its goal reliably, before you release it and while it runs. Use this page to find the guide for each stage.
+Evaluating an AI agent means checking that it reaches its goal reliably, before you release it and while it runs. Use these guides to test, monitor, and analyze your agents.
 
-## Evaluate your agents
-
-| If you want to                                                          | Use                                                                                                            |
-| :---------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| Check agent behavior before you release it                              | [Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)            |
-| Follow agent process instances and troubleshoot problems as they happen | [Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)  |
-| Spot an agent that is stuck or looping before it fails                  | [Detect off-rail agents](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md)          |
-| Measure agent performance across many executions and find improvements  | [Analyze your AI agents with Optimize](/components/agentic-orchestration/evaluate-agents/analyze-ai-agents.md) |
-
-To understand the states and usage metrics Camunda tracks for each agent, see [states and usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md).
+<AoGrid ao={evaluateCards} columns={3}/>
 
 ## Next steps
 
