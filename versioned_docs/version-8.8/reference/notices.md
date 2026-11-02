@@ -102,7 +102,7 @@ The base images for Keycloak 23, 24, and 25 receive no more updates, so these Ca
 
 Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
 
-If you can't upgrade immediately, remove both root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console.
+If you can't upgrade immediately, remove both root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, see [Remove a CA from the JVM truststore in 8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) and [in 8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
 
 On Camunda 8 SaaS, if you disabled the automatic upgrade of your clusters, we recommend that you update them to the latest available patch version.
 
