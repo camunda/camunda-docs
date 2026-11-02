@@ -14,11 +14,13 @@ This procedure covers the Camunda Java components listed in step 3. It doesn't c
 
 ## 1. Build the truststore
 
-Copy the truststore from the Zeebe image that runs in your cluster. Replace `X` in the image tag with your patch version. Other images can contain different CAs. Before you use the copy for another component, verify its trusted CAs and import any additional CAs that it needs. List the common names (CNs) of the certificates to remove, one per line. The example lists two CAs:
+Copy the truststore from the Zeebe image that runs in your cluster. Replace `X` in the image tag with your patch version. Other images can contain different CAs. Before you use the copy for another component, verify its trusted CAs and import any additional CAs that it needs. List the common names (CNs) of the certificates to remove, one per line. The example lists the four root CAs that CVE-2026-114820 removes:
 
 ```bash
 CAMUNDA_IMAGE=camunda/zeebe:8.6.X
-REMOVE_CNS='emSign ECC Root CA - G3
+REMOVE_CNS='emSign Root CA - G1
+emSign Root CA - G2
+emSign ECC Root CA - G3
 AAA Certificate Services'
 
 docker run --rm --entrypoint sh -e REMOVE_CNS="$REMOVE_CNS" "$CAMUNDA_IMAGE" -c '
