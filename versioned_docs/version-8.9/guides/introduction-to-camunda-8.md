@@ -9,6 +9,7 @@ page_rank: 90
 
 import DocCardList from '@theme/DocCardList';
 import OverviewImg from './img/hero-get-started.png';
+import BuildWithCamundaBanner from '../components/react-components/\_build-with-camunda-banner';
 
 <h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
@@ -56,3 +57,5 @@ This guide is for low-code developers using Camunda 8 SaaS to efficiently alloca
 This guide is for users who prefer a low-code approach to process automation, walking you through working with a REST connector task as a first time Camunda 8 SaaS user. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
 <p><a href="./orchestrate-apis/" class="link-arrow">Get started with API orchestration</a></p>
+
+<BuildWithCamundaBanner />
