@@ -33,6 +33,77 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 82
+
+### Publication date
+
+November 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763), an uncontrolled
+resource consumption flaw in Apache Tomcat (which is used as the embedded servlet container in Web Modeler's `restapi`
+component). A memory leak occurs in the HTTP/2 handling when a client resets a stream, potentially allowing a
+denial-of-service attack through memory exhaustion.
+
+Web Modeler does not enable HTTP/2 by default. An installation is only affected if HTTP/2 is explicitly enabled
+(`server.http2.enabled: true`) and Tomcat directly terminates HTTP/2 connections. For example, if an ingress or load
+balancer terminates HTTP/2 and forwards HTTP/1.1 internally, Tomcat never sees the HTTP/2 frames (and the vulnerable
+code path would not be executed).
+
+### How to determine if the installation is affected
+
+You are using Web Modeler Self-Managed ≤ 8.9.10 with a custom HTTP/2 setup (see above).
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.11
+
+**Note**: Update to the latest available patch version 8.9.15.
+
+## Notice 81
+
+### Publication date
+
+November 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
+HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
+memory exhaustion by sending messages with an excessive number of headers or excessively long headers.
+
+The vulnerable library is only used in outgoing HTTP requests from Web Modeler to the Camunda 8 Orchestration Cluster
+API. To exploit the vulnerability, an attacker would need to be able to control or intercept the API responses through a
+prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code path is not
+reachable from external, untrusted client traffic.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.24, or ≤ 8.7.28
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.8, 8.8.25, 8.7.29
+
+**Note**: For 8.9 and 8.8, update to the latest available patch versions 8.9.15 and 8.8.26.
+
+The fix was deployed to Web Modeler SaaS on August 25, 2026, 13:31 CET.
+
 ## Notice 80
 
 ### Publication date
@@ -886,6 +957,11 @@ Camunda has provided the following releases that contain the fix:
 
 ## Notice 58
 
+:::info
+This notice contains incorrect information regarding the affected and patched versions, as the CVE was mistakenly attributed to a different library.
+It was superseded by [notice 81](#notice-81).
+:::
+
 ### Publication date
 
 July 14, 2026
@@ -907,15 +983,19 @@ path is not reachable from external, untrusted client traffic.
 
 ### How to determine if the installation is affected
 
-- You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.
+- ~~You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.~~
+
+**Update (November 9, 2026)**: The versions are incorrect; see [notice 81](#notice-81) for the correct values.
 
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
+- ~~Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24~~
 
-The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.
+~~The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.~~
+
+**Update (November 9, 2026)**: The versions and the SaaS deploy date are incorrect; see [notice 81](#notice-81) for the correct values.
 
 ## Notice 57
 
