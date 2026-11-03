@@ -404,7 +404,7 @@ const ADDITIONAL_RELEASES = [
   {
     title: "Enterprise download center",
     description:
-      "Enterprise-only downloads for ProcessOS, Camunda 8 Hub, and Camunda 7 artifacts.",
+      "Enterprise-only downloads for ProcessOS and Camunda 7 artifacts.",
     ...downloads.additionalReleases.enterprise,
     icon: <BuildingIconLg />,
     loginRequired: true,
