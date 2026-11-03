@@ -628,7 +628,10 @@ Camunda also revokes the refresh token when a web session expires, for example a
 [session idle timeout](../core-settings/configuration/properties.md), without a logout. This
 requires persistent web sessions (`camunda.security.session.persistent.enabled: true`). Sessions
 kept only in memory are revoked at logout only. The revocation runs in the background after the
-expired session is deleted, so the user does not wait for the identity provider.
+expired session is deleted, so the user does not wait for the identity provider. If several
+physical tenants use the same OIDC client with different revocation settings, Camunda does not
+revoke the refresh tokens of their expired sessions, so a tenant that sets
+`revocation-enabled: false` is never revoked.
 
 Revocation is enabled by default and requires no configuration where the provider publishes a
 `revocation_endpoint` in its discovery document, as Keycloak, Okta, and Auth0 do. Where it does not,
@@ -702,6 +705,17 @@ the identity provider is slow or unreachable. [...]
 Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
 client credentials Camunda uses are accepted there. To disable revocation for the provider instead,
 set `revocation-enabled: false`.
+
+If several physical tenants use the same OIDC client with different revocation settings, Camunda
+does not revoke on session expiry and logs this warning once for each provider:
+
+```
+OIDC registration '<registration-id>' belongs to several webapp chains with different refresh-token
+revocation settings, so the refresh tokens of its expired web sessions are not revoked. [...]
+```
+
+To revoke on expiry, give these tenants the same `revocation-enabled` and
+`revocation-endpoint-uri` settings.
 
 #### No client registration found
 
