@@ -56,5 +56,3 @@ Camunda's SAP integration consists of several modules that can be used independe
 | [SAP RFC outbound connector](./rfc-connector.md)     | Query Business Application Programming Interfaces (BAPIs) and remote-enabled function modules (RFCs) on SAP ECC systems. |
 
 These modules run within your [SAP BTP instance](https://www.sap.com/products/technology-platform.html) or alongside your Camunda deployment, requiring no proprietary Camunda setup and leveraging existing infrastructure with minimal prerequisites.
-
-![SAP integration overview](./img/sap-integration-overview.svg)
