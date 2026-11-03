@@ -18,6 +18,10 @@ However, only operations that are authenticated, authorized, and reach execution
 
 Additionally, only user operations are tracked by default, not [client](../../zeebe/technical-concepts/architecture.md#clients) operations. Unlike the other constraints, you can configure this behavior.
 
+Variable `Create` and `Update` operations are only recorded when variables are set directly, for example when you edit a variable in Operate or use the [update element instance variables API](../../../apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx). Variables set as part of another operation, such as process instance creation, process instance modification, or job completion, aren't recorded as separate variable operations. Only the operation itself is recorded.
+
+For example, if you move a token and edit variables in the same [process instance modification](../../operate/userguide/process-instance-modification.md) in Operate, the audit log shows a `Modify` process instance operation but no variable operations. To record the variable changes, edit the variables outside of modification mode.
+
 ## Recorded operations
 
 There are three categories of recorded operations:
