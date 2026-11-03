@@ -25,6 +25,7 @@ Cross-region cold recovery is available only for specific region pairs marked **
 | AWS            | US East (Ohio) (us-east-2) and US West (Oregon) (us-west-2)                     |
 | AWS            | US East (N. Virginia) (us-east-1) and US West (Oregon) (us-west-2)              |
 | AWS            | Europe (Ireland) (eu-west-1) and Europe (Frankfurt) (eu-central-1)              |
+| AWS            | Europe (Ireland) (eu-west-1) and Europe (Paris) (eu-west-3)                     |
 | GCP            | Council Bluffs, Iowa (us-central1) and Moncks Corner, South Carolina (us-east1) |
 | GCP            | Montréal (northamerica-northeast1) and Toronto (northamerica-northeast2)        |
 
