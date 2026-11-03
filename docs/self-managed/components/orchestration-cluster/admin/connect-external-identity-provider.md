@@ -717,6 +717,15 @@ revocation settings, so the refresh tokens of its expired web sessions are not r
 To revoke on expiry, give these tenants the same `revocation-enabled` and
 `revocation-endpoint-uri` settings.
 
+If Camunda cannot resolve an OIDC provider that can own an expired session, for example because
+its discovery endpoint is unreachable, it does not revoke on expiry until the provider resolves
+again. It logs this warning once for each outage:
+
+```
+Could not resolve OIDC registration '<registration-id>', so the refresh tokens of expired web
+sessions are not revoked until it resolves again. [...]
+```
+
 #### No client registration found
 
 If the `registrationId` used for logout (the identifier of the configured OIDC client registration) cannot be resolved, Admin cannot construct an RP-initiated logout request. The following message is logged:
