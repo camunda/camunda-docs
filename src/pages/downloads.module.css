@@ -25,23 +25,7 @@
   }
 }
 
-/* ─── CLI icon wrapper (matches 72px footprint of Docker/K8s icons) ─── */
-.cliIconWrap {
-  width: 72px;
-  height: 72px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ─── Additional release resources ─── */
-.additionalReleasesSection {
-  margin-top: 5rem;
-  padding-top: 3.5rem;
-  padding-bottom: 3rem;
-  border-top: 1px solid var(--card-border);
-}
-
+/* ─── Section headings ─── */
 .additionalReleasesTitle {
   margin: 0;
   text-align: center;
@@ -61,17 +45,6 @@
 }
 
 /* ─── More ways: 3-up wide grid ─── */
-.waysGridWide {
-  grid-template-columns: 1fr 1fr 1fr !important;
-  max-width: 1100px !important;
-}
-
-@media (max-width: 900px) {
-  .waysGridWide {
-    grid-template-columns: 1fr !important;
-  }
-}
-
 /* ─── Hero overrides (tighter than build-with-camunda hero) ─── */
 .heroSectionTight {
   padding-bottom: 2rem !important;
@@ -335,4 +308,195 @@
 
 .downloadCardFooterLink:hover {
   text-decoration: underline !important;
+}
+
+/* ─── Artifact catalog sections ─── */
+
+.catalogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.releaseCardsGrid {
+  margin-bottom: 1.25rem !important;
+}
+
+.catalogCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+.catalogCardWide {
+  grid-column: span 2;
+}
+
+@media (max-width: 700px) {
+  .catalogCardWide {
+    grid-column: auto;
+  }
+}
+
+.catalogCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.catalogCardTitle {
+  flex: 1;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.catalogCardBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.kindBadge,
+.statusBadge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.kindBadge {
+  background: var(--inline-code-bg);
+  color: var(--muted-color);
+}
+
+.statusBadge {
+  align-self: flex-start;
+  margin-bottom: 0.75rem;
+  background: rgba(252, 93, 13, 0.12);
+  color: #fc5d0d;
+}
+
+.installSnippet {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.installSnippet pre {
+  margin: 0;
+  padding: 0.6rem 4rem 0.6rem 0.75rem;
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copyButton {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--muted-color);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.copyButton:hover {
+  color: #fc5d0d;
+}
+
+/* ─── Section tabs (sticky below the navbar) ─── */
+.sectionTabsBar {
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: 10;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 0;
+  /* --ifm-background-color is transparent in light mode, so set it explicitly */
+  --tabs-bar-bg: #fff;
+  background: var(--tabs-bar-bg);
+}
+
+[data-theme="dark"] .sectionTabsBar {
+  --tabs-bar-bg: var(--ifm-background-color);
+}
+
+.sectionTabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.3rem;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--tabs-bar-bg);
+}
+
+.sectionTab {
+  padding: 0.5rem 1.1rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sectionTab:hover {
+  color: var(--ifm-font-color-base);
+}
+
+.sectionTabActive,
+.sectionTabActive:hover {
+  background: #fc5d0d;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .sectionTabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sectionTab {
+    flex-shrink: 0;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+  }
+}
+
+.tabPanel {
+  scroll-margin-top: 5rem;
+}
+
+/* ─── Release information links below the tabs ─── */
+.releaseInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.9rem;
+}
+
+.releaseInfoLabel {
+  color: var(--muted-color);
 }
