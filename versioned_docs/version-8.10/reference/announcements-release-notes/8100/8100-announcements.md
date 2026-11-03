@@ -316,15 +316,15 @@ Starting with 8.10.9, when the API is unprotected (`camunda.security.authenticat
 
 The `CamundaUserResult` response changes as follows:
 
-- A new required `anonymous` field is `true` for a caller without credentials and `false` for every authenticated user.
-- `username` is still required, but it can now be `null`. It's `null` only when `anonymous` is `true`. `displayName` and `email` are also `null` then.
+- A new required `isAnonymous` field is `true` for a caller without credentials and `false` for every authenticated user.
+- `username` is still required, but it can now be `null`. It's `null` only when `isAnonymous` is `true`. `displayName` and `email` are also `null` then.
 - An anonymous caller gets `["*"]` as `authorizedComponents`, empty `tenants`, `groups`, and `roles`, and `canLogout: false`.
 
 A protected API is not affected at runtime. It still answers `401` to a caller without credentials, and an authenticated user always has a `username`.
 
 **Why this is a breaking change:** A client generated from the API specification types `username` as `string | null` instead of `string`, so code that uses it as a non-null string can fail to compile. A caller without credentials has no user name, so the field can't stay non-null. Camunda chose to fix the unprotected API in 8.10 rather than keep the `401`.
 
-**Action:** If you generate a client from the Orchestration Cluster API specification, check `anonymous`, or handle a `null` `username`, before you use the user name.
+**Action:** If you generate a client from the Orchestration Cluster API specification, check `isAnonymous`, or handle a `null` `username`, before you use the user name.
 
 </div>
 </div>
