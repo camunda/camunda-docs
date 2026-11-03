@@ -1,0 +1,278 @@
+{
+  "_comment": "Hand-maintained catalog of Camunda 8 artifacts beyond the local development downloads. Not touched by hacks/update-downloads.js. Placeholders: {camundaVersion} = latest Orchestration Cluster release, {connectorsVersion} = latest connectors release (both from downloads.json).",
+  "sections": [
+    {
+      "id": "cli-and-sdks",
+      "title": "CLI and SDKs",
+      "description": "Work with Camunda from your terminal and your code.",
+      "items": [
+        {
+          "id": "c8ctl",
+          "name": "Camunda CLI (c8ctl)",
+          "kind": "npm",
+          "featured": true,
+          "description": "Deploy resources, start process instances, and inspect clusters from your terminal. Installs the c8ctl and c8 commands. Requires Node.js 22.18 or later.",
+          "install": "npm install -g @camunda8/cli",
+          "docsLink": "/docs/apis-tools/c8ctl/getting-started/",
+          "registryLink": {
+            "label": "npm",
+            "url": "https://www.npmjs.com/package/@camunda8/cli"
+          }
+        },
+        {
+          "name": "Java client",
+          "kind": "Maven",
+          "description": "Java client for the Orchestration Cluster REST API.",
+          "install": "io.camunda:camunda-client-java:{camundaVersion}",
+          "docsLink": "/docs/apis-tools/java-client/getting-started/",
+          "registryLink": {
+            "label": "Maven Central",
+            "url": "https://central.sonatype.com/artifact/io.camunda/camunda-client-java"
+          }
+        },
+        {
+          "name": "Camunda Spring Boot Starter",
+          "kind": "Maven",
+          "description": "Build job workers and process applications with Spring Boot 4. Use camunda-spring-boot-3-starter for Spring Boot 3.",
+          "install": "io.camunda:camunda-spring-boot-starter:{camundaVersion}",
+          "docsLink": "/docs/apis-tools/camunda-spring-boot-starter/getting-started/",
+          "registryLink": {
+            "label": "Maven Central",
+            "url": "https://central.sonatype.com/artifact/io.camunda/camunda-spring-boot-starter"
+          }
+        },
+        {
+          "name": "Camunda Process Test",
+          "kind": "Maven",
+          "description": "Test your processes with JUnit. Use camunda-process-test-java without Spring.",
+          "install": "io.camunda:camunda-process-test-spring:{camundaVersion}",
+          "docsLink": "/docs/apis-tools/testing/getting-started/",
+          "registryLink": {
+            "label": "Maven Central",
+            "url": "https://central.sonatype.com/artifact/io.camunda/camunda-process-test-spring"
+          }
+        },
+        {
+          "name": "Connector SDK",
+          "kind": "Maven",
+          "description": "Build custom outbound and inbound connectors.",
+          "install": "io.camunda.connector:connector-core:{connectorsVersion}",
+          "docsLink": "/docs/components/connectors/custom-built-connectors/connector-sdk/",
+          "registryLink": {
+            "label": "Maven Central",
+            "url": "https://central.sonatype.com/artifact/io.camunda.connector/connector-core"
+          }
+        },
+        {
+          "name": "TypeScript client",
+          "kind": "npm",
+          "description": "Orchestration Cluster API client for Node.js and the browser.",
+          "install": "npm install @camunda8/orchestration-cluster-api",
+          "docsLink": "/docs/apis-tools/typescript/oca-client/",
+          "registryLink": {
+            "label": "npm",
+            "url": "https://www.npmjs.com/package/@camunda8/orchestration-cluster-api"
+          }
+        },
+        {
+          "name": "Camunda 8 SDK for Node.js",
+          "kind": "npm",
+          "description": "Node.js SDK with job workers and all Camunda 8 APIs.",
+          "install": "npm install @camunda8/sdk",
+          "docsLink": "/docs/apis-tools/typescript/camunda8-sdk/",
+          "registryLink": {
+            "label": "npm",
+            "url": "https://www.npmjs.com/package/@camunda8/sdk"
+          }
+        },
+        {
+          "name": "Python SDK",
+          "kind": "PyPI",
+          "description": "Orchestration Cluster API client for Python.",
+          "install": "pip install camunda-orchestration-sdk",
+          "docsLink": "/docs/apis-tools/python-sdk/installing-the-sdk-to-your-project/",
+          "registryLink": {
+            "label": "PyPI",
+            "url": "https://pypi.org/project/camunda-orchestration-sdk/"
+          }
+        },
+        {
+          "name": "C# SDK",
+          "kind": "NuGet",
+          "description": "Orchestration Cluster API client for .NET.",
+          "install": "dotnet add package Camunda.Orchestration.Sdk",
+          "docsLink": "/docs/apis-tools/csharp-sdk/installation/",
+          "registryLink": {
+            "label": "NuGet",
+            "url": "https://www.nuget.org/packages/Camunda.Orchestration.Sdk"
+          }
+        },
+        {
+          "name": "Go SDK",
+          "kind": "Go",
+          "status": "Technical preview",
+          "description": "Orchestration Cluster API client for Go.",
+          "install": "go get github.com/camunda/orchestration-cluster-api-go/v10",
+          "docsLink": "/docs/apis-tools/go-sdk/installation/"
+        },
+        {
+          "name": "Rust SDK",
+          "kind": "crates.io",
+          "status": "Technical preview",
+          "description": "Orchestration Cluster API client for Rust.",
+          "install": "cargo add camunda-orchestration-sdk",
+          "docsLink": "/docs/apis-tools/rust-sdk/installation/"
+        },
+        {
+          "name": "PHP SDK",
+          "kind": "Packagist",
+          "status": "Technical preview",
+          "description": "Orchestration Cluster API client for PHP.",
+          "install": "composer require camunda8/orchestration-cluster-api",
+          "docsLink": "/docs/apis-tools/php-sdk/installing-the-sdk-to-your-project/"
+        }
+      ]
+    },
+    {
+      "id": "self-managed",
+      "title": "Self-Managed deployment",
+      "description": "Run Camunda in your own infrastructure. All images and charts are public.",
+      "items": [
+        {
+          "name": "Helm chart",
+          "kind": "Helm",
+          "icon": "kubernetes",
+          "description": "Deploy Camunda 8 to any Kubernetes cluster. Chart camunda/camunda-platform.",
+          "install": "helm repo add camunda https://helm.camunda.io\nhelm install camunda camunda/camunda-platform",
+          "docsLink": "/docs/self-managed/deployment/helm/install/quick-install/",
+          "registryLink": {
+            "label": "Artifact Hub",
+            "url": "https://artifacthub.io/packages/helm/camunda/camunda-platform"
+          },
+          "extraLink": {
+            "label": "Version matrix",
+            "url": "https://helm.camunda.io/camunda-platform/version-matrix/"
+          }
+        },
+        {
+          "name": "Docker images",
+          "kind": "Docker",
+          "icon": "docker",
+          "description": "Also available: camunda/connectors-bundle, camunda/optimize, camunda/identity, camunda/hub, camunda/hub-websockets, camunda/keycloak.",
+          "install": "docker pull camunda/camunda:{camundaVersion}",
+          "docsLink": "/docs/self-managed/deployment/docker/",
+          "registryLink": {
+            "label": "Docker Hub",
+            "url": "https://hub.docker.com/u/camunda"
+          }
+        },
+        {
+          "name": "Docker Compose",
+          "kind": "Archive",
+          "icon": "docker",
+          "description": "Run the full Camunda 8 stack locally for development and evaluation.",
+          "install": "docker compose up -d",
+          "docsLink": "/docs/self-managed/quickstart/developer-quickstart/docker-compose/",
+          "registryLink": {
+            "label": "GitHub releases",
+            "url": "https://github.com/camunda/camunda-distributions/releases"
+          }
+        },
+        {
+          "name": "Reference architectures",
+          "kind": "Terraform",
+          "description": "Terraform modules and scripts for EKS, AKS, OpenShift, ECS, and EC2.",
+          "docsLink": "/docs/self-managed/reference-architecture/",
+          "registryLink": {
+            "label": "GitHub",
+            "url": "https://github.com/camunda/camunda-deployment-references"
+          }
+        }
+      ]
+    },
+    {
+      "id": "migration",
+      "title": "Migrate from Camunda 7",
+      "description": "Tools to move models, code, and data from Camunda 7 to Camunda 8.",
+      "items": [
+        {
+          "name": "Migration tooling",
+          "kind": "Archive",
+          "description": "Diagram Converter, Data Migrator, and Cockpit plugin.",
+          "docsLink": "/docs/guides/migrating-from-camunda-7/migration-tooling/",
+          "registryLink": {
+            "label": "GitHub releases",
+            "url": "https://github.com/camunda/camunda-7-to-8-migration-tooling/releases"
+          }
+        },
+        {
+          "name": "Code conversion recipes",
+          "kind": "Maven",
+          "description": "OpenRewrite recipes that convert Camunda 7 Java code.",
+          "install": "io.camunda:camunda-7-to-8-code-conversion-recipes",
+          "docsLink": "/docs/guides/migrating-from-camunda-7/migration-tooling/code-conversion/"
+        }
+      ]
+    },
+    {
+      "id": "enterprise",
+      "title": "Enterprise",
+      "description": "Enterprise customers and partners log in with their Camunda Enterprise credentials. To get credentials, contact your Customer Success Manager or Partner Manager.",
+      "items": [
+        {
+          "name": "ProcessOS",
+          "kind": "Archive",
+          "gated": true,
+          "description": "ProcessOS Harness packages for your AI coding agent.",
+          "docsLink": "/docs/components/process-os-harness/installation/",
+          "registryLink": {
+            "label": "Enterprise download center",
+            "url": "https://downloads.camunda.cloud/enterprise-release/process-os/"
+          }
+        },
+        {
+          "name": "Camunda Enterprise Registry",
+          "kind": "Docker",
+          "gated": true,
+          "description": "Mirror of all public images, plus enterprise-only images such as Keycloak EE.",
+          "install": "docker login registry.camunda.cloud",
+          "docsLink": "/docs/self-managed/deployment/helm/configure/registry-and-images/"
+        },
+        {
+          "name": "Camunda Artifactory",
+          "kind": "Maven",
+          "gated": true,
+          "description": "Enterprise Maven repositories, including Camunda 7 Enterprise.",
+          "docsLink": "/docs/self-managed/deployment/manual/install/",
+          "registryLink": {
+            "label": "artifacts.camunda.com",
+            "url": "https://artifacts.camunda.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "release-information",
+      "title": "Release information",
+      "description": "Check what changed and what is supported before you upgrade.",
+      "links": [
+        {
+          "label": "Release notes",
+          "to": "/docs/reference/announcements-release-notes/overview/"
+        },
+        {
+          "label": "Upgrade guides",
+          "to": "/docs/self-managed/upgrade/"
+        },
+        {
+          "label": "Supported environments",
+          "to": "/docs/reference/supported-environments/"
+        },
+        {
+          "label": "Release policy",
+          "to": "/docs/reference/announcements-release-notes/release-policy/"
+        }
+      ]
+    }
+  ]
+}

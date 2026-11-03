@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
@@ -8,6 +8,7 @@ import styles from "./downloads.module.css";
 import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
 import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import downloads from "../data/downloads.json";
+import catalog from "../data/download-catalog.json";
 
 /* ─── OS detection ─── */
 
@@ -204,62 +205,6 @@ function GearIconLg() {
   );
 }
 
-function BuildingIconLg() {
-  return (
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-      <rect
-        x="6"
-        y="6"
-        width="52"
-        height="52"
-        rx="12"
-        fill="rgba(252,93,13,0.12)"
-      />
-      {/* Main building */}
-      <rect
-        x="16"
-        y="20"
-        width="32"
-        height="30"
-        rx="1.5"
-        stroke="#fc5d0d"
-        strokeWidth="2.5"
-      />
-      {/* Roof line */}
-      <path
-        d="M13 20h38"
-        stroke="#fc5d0d"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      {/* Windows row 1 */}
-      <rect x="21" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
-      <rect x="30" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
-      <rect x="39" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
-      {/* Windows row 2 */}
-      <rect x="21" y="35" width="5" height="5" rx="1" fill="#fc5d0d" />
-      <rect x="39" y="35" width="5" height="5" rx="1" fill="#fc5d0d" />
-      {/* Door */}
-      <rect
-        x="29"
-        y="38"
-        width="7"
-        height="12"
-        rx="1"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-      />
-      {/* Ground */}
-      <path
-        d="M13 50h38"
-        stroke="#fc5d0d"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function ConnectorIconLg() {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -386,30 +331,283 @@ const {
   rpaWorker: RPA_WORKER,
 } = downloads;
 
+// Both releases are the Java artifacts for manual installation (VMs or bare
+// metal), so their setup guides point to the matching manual install section.
 const ADDITIONAL_RELEASES = [
   {
     title: "Camunda Orchestration Cluster",
     description:
-      "Download self-managed orchestration runtime artifacts and view all release notes.",
+      "Java distribution (zip or tar.gz) for manual installation on VMs or bare metal.",
     ...downloads.additionalReleases.orchestrationCluster,
+    docsLink:
+      "/docs/self-managed/deployment/manual/install/#orchestration-cluster",
     icon: <GearIconLg />,
   },
   {
     title: "Connectors",
     description:
-      "Get prebuilt connector artifacts and review release history for connector updates.",
+      "Connector runtime JARs for manual installation, with or without the prebuilt connectors.",
     ...downloads.additionalReleases.connectors,
+    docsLink: "/docs/self-managed/deployment/manual/install/#connectors",
     icon: <ConnectorIconLg />,
   },
-  {
-    title: "Enterprise download center",
-    description:
-      "Enterprise-only downloads for ProcessOS, Camunda 8 Hub, and Camunda 7 artifacts.",
-    ...downloads.additionalReleases.enterprise,
-    icon: <BuildingIconLg />,
-    loginRequired: true,
-  },
 ];
+
+/* ─── Artifact catalog (src/data/download-catalog.json) ─── */
+
+const CATALOG_VERSIONS = {
+  camundaVersion: downloads.additionalReleases.orchestrationCluster.version,
+  connectorsVersion: downloads.additionalReleases.connectors.version,
+};
+
+function resolveVersions(text) {
+  return text.replace(/\{(\w+)\}/g, (match, key) =>
+    key in CATALOG_VERSIONS ? CATALOG_VERSIONS[key] : match
+  );
+}
+
+const CATALOG_ICONS = {
+  docker: <DockerSvgIcon width="40" height="40" />,
+  kubernetes: <K8sSvgIcon width="40" height="40" />,
+};
+
+function LockIcon() {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ flexShrink: 0 }}
+    >
+      <rect x="3" y="11" width="18" height="11" rx="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+  );
+}
+
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      className={styles.copyButton}
+      aria-label="Copy to clipboard"
+      onClick={() => {
+        navigator.clipboard.writeText(text).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        });
+      }}
+    >
+      {copied ? "Copied" : "Copy"}
+    </button>
+  );
+}
+
+function CatalogItemCard({ item }) {
+  const install = item.install && resolveVersions(item.install);
+  return (
+    <div
+      className={clsx(
+        styles.catalogCard,
+        item.featured && [styles.downloadCardFeatured, styles.catalogCardWide]
+      )}
+    >
+      <div className={styles.catalogCardHeader}>
+        {item.icon && CATALOG_ICONS[item.icon]}
+        <h3 className={styles.catalogCardTitle}>{item.name}</h3>
+        <span className={styles.kindBadge}>{item.kind}</span>
+      </div>
+      {(item.gated || item.status) && (
+        <div className={styles.catalogCardBadges}>
+          {item.gated && (
+            <span className={styles.loginBadge}>
+              <LockIcon />
+              Requires login
+            </span>
+          )}
+          {item.status && (
+            <span className={styles.statusBadge}>{item.status}</span>
+          )}
+        </div>
+      )}
+      <p className={styles.downloadCardDesc}>{item.description}</p>
+      {install && (
+        <div className={styles.installSnippet}>
+          <pre>
+            <code>{install}</code>
+          </pre>
+          <CopyButton text={install} />
+        </div>
+      )}
+      <div className={styles.downloadCardFooter}>
+        {item.docsLink && (
+          <Link
+            to={useBaseUrl(item.docsLink)}
+            className={styles.downloadCardFooterLink}
+          >
+            Setup guide
+          </Link>
+        )}
+        {[item.registryLink, item.extraLink].filter(Boolean).map((link) => (
+          <a
+            key={link.url}
+            href={link.url}
+            className={styles.downloadCardFooterLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {link.label} <ExternalLinkIcon />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({ title, description }) {
+  return (
+    <>
+      <h2 className={styles.additionalReleasesTitle}>{title}</h2>
+      <p className={styles.additionalReleasesSub}>{description}</p>
+    </>
+  );
+}
+
+function CatalogSection({ section, children }) {
+  return (
+    <>
+      <SectionHeader title={section.title} description={section.description} />
+      {children}
+      <div className={styles.catalogGrid}>
+        {section.items.map((item) => (
+          <CatalogItemCard key={item.name} item={item} />
+        ))}
+      </div>
+    </>
+  );
+}
+
+const CATALOG_SECTIONS = Object.fromEntries(
+  catalog.sections.map((section) => [section.id, section])
+);
+
+const TABS = [
+  { id: "local-development", title: "Local development" },
+  ...catalog.sections
+    .filter((section) => section.items)
+    .map(({ id, title }) => ({ id, title })),
+];
+
+// c8ctl is listed under CLI and SDKs and repeated in Local development.
+const C8CTL = CATALOG_SECTIONS["cli-and-sdks"].items.find(
+  (item) => item.id === "c8ctl"
+);
+
+const RELEASE_INFORMATION = CATALOG_SECTIONS["release-information"];
+
+/* ─── Section tabs: one section at a time, selected tab kept in the URL hash ─── */
+
+function useActiveTab() {
+  const [activeTab, setActiveTab] = useState(TABS[0].id);
+
+  useEffect(() => {
+    const syncFromHash = () => {
+      const id = window.location.hash.slice(1);
+      if (TABS.some((tab) => tab.id === id)) setActiveTab(id);
+    };
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  const selectTab = useCallback((id) => {
+    setActiveTab(id);
+    window.history.replaceState(null, "", `#${id}`);
+  }, []);
+
+  return [activeTab, selectTab];
+}
+
+// The tab bar sticks below the navbar. When switching tabs further down the
+// page, jump back to the top of the new panel so it doesn't open mid-way.
+function SectionTabs({ activeTab, onSelect }) {
+  const barRef = useRef(null);
+
+  const handleSelect = (id) => {
+    onSelect(id);
+    requestAnimationFrame(() => {
+      const barBottom = barRef.current.getBoundingClientRect().bottom;
+      const panel = document.getElementById(id);
+      if (panel.getBoundingClientRect().top < barBottom) {
+        window.scrollBy({ top: panel.getBoundingClientRect().top - barBottom });
+      }
+    });
+  };
+
+  return (
+    <div ref={barRef} className={styles.sectionTabsBar}>
+      <div
+        className={styles.sectionTabs}
+        role="tablist"
+        aria-label="Download categories"
+      >
+        {TABS.map(({ id, title }) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            id={`${id}-tab`}
+            aria-selected={activeTab === id}
+            aria-controls={id}
+            className={clsx(
+              styles.sectionTab,
+              activeTab === id && styles.sectionTabActive
+            )}
+            onClick={() => handleSelect(id)}
+          >
+            {title}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Inactive panels use hidden="until-found" so Ctrl+F still finds their content;
+// a match fires "beforematch", which switches to that tab. React renders the
+// hidden prop as a boolean, so the value is set on the DOM node directly.
+function TabPanel({ id, activeTab, onSelect, children }) {
+  const ref = useRef(null);
+
+  const isActive = activeTab === id;
+
+  useEffect(() => {
+    const panel = ref.current;
+    if (!isActive) panel.setAttribute("hidden", "until-found");
+    const reveal = () => onSelect(id);
+    panel.addEventListener("beforematch", reveal);
+    return () => panel.removeEventListener("beforematch", reveal);
+  }, [id, isActive, onSelect]);
+
+  return (
+    <div
+      ref={ref}
+      id={id}
+      role="tabpanel"
+      aria-labelledby={`${id}-tab`}
+      className={styles.tabPanel}
+      hidden={!isActive}
+    >
+      {children}
+    </div>
+  );
+}
 
 /* ─── CLI snippet (matches build-with-camunda terminal style) ─── */
 
@@ -621,6 +819,7 @@ function DownloadCard({
 function Downloads() {
   const [activeOS, setActiveOS] = useState("mac");
   const [detectedOS, setDetectedOS] = useState(null);
+  const [activeTab, selectTab] = useActiveTab();
 
   useEffect(() => {
     const os = detectOS();
@@ -631,7 +830,7 @@ function Downloads() {
   return (
     <Layout
       title="Downloads"
-      description="Download Camunda 8 components for local development. Get Desktop Modeler, Camunda 8 Run, RPA Worker, and the Getting Started bundle."
+      description="Download Camunda 8: Desktop Modeler, Camunda 8 Run, c8ctl, SDKs, Docker images, the Helm chart, and enterprise artifacts."
     >
       <div className={bwcStyles.page}>
         {/* ─── Hero ─── */}
@@ -666,7 +865,7 @@ function Downloads() {
             >
               <h1 className={bwcStyles.terminalHeroTitle}>Camunda Downloads</h1>
               <p className={bwcStyles.terminalHeroSub}>
-                Download everything you need for local Camunda 8 development.
+                Download everything you need to build and run Camunda 8.
               </p>
             </div>
           </section>
@@ -680,41 +879,7 @@ function Downloads() {
             styles.downloadsSection
           )}
         >
-          <OSTabs
-            activeOS={activeOS}
-            onSelect={(os) => {
-              setActiveOS(os);
-              setDetectedOS(null);
-            }}
-          />
-          {detectedOS && (
-            <p className={styles.osDetectedLabel}>
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                style={{ marginRight: 4, verticalAlign: "-1px" }}
-              >
-                <circle
-                  cx="6"
-                  cy="6"
-                  r="5.5"
-                  stroke="currentColor"
-                  strokeOpacity="0.5"
-                />
-                <path
-                  d="M4 6l1.5 1.5L8 4.5"
-                  stroke="currentColor"
-                  strokeWidth="1.3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Detected:{" "}
-              {{ mac: "macOS", windows: "Windows", linux: "Linux" }[detectedOS]}
-            </p>
-          )}
+          <SectionTabs activeTab={activeTab} onSelect={selectTab} />
 
           <p
             className={clsx(
@@ -759,160 +924,154 @@ function Downloads() {
             </span>
           </p>
 
-          <div
-            className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridTwo)}
+          <TabPanel
+            id="local-development"
+            activeTab={activeTab}
+            onSelect={selectTab}
           >
-            <GettingStartedCard activeOS={activeOS} />
-            <DownloadCard
-              icon={<PencilIconLg />}
-              title="Desktop Modeler"
-              description="Design BPMN processes, DMN decision tables, and forms locally. Drag, drop, and design alongside your IDE."
-              version={DESKTOP_MODELER.version}
-              date={DESKTOP_MODELER.date}
-              links={DESKTOP_MODELER.links}
-              docsLink={DESKTOP_MODELER.docsLink}
-              previousVersions={DESKTOP_MODELER.previousVersions}
-              activeOS={activeOS}
+            <SectionHeader
+              title="Local development"
+              description="Model, run, and test processes on your machine."
             />
-            <DownloadCard
-              icon={<PlayIconLg />}
-              title="Camunda 8 Run"
-              description="Lightweight all-in-one Camunda distribution for effortless local development. Use alongside Desktop Modeler."
-              version={CAMUNDA_RUN.version}
-              date={CAMUNDA_RUN.date}
-              links={CAMUNDA_RUN.links}
-              docsLink={CAMUNDA_RUN.docsLink}
-              previousVersions={CAMUNDA_RUN.previousVersions}
+            <OSTabs
               activeOS={activeOS}
+              onSelect={(os) => {
+                setActiveOS(os);
+                setDetectedOS(null);
+              }}
             />
-            <DownloadCard
-              icon={<RpaIconLg />}
-              title="RPA Worker"
-              description="Run robotic process automation tasks alongside your BPMN workflows. Automate desktop applications and legacy systems."
-              version={RPA_WORKER.version}
-              date={RPA_WORKER.date}
-              links={RPA_WORKER.links}
-              docsLink={RPA_WORKER.docsLink}
-              previousVersions={RPA_WORKER.previousVersions}
-              activeOS={activeOS}
-            />
-          </div>
-
-          <div className={styles.additionalReleasesSection}>
-            <h2 className={styles.additionalReleasesTitle}>
-              Additional downloads
-            </h2>
-            <p className={styles.additionalReleasesSub}>
-              Get the latest Orchestration Cluster and connector releases, and
-              browse enterprise downloads, including ProcessOS.
-            </p>
-            <div
-              className={clsx(
-                bwcStyles.downloadsGrid,
-                styles.downloadsGridFull
-              )}
-            >
-              {ADDITIONAL_RELEASES.map((resource) => (
-                <DownloadCard
-                  key={resource.title}
-                  icon={resource.icon}
-                  title={resource.title}
-                  description={resource.description}
-                  version={resource.version}
-                  date={resource.date}
-                  links={resource.links}
-                  primaryLink={resource.primaryLink}
-                  previousVersions={resource.previousVersions}
-                  loginRequired={resource.loginRequired}
-                  activeOS={activeOS}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Alternative install methods ─── */}
-        <section
-          className={clsx(
-            bwcStyles.moreSection,
-            bwcStyles.darkSection,
-            bwcStyles.noTopBorder
-          )}
-        >
-          <div className="container">
-            <div className={bwcStyles.sectionHeader}>
-              <h2 className={bwcStyles.sectionTitle}>
-                More ways to run your own Camunda
-              </h2>
-              <p className={bwcStyles.sectionSub}>
-                Choose the setup that fits your workflow and infrastructure.
+            {detectedOS && (
+              <p className={styles.osDetectedLabel}>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  style={{ marginRight: 4, verticalAlign: "-1px" }}
+                >
+                  <circle
+                    cx="6"
+                    cy="6"
+                    r="5.5"
+                    stroke="currentColor"
+                    strokeOpacity="0.5"
+                  />
+                  <path
+                    d="M4 6l1.5 1.5L8 4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Detected:{" "}
+                {
+                  { mac: "macOS", windows: "Windows", linux: "Linux" }[
+                    detectedOS
+                  ]
+                }
               </p>
+            )}
+
+            <div
+              className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridTwo)}
+            >
+              <GettingStartedCard activeOS={activeOS} />
+              <DownloadCard
+                icon={<PencilIconLg />}
+                title="Desktop Modeler"
+                description="Design BPMN processes, DMN decision tables, and forms locally. Drag, drop, and design alongside your IDE."
+                version={DESKTOP_MODELER.version}
+                date={DESKTOP_MODELER.date}
+                links={DESKTOP_MODELER.links}
+                docsLink={DESKTOP_MODELER.docsLink}
+                previousVersions={DESKTOP_MODELER.previousVersions}
+                activeOS={activeOS}
+              />
+              <DownloadCard
+                icon={<PlayIconLg />}
+                title="Camunda 8 Run"
+                description="Lightweight all-in-one Camunda distribution for effortless local development. Use alongside Desktop Modeler."
+                version={CAMUNDA_RUN.version}
+                date={CAMUNDA_RUN.date}
+                links={CAMUNDA_RUN.links}
+                docsLink={CAMUNDA_RUN.docsLink}
+                previousVersions={CAMUNDA_RUN.previousVersions}
+                activeOS={activeOS}
+              />
+              <DownloadCard
+                icon={<RpaIconLg />}
+                title="RPA Worker"
+                description="Run robotic process automation tasks alongside your BPMN workflows. Automate desktop applications and legacy systems."
+                version={RPA_WORKER.version}
+                date={RPA_WORKER.date}
+                links={RPA_WORKER.links}
+                docsLink={RPA_WORKER.docsLink}
+                previousVersions={RPA_WORKER.previousVersions}
+                activeOS={activeOS}
+              />
+              <CatalogItemCard item={C8CTL} />
             </div>
-            <div className={clsx(bwcStyles.waysGrid, styles.waysGridWide)}>
-              <Link
-                to={useBaseUrl("/build-with-camunda#self-managed")}
-                className={bwcStyles.wayCard}
-              >
-                <span className={styles.cliIconWrap}>
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                    <rect
-                      x="2"
-                      y="4"
-                      width="20"
-                      height="16"
-                      rx="2"
-                      stroke="#fc5d0d"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M6 8l4 4-4 4"
-                      stroke="#fc5d0d"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 16h6"
-                      stroke="#fc5d0d"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                <h3>Camunda CLI</h3>
-                <p>
-                  Install with <code>npm install -g @camunda8/cli</code> and
-                  manage everything from your terminal.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
+          </TabPanel>
+
+          <TabPanel
+            id="cli-and-sdks"
+            activeTab={activeTab}
+            onSelect={selectTab}
+          >
+            <CatalogSection section={CATALOG_SECTIONS["cli-and-sdks"]} />
+          </TabPanel>
+
+          <TabPanel
+            id="self-managed"
+            activeTab={activeTab}
+            onSelect={selectTab}
+          >
+            <CatalogSection section={CATALOG_SECTIONS["self-managed"]}>
+              <div
+                className={clsx(
+                  bwcStyles.downloadsGrid,
+                  styles.downloadsGridFull,
+                  styles.releaseCardsGrid
                 )}
-                className={bwcStyles.wayCard}
               >
-                <DockerSvgIcon width="72" height="72" />
-                <h3>Docker Compose</h3>
-                <p>
-                  Run Camunda 8 locally for development and evaluation with{" "}
-                  <code>docker compose up -d</code>.
-                </p>
+                {ADDITIONAL_RELEASES.map((resource) => (
+                  <DownloadCard
+                    key={resource.title}
+                    icon={resource.icon}
+                    title={resource.title}
+                    description={resource.description}
+                    version={resource.version}
+                    date={resource.date}
+                    links={resource.links}
+                    primaryLink={resource.primaryLink}
+                    docsLink={resource.docsLink}
+                    previousVersions={resource.previousVersions}
+                    activeOS={activeOS}
+                  />
+                ))}
+              </div>
+            </CatalogSection>
+          </TabPanel>
+
+          <TabPanel id="migration" activeTab={activeTab} onSelect={selectTab}>
+            <CatalogSection section={CATALOG_SECTIONS.migration} />
+          </TabPanel>
+
+          <TabPanel id="enterprise" activeTab={activeTab} onSelect={selectTab}>
+            <CatalogSection section={CATALOG_SECTIONS.enterprise} />
+          </TabPanel>
+
+          <nav className={styles.releaseInfo} aria-label="Release information">
+            <span className={styles.releaseInfoLabel}>
+              {RELEASE_INFORMATION.title}:
+            </span>
+            {RELEASE_INFORMATION.links.map((link) => (
+              <Link key={link.to} to={useBaseUrl(link.to)}>
+                {link.label}
               </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/deployment/helm/install/quick-install/"
-                )}
-                className={bwcStyles.wayCard}
-              >
-                <K8sSvgIcon width="72" height="72" />
-                <h3>Kubernetes</h3>
-                <p>
-                  Deploy to any Kubernetes cluster with the official Camunda
-                  Helm chart.
-                </p>
-              </Link>
-            </div>
-          </div>
+            ))}
+          </nav>
         </section>
 
         {/* ─── Start building CTA ─── */}
