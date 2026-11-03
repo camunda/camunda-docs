@@ -1687,7 +1687,7 @@ Example:
 
 ### MOCK_JOB_WORKER_COMPLETE_JOB
 
-An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for more details, and [dynamic variables](utilities.md#complete-with-dynamic-variables) for the behavior of `variablesExpression`.
+An instruction to mock a job worker who completes jobs. See the [utilities documentation](utilities.md#complete-job) for more details.
 
 <table>
   <tbody><tr>
@@ -1745,17 +1745,15 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
   </tr>
 </tbody></table>
 
-The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
+The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with dynamic variables](utilities.md#complete-with-dynamic-variables) for its behavior and [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
 
-When you use `variablesExpression` or a non-empty `variablesTable`, it must be the only source of variables. The instruction
-fails if you also use another source:
+When you use `variablesExpression` or a non-empty `variablesTable`, it must be the only source of variables. The instruction fails if you also use another source:
 
 - A non-empty `variables` object.
 - `useExampleData` set to `true`.
 - Both `variablesExpression` and a non-empty `variablesTable`.
 
-An empty `variables` object, an empty `variablesTable`, and `useExampleData` set to `false` don't count. Without
-`variablesExpression` or `variablesTable`, the properties `variables` and `useExampleData` behave as before.
+An empty `variables` object, an empty `variablesTable`, and `useExampleData` set to `false` don't count. Without `variablesExpression` or `variablesTable`, the properties `variables` and `useExampleData` behave as before.
 
 Example:
 
