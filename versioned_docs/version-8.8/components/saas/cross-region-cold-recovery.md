@@ -17,7 +17,7 @@ Cross-region cold recovery is generally available starting from Camunda 8.7 or l
 
 ## Supported region pairs
 
-Cross-region cold recovery is available only for specific region pairs marked **Failover supported** when you select your region and backup location in Console. Each pair supports failover in both directions.
+Cross-region cold recovery is available only for specific region pairs marked **Cold recovery supported** when you select your region and backup location in Console. Each pair supports failover in both directions.
 
 | Cloud provider | Region pair                                                                     |
 | -------------- | ------------------------------------------------------------------------------- |
