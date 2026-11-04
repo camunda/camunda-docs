@@ -9,7 +9,7 @@ keywords:
 
 import PageDescription from '@site/src/components/PageDescription';
 import AoGrid from '../react-components/\_ao-card';
-import { buildLlmCards, buildToolCards, buildMemoryCards, buildExternalAgentCards, buildExposeCards } from '../react-components/\_ao-card-data';
+import { buildLlmCards, buildCapabilityCards, buildExternalAgentCards, buildExposeCards } from '../react-components/\_ao-card-data';
 
 <PageDescription />
 
@@ -29,21 +29,19 @@ Get started by [building your first AI agent](/guides/getting-started-agentic-or
 
 ### Connect an LLM
 
-A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next. To choose a model, see [choose the right LLM](/components/agentic-orchestration/choose-right-model-agentic.md).
+A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next. To get started quickly in Camunda SaaS, use the Camunda-provided LLM.
+
+To choose a model, compare recommendations, and write effective prompts, see the [best practices](/components/agentic-orchestration/best-practices-agentic.md) for agentic orchestration.
 
 <AoGrid ao={buildLlmCards} columns={3}/>
 
-### Give the agent tools
+### Give the agent tools and memory
 
 Tools are the BPMN activities an agent can call to act on your systems, such as service tasks, [human tasks](/reference/glossary.md#human-task), and sub-processes. The agent selects which tools to run, and Camunda applies retries and incident handling to each call.
 
-<AoGrid ao={buildToolCards} columns={3}/>
-
-### Give the agent memory
-
 By default, an agent only knows what is in its conversation context. To give it access to knowledge beyond that, store [embeddings](/reference/glossary.md#embedding-vector-embedding) in a vector database and retrieve them when the agent needs them.
 
-<AoGrid ao={buildMemoryCards} columns={3}/>
+<AoGrid ao={buildCapabilityCards} columns={3}/>
 
 ## Connect an external agent
 

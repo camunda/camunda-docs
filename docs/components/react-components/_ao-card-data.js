@@ -94,7 +94,7 @@ export const buildLlmCards = [
   },
 ];
 
-export const buildToolCards = [
+export const buildCapabilityCards = [
   {
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
@@ -102,9 +102,6 @@ export const buildToolCards = [
     description:
       "Add BPMN elements to the agent's ad-hoc sub-process so the LLM can select and call them as tools.",
   },
-];
-
-export const buildMemoryCards = [
   {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
