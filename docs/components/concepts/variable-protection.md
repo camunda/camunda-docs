@@ -9,17 +9,13 @@ Process [variables](./variables.md) often carry sensitive data, such as card num
 
 With variable protection, you mark individual variables as sensitive so their values aren't exported to secondary storage. You keep using the variables in your process, and you can still see which variables exist and which are protected.
 
-Variable protection is available from 8.11.0-alpha1 as an alpha feature.
-
-:::warning
-In 8.11.0-alpha1, variable protection is incomplete. Redaction applies to variables that you read through the variable and user task variable endpoints, but values can still appear in other places. Before you rely on this feature for sensitive data, see [Known issues and planned changes](#known-issues-and-planned-changes).
-:::
+Variable protection is available from 8.11.0-alpha1 as an alpha feature. In this release, protection is incomplete, and values can still appear in other places. Before you use it for sensitive data, review the [known issues and planned changes](#known-issues-and-planned-changes).
 
 ## Redact variable values
 
 The `REDACT` protection mode irrecoverably replaces the value of a variable before it is exported to secondary storage. Searching or reading the variable through the API returns the redacted value, not the original.
 
-The variable itself stays visible in secondary storage, only without its value. For example, you can still see its `name`, `variableKey`, `scopeKey`, `processInstanceKey`, `tenantId`, and `metadata.protectionModes`.
+The variable itself stays visible in secondary storage, but Camunda `redacts` its value. You can still access other variable properties, such as `name`, `variableKey`, `scopeKey`, `processInstanceKey`, `tenantId`, and `metadata.protectionModes`.
 
 The original value isn't removed from the engine. Components that work with primary storage still receive it, for example a job worker that activates a job and gets the process variables.
 
@@ -71,11 +67,7 @@ The following request sets a new value for `cardNumber` and protects it:
 }
 ```
 
-The following table shows the result for each combination of existing variable state and request.
-
-:::warning
-Not all update cases are finalized. The cases below can change before the final release.
-:::
+The following table shows the result for each combination of existing variable state and request. Not all update cases are finalized. See [known issues](#update-behavior-is-not-finalized).
 
 | Variable before the request | You send                                                         | What happens                                                            |
 | :-------------------------- | :--------------------------------------------------------------- | :---------------------------------------------------------------------- |
@@ -144,18 +136,7 @@ For the process instance created above, the search response looks like this:
 
 To list only protected or only unprotected variables, use the `protectionMode` filter in the variables search request. For all request and response fields, see the [search variables API specification](/apis-tools/orchestration-cluster-api-rest/specifications/search-variables.api.mdx).
 
-:::warning
-The redacted `value` is the string `"null"`, not an omitted field or a JSON `null`. Check `metadata.protectionModes` instead of the value to detect a protected variable. A variable whose real value is the string `"null"` can't be told apart by its value alone. In a later release, the redacted value will change to `null`.
-:::
-
-### What you can and can't do
-
-| You can                                                                                                                            | You can't                                                                                                                              |
-| :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| Protect one or more variables with `REDACT` when you create a process instance or update variables.                                | Read the original value of a protected variable from secondary storage or the variable endpoints. The value is replaced before export. |
-| Identify protected variables through `metadata.protectionModes`, or filter for them with `protectionMode` in the variables search. | Rely on `REDACT` to hide a value in places other than the stored variable in 8.11.0-alpha1.                                            |
-| Keep using unprotected variables in the same process instance without any change.                                                  | Protect a variable by default. You must set `variablesMetadata` explicitly on every request.                                           |
-| Search for a protected variable by name, scope, or process instance, but not by its value.                                         | Rely on the update cases that are not finalized yet. They can change before the final release.                                         |
+The redacted `value` is currently the string `"null"`. Check `metadata.protectionModes` to detect a protected variable. See [known issues](#the-redacted-value-is-the-string-null).
 
 ## Known issues and planned changes
 
@@ -178,7 +159,7 @@ Some cases of [updating variables](#update-variables) aren't finalized, for exam
 
 ### The redacted value is the string `"null"`
 
-In 8.11.0-alpha1, the search response returns a redacted value as the string `"null"`. In a later release, the redacted value will change to `null`. Build integrations on `metadata.protectionModes`, not on the redacted `value`, so they keep working after the change.
+In 8.11.0-alpha1, the search response returns a redacted `value` as the string `"null"`. This placeholder might change in a later release. Don't rely on the `value` to detect redaction. Use `metadata.protectionModes` instead, so your integration keeps working after any change.
 
 ## Next steps
 
