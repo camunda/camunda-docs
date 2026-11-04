@@ -2,7 +2,7 @@
 id: build-agents
 title: Build AI agents
 sidebar_label: Build AI agents
-description: "Build AI agents in Camunda by modeling a Camunda AI agent or connecting an external agent, and give them an LLM, tools, and long-term memory."
+description: "Build AI agents in Camunda by modeling a Camunda AI agent or connecting an external agent."
 keywords:
   ["build AI agent", "AI agent", "agentic orchestration", "tools", "MCP", "LLM"]
 ---
@@ -13,8 +13,7 @@ import { buildLlmCards, buildToolCards, buildMemoryCards, buildExternalAgentCard
 
 <PageDescription />
 
-An [AI agent](/reference/glossary.md#ai-agent) decides which tools to call to reach a goal, while Camunda orchestrates the process around it. Use this page to find the guide for each part of building one.
-
+Learn how to build an [AI agent](/reference/glossary.md#ai-agent).
 You can follow one of two paths:
 
 1. [Build a Camunda AI agent](#build-a-camunda-ai-agent): Model the agent in BPMN, connect it to an LLM, and give it tools and memory.
@@ -22,10 +21,10 @@ You can follow one of two paths:
 
 ## Build a Camunda AI agent
 
-A [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) runs its [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity. You model the agent with the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) on an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process).
+A [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) runs its [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity. You model the agent with the [AI Agent connector](/components/connectors/out-of-the-box-connectors/).
 
 :::tip
-If you're new to agentic orchestration, get started by [building your first AI agent](/guides/getting-started-agentic-orchestration.md).
+Get started by [building your first AI agent](/guides/getting-started-agentic-orchestration.md).
 :::
 
 ### Connect an LLM
