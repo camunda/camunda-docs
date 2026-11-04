@@ -121,7 +121,7 @@ Known constraints and behavior:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Identity providers**: two providers that a tenant assigns must not use the same `issuer-uri`. Issuer URIs that differ only by a trailing slash are the same issuer.
-- **Client secret**: a tenant that changes the `issuer-uri` or `token-uri` of a cluster-level provider must set its own `client-secret`, so that the cluster secret is not sent to another identity provider. This does not apply with `client-authentication-method: private_key_jwt`. A value that differs only by a trailing slash is not a change.
+- **Client secret**: a tenant that changes the `issuer-uri` or `token-uri` of a cluster-level provider must set its own `client-secret`, so that the cluster secret is not sent to another identity provider. This does not apply with `client-authentication-method: private_key_jwt`. An `issuer-uri` that differs only by a trailing slash is not a change, but any change to `token-uri` is.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
 - **Secrets**: each physical tenant supports at most one secret store, and its ID must be `default`; any other ID is rejected. Camunda validates the cache settings per tenant. `ttl` must be at least `1m` and use whole minutes, and `max-size` must be at least `1`. To override the root-level `camunda.secrets.*` defaults for a physical tenant, use `camunda.physical-tenants.<tenant-key>.secrets.*`.
 
