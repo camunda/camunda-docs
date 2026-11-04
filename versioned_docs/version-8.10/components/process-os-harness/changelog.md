@@ -49,6 +49,15 @@ Releases in each section are listed newest first. For installation instructions,
 ## Alpha
 
 <details>
+<summary>1.1.0-alpha.3 (2026-11-02)</summary>
+
+#### Bug fixes
+
+- Non-colliding port default and worker-sized HTTP pool
+
+</details>
+
+<details>
 <summary>1.1.0-alpha.2 (2026-10-26)</summary>
 
 #### Features
