@@ -19,7 +19,7 @@ import PageDescription from '@site/src/components/PageDescription';
 :::caution Early access
 ProcessOS Harness is available as [early access](/components/early-access/overview.md) for trained customers and enabled partners. See [current scope](#current-scope).
 
-Early access applies to the harness itself. Its interfaces, skills, and governance steps can still change. It doesn't apply to the processes the harness builds, which are standard Camunda processes. See [what you get](#what-you-get).
+Early access applies to the harness itself. Its interfaces, skills, and governance steps may still change. It does not apply to the processes the harness builds, which are standard Camunda processes. See [what you get](#what-you-get).
 :::
 
 ## About
@@ -30,9 +30,9 @@ The input for ProcessOS Harness can be any resource that describes the process, 
 
 ## What you get
 
-ProcessOS Harness builds a standard Camunda process: BPMN models, DMN tables, Camunda Forms, and job workers. The process has no dependency on ProcessOS Harness. You deploy, change, and maintain it the same way as a process you built by hand, for example in Modeler or in code.
+ProcessOS Harness builds standard Camunda processes using BPMN models, DMN tables, Camunda Forms, and job workers. These processes do not depend on ProcessOS Harness. You can deploy, modify, and maintain them just like processes you build by hand, for example, in Modeler or in code.
 
-Changes to ProcessOS Harness don't change a process you already built. While the harness is in early access, only the way it builds processes can change.
+Changes to ProcessOS Harness do not affect processes you have already built. While the harness is in early access, only the way it builds processes may change.
 
 ## Who ProcessOS Harness is for
 
@@ -94,7 +94,7 @@ Today, ProcessOS Harness focuses on taking you from discovery to a generated, te
 
 In this release, each project runs locally with its own private memory. Cross-project memory and multi-project management are planned for future releases.
 
-If you build your own software on top of ProcessOS Harness itself, for example your own user interface that calls the harness, it can break when the harness changes. Processes built with the harness aren't affected.
+If you build your own software on top of ProcessOS Harness, for example, a user interface that calls the harness, it may break when the harness changes. Processes built with the harness are not affected.
 
 ## Get started
 
