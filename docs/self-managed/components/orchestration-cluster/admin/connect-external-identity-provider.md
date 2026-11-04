@@ -694,12 +694,13 @@ Failed to revoke the refresh token for OIDC registration '<id>' at <endpoint> [.
 session is still terminated, but the refresh token may remain valid until it expires.
 ```
 
-If many sessions expire while the identity provider is slow or unreachable, Camunda stops queueing
-revocations and logs this warning once:
+Camunda queues the revocations of expired sessions separately for each identity provider. If a
+provider's queue is full, for example while the provider is slow or unreachable, Camunda drops
+further revocations for that provider and logs this warning once:
 
 ```
-Dropping refresh-token revocations of expired web sessions: 1000 are already queued, likely because
-the identity provider is slow or unreachable. [...]
+Dropping refresh-token revocations of expired web sessions for token endpoint '<token-endpoint>':
+its revocation queue is full (1000 queued). [...]
 ```
 
 Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
