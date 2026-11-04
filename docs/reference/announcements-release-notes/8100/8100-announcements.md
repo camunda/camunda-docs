@@ -211,9 +211,10 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 The following key changes were also released as part of an 8.10.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
-| :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| Patch release                                                          | Artifact | Type       | Key change                                                                                                                                |
+| :--------------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7)       | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| 8.10.x <!-- TODO: set the patch release and link it once it is cut --> | Core     | Bug fix    | [Batch suspend, resume, and cancel narrow and validate the `state` filter](#batch-suspend-resume-cancel-state-filter)                     |
 
 ## Agentic orchestration
 
@@ -461,6 +462,35 @@ A cluster upgraded without these changes stops reporting license information to 
 **Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-8100.md#broker-ping-configuration) in the upgrade guide.
 
 <p className="link-arrow">[Camunda Hub ping configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Bug fix</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch suspend, resume, and cancel narrow and validate the `state` filter {#batch-suspend-resume-cancel-state-filter}
+
+Starting with 8.10.x, the batch operations to suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, suspend and resume discarded your `state` and `parentProcessInstanceKey` filters, so a batch could act on instances outside your filter. For example, a batch suspension filtered by `parentProcessInstanceKey` suspended every active process instance that matched the remaining filter criteria.
+
+| Operation                                                                                                              | Required state           | Previous behavior                             |
+| :--------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
+| [Suspend](/apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation.api.mdx) | `ACTIVE`                 | Replaced your filter with the required state. |
+| [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx)   | `SUSPENDED`              | Replaced your filter with the required state. |
+| [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx)   | `ACTIVE` and `SUSPENDED` | Combined your filter with the required state. |
+
+The following rules apply to all three operations:
+
+- A top-level `state` filter that uses `$eq` or `$in` with a state outside the required states is rejected with `400 Bad Request`. Suspend and resume previously discarded the filter. Cancel already rejected it.
+- States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances. Cancel previously rejected invalid states in `$or` branches.
+- The `$neq`, `$exists`, and `$like` operators on a top-level `state` are applied as given.
+
+Suspend and resume now apply the `parentProcessInstanceKey` filter as given. Cancel keeps its root-only behavior from [8.10.7](#batch-cancel-parent-process-instance-filter).
+
+**Action:** Remove a conflicting top-level `state` filter from your batch requests, or move it into an `$or` branch. If your integration relied on suspend or resume discarding your `parentProcessInstanceKey` filter, review the filter, because it now limits the batch.
 
 </div>
 </div>

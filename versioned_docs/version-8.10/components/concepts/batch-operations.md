@@ -43,6 +43,25 @@ Furthermore, depending on the status of the batch operation, you may be able to 
 Canceling a batch operation does not rollback any changes that have already been produced.
 :::
 
+## Filter process instances for batch operations
+
+Batch process instance operations only act on instances in a state the operation supports. Starting with an 8.10.x patch release, the following rules apply to the suspend, resume, and cancel operations.
+
+| Operation | Required state           |
+| :-------- | :----------------------- |
+| Suspend   | `ACTIVE`                 |
+| Resume    | `SUSPENDED`              |
+| Cancel    | `ACTIVE` and `SUSPENDED` |
+
+Your filter only narrows the batch. Camunda narrows your `state` filter with the required state, so the batch never includes instances outside the required state.
+
+- A top-level `state` filter that uses `$eq` or `$in` with a state the operation doesn't support is rejected with `400 Bad Request`.
+- States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances.
+- The `$neq`, `$exists`, and `$like` operators on a top-level `state` are applied as given, and the batch remains limited to the required states.
+- A `parentProcessInstanceKey` filter is applied as given. Cancel only acts on root instances, so a filter that matches only child instances selects no instances.
+
+To resolve a rejected request, remove the conflicting top-level `state` filter or move it into an `$or` branch.
+
 ## States
 
 A batch operation can have one of the following statuses:

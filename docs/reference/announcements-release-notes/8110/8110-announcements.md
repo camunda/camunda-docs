@@ -20,7 +20,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
-Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it.
+Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend, resume, and cancel already behave this way starting with an 8.10.x patch release, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-cancel-state-filter).
 
 Previously, the API documentation described the `state` filter as "ignored and overridden". This didn't match the actual behavior, which differed by operation.
 
