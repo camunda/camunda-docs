@@ -204,7 +204,7 @@ The following variables are available in the context of the response expression:
 
 - **status**: Response status.
 - **body**: Response body of your request. Populated when the **Response format** is **As text** or **As JSON**.
-- **headers**: Response headers.
+- **headers**: Response headers. Header names keep the casing sent by the server. To look up a header regardless of its casing, use the [`getHeader` FEEL function](/components/connectors/use-connectors/index.md#function-getheader).
 - **document**: Populated when the **Response format** is **Document reference**; represents the stored document:
   - **documentId**: The ID of the stored document.
   - **contentHash**: The hash of the stored document.
