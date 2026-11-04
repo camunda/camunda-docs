@@ -65,9 +65,11 @@ const release = (
     : [{ name: `camunda-zeebe-${tag}.tar.gz` }],
 });
 
-// Release metadata as of November 2026: 8.10 is GA, the Getting Started bundle
-// last shipped with 8.10.4, and no 8.11 alpha is out yet.
-const TODAY = {
+// Mocked fixture data, not the live catalog: a frozen snapshot of release
+// metadata from November 2026 (8.10 is GA, the Getting Started bundle last
+// shipped with 8.10.4, and no 8.11 alpha is out yet) to exercise the selection
+// logic. The script itself reads the live releases on every run.
+const NOV_2026_RELEASES = {
   c8run: ["8.9.23", "8.10.0-alpha4", "8.10.0-alpha5", "8.10.6", "8.10.7"],
   modeler: ["5.51.1", "5.52.0"],
   rpa: ["1.3.1", "1.3.2"],
@@ -232,8 +234,8 @@ describe("update-downloads", () => {
     ).resolves.toBeNull();
   });
 
-  test("builds today's catalog", async () => {
-    mockFetch(TODAY);
+  test("builds the catalog from the November 2026 release snapshot", async () => {
+    mockFetch(NOV_2026_RELEASES);
     const catalog = await loadScript().buildCatalog();
 
     expect(catalog.gettingStarted.version).toBe("8.10.4");
@@ -253,9 +255,9 @@ describe("update-downloads", () => {
 
   test("shows the next minor's alpha and then its stable release", async () => {
     mockFetch({
-      ...TODAY,
-      c8run: [...TODAY.c8run, "8.11.0-alpha1"],
-      camunda: [release("8.11.0-alpha1"), ...TODAY.camunda],
+      ...NOV_2026_RELEASES,
+      c8run: [...NOV_2026_RELEASES.c8run, "8.11.0-alpha1"],
+      camunda: [release("8.11.0-alpha1"), ...NOV_2026_RELEASES.camunda],
     });
     let catalog = await loadScript().buildCatalog();
 
@@ -272,9 +274,13 @@ describe("update-downloads", () => {
     );
 
     mockFetch({
-      ...TODAY,
-      c8run: [...TODAY.c8run, "8.11.0-alpha5", "8.11.0"],
-      camunda: [release("8.11.0"), release("8.11.0-alpha5"), ...TODAY.camunda],
+      ...NOV_2026_RELEASES,
+      c8run: [...NOV_2026_RELEASES.c8run, "8.11.0-alpha5", "8.11.0"],
+      camunda: [
+        release("8.11.0"),
+        release("8.11.0-alpha5"),
+        ...NOV_2026_RELEASES.camunda,
+      ],
     });
     catalog = await loadScript().buildCatalog();
 
@@ -288,8 +294,8 @@ describe("update-downloads", () => {
 
   test("keeps the previous release while a new one is uploading", async () => {
     mockFetch({
-      ...TODAY,
-      c8run: [...TODAY.c8run, "8.10.8"],
+      ...NOV_2026_RELEASES,
+      c8run: [...NOV_2026_RELEASES.c8run, "8.10.8"],
       missing: { "camunda/c8run/": "8.10.8" },
     });
     const catalog = await loadScript().buildCatalog();
@@ -302,8 +308,8 @@ describe("update-downloads", () => {
 
   test("hides the alpha while the first alpha of a minor is uploading", async () => {
     mockFetch({
-      ...TODAY,
-      c8run: [...TODAY.c8run, "8.11.0-alpha1"],
+      ...NOV_2026_RELEASES,
+      c8run: [...NOV_2026_RELEASES.c8run, "8.11.0-alpha1"],
       missing: { "camunda/c8run/": "8.11.0-alpha1" },
     });
     const catalog = await loadScript().buildCatalog();
@@ -322,7 +328,10 @@ describe("update-downloads", () => {
     const newer = Array.from({ length: 150 }, (_, index) =>
       release(`8.10.${100 + index}`)
     );
-    mockFetch({ ...TODAY, camunda: [...newer, ...TODAY.camunda] });
+    mockFetch({
+      ...NOV_2026_RELEASES,
+      camunda: [...newer, ...NOV_2026_RELEASES.camunda],
+    });
     const catalog = await loadScript().buildCatalog();
 
     expect(catalog.gettingStarted.version).toBe("8.10.4");
