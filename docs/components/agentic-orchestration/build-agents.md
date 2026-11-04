@@ -27,19 +27,21 @@ A [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) runs its [agent lo
 Get started by [building your first AI agent](/guides/getting-started-agentic-orchestration.md).
 :::
 
-### Connect an LLM
+### Choose an LLM
 
 A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next.
 
-To get started quickly in Camunda SaaS, use the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md).
+- To get started quickly in Camunda SaaS, use the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md).
+- To choose a model, compare recommendations, and write effective prompts, see the [best practices](/components/agentic-orchestration/best-practices-agentic.md).
+- To see which model providers the AI Agent connector supports, see the [supported providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#supported-providers).
 
-To choose a model, compare recommendations, and write effective prompts, see the agentic orchestration [best practices](/components/agentic-orchestration/best-practices-agentic.md).
+### Extend your agent capabilities
 
-### Give the agent tools and memory
+Use these guides to add tools and long-term memory to your agent.
 
 Tools are the BPMN activities an agent can call to act on your systems, such as service tasks, [human tasks](/reference/glossary.md#human-task), and sub-processes. The agent selects which tools to run, and Camunda applies retries and incident handling to each call.
 
-By default, an agent only knows what is in its conversation context. To give it access to knowledge beyond that, store [embeddings](/reference/glossary.md#embedding-vector-embedding) in a vector database and retrieve them when the agent needs them.
+By default, an agent only knows what is in its conversation context. To give it long-term memory, store [embeddings](/reference/glossary.md#embedding-vector-embedding) in a vector database and retrieve them when the agent needs them.
 
 <AoGrid ao={buildCapabilityCards} columns={3}/>
 

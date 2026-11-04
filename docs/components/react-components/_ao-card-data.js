@@ -90,7 +90,7 @@ export const buildLlmCards = [
     title: "Camunda-provided LLM",
     image: IconAoLlmImg,
     description:
-      "Run your agent right away in Camunda SaaS with a Camunda-managed LLM and no credentials to set up. Intended for testing and experimentation.",
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
   },
 ];
 
@@ -99,15 +99,14 @@ export const buildCapabilityCards = [
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
     image: IconAoAgentImg,
-    description:
-      "Add BPMN elements to the agent's ad-hoc sub-process so the LLM can select and call them as tools.",
+    description: "Add BPMN elements as callable tools to your AI agents.",
   },
   {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,
     description:
-      "Use retrieval-augmented generation (RAG) and the Vector Database connector to let your agent recall knowledge across process instances.",
+      "Add long-term memory to your AI agents using RAG and the Vector Database connector.",
   },
 ];
 
@@ -117,7 +116,7 @@ export const buildExternalAgentCards = [
     title: "Connect an external agent",
     image: IconAoAgentImg,
     description:
-      "Orchestrate an agent built with a framework such as LangGraph or CrewAI, and surface its activity in Camunda.",
+      "Connect an agent built with an external framework, such as LangGraph or CrewAI, to Camunda.",
   },
 ];
 
@@ -127,7 +126,7 @@ export const buildExposeCards = [
     title: "Expose a process as an MCP tool",
     image: IconMCP,
     description:
-      "Register a BPMN process as a callable tool in the Processes MCP Server so agents can discover and run it.",
+      "Expose BPMN processes as MCP tools so AI agents can discover and run them.",
   },
 ];
 

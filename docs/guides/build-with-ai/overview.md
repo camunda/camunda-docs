@@ -74,7 +74,7 @@ Build AI agents and connect them to LLMs, tools, memory, and other agents.
 link: "../../../components/agentic-orchestration/build-agents/",
 title: "Build AI agents",
 image: IconAgenticImg,
-description: "Find the guide for each part of building an AI agent, from LLMs and tools to memory and external agents.",
+description: "Build AI agents in Camunda by modeling a Camunda AI agent or connecting an external agent.",
 },
 {
 link: "../../../components/agentic-orchestration/camunda-provided-llm/",
