@@ -72,34 +72,16 @@ Build AI agents and connect them to LLMs, tools, memory, and other agents.
 
 <AoGrid columns={3} ao={[
 {
+link: "../../../components/agentic-orchestration/build-agents/",
+title: "Build AI agents",
+image: IconAgenticImg,
+description: "Find the guide for each part of building an AI agent, from LLMs and tools to memory and external agents.",
+},
+{
 link: "../../../components/agentic-orchestration/camunda-provided-llm/",
 title: "Camunda-provided LLM",
 image: IconLlmImg,
 description: "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-},
-{
-link: "../../../components/agentic-orchestration/add-tool-to-ai-agent/",
-title: "Add tools to an AI agent",
-image: IconAgenticImg,
-description: "Add BPMN elements as callable tools to your AI agents.",
-},
-{
-link: "../../../components/agentic-orchestration/rag-ai-agents/",
-title: "Add long-term memory",
-image: IconRagImg,
-description: "Add long-term memory to your AI agents.",
-},
-{
-link: "../../../components/agentic-orchestration/connect-external-agent/",
-title: "Connect an external agent",
-image: IconAgenticImg,
-description: "Connect an external agent to Camunda.",
-},
-{
-link: "../../../components/agentic-orchestration/expose-process-as-mcp-tool/",
-title: "Expose a process as an MCP tool",
-image: IconMcpImg,
-description: "Configure a BPMN process as a callable MCP tool for AI agents.",
 },
 {
 link: "../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/",

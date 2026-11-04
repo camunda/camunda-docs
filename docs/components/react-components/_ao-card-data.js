@@ -83,119 +83,54 @@ export const evaluateCards = [
   },
 ];
 
-// Cards for choosing an LLM on the Build AI agents page
-export const buildModelCards = [
-  {
-    link: "../choose-right-model-agentic/",
-    title: "Choose the right LLM",
-    image: IconAoLlmImg,
-    description: "Choose the right LLM for AI agents.",
-  },
-  {
-    link: "../model-recommendations-agentic/",
-    title: "LLM recommendations",
-    image: IconAoLlmImg,
-    description: "Best practices for working with models and prompts.",
-  },
+// Cards on the Build AI agents page
+export const buildLlmCards = [
   {
     link: "../camunda-provided-llm/",
     title: "Camunda-provided LLM",
     image: IconAoLlmImg,
     description:
-      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers/",
-    title: "AI Agent model providers",
-    image: IconConnectorImg,
-    description: "Configure the LLM provider used by the AI Agent connector.",
+      "Run your agent right away in Camunda SaaS with a Camunda-managed LLM and no credentials to set up. Intended for testing and experimentation.",
   },
 ];
 
-// Cards for building a Camunda AI agent on the Build AI agents page
-export const buildAgentCards = [
-  {
-    link: "../ai-agents/",
-    title: "AI agents",
-    image: IconAoAgentImg,
-    description: "Learn about agent types and how the agent loop works.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
-    title: "AI Agent connector",
-    image: IconConnectorImg,
-    description:
-      "Embed LLM-powered agents in your processes with the AI Agent connector.",
-  },
+export const buildToolCards = [
   {
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
     image: IconAoAgentImg,
-    description: "Add BPMN elements as callable tools to your AI agents.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions/",
-    title: "AI agent tool definitions",
-    image: IconConnectorImg,
     description:
-      "Understand how tool names, descriptions, and parameters work.",
+      "Add BPMN elements to the agent's ad-hoc sub-process so the LLM can select and call them as tools.",
   },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-mcp-client/",
-    title: "MCP Client",
-    image: IconMCP,
-    description: "Give your AI agent access to tools on MCP servers.",
-  },
+];
+
+export const buildMemoryCards = [
   {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,
-    description: "Add long-term memory to your AI agents.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents/",
-    title: "Document support",
-    image: IconConnectorImg,
-    description: "Pass documents and images to the LLM.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop/",
-    title: "Human in the loop",
-    image: IconAoDesignImg,
-    description: "Route sensitive tool calls to a person for approval.",
+    description:
+      "Use retrieval-augmented generation (RAG) and the Vector Database connector to let your agent recall knowledge across process instances.",
   },
 ];
 
-// Cards for external agents on the Build AI agents page
 export const buildExternalAgentCards = [
   {
     link: "../connect-external-agent/",
     title: "Connect an external agent",
     image: IconAoAgentImg,
-    description: "Connect an agent built with an external framework.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime/",
-    title: "Amazon Bedrock AgentCore Runtime",
-    image: IconConnectorImg,
-    description: "Invoke agents deployed on AWS Bedrock AgentCore Runtime.",
+    description:
+      "Orchestrate an agent built with a framework such as LangGraph or CrewAI, and surface its activity in Camunda.",
   },
 ];
 
-// Cards for exposing processes as tools on the Build AI agents page
 export const buildExposeCards = [
   {
     link: "../expose-process-as-mcp-tool/",
     title: "Expose a process as an MCP tool",
     image: IconMCP,
     description:
-      "Configure a BPMN process as a callable MCP tool for AI agents.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event/",
-    title: "MCP start event",
-    image: IconConnectorImg,
-    description: "Register a BPMN process as a callable MCP tool.",
+      "Register a BPMN process as a callable tool in the Processes MCP Server so agents can discover and run it.",
   },
 ];
 
