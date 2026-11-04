@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1xm9sbj" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.52.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <bpmn:collaboration id="Collaboration_14wo4pv">
+    <bpmn:participant id="Participant_1mn2ic0" name="Governance&#10;Process" processRef="Process_0v936c0" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0v936c0" isExecutable="false">
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_AsIsModelsFinalized" name="As-is models finalized">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=1" target="transformationIteration" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bmfisk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ohk6rw</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:startEvent id="StartEvent_ProjectStarted" name="Process&#10;re-engineering&#10;project started">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=assert(projectName, projectName != null, &#34;No project name defined&#34;)" target="projectName" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0xs54ut</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_ProcessScopeDefined" name="Process scope defined">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=1" target="discoveryIteration" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_02t668j</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ajgd37</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="EndEvent_ProjectFinalized" name="Process&#10;re-engineering&#10;project finalized">
+      <bpmn:incoming>Flow_1hpbvrt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_ToBeModelsFinalized" name="To-be models finalized">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=1" target="implementationIteration" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0lorxz6</bpmn:incoming>
+      <bpmn:outgoing>Flow_19usv4a</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_ExecutableSolutionGenerated" name="Executable solution generated">
+      <bpmn:incoming>Flow_0cfmc9n</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hpbvrt</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:task id="Activity_1627xnd" name="Project initialization">
+      <bpmn:incoming>Flow_0xs54ut</bpmn:incoming>
+      <bpmn:outgoing>Flow_02t668j</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0agqzhg" name="Process&#10;discovery">
+      <bpmn:incoming>Flow_0ajgd37</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bmfisk</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1rti6vi" name="Process&#10;transformation">
+      <bpmn:incoming>Flow_1ohk6rw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lorxz6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1qkd2d8" name="Process&#10;implementation">
+      <bpmn:incoming>Flow_19usv4a</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cfmc9n</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0bmfisk" sourceRef="Activity_0agqzhg" targetRef="IntermediateThrowEvent_AsIsModelsFinalized" />
+    <bpmn:sequenceFlow id="Flow_1ohk6rw" sourceRef="IntermediateThrowEvent_AsIsModelsFinalized" targetRef="Activity_1rti6vi" />
+    <bpmn:sequenceFlow id="Flow_0xs54ut" sourceRef="StartEvent_ProjectStarted" targetRef="Activity_1627xnd" />
+    <bpmn:sequenceFlow id="Flow_02t668j" sourceRef="Activity_1627xnd" targetRef="IntermediateThrowEvent_ProcessScopeDefined" />
+    <bpmn:sequenceFlow id="Flow_0ajgd37" sourceRef="IntermediateThrowEvent_ProcessScopeDefined" targetRef="Activity_0agqzhg" />
+    <bpmn:sequenceFlow id="Flow_1hpbvrt" sourceRef="IntermediateThrowEvent_ExecutableSolutionGenerated" targetRef="EndEvent_ProjectFinalized" />
+    <bpmn:sequenceFlow id="Flow_0lorxz6" sourceRef="Activity_1rti6vi" targetRef="IntermediateThrowEvent_ToBeModelsFinalized" />
+    <bpmn:sequenceFlow id="Flow_19usv4a" sourceRef="IntermediateThrowEvent_ToBeModelsFinalized" targetRef="Activity_1qkd2d8" />
+    <bpmn:sequenceFlow id="Flow_0cfmc9n" sourceRef="Activity_1qkd2d8" targetRef="IntermediateThrowEvent_ExecutableSolutionGenerated" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_14wo4pv">
+      <bpmndi:BPMNShape id="Participant_1mn2ic0_di" bpmnElement="Participant_1mn2ic0" isHorizontal="true">
+        <dc:Bounds x="170" y="80" width="1140" height="170" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1l5w753" bpmnElement="IntermediateThrowEvent_AsIsModelsFinalized" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="679" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="668" y="175" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0bowyh4" bpmnElement="StartEvent_ProjectStarted" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="239" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="222" y="175" width="71" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_ProcessScopeDefined_di" bpmnElement="IntermediateThrowEvent_ProcessScopeDefined" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="459" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="441" y="175" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_12sk7sj" bpmnElement="EndEvent_ProjectFinalized" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="1219" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1199" y="175" width="77" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1qiow64" bpmnElement="IntermediateThrowEvent_ToBeModelsFinalized" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="909" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="894" y="175" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1iz3gz5" bpmnElement="IntermediateThrowEvent_ExecutableSolutionGenerated" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="1119" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1110" y="175" width="55" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1627xnd_di" bpmnElement="Activity_1627xnd">
+        <dc:Bounds x="320" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0agqzhg_di" bpmnElement="Activity_0agqzhg">
+        <dc:Bounds x="537" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rti6vi_di" bpmnElement="Activity_1rti6vi">
+        <dc:Bounds x="757" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qkd2d8_di" bpmnElement="Activity_1qkd2d8">
+        <dc:Bounds x="987" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0bmfisk_di" bpmnElement="Flow_0bmfisk">
+        <di:waypoint x="637" y="150" />
+        <di:waypoint x="679" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ohk6rw_di" bpmnElement="Flow_1ohk6rw">
+        <di:waypoint x="715" y="150" />
+        <di:waypoint x="757" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xs54ut_di" bpmnElement="Flow_0xs54ut">
+        <di:waypoint x="275" y="150" />
+        <di:waypoint x="320" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02t668j_di" bpmnElement="Flow_02t668j">
+        <di:waypoint x="420" y="150" />
+        <di:waypoint x="459" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ajgd37_di" bpmnElement="Flow_0ajgd37">
+        <di:waypoint x="495" y="150" />
+        <di:waypoint x="537" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hpbvrt_di" bpmnElement="Flow_1hpbvrt">
+        <di:waypoint x="1155" y="150" />
+        <di:waypoint x="1219" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lorxz6_di" bpmnElement="Flow_0lorxz6">
+        <di:waypoint x="857" y="150" />
+        <di:waypoint x="909" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19usv4a_di" bpmnElement="Flow_19usv4a">
+        <di:waypoint x="945" y="150" />
+        <di:waypoint x="987" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cfmc9n_di" bpmnElement="Flow_0cfmc9n">
+        <di:waypoint x="1087" y="150" />
+        <di:waypoint x="1119" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -9,6 +9,8 @@ import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import AwsSvgIcon from "../components/CamundaSelfManaged/icons/aws.svg";
 import GcpSvgIcon from "../components/CamundaSelfManaged/icons/gcp.svg";
 import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
+import IconRunLocally from "../../docs/components/assets/icon-run-locally.svg";
+import IconSaasTrial from "../../docs/components/assets/icon-saas-trial.svg";
 import downloads from "../data/downloads.json";
 
 const GETTING_STARTED = downloads.gettingStarted;
@@ -19,46 +21,6 @@ const CAMUNDA_RUN_STABLE_MINOR = CAMUNDA_RUN.version
   .join(".");
 
 /* ─── Icon components ─── */
-
-function CloudIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M19.35 10.04A7.49 7.49 0 0012 4a7.48 7.48 0 00-6.93 4.6A6 6 0 006 20h13a5 5 0 00.35-9.96z"
-        fill="#78a9ff"
-      />
-    </svg>
-  );
-}
-
-function TerminalIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <rect
-        x="2"
-        y="4"
-        width="20"
-        height="16"
-        rx="2"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-      />
-      <path
-        d="M6 8l4 4-4 4"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 16h6"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 function CheckIcon({ color = "#78a9ff" }) {
   return (
@@ -704,7 +666,12 @@ function BuildWithCamunda() {
                   Self-Managed
                 </span>
                 <span className={styles.heroCardIcon}>
-                  <TerminalIcon />
+                  <IconRunLocally
+                    role="img"
+                    aria-hidden="true"
+                    width="64"
+                    height="64"
+                  />
                 </span>
                 <h2 className={styles.heroCardTitle}>Run Camunda locally</h2>
                 <p className={styles.heroCardMeta}>
@@ -739,7 +706,12 @@ function BuildWithCamunda() {
                   Cloud
                 </span>
                 <span className={styles.heroCardIcon}>
-                  <CloudIcon />
+                  <IconSaasTrial
+                    role="img"
+                    aria-hidden="true"
+                    width="64"
+                    height="64"
+                  />
                 </span>
                 <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
                 <p className={styles.heroCardMeta}>Fully managed cloud</p>
@@ -752,7 +724,7 @@ function BuildWithCamunda() {
                     <CheckIcon color="#22a06b" /> Zero setup
                   </li>
                   <li>
-                    <CheckIcon color="#22a06b" /> Web Modeler included
+                    <CheckIcon color="#22a06b" /> Modeler included
                   </li>
                   <li>
                     <CheckIcon color="#22a06b" /> AI agent skills built in

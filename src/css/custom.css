@@ -10,6 +10,10 @@ Camunda Hub design system: neutral gray primary (orange is reserved for the
 logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
 */
 :root {
+  /* Brand purple, matching camunda.com marketing bands. Used by the
+     Build with Camunda page. */
+  --camunda-brand-purple: #5958d1; /* camunda.com purple-600 */
+  --camunda-brand-purple-tint: rgba(89, 88, 209, 0.1);
   --ifm-color-primary: #171717;
   --ifm-color-primary-dark: #141414;
   --ifm-color-primary-darker: #0f0f0f;
@@ -2702,6 +2706,53 @@ p.link-button > a:focus-visible::after {
 }
 
 [data-theme="dark"] p.link-button > a:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black);
+}
+
+/* On mobile, stack the banner button below the text. */
+@media (max-width: 996px) {
+  .build-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .build-banner-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 66%;
+  }
+
+  /* Align the button with the text, past the 64px icon and 20px gap. */
+  .build-banner .button--banner {
+    margin-left: 84px;
+  }
+
+  /* Keep the fade to white, but stay purple under the text. */
+  .build-banner > [aria-hidden="true"] {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 60%,
+      transparent 100%
+    ) !important;
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 60%,
+      transparent 100%
+    ) !important;
+  }
+}
+
+/* Banner button: outlined in dark mode, like p.link-button above. */
+[data-theme="dark"] .button.button--primary.button--banner {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .button.button--primary.button--banner:hover {
   background-color: #ffffff;
   color: var(--ifm-color-black);
 }

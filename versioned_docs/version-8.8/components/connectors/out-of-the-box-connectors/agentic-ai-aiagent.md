@@ -179,7 +179,7 @@ The decision and execution loop is shared between the LLM and Camunda:
 This means tools can be called in different orders, repeated, run in parallel, or skipped entirely, while execution remains constrained by the modeled process boundaries.
 
 :::tip
-For a broader overview of how execution works in an AI agent and architectural guidance, see [Design and architecture](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+For a broader overview of how execution works in an AI agent, see [AI agents](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works). For architectural guidance, see [Design and architecture](/components/agentic-orchestration/design-architecture.md).
 :::
 
 ### Feedback loop

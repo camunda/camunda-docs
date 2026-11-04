@@ -52,7 +52,7 @@ Process documentation often carries personal data by accident, in the form of sa
 
 - Remove or mask personal data from sample files before adding them to the project.
 - Crop personal information from screenshots used in review packages.
-- Check whether your process falls under rules requiring disclosure that AI was involved, described in the [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md).
+- Check whether your process falls under rules requiring disclosure that AI was involved, described in the [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md).
 - Treat the generated solution as you would any other code artifact when it contains business rules you consider confidential.
 
 ## Share with SMEs and reviewers
