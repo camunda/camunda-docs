@@ -21,7 +21,7 @@ You can follow one of two paths:
 
 ## Build a Camunda AI agent
 
-A [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) runs its [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity. You model the agent with the [AI Agent connector](/components/connectors/out-of-the-box-connectors/).
+A [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) runs its [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity. You model the agent with the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 :::tip
 Get started by [building your first AI agent](/guides/getting-started-agentic-orchestration.md).
