@@ -31,6 +31,90 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 80
+
+### Publication date
+
+November 4, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe, Operate, and Tasklist (8.7)
+- Camunda Zeebe (8.6)
+- Camunda Optimize
+- Camunda Management Identity (Identity in 8.6)
+- Camunda Connectors
+- Hub Self-Managed 8.10
+- Web Modeler Self-Managed 8.6, 8.7, 8.8, and 8.9
+- Console Self-Managed 8.7, 8.8, and 8.9
+- Camunda Keycloak images (`camunda/keycloak` and `registry.camunda.cloud/keycloak-ee/keycloak`)
+
+### Impact
+
+The certificate authority eMudhra reported that an attacker compromised some of its intermediate certificate authorities.
+Oracle published two Java security alerts for this compromise:
+
+- [CVE-2026-91403](https://www.cve.org/CVERecord?id=CVE-2026-91403) removes the root certificates "emSign ECC Root CA - G3" and "AAA Certificate Services" from the Java trust store.
+- [CVE-2026-114820](https://www.cve.org/CVERecord?id=CVE-2026-114820) also removes "emSign Root CA - G1" and "emSign Root CA - G2".
+
+Severity: Critical (CVSS 9.1, CVE-2026-114820).
+
+The trust stores in the affected images contain some of these root certificates.
+
+Exploitation requires an attacker who also controls the network path, for example through DNS poisoning or a compromised network device. The attacker can then do a man-in-the-middle attack on outgoing TLS connections from Camunda components, with a certificate that a compromised intermediate signed.
+
+We have no evidence that an attacker used this against Camunda. This issue does not affect Camunda keys and secrets. No public Camunda endpoint uses an eMudhra certificate. If you suspect a man-in-the-middle attack on an outgoing connection, rotate the credentials that this connection sends.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.10.5, ≤ 8.9.25, or ≤ 8.8.43
+- Camunda Zeebe, Operate, or Tasklist ≤ 8.7.43
+- Camunda Zeebe ≤ 8.6.40
+- Camunda Optimize ≤ 8.10.5, ≤ 8.9.25, ≤ 8.8.43, or ≤ 8.7.29
+- Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, ≤ 8.7.29, or ≤ 8.6.33
+- Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
+- Camunda Identity ≤ 8.6.33
+- Hub Self-Managed ≤ 8.10.4
+- Web Modeler Self-Managed ≤ 8.9.13 or ≤ 8.8.24, or any 8.6 or 8.7 version
+- Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
+- A Camunda Keycloak image built before October 22, 2026, or a Camunda Keycloak image for Keycloak 23, 24, or 25
+
+To see when an image was built, run `docker inspect -f '{{.Created}}' <image>`.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix for CVE-2026-91403 ("emSign ECC Root CA - G3" and "AAA Certificate Services" are removed from the trust stores):
+
+- Camunda Orchestration Cluster 8.10.6, 8.9.26, 8.8.44
+- Camunda Zeebe, Operate, and Tasklist 8.7.44
+- Camunda Zeebe 8.6.41
+- Camunda Optimize 8.10.6, 8.9.26, 8.8.44, 8.7.30
+- Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30, 8.6.34
+- Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
+- Hub Self-Managed 8.10.5
+- Web Modeler Self-Managed 8.9.14, 8.8.25
+- Camunda Identity 8.6.34
+- Console Self-Managed 8.9.130, 8.8.147, 8.7.115
+- Camunda Keycloak images built on or after October 22, 2026:
+  - `camunda/keycloak` with the `26.3.3` tag. This is the default image of the bundled `identityKeycloak` subchart in Camunda 8.7 to 8.9. This tag receives no more updates. For details, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
+  - `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag
+  - `registry.camunda.cloud/keycloak-ee/keycloak` with the `26.8.1` tag, which `values-enterprise.yaml` uses in Camunda 8.7 to 8.9
+
+If you use one of these Keycloak tags, pull the image again and restart Keycloak. With `imagePullPolicy: IfNotPresent` or a mirrored registry, the old image can stay in use. Update your mirror and make sure that the new image runs.
+
+The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
+
+The releases above still trust "emSign Root CA - G1", which CVE-2026-114820 also removes. Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, remove it with the workaround below. We will update this notice when we release images without it.
+
+A fix for Web Modeler Self-Managed 8.6 and 8.7 is not available yet. Their REST API images still trust the root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
+
+If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, contact Camunda Support for the workaround procedure.
+
+On Camunda 8 SaaS, if you disabled the automatic upgrade of your clusters, we recommend that you update them to the latest available patch version.
+
 ## Notice 79
 
 ### Publication date
