@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
+/**
+ * Generates `src/data/downloads.json` from release metadata. The nightly
+ * "Update download catalog" workflow reruns this script and replaces the whole
+ * file, so a hand edit to the JSON lasts only until the next run. Change the
+ * selection here, or `STATIC_DATA` for fixed values, instead.
+ */
+
 const fs = require("fs").promises;
 const path = require("path");
 const cheerio = require("cheerio");
@@ -310,29 +317,89 @@ function parseAssets(html, directoryUrl) {
     .filter(Boolean);
 }
 
-function getLatestVersion(entries, { prerelease }) {
+// The release channels a catalog row can show:
+// - "stable": the newest version without a pre-release suffix, such as 8.10.7.
+// - "alpha": the newest pre-release, such as 8.11.0-alpha1, but only while it
+//   is newer than the newest stable version. Once its minor ships, the alpha is
+//   outdated, so there is no alpha to show until the next minor's first alpha.
+// - "any": the newest version of either channel, for an artifact that ships
+//   with some alphas and some stable releases. A stable release then
+//   supersedes the alphas before it.
+const CHANNELS = ["stable", "alpha", "any"];
+
+// How many of the newest releases to try when a release is missing assets, for
+// example while it is still being uploaded, before the update fails.
+const MAX_RELEASE_ATTEMPTS = 3;
+
+class MissingAssetError extends Error {}
+
+function rankVersions(entries, channel, getName = (entry) => entry.name) {
+  if (!CHANNELS.includes(channel)) {
+    throw new Error(`Unknown release channel: ${channel}`);
+  }
+
   const versions = entries
     .map((entry) => ({
       ...entry,
-      parsed: parseVersion(entry.name),
+      parsed: parseVersion(getName(entry)),
     }))
-    .filter(
-      (entry) => entry.parsed && Boolean(entry.parsed.prerelease) === prerelease
-    )
+    .filter((entry) => entry.parsed)
     .sort((left, right) => compareVersions(right.parsed, left.parsed));
+  const newestStable = versions.find((entry) => !entry.parsed.prerelease);
 
-  if (versions.length === 0) {
-    const channel = prerelease ? "pre-release" : "stable";
-    throw new Error(`Could not find a ${channel} version`);
+  return versions.filter((entry) => {
+    if (channel === "stable") {
+      return !entry.parsed.prerelease;
+    }
+    if (channel === "alpha") {
+      return (
+        Boolean(entry.parsed.prerelease) &&
+        (!newestStable ||
+          compareVersions(entry.parsed, newestStable.parsed) > 0)
+      );
+    }
+    return true;
+  });
+}
+
+// Loads the newest release of the channel. A release that is missing assets is
+// skipped with a warning, so the row keeps its previous release instead of
+// failing the whole update. Returns null when the "alpha" channel has nothing
+// newer than the stable release.
+async function selectRelease(entries, { channel, product, getName, load }) {
+  const candidates = rankVersions(entries, channel, getName);
+  if (candidates.length === 0) {
+    if (channel === "alpha") {
+      return null;
+    }
+    throw new Error(`Could not find a ${channel} ${product} release`);
   }
 
-  return versions[0];
+  const attempts = candidates.slice(0, MAX_RELEASE_ATTEMPTS);
+  for (const candidate of attempts) {
+    try {
+      return await load(candidate);
+    } catch (error) {
+      if (!(error instanceof MissingAssetError)) {
+        throw error;
+      }
+      console.warn(
+        `::warning::Skipping ${product} ${candidate.parsed.value}: ${error.message}`
+      );
+    }
+  }
+
+  throw new Error(
+    `None of the newest ${channel} ${product} releases has all assets: ${attempts
+      .map((candidate) => candidate.parsed.value)
+      .join(", ")}`
+  );
 }
 
 function selectAsset(assets, pattern, product, label) {
   const asset = assets.find((candidate) => pattern.test(candidate.name));
   if (!asset) {
-    throw new Error(`Missing ${product} asset for ${label}`);
+    throw new MissingAssetError(`Missing ${product} asset for ${label}`);
   }
 
   return {
@@ -359,7 +426,7 @@ function getEarliestAssetDate(assets) {
     .sort();
 
   if (dates.length === 0) {
-    throw new Error("No asset dates found");
+    throw new MissingAssetError("No asset dates found");
   }
 
   return formatDate(dates[0]);
@@ -427,16 +494,25 @@ async function fetchDownloadRelease(releaseEntry, definitions, product) {
   };
 }
 
+function fetchLatestDownloadRelease(
+  directory,
+  { channel, product, definitions }
+) {
+  return selectRelease(directory.entries, {
+    channel,
+    product,
+    load: (entry) =>
+      fetchDownloadRelease(entry, definitions(entry.name), product),
+  });
+}
+
 async function fetchModeler() {
   const directory = await fetchDownloadDirectory("camunda-modeler/");
-  const stableEntry = getLatestVersion(directory.entries, {
-    prerelease: false,
+  const stable = await fetchLatestDownloadRelease(directory, {
+    channel: "stable",
+    product: "Desktop Modeler",
+    definitions: () => ASSET_DEFINITIONS.modeler,
   });
-  const stable = await fetchDownloadRelease(
-    stableEntry,
-    ASSET_DEFINITIONS.modeler,
-    "Desktop Modeler"
-  );
 
   const manifestUrl = new URL(
     "latest-mac.yml",
@@ -494,47 +570,46 @@ async function fetchModeler() {
 
 async function fetchCamundaRun() {
   const directory = await fetchDownloadDirectory("camunda/c8run/");
-  const stableEntry = getLatestVersion(directory.entries, {
-    prerelease: false,
-  });
-  const experimentalEntry = getLatestVersion(directory.entries, {
-    prerelease: true,
-  });
   const [stable, experimental] = await Promise.all([
-    fetchDownloadRelease(
-      stableEntry,
-      ASSET_DEFINITIONS.camundaRun(stableEntry.name),
-      "Camunda 8 Run"
-    ),
-    fetchDownloadRelease(
-      experimentalEntry,
-      ASSET_DEFINITIONS.camundaRun(experimentalEntry.name),
-      "Camunda 8 Run experimental"
-    ),
+    fetchLatestDownloadRelease(directory, {
+      channel: "stable",
+      product: "Camunda 8 Run",
+      definitions: ASSET_DEFINITIONS.camundaRun,
+    }),
+    fetchLatestDownloadRelease(directory, {
+      channel: "alpha",
+      product: "Camunda 8 Run experimental",
+      definitions: ASSET_DEFINITIONS.camundaRun,
+    }),
   ]);
+  // Without an alpha newer than the stable release, the row has no alpha links
+  // and no alphaVersion.
+  const experimentalLinks = experimental
+    ? experimental.links
+    : { mac: [], windows: [], linux: [] };
 
   return {
     version: stable.version,
     date: stable.date,
-    alphaVersion: experimental.version,
+    alphaVersion: experimental ? experimental.version : undefined,
     links: {
       mac: {
         stable: stable.links.mac,
-        experimental: experimental.links.mac.map((link) => ({
+        experimental: experimentalLinks.mac.map((link) => ({
           ...link,
           label: `Alpha ${link.label}`,
         })),
       },
       windows: {
         stable: stable.links.windows,
-        experimental: experimental.links.windows.map((link) => ({
+        experimental: experimentalLinks.windows.map((link) => ({
           ...link,
           label: "Alpha Windows",
         })),
       },
       linux: {
         stable: stable.links.linux,
-        experimental: experimental.links.linux.map((link) => ({
+        experimental: experimentalLinks.linux.map((link) => ({
           ...link,
           label: "Alpha Linux",
         })),
@@ -547,14 +622,11 @@ async function fetchCamundaRun() {
 
 async function fetchRpaWorker() {
   const directory = await fetchDownloadDirectory("rpa-worker/");
-  const stableEntry = getLatestVersion(directory.entries, {
-    prerelease: false,
+  const release = await fetchLatestDownloadRelease(directory, {
+    channel: "stable",
+    product: "RPA Worker",
+    definitions: ASSET_DEFINITIONS.rpaWorker,
   });
-  const release = await fetchDownloadRelease(
-    stableEntry,
-    ASSET_DEFINITIONS.rpaWorker(stableEntry.name),
-    "RPA Worker"
-  );
 
   return {
     ...release,
@@ -572,7 +644,7 @@ function getGithubAssetLinks(release, definitions, prefix) {
           ({ name }) => name.startsWith(prefix) && name.endsWith(suffix)
         );
         if (!asset) {
-          throw new Error(
+          throw new MissingAssetError(
             `Missing Getting Started asset for ${label} in ${release.tag_name}`
           );
         }
@@ -585,65 +657,74 @@ function getGithubAssetLinks(release, definitions, prefix) {
   );
 }
 
-async function fetchGithubReleases(repository) {
-  return fetchJson(
-    `${GITHUB_API_BASE_URL}/repos/${repository}/releases?per_page=100`
-  );
-}
+const githubReleases = new Map();
 
-function selectGithubRelease(releases, { prerelease, assetPrefix }) {
-  const candidates = releases
-    .map((release) => ({
-      ...release,
-      parsed: parseVersion(release.tag_name),
-    }))
-    .filter(
-      (release) =>
-        !release.draft &&
-        release.parsed &&
-        (prerelease === undefined ||
-          Boolean(release.parsed.prerelease) === prerelease) &&
-        (!assetPrefix ||
-          release.assets.some(({ name }) => name.startsWith(assetPrefix)))
-    )
-    .sort((left, right) => compareVersions(right.parsed, left.parsed));
-
-  if (candidates.length === 0) {
-    const channel =
-      prerelease === undefined ? "" : prerelease ? "pre-release " : "stable ";
-    throw new Error(
-      `Could not find a ${channel}GitHub release with ${assetPrefix} assets`
+// Reads every page, so an artifact whose newest release is older than the
+// latest 100 releases, such as a discontinued one, stays selectable.
+function fetchGithubReleases(repository) {
+  if (!githubReleases.has(repository)) {
+    githubReleases.set(
+      repository,
+      (async () => {
+        const releases = [];
+        for (let page = 1; ; page++) {
+          const batch = await fetchJson(
+            `${GITHUB_API_BASE_URL}/repos/${repository}/releases?per_page=100&page=${page}`
+          );
+          releases.push(...batch);
+          if (batch.length < 100) {
+            return releases;
+          }
+        }
+      })()
     );
   }
 
-  return candidates[0];
+  return githubReleases.get(repository);
+}
+
+function selectGithubRelease(
+  releases,
+  { channel, product, assetPrefix, load = (release) => release }
+) {
+  return selectRelease(
+    releases.filter(
+      (release) =>
+        !release.draft &&
+        (!assetPrefix ||
+          release.assets.some(({ name }) => name.startsWith(assetPrefix)))
+    ),
+    {
+      channel,
+      product,
+      getName: (release) => release.tag_name,
+      load,
+    }
+  );
 }
 
 async function fetchGettingStarted() {
   const releases = await fetchGithubReleases("camunda/camunda");
-  // The bundle ships with selected alphas and stable releases. Pick the newest
-  // version from either channel so a stable release supersedes older alphas.
-  const release = selectGithubRelease(releases, {
+  // The bundle ships with some alphas and some stable releases.
+  return selectGithubRelease(releases, {
+    channel: "any",
+    product: "Getting Started bundle",
     assetPrefix: "camunda8-getting-started-bundle-",
+    load: (release) => ({
+      version: release.tag_name,
+      date: formatDate(release.published_at),
+      links: getGithubAssetLinks(
+        release,
+        ASSET_DEFINITIONS.gettingStarted,
+        `camunda8-getting-started-bundle-${release.tag_name}-`
+      ),
+    }),
   });
-
-  return {
-    version: release.tag_name,
-    date: formatDate(release.published_at),
-    links: getGithubAssetLinks(
-      release,
-      ASSET_DEFINITIONS.gettingStarted,
-      `camunda8-getting-started-bundle-${release.tag_name}-`
-    ),
-  };
 }
 
-async function fetchLatestGithubRelease(repository) {
+async function fetchLatestGithubRelease(repository, product) {
   const releases = await fetchGithubReleases(repository);
-  return selectGithubRelease(releases, {
-    prerelease: false,
-    assetPrefix: "",
-  });
+  return selectGithubRelease(releases, { channel: "stable", product });
 }
 
 async function buildCatalog() {
@@ -655,8 +736,8 @@ async function buildCatalog() {
       fetchRpaWorker(),
     ]);
   const [orchestrationCluster, connectors] = await Promise.all([
-    fetchLatestGithubRelease("camunda/camunda"),
-    fetchLatestGithubRelease("camunda/connectors"),
+    fetchLatestGithubRelease("camunda/camunda", "Orchestration Cluster"),
+    fetchLatestGithubRelease("camunda/connectors", "Connectors"),
   ]);
 
   return {
@@ -717,9 +798,19 @@ async function updateCatalog({ checkOnly }) {
   return true;
 }
 
-updateCatalog({ checkOnly: process.argv.includes("--check") }).catch(
-  (error) => {
-    console.error(`Download catalog update failed: ${error.message}`);
-    process.exitCode = 1;
-  }
-);
+if (require.main === module) {
+  updateCatalog({ checkOnly: process.argv.includes("--check") }).catch(
+    (error) => {
+      console.error(`Download catalog update failed: ${error.message}`);
+      process.exitCode = 1;
+    }
+  );
+}
+
+module.exports = {
+  buildCatalog,
+  compareVersions,
+  MissingAssetError,
+  rankVersions,
+  selectRelease,
+};

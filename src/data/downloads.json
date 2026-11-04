@@ -89,7 +89,6 @@
   "camundaRun": {
     "version": "8.10.7",
     "date": "Oct 27, 2026",
-    "alphaVersion": "8.10.0-alpha5",
     "links": {
       "mac": {
         "stable": [
@@ -102,16 +101,7 @@
             "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-darwin-x86_64.zip"
           }
         ],
-        "experimental": [
-          {
-            "label": "Alpha Apple Silicon",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-darwin-aarch64.zip"
-          },
-          {
-            "label": "Alpha Intel",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-darwin-x86_64.zip"
-          }
-        ]
+        "experimental": []
       },
       "windows": {
         "stable": [
@@ -120,12 +110,7 @@
             "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-windows-x86_64.zip"
           }
         ],
-        "experimental": [
-          {
-            "label": "Alpha Windows",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-windows-x86_64.zip"
-          }
-        ]
+        "experimental": []
       },
       "linux": {
         "stable": [
@@ -134,12 +119,7 @@
             "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-linux-x86_64.tar.gz"
           }
         ],
-        "experimental": [
-          {
-            "label": "Alpha Linux",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-linux-x86_64.tar.gz"
-          }
-        ]
+        "experimental": []
       }
     },
     "docsLink": "/docs/self-managed/quickstart/developer-quickstart/c8run/install-start/",
