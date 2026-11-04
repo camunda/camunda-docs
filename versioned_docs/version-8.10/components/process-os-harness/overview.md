@@ -18,6 +18,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 :::caution Early access
 ProcessOS Harness is available as [early access](/components/early-access/overview.md) for trained customers and enabled partners. See [current scope](#current-scope).
+
+Early access applies to the harness itself. Its interfaces, skills, and governance steps can still change. It doesn't apply to the processes the harness builds, which are standard Camunda processes. See [what you get](#what-you-get).
 :::
 
 ## About
@@ -25,6 +27,12 @@ ProcessOS Harness is available as [early access](/components/early-access/overvi
 ProcessOS Harness is the backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents in the terminal, such as Claude Code CLI or GitHub Copilot CLI, to perform the building safely and under control.
 
 The input for ProcessOS Harness can be any resource that describes the process, such as files, systems, or web pages. The harness guides the agent through a phased approach, asks humans for review, and generates a tested and deployable Camunda solution.
+
+## What you get
+
+ProcessOS Harness builds a standard Camunda process: BPMN models, DMN tables, Camunda Forms, and job workers. The process has no dependency on ProcessOS Harness. You deploy, change, and maintain it the same way as a process you built by hand, for example in Modeler or in code.
+
+Changes to ProcessOS Harness don't change a process you already built. While the harness is in early access, only the way it builds processes can change.
 
 ## Who ProcessOS Harness is for
 
@@ -78,13 +86,15 @@ Legacy migration transformations can be optimized for specific source systems. G
 
 Today, ProcessOS Harness focuses on taking you from discovery to a generated, tested Camunda solution. The following areas sit outside this release and are on the roadmap for future iterations:
 
-- Production deployment and full application lifecycle management.
+- Production deployment and full application lifecycle management of the generated solution. ProcessOS Harness stops at a tested solution, and you deploy and operate it like any Camunda process.
 - Camunda platform setup and CI/CD integration.
 - Custom application and user interface generation beyond Camunda Forms.
 - Process performance measurement and quantitative analysis such as process mining.
 - Shared organizational memory across projects.
 
 In this release, each project runs locally with its own private memory. Cross-project memory and multi-project management are planned for future releases.
+
+If you build your own software on top of ProcessOS Harness itself, for example your own user interface that calls the harness, it can break when the harness changes. Processes built with the harness aren't affected.
 
 ## Get started
 
