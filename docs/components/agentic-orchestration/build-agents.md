@@ -29,11 +29,11 @@ Get started by [building your first AI agent](/guides/getting-started-agentic-or
 
 ### Connect an LLM
 
-A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next. To get started quickly in Camunda SaaS, use the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md).
+A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next.
 
-To choose a model, compare recommendations, and write effective prompts, see the [best practices](/components/agentic-orchestration/best-practices-agentic.md) for agentic orchestration.
+To get started quickly in Camunda SaaS, use the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md).
 
-<AoGrid ao={buildLlmCards} columns={3}/>
+To choose a model, compare recommendations, and write effective prompts, see the agentic orchestration [best practices](/components/agentic-orchestration/best-practices-agentic.md).
 
 ### Give the agent tools and memory
 
