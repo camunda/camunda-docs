@@ -78,9 +78,9 @@ camunda:
 
 ## Required and optional properties per tenant
 
-Each configured tenant under `camunda.physical-tenants.<tenant-key>` must assign at least one cluster-defined identity provider through `security.authentication.providers.assigned`. All other tenant-level properties are optional overrides of the root-level defaults.
+Each configured tenant under `camunda.physical-tenants.<tenant-key>` must assign at least one identity provider through `security.authentication.providers.assigned`. All other tenant-level properties are optional overrides of the root-level defaults.
 
-Identity providers are defined at the cluster level, then assigned per tenant. Physical Tenants do not define tenant-local provider objects.
+Identity providers are usually defined at the cluster level, then assigned per tenant. A tenant can also define a provider of its own under `camunda.physical-tenants.<tenant-key>.security.authentication.providers.oidc.<provider-id>`, and must then assign it as well.
 
 For the full list of available properties, see the [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) reference.
 
@@ -89,6 +89,8 @@ For the full list of available properties, see the [Orchestration Cluster config
 Use root-level `camunda.*` for shared defaults across all tenants.
 
 Use `camunda.physical-tenants.<tenant-key>.*` only for tenant-specific differences.
+
+A tenant value overrides the root value field by field, and the tenant keeps each root value it does not set. This also applies to each property of an identity provider. A list, such as `audiences` or `scope`, replaces the root list instead of adding to it.
 
 Some properties are cluster-scoped and cannot be overridden per tenant. Per-tenant override behavior is indicated in the [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) reference.
 
@@ -118,6 +120,8 @@ Known constraints and behavior:
   - Azure: Container name, container path, and endpoint.
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
+- **Identity providers**: two providers that a tenant assigns must not use the same `issuer-uri`. Issuer URIs that differ only by a trailing slash are the same issuer.
+- **Client secret**: a tenant that changes the `issuer-uri` or `token-uri` of a cluster-level provider must set its own `client-secret`, so that the cluster secret is not sent to another identity provider. This does not apply with `client-authentication-method: private_key_jwt`. A value that differs only by a trailing slash is not a change.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
 - **Secrets**: each physical tenant supports at most one secret store, and its ID must be `default`; any other ID is rejected. Camunda validates the cache settings per tenant. `ttl` must be at least `1m` and use whole minutes, and `max-size` must be at least `1`. To override the root-level `camunda.secrets.*` defaults for a physical tenant, use `camunda.physical-tenants.<tenant-key>.secrets.*`.
 

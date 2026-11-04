@@ -19,9 +19,9 @@ For configuration properties used to assign identity providers to tenants, see [
 
 Identity is **centralized at the cluster boundary**. This means:
 
-- Identity providers (IdPs) are defined once at the cluster level.
-- Each Physical Tenant selects which cluster-defined providers it accepts using `providers.assigned`.
-- Physical Tenants cannot introduce their own IdP definitions outside the cluster-level list.
+- Identity providers (IdPs) are usually defined once at the cluster level.
+- Each Physical Tenant selects which providers it accepts using `providers.assigned`.
+- A Physical Tenant can also define a provider of its own under `camunda.physical-tenants.<tenant-key>.security.authentication.providers.oidc.<provider-id>`. Like a cluster-level provider, it must be listed in the tenant's `providers.assigned`.
 
 This design keeps identity management simple and avoids per-engine IdP fragmentation, which is explicitly not recommended for Physical Tenants. Configuring a separate identity provider per engine increases operational complexity without additional security benefit for most use cases.
 
@@ -122,7 +122,7 @@ camunda:
 Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant. The block is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:
 
 - The **default** Physical Tenant, which keeps the top-level `camunda.security.initialization`, whether synthesized from the root or declared explicitly.
-- Any tenant with `security.authorization.enabled: false` (per-tenant override, or inherited from the root), since the initialization block only takes effect when authorization is enabled.
+- Any tenant with `security.authorizations.enabled: false` (per-tenant override, or inherited from the root), since the initialization block only takes effect when authorization is enabled.
 
 If a non-default tenant with authorization enabled omits the block, startup fails:
 

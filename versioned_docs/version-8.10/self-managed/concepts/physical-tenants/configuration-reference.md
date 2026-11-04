@@ -78,9 +78,9 @@ camunda:
 
 ## Required and optional properties per tenant
 
-Each configured tenant under `camunda.physical-tenants.<tenant-key>` must assign at least one cluster-defined identity provider through `security.authentication.providers.assigned`. All other tenant-level properties are optional overrides of the root-level defaults.
+Each configured tenant under `camunda.physical-tenants.<tenant-key>` must assign at least one identity provider through `security.authentication.providers.assigned`. All other tenant-level properties are optional overrides of the root-level defaults.
 
-Identity providers are defined at the cluster level, then assigned per tenant. Physical Tenants do not define tenant-local provider objects.
+Identity providers are usually defined at the cluster level, then assigned per tenant. A tenant can also define a provider of its own under `camunda.physical-tenants.<tenant-key>.security.authentication.providers.oidc.<provider-id>`, and must then assign it as well.
 
 For the full list of available properties, see the [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) reference.
 
