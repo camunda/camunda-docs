@@ -11,7 +11,6 @@ import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconConnectorsImg from '../../components/assets/icon-connectors.png';
 import IconBpmnImg from '../../components/assets/icon-bpmn.png';
 import IconLlmImg from '../../components/assets/icon-llm.png';
-import IconRagImg from '../../components/assets/icon-long-term-memory.png';
 import IconOperateImg from '../../components/assets/icon-operate.png';
 import IconOptimizeImg from '../../components/assets/icon-optimize.png';
 import IconConfigImg from '../../components/assets/icon-config.png';
