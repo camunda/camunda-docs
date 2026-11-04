@@ -365,7 +365,8 @@ function rankVersions(entries, channel, getName = (entry) => entry.name) {
 // Loads the newest release of the channel. A release that is missing assets is
 // skipped with a warning, so the row keeps its previous release instead of
 // failing the whole update. Returns null when the "alpha" channel has nothing
-// newer than the stable release.
+// newer than the stable release, or when none of its alphas has all assets:
+// the alpha row is optional, so it is hidden rather than failing the update.
 async function selectRelease(entries, { channel, product, getName, load }) {
   const candidates = rankVersions(entries, channel, getName);
   if (candidates.length === 0) {
@@ -389,10 +390,18 @@ async function selectRelease(entries, { channel, product, getName, load }) {
     }
   }
 
+  const skipped = attempts
+    .map((candidate) => candidate.parsed.value)
+    .join(", ");
+  if (channel === "alpha") {
+    console.warn(
+      `::warning::Hiding the ${product} alpha: none of ${skipped} has all assets`
+    );
+    return null;
+  }
+
   throw new Error(
-    `None of the newest ${channel} ${product} releases has all assets: ${attempts
-      .map((candidate) => candidate.parsed.value)
-      .join(", ")}`
+    `None of the newest ${channel} ${product} releases has all assets: ${skipped}`
   );
 }
 

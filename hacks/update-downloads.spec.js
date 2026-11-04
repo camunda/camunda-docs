@@ -221,6 +221,15 @@ describe("update-downloads", () => {
     await expect(
       selectRelease([], { channel: "alpha", product: "Tool" })
     ).resolves.toBeNull();
+    await expect(
+      selectRelease([{ name: "2.0.0-alpha1" }], {
+        channel: "alpha",
+        product: "Tool",
+        load: async () => {
+          throw new MissingAssetError("Missing");
+        },
+      })
+    ).resolves.toBeNull();
   });
 
   test("builds today's catalog", async () => {
@@ -288,6 +297,24 @@ describe("update-downloads", () => {
     expect(catalog.camundaRun.version).toBe("8.10.7");
     expect(warn).toHaveBeenCalledWith(
       expect.stringContaining("Skipping Camunda 8 Run 8.10.8")
+    );
+  });
+
+  test("hides the alpha while the first alpha of a minor is uploading", async () => {
+    mockFetch({
+      ...TODAY,
+      c8run: [...TODAY.c8run, "8.11.0-alpha1"],
+      missing: { "camunda/c8run/": "8.11.0-alpha1" },
+    });
+    const catalog = await loadScript().buildCatalog();
+
+    expect(catalog.camundaRun.version).toBe("8.10.7");
+    expect(catalog.camundaRun.alphaVersion).toBeUndefined();
+    expect(catalog.camundaRun.links.mac.experimental).toEqual([]);
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining(
+        "Hiding the Camunda 8 Run experimental alpha: none of 8.11.0-alpha1"
+      )
     );
   });
 
