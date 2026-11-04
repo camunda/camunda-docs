@@ -13,7 +13,7 @@ import { buildLlmCards, buildCapabilityCards, buildExternalAgentCards, buildExpo
 
 <PageDescription />
 
-Learn how to build an [AI agent](/reference/glossary.md#ai-agent).
+Use this page to learn how to build an [AI agent](/reference/glossary.md#ai-agent).
 You can follow one of two paths:
 
 1. [Build a Camunda AI agent](#build-a-camunda-ai-agent): Model the agent in BPMN, connect it to an LLM, and give it tools and memory.
