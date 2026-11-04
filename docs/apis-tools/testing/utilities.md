@@ -723,6 +723,9 @@ instance key.
 Predefined incident selectors are available in the `io.camunda.process.test.api.assertions.IncidentSelectors` class.
 
 ```java
+// Assert an incident by the BPMN element ID "approve_request_task"
+assertThatIncident(IncidentSelectors.byElementId("approve_request_task")).isActive();
+
 // Resolve an incident by the BPMN element ID "approve_request_task"
 processTestContext.resolveIncident(IncidentSelectors.byElementId("approve_request_task"));
 ```

@@ -398,6 +398,82 @@ Example:
 }
 ```
 
+### ASSERT_INCIDENT
+
+An instruction to assert the state and details of an incident. See the [assertions documentation](assertions.md#incident-assertions) for more details.
+
+The instruction waits until the incident is found and fulfills all given expectations. Specify only the properties you want to assert.
+
+<table>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>Instruction type, must be "ASSERT_INCIDENT"</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>incidentSelector</td>
+    <td>The selector to identify the incident.</td>
+    <td><a href="#incident-selector">IncidentSelector</a></td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>state</td>
+    <td>The expected state of the incident.</td>
+    <td>enum: IS_ACTIVE, IS_RESOLVED</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>errorType</td>
+    <td>The expected error type of the incident, for example, <code>JOB_NO_RETRIES</code>. See the <a href="#incident-error-types">list of error types</a>.</td>
+    <td>enum</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>errorMessage</td>
+    <td>The expected error message of the incident.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>elementId</td>
+    <td>The expected ID of the BPMN element where the incident occurred.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_INCIDENT",
+  "incidentSelector": {
+    "elementId": "LaunchRocket"
+  },
+  "state": "IS_ACTIVE",
+  "errorType": "JOB_NO_RETRIES",
+  "errorMessage": "Fuel pressure out of range"
+}
+```
+
+#### Incident error types
+
+The `errorType` property supports the following values: `UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `EXECUTION_LISTENER_NO_RETRIES`, `TASK_LISTENER_NO_RETRIES`, `AD_HOC_SUB_PROCESS_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`, `RESOURCE_NOT_FOUND`, `SECRET_RESOLUTION_ERROR`, and `UNKNOWN_ENUM_VALUE`.
+
 ### ASSERT_PROCESS_INSTANCE
 
 An instruction to assert the state of a process instance. See the [assertions documentation](assertions.md#process-instance-assertions) for more details.
