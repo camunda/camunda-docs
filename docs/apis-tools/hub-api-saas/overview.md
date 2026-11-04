@@ -13,9 +13,11 @@ import PageDescription from '@site/src/components/PageDescription';
 
 See the [authentication guide](/apis-tools/hub-api-saas/authentication.md) for setup instructions.
 
-## API reference
+## Try with Swagger
 
-A detailed API description is available as an [OpenAPI](https://www.openapis.org/) specification. Access the [Camunda Hub API v2 OpenAPI specification](https://hub.camunda.io/v3/api-docs/api-v2) for SaaS.
+Use the interactive Swagger API explorer with the Camunda Hub API.
+
+<p class="link-arrow">[Swagger API explorer](https://hub.camunda.io/swagger-ui/index.html)</p>
 
 ## Migrating from API v1
 
