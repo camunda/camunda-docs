@@ -601,16 +601,18 @@ function selectGithubRelease(releases, { prerelease, assetPrefix }) {
       (release) =>
         !release.draft &&
         release.parsed &&
-        Boolean(release.parsed.prerelease) === prerelease &&
+        (prerelease === undefined ||
+          Boolean(release.parsed.prerelease) === prerelease) &&
         (!assetPrefix ||
           release.assets.some(({ name }) => name.startsWith(assetPrefix)))
     )
     .sort((left, right) => compareVersions(right.parsed, left.parsed));
 
   if (candidates.length === 0) {
-    const channel = prerelease ? "pre-release" : "stable";
+    const channel =
+      prerelease === undefined ? "" : prerelease ? "pre-release " : "stable ";
     throw new Error(
-      `Could not find a ${channel} GitHub release with ${assetPrefix} assets`
+      `Could not find a ${channel}GitHub release with ${assetPrefix} assets`
     );
   }
 
@@ -619,8 +621,9 @@ function selectGithubRelease(releases, { prerelease, assetPrefix }) {
 
 async function fetchGettingStarted() {
   const releases = await fetchGithubReleases("camunda/camunda");
+  // The bundle ships with selected alphas and stable releases. Pick the newest
+  // version from either channel so a stable release supersedes older alphas.
   const release = selectGithubRelease(releases, {
-    prerelease: true,
     assetPrefix: "camunda8-getting-started-bundle-",
   });
 
