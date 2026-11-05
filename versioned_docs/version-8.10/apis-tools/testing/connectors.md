@@ -333,40 +333,9 @@ public class MyProcessTest {
 You can configure the URL of an outbound connector in your BPMN process
 using [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) to replace it in the
 tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/test"`.
+
+Alternatively, you can use [cluster secrets](configuration.md#set-cluster-secrets) by setting the URL expression to `=camunda.secrets.BASE_URL + "/test"` and providing the value with `cluster-secrets` instead of `connectors-secrets`.
 :::
-
-If your process references the URL as a [cluster secret](#set-cluster-secrets), set the URL expression to `=camunda.secrets.BASE_URL + "/test"` and provide the value with `cluster-secrets` instead of `connectors-secrets`.
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]
-}>
-
-<TabItem value='spring-sdk'>
-
-```java
-@SpringBootTest(
-    properties = {
-        "camunda.process-test.connectors-enabled=true",
-        "camunda.process-test.cluster-secrets.BASE_URL=http://host.testcontainers.internal:9999"
-    })
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-```java
-new CamundaProcessTestExtension()
-    .withConnectorsEnabled(true)
-    .withClusterSecret("BASE_URL", "http://host.testcontainers.internal:9999");
-```
-
-</TabItem>
-
-</Tabs>
 
 ## Custom connectors
 
