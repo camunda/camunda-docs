@@ -213,7 +213,7 @@ The AI Agent Sub-process template configures its own ad-hoc sub-process. The AI 
 
 ## Update custom extensions {#custom-extensions}
 
-If you extend the AI Agent connector in a Self-Managed or hybrid deployment, for example with a custom conversation store or chat model, the Java APIs also changed in Camunda 8.10. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md).
+If you extend the AI Agent connector in a Self-Managed or hybrid deployment, for example with a custom conversation store or chat model, the Java APIs also changed in Camunda 8.10. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/stable/8.10/connectors/agentic-ai/docs/breaking-changes.md).
 
 ## Model provider configuration mapping
 
