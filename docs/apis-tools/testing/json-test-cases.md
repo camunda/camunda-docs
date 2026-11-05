@@ -1721,7 +1721,7 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
   <tr>
     <td>variablesExpression</td>
     <td>
-      A FEEL expression that is evaluated with the job's variables as context to derive the variables to complete the job with. The expression must evaluate to an object and must not be blank. The leading <code>=</code> is optional. If the expression fails or doesn't evaluate to an object, the job fails.
+      A FEEL expression to evaluate with the job's variables as context. The result is the variables to complete the job with. The expression must evaluate to an object and must not be blank. The leading <code>=</code> is optional. If the expression fails or doesn't evaluate to an object, the job fails.
     </td>
     <td>string</td>
     <td>No</td>
@@ -1747,7 +1747,7 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
 
 The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with dynamic variables](utilities.md#complete-with-dynamic-variables) for its behavior and [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
 
-When you use `variablesExpression` or a non-empty `variablesTable`, it must be the only source of variables. The instruction fails if you also use another source:
+When you use `variablesExpression` or a non-empty `variablesTable`, it must be the only source of variables. The instruction fails in these cases:
 
 - A non-empty `variables` object.
 - `useExampleData` set to `true`.

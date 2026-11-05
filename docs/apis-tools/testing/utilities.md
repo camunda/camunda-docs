@@ -126,7 +126,7 @@ simplify your tests and reduce the maintenance effort.
 
 ### Complete with dynamic variables
 
-With `thenComplete(Function)`, you can complete jobs with variables derived from the job's own variables. Use it when the output depends on the input, for example, in a multi-instance activity that runs the same job type once per item.
+With `thenComplete(Function)`, you can complete jobs with variables derived from the job's own variables. Use it when the output depends on the input, such as in a multi-instance activity that runs the same job type once per item.
 
 Your function receives the job's variables, including the variables of the multi-instance scope such as `loopCounter` and the input element. It returns the variables to complete the job with.
 
@@ -147,7 +147,7 @@ void shouldCompleteJobWithDynamicVariables() {
 }
 ```
 
-If the function returns `null` or throws an exception, the job fails. Its retries decrease by one, and an incident is created when no retries are left.
+If the function returns `null` or throws an exception, the job fails. The job's retries decrease by one, and an incident is created when no retries are left.
 
 Because a failing job can be retried, the function can run multiple times for the same job. Keep the function free of side effects. [`getInvocations()`](#inspect-mock-invocations) counts every attempt, including retries.
 
@@ -183,7 +183,7 @@ The mock evaluates the rows in order, using the following rules:
 - An empty `when` matches every job. Add it as the last row to define a default.
 - If no row matches, the job completes without variables.
 
-Numbers are compared without conversion. For example, `1` and `1L` both match an integer job variable with the value `1`, but `1.0` does not.
+Integer numbers match regardless of their Java type. For example, `1` and `1L` both match an integer job variable with the value `1`, but `1.0` doesn't.
 
 ### Throw BPMN error
 
