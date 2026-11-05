@@ -41,14 +41,14 @@ If you're unsure, start with the option your team already operates. Both are ref
 
 The decision only changes some layers. Layers that your choice doesn't affect keep the same inputs and outputs, which is why you can decide them on their own pages.
 
-| Layer                 | Changes with the compute choice? | What differs                                                                                            |
-| --------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Network               | No                               | The same VPC contract serves both. See [bring your own VPC](./network-bring-your-own-vpc.md).           |
-| Secondary storage     | No                               | Aurora PostgreSQL works with both.                                                                      |
-| Object storage        | Partly                           | Both need a backup bucket. Only ECS needs a node ID lease bucket for each zone.                         |
-| Compute               | Yes                              | A Kubernetes cluster and node groups, or an ECS cluster with a task execution role.                     |
-| Exposure              | Partly                           | Kubernetes uses ingress. ECS attaches rules to load balancer listeners that the exposure layer creates. |
-| Camunda configuration | Yes                              | Helm values, or ECS task definitions with the same Camunda properties as environment variables.         |
+| Layer                 | Changes with the compute choice? | What differs                                                                                               |
+| --------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Network               | No                               | The same VPC contract serves both. See [bring your own VPC](./network-bring-your-own-vpc.md).              |
+| Secondary storage     | No                               | Aurora PostgreSQL works with both.                                                                         |
+| Object storage        | Partly                           | Both need a backup bucket. Only ECS needs a node ID lease bucket for each zone.                            |
+| Compute               | Yes                              | A Kubernetes cluster and node groups, or an ECS cluster with a task execution role.                        |
+| Exposure              | Partly                           | Kubernetes uses an Ingress. ECS attaches rules to load balancer listeners that the exposure layer creates. |
+| Camunda configuration | Yes                              | Helm values, or ECS task definitions with the same Camunda properties as environment variables.            |
 
 :::note Current state of the reference repository
 The layered Terraform exists for Amazon ECS only. The EKS reference architectures still create their own VPC and storage, so they don't consume the layers yet.

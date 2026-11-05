@@ -100,7 +100,7 @@ The layer builds these settings from the `secondary_storage` output of the stora
 | `backup_bucket_name`, `backup_access_policy_arn`, `lease_bucket`                                                                               | Object storage layer | Backups and node ID leases                  |
 | `secondary_storage`, `rds_db_connect_policy_arn`, `db_seed_done`                                                                               | Storage layer        | The database and access to it               |
 | `alb_listener_http_webapp_arn`, `alb_listener_http_management_arn`, `nlb_grpc_arn`                                                             | Exposure layer       | Listeners that the services attach rules to |
-| `oidc`                                                                                                                                         | Identity layer       | `null` selects basic authentication         |
+| `oidc`                                                                                                                                         | Identity layer       | `null` selects Basic authentication         |
 
 | Output                                            | Purpose                                              |
 | ------------------------------------------------- | ---------------------------------------------------- |
