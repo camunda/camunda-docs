@@ -111,7 +111,7 @@ The releases above still trust "emSign Root CA - G1", which CVE-2026-114820 also
 
 A fix for Web Modeler Self-Managed 8.6 and 8.7 is not available yet. Their REST API images still trust the root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
 
-If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, contact Camunda Support for the workaround procedure.
+If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. For step-by-step instructions, see [Remove a CA from the JVM truststore](/self-managed/deployment/helm/configure/tls.md#remove-a-ca-from-the-jvm-truststore). This procedure does not cover Keycloak or Console. For Camunda 8.6 and 8.7, see [Remove a CA from the JVM truststore in 8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) and [in 8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
 
 On Camunda 8 SaaS, if you disabled the automatic upgrade of your clusters, we recommend that you update them to the latest available patch version.
 
