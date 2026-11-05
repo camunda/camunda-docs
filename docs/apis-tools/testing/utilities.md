@@ -183,8 +183,6 @@ The mock evaluates the rows in order, using the following rules:
 - An empty `when` matches every job. Add it as the last row to define a default.
 - If no row matches, the job completes without variables.
 
-Integer numbers match regardless of their Java type. For example, `1` and `1L` both match an integer job variable with the value `1`, but `1.0` doesn't.
-
 ### Throw BPMN error
 
 The mock throws BPMN errors for jobs with the given error code and optional error message and variables.
