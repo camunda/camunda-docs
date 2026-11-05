@@ -1738,7 +1738,7 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
   </tr>
   <tr>
     <td>useExampleData</td>
-    <td>Whether to use example data from the BPMN element. If true, the variables property is ignored.</td>
+    <td>Whether to use example data from the BPMN element. If true, the variables property is ignored. You can't combine it with <code>variablesExpression</code> or a non-empty <code>variablesTable</code>.</td>
     <td>boolean</td>
     <td>No</td>
     <td>false</td>
