@@ -1747,13 +1747,7 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
 
 The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with dynamic variables](utilities.md#complete-with-dynamic-variables) for its behavior and [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
 
-When you use `variablesExpression` or a non-empty `variablesTable`, it must be the only source of variables. The instruction fails in these cases:
-
-- A non-empty `variables` object.
-- `useExampleData` set to `true`.
-- Both `variablesExpression` and a non-empty `variablesTable`.
-
-An empty `variables` object, an empty `variablesTable`, and `useExampleData` set to `false` don't count. Without `variablesExpression` or `variablesTable`, the properties `variables` and `useExampleData` behave as before.
+Set only one of `variables`, `variablesExpression`, `variablesTable`, or `useExampleData`. If you set `variablesExpression` or `variablesTable` together with another of these properties, the instruction fails.
 
 #### Variables Table Row
 
