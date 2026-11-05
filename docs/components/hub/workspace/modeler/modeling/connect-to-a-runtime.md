@@ -1,7 +1,7 @@
 ---
 id: connect-to-a-runtime
 title: Connect to a runtime
-description: "Choose the environment that task testing, connector credentials, and the Webhook tab work against while you model in Camunda Hub."
+description: "Choose the environment that the Validate tab, connector credentials, and the Webhook tab work against while you model in Camunda Hub."
 ---
 
 import RuntimeSelectorImg from './img/runtime-connection-selector.png';
@@ -16,7 +16,7 @@ With the runtime connection, you model against a real runtime instead of guessin
 
 | Feature                                                                                   | What it uses the connection for                                                                                                                        |
 | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Task testing](../validation/task-testing.md)                                             | Runs the selected task on the connected runtime.                                                                                                       |
+| [Validate](../validation/task-testing.md)                                                 | Runs the selected task on the connected runtime.                                                                                                       |
 | Connector credentials                                                                     | Offers the credentials available on the connected runtime in the properties panel of connector templates. Requires a runtime on Camunda 8.10 or later. |
 | **Webhook** tab of inbound connectors                                                     | Shows the webhook status and logs of the connected runtime.                                                                                            |
 | [Problems panel](./fix-problems-in-your-diagram.md#follow-the-runtime-connection-version) | Validates the diagram against the Camunda version of the connected runtime.                                                                            |
@@ -98,7 +98,7 @@ If no tenant can be selected automatically and you haven't chosen one, the runti
 
 ## Work offline
 
-Select **Work offline** at the bottom of the selector to disconnect. While you work offline, task testing and connector credentials are unavailable. Modeling, validation, and deployment keep working.
+Select **Work offline** at the bottom of the selector to disconnect. While you work offline, the **Validate** tab and connector credentials are unavailable. Modeling, validation, and deployment keep working.
 
 ## Manage the available runtimes
 
@@ -162,6 +162,6 @@ Camunda Hub doesn't check your permissions before it reads from the connected ru
 
 In Self-Managed, the runtime connection is enabled by default. To turn it off, set `camunda.hub.feature.runtime-connection-enabled` (environment variable `CAMUNDA_HUB_FEATURE_RUNTIME_CONNECTION_ENABLED`) to `false`. See the [feature flags reference](/self-managed/components/hub/configuration/properties.md#feature-flags).
 
-When the runtime connection is off, task testing keeps using its own cluster selection, and connector credentials aren't offered in the properties panel.
+When the runtime connection is off, the **Validate** tab keeps using its own cluster selection, and connector credentials aren't offered in the properties panel.
 
 Offering connector credentials in the properties panel also requires [credentials](/components/hub/organization/credentials/index.md) to be enabled with `camunda.hub.feature.credentials-enabled` (environment variable `CAMUNDA_HUB_FEATURE_CREDENTIALS_ENABLED`). It's also enabled by default in Self-Managed.

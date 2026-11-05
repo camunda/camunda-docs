@@ -75,7 +75,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    If the connection is established successfully, you can leave the settings and go back to the connection manager, where your new connection is now available.
 
-7. Select the connection you just created to use it for [deployment](./deploy-to-self-managed.md) or other tools like [task testing](../../../../components/modeler/desktop-modeler/task-testing.md) or [starting a new process instance](../../../../components/modeler/desktop-modeler/start-instance.md):
+7. Select the connection you just created to use it for [deployment](./deploy-to-self-managed.md) or other tools like [Validate](../../../../components/modeler/desktop-modeler/task-testing.md) or [starting a new process instance](../../../../components/modeler/desktop-modeler/start-instance.md):
 
    ![New connection selected in connection manager](./img/connection-selector-new-connection.png)
    :::note
