@@ -10,7 +10,7 @@ Validating deploys the process and executes the selected task on the engine, as 
 
 ## Prerequisites
 
-Validating requires a **REST connection** to a Camunda instance running 8.8.0+.
+The **Validate** tab requires a **REST connection** to a Camunda instance running 8.8.0+.
 gRPC connections are not supported.
 
 You can set up a connection by following the [Connect to Camunda 8](./connect-to-camunda-8.md) guide.
