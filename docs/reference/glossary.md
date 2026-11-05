@@ -426,7 +426,7 @@ A generation is not a process definition version, a version tag, or a [file vers
 
 A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
+- [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#the-ai-models-behind-these-features)
 
 ## H
 
@@ -518,7 +518,7 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+- [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#human-oversight)
 
 ### Kubernetes Secret
 

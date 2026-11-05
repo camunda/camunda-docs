@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRVhQT1JURVIiLCJwZXJtaXNzaW9uVHlwZSI6IlBBVVNFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -53,6 +55,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRVhQT1JURVIiLCJwZXJtaXNzaW9uVHlwZSI6IlBBVVNFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -98,6 +102,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRVhQT1JURVIiLCJwZXJtaXNzaW9uVHlwZSI6IlBBVVNFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
