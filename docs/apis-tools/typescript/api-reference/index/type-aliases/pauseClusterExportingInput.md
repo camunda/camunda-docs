@@ -16,5 +16,5 @@ type pauseClusterExportingInput = object;
 ### soft?
 
 ```ts
-optional soft?: pauseClusterExportingQueryParam_soft;
+soft?: pauseClusterExportingQueryParam_soft;
 ```

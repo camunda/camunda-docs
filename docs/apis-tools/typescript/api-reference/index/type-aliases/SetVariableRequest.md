@@ -16,7 +16,7 @@ type SetVariableRequest = object;
 ### local?
 
 ```ts
-optional local?: boolean;
+local?: boolean;
 ```
 
 If set to `true`, the variables are merged strictly into the local scope (as specified
@@ -39,7 +39,7 @@ default, with local set to `false`, scope '1' will be { "foo": 5 } and scope '2'
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```
 
 ---
@@ -56,4 +56,22 @@ JSON object representing the variables to set in the element’s scope.
 
 ```ts
 [key: string]: unknown
+```
+
+---
+
+### variablesMetadata?
+
+```ts
+variablesMetadata?: object;
+```
+
+Metadata of the variables, keyed by variable name. Use it to set how a variable is
+treated, for example to protect its value. A variable without an entry keeps the
+metadata it has, or has none.
+
+#### Index Signature
+
+```ts
+[key: string]: VariableMetadata
 ```

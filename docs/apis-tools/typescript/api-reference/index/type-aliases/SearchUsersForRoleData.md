@@ -16,7 +16,7 @@ type SearchUsersForRoleData = object;
 ### body?
 
 ```ts
-optional body?: RoleUserSearchQueryRequest;
+body?: RoleUserSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The role ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

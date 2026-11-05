@@ -49,9 +49,7 @@ new CamundaValidationError(params): CamundaValidationError;
 
 #### Overrides
 
-```ts
-Error.constructor;
-```
+`Error.constructor`
 
 ## Properties
 
@@ -66,7 +64,7 @@ issues: string[];
 ### operationId?
 
 ```ts
-optional operationId?: string;
+operationId?: string;
 ```
 
 ---

@@ -16,7 +16,7 @@ type ResolveProcessInstanceIncidentsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the process instance to resolve incidents for.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

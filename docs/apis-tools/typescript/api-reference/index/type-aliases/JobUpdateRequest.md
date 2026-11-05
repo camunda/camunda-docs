@@ -24,7 +24,7 @@ changeset: JobChangeset;
 ### jobLeaseToken?
 
 ```ts
-optional jobLeaseToken?: JobLeaseToken | null;
+jobLeaseToken?: JobLeaseToken | null;
 ```
 
 The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.
@@ -37,5 +37,5 @@ A job that was activated without a lease requires no token.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

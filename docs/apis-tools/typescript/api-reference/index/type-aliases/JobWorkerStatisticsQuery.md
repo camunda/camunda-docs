@@ -26,7 +26,7 @@ filter: JobWorkerStatisticsFilter;
 ### page?
 
 ```ts
-optional page?: CursorForwardPagination;
+page?: CursorForwardPagination;
 ```
 
 Search cursor pagination.

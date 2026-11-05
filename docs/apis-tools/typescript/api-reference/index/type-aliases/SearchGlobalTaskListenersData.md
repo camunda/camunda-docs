@@ -16,7 +16,7 @@ type SearchGlobalTaskListenersData = object;
 ### body?
 
 ```ts
-optional body?: GlobalTaskListenerSearchQueryRequest;
+body?: GlobalTaskListenerSearchQueryRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: GlobalTaskListenerSearchQueryRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

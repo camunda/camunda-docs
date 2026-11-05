@@ -18,7 +18,7 @@ User task effective variable search query request. Uses offset-based pagination 
 ### filter?
 
 ```ts
-optional filter?: UserTaskVariableFilter;
+filter?: UserTaskVariableFilter;
 ```
 
 The user task variable search filters.
@@ -28,7 +28,7 @@ The user task variable search filters.
 ### page?
 
 ```ts
-optional page?: OffsetPagination;
+page?: OffsetPagination;
 ```
 
 Pagination parameters.
@@ -38,7 +38,7 @@ Pagination parameters.
 ### sort?
 
 ```ts
-optional sort?: UserTaskVariableSearchQuerySortRequest[];
+sort?: UserTaskVariableSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

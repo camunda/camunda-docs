@@ -18,7 +18,7 @@ Decision definition search filter.
 ### decisionDefinitionId?
 
 ```ts
-optional decisionDefinitionId?: DecisionDefinitionId;
+decisionDefinitionId?: DecisionDefinitionId;
 ```
 
 The DMN ID of the decision definition.
@@ -28,7 +28,7 @@ The DMN ID of the decision definition.
 ### decisionDefinitionKey?
 
 ```ts
-optional decisionDefinitionKey?: DecisionDefinitionKey;
+decisionDefinitionKey?: DecisionDefinitionKey;
 ```
 
 The assigned key, which acts as a unique identifier for this decision definition.
@@ -38,7 +38,7 @@ The assigned key, which acts as a unique identifier for this decision definition
 ### decisionRequirementsId?
 
 ```ts
-optional decisionRequirementsId?: string;
+decisionRequirementsId?: string;
 ```
 
 the DMN ID of the decision requirements graph that the decision definition is part of.
@@ -48,7 +48,7 @@ the DMN ID of the decision requirements graph that the decision definition is pa
 ### decisionRequirementsKey?
 
 ```ts
-optional decisionRequirementsKey?: DecisionRequirementsKey;
+decisionRequirementsKey?: DecisionRequirementsKey;
 ```
 
 The assigned key of the decision requirements graph that the decision definition is part of.
@@ -58,7 +58,7 @@ The assigned key of the decision requirements graph that the decision definition
 ### decisionRequirementsName?
 
 ```ts
-optional decisionRequirementsName?: string;
+decisionRequirementsName?: string;
 ```
 
 The DMN name of the decision requirements that the decision definition is part of.
@@ -68,7 +68,7 @@ The DMN name of the decision requirements that the decision definition is part o
 ### decisionRequirementsVersion?
 
 ```ts
-optional decisionRequirementsVersion?: number;
+decisionRequirementsVersion?: number;
 ```
 
 The assigned version of the decision requirements that the decision definition is part of.
@@ -78,7 +78,7 @@ The assigned version of the decision requirements that the decision definition i
 ### isLatestVersion?
 
 ```ts
-optional isLatestVersion?: boolean;
+isLatestVersion?: boolean;
 ```
 
 Whether to only return the latest version of each decision definition.
@@ -90,7 +90,7 @@ The response contains no `startCursor` in the `page`, and requests ignore the `f
 ### name?
 
 ```ts
-optional name?: string;
+name?: string;
 ```
 
 The DMN name of the decision definition.
@@ -100,7 +100,7 @@ The DMN name of the decision definition.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 The tenant ID of the decision definition.
@@ -110,7 +110,7 @@ The tenant ID of the decision definition.
 ### version?
 
 ```ts
-optional version?: number;
+version?: number;
 ```
 
 The assigned version of the decision definition.

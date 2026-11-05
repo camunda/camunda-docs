@@ -18,7 +18,7 @@ Authorization search filter.
 ### ownerId?
 
 ```ts
-optional ownerId?: string;
+ownerId?: string;
 ```
 
 The ID of the owner of permissions.
@@ -28,7 +28,7 @@ The ID of the owner of permissions.
 ### ownerType?
 
 ```ts
-optional ownerType?: OwnerTypeEnum;
+ownerType?: OwnerTypeEnum;
 ```
 
 ---
@@ -36,7 +36,7 @@ optional ownerType?: OwnerTypeEnum;
 ### resourceIds?
 
 ```ts
-optional resourceIds?: string[];
+resourceIds?: string[];
 ```
 
 The IDs of the resource to search permissions for.
@@ -46,7 +46,7 @@ The IDs of the resource to search permissions for.
 ### resourcePropertyNames?
 
 ```ts
-optional resourcePropertyNames?: string[];
+resourcePropertyNames?: string[];
 ```
 
 The names of the resource properties to search permissions for.
@@ -56,7 +56,7 @@ The names of the resource properties to search permissions for.
 ### resourceType?
 
 ```ts
-optional resourceType?: ResourceTypeEnum;
+resourceType?: ResourceTypeEnum;
 ```
 
 The type of resource to search permissions for.

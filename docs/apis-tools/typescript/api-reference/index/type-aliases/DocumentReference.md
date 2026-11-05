@@ -16,7 +16,7 @@ type DocumentReference = object;
 ### camunda.document.type
 
 ```ts
-camunda.document.type: "camunda";
+"camunda.document.type": "camunda";
 ```
 
 Document discriminator. Always set to "camunda".

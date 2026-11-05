@@ -16,5 +16,5 @@ type triggerClusterRebalanceInput = triggerClusterRebalanceBody & object;
 ### dryRun?
 
 ```ts
-optional dryRun?: triggerClusterRebalanceQueryParam_dryRun;
+dryRun?: triggerClusterRebalanceQueryParam_dryRun;
 ```

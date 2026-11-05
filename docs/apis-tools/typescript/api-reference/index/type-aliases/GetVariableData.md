@@ -16,7 +16,7 @@ type GetVariableData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The variable key.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

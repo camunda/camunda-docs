@@ -18,7 +18,7 @@ The user task variable search filters.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 Name of the variable.

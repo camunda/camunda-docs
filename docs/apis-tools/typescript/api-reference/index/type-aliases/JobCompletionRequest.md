@@ -16,7 +16,7 @@ type JobCompletionRequest = object;
 ### businessId?
 
 ```ts
-optional businessId?: BusinessId | null;
+businessId?: BusinessId | null;
 ```
 
 An optional business id to assign to the process instance the job belongs to, as part of completing the job, letting a worker set the identifier from work it just performed.
@@ -27,7 +27,7 @@ The business id can only be assigned to a root process instance: if the job belo
 ### jobLeaseToken?
 
 ```ts
-optional jobLeaseToken?: JobLeaseToken | null;
+jobLeaseToken?: JobLeaseToken | null;
 ```
 
 The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.
@@ -39,7 +39,7 @@ A job that was activated without a lease requires no token.
 ### result?
 
 ```ts
-optional result?: JobResult;
+result?: JobResult;
 ```
 
 ---
@@ -47,7 +47,7 @@ optional result?: JobResult;
 ### variables?
 
 ```ts
-optional variables?:
+variables?:
   | {
 [key: string]: unknown;
 }

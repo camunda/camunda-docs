@@ -16,7 +16,7 @@ type ResourceSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: ResourceFilter;
+filter?: ResourceFilter;
 ```
 
 The resource search filters.
@@ -24,7 +24,7 @@ The resource search filters.
 ### sort?
 
 ```ts
-optional sort?: ResourceSearchQuerySortRequest[];
+sort?: ResourceSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

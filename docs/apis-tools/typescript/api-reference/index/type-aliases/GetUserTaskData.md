@@ -16,7 +16,7 @@ type GetUserTaskData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The user task key.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

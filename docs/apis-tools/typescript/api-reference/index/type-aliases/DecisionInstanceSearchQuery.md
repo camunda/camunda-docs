@@ -16,7 +16,7 @@ type DecisionInstanceSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: DecisionInstanceFilter;
+filter?: DecisionInstanceFilter;
 ```
 
 The decision instance search filters.
@@ -24,7 +24,7 @@ The decision instance search filters.
 ### sort?
 
 ```ts
-optional sort?: DecisionInstanceSearchQuerySortRequest[];
+sort?: DecisionInstanceSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

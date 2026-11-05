@@ -16,7 +16,7 @@ type IncidentSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: IncidentFilter;
+filter?: IncidentFilter;
 ```
 
 The incident search filters.
@@ -24,7 +24,7 @@ The incident search filters.
 ### sort?
 
 ```ts
-optional sort?: IncidentSearchQuerySortRequest[];
+sort?: IncidentSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

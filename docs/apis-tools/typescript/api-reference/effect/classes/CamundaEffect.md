@@ -38,7 +38,4 @@ new CamundaEffect(_): CamundaEffect;
 
 #### Inherited from
 
-```ts
-Context.Service<CamundaEffect, CamundaEffectClient>()("CamundaEffect")
-  .constructor;
-```
+`Context.Service<CamundaEffect, CamundaEffectClient>()( 'CamundaEffect' ).constructor`

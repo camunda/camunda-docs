@@ -30,7 +30,7 @@ The Effect API is an **opt-in subpath** (`@camunda8/orchestration-cluster-api/ef
 ### activationRetrySchedule?
 
 ```ts
-readonly optional activationRetrySchedule?: Schedule<unknown, DomainError, never, R>;
+readonly activationRetrySchedule?: Schedule<unknown, DomainError, never, R>;
 ```
 
 `Schedule` used to back off and retry a **failed activation request** (transport
@@ -46,7 +46,7 @@ When omitted, an activation failure fails the stream.
 ### concurrency?
 
 ```ts
-readonly optional concurrency?: number | "unbounded";
+readonly concurrency?: number | "unbounded";
 ```
 
 Max jobs processed concurrently (handler parallelism / backpressure). The
@@ -60,7 +60,7 @@ leases more jobs than it can process at once. Default: the value of
 ### fetchVariables?
 
 ```ts
-readonly optional fetchVariables?: readonly string[];
+readonly fetchVariables?: readonly string[];
 ```
 
 Restrict activation to these variable names.
@@ -84,7 +84,7 @@ The Effect job handler.
 ### handlerRetrySchedule?
 
 ```ts
-readonly optional handlerRetrySchedule?: Schedule<unknown, JobError, never, R>;
+readonly handlerRetrySchedule?: Schedule<unknown, JobError, never, R>;
 ```
 
 `Schedule` used to retry the **handler** in-process on a [RetryableJobError](../classes/RetryableJobError.md)
@@ -96,7 +96,7 @@ before the job is failed back to the broker. Runs on the Effect `Clock`
 ### jobTimeout?
 
 ```ts
-readonly optional jobTimeout?: Input;
+readonly jobTimeout?: Input;
 ```
 
 Per-job activation lock timeout (server-side). Default `60 seconds`.
@@ -110,7 +110,7 @@ Per-job activation lock timeout (server-side). Default `60 seconds`.
 ### maxJobsToActivate?
 
 ```ts
-readonly optional maxJobsToActivate?: number;
+readonly maxJobsToActivate?: number;
 ```
 
 Max jobs to activate per poll (the activation batch size). Default `10`.
@@ -124,7 +124,7 @@ Max jobs to activate per poll (the activation batch size). Default `10`.
 ### pollInterval?
 
 ```ts
-readonly optional pollInterval?: Input;
+readonly pollInterval?: Input;
 ```
 
 Delay between polls that returned **no** jobs, on the Effect `Clock` (so it is
@@ -140,7 +140,7 @@ immediately. Default `1 second`.
 ### requestTimeout?
 
 ```ts
-readonly optional requestTimeout?: Input;
+readonly requestTimeout?: Input;
 ```
 
 Long-poll request timeout. `0` (the default) lets the broker hold the request
@@ -165,7 +165,7 @@ The job type to activate.
 ### withLease?
 
 ```ts
-readonly optional withLease?: boolean;
+readonly withLease?: boolean;
 ```
 
 Activate jobs with a lease — default `false`.
@@ -188,7 +188,7 @@ fenced commands automatically, so handlers do not read it directly.
 ### workerName?
 
 ```ts
-readonly optional workerName?: string;
+readonly workerName?: string;
 ```
 
 Worker name recorded on the activation request. Defaults to `effect-worker-<type>-<n>`, where `<n>` is an incrementing per-process counter.

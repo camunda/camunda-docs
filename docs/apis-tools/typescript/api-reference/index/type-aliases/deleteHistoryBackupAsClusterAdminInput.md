@@ -24,5 +24,5 @@ backupId: deleteHistoryBackupAsClusterAdminPathParam_backupId;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: deleteHistoryBackupAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: deleteHistoryBackupAsClusterAdminQueryParam_physicalTenantId;
 ```

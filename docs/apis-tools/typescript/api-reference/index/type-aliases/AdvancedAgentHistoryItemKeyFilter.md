@@ -20,7 +20,7 @@ Advanced AgentHistoryItemKey filter.
 ### $eq?
 
 ```ts
-optional $eq?: AgentHistoryItemKey;
+$eq?: AgentHistoryItemKey;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: AgentHistoryItemKey[];
+$in?: AgentHistoryItemKey[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq?: AgentHistoryItemKey;
+$neq?: AgentHistoryItemKey;
 ```
 
 Checks for inequality with the provided value.
@@ -60,7 +60,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn?: AgentHistoryItemKey[];
+$notIn?: AgentHistoryItemKey[];
 ```
 
 Checks if the property matches none of the provided values.

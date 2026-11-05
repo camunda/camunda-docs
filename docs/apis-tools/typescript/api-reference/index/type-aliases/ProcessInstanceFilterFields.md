@@ -18,7 +18,7 @@ Process instance search filter.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition id.
@@ -26,7 +26,7 @@ The process definition id.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key.
@@ -34,7 +34,7 @@ The process definition key.
 ### processDefinitionName?
 
 ```ts
-optional processDefinitionName?: StringFilterProperty;
+processDefinitionName?: StringFilterProperty;
 ```
 
 The process definition name.
@@ -42,7 +42,7 @@ The process definition name.
 ### processDefinitionVersion?
 
 ```ts
-optional processDefinitionVersion?: IntegerFilterProperty;
+processDefinitionVersion?: IntegerFilterProperty;
 ```
 
 The process definition version.
@@ -50,7 +50,7 @@ The process definition version.
 ### processDefinitionVersionTag?
 
 ```ts
-optional processDefinitionVersionTag?: StringFilterProperty;
+processDefinitionVersionTag?: StringFilterProperty;
 ```
 
 The process definition version tag.
