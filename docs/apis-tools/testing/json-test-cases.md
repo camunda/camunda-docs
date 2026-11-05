@@ -1732,7 +1732,7 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
     <td>
       A list of rows to select the variables to complete the job with. Each row has a <code>when</code> object, which is matched against the job's variables, and a <code>variables</code> object to complete the job with. The first matching row is used. If no row matches, the job completes without variables.
     </td>
-    <td>array of objects</td>
+    <td>array of <a href="#variables-table-row">VariablesTableRow</a></td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1754,6 +1754,40 @@ When you use `variablesExpression` or a non-empty `variablesTable`, it must be t
 - Both `variablesExpression` and a non-empty `variablesTable`.
 
 An empty `variables` object, an empty `variablesTable`, and `useExampleData` set to `false` don't count. Without `variablesExpression` or `variablesTable`, the properties `variables` and `useExampleData` behave as before.
+
+#### Variables Table Row
+
+A row of a variables table. The rows are evaluated in order, and the job is completed with the `variables` of the first row whose `when` matches. See [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules.
+
+<table style={{width: '90%'}}>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+  </tr>
+  <tr>
+    <td>when</td>
+    <td>The variables to match against the job's variables. Every entry must be present in the job's variables with an equal value. An empty object matches every job.</td>
+    <td>object</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>variables</td>
+    <td>The variables to complete the job with when the row matches.</td>
+    <td>object</td>
+    <td>Yes</td>
+  </tr>
+</tbody></table>
+
+Example of a row:
+
+```json
+{
+  "when": { "loopCounter": 1 },
+  "variables": { "sampleType": "regolith" }
+}
+```
 
 Example:
 
