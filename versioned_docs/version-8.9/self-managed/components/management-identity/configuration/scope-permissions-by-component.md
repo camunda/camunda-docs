@@ -15,7 +15,7 @@ The flag is off by default, and it only takes effect once components send a comp
 
 Management Identity identifies a permission by its audience and its definition, for example `write:*`. When each component has an audience of its own, the audience is enough to tell components apart.
 
-Some identity providers allow only one audience across all clients. When components share an audience, Management Identity can't tell whose permission is whose. A user who holds only the `Optimize` role then appears to Hub as a user with Optimize's permissions, and a user with only Hub permissions appears the same way to Optimize.
+Some identity providers allow only one audience across all clients. When components share an audience, Management Identity can't tell whose permission is whose. A user who holds only the `Optimize` role then appears to Web Modeler as a user with Optimize's permissions, and a user with only Web Modeler permissions appears the same way to Optimize.
 
 Enable the flag only where components share an audience. With a distinct audience per component, the flag changes nothing.
 
@@ -36,10 +36,10 @@ If you override the ID, use one of the following values. Matching ignores case a
 | Component           | Component ID                                       |
 | :------------------ | :------------------------------------------------- |
 | Optimize            | `optimize`                                         |
-| Hub                 | `webmodeler`                                       |
+| Web Modeler         | `webmodeler`                                       |
 | Management Identity | `identity` (set by Management Identity for itself) |
 
-Hub's client ID is `web-modeler`, which isn't the same string as its component ID `webmodeler`. Both are accepted.
+Web Modeler's client ID is `web-modeler`, which isn't the same string as its component ID `webmodeler`. Both are accepted.
 
 ## Check what the flag would change
 
