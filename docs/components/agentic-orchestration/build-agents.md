@@ -46,7 +46,7 @@ Get started by [building your first AI agent](/guides/getting-started-agentic-or
 A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next.
 
 - To get started quickly in Camunda SaaS, use the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md).
-- To choose a model, compare recommendations, and write effective prompts, see the [best practices](/components/agentic-orchestration/best-practices-agentic.md).
+- To choose a model, compare recommendations, and write effective prompts, see [Choose the right LLM](/components/agentic-orchestration/choose-right-model-agentic.md) and [LLM recommendations](/components/agentic-orchestration/model-recommendations-agentic.md).
 - To see which model providers the AI Agent connector supports, see the [supported providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#supported-providers).
 
 ### Extend your agent capabilities
