@@ -22,6 +22,10 @@ For documentation-only tasks:
 - Do not run baseline validation before editing.
 - Do not run security scans unless the task involves code, dependencies, generated artifacts, or security-sensitive configuration.
 
+## Opening a PR from another repository or skill
+
+If you open a PR against `camunda/camunda-docs` from outside it, use the [PR template](https://github.com/camunda/camunda-docs/blob/main/.github/pull_request_template.md) as the PR body and fill in its sections. Do not replace it with your own layout or checklist. Follow the PR workflow and versioning rules in the [repo instructions](https://github.com/camunda/camunda-docs/blob/main/.github/instructions/repo.instructions.md).
+
 ## Validation
 
 For documentation-only changes, prefer lightweight validation first:
