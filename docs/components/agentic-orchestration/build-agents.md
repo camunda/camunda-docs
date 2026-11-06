@@ -9,15 +9,29 @@ keywords:
 
 import PageDescription from '@site/src/components/PageDescription';
 import AoGrid from '../react-components/\_ao-card';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 import { buildCapabilityCards, buildExternalAgentCards, buildExposeCards } from '../react-components/\_ao-card-data';
 
 <PageDescription />
 
-Use this page to learn how to build an [AI agent](/reference/glossary.md#ai-agent).
-You can follow one of two paths:
+## About
 
-1. [Build a Camunda AI agent](#build-a-camunda-ai-agent): Model the agent in BPMN, connect it to an LLM, and give it tools and memory.
-2. [Connect an external agent](#connect-an-external-agent): Orchestrate an agent that runs outside Camunda, such as in LangGraph or on Amazon Bedrock.
+Ready to start building [AI agents](/reference/glossary.md#ai-agent) in Camunda? Start by choosing what type of agent you want to build:
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**Agent type**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[Build a Camunda AI agent](#build-a-camunda-ai-agent)</td>
+    <td>Model the agent in BPMN, connect it to an LLM, and give it tools and memory.</td>
+</tr>
+<tr>
+    <td>[Connect an external agent](#connect-an-external-agent)</td>
+    <td>Orchestrate an agent that runs outside Camunda, such as in LangGraph or on Amazon Bedrock.</td>
+</tr>
+</table>
 
 ## Build a Camunda AI agent
 
@@ -56,3 +70,5 @@ An [external agent](/reference/glossary.md#external-agent) runs its agent loop i
 Agents built in Camunda or elsewhere can also call your processes. With the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), you can expose a BPMN process as a tool that agents discover and run.
 
 <AoGrid ao={buildExposeCards} columns={3}/>
+
+<AoGetStartedBanner />
