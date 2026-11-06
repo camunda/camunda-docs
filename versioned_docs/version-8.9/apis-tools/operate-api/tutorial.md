@@ -218,7 +218,7 @@ fetchStatistics()
     })
   )
   .catch((err) => {
-    console.error("An error occured when fetching statistics: ", err);
+    console.error("An error occurred when fetching statistics: ", err);
   });
 
 // ...
