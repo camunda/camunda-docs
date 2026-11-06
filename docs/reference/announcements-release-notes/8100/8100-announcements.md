@@ -211,10 +211,10 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 The following key changes were also released as part of an 8.10.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                          | Artifact | Type       | Key change                                                                                                                                |
-| :--------------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7)       | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
-| 8.10.x <!-- TODO: set the patch release and link it once it is cut --> | Core     | Bug fix    | [Batch suspend, resume, and cancel narrow and validate the `state` filter](#batch-suspend-resume-cancel-state-filter)                     |
+| Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
+| :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9) | Core     | Bug fix    | [Batch suspend, resume, and cancel narrow and validate the `state` filter](#batch-suspend-resume-cancel-state-filter)                     |
 
 ## Agentic orchestration
 
@@ -474,7 +474,7 @@ A cluster upgraded without these changes stops reporting license information to 
 
 #### Batch suspend, resume, and cancel narrow and validate the `state` filter {#batch-suspend-resume-cancel-state-filter}
 
-Starting with 8.10.x, the batch operations to suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, suspend and resume discarded your `state` and `parentProcessInstanceKey` filters, so a batch could act on instances outside your filter. For example, a batch suspension filtered by `parentProcessInstanceKey` suspended every active process instance that matched the remaining filter criteria.
+Starting with 8.10.9, the batch operations to suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, suspend and resume discarded your `state` and `parentProcessInstanceKey` filters, so a batch could act on instances outside your filter. For example, a batch suspension filtered by `parentProcessInstanceKey` suspended every active process instance that matched the remaining filter criteria.
 
 | Operation                                                                                                              | Required state           | Previous behavior                             |
 | :--------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |

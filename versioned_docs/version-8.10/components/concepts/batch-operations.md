@@ -45,7 +45,7 @@ Canceling a batch operation does not rollback any changes that have already been
 
 ## Filter process instances for batch operations
 
-Batch process instance operations only act on instances in a state the operation supports. Starting with an 8.10.x patch release, the following rules apply to the suspend, resume, and cancel operations.
+Batch process instance operations only act on instances in a state the operation supports. Starting with 8.10.9, the following rules apply to the suspend, resume, and cancel operations.
 
 | Operation | Required state           |
 | :-------- | :----------------------- |
