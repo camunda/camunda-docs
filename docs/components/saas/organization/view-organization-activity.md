@@ -10,7 +10,7 @@ View details of all activity within an organization, such as cluster creation, d
 
 This feature is only available in SaaS.
 
-Camunda keeps activity entries indefinitely. The entries do not expire, and Camunda does not delete them after a set time.
+Activity entries have no fixed retention period. Camunda decides when to delete older entries.
 
 ## View activity
 
