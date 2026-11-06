@@ -70,12 +70,4 @@ A Keycloak upgrade changes the database schema. Keycloak does not support a data
 1. If you use custom themes or providers, check that they work with the target Keycloak version.
 1. Test the upgrade in a non-production environment first. After the upgrade, check that users can log in to the Camunda web applications and that Camunda components can get tokens from Keycloak.
 
-:::caution Do not upgrade to Keycloak 26.7.0 to 26.7.4
-Keycloak 26.7.0 to 26.7.4 can fail to start during the database migration to 26.7.0 when the database has more than one realm. The log shows `Cannot lazily initialize collection of role 'org.keycloak.models.jpa.entities.RealmEntity.components' ... (no session)`. For details, see [Keycloak issue #51304](https://github.com/keycloak/keycloak/issues/51304).
-
-Use Keycloak 26.7.5 or later as the target version. If you use the Camunda Helm chart, the Keycloak image in `values-enterprise.yaml` for chart versions earlier than 12.14.2 for Camunda 8.7 is 26.7.4. Set `identityKeycloak.image.tag` to 26.7.5 or later.
-
-If the migration already failed, do not go back to the old Keycloak version against the same database. Make a new database backup, keep only one Keycloak replica, and start Keycloak 26.7.5 or later. To go back to the old version, restore the database backup that you made before the upgrade.
-:::
-
 If you deploy Keycloak with the Keycloak Operator, also follow the [Keycloak Operator documentation](https://www.keycloak.org/operator/installation) to upgrade the operator.
