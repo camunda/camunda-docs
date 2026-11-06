@@ -213,6 +213,7 @@ The following key changes were also released as part of an 8.10.x patch release 
 
 | Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
 | :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.1](https://github.com/camunda/camunda/releases/tag/8.10.1) | Core     | Bug fix    | [Batch cancellation narrows and validates the `state` filter](#batch-cancel-state-filter)                                                 |
 | [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
 | [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9) | Core     | Bug fix    | [Batch suspend and resume narrow and validate the `state` filter](#batch-suspend-resume-state-filter)                                     |
 
@@ -472,11 +473,36 @@ A cluster upgraded without these changes stops reporting license information to 
 </div>
 <div className="release-announcement-content">
 
+#### Batch cancellation narrows and validates the `state` filter {#batch-cancel-state-filter}
+
+Starting with 8.10.1, the batch operation to [cancel process instances](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx) narrows your `state` filter with `ACTIVE` and `SUSPENDED`, and validates it. Previously, it discarded your `state` filter, so a batch could cancel instances outside your filter.
+
+| `state` filter                         | 8.10.0                                  | 8.10.1 and later                                   |
+| :------------------------------------- | :-------------------------------------- | :------------------------------------------------- |
+| None                                   | Active and suspended instances canceled | Active and suspended instances canceled            |
+| `ACTIVE`                               | Active and suspended instances canceled | Active instances canceled                          |
+| `SUSPENDED`                            | Active and suspended instances canceled | Suspended instances canceled                       |
+| Any other state through `$eq` or `$in` | Active and suspended instances canceled | Rejected with `400 Bad Request`                    |
+| `$neq`, `$exists`, or `$like`          | Ignored                                 | Applied, limited to active and suspended instances |
+
+From 8.10.1 to 8.10.8, a state other than `ACTIVE` or `SUSPENDED` inside an `$or` branch is also rejected with `400 Bad Request`. Starting with [8.10.9](#batch-suspend-resume-state-filter), states inside `$or` branches aren't validated.
+
+**Action:** Remove a top-level `state` filter other than `ACTIVE` or `SUSPENDED` from your batch cancellation requests. If your integration filtered for `ACTIVE` or `SUSPENDED` and relied on both being canceled, remove the `state` filter.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Bug fix</span>
+</div>
+<div className="release-announcement-content">
+
 #### Batch suspend and resume narrow and validate the `state` filter {#batch-suspend-resume-state-filter}
 
 Starting with 8.10.9, the batch operations to suspend and resume process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, they discarded your `state` and `parentProcessInstanceKey` filters, so a batch could act on instances outside your filter. For example, a batch suspension filtered by `parentProcessInstanceKey` suspended every active process instance that matched the remaining filter criteria.
 
-Batch cancellation narrows your `state` filter starting with 8.10.1, and your `parentProcessInstanceKey` filter starting with [8.10.7](#batch-cancel-parent-process-instance-filter). Starting with 8.10.9, it no longer rejects states inside `$or` branches, so all three operations follow the same rules.
+Batch cancellation narrows your `state` filter starting with [8.10.1](#batch-cancel-state-filter), and your `parentProcessInstanceKey` filter starting with [8.10.7](#batch-cancel-parent-process-instance-filter). Starting with 8.10.9, it no longer rejects states inside `$or` branches, so all three operations follow the same rules.
 
 | Operation                                                                                                              | Required state           | Previous behavior                             |
 | :--------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
