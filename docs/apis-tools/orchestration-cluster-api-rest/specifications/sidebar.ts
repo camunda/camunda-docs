@@ -330,9 +330,21 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-clock",
+          label: "Get internal clock",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/pin-clock",
           label: "Pin internal clock (alpha)",
           className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-clock",
+          label: "Add time to internal clock",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -1689,6 +1701,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task-form",
           label: "Get user task form",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/lookup-user-task",
+          label: "Look up an active user task (alpha)",
+          className: "api-method post",
         },
         {
           type: "doc",

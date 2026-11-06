@@ -7,6 +7,7 @@ keywords: ["agentic ai", "AI agents", "agent definition", "agent instance"]
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <PageDescription />
 
@@ -157,3 +158,5 @@ To display readable model reasoning where supported, [migrate to the AI Agent el
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.
 
 See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for a step-by-step walkthrough of reporting this data from your own runtime.
+
+<AoGetStartedBanner />

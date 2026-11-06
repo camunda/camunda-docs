@@ -39,10 +39,22 @@ paths:
         The files must be provided as `multipart/form-data` with the named parts `readme` and `template` (the part name
         is the same for each file of the respective type).
 
-        Previously ingested assets that are not included in the request payload will be marked as unpublished in the
-        catalog. Unpublished assets are only accessible to administrators; regular modeling users cannot use them for
-        new diagram elements anymore. Existing diagrams using assets that get unpublished will continue to work as
-        before.
+        The optional `source` form field identifies the catalog source the assets are ingested from. Only assets of
+        the ingested source are unpublished when they are missing from the payload; assets of other sources stay
+        untouched. If a submitted element template ID already exists in a different source, the asset is adopted:
+        its source is updated to the ingested source and it is (re)published there. This is the hand-over path when
+        a source is renamed or a mono-repo is split into multiple repositories — the last successful ingestion
+        wins. Requests without a `source` match the default bucket of assets that were ingested without a source.
+
+        Previously ingested assets of the ingested source that are not included in the request payload will be
+        marked as unpublished in the catalog. Unpublished assets are only accessible to administrators; regular
+        modeling users cannot use them for new diagram elements anymore. Existing diagrams using assets that get
+        unpublished will continue to work as before.
+
+        Re-ingesting an unpublished asset with an unchanged template at its latest version does not require a
+        version bump: the stored content is updated from the submission, including its deprecation flag.
+        Deprecation is lifecycle metadata that follows the latest ingestion while an asset is unpublished.
+        Changing a published asset — including only its deprecation flag — requires a higher template version.
       x-added-in-version: "8.10"
       tags:
         - Catalog
@@ -254,6 +266,14 @@ components:
             type: string
             format: binary
           minItems: 1
+        source:
+          description: |
+            Free-text identifier of the catalog source the assets are ingested from (for example the repository
+            name). Only assets of this source are unpublished when missing from the payload; an asset whose
+            template ID exists in another source is adopted (moved to this source). If omitted, the assets are
+            ingested into the default bucket and only assets without a source are matched.
+          type: string
+          maxLength: 255
 
     CatalogAssetSearchQuery:
       type: object
@@ -336,8 +356,8 @@ components:
       properties:
         status:
           description: |
-            Filter by usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`
-            (see the description of the `usage.status` response field for their meaning).
+            Filter by usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`,
+            `RETIRED` (see the description of the `usage.status` response field for their meaning).
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
 
@@ -414,13 +434,15 @@ components:
             * `UP_TO_DATE`: The asset is active (= neither unpublished nor deprecated), and only its current latest version is used.
             * `UPDATE_AVAILABLE`: The asset is active, but at least one usage is on an older version.
             * `DEPRECATED`: The asset is unpublished, or its latest version is deprecated, but it is still in use. Takes priority over `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).
-            * `UNUSED`: The asset is not used at all. Takes priority over `DEPRECATED` (for unpublished/deprecated assets that are not used).
+            * `UNUSED`: The asset is active (= neither unpublished nor deprecated), but not used at all.
+            * `RETIRED`: The asset is unpublished, or its latest version is deprecated, and it is not used at all. Takes priority over `UNUSED` (for unpublished/deprecated assets that are not used).
           type: string
           enum:
             - UP_TO_DATE
             - UPDATE_AVAILABLE
             - DEPRECATED
             - UNUSED
+            - RETIRED
         workspaceCount:
           description: The number of distinct workspaces in which the asset is used.
           type: integer

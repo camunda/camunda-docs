@@ -353,7 +353,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 
 The [Keycloak Operator](https://www.keycloak.org/operator/installation) provides the official operator-based way to deploy and manage Keycloak instances on Kubernetes. Maintained by the Keycloak team, it provides the recommended approach for automated deployment, configuration, and lifecycle management.
 
-Use the latest Keycloak version listed in our [supported environments matrix](/reference/supported-environments.md).
+Use the latest Keycloak version listed in our [supported environments matrix](/reference/supported-environments.md). For Keycloak support scope, security fixes, and upgrades, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
 
 We use the Camunda-maintained quay-optimized Keycloak image [camunda/keycloak:quay-optimized-version](https://github.com/camunda/keycloak) as it bundles the Camunda Identity login theme, the `/auth` base path, the AWS JDBC wrapper, and pre-baked configuration.
 

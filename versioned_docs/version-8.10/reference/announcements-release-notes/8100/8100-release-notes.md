@@ -10,7 +10,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -32,7 +32,7 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.10.6 (22.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.6)</li><li>[Camunda 8.10.5 (19.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.5)</li><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.2 (22.10.2026)](https://github.com/camunda/connectors/releases/tag/8.10.2)</li><li>[Connectors 8.10.1 (20.10.2026)](https://github.com/camunda/connectors/releases/tag/8.10.1)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
+<ul><li>[Camunda 8.10.9 (05.11.2026)](https://github.com/camunda/camunda/releases/tag/8.10.9)</li><li>[Camunda 8.10.8 (02.11.2026)](https://github.com/camunda/camunda/releases/tag/8.10.8)</li><li>[Camunda 8.10.7 (26.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.7)</li><li>[Camunda 8.10.6 (22.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.6)</li><li>[Camunda 8.10.5 (19.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.5)</li><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.4 (05.11.2026)](https://github.com/camunda/connectors/releases/tag/8.10.4)</li><li>[Connectors 8.10.3 (02.11.2026)](https://github.com/camunda/connectors/releases/tag/8.10.3)</li><li>[Connectors 8.10.2 (22.10.2026)](https://github.com/camunda/connectors/releases/tag/8.10.2)</li><li>[Connectors 8.10.1 (20.10.2026)](https://github.com/camunda/connectors/releases/tag/8.10.1)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -168,14 +168,6 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 - The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
-
-### ProcessOS Harness
-
-<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
-
-Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
-
-<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
 
 ### Real-time agent visibility and monitoring
 
@@ -1495,11 +1487,11 @@ User, group, role, tenant, and permission management for Optimize is unchanged i
 
 Camunda 8.10 completes the unified configuration of the Orchestration Cluster that began in 8.8.
 
-- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
+- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
 - You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
 - For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
-<p class="link-arrow">[Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+<p class="link-arrow">[Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 ### Unified frontend application for Admin, Operate, and Tasklist
 
@@ -1531,6 +1523,16 @@ Camunda Hub and Accounts now support the 2025 enterprise license model.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
 - For enterprise (`salesplantype = enterprise`) organizations, the licensing model is shown in the organization details. Admins can edit this by selecting either **legacy** or **2025** via a modal action.
 - The enterprise onboarding wizard now includes a license selection step (defaults to **2025**). The `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** if not provided).
+
+## ProcessOS
+
+<div class="release"><span class="badge badge--medium" title="This feature affects ProcessOS">ProcessOS</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+### ProcessOS Harness
+
+Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
 
 ## Reference architectures
 

@@ -338,8 +338,9 @@ tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/te
 
 ## Custom connectors
 
-By default, the runtime uses the built-in connectors bundle in the same version as the Maven module. You can change the
-version or use a custom connectors bundle in the following way.
+By default, the runtime uses the built-in connectors bundle in a fixed, published version. Connectors have a separate
+release cycle, so this version isn't necessarily the same as the Maven module version. You can change the version or use
+a custom connectors bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [

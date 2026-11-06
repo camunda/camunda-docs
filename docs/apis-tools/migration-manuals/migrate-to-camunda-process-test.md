@@ -114,18 +114,11 @@ Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
    Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run) on your machine.
+   Use the same version as CPT or later. See the [remote runtime prerequisites](/apis-tools/testing/configuration.md#prerequisites-1) for the required port and permissions.
 
-2. **Enable the management clock endpoint**  
-   See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):
-   - Create an `application.yaml` file in the root `/c8run` directory.
-   - Add:
-     ```yaml
-     zeebe.clock.controlled: true
-     ```
+2. **Start Camunda 8 Run**.
 
-3. **Start Camunda 8 Run**.
-
-4. **Switch CPT’s runtime mode** to `remote` in your project configuration.
+3. **Switch CPT’s runtime mode** to `remote` in your project configuration.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [

@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
@@ -42,6 +44,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -66,6 +70,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlNZU1RFTSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn0seyJyZXNvdXJjZVR5cGUiOiJCQUNLVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFU1RPUkUifV19XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -105,6 +111,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRVNUT1JFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -131,6 +139,13 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: |
+            A requested backup has no completed backup on at least one partition, or the physical tenant does not exist. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
           description: The cluster is not in recovery mode, so the restore cannot be accepted.
         "500":
@@ -148,6 +163,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRVNUT1JFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
