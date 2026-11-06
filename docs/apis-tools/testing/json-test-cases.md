@@ -1749,6 +1749,29 @@ The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-
 
 Set only one of `variables`, `variablesExpression`, `variablesTable`, or `useExampleData`. If you set `variablesExpression` or `variablesTable` together with another of these properties, the instruction fails.
 
+Example:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "calculate-trajectory",
+  "variables": {
+    "trajectory": "optimal",
+    "fuelConsumption": 450
+  }
+}
+```
+
+Example with a FEEL expression that derives the variables from the job's variables:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesExpression": "{ sampleType: if loopCounter = 1 then \"regolith\" else \"basalt\" }"
+}
+```
+
 #### Variables Table Row
 
 A row of a variables table. The rows are evaluated in order, and the job is completed with the `variables` of the first row whose `when` matches. See [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules.
@@ -1774,39 +1797,7 @@ A row of a variables table. The rows are evaluated in order, and the job is comp
   </tr>
 </tbody></table>
 
-Example of a row:
-
-```json
-{
-  "when": { "loopCounter": 1 },
-  "variables": { "sampleType": "regolith" }
-}
-```
-
 Example:
-
-```json
-{
-  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
-  "jobType": "calculate-trajectory",
-  "variables": {
-    "trajectory": "optimal",
-    "fuelConsumption": 450
-  }
-}
-```
-
-Example with a FEEL expression that derives the variables from the job's variables:
-
-```json
-{
-  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
-  "jobType": "analyze-sample",
-  "variablesExpression": "{ sampleType: if loopCounter = 1 then \"regolith\" else \"basalt\" }"
-}
-```
-
-Example with a variables table:
 
 ```json
 {
