@@ -39,17 +39,6 @@ export const fundamentalCards = [
     description: "Understand how tools are resolved and defined for the LLM.",
   },
   {
-    link: "../agentic-ai-aiagent-migration/",
-    title: "Process instance migration",
-    image: IconAoDesignImg,
-    description:
-      "Review which migration scenarios are supported for running AI agents.",
-  },
-];
-
-// Configure and extend cards on the AI Agent connector page
-export const configureCards = [
-  {
     link: "../agentic-ai-aiagent-model-providers/",
     title: "Model providers",
     image: IconLlmImg,
@@ -61,6 +50,24 @@ export const configureCards = [
     image: IconIdpImg,
     description:
       "Understand how the connector passes documents and images to the LLM.",
+  },
+];
+
+// Advanced topics cards on the AI Agent connector page
+export const advancedCards = [
+  {
+    link: "../agentic-ai-aiagent-upgrade/",
+    title: "Upgrade AI Agent element templates",
+    image: IconBpmnImg,
+    description:
+      "Upgrade AI Agent connectors from the legacy element templates to the new ones.",
+  },
+  {
+    link: "../agentic-ai-aiagent-migration/",
+    title: "Process instance migration",
+    image: IconAoDesignImg,
+    description:
+      "Review which migration scenarios are supported for running AI agents.",
   },
   {
     link: "../agentic-ai-aiagent-customization/",

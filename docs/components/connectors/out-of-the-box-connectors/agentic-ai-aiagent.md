@@ -6,7 +6,7 @@ description: AI agent connector implementing an agent loop for tool calls with a
 ---
 
 import AoGrid from '../../react-components/\_ao-card';
-import { configureCards, connectorCards, fundamentalCards } from '../../react-components/\_aiagent-card-data';
+import { advancedCards, connectorCards, fundamentalCards } from '../../react-components/\_aiagent-card-data';
 
 Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI agents to build solutions using [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md).
 
@@ -59,7 +59,7 @@ The right implementation depends on your use case.
 The **recommended approach** for most use cases is to use the **AI Agent Sub-process** implementation due to the simplified configuration and support for event sub-processes.
 :::
 
-If you use the legacy element templates, see [Upgrade AI Agent element templates](./agentic-ai-aiagent-upgrade.md).
+If your process models use templates from before 8.10, see [upgrade AI Agent element templates](./agentic-ai-aiagent-upgrade.md) to migrate to the latest version.
 
 ### Compare implementations
 
@@ -87,15 +87,15 @@ Execution listeners behave differently between the two implementations. On the A
 
 ## Learn the fundamentals
 
-Understand the fundamental concepts of the AI Agent connector.
+Understand the fundamental concepts of the AI Agent connector, configure the LLM provider, and pass documents to the model.
 
-<AoGrid ao={fundamentalCards} columns={3}/>
+<AoGrid ao={fundamentalCards} columns={2}/>
 
-## Configure and extend
+## Dive into advanced topics
 
-Configure the LLM provider, pass documents to the model, and customize the connector.
+Upgrade the element templates, migrate running process instances, and customize the connector in Self-Managed.
 
-<AoGrid ao={configureCards} columns={3}/>
+<AoGrid ao={advancedCards} columns={3}/>
 
 ## Explore further resources
 

@@ -1113,15 +1113,15 @@ module.exports = {
                       items: [
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model",
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-migration",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                       ],
                     },
                     {
                       type: "category",
-                      label: "Configure and extend",
+                      label: "Advanced topics",
                       items: [
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-migration",
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                       ],
                     },
