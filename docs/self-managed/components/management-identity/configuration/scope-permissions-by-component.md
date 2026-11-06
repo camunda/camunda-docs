@@ -11,11 +11,11 @@ Without the flag, Management Identity returns every permission on the audience t
 
 The flag is off by default, and it only takes effect once components send a component ID. It applies when Management Identity connects to a generic OIDC provider or Microsoft Entra ID (the `oidc` Spring profile). It has no effect with the default Keycloak setup. Read [check what the flag would change](#check-what-the-flag-would-change) before you enable it.
 
-## When to enable the flag
+## Decide if components share an audience
 
 Management Identity identifies a permission by its audience and its definition, for example `write:*`. When each component has an audience of its own, the audience is enough to tell components apart.
 
-Some identity providers allow only one audience across all clients. When components share an audience, Management Identity can't tell whose permission is whose. A user who holds only the `Optimize` role then appears to Hub as a user with Optimize's permissions, and a user with only Hub permissions appears the same way to Optimize.
+Some identity providers allow only one audience across all clients. When components share an audience, Management Identity can't tell which component a permission belongs to. A user who has only the `Optimize` role then receives Optimize's permissions in Camunda Hub, and a user who has only Camunda Hub permissions receives them in Optimize.
 
 Enable the flag only where components share an audience. With a distinct audience per component, the flag changes nothing.
 
@@ -36,10 +36,10 @@ If you override the ID, use one of the following values. Matching ignores case a
 | Component           | Component ID                                       |
 | :------------------ | :------------------------------------------------- |
 | Optimize            | `optimize`                                         |
-| Hub                 | `webmodeler`                                       |
+| Camunda Hub         | `webmodeler`                                       |
 | Management Identity | `identity` (set by Management Identity for itself) |
 
-Hub's client ID is `web-modeler`, which isn't the same string as its component ID `webmodeler`. Both are accepted.
+Camunda Hub's client ID is `web-modeler`, which isn't the same string as its component ID `webmodeler`. Both are accepted.
 
 ## Check what the flag would change
 
@@ -47,10 +47,10 @@ While the flag is off, Management Identity doesn't withhold anything. It does lo
 
 1. Leave the flag off, and make sure the components that share the audience send their component IDs.
 2. Let users sign in and use the components, so each component fetches permissions at least once. Management Identity logs a warning only when a permission is requested.
-3. Read the Management Identity log and compare each warning with the following table.
-4. If any listed permission is one a component actually needs, don't enable the flag yet.
+3. Read the Management Identity log and compare each warning with the log messages in this section.
+4. If any permission named in a warning is one a component actually needs, don't enable the flag yet.
 
-Management Identity logs each warning once per process, up to 1,000 warnings for each log message in the following table. Restart Management Identity to see them again.
+Management Identity logs each warning once per process, up to 1,000 warnings for each distinct log message. Restart Management Identity to see them again.
 
 | Log message                                                                                                                                                                                                                           | Meaning                                                                                                                                                            | What to do                                                                                        |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
@@ -81,7 +81,6 @@ Set `SCOPE_PERMISSIONS_BY_COMPONENT` back to `false`, or remove it, and restart 
 
 ## Known limitations
 
-- Roles you edit at runtime aren't scoped correctly. Management Identity resolves which component owns a permission from its configuration, not from the database. A role that a component defines and that you later edited through `/api/roles` is attributed the way the configuration defines it. No component gains access it doesn't have without the flag, but scoping doesn't apply to roles you edited at runtime.
-- Roles and permissions created at runtime are returned to every component. Management Identity can't attribute them to a component, so it never withholds them.
+- Roles and permissions you create or edit at runtime through `/api/roles` aren't scoped. Management Identity attributes permissions from its configuration, not from the database, so it can't attribute these to a component and returns them to every component. No component gains access it doesn't have without the flag.
 - A permission that several components define is returned to each of them. When a role grants a permission that the granting component doesn't define itself, and several other components do, all of those components receive it. The result is narrower than before, never broader.
 - The component ID isn't authenticated. A component names itself in its request, and Management Identity can't verify the name. The flag corrects misconfiguration. It doesn't protect against a caller that deliberately names another component.
