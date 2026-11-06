@@ -1121,7 +1121,7 @@ module.exports = {
                       type: "category",
                       label: "Advanced topics",
                       items: [
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-migration",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-instance-migration",
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                       ],
                     },

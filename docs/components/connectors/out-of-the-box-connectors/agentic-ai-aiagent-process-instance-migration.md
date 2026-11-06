@@ -1,5 +1,5 @@
 ---
-id: agentic-ai-aiagent-migration
+id: agentic-ai-aiagent-process-instance-migration
 sidebar_label: Process instance migration
 title: AI Agent process instance migration
 description: Learn which process instance migration scenarios are supported for running AI Agent connector instances, and how to handle changed tool definitions.

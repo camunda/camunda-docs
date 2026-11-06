@@ -63,7 +63,7 @@ export const advancedCards = [
       "Upgrade AI Agent connectors from the legacy element templates to the new ones.",
   },
   {
-    link: "../agentic-ai-aiagent-migration/",
+    link: "../agentic-ai-aiagent-process-instance-migration/",
     title: "Process instance migration",
     image: IconAoDesignImg,
     description:
