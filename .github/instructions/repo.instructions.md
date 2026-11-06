@@ -37,9 +37,8 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 
 - Add **labels** to communicate the component, version, and priority. Both PRs and issues without labels may be triaged slowly.
 - Add the **`deploy` label** to a PR to trigger a preview site deployment. This is recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
-- When creating a PR, invoke the `create-pr` skill (`.claude/skills/create-pr/SKILL.md`).
+- When creating a PR, invoke the `docs-create-pr` skill (`.claude/skills/docs-create-pr/SKILL.md`).
 - When updating an existing PR description, preserve the full template structure and edit content inside the `## Description` section only, unless explicitly asked to change other sections.
-- Add both PRs and issues to the **Documentation Team** GitHub Project so they appear in the team's board and backlog.
 
 ## 4. Commits
 
