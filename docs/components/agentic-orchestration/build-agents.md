@@ -9,7 +9,7 @@ keywords:
 
 import PageDescription from '@site/src/components/PageDescription';
 import AoGrid from '../react-components/\_ao-card';
-import { buildLlmCards, buildCapabilityCards, buildExternalAgentCards, buildExposeCards } from '../react-components/\_ao-card-data';
+import { buildCapabilityCards, buildExternalAgentCards, buildExposeCards } from '../react-components/\_ao-card-data';
 
 <PageDescription />
 

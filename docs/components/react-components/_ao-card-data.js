@@ -52,12 +52,6 @@ export const fundamentalCards = [
 // Evaluate cards on the Evaluate AI agents page
 export const evaluateCards = [
   {
-    link: "../test-ai-agents/",
-    title: "Test with CPT",
-    image: IconTest,
-    description: "Test your AI agents with Camunda Process Test.",
-  },
-  {
     link: "../monitor-ai-agents/",
     title: "Monitor with Operate",
     image: IconOperate,
@@ -76,24 +70,14 @@ export const evaluateCards = [
     description: "Analyze your AI agents with Optimize.",
   },
   {
-    link: "../../agent-states-and-metrics/",
-    title: "States and usage metrics",
-    image: IconAoDesignImg,
-    description: "Understand agent states and usage metrics.",
+    link: "../test-ai-agents/",
+    title: "Test with CPT",
+    image: IconTest,
+    description: "Test your AI agents with Camunda Process Test.",
   },
 ];
 
 // Cards on the Build AI agents page
-export const buildLlmCards = [
-  {
-    link: "../camunda-provided-llm/",
-    title: "Camunda-provided LLM",
-    image: IconAoLlmImg,
-    description:
-      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-  },
-];
-
 export const buildCapabilityCards = [
   {
     link: "../add-tool-to-ai-agent/",
