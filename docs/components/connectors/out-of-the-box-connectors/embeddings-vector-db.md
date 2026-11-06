@@ -84,7 +84,7 @@ To perform this operation, enter the following:
 
 - **Operation** dropdown: **Retrieve document**.
 - **Search query**: Enter your search query.
-- **Max results**: Enter maximum amount of returned results. Amazon DynamoDB and Amazon S3 Vectors return at most 100 results per query, so the operation fails if you enter a higher value for these vector stores.
+- **Max results**: Enter the maximum number of results to return. Amazon DynamoDB and Amazon S3 Vectors return at most 100 results per query. A higher value causes the operation to fail.
 - **Min score**: Enter the lowest score threshold similarity value; the value should be between 0 and 1, for example, 0.81.
 - **Embedding model**: Refer to the [relevant section](#embedding-models).
 - **Vector store**: Refer to the [relevant section](#vector-stores).
@@ -119,7 +119,7 @@ Camunda document reference metadata, similarity score, and the actual text conte
 }
 ```
 
-The operation fails if a matching entry in the vector store has no text, for example an entry that was not written by the **Embed document** operation.
+The **Retrieve document** operation fails if a matching vector store entry has no text, for example an entry the **Embed document** operation didn't write.
 
 </TabItem>
 
@@ -289,7 +289,7 @@ Enter the following parameters:
 
 Enter the following parameters:
 
-- **Amazon S3 Vectors credential** – _(Optional)_ A reusable [credential](/components/hub/organization/credentials/index.md) that holds the access key and secret key. If you leave it empty, enter **Access key** and **Secret key** instead.
+- **Amazon S3 Vectors credential** – (Optional) A reusable [credential](/components/hub/organization/credentials/index.md) that holds the access key and secret key. If you leave it empty, enter **Access key** and **Secret key** instead.
 - **Access key** and **Secret key** – AWS IAM credentials for a user with the permissions listed below.
 - **Region** – AWS region of the vector bucket, for example `us-east-1`.
 - **Vector bucket name** – Name of an existing [S3 vector bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-buckets.html).
@@ -302,9 +302,9 @@ To use an existing index, make sure it:
 - Has the same number of dimensions as the embedding model.
 - Declares `_page_content` as a non-filterable metadata key. The connector stores the chunk text in this key.
 
-The connector scores results with the distance metric of the index.
+The connector scores results with the distance metric of the existing index, or cosine distance for an index it creates.
 
-The connector stores only the chunk text, not the metadata parsed from the document. Parsed document metadata can exceed the [Amazon S3 Vectors metadata limits](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html).
+The connector stores only the chunk text, not the metadata parsed from the document, because parsed metadata can exceed the [Amazon S3 Vectors metadata limits](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html).
 
 The IAM user needs permission for the following actions:
 
@@ -320,7 +320,7 @@ The IAM user needs permission for the following actions:
 
 Enter the following parameters:
 
-- **Amazon DynamoDB credential** – _(Optional)_ A reusable [credential](/components/hub/organization/credentials/index.md) that holds the access key and secret key. If you leave it empty, enter **Access key** and **Secret key** instead.
+- **Amazon DynamoDB credential** – (Optional) A reusable [credential](/components/hub/organization/credentials/index.md) that holds the access key and secret key. If you leave it empty, enter **Access key** and **Secret key** instead.
 - **Access key** and **Secret key** – AWS IAM credentials for a user with the permissions listed below.
 - **Region** – AWS region of the table, for example `us-east-1`.
 - **Table name** – Name of the table where you wish to store embeddings. The name must be 3 to 255 characters long and contain only letters, digits, underscores, hyphens, or dots.
@@ -336,9 +336,7 @@ To use an existing table, make sure it:
 
 The connector uses the partition key, vector attribute, and distance function of the existing table and vector index.
 
-:::note
-DynamoDB indexes new embeddings asynchronously. A **Retrieve document** operation that runs immediately after an **Embed document** operation might not return the new chunks. The **Retrieve document** operation fails if the vector index is not active yet.
-:::
+DynamoDB indexes new embeddings asynchronously. A **Retrieve document** operation that runs immediately after an **Embed document** operation might not return the new chunks. The **Retrieve document** operation fails if the vector index isn't active yet.
 
 The IAM user needs permission for the following actions:
 
