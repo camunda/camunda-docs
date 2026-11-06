@@ -1,11 +1,11 @@
 ---
-name: backport
+name: docs-backport
 description: Use when applying a docs change to one or more older versioned releases. Covers finding equivalent files across versions, handling doc ID divergence, updating versioned sidebars, and PR conventions for backports.
 user-invocable: true
 argument-hint: "<description of the change to backport, or the PR/branch it came from>"
 ---
 
-# /backport — backport a docs change to older versions
+# /docs-backport — backport a docs change to older versions
 
 **Only proceed when the PR author has explicitly requested a backport.** Do not decide to backport on their behalf. If it is unclear which versions to target, ask before touching any files.
 
