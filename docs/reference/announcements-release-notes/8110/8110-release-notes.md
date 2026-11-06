@@ -21,13 +21,13 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Read the engine clock and add time without pinning it
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 <!-- https://github.com/camunda/camunda/issues/57863, https://github.com/camunda/camunda/pull/66061, https://github.com/camunda/camunda/issues/57864, https://github.com/camunda/camunda/pull/66462 -->
 
-With two new Orchestration Cluster REST API endpoints, you can read the engine clock and move it without stopping it.
+Use two new Orchestration Cluster REST API endpoints to read and move the engine clock without stopping it.
 
-| Endpoint             | What it does                                                                                                      | Required permission  | Java client                             |
+| Endpoint             | Description                                                                                                       | Required permission  | Java client                             |
 | :------------------- | :---------------------------------------------------------------------------------------------------------------- | :------------------- | :-------------------------------------- |
 | `GET /v2/clock`      | Returns the current time of the engine clock. If the clock is pinned, it returns the pinned time.                 | `READ` on `SYSTEM`   | `newClockGetRequest()`                  |
 | `POST /v2/clock/add` | Moves the clock forward or backward by an ISO 8601 duration, such as `PT1H` or `-PT1H`, and returns the new time. | `UPDATE` on `SYSTEM` | `newAddClockCommand().offset(Duration)` |
@@ -74,7 +74,7 @@ This helps address a known compliance gap (for example, PCI DSS 4.0 Requirement 
 
 <!-- https://github.com/camunda/product-hub/issues/3873 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 Desktop Modeler now uses the Camunda Design System. The application UI, the BPMN, DMN, and form editors, the properties panel, and side panels such as the variables outline and task testing all use Camunda Design System components and style.
 
@@ -84,7 +84,7 @@ Desktop Modeler no longer ships Carbon or its previous global styles. If your pl
 
 #### Protect sensitive variables with REDACT
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 <!-- https://github.com/camunda/camunda/issues/64644 -->
 
@@ -100,7 +100,7 @@ In 8.11.0-alpha1, protection is incomplete. Variable values can still appear in 
 
 #### Evenly distributed record indices in Elasticsearch and OpenSearch
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
 
 <!-- https://github.com/camunda/camunda/issues/54601, https://github.com/camunda/camunda/pull/56522 -->
 
