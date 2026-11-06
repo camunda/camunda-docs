@@ -53,5 +53,3 @@ echo "$PR_URL"
 ```
 
 3. Follow the commit message conventions in `.github/instructions/repo.instructions.md` § 4 (Code formatting and commits) for the PR title format.
-
-4. Do not add the PR to the Documentation Team project yourself. The `add-to-project` workflow (`.github/workflows/add-to-project.yaml`) does it, and sets the status to "In Review", when a Tech Writers reviewer is requested. Contributor `gh` tokens usually lack the `read:org` and `project` scopes, so the manual step fails.
