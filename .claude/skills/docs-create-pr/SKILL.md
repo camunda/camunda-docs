@@ -1,11 +1,11 @@
 ---
-name: create-pr
-description: Use when opening a pull request in camunda-docs. Covers reading the PR template, marking applicable checklist items, choosing labels, constructing the gh pr create command with --body-file, and adding the PR to the Documentation Team project.
+name: docs-create-pr
+description: Use when opening a pull request in camunda-docs. Covers reading the PR template, marking applicable checklist items, choosing labels, constructing the gh pr create command with --body-file, and the PR title format.
 user-invocable: true
 argument-hint: "<brief description of the PR>"
 ---
 
-# /create-pr — open a pull request for camunda-docs
+# /docs-create-pr — open a pull request for camunda-docs
 
 Follow these steps in order. Do not skip or reorder them.
 
@@ -54,8 +54,4 @@ echo "$PR_URL"
 
 3. Follow the commit message conventions in `.github/instructions/repo.instructions.md` § 4 (Code formatting and commits) for the PR title format.
 
-4. Add the PR to the Documentation Team GitHub project using the URL captured above:
-
-```bash
-gh pr edit "$PR_URL" --add-project "Documentation Team"
-```
+4. Do not add the PR to the Documentation Team project yourself. The `add-to-project` workflow (`.github/workflows/add-to-project.yaml`) does it, and sets the status to "In Review", when a Tech Writers reviewer is requested. Contributor `gh` tokens usually lack the `read:org` and `project` scopes, so the manual step fails.
