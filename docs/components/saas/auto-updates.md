@@ -4,6 +4,10 @@ title: "Auto-updates"
 description: "Some updates are applied to SaaS clusters automatically."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Camunda 8 SaaS customers can enable auto-updates. When enabled, the cluster is updated once a new patch release is available.
 
 You can enable auto-updates when you [create a cluster](/components/saas/clusters/create-cluster.md) or in the **Settings** tab:

@@ -5,10 +5,16 @@ description: "Learn how admin users can manage access to alpha features in Camun
 keywords: [alpha-features, alpha, admin, pre-release]
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 :::note
 Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions.
 Customers in other subscriptions can still turn on/off these settings directly from Camunda Hub.  
 :::
+
+## About
 
 If you aren't already familiar with accessing **alpha features**, learn more in our [alpha feature documentation](/components/early-access/alpha/alpha-features.md).
 

@@ -14,6 +14,10 @@ keywords:
   ]
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Encryption at rest protects stored data by making it unreadable without the appropriate decryption keys.
 
 By default, Camunda 8 SaaS uses a provider-managed encryption key with [Google Cloud Platform (GCP) encryption](https://cloud.google.com/docs/security/encryption/default-encryption). Enterprise customers can choose:

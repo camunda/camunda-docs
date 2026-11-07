@@ -5,6 +5,10 @@ description: "Cluster load provides you with a high-level overview of how well a
 keywords: [capacity, "cluster capacity", load, "cluster load"]
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Use the cluster load metric to view and manage your cluster load and utilization.
 
 :::note

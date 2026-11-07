@@ -4,6 +4,10 @@ title: Set up the Cluster Metrics endpoint
 description: Learn how to set up the Cluster Metrics endpoint in Camunda 8 SaaS, manage credentials, and obtain the connection details required to integrate with your monitoring system.
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 Set up and manage the Cluster Metrics endpoint for a Camunda 8 SaaS Orchestration cluster, including how to activate and deactivate the endpoint and obtain the connection details required to integrate it with an external monitoring system.
 
 ## Before you begin
