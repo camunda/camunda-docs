@@ -700,7 +700,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/build-with-ai/overview",
+          docId: "components/agentic-orchestration/overview",
           label: "Agentic orchestration",
           position: "left",
         },
