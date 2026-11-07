@@ -625,6 +625,15 @@ of it cannot be used to obtain new access tokens after the user has signed out. 
 [RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009) revocation request sent from Camunda to
 the provider, separate from the browser redirect used for RP-initiated logout.
 
+Camunda also revokes the refresh token when a web session expires, for example after the
+[session idle timeout](../core-settings/configuration/properties.md), without a logout. This
+requires persistent web sessions (`camunda.security.session.persistent.enabled: true`). Sessions
+kept only in memory are revoked at logout only. The revocation runs in the background after the
+expired session is deleted, so the user does not wait for the identity provider. If several
+physical tenants use the same OIDC client with different revocation settings, Camunda does not
+revoke the refresh tokens of their expired sessions, so a tenant that sets
+`revocation-enabled: false` is never revoked.
+
 Revocation is enabled by default and requires no configuration where the provider publishes a
 `revocation_endpoint` in its discovery document, as Keycloak, Okta, and Auth0 do. Where it does not,
 set the endpoint explicitly:
@@ -642,10 +651,10 @@ endpoint that was discovered, so it is the way to opt out of the default behavio
 
 Two consequences are worth planning for:
 
-- Logout now makes an outbound call from Camunda to the identity provider, so the provider must be
-  reachable from the Camunda deployment. The call is bounded at roughly three seconds and fails
-  soft: if the provider is unreachable or rejects the request, the user is still logged out locally
-  and a warning is logged.
+- Logout and session expiry now make an outbound call from Camunda to the identity provider, so the
+  provider must be reachable from the Camunda deployment. The call is bounded at roughly three
+  seconds and fails soft: if the provider is unreachable or rejects the request, the user is still
+  logged out locally and a warning is logged.
 - Microsoft Entra ID publishes no revocation endpoint, so refresh tokens are not revoked there. Entra
   deployments are otherwise unaffected.
 
@@ -678,17 +687,46 @@ Ensure you either:
 
 #### Refresh token was not revoked
 
-If the identity provider cannot be reached, or rejects the revocation request, logout still
-completes and a warning similar to the following is logged:
+If the identity provider cannot be reached, or rejects the revocation request, logout or session
+expiry still completes and a warning similar to the following is logged:
 
 ```
 Failed to revoke the refresh token for OIDC registration '<id>' at <endpoint> [...]. The local
 session is still terminated, but the refresh token may remain valid until it expires.
 ```
 
+Camunda queues the revocations of expired sessions separately for each identity provider. If a
+provider's queue is full, for example while the provider is slow or unreachable, Camunda drops
+further revocations for that provider and logs this warning once:
+
+```
+Dropping refresh-token revocations of expired web sessions for token endpoint '<token-endpoint>':
+its revocation queue is full (1000 queued). [...]
+```
+
 Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
 client credentials Camunda uses are accepted there. To disable revocation for the provider instead,
 set `revocation-enabled: false`.
+
+If several physical tenants use the same OIDC client with different revocation settings, Camunda
+does not revoke on session expiry and logs this warning once for each provider:
+
+```
+OIDC registration '<registration-id>' belongs to several webapp chains with different refresh-token
+revocation settings, so the refresh tokens of its expired web sessions are not revoked. [...]
+```
+
+To revoke on expiry, give these tenants the same `revocation-enabled` and
+`revocation-endpoint-uri` settings.
+
+If Camunda cannot resolve an OIDC provider that can own an expired session, for example because
+its discovery endpoint is unreachable, it does not revoke on expiry until the provider resolves
+again. It logs this warning once for each outage:
+
+```
+Could not resolve OIDC registration '<registration-id>', so the refresh tokens of expired web
+sessions are not revoked until it resolves again. [...]
+```
 
 #### No client registration found
 
