@@ -1102,7 +1102,7 @@ If a primary region fails, you can now recover your SaaS Orchestration Cluster i
 
 - Enable dual-region backup when you create the cluster, and select the backup location in Console.
 - Start failover in Console or through the API, and select the backup to restore from.
-- Cold recovery is available for AWS and GCP clusters in region pairs marked **Failover supported**, including AWS clusters that use Bring Your Own Key (BYOK).
+- Cold recovery is available for AWS and GCP clusters in region pairs marked **Cold recovery supported**, including AWS clusters that use Bring Your Own Key (BYOK).
 - Use only the recovered cluster after failover. Don't run the original cluster at the same time, to avoid conflicting writes.
 
 The data you can lose depends on the backup you select and your backup interval, because the recovered cluster contains only the data up to that backup.
