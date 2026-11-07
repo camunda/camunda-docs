@@ -7,7 +7,7 @@ mdx:
 
 # Enums
 
-Enumeration types (110 enums).
+Enumeration types (112 enums).
 
 ## AgentDefinitionSearchQuerySortRequestField
 
@@ -1248,6 +1248,14 @@ Process instance states
 | `SUSPENDED`  |             |
 | `TERMINATED` |             |
 
+## ProtectionModeEnum
+
+The kind of protection applied to a variable value. `REDACT` irrecoverably replaces the value before it reaches secondary storage.
+
+| Value    | Description |
+| -------- | ----------- |
+| `REDACT` |             |
+
 ## ResourceSearchQuerySortRequestField
 
 The field to sort by.
@@ -1441,6 +1449,20 @@ The field to sort by.
 | `Username` |             |
 | `Name`     |             |
 | `Email`    |             |
+
+## UserTaskLookupStateEnum
+
+The lifecycle state of an active user task. A state ending in `-ING` means a change to the task is in progress, for example waiting for task listeners; the task fields still hold the values from before the change.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `CREATING`   |             |
+| `CREATED`    |             |
+| `ASSIGNING`  |             |
+| `CLAIMING`   |             |
+| `UPDATING`   |             |
+| `COMPLETING` |             |
+| `CANCELING`  |             |
 
 ## UserTaskSearchQuerySortRequestField
 
