@@ -49,6 +49,21 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /v2/authentication/me` answers a caller without credentials on an unprotected API {#anonymous-current-user}
+
+On an unprotected API, [`GET /v2/authentication/me`](/apis-tools/orchestration-cluster-api-rest/specifications/get-authentication.api.mdx) answers a caller without credentials with `200 OK` and `isAnonymous: true`, instead of `401 Unauthorized`. The `username` field of `CamundaUserResult` is still required, but it can now be `null`, so a client generated from the API specification can fail to compile. This change is also part of 8.10.9.
+
+**Action:** See the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#anonymous-current-user) for the changed fields and what to do.
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
