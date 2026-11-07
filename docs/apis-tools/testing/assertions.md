@@ -736,6 +736,83 @@ Asserts that the user task has the expected candidate groups.
 assertThatUserTask(UserTaskSelectors.byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
 ```
 
+## Incident assertions
+
+You can verify the state and details of a single incident using `CamundaAssert.assertThatIncident()`. Use an [IncidentSelector](utilities.md#incident-selector) to identify the incident.
+
+To verify only that a process instance has or doesn't have active incidents, use [hasActiveIncidents](#hasactiveincidents) or [hasNoActiveIncidents](#hasnoactiveincidents) instead.
+
+### With incident selector
+
+Use an [IncidentSelector](utilities.md#incident-selector) to identify the incident. The selector targets the first matching incident.
+
+```java
+// by BPMN element ID
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket")).isActive();
+
+// by process instance key
+assertThatIncident(IncidentSelectors.byProcessInstanceKey(processInstanceKey)).isActive();
+
+// by process definition ID
+assertThatIncident(IncidentSelectors.byProcessDefinitionId("MoonExplorationProcess")).isActive();
+```
+
+### isActive
+
+Assert that the incident is active. The assertion considers an incident in state `ACTIVE`, `PENDING`, or `MIGRATED` as active, and it fails if the incident is resolved or doesn't exist.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket")).isActive();
+```
+
+### isResolved
+
+Assert that the incident is resolved. The assertion fails if the incident is still active or doesn't exist.
+
+```java
+// when: resolve the incident at the element with ID "LaunchRocket"
+processTestContext.resolveIncident(IncidentSelectors.byElementId("LaunchRocket"));
+
+// then
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket")).isResolved();
+```
+
+### hasErrorType
+
+Assert that the incident has the expected error type. Use the `IncidentErrorType` enum of the Camunda Java client, for example, `JOB_NO_RETRIES` or `CONDITION_ERROR`.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket"))
+    .hasErrorType(IncidentErrorType.JOB_NO_RETRIES);
+```
+
+### hasErrorMessage
+
+Assert that the incident has the expected error message. The assertion compares the full message and fails if it differs.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket"))
+    .hasErrorMessage("Fuel pressure out of range");
+```
+
+### hasElementId
+
+Assert that the incident belongs to the expected BPMN element.
+
+```java
+assertThatIncident(IncidentSelectors.byProcessInstanceKey(processInstanceKey))
+    .hasElementId("LaunchRocket");
+```
+
+### hasProcessInstanceKey
+
+Assert that the incident belongs to the expected process instance.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket"))
+    .hasProcessInstanceKey(processInstanceKey);
+```
+
 ## Decision assertions
 
 You can verify the decision evaluation state and other properties using `CamundaAssert.assertThat()` or
