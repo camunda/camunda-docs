@@ -18,7 +18,7 @@ Element instance inspection request.
 ### filter?
 
 ```ts
-optional filter?: ElementInstanceWaitStateFilter;
+filter?: ElementInstanceWaitStateFilter;
 ```
 
 Filter criteria for the inspection.
@@ -26,7 +26,7 @@ Filter criteria for the inspection.
 ### sort?
 
 ```ts
-optional sort?: ElementInstanceWaitStateQuerySortRequest[];
+sort?: ElementInstanceWaitStateQuerySortRequest[];
 ```
 
 Sort field criteria.

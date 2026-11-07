@@ -16,7 +16,7 @@ type TriggerClusterRebalanceData = object;
 ### body?
 
 ```ts
-optional body?: ClusterRebalanceRequest;
+body?: ClusterRebalanceRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ClusterRebalanceRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### dryRun?
 
 ```ts
-optional dryRun?: boolean;
+dryRun?: boolean;
 ```
 
 If true, report the plan the rebalance would carry out without pausing any partition or transferring any leadership.

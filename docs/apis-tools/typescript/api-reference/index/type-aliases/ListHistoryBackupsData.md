@@ -16,7 +16,7 @@ type ListHistoryBackupsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### prefix?
 
 ```ts
-optional prefix?: BackupIdPrefix;
+prefix?: BackupIdPrefix;
 ```
 
 A prefix that backup ids must match, ending in a single '*'. If omitted, all
@@ -47,7 +47,7 @@ backups are returned.
 #### verbose?
 
 ```ts
-optional verbose?: boolean;
+verbose?: boolean;
 ```
 
 Whether to ask the secondary storage for snapshot-level detail. Setting this to

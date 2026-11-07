@@ -112,10 +112,12 @@ The process definition ID associated with this correlated message subscription.
 ### processDefinitionKey
 
 ```ts
-processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey | null;
 ```
 
 The process definition key associated with this correlated message subscription.
+This field is not present for correlations to message subscriptions of a running
+process instance (catch, boundary and receive task events) written by version 8.8.
 
 ---
 

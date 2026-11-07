@@ -5,17 +5,19 @@ import {
   createCamundaClient,
   type DecisionDefinitionId,
   type DecisionDefinitionKey,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region EvaluateDecisionById
-async function evaluateDecisionByIdExample(decisionDefinitionId: DecisionDefinitionId) {
+async function evaluateDecisionByIdExample(
+  decisionDefinitionId: DecisionDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.evaluateDecision({
     decisionDefinitionId,
     variables: {
       amount: 1000,
-      invoiceCategory: 'Misc',
+      invoiceCategory: "Misc",
     },
   });
 
@@ -25,14 +27,16 @@ async function evaluateDecisionByIdExample(decisionDefinitionId: DecisionDefinit
 //#endregion EvaluateDecisionById
 
 //#region EvaluateDecisionByKey
-async function evaluateDecisionByKeyExample(decisionDefinitionKey: DecisionDefinitionKey) {
+async function evaluateDecisionByKeyExample(
+  decisionDefinitionKey: DecisionDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.evaluateDecision({
     decisionDefinitionKey,
     variables: {
       amount: 1000,
-      invoiceCategory: 'Misc',
+      invoiceCategory: "Misc",
     },
   });
 
@@ -41,7 +45,9 @@ async function evaluateDecisionByKeyExample(decisionDefinitionKey: DecisionDefin
 //#endregion EvaluateDecisionByKey
 
 //#region GetDecisionDefinition
-async function getDecisionDefinitionExample(decisionDefinitionKey: DecisionDefinitionKey) {
+async function getDecisionDefinitionExample(
+  decisionDefinitionKey: DecisionDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const definition = await camunda.getDecisionDefinition(
@@ -55,7 +61,9 @@ async function getDecisionDefinitionExample(decisionDefinitionKey: DecisionDefin
 //#endregion GetDecisionDefinition
 
 //#region SearchDecisionDefinitions
-async function searchDecisionDefinitionsExample(decisionDefinitionId: DecisionDefinitionId) {
+async function searchDecisionDefinitionsExample(
+  decisionDefinitionId: DecisionDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchDecisionDefinitions(

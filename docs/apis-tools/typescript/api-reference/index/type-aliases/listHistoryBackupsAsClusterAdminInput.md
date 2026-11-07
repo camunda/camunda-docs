@@ -16,7 +16,7 @@ type listHistoryBackupsAsClusterAdminInput = object;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: listHistoryBackupsAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: listHistoryBackupsAsClusterAdminQueryParam_physicalTenantId;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional physicalTenantId?: listHistoryBackupsAsClusterAdminQueryParam_physicalT
 ### prefix?
 
 ```ts
-optional prefix?: listHistoryBackupsAsClusterAdminQueryParam_prefix;
+prefix?: listHistoryBackupsAsClusterAdminQueryParam_prefix;
 ```
 
 ---
@@ -32,5 +32,5 @@ optional prefix?: listHistoryBackupsAsClusterAdminQueryParam_prefix;
 ### verbose?
 
 ```ts
-optional verbose?: listHistoryBackupsAsClusterAdminQueryParam_verbose;
+verbose?: listHistoryBackupsAsClusterAdminQueryParam_verbose;
 ```

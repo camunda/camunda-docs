@@ -40,7 +40,7 @@ The key of the process instance that should be modified.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

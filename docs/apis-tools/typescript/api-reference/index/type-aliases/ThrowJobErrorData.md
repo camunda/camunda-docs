@@ -40,7 +40,7 @@ The key of the job.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

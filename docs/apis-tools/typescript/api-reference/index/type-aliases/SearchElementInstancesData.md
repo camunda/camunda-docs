@@ -16,7 +16,7 @@ type SearchElementInstancesData = object;
 ### body?
 
 ```ts
-optional body?: ElementInstanceSearchQuery;
+body?: ElementInstanceSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ElementInstanceSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

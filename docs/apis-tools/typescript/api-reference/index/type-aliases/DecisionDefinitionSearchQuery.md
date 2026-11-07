@@ -16,7 +16,7 @@ type DecisionDefinitionSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: DecisionDefinitionFilter;
+filter?: DecisionDefinitionFilter;
 ```
 
 The decision definition search filters.
@@ -24,7 +24,7 @@ The decision definition search filters.
 ### sort?
 
 ```ts
-optional sort?: DecisionDefinitionSearchQuerySortRequest[];
+sort?: DecisionDefinitionSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

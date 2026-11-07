@@ -19,4 +19,4 @@ type DeleteResourceResponses = object;
 200: DeleteResourceResponse;
 ```
 
-The resource is deleted.
+The resource is deleted. For a process definition that is already draining, the repeated deletion is accepted without effect and the definition stays `DRAINING`.

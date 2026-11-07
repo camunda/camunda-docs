@@ -17,5 +17,5 @@ type takeRuntimeBackupAsClusterAdminInput =
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: takeRuntimeBackupAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: takeRuntimeBackupAsClusterAdminQueryParam_physicalTenantId;
 ```

@@ -8,7 +8,7 @@ import {
   type MappingRuleId,
   type RoleId,
   type Username,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateRole
 async function createRoleExample(roleId: RoleId) {
@@ -16,7 +16,7 @@ async function createRoleExample(roleId: RoleId) {
 
   const result = await camunda.createRole({
     roleId,
-    name: 'Process Admin',
+    name: "Process Admin",
   });
 
   console.log(`Created role: ${result.roleId}`);
@@ -27,7 +27,10 @@ async function createRoleExample(roleId: RoleId) {
 async function getRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
-  const role = await camunda.getRole({ roleId }, { consistency: { waitUpToMs: 5000 } });
+  const role = await camunda.getRole(
+    { roleId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   console.log(`Role: ${role.name}`);
 }
@@ -56,7 +59,7 @@ async function updateRoleExample(roleId: RoleId) {
 
   await camunda.updateRole({
     roleId,
-    name: 'Process Administrator',
+    name: "Process Administrator",
   });
 }
 //#endregion UpdateRole
@@ -125,7 +128,10 @@ async function assignRoleToClientExample(roleId: RoleId, clientId: ClientId) {
 //#endregion AssignRoleToClient
 
 //#region UnassignRoleFromClient
-async function unassignRoleFromClientExample(roleId: RoleId, clientId: ClientId) {
+async function unassignRoleFromClientExample(
+  roleId: RoleId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromClient({
@@ -136,7 +142,10 @@ async function unassignRoleFromClientExample(roleId: RoleId, clientId: ClientId)
 //#endregion UnassignRoleFromClient
 
 //#region AssignRoleToMappingRule
-async function assignRoleToMappingRuleExample(roleId: RoleId, mappingRuleId: MappingRuleId) {
+async function assignRoleToMappingRuleExample(
+  roleId: RoleId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToMappingRule({
@@ -147,7 +156,10 @@ async function assignRoleToMappingRuleExample(roleId: RoleId, mappingRuleId: Map
 //#endregion AssignRoleToMappingRule
 
 //#region UnassignRoleFromMappingRule
-async function unassignRoleFromMappingRuleExample(roleId: RoleId, mappingRuleId: MappingRuleId) {
+async function unassignRoleFromMappingRuleExample(
+  roleId: RoleId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromMappingRule({

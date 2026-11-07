@@ -16,7 +16,7 @@ type CorrelatedMessageSubscriptionSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: CorrelatedMessageSubscriptionFilter;
+filter?: CorrelatedMessageSubscriptionFilter;
 ```
 
 The correlated message subscriptions search filters.
@@ -24,7 +24,7 @@ The correlated message subscriptions search filters.
 ### sort?
 
 ```ts
-optional sort?: CorrelatedMessageSubscriptionSearchQuerySortRequest[];
+sort?: CorrelatedMessageSubscriptionSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

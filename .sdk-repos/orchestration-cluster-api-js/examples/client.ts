@@ -6,7 +6,7 @@ import {
   createCamundaResultClient,
   isErr,
   isOk,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateClient
 async function createClientExample() {
@@ -22,10 +22,10 @@ async function createClientExample() {
 async function createClientWithConfigExample() {
   const camunda = createCamundaClient({
     config: {
-      CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2',
-      CAMUNDA_AUTH_STRATEGY: 'BASIC',
-      CAMUNDA_BASIC_AUTH_USERNAME: 'demo',
-      CAMUNDA_BASIC_AUTH_PASSWORD: 'demo',
+      CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2",
+      CAMUNDA_AUTH_STRATEGY: "BASIC",
+      CAMUNDA_BASIC_AUTH_USERNAME: "demo",
+      CAMUNDA_BASIC_AUTH_PASSWORD: "demo",
     },
   });
 
@@ -38,12 +38,12 @@ async function createClientWithConfigExample() {
 async function createClientOAuthExample() {
   const camunda = createCamundaClient({
     config: {
-      CAMUNDA_REST_ADDRESS: 'https://cluster.example/v2',
-      CAMUNDA_AUTH_STRATEGY: 'OAUTH',
-      CAMUNDA_CLIENT_ID: 'my-client-id',
-      CAMUNDA_CLIENT_SECRET: 'my-client-secret',
-      CAMUNDA_OAUTH_URL: 'https://login.cloud.camunda.io/oauth/token',
-      CAMUNDA_TOKEN_AUDIENCE: 'zeebe.camunda.io',
+      CAMUNDA_REST_ADDRESS: "https://cluster.example/v2",
+      CAMUNDA_AUTH_STRATEGY: "OAUTH",
+      CAMUNDA_CLIENT_ID: "my-client-id",
+      CAMUNDA_CLIENT_SECRET: "my-client-secret",
+      CAMUNDA_OAUTH_URL: "https://login.cloud.camunda.io/oauth/token",
+      CAMUNDA_TOKEN_AUDIENCE: "zeebe.camunda.io",
     },
   });
 
@@ -78,7 +78,9 @@ async function getClusterTopologyExample() {
     `Cluster ${topology.clusterId} — ${topology.clusterSize} broker(s), gateway ${topology.gatewayVersion}`
   );
   for (const broker of topology.brokers) {
-    console.log(`  Broker ${broker.brokerId}: ${broker.host}:${broker.port} (${broker.version})`);
+    console.log(
+      `  Broker ${broker.brokerId}: ${broker.host}:${broker.port} (${broker.version})`
+    );
   }
   for (const tenant of topology.physicalTenants) {
     console.log(
@@ -96,7 +98,7 @@ async function changeClusterModeExample() {
   // the request and inspect the resulting plan without applying it. Omit it (or
   // set it to false) to actually trigger the transition.
   const change = await camunda.changeClusterMode({
-    mode: 'RECOVERING',
+    mode: "RECOVERING",
     dryRun: true,
   });
 
@@ -104,9 +106,9 @@ async function changeClusterModeExample() {
   // is not scoped to one, such as a broker lifecycle operation.
   console.log(`Cluster change ${change.changeId}:`);
   for (const group of change.plannedChanges) {
-    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
     for (const op of group.operations) {
-      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ""}`);
     }
   }
 }
@@ -119,16 +121,16 @@ async function changeClusterModeAsClusterAdminExample() {
   // The cluster-admin variant can target a single physical tenant. Omit
   // `physicalTenantId` to apply the change to every physical tenant.
   const change = await camunda.changeClusterModeAsClusterAdmin({
-    mode: 'RECOVERING',
-    physicalTenantId: 'default',
+    mode: "RECOVERING",
+    physicalTenantId: "default",
     dryRun: true,
   });
 
   console.log(`Cluster change ${change.changeId}:`);
   for (const group of change.plannedChanges) {
-    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
     for (const op of group.operations) {
-      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ""}`);
     }
   }
 }
@@ -147,10 +149,10 @@ async function restoreExample() {
 
   console.log(`Cluster change ${change.changeId}:`);
   for (const group of change.plannedChanges) {
-    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
     for (const op of group.operations) {
-      const mode = 'mode' in op ? op.mode : undefined;
-      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ''}`);
+      const mode = "mode" in op ? op.mode : undefined;
+      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ""}`);
     }
   }
 }
@@ -166,16 +168,16 @@ async function restoreAsClusterAdminExample() {
   // (`from`/`to`), but not both.
   const change = await camunda.restoreAsClusterAdmin({
     backupIds: [200, 201],
-    physicalTenantId: 'default',
+    physicalTenantId: "default",
     dryRun: true,
   });
 
   console.log(`Cluster change ${change.changeId}:`);
   for (const group of change.plannedChanges) {
-    console.log(`  ${group.physicalTenantId ?? 'cluster-wide'}:`);
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
     for (const op of group.operations) {
-      const mode = 'mode' in op ? op.mode : undefined;
-      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ''}`);
+      const mode = "mode" in op ? op.mode : undefined;
+      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ""}`);
     }
   }
 }
@@ -199,7 +201,7 @@ async function getRestoreStatusExample() {
 //#region ResultClient
 async function resultClientExample() {
   const camunda = createCamundaResultClient({
-    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
+    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
   });
 
   const result = await camunda.getTopology();
@@ -216,7 +218,7 @@ async function resultClientExample() {
 //#region CustomFetch
 async function customFetchExample() {
   const camunda = createCamundaClient({
-    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
+    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
     fetch: async (input: RequestInfo | URL, init?: RequestInit) => {
       // Add custom headers or logging
       const response = await globalThis.fetch(input, init);
@@ -232,7 +234,7 @@ async function customFetchExample() {
 //#region Config
 function configExample() {
   const camunda = createCamundaClient({
-    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
+    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
   });
 
   const config = camunda.config;
@@ -256,7 +258,7 @@ async function configureExample() {
   // Reconfigure the client with new overrides
   camunda.configure({
     config: {
-      CAMUNDA_REST_ADDRESS: 'http://new-host:8080/v2',
+      CAMUNDA_REST_ADDRESS: "http://new-host:8080/v2",
     },
   });
 
@@ -300,7 +302,7 @@ async function withCorrelationExample() {
   const camunda = createCamundaClient();
 
   // Run operations with a correlation ID for tracing
-  await camunda.withCorrelation('request-123', async () => {
+  await camunda.withCorrelation("request-123", async () => {
     const topology = await camunda.getTopology();
     console.log(`Cluster size: ${topology.clusterSize}`);
   });

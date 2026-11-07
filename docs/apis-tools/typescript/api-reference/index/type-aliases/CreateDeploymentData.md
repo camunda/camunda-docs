@@ -30,7 +30,7 @@ The binary data to create the deployment resources. It is possible to have more 
 #### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 ---
@@ -38,7 +38,7 @@ optional tenantId?: TenantId;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -46,7 +46,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -26,7 +26,7 @@ The error code that will be matched with an error catch event.
 ### errorMessage?
 
 ```ts
-optional errorMessage?: string | null;
+errorMessage?: string | null;
 ```
 
 An error message that provides additional context.
@@ -36,7 +36,7 @@ An error message that provides additional context.
 ### jobLeaseToken?
 
 ```ts
-optional jobLeaseToken?: JobLeaseToken | null;
+jobLeaseToken?: JobLeaseToken | null;
 ```
 
 The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.
@@ -48,7 +48,7 @@ A job that was activated without a lease requires no token.
 ### variables?
 
 ```ts
-optional variables?:
+variables?:
   | {
 [key: string]: unknown;
 }

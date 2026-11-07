@@ -18,7 +18,7 @@ Batch operation search request.
 ### filter?
 
 ```ts
-optional filter?: BatchOperationFilter;
+filter?: BatchOperationFilter;
 ```
 
 The batch operation search filters.
@@ -26,7 +26,7 @@ The batch operation search filters.
 ### sort?
 
 ```ts
-optional sort?: BatchOperationSearchQuerySortRequest[];
+sort?: BatchOperationSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

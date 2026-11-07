@@ -22,5 +22,5 @@ type ActivatedJobResultWithoutJobLeaseToken = Omit<
 ### jobLeaseToken?
 
 ```ts
-optional jobLeaseToken?: null;
+jobLeaseToken?: null;
 ```

@@ -16,11 +16,11 @@ type createDocumentInput = createDocumentBody & object;
 ### documentId?
 
 ```ts
-optional documentId?: createDocumentQueryParam_documentId;
+documentId?: createDocumentQueryParam_documentId;
 ```
 
 ### storeId?
 
 ```ts
-optional storeId?: createDocumentQueryParam_storeId;
+storeId?: createDocumentQueryParam_storeId;
 ```

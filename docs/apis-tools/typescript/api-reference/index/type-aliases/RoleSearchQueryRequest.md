@@ -18,7 +18,7 @@ Role search request.
 ### filter?
 
 ```ts
-optional filter?: RoleFilter;
+filter?: RoleFilter;
 ```
 
 The role search filters.
@@ -26,7 +26,7 @@ The role search filters.
 ### sort?
 
 ```ts
-optional sort?: RoleSearchQuerySortRequest[];
+sort?: RoleSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

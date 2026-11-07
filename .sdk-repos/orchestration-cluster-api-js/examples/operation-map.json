@@ -1283,6 +1283,20 @@
       "label": "Pin the cluster clock"
     }
   ],
+  "getClock": [
+    {
+      "file": "admin-operations.ts",
+      "region": "GetClock",
+      "label": "Get the cluster clock"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "admin-operations.ts",
+      "region": "AddClock",
+      "label": "Add time to the cluster clock"
+    }
+  ],
   "resetClock": [
     {
       "file": "admin-operations.ts",
@@ -1442,6 +1456,13 @@
       "file": "additional-operations.ts",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "lookupUserTask": [
+    {
+      "file": "additional-operations.ts",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
     }
   ],
   "resolveSecrets": [

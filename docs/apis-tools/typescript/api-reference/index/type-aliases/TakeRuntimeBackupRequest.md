@@ -20,7 +20,7 @@ Request body for taking a runtime backup.
 ### backupId?
 
 ```ts
-optional backupId?: BackupId | null;
+backupId?: BackupId | null;
 ```
 
 The id of the backup to take. Must be omitted if continuous backups and/or a

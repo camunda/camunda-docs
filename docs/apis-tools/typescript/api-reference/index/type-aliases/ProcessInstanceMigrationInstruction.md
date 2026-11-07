@@ -28,7 +28,7 @@ Element mappings from the source process instance to the target process instance
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```
 
 ---

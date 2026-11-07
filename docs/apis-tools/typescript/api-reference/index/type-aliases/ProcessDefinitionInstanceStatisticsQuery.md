@@ -16,7 +16,7 @@ type ProcessDefinitionInstanceStatisticsQuery = object;
 ### page?
 
 ```ts
-optional page?: OffsetPagination;
+page?: OffsetPagination;
 ```
 
 Search cursor pagination.
@@ -26,7 +26,7 @@ Search cursor pagination.
 ### sort?
 
 ```ts
-optional sort?: ProcessDefinitionInstanceStatisticsQuerySortRequest[];
+sort?: ProcessDefinitionInstanceStatisticsQuerySortRequest[];
 ```
 
 Sort field criteria.

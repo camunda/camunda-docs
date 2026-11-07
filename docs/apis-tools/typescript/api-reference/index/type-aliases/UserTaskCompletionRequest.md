@@ -16,7 +16,7 @@ type UserTaskCompletionRequest = object;
 ### action?
 
 ```ts
-optional action?: string | null;
+action?: string | null;
 ```
 
 A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete".
@@ -26,7 +26,7 @@ A custom action value that will be accessible from user task events resulting fr
 ### variables?
 
 ```ts
-optional variables?:
+variables?:
   | {
 [key: string]: unknown;
 }

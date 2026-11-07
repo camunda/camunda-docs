@@ -42,7 +42,7 @@ element, such as a service task (see the `elementInstanceKey` on the job message
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

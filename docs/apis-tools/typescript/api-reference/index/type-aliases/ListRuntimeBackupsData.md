@@ -16,7 +16,7 @@ type ListRuntimeBackupsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### prefix?
 
 ```ts
-optional prefix?: BackupIdPrefix;
+prefix?: BackupIdPrefix;
 ```
 
 A prefix that backup ids must match, ending in a single '*'. If omitted, all
