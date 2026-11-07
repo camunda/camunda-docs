@@ -177,6 +177,7 @@ module.exports = {
                 "components/process-os-harness/build/governance-process",
                 "components/process-os-harness/build/review-cycle",
                 "components/process-os-harness/build/builder-task",
+                "components/process-os-harness/build/cost-tracking",
                 {
                   type: "category",
                   label: "Phases",
