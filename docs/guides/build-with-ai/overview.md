@@ -11,9 +11,6 @@ import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconConnectorsImg from '../../components/assets/icon-connectors.png';
 import IconBpmnImg from '../../components/assets/icon-bpmn.png';
 import IconLlmImg from '../../components/assets/icon-llm.png';
-import IconOperateImg from '../../components/assets/icon-operate.png';
-import IconOptimizeImg from '../../components/assets/icon-optimize.png';
-import IconConfigImg from '../../components/assets/icon-config.png';
 import IconPlay from '../../components/assets/icon-play.png';
 import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
 import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
@@ -96,28 +93,10 @@ Monitor your AI agents in real time with Operate, improve performance over time 
 
 <AoGrid columns={3} ao={[
 {
-link: "../../../components/agentic-orchestration/evaluate-agents/monitor-ai-agents/",
-title: "Monitor with Operate",
-image: IconOperateImg,
-description: "Monitor your AI agents with Operate.",
-},
-{
-link: "../../../components/agentic-orchestration/evaluate-agents/detect-off-rail-agents/",
-title: "Detect off-rail agents",
+link: "../../../components/agentic-orchestration/evaluate-agents/evaluate-ai-agents/",
+title: "Evaluate AI agents",
 image: IconAgenticImg,
-description: "Identify a stuck or looping AI agent before it fails.",
-},
-{
-link: "../../../components/agentic-orchestration/evaluate-agents/analyze-ai-agents/",
-title: "Analyze with Optimize",
-image: IconOptimizeImg,
-description: "Analyze your AI agents with Optimize.",
-},
-{
-link: "../../../components/agentic-orchestration/evaluate-agents/test-ai-agents/",
-title: "Test with CPT",
-image: IconConfigImg,
-description: "Test your AI agents with Camunda Process Test.",
+description: "Test, monitor, and analyze your AI agents with Camunda Process Test, Operate, and Optimize.",
 },
 ]} />
 
@@ -127,28 +106,10 @@ Follow guidelines and recommendations for designing and running AI agents.
 
 <AoGrid columns={3} ao={[
 {
-link: "../../../components/agentic-orchestration/ai-usage-guidelines/",
-title: "AI usage guidelines",
+link: "../../../components/agentic-orchestration/best-practices-agentic/",
+title: "Best practices",
 image: IconDocsImg,
-description: "Requirements on security, legality, data handling, human oversight, and prohibited use cases.",
-},
-{
-link: "../../../components/agentic-orchestration/ao-design/",
-title: "Design and architecture",
-image: IconDocsImg,
-description: "Plan and design your agentic orchestration solutions.",
-},
-{
-link: "../../../components/agentic-orchestration/choose-right-model-agentic/",
-title: "Choose the right LLM",
-image: IconLlmImg,
-description: "Choose the right Large Language Model (LLM) for AI agents.",
-},
-{
-link: "../../../components/agentic-orchestration/model-recommendations-agentic/",
-title: "LLM recommendations",
-image: IconLlmImg,
-description: "Best practices for working with models and prompts.",
+description: "Design reliable, governed, and responsible agentic solutions, and choose the right LLM.",
 },
 ]} />
 
