@@ -143,13 +143,14 @@ steps:
 
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
-| Environment variable         | Description                                      | Default value |
-| :--------------------------- | :----------------------------------------------- | :------------ |
-| RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature.    | false         |
-| MULTITENANCY_ENABLED         | Controls the multi-tenancy feature for Optimize. | false         |
+| Environment variable           | Description                                                                                                                                                                                                                                             | Default value |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
+| RESOURCE_PERMISSIONS_ENABLED   | Controls the resource authorizations feature.                                                                                                                                                                                                           | false         |
+| MULTITENANCY_ENABLED           | Controls the multi-tenancy feature for Optimize.                                                                                                                                                                                                        | false         |
+| SCOPE_PERMISSIONS_BY_COMPONENT | Returns each component only the permissions its own resource server defines when components share an OIDC audience. See [scope permissions by component](/self-managed/components/management-identity/configuration/scope-permissions-by-component.md). | false         |
 
 :::note
-Setting either of the feature flags to `true` requires a database connection. To configure a database
+Setting `RESOURCE_PERMISSIONS_ENABLED` or `MULTITENANCY_ENABLED` to `true` requires a database connection. To configure a database
 connection, see [database configuration](#database-configuration).
 :::
 
