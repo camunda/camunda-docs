@@ -11,6 +11,8 @@ The Camunda Helm chart requires externally managed PostgreSQL for Camunda Hub an
 
 This page applies to Management Identity and Camunda Hub. Configure the database for an external Keycloak deployment separately. It does not apply to the Orchestration Cluster or Optimize.
 
+For PostgreSQL support scope and upgrades, see [PostgreSQL support and upgrades](/self-managed/deployment/helm/configure/infrastructure-dependencies/postgresql-support-and-upgrades.md).
+
 ## Prerequisites
 
 - **Running external PostgreSQL service**

@@ -1967,6 +1967,19 @@ module.exports = {
                 "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/health-probes",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
+                {
+                  type: "category",
+                  label: "Infrastructure dependencies",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/infrastructure-dependencies/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/configure/infrastructure-dependencies/postgresql-support-and-upgrades",
+                    "self-managed/deployment/helm/configure/infrastructure-dependencies/elasticsearch-support-and-upgrades",
+                    "self-managed/deployment/helm/configure/infrastructure-dependencies/opensearch-support-and-upgrades",
+                  ],
+                },
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {

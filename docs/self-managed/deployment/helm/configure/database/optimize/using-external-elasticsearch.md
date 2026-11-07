@@ -9,6 +9,8 @@ Configure Optimize in Camunda 8 Self-Managed to connect to an external Elasticse
 
 This page applies to Optimize only. If the Orchestration Cluster also uses Elasticsearch as secondary storage, configure that separately using [use external Elasticsearch for Orchestration Cluster with Helm](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
 
+For Elasticsearch support scope and upgrades, see [Elasticsearch support and upgrades](/self-managed/deployment/helm/configure/infrastructure-dependencies/elasticsearch-support-and-upgrades.md).
+
 Optimize supports Elasticsearch only through Elasticsearch or OpenSearch backends. It does not support RDBMS.
 
 ## Prerequisites
