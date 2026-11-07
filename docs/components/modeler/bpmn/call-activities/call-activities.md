@@ -52,7 +52,15 @@ It's recommended to define output mappings if the call activity is in a parallel
 
 By default, all variables of the call activity scope are copied to the created process instance. This can be limited to copying only the local variables of the call activity, by setting the attribute `propagateAllParentVariables` to `false`.
 
-By disabling this attribute, variables existing at higher scopes are no longer copied. If the attribute `propagateAllParentVariables` is set (default: `true`), all variables are propagated to the child process instance.
+If you set `propagateAllParentVariables` to `false`, variables that exist at higher scopes are no longer copied. The engine copies only the local variables of the call activity, regardless of how they were created. For example:
+
+- Input mappings
+- [Start execution listeners](/components/concepts/execution-listeners.md) that complete with variables
+- Variables set on the call activity instance, for example through the API or Operate, or while resolving an incident
+- The [multi-instance](../multi-instance/multi-instance.md#variable-mappings) variables of a multi-instance call activity, such as the input element and `loopCounter`
+- Variables scoped to the call activity when you [modify the process instance](/components/concepts/process-instance-modification.md)
+
+The copied local variables follow the same rules as all other variables of the created process instance when it completes. If `propagateAllChildVariables` is enabled, they are propagated back to the caller, and a variable with the same name at a higher scope is overwritten when its value differs. See [internal engine variables](/components/concepts/variables.md#internal-engine-variables) for the multi-instance variables.
 
 For how a call activity compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
