@@ -120,6 +120,10 @@
         {
           "type": "category",
           "label": "Evaluate",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/evaluate-agents/evaluate-ai-agents"
+          },
           "items": [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
             "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
@@ -130,6 +134,10 @@
         {
           "type": "category",
           "label": "Best practices",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/best-practices-agentic"
+          },
           "items": [
             "components/agentic-orchestration/ai-usage-guidelines",
             "components/agentic-orchestration/ao-design",
