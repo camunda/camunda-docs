@@ -89,14 +89,14 @@ description: "Embed LLM-powered agents in your processes with the AI Agent conne
 
 ## Evaluate
 
-Monitor your AI agents in real time with Operate, improve performance over time with Optimize, and test them with Camunda Process Test.
+Monitor, analyze, and test your AI agents to find problems early and improve performance.
 
 <AoGrid columns={3} ao={[
 {
 link: "../../../components/agentic-orchestration/evaluate-agents/evaluate-ai-agents/",
 title: "Evaluate AI agents",
 image: IconAgenticImg,
-description: "Test, monitor, and analyze your AI agents with Camunda Process Test, Operate, and Optimize.",
+description: "Monitor, analyze, and test your AI agents with Operate, Optimize, and Camunda Process Test.",
 },
 ]} />
 
@@ -109,7 +109,7 @@ Follow guidelines and recommendations for designing and running AI agents.
 link: "../../../components/agentic-orchestration/best-practices-agentic/",
 title: "Best practices",
 image: IconDocsImg,
-description: "Design reliable, governed, and responsible agentic solutions, and choose the right LLM.",
+description: "Find guidance on responsible AI use, solution design, and LLM recommendations.",
 },
 ]} />
 
