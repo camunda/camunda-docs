@@ -75,7 +75,6 @@ When the job worker activates jobs through the Orchestration Cluster REST API wi
 
 - **Jobs can be activated for a closed client.** If a client is closed while its long-polling request is open, the gateway does not detect that the connection is gone. The request stays open and can still activate jobs. Nothing processes these jobs, so they stay locked until their job timeout elapses, and then become available to other workers.
 - **The response size is not limited on the client.** The gateway limits the jobs it returns from each partition to the [maximum message size](../../self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork), but combines the jobs from all partitions into a single response. With large variables and many partitions, one response can be several times the maximum message size, and the Java client holds all of it in memory. To keep responses small, limit `maxJobsActive` and use `fetchVariables` to fetch only the variables the handler needs.
-- **Before 8.10.5**, a long-polling request with a request timeout longer than 30 seconds fails with `503 Service Unavailable` after 30 seconds, and the abandoned request can still activate jobs. Upgrade to 8.10.5 or later, or keep the request timeout at 30 seconds or less.
 
 If these limitations affect you, use the Zeebe gRPC protocol for job activation, or disable long polling for REST job activation.
 :::
