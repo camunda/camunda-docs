@@ -70,19 +70,14 @@ When you model a service task in your BPMN process and assign it a job type (e.g
 
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
-:::caution REST API limitation
-The Java client cannot keep the long-lived polling connections required for job polling via the Orchestration Cluster REST API in the following cases:
+:::caution REST API limitations
+When the job worker activates jobs through the Orchestration Cluster REST API with long polling, be aware of the following:
 
-- Performing long-polling job activation when activating jobs larger than the [maximum message size](../../self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork).
-- Issuing any additional job activation requests while a long-polling connection is open - whether from the same client instance, another client in the same JVM, or a client in a different JVM.
+- **Jobs can be activated for a closed client.** If a client is closed while its long-polling request is open, the gateway does not detect that the connection is gone. The request stays open and can still activate jobs. Nothing processes these jobs, so they stay locked until their job timeout elapses, and then become available to other workers.
+- **The response size is not limited on the client.** The gateway limits the jobs it returns from each partition to the [maximum message size](../../self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork), but combines the jobs from all partitions into a single response. With large variables and many partitions, one response can be several times the maximum message size, and the Java client holds all of it in memory. To keep responses small, limit `maxJobsActive` and use `fetchVariables` to fetch only the variables the handler needs.
+- **Before 8.10.5**, a long-polling request with a request timeout longer than 30 seconds fails with `503 Service Unavailable` after 30 seconds, and the abandoned request can still activate jobs. Upgrade to 8.10.5 or later, or keep the request timeout at 30 seconds or less.
 
-When the cases above occurs, the open long-polling request will be interrupted.
-You may observe workers intermittently stop receiving jobs and cause reduced throughput due to wasted I/O and connection churn.
-If you encounter this issue, consider using job activation via the Orchestration Cluster REST API with long polling disabled, or switching to the Zeebe gRPC protocol for job activation.
-
-Additionally, the long-polling connection might still receive jobs after the Java client is closed.
-As the Java client does not process these jobs they will time out.
-This means some jobs are not processed and will become available again after their timeout has elapsed.
+If these limitations affect you, use the Zeebe gRPC protocol for job activation, or disable long polling for REST job activation.
 :::
 
 On `open`, the job worker waits `pollInterval` milliseconds and then polls for `maxJobsActive` jobs. It then continues with the following schedule:
