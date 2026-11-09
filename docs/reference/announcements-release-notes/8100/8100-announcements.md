@@ -213,7 +213,9 @@ The following key changes were also released as part of an 8.10.x patch release 
 
 | Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
 | :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.1](https://github.com/camunda/camunda/releases/tag/8.10.1) | Core     | Regression | [Batch cancellation narrows and validates the `state` filter](#batch-cancel-state-filter)                                                 |
 | [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9) | Core     | Regression | [Batch suspend and resume narrow and validate the `state` filter](#batch-suspend-resume-state-filter)                                     |
 
 ## Agentic orchestration
 
@@ -461,6 +463,62 @@ A cluster upgraded without these changes stops reporting license information to 
 **Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-8100.md#broker-ping-configuration) in the upgrade guide.
 
 <p className="link-arrow">[Camunda Hub ping configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch cancellation narrows and validates the `state` filter {#batch-cancel-state-filter}
+
+Starting with 8.10.1, the batch operation to [cancel process instances](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx) narrows your `state` filter with `ACTIVE` and `SUSPENDED`, and validates it. Previously, it discarded your `state` filter, so a batch could cancel instances outside your filter.
+
+| `state` filter                         | 8.10.0                                  | 8.10.1 and later                                   |
+| :------------------------------------- | :-------------------------------------- | :------------------------------------------------- |
+| None                                   | Active and suspended instances canceled | Active and suspended instances canceled            |
+| `ACTIVE`                               | Active and suspended instances canceled | Active instances canceled                          |
+| `SUSPENDED`                            | Active and suspended instances canceled | Suspended instances canceled                       |
+| Any other state through `$eq` or `$in` | Active and suspended instances canceled | Rejected with `400 Bad Request`                    |
+| `$neq`, `$exists`, or `$like`          | Ignored                                 | Applied, limited to active and suspended instances |
+
+From 8.10.1 to 8.10.8, a state other than `ACTIVE` or `SUSPENDED` inside an `$or` branch is also rejected with `400 Bad Request`. Starting with [8.10.9](#batch-suspend-resume-state-filter), states inside `$or` branches aren't validated.
+
+**Action:** Remove a top-level `state` filter other than `ACTIVE` or `SUSPENDED` from your batch cancellation requests. If your integration filtered for `ACTIVE` or `SUSPENDED` and relied on both being canceled, remove the `state` filter.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch suspend and resume narrow and validate the `state` filter {#batch-suspend-resume-state-filter}
+
+Starting with 8.10.9, the batch operations to suspend and resume process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, they discarded your `state` and `parentProcessInstanceKey` filters, so a batch could act on instances outside your filter. For example, a batch suspension filtered by `parentProcessInstanceKey` suspended every active process instance that matched the remaining filter criteria.
+
+Batch cancellation narrows your `state` filter starting with [8.10.1](#batch-cancel-state-filter), and your `parentProcessInstanceKey` filter starting with [8.10.7](#batch-cancel-parent-process-instance-filter). Starting with 8.10.9, it no longer rejects states inside `$or` branches, so all three operations follow the same rules.
+
+| Operation                                                                                                              | Required state           | Previous behavior                             |
+| :--------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
+| [Suspend](/apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation.api.mdx) | `ACTIVE`                 | Replaced your filter with the required state. |
+| [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx)   | `SUSPENDED`              | Replaced your filter with the required state. |
+| [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx)   | `ACTIVE` and `SUSPENDED` | Combined your filter with the required state. |
+
+Starting with 8.10.9, the following rules apply to all three operations:
+
+- A top-level `state` filter that uses `$eq` or `$in` with a state outside the required states is rejected with `400 Bad Request`. Suspend and resume previously discarded the filter. Cancel already rejected it.
+- States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances. Cancel previously rejected invalid states in `$or` branches.
+- The `$neq`, `$exists`, and `$like` operators on a top-level `state` are applied as given.
+
+Suspend and resume now apply the `parentProcessInstanceKey` filter as given. Cancel keeps its root-only behavior.
+
+**Action:** Remove a conflicting top-level `state` filter from your batch requests, or move it into an `$or` branch. If your integration relied on suspend or resume discarding your `parentProcessInstanceKey` filter, review the filter, because it now limits the batch.
 
 </div>
 </div>
