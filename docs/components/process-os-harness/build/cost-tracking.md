@@ -49,7 +49,7 @@ To record work outside a governance job, run `/process-os-usage-log`. Choose the
 
 A session can have several entries. The skill prevents double counting:
 
-- If you log a session again from the same start, the new entry replaces the earlier one.
+- If you log a session again from the same or an earlier start, the new entry replaces the earlier one.
 - If you log it from where the last entry ended, ProcessOS Harness adds a second entry.
 - If a window partly overlaps a stored one, ProcessOS Harness refuses it.
 
