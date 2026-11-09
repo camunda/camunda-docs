@@ -5,92 +5,249 @@ sidebar_label: Vector Database
 description: Embed, store, and retrieve LLM embeddings and store them in vector databases.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-The **Vector Database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings.
+Embed documents into a vector database and retrieve them by similarity search to give your process context documents and long-term LLM memory.
 
-This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
+## About this connector
+
+The **Vector Database connector** embeds, stores, and retrieves Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
+
+The connector supports two operations:
+
+- **Embed document**: Converts a document or text into vectors with an embedding model and stores them in a vector store.
+- **Retrieve document**: Converts a query into a vector and searches the vector store for similar chunks.
 
 :::note
-The **Vector Database connector** uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
-to the latest stable released LangChain4j library.
+The connector uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited to the latest stable released LangChain4j library.
 :::
 
 ## Prerequisites
 
-Before using the **Vector Database connector**, ensure you understand the
-[concept of LLM embeddings](https://huggingface.co/spaces/hesamation/primer-llm-embedding).
+Before using this connector, make sure you understand the [concept of LLM embeddings](https://huggingface.co/spaces/hesamation/primer-llm-embedding).
 
-To start using the **Vector Database connector**, ensure you have access to a supported LLM embeddings API to convert document content into vectorized embedding form. You will also need to have write access to a supported database.
+You also need:
 
-## Create a connector task
+- Access to a supported LLM embeddings API to convert document content into vectorized embedding form.
+- Write access to a supported vector store.
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+<OutboundConnectorBasics />
 
-<ConnectorTask/>
+## Configuration
+
+Every operation needs an embedding model and a vector store. Select the **Operation** first, then configure the **Embedding model** and **Vector store** properties.
+
+| Property  | Type     | Required | Description                                                                                                       | Example |
+| :-------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------- | :------ |
+| Operation | Dropdown | Yes      | The operation to run: **Embed document** or **Retrieve document**. The template default is **Retrieve document**. |         |
+
+### Embedding models
+
+Select an embedding model provider, then configure the properties for that provider.
+
+| Property       | Type     | Required | Description                                                                                                                                            | Example |
+| :------------- | :------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Model provider | Dropdown | Yes      | The embedding model provider. The options are **AWS Bedrock**, **Azure OpenAI**, **Google Vertex AI**, and **OpenAI**. The default is **AWS Bedrock**. |         |
+
+#### Amazon Bedrock
+
+The connector supports [Amazon Titan V1 and V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html). You can also specify any custom model that supports text embedding and is available in your Amazon Bedrock account.
+
+| Property             | Type     | Required | Description                                                                                                                                                                                                                                                                      | Example                        |
+| :------------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
+| Access key           | String   | Yes      | Access key for a user with permissions for the Amazon Bedrock `InvokeModel` action.                                                                                                                                                                                              |                                |
+| Secret key           | String   | Yes      | Secret key for the user associated with the access key.                                                                                                                                                                                                                          |                                |
+| Region               | String   | Yes      | AWS region where the model is hosted. See [AWS model region support](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html).                                                                                                                                  | `us-east-1`                    |
+| Model name           | Dropdown | Yes      | The embedding model to use: `amazon.titan-embed-text-v1`, `amazon.titan-embed-text-v2:0`, or **Custom**. Defaults to `amazon.titan-embed-text-v2:0`.                                                                                                                             | `amazon.titan-embed-text-v2:0` |
+| Custom model name    | String   | Yes      | Name of your custom Amazon Bedrock embedding model. Shown when **Model name** is **Custom**.                                                                                                                                                                                     |                                |
+| Embedding dimensions | Dropdown | Yes      | Number of dimensions of the embedding vector: `256`, `512`, or `1024`. Defaults to `1024`. Shown when **Model name** is `amazon.titan-embed-text-v2:0`.                                                                                                                          | `1024`                         |
+| Normalize            | Boolean  | Yes      | Whether to normalize the embedding vector. Defaults to `false`. Shown when **Model name** is `amazon.titan-embed-text-v2:0`. See the [AWS blog](https://aws.amazon.com/blogs/aws/amazon-titan-text-v2-now-available-in-amazon-bedrock-optimized-for-improving-rag/) for details. |                                |
+| Max retries          | Number   | Yes      | Maximum number of retries for the embedding request if it fails. Defaults to `3`.                                                                                                                                                                                                | `3`                            |
+
+#### Azure OpenAI
+
+| Property              | Type     | Required | Description                                                                                                                                                                | Example                                          |
+| :-------------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
+| Endpoint              | String   | Yes      | The Azure OpenAI endpoint URL.                                                                                                                                             | `https://<your-resource-name>.openai.azure.com/` |
+| Authentication        | Dropdown | Yes      | The authentication type: **API key** or **Client credentials**. Defaults to **API key**.                                                                                   |                                                  |
+| API key               | String   | Yes      | An Azure OpenAI API key from the [Azure AI Foundry portal](https://ai.azure.com/). Shown when **Authentication** is **API key**.                                           |                                                  |
+| Client ID             | String   | Yes      | The Microsoft Entra application ID. Shown when **Authentication** is **Client credentials**.                                                                               |                                                  |
+| Client secret         | String   | Yes      | The client secret of the Microsoft Entra application. Shown when **Authentication** is **Client credentials**.                                                             |                                                  |
+| Tenant ID             | String   | Yes      | The Microsoft Entra tenant ID. Shown when **Authentication** is **Client credentials**.                                                                                    |                                                  |
+| Authority host        | String   | No       | The authority host URL. Can also be an OAuth 2.0 token endpoint. Defaults to `https://login.microsoftonline.com`. Shown when **Authentication** is **Client credentials**. |                                                  |
+| Model deployment name | String   | Yes      | The name of the model deployment.                                                                                                                                          |                                                  |
+| Embedding dimensions  | Number   | No       | Number of dimensions of the embedding vector. If you don't specify a value, the default of the selected model is used.                                                     |                                                  |
+| Max retries           | Number   | No       | Maximum number of retries for the embedding request if it fails. Defaults to `3`.                                                                                          | `3`                                              |
+| Custom headers        | String   | No       | Map of custom HTTP headers to add to the request.                                                                                                                          |                                                  |
+
+Client credentials authentication requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
+
+#### Google Vertex AI
+
+| Property                        | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                  | Example  |
+| :------------------------------ | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- |
+| Project ID                      | String   | Yes      | The Google Cloud project ID.                                                                                                                                                                                                                                                                                                                                                                                                 |          |
+| Region                          | String   | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference takes place.                                                                                                                                                                                                                                                                                                 |          |
+| Authentication                  | Dropdown | Yes      | The authentication type: **Service account credentials** or **Application default credentials (Hybrid/Self-Managed only)**. Defaults to **Service account credentials**. Application default credentials (ADC) use the default credentials available in your environment. To set up ADC in a local development environment, see [set up ADC](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment). |          |
+| JSON key of the service account | String   | Yes      | The key of a [service account](https://cloud.google.com/iam/docs/service-account-overview) in JSON format. Shown when **Authentication** is **Service account credentials**.                                                                                                                                                                                                                                                 |          |
+| Model name                      | String   | Yes      | The Vertex AI embedding model. See the [Vertex AI documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/embeddings) for available models.                                                                                                                                                                                                                                                                     |          |
+| Embedding dimensions            | Number   | Yes      | Number of dimensions of the embedding vector. See the documentation of the selected model for valid values.                                                                                                                                                                                                                                                                                                                  |          |
+| Publisher                       | String   | No       | The publisher of the Vertex AI model. Defaults to `google`.                                                                                                                                                                                                                                                                                                                                                                  | `google` |
+| Max retries                     | Number   | No       | Maximum number of retries for the embedding request if it fails. Defaults to `3`.                                                                                                                                                                                                                                                                                                                                            | `3`      |
+
+#### OpenAI
+
+| Property             | Type   | Required | Description                                                                                                                                      | Example |
+| :------------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| OpenAI API key       | String | Yes      | Your OpenAI account API key for authorization.                                                                                                   |         |
+| Model name           | String | Yes      | The OpenAI model to use for embeddings. See the [OpenAI documentation](https://platform.openai.com/docs/guides/embeddings) for available models. |         |
+| Organization ID      | String | No       | For projects accessed through a legacy user API key, the organization ID to use for API requests with this connector.                            |         |
+| Project ID           | String | No       | For projects accessed through a legacy user API key, the project ID to use for API requests with this connector.                                 |         |
+| Embedding dimensions | Number | No       | Number of dimensions of the embedding vector. If you don't specify a value, the default of the selected model is used.                           |         |
+| Max retries          | Number | No       | Maximum number of retries for the embedding request if it fails. Defaults to `3`.                                                                | `3`     |
+| Custom headers       | String | No       | Map of custom HTTP headers to add to the request.                                                                                                |         |
+| Custom base URL      | String | No       | Base URL for API requests when you use a custom OpenAI endpoint. Defaults to `https://api.openai.com/v1/`.                                       |         |
+
+### Vector stores
+
+Select a vector store, then configure the properties for that store.
+
+| Property         | Type     | Required | Description                                                                                                                                                                               | Example |
+| :--------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Embeddings store | Dropdown | Yes      | The vector store. The options are **Amazon Managed OpenSearch**, **Azure AI Search**, **Azure Cosmos DB NoSQL**, **Elasticsearch**, and **OpenSearch**. The default is **Elasticsearch**. |         |
+
+#### Amazon Managed OpenSearch
+
+| Property   | Type   | Required | Description                                                                                                                                                                                         | Example                      |
+| :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- |
+| Access key | String | Yes      | AWS IAM access key of a user with read/write access.                                                                                                                                                |                              |
+| Secret key | String | Yes      | Secret key associated with the access key.                                                                                                                                                          |                              |
+| Server URL | String | Yes      | The Amazon OpenSearch URL without protocol.                                                                                                                                                         | `my-opensearch.aws.com:port` |
+| Region     | String | Yes      | Region of the Amazon OpenSearch instance.                                                                                                                                                           |                              |
+| Index name | String | Yes      | Name of the index where you want to store embeddings. When embedding, the connector creates a new index if it doesn't exist. When retrieving, the connector raises an error if the index is absent. |                              |
+
+#### Azure AI Search
+
+| Property       | Type     | Required | Description                                                                                                                                                                | Example                                            |
+| :------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------- |
+| Endpoint       | String   | Yes      | The Azure AI Search endpoint URL.                                                                                                                                          | `https://<your-resource-name>.search.windows.net/` |
+| Authentication | Dropdown | Yes      | The authentication type: **API key** or **Client credentials**. Defaults to **API key**.                                                                                   |                                                    |
+| API key        | String   | Yes      | An Azure AI Search key. Shown when **Authentication** is **API key**.                                                                                                      |                                                    |
+| Client ID      | String   | Yes      | The Microsoft Entra application ID. Shown when **Authentication** is **Client credentials**.                                                                               |                                                    |
+| Client secret  | String   | Yes      | The client secret of the Microsoft Entra application. Shown when **Authentication** is **Client credentials**.                                                             |                                                    |
+| Tenant ID      | String   | Yes      | The Microsoft Entra tenant ID. Shown when **Authentication** is **Client credentials**.                                                                                    |                                                    |
+| Authority host | String   | No       | The authority host URL. Can also be an OAuth 2.0 token endpoint. Defaults to `https://login.microsoftonline.com`. Shown when **Authentication** is **Client credentials**. |                                                    |
+| Index name     | String   | Yes      | Name of the search index. When embedding, the connector creates the index if it doesn't exist. When retrieving, the connector raises an error if the index is absent.      |                                                    |
+
+Client credentials authentication requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908) and assigning the [required roles](https://learn.microsoft.com/en-us/azure/search/search-security-rbac). You must explicitly enable role-based access control for the Azure AI Search resource.
+
+#### Azure Cosmos DB NoSQL
+
+| Property          | Type     | Required | Description                                                                                                                                                                | Example                                             |
+| :---------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
+| Endpoint          | String   | Yes      | The Azure Cosmos DB NoSQL endpoint URL.                                                                                                                                    | `https://<your-resource-name>.documents.azure.com/` |
+| Authentication    | Dropdown | Yes      | The authentication type: **API key** or **Client credentials**. Defaults to **API key**.                                                                                   |                                                     |
+| API key           | String   | Yes      | An Azure Cosmos DB key. Shown when **Authentication** is **API key**.                                                                                                      |                                                     |
+| Client ID         | String   | Yes      | The Microsoft Entra application ID. Shown when **Authentication** is **Client credentials**.                                                                               |                                                     |
+| Client secret     | String   | Yes      | The client secret of the Microsoft Entra application. Shown when **Authentication** is **Client credentials**.                                                             |                                                     |
+| Tenant ID         | String   | Yes      | The Microsoft Entra tenant ID. Shown when **Authentication** is **Client credentials**.                                                                                    |                                                     |
+| Authority host    | String   | No       | The authority host URL. Can also be an OAuth 2.0 token endpoint. Defaults to `https://login.microsoftonline.com`. Shown when **Authentication** is **Client credentials**. |                                                     |
+| Database name     | String   | Yes      | The name of the Azure Cosmos DB NoSQL database.                                                                                                                            |                                                     |
+| Container name    | String   | Yes      | The name of the Azure Cosmos DB NoSQL container. The container must already exist and have an `/id` partition key.                                                         |                                                     |
+| Consistency level | Dropdown | Yes      | The consistency level for the container: **Strong**, **Bounded Staleness**, **Session**, **Consistent Prefix**, or **Eventual**. Defaults to **Eventual**.                 |                                                     |
+| Distance function | Dropdown | Yes      | The distance function for vector similarity search: **Euclidean**, **Cosine**, or **Dot Product**. Defaults to **Cosine**.                                                 |                                                     |
+| Vector index type | Dropdown | Yes      | The vector index type: **Flat**, **Quantized Flat**, or **DiskANN**. Defaults to **Flat**.                                                                                 |                                                     |
+
+Client credentials authentication requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
+
+For more information about Azure Cosmos DB NoSQL vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search). Pay special attention to the vector dimensions limitations.
+
+#### Elasticsearch
+
+The Elasticsearch version must be 8 or later.
+
+| Property   | Type   | Required | Description                                                                                                                                                                                         | Example             |
+| :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
+| Base URL   | String | Yes      | The Elasticsearch base URL, including protocol.                                                                                                                                                     | `https://host:port` |
+| Username   | String | Yes      | The Elasticsearch user with read/write access.                                                                                                                                                      |                     |
+| Password   | String | Yes      | The password of the Elasticsearch user.                                                                                                                                                             |                     |
+| Index name | String | Yes      | Name of the index where you want to store embeddings. When embedding, the connector creates a new index if it doesn't exist. When retrieving, the connector raises an error if the index is absent. |                     |
+
+#### OpenSearch
+
+| Property   | Type   | Required | Description                                                                                                                                                                                         | Example             |
+| :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
+| Base URL   | String | Yes      | The OpenSearch base URL, including protocol.                                                                                                                                                        | `https://host:port` |
+| Username   | String | Yes      | The OpenSearch user with read/write access.                                                                                                                                                         |                     |
+| Password   | String | Yes      | The password of the OpenSearch user.                                                                                                                                                                |                     |
+| Index name | String | Yes      | Name of the index where you want to store embeddings. When embedding, the connector creates a new index if it doesn't exist. When retrieving, the connector raises an error if the index is absent. |                     |
 
 ## Operations
 
-<Tabs groupId="operations" defaultValue="embed" queryString values={
-[
-{label: 'Embed document', value: 'embed' },
-{label: 'Retrieve document', value: 'retrieve' },
-]}>
+### Embed document
 
-<TabItem value='embed'>
+Embed a document or plain text into the vector store. The operation performs the following steps:
 
-The **embed document** operation performs the following steps:
+1. Consumes a document.
+1. Parses the document depending on its file format and optionally splits it into text chunks.
+1. Converts the chunks into vectors with the embedding model.
+1. Stores the vectors in the vector store.
 
-1. [Consume a document](#embedding-document-configuration).
-2. Parse the document depending on a file format (optionally [split into text chunks](#splitting)).
-3. Convert chunks into a vector form with LLM help.
-4. Store produced vectors in a vector database.
+#### Input parameters
 
-To perform this operation, enter the following:
+Select **Embed document** in the **Operation** dropdown, then configure the [embedding model](#embedding-models) and the [vector store](#vector-stores). The following properties are specific to this operation.
 
-- **Operation** dropdown: **Embed document**.
-- **Embedding model**: Refer to the [relevant section](#embedding-models).
-- **Vector store**: Refer to the [relevant section](#vector-stores).
-- **Document**: Refer to the [relevant section](#embedding-document-configuration).
+| Property                    | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                           | Example |
+| :-------------------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Document source             | Dropdown | Yes      | Whether to embed a **Camunda document** or **Plain text**. Defaults to **Camunda document**.                                                                                                                                                                                                                                                                                                          |         |
+| Plain text to embed         | String   | Yes      | The text to embed, handled as regular UTF-8 text. Shown when **Document source** is **Plain text**. Use plain text for small data that fits into a text field or a process variable. If you have JSON input, a FEEL [string conversion function](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#stringfrom) can help.                                               |         |
+| Documents                   | String   | Yes      | A FEEL expression that returns the Camunda documents to embed. Shown when **Document source** is **Camunda document**. Use Camunda documents for larger document pipelines, for example from [webhooks or user tasks](/components/document-handling/getting-started.md). The connector parses documents with [Apache Tika](https://tika.apache.org/), so any Apache Tika-supported file format works. |         |
+| Document splitting strategy | Dropdown | Yes      | How to break large documents into smaller chunks: **Recursive** or **Do not split**. Defaults to **Recursive**. Seek guidance from your local data scientist to determine whether you need splitting. See the [LangChain4j documentation](https://docs.langchain4j.dev/tutorials/rag#document-splitter).                                                                                              |         |
+| Max chars                   | Number   | Yes      | Maximum size of a chunk in characters. Defaults to `500`. Shown when **Document splitting strategy** is **Recursive**.                                                                                                                                                                                                                                                                                | `500`   |
+| Max overlap window          | Number   | Yes      | Maximum overlap between consecutive chunks in characters. Defaults to `80`. Shown when **Document splitting strategy** is **Recursive**.                                                                                                                                                                                                                                                              | `80`    |
 
-As a result of this operation, you will get an array of created embedding chunk IDs,
-for example `["d599ec62-fe51-4a91-bbf0-26e1241f9079", "a1fad021-5148-42b4-aa02-7de9d590e69c"]`.
+#### Output
 
-### Updating embedded documents
+The operation returns an array of the IDs of the created embedding chunks:
 
-Each time you embed a document, the connector generates a new set of chunks and stores them in the vector database.  
-If the document was previously embedded, this creates duplicate chunks.
+```json
+["d599ec62-fe51-4a91-bbf0-26e1241f9079", "a1fad021-5148-42b4-aa02-7de9d590e69c"]
+```
+
+#### Update embedded documents
+
+Each time you embed a document, the connector generates a new set of chunks and stores them in the vector store. If you embed the same document again, this creates duplicate chunks.
 
 To prevent duplicates:
 
-1. Delete the existing chunks before re-embedding the document.
-2. Use the chunk IDs returned by the previous embedding operation.
-3. If the embedded document is from Camunda, use the `filename` metadata field to find the chunk IDs.
-4. Follow your vector store’s documentation for deleting chunks.
+1. Delete the existing chunks before you embed the document again.
+1. Use the chunk IDs returned by the previous embedding operation.
+1. If the embedded document is from Camunda, use the `filename` metadata field to find the chunk IDs.
+1. Follow the documentation of your vector store to delete chunks.
 
-</TabItem>
+### Retrieve document
 
-<TabItem value='retrieve'>
-
-The **retrieve document** operation performs the following steps:
+Search the vector store for chunks that are similar to a query. The operation performs the following steps:
 
 1. Consumes a query.
-2. Convert the query into a vector form with LLM help.
-3. Perform a vector similarity search on previously-stored LLM embeddings.
-4. Store results in Camunda document storage.
+1. Converts the query into a vector with the embedding model.
+1. Performs a vector similarity search on the stored embeddings.
+1. Stores the results in Camunda document storage.
 
-To perform this operation, enter the following:
+#### Input parameters
 
-- **Operation** dropdown: **Retrieve document**.
-- **Search query**: Enter your search query.
-- **Max results**: Enter maximum amount of returned results.
-- **Min score**: Enter the lowest score threshold similarity value; the value should be between 0 and 1, for example, 0.81.
-- **Embedding model**: Refer to the [relevant section](#embedding-models).
-- **Vector store**: Refer to the [relevant section](#vector-stores).
+Select **Retrieve document** in the **Operation** dropdown, then configure the [embedding model](#embedding-models) and the [vector store](#vector-stores). The following properties are specific to this operation.
 
-As a result of this operation, you will get an array of relevant chunks, where each includes a [chunk ID](#splitting),
-Camunda document reference metadata, similarity score, and the actual text content.
+| Property     | Type   | Required | Description                                                                                                                                                            | Example |
+| :----------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Search query | String | Yes      | The query to look up similar documents for.                                                                                                                            |         |
+| Max results  | Number | Yes      | The maximum number of results to return. Defaults to `5`.                                                                                                              | `5`     |
+| Min score    | Number | No       | The minimum similarity score a result needs to be included. Enter a value between 0 and 1. An empty or incorrect value resolves to `0.0`, which includes every result. | `0.81`  |
+
+#### Output
+
+The operation returns an object with a `chunks` array. Each chunk includes a chunk ID, the Camunda document reference metadata, the similarity score, and the text content.
 
 ```json
 {
@@ -119,250 +276,6 @@ Camunda document reference metadata, similarity score, and the actual text conte
 }
 ```
 
-</TabItem>
-
-</Tabs>
-
-## Embedding models
-
-<Tabs groupId="embedding-models" defaultValue="bedrock" queryString values={
-[
-{label: 'Amazon Bedrock', value: 'bedrock' },
-{label: 'Azure OpenAI', value: 'azure-openai' },
-{label: 'Google Vertex AI', value: 'vertex-ai' },
-{label: 'OpenAI', value: 'openai' }
-]}>
-
-<TabItem value='bedrock'>
-
-The **Vector Database connector** supports [Amazon Titan V1 and V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).  
-You can also specify any custom model that supports text embedding and is available in your Amazon Bedrock account.
-
-To use Amazon Bedrock as an embedding model, provide:
-
-- **Access key** – Access key for a user with permissions for the Amazon Bedrock `InvokeModel` action.
-- **Secret key** – Secret key for the user associated with the provided access key.
-- **Region** – AWS region where the model is hosted (for example, `us-east-1`). See [AWS model region support](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html) for details.
-- **Model name** – One of:
-  - **Amazon Titan V1** – `amazon.titan-embed-text-v1`
-  - **Amazon Titan V2** – `amazon.titan-embed-text-v2:0`
-  - **Custom model** – Name of your custom Amazon Bedrock embedding model.
-
-When using Amazon Titan V2, you can also specify:
-
-- **Embedding dimensions** – Number of dimensions for the embedding vector.
-- **Normalize** – Whether to normalize the embedding vector. See [AWS blog](https://aws.amazon.com/blogs/aws/amazon-titan-text-v2-now-available-in-amazon-bedrock-optimized-for-improving-rag/) for more details.
-
-For all models, the following parameter is optional:
-
-- **Max retries** – Maximum number of retries for the embedding request in case of failure.
-
-</TabItem>
-
-<TabItem value='openai'>
-
-To use OpenAI as an embedding model, provide:
-
-- **API key** – Your OpenAI account API key for authorization.
-- **Model name** – The OpenAI model to use for embeddings. See the [OpenAI documentation](https://platform.openai.com/docs/guides/embeddings) for available models.
-
-Optional parameters include:
-
-- **Organization ID** – For projects accessed through a legacy user API key, specify the organization ID for API requests with this connector.
-- **Project ID** – For projects accessed through a legacy user API key, specify the project ID for API requests with this connector.
-- **Embedding dimensions** – Number of dimensions for the embedding vector. If not specified, the default value for the selected model is used.
-- **Custom headers** – Additional headers to include in the request.
-- **Custom base URL** – Base URL for API requests when using a custom OpenAI endpoint.
-- **Max retries** – Maximum number of retries for the embedding request in case of failure.
-
-</TabItem>
-
-<TabItem value='azure-openai'>
-
-To use Azure OpenAI as an embedding model, provide:
-
-- **Endpoint** – The Azure OpenAI endpoint URL, for example `https://<your-resource-name>.openai.azure.com/`.
-- **Authentication** – Select the authentication type to use with Azure OpenAI.
-
-Optional parameters include:
-
-- **Embedding dimensions** – Number of dimensions for the embedding vector. If not specified, the default value for the selected model is used.
-- **Custom headers** – Additional headers to include in the request.
-- **Max retries** – Maximum number of retries for the embedding request in case of failure.
-
-Two authentication methods are supported:
-
-- **API key** – Authenticate using an Azure OpenAI API key from the [Azure AI Foundry portal](https://ai.azure.com/).
-- **Client credentials** – Authenticate using a client ID and secret. This requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). Provide:
-  - **Client ID** – The Microsoft Entra application ID.
-  - **Client secret** – The application’s client secret.
-  - **Tenant ID** – The Microsoft Entra tenant ID.
-  - **Authority host** – _(Optional)_ The authority host URL. Defaults to `https://login.microsoftonline.com/`. Can also be an OAuth 2.0 token endpoint.
-
-</TabItem>
-
-<TabItem value='vertex-ai'>
-
-To use Google Vertex AI as an embedding model, provide:
-
-- **Project ID** – The Google Cloud project ID.
-- **Region** – The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.
-- **Authentication** – Select the authentication type for connecting to Google Cloud.
-- **Model name** – The Vertex AI model to use for embeddings. Refer to the [Vertex AI documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/embeddings) for available models.
-- **Embedding dimensions** – Number of dimensions for the embedding vector. Consult the documentation for the selected model for valid ranges.
-
-Optional parameters include:
-
-- **Publisher** – The publisher of the Vertex AI model. Defaults to `google` if not specified.
-- **Max retries** – Maximum number of retries for the embedding request in case of failure.
-
-Two authentication methods are supported:
-
-- **Service Account Credentials** – Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
-- **Application Default Credentials (ADC)** – Authenticate using the default credentials available in your environment.  
-  This method is only supported in Self-Managed or hybrid environments.  
-  To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
-
-</TabItem>
-
-</Tabs>
-
-## Vector stores
-
-<Tabs groupId="vector" defaultValue="amazon-opensearch" queryString values={
-[
-{label: 'Amazon OpenSearch', value: 'amazon-opensearch' },
-{label: 'Azure AI Search', value: 'azure-ai-search' },
-{label: 'Azure Cosmos DB NoSQL', value: 'azure-cosmos-db' },
-{label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
-]}>
-
-<TabItem value='elasticsearch'>
-
-Enter the following parameters:
-
-- **Base URL** – The Elasticsearch base URL, including protocol, for example `https://host:port`.
-- **Username** – For the Elasticsearch user that has read/write access.
-- **Password** – For the Elasticsearch user that has read/write access.
-- **Index name** – Name of the index where you wish to store embeddings.
-  - When embedding: If the index is not present, the connector will create a new one.
-  - When retrieving: If the index is absent, the connector will raise an error.
-
-:::important
-The Elasticsearch version must be 8+.
-:::
-
-</TabItem>
-
-<TabItem value='opensearch'>
-
-Enter the following parameters:
-
-- **Base URL** – The OpenSearch base URL, including protocol, for example `https://host:port`.
-- **Username** – For the OpenSearch user that has read/write access.
-- **Password** – For the OpenSearch user that has read/write access.
-- **Index name** – Name of the index where you wish to store embeddings.
-  - When embedding: If the index is not present, the connector will create a new one.
-  - When retrieving: If the index is absent, the connector will raise an error.
-
-</TabItem>
-
-<TabItem value='amazon-opensearch'>
-
-Enter the following parameters:
-
-- **Access key** and **Secret key** – Enter AWS IAM credentials for the user that has read/write access.
-- **Server URL** – An Amazon OpenSearch URL _without_ protocol, for example `my-opensearch.aws.com:port`.
-- **Region** – Region of the Amazon OpenSearch instance.
-- **Index name** – Name of the index where you wish to store embeddings.
-  - When embedding: If the index is not present, the connector will create a new one.
-  - When retrieving: If the index is absent, the connector will raise an error.
-
-</TabItem>
-
-<TabItem value='azure-ai-search'>
-
-Enter the following parameters:
-
-- **Endpoint** – The Azure AI Search endpoint URL, for example `https://<your-resource-name>.search.windows.net/`.
-- **Authentication** – Select the authentication type for connecting to Azure AI Search.
-- **Index name** – Name of the index where embeddings will be stored.
-  - When embedding: If the index is not present, the connector will create it.
-  - When retrieving: If the index is absent, the connector will raise an error.
-
-Two authentication methods are supported:
-
-- **API key** – Authenticate using an Azure AI Search key.
-- **Client credentials** – Authenticate using a client ID and secret.  
-  This requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908) and assigning the [required roles](https://learn.microsoft.com/en-us/azure/search/search-security-rbac).  
-  Role-based access control must be explicitly enabled for the Azure AI Search resource.
-
-  Provide the following fields:
-  - **Client ID** – The Microsoft Entra application ID.
-  - **Client secret** – The application’s client secret.
-  - **Tenant ID** – The Microsoft Entra tenant ID.
-  - **Authority host** – _(Optional)_ The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
-
-</TabItem>
-
-<TabItem value='azure-cosmos-db'>
-
-Enter the following parameters:
-
-- **Endpoint** – The Azure Cosmos DB NoSQL endpoint URL, for example `https://<your-resource-name>.documents.azure.com/`.
-- **Authentication** – Select the authentication type for connecting to Azure Cosmos DB NoSQL.
-- **Database name** – The name of the Azure Cosmos DB NoSQL database.
-- **Container name** – The name of the Azure Cosmos DB NoSQL container.  
-  _Note:_ The container must already exist and have an `/id` partition key.
-- **Consistency level** – The consistency level for the container. Defaults to `Eventual`.
-- **Distance function** – The distance function to use for vector similarity search. Defaults to `Cosine`.
-- **Vector index type** – The vector index type to use. Defaults to `Flat`.
-
-:::info
-For more information about Azure Cosmos DB NoSQL vector search, refer to the [official documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).  
-Pay special attention to the vector dimensions limitations as stated in the documentation.
-:::
-
-Two authentication methods are supported:
-
-- **API key** – Authenticate using an Azure Cosmos DB key.
-- **Client credentials** – Authenticate using a client ID and secret.  
-  This requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908).
-
-  Provide the following fields:
-  - **Client ID** – The Microsoft Entra application ID.
-  - **Client secret** – The application’s client secret.
-  - **Tenant ID** – The Microsoft Entra tenant ID.
-  - **Authority host** – _(Optional)_ The authority host URL. Defaults to `https://login.microsoftonline.com/`. Can also be an OAuth 2.0 token endpoint.
-
-</TabItem>
-
-</Tabs>
-
-## Embedding document configuration
-
-### Document source
-
-The **Document source** can be either **Plain text** or a **Camunda document**.
-
-**Plain text** can be useful when you deal with small size data that can fit into a text field or a process variable. Input will be handled as a regular UTF-8 text.
-
-:::note
-A FEEL [string conversion function](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#stringfrom) might be useful if you have JSON input.
-:::
-
-The **Camunda document** might be useful when you deal with larger document pipelines that come from
-[webhook or user tasks](/components/document-handling/getting-started.md). Input documents will be parsed with [Apache Tika](https://tika.apache.org/), so files
-can be of any Apache Tika-supported formats.
-
-### Splitting
-
-**Splitting** is an action of breaking large documents into smaller pieces. It can be either recursive or no splitting
-at all. Seek guidance from your local data scientist to determine if you require splitting.
-
-Learn more about splitting in the [LangChain4j documentation](https://docs.langchain4j.dev/tutorials/rag#document-splitter).
-
 ## HTTP proxy configuration
 
 In Self-Managed environments, the Vector Database connector supports routing HTTP requests through an HTTP proxy. This applies to both embedding model API calls and vector store connections.
@@ -371,7 +284,7 @@ The Vector Database connector supports [plain proxy variables](/self-managed/com
 
 The following providers do not support connector proxy variables, but respect standard [JVM proxy properties](/self-managed/components/connectors/http-proxy-configuration.md#jvm-properties):
 
-- Google VertexAI (embedding model).
+- Google Vertex AI (embedding model).
 - Azure AI Search (vector store).
 
 The following providers do not support proxy configuration:
@@ -383,3 +296,10 @@ To disable proxy support entirely (for example, if only an HTTPS-based proxy is 
 ```bash
 CAMUNDA_CONNECTOR_VECTORDB_HTTP_PROXYSUPPORT_ENABLED=false
 ```
+
+<ErrorHandling />
+
+## Further resources
+
+- [Add long-term memory to your AI agents](/components/agentic-orchestration/rag-ai-agents.md)
+- [LangChain4j documentation](https://docs.langchain4j.dev/)
