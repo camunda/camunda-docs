@@ -4,8 +4,6 @@ title: "Concepts"
 description: "Understand the basic concepts of form-js"
 ---
 
-import clsx from "clsx";
-
 import GHIcon from "@site/src/mdx/GitHubInlineIcon";
 import FormViewer from "@site/src/mdx/FormViewer";
 import FormPlaygroundImg from "./img/forms-playground.png";
@@ -53,18 +51,6 @@ The form playground mainly comprises the following areas:
 The input and output panel, together with the preview, come in handy to simulate the behavior of a form, and to validate or debug the configuration of one or multiple components, especially when using expressions extensively. Use the input data panel to simulate process variables, business objects, or static data used in your form.
 
 <img src={FormPlaygroundImg} alt="Camunda Forms playground" />
-
-<div style={{marginTop: '24px', marginBottom: '8px'}}>
-   <a
-      className={clsx(
-         "button button--outline button--secondary button--lg"
-      )}
-      href="https://camunda-form-playground.netlify.app/">
-      Try form playground
-   </a>
-</div>
-
-Try the form playground yourself directly on the web, no log in needed.
 
 ## The form schema
 
