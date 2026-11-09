@@ -2,156 +2,256 @@
 id: azure-open-ai
 title: Azure OpenAI connector
 sidebar_label: Azure OpenAI
-description: Interact with Azure OpenAI from your BPMN process.
+description: Send prompts to Azure OpenAI models from your BPMN process and use the response in later steps.
 ---
-
-The **Azure OpenAI connector** is an outbound connector that allows you to interact with
-[Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) models from your BPMN processes.
-
-The **Azure OpenAI connector** currently supports only prompt operations:
-[`completions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions),
-[`chat completions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions), and
-[`completions extensions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
-
-Refer the [official models documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models)
-to find out if a desired model supports the operations mentioned.
-
-## Prerequisites
-
-To begin using the **Azure OpenAI connector**, ensure you have created and deployed an Azure OpenAI resource.
-A valid Azure OpenAI API key is also required.
-
-Learn more at the [official Azure OpenAI portal entry](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource).
-
-## Create an Azure OpenAI connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
+Send prompts to [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) models from your BPMN process and use the response in later steps.
+
+## About this connector
+
+The **Azure OpenAI connector** is an outbound connector that calls the REST API of your Azure OpenAI resource. Use it to generate text with a deployed model as part of a process, for example to summarize a document or answer a question.
+
+The connector is a [protocol connector](/components/connectors/protocol/rest.md) built on top of the REST connector, and supports the following prompt operations:
+
+- [**Completion**](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions): Generates a text completion for a prompt.
+- [**Chat completion**](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions): Generates a response to a conversation made of messages.
+- [**Completions extension**](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions): Generates a response to a conversation and can use additional data sources.
+
+Not every model supports every operation. Refer to the [Azure OpenAI models documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models) to check which operations your model supports.
+
+## Prerequisites
+
+To use the Azure OpenAI connector, you need the following:
+
+| Prerequisite                                                                                                                                                               | Description                                                                                        |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| [Azure OpenAI resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource)                                                                 | A created Azure OpenAI resource with a deployed model that supports the operation you want to use. |
+| [API key](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api#retrieve-key-and-endpoint) for the resource | A valid key for your Azure OpenAI resource.                                                        |
+
+:::note
+Use secrets to store your API key and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+:::
+
+## Create an Azure OpenAI connector task
+
 <ConnectorTask/>
 
-## Make your Azure OpenAI connector executable
+## Configuration
 
-To work with the **Azure OpenAI connector**, fill all mandatory fields.
+### Authentication
 
-## Authentication
+| Property | Type   | Required | Description                                | Example                        |
+| :------- | :----- | :------- | :----------------------------------------- | :----------------------------- |
+| API key  | String | Yes      | The API key of your Azure OpenAI resource. | `{{secrets.AZURE_OAI_SECRET}}` |
 
-Fill the **API key** field with a valid Azure OpenAI API key.
-[Learn more](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api#retrieve-key-and-endpoint) about obtaining a key.
+### Job timeout
 
-### Create a new connector secret
+| Property    | Type   | Required | Description                                                                                                                            | Example |
+| :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Job timeout | String | No       | An ISO-8601 duration after which Zeebe considers the job timed out if it is not completed yet. Leave empty to use the default timeout. | `PT5M`  |
 
-Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+## Operations
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (for example, `AZURE_OAI_SECRET`) so you can reference it later in the connector.
+Select the operation in the **Operation** dropdown. The **Operation** property determines which of the following properties appear.
 
-## Operation
+### Completion
 
-Select the desired operation from the **Operation** dropdown.
-Fill in the **Resource name**, the **Deployment ID**, and the **API version** related to your operation. Ensure the
-deployed [model](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models) supports the selected operation.
+Generate a completion for a prompt. Select **Completion** in **Operation**. Learn more in the [Azure OpenAI completions documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions).
 
-### Completion, chat completion, and completion extension
+#### Input parameters
 
-- For **completion** details, refer to the related [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions).
-- For **chat completion** details, refer to the related [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions).
-- For **completion extension** details, refer to the related [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
+| Property              | Type     | Required | Description                                                                                                     | Example                       |
+| :-------------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------- | :---------------------------- |
+| Resource name         | String   | Yes      | The name of your Azure OpenAI resource.                                                                         | `myresource`                  |
+| Deployment ID         | String   | Yes      | The deployment name you chose when you deployed the model.                                                      | `mydeployment`                |
+| API version           | String   | Yes      | The API version to use for this operation. The default is `2024-02-01`.                                         | `2024-02-01`                  |
+| Prompt                | Text     | Yes      | The prompt or prompts to generate completions for, encoded as a string or an array of strings.                  | `Write a haiku about the sea` |
+| Max tokens            | String   | No       | The maximum number of tokens to generate in the completion. The default is `16`.                                |                               |
+| Temperature           | String   | No       | The sampling temperature to use, between 0 and 2. The default is `1`.                                           |                               |
+| Top P                 | String   | No       | An alternative to sampling with temperature, also known as nucleus sampling. The default is `1`.                |                               |
+| Logit bias            | Text     | No       | Modifies the likelihood of specified tokens appearing in the completion.                                        |                               |
+| User                  | String   | No       | A unique identifier representing your end user.                                                                 |                               |
+| Number of completions | String   | No       | How many completions to generate for each prompt. The default is `1`.                                           |                               |
+| Stream                | Dropdown | Yes      | Whether to stream back partial progress: **False** or **True**. The default is **False**.                       | **False**                     |
+| Log probabilities     | String   | No       | Includes the log probabilities on the most likely tokens, as well as the chosen tokens.                         |                               |
+| Suffix                | String   | No       | The suffix that comes after a completion of inserted text.                                                      |                               |
+| Echo                  | Dropdown | No       | Whether to echo back the prompt in addition to the completion: **False** or **True**. The default is **False**. | **False**                     |
+| Stop                  | String   | No       | Up to four sequences where the API stops generating further tokens.                                             |                               |
+| Presence penalty      | String   | No       | Positive values penalize new tokens based on whether they appear in the text so far. The default is `0`.        |                               |
+| Frequency penalty     | String   | No       | Positive values penalize new tokens based on their existing frequency in the text so far. The default is `0`.   |                               |
+| Best of               | String   | No       | Generates the given number of completions server-side and returns the best one. The default is `1`.             |                               |
 
-## Handle connector response
+#### Output
 
-The **Azure OpenAI connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**. Therefore,
-handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
+The connector returns the HTTP response of the Azure OpenAI REST API as an object with the `status`, `headers`, and `body` fields. The `body` field contains the response of the model. Learn more about the response format in [REST connector response](/components/connectors/protocol/rest.md#response).
 
-## Usage example
+### Chat completion
 
-### Chat completions
+Generate a response to a conversation. Select **Chat completion** in **Operation**. Learn more in the [Azure OpenAI chat completions documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions).
 
-Assume you have deployed a `gpt-35-turbo` model with the following URL:
-`https://myresource.openai.azure.com/openai/deployments/mydeployment/completions?api-version=2024-02-01`, and created a
-Connector secret with the name `AZURE_OAI_SECRET`.
+The connector sends the **Message content** as the last message of the conversation. To add earlier messages, such as a system message, use **Messages context**.
 
-Consider the following input:
+#### Input parameters
 
-- **API key**: `{{secrets.AZURE_OAI_SECRET}}`
-- **Operation**: `Chat completion`
-- **Resource name**: `myresource`
-- **Deployment ID**: `mydeployment`
-- **API version**: `2024-02-01`
-- **Message role**: `User`
-- **Message content**: `What is the age of the Universe?`
-- **Message context**: `=[{"role": "system", "content": "You are helpful assistant."}]`
-- Leave the rest of the params blank or default
-- **Result variable**: `myOpenAIResponse`
+| Property              | Type     | Required | Description                                                                                                             | Example                                                          |
+| :-------------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------- |
+| Resource name         | String   | Yes      | The name of your Azure OpenAI resource.                                                                                 | `myresource`                                                     |
+| Deployment ID         | String   | Yes      | The deployment name you chose when you deployed the model.                                                              | `mydeployment`                                                   |
+| API version           | String   | Yes      | The API version to use for this operation. The default is `2024-02-01`.                                                 | `2024-02-01`                                                     |
+| Message role          | Dropdown | Yes      | Who gives the current message: **User**, **System**, **Assistant**, **Tool**, or **Function**. The default is **User**. | **User**                                                         |
+| Message content       | Text     | Yes      | The content of the message.                                                                                             | `What is the age of the Universe?`                               |
+| Messages context      | Text     | No       | The array of messages associated with this chat completion request, sent before the current message.                    | `=[{"role": "system", "content": "You are helpful assistant."}]` |
+| Content part          | String   | No       | Part of a user's multi-modal message.                                                                                   |                                                                  |
+| Enhancements          | String   | No       | The Vision enhancement features requested for the chat.                                                                 |                                                                  |
+| Temperature           | String   | No       | The sampling temperature to use, between 0 and 2. The default is `1`.                                                   |                                                                  |
+| Number of completions | String   | No       | How many completions to generate for each prompt. The default is `1`.                                                   |                                                                  |
+| Stream                | Dropdown | Yes      | Whether to stream back partial progress: **False** or **True**. The default is **False**.                               | **False**                                                        |
+| Stop                  | String   | No       | Up to four sequences where the API stops generating further tokens.                                                     |                                                                  |
+| Max tokens            | String   | No       | The maximum number of tokens to generate in the completion.                                                             |                                                                  |
+| Presence penalty      | String   | No       | Positive values penalize new tokens based on whether they appear in the text so far.                                    |                                                                  |
+| Frequency penalty     | String   | No       | Positive values penalize new tokens based on their existing frequency in the text so far.                               |                                                                  |
+| Logit bias            | String   | No       | Modifies the likelihood of specified tokens appearing in the completion.                                                |                                                                  |
+| User                  | String   | No       | A unique identifier representing your end user.                                                                         |                                                                  |
+| Tools                 | String   | No       | A list of tools the model can call.                                                                                     |                                                                  |
+| Data sources          | String   | No       | Additional resource data.                                                                                               |                                                                  |
 
-In the `myOpenAIResponse` you will find the following result:
+#### Output {#chat-completion-output}
+
+The connector returns the HTTP response of the Azure OpenAI REST API as an object with the `status`, `headers`, and `body` fields. For example, for the input in [Usage example](#usage-example):
 
 ```json
 {
-   "status": 200,
-   "headers": {
-    ...
-   },
-   "body": {
-      "choices": [
-         {
-            "content_filter_results": {
-               "hate": {
-                  "filtered": false,
-                  "severity": "safe"
-               },
-               "self_harm": {
-                  "filtered": false,
-                  "severity": "safe"
-               },
-               "sexual": {
-                  "filtered": false,
-                  "severity": "safe"
-               },
-               "violence": {
-                  "filtered": false,
-                  "severity": "safe"
-               }
-            },
-            "finish_reason": "stop",
-            "index": 0,
-            "message": {
-               "content": "The age of the universe is estimated to be around 13.8 billion years. This age is determined through various scientific methods, such as measuring the cosmic microwave background radiation and studying the expansion rate of the universe.",
-               "role": "assistant"
-            }
-         }
-      ],
-      "created": "...",
-      "id": "...",
-      "model": "gpt-35-turbo",
-      "object": "chat.completion",
-      "prompt_filter_results": [
-         {
-            "prompt_index": 0,
-            "content_filter_results": {
-               "hate": {
-                  "filtered": false,
-                  "severity": "safe"
-               },
-               "self_harm": {
-                  "filtered": false,
-                  "severity": "safe"
-               },
-               "sexual": {
-                  "filtered": false,
-                  "severity": "safe"
-               },
-               "violence": {
-                  "filtered": false,
-                  "severity": "safe"
-               }
-            }
-         }
-      ],
-      "usage": {
-         "completion_tokens": 43,
-         "prompt_tokens": 24,
-         "total_tokens": 67
+  "status": 200,
+  "headers": {},
+  "body": {
+    "choices": [
+      {
+        "content_filter_results": {
+          "hate": {
+            "filtered": false,
+            "severity": "safe"
+          },
+          "self_harm": {
+            "filtered": false,
+            "severity": "safe"
+          },
+          "sexual": {
+            "filtered": false,
+            "severity": "safe"
+          },
+          "violence": {
+            "filtered": false,
+            "severity": "safe"
+          }
+        },
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "content": "The age of the universe is estimated to be around 13.8 billion years. This age is determined through various scientific methods, such as measuring the cosmic microwave background radiation and studying the expansion rate of the universe.",
+          "role": "assistant"
+        }
       }
-   }
+    ],
+    "created": 1700000000,
+    "id": "chatcmpl-123",
+    "model": "gpt-35-turbo",
+    "object": "chat.completion",
+    "prompt_filter_results": [
+      {
+        "prompt_index": 0,
+        "content_filter_results": {
+          "hate": {
+            "filtered": false,
+            "severity": "safe"
+          },
+          "self_harm": {
+            "filtered": false,
+            "severity": "safe"
+          },
+          "sexual": {
+            "filtered": false,
+            "severity": "safe"
+          },
+          "violence": {
+            "filtered": false,
+            "severity": "safe"
+          }
+        }
+      }
+    ],
+    "usage": {
+      "completion_tokens": 43,
+      "prompt_tokens": 24,
+      "total_tokens": 67
+    }
+  }
 }
 ```
+
+To store only the text of the answer in a process variable, use **Result expression**. FEEL lists start at index 1:
+
+```feel
+= {
+  "answer": response.body.choices[1].message.content
+}
+```
+
+### Completions extension
+
+Generate a response to a conversation, optionally using additional data sources. Select **Completions extension** in **Operation**. Learn more in the [Azure OpenAI completions extensions documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
+
+#### Input parameters
+
+| Property              | Type     | Required | Description                                                                               | Example              |
+| :-------------------- | :------- | :------- | :---------------------------------------------------------------------------------------- | :------------------- |
+| Resource name         | String   | Yes      | The name of your Azure OpenAI resource.                                                   | `myresource`         |
+| Deployment ID         | String   | Yes      | The deployment name you chose when you deployed the model.                                | `mydeployment`       |
+| API version           | String   | Yes      | The API version to use for this operation. The default is `2023-12-01-preview`.           | `2023-12-01-preview` |
+| Messages              | String   | Yes      | The array of messages associated with this chat completion request.                       |                      |
+| Content part          | String   | No       | Part of a user's multi-modal message.                                                     |                      |
+| Enhancements          | String   | No       | The Vision enhancement features requested for the chat.                                   |                      |
+| Temperature           | String   | No       | The sampling temperature to use, between 0 and 2. The default is `1`.                     |                      |
+| Number of completions | String   | No       | How many completions to generate for each prompt. The default is `1`.                     |                      |
+| Stream                | Dropdown | Yes      | Whether to stream back partial progress: **False** or **True**. The default is **False**. | **False**            |
+| Stop                  | String   | No       | Up to four sequences where the API stops generating further tokens.                       |                      |
+| Max tokens            | String   | No       | The maximum number of tokens to generate in the completion.                               |                      |
+| Presence penalty      | String   | No       | Positive values penalize new tokens based on whether they appear in the text so far.      |                      |
+| Frequency penalty     | String   | No       | Positive values penalize new tokens based on their existing frequency in the text so far. |                      |
+| Logit bias            | String   | No       | Modifies the likelihood of specified tokens appearing in the completion.                  |                      |
+| User                  | String   | No       | A unique identifier representing your end user.                                           |                      |
+| Tools                 | String   | No       | A list of tools the model can call.                                                       |                      |
+| Data sources          | String   | No       | Additional resource data.                                                                 |                      |
+
+#### Output
+
+The connector returns the HTTP response of the Azure OpenAI REST API as an object with the `status`, `headers`, and `body` fields. The `body` field contains the response of the model. Learn more about the response format in [REST connector response](/components/connectors/protocol/rest.md#response).
+
+## Usage example
+
+Assume you deployed a `gpt-35-turbo` model as `mydeployment` on the resource `myresource`, and created a connector secret named `AZURE_OAI_SECRET` that holds your API key. To get an answer to a question, configure the connector as follows:
+
+| Property         | Value                                                            |
+| :--------------- | :--------------------------------------------------------------- |
+| API key          | `{{secrets.AZURE_OAI_SECRET}}`                                   |
+| Operation        | **Chat completion**                                              |
+| Resource name    | `myresource`                                                     |
+| Deployment ID    | `mydeployment`                                                   |
+| API version      | `2024-02-01`                                                     |
+| Message role     | **User**                                                         |
+| Message content  | `What is the age of the Universe?`                               |
+| Messages context | `=[{"role": "system", "content": "You are helpful assistant."}]` |
+| Result variable  | `myOpenAIResponse`                                               |
+
+Leave the other properties empty or at their default values. The connector sends the request to `https://myresource.openai.azure.com/openai/deployments/mydeployment/chat/completions?api-version=2024-02-01`, and stores the response in `myOpenAIResponse`. See the [chat completion output](#chat-completion-output) for the response.
+
+## Troubleshooting
+
+To learn about general error handling in Camunda, see [BPMN errors and failing jobs](/components/connectors/use-connectors/index.md#bpmn-errors).
+
+## Further resources
+
+- [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
+- [Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models)
+- [Create an Azure OpenAI resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource)
