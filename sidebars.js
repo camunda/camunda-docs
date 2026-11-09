@@ -105,6 +105,10 @@ module.exports = {
         {
           type: "category",
           label: "Build",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/build-agents",
+          },
           items: [
             "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/add-tool-to-ai-agent",
@@ -1018,6 +1022,7 @@ module.exports = {
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
+            "components/modeler/desktop-modeler/element-templates/hosting-template-sources",
             "components/modeler/desktop-modeler/element-templates/using-templates",
           ],
         },
