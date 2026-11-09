@@ -30,7 +30,7 @@ Each entry is one JSON file under `.camunda/usage/`. You commit these files with
 
 ProcessOS Harness stores no aggregate. It calculates totals from the entry files when you ask for them. Entries recorded on different branches merge as separate files, so they don't create conflicting totals.
 
-## Automatic recording per builder job
+## Automatic recording per builder task
 
 ProcessOS Harness records one `job` entry for each [builder task](builder-task.md) without any action from you.
 
