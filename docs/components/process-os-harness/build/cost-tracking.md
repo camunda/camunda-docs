@@ -36,21 +36,43 @@ ProcessOS Harness records one `job` entry for each [builder task](builder-task.m
 
 Each entry counts only the usage inside its own window. If the agent runs several builder tasks in one session, each task gets its own entry, and no stretch of the session is counted twice.
 
-## Manual recording with the usage log skill
+## Record work outside a builder task
 
-To record work outside a governance job, run `/process-os-usage-log`. Choose the kind of entry:
+Builder tasks record their usage automatically. Log any other agent work for the project yourself, so the totals cover it.
 
-| Kind       | Use it for                                          |
-| ---------- | --------------------------------------------------- |
-| `adhoc`    | Work you did outside a governance job.              |
-| `research` | Work that business reporting must exclude.          |
+```mermaid
+flowchart TD
+    W["Agent work in a ProcessOS project"] --> J{"Inside a builder task?"}
+    J -->|Yes| A["Nothing to do: completing the task records it"]
+    J -->|No| C{"Part of the project's delivery?"}
+    C -->|Yes| L["Run /process-os-usage-log as the last step of that session, then commit the entry"]
+    C -->|"No: research or co-innovation"| N["Don't log it"]
+```
 
-A session can have several entries. The skill prevents double counting:
+### Project work outside a builder task
 
-- If you log a session again from the same or an earlier start, the new entry replaces the earlier one.
-- If you log it from where the last entry ended, ProcessOS Harness adds a second entry.
-- If a window partly overlaps a stored one, ProcessOS Harness refuses it.
-- If you ran builder jobs in the session, log only the work after the last job ended. A window that overlaps a job entry of the same session is refused.
+**When:** You use the agent for the project outside a builder task, for example to optimize a report or fix a BPMN model after review.
+
+**How:** Start a new agent session for the task. As its last step, run `/process-os-usage-log`, confirm the phase, and commit the file it writes to `.camunda/usage/`.
+
+### Research and co-innovation
+
+**When:** You experiment, for example to try out a model or a prompt, or do co-innovation work outside the project's delivery.
+
+**How:** Don't log it. Work you don't log stays out of the totals.
+
+### Do
+
+- Use one session per task.
+- Run `/process-os-usage-log` in the session that did the work, before you close it.
+- Commit the entry file. The skill doesn't commit it for you.
+
+### Don't
+
+- Don't log a builder task's work manually. It's already recorded.
+- Don't log earlier work from a new session. The agent reads only its own current session's usage, so a new session logs only itself.
+
+If you ran builder tasks earlier in the same session, the skill logs only the work after the last one ended. Logging the same session again replaces its earlier entry.
 
 ## View totals
 
