@@ -119,8 +119,9 @@ Camunda has provided the following releases which also contain the fix for CVE-2
 - Hub Self-Managed 8.10.6
 - Web Modeler Self-Managed 8.9.15, 8.8.26, 8.7.29, 8.6.29
 - `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag, built on or after November 5, 2026
+- `registry.camunda.cloud/keycloak-ee/keycloak` with the `26.8.2` tag, built on or after November 7, 2026. The `26.8.1` tag does not get this fix. Set the `26.8.2` tag in `values-enterprise.yaml`.
 
-The other releases in the first list still trust "emSign Root CA - G1". Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, upgrade to a release in the second list or remove the root with the workaround below. A fix for the `camunda/keycloak:26.3.3` and `keycloak-ee` images is not available yet. We will update this notice when we release it.
+The other releases in the first list still trust "emSign Root CA - G1". Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, upgrade to a release in the second list or remove the root with the workaround below. The `camunda/keycloak:26.3.3` image does not get this fix, because this tag receives no more updates. Move to a fixed Keycloak 26 image.
 
 Camunda Operate, Tasklist, and Optimize 8.6 are not affected by CVE-2026-91403. Their images use a trust store that does not contain the root certificates.
 
