@@ -1,6 +1,6 @@
 ---
 id: agentic-ai-aiagent-upgrade
-sidebar_label: Upgrade from the legacy connector
+sidebar_label: Upgrade AI Agent element templates
 title: Upgrade AI Agent element templates
 description: Upgrade AI Agent connectors from the legacy element templates to the new element templates with c8ctl or manually, and migrate their model provider configurations.
 ---
