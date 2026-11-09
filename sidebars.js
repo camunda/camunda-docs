@@ -1113,11 +1113,25 @@ module.exports = {
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
                       ],
                     },
+                    {
+                      type: "category",
+                      label: "Fundamentals",
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "Advanced topics",
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-instance-migration",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
+                      ],
+                    },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
                 {
@@ -1151,7 +1165,12 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound",
+                  ],
+                },
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
                 "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
