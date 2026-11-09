@@ -308,7 +308,7 @@ If you provide _["admin"]_ for **Required roles**, the message _can be correlate
 If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the connector will throw an exception.
 
 :::note
-For GitHub, there is a simplified [GitHub Webhook connector](/components/connectors/out-of-the-box-connectors/github.md).
+For GitHub, there is a simplified [GitHub Webhook connector](/components/connectors/out-of-the-box-connectors/github-inbound.md).
 :::
 
 ## Return data from your HTTP Webhook connector

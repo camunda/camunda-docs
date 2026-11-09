@@ -1200,7 +1200,12 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/email-outbound",
               ],
             },
-            "components/connectors/out-of-the-box-connectors/github",
+            {
+              GitHub: [
+                "components/connectors/out-of-the-box-connectors/github-inbound",
+                "components/connectors/out-of-the-box-connectors/github-outbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [

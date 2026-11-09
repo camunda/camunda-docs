@@ -972,7 +972,12 @@
             "components/connectors/out-of-the-box-connectors/csv",
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/email",
-            "components/connectors/out-of-the-box-connectors/github",
+            {
+              "GitHub": [
+                "components/connectors/out-of-the-box-connectors/github-inbound",
+                "components/connectors/out-of-the-box-connectors/github-outbound"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               "Google": [

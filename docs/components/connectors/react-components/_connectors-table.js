@@ -260,14 +260,14 @@ const SearchableTable = () => {
       name: "GitHub",
       description: "Manage GitHub issues and releases from your processes.",
       type: "Outbound",
-      link: "../github/?github=outbound",
+      link: "../github-outbound/",
       image: GithubImg,
     },
     {
       name: "GitHub Webhook",
       description: "Start a process instance triggered by a GitHub event.",
       type: "Inbound",
-      link: "../github/?github=inbound",
+      link: "../github-inbound/",
       image: GithubImg,
     },
     {
