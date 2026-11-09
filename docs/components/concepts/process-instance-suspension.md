@@ -72,6 +72,18 @@ If a user task has `canceling` [user task listeners](./user-task-listeners.md) d
 
 User task listener jobs that were already created before suspension behave like other jobs during suspension. See [Jobs](#jobs).
 
+#### Suspended user tasks in secondary storage
+
+When you suspend a process instance, Camunda marks its user tasks as suspended in secondary storage. When you resume the instance, Camunda removes the marker again. The marker is exported asynchronously, so it can take a short time to appear or disappear after you suspend or resume the instance.
+
+- The [search user tasks](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) endpoint returns an `isSuspended` field for each user task.
+- Use the `isSuspended` filter of the same endpoint to return only suspended or only non-suspended user tasks.
+- [Tasklist](../tasklist/introduction-to-tasklist.md) keeps suspended user tasks visible, labels them as suspended, and disables actions such as assign, unassign, and complete.
+
+:::note
+User tasks of process instances that you suspended before upgrading to 8.11 aren't marked as suspended, even though the instances show as `SUSPENDED`. Camunda rejects actions on these tasks, but Tasklist and the search API still show them as not suspended until you resume the instance.
+:::
+
 ## Allowed actions on suspended instances
 
 External commands against a suspended process instance are blocked, with the following exceptions:

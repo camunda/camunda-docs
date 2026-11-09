@@ -49,6 +49,27 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### User tasks of suspended process instances are now marked as suspended {#user-tasks-suspended-marker}
+
+Starting with 8.11, Camunda marks the user tasks of a suspended process instance as suspended in secondary storage, and removes the marker when you resume the instance.
+
+- The [search user tasks](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) endpoint returns a new `isSuspended` field and supports a new `isSuspended` filter.
+- Tasklist keeps suspended user tasks visible, labels them as suspended, and disables actions such as assign, unassign, and complete.
+- User tasks of instances that you suspended on 8.10 or earlier aren't marked after you upgrade. The instances still show as `SUSPENDED`, and Camunda still rejects actions on their tasks, but Tasklist and the search API show these tasks as not suspended.
+
+**Action:** No action is required. If your integration assumes that user tasks returned by the search API are actionable, filter on `isSuspended`. Keep in mind that tasks of instances suspended before the upgrade aren't marked.
+
+<p className="link-arrow">[Process instance suspension](/components/concepts/process-instance-suspension.md#suspended-user-tasks-in-secondary-storage)</p>
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
