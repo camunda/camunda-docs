@@ -14,7 +14,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 With cost tracking, you can see roughly what each project iteration costs in tokens and USD. The agent that does the work reports its own usage. ProcessOS Harness validates the reports, stores them in your project, and adds them up when you ask for totals.
 
-ProcessOS Harness never reads the session files of an agent, and no usage data leaves your project.
+ProcessOS Harness itself never reads an agent's session files: the agent reads its own recorded usage and reports it. No usage data leaves your project.
 
 ## What is recorded
 
