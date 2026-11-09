@@ -1704,6 +1704,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/lookup-user-task",
+          label: "Look up an active user task (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-variables",
           label: "Search user task variables",
           className: "api-method post",

@@ -28,7 +28,7 @@ The Zeebe cluster is [zone-aware](/self-managed/components/orchestration-cluster
 
   Set `AWS_PROFILE` if you don't use the default credential chain.
 
-Both scripts take `--failed-region 0|1` to name the region being failed away from and restored. The default is `0`.
+Both scripts take `--failed-region 0|1` to name the region being failed away from and restored. For `failover.sh`, the default is `0`. `failback.sh` has no default, so you must set it. That script empties the EFS primary storage of that region.
 
 ## Fail over to the surviving region
 

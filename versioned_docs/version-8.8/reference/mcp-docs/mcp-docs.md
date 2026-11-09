@@ -7,6 +7,7 @@ description: "Connect to Camunda documentation directly from your IDE or AI tool
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import BuildWithCamundaBanner from '../../components/react-components/\_build-with-camunda-banner';
 import McpServerImg from './img/camunda-docs-mcpserver.png';
 import McpServerDropdownImg from './img/camunda-docs-mcpserver-dropdown.png';
 
@@ -169,3 +170,5 @@ This tool allows AI tools/agents to perform semantic retrieval over the Camunda 
 1. Select **Agent** mode from the **Set Agent** drop-down menu.
 1. Click **Configure Tools** to check the `search_camunda_knowledge_sources` tool is available and selected.
 1. Ask context-aware questions about Camunda.
+
+<BuildWithCamundaBanner />

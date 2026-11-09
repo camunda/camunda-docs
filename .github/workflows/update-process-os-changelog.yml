@@ -1,0 +1,116 @@
+name: Update ProcessOS changelog
+
+on:
+  schedule:
+    # Run nightly at 3 AM UTC
+    - cron: "0 3 * * *"
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: read
+
+jobs:
+  update-process-os-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      # camunda/process-os is private, so the default GITHUB_TOKEN cannot read
+      # its releases. The App token covers both repositories: process-os to
+      # read releases and their assets, camunda-docs to open the PR.
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          owner: camunda
+          repositories: |
+            camunda-docs
+            process-os
+
+      # The script uses Node built-ins only, so no npm ci.
+      - name: Run changelog update
+        id: update-changelog
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          npm run update-process-os-changelog
+
+          if git diff --quiet; then
+            echo "No changes detected"
+            echo "changes_detected=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected"
+            echo "changes_detected=true" >> "$GITHUB_OUTPUT"
+            echo "changed_files=$(git diff --name-only | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.update-changelog.outputs.changes_detected == 'true'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          commit-message: "docs(process-os-harness): add new releases to the ProcessOS Harness changelog"
+          title: "docs(process-os-harness): add new releases to the ProcessOS Harness changelog"
+          body: |
+            This PR was automatically created by the nightly ProcessOS changelog update automation.
+
+            ## Changes
+
+            The script added entries for new camunda/process-os releases to:
+            ${{ steps.update-changelog.outputs.changed_files }}
+
+            ## What was updated
+
+            - ✅ Fetched published releases from camunda/process-os, alpha and stable
+            - ✅ Added an entry from each new release's `docs-changelog.md` asset, newest first
+            - ✅ Left every existing entry unchanged, including edits made on the page
+
+            ---
+
+            🤖 This PR was created automatically. If you have any questions about the automation, please check the [update-process-os-changelog.js script](./hacks/update-process-os-changelog.js).
+          branch: auto/update-process-os-changelog
+          delete-branch: true
+          team-reviewers: camunda/tech-writers
+
+      - name: Log automation result
+        run: |
+          if [ "${{ steps.update-changelog.outputs.changes_detected }}" == "true" ]; then
+            echo "✅ ProcessOS changelog update completed successfully. PR created."
+          else
+            echo "ℹ️ No updates needed. The ProcessOS changelog is up to date."
+          fi
+  notify-failure:
+    needs:
+      - update-process-os-changelog
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    uses: ./.github/workflows/notify-failure.yml
+    with:
+      # If any dependent job fails, set the dependency_status to 'failure',
+      # otherwise set it to 'success'.
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

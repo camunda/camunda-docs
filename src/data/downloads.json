@@ -1,45 +1,45 @@
 {
   "gettingStarted": {
-    "version": "8.10.0-alpha5",
-    "date": "Aug 31, 2026",
+    "version": "8.10.4",
+    "date": "Oct 13, 2026",
     "links": {
       "mac": [
         {
           "label": "Apple Silicon",
-          "url": "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-darwin-aarch64.zip"
+          "url": "https://github.com/camunda/camunda/releases/download/8.10.4/camunda8-getting-started-bundle-8.10.4-darwin-aarch64.zip"
         },
         {
           "label": "Intel",
-          "url": "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-darwin-x86_64.zip"
+          "url": "https://github.com/camunda/camunda/releases/download/8.10.4/camunda8-getting-started-bundle-8.10.4-darwin-x86_64.zip"
         }
       ],
       "windows": [
         {
           "label": "Windows (x64)",
-          "url": "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-windows-x86_64.zip"
+          "url": "https://github.com/camunda/camunda/releases/download/8.10.4/camunda8-getting-started-bundle-8.10.4-windows-x86_64.zip"
         }
       ],
       "linux": [
         {
           "label": "Linux (x64)",
-          "url": "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-linux-x86_64.tar.gz"
+          "url": "https://github.com/camunda/camunda/releases/download/8.10.4/camunda8-getting-started-bundle-8.10.4-linux-x86_64.tar.gz"
         }
       ]
     }
   },
   "desktopModeler": {
-    "version": "5.52.0",
-    "date": "Oct 6, 2026",
+    "version": "5.53.0",
+    "date": "Oct 30, 2026",
     "links": {
       "mac": {
         "stable": [
           {
             "label": "Apple Silicon (.dmg)",
-            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.52.0/camunda-modeler-5.52.0-mac-arm64.dmg"
+            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.53.0/camunda-modeler-5.53.0-mac-arm64.dmg"
           },
           {
             "label": "Intel (.dmg)",
-            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.52.0/camunda-modeler-5.52.0-mac-x64.dmg"
+            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.53.0/camunda-modeler-5.53.0-mac-x64.dmg"
           }
         ],
         "experimental": [
@@ -57,7 +57,7 @@
         "stable": [
           {
             "label": "Windows (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.52.0/camunda-modeler-5.52.0-win-x64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.53.0/camunda-modeler-5.53.0-win-x64.zip"
           }
         ],
         "experimental": [
@@ -71,7 +71,7 @@
         "stable": [
           {
             "label": "Linux (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.52.0/camunda-modeler-5.52.0-linux-x64.tar.gz"
+            "url": "https://downloads.camunda.cloud/release/camunda-modeler/5.53.0/camunda-modeler-5.53.0-linux-x64.tar.gz"
           }
         ],
         "experimental": [
@@ -87,29 +87,29 @@
     "previousVersions": "https://downloads.camunda.cloud/release/camunda-modeler/"
   },
   "camundaRun": {
-    "version": "8.10.7",
-    "date": "Oct 27, 2026",
-    "alphaVersion": "8.10.0-alpha5",
+    "version": "8.10.9",
+    "date": "Nov 6, 2026",
+    "alphaVersion": "8.11.0-alpha1",
     "links": {
       "mac": {
         "stable": [
           {
             "label": "Apple Silicon",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-darwin-aarch64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.9/camunda8-run-8.10.9-darwin-aarch64.zip"
           },
           {
             "label": "Intel",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-darwin-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.9/camunda8-run-8.10.9-darwin-x86_64.zip"
           }
         ],
         "experimental": [
           {
             "label": "Alpha Apple Silicon",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-darwin-aarch64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.11.0-alpha1/camunda8-run-8.11.0-alpha1-darwin-aarch64.zip"
           },
           {
             "label": "Alpha Intel",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-darwin-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.11.0-alpha1/camunda8-run-8.11.0-alpha1-darwin-x86_64.zip"
           }
         ]
       },
@@ -117,13 +117,13 @@
         "stable": [
           {
             "label": "Windows (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-windows-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.9/camunda8-run-8.10.9-windows-x86_64.zip"
           }
         ],
         "experimental": [
           {
             "label": "Alpha Windows",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-windows-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.11.0-alpha1/camunda8-run-8.11.0-alpha1-windows-x86_64.zip"
           }
         ]
       },
@@ -131,13 +131,13 @@
         "stable": [
           {
             "label": "Linux (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.7/camunda8-run-8.10.7-linux-x86_64.tar.gz"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.9/camunda8-run-8.10.9-linux-x86_64.tar.gz"
           }
         ],
         "experimental": [
           {
             "label": "Alpha Linux",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-linux-x86_64.tar.gz"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.11.0-alpha1/camunda8-run-8.11.0-alpha1-linux-x86_64.tar.gz"
           }
         ]
       }
@@ -177,20 +177,20 @@
   },
   "additionalReleases": {
     "orchestrationCluster": {
-      "version": "8.10.7",
-      "date": "Oct 26, 2026",
+      "version": "8.10.9",
+      "date": "Nov 5, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/camunda/releases/tag/8.10.7"
+        "url": "https://github.com/camunda/camunda/releases/tag/8.10.9"
       },
       "previousVersions": "https://github.com/camunda/camunda/releases"
     },
     "connectors": {
-      "version": "8.10.2",
-      "date": "Oct 22, 2026",
+      "version": "8.10.5",
+      "date": "Nov 6, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/connectors/releases/tag/8.10.2"
+        "url": "https://github.com/camunda/connectors/releases/tag/8.10.5"
       },
       "previousVersions": "https://github.com/camunda/connectors/releases"
     },

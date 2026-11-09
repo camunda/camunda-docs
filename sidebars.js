@@ -83,14 +83,62 @@ module.exports = {
   BuildWithAI: [
     {
       type: "category",
-      label: "Build with AI",
+      label: "Agentic orchestration",
       link: {
         type: "doc",
         id: "guides/build-with-ai/overview",
       },
-      items: [],
+      items: [
+        {
+          type: "category",
+          label: "Get started",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
+          },
+          items: [
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/agent-definitions-and-instances",
+            "components/agentic-orchestration/agent-states-and-metrics",
+          ],
+        },
+        {
+          type: "category",
+          label: "Build",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/build-agents",
+          },
+          items: [
+            "components/agentic-orchestration/camunda-provided-llm",
+            "components/agentic-orchestration/add-tool-to-ai-agent",
+            "components/agentic-orchestration/rag-ai-agents",
+            "components/agentic-orchestration/connect-external-agent",
+            "components/agentic-orchestration/expose-process-as-mcp-tool",
+          ],
+        },
+        {
+          type: "category",
+          label: "Evaluate",
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          items: [
+            "components/agentic-orchestration/ai-usage-guidelines",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic",
+          ],
+        },
+      ],
     },
-    "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
       label: "ProcessOS",
@@ -147,80 +195,9 @@ module.exports = {
                 "components/process-os-harness/best-practices/data-handling",
               ],
             },
+            "components/process-os-harness/changelog",
           ],
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Agentic orchestration",
-      link: {
-        type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration-overview",
-      },
-      items: [
-        "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/camunda-provided-llm",
-        "components/agentic-orchestration/agent-definitions-and-instances",
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/agent-states-and-metrics",
-        {
-          type: "category",
-          label: "Evaluate AI agents",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
-          },
-          items: [
-            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
-            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
-            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
-            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
-          ],
-        },
-        "components/agentic-orchestration/add-tool-to-ai-agent",
-        "components/agentic-orchestration/rag-ai-agents",
-        "components/agentic-orchestration/connect-external-agent",
-        "components/agentic-orchestration/expose-process-as-mcp-tool",
-        "components/agentic-orchestration/choose-right-model-agentic",
-        "components/agentic-orchestration/model-recommendations-agentic",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/hub/workspace/modeler/idp",
-      },
-      items: [
-        "components/hub/workspace/modeler/idp/idp-configuration",
-        "components/hub/workspace/modeler/idp/idp-projects",
-        "components/hub/workspace/modeler/idp/idp-document-classification",
-        {
-          type: "category",
-          label: "Document extraction",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-            "components/hub/workspace/modeler/idp/idp-structured-extraction",
-          ],
-        },
-        // "components/hub/workspace/modeler/idp/idp-document-automation",
-        {
-          type: "category",
-          label: "Integrate IDP into your processes",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp/idp-integrate",
-          },
-          items: ["components/hub/workspace/modeler/idp/idp-example"],
-        },
-        "components/hub/workspace/modeler/idp/idp-key-concepts",
-        "components/hub/workspace/modeler/idp/idp-reference",
       ],
     },
     "reference/mcp-docs/docs-mcp",
@@ -343,6 +320,7 @@ module.exports = {
         "components/concepts/signals",
         "components/concepts/conditionals",
         "components/concepts/variables",
+        "components/concepts/variable-protection",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
         "components/concepts/decision-instance-deletion",
@@ -418,6 +396,43 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
+        {
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-configuration",
+            "components/hub/workspace/modeler/idp/idp-projects",
+            "components/hub/workspace/modeler/idp/idp-document-classification",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+              },
+              items: [
+                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+                "components/hub/workspace/modeler/idp/idp-structured-extraction",
+              ],
+            },
+            // "components/hub/workspace/modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/hub/workspace/modeler/idp/idp-integrate",
+              },
+              items: ["components/hub/workspace/modeler/idp/idp-example"],
+            },
+            "components/hub/workspace/modeler/idp/idp-key-concepts",
+            "components/hub/workspace/modeler/idp/idp-reference",
+          ],
+        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",
@@ -1007,6 +1022,7 @@ module.exports = {
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
+            "components/modeler/desktop-modeler/element-templates/hosting-template-sources",
             "components/modeler/desktop-modeler/element-templates/using-templates",
           ],
         },
@@ -1097,11 +1113,25 @@ module.exports = {
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
                       ],
                     },
+                    {
+                      type: "category",
+                      label: "Fundamentals",
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "Advanced topics",
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-instance-migration",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
+                      ],
+                    },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
                 {
@@ -1135,7 +1165,12 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound",
+                  ],
+                },
                 {
                   "AWS SQS": [
                     "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",

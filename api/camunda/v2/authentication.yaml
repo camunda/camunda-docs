@@ -10,6 +10,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -41,6 +43,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
