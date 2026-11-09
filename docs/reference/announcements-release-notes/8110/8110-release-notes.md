@@ -66,7 +66,7 @@ This addresses a known compliance gap (such as PCI DSS 4.0 Requirement 8.2.8), a
 
 ##### Console (SaaS)
 
-- **Per cluster**: Set the idle timeout and heartbeat in Console cluster settings. Applies to clusters on 8.10.0-alpha5 or later.
+- **Per cluster**: Set the idle timeout and heartbeat in Hub cluster settings. Applies to clusters on 8.10.0-alpha5 or later.
 - **Organization default**: Set a default idle timeout for new clusters. The default applies only when you create a cluster. Existing clusters keep their own value, which you can still edit.
 
 <p class="link-arrow">[View Console](/components/hub/organization/console.md)</p>
