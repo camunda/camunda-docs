@@ -5,139 +5,103 @@ description: Orchestrate your Blue Prism queue items from your BPMN process.
 sidebar_label: Blue Prism
 ---
 
-The **Blue Prism connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-To start using the connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://documentation.blueprism.com/bp-7-5/en-us/Guides/bp-api/api-introduction.htm?tocpath=Installation%7CInstall%20the%20Blue%20Prism%20API%7C_____0) to learn more about how to install and configure Blue Prism API service.
+Orchestrate Blue Prism work queue items from your BPMN process with the Blue Prism connector.
 
-## Create a Blue Prism connector task
+## About this connector
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+The Blue Prism connector integrates your process with [Blue Prism RPA](https://www.blueprism.com/) through the Blue Prism API. Use it to create work queue items for your robots and to check the state of a queue item after a robot has processed it.
 
-<ConnectorTask/>
+The connector supports two operations: **Get item from a queue by ID** and **Create work queue item**.
 
-## Authentication
+## Prerequisites
 
-You can choose among the available **Blue Prism connector** authentication types according to your authentication requirements.
+You need a running Blue Prism instance with the Blue Prism API service installed and configured. To learn how to install and configure the API service, see the [Blue Prism API documentation](https://documentation.blueprism.com/bp-7-5/en-us/Guides/bp-api/api-introduction.htm?tocpath=Installation%7CInstall%20the%20Blue%20Prism%20API%7C_____0).
 
-### Bearer token authentication
+<OutboundConnectorBasics />
 
-#### Create a new connector secret
+## Configuration
 
-We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+### Authentication
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `BLUE_PRISM_BEARER_TOKEN`) so you can reference it later in the connector.
+Select an authentication type from the **Type** dropdown.
 
-#### Configure the bearer token
+:::tip
+Keep credentials out of the BPMN XML by storing them in [connector secrets](../../console/manage-clusters/manage-secrets.md) and referencing them, for example `{{secrets.BLUE_PRISM_BEARER_TOKEN}}`.
+:::
 
-Select the **Blue Prism connector** and fill out the following properties under the **Authentication** section:
+#### Bearer token
 
-1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `{{secrets.BLUE_PRISM_BEARER_TOKEN}}`).
+| Property     | Type   | Required | Description                                           | Example                               |
+| :----------- | :----- | :------- | :---------------------------------------------------- | :------------------------------------ |
+| Bearer token | String | Yes      | The bearer token to authenticate with Blue Prism API. | `{{secrets.BLUE_PRISM_BEARER_TOKEN}}` |
 
-### OAuth Client Credentials Flow
+#### OAuth 2.0 client credentials
 
-#### Create a new connector secret
+Authenticates with the [OAuth 2.0 client credentials flow](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
-We advise you to keep your **Client ID** and **Client secret** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+| Property                    | Type   | Required | Description                                                            | Example                                |
+| :-------------------------- | :----- | :------- | :--------------------------------------------------------------------- | :------------------------------------- |
+| Identity token provider URL | String | Yes      | The token endpoint of the identity provider configured for Blue Prism. | `https://auth-server/connect/token`    |
+| Client ID                   | String | Yes      | The Blue Prism OAuth 2.0 client ID.                                    | `{{secrets.BLUE_PRISM_CLIENT_ID}}`     |
+| Client secret               | String | Yes      | The Blue Prism OAuth 2.0 client secret.                                | `{{secrets.BLUE_PRISM_CLIENT_SECRET}}` |
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `BLUE_PRISM_CLIENT_ID`) so you can reference it later in the connector.
+### Connection
 
-#### Configure the OAuth Token
+| Property                | Type   | Required | Description                                                                                              | Example                      |
+| :---------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------- | :--------------------------- |
+| Blue Prism API base URL | String | Yes      | The base URL of your Blue Prism API service.                                                             | `http://my.bp.host.com:9876` |
+| Connection timeout      | String | No       | The time in seconds to wait to establish a connection, or `0` for an infinite timeout. Defaults to `20`. | `20`                         |
 
-Select the **Blue Prism connector** and fill out the following properties under the **Authentication** section:
+## Operations
 
-1. Select **OAuth 2.0 client credentials** in the **Authentication** section.
-2. Set **Identity token provider URL** to identity provider configured for your Blue Prism instance.
-3. Set **Client ID** to the secret you created (i.e. `{{secrets.BLUE_PRISM_CLIENT_ID}}`).
-4. Set **Client secret** to the secret you created (i.e. `{{secrets.BLUE_PRISM_CLIENT_SECRET}}`).
-
-Find more information about the OAuth client credentials flow in the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
-
-## Operation types
-
-The **Blue Prism connector** currently supports two operation types in the **Operation type** dropdown list: _Get item from a queue by ID_ and _Create work queue item_.
+Select the operation from the **Operation type** dropdown.
 
 ### Get item from a queue by ID
 
-This operation allows you to return details of a specified item from a work queue.
-It matches directly to respective Blue Prism API endpoint - [`Return details of a specified item from a work queue`](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/getWorkQueueItemFromWorkQueue).
+Returns the details of a specified item from a work queue. This operation maps to the Blue Prism API endpoint [Return details of a specified item from a work queue](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/getWorkQueueItemFromWorkQueue).
 
-#### Usage
+#### Input parameters
 
-1. Select **Get item from a queue by ID** from the **Operation** dropdown.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section, set **Blue Prism API base URL** field. E.g., `http://my.bp.host.com:9876`.
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where the item is fetched from.
-5. In the **Input** section, set **Queue item ID**. This is the identifier of the item to be fetched.
+| Property      | Type   | Required | Description                                                                                                | Example |
+| :------------ | :----- | :------- | :--------------------------------------------------------------------------------------------------------- | :------ |
+| Work queue ID | String | Yes      | The identifier of the queue the item is fetched from.                                                      |         |
+| Queue item ID | String | Yes      | The identifier of the item to fetch. Modeler does not enforce this property, but the request URL needs it. |         |
 
-#### Get item from a queue by ID response
+#### Output
 
-Given you have a queue item ID previously added to a queue, the operation **Get item from a queue by ID response** returns information about a certain item.
+The connector returns the Blue Prism API response, with the item details in `response.body`. The **Result expression** is pre-filled with `={itemState:response.body.state}`, which stores the processing state of the item in an `itemState` process variable. Use it to check whether the item was processed.
 
-You can use an output mapping to map the response:
-
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemState:response.body.state}`. You will observe the `itemState` in the process variables. Its value will let you know if the item was processed or not.
-
-Response example:
+The full response follows the Blue Prism API for [getting a work queue item](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/getWorkQueueItemFromWorkQueue). The connector relies only on the `state` field of the response body:
 
 ```json
 {
-  "id": "01234567-89ab-cdef-0123-456789abcdef",
-  "priority": 3,
-  "ident": 123,
-  "state": "Completed",
-  "keyValue": "Example value",
-  "status": "Example status",
-  "tags": ["Example tag 1", "Example tag 2"],
-  "attemptNumber": 1,
-  "loadedDate": "2020-10-02T12:34:56+01:00",
-  "deferredDate": "2020-10-02T12:34:56+01:00",
-  "lockedDate": "0001-01-01T00:00:00Z",
-  "completedDate": "2020-10-02T13:00:00+01:00",
-  "exceptionedDate": "0001-01-01T00:00:00Z",
-  "exceptionReason": "Example reason",
-  "lastUpdated": "2020-10-02T13:00:00+01:00",
-  "workTimeInSeconds": 123,
-  "attemptWorkTimeInSeconds": 123,
-  "resource": "Example resource",
-  "data": {
-    "rows": []
-  },
-  "sla": 7200,
-  "sladatetime": "0001-01-01T00:00:00Z",
-  "processname": "Example process name",
-  "issuggested": false
+  "body": {
+    "state": "Completed"
+  }
 }
 ```
 
 ### Create work queue item
 
-This operation allows you to create work queue items in the specified queue.
-It matches directly to respective Blue Prism API endpoint - [`Create work queue items`](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/createWorkQueueItems).
+Creates a work queue item in the specified queue. This operation maps to the Blue Prism API endpoint [Create work queue items](https://documentation.blueprism.com/bp-7-5/en-us/bp-api/bpe-7-5-0-api-spec.html#tag/Work-Queues/operation/createWorkQueueItems).
 
-#### Usage
+#### Input parameters
 
-1. Select **Create work queue item** from the **Operation** dropdown.
-2. Populate the **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section, set **Blue Prism API base URL** field. E.g., `http://my.bp.host.com:9876`.
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where item will be fetched from.
-5. In the **Input** section, set **Item type** of the data entry you wish to submit to the queue.
-6. In the **Input** section, set **Item value** of the data entry you wish to submit to the queue.
-7. In the **Input** section, set **Defer date**. This field is the earliest time and date that this item is deferred until.
-8. In the **Input** section, set **Priority**. This field is the priority value assigned to the item.
-9. In the **Input** section, set **Status**. This is the user-supplied status value. _Note: Do not confuse this with queue item 'state' property._
+| Property      | Type     | Required | Description                                                                                                                                 | Example      |
+| :------------ | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------ | :----------- |
+| Work queue ID | String   | Yes      | The identifier of the queue the item is created in.                                                                                         |              |
+| Item type     | Dropdown | Yes      | The data type of the value you submit to the queue item: `Text`, `Number`, `Date`, `Flag`, `Password`, or `Collection`. Defaults to `Text`. | `Text`       |
+| Item value    | String   | No       | The data value you submit to the queue item. Its value is typed by the **Item type** dropdown. Omitted from the request when empty.         |              |
+| Defer date    | String   | No       | The date the item is deferred until. Format: `yyyy-MM-dd`.                                                                                  | `2026-01-31` |
+| Priority      | String   | No       | The priority value assigned to the item. Must be an integer. Defaults to `3`.                                                               | `3`          |
+| Status        | String   | No       | A user-supplied status value. Do not confuse it with the queue item `state` property, which Blue Prism sets.                                |              |
 
-#### Create work queue item response
+#### Output
 
-The operation **Create work queue item** returns information about the newly created item in the queue.
-
-You can use an output mapping to map the response:
-
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemId:response.body.ids[1]}`. To use operation _Get queue item result by ID_, you need an `itemId`. This expression will add it in the context for you. Learn more in [get queue item result by ID](#get-item-from-a-queue-by-id).
+The connector returns the IDs of the newly created items in `response.body.ids`. The **Result expression** is pre-filled with `={itemId:response.body.ids[1]}`, which stores the ID of the new item in an `itemId` process variable. Use this `itemId` as the **Queue item ID** of the **Get item from a queue by ID** operation.
 
 Response example:
 
@@ -147,11 +111,16 @@ Response example:
 }
 ```
 
-### Using Blue Prism connector best practice
+## Poll the queue item state
 
-There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, refer to an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+A queue item is not guaranteed to be processed right away. Build your BPMN diagram to poll the item periodically: create the item, then loop with a timer and the **Get item from a queue by ID** operation until `itemState` shows the item is processed. To learn more, see the _Solution with Timer and Loop_ entry on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
-To avoid performance issues, it is recommended to limit the number of loop retries.
+To avoid performance issues, limit the number of loop retries.
 :::
+
+<ErrorHandling />
+
+## Further resources
+
+- [Blue Prism API documentation](https://documentation.blueprism.com/bp-7-5/en-us/Guides/bp-api/api-introduction.htm?tocpath=Installation%7CInstall%20the%20Blue%20Prism%20API%7C_____0)
