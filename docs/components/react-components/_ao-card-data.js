@@ -2,7 +2,10 @@ import IconAoImg from "../assets/icon-play.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
+import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
+import IconOperate from "../assets/icon-operate.png";
+import IconTest from "../hub/workspace/modeler/idp/img/icon-prereqs.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
 import IconMCP from "../assets/icon-mcp.png";
 
@@ -46,6 +49,34 @@ export const fundamentalCards = [
   },
 ];
 
+// Evaluate cards on the Evaluate AI agents page
+export const evaluateCards = [
+  {
+    link: "../monitor-ai-agents/",
+    title: "Monitor with Operate",
+    image: IconOperate,
+    description: "Monitor your AI agents with Operate.",
+  },
+  {
+    link: "../detect-off-rail-agents/",
+    title: "Detect off-rail agents",
+    image: IconAoAgentImg,
+    description: "Identify a stuck or looping AI agent before it fails.",
+  },
+  {
+    link: "../analyze-ai-agents/",
+    title: "Analyze with Optimize",
+    image: IconOptimize,
+    description: "Analyze your AI agents with Optimize.",
+  },
+  {
+    link: "../test-ai-agents/",
+    title: "Test with CPT",
+    image: IconTest,
+    description: "Test your AI agents with Camunda Process Test.",
+  },
+];
+
 // Cards on the Build AI agents page
 export const buildCapabilityCards = [
   {
@@ -80,6 +111,34 @@ export const buildExposeCards = [
     image: IconMCP,
     description:
       "Expose BPMN processes as MCP tools so AI agents can discover and run them.",
+  },
+];
+
+// Best practices cards on the Best practices page
+export const bestPracticeCards = [
+  {
+    link: "../ai-usage-guidelines/",
+    title: "AI usage guidelines",
+    image: IconAoDesignImg,
+    description: "Use Camunda AI features responsibly.",
+  },
+  {
+    link: "../ao-design/",
+    title: "Design and architecture",
+    image: IconAoDesignImg,
+    description: "Plan and design your agentic orchestration solutions.",
+  },
+  {
+    link: "../choose-right-model-agentic/",
+    title: "Choose the right LLM",
+    image: IconAoLlmImg,
+    description: "Choose the right Large Language Model (LLM) for AI agents.",
+  },
+  {
+    link: "../model-recommendations-agentic/",
+    title: "LLM recommendations",
+    image: IconAoLlmImg,
+    description: "Best practices for working with models and prompts.",
   },
 ];
 
