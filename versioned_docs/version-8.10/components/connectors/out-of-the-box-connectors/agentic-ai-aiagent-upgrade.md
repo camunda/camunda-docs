@@ -1,6 +1,6 @@
 ---
 id: agentic-ai-aiagent-upgrade
-sidebar_label: Upgrade from the legacy connector
+sidebar_label: Upgrade AI Agent element templates
 title: Upgrade AI Agent element templates
 description: Upgrade AI Agent connectors from the legacy element templates to the new element templates with c8ctl or manually, and migrate their model provider configurations.
 ---
@@ -213,7 +213,7 @@ The AI Agent Sub-process template configures its own ad-hoc sub-process. The AI 
 
 ## Update custom extensions {#custom-extensions}
 
-If you extend the AI Agent connector in a Self-Managed or hybrid deployment, for example with a custom conversation store or chat model, the Java APIs also changed in Camunda 8.10. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md).
+If you extend the AI Agent connector in a Self-Managed or hybrid deployment, for example with a custom conversation store or chat model, the Java APIs also changed in Camunda 8.10. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/stable/8.10/connectors/agentic-ai/docs/breaking-changes.md).
 
 ## Model provider configuration mapping
 

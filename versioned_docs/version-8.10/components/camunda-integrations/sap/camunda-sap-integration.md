@@ -19,8 +19,7 @@ The SAP integration enables you to:
 - Extend end-to-end process orchestration into SAP S/4HANA and ECC systems.
 - Execute SAP-specific functions (such as BAPIs, RFCs, and OData calls) directly within BPMN workflows.
 - Call SAP functions as tools from an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), letting an agent autonomously trigger BAPIs, RFCs, or OData operations as part of its tool-calling loop.
-- Surface Camunda Tasklist items directly in SAP Fiori through **SAP Task Center integration**, improving visibility and collaboration for business users.
-- Enable event-driven automation with **SAP Advanced Event Mesh** (upcoming), allowing real-time responsiveness and better integration with SAP event streams.
+- Enable event-driven automation with **SAP Advanced Event Mesh**, allowing real-time responsiveness and better integration with SAP event streams.
 - Provide IT and business teams with a certified, enterprise-grade solution for SAP automation.
 
 :::info
@@ -50,11 +49,10 @@ This section of the documentation covers:
 
 Camunda's SAP integration consists of several modules that can be used independently:
 
-| Module                                               | What it does                                                                                                             |
-| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
-| [SAP OData outbound connector](./odata-connector.md) | Interact with an SAP S/4HANA or ECC system via OData v2 + v4 APIs directly from your BPMN model.                         |
-| [SAP RFC outbound connector](./rfc-connector.md)     | Query Business Application Programming Interfaces (BAPIs) and remote-enabled function modules (RFCs) on SAP ECC systems. |
+| Module                                                           | What it does                                                                                                             |
+| :--------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [SAP OData outbound connector](./odata-connector.md)             | Interact with an SAP S/4HANA or ECC system via OData v2 + v4 APIs directly from your BPMN model.                         |
+| [SAP RFC outbound connector](./rfc-connector.md)                 | Query Business Application Programming Interfaces (BAPIs) and remote-enabled function modules (RFCs) on SAP ECC systems. |
+| [SAP eventing with SAP Advanced Event Mesh (AEM)](./eventing.md) | Receive CloudEvents from SAP AEM and send CloudEvents to AEM from your BPMN model.                                       |
 
 These modules run within your [SAP BTP instance](https://www.sap.com/products/technology-platform.html) or alongside your Camunda deployment, requiring no proprietary Camunda setup and leveraging existing infrastructure with minimal prerequisites.
-
-![SAP integration overview](./img/sap-integration-overview.svg)
