@@ -161,7 +161,7 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ### Camunda 8
 
-Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
+Camunda 8 is an agentic orchestration platform. Build [Camunda AI agents](#camunda-ai-agent) directly in your processes, and orchestrate them together with [external agents](#external-agent), people, and systems in end-to-end processes that combine deterministic steps with dynamic steps decided by AI agents at runtime. Built for the enterprise, Camunda 8 provides the security, compliance, availability, and scale that mission-critical processes need. Camunda 8 consists of the following key components:
 
 | Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                  |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -426,7 +426,7 @@ A generation is not a process definition version, a version tag, or a [file vers
 
 A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
+- [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#the-ai-models-behind-these-features)
 
 ## H
 
@@ -518,7 +518,7 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+- [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#human-oversight)
 
 ### Kubernetes Secret
 

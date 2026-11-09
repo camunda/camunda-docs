@@ -186,6 +186,7 @@ At runtime, `c8ctl` injects a global object via `globalThis.c8ctl` that plugins 
 | `resolveTenantId(profile?)`          | Resolve the active tenant ID using the same fallback logic as built-in commands.         |
 | `getLogger()`                        | Get the `c8ctl` logger instance (respects the current output mode).                      |
 | `getUserDataDir()`                   | Absolute path of the `c8ctl` user data directory (honours `C8CTL_DATA_DIR`).             |
+| `getModelerDataDir()`                | Absolute path of the Camunda Desktop Modeler user data directory (honours `C8CTL_MODELER_DIR`). |
 | `npm({ args, stdout?, stdio? })`     | Run npm the way `c8ctl` does, portably. See [Running npm from a plugin](#running-npm-from-a-plugin). |
 | `version`                            | `c8ctl` version string.                                                                  |
 | `nodeVersion`                        | Node.js version.                                                                         |

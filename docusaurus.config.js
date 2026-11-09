@@ -563,7 +563,7 @@ module.exports = {
         ignoreFiles: ["apis-tools/*/specifications/*"],
         title: "Camunda 8 Documentation",
         description:
-          "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
+          "Agentic orchestration platform. Build AI agents and orchestrate them with people and systems in end-to-end BPMN processes. Supports DMN, connectors, and external agents.",
         customLLMFiles: [
           {
             filename: "llms-guides.txt",
@@ -701,7 +701,7 @@ module.exports = {
         {
           type: "doc",
           docId: "guides/build-with-ai/overview",
-          label: "Build with AI",
+          label: "Agentic orchestration",
           position: "left",
         },
         {

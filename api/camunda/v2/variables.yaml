@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -68,6 +70,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -185,9 +189,7 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKeyFilterProperty"
         protectionMode:
-          description: |
-            The protection applied to the variable. A variable matches when it has at least one of
-            the given protection modes.
+          description: The protection modes applied to the variable.
           allOf:
             - $ref: "#/components/schemas/ProtectionModeFilterProperty"
       x-properties-added-in-version:
@@ -276,8 +278,7 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         metadata:
-          description: Metadata of this variable. `null` when the variable has no metadata.
-          nullable: true
+          description: Metadata of this variable.
           allOf:
             - $ref: "#/components/schemas/VariableMetadata"
       x-properties-added-in-version:
@@ -307,7 +308,7 @@ components:
         The kind of protection applied to a variable value. `REDACT` irrecoverably replaces the
         value before it reaches secondary storage.
     ProtectionModeFilterProperty:
-      description: ProtectionModeEnum property with the advanced search capability to match any of several values.
+      description: ProtectionModeEnum property with full advanced search capabilities.
       oneOf:
         - type: string
           title: Exact match
@@ -320,8 +321,26 @@ components:
       description: Advanced ProtectionModeEnum filter.
       type: object
       properties:
+        $eq:
+          description: Checks if the variable has the provided protection mode.
+          allOf:
+            - $ref: "#/components/schemas/ProtectionModeEnum"
+        $neq:
+          description: Checks if the variable does not have the provided protection mode.
+          allOf:
+            - $ref: "#/components/schemas/ProtectionModeEnum"
+        $exists:
+          description: |
+            Checks if the variable has any protection mode. Use `false` to match the variables
+            that are not protected.
+          type: boolean
         $in:
           description: Checks if the variable has at least one of the provided protection modes.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProtectionModeEnum"
+        $notIn:
+          description: Checks if the variable has none of the provided protection modes.
           type: array
           items:
             $ref: "#/components/schemas/ProtectionModeEnum"
@@ -349,6 +368,14 @@ components:
           description: JSON object representing the variables to set in the element’s scope.
           additionalProperties: true
           type: object
+        variablesMetadata:
+          description: |
+            Metadata of the variables, keyed by variable name. Use it to set how a variable is
+            treated, for example to protect its value. A variable without an entry keeps the
+            metadata it has, or has none.
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/VariableMetadata"
         local:
           description: |-
             If set to `true`, the variables are merged strictly into the local scope (as specified
@@ -378,3 +405,5 @@ components:
           addedInVersionOverride: "8.6"
         - propertyName: operationReference
           addedInVersionOverride: "8.6"
+        - propertyName: variablesMetadata
+          addedInVersion: "8.11"

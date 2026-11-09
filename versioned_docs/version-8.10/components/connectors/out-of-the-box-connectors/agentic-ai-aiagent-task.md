@@ -24,7 +24,7 @@ Implement an AI agent using an AI Agent connector applied to a service task, pai
 
 ## About this implementation
 
-This is the original AI Agent connector implementation. It relies on a BPMN [service task](../../../components/modeler/bpmn/service-tasks/service-tasks.md) in combination with a multi-instance ad-hoc sub-process. Unlike the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation, you must model the [agent loop](/reference/glossary.md#agent-loop) explicitly in the BPMN diagram, leading to a more complex configuration.
+This implementation is intended for advanced use cases where you want to add BPMN flow or guardrails between tool calls and model calls. It relies on a BPMN [service task](../../../components/modeler/bpmn/service-tasks/service-tasks.md) in combination with a multi-instance ad-hoc sub-process. Unlike the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation, you must model the [agent loop](/reference/glossary.md#agent-loop) explicitly in the BPMN diagram, leading to a more complex configuration.
 
 This implementation is best suited for:
 

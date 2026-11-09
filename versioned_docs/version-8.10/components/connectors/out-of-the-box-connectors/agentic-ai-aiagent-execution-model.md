@@ -36,7 +36,7 @@ The decision and execution loop is shared between the LLM and Camunda:
 This means tools can be called in different orders, repeated, run in parallel, or skipped entirely, while execution remains constrained by the modeled process boundaries.
 
 :::tip
-For a broader overview of how execution works in an AI agent and architectural guidance, see [Design and architecture](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+For a broader overview of how execution works in an AI agent, see [AI agents](/components/agentic-orchestration/ai-agents.md#how-the-agent-loop-works). For architectural guidance, see [Design and architecture](/components/agentic-orchestration/design-architecture.md).
 :::
 
 ## Agent loop
@@ -88,26 +88,37 @@ The AI Agent connector can be configured to instruct the LLM to respond in a str
 
 ## Example conversation
 
-The following is a high-level example conversation with the AI Agent connector, including both an agent loop and a human-in-the-loop (HITL) follow-up.
+The following sequence diagram shows a high-level example conversation with the AI Agent connector, including both an agent loop and a human-in-the-loop (HITL) follow-up.
 
 The conversational awareness provided by the agent context allows use cases such as the user only responding with `Yes, please proceed`, with the agent understanding what it should do next.
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Agent as AI Agent
+    participant Tools as Ad-hoc sub-process (tools)
+
+    User->>Agent: Is John Doe eligible for a credit card?
+
+    rect rgba(128, 128, 128, 0.15)
+    Note over Agent,Tools: Agent loop
+    Agent->>Tools: Call Check_Credit_Card_Eligibility<br/>{"name": "John Doe"}
+    Tools-->>Agent: {"eligible": true}
+    end
+
+    rect rgba(128, 128, 128, 0.15)
+    Note over User,Agent: Human-in-the-loop (HITL) follow-up
+    Agent->>User: John Doe is eligible for a credit card.<br/>Would you like to proceed?
+    User->>Agent: Yes, please proceed.
+    end
+
+    rect rgba(128, 128, 128, 0.15)
+    Note over Agent,Tools: Agent loop
+    Agent->>Tools: Call Create_Credit_Card<br/>{"name": "John Doe"}
+    Tools-->>Agent: {"success": true}
+    end
+
+    Agent->>User: John Doe's credit card has been created successfully.
 ```
-# Initial input/user prompt
-User: Is John Doe eligible for a credit card?
 
-# Agent loop
-AI Agent: Call the `Check_Credit_Card_Eligibility` tool with the following parameters: {"name": "John Doe"}
-<process routes through ad-hoc sub-process>
-Tool Call Result: {"Check_Credit_Card_Eligibility": {"eligible": true}}
-
-# Human-in-the-loop (HITL) follow-up
-AI Agent: John Doe is eligible for a credit card. Would you like to proceed?
-<process routes to a user task as no tool calls are requested>
-User: Yes, please proceed.
-
-AI Agent: Call the `Create_Credit_Card` tool with the following parameters: {"name": "John Doe"}
-Tool Call Result: {"Create_Credit_Card": {"success": true}}
-
-AI Agent: John Doe's credit card has been created successfully.
-```
+With the [AI Agent Task](./agentic-ai-aiagent-task.md) implementation, the process models the routing between the agent and the ad-hoc sub-process. With the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation, the agent handles it internally.

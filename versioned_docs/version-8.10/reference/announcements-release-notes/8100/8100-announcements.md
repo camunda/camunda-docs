@@ -260,7 +260,7 @@ Camunda 8.10 changes the Java APIs that [custom AI Agent extensions](/components
 
 Only custom implementations are affected. The built-in providers and stores need no changes.
 
-**Action:** If you maintain a custom `ConversationStore`, a custom chat model factory, or code that uses the message and tool model classes, update it to the new APIs. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for the changes and replacements.
+**Action:** If you maintain a custom `ConversationStore`, a custom chat model factory, or code that uses the message and tool model classes, update it to the new APIs. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/stable/8.10/connectors/agentic-ai/docs/breaking-changes.md) for the changes and replacements.
 
 </div>
 </div>
