@@ -18,7 +18,7 @@ To start or continue a process when a message arrives in a queue, use the [Amazo
 
 ## Prerequisites
 
-To use the **Amazon SQS outbound connector**, you need an SQS queue and an IAM access key and secret key pair with the `sqs:SendMessage` permission for that queue. Learn more in the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html).
+To use the **Amazon SQS outbound connector**, you need an SQS queue and AWS credentials with the `sqs:SendMessage` permission for that queue. Provide the credentials as an IAM access key and secret key pair or, in Hybrid and Self-Managed setups, through the default credentials chain. Learn more in the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html).
 
 :::note
 Use secrets to avoid exposing your AWS IAM credentials as plain text. See [managing secrets](/components/saas/clusters/manage-secrets.md).
