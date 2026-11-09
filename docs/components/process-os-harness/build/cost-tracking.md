@@ -34,7 +34,7 @@ ProcessOS Harness stores no aggregate. It calculates totals from the entry files
 
 ProcessOS Harness records one `job` entry for each [builder task](builder-task.md) without any action from you.
 
-Each entry counts only the usage inside its own window. If the agent runs several builder jobs in one session, each job gets its own entry, and no stretch of the session is counted twice.
+Each entry counts only the usage inside its own window. If the agent runs several builder tasks in one session, each task gets its own entry, and no stretch of the session is counted twice.
 
 ## Manual recording with the usage log skill
 
