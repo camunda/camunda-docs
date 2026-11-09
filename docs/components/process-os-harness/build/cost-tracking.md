@@ -21,7 +21,7 @@ ProcessOS Harness itself never reads an agent's session files: the agent reads i
 ProcessOS Harness stores one usage entry per window of agent work. An entry contains:
 
 - Token counts and an approximate cost in USD.
-- Timestamps, model names, and the configured reasoning effort of each model.
+- Timestamps, model names, and, where the agent records it, the configured reasoning effort of each model.
 - The session ID of the agent and an optional builder pseudonym.
 
 An entry never contains prompts, transcript content, real names, or email addresses.
