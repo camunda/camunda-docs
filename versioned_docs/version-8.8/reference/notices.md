@@ -49,7 +49,7 @@ component). A memory leak occurs in the HTTP/2 handling when a client resets a s
 denial-of-service attack through memory exhaustion.
 
 Web Modeler does not enable HTTP/2 by default. An installation is only affected if HTTP/2 is explicitly enabled
-(`server.http2.enabled: true`) and Tomcat directly terminates HTTP/2 connections. For example, if an ingress or load
+(`server.http2.enabled: true`) and Tomcat directly terminates HTTP/2 connections. For example, if an Ingress or load
 balancer terminates HTTP/2 and forwards HTTP/1.1 internally, Tomcat never sees the HTTP/2 frames (and the vulnerable
 code path would not be executed).
 
