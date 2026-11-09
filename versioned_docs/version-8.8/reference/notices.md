@@ -78,7 +78,7 @@ You are using:
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
 - Camunda Identity ≤ 8.6.33
 - Hub Self-Managed ≤ 8.10.4
-- Web Modeler Self-Managed ≤ 8.9.13, ≤ 8.8.24, or ≤ 8.6.28, or any 8.7 version
+- Web Modeler Self-Managed ≤ 8.9.13, ≤ 8.8.24, ≤ 8.6.28, or any 8.7 version
 - Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
 - A Camunda Keycloak image built before October 22, 2026, or a Camunda Keycloak image for Keycloak 23, 24, or 25
 
@@ -107,7 +107,7 @@ If you use one of these Keycloak tags, pull the image again and restart Keycloak
 
 The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
 
-Camunda has provided the following releases which also contain the fix for CVE-2026-114820 ("emSign Root CA - G1" and "emSign Root CA - G2" are also removed from the trust stores):
+Camunda has provided the following releases that also contain the fix for CVE-2026-114820 ("emSign Root CA - G1" and "emSign Root CA - G2" are also removed from the trust stores):
 
 - Camunda Orchestration Cluster 8.10.9, 8.9.28, 8.8.46
 - Camunda Zeebe, Operate, and Tasklist 8.7.45
@@ -120,9 +120,9 @@ Camunda has provided the following releases which also contain the fix for CVE-2
 - Web Modeler Self-Managed 8.9.15, 8.6.29
 - `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag, built on or after November 5, 2026
 
-The other releases in the first list still trust "emSign Root CA - G1". Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, upgrade to a release in the second list or remove the root with the workaround below. A fix for Optimize 8.7, Web Modeler Self-Managed 8.8, and the `camunda/keycloak:26.3.3` and `keycloak-ee` images is not available yet. We will update this notice when we release it.
+Releases that only contain the fix for CVE-2026-91403 still trust "emSign Root CA - G1". Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, upgrade to a release that contains its fix or remove the root with the workaround below. A fix is not available yet for Optimize 8.7, Web Modeler Self-Managed 8.7 and 8.8, and the `camunda/keycloak:26.3.3` and `keycloak-ee` images. We will update this notice when we release a fix.
 
-A fix for Web Modeler Self-Managed 8.7 is not available yet. Its REST API image still trusts the root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
+The Web Modeler Self-Managed 8.7 REST API image still trusts the root certificates. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
 
 If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. This procedure does not cover Keycloak or Console. For older versions of Camunda, read the guide to remove a CA from the JVM truststore in [8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) or [8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
 
