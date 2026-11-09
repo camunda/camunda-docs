@@ -1719,13 +1719,35 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
     <td></td>
   </tr>
   <tr>
+    <td>variablesExpression</td>
+    <td>
+      A FEEL expression to evaluate with the job's variables as context. The result is the variables to complete the job with. The expression must evaluate to an object and must not be blank. The leading <code>=</code> is optional. If the expression fails or doesn't evaluate to an object, the job fails.
+    </td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>variablesTable</td>
+    <td>
+      A list of rows to select the variables to complete the job with. Each row has a <code>when</code> object, which is matched against the job's variables, and a <code>variables</code> object to complete the job with. The first matching row is used. If no row matches, the job completes without variables.
+    </td>
+    <td>array of <a href="#variables-table-row">VariablesTableRow</a></td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
     <td>useExampleData</td>
-    <td>Whether to use example data from the BPMN element. If true, the variables property is ignored.</td>
+    <td>Whether to use example data from the BPMN element. If true, the variables property is ignored. You can't combine it with <code>variablesExpression</code> or a non-empty <code>variablesTable</code>.</td>
     <td>boolean</td>
     <td>No</td>
     <td>false</td>
   </tr>
 </tbody></table>
+
+The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with dynamic variables](utilities.md#complete-with-dynamic-variables) for its behavior and [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
+
+Set only one of `variables`, `variablesExpression`, `variablesTable`, or `useExampleData`. If you set `variablesExpression` or `variablesTable` together with another of these properties, the instruction fails.
 
 Example:
 
@@ -1737,6 +1759,64 @@ Example:
     "trajectory": "optimal",
     "fuelConsumption": 450
   }
+}
+```
+
+Example with a FEEL expression that derives the variables from the job's variables:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesExpression": "{ sampleType: if loopCounter = 1 then \"regolith\" else \"basalt\" }"
+}
+```
+
+#### Variables Table Row
+
+A row of a variables table. The rows are evaluated in order, and the job is completed with the `variables` of the first row whose `when` matches. See [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules.
+
+<table style={{width: '90%'}}>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+  </tr>
+  <tr>
+    <td>when</td>
+    <td>The variables to match against the job's variables. Every entry must be present in the job's variables with an equal value. An empty object matches every job.</td>
+    <td>object</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>variables</td>
+    <td>The variables to complete the job with when the row matches.</td>
+    <td>object</td>
+    <td>Yes</td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesTable": [
+    {
+      "when": { "loopCounter": 1 },
+      "variables": { "sampleType": "regolith" }
+    },
+    {
+      "when": { "loopCounter": 2 },
+      "variables": { "sampleType": "basalt" }
+    },
+    {
+      "when": {},
+      "variables": { "sampleType": "unknown" }
+    }
+  ]
 }
 ```
 
