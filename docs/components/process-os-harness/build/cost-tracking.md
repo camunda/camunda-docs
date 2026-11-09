@@ -14,8 +14,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 With cost tracking, you can see roughly what each project iteration costs in tokens and USD. The agent that does the work reports its own usage. ProcessOS Harness validates the reports, stores them in your project, and adds them up when you ask for totals.
 
-ProcessOS Harness itself never reads an agent's session files: the agent reads its own recorded usage and reports it. No usage data leaves your project.
-
 ## What is recorded
 
 ProcessOS Harness stores one usage entry per window of agent work. An entry contains:
@@ -73,4 +71,4 @@ ProcessOS Harness stores an unknown value as `null`, never as `0`. A total that 
 
 ## Privacy
 
-Before it records an entry, the agent writes a draft file, `.camunda/usage-draft-*.json`. ProcessOS Harness adds these drafts to `.gitignore` when you initialize the project, so they aren't committed.
+ProcessOS Harness itself never reads an agent's session files: the agent reads its own recorded usage and reports it. No usage data leaves your project.
