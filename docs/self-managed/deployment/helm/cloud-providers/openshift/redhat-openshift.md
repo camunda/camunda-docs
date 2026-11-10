@@ -540,22 +540,22 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </TabItem>
 <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress">
 
-Deploy Keycloak with nginx-ingress:
+Deploy Keycloak with Contour Ingress:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
 (cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
-export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
+export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-contour.yml"
 (cd generic/kubernetes/operator-based/keycloak && ./deploy.sh)
 ```
 
 <details>
-<summary>Review the nginx Keycloak instance configuration</summary>
+<summary>Review the Contour Keycloak instance configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-contour.yml
 ```
 
 </details>
