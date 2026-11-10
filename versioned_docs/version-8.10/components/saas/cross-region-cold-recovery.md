@@ -17,13 +17,17 @@ Cross-region cold recovery is generally available starting from Camunda 8.7 or l
 
 ## Supported region pairs
 
-Cross-region cold recovery is available only for specific region pairs marked **Failover supported** when you select your region and backup location in Console. Each pair supports failover in both directions.
+Cross-region cold recovery is available only for specific region pairs marked **Cold recovery supported** when you select your region and backup location in Console. Each pair supports failover in both directions.
 
 | Cloud provider | Region pair                                                                     |
 | -------------- | ------------------------------------------------------------------------------- |
 | AWS            | US East (Ohio) (us-east-2) and US East (N. Virginia) (us-east-1)                |
 | AWS            | US East (Ohio) (us-east-2) and US West (Oregon) (us-west-2)                     |
+| AWS            | US East (N. Virginia) (us-east-1) and US West (Oregon) (us-west-2)              |
+| AWS            | Europe (Ireland) (eu-west-1) and Europe (Frankfurt) (eu-central-1)              |
+| AWS            | Europe (Ireland) (eu-west-1) and Europe (Paris) (eu-west-3)                     |
 | GCP            | Council Bluffs, Iowa (us-central1) and Moncks Corner, South Carolina (us-east1) |
+| GCP            | Montréal (northamerica-northeast1) and Toronto (northamerica-northeast2)        |
 
 ## Restored data
 
