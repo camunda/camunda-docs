@@ -11,7 +11,7 @@ With mutual TLS (mTLS), the Camunda Java client presents a client certificate wh
 
 ## Terminate mTLS on your own gateway
 
-The Orchestration Cluster doesn't terminate mTLS itself. It doesn't request or verify client certificates. To require client certificates, run a gateway on your own infrastructure, such as a reverse proxy, an ingress controller, or a service mesh sidecar, in front of the cluster:
+The Orchestration Cluster doesn't terminate mTLS itself. Its gRPC and REST APIs support server-side TLS only, so they don't request or verify client certificates. To require client certificates, run a gateway on your own infrastructure, such as a reverse proxy, an ingress controller, or a service mesh sidecar, in front of the cluster. Communication between cluster nodes also uses [server-side TLS only](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md#how-it-works), so a service mesh is also the recommended way to get mTLS inside the cluster:
 
 ```text
 Java client --(mTLS)--> your gateway --(TLS or plaintext)--> Orchestration Cluster
