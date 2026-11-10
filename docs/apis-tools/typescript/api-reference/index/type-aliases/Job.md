@@ -11,6 +11,16 @@ mdx:
 type Job<In, Headers> = EnrichedActivatedJob & object;
 ```
 
+## Type Parameters
+
+### In
+
+`In` _extends_ `z.ZodTypeAny` \| `undefined`
+
+### Headers
+
+`Headers` _extends_ `z.ZodTypeAny` \| `undefined`
+
 ## Type Declaration
 
 ### customHeaders
@@ -24,13 +34,3 @@ customHeaders: InferOrUnknown<Headers>;
 ```ts
 variables: InferOrUnknown<In>;
 ```
-
-## Type Parameters
-
-### In
-
-`In` _extends_ `z.ZodTypeAny` \| `undefined`
-
-### Headers
-
-`Headers` _extends_ `z.ZodTypeAny` \| `undefined`

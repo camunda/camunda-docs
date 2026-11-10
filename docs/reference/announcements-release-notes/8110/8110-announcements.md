@@ -48,3 +48,43 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 
 </div>
 </div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### User tasks of suspended process instances are now marked as suspended {#user-tasks-suspended-marker}
+
+Starting with 8.11, when you suspend a process instance, Camunda marks its user tasks as suspended in secondary storage. When you resume the instance, Camunda removes the marker.
+
+- The [search user tasks](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) endpoint returns a new `isSuspended` field and supports filtering by `isSuspended`.
+- Tasklist keeps suspended user tasks visible, labels them as suspended, and disables actions such as assigning, unassigning, and completing them.
+- User tasks belonging to instances suspended in 8.10 or earlier are not marked as suspended after you upgrade. The instances still show as `SUSPENDED`, and Camunda still rejects actions on their tasks, but Tasklist and the search API show them as not suspended.
+
+**Action:** No action is required. If your integration assumes that user tasks returned by the search API are actionable, filter by `isSuspended`. Note that tasks belonging to instances suspended before the upgrade are not marked as suspended.
+
+<p className="link-arrow">[Process instance suspension](/components/concepts/process-instance-suspension.md#suspended-user-tasks-in-secondary-storage)</p>
+
+</div>
+</div>
+
+## Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Grafana dashboards use the v2 dashboard schema and require Grafana 13 or later {#grafana-dashboards-v2-schema}
+
+Starting with Camunda 8.11, the Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/). Camunda 8.10 is the last release that provides the dashboards in the classic format, which [Camunda deprecated in 8.10](/reference/announcements-release-notes/8100/8100-announcements.md#classic-grafana-dashboard-format-deprecated). The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
+
+The dashboards of 8.11 require Grafana 13 or later. Earlier Grafana versions cannot import the v2 dashboard schema.
+
+**Action:** Before you move to the dashboards of 8.11, upgrade your Grafana instance to version 13 or later. To keep using the dashboards in the classic format, import them from the `stable/8.10` branch or from the branch of the release you run.
+
+</div>
+</div>

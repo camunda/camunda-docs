@@ -17,4 +17,4 @@ This SDK is licensed under the [Apache License, Version 2.0](https://github.com/
 
 The Camunda OpenAPI specification from which the low-level client is generated is subject
 to the
-[Camunda License Version 1.0](https://github.com/camunda/camunda/blob/main/licenses/CAMUNDA-LICENSE-1.0.txt).
+[Camunda License Version 1.0](https://github.com/camunda/camunda/blob/stable/8.10/licenses/CAMUNDA-LICENSE-1.0.txt).

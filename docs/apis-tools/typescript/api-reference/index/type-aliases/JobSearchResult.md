@@ -74,10 +74,10 @@ The reason provided by the user task listener for denying the work.
 ### elementId
 
 ```ts
-elementId: ElementId | null;
+elementId: ElementId;
 ```
 
-The element ID associated with the job. May be missing on job failure.
+The element ID associated with the job.
 
 ---
 

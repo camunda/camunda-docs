@@ -33,10 +33,10 @@ By default, the task is reassigned if it was already assigned. Set this to `fals
 
 ---
 
-### assignee?
+### assignee
 
 ```ts
-optional assignee?: string;
+assignee: string;
 ```
 
 The assignee for the user task. The assignee must not be empty or `null`.

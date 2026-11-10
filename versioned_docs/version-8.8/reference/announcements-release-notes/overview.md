@@ -1,52 +1,48 @@
 ---
 id: overview
-title: "Release announcements and release notes"
-description: "Important announcements and release notes for upcoming and past Camunda 8 releases that customers should be aware of."
+title: "8.8 release information"
+sidebar_label: "Release information"
+description: "What's new, release notes, announcements, and supporting information for Camunda 8.8."
 ---
 
-Announcements and release notes for supported versions of the Camunda documentation.
+import PageDescription from '@site/src/components/PageDescription';
+import ReleasesGrid from '../react-components/\_release-card';
+import { releaseInfoCards } from '../react-components/\_release-card-data';
 
-<table className="table-callout" width="100%">
-<tr>
-<td>**Version**</td>
-<td>**Release date**</td>
-<td>**Announcements**</td>
-<td>**Release notes**</td>
-<td>**End of standard maintenance**</td>
-</tr>
-<tr>
-<td>8.8</td>
-<td>14 October 2025</td>
-<td>[8.8 release announcements](/reference/announcements-release-notes/880/880-announcements.md)</td>
-<td>[8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md)</td>
-<td>13 April 2027</td>
-</tr>
-</table>
+<PageDescription />
 
-:::info Camunda 8.8
+## Release information
 
-- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md).
-  :::
+See what's new in Camunda 8.8, key changes and [supported environments](/reference/supported-environments.md) changes in the release announcements, and new features in the release notes.
 
-## Release announcements
+<ReleasesGrid releases={releaseInfoCards} />
 
-Release announcements include:
+:::info Upgrade guidance
 
-- Changes in supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, and so on).
-- Key changes (for example, deprecations and breaking changes).
-
-:::info
-
-- See [upgrade guides](/self-managed/upgrade/components/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
-- See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
+- See [upgrade Camunda](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::
 
-## Release notes
+## Release schedule
 
-Release notes include details of new product features and enhancements.
+Key dates for the Camunda 8.8 release.
 
-Release notes are separated by minor release pages and include alphas released during the development cycle.
+| Version      | Release type | Release date     | Scheduled end of maintenance |
+| :----------- | :----------- | :--------------- | :--------------------------- |
+| 8.8.0        | Minor        | 14 October 2025  | 13 April 2027                |
+| 8.8.0-alpha8 | Alpha        | 9 September 2025 | -                            |
+| 8.8.0-alpha7 | Alpha        | 12 August 2025   | -                            |
+| 8.8.0-alpha6 | Alpha        | 8 July 2025      | -                            |
+| 8.8.0-alpha5 | Alpha        | 10 June 2025     | -                            |
+| 8.8.0-alpha4 | Alpha        | 13 May 2025      | -                            |
+| 8.8.0-alpha3 | Alpha        | 8 April 2025     | -                            |
+| 8.8.0-alpha2 | Alpha        | 11 March 2025    | -                            |
+| 8.8.0-alpha1 | Alpha        | 11 February 2025 | -                            |
+
+:::info Release policy
+Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
+:::
 
 ## Changelogs
 
@@ -58,7 +54,3 @@ Technical changelogs for Camunda 8 are available on GitHub:
 | Connectors         | [github.com/camunda/connectors/releases](https://github.com/camunda/connectors/releases)                       |
 | Camunda Helm chart | [github.com/camunda/camunda-platform-helm/releases](https://github.com/camunda/camunda-platform-helm/releases) |
 | Desktop Modeler    | [github.com/camunda/camunda-modeler/releases](https://github.com/camunda/camunda-modeler/releases)             |
-
-## Release policy
-
-Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.

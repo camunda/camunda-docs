@@ -99,3 +99,30 @@ each waiting a second advance the engine by a second -- as real sleeps would. `p
 
 Because `PUT /clock` is write-only, the clock mirrors what it last pinned. That mirror is
 accurate only while nothing else pins the same engine: use one `EngineClock` per engine.
+
+## Reproducible jitter
+
+A pinned clock makes the SDK's timing virtual, but not repeatable: worker startup jitter is
+still drawn at random, so two runs can schedule differently. Pass a `SeededRandom` as
+`random=` alongside the clock to fix that jitter too. Omit it and the live, unseeded
+`live_random` is used, which is what production wants -- jitter exists so a fleet of
+workers does not start in lockstep.
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeSeededRandom -->
+
+```python
+from camunda_orchestration_sdk import CamundaAsyncClient, ManualClock, SeededRandom
+
+# Seeded from CAMUNDA_TEST_SEED when it is set, otherwise from a fresh random seed.
+random = SeededRandom.from_env()
+print(f"jitter source: {random!r}")  # names the seed to replay on failure
+
+async with CamundaAsyncClient(clock=ManualClock(), random=random) as client:
+    ...  # worker startup jitter is now exact and repeatable
+```
+
+`SeededRandom.from_env()` reads `CAMUNDA_TEST_SEED`. Log the source's `repr()` -- it names
+the seed -- and when a run fails, set `CAMUNDA_TEST_SEED` to that seed to replay the same
+draws. Only an unset variable means "pick a fresh seed"; any other value that is not an
+unsigned 64-bit integer raises, so a typo cannot silently replay the wrong run. The same
+seed produces the same draws in every Camunda SDK.

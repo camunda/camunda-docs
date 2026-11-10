@@ -19,6 +19,12 @@ type Effectify<C> = { [K in FnKeys<C>]: EffectifyMethod<C[K]> } & object & {
 
 Maps every method of `C` to an Effect-returning method, preserving non-fn members.
 
+## Type Parameters
+
+### C
+
+`C`
+
 ## Type Declaration
 
 ### inner
@@ -26,9 +32,3 @@ Maps every method of `C` to an Effect-returning method, preserving non-fn member
 ```ts
 inner: C;
 ```
-
-## Type Parameters
-
-### C
-
-`C`

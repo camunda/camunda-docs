@@ -9,6 +9,8 @@ When internal requests are processed faster than the rate at which they are expo
 
 For user commands, this will show up as increased [backpressure](/components/zeebe/technical-concepts/internal-processing.md#handling-backpressure), observed latency, and reduced throughput. [Internal processing](/components/zeebe/technical-concepts/internal-processing.md) slows down as the stream processor waits longer for processing results to be written.
 
+The export rate and backlog are measured across all exporters configured for a partition. A [custom exporter](/self-managed/concepts/exporters.md#performance-impact) with a slow `export()` method also reduces the export rate and can trigger throttling.
+
 Write rate limiting applies to all new records, including processing results, user commands, inter-partition messages, and scheduled tasks.
 
 ## Enable flow control
@@ -21,7 +23,7 @@ A static write rate limit can prevent throughput peaks, and write rate throttlin
 These write limits are enabled by default in SaaS and disabled in Self-Managed. For most use cases, write rate limits can be enabled as needed if an issue arises.
 :::
 
-Flow control is configured in your Zeebe Broker's `application.yaml` file. The default values can be found in the `# flowControl` section of the Zeebe Broker [configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) templates.
+Flow control is configured in your Zeebe Broker's `application.yaml` file. The default values can be found in the `# flowControl` section of the Zeebe Broker [configuration](https://github.com/camunda/camunda/blob/stable/8.9/dist/src/main/config/defaults.yaml) templates.
 
 ```yaml
 zeebe:

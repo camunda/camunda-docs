@@ -27,7 +27,7 @@ The Zeebe Elasticsearch exporter acts as a bridge between [Zeebe](https://camund
 The exporter operates on the idea that it should perform as little as possible on the Zeebe side of things. In other words, you can think of the indexes into which the records are exported as a staging data warehouse. Any enrichment or transformation on the exported data should be performed by your own ETL jobs.
 
 When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
-those as templates in [the resources folder of the exporter's source code](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter/src/main/resources).
+those as templates in [the resources folder of the exporter's source code](https://github.com/camunda/camunda/tree/stable/8.10/zeebe/exporters/elasticsearch-exporter/src/main/resources).
 
 :::note
 The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator.) Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.
@@ -147,6 +147,7 @@ For Optimize-specific filtering, see [Optimize export filtering](/self-managed/c
 | rootVariableValueTypeInclusion      | Restricts exported root variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`).                                                                                                                                                                                                                                                                                                        | `[]`           |
 | signal                              | If `true` records related to signals will be exported.                                                                                                                                                                                                                                                                                                                                                                   | `true`         |
 | signal-subscription                 | If `true` records related to signal subscriptions will be exported.                                                                                                                                                                                                                                                                                                                                                      | `true`         |
+| templatePriority                    | Priority of the index templates created for the `zeebe-record-*` indices. Raise it when other templates match the same pattern, so the exporter's template wins. Must be `>= 0`.                                                                                                                                                                                                                                         | `20`           |
 | timer                               | If `true` records related to timers will be exported.                                                                                                                                                                                                                                                                                                                                                                    | `true`         |
 | user-task                           | If `true` records related to user tasks will be exported.                                                                                                                                                                                                                                                                                                                                                                | `true`         |
 | variable                            | If `true` records related to variables will be exported.                                                                                                                                                                                                                                                                                                                                                                 | `true`         |
@@ -269,6 +270,9 @@ camunda:
           index:
             prefix: zeebe-record
             createTemplate: true
+
+            # Priority of the index templates created by the exporter. Raise it if other templates match the same index pattern.
+            templatePriority: 20
 
             indexSuffixDatePattern: "yyyy-MM-dd"
 

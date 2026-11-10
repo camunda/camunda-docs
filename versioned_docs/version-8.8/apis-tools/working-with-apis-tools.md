@@ -18,7 +18,7 @@ import { apiCards, clientCards } from './react-components/\_apitools-card-data';
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with the Camunda Java Client" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+<p class="link-button">[Get started with the Camunda Java Client](./java-client/getting-started.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

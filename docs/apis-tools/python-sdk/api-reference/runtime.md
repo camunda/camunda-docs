@@ -752,7 +752,7 @@ Raise this exception to explicitly fail a job with custom retries/backoff.
 ## JobWorker
 
 ```python
-class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0, clock=None)
+class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0, clock=None, random=None)
 ```
 
 Bases: `object`
@@ -768,6 +768,7 @@ Bases: `object`
 | `execution_strategy`         | `EXECUTION_STRATEGY`                                                               |             |
 | `startup_jitter_max_seconds` | `float`                                                                            |             |
 | `clock`                      | `Clock` \| `None`                                                                  |             |
+| `random`                     | `RandomSource` \| `None`                                                           |             |
 
 ### aclose()
 

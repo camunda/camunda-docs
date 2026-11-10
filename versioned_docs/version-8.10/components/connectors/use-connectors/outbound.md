@@ -51,6 +51,12 @@ If necessary, the **retry backoff** property can be made visible and editable in
 
 `retryBackoff` is a reserved task header key recognized by the connector runtime. You don't need to handle this input in your connector implementation, as the runtime handles it automatically for all outbound connectors.
 
+## Job timeout
+
+If Zeebe doesn't receive a result for a job within the job timeout, it makes the job available again and another worker can pick it up. A long-running connector call can then run twice.
+
+Element templates of outbound connectors can include an optional **Job timeout** property in the **Retries** section of the properties panel. Enter an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) duration, for example `PT15M`, to give the call more time before Zeebe reassigns the job. Leave the property empty to use the default job timeout.
+
 ## Downloading documents
 
 To download documents without an additional step, review [uploading a document when using connectors](/components/document-handling/upload-document-to-bpmn-process.md#upload-a-document-when-using-any-connector).

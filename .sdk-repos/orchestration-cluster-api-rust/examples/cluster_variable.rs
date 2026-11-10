@@ -27,7 +27,7 @@ async fn create_global_cluster_variable() -> Result<(), Box<dyn std::error::Erro
         .create_global_cluster_variable(CreateGlobalClusterVariableParams {
             create_cluster_variable_request: CreateClusterVariableRequest {
                 name: ClusterVariableName::assume_exists("my-variable"),
-                value: serde_json::json!({"key": "value"}),
+                value: Some(serde_json::json!({"key": "value"})),
                 ..Default::default()
             },
         })
@@ -49,7 +49,7 @@ async fn create_tenant_cluster_variable(
             tenant_id,
             create_cluster_variable_request: CreateClusterVariableRequest {
                 name: ClusterVariableName::assume_exists("my-variable"),
-                value: serde_json::json!({"key": "value"}),
+                value: Some(serde_json::json!({"key": "value"})),
                 ..Default::default()
             },
         })
@@ -146,7 +146,7 @@ async fn update_global_cluster_variable(name: String) -> Result<(), Box<dyn std:
         .update_global_cluster_variable(UpdateGlobalClusterVariableParams {
             name,
             update_cluster_variable_request: UpdateClusterVariableRequest {
-                value: serde_json::json!({"key": "value"}),
+                value: Some(serde_json::json!({"key": "value"})),
                 ..Default::default()
             },
         })
@@ -169,7 +169,7 @@ async fn update_tenant_cluster_variable(
             tenant_id,
             name,
             update_cluster_variable_request: UpdateClusterVariableRequest {
-                value: serde_json::json!({"key": "value"}),
+                value: Some(serde_json::json!({"key": "value"})),
                 ..Default::default()
             },
         })

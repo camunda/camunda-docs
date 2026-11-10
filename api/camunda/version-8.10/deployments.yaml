@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -64,6 +66,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -111,6 +115,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.7]]
 
@@ -168,6 +174,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -216,6 +224,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -262,6 +272,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IlJlc29sdmVkIGZyb20gdGhlIGRlcGxveWVkIHJlc291cmNlIHR5cGUg4oCUIERFTEVURV9QUk9DRVNTLCBERUxFVEVfRFJELCBERUxFVEVfRk9STSBvciBERUxFVEVfUkVTT1VSQ0Ugb24gUkVTT1VSQ0UuIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -278,6 +290,11 @@ paths:
         to `true`. History deletion is supported for process definitions and decision requirements
         definitions; for other resource types (forms, generic resources) the flag is ignored and no
         history is deleted.
+
+        Deleting a process definition that is already draining is accepted again and changes
+        nothing: the definition stays `DRAINING` until its running instances finish. The one repeated
+        deletion that is rejected is one with `deleteHistory` set to `true`, because the history
+        cannot be deleted before the drain finishes.
 
         The two supported types differ in how the history is removed. For a decision requirements
         definition the history is deleted asynchronously via a batch operation whose details are
@@ -305,7 +322,7 @@ paths:
               $ref: "#/components/schemas/DeleteResourceRequest"
       responses:
         "200":
-          description: The resource is deleted.
+          description: The resource is deleted. For a process definition that is already draining, the repeated deletion is accepted without effect and the definition stays `DRAINING`.
           content:
             application/json:
               schema:
@@ -314,6 +331,12 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "404":
           description: The resource is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: The process definition is still draining, so its history cannot be deleted yet. Retry with `deleteHistory` set to `true` once the definition is fully deleted; the batch operation is then created immediately.
           content:
             application/problem+json:
               schema:

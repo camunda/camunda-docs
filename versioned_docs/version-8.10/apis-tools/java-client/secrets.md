@@ -45,3 +45,7 @@ List<String> references = response.getReferences();
 ## Physical-tenant scoping
 
 Both commands resolve and list against the secret stores of the client's own [Physical Tenant](./physical-tenants.md). Neither command takes a separate tenant parameter.
+
+## Testing
+
+To supply cluster secrets in tests, see [cluster secrets in Camunda Process Test](/apis-tools/testing/connectors.md#cluster-secrets).

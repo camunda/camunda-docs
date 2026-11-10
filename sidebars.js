@@ -83,14 +83,70 @@ module.exports = {
   BuildWithAI: [
     {
       type: "category",
-      label: "Build with AI",
+      label: "Agentic orchestration",
       link: {
         type: "doc",
         id: "guides/build-with-ai/overview",
       },
-      items: [],
+      items: [
+        {
+          type: "category",
+          label: "Get started",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
+          },
+          items: [
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/agent-definitions-and-instances",
+            "components/agentic-orchestration/agent-states-and-metrics",
+          ],
+        },
+        {
+          type: "category",
+          label: "Build",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/build-agents",
+          },
+          items: [
+            "components/agentic-orchestration/camunda-provided-llm",
+            "components/agentic-orchestration/add-tool-to-ai-agent",
+            "components/agentic-orchestration/rag-ai-agents",
+            "components/agentic-orchestration/connect-external-agent",
+            "components/agentic-orchestration/expose-process-as-mcp-tool",
+          ],
+        },
+        {
+          type: "category",
+          label: "Evaluate",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-ai-agents",
+          },
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/best-practices-agentic",
+          },
+          items: [
+            "components/agentic-orchestration/ai-usage-guidelines",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic",
+          ],
+        },
+      ],
     },
-    "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
       label: "ProcessOS",
@@ -147,80 +203,9 @@ module.exports = {
                 "components/process-os-harness/best-practices/data-handling",
               ],
             },
+            "components/process-os-harness/changelog",
           ],
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Agentic orchestration",
-      link: {
-        type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration-overview",
-      },
-      items: [
-        "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/camunda-provided-llm",
-        "components/agentic-orchestration/agent-definitions-and-instances",
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/agent-states-and-metrics",
-        {
-          type: "category",
-          label: "Evaluate AI agents",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
-          },
-          items: [
-            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
-            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
-            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
-            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
-          ],
-        },
-        "components/agentic-orchestration/add-tool-to-ai-agent",
-        "components/agentic-orchestration/rag-ai-agents",
-        "components/agentic-orchestration/connect-external-agent",
-        "components/agentic-orchestration/expose-process-as-mcp-tool",
-        "components/agentic-orchestration/choose-right-model-agentic",
-        "components/agentic-orchestration/model-recommendations-agentic",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/hub/workspace/modeler/idp",
-      },
-      items: [
-        "components/hub/workspace/modeler/idp/idp-configuration",
-        "components/hub/workspace/modeler/idp/idp-projects",
-        "components/hub/workspace/modeler/idp/idp-document-classification",
-        {
-          type: "category",
-          label: "Document extraction",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-            "components/hub/workspace/modeler/idp/idp-structured-extraction",
-          ],
-        },
-        // "components/hub/workspace/modeler/idp/idp-document-automation",
-        {
-          type: "category",
-          label: "Integrate IDP into your processes",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp/idp-integrate",
-          },
-          items: ["components/hub/workspace/modeler/idp/idp-example"],
-        },
-        "components/hub/workspace/modeler/idp/idp-key-concepts",
-        "components/hub/workspace/modeler/idp/idp-reference",
       ],
     },
     "reference/mcp-docs/docs-mcp",
@@ -418,6 +403,43 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
+        {
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-configuration",
+            "components/hub/workspace/modeler/idp/idp-projects",
+            "components/hub/workspace/modeler/idp/idp-document-classification",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+              },
+              items: [
+                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+                "components/hub/workspace/modeler/idp/idp-structured-extraction",
+              ],
+            },
+            // "components/hub/workspace/modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/hub/workspace/modeler/idp/idp-integrate",
+              },
+              items: ["components/hub/workspace/modeler/idp/idp-example"],
+            },
+            "components/hub/workspace/modeler/idp/idp-key-concepts",
+            "components/hub/workspace/modeler/idp/idp-reference",
+          ],
+        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",
@@ -1000,13 +1022,14 @@ module.exports = {
         "components/modeler/desktop-modeler/connect-to-camunda-8",
         "components/modeler/desktop-modeler/deploy-diagram",
         "components/modeler/desktop-modeler/start-instance",
-        "components/modeler/desktop-modeler/process-applications",
+        "components/modeler/desktop-modeler/projects",
         "components/modeler/desktop-modeler/utilize-forms",
         "components/modeler/desktop-modeler/use-connectors",
         "components/modeler/desktop-modeler/credentials",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
+            "components/modeler/desktop-modeler/element-templates/hosting-template-sources",
             "components/modeler/desktop-modeler/element-templates/using-templates",
           ],
         },
@@ -1097,11 +1120,25 @@ module.exports = {
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
                       ],
                     },
+                    {
+                      type: "category",
+                      label: "Fundamentals",
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "Advanced topics",
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-instance-migration",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
+                      ],
+                    },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
                 {
@@ -1132,11 +1169,26 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                {
+                  "AWS EventBridge": [
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-outbound",
+                  ],
+                },
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound",
+                  ],
+                },
+                {
+                  "AWS SQS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-outbound",
+                  ],
+                },
                 "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
@@ -1319,6 +1371,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/management-api/sidebar-schema"),
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
@@ -1610,24 +1663,15 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Release announcements and release notes",
+      label: "Release information",
       link: {
         type: "doc",
         id: "reference/announcements-release-notes/overview",
       },
       items: [
-        {
-          type: "category",
-          label: "8.11",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/8110/8110-release-notes",
-          },
-          items: [
-            "reference/announcements-release-notes/8110/8110-announcements",
-            "reference/announcements-release-notes/8110/8110-release-notes",
-          ],
-        },
+        "reference/announcements-release-notes/8110/whats-new-in-811",
+        "reference/announcements-release-notes/8110/8110-announcements",
+        "reference/announcements-release-notes/8110/8110-release-notes",
         {
           type: "category",
           label: "8.10",
@@ -1667,9 +1711,9 @@ module.exports = {
             "reference/announcements-release-notes/880/880-release-notes",
           ],
         },
-        "reference/announcements-release-notes/release-policy",
       ],
     },
+    "reference/announcements-release-notes/release-policy",
     "reference/notices",
     "reference/licenses",
     "reference/public-api",
@@ -2115,7 +2159,17 @@ module.exports = {
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
+                    {
+                      type: "category",
+                      label: "Internal Keycloak",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
+                      },
+                      items: [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades",
+                      ],
+                    },
                     {
                       type: "category",
                       label: "External OIDC provider",

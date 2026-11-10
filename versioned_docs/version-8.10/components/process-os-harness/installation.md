@@ -14,8 +14,8 @@ Camunda recommends completing the [organizational setup](setup/project-setup.md)
 
 ## Install ProcessOS Harness
 
-:::note For Camunda Enterprise customers only
-ProcessOS Harness is only available to Camunda Enterprise customers. To download it, you need access to the [Camunda Download Center (Enterprise Releases)](https://downloads.camunda.cloud/enterprise-release/) with your Camunda Enterprise credentials. If you don't have credentials, contact your Customer Success Manager.
+:::note For Camunda Enterprise customers and active partners
+ProcessOS Harness is available to Camunda Enterprise customers and Camunda partners with a signed Camunda partner agreement. To download it, you need access to the [Camunda Download Center (Enterprise Releases)](https://downloads.camunda.cloud/enterprise-release/) with your Camunda Enterprise credentials. If you don't have credentials, contact your Customer Success Manager or Partner Manager.
 :::
 
 ### Choose a target
@@ -75,7 +75,7 @@ Only one bundle can be installed at a time. To move to a different agent, run `c
 
 ### Keep an installation up to date
 
-To install a newer archive, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`. The `c8 os install` command doesn't run while a distribution is installed.
+To install a newer archive, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`. The `c8 os install` command doesn't run while a distribution is installed. To see what changed in each release, read the [changelog](changelog.md).
 
 | Command                                      | What it does                                                     |
 | -------------------------------------------- | ---------------------------------------------------------------- |

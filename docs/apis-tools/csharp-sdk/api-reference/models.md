@@ -7,7 +7,7 @@ mdx:
 
 # Models
 
-Request and response model classes (711 types).
+Request and response model classes (715 types).
 
 ## Quick Reference
 
@@ -172,6 +172,7 @@ Request and response model classes (711 types).
 - [CamundaKeyJsonConverterFactory](#camundakeyjsonconverterfactory) — JSON converter factory that handles any `ICamundaKey` struct
 - [CamundaKeyValidation](#camundakeyvalidation) — Validation helpers for domain key constraints
 - [CamundaLongKeyJsonConverterFactory](#camundalongkeyjsonconverterfactory) — JSON converter factory that handles any `ICamundaLongKey` struct
+- [CamundaRandomSource](#camundarandomsource) — The live `IRandomSource`: the platform's shared, unseeded generator
 - [CamundaSdkException](#camundasdkexception) — SDK error types mirroring the JS SDK's error structure
 - [CamundaTimeProvider](#camundatimeprovider) — A `TimeProvider` decorator whose `CamundaTimeProvider
 - [CamundaUserResult](#camundauserresult) — CamundaUserResult
@@ -377,6 +378,7 @@ Request and response model classes (711 types).
 - [ICamundaKey](#icamundakey) — Marker interface for all Camunda domain key types
 - [ICamundaLongKey](#icamundalongkey) — Marker interface for Camunda domain types backed by a long (int64) value
 - [IEngineClockTarget](#iengineclocktarget) — The engine clock operations `EngineTimeProvider` drives
+- [IRandomSource](#irandomsource) — Source of the randomness behind SDK runtime jitter: retry backoff, OAuth retry backoff, and worker startup staggering
 - [ITenantIdSettable](#itenantidsettable) — Implemented by request body types that have an optional tenantId property
 - [ITenantIdsSettable](#itenantidssettable) — Implemented by request body types that have an optional `tenantIds` array property (e
 - [IncidentErrorTypeExactMatch](#incidenterrortypeexactmatch) — Matches the value exactly
@@ -604,6 +606,7 @@ Request and response model classes (711 types).
 - [RoleSearchQuerySortRequest](#rolesearchquerysortrequest) — RoleSearchQuerySortRequest
 - [RoleUpdateRequest](#roleupdaterequest) — RoleUpdateRequest
 - [RoleUpdateResult](#roleupdateresult) — RoleUpdateResult
+- [RoleUserFilterRequest](#roleuserfilterrequest) — Role user filter request
 - [RoleUserResult](#roleuserresult) — RoleUserResult
 - [RoleUserSearchQueryRequest](#roleusersearchqueryrequest) — RoleUserSearchQueryRequest
 - [RoleUserSearchQuerySortRequest](#roleusersearchquerysortrequest) — RoleUserSearchQuerySortRequest
@@ -620,6 +623,7 @@ Request and response model classes (711 types).
 - [SecretResolutionError](#secretresolutionerror) — SecretResolutionError
 - [SecretResolveRequest](#secretresolverequest) — SecretResolveRequest
 - [SecretResolveResult](#secretresolveresult) — The per-reference outcome of a resolve request
+- [SeededRandomSource](#seededrandomsource) — A deterministic `IRandomSource` for tests: the same seed yields the same sequence of draws on every run, and in every Camunda SDK
 - [SetVariableRequest](#setvariablerequest) — SetVariableRequest
 - [SignalBroadcastRequest](#signalbroadcastrequest) — SignalBroadcastRequest
 - [SignalBroadcastResult](#signalbroadcastresult) — SignalBroadcastResult
@@ -2664,10 +2668,11 @@ Configuration for authentication and session management.
 public sealed class AuthenticationConfigurationResponse
 ```
 
-| Property           | Type      | Description                                                  |
-| ------------------ | --------- | ------------------------------------------------------------ |
-| `CanLogout`        | `Boolean` | Whether users can log out (false for SaaS deployments).      |
-| `IsLoginDelegated` | `Boolean` | Whether login is delegated to an external identity provider. |
+| Property                 | Type      | Description                                                                                                                |
+| ------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `CanLogout`              | `Boolean` | Whether users can log out (false for SaaS deployments).                                                                    |
+| `IsLoginDelegated`       | `Boolean` | Whether login is delegated to an external identity provider.                                                               |
+| `IsCamundaGroupsEnabled` | `Boolean` | Whether Camunda manages group membership locally, as opposed to delegating it to the identity provider via a groups claim. |
 
 ## AuthorizationCreateResult
 
@@ -3275,6 +3280,20 @@ JSON converter factory that handles any `ICamundaLongKey` struct. Serializes as 
 public sealed class CamundaLongKeyJsonConverterFactory : JsonConverterFactory
 ```
 
+## CamundaRandomSource
+
+The live `IRandomSource`: the platform's shared, unseeded generator.
+
+This is the one place in the SDK runtime allowed to read ambient randomness. Production jitter stays random so that a fleet of workers does not retry or start in lockstep.
+
+```csharp
+public sealed class CamundaRandomSource : IRandomSource
+```
+
+| Property | Type                  | Description                         |
+| -------- | --------------------- | ----------------------------------- |
+| `Live`   | `CamundaRandomSource` | The default live randomness source. |
+
 ## CamundaSdkException
 
 SDK error types mirroring the JS SDK's error structure.
@@ -3316,18 +3335,18 @@ CamundaUserResult
 public sealed class CamundaUserResult
 ```
 
-| Property               | Type                         | Description                                                   |
-| ---------------------- | ---------------------------- | ------------------------------------------------------------- |
-| `Username`             | `Username`                   | The username of the user.                                     |
-| `DisplayName`          | `String`                     | The display name of the user.                                 |
-| `Email`                | `String`                     | The email of the user.                                        |
-| `AuthorizedComponents` | `List<String>`               | The web components the user is authorized to use.             |
-| `Tenants`              | `List<TenantResult>`         | The tenants the user is a member of.                          |
-| `Groups`               | `List<String>`               | The groups assigned to the user.                              |
-| `Roles`                | `List<String>`               | The roles assigned to the user.                               |
-| `SalesPlanType`        | `String`                     | The plan of the user.                                         |
-| `C8Links`              | `Dictionary<String, String>` | The links to the components in the C8 stack.                  |
-| `CanLogout`            | `Boolean`                    | Flag for understanding if the user is able to perform logout. |
+| Property               | Type                         | Description                                                                                                                                                                                                                |
+| ---------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Username`             | `Username`                   | The username of the user.                                                                                                                                                                                                  |
+| `DisplayName`          | `String`                     | The display name of the user.                                                                                                                                                                                              |
+| `Email`                | `String`                     | The email of the user.                                                                                                                                                                                                     |
+| `AuthorizedComponents` | `List<String>`               | The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `["*"]`, regardless of the user's actual permissions, since access is not restricted in that case. |
+| `Tenants`              | `List<TenantResult>`         | The tenants the user is a member of.                                                                                                                                                                                       |
+| `Groups`               | `List<String>`               | The groups assigned to the user.                                                                                                                                                                                           |
+| `Roles`                | `List<String>`               | The roles assigned to the user.                                                                                                                                                                                            |
+| `SalesPlanType`        | `String`                     | The plan of the user.                                                                                                                                                                                                      |
+| `C8Links`              | `Dictionary<String, String>` | The links to the components in the C8 stack.                                                                                                                                                                               |
+| `CanLogout`            | `Boolean`                    | Flag for understanding if the user is able to perform logout.                                                                                                                                                              |
 
 ## CancelProcessInstanceRequest
 
@@ -4875,10 +4894,11 @@ Configuration for deployment characteristics.
 public sealed class DeploymentConfigurationResponse
 ```
 
-| Property                | Type      | Description                             |
-| ----------------------- | --------- | --------------------------------------- |
-| `IsMultiTenancyEnabled` | `Boolean` | Whether multi-tenancy is enabled.       |
-| `MaxRequestSize`        | `Int64`   | The maximum HTTP request size in bytes. |
+| Property                | Type      | Description                                            |
+| ----------------------- | --------- | ------------------------------------------------------ |
+| `IsMultiTenancyEnabled` | `Boolean` | Whether multi-tenancy is enabled.                      |
+| `IsTenantsApiEnabled`   | `Boolean` | Whether the tenants management API and UI are enabled. |
+| `MaxRequestSize`        | `Int64`   | The maximum HTTP request size in bytes.                |
 
 ## DeploymentDecisionRequirementsResult
 
@@ -6318,6 +6338,18 @@ Declared as an interface so the provider does not depend on the generated client
 public interface IEngineClockTarget
 ```
 
+## IRandomSource
+
+Source of the randomness behind SDK runtime jitter: retry backoff, OAuth retry backoff, and worker startup staggering.
+
+The randomness counterpart of `CamundaOptions.TimeProvider`. Pinning the clock makes cadence virtual; supplying a `SeededRandomSource` as well makes it reproducible, so a timing-dependent failure can be replayed draw for draw.
+
+Implementations must be safe to call from multiple threads.
+
+```csharp
+public interface IRandomSource
+```
+
 ## ITenantIdSettable
 
 Implemented by request body types that have an optional tenantId property. The SDK uses this to inject the configured default tenant ID when the caller does not supply one explicitly.
@@ -7112,7 +7144,7 @@ public sealed class JobSearchResult
 | `CustomHeaders`            | `Dictionary<String, String>`   | A set of custom headers defined during modelling.                                                                                                                                                                                              |
 | `Deadline`                 | `Nullable<DateTimeOffset>`     | If the job has been activated, when it will next be available to be activated.                                                                                                                                                                 |
 | `DeniedReason`             | `String`                       | The reason provided by the user task listener for denying the work.                                                                                                                                                                            |
-| `ElementId`                | `Nullable<ElementId>`          | The element ID associated with the job. May be missing on job failure.                                                                                                                                                                         |
+| `ElementId`                | `ElementId`                    | The element ID associated with the job.                                                                                                                                                                                                        |
 | `ElementInstanceKey`       | `ElementInstanceKey`           | The element instance key associated with the job.                                                                                                                                                                                              |
 | `EndTime`                  | `Nullable<DateTimeOffset>`     | End date of the job. This is `null` if the job is not in an end state yet.                                                                                                                                                                     |
 | `ErrorCode`                | `String`                       | The error code provided for a failed job.                                                                                                                                                                                                      |
@@ -9662,6 +9694,18 @@ public sealed class RoleUpdateResult
 | `Description` | `String` | The description of the updated role.  |
 | `RoleId`      | `RoleId` | The ID of the updated role.           |
 
+## RoleUserFilterRequest
+
+Role user filter request
+
+```csharp
+public sealed class RoleUserFilterRequest
+```
+
+| Property   | Type                   | Description                  |
+| ---------- | ---------------------- | ---------------------------- |
+| `Username` | `StringFilterProperty` | The username search filters. |
+
 ## RoleUserResult
 
 RoleUserResult
@@ -9682,10 +9726,11 @@ RoleUserSearchQueryRequest
 public sealed class RoleUserSearchQueryRequest
 ```
 
-| Property | Type                                   | Description          |
-| -------- | -------------------------------------- | -------------------- |
-| `Sort`   | `List<RoleUserSearchQuerySortRequest>` | Sort field criteria. |
-| `Page`   | `SearchQueryPageRequest`               | Pagination criteria. |
+| Property | Type                                   | Description               |
+| -------- | -------------------------------------- | ------------------------- |
+| `Filter` | `RoleUserFilterRequest`                | The user filter criteria. |
+| `Sort`   | `List<RoleUserSearchQuerySortRequest>` | Sort field criteria.      |
+| `Page`   | `SearchQueryPageRequest`               | Pagination criteria.      |
 
 ## RoleUserSearchQuerySortRequest
 
@@ -9863,6 +9908,22 @@ public sealed class SecretResolveResult
 | ---------- | ----------------------------- | ------------------------------------------------------------------------ |
 | `Resolved` | `List<ResolvedSecret>`        | The references that were successfully resolved.                          |
 | `Errors`   | `List<SecretResolutionError>` | The references that could not be resolved, each with a typed error code. |
+
+## SeededRandomSource
+
+A deterministic `IRandomSource` for tests: the same seed yields the same sequence of draws on every run, and in every Camunda SDK.
+
+The generator is SplitMix64, taking the top 53 bits of each output as a double. It is specified by the cross-SDK contract (camunda/sdk-infra#50) rather than borrowed from the platform, so a seed reproduces the same jitter regardless of runtime version or language.
+
+Draws are thread-safe. Reproducibility holds for draws made in a fixed order; if several workers draw concurrently, which of them receives which value is up to the scheduler.
+
+```csharp
+public sealed class SeededRandomSource : IRandomSource
+```
+
+| Property | Type     | Description                                                                             |
+| -------- | -------- | --------------------------------------------------------------------------------------- |
+| `Seed`   | `UInt64` | The seed this source was created with. Report it on failure to make the run replayable. |
 
 ## SetVariableRequest
 
@@ -10324,10 +10385,10 @@ TenantSearchQuerySortRequest
 public sealed class TenantSearchQuerySortRequest
 ```
 
-| Property | Type                                | Description                                   |
-| -------- | ----------------------------------- | --------------------------------------------- |
-| `Field`  | `TenantSearchQuerySortRequestField` | The field to sort by.                         |
-| `Order`  | `Nullable<SortOrderEnum>`           | The order in which to sort the related field. |
+| Property | Type                                | Description                                                               |
+| -------- | ----------------------------------- | ------------------------------------------------------------------------- |
+| `Field`  | `TenantSearchQuerySortRequestField` | The field to sort by. `key` is deprecated and should not be used anymore. |
+| `Order`  | `Nullable<SortOrderEnum>`           | The order in which to sort the related field.                             |
 
 ## TenantUpdateRequest
 
@@ -10754,6 +10815,7 @@ public sealed class UserTaskFilter
 | Property                   | Type                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | -------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `State`                    | `UserTaskStateFilterProperty`        | The user task state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `IsSuspended`              | `Nullable<Boolean>`                  | Whether the user task is suspended because its owning process instance is suspended.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `Assignee`                 | `StringFilterProperty`               | The assignee of the user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `BusinessId`               | `StringFilterProperty`               | The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `Priority`                 | `IntegerFilterProperty`              | The priority of the user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -10787,6 +10849,7 @@ public sealed class UserTaskFilterFields
 | Property                   | Type                                 | Description                                                                                                                                                                                                   |
 | -------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `State`                    | `UserTaskStateFilterProperty`        | The user task state.                                                                                                                                                                                          |
+| `IsSuspended`              | `Nullable<Boolean>`                  | Whether the user task is suspended because its owning process instance is suspended.                                                                                                                          |
 | `Assignee`                 | `StringFilterProperty`               | The assignee of the user task.                                                                                                                                                                                |
 | `BusinessId`               | `StringFilterProperty`               | The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found. |
 | `Priority`                 | `IntegerFilterProperty`              | The priority of the user task.                                                                                                                                                                                |
@@ -10855,6 +10918,7 @@ public sealed class UserTaskResult
 | `ProcessDefinitionVersion` | `Int32`                        | The version of the process definition.                                                                                                                                                                                                      |
 | `CustomHeaders`            | `Dictionary<String, String>`   | Custom headers for the user task.                                                                                                                                                                                                           |
 | `Priority`                 | `Int32`                        | The priority of a user task. The higher the value the higher the priority.                                                                                                                                                                  |
+| `IsSuspended`              | `Boolean`                      | Whether the user task is suspended because its owning process instance is suspended.                                                                                                                                                        |
 | `UserTaskKey`              | `UserTaskKey`                  | The key of the user task.                                                                                                                                                                                                                   |
 | `ElementInstanceKey`       | `ElementInstanceKey`           | The key of the element instance.                                                                                                                                                                                                            |
 | `ProcessName`              | `String`                       | The name of the process definition. This is `null` if the process has no name defined.                                                                                                                                                      |

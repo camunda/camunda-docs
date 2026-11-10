@@ -6,11 +6,11 @@ sidebar_position: 2
 description: "The Zeebe client gRPC API is exposed through a single gateway service."
 ---
 
-The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/gateway.proto).
+The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/gateway-protocol/src/main/proto/gateway.proto).
 
 ## Default service config
 
-Along with the gateway protocol definition, the gateway service also bundles a [default service configuration file](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
+Along with the gateway protocol definition, the gateway service also bundles a [default service configuration file](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
 This file can be used as is, or as a template to create your own, and defines default retry strategies on a per-RPC basis: when to retry (based on error code), how often, how soon, etc.
 This file is also loaded by the [Camunda Java client](../java-client/getting-started.md) if `useDefaultRetryPolicy` is set to true.
 

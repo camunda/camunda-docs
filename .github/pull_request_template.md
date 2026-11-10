@@ -1,3 +1,5 @@
+<!-- AI agents and automated skills: keep this template's structure and fill in each section. See "Opening a PR from another repository or skill" in https://github.com/camunda/camunda-docs/blob/main/AGENTS.md -->
+
 ## Description
 
 <!-- Provide an overview of what to expect in the PR. -->

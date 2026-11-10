@@ -9,6 +9,8 @@ When internal requests are processed faster than the rate at which they are expo
 
 For user commands, this will show up as increased [backpressure](/components/zeebe/technical-concepts/internal-processing.md#handling-backpressure), observed latency, and reduced throughput. [Internal processing](/components/zeebe/technical-concepts/internal-processing.md) slows down as the stream processor waits longer for processing results to be written.
 
+The export rate and backlog are measured across all exporters configured for a partition. A [custom exporter](/self-managed/concepts/exporters.md#performance-impact) with a slow `export()` method also reduces the export rate and can trigger throttling.
+
 Write rate limiting applies to all new records, including processing results, user commands, inter-partition messages, and scheduled tasks.
 
 ## Enable flow control
@@ -21,7 +23,7 @@ A static write rate limit can prevent throughput peaks, and write rate throttlin
 These write limits are enabled by default in SaaS and disabled in Self-Managed. For most use cases, write rate limits can be enabled as needed if an issue arises.
 :::
 
-Flow control is configured in the Orchestration Cluster `application.yaml` file under `camunda.processing.flow-control.write`. The default values are listed in the `flow-control` section of the [configuration defaults](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) and in the [processing configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+Flow control is configured in the Orchestration Cluster `application.yaml` file under `camunda.processing.flow-control.write`. The default values are listed in the `flow-control` section of the [configuration defaults](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/config/defaults.yaml) and in the [processing configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
 ```yaml
 camunda:

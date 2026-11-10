@@ -42,17 +42,27 @@ The `prod` tag also marks an environment as a production environment. Your organ
 
 ## Who can see and use environments
 
-Organization admins assign environments to workspaces. An environment can be assigned to more than one workspace, and a workspace can have any number of environments, including none.
+Organization owners and admins assign environments to workspaces. DevOps users can also assign environments to workspaces where they are an editor or workspace admin. An environment can be assigned to more than one workspace, and a workspace can have any number of environments, including none.
+
+### Organization level
+
+On the **Environments** page and in the navigation:
+
+- **SaaS**: Every user in the organization sees every environment and can open its applications. Only organization owners, admins, DevOps users, and legacy Developers can resume a paused environment.
+- **Self-Managed**: Organization admins and DevOps users see every environment. Other users see only the environments assigned to workspaces where they are a workspace admin or editor.
+
+### Workspace level
+
+Within a workspace, users see only the environments assigned to that workspace, whatever their organization role:
+
+| Workspace role                | What the role sees                         |
+| :---------------------------- | :----------------------------------------- |
+| Workspace admin or editor     | The environments assigned to the workspace |
+| Workspace viewer or commenter | No environments                            |
 
 Every [project](./projects.md) in a [workspace](./workspaces.md) can use all the environments assigned to the workspace. A project can't reach an environment that its workspace doesn't have.
 
-| Role                          | What the role sees                            |
-| :---------------------------- | :-------------------------------------------- |
-| Organization owner or admin   | Every environment in the organization         |
-| Workspace admin or editor     | The environments assigned to their workspaces |
-| Workspace viewer or commenter | No environments                               |
-
-Seeing an environment doesn't grant access to what runs in it. The Orchestration Cluster decides who can deploy to an environment and use its applications. See [access control](/components/concepts/access-control/access-control-overview.md).
+Users can open the applications of every environment they see, but the Orchestration Cluster decides who can deploy to an environment and what they can see and do in its applications. See [access control](/components/concepts/access-control/access-control-overview.md).
 
 ## What an environment contains
 

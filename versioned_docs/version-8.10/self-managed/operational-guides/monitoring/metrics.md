@@ -453,7 +453,7 @@ For how the broker resolves secret references before job activation, see
 ### Zeebe
 
 Zeebe comes with a pre-built dashboard, available in the repository:
-[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/zeebe.json).
+[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/stable/8.10/monitor/grafana/zeebe.json).
 
 - [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into your Grafana instance and select the correct Prometheus data source (if you have more than one).
 - The dashboard displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
@@ -480,7 +480,7 @@ Other Grafana dashboards (API panels, gateway panels) are being updated to inclu
 
 A pre-built Grafana dashboard is available for the data layer in the repository:
 
-[monitor/grafana/dashboards/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
+[monitor/grafana/dashboards/data_layer.json](https://github.com/camunda/camunda/blob/stable/8.10/monitor/grafana/dashboards/data_layer.json)
 
 To use it:
 

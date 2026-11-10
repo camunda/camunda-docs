@@ -28,7 +28,7 @@ The Zeebe cluster is [zone-aware](/self-managed/components/orchestration-cluster
 
   Set `AWS_PROFILE` if you don't use the default credential chain.
 
-Both scripts take `--failed-region 0|1` to name the region being failed away from and restored. The default is `0`.
+Both scripts take `--failed-region 0|1` to name the region being failed away from and restored. For `failover.sh`, the default is `0`. `failback.sh` has no default, so you must set it. That script empties the EFS primary storage of that region.
 
 ## Fail over to the surviving region
 
@@ -107,7 +107,7 @@ The Orchestration Cluster connects through the global writer endpoint, and the A
 
 When the lost region is available again, restore it:
 
-1. If you failed over with `--keep-tasks`, scale the failed region's ECS services to zero once its AWS API responds again. `failback.sh` scales them back up in a later step.
+1. If you failed over with `--keep-tasks`, scale the failed region's ECS services to zero once its AWS API responds again. `failback.sh` scales them back up in a later step. It stops with an error if the orchestration cluster service still has desired, pending, or running tasks.
 
    ```bash
    # Use REGION_1 and CLUSTER_1 if region 1 failed
@@ -134,11 +134,17 @@ The script:
 
 1. Prints the topology before the change.
 1. Makes sure the recovered region's Aurora cluster is a member of the Aurora Global Database. If an unplanned recovery left it detached but intact, the script reattaches it. If the cluster was destroyed, recreate it with `terraform apply` in `terraform/infra` and run the script again.
+1. Stops the wipe tasks that an earlier run left, if any. Then it waits until every task that is stopping in the cluster stops.
+1. Empties the recovered region's EFS primary storage, if its zone is absent from the partition distribution. A one-off Fargate task removes everything under `/usr/local/camunda/data`. The brokers then rejoin without the Raft state from before the failover. If the zone is still present, the script keeps the data.
 1. Scales the recovered region's ECS services back up, to four orchestration cluster tasks and one Connectors task.
 1. Waits for the recovered brokers to rejoin cluster membership.
 1. Sends `POST /actuator/cluster/zones/<recovered-region>` with `numberOfReplicas`, `priority`, and `numberOfBrokers`, then waits for the partition redistribution to complete.
 1. Verifies the expected broker count, that every partition has a leader, and that none of the recovered brokers is idle.
 1. With `--switch-writer`, moves the Aurora writer back to the recovered region with a planned switchover.
+
+The failback needs a clean region, as the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) describes for Kubernetes. On ECS, the old data stays on EFS after the failover, so `failback.sh` removes it. Use `--keep-data` only if you emptied that storage yourself.
+
+If the wipe task does not stop within `WIPE_TIMEOUT` seconds (default `3600`), the script stops it and exits. Increase `WIPE_TIMEOUT` for a large data directory, then run the script again.
 
 If `failback.sh --switch-writer` stops while it moves the Aurora writer back, you can run it again. It waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
@@ -146,6 +152,7 @@ If `failback.sh --switch-writer` stops while it moves the Aurora writer back, yo
 | ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `--switch-writer` | Off                                     | Moves the Aurora writer back to the recovered region after the zone is restored.                                          |
 | `--dry-run`       | Off                                     | Sends the zone request with `dryRun=true` and prints the planned operations. ECS, the cluster, and Aurora aren't changed. |
+| `--keep-data`     | Off                                     | Keeps the EFS primary storage of the recovered region. The script doesn't run the wipe task.                              |
 | `--replicas N`    | `2`                                     | `numberOfReplicas` for the zone. Matches `replication_factor / 2` in `terraform/app/locals.tf`.                           |
 | `--brokers N`     | `4`                                     | `numberOfBrokers` for the zone. Also sets the task count of the orchestration cluster service.                            |
 | `--priority N`    | `1000` for region 0, `500` for region 1 | Zone `priority`. Matches `CAMUNDA_CLUSTER_PARTITIONING_ZONEAWARE_ZONES_*_PRIORITY` in `terraform/app/locals.tf`.          |

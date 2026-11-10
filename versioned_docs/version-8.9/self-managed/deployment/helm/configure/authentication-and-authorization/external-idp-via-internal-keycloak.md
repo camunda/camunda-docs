@@ -13,6 +13,8 @@ This setup allows you to:
 - Retain the internal Keycloak for Camunda OIDC integration
 - Manage user authorization in Camunda identity components
 
+For Keycloak support scope, security fixes, and upgrades, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
+
 ## Prerequisites
 
 - A Camunda 8 deployment with internal Keycloak enabled. For setup instructions, see [Configure internal Keycloak for Helm deployments](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).

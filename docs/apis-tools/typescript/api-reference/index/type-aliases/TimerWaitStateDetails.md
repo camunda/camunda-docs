@@ -28,11 +28,3 @@ repetitions: number | null;
 ```
 
 The number of remaining timer repetitions (-1 for infinite, 0 for non-repeating).
-
-### waitStateType
-
-```ts
-waitStateType: string;
-```
-
-The wait state type discriminator.

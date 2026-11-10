@@ -176,8 +176,7 @@ paths:
   /projects/{projectKey}/restoration:
     $ref: projects.yaml#/paths/~1projects~1{projectKey}~1restoration
   /projects/{projectKey}/catalog/asset-usages/search:
-    $ref: >-
-      catalog.yaml#/paths/~1projects~1{projectKey}~1catalog~1asset-usages~1search
+    $ref: catalog.yaml#/paths/~1projects~1{projectKey}~1catalog~1asset-usages~1search
   /project-snapshots:
     $ref: project-snapshots.yaml#/paths/~1project-snapshots
   /project-snapshots/{projectSnapshotKey}:
@@ -185,20 +184,15 @@ paths:
   /project-snapshots/search:
     $ref: project-snapshots.yaml#/paths/~1project-snapshots~1search
   /project-snapshots/{projectSnapshotKey}/restoration:
-    $ref: >-
-      project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1restoration
+    $ref: project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1restoration
   /project-snapshots/{projectSnapshotKey}/review-requests:
-    $ref: >-
-      project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1review-requests
+    $ref: project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1review-requests
   /project-snapshots/{projectSnapshotKey}/reviews:
-    $ref: >-
-      project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1reviews
+    $ref: project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1reviews
   /project-snapshots/{projectSnapshotKey}/duplication:
-    $ref: >-
-      project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1duplication
+    $ref: project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1duplication
   /project-snapshots/{projectSnapshotKey}/external-resources:
-    $ref: >-
-      project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1external-resources
+    $ref: project-snapshots.yaml#/paths/~1project-snapshots~1{projectSnapshotKey}~1external-resources
   /versions:
     $ref: versions.yaml#/paths/~1versions
   /versions/{versionKey}:

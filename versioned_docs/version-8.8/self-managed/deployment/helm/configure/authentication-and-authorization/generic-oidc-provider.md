@@ -134,6 +134,8 @@ If your provider supports the `offline_access` scope, components will receive re
 
 If `offline_access` is not available or not granted, users will be redirected to your OIDC provider for re-authentication when their access token expires.
 
+If a refresh fails because the refresh token is no longer valid (for example, because it has expired or been revoked and the provider returns `invalid_grant`) the user is logged out and must sign in again.
+
 For more information, see [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 :::
 

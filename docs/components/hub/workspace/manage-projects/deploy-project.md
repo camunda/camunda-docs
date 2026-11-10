@@ -81,7 +81,7 @@ The status of an environment decides whether you can deploy to it:
 | Unavailable | You can't deploy, for example because the environment is temporarily unavailable.             |
 | Unknown     | You can deploy, but the deployment may fail because the status of the environment is unknown. |
 
-For how the status follows the state of the cluster, see [environment statuses](/components/hub/organization/manage-environments/index.md#how-environment-statuses-follow-the-cluster). To resume a paused environment, click **Resume** next to it. Only organization owners, admins, and DevOps users see this button. You can also [resume the environment from the environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
+For how the status follows the state of the cluster, see [environment statuses](/components/hub/organization/manage-environments/index.md#how-environment-statuses-follow-the-cluster). To resume a paused environment, click **Resume** next to it. Only organization owners, admins, DevOps users, and legacy Developers see this button. You can also [resume the environment from the environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
 
 </TabItem>
 

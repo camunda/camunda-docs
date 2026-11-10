@@ -10,13 +10,13 @@ mdx:
 ```ts
 function createCamundaClientLoose(...args): WithSearchPagination<{
   clock: {
-     deadline: {
+     deadline(...a): {
         dispose: (...a) => void;
         signal: {
         };
      };
-     now: number;
-     sleep: Promise<void>;
+     now(...a): number;
+     sleep(...a): Promise<void>;
   };
   config: {
      __raw: {
@@ -100,71 +100,74 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         workerName?: string;
      };
   };
-  _getSupportLogger: {
-     log: void;
+  random: {
+     next(...a): number;
   };
-  _invokeWithRetry: Promise<unknown>;
-  activateAdHocSubProcessActivities: CancelablePromise<void>;
-  activateJobs: CancelablePromise<{
+  _getSupportLogger(...a): {
+     log(...a): void;
+  };
+  _invokeWithRetry(...a): Promise<unknown>;
+  activateAdHocSubProcessActivities(...a): CancelablePromise<void>;
+  activateJobs(...a): CancelablePromise<{
      jobs: object[];
   }>;
-  assignClientToGroup: CancelablePromise<void>;
-  assignClientToTenant: CancelablePromise<void>;
-  assignGroupToTenant: CancelablePromise<void>;
-  assignMappingRuleToGroup: CancelablePromise<void>;
-  assignMappingRuleToTenant: CancelablePromise<void>;
-  assignProcessInstanceBusinessId: CancelablePromise<void>;
-  assignRoleToClient: CancelablePromise<void>;
-  assignRoleToGroup: CancelablePromise<void>;
-  assignRoleToMappingRule: CancelablePromise<void>;
-  assignRoleToTenant: CancelablePromise<void>;
-  assignRoleToUser: CancelablePromise<void>;
-  assignUserTask: CancelablePromise<void>;
-  assignUserToGroup: CancelablePromise<void>;
-  assignUserToTenant: CancelablePromise<void>;
-  broadcastSignal: CancelablePromise<{
+  assignClientToGroup(...a): CancelablePromise<void>;
+  assignClientToTenant(...a): CancelablePromise<void>;
+  assignGroupToTenant(...a): CancelablePromise<void>;
+  assignMappingRuleToGroup(...a): CancelablePromise<void>;
+  assignMappingRuleToTenant(...a): CancelablePromise<void>;
+  assignProcessInstanceBusinessId(...a): CancelablePromise<void>;
+  assignRoleToClient(...a): CancelablePromise<void>;
+  assignRoleToGroup(...a): CancelablePromise<void>;
+  assignRoleToMappingRule(...a): CancelablePromise<void>;
+  assignRoleToTenant(...a): CancelablePromise<void>;
+  assignRoleToUser(...a): CancelablePromise<void>;
+  assignUserTask(...a): CancelablePromise<void>;
+  assignUserToGroup(...a): CancelablePromise<void>;
+  assignUserToTenant(...a): CancelablePromise<void>;
+  broadcastSignal(...a): CancelablePromise<{
      signalKey: string;
      tenantId: string;
   }>;
-  cancelBatchOperation: CancelablePromise<void>;
-  cancelClusterRebalance: CancelablePromise<{
+  cancelBatchOperation(...a): CancelablePromise<void>;
+  cancelClusterRebalance(...a): CancelablePromise<{
      wasRunning: boolean;
   }>;
-  cancelProcessInstance: CancelablePromise<void>;
-  cancelProcessInstancesBatchOperation: CancelablePromise<{
+  cancelProcessInstance(...a): CancelablePromise<void>;
+  cancelProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  changeClusterMode: CancelablePromise<{
+  changeClusterMode(...a): CancelablePromise<{
      changeId: string;
      plannedChanges: object[];
   }>;
-  changeClusterModeAsClusterAdmin: CancelablePromise<{
+  changeClusterModeAsClusterAdmin(...a): CancelablePromise<{
      changeId: string;
      plannedChanges: object[];
   }>;
-  clearAuthCache: void;
-  completeJob: CancelablePromise<void>;
-  completeUserTask: CancelablePromise<void>;
-  configure: void;
-  correlateMessage: CancelablePromise<{
+  clearAuthCache(...a): void;
+  completeJob(...a): CancelablePromise<void>;
+  completeUserTask(...a): CancelablePromise<void>;
+  configure(...a): void;
+  correlateMessage(...a): CancelablePromise<{
      messageKey: string;
      processInstanceKey: string;
      tenantId: string;
   }>;
-  createAdminUser: CancelablePromise<{
+  createAdminUser(...a): CancelablePromise<{
      email: string | null;
      name: string | null;
      username: string;
   }>;
-  createAgentInstance: CancelablePromise<{
+  createAgentInstance(...a): CancelablePromise<{
      agentInstanceKey: string;
      createdHistory: object[];
   }>;
-  createAuthorization: CancelablePromise<{
+  createAuthorization(...a): CancelablePromise<{
      authorizationKey: string;
   }>;
-  createDeployment: CancelablePromise<{
+  createDeployment(...a): CancelablePromise<{
      decisionRequirements: object[];
      decisions: object[];
      deploymentKey: string;
@@ -174,7 +177,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      resources: object[];
      tenantId: string;
   }>;
-  createDocument: CancelablePromise<{
+  createDocument(...a): CancelablePromise<{
      camunda.document.type: "camunda";
      contentHash: string | null;
      documentId: string;
@@ -199,16 +202,16 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      };
      storeId: string;
   }>;
-  createDocumentLink: CancelablePromise<{
+  createDocumentLink(...a): CancelablePromise<{
      expiresAt: string;
      url: string;
   }>;
-  createDocuments: CancelablePromise<{
+  createDocuments(...a): CancelablePromise<{
      createdDocuments: object[];
      failedDocuments: object[];
   }>;
-  createElementInstanceVariables: CancelablePromise<void>;
-  createGlobalClusterVariable: CancelablePromise<{
+  createElementInstanceVariables(...a): CancelablePromise<void>;
+  createGlobalClusterVariable(...a): CancelablePromise<{
      kind: ClusterVariableKindEnum;
      metadata: {
       [key: string]: string | number;
@@ -218,7 +221,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string | null;
      value: string;
   }>;
-  createGlobalTaskListener: CancelablePromise<{
+  createGlobalTaskListener(...a): CancelablePromise<{
      afterNonGlobal?: boolean;
      eventTypes: GlobalTaskListenerEventTypeEnum[];
      id: string;
@@ -227,29 +230,29 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      source: GlobalListenerSourceEnum;
      type?: string;
   }>;
-  createGroup: CancelablePromise<{
+  createGroup(...a): CancelablePromise<{
      description: string | null;
      groupId: string;
      name: string;
   }>;
-  createJobWorker: {
+  createJobWorker(...a): {
      activeJobs: number;
      name: string;
      stopped: boolean;
-     start: void;
-     stop: void;
-     stopGracefully: Promise<{
+     start(...a): void;
+     stop(...a): void;
+     stopGracefully(...a): Promise<{
         remainingJobs: number;
         timedOut: boolean;
      }>;
   };
-  createMappingRule: CancelablePromise<{
+  createMappingRule(...a): CancelablePromise<{
      claimName: string;
      claimValue: string;
      mappingRuleId: string;
      name: string;
   }>;
-  createProcessInstance: CancelablePromise<{
+  createProcessInstance(...a): CancelablePromise<{
      businessId:   | {
       [key: number]: string;
         __brand: "BusinessId";
@@ -265,17 +268,17 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
       [key: string]: unknown;
      };
   }>;
-  createRole: CancelablePromise<{
+  createRole(...a): CancelablePromise<{
      description: string | null;
      name: string;
      roleId: string;
   }>;
-  createTenant: CancelablePromise<{
+  createTenant(...a): CancelablePromise<{
      description: string | null;
      name: string;
      tenantId: string;
   }>;
-  createTenantClusterVariable: CancelablePromise<{
+  createTenantClusterVariable(...a): CancelablePromise<{
      kind: ClusterVariableKindEnum;
      metadata: {
       [key: string]: string | number;
@@ -285,44 +288,44 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string | null;
      value: string;
   }>;
-  createThreadedJobWorker: {
+  createThreadedJobWorker(...a): {
      activeJobs: number;
      busyThreads: number;
      name: string;
      poolSize: number;
      ready: Promise<void>;
      stopped: boolean;
-     start: void;
-     stop: void;
-     stopGracefully: Promise<{
+     start(...a): void;
+     stop(...a): void;
+     stopGracefully(...a): Promise<{
         remainingJobs: number;
         timedOut: boolean;
      }>;
   };
-  createUser: CancelablePromise<{
+  createUser(...a): CancelablePromise<{
      email: string | null;
      name: string | null;
      username: string;
   }>;
-  deleteAuthorization: CancelablePromise<void>;
-  deleteDecisionInstance: CancelablePromise<void>;
-  deleteDecisionInstancesBatchOperation: CancelablePromise<{
+  deleteAuthorization(...a): CancelablePromise<void>;
+  deleteDecisionInstance(...a): CancelablePromise<void>;
+  deleteDecisionInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  deleteDocument: CancelablePromise<void>;
-  deleteGlobalClusterVariable: CancelablePromise<void>;
-  deleteGlobalTaskListener: CancelablePromise<void>;
-  deleteGroup: CancelablePromise<void>;
-  deleteHistoryBackup: CancelablePromise<void>;
-  deleteHistoryBackupAsClusterAdmin: CancelablePromise<void>;
-  deleteMappingRule: CancelablePromise<void>;
-  deleteProcessInstance: CancelablePromise<void>;
-  deleteProcessInstancesBatchOperation: CancelablePromise<{
+  deleteDocument(...a): CancelablePromise<void>;
+  deleteGlobalClusterVariable(...a): CancelablePromise<void>;
+  deleteGlobalTaskListener(...a): CancelablePromise<void>;
+  deleteGroup(...a): CancelablePromise<void>;
+  deleteHistoryBackup(...a): CancelablePromise<void>;
+  deleteHistoryBackupAsClusterAdmin(...a): CancelablePromise<void>;
+  deleteMappingRule(...a): CancelablePromise<void>;
+  deleteProcessInstance(...a): CancelablePromise<void>;
+  deleteProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  deleteResource: CancelablePromise<{
+  deleteResource(...a): CancelablePromise<{
      batchOperation:   | {
         batchOperationKey: string;
         batchOperationType: BatchOperationTypeEnum;
@@ -330,15 +333,15 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         | null;
      resourceKey: string;
   }>;
-  deleteRole: CancelablePromise<void>;
-  deleteRuntimeBackup: CancelablePromise<void>;
-  deleteRuntimeBackupAsClusterAdmin: CancelablePromise<void>;
-  deleteRuntimeBackupState: CancelablePromise<void>;
-  deleteRuntimeBackupStateAsClusterAdmin: CancelablePromise<void>;
-  deleteTenant: CancelablePromise<void>;
-  deleteTenantClusterVariable: CancelablePromise<void>;
-  deleteUser: CancelablePromise<void>;
-  deployResourcesFromFiles: CancelablePromise<{
+  deleteRole(...a): CancelablePromise<void>;
+  deleteRuntimeBackup(...a): CancelablePromise<void>;
+  deleteRuntimeBackupAsClusterAdmin(...a): CancelablePromise<void>;
+  deleteRuntimeBackupState(...a): CancelablePromise<void>;
+  deleteRuntimeBackupStateAsClusterAdmin(...a): CancelablePromise<void>;
+  deleteTenant(...a): CancelablePromise<void>;
+  deleteTenantClusterVariable(...a): CancelablePromise<void>;
+  deleteUser(...a): CancelablePromise<void>;
+  deployResourcesFromFiles(...a): CancelablePromise<{
      decisionRequirements: object[];
      decisions: object[];
      deploymentKey: string;
@@ -348,13 +351,13 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      resources: object[];
      tenantId: string;
   }>;
-  emitSupportLogPreamble: void;
-  evaluateConditionals: CancelablePromise<{
+  emitSupportLogPreamble(...a): void;
+  evaluateConditionals(...a): CancelablePromise<{
      conditionalEvaluationKey: string;
      processInstances: object[];
      tenantId: string;
   }>;
-  evaluateDecision: CancelablePromise<{
+  evaluateDecision(...a): CancelablePromise<{
      decisionDefinitionId: string;
      decisionDefinitionKey: string;
      decisionDefinitionName: string;
@@ -373,15 +376,15 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      output: string;
      tenantId: string;
   }>;
-  evaluateExpression: CancelablePromise<{
+  evaluateExpression(...a): CancelablePromise<{
      expression: string;
      referencedSecrets: object[];
      result: unknown;
      warnings: object[];
   }>;
-  failJob: CancelablePromise<void>;
-  forceAuthRefresh: Promise<string | undefined>;
-  getAgentDefinition: CancelablePromise<{
+  failJob(...a): CancelablePromise<void>;
+  forceAuthRefresh(...a): Promise<string | undefined>;
+  getAgentDefinition(...a): CancelablePromise<{
      agentDefinitionKey: string;
      agentType: AgentDefinitionTypeEnum;
      elementId: string;
@@ -392,7 +395,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      processDefinitionVersionTag: string | null;
      tenantId: string;
   }>;
-  getAgentInstance: CancelablePromise<{
+  getAgentInstance(...a): CancelablePromise<{
      agentDefinitionKey: string;
      agentInstanceKey: string;
      completionDate: string | null;
@@ -457,7 +460,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
      tools: object[];
   }>;
-  getAuditLog: CancelablePromise<{
+  getAuditLog(...a): CancelablePromise<{
      actorId: string | null;
      actorType:   | AuditLogActorTypeEnum
         | null;
@@ -575,7 +578,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
       }
         | null;
   }>;
-  getAuthentication: CancelablePromise<{
+  getAuthentication(...a): CancelablePromise<{
      authorizedComponents: string[];
      c8Links: {
       [key: string]: string;
@@ -589,10 +592,10 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenants: object[];
      username: string;
   }>;
-  getAuthHeaders: Promise<{
+  getAuthHeaders(...a): Promise<{
    [key: string]: string;
   }>;
-  getAuthorization: CancelablePromise<{
+  getAuthorization(...a): CancelablePromise<{
      authorizationKey: string;
      ownerId: string;
      ownerType: OwnerTypeEnum;
@@ -601,7 +604,8 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      resourcePropertyName: string | null;
      resourceType: ResourceTypeEnum;
   }>;
-  getBackpressureState:   | {
+  getBackpressureState(...a):
+     | {
      backoffMs: number;
      consecutive: number;
      permitsCurrent: number;
@@ -615,8 +619,8 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      permitsMax: null;
      severity: string;
      waiters: number;
-   };
-  getBatchOperation: CancelablePromise<{
+  };
+  getBatchOperation(...a): CancelablePromise<{
      actorId: string | null;
      actorType:   | AuditLogActorTypeEnum
         | null;
@@ -631,10 +635,10 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      startDate: string | null;
      state: BatchOperationStateEnum;
   }>;
-  getClusterExportingStatus: CancelablePromise<{
+  getClusterExportingStatus(...a): CancelablePromise<{
      status: ExportingStatusCode;
   }>;
-  getClusterRebalance: CancelablePromise<{
+  getClusterRebalance(...a): CancelablePromise<{
      lastCompletedRebalance:   | {
         finishedAt: string;
         partitions: object[];
@@ -654,20 +658,20 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         | null;
      state: "BALANCED" | "BALANCING" | "UNBALANCED";
   }>;
-  getClusterStatus: CancelablePromise<{
+  getClusterStatus(...a): CancelablePromise<{
      status: "HEALTHY" | "DEGRADED" | "DOWN";
   }>;
-  getClusterTopology: CancelablePromise<{
+  getClusterTopology(...a): CancelablePromise<{
      brokers: object[];
      clusterId: string | null;
      clusterSize: number;
      gatewayVersion: string | null;
      physicalTenants: object[];
   }>;
-  getClusterUpgradeStatus: CancelablePromise<{
+  getClusterUpgradeStatus(...a): CancelablePromise<{
      status: "UNKNOWN" | "MIGRATED" | "MIGRATION_IN_PROGRESS";
   }>;
-  getConfig: {
+  getConfig(...a): {
      __raw: {
       [key: string]: string | undefined;
      };
@@ -749,7 +753,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         workerName?: string;
      };
   };
-  getDecisionDefinition: CancelablePromise<{
+  getDecisionDefinition(...a): CancelablePromise<{
      decisionDefinitionId: string;
      decisionDefinitionKey: string;
      decisionRequirementsId: string;
@@ -760,8 +764,8 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
      version: number;
   }>;
-  getDecisionDefinitionXml: CancelablePromise<string>;
-  getDecisionInstance: CancelablePromise<{
+  getDecisionDefinitionXml(...a): CancelablePromise<string>;
+  getDecisionInstance(...a): CancelablePromise<{
      businessId:   | {
       [key: number]: string;
         __brand: "BusinessId";
@@ -803,7 +807,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      state: DecisionInstanceStateEnum;
      tenantId: string;
   }>;
-  getDecisionRequirements: CancelablePromise<{
+  getDecisionRequirements(...a): CancelablePromise<{
      decisionRequirementsId: string;
      decisionRequirementsKey: string;
      decisionRequirementsName: string;
@@ -811,10 +815,10 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
      version: number;
   }>;
-  getDecisionRequirementsXml: CancelablePromise<string>;
-  getDocument: CancelablePromise<{
+  getDecisionRequirementsXml(...a): CancelablePromise<string>;
+  getDocument(...a): CancelablePromise<{
   }>;
-  getElementInstance: CancelablePromise<{
+  getElementInstance(...a): CancelablePromise<{
      elementId: string;
      elementInstanceKey: string;
      elementName: string;
@@ -864,18 +868,18 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         | "SCRIPT_TASK"
         | "SEND_TASK";
   }>;
-  getErrorMode: "throw" | "result";
-  getExportingStatus: CancelablePromise<{
+  getErrorMode(...a): "throw" | "result";
+  getExportingStatus(...a): CancelablePromise<{
      status: ExportingStatusCode;
   }>;
-  getFormByKey: CancelablePromise<{
+  getFormByKey(...a): CancelablePromise<{
      formId: string;
      formKey: string;
      schema: string;
      tenantId: string;
      version: number;
   }>;
-  getGlobalClusterVariable: CancelablePromise<{
+  getGlobalClusterVariable(...a): CancelablePromise<{
      kind: ClusterVariableKindEnum;
      metadata: {
       [key: string]: string | number;
@@ -885,7 +889,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string | null;
      value: string;
   }>;
-  getGlobalJobStatistics: CancelablePromise<{
+  getGlobalJobStatistics(...a): CancelablePromise<{
      completed: {
         count: number;
         lastUpdatedAt: string | null;
@@ -900,7 +904,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      };
      isIncomplete: boolean;
   }>;
-  getGlobalTaskListener: CancelablePromise<{
+  getGlobalTaskListener(...a): CancelablePromise<{
      afterNonGlobal?: boolean;
      eventTypes: GlobalTaskListenerEventTypeEnum[];
      id: string;
@@ -909,22 +913,22 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      source: GlobalListenerSourceEnum;
      type?: string;
   }>;
-  getGroup: CancelablePromise<{
+  getGroup(...a): CancelablePromise<{
      description: string | null;
      groupId: string;
      name: string;
   }>;
-  getHistoryBackup: CancelablePromise<{
+  getHistoryBackup(...a): CancelablePromise<{
      backupId: number;
      details: object[];
      failureReason: string | null;
      state: HistoryBackupStateCode;
   }>;
-  getHistoryBackupAsClusterAdmin: CancelablePromise<{
+  getHistoryBackupAsClusterAdmin(...a): CancelablePromise<{
      backupId: number;
      physicalTenants: object[];
   }>;
-  getIncident: CancelablePromise<{
+  getIncident(...a): CancelablePromise<{
      creationTime: string;
      elementId: string;
      elementInstanceKey: string;
@@ -947,7 +951,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      state: IncidentStateEnum;
      tenantId: string;
   }>;
-  getJobErrorStatistics: CancelablePromise<{
+  getJobErrorStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -964,7 +968,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getJobTimeSeriesStatistics: CancelablePromise<{
+  getJobTimeSeriesStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -981,7 +985,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getJobTypeStatistics: CancelablePromise<{
+  getJobTypeStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -998,7 +1002,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getJobWorkerStatistics: CancelablePromise<{
+  getJobWorkerStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1015,19 +1019,19 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getLicense: CancelablePromise<{
+  getLicense(...a): CancelablePromise<{
      expiresAt: string | null;
      isCommercial: boolean;
      licenseType: string;
      validLicense: boolean;
   }>;
-  getMappingRule: CancelablePromise<{
+  getMappingRule(...a): CancelablePromise<{
      claimName: string;
      claimValue: string;
      mappingRuleId: string;
      name: string;
   }>;
-  getProcessDefinition: CancelablePromise<{
+  getProcessDefinition(...a): CancelablePromise<{
      hasStartForm: boolean;
      name: string | null;
      processDefinitionId: string;
@@ -1038,7 +1042,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      version: number;
      versionTag: string | null;
   }>;
-  getProcessDefinitionInstanceStatistics: CancelablePromise<{
+  getProcessDefinitionInstanceStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1055,7 +1059,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getProcessDefinitionInstanceVersionStatistics: CancelablePromise<{
+  getProcessDefinitionInstanceVersionStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1072,7 +1076,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getProcessDefinitionMessageSubscriptionStatistics: CancelablePromise<{
+  getProcessDefinitionMessageSubscriptionStatistics(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1089,11 +1093,11 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getProcessDefinitionStatistics: CancelablePromise<{
+  getProcessDefinitionStatistics(...a): CancelablePromise<{
      items: object[];
   }>;
-  getProcessDefinitionXml: CancelablePromise<string>;
-  getProcessInstance: CancelablePromise<{
+  getProcessDefinitionXml(...a): CancelablePromise<string>;
+  getProcessInstance(...a): CancelablePromise<{
      businessId:   | {
       [key: number]: string;
         __brand: "BusinessId";
@@ -1128,31 +1132,14 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tags: string[];
      tenantId: string;
   }>;
-  getProcessInstanceCallHierarchy: CancelablePromise<object[]>;
-  getProcessInstanceSequenceFlows: CancelablePromise<{
+  getProcessInstanceCallHierarchy(...a): CancelablePromise<object[]>;
+  getProcessInstanceSequenceFlows(...a): CancelablePromise<{
      items: object[];
   }>;
-  getProcessInstanceStatistics: CancelablePromise<{
+  getProcessInstanceStatistics(...a): CancelablePromise<{
      items: object[];
   }>;
-  getProcessInstanceStatisticsByDefinition: CancelablePromise<{
-     items: object[];
-     page: {
-        endCursor:   | {
-         [key: number]: string;
-           __brand: "EndCursor";
-         }
-           | null;
-        hasMoreTotalItems: boolean;
-        startCursor:   | {
-         [key: number]: string;
-           __brand: "StartCursor";
-         }
-           | null;
-        totalItems: number;
-     };
-  }>;
-  getProcessInstanceStatisticsByError: CancelablePromise<{
+  getProcessInstanceStatisticsByDefinition(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1169,10 +1156,27 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  getProcessInstanceWaitStateStatistics: CancelablePromise<{
+  getProcessInstanceStatisticsByError(...a): CancelablePromise<{
+     items: object[];
+     page: {
+        endCursor:   | {
+         [key: number]: string;
+           __brand: "EndCursor";
+         }
+           | null;
+        hasMoreTotalItems: boolean;
+        startCursor:   | {
+         [key: number]: string;
+           __brand: "StartCursor";
+         }
+           | null;
+        totalItems: number;
+     };
+  }>;
+  getProcessInstanceWaitStateStatistics(...a): CancelablePromise<{
      items: object[];
   }>;
-  getResource: CancelablePromise<{
+  getResource(...a): CancelablePromise<{
      resourceId: string;
      resourceKey: string;
      resourceName: string;
@@ -1180,43 +1184,43 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      version: number;
      versionTag: string | null;
   }>;
-  getResourceContent: CancelablePromise<{
+  getResourceContent(...a): CancelablePromise<{
    [key: string]: unknown;
   }>;
-  getResourceContentBinary: CancelablePromise<{
+  getResourceContentBinary(...a): CancelablePromise<{
   }>;
-  getRestoreStatus: CancelablePromise<{
+  getRestoreStatus(...a): CancelablePromise<{
      brokers: object[];
      changeId: string;
      startedAt: string | null;
      status: "COMPLETED" | "FAILED" | "IN_PROGRESS" | "CANCELLED";
   }>;
-  getRole: CancelablePromise<{
+  getRole(...a): CancelablePromise<{
      description: string | null;
      name: string;
      roleId: string;
   }>;
-  getRuntimeBackup: CancelablePromise<{
+  getRuntimeBackup(...a): CancelablePromise<{
      backupId: number;
      details: object[];
      failureReason: string | null;
      state: StateCode;
   }>;
-  getRuntimeBackupAsClusterAdmin: CancelablePromise<{
+  getRuntimeBackupAsClusterAdmin(...a): CancelablePromise<{
      backupId: number;
      failureReason: string | null;
      physicalTenants: object[];
      state: StateCode;
   }>;
-  getRuntimeBackupState: CancelablePromise<{
+  getRuntimeBackupState(...a): CancelablePromise<{
      backupStates: object[];
      checkpointStates: object[];
      ranges: object[];
   }>;
-  getRuntimeBackupStateAsClusterAdmin: CancelablePromise<{
+  getRuntimeBackupStateAsClusterAdmin(...a): CancelablePromise<{
      physicalTenants: object[];
   }>;
-  getStartProcessForm: CancelablePromise<
+  getStartProcessForm(...a): CancelablePromise<
      | void
      | {
      formId: string;
@@ -1225,10 +1229,11 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
      version: number;
   }>;
-  getStatus: CancelablePromise<void>;
-  getSystemConfiguration: CancelablePromise<{
+  getStatus(...a): CancelablePromise<void>;
+  getSystemConfiguration(...a): CancelablePromise<{
      authentication: {
         canLogout: boolean;
+        isCamundaGroupsEnabled: boolean;
         isLoginDelegated: boolean;
      };
      cloud: {
@@ -1239,6 +1244,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      };
      deployment: {
         isMultiTenancyEnabled: boolean;
+        isTenantsApiEnabled: boolean;
         maxRequestSize: number;
      };
      jobMetrics: {
@@ -1250,12 +1256,12 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         maxWorkerNameLength: number;
      };
   }>;
-  getTenant: CancelablePromise<{
+  getTenant(...a): CancelablePromise<{
      description: string | null;
      name: string;
      tenantId: string;
   }>;
-  getTenantClusterVariable: CancelablePromise<{
+  getTenantClusterVariable(...a): CancelablePromise<{
      kind: ClusterVariableKindEnum;
      metadata: {
       [key: string]: string | number;
@@ -1265,7 +1271,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string | null;
      value: string;
   }>;
-  getTopology: CancelablePromise<{
+  getTopology(...a): CancelablePromise<{
      brokers: object[];
      clusterId: string | null;
      clusterSize: number;
@@ -1274,7 +1280,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      partitionsCount: number;
      replicationFactor: number;
   }>;
-  getUsageMetrics: CancelablePromise<{
+  getUsageMetrics(...a): CancelablePromise<{
      activeTenants: number;
      assignees: number;
      decisionInstances: number;
@@ -1283,12 +1289,12 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
       [key: string]: object;
      };
   }>;
-  getUser: CancelablePromise<{
+  getUser(...a): CancelablePromise<{
      email: string | null;
      name: string | null;
      username: string;
   }>;
-  getUserTask: CancelablePromise<{
+  getUserTask(...a): CancelablePromise<{
      assignee: string | null;
      businessId:   | {
       [key: number]: string;
@@ -1312,6 +1318,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         __brand: "FormKey";
       }
         | null;
+     isSuspended: boolean;
      name: string | null;
      priority: number;
      processDefinitionId: string;
@@ -1329,7 +1336,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
      userTaskKey: string;
   }>;
-  getUserTaskForm: CancelablePromise<
+  getUserTaskForm(...a): CancelablePromise<
      | void
      | {
      formId: string;
@@ -1338,7 +1345,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
      version: number;
   }>;
-  getVariable: CancelablePromise<{
+  getVariable(...a): CancelablePromise<{
      name: string;
      processInstanceKey: string;
      rootProcessInstanceKey:   | {
@@ -1351,76 +1358,76 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      value: string;
      variableKey: string;
   }>;
-  getWorkers: any[];
-  listHistoryBackups: CancelablePromise<object[]>;
-  listHistoryBackupsAsClusterAdmin: CancelablePromise<object[]>;
-  listRuntimeBackups: CancelablePromise<object[]>;
-  listRuntimeBackupsAsClusterAdmin: CancelablePromise<object[]>;
-  listSecrets: CancelablePromise<{
+  getWorkers(...a): any[];
+  listHistoryBackups(...a): CancelablePromise<object[]>;
+  listHistoryBackupsAsClusterAdmin(...a): CancelablePromise<object[]>;
+  listRuntimeBackups(...a): CancelablePromise<object[]>;
+  listRuntimeBackupsAsClusterAdmin(...a): CancelablePromise<object[]>;
+  listSecrets(...a): CancelablePromise<{
      references: string[];
   }>;
-  logger: {
-     code: void;
-     debug: void;
-     error: void;
-     info: void;
-     level: LogLevel;
-     scope: { level: () => LogLevel; setLevel: (level: LogLevel) => void; setTransport: (t?: ((e: { level: LogLevel; scope: string; ts: number; args: any[]; code?: string | undefined; data?: any; }) => void) | undefined) => void; ... 7 more ...; code: (level: LogLevel, code: string, msg: string, data?: any) => void; };
-     setLevel: void;
-     setTransport: void;
-     silly: void;
-     trace: void;
-     warn: void;
+  logger(...a): {
+     code(...a): void;
+     debug(...a): void;
+     error(...a): void;
+     info(...a): void;
+     level(...a): LogLevel;
+     scope(...a): { level: () => LogLevel; setLevel: (level: LogLevel) => void; setTransport: (t?: ((e: { level: LogLevel; scope: string; ts: number; args: any[]; code?: string | undefined; data?: any; }) => void) | undefined) => void; ... 7 more ...; code: (level: LogLevel, code: string, msg: string, data?: any) => void; };
+     setLevel(...a): void;
+     setTransport(...a): void;
+     silly(...a): void;
+     trace(...a): void;
+     warn(...a): void;
   };
-  migrateProcessInstance: CancelablePromise<void>;
-  migrateProcessInstancesBatchOperation: CancelablePromise<{
+  migrateProcessInstance(...a): CancelablePromise<void>;
+  migrateProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  modifyProcessInstance: CancelablePromise<void>;
-  modifyProcessInstancesBatchOperation: CancelablePromise<{
+  modifyProcessInstance(...a): CancelablePromise<void>;
+  modifyProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  onAuthHeaders: void;
-  pauseClusterExporting: CancelablePromise<void>;
-  pauseExporting: CancelablePromise<void>;
-  pinClock: CancelablePromise<void>;
-  publishMessage: CancelablePromise<{
+  onAuthHeaders(...a): void;
+  pauseClusterExporting(...a): CancelablePromise<void>;
+  pauseExporting(...a): CancelablePromise<void>;
+  pinClock(...a): CancelablePromise<void>;
+  publishMessage(...a): CancelablePromise<{
      messageKey: string;
      tenantId: string;
   }>;
-  resetClock: CancelablePromise<void>;
-  resolveIncident: CancelablePromise<void>;
-  resolveIncidentsBatchOperation: CancelablePromise<{
+  resetClock(...a): CancelablePromise<void>;
+  resolveIncident(...a): CancelablePromise<void>;
+  resolveIncidentsBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  resolveProcessInstanceIncidents: CancelablePromise<{
+  resolveProcessInstanceIncidents(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  resolveSecrets: CancelablePromise<{
+  resolveSecrets(...a): CancelablePromise<{
      errors: object[];
      resolved: object[];
   }>;
-  restore: CancelablePromise<{
+  restore(...a): CancelablePromise<{
      changeId: string;
      plannedChanges: object[];
   }>;
-  restoreAsClusterAdmin: CancelablePromise<{
+  restoreAsClusterAdmin(...a): CancelablePromise<{
      changeId: string;
      plannedChanges: object[];
   }>;
-  resumeBatchOperation: CancelablePromise<void>;
-  resumeClusterExporting: CancelablePromise<void>;
-  resumeExporting: CancelablePromise<void>;
-  resumeProcessInstance: CancelablePromise<void>;
-  resumeProcessInstancesBatchOperation: CancelablePromise<{
+  resumeBatchOperation(...a): CancelablePromise<void>;
+  resumeClusterExporting(...a): CancelablePromise<void>;
+  resumeExporting(...a): CancelablePromise<void>;
+  resumeProcessInstance(...a): CancelablePromise<void>;
+  resumeProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  searchAgentDefinitions: CancelablePromise<{
+  searchAgentDefinitions(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1437,7 +1444,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchAgentInstanceHistory: CancelablePromise<{
+  searchAgentInstanceHistory(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1454,7 +1461,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchAgentInstances: CancelablePromise<{
+  searchAgentInstances(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1471,7 +1478,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchAuditLogs: CancelablePromise<{
+  searchAuditLogs(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1488,7 +1495,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchAuthorizations: CancelablePromise<{
+  searchAuthorizations(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1505,7 +1512,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchBatchOperationItems: CancelablePromise<{
+  searchBatchOperationItems(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1522,7 +1529,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchBatchOperations: CancelablePromise<{
+  searchBatchOperations(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1539,7 +1546,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchClientsForGroup: CancelablePromise<{
+  searchClientsForGroup(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1556,7 +1563,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchClientsForRole: CancelablePromise<{
+  searchClientsForRole(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1573,7 +1580,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchClientsForTenant: CancelablePromise<{
+  searchClientsForTenant(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1590,7 +1597,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchClusterVariables: CancelablePromise<{
+  searchClusterVariables(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1607,7 +1614,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchCorrelatedMessageSubscriptions: CancelablePromise<{
+  searchCorrelatedMessageSubscriptions(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1624,7 +1631,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchDecisionDefinitions: CancelablePromise<{
+  searchDecisionDefinitions(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1641,7 +1648,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchDecisionInstances: CancelablePromise<{
+  searchDecisionInstances(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1658,7 +1665,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchDecisionRequirements: CancelablePromise<{
+  searchDecisionRequirements(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1675,7 +1682,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchElementInstanceIncidents: CancelablePromise<{
+  searchElementInstanceIncidents(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1692,7 +1699,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchElementInstances: CancelablePromise<{
+  searchElementInstances(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1709,7 +1716,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchElementInstanceWaitStates: CancelablePromise<{
+  searchElementInstanceWaitStates(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1726,7 +1733,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchGlobalTaskListeners: CancelablePromise<{
+  searchGlobalTaskListeners(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1743,7 +1750,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchGroupIdsForTenant: CancelablePromise<{
+  searchGroupIdsForTenant(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1760,7 +1767,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchGroups: CancelablePromise<{
+  searchGroups(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1777,7 +1784,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchGroupsForRole: CancelablePromise<{
+  searchGroupsForRole(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1794,7 +1801,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchIncidents: CancelablePromise<{
+  searchIncidents(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1811,7 +1818,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchJobs: CancelablePromise<{
+  searchJobs(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1828,7 +1835,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchMappingRule: CancelablePromise<{
+  searchMappingRule(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1845,7 +1852,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchMappingRulesForGroup: CancelablePromise<{
+  searchMappingRulesForGroup(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1862,7 +1869,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchMappingRulesForRole: CancelablePromise<{
+  searchMappingRulesForRole(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1879,7 +1886,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchMappingRulesForTenant: CancelablePromise<{
+  searchMappingRulesForTenant(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1896,7 +1903,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchMessageSubscriptions: CancelablePromise<{
+  searchMessageSubscriptions(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1913,7 +1920,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchOwnAuthorizations: CancelablePromise<{
+  searchOwnAuthorizations(...a): CancelablePromise<{
      authorizationsEnabled: boolean;
      items: object[];
      page: {
@@ -1931,7 +1938,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchProcessDefinitions: CancelablePromise<{
+  searchProcessDefinitions(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1948,7 +1955,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchProcessDefinitionVariableNames: CancelablePromise<{
+  searchProcessDefinitionVariableNames(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1965,7 +1972,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchProcessInstanceIncidents: CancelablePromise<{
+  searchProcessInstanceIncidents(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1982,7 +1989,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchProcessInstances: CancelablePromise<{
+  searchProcessInstances(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -1999,7 +2006,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchResources: CancelablePromise<{
+  searchResources(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2016,7 +2023,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchRoles: CancelablePromise<{
+  searchRoles(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2033,7 +2040,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchRolesForGroup: CancelablePromise<{
+  searchRolesForGroup(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2050,7 +2057,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchRolesForTenant: CancelablePromise<{
+  searchRolesForTenant(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2067,7 +2074,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchTenants: CancelablePromise<{
+  searchTenants(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2084,7 +2091,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUsers: CancelablePromise<{
+  searchUsers(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2101,7 +2108,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUsersForGroup: CancelablePromise<{
+  searchUsersForGroup(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2118,7 +2125,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUsersForRole: CancelablePromise<{
+  searchUsersForRole(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2135,7 +2142,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUsersForTenant: CancelablePromise<{
+  searchUsersForTenant(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2152,7 +2159,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUserTaskAuditLogs: CancelablePromise<{
+  searchUserTaskAuditLogs(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2169,7 +2176,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUserTaskEffectiveVariables: CancelablePromise<{
+  searchUserTaskEffectiveVariables(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2186,7 +2193,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUserTasks: CancelablePromise<{
+  searchUserTasks(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2203,7 +2210,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchUserTaskVariables: CancelablePromise<{
+  searchUserTaskVariables(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2220,7 +2227,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchVariables: CancelablePromise<{
+  searchVariables(...a): CancelablePromise<{
      items: object[];
      page: {
         endCursor:   | {
@@ -2237,47 +2244,47 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         totalItems: number;
      };
   }>;
-  searchVariablesAsDto: CancelablePromise<{
+  searchVariablesAsDto(...a): CancelablePromise<{
      raw: {
       [key: string]: unknown;
      };
-     get: unknown;
-     has: boolean;
-     validate: {
+     get(...a): unknown;
+     has(...a): boolean;
+     validate(...a): {
       [key: string]: unknown;
      };
   }>;
-  stopAllWorkers: void;
-  suspendBatchOperation: CancelablePromise<void>;
-  suspendProcessInstance: CancelablePromise<void>;
-  suspendProcessInstancesBatchOperation: CancelablePromise<{
+  stopAllWorkers(...a): void;
+  suspendBatchOperation(...a): CancelablePromise<void>;
+  suspendProcessInstance(...a): CancelablePromise<void>;
+  suspendProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  syncRuntimeBackupState: CancelablePromise<{
+  syncRuntimeBackupState(...a): CancelablePromise<{
      backupStates: object[];
      checkpointStates: object[];
      ranges: object[];
   }>;
-  syncRuntimeBackupStateAsClusterAdmin: CancelablePromise<{
+  syncRuntimeBackupStateAsClusterAdmin(...a): CancelablePromise<{
      physicalTenants: object[];
   }>;
-  takeHistoryBackup: CancelablePromise<{
+  takeHistoryBackup(...a): CancelablePromise<{
      backupId: number;
      scheduledSnapshots: string[];
   }>;
-  takeHistoryBackupAsClusterAdmin: CancelablePromise<{
+  takeHistoryBackupAsClusterAdmin(...a): CancelablePromise<{
      backupId: number;
      physicalTenants: object[];
   }>;
-  takeRuntimeBackup: CancelablePromise<{
+  takeRuntimeBackup(...a): CancelablePromise<{
      backupId: number;
   }>;
-  takeRuntimeBackupAsClusterAdmin: CancelablePromise<{
+  takeRuntimeBackupAsClusterAdmin(...a): CancelablePromise<{
      physicalTenants: object[];
   }>;
-  throwJobError: CancelablePromise<void>;
-  triggerClusterRebalance: CancelablePromise<{
+  throwJobError(...a): CancelablePromise<void>;
+  triggerClusterRebalance(...a): CancelablePromise<{
      lastCompletedRebalance:   | {
         finishedAt: string;
         partitions: object[];
@@ -2297,24 +2304,24 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         | null;
      state: "BALANCED" | "BALANCING" | "UNBALANCED";
   }>;
-  unassignClientFromGroup: CancelablePromise<void>;
-  unassignClientFromTenant: CancelablePromise<void>;
-  unassignGroupFromTenant: CancelablePromise<void>;
-  unassignMappingRuleFromGroup: CancelablePromise<void>;
-  unassignMappingRuleFromTenant: CancelablePromise<void>;
-  unassignRoleFromClient: CancelablePromise<void>;
-  unassignRoleFromGroup: CancelablePromise<void>;
-  unassignRoleFromMappingRule: CancelablePromise<void>;
-  unassignRoleFromTenant: CancelablePromise<void>;
-  unassignRoleFromUser: CancelablePromise<void>;
-  unassignUserFromGroup: CancelablePromise<void>;
-  unassignUserFromTenant: CancelablePromise<void>;
-  unassignUserTask: CancelablePromise<void>;
-  updateAgentInstance: CancelablePromise<{
+  unassignClientFromGroup(...a): CancelablePromise<void>;
+  unassignClientFromTenant(...a): CancelablePromise<void>;
+  unassignGroupFromTenant(...a): CancelablePromise<void>;
+  unassignMappingRuleFromGroup(...a): CancelablePromise<void>;
+  unassignMappingRuleFromTenant(...a): CancelablePromise<void>;
+  unassignRoleFromClient(...a): CancelablePromise<void>;
+  unassignRoleFromGroup(...a): CancelablePromise<void>;
+  unassignRoleFromMappingRule(...a): CancelablePromise<void>;
+  unassignRoleFromTenant(...a): CancelablePromise<void>;
+  unassignRoleFromUser(...a): CancelablePromise<void>;
+  unassignUserFromGroup(...a): CancelablePromise<void>;
+  unassignUserFromTenant(...a): CancelablePromise<void>;
+  unassignUserTask(...a): CancelablePromise<void>;
+  updateAgentInstance(...a): CancelablePromise<{
      createdHistory: object[];
   }>;
-  updateAuthorization: CancelablePromise<void>;
-  updateGlobalClusterVariable: CancelablePromise<{
+  updateAuthorization(...a): CancelablePromise<void>;
+  updateGlobalClusterVariable(...a): CancelablePromise<{
      kind: ClusterVariableKindEnum;
      metadata: {
       [key: string]: string | number;
@@ -2324,7 +2331,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string | null;
      value: string;
   }>;
-  updateGlobalTaskListener: CancelablePromise<{
+  updateGlobalTaskListener(...a): CancelablePromise<{
      afterNonGlobal?: boolean;
      eventTypes: GlobalTaskListenerEventTypeEnum[];
      id: string;
@@ -2333,33 +2340,33 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      source: GlobalListenerSourceEnum;
      type?: string;
   }>;
-  updateGroup: CancelablePromise<{
+  updateGroup(...a): CancelablePromise<{
      description: string | null;
      groupId: string;
      name: string;
   }>;
-  updateJob: CancelablePromise<void>;
-  updateJobsBatchOperation: CancelablePromise<{
+  updateJob(...a): CancelablePromise<void>;
+  updateJobsBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
      batchOperationType: BatchOperationTypeEnum;
   }>;
-  updateMappingRule: CancelablePromise<{
+  updateMappingRule(...a): CancelablePromise<{
      claimName: string;
      claimValue: string;
      mappingRuleId: string;
      name: string;
   }>;
-  updateRole: CancelablePromise<{
+  updateRole(...a): CancelablePromise<{
      description: string | null;
      name: string;
      roleId: string;
   }>;
-  updateTenant: CancelablePromise<{
+  updateTenant(...a): CancelablePromise<{
      description: string | null;
      name: string;
      tenantId: string;
   }>;
-  updateTenantClusterVariable: CancelablePromise<{
+  updateTenantClusterVariable(...a): CancelablePromise<{
      kind: ClusterVariableKindEnum;
      metadata: {
       [key: string]: string | number;
@@ -2369,13 +2376,13 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string | null;
      value: string;
   }>;
-  updateUser: CancelablePromise<{
+  updateUser(...a): CancelablePromise<{
      email: string | null;
      name: string | null;
      username: string;
   }>;
-  updateUserTask: CancelablePromise<void>;
-  withCorrelation: Promise<unknown>;
+  updateUserTask(...a): CancelablePromise<void>;
+  withCorrelation(...a): Promise<unknown>;
 }>;
 ```
 
@@ -2393,19 +2400,19 @@ signatures), matching the runtime wrappers the constructor installs.
 
 ### args
 
-...\[[`CamundaOptions`](../interfaces/CamundaOptions.md)\]
+...\[`options?`: [`CamundaOptions`](../interfaces/CamundaOptions.md)\]
 
 ## Returns
 
 [`WithSearchPagination`](../type-aliases/WithSearchPagination.md)\<\{
 `clock`: \{
-`deadline`: \{
+`deadline`(...`a`): \{
 `dispose`: (...`a`) => `void`;
 `signal`: \{
 \};
 \};
-`now`: `number`;
-`sleep`: `Promise`\<`void`\>;
+`now`(...`a`): `number`;
+`sleep`(...`a`): `Promise`\<`void`\>;
 \};
 `config`: \{
 `__raw`: \{
@@ -2489,71 +2496,74 @@ signatures), matching the runtime wrappers the constructor installs.
 `workerName?`: `string`;
 \};
 \};
-`_getSupportLogger`: \{
-`log`: `void`;
+`random`: \{
+`next`(...`a`): `number`;
 \};
-`_invokeWithRetry`: `Promise`\<`unknown`\>;
-`activateAdHocSubProcessActivities`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`activateJobs`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`_getSupportLogger`(...`a`): \{
+`log`(...`a`): `void`;
+\};
+`_invokeWithRetry`(...`a`): `Promise`\<`unknown`\>;
+`activateAdHocSubProcessActivities`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`activateJobs`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `jobs`: `object`[];
 \}\>;
-`assignClientToGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignClientToTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignGroupToTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignMappingRuleToGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignMappingRuleToTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignProcessInstanceBusinessId`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignRoleToClient`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignRoleToGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignRoleToMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignRoleToTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignRoleToUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignUserTask`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignUserToGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`assignUserToTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`broadcastSignal`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`assignClientToGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignClientToTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignGroupToTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignMappingRuleToGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignMappingRuleToTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignProcessInstanceBusinessId`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignRoleToClient`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignRoleToGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignRoleToMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignRoleToTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignRoleToUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignUserTask`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignUserToGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`assignUserToTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`broadcastSignal`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `signalKey`: `string`;
 `tenantId`: `string`;
 \}\>;
-`cancelBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`cancelClusterRebalance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`cancelBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`cancelClusterRebalance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `wasRunning`: `boolean`;
 \}\>;
-`cancelProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`cancelProcessInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`cancelProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`cancelProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`changeClusterMode`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`changeClusterMode`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `changeId`: `string`;
 `plannedChanges`: `object`[];
 \}\>;
-`changeClusterModeAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`changeClusterModeAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `changeId`: `string`;
 `plannedChanges`: `object`[];
 \}\>;
-`clearAuthCache`: `void`;
-`completeJob`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`completeUserTask`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`configure`: `void`;
-`correlateMessage`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`clearAuthCache`(...`a`): `void`;
+`completeJob`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`completeUserTask`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`configure`(...`a`): `void`;
+`correlateMessage`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `messageKey`: `string`;
 `processInstanceKey`: `string`;
 `tenantId`: `string`;
 \}\>;
-`createAdminUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createAdminUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `email`: `string` \| `null`;
 `name`: `string` \| `null`;
 `username`: `string`;
 \}\>;
-`createAgentInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createAgentInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `agentInstanceKey`: `string`;
 `createdHistory`: `object`[];
 \}\>;
-`createAuthorization`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createAuthorization`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `authorizationKey`: `string`;
 \}\>;
-`createDeployment`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createDeployment`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `decisionRequirements`: `object`[];
 `decisions`: `object`[];
 `deploymentKey`: `string`;
@@ -2563,7 +2573,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `resources`: `object`[];
 `tenantId`: `string`;
 \}\>;
-`createDocument`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createDocument`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `camunda.document.type`: `"camunda"`;
 `contentHash`: `string` \| `null`;
 `documentId`: `string`;
@@ -2588,16 +2598,16 @@ signatures), matching the runtime wrappers the constructor installs.
 \};
 `storeId`: `string`;
 \}\>;
-`createDocumentLink`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createDocumentLink`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `expiresAt`: `string`;
 `url`: `string`;
 \}\>;
-`createDocuments`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createDocuments`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `createdDocuments`: `object`[];
 `failedDocuments`: `object`[];
 \}\>;
-`createElementInstanceVariables`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`createGlobalClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createElementInstanceVariables`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`createGlobalClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `kind`: [`ClusterVariableKindEnum`](../type-aliases/ClusterVariableKindEnum.md);
 `metadata`: \{
 \[`key`: `string`\]: `string` \| `number`;
@@ -2607,7 +2617,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string` \| `null`;
 `value`: `string`;
 \}\>;
-`createGlobalTaskListener`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createGlobalTaskListener`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `afterNonGlobal?`: `boolean`;
 `eventTypes`: [`GlobalTaskListenerEventTypeEnum`](../type-aliases/GlobalTaskListenerEventTypeEnum.md)[];
 `id`: `string`;
@@ -2616,29 +2626,29 @@ signatures), matching the runtime wrappers the constructor installs.
 `source`: [`GlobalListenerSourceEnum`](../type-aliases/GlobalListenerSourceEnum.md);
 `type?`: `string`;
 \}\>;
-`createGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `groupId`: `string`;
 `name`: `string`;
 \}\>;
-`createJobWorker`: \{
+`createJobWorker`(...`a`): \{
 `activeJobs`: `number`;
 `name`: `string`;
 `stopped`: `boolean`;
-`start`: `void`;
-`stop`: `void`;
-`stopGracefully`: `Promise`\<\{
+`start`(...`a`): `void`;
+`stop`(...`a`): `void`;
+`stopGracefully`(...`a`): `Promise`\<\{
 `remainingJobs`: `number`;
 `timedOut`: `boolean`;
 \}\>;
 \};
-`createMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `claimName`: `string`;
 `claimValue`: `string`;
 `mappingRuleId`: `string`;
 `name`: `string`;
 \}\>;
-`createProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `businessId`: \| \{
 \[`key`: `number`\]: `string`;
 `__brand`: `"BusinessId"`;
@@ -2654,17 +2664,17 @@ signatures), matching the runtime wrappers the constructor installs.
 \[`key`: `string`\]: `unknown`;
 \};
 \}\>;
-`createRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `name`: `string`;
 `roleId`: `string`;
 \}\>;
-`createTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `name`: `string`;
 `tenantId`: `string`;
 \}\>;
-`createTenantClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createTenantClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `kind`: [`ClusterVariableKindEnum`](../type-aliases/ClusterVariableKindEnum.md);
 `metadata`: \{
 \[`key`: `string`\]: `string` \| `number`;
@@ -2674,44 +2684,44 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string` \| `null`;
 `value`: `string`;
 \}\>;
-`createThreadedJobWorker`: \{
+`createThreadedJobWorker`(...`a`): \{
 `activeJobs`: `number`;
 `busyThreads`: `number`;
 `name`: `string`;
 `poolSize`: `number`;
 `ready`: `Promise`\<`void`\>;
 `stopped`: `boolean`;
-`start`: `void`;
-`stop`: `void`;
-`stopGracefully`: `Promise`\<\{
+`start`(...`a`): `void`;
+`stop`(...`a`): `void`;
+`stopGracefully`(...`a`): `Promise`\<\{
 `remainingJobs`: `number`;
 `timedOut`: `boolean`;
 \}\>;
 \};
-`createUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`createUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `email`: `string` \| `null`;
 `name`: `string` \| `null`;
 `username`: `string`;
 \}\>;
-`deleteAuthorization`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteDecisionInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteDecisionInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`deleteAuthorization`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteDecisionInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteDecisionInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`deleteDocument`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteGlobalClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteGlobalTaskListener`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteHistoryBackup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteHistoryBackupAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteProcessInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`deleteDocument`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteGlobalClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteGlobalTaskListener`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteHistoryBackup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteHistoryBackupAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`deleteResource`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`deleteResource`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperation`: \| \{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
@@ -2719,15 +2729,15 @@ signatures), matching the runtime wrappers the constructor installs.
 \| `null`;
 `resourceKey`: `string`;
 \}\>;
-`deleteRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteRuntimeBackup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteRuntimeBackupAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteRuntimeBackupState`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteRuntimeBackupStateAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteTenantClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deleteUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`deployResourcesFromFiles`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`deleteRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteRuntimeBackup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteRuntimeBackupAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteRuntimeBackupState`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteRuntimeBackupStateAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteTenantClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deleteUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`deployResourcesFromFiles`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `decisionRequirements`: `object`[];
 `decisions`: `object`[];
 `deploymentKey`: `string`;
@@ -2737,13 +2747,13 @@ signatures), matching the runtime wrappers the constructor installs.
 `resources`: `object`[];
 `tenantId`: `string`;
 \}\>;
-`emitSupportLogPreamble`: `void`;
-`evaluateConditionals`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`emitSupportLogPreamble`(...`a`): `void`;
+`evaluateConditionals`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `conditionalEvaluationKey`: `string`;
 `processInstances`: `object`[];
 `tenantId`: `string`;
 \}\>;
-`evaluateDecision`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`evaluateDecision`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `decisionDefinitionId`: `string`;
 `decisionDefinitionKey`: `string`;
 `decisionDefinitionName`: `string`;
@@ -2762,15 +2772,15 @@ signatures), matching the runtime wrappers the constructor installs.
 `output`: `string`;
 `tenantId`: `string`;
 \}\>;
-`evaluateExpression`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`evaluateExpression`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `expression`: `string`;
 `referencedSecrets`: `object`[];
 `result`: `unknown`;
 `warnings`: `object`[];
 \}\>;
-`failJob`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`forceAuthRefresh`: `Promise`\<`string` \| `undefined`\>;
-`getAgentDefinition`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`failJob`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`forceAuthRefresh`(...`a`): `Promise`\<`string` \| `undefined`\>;
+`getAgentDefinition`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `agentDefinitionKey`: `string`;
 `agentType`: [`AgentDefinitionTypeEnum`](../type-aliases/AgentDefinitionTypeEnum.md);
 `elementId`: `string`;
@@ -2781,7 +2791,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `processDefinitionVersionTag`: `string` \| `null`;
 `tenantId`: `string`;
 \}\>;
-`getAgentInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getAgentInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `agentDefinitionKey`: `string`;
 `agentInstanceKey`: `string`;
 `completionDate`: `string` \| `null`;
@@ -2846,7 +2856,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 `tools`: `object`[];
 \}\>;
-`getAuditLog`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getAuditLog`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `actorId`: `string` \| `null`;
 `actorType`: \| [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md)
 \| `null`;
@@ -2964,7 +2974,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \}
 \| `null`;
 \}\>;
-`getAuthentication`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getAuthentication`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `authorizedComponents`: `string`[];
 `c8Links`: \{
 \[`key`: `string`\]: `string`;
@@ -2978,10 +2988,10 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenants`: `object`[];
 `username`: `string`;
 \}\>;
-`getAuthHeaders`: `Promise`\<\{
+`getAuthHeaders`(...`a`): `Promise`\<\{
 \[`key`: `string`\]: `string`;
 \}\>;
-`getAuthorization`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getAuthorization`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `authorizationKey`: `string`;
 `ownerId`: `string`;
 `ownerType`: [`OwnerTypeEnum`](../type-aliases/OwnerTypeEnum.md);
@@ -2990,7 +3000,8 @@ signatures), matching the runtime wrappers the constructor installs.
 `resourcePropertyName`: `string` \| `null`;
 `resourceType`: [`ResourceTypeEnum`](../type-aliases/ResourceTypeEnum.md);
 \}\>;
-`getBackpressureState`: \| \{
+`getBackpressureState`(...`a`):
+\| \{
 `backoffMs`: `number`;
 `consecutive`: `number`;
 `permitsCurrent`: `number`;
@@ -3005,7 +3016,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `severity`: `string`;
 `waiters`: `number`;
 \};
-`getBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `actorId`: `string` \| `null`;
 `actorType`: \| [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md)
 \| `null`;
@@ -3020,10 +3031,10 @@ signatures), matching the runtime wrappers the constructor installs.
 `startDate`: `string` \| `null`;
 `state`: [`BatchOperationStateEnum`](../type-aliases/BatchOperationStateEnum.md);
 \}\>;
-`getClusterExportingStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getClusterExportingStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `status`: [`ExportingStatusCode`](../type-aliases/ExportingStatusCode.md);
 \}\>;
-`getClusterRebalance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getClusterRebalance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `lastCompletedRebalance`: \| \{
 `finishedAt`: `string`;
 `partitions`: `object`[];
@@ -3043,20 +3054,20 @@ signatures), matching the runtime wrappers the constructor installs.
 \| `null`;
 `state`: `"BALANCED"` \| `"BALANCING"` \| `"UNBALANCED"`;
 \}\>;
-`getClusterStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getClusterStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `status`: `"HEALTHY"` \| `"DEGRADED"` \| `"DOWN"`;
 \}\>;
-`getClusterTopology`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getClusterTopology`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `brokers`: `object`[];
 `clusterId`: `string` \| `null`;
 `clusterSize`: `number`;
 `gatewayVersion`: `string` \| `null`;
 `physicalTenants`: `object`[];
 \}\>;
-`getClusterUpgradeStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getClusterUpgradeStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `status`: `"UNKNOWN"` \| `"MIGRATED"` \| `"MIGRATION_IN_PROGRESS"`;
 \}\>;
-`getConfig`: \{
+`getConfig`(...`a`): \{
 `__raw`: \{
 \[`key`: `string`\]: `string` \| `undefined`;
 \};
@@ -3138,7 +3149,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `workerName?`: `string`;
 \};
 \};
-`getDecisionDefinition`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getDecisionDefinition`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `decisionDefinitionId`: `string`;
 `decisionDefinitionKey`: `string`;
 `decisionRequirementsId`: `string`;
@@ -3149,8 +3160,8 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 `version`: `number`;
 \}\>;
-`getDecisionDefinitionXml`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>;
-`getDecisionInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getDecisionDefinitionXml`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>;
+`getDecisionInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `businessId`: \| \{
 \[`key`: `number`\]: `string`;
 `__brand`: `"BusinessId"`;
@@ -3192,7 +3203,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `state`: [`DecisionInstanceStateEnum`](../type-aliases/DecisionInstanceStateEnum.md);
 `tenantId`: `string`;
 \}\>;
-`getDecisionRequirements`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getDecisionRequirements`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `decisionRequirementsId`: `string`;
 `decisionRequirementsKey`: `string`;
 `decisionRequirementsName`: `string`;
@@ -3200,10 +3211,10 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 `version`: `number`;
 \}\>;
-`getDecisionRequirementsXml`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>;
-`getDocument`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getDecisionRequirementsXml`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>;
+`getDocument`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 \}\>;
-`getElementInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getElementInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `elementId`: `string`;
 `elementInstanceKey`: `string`;
 `elementName`: `string`;
@@ -3253,18 +3264,18 @@ signatures), matching the runtime wrappers the constructor installs.
 \| `"SCRIPT_TASK"`
 \| `"SEND_TASK"`;
 \}\>;
-`getErrorMode`: `"throw"` \| `"result"`;
-`getExportingStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getErrorMode`(...`a`): `"throw"` \| `"result"`;
+`getExportingStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `status`: [`ExportingStatusCode`](../type-aliases/ExportingStatusCode.md);
 \}\>;
-`getFormByKey`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getFormByKey`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `formId`: `string`;
 `formKey`: `string`;
 `schema`: `string`;
 `tenantId`: `string`;
 `version`: `number`;
 \}\>;
-`getGlobalClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getGlobalClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `kind`: [`ClusterVariableKindEnum`](../type-aliases/ClusterVariableKindEnum.md);
 `metadata`: \{
 \[`key`: `string`\]: `string` \| `number`;
@@ -3274,7 +3285,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string` \| `null`;
 `value`: `string`;
 \}\>;
-`getGlobalJobStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getGlobalJobStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `completed`: \{
 `count`: `number`;
 `lastUpdatedAt`: `string` \| `null`;
@@ -3289,7 +3300,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \};
 `isIncomplete`: `boolean`;
 \}\>;
-`getGlobalTaskListener`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getGlobalTaskListener`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `afterNonGlobal?`: `boolean`;
 `eventTypes`: [`GlobalTaskListenerEventTypeEnum`](../type-aliases/GlobalTaskListenerEventTypeEnum.md)[];
 `id`: `string`;
@@ -3298,22 +3309,22 @@ signatures), matching the runtime wrappers the constructor installs.
 `source`: [`GlobalListenerSourceEnum`](../type-aliases/GlobalListenerSourceEnum.md);
 `type?`: `string`;
 \}\>;
-`getGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `groupId`: `string`;
 `name`: `string`;
 \}\>;
-`getHistoryBackup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getHistoryBackup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 `details`: `object`[];
 `failureReason`: `string` \| `null`;
 `state`: [`HistoryBackupStateCode`](../type-aliases/HistoryBackupStateCode.md);
 \}\>;
-`getHistoryBackupAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getHistoryBackupAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 `physicalTenants`: `object`[];
 \}\>;
-`getIncident`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getIncident`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `creationTime`: `string`;
 `elementId`: `string`;
 `elementInstanceKey`: `string`;
@@ -3336,7 +3347,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `state`: [`IncidentStateEnum`](../type-aliases/IncidentStateEnum.md);
 `tenantId`: `string`;
 \}\>;
-`getJobErrorStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getJobErrorStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3353,7 +3364,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getJobTimeSeriesStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getJobTimeSeriesStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3370,7 +3381,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getJobTypeStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getJobTypeStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3387,7 +3398,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getJobWorkerStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getJobWorkerStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3404,19 +3415,19 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getLicense`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getLicense`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `expiresAt`: `string` \| `null`;
 `isCommercial`: `boolean`;
 `licenseType`: `string`;
 `validLicense`: `boolean`;
 \}\>;
-`getMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `claimName`: `string`;
 `claimValue`: `string`;
 `mappingRuleId`: `string`;
 `name`: `string`;
 \}\>;
-`getProcessDefinition`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessDefinition`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `hasStartForm`: `boolean`;
 `name`: `string` \| `null`;
 `processDefinitionId`: `string`;
@@ -3427,7 +3438,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `version`: `number`;
 `versionTag`: `string` \| `null`;
 \}\>;
-`getProcessDefinitionInstanceStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessDefinitionInstanceStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3444,7 +3455,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getProcessDefinitionInstanceVersionStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessDefinitionInstanceVersionStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3461,7 +3472,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getProcessDefinitionMessageSubscriptionStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessDefinitionMessageSubscriptionStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3478,11 +3489,11 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getProcessDefinitionStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessDefinitionStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 \}\>;
-`getProcessDefinitionXml`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>;
-`getProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessDefinitionXml`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>;
+`getProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `businessId`: \| \{
 \[`key`: `number`\]: `string`;
 `__brand`: `"BusinessId"`;
@@ -3517,31 +3528,14 @@ signatures), matching the runtime wrappers the constructor installs.
 `tags`: `string`[];
 `tenantId`: `string`;
 \}\>;
-`getProcessInstanceCallHierarchy`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
-`getProcessInstanceSequenceFlows`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessInstanceCallHierarchy`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
+`getProcessInstanceSequenceFlows`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 \}\>;
-`getProcessInstanceStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessInstanceStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 \}\>;
-`getProcessInstanceStatisticsByDefinition`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items`: `object`[];
-`page`: \{
-`endCursor`: \| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"EndCursor"`;
-\}
-\| `null`;
-`hasMoreTotalItems`: `boolean`;
-`startCursor`: \| \{
-\[`key`: `number`\]: `string`;
-`__brand`: `"StartCursor"`;
-\}
-\| `null`;
-`totalItems`: `number`;
-\};
-\}\>;
-`getProcessInstanceStatisticsByError`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessInstanceStatisticsByDefinition`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3558,10 +3552,27 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`getProcessInstanceWaitStateStatistics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getProcessInstanceStatisticsByError`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`items`: `object`[];
+`page`: \{
+`endCursor`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"EndCursor"`;
+\}
+\| `null`;
+`hasMoreTotalItems`: `boolean`;
+`startCursor`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"StartCursor"`;
+\}
+\| `null`;
+`totalItems`: `number`;
+\};
+\}\>;
+`getProcessInstanceWaitStateStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 \}\>;
-`getResource`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getResource`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `resourceId`: `string`;
 `resourceKey`: `string`;
 `resourceName`: `string`;
@@ -3569,43 +3580,43 @@ signatures), matching the runtime wrappers the constructor installs.
 `version`: `number`;
 `versionTag`: `string` \| `null`;
 \}\>;
-`getResourceContent`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getResourceContent`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 \[`key`: `string`\]: `unknown`;
 \}\>;
-`getResourceContentBinary`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getResourceContentBinary`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 \}\>;
-`getRestoreStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getRestoreStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `brokers`: `object`[];
 `changeId`: `string`;
 `startedAt`: `string` \| `null`;
 `status`: `"COMPLETED"` \| `"FAILED"` \| `"IN_PROGRESS"` \| `"CANCELLED"`;
 \}\>;
-`getRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `name`: `string`;
 `roleId`: `string`;
 \}\>;
-`getRuntimeBackup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getRuntimeBackup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 `details`: `object`[];
 `failureReason`: `string` \| `null`;
 `state`: [`StateCode`](../type-aliases/StateCode.md);
 \}\>;
-`getRuntimeBackupAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getRuntimeBackupAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 `failureReason`: `string` \| `null`;
 `physicalTenants`: `object`[];
 `state`: [`StateCode`](../type-aliases/StateCode.md);
 \}\>;
-`getRuntimeBackupState`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getRuntimeBackupState`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupStates`: `object`[];
 `checkpointStates`: `object`[];
 `ranges`: `object`[];
 \}\>;
-`getRuntimeBackupStateAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getRuntimeBackupStateAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `physicalTenants`: `object`[];
 \}\>;
-`getStartProcessForm`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<
+`getStartProcessForm`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<
 \| `void`
 \| \{
 `formId`: `string`;
@@ -3614,10 +3625,11 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 `version`: `number`;
 \}\>;
-`getStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`getSystemConfiguration`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`getSystemConfiguration`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `authentication`: \{
 `canLogout`: `boolean`;
+`isCamundaGroupsEnabled`: `boolean`;
 `isLoginDelegated`: `boolean`;
 \};
 `cloud`: \{
@@ -3628,6 +3640,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \};
 `deployment`: \{
 `isMultiTenancyEnabled`: `boolean`;
+`isTenantsApiEnabled`: `boolean`;
 `maxRequestSize`: `number`;
 \};
 `jobMetrics`: \{
@@ -3639,12 +3652,12 @@ signatures), matching the runtime wrappers the constructor installs.
 `maxWorkerNameLength`: `number`;
 \};
 \}\>;
-`getTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `name`: `string`;
 `tenantId`: `string`;
 \}\>;
-`getTenantClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getTenantClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `kind`: [`ClusterVariableKindEnum`](../type-aliases/ClusterVariableKindEnum.md);
 `metadata`: \{
 \[`key`: `string`\]: `string` \| `number`;
@@ -3654,7 +3667,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string` \| `null`;
 `value`: `string`;
 \}\>;
-`getTopology`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getTopology`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `brokers`: `object`[];
 `clusterId`: `string` \| `null`;
 `clusterSize`: `number`;
@@ -3663,7 +3676,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `partitionsCount`: `number`;
 `replicationFactor`: `number`;
 \}\>;
-`getUsageMetrics`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getUsageMetrics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `activeTenants`: `number`;
 `assignees`: `number`;
 `decisionInstances`: `number`;
@@ -3672,12 +3685,12 @@ signatures), matching the runtime wrappers the constructor installs.
 \[`key`: `string`\]: `object`;
 \};
 \}\>;
-`getUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `email`: `string` \| `null`;
 `name`: `string` \| `null`;
 `username`: `string`;
 \}\>;
-`getUserTask`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getUserTask`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `assignee`: `string` \| `null`;
 `businessId`: \| \{
 \[`key`: `number`\]: `string`;
@@ -3701,6 +3714,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `__brand`: `"FormKey"`;
 \}
 \| `null`;
+`isSuspended`: `boolean`;
 `name`: `string` \| `null`;
 `priority`: `number`;
 `processDefinitionId`: `string`;
@@ -3718,7 +3732,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 `userTaskKey`: `string`;
 \}\>;
-`getUserTaskForm`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<
+`getUserTaskForm`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<
 \| `void`
 \| \{
 `formId`: `string`;
@@ -3727,7 +3741,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 `version`: `number`;
 \}\>;
-`getVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `name`: `string`;
 `processInstanceKey`: `string`;
 `rootProcessInstanceKey`: \| \{
@@ -3740,76 +3754,76 @@ signatures), matching the runtime wrappers the constructor installs.
 `value`: `string`;
 `variableKey`: `string`;
 \}\>;
-`getWorkers`: `any`[];
-`listHistoryBackups`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
-`listHistoryBackupsAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
-`listRuntimeBackups`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
-`listRuntimeBackupsAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
-`listSecrets`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`getWorkers`(...`a`): `any`[];
+`listHistoryBackups`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
+`listHistoryBackupsAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
+`listRuntimeBackups`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
+`listRuntimeBackupsAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object`[]\>;
+`listSecrets`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `references`: `string`[];
 \}\>;
-`logger`: \{
-`code`: `void`;
-`debug`: `void`;
-`error`: `void`;
-`info`: `void`;
-`level`: [`LogLevel`](../../logger/type-aliases/LogLevel.md);
-`scope`: \{ level: () =\> LogLevel; setLevel: (level: LogLevel) =\> void; setTransport: (t?: ((e: \{ level: LogLevel; scope: string; ts: number; args: any\[\]; code?: string \| undefined; data?: any; \}) =\> void) \| undefined) =\> void; ... 7 more ...; code: (level: LogLevel, code: string, msg: string, data?: any) =\> void; \};
-`setLevel`: `void`;
-`setTransport`: `void`;
-`silly`: `void`;
-`trace`: `void`;
-`warn`: `void`;
+`logger`(...`a`): \{
+`code`(...`a`): `void`;
+`debug`(...`a`): `void`;
+`error`(...`a`): `void`;
+`info`(...`a`): `void`;
+`level`(...`a`): [`LogLevel`](../../logger/type-aliases/LogLevel.md);
+`scope`(...`a`): \{ level: () =\> LogLevel; setLevel: (level: LogLevel) =\> void; setTransport: (t?: ((e: \{ level: LogLevel; scope: string; ts: number; args: any\[\]; code?: string \| undefined; data?: any; \}) =\> void) \| undefined) =\> void; ... 7 more ...; code: (level: LogLevel, code: string, msg: string, data?: any) =\> void; \};
+`setLevel`(...`a`): `void`;
+`setTransport`(...`a`): `void`;
+`silly`(...`a`): `void`;
+`trace`(...`a`): `void`;
+`warn`(...`a`): `void`;
 \};
-`migrateProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`migrateProcessInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`migrateProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`migrateProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`modifyProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`modifyProcessInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`modifyProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`modifyProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`onAuthHeaders`: `void`;
-`pauseClusterExporting`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`pauseExporting`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`pinClock`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`publishMessage`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`onAuthHeaders`(...`a`): `void`;
+`pauseClusterExporting`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`pauseExporting`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`pinClock`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`publishMessage`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `messageKey`: `string`;
 `tenantId`: `string`;
 \}\>;
-`resetClock`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`resolveIncident`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`resolveIncidentsBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`resetClock`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resolveIncident`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resolveIncidentsBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`resolveProcessInstanceIncidents`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`resolveProcessInstanceIncidents`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`resolveSecrets`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`resolveSecrets`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `errors`: `object`[];
 `resolved`: `object`[];
 \}\>;
-`restore`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`restore`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `changeId`: `string`;
 `plannedChanges`: `object`[];
 \}\>;
-`restoreAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`restoreAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `changeId`: `string`;
 `plannedChanges`: `object`[];
 \}\>;
-`resumeBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`resumeClusterExporting`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`resumeExporting`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`resumeProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`resumeProcessInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`resumeBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resumeClusterExporting`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resumeExporting`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resumeProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resumeProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`searchAgentDefinitions`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchAgentDefinitions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3826,7 +3840,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchAgentInstanceHistory`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchAgentInstanceHistory`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3843,7 +3857,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchAgentInstances`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchAgentInstances`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3860,7 +3874,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchAuditLogs`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchAuditLogs`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3877,7 +3891,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchAuthorizations`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchAuthorizations`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3894,7 +3908,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchBatchOperationItems`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchBatchOperationItems`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3911,7 +3925,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchBatchOperations`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchBatchOperations`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3928,7 +3942,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchClientsForGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchClientsForGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3945,7 +3959,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchClientsForRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchClientsForRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3962,7 +3976,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchClientsForTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchClientsForTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3979,7 +3993,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchClusterVariables`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchClusterVariables`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -3996,7 +4010,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchCorrelatedMessageSubscriptions`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchCorrelatedMessageSubscriptions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4013,7 +4027,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchDecisionDefinitions`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchDecisionDefinitions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4030,7 +4044,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchDecisionInstances`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchDecisionInstances`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4047,7 +4061,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchDecisionRequirements`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchDecisionRequirements`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4064,7 +4078,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchElementInstanceIncidents`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchElementInstanceIncidents`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4081,7 +4095,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchElementInstances`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchElementInstances`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4098,7 +4112,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchElementInstanceWaitStates`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchElementInstanceWaitStates`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4115,7 +4129,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchGlobalTaskListeners`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchGlobalTaskListeners`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4132,7 +4146,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchGroupIdsForTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchGroupIdsForTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4149,7 +4163,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchGroups`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchGroups`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4166,7 +4180,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchGroupsForRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchGroupsForRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4183,7 +4197,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchIncidents`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchIncidents`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4200,7 +4214,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchJobs`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchJobs`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4217,7 +4231,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4234,7 +4248,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchMappingRulesForGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchMappingRulesForGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4251,7 +4265,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchMappingRulesForRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchMappingRulesForRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4268,7 +4282,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchMappingRulesForTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchMappingRulesForTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4285,7 +4299,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchMessageSubscriptions`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchMessageSubscriptions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4302,7 +4316,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchOwnAuthorizations`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchOwnAuthorizations`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `authorizationsEnabled`: `boolean`;
 `items`: `object`[];
 `page`: \{
@@ -4320,7 +4334,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchProcessDefinitions`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchProcessDefinitions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4337,7 +4351,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchProcessDefinitionVariableNames`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchProcessDefinitionVariableNames`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4354,7 +4368,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchProcessInstanceIncidents`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchProcessInstanceIncidents`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4371,7 +4385,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchProcessInstances`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchProcessInstances`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4388,7 +4402,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchResources`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchResources`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4405,7 +4419,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchRoles`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchRoles`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4422,7 +4436,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchRolesForGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchRolesForGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4439,7 +4453,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchRolesForTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchRolesForTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4456,7 +4470,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchTenants`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchTenants`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4473,7 +4487,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUsers`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUsers`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4490,7 +4504,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUsersForGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUsersForGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4507,7 +4521,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUsersForRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUsersForRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4524,7 +4538,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUsersForTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUsersForTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4541,7 +4555,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUserTaskAuditLogs`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUserTaskAuditLogs`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4558,7 +4572,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUserTaskEffectiveVariables`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUserTaskEffectiveVariables`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4575,7 +4589,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUserTasks`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUserTasks`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4592,7 +4606,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchUserTaskVariables`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchUserTaskVariables`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4609,7 +4623,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchVariables`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchVariables`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `items`: `object`[];
 `page`: \{
 `endCursor`: \| \{
@@ -4626,47 +4640,47 @@ signatures), matching the runtime wrappers the constructor installs.
 `totalItems`: `number`;
 \};
 \}\>;
-`searchVariablesAsDto`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`searchVariablesAsDto`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `raw`: \{
 \[`key`: `string`\]: `unknown`;
 \};
-`get`: `unknown`;
-`has`: `boolean`;
-`validate`: \{
+`get`(...`a`): `unknown`;
+`has`(...`a`): `boolean`;
+`validate`(...`a`): \{
 \[`key`: `string`\]: `unknown`;
 \};
 \}\>;
-`stopAllWorkers`: `void`;
-`suspendBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`suspendProcessInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`suspendProcessInstancesBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`stopAllWorkers`(...`a`): `void`;
+`suspendBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`suspendProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`suspendProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`syncRuntimeBackupState`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`syncRuntimeBackupState`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupStates`: `object`[];
 `checkpointStates`: `object`[];
 `ranges`: `object`[];
 \}\>;
-`syncRuntimeBackupStateAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`syncRuntimeBackupStateAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `physicalTenants`: `object`[];
 \}\>;
-`takeHistoryBackup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`takeHistoryBackup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 `scheduledSnapshots`: `string`[];
 \}\>;
-`takeHistoryBackupAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`takeHistoryBackupAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 `physicalTenants`: `object`[];
 \}\>;
-`takeRuntimeBackup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`takeRuntimeBackup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `backupId`: `number`;
 \}\>;
-`takeRuntimeBackupAsClusterAdmin`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`takeRuntimeBackupAsClusterAdmin`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `physicalTenants`: `object`[];
 \}\>;
-`throwJobError`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`triggerClusterRebalance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`throwJobError`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`triggerClusterRebalance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `lastCompletedRebalance`: \| \{
 `finishedAt`: `string`;
 `partitions`: `object`[];
@@ -4686,24 +4700,24 @@ signatures), matching the runtime wrappers the constructor installs.
 \| `null`;
 `state`: `"BALANCED"` \| `"BALANCING"` \| `"UNBALANCED"`;
 \}\>;
-`unassignClientFromGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignClientFromTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignGroupFromTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignMappingRuleFromGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignMappingRuleFromTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignRoleFromClient`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignRoleFromGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignRoleFromMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignRoleFromTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignRoleFromUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignUserFromGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignUserFromTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`unassignUserTask`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`updateAgentInstance`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`unassignClientFromGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignClientFromTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignGroupFromTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignMappingRuleFromGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignMappingRuleFromTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignRoleFromClient`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignRoleFromGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignRoleFromMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignRoleFromTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignRoleFromUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignUserFromGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignUserFromTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`unassignUserTask`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`updateAgentInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `createdHistory`: `object`[];
 \}\>;
-`updateAuthorization`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`updateGlobalClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateAuthorization`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`updateGlobalClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `kind`: [`ClusterVariableKindEnum`](../type-aliases/ClusterVariableKindEnum.md);
 `metadata`: \{
 \[`key`: `string`\]: `string` \| `number`;
@@ -4713,7 +4727,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string` \| `null`;
 `value`: `string`;
 \}\>;
-`updateGlobalTaskListener`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateGlobalTaskListener`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `afterNonGlobal?`: `boolean`;
 `eventTypes`: [`GlobalTaskListenerEventTypeEnum`](../type-aliases/GlobalTaskListenerEventTypeEnum.md)[];
 `id`: `string`;
@@ -4722,33 +4736,33 @@ signatures), matching the runtime wrappers the constructor installs.
 `source`: [`GlobalListenerSourceEnum`](../type-aliases/GlobalListenerSourceEnum.md);
 `type?`: `string`;
 \}\>;
-`updateGroup`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `groupId`: `string`;
 `name`: `string`;
 \}\>;
-`updateJob`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`updateJobsBatchOperation`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateJob`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`updateJobsBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
 `batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
 \}\>;
-`updateMappingRule`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateMappingRule`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `claimName`: `string`;
 `claimValue`: `string`;
 `mappingRuleId`: `string`;
 `name`: `string`;
 \}\>;
-`updateRole`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateRole`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `name`: `string`;
 `roleId`: `string`;
 \}\>;
-`updateTenant`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `description`: `string` \| `null`;
 `name`: `string`;
 `tenantId`: `string`;
 \}\>;
-`updateTenantClusterVariable`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateTenantClusterVariable`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `kind`: [`ClusterVariableKindEnum`](../type-aliases/ClusterVariableKindEnum.md);
 `metadata`: \{
 \[`key`: `string`\]: `string` \| `number`;
@@ -4758,11 +4772,11 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string` \| `null`;
 `value`: `string`;
 \}\>;
-`updateUser`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`updateUser`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `email`: `string` \| `null`;
 `name`: `string` \| `null`;
 `username`: `string`;
 \}\>;
-`updateUserTask`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
-`withCorrelation`: `Promise`\<`unknown`\>;
+`updateUserTask`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`withCorrelation`(...`a`): `Promise`\<`unknown`\>;
 \}\>

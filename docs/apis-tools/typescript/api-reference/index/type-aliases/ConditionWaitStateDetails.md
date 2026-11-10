@@ -28,11 +28,3 @@ expression: string;
 ```
 
 The condition expression that must evaluate to true to proceed.
-
-### waitStateType
-
-```ts
-waitStateType: string;
-```
-
-The wait state type discriminator.

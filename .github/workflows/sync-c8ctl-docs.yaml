@@ -75,7 +75,7 @@ jobs:
           mkdir -p "$TARGET"
           # Explicit allowlist of pages synced from the c8ctl repo (source of truth).
           # Repo-only docs in c8ctl/docs (e.g. plugin-collisions.md) are intentionally NOT listed.
-          SYNCED_FILES="getting-started.md cluster-inspection.md identity-management.md development-workflows.md plugins.md command-reference.md sidebar-schema.js"
+          SYNCED_FILES="getting-started.md cluster-inspection.md identity-management.md development-workflows.md camunda-json.md plugins.md command-reference.md sidebar-schema.js"
           for f in $SYNCED_FILES; do
             if [ -f "c8ctl/docs/$f" ]; then
               cp "c8ctl/docs/$f" "$TARGET/$f"
@@ -124,7 +124,7 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}

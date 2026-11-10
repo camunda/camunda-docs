@@ -25,6 +25,16 @@ Whether users can log out (false for SaaS deployments).
 
 ---
 
+### isCamundaGroupsEnabled
+
+```ts
+isCamundaGroupsEnabled: boolean;
+```
+
+Whether Camunda manages group membership locally, as opposed to delegating it to the identity provider via a groups claim.
+
+---
+
 ### isLoginDelegated
 
 ```ts

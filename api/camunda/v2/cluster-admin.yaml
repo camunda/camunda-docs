@@ -23,6 +23,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -68,6 +70,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -106,6 +110,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -153,6 +159,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -202,6 +210,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -256,6 +266,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -300,6 +312,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -361,6 +375,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -429,6 +445,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -520,6 +538,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -589,6 +609,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -632,6 +654,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -689,6 +713,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -753,6 +779,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -804,6 +832,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -870,6 +900,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -933,6 +965,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -1016,6 +1050,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -1069,6 +1105,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -1140,6 +1178,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -1215,6 +1255,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
+        [[SCOPE:cluster-wide]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -1264,6 +1306,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:cluster-wide]]
 
         [[ADDED_IN_VERSION:8.10]]
 

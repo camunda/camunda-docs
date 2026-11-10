@@ -33,6 +33,569 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 82
+
+### Publication date
+
+November 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763), an uncontrolled
+resource consumption flaw in Apache Tomcat (which is used as the embedded servlet container in Web Modeler's `restapi`
+component). A memory leak occurs in the HTTP/2 handling when a client resets a stream, potentially allowing a
+denial-of-service attack through memory exhaustion.
+
+Web Modeler does not enable HTTP/2 by default. An installation is only affected if HTTP/2 is explicitly enabled
+(`server.http2.enabled: true`) and Tomcat directly terminates HTTP/2 connections. For example, if an Ingress or load
+balancer terminates HTTP/2 and forwards HTTP/1.1 internally, Tomcat never sees the HTTP/2 frames (and the vulnerable
+code path would not be executed).
+
+### How to determine if the installation is affected
+
+You are using Web Modeler Self-Managed ≤ 8.9.10 with a custom HTTP/2 setup (see above).
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.11
+
+**Note**: Update to the latest available patch version 8.9.15.
+
+## Notice 81
+
+### Publication date
+
+November 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
+HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
+memory exhaustion by sending messages with an excessive number of headers or excessively long headers.
+
+The vulnerable library is only used in outgoing HTTP requests from Web Modeler to the Camunda 8 Orchestration Cluster
+API. To exploit the vulnerability, an attacker would need to be able to control or intercept the API responses through a
+prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code path is not
+reachable from external, untrusted client traffic.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.24, or ≤ 8.7.28
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.8, 8.8.25, 8.7.29
+
+**Note**: For 8.9 and 8.8, update to the latest available patch versions 8.9.15 and 8.8.26.
+
+The fix was deployed to Web Modeler SaaS on August 25, 2026, 13:31 CET.
+
+## Notice 80
+
+### Publication date
+
+November 4, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe, Operate, and Tasklist (8.7)
+- Camunda Zeebe (8.6)
+- Camunda Optimize
+- Camunda Management Identity (Identity in 8.6)
+- Camunda Connectors
+- Hub Self-Managed 8.10
+- Web Modeler Self-Managed 8.6, 8.7, 8.8, and 8.9
+- Console Self-Managed 8.7, 8.8, and 8.9
+- Camunda Keycloak images (`camunda/keycloak` and `registry.camunda.cloud/keycloak-ee/keycloak`)
+
+### Impact
+
+The certificate authority eMudhra reported that an attacker compromised some of its intermediate certificate authorities.
+Oracle published two Java security alerts for this compromise:
+
+- [CVE-2026-91403](https://www.cve.org/CVERecord?id=CVE-2026-91403) removes the root certificates "emSign ECC Root CA - G3" and "AAA Certificate Services" from the Java trust store.
+- [CVE-2026-114820](https://www.cve.org/CVERecord?id=CVE-2026-114820) also removes "emSign Root CA - G1" and "emSign Root CA - G2".
+
+Severity: Critical (CVSS 9.1, CVE-2026-114820).
+
+The trust stores in the affected images contain some of these root certificates.
+
+Exploitation requires an attacker who also controls the network path, for example through DNS poisoning or a compromised network device. The attacker can then do a man-in-the-middle attack on outgoing TLS connections from Camunda components, with a certificate that a compromised intermediate signed.
+
+We have no evidence that an attacker used this against Camunda. This issue does not affect Camunda keys and secrets. No public Camunda endpoint uses an eMudhra certificate. If you suspect a man-in-the-middle attack on an outgoing connection, rotate the credentials that this connection sends.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.10.5, ≤ 8.9.25, or ≤ 8.8.43
+- Camunda Zeebe, Operate, or Tasklist ≤ 8.7.43
+- Camunda Zeebe ≤ 8.6.40
+- Camunda Optimize ≤ 8.10.5, ≤ 8.9.25, ≤ 8.8.43, or ≤ 8.7.29
+- Camunda Connectors ≤ 8.10.1, ≤ 8.9.16, ≤ 8.8.23, ≤ 8.7.29, or ≤ 8.6.33
+- Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
+- Camunda Identity ≤ 8.6.33
+- Hub Self-Managed ≤ 8.10.4
+- Web Modeler Self-Managed ≤ 8.9.13, ≤ 8.8.24, ≤ 8.7.28, or ≤ 8.6.28
+- Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
+- A Camunda Keycloak image built before October 22, 2026, or a Camunda Keycloak image for Keycloak 23, 24, or 25
+
+To see when an image was built, run `docker inspect -f '{{.Created}}' <image>`.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix for CVE-2026-91403 ("emSign ECC Root CA - G3" and "AAA Certificate Services" are removed from the trust stores):
+
+- Camunda Orchestration Cluster 8.10.6, 8.9.26, 8.8.44
+- Camunda Zeebe, Operate, and Tasklist 8.7.44
+- Camunda Zeebe 8.6.41
+- Camunda Optimize 8.10.6, 8.9.26, 8.8.44, 8.7.30
+- Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30, 8.6.34
+- Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
+- Hub Self-Managed 8.10.5
+- Web Modeler Self-Managed 8.9.14, 8.8.25, 8.7.29, 8.6.29
+- Camunda Identity 8.6.34
+- Console Self-Managed 8.9.130, 8.8.147, 8.7.115
+- Camunda Keycloak images built on or after October 22, 2026:
+  - `camunda/keycloak` with the `26.3.3` tag. This is the default image of the bundled `identityKeycloak` subchart in Camunda 8.7 to 8.9. This tag receives no more updates. For details, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
+  - `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag
+  - `registry.camunda.cloud/keycloak-ee/keycloak` with the `26.8.1` tag, which `values-enterprise.yaml` uses in Camunda 8.7 to 8.9
+
+If you use one of these Keycloak tags, pull the image again and restart Keycloak. With `imagePullPolicy: IfNotPresent` or a mirrored registry, the old image can stay in use. Update your mirror and make sure that the new image runs.
+
+The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
+
+Camunda has provided the following releases that also contain the fix for CVE-2026-114820 ("emSign Root CA - G1" and "emSign Root CA - G2" are also removed from the trust stores):
+
+- Camunda Orchestration Cluster 8.10.9, 8.9.28, 8.8.46
+- Camunda Zeebe, Operate, and Tasklist 8.7.45
+- Camunda Zeebe 8.6.42
+- Camunda Optimize 8.10.9, 8.9.28, 8.8.46, 8.7.31, 8.6.29
+- Camunda Connectors 8.10.4, 8.9.19, 8.8.26, 8.7.32, 8.6.36
+- Camunda Management Identity 8.10.4, 8.9.14, 8.8.22, 8.7.29
+- Camunda Identity 8.6.35
+- Hub Self-Managed 8.10.6
+- Web Modeler Self-Managed 8.9.15, 8.8.26, 8.7.29, 8.6.29
+- `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag, built on or after November 5, 2026
+- `registry.camunda.cloud/keycloak-ee/keycloak` with the `26.8.2` tag, built on or after November 7, 2026. The `26.8.1` tag does not get this fix. Set the `26.8.2` tag in `values-enterprise.yaml`.
+
+The other releases in the first list still trust "emSign Root CA - G1". Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, upgrade to a release in the second list or remove the root with the workaround below. The `camunda/keycloak:26.3.3` image does not get this fix, because this tag receives no more updates. Move to a fixed Keycloak 26 image.
+
+Camunda Operate, Tasklist, and Optimize 8.6 are not affected by CVE-2026-91403. Their images use a trust store that does not contain the root certificates.
+
+If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. This procedure does not cover Keycloak or Console. For older versions of Camunda, read the guide to remove a CA from the JVM truststore in [8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) or [8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
+
+On Camunda 8 SaaS, if you disabled the automatic upgrade of your clusters, we recommend that you update them to the latest available patch version.
+
+## Notice 79
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+- Zeebe
+- Operate
+- Tasklist
+- Optimize
+
+### Impact
+
+[CVE-2026-71290](https://nvd.nist.gov/vuln/detail/CVE-2026-71290) is a TLS hostname verification bypass in the asynchronous client of Apache HttpClient 5 (`httpclient5` 5.4 through 5.6.3). Camunda uses this client to connect to Elasticsearch and OpenSearch. An attacker in a network position to intercept traffic (for example, through DNS spoofing or a compromised host on a shared network segment) can impersonate the search backend with a valid certificate for another domain. This can expose Basic authentication credentials sent to the backend, expose or modify process data in transit, and allow forged responses.
+
+This notice covers the 8.6 line. For the 8.7 fixes, see [Notice 60](#notice-60).
+
+### How to determine if the installation is affected
+
+You are using one of the following components, and it connects to Elasticsearch or OpenSearch over TLS:
+
+- Zeebe, Operate, or Tasklist ≤ 8.6.39
+- Optimize ≤ 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe, Operate, Tasklist: 8.6.40
+- Optimize: 8.6.28
+
+## Notice 78
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Identity
+
+### Impact
+
+[CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763) is an uncontrolled resource consumption flaw in Apache Tomcat. A memory leak occurs in the HTTP/2 handling when a client resets a stream.
+
+Identity enables HTTP/2 by default, so an attacker who can reach its HTTP port can exhaust memory and cause a denial of service without authenticating. The flaw does not allow reading or changing data. Because Identity is central to multi-tenancy, an outage can disrupt the wider automation stack.
+
+### How to determine if the installation is affected
+
+You are using Identity before 8.6.34, with the default `server.http2.enabled: true`, and the Identity port is reachable by untrusted clients.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Identity: 8.6.34 (included in the Camunda 8.6.41 Docker image)
+
+As a workaround, set `server.http2.enabled` to `false`.
+
+## Notice 77
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Operate, Tasklist
+
+### Impact
+
+[CVE-2026-41720](https://nvd.nist.gov/vuln/detail/CVE-2026-41720) is a flaw in Spring LDAP: bind requests with a non-empty username and an empty or null password are not rejected. In Operate or Tasklist with legacy LDAP authentication enabled (`ldap-auth` profile), an attacker who knows a valid username may authenticate with a blank password and gain access to the web application, if the LDAP directory accepts such binds. Other deployments are not affected.
+
+### How to determine if the installation is affected
+
+You are using Operate or Tasklist with the `ldap-auth` profile enabled, before 8.6.40.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Operate, Tasklist: 8.6.40
+
+As a workaround, configure your LDAP server to reject unauthenticated (empty-password) binds.
+
+## Notice 76
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Zeebe, Operate, Tasklist, Identity, and Optimize
+
+### Impact
+
+[CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984) is a denial of service in Micrometer's HTTP request instrumentation. Spring Boot applies it automatically to all HTTP endpoints. An unauthenticated attacker who can reach any HTTP endpoint can send a specially crafted request that drives the instrumentation into excessive resource use, making the component unresponsive until restart. This affects availability only; it does not expose or modify data.
+
+### How to determine if the installation is affected
+
+You are using one of the following components with HTTP endpoints reachable by untrusted clients:
+
+- Zeebe, Operate, Tasklist before 8.6.40
+- Identity before 8.6.31
+- Optimize before 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe, Operate, Tasklist: 8.6.40
+- Identity: 8.6.31
+- Optimize: 8.6.27
+
+## Notice 75
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Zeebe
+
+### Impact
+
+[CVE-2026-40983](https://nvd.nist.gov/vuln/detail/CVE-2026-40983) is a denial of service in Micrometer's gRPC server instrumentation. The Zeebe Gateway applies this interceptor to its public gRPC API with no way to disable it. An unauthenticated attacker with network access can send crafted gRPC requests and exhaust resources, making the gateway unresponsive until it is restarted. All client operations (job polling, deployments, message publication, and process instance creation) are interrupted. Operate, Tasklist, and Identity include the library but do not run a gRPC server, so they are not exploitable.
+
+### How to determine if the installation is affected
+
+You are using Zeebe before 8.6.40, with the gateway endpoint reachable by untrusted clients.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe: 8.6.40
+
+## Notice 74
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Zeebe
+
+### Impact
+
+[CVE-2026-42587](https://nvd.nist.gov/vuln/detail/CVE-2026-42587) is a decompression limit bypass in Netty. The `maxAllocation` limit is not enforced when the content encoding is Brotli, zstd, or Snappy. An unauthenticated attacker can send a small compressed payload that causes unbounded memory allocation. This leads to an out-of-memory denial of service on the Zeebe Gateway, whose Netty HTTP/2 endpoint is reachable from outside the cluster. Other components have a much lower likelihood. Data is not disclosed or modified.
+
+### How to determine if the installation is affected
+
+You are using Zeebe before 8.6.40, with the gateway endpoint reachable by untrusted clients.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe: 8.6.40
+
+## Notice 73
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Zeebe, Operate, Tasklist, Identity, and Optimize
+
+### Impact
+
+[CVE-2026-42585](https://nvd.nist.gov/vuln/detail/CVE-2026-42585) is an HTTP request smuggling flaw in Netty. It comes from incorrect parsing of malformed `Transfer-Encoding` headers. If an affected component sits behind a reverse proxy, load balancer, or Ingress that parses the request boundary differently, an attacker can smuggle a second request past front-end checks such as authentication or WAF rules. Depending on the setup, this can lead to unauthorized access to protected endpoints, cache poisoning, or session abuse. HTTPS does not prevent it.
+
+### How to determine if the installation is affected
+
+You are using the following components behind a reverse proxy, load balancer, or Ingress:
+
+- Zeebe, Operate, Tasklist before 8.6.40
+- Identity before 8.6.31
+- Optimize before 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe, Operate, Tasklist: 8.6.40
+- Identity: 8.6.31
+- Optimize: 8.6.27
+
+## Notice 72
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Operate, Tasklist, and Zeebe Java Client (`io.camunda:zeebe-client-java`)
+
+### Impact
+
+[CVE-2026-68494](https://nvd.nist.gov/vuln/detail/CVE-2026-68494) is an incomplete fix for a number-length limit bypass in the non-blocking parser of `jackson-core`. The Zeebe Java Client (`io.camunda:zeebe-client-java`) uses that parser to read chunked API responses. Operate and Tasklist use the Zeebe Java Client and can be affected transitively. A malicious or compromised response could make the client process hang or run out of memory.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Operate or Tasklist before 8.6.40, because these components use the affected Zeebe Java Client dependency
+- Zeebe Java Client (`io.camunda:zeebe-client-java`) before 8.6.40 with a `jackson-core` version in the affected range, connecting to an endpoint you do not fully trust
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Operate, Tasklist, and Zeebe Java Client (`io.camunda:zeebe-client-java`): 8.6.40
+
+## Notice 71
+
+### Publication date
+
+November 2, 2026
+
+### Products affected
+
+Zeebe, Operate, Tasklist, Identity, and Optimize
+
+### Impact
+
+[CVE-2026-34282](https://nvd.nist.gov/vuln/detail/CVE-2026-34282) is a flaw in the networking component of the Oracle JDK shipped in Camunda container images (OpenJDK 21.0.10). A TLS peer can cause a blocking network call to hang indefinitely, which pins the handling thread. Enough requests can exhaust the web server's thread pool and make the component unresponsive to all users (denial of service).
+
+Exploitation has strong preconditions. The component must run with OpenID Connect (OIDC) authentication against an identity provider reached over HTTPS, and the attacker must control or sit on the path to that identity provider. Confidentiality and integrity are not affected.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Zeebe, Operate, Tasklist before 8.6.40
+- Identity before 8.6.31
+- Optimize before 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Zeebe, Operate, Tasklist: 8.6.40
+- Identity: 8.6.31
+- Optimize: 8.6.27
+
+## Notice 70
+
+### Publication date
+
+October 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+Web Modeler Self-Managed is affected by [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/CVE-2026-111497), a critical-severity out-of-bounds write in the Node.js Brotli decoder that can allow remote code execution.
+
+The Web Modeler Self-Managed 8.7 and 8.8 webapp images contain a Node.js runtime. An authenticated Web Modeler user can reach the affected decoder through the "import resources from URL" capability: the webapp server fetches URLs that the user supplies and automatically decodes Brotli-compressed responses. A server controlled by an attacker can return a crafted Brotli response that triggers the out-of-bounds write in the Node.js process.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.7.27, or ≤ 8.8.23
+
+### Solution
+
+Camunda has provided the following releases which contain the fix (Node.js 24.22.1):
+
+- Web Modeler Self-Managed 8.7.28, 8.8.24
+
+No action is necessary for Camunda SaaS.
+
+## Notice 69
+
+### Publication date
+
+October 26, 2026
+
+### Products affected
+
+- Hub Self-Managed 8.10
+- Web Modeler Self-Managed 8.7, 8.8, and 8.9
+
+### Impact
+
+Two critical vulnerabilities in PHP ([CVE-2026-109618](https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w) and [CVE-2026-109619](https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp)) were disclosed on 20 October 2026.
+Our security and engineering teams have analyzed both in detail. We found no way to exploit them in any Camunda product.
+Out of an abundance of caution, we have released updated images with the fixed PHP version.
+
+#### Which products are concerned
+
+- SaaS: Camunda SaaS does not use PHP and is not affected.
+- Self-Managed: The websockets component of Hub (version ≤ 8.10.3) and Web Modeler (versions ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27) runs PHP 8.5.11, a version in the affected range.
+- No other Camunda 8 component uses PHP.
+
+#### Why the vulnerabilities cannot be exploited
+
+Both vulnerabilities are in the way PHP processes incoming web requests when it runs inside a web server (for example
+PHP-FPM or Apache with mod_php). The websockets component does not run PHP that way. It runs as a standalone process
+that reads and validates requests itself, never uses PHP's request handling, and accepts only small, size-limited
+messages. None of the attack paths described in the CVE advisories can reach it.
+
+#### What you need to do
+
+No immediate action is required. We recommend updating to the new images as part of your normal update process.
+
+If your own policy requires it, you can stop the websockets component until you have updated.
+Web Modeler and Hub keep working, and all modeling, saving, deployment, versioning and Git sync functionality is unaffected.
+Only features that rely on real-time updates are affected while the component is stopped.
+
+- Real-time collaboration: online presence, live diagram updates, live comments, attention markers and live changes to project permissions are not delivered. Collaborators see each other's changes only after reloading the page, concurrent changes might conflict / overwrite each other.
+- AI copilot (8.8 and later): copilot responses are delivered through the websockets component and are not returned while it is stopped.
+- Intelligent Document Processing (8.8 and later): extraction results are delivered through the websockets component and are not shown in the modeler while it is stopped.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Hub ≤ 8.10.3
+- Web Modeler ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix (update to PHP 8.5.12):
+
+- Hub 8.10.4
+- Web Modeler 8.9.13, 8.8.24, 8.7.28
+
+## Notice 68
+
+### Publication date
+
+October 20, 2026
+
+### Products affected
+
+- Management Identity Self-Managed 8.8, 8.9, and 8.10
+- Orchestration Cluster 8.9 and 8.10, when PostgreSQL is used as secondary storage (RDBMS)
+- Web Modeler Self-Managed 8.8 and 8.9, when PostgreSQL is used as RDBMS
+- Hub Self-Managed 8.10, when PostgreSQL is used as RDBMS
+
+### Impact
+
+The PostgreSQL JDBC driver (`org.postgresql:postgresql`) versions 42.7.11 to 42.7.13 used by Camunda are affected by [CVE-2026-107314](https://github.com/pgjdbc/pgjdbc/security/advisories/GHSA-rhp9-mr79-r74h). If the `requireAuth` connection property excludes every authentication method, or lists no method at all, the driver doesn't restrict the authentication method. A man-in-the-middle attacker between Camunda and PostgreSQL can then request cleartext password authentication and obtain the database password.
+
+The following values trigger the issue:
+
+- `requireAuth=!password,!md5,!gss,!sspi,!scram-sha-256,!none` (excludes every method)
+- `requireAuth=,` (lists no method)
+
+Severity: High. The upstream CVSS 3.1 base score for the library is 5.9 (`AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N`).
+
+The `requireAuth` property has no default value, and Camunda doesn't set it. Only installations that set the property as described are affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You run one of the following Camunda products on a version earlier than the fixed versions listed in the solution:
+  - Management Identity 8.8 to 8.10
+  - Orchestration Cluster 8.9 or 8.10 with PostgreSQL as secondary storage
+  - Web Modeler 8.8 or 8.9 with PostgreSQL
+  - Hub 8.10 with PostgreSQL
+- The JDBC URL or datasource properties for the PostgreSQL connection set `requireAuth` to a value that excludes all authentication methods, or that contains no method.
+- The database connection doesn't use TLS with full server verification (`sslmode=verify-full`).
+
+### Solution
+
+Camunda has provided the following releases which contain the fix (driver version 42.7.14):
+
+- Orchestration Cluster: 8.10.4, 8.9.24
+- Management Identity: 8.10.1, 8.9.11, 8.8.19
+- Web Modeler: 8.9.11, 8.8.22
+- Hub: 8.10.3
+
+If your configuration sets `requireAuth` to one of the affected values, replace it with a positive list of the authentication methods your PostgreSQL server uses, for example `requireAuth=scram-sha-256`, before you upgrade. After the upgrade, the driver refuses connections that use a value excluding every method (SQLState `08004`), and rejects a value that lists no method as invalid (SQLState `22023`).
+
+If you can't upgrade immediately, use one of these workarounds:
+
+- Replace the `requireAuth` value with a positive list of allowed methods on your current version, as described above.
+- Connect to PostgreSQL with `sslmode=verify-full`.
+
 ## Notice 67
 
 ### Publication date
@@ -408,6 +971,11 @@ Camunda has provided the following releases that contain the fix:
 
 ## Notice 58
 
+:::info
+This notice contains incorrect information regarding the affected and patched versions, as the CVE was mistakenly attributed to a different library.
+It was superseded by [notice 81](#notice-81).
+:::
+
 ### Publication date
 
 July 14, 2026
@@ -426,15 +994,19 @@ Cluster API. To exploit the vulnerability, an attacker would need to be able to 
 
 ### How to determine if the installation is affected
 
-- You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.
+- ~~You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.~~
+
+**Update (November 9, 2026)**: The versions are incorrect; see [notice 81](#notice-81) for the correct values.
 
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
+- ~~Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24~~
 
-The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.
+~~The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.~~
+
+**Update (November 9, 2026)**: The versions and the SaaS deploy date are incorrect; see [notice 81](#notice-81) for the correct values.
 
 ## Notice 57
 

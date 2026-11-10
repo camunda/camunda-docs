@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## About
 
-[Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
+[Camunda Process Test](https://github.com/camunda/camunda/tree/stable/8.9/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
 
 CPT provides different runtimes to execute your process tests:
 
@@ -351,7 +351,7 @@ Refer to the [API documentation](https://javadoc.io/doc/io.camunda/camunda-proce
 
 ## Examples
 
-Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
+Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/stable/8.9/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
 
 ## Process Test Coverage
 

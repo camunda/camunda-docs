@@ -277,6 +277,175 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 :::
 
+## Remove a CA from the JVM truststore
+
+To stop the Java components from trusting a CA that is in the image's default truststore, replace the truststore. `global.tls.caBundle` can only add CAs. It can't remove a CA.
+
+The procedure copies the image truststore without the listed CAs. It stores the copy in a Secret. Then it points each Java component to the copy with `-Djavax.net.ssl.trustStore`. Use it as an interim measure until you upgrade to images that no longer contain the CAs.
+
+Don't combine this procedure with `global.tls.caBundle`. The chart adds its own `-Djavax.net.ssl.trustStore` flag after yours, and the JVM uses the last one. If you need a private CA, import it into the new truststore in step 1 and remove `global.tls.caBundle` from your values.
+
+This procedure covers the Camunda Java components listed in step 3. It doesn't change the OS CA bundle or other components.
+
+### 1. Build the truststore
+
+Copy the truststore from the Orchestration Cluster image that runs in your cluster. Replace `X` in the image tag with your patch version. A truststore from another image can contain other CAs. List the common names (CNs) of the certificates to remove, one per line. The example lists the four root CAs that CVE-2026-114820 removes:
+
+```bash
+CAMUNDA_IMAGE=camunda/camunda:8.11.X
+REMOVE_CNS='emSign Root CA - G1
+emSign Root CA - G2
+emSign ECC Root CA - G3
+AAA Certificate Services'
+
+docker run --rm --entrypoint sh -e REMOVE_CNS="$REMOVE_CNS" "$CAMUNDA_IMAGE" -c '
+  certs="$(keytool -list -v -cacerts -storepass changeit)" || exit 1
+  printf "%s\n" "$REMOVE_CNS" | while IFS= read -r cn; do
+    printf "%s: " "$cn"
+    printf "%s\n" "$certs" | awk -v cn="CN=${cn}," "/^Owner: / && index(\$0 \",\", cn) {count++} END {print count+0}"
+  done'
+```
+
+Verify the count for each CA. A count of `1` or more means the image contains the CA. Other Java component images can contain different CAs, so run the check again with `CAMUNDA_IMAGE` set to each image that you deploy. If every count is `0` in every image, you don't need this procedure.
+
+Then build the truststore without the listed CAs. Each run starts again from the image truststore, so list every CA to remove in each run:
+
+```bash
+mkdir -p truststore
+docker run --rm --user 0 --entrypoint sh \
+  -v "$PWD/truststore:/out" -e REMOVE_CNS="$REMOVE_CNS" \
+  "$CAMUNDA_IMAGE" -c '
+    set -e
+    rm -f /out/cacerts
+    keytool -importkeystore -noprompt \
+      -srckeystore "$JAVA_HOME/lib/security/cacerts" -srcstorepass changeit \
+      -destkeystore /out/cacerts -deststoretype PKCS12 -deststorepass changeit
+    printf "%s\n" "$REMOVE_CNS" | while IFS= read -r cn; do
+      certs="$(keytool -list -v -keystore /out/cacerts -storepass changeit)"
+      printf "%s\n" "$certs" \
+        | awk -v cn="CN=${cn}," "/^Alias name: /{alias=substr(\$0, 13)} /^Owner: / && index(\$0 \",\", cn) {print alias}" \
+        | while IFS= read -r alias; do
+            keytool -delete -alias "$alias" -keystore /out/cacerts -storepass changeit
+          done
+    done
+    chmod 644 /out/cacerts'
+```
+
+Verify the truststore. The command must return `0` for every listed CA:
+
+```bash
+docker run --rm --entrypoint sh \
+  -v "$PWD/truststore:/in:ro" -e REMOVE_CNS="$REMOVE_CNS" \
+  "$CAMUNDA_IMAGE" -c '
+    certs="$(keytool -list -v -keystore /in/cacerts -storepass changeit)" || exit 1
+    printf "%s\n" "$REMOVE_CNS" | while IFS= read -r cn; do
+      printf "%s: " "$cn"
+      printf "%s\n" "$certs" | awk -v cn="CN=${cn}," "/^Owner: / && index(\$0 \",\", cn) {count++} END {print count+0}"
+    done'
+```
+
+(Optional) Import your private CA:
+
+```bash
+docker run --rm --user 0 --entrypoint sh \
+  -v "$PWD/truststore:/out" -v "$PWD/your-private-ca.pem:/ca.pem:ro" \
+  "$CAMUNDA_IMAGE" -c 'keytool -importcert -noprompt -alias your-private-ca \
+    -file /ca.pem -keystore /out/cacerts -storepass changeit'
+```
+
+The truststore contains public certificates only, so the default `changeit` password is not a secret.
+
+### 2. Create the truststore Secret
+
+```bash
+kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
+  --from-file=cacerts=./truststore/cacerts --save-config
+```
+
+Create the Secret before you run `helm upgrade` in step 3. If the Secret doesn't exist, the pods stay in `ContainerCreating`.
+
+### 3. Point the Java components to the truststore
+
+Mount the Secret on each Java component and set the truststore flags:
+
+| Component             | Values key           | Where to set the flags                                        |
+| --------------------- | -------------------- | ------------------------------------------------------------- |
+| Orchestration Cluster | `orchestration`      | `javaOpts`. Keep the chart's default options.                 |
+| Optimize              | `optimize`           | `javaOpts`                                                    |
+| Connectors            | `connectors`         | `JAVA_TOOL_OPTIONS` in `env`                                  |
+| Management Identity   | `identity`           | `JAVA_TOOL_OPTIONS` in `env`                                  |
+| Camunda Hub REST API  | `camundaHub.restapi` | `JAVA_TOOL_OPTIONS` in `env`. `javaOpts` sets `JAVA_OPTIONS`. |
+
+```yaml
+orchestration:
+  javaOpts: >-
+    -XX:+HeapDumpOnOutOfMemoryError
+    -XX:HeapDumpPath=/usr/local/camunda/data
+    -XX:ErrorFile=/usr/local/camunda/data/camunda_error%p.log
+    -XX:+ExitOnOutOfMemoryError
+    -Djavax.net.ssl.trustStore=/etc/camunda/jvm-truststore/cacerts
+    -Djavax.net.ssl.trustStorePassword=changeit
+  extraVolumes: &jvmTruststoreVolumes
+    - name: jvm-truststore
+      secret:
+        secretName: camunda-jvm-truststore
+  extraVolumeMounts: &jvmTruststoreMounts
+    - name: jvm-truststore
+      mountPath: /etc/camunda/jvm-truststore
+      readOnly: true
+
+optimize:
+  javaOpts: >-
+    -Djavax.net.ssl.trustStore=/etc/camunda/jvm-truststore/cacerts
+    -Djavax.net.ssl.trustStorePassword=changeit
+  extraVolumes: *jvmTruststoreVolumes
+  extraVolumeMounts: *jvmTruststoreMounts
+
+connectors:
+  env: &jvmTruststoreEnv
+    - name: JAVA_TOOL_OPTIONS
+      value: >-
+        -Djavax.net.ssl.trustStore=/etc/camunda/jvm-truststore/cacerts
+        -Djavax.net.ssl.trustStorePassword=changeit
+  extraVolumes: *jvmTruststoreVolumes
+  extraVolumeMounts: *jvmTruststoreMounts
+
+identity:
+  env: *jvmTruststoreEnv
+  extraVolumes: *jvmTruststoreVolumes
+  extraVolumeMounts: *jvmTruststoreMounts
+
+camundaHub:
+  restapi:
+    env: *jvmTruststoreEnv
+    extraVolumes: *jvmTruststoreVolumes
+    extraVolumeMounts: *jvmTruststoreMounts
+```
+
+If you have already set `javaOpts`, `env`, `extraVolumes`, or `extraVolumeMounts` for a component, merge these entries into your values. Run `helm upgrade` with the file.
+
+### 4. Verify the truststore
+
+Make sure each Java process uses the new truststore. Each Java pod must return a `Picked up JAVA_TOOL_OPTIONS` line with `/etc/camunda/jvm-truststore/cacerts`:
+
+```bash
+for pod in $(kubectl -n "$NAMESPACE" get pods -o name -l app.kubernetes.io/part-of=camunda-platform); do
+  echo "$pod: $(kubectl -n "$NAMESPACE" logs "$pod" --all-containers | grep -m1 'Picked up JAVA_TOOL_OPTIONS')"
+done
+```
+
+The loop selects pods by the `app.kubernetes.io/part-of=camunda-platform` label. The output must show the flag for each Java component from step 3. Pods that don't run Java, such as the Camunda Hub `websockets` Pod, print an empty value. Run the loop after `kubectl rollout status` finishes for each workload. Pods that are shutting down also print an empty value.
+
+To update the truststore, rebuild it by following step 1. Then replace the Secret and restart the pods:
+
+```bash
+kubectl -n "$NAMESPACE" create secret generic camunda-jvm-truststore \
+  --from-file=cacerts=./truststore/cacerts \
+  --dry-run=client -o yaml | kubectl -n "$NAMESPACE" apply -f -
+kubectl -n "$NAMESPACE" rollout restart statefulset,deployment \
+  -l app.kubernetes.io/part-of=camunda-platform
+```
+
 ## Legacy: per-component JKS truststore (deprecated)
 
 The `global.elasticsearch.*` and `global.opensearch.*` trees were removed in chart 15.x, including their `tls.secret.*` and `tls.jks.secret.*` password-injection blocks. Setting any key under them fails the render. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#migrate-globalelasticsearch-and-globalopensearch) for the migration mapping.

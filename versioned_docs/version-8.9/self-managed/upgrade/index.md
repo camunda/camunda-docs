@@ -18,7 +18,7 @@ import OverviewImg from '../assets/hero-upgrade-89.png';
 
 Get started by preparing your Self-Managed environment for upgrade to Camunda 8.9. Confirm upgrade eligibility, understand platform-level changes, and identify actions you might need to take before upgrading.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Prepare for upgrade" href="./prepare-for-upgrade/" style={{marginBottom: '30px', marginTop: '20px'}}>Prepare for upgrade</a>
+<p class="link-button">[Prepare for upgrade](./prepare-for-upgrade.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

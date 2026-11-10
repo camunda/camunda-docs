@@ -142,7 +142,7 @@ public class InvoiceApprovalTest {
 ```
 
 :::note
-The complete source code for this example test is available on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example/src/test/java/io/camunda/InvoiceApprovalTest.java).
+The complete source code for this example test is available on [GitHub](https://github.com/camunda/camunda/tree/stable/8.10/testing/camunda-process-test-example/src/test/java/io/camunda/InvoiceApprovalTest.java).
 :::
 
 ### Test scope and mocking
