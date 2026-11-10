@@ -41,6 +41,13 @@ A [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) runs its [agent lo
 Get started by [building your first AI agent](/guides/getting-started-agentic-orchestration.md).
 :::
 
+### Follow a worked example
+
+To see how the pieces fit together in a BPMN model, follow an example for your AI Agent connector implementation:
+
+- [AI Agent Sub-process example](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md): Model an agent with automatic tool calling and a response follow-up loop. This is the recommended implementation.
+- [AI Agent Task example](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md): Model the agent loop explicitly, for example to add approval or auditing between tool calls.
+
 ### Choose an LLM
 
 A [large language model (LLM)](/reference/glossary.md#large-language-model-llm) provides the agent's reasoning. The agent sends it a [prompt](/reference/glossary.md#prompt) and the available tools, and the LLM decides what to do next.
