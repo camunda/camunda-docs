@@ -5,84 +5,82 @@ description: Orchestrate your Automation Anywhere queue items from your BPMN pro
 sidebar_label: Automation Anywhere
 ---
 
-The **Automation Anywhere connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/) to add work items to the queue and obtain work item results.
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-To start using the connector, you need an instance with a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured via an API service. Refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more about installing and configuring the Automation Anywhere API service.
+Add work items to an Automation Anywhere queue and get their results from your BPMN process.
 
-You also need a user account with the `AAE_Queue Admin` role to query and manage workload queues and work items in a Control Room. Read more about roles in the [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).
+## About this connector
 
-## Create an Automation Anywhere connector task
+The Automation Anywhere connector orchestrates an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/). Use it to hand work to your bots by adding work items to a queue, and to check the state and result of a work item after a bot processes it.
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+## Prerequisites
 
-<ConnectorTask/>
+| Prerequisite                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Automation Anywhere instance                 | An instance with a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html), configured via an API service. Refer to the [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn how to install and configure the API service. |
+| User account with the `AAE_Queue Admin` role | A user account that can query and manage workload queues and work items in the Control Room. Learn more about [roles](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).                                                                                                                                                                                     |
 
-## Make your Automation Anywhere connector executable
-
-To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the connector properties panel on the right side of the screen.
-
-:::note
-All the mandatory and non-mandatory fields depending on the authentication and operation selections you choose are covered in the upcoming sections.
-:::
-
-## Authentication
-
-You can choose among the available **Automation Anywhere connector** authentication types according to your authentication requirements.
-
-:::note
-We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
-
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the connector.
-
-:::
-
-### _Authenticate (username and password)_ authentication
-
-Select the **Automation Anywhere connector** and fill out the following properties under the **Authentication** section:
-
-1. Select **Authenticate (username and password)** in the **Authentication** section.
-2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
-3. Set **Username** to `Username` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_UESRNAME}}`).
-4. Select needed **Multiple login** type. If this value is set to `true`, you will be allowed multiple API sessions. For more information on multi-login, refer to [multi-login user](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/users/cloud-multi-login-user.html).
-
-### _Authenticate (username and API key)_ authentication
-
-Select the **Automation Anywhere connector** and fill out the following properties under the **Authentication** section:
-
-1. Select **Authenticate (username and API key)** in the **Authentication** section.
-2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
-3. Set **API key** as `API key` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_API_KEY}}`). The API-Key is a 40-character string generated in the Control Room. Refer to [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-control-room-apikey-role.html) to learn more.
-
-### _Authentication (refresh) token_ authentication
-
-Select the **Automation Anywhere connector** and fill out the following properties under the **Authentication** section:
-
-1. Select **Authentication (refresh) token** in the **Authentication** section.
-2. Set **Token** to `Token` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_TOKEN}}`). It can be an authentication or refresh token. Refer to [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/api-authentication.html) to learn how to generate an authentication token or observe the [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/refresh-authentication-token.html) to learn how to generate a refresh token.
+<OutboundConnectorBasics />
 
 ## Configuration
 
-### Control Room URL
+### Connection
 
-1. Set **Control Room URL** to `Control Room URL`. The Control Room URL is the URL you use to access the Automation Anywhere Control Room. The Control Room URL is typically provided by the Automation Anywhere administrator and is specific to the organization's instance of the platform (i.e. `https://domainname.myautomationanywhere.digital`).
+| Property         | Type   | Required | Description                                                                                                                                                                             | Example                                           |
+| :--------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------ |
+| Control room URL | String | Yes      | The URL you use to access the Automation Anywhere Control Room. Your Automation Anywhere administrator provides it, and it is specific to your organization's instance of the platform. | `https://domainname.myautomationanywhere.digital` |
 
-## Operation types
+### Authentication
 
-The **Automation Anywhere connector** currently supports two operation types in the **Operation type** dropdown list: _Add work item to the queue_ and _Get work item result from queue by ID_.
+Select an authentication type from the **Type** dropdown in the **Authentication** section.
+:::note
+Store passwords, API keys, and tokens as secrets to avoid exposing them in the BPMN XML file. Follow the [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md), then reference the secret in the property, for example `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`.
+:::
+
+#### Authenticate (username and password)
+
+| Property       | Type     | Required | Description                                                                                                                                                                                                                                              | Example                                    |
+| :------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
+| Username       | String   | Yes      | The username of the Control Room user.                                                                                                                                                                                                                   | `{{secrets.AUTOMATION_ANYWHERE_USERNAME}}` |
+| Password       | String   | Yes      | The password of the Control Room user.                                                                                                                                                                                                                   | `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}` |
+| Multiple login | Dropdown | Yes      | Select `TRUE` to allow multiple API sessions for the user. Learn more about [multi-login users](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/users/cloud-multi-login-user.html). |                                            |
+
+#### Authenticate (username and API key)
+
+| Property | Type   | Required | Description                                                                                                                                                                                                                                                                                                                            | Example                                    |
+| :------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
+| Username | String | Yes      | The username of the Control Room user.                                                                                                                                                                                                                                                                                                 | `{{secrets.AUTOMATION_ANYWHERE_USERNAME}}` |
+| API key  | String | Yes      | The API key of the Control Room user. The API key is a 40-character string generated in the Control Room. Learn how to [create and assign an API key generation role](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-control-room-apikey-role.html). | `{{secrets.AUTOMATION_ANYWHERE_API_KEY}}`  |
+
+#### Authentication (refresh) token
+
+| Property | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Example                                 |
+| :------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------- |
+| Token    | String | Yes      | An authentication token or a refresh token. Learn how to generate an authentication token in the [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/api-authentication.html), or a refresh token in the [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/refresh-authentication-token.html). | `{{secrets.AUTOMATION_ANYWHERE_TOKEN}}` |
+
+### Timeout
+
+| Property                      | Type   | Required | Description                                                                                             | Example |
+| :---------------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------ | :------ |
+| Connection timeout in seconds | Number | No       | The timeout in seconds to establish a connection. Set `0` for an infinite timeout. The default is `20`. | `30`    |
+
+## Operations
+
+Select an operation from the **Type** dropdown in the **Operation** section. The connector supports two operations.
 
 ### Add work item to the queue
 
-This operation provides the ability to add a work queue item in the specified queue.
-It corresponds directly to the respective Automation Anywhere API - [`Add Work Items to the queue API`](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/add-work-item-data-to-queue-api.html).
+Add a work item to a queue. This operation corresponds to the Automation Anywhere [Add work items to the queue API](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/add-work-item-data-to-queue-api.html).
 
-#### Usage
+#### Input parameters
 
-1. Select **Add work item to the queue** from the **Operation type** dropdown in the **Operation** section.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section, set the **Control Room URL** field as described in the [respective section](#control-room-url).
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
-5. In the **Input** section, set **Work Item json Data** that you want to pass together with the item. The **Data** has to comply with the Automation Anywhere API, and must contain the following semantics:
+| Property            | Type   | Required | Description                                                                                                                              | Example    |
+| :------------------ | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :--------- |
+| Work queue ID       | String | Yes      | The identifier of the queue to add the work item to.                                                                                     | `20`       |
+| Work item json data | Text   | Yes      | JSON data for the work item, mapping queue column names to values. The data must comply with the Automation Anywhere API. Supports FEEL. | See below. |
+
+Example for **Work item json data**:
 
 ```json
 {
@@ -92,16 +90,9 @@ It corresponds directly to the respective Automation Anywhere API - [`Add Work I
 }
 ```
 
-#### Add work item to the queue response
+#### Output
 
-The operation **Add work item to the queue** returns information about the newly created item in the queue.
-
-You can use an output mapping to map the response:
-
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemId:response.body.list[1].id}`. To use operation _Get work item result from queue by ID_, you need an `itemId`. This expression will add it to the context for you. Learn more in [get work item result from queue by ID](#get-work-item-result-from-queue-by-id).
-
-Response example:
+The connector returns the HTTP response of the Control Room, with the response data in `response.body`. The response contains information about the newly created work item:
 
 ```json
 {
@@ -135,29 +126,28 @@ Response example:
 }
 ```
 
+To use the [Get work item result from queue by ID](#get-work-item-result-from-queue-by-id) operation later, you need the ID of the new work item. Use a **Result expression** to store it in a process variable:
+
+```feel
+= {
+  itemId: response.body.list[1].id
+}
+```
+
 ### Get work item result from queue by ID
 
-This operation provides the ability to return the details of the specified work item from the work queue.
-It corresponds directly to the respective Automation Anywhere API - [`List Work Items in queue with filter by work item ID`](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/get-all-work-items-in-queues-api.html).
+Get the details of a work item from a queue. This operation corresponds to the Automation Anywhere [List work items in queue with filter by work item ID API](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/get-all-work-items-in-queues-api.html).
 
-#### Usage
+#### Input parameters
 
-1. Select **Get work item result from queue by ID** from the **Operation type** dropdown in the **Operation** section.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section, set the **Control Room URL** field as described in the [respective section](#control-room-url).
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
-5. In the **Input** section, set **Work item ID**. This is the identifier of the item to be fetched.
+| Property      | Type   | Required | Description                                                                                          | Example |
+| :------------ | :----- | :------- | :--------------------------------------------------------------------------------------------------- | :------ |
+| Work queue ID | String | Yes      | The identifier of the queue the work item is in.                                                     | `20`    |
+| Work item ID  | Number | Yes      | The identifier of the work item to fetch, for example the one you stored after adding the work item. | `40957` |
 
-#### Get work item result from queue by ID response
+#### Output
 
-Given you have a queue work item ID previously added to a queue, the operation **Get work item result from queue by ID** returns information about a certain work item.
-
-You can use an output mapping to map the response:
-
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemState:response.body.list[1].status}`. You will observe the `itemState` in the process variables. Its value will let you know if the item was processed or not.
-
-Response example:
+The connector returns the HTTP response of the Control Room, with the response data in `response.body`. The response contains information about the work item:
 
 ```json
 {
@@ -194,11 +184,20 @@ Response example:
 }
 ```
 
-## Using Automation Anywhere connector best practice
+To check whether a bot processed the work item, store its status in a process variable with a **Result expression**. The `itemState` variable then tells you whether the item was processed:
 
-There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, refer to an entry _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+```feel
+= {
+  itemState: response.body.list[1].status
+}
+```
+
+## Wait for a work item to be processed
+
+Automation Anywhere does not guarantee that a bot processes a work item right away. Model your BPMN diagram to poll periodically, for example with a timer and a loop. To learn more, refer to the entry _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
-To avoid performance issues, it is recommended to limit the number of loop retries.
+To avoid performance issues, limit the number of loop retries.
 :::
+
+<ErrorHandling />

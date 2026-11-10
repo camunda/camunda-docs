@@ -951,11 +951,26 @@
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                {
+                  "AWS EventBridge": [
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound"
+                  ]
+                },
+                {
+                  "AWS SQS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract"
               ]

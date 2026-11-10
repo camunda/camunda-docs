@@ -105,6 +105,10 @@
         {
           "type": "category",
           "label": "Build",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/build-agents"
+          },
           "items": [
             "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/add-tool-to-ai-agent",
@@ -116,6 +120,10 @@
         {
           "type": "category",
           "label": "Evaluate",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/evaluate-agents/evaluate-ai-agents"
+          },
           "items": [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
             "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
@@ -126,6 +134,10 @@
         {
           "type": "category",
           "label": "Best practices",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/best-practices-agentic"
+          },
           "items": [
             "components/agentic-orchestration/ai-usage-guidelines",
             "components/agentic-orchestration/ao-design",
@@ -1140,6 +1152,7 @@
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
+            "components/modeler/desktop-modeler/element-templates/hosting-template-sources",
             "components/modeler/desktop-modeler/element-templates/using-templates"
           ]
         },
@@ -1230,11 +1243,25 @@
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example"
                       ]
                     },
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization"
+                    {
+                      "type": "category",
+                      "label": "Fundamentals",
+                      "items": [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents"
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Advanced topics",
+                      "items": [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-instance-migration",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization"
+                      ]
+                    },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade"
                   ]
                 },
                 {
@@ -1265,11 +1292,26 @@
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                {
+                  "AWS EventBridge": [
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound"
+                  ]
+                },
+                {
+                  "AWS SQS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract"
               ]

@@ -306,7 +306,7 @@ docker run --rm --entrypoint sh -e REMOVE_CNS="$REMOVE_CNS" "$CAMUNDA_IMAGE" -c 
   done'
 ```
 
-Verify the count for each CA. A count of `1` or more means the image contains the CA. If every count is `0`, you don't need this procedure.
+Verify the count for each CA. A count of `1` or more means the image contains the CA. Other Java component images can contain different CAs, so run the check again with `CAMUNDA_IMAGE` set to each image that you deploy. If every count is `0` in every image, you don't need this procedure.
 
 Then build the truststore without the listed CAs. Each run starts again from the image truststore, so list every CA to remove in each run:
 
@@ -422,7 +422,7 @@ webModeler:
     extraVolumeMounts: *jvmTruststoreMounts
 ```
 
-If you have already set `javaOpts` or `env` for a component, merge these entries into your values. Run `helm upgrade` with the file.
+If you have already set `javaOpts`, `env`, `extraVolumes`, or `extraVolumeMounts` for a component, merge these entries into your values. Run `helm upgrade` with the file.
 
 ### 4. Verify the truststore
 

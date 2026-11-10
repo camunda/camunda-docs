@@ -161,7 +161,7 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ### Camunda 8
 
-Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
+Camunda 8 is an agentic orchestration platform. Build [Camunda AI agents](#camunda-ai-agent) directly in your processes, and orchestrate them together with [external agents](#external-agent), people, and systems in end-to-end processes that combine deterministic steps with dynamic steps decided by AI agents at runtime. Built for the enterprise, Camunda 8 provides the security, compliance, availability, and scale that mission-critical processes need. Camunda 8 consists of the following key components:
 
 | Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                  |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -176,7 +176,7 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 
 The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
 
-It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), which offers two implementations: the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) and the [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), which offers two implementations: the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) and the [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md).
 
 :::note
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
