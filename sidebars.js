@@ -120,6 +120,10 @@ module.exports = {
         {
           type: "category",
           label: "Evaluate",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-ai-agents",
+          },
           items: [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
             "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
@@ -130,6 +134,10 @@ module.exports = {
         {
           type: "category",
           label: "Best practices",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/best-practices-agentic",
+          },
           items: [
             "components/agentic-orchestration/ai-usage-guidelines",
             "components/agentic-orchestration/ao-design",
@@ -1165,8 +1173,18 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound",
+                  ],
+                },
+                {
+                  "AWS SQS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-outbound",
+                  ],
+                },
                 "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
