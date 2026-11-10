@@ -49,6 +49,35 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 </div>
 </div>
 
+## Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### MariaDB connections use TLS by default {#mariadb-tls-by-default}
+
+Starting with Camunda 8.11, Camunda bundles version 4 of the MariaDB JDBC driver (`org.mariadb.jdbc:mariadb-java-client`). This driver connects with TLS by default and verifies the server certificate. The driver bundled with earlier versions connected without TLS unless you enabled it in the JDBC URL.
+
+This affects deployments that use MariaDB as secondary storage:
+
+- If your MariaDB server doesn't have TLS enabled, for example MariaDB 10.11 with default settings, Camunda fails at startup with `Trying to connect with ssl, but ssl not enabled in the server`.
+- If your MariaDB server uses a certificate the driver can't verify, such as a self-signed certificate, Camunda fails at startup with `Self signed certificates. Either set sslMode=trust, use password with a MitM-Proof authentication plugin or provide server certificate to client`.
+
+MariaDB 11.4 and later enable TLS by default with a generated certificate that the driver verifies when it connects with a password. A default installation of these versions isn't affected.
+
+**Action:** Before you upgrade to 8.11, check how Camunda connects to MariaDB:
+
+- We recommend enabling TLS on your MariaDB server. If the server uses a self-signed certificate or one from a private certificate authority, set `serverSslCert` in the JDBC URL to that certificate, for example `jdbc:mariadb://hostname:3306/camunda?serverSslCert=/path/to/ca-cert.pem`.
+- To keep connecting without TLS, add `sslMode=disable` to the JDBC URL, for example `jdbc:mariadb://hostname:3306/camunda?sslMode=disable`.
+
+For more information, see [TLS/SSL configuration](/self-managed/deployment/helm/configure/database/rdbms-troubleshooting.md#tlsssl-configuration).
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
