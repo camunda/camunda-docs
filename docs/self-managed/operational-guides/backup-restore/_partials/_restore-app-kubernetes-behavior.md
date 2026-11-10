@@ -1,3 +1,7 @@
+:::warning Set the node ID if you don't restore through the Helm chart
+The recommended way to restore on Kubernetes is to change the Helm values of your existing deployment. The Helm chart's startup script then sets the node ID for each pod from its StatefulSet ordinal. If you use `orchestration.command`, a separate Kubernetes Job, or a custom pod instead, that script doesn't run and the node ID defaults to `0` on every node. Set `ZEEBE_BROKER_CLUSTER_NODEID` explicitly on each pod to the ID of the broker that runs there.
+:::
+
 The application exits after restore and Kubernetes restarts the pod, which appears as `CrashLoopBackOff`. This is expected behavior. The restore application does not restore state again once partitions are already restored to persistent disk.
 
 After removing the temporary restore command, or unsetting `ZEEBE_RESTORE` and the related restore environment variables to restore Zeebe's default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.

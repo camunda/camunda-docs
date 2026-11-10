@@ -91,6 +91,8 @@ Camunda provides a standalone app which must be run on each node where a Zeebe B
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
 
+The node ID is the broker's ID in the cluster, from `0` to the cluster size minus one. Set `ZEEBE_BROKER_CLUSTER_NODEID` on each node to the ID of the broker that will run there. If you don't set it, the restore app uses the default node ID `0` on every node. Each node then restores only the partitions that broker `0` owns, and the restore finishes without an error. This is easy to miss when the replication factor equals the number of brokers, because broker `0` then holds every partition. If partitions are missing after a restore, or every node restored the same partitions, repeat the full restore, including secondary storage, with the correct node IDs. Don't restore individual partitions or brokers.
+
 The amount of partitions backed up are also visible in the backup store of Zeebe; see the available backups of Zeebe partitions you found when [finding available backup IDs](#find-available-backup-ids) above.
 If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
 :::
@@ -152,7 +154,7 @@ If you're not using the Camunda Helm chart, you can use a similar approach nativ
    </TabItem>
    <TabItem value="manual" label="Manual">
 
-To restore a Zeebe Cluster, run the following in each node where the broker will be running:
+To restore a Zeebe Cluster, set `ZEEBE_BROKER_CLUSTER_NODEID` to the broker's node ID, then run the following in each node where the broker will be running:
 
 ```bash
 mkdir -p camunda

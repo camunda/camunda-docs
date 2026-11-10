@@ -690,6 +690,8 @@ Camunda provides a standalone app which must be run on each node where a Zeebe b
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
 
+The node ID is the broker's ID in the cluster, from `0` to the cluster size minus one. Set `ZEEBE_BROKER_CLUSTER_NODEID` on each node to the ID of the broker that will run there. If you don't set it, the restore app uses the default node ID `0` on every node. Each node then restores only the partitions that broker `0` owns, and the restore finishes without an error. This is easy to miss when the replication factor equals the number of brokers, because broker `0` then holds every partition. If partitions are missing after a restore, or every node restored the same partitions, repeat the full restore, including secondary storage, with the correct node IDs. Don't restore individual partitions or brokers.
+
 The amount of partitions backed up are also visible in the backup store of Zeebe, see [how to figure out available backups](#available-backups-of-zeebe-partitions).
 If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
 :::
@@ -750,6 +752,10 @@ If you're not using the Camunda Helm chart, you can use a similar approach nativ
 
 :::
 
+:::warning Set the node ID if you don't restore through the Helm chart
+The recommended way to restore on Kubernetes is to change the Helm values of your existing deployment. The Helm chart's startup script then sets the node ID for each pod from its StatefulSet ordinal. If you use `orchestration.command`, a separate Kubernetes Job, or a custom pod instead, that script doesn't run and the node ID defaults to `0` on every node. Set `ZEEBE_BROKER_CLUSTER_NODEID` explicitly on each pod to the ID of the broker that runs there.
+:::
+
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
 After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
@@ -765,7 +771,7 @@ It will not try to import or overwrite the data again but should be noted that y
    </TabItem>
    <TabItem value="manual" label="Manual" default>
 
-To restore a Zeebe Cluster, run the following in each node where the broker will be running:
+To restore a Zeebe Cluster, set `ZEEBE_BROKER_CLUSTER_NODEID` to the broker's node ID, then run the following in each node where the broker will be running:
 
 ```bash
 mkdir -p camunda
