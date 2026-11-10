@@ -150,6 +150,21 @@ camunda:
 
 **Request timeout offset:** The offset being added to the timeout on asynchronous requests sent to Camunda to cover the network latency.
 
+### Mutual TLS (mTLS)
+
+To present a client certificate to an mTLS gateway in front of your Orchestration Cluster, configure the `camunda.client.mtls` properties:
+
+```yaml
+camunda:
+  client:
+    mtls:
+      cert-path: /etc/camunda/client.crt
+      key-path: /etc/camunda/client.key
+      ca-path: /etc/camunda/ca.crt
+```
+
+The Orchestration Cluster doesn't terminate mTLS itself, so the client certificate must be verified by a gateway on your own infrastructure. For the gateway requirements, keystore options, and all properties, see [Connect with mutual TLS (mTLS)](../java-client/mtls.md).
+
 ### Multi-tenancy
 
 To connect the client to a specific tenant, you can configure:
