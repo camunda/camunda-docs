@@ -93,14 +93,14 @@ Secondary storage is usually the first bottleneck as you add tenants. Size a sha
 
 ### Size RDBMS connections
 
-Each broker opens one HikariCP connection pool per tenant at startup, so connections scale with brokers and tenants, not partitions:
+Each broker opens two HikariCP connection pools per tenant at startup, one for queries and one for the RDBMS exporter, so connections scale with brokers and tenants, not partitions:
 
 ```text
-idle connections     =  brokers × tenants × minimum-idle
-maximum connections  =  brokers × tenants × maximum-pool-size
+idle connections     =  brokers × tenants × (minimum-idle + exporter minimum-idle)
+maximum connections  =  brokers × tenants × (maximum-pool-size + exporter maximum-pool-size)
 ```
 
-With the defaults (`maximum-pool-size` `10`, `minimum-idle` `2`), three brokers and four tenants can open 120 connections, above the PostgreSQL default `max_connections` of 100. Calculate this for each database instance, counting only its tenants, and either raise the database limit or add a connection pooler. You can override [pool properties](/self-managed/concepts/databases/relational-db/configuration.md#connection-pool-configuration) for each tenant.
+With the defaults (`maximum-pool-size` `10`, `minimum-idle` `2` for both pools), three brokers and four tenants can open 240 connections, above the PostgreSQL default `max_connections` of 100. Calculate this for each database instance, counting only its tenants, and either raise the database limit or add a connection pooler. You can override [pool properties](/self-managed/concepts/databases/relational-db/configuration.md#connection-pool-configuration) for each tenant.
 
 HikariCP metrics carry the `physicalTenant` tag. If data availability latency rises as you add tenants, check pool saturation before adding database capacity.
 

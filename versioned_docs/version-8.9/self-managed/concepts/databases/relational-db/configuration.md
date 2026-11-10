@@ -146,6 +146,12 @@ Camunda uses HikariCP for JDBC connection pooling. The following properties can 
 | `camunda.data.secondary-storage.rdbms.connection-pool.max-lifetime`       | Maximum lifetime (ms) of each connection before it is closed and replaced | 1800000 |
 | `camunda.data.secondary-storage.rdbms.connection-pool.connection-timeout` | Maximum time (ms) the application waits for a connection from the pool    | 30000   |
 
+### Exporter connection pool
+
+The RDBMS exporter uses a separate connection pool, so that queries holding all connections of the main pool can't stop exporting. It takes the same properties and defaults under `camunda.data.secondary-storage.rdbms.exporter-connection-pool.*`, for example `camunda.data.secondary-storage.rdbms.exporter-connection-pool.maximum-pool-size`.
+
+Count both pools when you size the database's connection limit. Each node opens up to `connection-pool.maximum-pool-size` plus `exporter-connection-pool.maximum-pool-size` connections.
+
 ## Exporter configuration
 
 The RDBMS exporter is automatically enabled when:
