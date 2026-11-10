@@ -35,11 +35,9 @@ New to [agentic orchestration](../../agentic-orchestration/agentic-orchestration
 
 ## Prerequisites
 
-The following prerequisites are required to use this connector:
+Before using this connector, set up an account and authentication details for the LLM model provider and backend you want to use. The required credentials depend on the provider and backend.
 
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                |
-| :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up your LLM model provider and authentication | <p>Before using this connector, set up an account and authentication details for the LLM model provider and backend you want to use. The required credentials depend on the provider and backend. </p><p>See [AI Agent model providers](./agentic-ai-aiagent-model-providers.md#supported-providers) for more details.</p> |
+See [AI Agent model providers](./agentic-ai-aiagent-model-providers.md#supported-providers) for more details.
 
 ## Choose an implementation
 
