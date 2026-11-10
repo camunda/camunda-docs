@@ -49,6 +49,21 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Call activities pass all local variables to the child when `propagateAllParentVariables` is `false` {#call-activity-local-variables}
+
+Starting with 8.11, a call activity with `propagateAllParentVariables` set to `false` copies all its [local variables](/components/modeler/bpmn/call-activities/call-activities.md#variable-mappings) to the child, even without input mappings. Previously, the child received no variables in that case. With `propagateAllChildVariables` enabled (default) and no output mappings, these variables also flow back when the child completes, even if unchanged. For a multi-instance call activity, the loop variables then land in the calling process instance, and a nested one overwrites the enclosing iteration's `loopCounter`.
+
+**Action:** Review such call activities, especially multi-instance ones. To stop the variables from flowing back, define output mappings or set `propagateAllChildVariables` to `false`.
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
