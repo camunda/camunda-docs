@@ -95,27 +95,27 @@ The connector sends the **Message content** as the last message of the conversat
 
 #### Input parameters
 
-| Property              | Type     | Required | Description                                                                                                             | Example                                                          |
-| :-------------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------- |
-| Resource name         | String   | Yes      | The name of your Azure OpenAI resource.                                                                                 | `myresource`                                                     |
-| Deployment ID         | String   | Yes      | The deployment name you chose when you deployed the model.                                                              | `mydeployment`                                                   |
-| API version           | String   | Yes      | The API version to use for this operation. The default is `2024-02-01`.                                                 | `2024-02-01`                                                     |
-| Message role          | Dropdown | Yes      | Who gives the current message: **User**, **System**, **Assistant**, **Tool**, or **Function**. The default is **User**. | **User**                                                         |
-| Message content       | Text     | Yes      | The content of the message.                                                                                             | `What is the age of the Universe?`                               |
-| Messages context      | Text     | No       | The array of messages associated with this chat completion request, sent before the current message.                    | `=[{"role": "system", "content": "You are helpful assistant."}]` |
-| Content part          | String   | No       | Part of a user's multi-modal message.                                                                                   |                                                                  |
-| Enhancements          | String   | No       | The Vision enhancement features requested for the chat.                                                                 |                                                                  |
-| Temperature           | String   | No       | The sampling temperature to use, between 0 and 2. The default is `1`.                                                   |                                                                  |
-| Number of completions | String   | No       | How many completions to generate for each prompt. The default is `1`.                                                   |                                                                  |
-| Stream                | Dropdown | Yes      | Whether to stream back partial progress: **False** or **True**. The default is **False**.                               | **False**                                                        |
-| Stop                  | String   | No       | Up to four sequences where the API stops generating further tokens.                                                     |                                                                  |
-| Max tokens            | String   | No       | The maximum number of tokens to generate in the completion.                                                             |                                                                  |
-| Presence penalty      | String   | No       | Positive values penalize new tokens based on whether they appear in the text so far.                                    |                                                                  |
-| Frequency penalty     | String   | No       | Positive values penalize new tokens based on their existing frequency in the text so far.                               |                                                                  |
-| Logit bias            | String   | No       | Modifies the likelihood of specified tokens appearing in the completion.                                                |                                                                  |
-| User                  | String   | No       | A unique identifier representing your end user.                                                                         |                                                                  |
-| Tools                 | String   | No       | A list of tools the model can call.                                                                                     |                                                                  |
-| Data sources          | String   | No       | Additional resource data.                                                                                               |                                                                  |
+| Property              | Type     | Required | Description                                                                                                             | Example                                                            |
+| :-------------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------- |
+| Resource name         | String   | Yes      | The name of your Azure OpenAI resource.                                                                                 | `myresource`                                                       |
+| Deployment ID         | String   | Yes      | The deployment name you chose when you deployed the model.                                                              | `mydeployment`                                                     |
+| API version           | String   | Yes      | The API version to use for this operation. The default is `2024-02-01`.                                                 | `2024-02-01`                                                       |
+| Message role          | Dropdown | Yes      | Who gives the current message: **User**, **System**, **Assistant**, **Tool**, or **Function**. The default is **User**. | **User**                                                           |
+| Message content       | Text     | Yes      | The content of the message.                                                                                             | `What is the age of the Universe?`                                 |
+| Messages context      | Text     | No       | The array of messages associated with this chat completion request, sent before the current message.                    | `=[{"role": "system", "content": "You are a helpful assistant."}]` |
+| Content part          | String   | No       | Part of a user's multi-modal message.                                                                                   |                                                                    |
+| Enhancements          | String   | No       | The Vision enhancement features requested for the chat.                                                                 |                                                                    |
+| Temperature           | String   | No       | The sampling temperature to use, between 0 and 2. The default is `1`.                                                   |                                                                    |
+| Number of completions | String   | No       | How many completions to generate for each prompt. The default is `1`.                                                   |                                                                    |
+| Stream                | Dropdown | Yes      | Whether to stream back partial progress: **False** or **True**. The default is **False**.                               | **False**                                                          |
+| Stop                  | String   | No       | Up to four sequences where the API stops generating further tokens.                                                     |                                                                    |
+| Max tokens            | String   | No       | The maximum number of tokens to generate in the completion.                                                             |                                                                    |
+| Presence penalty      | String   | No       | Positive values penalize new tokens based on whether they appear in the text so far.                                    |                                                                    |
+| Frequency penalty     | String   | No       | Positive values penalize new tokens based on their existing frequency in the text so far.                               |                                                                    |
+| Logit bias            | String   | No       | Modifies the likelihood of specified tokens appearing in the completion.                                                |                                                                    |
+| User                  | String   | No       | A unique identifier representing your end user.                                                                         |                                                                    |
+| Tools                 | String   | No       | A list of tools the model can call.                                                                                     |                                                                    |
+| Data sources          | String   | No       | Additional resource data.                                                                                               |                                                                    |
 
 #### Output {#chat-completion-output}
 
@@ -232,17 +232,17 @@ The connector returns the HTTP response of the Azure OpenAI REST API as an objec
 
 Assume you deployed a `gpt-35-turbo` model as `mydeployment` on the resource `myresource`, and created a connector secret named `AZURE_OAI_SECRET` that holds your API key. To get an answer to a question, configure the connector as follows:
 
-| Property         | Value                                                            |
-| :--------------- | :--------------------------------------------------------------- |
-| API key          | `{{secrets.AZURE_OAI_SECRET}}`                                   |
-| Operation        | **Chat completion**                                              |
-| Resource name    | `myresource`                                                     |
-| Deployment ID    | `mydeployment`                                                   |
-| API version      | `2024-02-01`                                                     |
-| Message role     | **User**                                                         |
-| Message content  | `What is the age of the Universe?`                               |
-| Messages context | `=[{"role": "system", "content": "You are helpful assistant."}]` |
-| Result variable  | `myOpenAIResponse`                                               |
+| Property         | Value                                                              |
+| :--------------- | :----------------------------------------------------------------- |
+| API key          | `{{secrets.AZURE_OAI_SECRET}}`                                     |
+| Operation        | **Chat completion**                                                |
+| Resource name    | `myresource`                                                       |
+| Deployment ID    | `mydeployment`                                                     |
+| API version      | `2024-02-01`                                                       |
+| Message role     | **User**                                                           |
+| Message content  | `What is the age of the Universe?`                                 |
+| Messages context | `=[{"role": "system", "content": "You are a helpful assistant."}]` |
+| Result variable  | `myOpenAIResponse`                                                 |
 
 Leave the other properties empty or at their default values. The connector sends the request to `https://myresource.openai.azure.com/openai/deployments/mydeployment/chat/completions?api-version=2024-02-01`, and stores the response in `myOpenAIResponse`. See the [chat completion output](#chat-completion-output) for the response.
 
