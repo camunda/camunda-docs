@@ -37,10 +37,14 @@ These authorizations do not apply to other Camunda services, such as Web Modeler
 
 The authorization system is built on the principle of **least privilege**.
 
-- When enabled, no access is granted by default, and all permissions must be explicitly assigned.
+When authorizations are enabled:
+
+- No access is granted by default, and all permissions must be explicitly assigned.
 - There are no "deny" rules – if a permission is not explicitly granted, access is denied.
 
 This model is enforced across both web components and API requests.
+
+When authorizations are disabled, every authenticated user can access all resources. See [behavior when authorizations are disabled](#behavior-when-authorizations-are-disabled).
 
 ### Owners, resources, and permissions
 
@@ -159,6 +163,19 @@ orchestration.security.authorizations.enabled=true
 ```
   </TabItem>
 </Tabs>
+
+### Behavior when authorizations are disabled
+
+:::warning
+Disabling authorizations isn't recommended in production environments. When `camunda.security.authorizations.enabled` is `false`, every authenticated user has full access to all Orchestration Cluster resources, including users, roles, and tenants. To grant limited access instead, see [common authorization use cases](#common-use-cases).
+:::
+
+When authorizations are disabled:
+
+- Resource-ID and property-based permission checks are skipped for every resource type. These checks return an authorized result instead of denying access.
+- Authorizations are disabled for the whole Orchestration Cluster. You can't disable them for individual components.
+- Every authenticated user can access all [available resources](#available-resources) in Operate, Tasklist, Identity, and the Orchestration Cluster API.
+- Authentication still applies. Only users who sign in, or clients that present valid credentials, can access the cluster.
 
 ## Security considerations
 
