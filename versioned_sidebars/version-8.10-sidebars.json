@@ -559,6 +559,19 @@
         "components/wait-states/overview",
         {
           "type": "category",
+          "label": "Audit log",
+          "link": {
+            "type": "doc",
+            "id": "components/audit-log/overview"
+          },
+          "items": [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure"
+          ]
+        },
+        {
+          "type": "category",
           "label": "Camunda integrations",
           "link": {
             "type": "doc",
