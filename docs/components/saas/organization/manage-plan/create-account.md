@@ -21,7 +21,6 @@ Sign up and start your developer journey with Camunda 8 SaaS.
 
 - See [available plans](/components/saas/organization/manage-plan/available-plans.md) to compare what each plan includes.
 - If you choose to create an account using the social sign up buttons, you are redirected directly to [Camunda Hub](/components/hub/index.md).
-  Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
 
 :::
 

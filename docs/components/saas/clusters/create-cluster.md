@@ -8,6 +8,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 To deploy and run your process, you must create a [cluster](/components/concepts/clusters.md) in Camunda 8. Every cluster you create in SaaS gets one [environment](/components/concepts/environments.md) automatically, and you [assign it to a workspace](../../hub/organization/manage-environments/assign-environments.md) so teams can deploy to it.
 
 :::note

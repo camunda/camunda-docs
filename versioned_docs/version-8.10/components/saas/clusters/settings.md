@@ -4,7 +4,9 @@ title: Manage cluster settings
 description: "Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
-Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::note
 This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).

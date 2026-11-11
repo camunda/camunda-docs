@@ -4,7 +4,9 @@ title: Create and manage users
 description: "Create and manage your organization's users in Camunda Hub."
 ---
 
-Create and manage your organization's users in Camunda Hub.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Add a user
 

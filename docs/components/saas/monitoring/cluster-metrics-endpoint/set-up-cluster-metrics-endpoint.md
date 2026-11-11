@@ -8,6 +8,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 Set up and manage the Cluster Metrics endpoint for a Camunda 8 SaaS Orchestration cluster, including how to activate and deactivate the endpoint and obtain the connection details required to integrate it with an external monitoring system.
 
 ## Before you begin
