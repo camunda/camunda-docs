@@ -1,7 +1,8 @@
 ---
 id: overview
-title: Monitoring
-description: Learn how to monitor Camunda 8 SaaS Orchestration Clusters using a secure metrics endpoint and your existing monitoring and observability tools.
+title: SaaS monitoring
+sidebar_label: Monitoring
+description: Monitor Camunda 8 SaaS Orchestration Clusters using a secure metrics endpoint and your existing monitoring and observability tools.
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -20,8 +21,6 @@ Camunda 8 SaaS offers a number of monitoring options to help you keep track of y
 | [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) | Flow control is enabled by default to protect SaaS clusters from excessive load and to maintain a stable state. This feature helps in monitoring and managing cluster performance.                                                                                                                                                                                                                   |
 | [Usage metrics](/reference/data-collection/usage-metrics.md)                                      | There are three main usage metrics that have an impact on Camunda 8 pricing. It is important to understand these definitions, their impact on billing, and how to retrieve them.                                                                                                                                                                                                                     |
 | [Camunda 8 SaaS status](/components/saas/status.md)                                               | Camunda provides a status page where you can check the current and past service availability of Camunda 8 SaaS. You can also subscribe to updates via Atom and RSS feeds to receive notifications about service status changes.                                                                                                                                                                      |
-
-Use your own monitoring and observability tools to observe the health and performance of your Camunda 8 SaaS Orchestration Clusters.
 
 ## Cluster Metrics endpoint
 
