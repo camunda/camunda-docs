@@ -7,6 +7,7 @@ description: "Learn about Camunda 8 SaaS, the fully managed cloud-based service 
 import AoGrid from '../react-components/\_ao-card';
 import { RocketIcon, BriefcaseIcon, FileStackIcon, BoxesIcon, BuildingComplexIcon, KeyRoundIcon, ServerIcon, MonitorCloudIcon, PencilRulerIcon } from "@site/docs/components/assets/hub-icons";
 import OverviewImg from './img/hero-saas.png';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <h3 class="subheading">Get started with Camunda 8 as a fully managed, cloud-based service.</h3>
 
@@ -96,3 +97,5 @@ image: PencilRulerIcon,
 description: "Learn how Camunda 8 SaaS is built, including how clusters and Zeebe run on the managed platform.",
 },
 ]} columns={3}/>
+
+<AoGetStartedBanner />

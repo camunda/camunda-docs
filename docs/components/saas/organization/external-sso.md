@@ -9,6 +9,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 Enterprise plan customers can integrate an external identity provider (IdP) with Camunda. This means users within your organization do not need to sign up by creating a Camunda account.
 
 ## Onboarding procedure

@@ -10,6 +10,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
+## About
+
 Camunda 8 SaaS lets you create backups and restore a cluster from a selected backup in Camunda Hub, without opening a support ticket.
 
 Backups are designed for disaster recovery, not long-term archival.

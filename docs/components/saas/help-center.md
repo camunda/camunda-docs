@@ -7,6 +7,7 @@ keywords: [help-center, help, support]
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import OpenHelpCenterImg from './img/open-help-center.png';
 
 <PageDescription />
 
@@ -16,7 +17,7 @@ You can open the Help Center directly from your Camunda 8 account.
 
 In Camunda Hub, click the **Open Help Center** icon in the top right corner of the navigation bar.
 
-![question mark icon to open the help center](./img/open-help-center.png)
+<img src={OpenHelpCenterImg} alt="question mark icon to open the help center" style={{width: "200px"}}/>
 
 ## New user survey
 

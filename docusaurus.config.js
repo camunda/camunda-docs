@@ -712,14 +712,14 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "self-managed/about-self-managed",
-          label: "Self-Managed",
+          docId: "components/saas/saas",
+          label: "SaaS",
           position: "left",
         },
         {
           type: "doc",
-          docId: "components/saas/saas",
-          label: "SaaS",
+          docId: "self-managed/about-self-managed",
+          label: "Self-Managed",
           position: "left",
         },
         {

@@ -10,6 +10,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
+## About
+
 You can use the backup feature of Camunda 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) with _zero downtime_. In case of failures that lead to data loss, you can restore a cluster from a backup.
 
 A Camunda 8 SaaS backup consists of a data backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications depend on each other, the backup must be consistent across all components. Therefore, the backup of a Camunda 8 cluster is taken as a whole.

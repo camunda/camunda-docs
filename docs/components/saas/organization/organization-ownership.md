@@ -8,6 +8,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 The first user to sign up for Camunda 8 from an organization, company, or group becomes the Organization Owner. The organization owns Camunda Hub workspaces, projects, and clusters, and the owner and any Organization Admins they assign control access to them.
 
 ## Organization Owner

@@ -8,6 +8,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 The following Camunda 8 plans are currently available:
 
 | Plan       | Description                                                                          |

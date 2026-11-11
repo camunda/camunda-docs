@@ -10,6 +10,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 Learn how Camunda 8 SaaS responds when your external Amazon KMS encryption key (BYOK) becomes unavailable during cluster startup or runtime.
 
 This page applies only to **external customer-managed keys** (AWS KMS). For encryption fundamentals, see the [encryption overview](/components/saas/byok/index.md).
