@@ -16,7 +16,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-An [AI agent tool](/reference/glossary.md#ai-agent-tool) is a BPMN element, or a flow of elements, inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md). When a tool is a flow, only its root element is exposed to the LLM. You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
+Learn how to add [tools](/reference/glossary.md#ai-agent-tool) to an AI agent. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for conceptual details.
 
 :::note See a full example
 For this in the context of a running AI agent, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).
