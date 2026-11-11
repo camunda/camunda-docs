@@ -13,6 +13,8 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
 - When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/components/best-practices/architecture/sizing-self-managed.md).
+- You usually add partitions to handle more load, so more data is exported to secondary storage. Scaling partitions doesn't scale secondary storage. Size it for the higher load before you scale. See [considerations](#considerations).
+- Optimize doesn't detect new partitions. After you add partitions, [update Optimize](#5-update-optimize).
   :::
 
 ## Broker id naming scheme
@@ -32,6 +34,12 @@ How brokers are identified and scaled depends on whether the cluster is [zone-aw
 - Scaling is a planned configuration change. The cluster rejects a new configuration change while another one is still running.
 - A dynamic scaling operation does not require a rolling restart. Static configuration changes, such as adding a Physical Tenant, still follow the [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md) restart procedure.
 - Gateway replicas are scaled separately from brokers and partitions. In Helm deployments, adjust `zeebe-gateway.replicas`. Gateway scaling changes shared request capacity but does not change partition placement.
+- Scaling partitions doesn't scale secondary storage. You usually add partitions to increase throughput, and more throughput means more data exported to secondary storage. If secondary storage can't keep up, it limits the throughput of the whole cluster. Check secondary storage before you scale partitions:
+  - **Elasticsearch or OpenSearch:** All partitions export to the same indices. Write throughput depends on the number of primary shards, not the number of nodes. Adding nodes alone doesn't help if the shard count stays the same. Check the shard count of your indices, and the CPU, memory, and disk of your nodes.
+  - **RDBMS:** The database scales mainly vertically, with a larger instance. Check that the database instance has enough CPU, memory, and connections for the higher load. Adding capacity later is more disruptive than planning headroom up front.
+  - **Optimize:** Optimize imports each partition separately and writes its own indices, so more partitions also increase the load from Optimize on Elasticsearch or OpenSearch. Optimize sets the shard count ([Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-index-settings), [OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-index-settings)) when it creates an index. It creates one process instance index per process definition, the first time it imports that definition. If you change the setting later, only indices for new process definitions use it. To change existing indices, you must delete them. Optimize then re-imports only the data that is still in the exporter indices, so older data is lost.
+
+  For details, see [secondary storage considerations](/components/best-practices/architecture/sizing-self-managed.md#secondary-storage-considerations) in the resource planning guide.
 
 ## Scale a cluster with multiple Physical Tenants
 
@@ -62,6 +70,8 @@ curl -X 'PATCH' \
 ```
 
 Requests that combine `physicalTenant` with a broker change or a replication factor change are rejected with `400`, because neither dimension has a tenant to scope it to. An unknown `physicalTenant` is rejected with `404`.
+
+If you use Optimize, update that tenant's Optimize instance afterward, as described in [step 5](#5-update-optimize).
 
 :::note
 A partition count change sent **without** the `physicalTenant` parameter targets the default Physical Tenant only. Read operations behave differently: `GET /actuator/cluster` without the parameter reports every Physical Tenant. Always pass `physicalTenant` explicitly when you intend to scale a non-default tenant.
@@ -471,6 +481,31 @@ The response would show that partitions are distributed to new brokers:
 ```
 
 </details>
+
+### 5. Update Optimize
+
+Skip this step if you didn't change the partition count, or if you don't use Optimize.
+
+Optimize has its own [`zeebe.partitionCount`](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) setting and doesn't detect new partitions. If you don't update it, process instances on the new partitions are simply missing in Optimize, without any error.
+
+With [multiple Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md), each tenant has its own Optimize instance. Update the Optimize instance of each tenant whose partition count changed, and set it to that tenant's partition count.
+
+1. Set Optimize's `zeebe.partitionCount` to the new partition count. With Helm, use `optimize.extraConfiguration`:
+
+   ```yaml
+   optimize:
+     extraConfiguration:
+       - file: partition-count.yaml
+         content: |
+           zeebe:
+             partitionCount: 6
+   ```
+
+   The `optimize.partitionCount` Helm value still works, but it is deprecated. Without Helm, set the `CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT` environment variable.
+
+2. Restart Optimize.
+
+Optimize stores its import position per partition. After the restart, it imports the records of the new partitions that still exist in the exporter indices. Make sure the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporter retention keeps these records until Optimize imports them. If the records are deleted first, this data is permanently missing in Optimize.
 
 ## Scale down
 
