@@ -33,16 +33,6 @@ For example, your **User Prompt** field could contain the following FEEL express
 
 With the **AI Agent Sub-process** implementation, the follow-up needs to be modeled to loop back to the AI Agent ad-hoc sub-process.
 
-The agent context is kept inside the sub-process by default, so you must also pass it out and back in. Configure the following fields so the agent resumes the same conversation:
-
-| Field                 | Section        | Value            |
-| :-------------------- | :------------- | :--------------- |
-| Include agent context | Response       | Enabled          |
-| Result variable       | Output mapping | `agent`          |
-| Agent context         | Memory         | `=agent.context` |
-
-For details on each field, see [memory](./agentic-ai-aiagent-subprocess.md#memory), [response](./agentic-ai-aiagent-subprocess.md#response), and [output mapping](./agentic-ai-aiagent-subprocess.md#output-mapping).
-
 ![AI Agent Sub-process with response follow-up](../img/ai-agent-subprocess-follow-up.png)
 
 :::note
