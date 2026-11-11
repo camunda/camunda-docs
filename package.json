@@ -101,12 +101,12 @@
   },
   "overrides": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0",
+    "postman-code-generators": "2.1.1",
     "@docusaurus/plugin-content-docs": "3.9.2"
   },
   "resolutions": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0",
+    "postman-code-generators": "2.1.1",
     "@docusaurus/plugin-content-docs": "3.9.2"
   },
   "engines": {
