@@ -167,7 +167,7 @@ orchestration.security.authorizations.enabled=true
 ### Behavior when authorizations are disabled
 
 :::warning
-Disabling authorizations isn't recommended in production environments. When `camunda.security.authorizations.enabled` is `false`, every authenticated user has full access to all Orchestration Cluster resources, including users, roles, and tenants. To grant limited access instead, see [common authorization use cases](#common-use-cases).
+Disabling authorizations isn't recommended in production environments. When authorizations are disabled, every authenticated user has full access to all Orchestration Cluster resources, including users, roles, and tenants. To grant limited access instead, see [common authorization use cases](#common-use-cases).
 :::
 
 When authorizations are disabled:
