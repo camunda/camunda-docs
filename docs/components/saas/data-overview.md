@@ -9,6 +9,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## About
+
 You can configure where your data is hosted and how it is protected and retained.
 
 | Data option                            | Description                                                                                                                                                                                                                                                                                              |
