@@ -99,4 +99,4 @@ description: "Learn how Camunda 8 SaaS is built, including how clusters and Zeeb
 },
 ]} columns={3}/>
 
-<AoGetStartedBanner />
+<AoGetStartedBanner href="../../guides/getting-started-agentic-orchestration/" />
