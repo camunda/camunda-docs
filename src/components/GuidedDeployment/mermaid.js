@@ -339,7 +339,7 @@ function allOptionsDiagram() {
   const optionId = (q, o) => safeId(`${q}__${o}`);
   /** @type {string[]} */
   const lines = [
-    "flowchart LR",
+    "flowchart TB",
     "  classDef unavailable stroke-dasharray: 5 5,opacity:0.6",
   ];
   /** @type {string[]} */
@@ -410,7 +410,10 @@ function allOptionsDiagram() {
     }
     lines.push("  end");
   }
-  return [...lines, ...edges].join("\n");
+  // Invisible links keep the steps in the order of the guide, top to bottom,
+  // although the rules point back at earlier steps.
+  const order = `  ${model.steps.map((s) => `step_${safeId(s.id)}`).join(" ~~~ ")}`;
+  return [...lines, order, ...edges].join("\n");
 }
 
 module.exports = { architectureDiagram, allOptionsDiagram };
