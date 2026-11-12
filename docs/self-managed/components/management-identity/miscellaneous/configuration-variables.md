@@ -163,7 +163,7 @@ connection, see [database configuration](#database-configuration).
 :::
 
 :::note
-When using the Camunda Helm chart, setting `MULTITENANCY_ENABLED: true` alone does not enable the Tenants tab in Management Identity. You must also set `global.multitenancy.enabled: true` in your Helm values. Without the global flag, the Tenants tab does not appear in Management Identity even when `MULTITENANCY_ENABLED` is set to `true`.
+When using the Camunda Helm chart, setting `MULTITENANCY_ENABLED: true` alone does not enable the Tenants tab in Management Identity. You must also set `global.multitenancy.enabled: true` in your Helm values. Without the global flag, the Tenants tab does not appear in Management Identity even when `MULTITENANCY_ENABLED` is set to `true`. The global flag also enables multi-tenancy checks in the Orchestration Cluster. To configure the Orchestration Cluster separately, see [configure multi-tenancy in the Helm chart](/self-managed/deployment/helm/configure/configure-logical-tenants.md).
 :::
 
 ## Logging
