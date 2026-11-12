@@ -1,11 +1,11 @@
 ---
 id: object-storage
-title: "Decide how many S3 buckets you need"
+title: "Object storage"
 sidebar_label: "Object storage"
 description: "Create the S3 buckets of a Camunda 8 deployment on AWS: one backup bucket for the cluster and one node ID lease bucket for each zone."
 ---
 
-A layered deployment on Amazon ECS needs two kinds of S3 buckets: one backup bucket for the whole cluster, and one node ID lease bucket for each zone. The object storage layer creates them, and the Camunda layer reads their names.
+A guided deployment on Amazon ECS needs two kinds of S3 buckets: one backup bucket for the whole cluster, and one node ID lease bucket for each zone. The object storage stage creates them, and the Camunda stage reads their names.
 
 ## Understand why there are two kinds
 
@@ -14,7 +14,7 @@ A layered deployment on Amazon ECS needs two kinds of S3 buckets: one backup buc
 | Backup        | One for each cluster | Camunda writes its backups here and restores from here.                                        | On         |
 | Node ID lease | One for each zone    | Each broker leases its node index from this bucket, because ECS tasks have no stable identity. | Off        |
 
-Both kinds are private, block public access, and are encrypted with a KMS key. The layer creates a key for each bucket unless you pass an existing one to the `s3-bucket` module.
+Both kinds are private, block public access, and are encrypted with a KMS key. The stage creates a key for each bucket unless you pass an existing one to the `s3-bucket` module.
 
 ### Keep one lease bucket for each zone
 
@@ -26,9 +26,9 @@ The lease bucket isn't versioned: the lease object changes on every renewal, so 
 
 All zones of a cluster write backups to one bucket, so a restore finds everything in one place, whichever region is active. Create it once, in the first region.
 
-## Create the object storage layer
+## Create the object storage stage
 
-1. Set the variables of the layer in `object-storage.tfvars`. Name every zone that the cluster has now. For a single region, that's one zone:
+1. Set the variables of the stage in `object-storage.tfvars`. Name every zone that the cluster has now. For a single region, that's one zone:
 
    ```hcl
    prefix     = "camunda-demo"
@@ -39,7 +39,7 @@ All zones of a cluster write backups to one bucket, so a restore finds everythin
    force_destroy = true
    ```
 
-1. Apply the layer:
+1. Apply the stage:
 
    ```bash
    ./procedure/compose.sh apply examples/greenfield
@@ -51,11 +51,11 @@ All zones of a cluster write backups to one bucket, so a restore finds everythin
    terraform -chdir=terraform/object-storage output -json lease_buckets
    ```
 
-Bucket names are global, so the layer builds them from the prefix and the account ID: `<prefix>-<account-id>-backup` and `<prefix>-<account-id>-lease-<zone>`. Keep the prefix short enough for the 63 characters that S3 allows.
+Bucket names are global, so the stage builds them from the prefix and the account ID: `<prefix>-<account-id>-backup` and `<prefix>-<account-id>-lease-<zone>`. Keep the prefix short enough for the 63 characters that S3 allows.
 
-Leave `force_destroy` at `false` for anything that holds data you need. With `true`, destroying the layer deletes the buckets and their objects, including backups.
+Leave `force_destroy` at `false` for anything that holds data you need. With `true`, destroying the stage deletes the buckets and their objects, including backups.
 
-## Use the layer inputs and outputs
+## Use the stage inputs and outputs
 
 | Input           | Purpose                                                                    |
 | --------------- | -------------------------------------------------------------------------- |
@@ -66,13 +66,13 @@ Leave `force_destroy` at `false` for anything that holds data you need. With `tr
 
 | Output                     | Used by                                                                          |
 | -------------------------- | -------------------------------------------------------------------------------- |
-| `backup_bucket_name`       | Camunda layer: backup store and repository name                                  |
-| `backup_access_policy_arn` | Camunda layer: attached to the task role                                         |
-| `lease_buckets`            | Camunda layer: `lease_buckets[<zone>]` has `bucket_name` and `access_policy_arn` |
+| `backup_bucket_name`       | Camunda stage: backup store and repository name                                  |
+| `backup_access_policy_arn` | Camunda stage: attached to the task role                                         |
+| `lease_buckets`            | Camunda stage: `lease_buckets[<zone>]` has `bucket_name` and `access_policy_arn` |
 
-The Camunda layer takes the entry of its own zone as `lease_bucket`. A second region runs this layer again with its own zone name.
+The Camunda stage takes the entry of its own zone as `lease_bucket`. A second region runs this stage again with its own zone name.
 
-## Troubleshoot the object storage layer
+## Troubleshoot the object storage stage
 
 ### zones needs at least one name made of alphanumerics and hyphens, starting with an alphanumeric.
 
@@ -88,5 +88,5 @@ You passed an existing lease bucket to the orchestration cluster module without 
 
 ## Next steps
 
-- [Expose the cluster](./exposure.md)
-- [Configure Camunda](./camunda-configuration.md)
+- [Exposure](./exposure.md)
+- [Orchestration Cluster](./orchestration-cluster/overview.md)

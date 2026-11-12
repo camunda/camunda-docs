@@ -1,35 +1,35 @@
 ---
 id: camunda-hub
-title: "Deploy Camunda Hub for several clusters"
+title: "Camunda Hub"
 sidebar_label: "Camunda Hub"
 description: "Deploy a single Camunda Hub on Amazon ECS and connect it to one or more Orchestration Clusters."
 ---
 
-The Camunda Hub layer deploys one Camunda Hub for the whole estate and connects it to every Orchestration Cluster that you list. Adding a cluster adds an entry to the layer. It never adds another Hub.
+The Camunda Hub stage deploys one Camunda Hub for the whole estate and connects it to every Orchestration Cluster that you list. Adding a cluster adds an entry to the stage. It never adds another Hub.
 
 ## Understand how Camunda Hub fits
 
-Camunda Hub is part of the management plane, next to [Management Identity](./management-identity.md) and the [OIDC provider](./oidc-provider.md). It owns no cluster. The Orchestration Clusters are inputs.
+Camunda Hub is part of the [management plane](./overview.md), next to [Management Identity](./management-identity.md). It signs in against the [identity provider](./identity-provider.md). It owns no cluster. The Orchestration Clusters are inputs.
 
 | What Camunda Hub needs  | Where it comes from                                                               |
 | ----------------------- | --------------------------------------------------------------------------------- |
-| A database              | The storage layer, declared with `auth = "iam"`                                   |
-| Sign-in                 | The `management` output of the OIDC provider layer                                |
+| A database              | The storage stage, declared with `auth = "iam"`                                   |
+| Sign-in                 | The `management` output of the identity provider stage                            |
 | Roles and organizations | The `internal_url` of Management Identity, with the roles of Camunda Hub declared |
-| The clusters            | The `cluster_registration` output of the Camunda layer of each cluster            |
+| The clusters            | The `cluster_registration` output of the Camunda stage of each cluster            |
 
 Camunda Hub forwards the signed-in user's token to the clusters. It reaches them over the network on three addresses: the REST API, the gRPC API, and the health endpoint on the management port. The addresses of `cluster_registration` are service discovery names that resolve inside the VPC. A cluster in another VPC is reachable through the interconnect, which forwards the names, and needs its routes and ports open.
 
-## Create the Camunda Hub layer
+## Create the Camunda Hub stage
 
-1. Declare the database `camunda_hub` in the storage layer, with `auth = "iam"`. See [OIDC provider](./oidc-provider.md#prepare-the-management-plane).
-1. Print the registration of each cluster, from the Camunda layer of that cluster:
+1. Declare the database `camunda_hub` in the storage stage, with `auth = "iam"`. See [prepare the shared steps](./overview.md#prepare-the-shared-steps).
+1. Print the registration of each cluster, from the Camunda stage of that cluster:
 
    ```bash
    terraform -chdir=terraform/camunda output -json cluster_registration
    ```
 
-1. List the clusters in the variables of the layer, by an ID of your choice:
+1. List the clusters in the variables of the stage, by an ID of your choice:
 
    ```hcl
    prefix = "camunda-mgmt"
@@ -53,7 +53,7 @@ Camunda Hub forwards the signed-in user's token to the clusters. It reaches them
 
    The `version` must match the version of the cluster: from 8.8 on it selects the REST and gRPC cluster API. The name defaults to the ID.
 
-1. Apply the layers of the management plane:
+1. Apply the stages of the management plane:
 
    ```bash
    PLAN=management ./procedure/compose.sh apply examples/management-plane
@@ -63,10 +63,10 @@ Camunda Hub forwards the signed-in user's token to the clusters. It reaches them
 
 ## Add a cluster later
 
-1. Connect the cluster to the OIDC provider. See [connect an Orchestration Cluster](./oidc-provider.md#connect-an-orchestration-cluster).
-1. Add its `cluster_registration` to `clusters` and apply the Camunda Hub layer. Camunda Hub restarts with the new list.
+1. Connect the cluster to the OIDC provider. See [connect an Orchestration Cluster](./identity-provider.md#connect-an-orchestration-cluster).
+1. Add its `cluster_registration` to `clusters` and apply the Camunda Hub stage. Camunda Hub restarts with the new list.
 
-## Use the layer inputs and outputs
+## Use the stage inputs and outputs
 
 | Setting               | Meaning                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -81,15 +81,15 @@ Camunda Hub forwards the signed-in user's token to the clusters. It reaches them
 | `clusters`        | The IDs of the connected clusters                   |
 | `clusters_config` | The clusters as Camunda Hub is configured with them |
 
-## Troubleshoot the Camunda Hub layer
+## Troubleshoot the Camunda Hub stage
 
-### Management Identity does not declare the roles of Camunda Hub: set enable_hub_authorization = true in the Management Identity layer.
+### Management Identity does not declare the roles of Camunda Hub: set enable_hub_authorization = true in the Management Identity stage.
 
-Management Identity doesn't declare the Web Modeler roles. Set `enable_hub_authorization = true` in its layer, apply it, then apply the Camunda Hub layer.
+Management Identity doesn't declare the Web Modeler roles. Set `enable_hub_authorization = true` in its stage, apply it, then apply the Camunda Hub stage.
 
-### Camunda Hub connects with an IAM token: declare its database with auth = iam in the storage layer.
+### Camunda Hub connects with an IAM token: declare its database with auth = iam in the storage stage.
 
-The database was declared with `auth = password`. Remove `auth` from `camunda_hub` in the `databases` of the storage layer.
+The database was declared with `auth = password`. Remove `auth` from `camunda_hub` in the `databases` of the storage stage.
 
 ### clusters needs at least one Orchestration Cluster.
 
@@ -101,5 +101,5 @@ Camunda Hub probes the readiness address on the management port, `9600`. Check t
 
 ## Next steps
 
-- [Connect an Orchestration Cluster to the OIDC provider](./oidc-provider.md#connect-an-orchestration-cluster)
-- [Grow from one region to two](./evolve-single-to-dual-region.md)
+- [Connect an Orchestration Cluster to the OIDC provider](./identity-provider.md#connect-an-orchestration-cluster)
+- [Grow to two regions](../grow/single-to-dual-region.md)
