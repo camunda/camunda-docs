@@ -81,6 +81,7 @@ RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 #---------------------------------------------------------------------------------
 
 RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
+RewriteRule ^p/get-started-with-test-mode/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#get-started-with-test-mode [R=301,NE,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
