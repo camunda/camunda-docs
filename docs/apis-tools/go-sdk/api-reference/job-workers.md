@@ -107,6 +107,34 @@ func (j *Job) Variables(v any) error
 
 Variables unmarshals the job variables into v (a pointer to a struct or map).
 
+## JobCompletion
+
+JobCompletion is the outcome of a successfully handled job: the variables to
+complete it with and, optionally, a job result.
+
+A job result is how a user task listener corrects or denies the task it
+listens to (see CorrectUserTask and DenyUserTask), and how the job of an
+ad-hoc sub-process tells the engine which elements to activate next (see
+AdHocSubProcessJobResult). Leave Result nil for an ordinary job.
+
+### Fields
+
+| Field       | Type             | Description |
+| ----------- | ---------------- | ----------- |
+| `Variables` | `map[string]any` |             |
+| `Result`    | `*JobResult`     |             |
+
+## JobCompletionHandler
+
+```go
+type JobCompletionHandler func(ctx context.Context, job *Job) (JobCompletion, error)
+```
+
+JobCompletionHandler processes an activated job like a JobHandler, but
+completes it with a JobCompletion, which can carry a job result. Errors are
+handled exactly as for a JobHandler: a *BpmnError throws a BPMN error and any
+other error fails the job. Adapt it with CompletionHandler.
+
 ## JobHandler
 
 ```go
@@ -118,6 +146,30 @@ JobHandler processes an activated job:
 - returning (variables, nil) completes the job with those variables;
 - returning a *BpmnError throws a BPMN error;
 - returning any other error fails the job (decrementing its retries).
+
+To also complete the job with a job result (user task listener corrections or
+denial, or an ad-hoc sub-process result), write a JobCompletionHandler and adapt
+it with CompletionHandler.
+
+### Functions
+
+#### CompletionHandler
+
+```go
+func CompletionHandler(h JobCompletionHandler) JobHandler
+```
+
+CompletionHandler adapts a JobCompletionHandler to a JobHandler, so it can be
+passed to NewJobWorker or NewStreamJobWorker.
+
+The worker sets the result's "type" discriminator from the variant that is
+populated, so it is always correct on the wire. A result with no variant set,
+or with both, is a handler bug: the job is failed with a descriptive error
+rather than completed without the result the handler asked for.
+
+The FALCON command stream cannot carry a job result, so a JobWorker receiving
+jobs over it fails a result-bearing completion; use WithForceREST to send job
+results to a gateway that advertises FALCON.
 
 ## JobWorker
 
@@ -148,8 +200,9 @@ blocks WebSockets) the worker transparently falls back to REST polling.
 ## StreamJobWorker
 
 StreamJobWorker activates jobs over the Zeebe gRPC StreamActivatedJobs stream
-and completes, fails, or throws BPMN errors over gRPC. Unlike the REST
-JobWorker it does not poll: the engine pushes jobs as they become available.
+and completes (with any job result, see CompletionHandler), fails, or throws
+BPMN errors over gRPC. Unlike the REST JobWorker it does not poll: the engine
+pushes jobs as they become available.
 
 ### Methods
 
@@ -351,3 +404,65 @@ func WithWorkerTenantIDs(ids ...string) WorkerOption
 
 WithWorkerTenantIDs restricts job activation to the given tenant ids,
 overriding the client's default tenant.
+
+## Package functions
+
+### ActivateAdHocElement
+
+```go
+func ActivateAdHocElement(elementID ElementId, variables map[string]any) JobResultActivateElement
+```
+
+**Types:** [`ElementId`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ElementId), [`JobResultActivateElement`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultActivateElement)
+
+ActivateAdHocElement returns an instruction to activate the element elementID
+inside an ad-hoc sub-process, creating variables (which may be nil) in the
+scope of the activated element.
+
+### AdHocSubProcessJobResult
+
+```go
+func AdHocSubProcessJobResult(r JobResultAdHocSubProcess) *JobResult
+```
+
+**Types:** [`JobResultAdHocSubProcess`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultAdHocSubProcess), [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+AdHocSubProcessJobResult wraps an ad-hoc sub-process result as a JobResult with
+the "adHocSubProcess" discriminator set.
+
+### CorrectUserTask
+
+```go
+func CorrectUserTask(c JobResultCorrections) *JobResult
+```
+
+**Types:** [`JobResultCorrections`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultCorrections), [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+CorrectUserTask returns a user task listener result that corrects the task's
+attributes. Only the attributes set on c are corrected; the rest keep their
+persisted value. Clear the assignee with an empty string, the due or follow-up
+date with ClearDueDate or ClearFollowUpDate, and the candidate users or groups
+with an empty, non-nil slice.
+
+### DenyUserTask
+
+```go
+func DenyUserTask(reason string) *JobResult
+```
+
+**Types:** [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+DenyUserTask returns a user task listener result that denies the work, for
+example rejecting a task completion so the task stays active. reason is
+optional; an empty reason is omitted.
+
+### UserTaskJobResult
+
+```go
+func UserTaskJobResult(r JobResultUserTask) *JobResult
+```
+
+**Types:** [`JobResultUserTask`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultUserTask), [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+UserTaskJobResult wraps a user task listener result as a JobResult with the
+"userTask" discriminator set.
