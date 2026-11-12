@@ -5,7 +5,11 @@ sidebar_label: "Network"
 description: "Decide where the VPC comes from and how regions connect for a Camunda 8 Self-Managed deployment on AWS, and create the network stage."
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The network stage provides the VPC and subnets that every other stage uses and, when you run more than one region, the link between the regions. You make two decisions: where the VPC comes from, and how regions connect.
+
+<GuidedProgress />
 
 ## Choose the VPC source
 
@@ -15,6 +19,8 @@ The network stage provides the VPC and subnets that every other stage uses and, 
 | Use an existing VPC | You deploy into an existing AWS landing zone, with its own address plan, routing, and egress. | The VPC ID, its CIDR block, and the subnet IDs, as described in the next section. |
 
 Creating a VPC is the default. Using an existing VPC doesn't change anything else in the deployment: the stage validates your values and publishes them as the same outputs.
+
+<ChoicePanel question="vpc" />
 
 ## Choose how regions connect
 
@@ -27,7 +33,11 @@ You need a link between regions only when you grow beyond one region. Each regio
 
 Neither option encrypts traffic at the network stage. Raft replication between brokers crosses the AWS backbone in cleartext unless you add encryption, for example IPsec on a transit gateway attachment or TLS on the broker channel. Evaluate this before you choose, especially for regulated workloads.
 
+<ChoicePanel question="link" />
+
 The VPC CIDR blocks of the regions must not overlap. See [grow to two regions](./grow/single-to-dual-region.md) and [grow to three regions](./grow/dual-to-three-regions.md).
+
+<GuidedWhen vpc="existing">
 
 ## Meet the requirements of your VPC
 
@@ -53,16 +63,26 @@ aws ec2 describe-subnets --subnet-ids subnet-0aaa subnet-0bbb subnet-0ccc \
 
 Both VPC attributes must return `true`, and the three subnets must list three different availability zones.
 
+</GuidedWhen>
+
 ## Create the network stage
 
 From `aws/containers/ecs-guided` in the reference repository:
 
-1. Write the variables of the network stage. To create a VPC:
+1. Write the variables of the network stage.
+
+   <GuidedWhen vpc="create">
+
+   To create a VPC:
 
    ```hcl
    prefix = "camunda-demo"
    cidr   = "10.190.0.0/16"
    ```
+
+   </GuidedWhen>
+
+   <GuidedWhen vpc="existing">
 
    To use an existing VPC:
 
@@ -78,6 +98,8 @@ From `aws/containers/ecs-guided` in the reference repository:
 
    private_route_table_ids = ["rtb-0123"]
    ```
+
+   </GuidedWhen>
 
 1. Put the variables in the `network.tfvars` of the example you copy: `examples/greenfield` creates a VPC, `examples/byo-vpc` uses an existing one. Set the same `prefix` in the other files.
 1. Apply the stages in order. With an existing VPC, the network stage creates no AWS resources: it validates the values and publishes them as outputs, and the helper script passes them to the next stages.
@@ -103,6 +125,8 @@ The network stage doesn't depend on the [compute option](./compute.md). The cont
 
 ## Troubleshoot the network stage
 
+<GuidedWhen vpc="existing">
+
 ### byo_vpc = true requires vpc_id, vpc_cidr and at least 3 private_subnet_ids
 
 You set `byo_vpc = true` but left out the VPC ID, the CIDR block, or fewer than three private subnets. The stage checks them before anything is created. Add the missing values, and make sure the three subnets are in three different availability zones.
@@ -111,11 +135,19 @@ You set `byo_vpc = true` but left out the VPC ID, the CIDR block, or fewer than 
 
 You passed VPC values but didn't set `byo_vpc = true`. Terraform would ignore them and create a new VPC instead. Set `byo_vpc = true`, or remove the VPC values.
 
+</GuidedWhen>
+
+<GuidedWhen vpc="create">
+
 ### At least 3 availability zones are required
 
 You asked the stage to create a VPC with fewer than three zones. Brokers and Aurora spread over three zones, so set `az_count` to three or more.
+
+</GuidedWhen>
 
 ## Next steps
 
 - [Compute](./compute.md)
 - [Grow to two regions](./grow/single-to-dual-region.md)
+
+<GuidedNext />

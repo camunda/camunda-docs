@@ -5,7 +5,23 @@ sidebar_label: "Camunda Hub"
 description: "Deploy a single Camunda Hub on Amazon ECS and connect it to one or more Orchestration Clusters."
 ---
 
+import { GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The Camunda Hub stage deploys one Camunda Hub for the whole estate and connects it to every Orchestration Cluster that you list. Adding a cluster adds an entry to the stage. It never adds another Hub.
+
+<GuidedProgress />
+
+<GuidedWhen managementPlane="none" chosenOnly>
+
+You chose no management plane, so this page doesn't apply to your deployment. Continue with [your architecture](../your-architecture.md).
+
+</GuidedWhen>
+
+<GuidedWhen compute="eks" managementPlane="deploy">
+
+With Amazon EKS, the [Helm chart](/self-managed/deployment/helm/install/quick-install.md) deploys Camunda Hub and Management Identity with the full platform. The stages on these pages are part of the Amazon ECS Terraform. See [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md).
+
+</GuidedWhen>
 
 ## Understand how Camunda Hub fits
 
@@ -19,6 +35,8 @@ Camunda Hub is part of the [management plane](./overview.md), next to [Managemen
 | The clusters            | The `cluster_registration` output of the Camunda stage of each cluster            |
 
 Camunda Hub forwards the signed-in user's token to the clusters. It reaches them over the network on three addresses: the REST API, the gRPC API, and the health endpoint on the management port. The addresses of `cluster_registration` are service discovery names that resolve inside the VPC. A cluster in another VPC is reachable through the interconnect, which forwards the names, and needs its routes and ports open.
+
+<GuidedWhen managementPlane="deploy" compute="ecs">
 
 ## Create the Camunda Hub stage
 
@@ -99,7 +117,11 @@ The map is empty. Add at least one entry.
 
 Camunda Hub probes the readiness address on the management port, `9600`. Check that the address resolves from the Camunda Hub task, that the security groups open `9600` between the two, and that the cluster is ready.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Connect an Orchestration Cluster to the OIDC provider](./identity-provider.md#connect-an-orchestration-cluster)
 - [Grow to two regions](../grow/single-to-dual-region.md)
+
+<GuidedNext />

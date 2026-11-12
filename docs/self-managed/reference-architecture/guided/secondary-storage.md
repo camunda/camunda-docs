@@ -5,7 +5,11 @@ sidebar_label: "Secondary storage"
 description: "Choose between relational and document-store secondary storage for the Orchestration Cluster on AWS, and create the Aurora PostgreSQL stage."
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The Orchestration Cluster stores the data that its web applications and APIs query in secondary storage. In the guided deployment, the secondary storage stage creates an Aurora PostgreSQL cluster, seeds its database users, and publishes the connection settings that the Camunda stage reads.
+
+<GuidedProgress />
 
 ## Choose a storage family
 
@@ -20,6 +24,16 @@ Choose one family for each deployment. You can't migrate between families in pla
 
 Choose a document store if you need Optimize or heavy search workloads. Choose Aurora PostgreSQL otherwise. If you need Optimize with relational storage, plan for both backends. See [compare Elasticsearch/OpenSearch and RDBMS](/self-managed/reference-architecture/reference-architecture.md#compare-elasticsearchopensearch-and-rdbms) and the [secondary storage overview](/self-managed/concepts/secondary-storage/index.md).
 
+<ChoicePanel question="storage" />
+
+<GuidedWhen compute={["eks", "ec2"]}>
+
+The guided storage stage is part of the Amazon ECS Terraform. With Amazon EKS or Amazon EC2, the reference architecture creates its own secondary storage. See [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md) or [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
+
+</GuidedWhen>
+
+<GuidedWhen storage="aurora">
+
 ## Choose the instance class before you grow
 
 The stage runs one Aurora instance by default. The instance class decides whether the cluster can join an Aurora Global Database later.
@@ -31,6 +45,12 @@ The stage runs one Aurora instance by default. The instance class decides whethe
 | `db.serverless`                   | Yes                     | A deployment with a varying load           |
 
 Aurora Global Databases don't support `db.t3` or `db.t4g` instances. If you start on `db.t3.medium` and later need a second region, set `db_instance_class` to an r-class instance first. The resize is in place, and search is unavailable for a few minutes while the single instance restarts. See [grow to two regions](./grow/single-to-dual-region.md).
+
+<ChoicePanel question="dbClass" />
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs" storage="aurora">
 
 ## Understand what the stage creates
 
@@ -64,6 +84,10 @@ Aurora Global Databases don't support `db.t3` or `db.t4g` instances. If you star
    terraform -chdir=terraform/storage output -json secondary_storage
    ```
 
+</GuidedWhen>
+
+<GuidedWhen compute="ecs" storage="aurora" managementPlane="deploy">
+
 ## Add databases for the management plane
 
 The OIDC provider, Management Identity, and Camunda Hub each need a database of their own. Declare them in `databases`, and the stage creates the role and the database for each, on the same cluster or on the cluster of the management plane:
@@ -88,6 +112,10 @@ databases = {
 | `password` | A role with a generated password, stored in Secrets Manager. For components that don't support IAM authentication. |
 
 Names use lowercase letters, digits, and underscores, and start with a letter, because they appear in SQL statements. The `databases` output gives each component its JDBC URL, role, and secret or policy. See [deploy an identity provider](./management-plane/identity-provider.md).
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs" storage="aurora">
 
 ## Use the stage inputs and outputs
 
@@ -130,7 +158,11 @@ You passed a `db.t3` or `db.t4g` class as `secondary_instance_class` of the `glo
 
 The seed task couldn't create the database users. Open the CloudWatch log group `/ecs/<prefix>-db-seed` for the statement that failed, and check that the security groups in `seed_security_group_ids` allow port 5432 to the cluster. Apply the stage again to re-run the seed.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Object storage](./object-storage.md)
 - [Orchestration Cluster](./orchestration-cluster/overview.md)
+
+<GuidedNext />

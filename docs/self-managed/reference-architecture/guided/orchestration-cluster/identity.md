@@ -5,7 +5,11 @@ sidebar_label: "Identity"
 description: "Choose between built-in users and an OIDC provider for a Camunda 8 Orchestration Cluster on AWS, and connect the cluster to the provider."
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The identity stage decides how users and clients sign in to an Orchestration Cluster: with built-in users, or with an OIDC provider. Both produce the same output, so the Camunda stage doesn't know which one is behind it.
+
+<GuidedProgress />
 
 ## Choose an authentication mode
 
@@ -15,6 +19,16 @@ The identity stage decides how users and clients sign in to an Orchestration Clu
 | `oidc`  | You use your own provider, or the [identity provider of the management plane](../management-plane/identity-provider.md). | The provider's issuer, token endpoint, audience, and one client per component. |
 
 Camunda Hub and Management Identity need an OIDC provider, so a cluster that Camunda Hub manages uses `oidc`. See [Camunda Hub](../management-plane/camunda-hub.md).
+
+<ChoicePanel question="auth" />
+
+<GuidedWhen compute={["eks", "ec2"]}>
+
+The Orchestration Cluster stage is part of the Amazon ECS Terraform. With Amazon EKS, the Helm chart deploys the Orchestration Cluster: see [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md). With Amazon EC2, see [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md). The decisions on these pages apply in both cases.
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs" auth="oidc">
 
 ## Describe your provider
 
@@ -33,6 +47,10 @@ In `oidc` mode, the stage takes one object, `external_oidc`. Create a client for
 Set `admin_claim_value` to a principal that exists in your directory. It receives the administrator role. The default `admin` is the login user of the management plane's OIDC provider.
 
 The task execution role must be able to decrypt the client secrets. Encrypt them with the key of the compute stage, or pass the key you used as `client_secrets_kms_key_arn`.
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs">
 
 ## Create the identity stage
 
@@ -58,6 +76,10 @@ The stage publishes one output for the Camunda stage:
 | `oidc`                | `null` in basic mode. Otherwise the issuer, token endpoint, audience, redirect URI, claims, and one client for each component. |
 | `authentication_mode` | `basic` or `oidc`.                                                                                                             |
 
+</GuidedWhen>
+
+<GuidedWhen compute="ecs" auth="oidc">
+
 ## Troubleshoot the identity stage
 
 ### authentication_mode = oidc requires external_oidc.
@@ -80,7 +102,11 @@ The stage didn't receive the outputs of the exposure and compute stages. Apply t
 
 Nobody would receive the administrator role. Set `admin_claim_value` to the value of the username claim of your administrator.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Deploy the identity provider](../management-plane/identity-provider.md)
 - [Orchestration Cluster](./overview.md)
+
+<GuidedNext />

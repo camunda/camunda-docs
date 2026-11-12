@@ -1888,7 +1888,10 @@ module.exports = {
         {
           type: "category",
           label: "Guided deployment",
-          link: { type: "doc", id: "self-managed/reference-architecture/guided/guided-deployment" },
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/guided/guided-deployment",
+          },
           items: [
             "self-managed/reference-architecture/guided/cloud-provider",
             "self-managed/reference-architecture/guided/network",
@@ -1899,7 +1902,10 @@ module.exports = {
             {
               type: "category",
               label: "Orchestration Cluster",
-              link: { type: "doc", id: "self-managed/reference-architecture/guided/orchestration-cluster/overview" },
+              link: {
+                type: "doc",
+                id: "self-managed/reference-architecture/guided/orchestration-cluster/overview",
+              },
               items: [
                 "self-managed/reference-architecture/guided/orchestration-cluster/identity",
                 "self-managed/reference-architecture/guided/orchestration-cluster/zones-and-brokers",
@@ -1908,13 +1914,17 @@ module.exports = {
             {
               type: "category",
               label: "Management plane",
-              link: { type: "doc", id: "self-managed/reference-architecture/guided/management-plane/overview" },
+              link: {
+                type: "doc",
+                id: "self-managed/reference-architecture/guided/management-plane/overview",
+              },
               items: [
                 "self-managed/reference-architecture/guided/management-plane/identity-provider",
                 "self-managed/reference-architecture/guided/management-plane/management-identity",
                 "self-managed/reference-architecture/guided/management-plane/camunda-hub",
               ],
             },
+            "self-managed/reference-architecture/guided/your-architecture",
             {
               type: "category",
               label: "Grow your deployment",

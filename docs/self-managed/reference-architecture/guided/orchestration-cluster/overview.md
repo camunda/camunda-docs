@@ -5,12 +5,24 @@ sidebar_label: "Overview"
 description: "Deploy the Camunda 8 Orchestration Cluster and Connectors on Amazon ECS from the outputs of the earlier steps, and configure how it connects to storage and sign-in."
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The Orchestration Cluster step runs the Orchestration Cluster and Connectors on Amazon ECS. It creates no network, storage, load balancer, or identity provider: they arrive as variables from the steps before it. Configure the cluster in these pages:
 
 | Page                                        | What you decide                                                       |
 | ------------------------------------------- | --------------------------------------------------------------------- |
 | [Identity](./identity.md)                   | Built-in users or an OIDC provider, and how to describe your provider |
 | [Zones and brokers](./zones-and-brokers.md) | How many brokers, which zones, which replication factor, how to grow  |
+
+<GuidedProgress />
+
+<ChoicePanel step="orchestration-cluster" />
+
+<GuidedWhen compute={["eks", "ec2"]}>
+
+The Orchestration Cluster stage is part of the Amazon ECS Terraform. With Amazon EKS, the Helm chart deploys the Orchestration Cluster: see [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md). With Amazon EC2, see [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md). The decisions on these pages apply in both cases.
+
+</GuidedWhen>
 
 ## Choose the authentication mode
 
@@ -19,7 +31,13 @@ The Orchestration Cluster step runs the Orchestration Cluster and Connectors on 
 | Basic (default) | Evaluation, or when you have no provider | The stage generates passwords for the `admin` and `connectors` users and stores them in Secrets Manager. |
 | OIDC            | You have an OIDC provider                | You pass the `oidc` output of the identity stage. The stage creates no passwords.                        |
 
+<GuidedWhen auth="basic" regions={["2", "3"]}>
+
 In basic mode, the users exist in the cluster, not in each region. A second region must receive the passwords of the first: read `admin_user_password` and `connectors_user_password` from the outputs of the first region's Camunda stage and pass them to the second region. A different password makes Connectors fail to authenticate.
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs">
 
 ## Understand the secondary storage settings
 
@@ -86,8 +104,12 @@ The stage builds these settings from the `secondary_storage` output of the stora
 
 The `secondary_storage` input isn't an RDBMS with IAM authentication. Pass the output of the storage stage, or the output of the global database root.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Set up identity](./identity.md)
 - [Set zones and brokers](./zones-and-brokers.md)
 - [Deploy the management plane](../management-plane/overview.md)
+
+<GuidedNext />

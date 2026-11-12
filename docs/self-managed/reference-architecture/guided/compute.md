@@ -5,7 +5,11 @@ sidebar_label: "Compute"
 description: "Compare Amazon EKS, Amazon ECS with Fargate, and Amazon EC2 for running Camunda 8 Self-Managed, and see which stages of your deployment change with the choice."
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress } from "@site/src/components/GuidedDeployment";
+
 The compute stage decides where the Orchestration Cluster runs. Choose Amazon EKS if you run Kubernetes or need the full platform, Amazon ECS with Fargate if you want containers without operating Kubernetes, and Amazon EC2 if you run the Camunda single application on virtual machines.
+
+<GuidedProgress />
 
 ## Compare the options
 
@@ -49,6 +53,8 @@ Choose Amazon EC2 if all of these apply:
 
 If you're unsure, start with the option your team already operates. Each option is a reference architecture: it shows how the components fit together and isn't production-ready as it is.
 
+<ChoicePanel question="compute" />
+
 ## See what changes with the choice
 
 The decision only changes some stages. Stages that your choice doesn't affect keep the same inputs and outputs, which is why you can decide them on their own pages.
@@ -76,3 +82,5 @@ There is no in-place move between compute options. Plan a change as a new deploy
 - [Deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
 - [Deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md)
 - [Network](./network.md)
+
+<GuidedNext />

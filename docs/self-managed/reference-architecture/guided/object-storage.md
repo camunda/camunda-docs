@@ -5,7 +5,21 @@ sidebar_label: "Object storage"
 description: "Create the S3 buckets of a Camunda 8 deployment on AWS: one backup bucket for the cluster and one node ID lease bucket for each zone."
 ---
 
+import { FollowsFromChoices, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 A guided deployment on Amazon ECS needs two kinds of S3 buckets: one backup bucket for the whole cluster, and one node ID lease bucket for each zone. The object storage stage creates them, and the Camunda stage reads their names.
+
+<GuidedProgress />
+
+This step has no decision of its own: the buckets follow from your compute and your regions.
+
+<FollowsFromChoices step="object-storage" />
+
+<GuidedWhen compute={["eks", "ec2"]}>
+
+With Amazon EKS or Amazon EC2, you need only the backup bucket, because only Amazon ECS needs a node ID lease bucket for each zone. The object storage stage is part of the Amazon ECS Terraform. See [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md) or [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
+
+</GuidedWhen>
 
 ## Understand why there are two kinds
 
@@ -16,15 +30,21 @@ A guided deployment on Amazon ECS needs two kinds of S3 buckets: one backup buck
 
 Both kinds are private, block public access, and are encrypted with a KMS key. The stage creates a key for each bucket unless you pass an existing one to the `s3-bucket` module.
 
+<GuidedWhen compute="ecs">
+
 ### Keep one lease bucket for each zone
 
 A broker acquires its node index by writing a lease object to the bucket with S3 conditional writes. The lease is scoped to the bucket, and the bucket must not be shared with other Zeebe clusters. Each zone numbers its brokers from zero and leases those indexes from its own bucket, so create one lease bucket for each zone, and never point two zones at the same bucket.
 
 The lease bucket isn't versioned: the lease object changes on every renewal, so versions would only pile up.
 
+</GuidedWhen>
+
 ### Share the backup bucket
 
 All zones of a cluster write backups to one bucket, so a restore finds everything in one place, whichever region is active. Create it once, in the first region.
+
+<GuidedWhen compute="ecs">
 
 ## Create the object storage stage
 
@@ -86,7 +106,11 @@ You called the `s3-bucket` module with another purpose. Use `backup` for backups
 
 You passed an existing lease bucket to the orchestration cluster module without the policy that grants access to it. Pass the `access_policy_arn` of the same `lease_buckets` entry.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Exposure](./exposure.md)
 - [Orchestration Cluster](./orchestration-cluster/overview.md)
+
+<GuidedNext />
