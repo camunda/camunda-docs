@@ -31,7 +31,7 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
   For details, see [secondary storage considerations](/components/best-practices/architecture/sizing-self-managed.md#secondary-storage-considerations) in the resource planning guide.
 
-## Scale up brokers
+## Scale up
 
 The following shows how to scale up a Zeebe cluster using an example of scaling from cluster size 3 to cluster size 6. The target partition count is 6.
 

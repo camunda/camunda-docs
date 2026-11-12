@@ -90,7 +90,7 @@ Confirm that every expected partition has a leader, that the targeted tenant's p
 
 Because brokers and gateways are shared, a scaling operation for one tenant changes the capacity available to all of them. Compare tenant-scoped and cluster-wide partition, latency, and storage metrics against your pre-scaling baseline before returning the cluster to normal traffic.
 
-## Scale up brokers
+## Scale up
 
 The following shows how to scale up a Zeebe cluster using an example of scaling from cluster size 3 to cluster size 6. The target partition count is 6.
 
