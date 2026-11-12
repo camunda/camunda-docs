@@ -2587,6 +2587,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code",
                   ],
                 },
