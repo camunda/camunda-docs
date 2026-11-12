@@ -140,7 +140,7 @@ The key must be enabled, symmetric, and below its quota for grants. The **Detail
 
 1. Make sure that the key is enabled. If the key is scheduled for deletion, cancel the deletion, then enable the key.
 2. Make sure that the key is a symmetric key for encryption and decryption. In the AWS KMS console, the key type is **Symmetric** and the key usage is **Encrypt and decrypt**.
-3. Make sure that the key has not reached its AWS KMS quota for grants. If it has, contact Camunda support.
+3. Make sure that the key has not reached its AWS KMS quota for grants.
 
 A disabled key can show this status or **Your key is disabled**. For both, enable the key.
 
