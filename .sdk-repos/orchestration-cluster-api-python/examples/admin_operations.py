@@ -8,6 +8,7 @@ from camunda_orchestration_sdk import (
     AuditLogKey,
     AuditLogSearchQueryRequest,
     CamundaClient,
+    ClockAddRequest,
     ClockPinRequest,
     ClusterBalanceResponse,
     ClusterRebalanceRequest,
@@ -169,7 +170,7 @@ def create_global_task_listener_example() -> None:
 
     result = client.create_global_task_listener(
         data=CreateGlobalTaskListenerRequest(
-            id="audit-log-listener",
+            id=GlobalListenerId("audit-log-listener"),
             event_types=[GlobalTaskListenerEventTypeEnum.COMPLETING],
             type_="my-task-listener",
         ),
@@ -341,6 +342,30 @@ def get_status_example() -> None:
 
     print("Cluster is healthy")
 # endregion GetStatus
+
+
+# region GetClock
+def get_clock_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_clock()
+
+    print(f"Engine time: {result.timestamp.isoformat()}")
+# endregion GetClock
+
+
+# region AddClock
+def add_clock_example() -> None:
+    client = CamundaClient()
+
+    result = client.add_clock(
+        data=ClockAddRequest(
+            offset="PT1H",
+        ),
+    )
+
+    print(f"Engine time: {result.timestamp.isoformat()}")
+# endregion AddClock
 
 
 # region PinClock

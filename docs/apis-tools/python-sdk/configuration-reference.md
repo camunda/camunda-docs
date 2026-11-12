@@ -2,7 +2,7 @@
 id: configuration-reference
 title: Configuration reference
 sidebar_label: Configuration reference
-sidebar_position: 17
+sidebar_position: 18
 mdx:
   format: md
 ---
@@ -38,6 +38,7 @@ All `CAMUNDA_*` environment variables recognised by the SDK. These can also be p
 | `CAMUNDA_WORKER_REQUEST_TIMEOUT`            | —                                            | Default long-poll request timeout in milliseconds for all workers.                                                                                                                                                                                                        |
 | `CAMUNDA_WORKER_NAME`                       | —                                            | Default worker name for all workers.                                                                                                                                                                                                                                      |
 | `CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS` | —                                            | Default maximum startup jitter in seconds for all workers.                                                                                                                                                                                                                |
+| `CAMUNDA_HTTP_MAX_CONNECTIONS`              | —                                            | Maximum number of connections in the httpx connection pool. When set, the SDK builds its httpx clients with `httpx.Limits(max_connections=N, max_keepalive_connections=N)`. An explicit `limits` entry in `httpx_args` takes precedence over this setting.                |
 | `CAMUNDA_MTLS_CERT_PATH`                    | —                                            | Path to client certificate (PEM) for mTLS.                                                                                                                                                                                                                                |
 | `CAMUNDA_MTLS_KEY_PATH`                     | —                                            | Path to client private key (PEM) for mTLS.                                                                                                                                                                                                                                |
 | `CAMUNDA_MTLS_CA_PATH`                      | —                                            | Path to CA certificate bundle (PEM) for mTLS. Optional.                                                                                                                                                                                                                   |
