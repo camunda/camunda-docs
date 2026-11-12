@@ -16,7 +16,7 @@ type SearchDecisionRequirementsData = object;
 ### body?
 
 ```ts
-optional body?: DecisionRequirementsSearchQuery;
+body?: DecisionRequirementsSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: DecisionRequirementsSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

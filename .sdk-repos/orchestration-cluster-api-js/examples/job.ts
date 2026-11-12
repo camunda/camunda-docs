@@ -6,14 +6,14 @@ import {
   createTestClock,
   type JobActionReceipt,
   type JobKey,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region ActivateJobs
 async function activateJobsExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.activateJobs({
-    type: 'payment-processing',
+    type: "payment-processing",
     timeout: 30000,
     maxJobsToActivate: 5,
   });
@@ -22,7 +22,7 @@ async function activateJobsExample() {
     console.log(`Job ${job.jobKey}: ${job.type}`);
 
     // Each enriched job has helper methods
-    await job.complete({ paymentId: 'PAY-123' });
+    await job.complete({ paymentId: "PAY-123" });
   }
 }
 //#endregion ActivateJobs
@@ -34,8 +34,8 @@ async function completeJobExample(jobKey: JobKey) {
   await camunda.completeJob({
     jobKey,
     variables: {
-      paymentId: 'PAY-123',
-      status: 'completed',
+      paymentId: "PAY-123",
+      status: "completed",
     },
   });
 }
@@ -48,7 +48,7 @@ async function failJobExample(jobKey: JobKey) {
   await camunda.failJob({
     jobKey,
     retries: 2,
-    errorMessage: 'Payment gateway timeout',
+    errorMessage: "Payment gateway timeout",
     retryBackOff: 5000,
   });
 }
@@ -59,7 +59,7 @@ async function createJobWorkerExample() {
   const camunda = createCamundaClient();
 
   const _worker = camunda.createJobWorker({
-    jobType: 'payment-processing',
+    jobType: "payment-processing",
     jobTimeoutMs: 30000,
     maxParallelJobs: 5,
     jobHandler: async (job): Promise<JobActionReceipt> => {
@@ -78,7 +78,7 @@ async function jobWorkerExample() {
   const camunda = createCamundaClient();
 
   const _worker = camunda.createJobWorker({
-    jobType: 'payment-processing',
+    jobType: "payment-processing",
     jobTimeoutMs: 30000,
     maxParallelJobs: 5,
     jobHandler: async (job): Promise<JobActionReceipt> => {
@@ -86,7 +86,7 @@ async function jobWorkerExample() {
       console.log(`Processing order: ${orderId}`);
 
       // Complete the job with result variables
-      return job.complete({ paymentId: 'PAY-123' });
+      return job.complete({ paymentId: "PAY-123" });
     },
   });
 
@@ -100,7 +100,7 @@ async function jobWorkerWithErrorHandlingExample() {
   const camunda = createCamundaClient();
 
   const worker = camunda.createJobWorker({
-    jobType: 'email-sending',
+    jobType: "email-sending",
     jobTimeoutMs: 60000,
     maxParallelJobs: 10,
     pollIntervalMs: 300,
@@ -126,8 +126,8 @@ async function createThreadedJobWorkerExample() {
   const camunda = createCamundaClient();
 
   const _worker = camunda.createThreadedJobWorker({
-    jobType: 'cpu-heavy-task',
-    handlerModule: './my-handler.js',
+    jobType: "cpu-heavy-task",
+    handlerModule: "./my-handler.js",
     maxParallelJobs: 32,
     jobTimeoutMs: 30000,
   });
@@ -139,7 +139,7 @@ function getWorkersExample() {
   const camunda = createCamundaClient();
 
   camunda.createJobWorker({
-    jobType: 'payment-processing',
+    jobType: "payment-processing",
     jobHandler: async (job): Promise<JobActionReceipt> => job.complete(),
   });
 
@@ -153,7 +153,7 @@ function stopAllWorkersExample() {
   const camunda = createCamundaClient();
 
   camunda.createJobWorker({
-    jobType: 'payment-processing',
+    jobType: "payment-processing",
     jobHandler: async (job): Promise<JobActionReceipt> => job.complete(),
   });
 

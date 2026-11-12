@@ -16,5 +16,5 @@ type searchVariablesInput = searchVariablesBody & object;
 ### truncateValues?
 
 ```ts
-optional truncateValues?: searchVariablesQueryParam_truncateValues;
+truncateValues?: searchVariablesQueryParam_truncateValues;
 ```

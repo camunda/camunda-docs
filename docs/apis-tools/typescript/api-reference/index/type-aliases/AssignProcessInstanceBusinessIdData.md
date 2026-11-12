@@ -40,7 +40,7 @@ The key of the process instance to assign the business id to.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

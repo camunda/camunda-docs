@@ -16,7 +16,7 @@ type GroupClientSearchQueryRequest = SearchQueryRequest & object;
 ### sort?
 
 ```ts
-optional sort?: GroupClientSearchQuerySortRequest[];
+sort?: GroupClientSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

@@ -16,7 +16,7 @@ type SearchUserTasksData = object;
 ### body?
 
 ```ts
-optional body?: UserTaskSearchQuery;
+body?: UserTaskSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: UserTaskSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

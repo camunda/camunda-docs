@@ -16,7 +16,7 @@ type SearchMappingRulesForGroupData = object;
 ### body?
 
 ```ts
-optional body?: MappingRuleSearchQueryRequest;
+body?: MappingRuleSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The group ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

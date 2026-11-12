@@ -66,39 +66,28 @@ Optional variables to attach to the job on failure.
 
 #### Inherited from
 
-```ts
-Data.TaggedError('RetryableJobError')<{
-  readonly message: string;
-  / Server-side delay before the job becomes re-activatable (failJob retryBackOff). /
-  readonly retryBackoff?: Duration.Input;
-  / Optional variables to attach to the job on failure. /
-  readonly variables?: { readonly [key: string]: unknown };
-  readonly cause?: unknown;
-}>.constructor
-```
+``Data.TaggedError('RetryableJobError')<{ readonly message: string; /** Server-side delay before the job becomes re-activatable (`failJob` `retryBackOff`). */ readonly retryBackoff?: Duration.Input; /** Optional variables to attach to the job on failure. */ readonly variables?: { readonly [key: string]: unknown }; readonly cause?: unknown; }>.constructor``
 
 ## Properties
 
 ### retryBackoff?
 
 ```ts
-readonly optional retryBackoff?: Input;
+readonly retryBackoff?: Input;
 ```
 
 Server-side delay before the job becomes re-activatable (`failJob` `retryBackOff`).
 
 #### Inherited from
 
-```ts
-Data.TaggedError("RetryableJobError").retryBackoff;
-```
+`Data.TaggedError('RetryableJobError').retryBackoff`
 
 ---
 
 ### variables?
 
 ```ts
-readonly optional variables?: object;
+readonly variables?: object;
 ```
 
 Optional variables to attach to the job on failure.
@@ -111,6 +100,4 @@ Optional variables to attach to the job on failure.
 
 #### Inherited from
 
-```ts
-Data.TaggedError("RetryableJobError").variables;
-```
+`Data.TaggedError('RetryableJobError').variables`

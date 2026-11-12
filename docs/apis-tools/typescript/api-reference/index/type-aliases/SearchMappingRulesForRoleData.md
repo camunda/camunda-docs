@@ -16,7 +16,7 @@ type SearchMappingRulesForRoleData = object;
 ### body?
 
 ```ts
-optional body?: MappingRuleSearchQueryRequest;
+body?: MappingRuleSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The role ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

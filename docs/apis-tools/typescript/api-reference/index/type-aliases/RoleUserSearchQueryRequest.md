@@ -16,7 +16,7 @@ type RoleUserSearchQueryRequest = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: RoleUserFilterRequest;
+filter?: RoleUserFilterRequest;
 ```
 
 The user filter criteria.
@@ -24,7 +24,7 @@ The user filter criteria.
 ### sort?
 
 ```ts
-optional sort?: RoleUserSearchQuerySortRequest[];
+sort?: RoleUserSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

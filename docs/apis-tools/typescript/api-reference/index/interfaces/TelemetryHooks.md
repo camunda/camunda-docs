@@ -12,7 +12,7 @@ mdx:
 ### afterResponse()?
 
 ```ts
-optional afterResponse(e): void;
+afterResponse?(e): void;
 ```
 
 #### Parameters
@@ -30,7 +30,7 @@ optional afterResponse(e): void;
 ### authError()?
 
 ```ts
-optional authError(e): void;
+authError?(e): void;
 ```
 
 #### Parameters
@@ -48,7 +48,7 @@ optional authError(e): void;
 ### authStart()?
 
 ```ts
-optional authStart(e): void;
+authStart?(e): void;
 ```
 
 #### Parameters
@@ -66,7 +66,7 @@ optional authStart(e): void;
 ### authSuccess()?
 
 ```ts
-optional authSuccess(e): void;
+authSuccess?(e): void;
 ```
 
 #### Parameters
@@ -84,7 +84,7 @@ optional authSuccess(e): void;
 ### beforeRequest()?
 
 ```ts
-optional beforeRequest(e): void;
+beforeRequest?(e): void;
 ```
 
 #### Parameters
@@ -102,7 +102,7 @@ optional beforeRequest(e): void;
 ### requestError()?
 
 ```ts
-optional requestError(e): void;
+requestError?(e): void;
 ```
 
 #### Parameters
@@ -120,7 +120,7 @@ optional requestError(e): void;
 ### retry()?
 
 ```ts
-optional retry(e): void;
+retry?(e): void;
 ```
 
 #### Parameters

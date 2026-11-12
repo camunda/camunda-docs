@@ -74,10 +74,10 @@ The reason provided by the user task listener for denying the work.
 ### elementId
 
 ```ts
-elementId: ElementId;
+elementId: ElementId | null;
 ```
 
-The element ID associated with the job.
+The element ID associated with the job. May be missing on job failure.
 
 ---
 
@@ -191,20 +191,22 @@ The priority of the job. Higher values indicate higher priority. Jobs created be
 ### processDefinitionId
 
 ```ts
-processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId | null;
 ```
 
-The process definition ID associated with the job.
+The process definition ID associated with the job. This field is not present for
+jobs imported by Operate 8.7 and earlier.
 
 ---
 
 ### processDefinitionKey
 
 ```ts
-processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey | null;
 ```
 
-The process definition key associated with the job.
+The process definition key associated with the job. This field is not present for
+jobs imported by Operate 8.7 and earlier.
 
 ---
 
@@ -245,6 +247,17 @@ belonging to process instance hierarchies created in version 8.9 or later.
 ```ts
 state: JobStateEnum;
 ```
+
+---
+
+### storageOrdinal
+
+```ts
+storageOrdinal: number | null;
+```
+
+The storage ordinal this job's data belongs to. This is `null` for
+data exported before storage ordinals were introduced in version 8.11.
 
 ---
 

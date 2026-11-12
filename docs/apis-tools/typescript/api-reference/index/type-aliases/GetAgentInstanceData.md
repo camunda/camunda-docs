@@ -16,7 +16,7 @@ type GetAgentInstanceData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the agent instance to retrieve.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

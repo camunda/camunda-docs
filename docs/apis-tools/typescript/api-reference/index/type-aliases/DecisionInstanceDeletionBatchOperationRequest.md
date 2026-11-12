@@ -28,5 +28,5 @@ The decision instance filter.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

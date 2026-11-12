@@ -30,7 +30,7 @@ deployed version of the decision is used.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 The tenant ID of the decision.
@@ -40,7 +40,7 @@ The tenant ID of the decision.
 ### variables?
 
 ```ts
-optional variables?: object;
+variables?: object;
 ```
 
 The decision evaluation variables as JSON document.

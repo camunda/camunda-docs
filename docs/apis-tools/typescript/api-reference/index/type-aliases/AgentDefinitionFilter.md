@@ -18,7 +18,7 @@ Agent definition search filter.
 ### agentDefinitionKey?
 
 ```ts
-optional agentDefinitionKey?: AgentDefinitionKeyFilterProperty;
+agentDefinitionKey?: AgentDefinitionKeyFilterProperty;
 ```
 
 The unique key of the agent definition.
@@ -28,7 +28,7 @@ The unique key of the agent definition.
 ### agentType?
 
 ```ts
-optional agentType?: AgentDefinitionTypeFilterProperty;
+agentType?: AgentDefinitionTypeFilterProperty;
 ```
 
 The kind of agent this agent definition describes.
@@ -38,7 +38,7 @@ The kind of agent this agent definition describes.
 ### elementId?
 
 ```ts
-optional elementId?: ElementIdFilterProperty;
+elementId?: ElementIdFilterProperty;
 ```
 
 The BPMN element ID of the process element that owns the agent definition.
@@ -48,7 +48,7 @@ The BPMN element ID of the process element that owns the agent definition.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The human-readable name of the process element that owns the agent definition.
@@ -58,7 +58,7 @@ The human-readable name of the process element that owns the agent definition.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: ProcessDefinitionIdFilterProperty;
+processDefinitionId?: ProcessDefinitionIdFilterProperty;
 ```
 
 The BPMN process ID of the process definition that owns the agent definition.
@@ -68,7 +68,7 @@ The BPMN process ID of the process definition that owns the agent definition.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The key of the process definition that owns the agent definition.
@@ -78,7 +78,7 @@ The key of the process definition that owns the agent definition.
 ### processDefinitionVersion?
 
 ```ts
-optional processDefinitionVersion?: IntegerFilterProperty;
+processDefinitionVersion?: IntegerFilterProperty;
 ```
 
 The version of the process definition that owns the agent definition.
@@ -88,7 +88,7 @@ The version of the process definition that owns the agent definition.
 ### processDefinitionVersionTag?
 
 ```ts
-optional processDefinitionVersionTag?: StringFilterProperty;
+processDefinitionVersionTag?: StringFilterProperty;
 ```
 
 The version tag of the process definition that owns the agent definition.
@@ -98,7 +98,7 @@ The version tag of the process definition that owns the agent definition.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant ID of the agent definition.

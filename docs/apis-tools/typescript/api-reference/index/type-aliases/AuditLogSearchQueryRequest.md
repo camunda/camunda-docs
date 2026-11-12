@@ -18,7 +18,7 @@ Audit log search request.
 ### filter?
 
 ```ts
-optional filter?: AuditLogFilter;
+filter?: AuditLogFilter;
 ```
 
 The audit log search filters.
@@ -26,7 +26,7 @@ The audit log search filters.
 ### sort?
 
 ```ts
-optional sort?: AuditLogSearchQuerySortRequest[];
+sort?: AuditLogSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

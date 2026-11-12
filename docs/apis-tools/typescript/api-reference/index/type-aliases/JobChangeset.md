@@ -18,7 +18,7 @@ JSON object with changed job attribute values. The job cannot be completed or fa
 ### priority?
 
 ```ts
-optional priority?: number | null;
+priority?: number | null;
 ```
 
 The new priority for the job. Higher values indicate higher priority.
@@ -28,7 +28,7 @@ The new priority for the job. Higher values indicate higher priority.
 ### retries?
 
 ```ts
-optional retries?: number | null;
+retries?: number | null;
 ```
 
 The new number of retries for the job.
@@ -38,7 +38,7 @@ The new number of retries for the job.
 ### timeout?
 
 ```ts
-optional timeout?: number | null;
+timeout?: number | null;
 ```
 
 The new timeout for the job in milliseconds.

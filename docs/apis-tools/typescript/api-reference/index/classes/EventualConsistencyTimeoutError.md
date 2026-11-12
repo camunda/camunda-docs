@@ -53,9 +53,7 @@ new EventualConsistencyTimeoutError(params): EventualConsistencyTimeoutError;
 
 #### Overrides
 
-```ts
-Error.constructor;
-```
+`Error.constructor`
 
 ## Properties
 
@@ -86,7 +84,7 @@ elapsedMs: number;
 ### lastResponseSnippet?
 
 ```ts
-optional lastResponseSnippet?: string;
+lastResponseSnippet?: string;
 ```
 
 ---
@@ -94,7 +92,7 @@ optional lastResponseSnippet?: string;
 ### lastStatus?
 
 ```ts
-optional lastStatus?: number;
+lastStatus?: number;
 ```
 
 ---
@@ -102,5 +100,5 @@ optional lastStatus?: number;
 ### operationId?
 
 ```ts
-optional operationId?: string;
+operationId?: string;
 ```

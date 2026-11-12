@@ -18,7 +18,7 @@ Agent instance history item search filter.
 ### commitStatus?
 
 ```ts
-optional commitStatus?: AgentInstanceHistoryCommitStatusFilterProperty;
+commitStatus?: AgentInstanceHistoryCommitStatusFilterProperty;
 ```
 
 The commit status of the history item. Defaults to COMMITTED only.
@@ -29,7 +29,7 @@ Include PENDING or DISCARDED explicitly to debug in-flight or failed activations
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The key of the element instance under which the history item was produced.
@@ -39,7 +39,7 @@ The key of the element instance under which the history item was produced.
 ### historyItemKey?
 
 ```ts
-optional historyItemKey?: AgentHistoryItemKeyFilterProperty;
+historyItemKey?: AgentHistoryItemKeyFilterProperty;
 ```
 
 The unique key of the history item.
@@ -49,7 +49,7 @@ The unique key of the history item.
 ### jobKey?
 
 ```ts
-optional jobKey?: JobKeyFilterProperty;
+jobKey?: JobKeyFilterProperty;
 ```
 
 The key of the job activation that produced the history item.
@@ -59,7 +59,7 @@ The key of the job activation that produced the history item.
 ### loopIteration?
 
 ```ts
-optional loopIteration?: IntegerFilterProperty;
+loopIteration?: IntegerFilterProperty;
 ```
 
 Filter by loop iteration number.
@@ -69,7 +69,7 @@ Filter by loop iteration number.
 ### producedAt?
 
 ```ts
-optional producedAt?: DateTimeFilterProperty;
+producedAt?: DateTimeFilterProperty;
 ```
 
 The timestamp when the history item was produced.
@@ -79,7 +79,7 @@ The timestamp when the history item was produced.
 ### role?
 
 ```ts
-optional role?: AgentInstanceHistoryRoleFilterProperty;
+role?: AgentInstanceHistoryRoleFilterProperty;
 ```
 
 The role of the history item.

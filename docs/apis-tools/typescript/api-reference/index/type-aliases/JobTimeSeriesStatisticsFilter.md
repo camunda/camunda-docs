@@ -38,7 +38,7 @@ Job type to return time-series metrics for.
 ### resolution?
 
 ```ts
-optional resolution?: string;
+resolution?: string;
 ```
 
 Time bucket resolution as an ISO 8601 duration (for example `PT1M` for 1 minute,

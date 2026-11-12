@@ -16,7 +16,7 @@ type SearchUsersForGroupData = object;
 ### body?
 
 ```ts
-optional body?: GroupUserSearchQueryRequest;
+body?: GroupUserSearchQueryRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The group ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

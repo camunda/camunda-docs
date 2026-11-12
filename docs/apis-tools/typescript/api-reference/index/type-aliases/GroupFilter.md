@@ -18,7 +18,7 @@ Group filter request
 ### $or?
 
 ```ts
-optional $or?: GroupFilterFields[] | null;
+$or?: GroupFilterFields[] | null;
 ```
 
 Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.

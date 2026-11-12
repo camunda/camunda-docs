@@ -16,7 +16,7 @@ type listRuntimeBackupsAsClusterAdminInput = object;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: listRuntimeBackupsAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: listRuntimeBackupsAsClusterAdminQueryParam_physicalTenantId;
 ```
 
 ---
@@ -24,5 +24,5 @@ optional physicalTenantId?: listRuntimeBackupsAsClusterAdminQueryParam_physicalT
 ### prefix?
 
 ```ts
-optional prefix?: listRuntimeBackupsAsClusterAdminQueryParam_prefix;
+prefix?: listRuntimeBackupsAsClusterAdminQueryParam_prefix;
 ```

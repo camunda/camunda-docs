@@ -16,7 +16,7 @@ type UnassignMappingRuleFromGroupData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -48,7 +48,7 @@ The mapping rule ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

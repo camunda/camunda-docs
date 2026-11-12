@@ -28,7 +28,7 @@ The ID of the process definition to retrieve version statistics for.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 Tenant ID of this process definition.

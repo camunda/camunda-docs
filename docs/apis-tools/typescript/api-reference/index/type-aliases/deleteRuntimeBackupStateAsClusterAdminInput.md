@@ -16,5 +16,5 @@ type deleteRuntimeBackupStateAsClusterAdminInput = object;
 ### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: deleteRuntimeBackupStateAsClusterAdminQueryParam_physicalTenantId;
+physicalTenantId?: deleteRuntimeBackupStateAsClusterAdminQueryParam_physicalTenantId;
 ```
