@@ -131,6 +131,20 @@ Adding new endpoints or attributes to existing responses is **not** considered a
 
 The default maximum request size for all requests (for example, to `POST /v2/deployments`) is 4MB. It can be configured in the Zeebe Gateway configuration using the `maxMessageSize` property. For more information, see the [Zeebe Gateway configuration reference](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#gateway-configuration).
 
+#### Deploy resources limits
+
+`POST /v2/deployments` accepts a `multipart/form-data` request in which each resource is one part. The following limits apply to each request:
+
+| Limit                               | Default | Self-Managed property                       |
+| ----------------------------------- | ------- | ------------------------------------------- |
+| Maximum size of a single resource   | 10MB    | `spring.servlet.multipart.max-file-size`    |
+| Maximum total size of the request   | 10MB    | `spring.servlet.multipart.max-request-size` |
+| Maximum number of parts per request | 50      | `server.tomcat.max-part-count`              |
+
+A request that exceeds any of these limits is rejected with HTTP status `413`, for example, a request that contains more than 50 resources. In Camunda 8 SaaS, these limits apply to all clusters and cannot be changed. In Self-Managed, you can adjust them as described in [Deployment configuration](/self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration.md).
+
+To stay within the limits, split a large deployment into several requests with fewer resources each. Each request creates a separate deployment, so the resources across requests are not deployed atomically.
+
 ### Naming conventions
 
 Naming across the Orchestration Cluster REST API is simple, intuitive, and consistent to reduce friction when working with multiple endpoints.
