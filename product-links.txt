@@ -56,6 +56,7 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 # Short URLs
 
 https://docs.camunda.io/p/cluster-auto-pause
+https://docs.camunda.io/p/get-started-with-test-mode
 
 # Full paths
 
