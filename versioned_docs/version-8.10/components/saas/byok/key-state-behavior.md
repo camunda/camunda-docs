@@ -127,12 +127,11 @@ The key policy must allow the tenant role of the cluster to use the key and to c
    - "Allow Camunda tenant IAM Role basic key access"
    - "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes"
 2. Make sure that no resource control policy in your AWS organization denies the tenant role access to the key.
-3. Find the denied request in AWS CloudTrail, in the account and Region of the key. The event shows the policy that denied the request.
-4. Make sure that the key ARN points to an existing key. AWS KMS gives the same denial for a key that does not exist.
+3. Make sure that the key ARN points to an existing key. AWS KMS gives the same denial for a key that does not exist.
 
 A deleted key also shows this status. If the key was deleted, AWS cannot restore it, and Camunda cannot recover the data that it encrypts. See [permanently deleted key](#permanently-deleted-key).
 
-If the key policy is correct and nothing in your organization denies the request, contact Camunda support.
+If the key policy is correct and nothing in your organization denies the request, contact Camunda support with the cluster ID and the **Details** line. AWS KMS logs a denied request only in the account of the caller, which is the account of Camunda, so the request does not show in your AWS CloudTrail.
 
 ### Your key cannot be used {#key-not-usable}
 
@@ -140,7 +139,7 @@ The key must be enabled, symmetric, and below its quota for grants. The **Detail
 
 1. Make sure that the key is enabled. If the key is scheduled for deletion, cancel the deletion, then enable the key.
 2. Make sure that the key is a symmetric key for encryption and decryption. In the AWS KMS console, the key type is **Symmetric** and the key usage is **Encrypt and decrypt**.
-3. Make sure that the key has not reached its AWS KMS quota for grants.
+3. Make sure that the key has not reached its AWS KMS quota for grants. To see who holds the grants, run `aws kms list-grants --key-id <key ARN>`. If most of them belong to your own principals, retire the grants that you do not need, or use a separate key for Camunda. If most of them belong to the tenant role or other Camunda principals, contact Camunda support.
 
 A disabled key can show this status or **Your key is disabled**. For both, enable the key.
 
