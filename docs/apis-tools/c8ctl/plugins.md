@@ -201,6 +201,8 @@ At runtime, `c8ctl` injects a global object via `globalThis.c8ctl` that plugins 
 
 `logger.info(message)` formats messages for the current output mode: plain text on stdout in text mode, or `{"status":"info","message":"..."}` on stderr in JSON mode. For a message that is the command's primary result, use `logger.info(message, { stream: "stdout" })`. Use `{ stream: "stderr" }` to keep a diagnostic on stderr in either mode. The override affects only that call, preserves formatting, and does not apply `--fields` filtering.
 
+With `--quiet`, `logger.info` and `logger.success` print nothing, except that `logger.success(message, key)` still prints the key (bare on stdout in text mode; JSON mode keeps the record). Pass `{ essential: true }` to `logger.info` when the message is the command's answer or explains a warning or error, so it still prints. Data written with `logger.output`, `logger.json` or `logger.table`, warnings and errors are never hidden.
+
 `logger.output(content)` writes raw content to stdout without formatting it, while `logger.json(data)` writes structured data with `--fields` filtering.
 
 ### Running npm from a plugin
