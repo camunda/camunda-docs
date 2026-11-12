@@ -8,6 +8,7 @@ use camunda_orchestration_sdk::apis::user_task_api::AssignUserTaskParams;
 use camunda_orchestration_sdk::apis::user_task_api::CompleteUserTaskParams;
 use camunda_orchestration_sdk::apis::user_task_api::GetUserTaskFormParams;
 use camunda_orchestration_sdk::apis::user_task_api::GetUserTaskParams;
+use camunda_orchestration_sdk::apis::user_task_api::LookupUserTaskParams;
 use camunda_orchestration_sdk::apis::user_task_api::SearchUserTaskAuditLogsParams;
 use camunda_orchestration_sdk::apis::user_task_api::SearchUserTaskEffectiveVariablesParams;
 use camunda_orchestration_sdk::apis::user_task_api::SearchUserTaskVariablesParams;
@@ -18,6 +19,7 @@ use camunda_orchestration_sdk::models::UserTaskAssignmentRequest;
 use camunda_orchestration_sdk::models::UserTaskAuditLogSearchQueryRequest;
 use camunda_orchestration_sdk::models::UserTaskCompletionRequest;
 use camunda_orchestration_sdk::models::UserTaskEffectiveVariableSearchQueryRequest;
+use camunda_orchestration_sdk::models::UserTaskLookupRequest;
 use camunda_orchestration_sdk::models::UserTaskSearchQuery;
 use camunda_orchestration_sdk::models::UserTaskUpdateRequest;
 use camunda_orchestration_sdk::models::UserTaskVariableSearchQueryRequest;
@@ -80,6 +82,27 @@ async fn get_user_task_form(user_task_key: String) -> Result<(), Box<dyn std::er
     Ok(())
 }
 // endregion GetUserTaskForm
+
+// region LookupUserTask
+async fn lookup_user_task(user_task_key: String) -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .lookup_user_task(LookupUserTaskParams {
+            user_task_key,
+            user_task_lookup_request: Some(UserTaskLookupRequest {
+                fetch_variables: Some(vec!["recommendation".into(), "applicant".into()]),
+            }),
+        })
+        .await?;
+    println!(
+        "{} is {}, assignee: {:?}",
+        result.user_task_key, result.state, result.assignee
+    );
+
+    Ok(())
+}
+// endregion LookupUserTask
 
 // region SearchUserTaskAuditLogs
 async fn search_user_task_audit_logs(
