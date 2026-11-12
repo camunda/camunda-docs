@@ -159,4 +159,23 @@ public static class UserTaskExamples
     }
     // </SearchUserTaskEffectiveVariables>
     #endregion SearchUserTaskEffectiveVariables
+
+    #region LookupUserTask
+
+    // <LookupUserTask>
+    public static async Task LookupUserTaskExample(UserTaskKey userTaskKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.LookupUserTaskAsync(
+            userTaskKey,
+            new UserTaskLookupRequest
+            {
+                FetchVariables = ["recommendation", "applicant"],
+            });
+
+        Console.WriteLine($"User task {result.UserTaskKey} is {result.State}, assignee: {result.Assignee}");
+    }
+    // </LookupUserTask>
+    #endregion LookupUserTask
 }
