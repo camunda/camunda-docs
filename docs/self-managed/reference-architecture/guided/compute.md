@@ -3,9 +3,15 @@ id: compute
 title: "Compute"
 sidebar_label: "Compute"
 description: "Compare Amazon EKS, Amazon ECS with Fargate, and Amazon EC2 for running Camunda 8 Self-Managed, and see which stages of your deployment change with the choice."
+pagination_prev: null
+pagination_next: null
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress } from "@site/src/components/GuidedDeployment";
+
 The compute stage decides where the Orchestration Cluster runs. Choose Amazon EKS if you run Kubernetes or need the full platform, Amazon ECS with Fargate if you want containers without operating Kubernetes, and Amazon EC2 if you run the Camunda single application on virtual machines.
+
+<GuidedProgress />
 
 ## Compare the options
 
@@ -49,6 +55,8 @@ Choose Amazon EC2 if all of these apply:
 
 If you're unsure, start with the option your team already operates. Each option is a reference architecture: it shows how the components fit together and isn't production-ready as it is.
 
+<ChoicePanel question="compute" />
+
 ## See what changes with the choice
 
 The decision only changes some stages. Stages that your choice doesn't affect keep the same inputs and outputs, which is why you can decide them on their own pages.
@@ -57,7 +65,7 @@ The decision only changes some stages. Stages that your choice doesn't affect ke
 | --------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Network               | No                               | The same VPC contract serves every option. See [network](./network.md).                                                                                                       |
 | Secondary storage     | Partly                           | Aurora PostgreSQL works with Amazon EKS and Amazon ECS. The Amazon EC2 reference architecture uses a managed OpenSearch domain.                                               |
-| Object storage        | Partly                           | Every option needs a backup bucket. Only Amazon ECS needs a node ID lease bucket for each zone.                                                                               |
+| Object storage        | Partly                           | A backup bucket is optional and recommended for every option. Amazon ECS also requires a node ID lease bucket for each zone.                                                  |
 | Compute               | Yes                              | A Kubernetes cluster and node groups, an ECS cluster with a task execution role, or EC2 instances.                                                                            |
 | Exposure              | Partly                           | Kubernetes uses an Ingress. Amazon ECS attaches rules to load balancer listeners that the exposure stage creates. Amazon EC2 uses an Application and a Network Load Balancer. |
 | Camunda configuration | Yes                              | Helm values, ECS task definitions with the same Camunda properties as environment variables, or the configuration file of the application on each instance.                   |
@@ -76,3 +84,5 @@ There is no in-place move between compute options. Plan a change as a new deploy
 - [Deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
 - [Deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md)
 - [Network](./network.md)
+
+<GuidedNext />

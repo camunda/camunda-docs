@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`architecture diagram draws ECS in a single region 1`] = `
+"flowchart TB
+  classDef external stroke-dasharray: 5 5
+  users(["Users and clients"]):::external
+  subgraph aws["AWS"]
+    subgraph region_a["Region A"]
+      lease_a[("S3 lease bucket, zone-a")]
+      backup_a[("S3 backup bucket")]
+      secrets_a["Secrets Manager, generated passwords"]
+      subgraph vpc_a["New VPC, three availability zones"]
+        efs_a[("Amazon EFS (broker data)")]
+        web_a["Application Load Balancer"]
+        grpc_a["Network Load Balancer, gRPC 26500"]
+        db_a[("Aurora PostgreSQL")]
+        raft_a["Internal Network Load Balancer, brokers 26502"]
+        subgraph compute_a["Amazon ECS cluster (Fargate)"]
+          subgraph oc_a["Orchestration Cluster, zone-a"]
+            brokers_a["Zeebe brokers zone-a_0 to zone-a_2"]
+            webapps_a["Operate, Tasklist, and Admin"]
+            connectors_a["Connectors"]
+          end
+        end
+      end
+    end
+  end
+  brokers_a -->|"Broker data"| efs_a
+  brokers_a -.->|"Node ID lease"| lease_a
+  web_a -->|"REST, web applications"| oc_a
+  grpc_a -->|"gRPC"| brokers_a
+  users -->|"gRPC 26500"| grpc_a
+  oc_a -->|"Secondary storage"| db_a
+  oc_a -.->|"Backups"| backup_a
+  users -->|"HTTP 80"| web_a
+  raft_a -->|"Raft"| brokers_a
+  oc_a -.-> secrets_a"
+`;
+
+exports[`architecture diagram draws EKS in a single region 1`] = `
+"flowchart TB
+  classDef external stroke-dasharray: 5 5
+  users(["Users and clients"]):::external
+  dns(["Your DNS record, camunda.example.com"]):::external
+  subgraph aws["AWS"]
+    subgraph region_a["Region A"]
+      backup_a[("S3 backup bucket")]
+      cert_a["ACM certificate"]
+      subgraph vpc_a["New VPC, three availability zones"]
+        web_a["Ingress (load balancer)"]
+        ebs_a[("Amazon EBS volume for each broker")]
+        db_a[("Elasticsearch or OpenSearch")]
+        subgraph compute_a["Amazon EKS cluster"]
+          optimize_a["Optimize"]
+          subgraph oc_a["Orchestration Cluster, zone-a"]
+            brokers_a["Zeebe brokers zone-a_0 to zone-a_2"]
+            webapps_a["Operate, Tasklist, and Admin"]
+            connectors_a["Connectors"]
+          end
+        end
+      end
+    end
+  end
+  brokers_a -->|"Broker data"| ebs_a
+  web_a -->|"REST, gRPC, web applications"| oc_a
+  oc_a -->|"Secondary storage"| db_a
+  optimize_a --> db_a
+  oc_a -.->|"Backups"| backup_a
+  users -->|"Resolves"| dns
+  dns -.->|"Alias or CNAME"| web_a
+  users -->|"HTTPS 443"| web_a
+  cert_a -.->|"TLS"| web_a"
+`;
+
+exports[`architecture diagram draws EKS in two regions with the management plane 1`] = `
+"flowchart TB
+  classDef external stroke-dasharray: 5 5
+  users(["Users and clients"]):::external
+  dns(["Your DNS record, camunda.example.com"]):::external
+  subgraph aws["AWS"]
+    subgraph region_a["Region A"]
+      backup_a[("S3 backup bucket")]
+      cert_a["ACM certificate"]
+      subgraph vpc_a["New VPC, three availability zones"]
+        web_a["Ingress (load balancer)"]
+        ebs_a[("Amazon EBS volume for each broker")]
+        db_a[("Aurora PostgreSQL, primary (writer)")]
+        subgraph compute_a["Amazon EKS cluster"]
+          subgraph oc_a["Orchestration Cluster, zone-a"]
+            brokers_a["Zeebe brokers zone-a_0 to zone-a_2"]
+            webapps_a["Operate, Tasklist, and Admin"]
+            connectors_a["Connectors"]
+          end
+          subgraph mp_a["Management plane"]
+            hub_a["Camunda Hub"]
+            mi_a["Management Identity"]
+            mpdb_a[("Databases of the management plane")]
+            idp_a["OIDC provider"]
+          end
+        end
+      end
+    end
+    subgraph region_b["Region B"]
+      cert_b["ACM certificate"]
+      subgraph vpc_b["New VPC, three availability zones"]
+        web_b["Ingress (load balancer)"]
+        ebs_b[("Amazon EBS volume for each broker")]
+        db_b[("Aurora PostgreSQL, secondary")]
+        subgraph compute_b["Amazon EKS cluster"]
+          subgraph oc_b["Orchestration Cluster, zone-b"]
+            brokers_b["Zeebe brokers zone-b_0 to zone-b_2"]
+            webapps_b["Operate, Tasklist, and Admin"]
+            connectors_b["Connectors"]
+          end
+        end
+      end
+    end
+  end
+  vpc_a <-->|"VPC peering"| vpc_b
+  brokers_a -->|"Broker data"| ebs_a
+  brokers_b -->|"Broker data"| ebs_b
+  web_a -->|"REST, gRPC, web applications"| oc_a
+  web_b -->|"REST, gRPC, web applications"| oc_b
+  oc_a -->|"Secondary storage"| db_a
+  oc_b -->|"Secondary storage"| db_b
+  db_a -.->|"Aurora Global Database replication"| db_b
+  oc_a -.->|"Backups"| backup_a
+  oc_b -.->|"Backups"| backup_a
+  users -->|"Resolves"| dns
+  dns -.->|"Alias or CNAME"| web_a
+  dns -.->|"Alias or CNAME"| web_b
+  users -->|"HTTPS 443"| web_a
+  users -->|"HTTPS 443"| web_b
+  cert_a -.->|"TLS"| web_a
+  cert_b -.->|"TLS"| web_b
+  users -->|"Design and manage"| hub_a
+  hub_a -->|"Roles"| mi_a
+  hub_a -->|"REST, gRPC, health"| oc_a
+  hub_a -->|"REST, gRPC, health"| oc_b
+  hub_a --> mpdb_a
+  mi_a --> mpdb_a
+  hub_a -.->|"Sign-in"| idp_a
+  mi_a -.->|"Sign-in"| idp_a
+  oc_a -.->|"OIDC sign-in"| idp_a
+  oc_b -.->|"OIDC sign-in"| idp_a"
+`;

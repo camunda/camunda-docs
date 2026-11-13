@@ -3,9 +3,27 @@ id: management-identity
 title: "Management Identity"
 sidebar_label: "Management Identity"
 description: "Deploy Management Identity for Camunda Hub on Amazon ECS, with its own database, and declare the roles that Camunda Hub needs."
+pagination_prev: null
+pagination_next: null
 ---
 
+import { GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The Management Identity stage deploys Management Identity, the permission model that Camunda Hub resolves its authorization through. Deploy it once, in the management plane, with the [identity provider](./identity-provider.md) that it signs in against.
+
+<GuidedProgress />
+
+<GuidedWhen managementPlane="none" chosenOnly>
+
+You chose no management plane, so this page doesn't apply to your deployment. Continue with [your architecture](../your-architecture.md).
+
+</GuidedWhen>
+
+<GuidedWhen compute="eks" managementPlane="deploy">
+
+With Amazon EKS, the [Helm chart](/self-managed/deployment/helm/install/quick-install.md) deploys Camunda Hub and Management Identity with the full platform. The stages on these pages are part of the Amazon ECS Terraform. See [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md).
+
+</GuidedWhen>
 
 ## Decide whether you need it
 
@@ -15,6 +33,8 @@ The Management Identity stage deploys Management Identity, the permission model 
 | Camunda Hub                                  | Yes                          |
 
 Management Identity signs in against your OIDC provider and keeps its own database. In the generic OIDC profile it can't read role assignments from the provider, so it declares the roles itself and grants them by matching a token claim.
+
+<GuidedWhen managementPlane="deploy" compute="ecs">
 
 ## Declare the roles of Camunda Hub
 
@@ -63,6 +83,10 @@ The database of Management Identity was declared with `auth = password`. Remove 
 
 The roles of Camunda Hub aren't declared. Set `enable_hub_authorization = true` and apply the stage again. Management Identity restarts with the model.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Deploy Camunda Hub](./camunda-hub.md)
+
+<GuidedNext />

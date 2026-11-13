@@ -3,9 +3,23 @@ id: exposure
 title: "Exposure"
 sidebar_label: "Exposure"
 description: "Create the load balancers in front of a Camunda 8 deployment on AWS, add TLS with your own certificate, and point your DNS name at the cluster."
+pagination_prev: null
+pagination_next: null
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The exposure stage creates the load balancers that users and clients reach, and nothing else: it creates no routing rules. The components attach their own path rules to the listeners that the stage publishes.
+
+<GuidedProgress />
+
+<GuidedWhen compute={["eks", "ec2"]}>
+
+The exposure stage is part of the Amazon ECS Terraform. With Amazon EKS, an Ingress exposes Camunda: see [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md). With Amazon EC2, the reference architecture creates an Application and a Network Load Balancer: see [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md). Decide on TLS below in both cases.
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs">
 
 ## Choose what you expose
 
@@ -28,9 +42,17 @@ The management endpoint on 9600 is unauthenticated. The Camunda stage leaves its
 
 The internal load balancer carries the traffic between brokers on 26502. A single region doesn't use it. Brokers of a second region join the cluster through it, and adding it later can make Terraform replace the Orchestration Cluster ECS service. Set `enable_raft_nlb = true` and, in the Camunda stage, `enable_raft_listener = true`. The examples set both.
 
+<ChoicePanel question="raftNlb" />
+
+</GuidedWhen>
+
 ## Add TLS
 
 TLS is opt-in. You bring a certificate and a DNS name, and the stage serves HTTPS.
+
+<ChoicePanel question="tls" />
+
+<GuidedWhen compute="ecs" tls="https">
 
 1. Request or import a certificate in AWS Certificate Manager for the DNS name that clients will use, for example `camunda.example.com`, in the region of the load balancer.
 1. Set both variables in `exposure.tfvars`:
@@ -44,6 +66,10 @@ TLS is opt-in. You bring a certificate and a DNS name, and the stage serves HTTP
 1. Create the DNS record yourself. Point `camunda.example.com` at the output `alb_dns_name`, with an alias or CNAME record in your DNS service. The stage doesn't manage DNS.
 
 The hostname is required with a certificate. ACM doesn't issue certificates for the load balancer's own `*.elb.amazonaws.com` name, so every issuer and redirect URL is built from the hostname that you set.
+
+</GuidedWhen>
+
+<GuidedWhen compute="ecs">
 
 ## Create the exposure stage
 
@@ -100,7 +126,11 @@ The internal load balancer needs three private subnets. Pass the `private_subnet
 
 The DNS record doesn't point at the load balancer, or you opened the load balancer's own name. Open the page with the hostname from `alb_public_hostname`, and check that the record points at `alb_dns_name`.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Orchestration Cluster](./orchestration-cluster/overview.md)
 - [Grow to two regions](./grow/single-to-dual-region.md)
+
+<GuidedNext />
