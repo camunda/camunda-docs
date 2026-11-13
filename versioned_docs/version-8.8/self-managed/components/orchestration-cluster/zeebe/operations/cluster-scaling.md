@@ -419,7 +419,7 @@ Optimize has its own [`zeebe.partitionCount`](/self-managed/components/optimize/
 
    Without Helm, set the `CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT` environment variable.
 
-2. Restart Optimize.
+2. Apply the change. With Helm, run `helm upgrade` with the updated values. The chart restarts the Optimize pods because the configuration changed. Without Helm, restart Optimize.
 
 Optimize stores its import position per partition. After the restart, it imports the records of the new partitions that still exist in the exporter indices. Make sure the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporter retention keeps these records until Optimize imports them. If the records are deleted first, this data is permanently missing in Optimize.
 
