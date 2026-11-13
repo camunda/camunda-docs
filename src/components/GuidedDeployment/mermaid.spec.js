@@ -103,6 +103,14 @@ describe("architecture diagram", () => {
     expect(diagram).not.toMatch(/peering"\| vpc/);
   });
 
+  it("draws the backup bucket only when the reader keeps it", () => {
+    expect(architectureDiagram({ compute: "eks" })).toMatch(/backup_a/);
+    const without = architectureDiagram({ compute: "ecs", backup: "none" });
+    expect(without).not.toMatch(/backup/);
+    // The lease bucket stays: Amazon ECS requires it.
+    expect(without).toMatch(/lease_a/);
+  });
+
   it("draws your own OIDC provider outside AWS", () => {
     const all = lines(architectureDiagram({ compute: "ecs", auth: "oidc" }));
     expect(all).toContain('idp(["Your OIDC provider"]):::external');

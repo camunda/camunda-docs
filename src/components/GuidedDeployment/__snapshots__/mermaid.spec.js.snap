@@ -6,8 +6,8 @@ exports[`architecture diagram draws ECS in a single region 1`] = `
   users(["Users and clients"]):::external
   subgraph aws["AWS"]
     subgraph region_a["Region A"]
-      backup_a[("S3 backup bucket")]
       lease_a[("S3 lease bucket, zone-a")]
+      backup_a[("S3 backup bucket")]
       secrets_a["Secrets Manager, generated passwords"]
       subgraph vpc_a["New VPC, three availability zones"]
         efs_a[("Amazon EFS (broker data)")]
@@ -25,13 +25,13 @@ exports[`architecture diagram draws ECS in a single region 1`] = `
       end
     end
   end
-  oc_a -.->|"Backups"| backup_a
   brokers_a -->|"Broker data"| efs_a
   brokers_a -.->|"Node ID lease"| lease_a
   web_a -->|"REST, web applications"| oc_a
   grpc_a -->|"gRPC"| brokers_a
   users -->|"gRPC 26500"| grpc_a
   oc_a -->|"Secondary storage"| db_a
+  oc_a -.->|"Backups"| backup_a
   users -->|"HTTP 80"| web_a
   raft_a -->|"Raft"| brokers_a
   oc_a -.-> secrets_a"
@@ -61,11 +61,11 @@ exports[`architecture diagram draws EKS in a single region 1`] = `
       end
     end
   end
-  oc_a -.->|"Backups"| backup_a
   brokers_a -->|"Broker data"| ebs_a
   web_a -->|"REST, gRPC, web applications"| oc_a
   oc_a -->|"Secondary storage"| db_a
   optimize_a --> db_a
+  oc_a -.->|"Backups"| backup_a
   users -->|"Resolves"| dns
   dns -.->|"Alias or CNAME"| web_a
   users -->|"HTTPS 443"| web_a
@@ -116,8 +116,6 @@ exports[`architecture diagram draws EKS in two regions with the management plane
       end
     end
   end
-  oc_a -.->|"Backups"| backup_a
-  oc_b -.->|"Backups"| backup_a
   vpc_a <-->|"VPC peering"| vpc_b
   brokers_a -->|"Broker data"| ebs_a
   brokers_b -->|"Broker data"| ebs_b
@@ -126,6 +124,8 @@ exports[`architecture diagram draws EKS in two regions with the management plane
   oc_a -->|"Secondary storage"| db_a
   oc_b -->|"Secondary storage"| db_b
   db_a -.->|"Aurora Global Database replication"| db_b
+  oc_a -.->|"Backups"| backup_a
+  oc_b -.->|"Backups"| backup_a
   users -->|"Resolves"| dns
   dns -.->|"Alias or CNAME"| web_a
   dns -.->|"Alias or CNAME"| web_b

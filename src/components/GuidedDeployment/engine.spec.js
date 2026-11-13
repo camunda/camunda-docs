@@ -351,7 +351,7 @@ describe("flow and progress", () => {
     expect(status["cloud-provider"]).toBe("done");
     expect(status.network).toBe("done");
     expect(status.compute).toBe("open");
-    expect(status["object-storage"]).toBe("info");
+    expect(status["object-storage"]).toBe("open");
   });
 
   it("shows content for unanswered questions and hides it for other answers", () => {
@@ -364,14 +364,26 @@ describe("flow and progress", () => {
     ).toBe(false);
   });
 
-  it("lists the buckets that follow from the choices", () => {
+  it("requires a lease bucket for each zone only with Amazon ECS", () => {
     const notes = (choices) =>
       engine
         .billOfMaterials(engine.resolve(choices))
         .find((s) => s.step.id === "object-storage")?.notes;
-    expect(notes({ compute: "eks" })).toEqual([
-      "One backup bucket for the cluster, in the first region",
+    expect(notes({ compute: "eks" })).toEqual([]);
+    expect(notes({ compute: "ec2" })).toEqual([]);
+    expect(notes({ compute: "ecs" })).toEqual([
+      "Required with Amazon ECS: one node ID lease bucket for each zone, in the region of the zone",
     ]);
-    expect(notes({ compute: "ecs" })).toHaveLength(2);
+  });
+
+  it("makes the backup bucket optional and recommended for every compute", () => {
+    for (const compute of ["eks", "ecs", "ec2"]) {
+      const resolution = engine.resolve({ compute });
+      expect(resolution.values.backup).toBe("create");
+      expect(resolution.questions.backup.source).toBe("default");
+      expect(resolution.questions.backup.options.every((o) => o.enabled)).toBe(
+        true
+      );
+    }
   });
 });

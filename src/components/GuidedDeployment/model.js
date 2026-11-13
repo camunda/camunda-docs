@@ -139,7 +139,7 @@ const steps = [
     id: "object-storage",
     title: "Object storage",
     page: "object-storage",
-    questions: [],
+    questions: ["backup"],
   },
   {
     id: "exposure",
@@ -286,16 +286,8 @@ const base = {
         in: "vpc",
         unless: { compute: ["eks", "ecs", "ec2"] },
       },
-      {
-        id: "backup",
-        label: "S3 backup bucket",
-        in: "region",
-        shape: "bucket",
-        regions: "first",
-      },
     ],
     edges: [
-      { from: "oc", to: "backup", label: "Backups", style: "dashed" },
       {
         from: "web",
         to: "oc",
@@ -304,12 +296,7 @@ const base = {
       },
     ],
   },
-  bom: [
-    {
-      step: "object-storage",
-      text: "One backup bucket for the cluster, in the first region",
-    },
-  ],
+  bom: [],
 };
 
 /** @type {Question[]} */
@@ -522,7 +509,7 @@ const questions = [
         bom: [
           {
             step: "object-storage",
-            text: "One node ID lease bucket for each zone, in the region of the zone",
+            text: "Required with Amazon ECS: one node ID lease bucket for each zone, in the region of the zone",
           },
         ],
       },
@@ -686,6 +673,43 @@ const questions = [
         id: "serverless",
         label: "db.serverless",
         description: "A deployment with a varying load.",
+      },
+    ],
+  },
+
+  // Object storage
+  {
+    id: "backup",
+    step: "object-storage",
+    page: "object-storage",
+    label: "Do you create a backup bucket?",
+    options: [
+      {
+        id: "create",
+        label: "Create a backup bucket (recommended)",
+        description:
+          "One bucket for the whole cluster, in the first region. Camunda writes its backups here and restores from here.",
+        default: true,
+        diagram: {
+          nodes: [
+            {
+              id: "backup",
+              label: "S3 backup bucket",
+              in: "region",
+              shape: "bucket",
+              regions: "first",
+            },
+          ],
+          edges: [
+            { from: "oc", to: "backup", label: "Backups", style: "dashed" },
+          ],
+        },
+      },
+      {
+        id: "none",
+        label: "No backup bucket",
+        description:
+          "Camunda runs without backups, so you can't restore after losing data or a region.",
       },
     ],
   },

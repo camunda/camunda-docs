@@ -2,33 +2,33 @@
 id: object-storage
 title: "Object storage"
 sidebar_label: "Object storage"
-description: "Create the S3 buckets of a Camunda 8 deployment on AWS: one backup bucket for the cluster and one node ID lease bucket for each zone."
+description: "Create the S3 buckets of a Camunda 8 deployment on AWS: a node ID lease bucket for each zone on Amazon ECS, and an optional, recommended backup bucket for the cluster."
 pagination_prev: null
 pagination_next: null
 ---
 
-import { FollowsFromChoices, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+import { ChoicePanel, FollowsFromChoices, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
 
-A guided deployment on Amazon ECS needs two kinds of S3 buckets: one backup bucket for the whole cluster, and one node ID lease bucket for each zone. The object storage stage creates them, and the Camunda stage reads their names.
+A guided deployment on Amazon ECS needs one node ID lease bucket for each zone, and a backup bucket for the whole cluster is optional but recommended. With Amazon EKS or Amazon EC2, you need no lease bucket, and the backup bucket is optional but recommended as well. The object storage stage creates the buckets, and the Camunda stage reads their names.
 
 <GuidedProgress />
 
-This step has no decision of its own: the buckets follow from your compute and your regions.
+<ChoicePanel question="backup" />
 
 <FollowsFromChoices step="object-storage" />
 
 <GuidedWhen compute={["eks", "ec2"]}>
 
-With Amazon EKS or Amazon EC2, you need only the backup bucket, because only Amazon ECS needs a node ID lease bucket for each zone. The object storage stage is part of the Amazon ECS Terraform. See [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md) or [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
+With Amazon EKS or Amazon EC2, you need no node ID lease bucket: only Amazon ECS leases node IDs, because its tasks have no stable identity. The object storage stage is part of the Amazon ECS Terraform. See [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md) or [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
 
 </GuidedWhen>
 
 ## Understand why there are two kinds
 
-| Bucket        | Count                | Purpose                                                                                        | Versioning |
-| ------------- | -------------------- | ---------------------------------------------------------------------------------------------- | ---------- |
-| Backup        | One for each cluster | Camunda writes its backups here and restores from here.                                        | On         |
-| Node ID lease | One for each zone    | Each broker leases its node index from this bucket, because ECS tasks have no stable identity. | Off        |
+| Bucket        | Count                                          | Purpose                                                                                        | Versioning |
+| ------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------- |
+| Backup        | One for each cluster, optional and recommended | Camunda writes its backups here and restores from here.                                        | On         |
+| Node ID lease | One for each zone, required on Amazon ECS      | Each broker leases its node index from this bucket, because ECS tasks have no stable identity. | Off        |
 
 Both kinds are private, block public access, and are encrypted with a KMS key. The stage creates a key for each bucket unless you pass an existing one to the `s3-bucket` module.
 
@@ -42,9 +42,13 @@ The lease bucket isn't versioned: the lease object changes on every renewal, so 
 
 </GuidedWhen>
 
+<GuidedWhen backup="create">
+
 ### Share the backup bucket
 
 All zones of a cluster write backups to one bucket, so a restore finds everything in one place, whichever region is active. Create it once, in the first region.
+
+</GuidedWhen>
 
 <GuidedWhen compute="ecs">
 
