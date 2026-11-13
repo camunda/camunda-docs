@@ -151,10 +151,10 @@ Currently, the Kafka connector supports only [Confluent Schema Registry](https:/
 
 The **Schema source** field sets whether the connector uses a schema you enter or a schema that is already registered in the schema registry.
 
-| Schema source               | Behavior                                                                                                                                                                                                                       |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Inline schema** (default) | The connector uses the schema you enter in the **Schema** field. If the schema isn't registered yet, the serializer registers it, unless you set `auto.register.schemas` to `false` in **Additional properties**.              |
-| **From registry**           | The connector fetches the schema already registered in the schema registry and uses it as it is. Nothing is registered. If the schema doesn't exist, the task fails. You don't need to copy the schema into the process model. |
+| Schema source               | Behavior                                                                                                                                                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Inline schema** (default) | The connector uses the schema you enter in the **Schema** field. If the schema isn't registered yet, the serializer registers it, unless you set `auto.register.schemas` to `false` in **Additional properties**.                                |
+| **From registry**           | The connector fetches the schema already registered in the schema registry and uses it as it is. The connector doesn't register anything. If the schema doesn't exist, the task fails. You don't need to copy the schema into the process model. |
 
 With **From registry**, you can set the following optional fields:
 
@@ -164,7 +164,7 @@ With **From registry**, you can set the following optional fields:
 | **Schema version** | The version of the schema in the subject. If empty, the connector uses the latest version. Ignored if **Schema ID** is set.                                |
 | **Schema ID**      | The global registry ID of the schema. The schema must be registered under the subject, otherwise the task fails. Takes precedence over **Schema version**. |
 
-With **From registry**, the connector looks up the schema with the same registry URL and credentials as the producer, and resolves schema references, for both Avro and JSON schemas. The settings that make the serializer use the resolved schema (`auto.register.schemas`, `use.latest.version`, `use.schema.id`, and the value subject name strategy) can't be overridden in **Additional properties**.
+With **From registry**, the connector looks up the schema with the same registry URL and credentials as the producer, and resolves schema references, for both Avro and JSON schemas. You can't override the settings that make the serializer use the resolved schema (`auto.register.schemas`, `use.latest.version`, `use.schema.id`, and the value subject name strategy) in **Additional properties**.
 
 #### Publish several event types to one topic
 
@@ -200,11 +200,15 @@ For example, the subject `tasks-value` holds a union of two records. The records
 }
 ```
 
-The connector picks the record type of each message as follows:
+The connector picks the type of each message as follows:
 
-1. If the **Value** has a single key that is the name of a record in the union, the connector uses that record and the key's value as the record's fields. The full name (`com.example.CancelTask`) always works. The short name (`CancelTask`) works if only one record in the union has it.
-1. Otherwise, the connector infers the record type from the fields of the **Value**. It uses the record that has a field for every key of the value and gets all of its required fields. A required field has no default and doesn't accept `null`. If no record has a field for every key, the connector ignores unknown keys and checks the required fields only.
-1. If the value matches several records, or none, the task fails. The error message lists the types of the union and shows how to wrap the value, for example: `The value matches several types of the union [com.example.CreateTask, com.example.CancelTask]. Wrap it with the type name as the only key, for example {"com.example.CreateTask": {...}}.`
+1. If the **Value** has a single key that is the name of a type in the union, and the key's value fits that type, the connector uses that type and the key's value. For a record, the key's value holds the record's fields. The full name (`com.example.CancelTask`) always works. The short name (`CancelTask`) works if only one type in the union has it.
+1. Otherwise, the connector infers the record type from the fields of the **Value**. If the union has only one record, the connector uses that record. If the union has several records, the connector uses the record that has a field for every key of the value and gets all of its required fields. A required field has no default and doesn't accept `null`. If no record has a field for every key, the connector ignores unknown keys and checks the required fields only.
+1. If the value matches several records, the task fails. If the value matches no record, the connector writes it as a map if the union has a `map` type. Otherwise, the task fails. The error message lists the types of the union and shows how to wrap the value:
+   - `The value matches several types of the union [com.example.CreateTask, com.example.CancelTask]. Wrap it with the type name as the only key, for example {"com.example.CreateTask": {...}}.`
+   - `The value matches none of the types of the union [com.example.CreateTask, com.example.CancelTask]. Wrap it with the type name as the only key, for example {"com.example.CreateTask": {...}}.`
+
+If the union has a `map` type, only record names count as type names in step 1. A value such as `{"string": "v"}` is a map entry, not a wrapper. With one record and a `map` type, the connector uses the record only if the value has all of the record's required fields.
 
 For example, this **Value** is published as a `CreateTask`, inferred from its fields:
 
@@ -228,9 +232,16 @@ This **Value** is published as a `CancelTask`, selected by the type name:
 
 Wrap the value whenever several records could match it, for example if two event types have the same fields.
 
-The same rules apply to unions inside a record, such as a field of type `["null", "com.example.Address"]`, and to array items whose type is a union. If a field is missing from the value and has a default in the schema, the connector uses the default.
+The same rules apply to unions inside a record, such as a field of type `["null", "com.example.Address"]`. They also apply to array items whose type is a union. If a field is missing from the value and has a default in the schema, the connector uses the default.
 
-A union schema requires **From registry**. With **Inline schema**, the serializer would register the single record as the subject's schema and replace the union, so the task fails with the error `A union schema needs the schema source From registry`. To fix it, register the union in the schema registry and select **From registry**.
+In a union inside a record, you can also wrap a value that isn't a record to pick its type. For example, for a field of type `["null", "int", "long"]`, the connector writes `{"long": 1}` as a `long` and `{"null": null}` as `null`. Without a wrapper, the Avro serializer picks the type from the JSON type of the value. A wrapped number must fit the type:
+
+- A wrapped `int` or `long` must be a whole number in the range of the type. Otherwise, the task fails with an error such as `The value 1.5 can't be written as the union type long: it must be a whole number from -9223372036854775808 to 9223372036854775807.`
+- A wrapped `float` or `double` must be in the range of the type. Otherwise, the task fails with an error such as `The value 1.0E39 can't be written as the union type float: it is outside the range of float.`
+
+If a union has no record, the error for a value that matches none of its types ends with `Use a value compatible with one of the union's types.` instead of a wrapper example.
+
+A union schema requires **From registry**. With **Inline schema**, the serializer would register the single record as the subject's schema and replace the union. To prevent this, the task fails with the error `A union schema needs the schema source From registry: register the union in the schema registry and select From registry instead of Inline.` To fix it, register the union in the schema registry and select **From registry**.
 
 ### Example Avro schema and data
 
