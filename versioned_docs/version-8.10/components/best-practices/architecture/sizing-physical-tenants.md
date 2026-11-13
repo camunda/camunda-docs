@@ -68,7 +68,7 @@ partition replicas on the broker  =  Σ over tenants (partitions × replication 
 If the check fails, the broker doesn't start and logs `Expected the allocated memory for RocksDB per partition to be at least 33554432 bytes, but was <bytes> bytes.`
 :::
 
-For example, [baseline](sizing-self-managed.md#baseline-resource-configuration) brokers with 2 GiB and the default fraction of `0.1` have about 205 MiB, enough for six replicas. With three brokers and three partitions at replication factor three per tenant, each tenant adds three replicas per broker, so a third tenant stops the brokers from starting.
+For example, a broker with 4 GiB and the default fraction has a pool of about 410 MiB, enough for 12 replicas (~410 / 32). With three brokers and three partitions at replication factor three per tenant, each tenant adds three replicas to every broker, so four tenants fit (= 12 / 3) and the fifth stops the brokers from starting.
 
 To meet the minimum, raise broker memory, raise `camunda.data.primary-storage.rocksdb.memory-fraction`, change the RocksDB allocation strategy, or add brokers. A higher fraction leaves less memory for the heap and page cache, so raising broker memory is usually safer.
 
