@@ -501,7 +501,7 @@ With [multiple Physical Tenants](/self-managed/concepts/physical-tenants/optimiz
              partitionCount: 6
    ```
 
-   The `optimize.partitionCount` Helm value still works, but it is deprecated. Without Helm, set the `CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT` environment variable.
+   Without Helm, set the `CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT` environment variable.
 
 2. Restart Optimize.
 
