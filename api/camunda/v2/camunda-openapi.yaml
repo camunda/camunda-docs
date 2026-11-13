@@ -485,6 +485,9 @@ paths:
   /variables/{variableKey}:
     $ref: "variables.yaml#/paths/~1variables~1{variableKey}"
 components:
+  schemas:
+    AuthenticatedCamundaUserResult:
+      $ref: "authentication.yaml#/components/schemas/AuthenticatedCamundaUserResult"
   securitySchemes:
     bearerAuth:
       type: http
