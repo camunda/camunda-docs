@@ -7,7 +7,36 @@ on:
     types: [created]
 
 jobs:
+  claude-review-secrets:
+    name: Wrap Claude review secrets
+    if: |
+      (github.event_name == 'pull_request_review_comment' &&
+       contains(github.event.comment.body, '@claude') &&
+       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)) ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request != null &&
+       contains(github.event.comment.body, '@claude') &&
+       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
+    outputs:
+      wrap-token: ${{ steps.wrap.outputs.wrap-token }}
+    steps:
+      - name: Wrap secrets for the review job
+        id: wrap
+        uses: camunda/infra-global-github-actions/vault-wrapped-secrets/wrap@c21e31eece771eb13d6c5e08e8831c9de62888bd # vault-wrapped-secrets-1.0.0
+        with:
+          vault-url: ${{ secrets.VAULT_ADDR }}
+          vault-auth-jwt-path: ${{ secrets.VAULT_JWT_PATH }}
+          vault-auth-jwt-role: ${{ secrets.VAULT_JWT_ROLE }}
+          vault-auth-jwt-audience: ${{ secrets.VAULT_JWT_AUDIENCE }}
+          secrets: |
+            secret/data/products/camunda-docs/ci/claude-reviewer ANTHROPIC_API_KEY | ANTHROPIC_API_KEY;
+
   claude-review:
+    needs: claude-review-secrets
     if: |
       (github.event_name == 'pull_request_review_comment' &&
        contains(github.event.comment.body, '@claude') &&
@@ -22,22 +51,20 @@ jobs:
       pull-requests: write
       issues: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Import secrets from Vault
-        id: secrets
-        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+      - name: Unwrap secrets
+        id: unwrap
+        uses: camunda/infra-global-github-actions/vault-wrapped-secrets/unwrap@c21e31eece771eb13d6c5e08e8831c9de62888bd # vault-wrapped-secrets-1.0.0
         with:
-          url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
-          secrets: |
-            secret/data/products/camunda-docs/ci/claude-reviewer ANTHROPIC_API_KEY;
+          vault-url: ${{ secrets.VAULT_ADDR }}
+          wrap-token: ${{ needs.claude-review-secrets.outputs.wrap-token }}
 
-      - uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe # v1.0.269
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run Claude review
+        uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe # v1.0.269
         with:
-          anthropic_api_key: ${{ steps.secrets.outputs.ANTHROPIC_API_KEY }}
+          anthropic_api_key: ${{ fromJSON(steps.unwrap.outputs.secrets).ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
             A commenter left this message on this pull request:
