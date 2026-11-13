@@ -13,8 +13,8 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
 - When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/components/best-practices/architecture/sizing-self-managed.md).
-- You usually add partitions to handle more load, so more data is exported to secondary storage. Scaling partitions doesn't scale secondary storage. Size it for the higher load before you scale. See [considerations](#considerations).
-- Optimize doesn't detect new partitions. After you add partitions, [update Optimize](#5-update-optimize).
+- You typically add partitions to handle more load, which means more data is exported to secondary storage. Adding partitions does not scale secondary storage, so size it for the higher load first. See [considerations](#considerations) for more details.
+- Optimize does not detect new partitions. After adding partitions, [update Optimize](#5-update-optimize).
   :::
 
 ## Considerations
@@ -408,7 +408,9 @@ The response would show that partitions are distributed to new brokers:
 
 ### 5. Update Optimize
 
+:::note
 Skip this step if you didn't change the partition count, or if you don't use Optimize.
+:::
 
 Optimize has its own [`zeebe.partitionCount`](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) setting and doesn't detect new partitions. If you don't update it, process instances on the new partitions are simply missing in Optimize, without any error.
 
