@@ -119,7 +119,7 @@ Known constraints and behavior:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
-- **Secrets**: each physical tenant supports at most one secret store, and its ID must be `default`; any other ID is rejected. Camunda validates the cache settings per tenant. `ttl` must be at least `1m` and use whole minutes, and `max-size` must be at least `1`. To override the root-level `camunda.secrets.*` defaults for a physical tenant, use `camunda.physical-tenants.<tenant-key>.secrets.*`.
+- **Secrets**: each physical tenant supports at most one secret store, and its ID must be `default`; any other ID is rejected. Camunda validates the cache settings per tenant. `ttl` must be at least `1m` and use whole minutes, and `max-size` must be at least `1`. To override the root-level `camunda.secrets.*` defaults for a physical tenant, use `camunda.physical-tenants.<tenant-key>.secrets.*`. With the [environment variable store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#environment-variable-store), each tenant needs a prefix that doesn't overlap another tenant's, so override the inherited prefix for every additional tenant.
 
 ### Startup error message formats
 
@@ -175,6 +175,20 @@ must be at least 1, but was 0
 
 ```text
 File store 'default' for physical tenant 'riskprod' has no path configured
+```
+
+```text
+Environment-variable store 'default' for physical tenant 'riskprod' has an invalid
+camunda.physical-tenants.riskprod.secrets.stores.env.default.prefix: The prefix 'CAMUNDA_SECRET_'
+overlaps the reserved prefix 'CAMUNDA_', so a secret reference could read the platform's own
+settings or credentials
+```
+
+```text
+Physical tenants must not configure overlapping environment-variable secret store prefixes, or one
+tenant would resolve another's secrets. Give every tenant a distinct prefix under
+camunda.physical-tenants.<id>.secrets.stores.env.<store>.prefix that does not start with another
+tenant's prefix. Conflicts: 'default' (prefix 'SECRET_') and 'riskprod' (prefix 'SECRET_PT1_')
 ```
 
 The cache messages always report the canonical `camunda.secrets.cache.*` property path, even when the
