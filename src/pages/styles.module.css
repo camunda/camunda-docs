@@ -45,11 +45,11 @@
 }
 
 .featuresBlock {
-  padding: 2rem 0;
+  padding: 2rem 0 4.5rem 0;
 }
 
 [data-theme="dark"] .featuresBlock {
-  padding: 1rem 0 2rem 0;
+  padding: 1rem 0 4.5rem 0;
 }
 
 [data-theme="dark"] .featuresDescription {
