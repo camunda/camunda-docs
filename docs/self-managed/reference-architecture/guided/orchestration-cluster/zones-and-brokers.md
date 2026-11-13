@@ -3,6 +3,8 @@ id: zones-and-brokers
 title: "Zones and brokers"
 sidebar_label: "Zones and brokers"
 description: "Set the zones, brokers, replication factor, and partitions of a Camunda 8 Orchestration Cluster on Amazon ECS, and plan for growing to more regions."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

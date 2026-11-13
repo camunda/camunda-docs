@@ -3,6 +3,8 @@ id: compute
 title: "Compute"
 sidebar_label: "Compute"
 description: "Compare Amazon EKS, Amazon ECS with Fargate, and Amazon EC2 for running Camunda 8 Self-Managed, and see which stages of your deployment change with the choice."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress } from "@site/src/components/GuidedDeployment";

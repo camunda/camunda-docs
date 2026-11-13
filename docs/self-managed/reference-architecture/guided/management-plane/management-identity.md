@@ -3,6 +3,8 @@ id: management-identity
 title: "Management Identity"
 sidebar_label: "Management Identity"
 description: "Deploy Management Identity for Camunda Hub on Amazon ECS, with its own database, and declare the roles that Camunda Hub needs."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

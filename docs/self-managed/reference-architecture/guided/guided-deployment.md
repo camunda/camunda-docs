@@ -3,6 +3,8 @@ id: guided-deployment
 title: "Guided deployment on AWS"
 sidebar_label: "Guided deployment"
 description: "Follow a step-by-step reference architecture for Camunda 8 Self-Managed on AWS: decide the network, compute, storage, exposure, and sign-in one step at a time, and grow from one region to more."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { AllOptions, GuidedNext, GuidedProgress } from "@site/src/components/GuidedDeployment";
@@ -36,17 +38,18 @@ Each band is a step of the guide. A step uses what the steps below it provide, s
 
 Each decision constrains the next: the cloud limits the network, the network limits the compute, and so on.
 
-| Step                                                          | Decision                                                                    |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [Cloud provider](./cloud-provider.md)                         | Which cloud, and how many regions?                                          |
-| [Network](./network.md)                                       | Create a VPC or use an existing one? How do regions connect?                |
-| [Compute](./compute.md)                                       | Kubernetes, Amazon ECS, or virtual machines?                                |
-| [Secondary storage](./secondary-storage.md)                   | Relational database, or Elasticsearch and OpenSearch?                       |
-| [Object storage](./object-storage.md)                         | How many buckets do you need, and why?                                      |
-| [Exposure](./exposure.md)                                     | How do users and clients reach the cluster, and where does TLS end?         |
-| [Orchestration Cluster](./orchestration-cluster/overview.md)  | How do users sign in, and how many brokers and zones does the cluster have? |
-| [Management plane](./management-plane/overview.md) (optional) | Do you need Camunda Hub and Management Identity for several clusters?       |
-| [Your architecture](./your-architecture.md)                   | What did you choose, and how does it fit together?                          |
+| Step                                                          | Decision                                                              |
+| ------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [Cloud provider](./cloud-provider.md)                         | Which cloud, and how many regions?                                    |
+| [Network](./network.md)                                       | Create a VPC or use an existing one? How do regions connect?          |
+| [Compute](./compute.md)                                       | Kubernetes, Amazon ECS, or virtual machines?                          |
+| [Secondary storage](./secondary-storage.md)                   | Relational database, or Elasticsearch and OpenSearch?                 |
+| [Object storage](./object-storage.md)                         | How many buckets do you need, and why?                                |
+| [Exposure](./exposure.md)                                     | How do users and clients reach the cluster, and where does TLS end?   |
+| [Orchestration Cluster](./orchestration-cluster/overview.md)  | How many brokers and zones does the cluster have?                     |
+| [Management plane](./management-plane/overview.md) (optional) | Do you need Camunda Hub and Management Identity for several clusters? |
+| [Identity](./identity.md)                                     | How do users and clients sign in: built-in users or OIDC?             |
+| [Your architecture](./your-architecture.md)                   | What did you choose, and how does it fit together?                    |
 
 The steps share one model of every option and the rules between them. Open it to see which choice enables or rules out which option:
 

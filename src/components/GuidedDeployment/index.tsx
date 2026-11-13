@@ -5,6 +5,7 @@
  *
  * - `GuidedProgress`: the steps, what is chosen, a share link, and reset.
  * - `ChoicePanel`: the questions of a step, or one question.
+ * - `ChoiceSummary`: the choices of a step that other pages ask.
  * - `GuidedWhen`: content that applies only to some choices.
  * - `FollowsFromChoices`: what a step without a decision needs.
  * - `GuidedNext`: the previous and next page of the flow.
@@ -420,6 +421,49 @@ export function GuidedWhen({
       )}
       {children}
     </div>
+  );
+}
+
+/**
+ * A read-only summary of the questions of a step that other pages ask, such
+ * as the overview of the Orchestration Cluster. Each question is asked on one
+ * page only; the summary links to it.
+ */
+export function ChoiceSummary({ step }: { step: string }) {
+  const { base } = useGuidedLocation();
+  const { resolution } = useGuided();
+  const title = model.stepsById[step].title;
+  return (
+    <section
+      className={clsx(styles.panel, styles.question)}
+      aria-label={`Your choices: ${title}`}
+    >
+      <p className={styles.optionLabel}>Your choices for this step</p>
+      <ul>
+        {model.stepsById[step].questions.map((id) => {
+          const state = resolution.questions[id];
+          const page = model.pagesById[state.question.page];
+          const option =
+            state.value === undefined
+              ? undefined
+              : engine.findOption(id, state.value);
+          return (
+            <li key={id}>
+              {state.question.label}{" "}
+              <strong>
+                {!state.applicable
+                  ? "Doesn't apply"
+                  : option
+                    ? option.label
+                    : "Not decided"}
+              </strong>
+              {state.source === "default" && " (default)"}. Decide it on{" "}
+              <Link to={pageUrl(base, page.id)}>{page.title}</Link>.
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 

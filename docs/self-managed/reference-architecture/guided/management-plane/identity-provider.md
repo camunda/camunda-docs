@@ -3,11 +3,13 @@ id: identity-provider
 title: "Identity provider"
 sidebar_label: "Identity provider"
 description: "Deploy an OIDC identity provider on Amazon ECS for Management Identity, Camunda Hub, and your Orchestration Clusters, and connect clusters to it."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
 
-The identity provider step deploys an OIDC provider on Amazon ECS that Management Identity, Camunda Hub, and every Orchestration Cluster sign in against. Skip it if you run your own provider, such as Entra ID or Okta: describe it in the [identity step of the Orchestration Cluster](../orchestration-cluster/identity.md) instead.
+The identity provider step deploys an OIDC provider on Amazon ECS that Management Identity, Camunda Hub, and every Orchestration Cluster sign in against. Skip it if you run your own provider, such as Entra ID or Okta: describe it in the [identity step](../identity.md) instead.
 
 <GuidedProgress />
 
@@ -21,7 +23,7 @@ You chose no management plane, so this page doesn't apply to your deployment. Co
 
 <GuidedWhen idp="own" chosenOnly>
 
-You chose your own provider, so skip this page. Describe the provider in the [identity step of the Orchestration Cluster](../orchestration-cluster/identity.md).
+You chose your own provider, so skip this page. Describe the provider in the [identity step](../identity.md).
 
 </GuidedWhen>
 
@@ -83,7 +85,7 @@ The realm also has one login user, `admin`, who administers the platform. The st
    terraform -chdir=terraform/oidc-provider output -json clusters | jq '.emea'
    ```
 
-1. Use it as `external_oidc` in the [identity stage](../orchestration-cluster/identity.md) of that cluster, with `authentication_mode = "oidc"`. See `examples/management-plane/cluster/identity.tfvars`.
+1. Use it as `external_oidc` in the [identity stage](../identity.md) of that cluster, with `authentication_mode = "oidc"`. See `examples/management-plane/cluster/identity.tfvars`.
 1. Apply the stages of the cluster. Its Camunda stage publishes `cluster_registration`, which you give to [Camunda Hub](./camunda-hub.md).
 
 The realm is imported when the provider starts for the first time. To add a cluster later, register its two clients in the administration console of the provider with the values of the `clusters` output, the same way as for a provider that you run yourself.

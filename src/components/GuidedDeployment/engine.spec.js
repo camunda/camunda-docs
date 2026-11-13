@@ -140,27 +140,61 @@ describe("option filtering", () => {
   });
 
   it("applies the management plane rules", () => {
-    const basic = optionStates({ compute: "ecs" }, "managementPlane");
-    expect(basic.deploy.reasons).toEqual(["Requires OIDC authentication"]);
+    // Sign-in is decided after the management plane, so it never blocks it.
+    const basic = optionStates(
+      { compute: "ecs", auth: "basic" },
+      "managementPlane"
+    );
+    expect(basic.deploy.enabled).toBe(true);
     const ecsDual = optionStates(
-      { regions: "2", compute: "ecs", auth: "oidc" },
+      { regions: "2", compute: "ecs" },
       "managementPlane"
     );
     expect(ecsDual.deploy.reasons).toEqual([
       "With Amazon ECS, requires a single region",
     ]);
     const eksDual = optionStates(
-      { regions: "2", compute: "eks", auth: "oidc" },
+      { regions: "2", compute: "eks" },
       "managementPlane"
     );
     expect(eksDual.deploy.enabled).toBe(true);
-    const ec2 = optionStates(
-      { compute: "ec2", auth: "oidc" },
-      "managementPlane"
-    );
+    const ec2 = optionStates({ compute: "ec2" }, "managementPlane");
     expect(ec2.deploy.reasons).toEqual([
       "Camunda Hub isn't supported on Amazon EC2",
     ]);
+  });
+});
+
+describe("identity after the management plane", () => {
+  it("greys out basic authentication with the management plane, and applies OIDC", () => {
+    const auth = optionStates({ managementPlane: "deploy" }, "auth");
+    expect(auth.basic).toMatchObject({
+      enabled: false,
+      reasons: ["Camunda Hub and Management Identity need an OIDC provider"],
+    });
+    const resolution = engine.resolve({ managementPlane: "deploy" });
+    expect(resolution.values.auth).toBe("oidc");
+    expect(resolution.questions.auth.source).toBe("only");
+  });
+
+  it("switches a basic choice to OIDC when the reader deploys the management plane, and says so", () => {
+    const { choices, cleared } = engine.choose(
+      { compute: "ecs", auth: "basic" },
+      "managementPlane",
+      "deploy"
+    );
+    expect(choices).toEqual({ compute: "ecs", managementPlane: "deploy" });
+    expect(cleared).toEqual([
+      {
+        question: "auth",
+        option: "basic",
+        reason: "Camunda Hub and Management Identity need an OIDC provider",
+        now: "oidc",
+      },
+    ]);
+    expect(engine.describeCleared(cleared[0])).toBe(
+      'Identity: "Basic: built-in users" was cleared. Camunda Hub and Management Identity need an OIDC provider. It\'s now "OIDC: an identity provider".'
+    );
   });
 });
 
@@ -293,7 +327,11 @@ describe("flow and progress", () => {
     );
     expect(
       engine.nextPage("management-plane", { managementPlane: "none" })?.id
-    ).toBe("your-architecture");
+    ).toBe("identity");
+    expect(
+      engine.nextPage("camunda-hub", { managementPlane: "deploy" })?.id
+    ).toBe("identity");
+    expect(engine.nextPage("identity", {})?.id).toBe("your-architecture");
     expect(
       engine.nextPage("management-plane", {
         managementPlane: "deploy",
@@ -301,7 +339,7 @@ describe("flow and progress", () => {
       })?.id
     ).toBe("management-identity");
     expect(
-      engine.previousPage("your-architecture", { managementPlane: "none" })?.id
+      engine.previousPage("identity", { managementPlane: "none" })?.id
     ).toBe("management-plane");
   });
 

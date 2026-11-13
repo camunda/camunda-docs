@@ -3,6 +3,8 @@ id: secondary-storage
 title: "Secondary storage"
 sidebar_label: "Secondary storage"
 description: "Choose between relational and document-store secondary storage for the Orchestration Cluster on AWS, and create the Aurora PostgreSQL stage."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

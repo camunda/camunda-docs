@@ -3,6 +3,8 @@ id: overview
 title: "Management plane"
 sidebar_label: "Overview"
 description: "Deploy the Camunda 8 management plane, Camunda Hub and Management Identity, once for several Orchestration Clusters on Amazon ECS."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
@@ -15,7 +17,7 @@ Camunda Hub uses Management Identity, which is a separate deployment from the Ad
 
 <GuidedProgress />
 
-<ChoicePanel step="management-plane" />
+<ChoicePanel question="managementPlane" />
 
 <GuidedWhen managementPlane="none" chosenOnly>
 

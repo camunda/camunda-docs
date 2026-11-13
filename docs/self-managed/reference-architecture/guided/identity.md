@@ -3,6 +3,8 @@ id: identity
 title: "Identity"
 sidebar_label: "Identity"
 description: "Choose between built-in users and an OIDC provider for a Camunda 8 Orchestration Cluster on AWS, and connect the cluster to the provider."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
@@ -13,18 +15,18 @@ The identity stage decides how users and clients sign in to an Orchestration Clu
 
 ## Choose an authentication mode
 
-| Mode    | When to use it                                                                                                           | What you provide                                                               |
-| ------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `basic` | A standalone cluster, or an evaluation. Nothing else is deployed.                                                        | Nothing. Passwords are generated and stored in Secrets Manager.                |
-| `oidc`  | You use your own provider, or the [identity provider of the management plane](../management-plane/identity-provider.md). | The provider's issuer, token endpoint, audience, and one client per component. |
+| Mode    | When to use it                                                                                                          | What you provide                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `basic` | A standalone cluster, or an evaluation. Nothing else is deployed.                                                       | Nothing. Passwords are generated and stored in Secrets Manager.                |
+| `oidc`  | You use your own provider, or the [identity provider of the management plane](./management-plane/identity-provider.md). | The provider's issuer, token endpoint, audience, and one client per component. |
 
-Camunda Hub and Management Identity need an OIDC provider, so a cluster that Camunda Hub manages uses `oidc`. See [Camunda Hub](../management-plane/camunda-hub.md).
+Camunda Hub and Management Identity need an OIDC provider, so a cluster that Camunda Hub manages uses `oidc`. That's why you decide sign-in after the [management plane](./management-plane/overview.md): if you deploy it, `oidc` applies. See [Camunda Hub](./management-plane/camunda-hub.md).
 
 <ChoicePanel question="auth" />
 
 <GuidedWhen compute={["eks", "ec2"]}>
 
-The Orchestration Cluster stage is part of the Amazon ECS Terraform. With Amazon EKS, the Helm chart deploys the Orchestration Cluster: see [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md). With Amazon EC2, see [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md). The decisions on these pages apply in both cases.
+The identity stage is part of the Amazon ECS Terraform. With Amazon EKS, you configure sign-in through the Helm chart: see [deploy to Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md). With Amazon EC2, see [deploy to Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md). The decision on this page applies in both cases.
 
 </GuidedWhen>
 
@@ -84,7 +86,7 @@ The stage publishes one output for the Camunda stage:
 
 ### authentication_mode = oidc requires external_oidc.
 
-You selected `oidc` without describing a provider. Add `external_oidc`, or use the [identity provider of the management plane](../management-plane/identity-provider.md) and pass the entry of your cluster from its `clusters` output.
+You selected `oidc` without describing a provider. Add `external_oidc`, or use the [identity provider of the management plane](./management-plane/identity-provider.md) and pass the entry of your cluster from its `clusters` output.
 
 ### external_oidc is only valid with authentication_mode = oidc.
 
@@ -106,7 +108,8 @@ Nobody would receive the administrator role. Set `admin_claim_value` to the valu
 
 ## Next steps
 
-- [Deploy the identity provider](../management-plane/identity-provider.md)
-- [Orchestration Cluster](./overview.md)
+- [Deploy the identity provider](./management-plane/identity-provider.md)
+- [Orchestration Cluster](./orchestration-cluster/overview.md)
+- [Your architecture](./your-architecture.md)
 
 <GuidedNext />

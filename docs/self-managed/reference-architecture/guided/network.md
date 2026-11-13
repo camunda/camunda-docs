@@ -3,6 +3,8 @@ id: network
 title: "Network"
 sidebar_label: "Network"
 description: "Decide where the VPC comes from and how regions connect for a Camunda 8 Self-Managed deployment on AWS, and create the network stage."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

@@ -3,6 +3,8 @@ id: cloud-provider
 title: "Cloud provider"
 sidebar_label: "Cloud provider"
 description: "See the cloud providers that Camunda 8 Self-Managed reference architectures support, the compute each one offers, and how many regions you need."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress } from "@site/src/components/GuidedDeployment";

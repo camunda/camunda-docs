@@ -1907,7 +1907,6 @@ module.exports = {
                 id: "self-managed/reference-architecture/guided/orchestration-cluster/overview",
               },
               items: [
-                "self-managed/reference-architecture/guided/orchestration-cluster/identity",
                 "self-managed/reference-architecture/guided/orchestration-cluster/zones-and-brokers",
               ],
             },
@@ -1924,6 +1923,7 @@ module.exports = {
                 "self-managed/reference-architecture/guided/management-plane/camunda-hub",
               ],
             },
+            "self-managed/reference-architecture/guided/identity",
             "self-managed/reference-architecture/guided/your-architecture",
             {
               type: "category",

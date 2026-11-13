@@ -3,20 +3,22 @@ id: overview
 title: "Orchestration Cluster"
 sidebar_label: "Overview"
 description: "Deploy the Camunda 8 Orchestration Cluster and Connectors on Amazon ECS from the outputs of the earlier steps, and configure how it connects to storage and sign-in."
+pagination_prev: null
+pagination_next: null
 ---
 
-import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+import { ChoiceSummary, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
 
 The Orchestration Cluster step runs the Orchestration Cluster and Connectors on Amazon ECS. It creates no network, storage, load balancer, or identity provider: they arrive as variables from the steps before it. Configure the cluster in these pages:
 
-| Page                                        | What you decide                                                       |
-| ------------------------------------------- | --------------------------------------------------------------------- |
-| [Identity](./identity.md)                   | Built-in users or an OIDC provider, and how to describe your provider |
-| [Zones and brokers](./zones-and-brokers.md) | How many brokers, which zones, which replication factor, how to grow  |
+| Page                                        | What you decide                                                                                 |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [Zones and brokers](./zones-and-brokers.md) | How many brokers, which zones, which replication factor, how to grow                            |
+| [Identity](../identity.md)                  | Built-in users or an OIDC provider. You decide it after the management plane, which needs OIDC. |
 
 <GuidedProgress />
 
-<ChoicePanel step="orchestration-cluster" />
+<ChoiceSummary step="orchestration-cluster" />
 
 <GuidedWhen compute={["eks", "ec2"]}>
 
@@ -108,8 +110,8 @@ The `secondary_storage` input isn't an RDBMS with IAM authentication. Pass the o
 
 ## Next steps
 
-- [Set up identity](./identity.md)
 - [Set zones and brokers](./zones-and-brokers.md)
+- [Set up identity](../identity.md)
 - [Deploy the management plane](../management-plane/overview.md)
 
 <GuidedNext />

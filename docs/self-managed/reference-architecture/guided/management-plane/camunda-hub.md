@@ -3,6 +3,8 @@ id: camunda-hub
 title: "Camunda Hub"
 sidebar_label: "Camunda Hub"
 description: "Deploy a single Camunda Hub on Amazon ECS and connect it to one or more Orchestration Clusters."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

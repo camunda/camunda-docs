@@ -3,6 +3,8 @@ id: object-storage
 title: "Object storage"
 sidebar_label: "Object storage"
 description: "Create the S3 buckets of a Camunda 8 deployment on AWS: one backup bucket for the cluster and one node ID lease bucket for each zone."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { FollowsFromChoices, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

@@ -3,6 +3,8 @@ id: your-architecture
 title: "Your architecture"
 sidebar_label: "Your architecture"
 description: "See the Camunda 8 Self-Managed architecture on AWS that your choices in the guided deployment describe, with a diagram, a bill of materials, and a link to share it."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { AllOptions, GuidedNext, GuidedProgress, YourArchitecture } from "@site/src/components/GuidedDeployment";

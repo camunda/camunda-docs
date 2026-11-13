@@ -3,6 +3,8 @@ id: exposure
 title: "Exposure"
 sidebar_label: "Exposure"
 description: "Create the load balancers in front of a Camunda 8 deployment on AWS, add TLS with your own certificate, and point your DNS name at the cluster."
+pagination_prev: null
+pagination_next: null
 ---
 
 import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";

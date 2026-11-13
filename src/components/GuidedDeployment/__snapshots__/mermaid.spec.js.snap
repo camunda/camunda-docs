@@ -133,8 +133,6 @@ exports[`architecture diagram draws EKS in two regions with the management plane
   users -->|"HTTPS 443"| web_b
   cert_a -.->|"TLS"| web_a
   cert_b -.->|"TLS"| web_b
-  oc_a -.->|"OIDC sign-in"| idp_a
-  oc_b -.->|"OIDC sign-in"| idp_a
   users -->|"Design and manage"| hub_a
   hub_a -->|"Roles"| mi_a
   hub_a -->|"REST, gRPC, health"| oc_a
@@ -142,5 +140,7 @@ exports[`architecture diagram draws EKS in two regions with the management plane
   hub_a --> mpdb_a
   mi_a --> mpdb_a
   hub_a -.->|"Sign-in"| idp_a
-  mi_a -.->|"Sign-in"| idp_a"
+  mi_a -.->|"Sign-in"| idp_a
+  oc_a -.->|"OIDC sign-in"| idp_a
+  oc_b -.->|"OIDC sign-in"| idp_a"
 `;

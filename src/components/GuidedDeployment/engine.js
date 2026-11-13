@@ -25,7 +25,7 @@ const model = require("./model");
  * @property {OptionState[]} options
  * @property {string | undefined} value The answer that applies, if any.
  * @property {Source} source
- * @typedef {{ question: string, option: string, reason: string }} Dropped
+ * @typedef {{ question: string, option: string, reason: string, now?: string }} Dropped
  * @typedef {object} Resolution
  * @property {Record<string, QuestionState>} questions
  * @property {Record<string, string>} values Answers that apply, defaults included.
@@ -206,7 +206,14 @@ function choose(choices, questionId, optionId) {
   const resolution = resolve(next);
   return {
     choices: resolution.chosen,
-    cleared: resolution.dropped.filter((d) => d.question !== questionId),
+    // `now` is the answer that applies instead, such as the only option left.
+    cleared: resolution.dropped
+      .filter((d) => d.question !== questionId)
+      .map((d) =>
+        resolution.values[d.question] === undefined
+          ? d
+          : { ...d, now: resolution.values[d.question] }
+      ),
   };
 }
 
@@ -219,9 +226,13 @@ function describeCleared(dropped) {
   const question = model.questionsById[dropped.question];
   const step = question ? model.stepsById[question.step] : undefined;
   const option = findOption(dropped.question, dropped.option);
+  const now =
+    dropped.now === undefined
+      ? ""
+      : ` It's now "${findOption(dropped.question, dropped.now)?.label ?? dropped.now}".`;
   return `${step?.title ?? dropped.question}: "${
     option?.label ?? dropped.option
-  }" was cleared. ${dropped.reason}.`;
+  }" was cleared. ${dropped.reason}.${now}`;
 }
 
 /**
