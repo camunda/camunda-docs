@@ -83,7 +83,7 @@ In the **Kafka** section:
 
 1. Select the schema strategy for your messages.
    - Select **No schema**, **Inline schema** for Avro serialization.
-   - Select **Schema registry** if you have a Confluent Schema Registry.
+   - Select **Schema registry** if you have a Confluent Schema Registry. Then choose the **Schema source**: enter the schema inline, or use a schema already registered in the registry. See [choose the schema source](#choose-the-schema-source).
 2. Set the topic name.
 3. (Optional) Set producer configuration values in the **Headers** field. Only `UTF-8` strings are supported as header values.
 4. (Optional) Set producer configuration values in the **Additional properties** field.
@@ -136,8 +136,9 @@ Select **Schema registry** to send messages with a schema registered in a schema
 
 - This option is suitable for messages that require a schema and that are registered in a [schema registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
 - You must provide:
-  - The **schema registry URL** in the **Kafka** section.
-  - The **schema** itself (that defines the message structure) in the **Message** section.
+  - The **Schema registry URL**.
+  - The **Schema type**: **Avro** or **JSON**.
+  - The **Schema source**, which decides where the schema comes from. See [choose the schema source](#choose-the-schema-source).
   - The **credentials** for the schema registry (if required). Refer to the [Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/sr-client-configs.html#basic-auth-credentials-source) for more information.
 
 :::info
@@ -145,6 +146,91 @@ Select **Schema registry** to send messages with a schema registered in a schema
 Currently, the Kafka connector supports only [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html). Other schema registry implementations are not supported at this time.
 
 :::
+
+#### Choose the schema source
+
+The **Schema source** field sets whether the connector uses a schema you enter or a schema that is already registered in the schema registry.
+
+| Schema source               | Behavior                                                                                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Inline schema** (default) | The connector uses the schema you enter in the **Schema** field. If the schema isn't registered yet, the serializer registers it, unless you set `auto.register.schemas` to `false` in **Additional properties**.              |
+| **From registry**           | The connector fetches the schema already registered in the schema registry and uses it as it is. Nothing is registered. If the schema doesn't exist, the task fails. You don't need to copy the schema into the process model. |
+
+With **From registry**, you can set the following optional fields:
+
+| Field              | Description                                                                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Subject**        | The registry subject of the schema. If empty, the connector uses `<topic>-value`.                                                                          |
+| **Schema version** | The version of the schema in the subject. If empty, the connector uses the latest version. Ignored if **Schema ID** is set.                                |
+| **Schema ID**      | The global registry ID of the schema. The schema must be registered under the subject, otherwise the task fails. Takes precedence over **Schema version**. |
+
+With **From registry**, the connector looks up the schema with the same registry URL and credentials as the producer, and resolves schema references, for both Avro and JSON schemas. The settings that make the serializer use the resolved schema (`auto.register.schemas`, `use.latest.version`, `use.schema.id`, and the value subject name strategy) can't be overridden in **Additional properties**.
+
+#### Publish several event types to one topic
+
+To publish several event types to one topic, register an Avro union of the event records as the schema of the topic's value subject, and select **From registry** as the **Schema source**.
+
+For example, the subject `tasks-value` holds a union of two records. The records are usually registered under their own subjects and added to the union as [schema references](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/index.html#schema-references):
+
+```json
+["com.example.CreateTask", "com.example.CancelTask"]
+```
+
+```json
+{
+  "type": "record",
+  "name": "CreateTask",
+  "namespace": "com.example",
+  "fields": [
+    { "name": "taskId", "type": "string" },
+    { "name": "title", "type": "string" }
+  ]
+}
+```
+
+```json
+{
+  "type": "record",
+  "name": "CancelTask",
+  "namespace": "com.example",
+  "fields": [
+    { "name": "taskId", "type": "string" },
+    { "name": "reason", "type": "string" }
+  ]
+}
+```
+
+The connector picks the record type of each message as follows:
+
+1. If the **Value** has a single key that is the name of a record in the union, the connector uses that record and the key's value as the record's fields. The full name (`com.example.CancelTask`) always works. The short name (`CancelTask`) works if only one record in the union has it.
+1. Otherwise, the connector infers the record type from the fields of the **Value**. It uses the record that has a field for every key of the value and gets all of its required fields. A required field has no default and doesn't accept `null`. If no record has a field for every key, the connector ignores unknown keys and checks the required fields only.
+1. If the value matches several records, or none, the task fails. The error message lists the types of the union and shows how to wrap the value, for example: `The value matches several types of the union [com.example.CreateTask, com.example.CancelTask]. Wrap it with the type name as the only key, for example {"com.example.CreateTask": {...}}.`
+
+For example, this **Value** is published as a `CreateTask`, inferred from its fields:
+
+```json
+{
+  "taskId": "42",
+  "title": "Review the contract"
+}
+```
+
+This **Value** is published as a `CancelTask`, selected by the type name:
+
+```json
+{
+  "com.example.CancelTask": {
+    "taskId": "42",
+    "reason": "duplicate"
+  }
+}
+```
+
+Wrap the value whenever several records could match it, for example if two event types have the same fields.
+
+The same rules apply to unions inside a record, such as a field of type `["null", "com.example.Address"]`, and to array items whose type is a union. If a field is missing from the value and has a default in the schema, the connector uses the default.
+
+A union schema requires **From registry**. With **Inline schema**, the serializer would register the single record as the subject's schema and replace the union, so the task fails with the error `A union schema needs the schema source From registry`. To fix it, register the union in the schema registry and select **From registry**.
 
 ### Example Avro schema and data
 
