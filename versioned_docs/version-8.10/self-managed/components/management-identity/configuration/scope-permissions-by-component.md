@@ -9,6 +9,8 @@ With the `scope-permissions-by-component` flag, Management Identity returns each
 
 Without the flag, Management Identity returns every permission on the audience that a component asks with. With the flag, it returns only the permissions that the component's own resource server defines.
 
+The flag corrects permission mix-ups caused by a shared audience. It isn't an access-control boundary. See [known limitations](#known-limitations).
+
 The flag is off by default, and it only takes effect once components send a component ID. It applies when Management Identity connects to a generic OIDC provider or Microsoft Entra ID (the `oidc` Spring profile). It has no effect with the default Keycloak setup. Read [check what the flag would change](#check-what-the-flag-would-change) before you enable it.
 
 ## Decide if components share an audience
