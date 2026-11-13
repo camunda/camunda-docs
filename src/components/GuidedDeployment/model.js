@@ -148,6 +148,12 @@ const steps = [
     questions: ["tls", "raftNlb"],
   },
   {
+    id: "identity",
+    title: "Identity",
+    page: "identity",
+    questions: ["auth"],
+  },
+  {
     id: "orchestration-cluster",
     title: "Orchestration Cluster",
     page: "orchestration-cluster",
@@ -158,12 +164,6 @@ const steps = [
     title: "Management plane",
     page: "management-plane",
     questions: ["managementPlane", "idp"],
-  },
-  {
-    id: "identity",
-    title: "Identity",
-    page: "identity",
-    questions: ["auth"],
   },
 ];
 
@@ -196,6 +196,7 @@ const pages = [
     step: "object-storage",
   },
   { id: "exposure", path: "exposure", title: "Exposure", step: "exposure" },
+  { id: "identity", path: "identity", title: "Identity", step: "identity" },
   {
     id: "orchestration-cluster",
     path: "orchestration-cluster/overview",
@@ -235,7 +236,6 @@ const pages = [
     step: "management-plane",
     shownWhen: { managementPlane: ["deploy"] },
   },
-  { id: "identity", path: "identity", title: "Identity", step: "identity" },
   {
     id: "your-architecture",
     path: "your-architecture",
@@ -826,12 +826,6 @@ const questions = [
         description:
           "A standalone cluster, or an evaluation. Passwords are generated and stored in Secrets Manager.",
         default: true,
-        requires: [
-          {
-            needs: { managementPlane: ["none"] },
-            reason: "Camunda Hub and Management Identity need an OIDC provider",
-          },
-        ],
         diagram: {
           nodes: [
             {
@@ -940,8 +934,13 @@ const questions = [
         id: "deploy",
         label: "Deploy the management plane",
         description:
-          "Camunda Hub and Management Identity, once for several Orchestration Clusters, each with its own database. Sign-in then uses OIDC.",
+          "Camunda Hub and Management Identity, once for several Orchestration Clusters, each with its own database.",
         requires: [
+          {
+            needs: { auth: ["oidc"] },
+            reason:
+              "Requires OIDC sign-in: Camunda Hub and Management Identity need an OIDC provider",
+          },
           {
             needs: { compute: ["eks", "ecs"] },
             reason: "Camunda Hub isn't supported on Amazon EC2",

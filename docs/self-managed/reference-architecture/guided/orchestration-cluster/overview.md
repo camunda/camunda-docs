@@ -11,10 +11,10 @@ import { ChoiceSummary, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src
 
 The Orchestration Cluster step runs the Orchestration Cluster and Connectors on Amazon ECS. It creates no network, storage, load balancer, or identity provider: they arrive as variables from the steps before it. Configure the cluster in these pages:
 
-| Page                                        | What you decide                                                                                 |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [Zones and brokers](./zones-and-brokers.md) | How many brokers, which zones, which replication factor, how to grow                            |
-| [Identity](../identity.md)                  | Built-in users or an OIDC provider. You decide it after the management plane, which needs OIDC. |
+| Page                                        | What you decide                                                                             |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [Zones and brokers](./zones-and-brokers.md) | How many brokers, which zones, which replication factor, how to grow                        |
+| [Identity](../identity.md)                  | Built-in users or an OIDC provider. You decide it before the cluster, in the identity step. |
 
 <GuidedProgress />
 

@@ -154,7 +154,7 @@ describe("all options diagram", () => {
   it("keeps the steps in the order of the guide", () => {
     expect(all[0]).toBe("flowchart TB");
     expect(all).toContain(
-      "step_cloud_provider ~~~ step_network ~~~ step_compute ~~~ step_secondary_storage ~~~ step_object_storage ~~~ step_exposure ~~~ step_orchestration_cluster ~~~ step_management_plane ~~~ step_identity"
+      "step_cloud_provider ~~~ step_network ~~~ step_compute ~~~ step_secondary_storage ~~~ step_object_storage ~~~ step_exposure ~~~ step_identity ~~~ step_orchestration_cluster ~~~ step_management_plane"
     );
   });
 

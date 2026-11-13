@@ -1899,6 +1899,7 @@ module.exports = {
             "self-managed/reference-architecture/guided/secondary-storage",
             "self-managed/reference-architecture/guided/object-storage",
             "self-managed/reference-architecture/guided/exposure",
+            "self-managed/reference-architecture/guided/identity",
             {
               type: "category",
               label: "Orchestration Cluster",
@@ -1923,7 +1924,6 @@ module.exports = {
                 "self-managed/reference-architecture/guided/management-plane/camunda-hub",
               ],
             },
-            "self-managed/reference-architecture/guided/identity",
             "self-managed/reference-architecture/guided/your-architecture",
             {
               type: "category",

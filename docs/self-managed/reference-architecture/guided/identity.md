@@ -20,7 +20,7 @@ The identity stage decides how users and clients sign in to an Orchestration Clu
 | `basic` | A standalone cluster, or an evaluation. Nothing else is deployed.                                                       | Nothing. Passwords are generated and stored in Secrets Manager.                |
 | `oidc`  | You use your own provider, or the [identity provider of the management plane](./management-plane/identity-provider.md). | The provider's issuer, token endpoint, audience, and one client per component. |
 
-Camunda Hub and Management Identity need an OIDC provider, so a cluster that Camunda Hub manages uses `oidc`. That's why you decide sign-in after the [management plane](./management-plane/overview.md): if you deploy it, `oidc` applies. See [Camunda Hub](./management-plane/camunda-hub.md).
+Camunda Hub and Management Identity need an OIDC provider, so a cluster that Camunda Hub manages uses `oidc`. If you plan to deploy the [management plane](./management-plane/overview.md), choose `oidc`: with `basic`, the management plane isn't available. See [Camunda Hub](./management-plane/camunda-hub.md).
 
 <ChoicePanel question="auth" />
 
@@ -108,8 +108,7 @@ Nobody would receive the administrator role. Set `admin_claim_value` to the valu
 
 ## Next steps
 
-- [Deploy the identity provider](./management-plane/identity-provider.md)
 - [Orchestration Cluster](./orchestration-cluster/overview.md)
-- [Your architecture](./your-architecture.md)
+- [Deploy the identity provider](./management-plane/identity-provider.md)
 
 <GuidedNext />

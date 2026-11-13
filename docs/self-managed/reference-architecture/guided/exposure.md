@@ -130,6 +130,7 @@ The DNS record doesn't point at the load balancer, or you opened the load balanc
 
 ## Next steps
 
+- [Identity](./identity.md)
 - [Orchestration Cluster](./orchestration-cluster/overview.md)
 - [Grow to two regions](./grow/single-to-dual-region.md)
 
