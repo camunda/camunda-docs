@@ -10,6 +10,8 @@ View details of all activity within an organization, such as cluster creation, d
 
 This feature is only available in SaaS.
 
+Activity entries have no fixed retention period. Camunda decides when to delete older entries.
+
 ## View activity
 
 To view organization activity:
