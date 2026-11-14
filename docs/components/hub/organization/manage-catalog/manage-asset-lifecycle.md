@@ -28,7 +28,7 @@ Diagrams that already reference a template continue to work with [unpublished as
 
 ## Unpublish an asset
 
-When your CI/CD pipeline submits assets, the submission represents the _full desired state_ of the catalog. Any asset that already exists in Camunda Hub but is not included in the submission is automatically unpublished. Therefore, to unpublish an asset, remove its directory from the asset repository, and run the sync pipeline again.
+When your CI/CD pipeline submits assets, the submission represents the _full desired state_ of the catalog for its source. Any asset of the same source that already exists in Camunda Hub but is not included in the submission is automatically unpublished. Assets that were ingested with a different [source](./sync-multiple-repositories.md) are not affected. Therefore, to unpublish an asset, remove its directory from the asset repository, and run the sync pipeline again.
 
 Unpublishing an asset also _deprecates_ its element template. Deprecated templates continue to work in existing diagrams, but are no longer offered when applying templates or creating elements.
 
@@ -56,6 +56,8 @@ To republish an unpublished asset:
 
 If you don't increment the element template's version, you'll receive a `400` response.
 
+When another repository re-adds the asset under a different [source](./sync-multiple-repositories.md) with unchanged content, the catalog adopts the asset and republishes it without a version increment.
+
 ## Delete an asset
 
 To permanently remove an asset from the catalog, use the Camunda Hub API delete endpoint:
@@ -81,5 +83,5 @@ Deletion is irreversible. Use it to correct mistakes or remove assets that shoul
 
 - [Get started with the catalog](/components/hub/organization/manage-catalog/getting-started.md) — set up the repository and CI/CD pipeline.
 - [Track catalog asset usage](/components/hub/organization/manage-catalog/track-asset-usage.md) — find outdated assets and the projects that still use them.
-- [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — consolidate templates before syncing.
+- [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — publish assets from several repositories into the same catalog.
 - [Use catalog assets in Hub](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) — learn how delivery teams apply published assets.
