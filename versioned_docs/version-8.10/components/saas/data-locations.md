@@ -4,7 +4,9 @@ title: "Data locations"
 description: "Data location information for Camunda 8 Saas, such as where your Camunda 8 SaaS data is located and how data is handled."
 ---
 
-Learn more about where your Camunda 8 SaaS data is located and how data is handled.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About Camunda 8 SaaS data locations
 

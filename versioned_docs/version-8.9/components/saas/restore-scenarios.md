@@ -4,6 +4,10 @@ title: Restore scenarios
 description: "Use practical restore playbooks for common SaaS recovery situations."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
 Use these scenarios to standardize how your team runs restore operations in SaaS.

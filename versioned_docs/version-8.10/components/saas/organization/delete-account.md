@@ -2,7 +2,12 @@
 id: delete-account
 title: Delete your Camunda account
 keywords: [account, delete, cancel]
+description: "Delete your Camunda account and, if you are the only member, the organization and its cluster."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 To delete your Camunda account, take the following steps:
 

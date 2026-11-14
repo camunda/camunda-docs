@@ -4,7 +4,9 @@ title: "Encryption at rest using external encryption keys"
 description: "Learn how to configure encryption at rest for a Camunda 8 SaaS Orchestration cluster using external AWS KMS encryption keys."
 ---
 
-Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration cluster using AWS KMS.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Prerequisites
 

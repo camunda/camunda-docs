@@ -1,10 +1,18 @@
 ---
 id: data-retention
 title: "Data retention"
-description: "In Camunda 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly over time."
+description: "Learn about Camunda 8 SaaS data retention strategies."
 ---
 
-In Camunda 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly overtime. These settings are a balance between performance and usability.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+In Camunda 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly over time.
+
+The retention settings are a balance between performance and usability.
 
 ## Default retention time of each application
 

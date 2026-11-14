@@ -4,7 +4,9 @@ title: Configure monitoring systems to scrape metrics
 description: Learn how to configure monitoring systems to scrape metrics from the Cluster Metrics endpoint in Camunda 8 SaaS.
 ---
 
-Configure your monitoring systems to scrape metrics from a Camunda 8 SaaS cluster using the Cluster Metrics endpoint.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Before you begin
 

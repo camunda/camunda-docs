@@ -5,6 +5,10 @@ sidebar_label: Hostnames and IP addresses for Camunda connections
 description: "Details on the network configuration for Camunda 8 SaaS clusters."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 Camunda 8 SaaS hostnames and IP addresses for inbound and outbound connections.
