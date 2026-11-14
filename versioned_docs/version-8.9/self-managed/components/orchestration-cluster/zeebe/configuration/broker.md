@@ -890,6 +890,14 @@ Be aware that all configurations which are part of the experimental section are 
 | groupNameCacheCapacity       | Maximum number of group names held in the in-memory name-to-ID cache used during candidate group resolution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_GROUPNAMECACHECAPACITY`.                                                                                                  | 1000          |
 | candidateGroupNameResolution | If true, the Zeebe engine attempts to resolve user task candidate group names to group IDs at task creation. Set to false to disable this resolution and pass candidate group values through unchanged. This setting can also be overridden using the environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION`. | true          |
 
+#### zeebe.broker.experimental.engine.messages
+
+Use this setting to tune pending subscription recovery on large partitions with slow recovery. Most users don't need to change it.
+
+| Field                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Example value |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| pendingSubscriptionRecoveryBatchLimit | Sets the number of pending subscriptions that the broker scans in one chunk when it rebuilds pending subscriptions after a partition becomes leader. Recovery still covers all pending subscriptions. This setting changes only how the scan is split into chunks, not the recovery result. Values below `1` prevent the broker from starting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_MESSAGES_PENDINGSUBSCRIPTIONRECOVERYBATCHLIMIT`. | 10000         |
+
 ### Multitenancy configuration
 
 For embedded gateway configuration, use the current gateway configuration properties documented in the gateway configuration guide. This page documents broker configuration and should use the unified `camunda.*` properties where available.
