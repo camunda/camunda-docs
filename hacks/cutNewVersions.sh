@@ -2,9 +2,9 @@
 set -e
 
 # Before running this script make sure these versions are correct!
-NEW_DOCS_VERSION="8.10"
-PREVIOUS_DOCS_VERSION="8.9"
-NEW_NEXT_DOCS_VERSION="8.11"
+NEW_DOCS_VERSION="8.11"
+PREVIOUS_DOCS_VERSION="8.10"
+NEW_NEXT_DOCS_VERSION="8.12"
 
 echo "1/4 Creating version $NEW_DOCS_VERSION of main docs..."
 npm run docusaurus docs:version $NEW_DOCS_VERSION
@@ -24,21 +24,35 @@ git add versions.json
 git commit -m "release: new version number for versions.json"
 
 echo "2/4 Correcting versions.js..."
-sed -i '' "s/${PREVIOUS_DOCS_VERSION}/${NEW_DOCS_VERSION}/" ./src/versions.js
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' "s/${PREVIOUS_DOCS_VERSION}/${NEW_DOCS_VERSION}/" ./src/versions.js
+else
+  sed -i "s/${PREVIOUS_DOCS_VERSION}/${NEW_DOCS_VERSION}/" ./src/versions.js
+fi
 
 git add ./src/versions.js
 git commit -m "release: new version number for src/versions.js"
 
 echo "3/4 Correcting current-version redirects..."
-sed -i '' "s/docs\/${NEW_DOCS_VERSION}\/(\.\*)/docs\/${NEW_NEXT_DOCS_VERSION}\/(\.\*)/" ./static/.htaccess
-sed -i '' "s/docs\/${PREVIOUS_DOCS_VERSION}\/(\.\*)/docs\/${NEW_DOCS_VERSION}\/(\.\*)/" ./static/.htaccess
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' "s/docs\/${NEW_DOCS_VERSION}\/(\.\*)/docs\/${NEW_NEXT_DOCS_VERSION}\/(\.\*)/" ./static/.htaccess
+  sed -i '' "s/docs\/${PREVIOUS_DOCS_VERSION}\/(\.\*)/docs\/${NEW_DOCS_VERSION}\/(\.\*)/" ./static/.htaccess
+else
+  sed -i "s/docs\/${NEW_DOCS_VERSION}\/(\.\*)/docs\/${NEW_NEXT_DOCS_VERSION}\/(\.\*)/" ./static/.htaccess
+  sed -i "s/docs\/${PREVIOUS_DOCS_VERSION}\/(\.\*)/docs\/${NEW_DOCS_VERSION}\/(\.\*)/" ./static/.htaccess
+fi
 
 git add ./static/.htaccess
 git commit -m "release: new version numbers for content redirects"
 
 echo "4/4 Correcting check-versions workflow configuration..."
-sed -i '' "s/${NEW_DOCS_VERSION}/${NEW_NEXT_DOCS_VERSION}/" ./.github/workflows/check-versions/version-config.json
-sed -i '' "s/${PREVIOUS_DOCS_VERSION}/${NEW_DOCS_VERSION}/" ./.github/workflows/check-versions/version-config.json
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' "s/${NEW_DOCS_VERSION}/${NEW_NEXT_DOCS_VERSION}/" ./.github/workflows/check-versions/version-config.json
+  sed -i '' "s/${PREVIOUS_DOCS_VERSION}/${NEW_DOCS_VERSION}/" ./.github/workflows/check-versions/version-config.json
+else
+  sed -i "s/${NEW_DOCS_VERSION}/${NEW_NEXT_DOCS_VERSION}/" ./.github/workflows/check-versions/version-config.json
+  sed -i "s/${PREVIOUS_DOCS_VERSION}/${NEW_DOCS_VERSION}/" ./.github/workflows/check-versions/version-config.json
+fi
 
 git add ./.github/workflows/check-versions/version-config.json
 git commit -m "release: new version numbers in check-versions workflow"
