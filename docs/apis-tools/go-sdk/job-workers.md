@@ -75,3 +75,90 @@ option as `camunda.WithJobLease(true)`. Leases are off by default (matching the
 engine) and need an engine that supports them: rather than degrade to unfenced
 commands, a worker that asked for a lease and is handed a job without a token
 rejects the activation with `camunda.ErrLeaseNotHonored`.
+
+## Job Corrections (User Task Listeners)
+
+When a job worker handles a [user task listener](../../components/concepts/user-task-listeners.md),
+it can correct task properties (assignee, due date, candidate groups, etc.) by
+completing the job with a job result. Write the handler as a
+`camunda.JobCompletionHandler`, which returns a `camunda.JobCompletion`, and adapt
+it with `camunda.CompletionHandler`:
+
+```go
+// A CompletionHandler returns a JobCompletion, which can carry a job result
+// alongside the variables. Adapt it for NewJobWorker or NewStreamJobWorker.
+worker := client.NewJobWorker("io.camunda:userTaskListener",
+	camunda.CompletionHandler(func(ctx context.Context, job *camunda.Job) (camunda.JobCompletion, error) {
+		corrections := camunda.NewJobResultCorrections()
+		corrections.SetAssignee("corrected-user")
+		corrections.SetPriority(80)
+		corrections.ClearFollowUpDate() // sent as "": removes the follow-up date
+		return camunda.JobCompletion{Result: camunda.CorrectUserTask(*corrections)}, nil
+	}),
+	camunda.WithMaxConcurrentJobs(5),
+)
+```
+
+To deny a task completion (reject the work):
+
+```go
+return camunda.JobCompletion{
+	Result: camunda.DenyUserTask("Insufficient documentation"),
+}, nil
+```
+
+| Correctable attribute | Setter on `JobResultCorrections` | Clear value                          |
+| --------------------- | -------------------------------- | ------------------------------------ |
+| `assignee`            | `SetAssignee(string)`            | Empty string `""`                    |
+| `dueDate`             | `SetDueDate(time.Time)`          | `ClearDueDate()` (sent as `""`)      |
+| `followUpDate`        | `SetFollowUpDate(time.Time)`     | `ClearFollowUpDate()` (sent as `""`) |
+| `candidateUsers`      | `SetCandidateUsers([]string)`    | Empty slice `[]string{}`             |
+| `candidateGroups`     | `SetCandidateGroups([]string)`   | Empty slice `[]string{}`             |
+| `priority`            | `SetPriority(int32)` (0–100)     | —                                    |
+
+Leaving an attribute unset (or setting it to `nil` with its `Set…Nil` method)
+preserves the persisted value. For the two dates, the last of `Set…`, `Set…Nil`,
+`Unset…` and `Clear…` wins. The clear lives on the `JobResultCorrections` model, so
+it also applies when you build a `JobCompletionRequest` for `client.CompleteJob`
+yourself.
+
+## Ad-hoc sub-process results
+
+The job of an [ad-hoc sub-process](../../components/modeler/bpmn/ad-hoc-subprocesses.md)
+completes with a result that names the inner elements to activate next and
+whether the sub-process is done:
+
+```go
+// The job of an ad-hoc sub-process decides which inner elements to activate
+// next, and whether the sub-process is done.
+worker := client.NewJobWorker("plan-next-steps",
+	camunda.CompletionHandler(func(ctx context.Context, job *camunda.Job) (camunda.JobCompletion, error) {
+		result := camunda.NewJobResultAdHocSubProcess()
+		result.SetActivateElements([]camunda.JobResultActivateElement{
+			camunda.ActivateAdHocElement("review_document", map[string]any{"reviewer": "alice"}),
+			camunda.ActivateAdHocElement("notify_customer", nil),
+		})
+		result.SetIsCompletionConditionFulfilled(false)
+		result.SetIsCancelRemainingInstances(false)
+		return camunda.JobCompletion{
+			Variables: map[string]any{"planned": true},
+			Result:    camunda.AdHocSubProcessJobResult(*result),
+		}, nil
+	}),
+)
+```
+
+The worker sets the result's `type` discriminator (`userTask` or
+`adHocSubProcess`) from the variant you populate, so a result built directly from
+the generated `JobResult` union is sent correctly too. A result with no variant —
+or both — fails the job rather than completing it without the result. Job results
+work with both workers: the gRPC streaming worker sends them on `CompleteJob`, and
+the REST worker on `POST /jobs/{jobKey}/completion`.
+
+The FALCON command stream (used by `NewJobWorker` when a nanobpmn gateway
+advertises it) cannot carry a job result: its completion frame has no result
+field. On FALCON, a handler that returns a result fails the job with a message
+saying so, rather than completing it without the result — which would, for
+example, approve a task the listener denied. To use job results against such a
+gateway, set `CAMUNDA_FORCE_REST=true` (or `camunda.WithForceREST(true)`) so the
+worker polls over REST.
