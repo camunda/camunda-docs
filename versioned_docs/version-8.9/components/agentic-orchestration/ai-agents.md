@@ -58,7 +58,7 @@ Think of the ad-hoc sub-process as a governed toolbox:
 - The LLM chooses a path from the allowed options, while Camunda enforces process boundaries and execution reliability.
 
 :::tip
-Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md), the [example AI Agent Task connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md), and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
 
 #### Example: an export compliance agent

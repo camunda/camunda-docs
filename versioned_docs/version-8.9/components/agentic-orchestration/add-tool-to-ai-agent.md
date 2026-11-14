@@ -16,11 +16,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-## About
-
-A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. When a tool is a flow of several elements, only the root node is exposed to the LLM as a tool.
-
-You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
+Learn how to add [tools](/reference/glossary.md#ai-agent-tool) to an AI agent. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for conceptual details.
 
 :::note See a full example
 For this in the context of a running AI agent, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).

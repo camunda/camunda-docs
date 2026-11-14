@@ -14,7 +14,7 @@ This worked example demonstrates how to use the [AI Agent Sub-process connector]
 As the **AI Agent Sub-process** implementation implicitly creates a tools feedback loop, you only need to add an ad-hoc sub-process with an applied AI Agent connector template to the process.
 
 :::info
-For more information on how to model the tools available to the AI agent, see [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
+To model the tools available to the AI agent, add activities inside the ad-hoc sub-process. See [add a tool to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md) and [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
 :::
 
 <img src={AgentProcessImg} alt="AI Agent Sub-process" class="img-700"/>
@@ -31,7 +31,7 @@ For example, your **User Prompt** field could contain the following FEEL express
 =if (is defined(followUpInput)) then followUpInput else initialUserInput
 ```
 
-With the **AI Agent Sub-process** implementation, the user feedback needs to be modeled to loop back to the AI Agent ad-hoc sub-process:
+With the **AI Agent Sub-process** implementation, the user feedback needs to be modeled to loop back to the AI Agent ad-hoc sub-process.
 
 ![AI Agent Sub-process with user feedback loop](../img/ai-agent-subprocess-user-feedback-loop.png)
 
