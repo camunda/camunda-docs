@@ -690,6 +690,8 @@ Camunda provides a standalone app which must be run on each node where a Zeebe b
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
 
+Make sure `ZEEBE_BROKER_CLUSTER_NODEID` is set on each node to the ID of the broker that will run there.
+
 The amount of partitions backed up are also visible in the backup store of Zeebe, see [how to figure out available backups](#available-backups-of-zeebe-partitions).
 If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
 :::
@@ -750,6 +752,10 @@ If you're not using the Camunda Helm chart, you can use a similar approach nativ
 
 :::
 
+:::warning Set the node ID if you don't restore through the Helm chart
+The recommended way to restore on Kubernetes is to change the Helm values of your existing deployment. The Helm chart's startup script then sets the node ID for each pod from its StatefulSet ordinal. If you use `orchestration.command`, a separate Kubernetes Job, or a custom pod instead, make sure that `ZEEBE_BROKER_CLUSTER_NODEID` is properly set on each pod.
+:::
+
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
 After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
@@ -765,7 +771,7 @@ It will not try to import or overwrite the data again but should be noted that y
    </TabItem>
    <TabItem value="manual" label="Manual" default>
 
-To restore a Zeebe Cluster, run the following in each node where the broker will be running:
+To restore a Zeebe Cluster run the following in each node where the broker will be running, while making sure the broker's node ID is set via `ZEEBE_BROKER_CLUSTER_NODEID`:
 
 ```bash
 mkdir -p camunda
