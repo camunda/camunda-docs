@@ -11,6 +11,7 @@ module.exports = [
     items: [
       "apis-tools/administration-api/authentication",
       "apis-tools/administration-api/administration-api-tutorial",
+      "apis-tools/administration-api/administration-api-create-cluster",
     ],
   },
 ];
