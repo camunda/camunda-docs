@@ -1423,6 +1423,20 @@
       "label": "Check cluster status"
     }
   ],
+  "getClock": [
+    {
+      "file": "Admin.cs",
+      "region": "GetClock",
+      "label": "Read the cluster clock"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "Admin.cs",
+      "region": "AddClock",
+      "label": "Add time to the cluster clock"
+    }
+  ],
   "pinClock": [
     {
       "file": "Admin.cs",
@@ -1526,6 +1540,13 @@
       "file": "UserTask.cs",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "lookupUserTask": [
+    {
+      "file": "UserTask.cs",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
     }
   ],
   "resolveSecrets": [
