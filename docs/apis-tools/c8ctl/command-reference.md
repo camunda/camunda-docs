@@ -20,6 +20,7 @@ These flags are accepted by every command.
 | `--profile` | string |  | Use a specific profile |
 | `--dry-run` | boolean |  | Preview the API request without executing |
 | `--verbose` | boolean |  | Show verbose output |
+| `--quiet` / `-q` | boolean |  | Hide informational and success messages |
 | `--fields` | string |  | Comma-separated list of fields to display |
 | `--json` | boolean |  | Force JSON output for this invocation (does not persist; overrides session state and C8CTL_OUTPUT_MODE) |
 | `--yes` / `-y` | boolean |  | Skip confirmation prompts |
