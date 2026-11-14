@@ -18,7 +18,7 @@ Cursor-based backward pagination
 ### before?
 
 ```ts
-optional before?: StartCursor;
+before?: StartCursor;
 ```
 
 Use the `startCursor` value from the previous response to fetch the previous page of results.
@@ -28,7 +28,7 @@ Use the `startCursor` value from the previous response to fetch the previous pag
 ### limit?
 
 ```ts
-optional limit?: number;
+limit?: number;
 ```
 
 The maximum number of items to return in one request.

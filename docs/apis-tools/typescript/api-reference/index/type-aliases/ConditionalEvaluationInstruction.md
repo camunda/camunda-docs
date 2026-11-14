@@ -16,7 +16,7 @@ type ConditionalEvaluationInstruction = object;
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKey;
+processDefinitionKey?: ProcessDefinitionKey;
 ```
 
 Used to evaluate root-level conditional start events of the process definition with the given key.
@@ -26,7 +26,7 @@ Used to evaluate root-level conditional start events of the process definition w
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 Used to evaluate root-level conditional start events for a tenant with the given ID.

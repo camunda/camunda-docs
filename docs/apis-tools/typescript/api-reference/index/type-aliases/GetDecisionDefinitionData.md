@@ -16,7 +16,7 @@ type GetDecisionDefinitionData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the decision definition, which acts as a unique identifier f
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

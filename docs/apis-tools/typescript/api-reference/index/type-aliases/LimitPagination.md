@@ -18,7 +18,7 @@ Limit-based pagination
 ### limit?
 
 ```ts
-optional limit?: number;
+limit?: number;
 ```
 
 The maximum number of items to return in one request.

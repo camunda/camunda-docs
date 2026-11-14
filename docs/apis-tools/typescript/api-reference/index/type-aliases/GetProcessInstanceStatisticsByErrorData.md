@@ -16,7 +16,7 @@ type GetProcessInstanceStatisticsByErrorData = object;
 ### body?
 
 ```ts
-optional body?: IncidentProcessInstanceStatisticsByErrorQuery;
+body?: IncidentProcessInstanceStatisticsByErrorQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: IncidentProcessInstanceStatisticsByErrorQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

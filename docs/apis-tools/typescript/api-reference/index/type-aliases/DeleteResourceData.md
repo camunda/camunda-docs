@@ -16,7 +16,7 @@ type DeleteResourceData = object;
 ### body?
 
 ```ts
-optional body?: DeleteResourceRequest;
+body?: DeleteResourceRequest;
 ```
 
 ---
@@ -42,7 +42,7 @@ definition or the key of a form definition
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -40,7 +40,7 @@ The username of the user to update.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

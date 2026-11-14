@@ -16,7 +16,7 @@ type AdHocSubProcessActivateActivitiesInstruction = object;
 ### cancelRemainingInstances?
 
 ```ts
-optional cancelRemainingInstances?: boolean;
+cancelRemainingInstances?: boolean;
 ```
 
 Whether to cancel remaining instances of the ad-hoc sub-process.

@@ -16,7 +16,7 @@ type UpdateUserTaskData = object;
 ### body?
 
 ```ts
-optional body?: UserTaskUpdateRequest;
+body?: UserTaskUpdateRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the user task to update.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

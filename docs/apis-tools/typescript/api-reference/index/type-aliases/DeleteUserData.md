@@ -16,7 +16,7 @@ type DeleteUserData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The username of the user to delete.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

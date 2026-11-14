@@ -18,7 +18,7 @@ The settings to run a given rebalance with. Every setting is optional; an absent
 ### leaderWaitTimeout?
 
 ```ts
-optional leaderWaitTimeout?: string;
+leaderWaitTimeout?: string;
 ```
 
 How long the coordinator waits for a partition without a leader to acquire one before reporting `NO_LEADER` and moving on (as a positive ISO-8601 duration).
@@ -28,7 +28,7 @@ How long the coordinator waits for a partition without a leader to acquire one b
 ### maxTransferAttempts?
 
 ```ts
-optional maxTransferAttempts?: number;
+maxTransferAttempts?: number;
 ```
 
 How many times a current leader may prompt the desired leader to take over leadership before giving up.
@@ -38,7 +38,7 @@ How many times a current leader may prompt the desired leader to take over leade
 ### replicationLagThreshold?
 
 ```ts
-optional replicationLagThreshold?: number;
+replicationLagThreshold?: number;
 ```
 
 The highest replication lag (in bytes) that a desired leader may have for its transfer to be accepted.
@@ -48,7 +48,7 @@ The highest replication lag (in bytes) that a desired leader may have for its tr
 ### replicationTimeout?
 
 ```ts
-optional replicationTimeout?: string;
+replicationTimeout?: string;
 ```
 
 How long a partition may stay frozen waiting for its desired leader to catch up (as a positive ISO-8601 duration).

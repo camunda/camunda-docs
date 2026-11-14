@@ -40,7 +40,7 @@ The key of the agent instance to update.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

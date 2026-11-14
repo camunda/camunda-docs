@@ -18,7 +18,7 @@ Filters for the element instance inspection.
 ### elementId?
 
 ```ts
-optional elementId?: ElementIdFilterProperty;
+elementId?: ElementIdFilterProperty;
 ```
 
 Filter by element ID.
@@ -28,7 +28,7 @@ Filter by element ID.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 Filter by element instance key.
@@ -38,7 +38,7 @@ Filter by element instance key.
 ### elementType?
 
 ```ts
-optional elementType?: WaitStateElementTypeFilterProperty;
+elementType?: WaitStateElementTypeFilterProperty;
 ```
 
 Filter by element type.
@@ -48,7 +48,7 @@ Filter by element type.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 Filter by process instance key.
@@ -58,7 +58,7 @@ Filter by process instance key.
 ### rootProcessInstanceKey?
 
 ```ts
-optional rootProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
+rootProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 Filter by root process instance key.
@@ -68,7 +68,7 @@ Filter by root process instance key.
 ### waitStateType?
 
 ```ts
-optional waitStateType?: WaitStateTypeFilterProperty;
+waitStateType?: WaitStateTypeFilterProperty;
 ```
 
 Filter by wait state type.

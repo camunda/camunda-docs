@@ -28,7 +28,7 @@ Start of the time window to filter metrics. ISO 8601 date-time format.
 ### jobType?
 
 ```ts
-optional jobType?: StringFilterProperty;
+jobType?: StringFilterProperty;
 ```
 
 Optional job type filter with advanced search capabilities.

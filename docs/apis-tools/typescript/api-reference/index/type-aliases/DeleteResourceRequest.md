@@ -28,7 +28,7 @@ type DeleteResourceRequest = {
 #### deleteHistory?
 
 ```ts
-optional deleteHistory?: boolean;
+deleteHistory?: boolean;
 ```
 
 Indicates if the historic data associated with the resource should also be deleted
@@ -44,7 +44,7 @@ returned.
 #### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```
 
 ---

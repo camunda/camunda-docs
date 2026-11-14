@@ -16,7 +16,7 @@ type CancelProcessInstanceData = object;
 ### body?
 
 ```ts
-optional body?: CancelProcessInstanceRequest;
+body?: CancelProcessInstanceRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the process instance to cancel.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

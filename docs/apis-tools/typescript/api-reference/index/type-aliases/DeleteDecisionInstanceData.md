@@ -16,7 +16,7 @@ type DeleteDecisionInstanceData = object;
 ### body?
 
 ```ts
-optional body?: DeleteDecisionInstanceRequest;
+body?: DeleteDecisionInstanceRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the decision evaluation to delete.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

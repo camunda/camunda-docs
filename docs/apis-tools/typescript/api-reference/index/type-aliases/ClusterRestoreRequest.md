@@ -18,7 +18,7 @@ Describes a restore request issued by a cluster admin. The backup selection at t
 ### overrides?
 
 ```ts
-optional overrides?:
+overrides?:
   | {
 [key: string]: RestoreRequest;
 }

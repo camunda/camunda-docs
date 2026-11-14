@@ -16,7 +16,7 @@ type DeleteDocumentData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,13 +40,13 @@ The ID of the document to delete.
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### storeId?
 
 ```ts
-optional storeId?: string;
+storeId?: string;
 ```
 
 The ID of the document store to delete the document from.

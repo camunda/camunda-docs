@@ -18,7 +18,7 @@ Element instance filter fields.
 ### elementId?
 
 ```ts
-optional elementId?: ElementIdFilterProperty;
+elementId?: ElementIdFilterProperty;
 ```
 
 The element ID for this element instance.
@@ -28,7 +28,7 @@ The element ID for this element instance.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKey;
+elementInstanceKey?: ElementInstanceKey;
 ```
 
 The assigned key, which acts as a unique identifier for this element instance.
@@ -38,7 +38,7 @@ The assigned key, which acts as a unique identifier for this element instance.
 ### elementInstanceScopeKey?
 
 ```ts
-optional elementInstanceScopeKey?:
+elementInstanceScopeKey?:
   | ElementInstanceKey
   | ProcessInstanceKey;
 ```
@@ -50,7 +50,7 @@ The scope key of this element instance. If provided with a process instance key 
 ### elementName?
 
 ```ts
-optional elementName?: StringFilterProperty;
+elementName?: StringFilterProperty;
 ```
 
 The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
@@ -60,7 +60,7 @@ The element name. This only works for data created with 8.8 and onwards. Instanc
 ### endDate?
 
 ```ts
-optional endDate?: DateTimeFilterProperty;
+endDate?: DateTimeFilterProperty;
 ```
 
 The end date of this element instance.
@@ -70,7 +70,7 @@ The end date of this element instance.
 ### hasIncident?
 
 ```ts
-optional hasIncident?: boolean;
+hasIncident?: boolean;
 ```
 
 Shows whether this element instance has an incident related to.
@@ -80,7 +80,7 @@ Shows whether this element instance has an incident related to.
 ### incidentKey?
 
 ```ts
-optional incidentKey?: IncidentKey;
+incidentKey?: IncidentKey;
 ```
 
 The key of incident if field incident is true.
@@ -90,7 +90,7 @@ The key of incident if field incident is true.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: ProcessDefinitionId;
+processDefinitionId?: ProcessDefinitionId;
 ```
 
 The process definition ID associated to this element instance.
@@ -100,7 +100,7 @@ The process definition ID associated to this element instance.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKey;
+processDefinitionKey?: ProcessDefinitionKey;
 ```
 
 The process definition key associated to this element instance.
@@ -110,7 +110,7 @@ The process definition key associated to this element instance.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKey;
+processInstanceKey?: ProcessInstanceKey;
 ```
 
 The process instance key associated to this element instance.
@@ -120,7 +120,7 @@ The process instance key associated to this element instance.
 ### startDate?
 
 ```ts
-optional startDate?: DateTimeFilterProperty;
+startDate?: DateTimeFilterProperty;
 ```
 
 The start date of this element instance.
@@ -130,7 +130,7 @@ The start date of this element instance.
 ### state?
 
 ```ts
-optional state?: ElementInstanceStateFilterProperty;
+state?: ElementInstanceStateFilterProperty;
 ```
 
 State of element instance as defined set of values.
@@ -140,7 +140,7 @@ State of element instance as defined set of values.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 ---
@@ -148,7 +148,7 @@ optional tenantId?: TenantId;
 ### type?
 
 ```ts
-optional type?:
+type?:
   | "UNSPECIFIED"
   | "PROCESS"
   | "SUB_PROCESS"

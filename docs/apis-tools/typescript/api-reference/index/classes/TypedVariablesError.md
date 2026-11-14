@@ -44,6 +44,4 @@ new TypedVariablesError(message, options?): TypedVariablesError;
 
 #### Overrides
 
-```ts
-Error.constructor;
-```
+`Error.constructor`

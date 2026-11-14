@@ -21,7 +21,7 @@ body instances will activate new element instances at the target id.
 ### ancestorScopeInstruction?
 
 ```ts
-optional ancestorScopeInstruction?: AncestorScopeInstruction;
+ancestorScopeInstruction?: AncestorScopeInstruction;
 ```
 
 ---
@@ -47,7 +47,7 @@ The target element id.
 ### variableInstructions?
 
 ```ts
-optional variableInstructions?: ModifyProcessInstanceVariableInstruction[];
+variableInstructions?: ModifyProcessInstanceVariableInstruction[];
 ```
 
 Instructions describing which variables to create or update.

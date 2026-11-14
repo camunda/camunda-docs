@@ -16,7 +16,7 @@ type ProcessDefinitionMessageSubscriptionStatisticsQuery = object;
 ### filter?
 
 ```ts
-optional filter?: MessageSubscriptionFilter;
+filter?: MessageSubscriptionFilter;
 ```
 
 The message subscription filters.
@@ -26,7 +26,7 @@ The message subscription filters.
 ### page?
 
 ```ts
-optional page?: CursorForwardPagination;
+page?: CursorForwardPagination;
 ```
 
 Search cursor pagination.

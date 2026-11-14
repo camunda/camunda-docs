@@ -19,4 +19,4 @@ type OwnAuthorizationSearchResult = AuthorizationSearchResult & object;
 authorizationsEnabled: boolean;
 ```
 
-Indicates whether authorization checks are enabled for the cluster.
+Indicates whether authorization checks are enabled for the physical tenant of the request.

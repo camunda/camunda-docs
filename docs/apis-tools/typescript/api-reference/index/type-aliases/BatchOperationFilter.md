@@ -18,7 +18,7 @@ Batch operation filter request.
 ### actorId?
 
 ```ts
-optional actorId?: StringFilterProperty;
+actorId?: StringFilterProperty;
 ```
 
 The ID of the actor who performed the operation.
@@ -28,7 +28,7 @@ The ID of the actor who performed the operation.
 ### actorType?
 
 ```ts
-optional actorType?: AuditLogActorTypeEnum;
+actorType?: AuditLogActorTypeEnum;
 ```
 
 The type of the actor who performed the operation.
@@ -38,7 +38,7 @@ The type of the actor who performed the operation.
 ### batchOperationKey?
 
 ```ts
-optional batchOperationKey?: BasicStringFilterProperty;
+batchOperationKey?: BasicStringFilterProperty;
 ```
 
 The key (or operate legacy ID) of the batch operation.
@@ -48,7 +48,7 @@ The key (or operate legacy ID) of the batch operation.
 ### operationType?
 
 ```ts
-optional operationType?: BatchOperationTypeFilterProperty;
+operationType?: BatchOperationTypeFilterProperty;
 ```
 
 The type of the batch operation.
@@ -58,7 +58,7 @@ The type of the batch operation.
 ### state?
 
 ```ts
-optional state?: BatchOperationStateFilterProperty;
+state?: BatchOperationStateFilterProperty;
 ```
 
 The state of the batch operation.

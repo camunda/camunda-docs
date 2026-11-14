@@ -39,5 +39,5 @@ Instructions for moving tokens between elements.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

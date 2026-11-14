@@ -16,7 +16,7 @@ type SearchProcessInstanceIncidentsData = object;
 ### body?
 
 ```ts
-optional body?: IncidentSearchQuery;
+body?: IncidentSearchQuery;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the process instance, which acts as a unique identifier for 
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

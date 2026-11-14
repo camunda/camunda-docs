@@ -28,5 +28,5 @@ The process instance filter.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

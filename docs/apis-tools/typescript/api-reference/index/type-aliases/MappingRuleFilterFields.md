@@ -18,7 +18,7 @@ Mapping rule search filter fields.
 ### claimName?
 
 ```ts
-optional claimName?: string;
+claimName?: string;
 ```
 
 The claim name to match against a token.
@@ -28,7 +28,7 @@ The claim name to match against a token.
 ### claimValue?
 
 ```ts
-optional claimValue?: string;
+claimValue?: string;
 ```
 
 The value of the claim to match.
@@ -38,7 +38,7 @@ The value of the claim to match.
 ### mappingRuleId?
 
 ```ts
-optional mappingRuleId?: StringFilterProperty;
+mappingRuleId?: StringFilterProperty;
 ```
 
 The ID of the mapping rule.
@@ -48,7 +48,7 @@ The ID of the mapping rule.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The name of the mapping rule.
