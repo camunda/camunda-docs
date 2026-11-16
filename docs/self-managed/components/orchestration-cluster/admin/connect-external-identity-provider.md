@@ -624,14 +624,15 @@ of it cannot be used to obtain new access tokens after the user has signed out. 
 [RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009) revocation request sent from Camunda to
 the provider, separate from the browser redirect used for RP-initiated logout.
 
-Camunda also revokes the refresh token when a web session expires, for example after the
-[session idle timeout](../core-settings/configuration/properties.md), without a logout. This
+Camunda also revokes the refresh token when a web session expires without a logout, for example after the
+[session idle timeout](../core-settings/configuration/properties.md#camundasecuritysession). This
 requires persistent web sessions (`camunda.security.session.persistent.enabled: true`). Sessions
-kept only in memory are revoked at logout only. The revocation runs in the background after the
-expired session is deleted, so the user does not wait for the identity provider. If several
-physical tenants use the same OIDC client with different revocation settings, Camunda does not
-revoke the refresh tokens of their expired sessions, so a tenant that sets
-`revocation-enabled: false` is never revoked.
+kept only in memory are revoked at logout only. The revocation runs in the background, so neither
+the user nor the removal of the expired session waits for the identity provider.
+
+If several physical tenants use the same OIDC client with different revocation settings, Camunda
+does not revoke the refresh tokens of their expired sessions. For example, if one tenant sets
+`revocation-enabled: false`, expired sessions of the other tenants are not revoked either.
 
 Revocation is enabled by default and requires no configuration where the provider publishes a
 `revocation_endpoint` in its discovery document, as Keycloak, Okta, and Auth0 do. Where it does not,
@@ -694,21 +695,29 @@ Failed to revoke the refresh token for OIDC registration '<id>' at <endpoint> [.
 session is still terminated, but the refresh token may remain valid until it expires.
 ```
 
+Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
+client credentials Camunda uses are accepted there. To disable revocation for the provider instead,
+set `revocation-enabled: false`.
+
+#### Revocations dropped because the queue is full
+
 Camunda queues the revocations of expired sessions separately for each identity provider. If a
-provider's queue is full, for example while the provider is slow or unreachable, Camunda drops
-further revocations for that provider and logs this warning once:
+provider's queue is full, for example while the provider is slow or unreachable, or many sessions
+expire at once, Camunda drops further revocations for that provider. It logs this warning once for
+each backlog:
 
 ```
 Dropping refresh-token revocations of expired web sessions for token endpoint '<token-endpoint>':
 its revocation queue is full (1000 queued). [...]
 ```
 
-Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
-client credentials Camunda uses are accepted there. To disable revocation for the provider instead,
-set `revocation-enabled: false`.
+The expired sessions are still deleted, but their refresh tokens may remain valid until they
+expire. Check that the provider's revocation endpoint is reachable from the Camunda deployment.
+
+#### Expired sessions not revoked because tenants disagree
 
 If several physical tenants use the same OIDC client with different revocation settings, Camunda
-does not revoke on session expiry and logs this warning once for each provider:
+does not revoke on session expiry and logs this warning once for each OIDC registration:
 
 ```
 OIDC registration '<registration-id>' belongs to several webapp chains with different refresh-token
@@ -717,6 +726,8 @@ revocation settings, so the refresh tokens of its expired web sessions are not r
 
 To revoke on expiry, give these tenants the same `revocation-enabled` and
 `revocation-endpoint-uri` settings.
+
+#### Expired sessions not revoked because the provider cannot be resolved
 
 If Camunda cannot resolve an OIDC provider that can own an expired session, for example because
 its discovery endpoint is unreachable, it does not revoke on expiry until the provider resolves
