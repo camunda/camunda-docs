@@ -104,10 +104,13 @@ When using platform threads, use the configuration options provided by the [Camu
 
 ```
 camunda.client.worker.defaults.max-jobs-active=20
-camunda.client.execution-threads=20
 ```
 
 The `max-jobs-active` property defines the maximum number of jobs that are activated in parallel.
-The `execution-threads` property defines the size of the thread pool used to process jobs.
-If you set `max-jobs-active` higher than `execution-threads`, the connector runtime queues jobs until a thread becomes available for processing.
-If you set `execution-threads` higher than `max-jobs-active`, some threads remain idle while waiting for jobs to be activated.
+The connector runtime sizes its platform thread pool to match `max-jobs-active`, so every activated job gets a thread and you don't need to configure the pool separately.
+
+If you need more threads than `max-jobs-active`, set `camunda.client.execution-threads`. The pool uses the larger of the two values.
+
+:::note
+In connector runtime versions before 8.11, the thread pool is sized by `camunda.client.execution-threads` alone, which defaults to `1`. On those versions, set `execution-threads` to the same value as `max-jobs-active`, otherwise the runtime processes one job at a time.
+:::
