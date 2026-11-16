@@ -44,7 +44,7 @@ On Self-Managed, two Physical Tenants of the same cluster are separate environme
 
 1. Select an environment from the list. Each entry shows its status icon, stage, and version, plus a badge if it needs your attention.
 
-   <img src={RuntimeEnvironmentsImg} width="424px" alt="Open Runtime selector titled Connect to an environment, listing the Development, Production, and Testing environments with healthy status icons, stage tags, and versions, Testing marked Needs credentials, Work offline currently selected, and the Manage workspace environments link" />
+   <img src={RuntimeEnvironmentsImg} width="413px" alt="Open Runtime selector titled Connect to an environment, listing a connected environment with a healthy status icon, its stage tag, and version, then Work offline, and the Manage workspace environments link" />
 
 1. If the runtime offers more than one logical tenant, choose one. See [choose a logical tenant](#choose-a-logical-tenant).
 
