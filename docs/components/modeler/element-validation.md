@@ -1,16 +1,16 @@
 ---
-id: task-testing
-title: Validate
-description: Run a BPMN activity directly in the modeler to verify your implementation without executing the entire process.
+id: element-validation
+title: Element validation
+description: Execute a single BPMN element directly in the modeler to verify your implementation without executing the entire process.
 ---
 
-Validate a BPMN activity directly from the modeler to verify your implementation without running the entire process:
+Element validation executes a single BPMN element directly from the modeler, so you can verify your implementation without running the entire process:
 
 1. In a BPMN diagram, open the **Details** panel.
 2. On the **Validate** tab, optionally define process variables under **Input**, and click **Execute**.
 3. See the results on the **Validate** tab.
 
-Validating gives immediate feedback on your implementation, variable mappings, and configuration within the modeler.
+Element validation gives immediate feedback on your implementation, variable mappings, and configuration within the modeler.
 
 The selected element runs on the connected Camunda 8 engine, as it does during normal process execution.
 
@@ -27,7 +27,7 @@ When you execute an element, the following occurs:
 4. The modeler displays the result, containing the execution log, process variables, and local variables, as well as any incidents or errors.
 
 :::warning
-Validating executes elements with live data on the connected cluster. Any configured actions (emails, API calls, database updates, payments, etc.) will run as defined.
+Element validation executes elements with live data on the connected cluster. Any configured actions (emails, API calls, database updates, payments, etc.) will run as defined.
 
 Do not use a production environment.
 :::
@@ -41,8 +41,8 @@ After an execution, you can view the resulting process instance in [Operate](../
 
 For configuration steps, see:
 
-- [Validate in Camunda Hub](../hub/workspace/modeler/validation/task-testing.md)
-- [Validate in Desktop Modeler](./desktop-modeler/task-testing.md)
+- [Element validation in Camunda Hub](../hub/workspace/modeler/validation/element-validation.md)
+- [Element validation in Desktop Modeler](./desktop-modeler/element-validation.md)
 
 ## Supported elements
 

@@ -1,0 +1,69 @@
+---
+id: element-validation
+title: Element validation
+description: Validate and debug a single BPMN element directly in Camunda Hub using live data from your connected environment.
+---
+
+import TaskTestingProductionWarningImg from './img/task-testing-production-warning.png';
+
+You can execute a single element directly within Camunda Hub to validate its configuration and logic without running the entire process.  
+The **Validate** tab lets you quickly debug mappings, inputs, and outputs without leaving your implementation context.
+
+## Element validation vs. Test mode
+
+While both element validation and Test mode let you check your BPMN models, they serve different purposes:
+
+| Feature / capability | Element validation (Implement mode) | Test mode                         |
+| -------------------- | ----------------------------------- | --------------------------------- |
+| Scope                | Single task or sub-process          | Process segment or full diagram   |
+| Best for             | Quick implementation checks         | End-to-end test validation        |
+| Data type            | Live data only                      | Live or mocked data               |
+| Saves test cases     | No                                  | Yes                               |
+| Mode required        | Runs directly in _Implement_ mode   | Requires switching to _Test_ mode |
+
+Use element validation during implementation for quick feedback, and use Test mode for structured testing with mock data or reusable test cases.
+
+## Prerequisites
+
+Before you validate an element, ensure you have:
+
+- A [runtime connection](../modeling/connect-to-a-runtime.md) to an environment, hosted on an active Camunda 8.8 or later Orchestration Cluster
+- Permissions to deploy and run processes in the target environment
+
+## Validate an element
+
+To validate an element in Camunda Hub:
+
+1. In your BPMN diagram, click the element you want to validate.
+2. Open the **Details** panel on the right side of the modeling interface.
+3. Select the **Validate** tab.
+4. Under **Input**, define the process variables in JSON format to simulate the process context.
+   - Use the **Variables** panel to review available variables in your process.
+   - Confirm that input mappings for your element are configured correctly.
+   - Match variable names and types to those expected by the element.
+   - Provide realistic sample data to reflect actual execution conditions.
+5. Click **Execute** to run the element.
+
+Camunda Hub automatically deploys the process before executing the element. The element executes on the environment or cluster selected in the **Runtime** selector, using your defined input data. To execute against a different runtime, [change the runtime connection](../modeling/connect-to-a-runtime.md#change-the-runtime-connection). If you're connected to a production runtime, the **Validate** tab shows **You are connected to a production cluster** (or **production environment**), because executing an element there uses production data and can cause real side effects.
+
+<img src={TaskTestingProductionWarningImg} width="400px" alt="Validate tab of the Details panel showing the warning You are connected to a production cluster above the Execute button" />
+
+During execution, the log displays each step in real time, including any states where the execution is waiting for an external action to complete. Click **Cancel** to stop waiting. The process instance keeps running on the cluster.
+
+## View results
+
+After the execution completes, results appear in the **Details** panel in the **Validate** tab:
+
+| Status                    | Result description                                                                     |
+| :------------------------ | :------------------------------------------------------------------------------------- |
+| Successful execution      | The **Result** section displays the resulting process variables and any updates.       |
+| Incident during execution | Details are shown along with the relevant variable context to help diagnose the issue. |
+| Execution error           | The error message and response details are displayed.                                  |
+
+## Related documentation
+
+- [Element validation in Desktop Modeler](../../../../modeler/desktop-modeler/element-validation.md)
+- [Connect to a runtime](../modeling/connect-to-a-runtime.md)
+- [Learn how element validation works](../../../../modeler/element-validation.md)
+- [Working with variables](../../../../concepts/variables.md)
+- [Using Test mode](test-your-process.md)

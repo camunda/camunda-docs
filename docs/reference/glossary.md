@@ -324,6 +324,12 @@ Use an element template to extend [Modeler](/components/modeler/about-modeler.md
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
 
+### Element validation
+
+Executes a single BPMN [element](#element) on a connected cluster directly from the modeler, so you can verify its implementation without running the entire process. In Camunda Hub and Desktop Modeler, you use it on the **Validate** tab. It supersedes [task testing](#task-testing).
+
+- [Element validation](/components/modeler/element-validation.md)
+
 ### Embedding (vector embedding)
 
 A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
@@ -922,6 +928,12 @@ An [inbound connector](#inbound-connector) that subscribes to a message queue.
 This way, a [Camunda workflow](#workflow) can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
 
 ## T
+
+### Task testing
+
+The former name of [element validation](#element-validation), used before Camunda 8.11.
+
+- [Element validation](#element-validation)
 
 ### Tenant
 
