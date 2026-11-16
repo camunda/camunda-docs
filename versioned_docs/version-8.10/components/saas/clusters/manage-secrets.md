@@ -59,7 +59,9 @@ To reuse a complete set of authentication and connection settings, rather than a
 
 ## Reference connector secrets as `camunda.secrets.<name>`
 
-In SaaS, you can also reference the connector secrets you create here through centralized secret resolution by using `camunda.secrets.<key>`. You can use these references in input mappings and Connector fields, in addition to the legacy `{{secrets.KEY}}` syntax.
+In SaaS, you can also reference the connector secrets you create here through centralized secret resolution by using `camunda.secrets.<key>`. You can use these references directly in connector fields and input mappings, in addition to the legacy `{{secrets.KEY}}` syntax. For example, write `Bearer {{secrets.MY_API_KEY}}` as `="Bearer " + camunda.secrets.MY_API_KEY`.
+
+To move existing models to this syntax, see [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md#migrate-in-saas). In SaaS, you only update the references in your models.
 
 To learn how to use these references, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings). To understand how Camunda resolves a reference before job activation, see [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
@@ -67,4 +69,4 @@ In SaaS, the secret store is provisioned and managed for you. You don't configur
 
 In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
 
-A reference name must match `[\p{Alnum}_-]+`. Only keys that contain letters, digits, `_`, and `-` can therefore be referenced as `camunda.secrets.<key>`. A key that contains a period (`.`), such as one used in a file extension, is stored but cannot be referenced this way. A key with a `-` must be backtick-escaped in FEEL (for example, `` =camunda.secrets.`db-password` ``), because a bare `-` is FEEL's minus operator.
+A key referenced as `camunda.secrets.<key>` can contain only ASCII letters, digits, `_`, and `-`. Rename any key with other characters before you use it this way. A key with a `-` must be backtick-escaped in FEEL (for example, `` =camunda.secrets.`db-password` ``), because a bare `-` is FEEL's minus operator.
