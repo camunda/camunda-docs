@@ -59,7 +59,7 @@ When you operate the connector runtime yourself, legacy references resolve from 
 1. **Copy the secret values.** Move each secret value from your connector secret provider into the store under the same name. Follow the [secret naming rule](#name-your-secrets).
 1. **(Optional) Enable fallback mode.** Set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime, as described in [Migrate incrementally with fallback mode](#migrate-incrementally-with-fallback-mode). Models you haven't updated yet then keep working while you migrate them.
 1. **Update your models.** Replace each `{{secrets.NAME}}` reference with `camunda.secrets.NAME`, as shown in [Rewrite secret references](#rewrite-secret-references).
-1. **Remove the legacy configuration.** Once no model contains a `{{secrets.<name>}}` reference, set `camunda.connector.secret-resolver.legacy.mode` back to `ON` (or remove the setting) and remove the connector secret provider configuration.
+1. **Turn off legacy resolution.** Once no model contains a `{{secrets.<name>}}` reference, set `camunda.connector.secret-resolver.legacy.mode` to `OFF` and remove the connector secret provider configuration. Any legacy reference you missed then fails with an error naming this setting, instead of resolving from a leftover provider.
 
 ### Migrate incrementally with fallback mode
 
@@ -67,6 +67,7 @@ Fallback mode lets models that still use the legacy syntax resolve from the Orch
 
 - `ON` (default): the current behavior, with no fallback. The runtime resolves `{{secrets.<name>}}` only from its configured secret providers.
 - `FALLBACK`: when a legacy reference's name isn't found in a configured secret provider, the runtime looks the name up in the same secret store that backs `camunda.secrets.<name>`.
+- `OFF`: the runtime doesn't resolve legacy references at all. Use it once your migration is complete.
 
 With `FALLBACK` set, you can move a secret's value into the Orchestration Cluster's store first and keep existing models on the legacy syntax. Models you haven't touched keep resolving, now from the store, while you update them field by field.
 
