@@ -194,12 +194,12 @@ Example event:
 }
 ```
 
-### Validate events
+### Element validation events
 
-Validate events are sent when using the [Validate](../task-testing.md) feature:
+Element validation events are sent when using [element validation](../element-validation.md):
 
 - Task execution is started. This event includes `elementType` and `elementTemplate` if applied.
-- Validate deployment. [Deployment event](#deployment-and-start-instance-events) is triggered when the process is deployed for execution.
+- Element validation deployment. [Deployment event](#deployment-and-start-instance-events) is triggered when the process is deployed for execution.
 - Task execution finished. This event includes `elementType`, `elementTemplate`, `success` boolean value, and `incidentType` if the execution resulted in an [incident](../../../concepts/incidents.md).
 
 Example task execution finished event:

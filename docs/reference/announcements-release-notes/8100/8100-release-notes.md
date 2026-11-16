@@ -879,7 +879,7 @@ Start forms can now be defined and edited in both modelers, ensuring a seamless 
 
 Task testing now supports call activities in both Desktop Modeler and Camunda Hub. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
 
-<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
+<p class="link-arrow">[Task testing](/components/modeler/element-validation.md)</p>
 
 ### Test process segments in test mode
 
@@ -2096,7 +2096,7 @@ What's included:
 
 Task testing now supports call activities in both Desktop Modeler and Camunda Hub. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
 
-<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
+<p class="link-arrow">[Task testing](/components/modeler/element-validation.md)</p>
 
 ## 8.10.0-alpha4
 

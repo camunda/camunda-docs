@@ -39,15 +39,15 @@ Camunda 8 Run supports the store through `C8RUN_SECRETS_MODE=env` and `C8RUN_SEC
 
 ### Camunda Hub
 
-#### Task testing is now Validate
+#### Task testing is now element validation
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 <!-- https://github.com/camunda/experience-pdp/issues/77 -->
 
-Task testing is now called **Validate** in both Camunda Hub and Desktop Modeler, so it is no longer confused with Test mode and Test Studio. The **Test** tab is now the **Validate** tab, and the run button reads **Execute** and **Cancel**. The feature works as before.
+Task testing is now called element validation in both Camunda Hub and Desktop Modeler, so it is no longer confused with Test mode and Test Studio. The **Test** tab is now the **Validate** tab, and the run button reads **Execute** and **Cancel**. The feature works as before.
 
-<p class="link-arrow">[Validate](/components/modeler/task-testing.md)</p>
+<p class="link-arrow">[Element validation](/components/modeler/element-validation.md)</p>
 
 ## 8.11.0-alpha1
 
