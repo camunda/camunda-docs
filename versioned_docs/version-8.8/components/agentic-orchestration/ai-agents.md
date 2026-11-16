@@ -7,6 +7,7 @@ keywords: ["agentic ai", "AI agents"]
 
 import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
 import PageDescription from '@site/src/components/PageDescription';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <PageDescription />
 
@@ -50,6 +51,12 @@ Decision-making and execution are intentionally split:
 - **LLM decides**: Which tool to call next, in what order, and with which parameters.
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
+Think of the ad-hoc sub-process as a governed toolbox:
+
+- Each element can be selected by the LLM as a tool.
+- Elements can be executed multiple times, in different orders, in parallel, or skipped.
+- The LLM chooses a path from the allowed options, while Camunda enforces process boundaries and execution reliability.
+
 :::tip
 Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
@@ -84,3 +91,5 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 </table>
+
+<AoGetStartedBanner />

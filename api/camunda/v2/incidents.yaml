@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -53,6 +55,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -104,6 +108,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -165,6 +171,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -208,6 +216,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -504,6 +514,7 @@ components:
         - rootProcessInstanceKey
         - jobKey
         - tenantId
+        - storageOrdinal
       properties:
         processDefinitionId:
           allOf:
@@ -561,6 +572,13 @@ components:
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKey"
+        storageOrdinal:
+          description: |
+            The storage ordinal this incident's data belongs to. This is `null` for
+            data exported before storage ordinals were introduced in version 8.11.
+          nullable: true
+          type: integer
+          format: int32
       x-properties-added-in-version:
         - propertyName: processDefinitionId
           addedInVersion: "8.6"
@@ -588,6 +606,8 @@ components:
           addedInVersion: "8.8"
         - propertyName: jobKey
           addedInVersion: "8.6"
+        - propertyName: storageOrdinal
+          addedInVersion: "8.11"
     IncidentResolutionRequest:
       type: object
       properties:

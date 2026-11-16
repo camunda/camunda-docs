@@ -1,3 +1,4 @@
+import IconIdpImg from "../assets/icon-idp.png";
 import IconRpaImg from "../assets/icon-rpa.png";
 import IconDocsImg from "../assets/icon-docs.png";
 import IconOperateImg from "../assets/icon-operate.png";
@@ -82,6 +83,13 @@ export const usingCamundaCards = [
 ];
 
 export const featuresPageCards = [
+  {
+    link: "../hub/workspace/modeler/idp/",
+    title: "Intelligent document processing (IDP)",
+    image: IconIdpImg,
+    description:
+      "Extract structured data from documents and integrate it into your processes.",
+  },
   {
     link: "../rpa/overview/",
     title: "Robotic process automation (RPA)",

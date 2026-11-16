@@ -69,12 +69,12 @@ camunda.hub.clusters:
 
 <TabItem value="envVars">
 
-| Environment variable                            | Description                                                                                                                                                                                                                                                                                     | Example value                                                   |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_GRPC`               | [Internal or external](./properties.md#notes-on-host-names-and-port-numbers) address where the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md) can be reached.                                                                                                                                  | `grpc://camunda:26500`,<br/>`grpcs://camunda.example.com:26500` |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_REST`               | [Internal or external](./properties.md#notes-on-host-names-and-port-numbers) address where the cluster's REST APIs can be reached. Used as the base URL for requests to the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). | `http://camunda:8080`,<br/>`https://camunda.example.com`        |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_WEBAPP`             | [External](./properties.md#notes-on-host-names-and-port-numbers) address where the cluster's web applications can be reached in a browser.                                                                                                                                                      | `https://camunda.example.com`                                   |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Indicates if [authorizations are enabled](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) for the cluster. If `true`, users will see a hint when they deploy from Camunda Hub.                                                   | `true`                                                          |
+| Environment variable                            | Description                                                                                                                                                                                                                                                                                               | Example value                                                   |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `CAMUNDA_HUB_CLUSTERS_0_URL_GRPC`               | [Internal or external](./properties.md#notes-on-host-names-and-port-numbers) address where the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md) can be reached. Optional. If you omit it, Camunda Hub uses the REST API for deployments, instance starts, and job workers, and job streaming is disabled.  | `grpc://camunda:26500`,<br/>`grpcs://camunda.example.com:26500` |
+| `CAMUNDA_HUB_CLUSTERS_0_URL_REST`               | [Internal or external](./properties.md#notes-on-host-names-and-port-numbers) address where the cluster's REST APIs can be reached. Used as the base URL for requests to the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Required. | `http://camunda:8080`,<br/>`https://camunda.example.com`        |
+| `CAMUNDA_HUB_CLUSTERS_0_URL_WEBAPP`             | [External](./properties.md#notes-on-host-names-and-port-numbers) address where the cluster's web applications can be reached in a browser.                                                                                                                                                                | `https://camunda.example.com`                                   |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Indicates if [authorizations are enabled](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) for the cluster. If `true`, users will see a hint when they deploy from Camunda Hub.                                                             | `true`                                                          |
 
 </TabItem>
 
@@ -94,3 +94,12 @@ camunda.hub.clusters:
 </TabItem>
 
 </Tabs>
+
+:::note Cluster communication protocol
+The REST URL is required for clusters version 8.8 and later. The gRPC URL is optional.
+
+- If you configure both URLs, Camunda Hub uses gRPC to interact with the cluster. To use REST instead, set `camunda.client.gateway.preferRestOverGrpc=true` (environment variable `CAMUNDA_CLIENT_GATEWAY_PREFERRESTOVERGRPC`).
+- If you configure only the REST URL, Camunda Hub uses REST to interact with the cluster. Job streaming is disabled because it is only available over gRPC. Use this setup if the network between Camunda Hub and the cluster only allows HTTP(S) traffic, for example when port `26500` is blocked.
+- If you configure only the gRPC URL, or neither URL, startup validation fails.
+
+:::

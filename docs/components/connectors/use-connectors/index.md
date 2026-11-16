@@ -245,6 +245,27 @@ The Connector runtime does not provide a `createDocuments` function. To extract 
 
 Before using `createDocument`, configure a document store for the Connector runtime. For configuration details, see [Document handling](/components/document-handling/getting-started.md).
 
+### `getHeader` function {#function-getheader}
+
+Starting with 8.11.0, you can use `getHeader` in the **Result expression** and **Error expression** fields.
+
+HTTP header names are case-insensitive, but a response's `headers` are a regular [FEEL context](/components/modeler/feel/language-guide/feel-data-types.md#context), so keys must match the exact casing the server sent. For example, `response.headers.date` returns `null` if the server sent `Date`. Use `getHeader` to look up a header regardless of its casing.
+
+| Item      | Type    | Description                                                                                                          |
+| --------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| `headers` | Context | The headers to search, for example `response.headers`.                                                               |
+| `name`    | String  | The header name, in any casing.                                                                                      |
+| Result    | Any     | The header value, or a list of values for a header sent multiple times. `null` if the header or `headers` is absent. |
+
+If `headers` contains a key that exactly matches `name`, `getHeader` returns its value. Otherwise, it returns the value of the first key that matches `name` ignoring case.
+
+```feel
+= {
+  contentType: getHeader(response.headers, "content-type"),
+  date: getHeader(response.headers, "Date")
+}
+```
+
 ## Activation
 
 The **Activation** section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).

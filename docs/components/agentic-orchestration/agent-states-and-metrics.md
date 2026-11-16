@@ -6,6 +6,7 @@ keywords: ["agentic ai", "AI agents", "agent state", "usage metrics"]
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <PageDescription />
 
@@ -70,3 +71,5 @@ Camunda counts the number of tool calls the agent instance has made across all l
 Camunda records the duration of each model call in the agent's conversation history. A model call that takes far longer than comparable ones is a sign the agent isn't progressing normally. This duration is surfaced per model call, not for tool results.
 
 Tool execution duration is not part of the conversation history metrics. When a tool is a BPMN element, you can see how long its execution took from the usual element instance details in the details tab for that tool activation.
+
+<AoGetStartedBanner />

@@ -75,7 +75,7 @@ jobs:
           mkdir -p "$TARGET"
           # Explicit allowlist of pages synced from the c8ctl repo (source of truth).
           # Repo-only docs in c8ctl/docs (e.g. plugin-collisions.md) are intentionally NOT listed.
-          SYNCED_FILES="getting-started.md cluster-inspection.md identity-management.md development-workflows.md plugins.md command-reference.md sidebar-schema.js"
+          SYNCED_FILES="getting-started.md cluster-inspection.md identity-management.md development-workflows.md camunda-json.md plugins.md command-reference.md sidebar-schema.js"
           for f in $SYNCED_FILES; do
             if [ -f "c8ctl/docs/$f" ]; then
               cp "c8ctl/docs/$f" "$TARGET/$f"
@@ -131,7 +131,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

@@ -138,6 +138,7 @@ The client is removed from the group.
 
 :::note
 [Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication.
+They aren’t available on [SaaS](../concepts/access-control/mapping-rules.md#mapping-rules-in-saas-and-self-managed), where the API also rejects attempts to assign them to roles or groups with a `403 Forbidden` response.
 :::
 
 ### Assign mapping rules to a group

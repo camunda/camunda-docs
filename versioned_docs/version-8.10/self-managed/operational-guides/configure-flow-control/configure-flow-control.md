@@ -23,7 +23,7 @@ A static write rate limit can prevent throughput peaks, and write rate throttlin
 These write limits are enabled by default in SaaS and disabled in Self-Managed. For most use cases, write rate limits can be enabled as needed if an issue arises.
 :::
 
-Flow control is configured in the Orchestration Cluster `application.yaml` file under `camunda.processing.flow-control.write`. The default values are listed in the `flow-control` section of the [configuration defaults](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) and in the [processing configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+Flow control is configured in the Orchestration Cluster `application.yaml` file under `camunda.processing.flow-control.write`. The default values are listed in the `flow-control` section of the [configuration defaults](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/config/defaults.yaml) and in the [processing configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
 ```yaml
 camunda:

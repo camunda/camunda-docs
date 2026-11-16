@@ -1,63 +1,45 @@
 ---
 id: overview
-title: "Release announcements and release notes"
-description: "Announcements and release notes for currently maintained Camunda documentation versions."
+title: "8.10 release information"
+sidebar_label: "Release information"
+description: "What's new, release notes, announcements, and supporting information for Camunda 8.10."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import ReleasesGrid from '../react-components/\_release-card';
+import { releaseInfoCards } from '../react-components/\_release-card-data';
 
 <PageDescription />
 
-<table className="table-callout" width="100%">
-<tr>
-<td>**Version**</td>
-<td>**Release date**</td>
-<td>**Announcements**</td>
-<td>**Release notes**</td>
-<td>**End of standard maintenance**</td>
-</tr>
-<tr>
-<td>8.10</td>
-<td>13 October 2026</td>
-<td>[8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md)</td>
-<td>[8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md)</td>
-<td>11 April 2028</td>
-</tr>
-<tr>
-<td>8.9</td>
-<td>14 April 2026</td>
-<td>[8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md)</td>
-<td>[8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)</td>
-<td>12 October 2027</td>
-</tr>
-<tr>
-<td>8.8</td>
-<td>14 October 2025</td>
-<td>[8.8 release announcements](/reference/announcements-release-notes/880/880-announcements.md)</td>
-<td>[8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md)</td>
-<td>13 April 2027</td>
-</tr>
-</table>
+## Release information
 
-## Release announcements
+See what's new in Camunda 8.10, key changes and [supported environments](/reference/supported-environments.md) changes in the release announcements, and new features in the release notes.
 
-Release announcements include:
+<ReleasesGrid releases={releaseInfoCards} />
 
-- Changes in supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, and so on).
-- Key changes (for example, deprecations and breaking changes).
+:::info Upgrade guidance
 
-:::info
-
-- See [upgrade to Camunda 8.10](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
-- See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
+- See [upgrade Camunda](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::
 
-## Release notes
+## Release schedule
 
-Release notes include details of new product features and enhancements.
+Key dates for the Camunda 8.10 release.
 
-Release notes are provided for each minor release and include alphas released during the development cycle.
+| Version       | Release type | Release date     | Scheduled end of maintenance |
+| :------------ | :----------- | :--------------- | :--------------------------- |
+| 8.10.0        | Minor        | 13 October 2026  | 11 April 2028                |
+| 8.10.0-alpha5 | Alpha        | 8 September 2026 | -                            |
+| 8.10.0-alpha4 | Alpha        | 11 August 2026   | -                            |
+| 8.10.0-alpha3 | Alpha        | 14 July 2026     | -                            |
+| 8.10.0-alpha2 | Alpha        | 9 June 2026      | -                            |
+| 8.10.0-alpha1 | Alpha        | 13 May 2026      | -                            |
+
+:::info Release policy
+Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
+:::
 
 ## Changelogs
 
@@ -70,6 +52,30 @@ Technical changelogs for Camunda 8 are available on GitHub:
 | Camunda Helm chart | [github.com/camunda/camunda-platform-helm/releases](https://github.com/camunda/camunda-platform-helm/releases) |
 | Desktop Modeler    | [github.com/camunda/camunda-modeler/releases](https://github.com/camunda/camunda-modeler/releases)             |
 
-## Release policy
+## Previous releases
 
-Review the [release policy](/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.
+Release dates and information for previous Camunda 8 releases that are still maintained.
+
+<table className="table-callout" width="100%">
+<tr>
+<td>**Version**</td>
+<td>**Release date**</td>
+<td>**Scheduled end of maintenance**</td>
+<td>**Release information**</td>
+<td>**Changelogs**</td>
+</tr>
+<tr>
+<td>8.9</td>
+<td>14 April 2026</td>
+<td>12 October 2027</td>
+<td><ul><li>[Announcements](/reference/announcements-release-notes/890/890-announcements.md)</li><li>[Release notes](/reference/announcements-release-notes/890/890-release-notes.md)</li></ul></td>
+<td><ul><li>[Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul></td>
+</tr>
+<tr>
+<td>8.8</td>
+<td>14 October 2025</td>
+<td>13 April 2027</td>
+<td><ul><li>[Announcements](/reference/announcements-release-notes/880/880-announcements.md)</li><li>[Release notes](/reference/announcements-release-notes/880/880-release-notes.md)</li></ul></td>
+<td><ul><li>[Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul></td>
+</tr>
+</table>

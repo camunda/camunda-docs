@@ -48,6 +48,10 @@ Numbers are subject to the following numeric limits:
 If you need arbitrary-precision or very large numbers, consider storing them as strings or in an external data store instead of process variables.
 :::
 
+:::note
+A date-time value with a time zone ID, for example from [`now()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal.md#now), is stored with the zone ID in brackets, such as `2026-09-29T12:31:01.641Z[GMT]`. Some ISO 8601 parsers reject this format, for example Python `datetime.fromisoformat()` and JavaScript `new Date()`. To store the value without the zone ID, [convert it to a fixed offset](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#date-and-timedate-timezone) before storing it, for example `date and time(now(), "Z")`.
+:::
+
 ## Variable size limitation
 
 The payload of a process instance is limited to 4 MB. This limit includes both process variables and workflow engine–internal data, so less than 4 MB is available for variables alone.

@@ -13,6 +13,8 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
 - When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/components/best-practices/architecture/sizing-self-managed.md).
+- You typically add partitions to handle more load, which means more data is exported to secondary storage. Adding partitions does not scale secondary storage, so size it for the higher load first. See [considerations](#considerations) for more details.
+- Optimize does not detect new partitions. After adding partitions, [update Optimize](#5-update-optimize).
   :::
 
 ## Considerations
@@ -21,8 +23,14 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - Existing partitions continue processing data, but you may notice temporary performance impacts until scaling completes. Plan scaling ahead of anticipated load increases to minimize disruption.
 - When adding new partitions or brokers, partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the load per broker. Use the API endpoints in [dry run](#dry-run) mode to preview partition distribution.
 - Always take a backup before scaling to ensure you can restore if needed.
+- When you add partitions, each new partition is bootstrapped from a snapshot of the global state of partition 1, such as process definitions, decisions, forms, and identity data. This snapshot is transferred in chunks of `zeebe.broker.experimental.raft.snapshotChunkSize`, and each request must complete within `zeebe.broker.experimental.raft.bootstrapSnapshotRequestTimeout` (default `30s`). The chunk size defaults to `1GB`, so on a cluster with a large global state, lower it, for example to `8MB`, before scaling. If a partition bootstrap still fails with snapshot request timeouts, increase the timeout.
+- Scaling partitions doesn't scale secondary storage. You usually add partitions to increase throughput, and more throughput means more data exported to secondary storage. If secondary storage can't keep up, it limits the throughput of the whole cluster. Check secondary storage before you scale partitions:
+  - **Elasticsearch or OpenSearch:** All partitions export to the same indices. Write throughput depends on the number of primary shards, not the number of nodes. Adding nodes alone doesn't help if the shard count stays the same. Check the shard count of your indices, and the CPU, memory, and disk of your nodes.
+  - **Optimize:** Optimize imports each partition separately and writes its own indices, so more partitions also increase the load from Optimize on Elasticsearch or OpenSearch. Optimize sets the shard count ([Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-index-settings), [OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-index-settings)) when it creates an index. It creates one process instance index per process definition, the first time it imports that definition. If you change the setting later, only indices for new process definitions use it. To change existing indices, you must delete them. Optimize then re-imports only the data that is still in the exporter indices, so older data is lost.
 
-## Scale up brokers
+  For details, see [secondary storage considerations](/components/best-practices/architecture/sizing-self-managed.md#secondary-storage-considerations) in the resource planning guide.
+
+## Scale up
 
 The following shows how to scale up a Zeebe cluster using an example of scaling from cluster size 3 to cluster size 6. The target partition count is 6.
 
@@ -396,6 +404,27 @@ The response would show that partitions are distributed to new brokers:
 
 </details>
 
+### 5. Update Optimize
+
+:::note
+Skip this step if you didn't change the partition count, or if you don't use Optimize.
+:::
+
+Optimize has its own [`zeebe.partitionCount`](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) setting and doesn't detect new partitions. If you don't update it, process instances on the new partitions are simply missing in Optimize, without any error.
+
+1. Set Optimize's `zeebe.partitionCount` to the new partition count. With Helm, set `optimize.partitionCount`:
+
+   ```yaml
+   optimize:
+     partitionCount: "6"
+   ```
+
+   Without Helm, set the `CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT` environment variable.
+
+2. Apply the change. With Helm, run `helm upgrade` with the updated values. The chart restarts the Optimize pods because the configuration changed. Without Helm, restart Optimize.
+
+Optimize stores its import position per partition. After the restart, it imports the records of the new partitions that still exist in the exporter indices. Make sure the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporter retention keeps these records until Optimize imports them. If the records are deleted first, this data is permanently missing in Optimize.
+
 ## Scale down
 
 We will explain how to scale down a Zeebe cluster via an example of scaling from cluster size 6 to cluster size 3. We assume the cluster is running with 6 brokers.
@@ -637,7 +666,7 @@ After scaling down the statefulset, you may have to delete the PVCs manually.
 
 ## API reference
 
-OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/cluster-api.yaml).
 
 ### Reconfiguration API
 
@@ -804,7 +833,7 @@ This operation does not re-distribute the partitions that were in the removed br
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
 ```
 {
@@ -1232,7 +1261,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
 ```
 {

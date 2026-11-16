@@ -56,7 +56,7 @@ Multi-tenancy behavior differs depending on the identity component:
 
 | values.yaml option                          | type    | default | description                                                                                                                                                                                                 |
 | ------------------------------------------- | ------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `global.multitenancy.enabled`               | boolean | `false` | (Management Identity) Enable multi-tenancy globally.                                                                                                                                                        |
+| `global.multitenancy.enabled`               | boolean | `false` | (Management Identity and Orchestration Cluster) Enable multi-tenancy globally.                                                                                                                              |
 | `orchestration.multitenancy.checks.enabled` | boolean | `false` | (Orchestration Cluster Admin) Deprecated in chart 15.x. Enforce tenant validation across requests. Use `camunda.security.multi-tenancy.checks-enabled` in `orchestration.extraConfiguration` instead.       |
 | `orchestration.multitenancy.api.enabled`    | boolean | `true`  | (Orchestration Cluster Admin) Deprecated in chart 15.x. Enable the multi-tenancy API for tenant management. Use `camunda.security.multi-tenancy.api-enabled` in `orchestration.extraConfiguration` instead. |
 

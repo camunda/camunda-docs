@@ -23,6 +23,7 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 
 - Name Markdown files in **kebab-case** matching the page title (for example, `introduction-to-camunda-8.md`). Avoid non-alphanumeric characters in file names.
 - Place version-sensitive images in an `img/` (or `assets/`) subdirectory alongside the doc file. Reuse existing co-located directories when they exist (for example, `docs/components/<area>/img/`) before adding new images to `static/img/`. Reserve `static/img/` for cross-cutting, non-versioned assets such as home page card images.
+- For Excalidraw-authored Self-Managed architecture diagrams, follow [the diagram guide](../../howtos/diagrams.md). Keep editable sources and SVG exports together, preserve any source-declared bold-title metadata during export, and review the result at docs-page width. Check contrast separately from brand palette membership.
 - Place BPMN files in `static/bpmn/<section>/`.
 - **Do not** modify `package-lock.json`, generated API docs in `docs/apis-tools/*/specifications/`, or versioned docs unless explicitly asked to.
 
@@ -36,9 +37,8 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 
 - Add **labels** to communicate the component, version, and priority. Both PRs and issues without labels may be triaged slowly.
 - Add the **`deploy` label** to a PR to trigger a preview site deployment. This is recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
-- When creating a PR, invoke the `create-pr` skill (`.claude/skills/create-pr/SKILL.md`).
+- When creating a PR, invoke the `docs-create-pr` skill (`.claude/skills/docs-create-pr/SKILL.md`).
 - When updating an existing PR description, preserve the full template structure and edit content inside the `## Description` section only, unless explicitly asked to change other sections.
-- Add both PRs and issues to the **Documentation Team** GitHub Project so they appear in the team's board and backlog.
 
 ## 4. Commits
 

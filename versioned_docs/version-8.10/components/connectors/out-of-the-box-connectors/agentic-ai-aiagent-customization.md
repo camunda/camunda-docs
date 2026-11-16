@@ -25,7 +25,7 @@ To disable proxy support entirely (for example, if only an HTTPS-based proxy is 
 ## Extend the AI Agent connector
 
 :::note
-The agentic AI ecosystem evolves quickly. The APIs used for these customizations can change between minor releases. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md).
+The agentic AI ecosystem evolves quickly. The APIs used for these customizations can change between minor releases. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/stable/8.10/connectors/agentic-ai/docs/breaking-changes.md).
 :::
 
 ### Prerequisites

@@ -32,7 +32,7 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
-The default values can be found in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) in the `# backpressure` section.
+The default values can be found in the [Zeebe repo](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/config/defaults.yaml) in the `# backpressure` section.
 
 #### Fixed limit
 

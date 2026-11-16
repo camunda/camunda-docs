@@ -9,6 +9,7 @@ page_rank: 90
 
 import DocCardList from '@theme/DocCardList';
 import OverviewImg from './img/hero-get-started.png';
+import BuildWithCamundaBanner from '../components/react-components/\_build-with-camunda-banner';
 
 <h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
@@ -17,7 +18,7 @@ import OverviewImg from './img/hero-get-started.png';
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
+<p class="link-button">[Run your first BPMN process with Camunda 8](./getting-started-hello-world.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -56,3 +57,5 @@ This guide is for low-code developers using Camunda 8 SaaS to efficiently alloca
 This guide is for users who prefer a low-code approach to process automation, walking you through working with a REST connector task as a first time Camunda 8 SaaS user. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
 <p><a href="./orchestrate-apis/" class="link-arrow">Get started with API orchestration</a></p>
+
+<BuildWithCamundaBanner />

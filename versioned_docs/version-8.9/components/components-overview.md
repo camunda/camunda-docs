@@ -32,7 +32,7 @@ import { featuresCards, usingCamundaCards } from './react-components/\_using-car
 
 Orchestrate and automate complex business processes for people, systems, devices, and [AI agents](/reference/glossary.md#ai-agent). Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Build with AI" href="../guides/build-with-ai/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Learn how to build agentic solutions</a>
+<p class="link-button">[Learn how to build agentic solutions](../guides/build-with-ai/overview.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

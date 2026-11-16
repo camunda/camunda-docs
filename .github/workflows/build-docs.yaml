@@ -78,6 +78,10 @@ jobs:
         run: npm install -g @untitaker/hyperlink
       - name: Check internal links
         uses: untitaker/hyperlink@9375bc4063712ad490d5eb3d54df0b6aade15e54 # 0.3.2
+        env:
+          # The runner image ships a gh CLI (2.45.0) without `gh attestation`, which the install
+          # script uses to verify its binary. Skip the check, as before gh was added to the image.
+          HYPERLINK_SKIP_ATTESTATION: 1
         with:
           args: build/
       - name: Remove https redirect

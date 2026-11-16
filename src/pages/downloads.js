@@ -404,7 +404,7 @@ const ADDITIONAL_RELEASES = [
   {
     title: "Enterprise download center",
     description:
-      "Enterprise-only downloads for Camunda 7 and Camunda 8 Web Modeler artifacts.",
+      "Enterprise-only downloads for ProcessOS and Camunda 7 artifacts.",
     ...downloads.additionalReleases.enterprise,
     icon: <BuildingIconLg />,
     loginRequired: true,
@@ -635,8 +635,8 @@ function Downloads() {
     >
       <div className={bwcStyles.page}>
         {/* ─── Hero ─── */}
-        <div className={bwcStyles.heroWrapper}>
-          <div className={bwcStyles.heroGlow} />
+        <div className={clsx(bwcStyles.heroWrapper, styles.downloadsHero)}>
+          <div className={clsx(bwcStyles.heroGlow, styles.downloadsHeroGlow)} />
           <svg
             className={styles.heroBgIcon}
             viewBox="0 0 24 24"
@@ -804,7 +804,7 @@ function Downloads() {
             </h2>
             <p className={styles.additionalReleasesSub}>
               Get the latest Orchestration Cluster and connector releases, and
-              browse enterprise downloads.
+              browse enterprise downloads, including ProcessOS.
             </p>
             <div
               className={clsx(

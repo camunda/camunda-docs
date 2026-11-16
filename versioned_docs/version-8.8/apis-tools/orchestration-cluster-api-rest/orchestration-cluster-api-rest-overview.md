@@ -47,7 +47,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **A client to send API requests**
   - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger) interface
   - Programmatic access: Use the [Java client](/apis-tools/java-client/getting-started.md) or [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
-  - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
+  - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
   - Universal client: [Postman collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest)
 
 ### Authentication
@@ -131,6 +131,20 @@ Adding new endpoints or attributes to existing responses is **not** considered a
 
 The default maximum request size for all requests (for example, to `POST /v2/deployments`) is 4MB. It can be configured in the Zeebe Gateway configuration using the `maxMessageSize` property. For more information, see the [Zeebe Gateway configuration reference](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#gateway-configuration).
 
+#### Deploy resources limits
+
+`POST /v2/deployments` accepts a `multipart/form-data` request in which each resource is one part. The following limits apply to each request:
+
+| Limit                               | Default | Self-Managed property                       |
+| ----------------------------------- | ------- | ------------------------------------------- |
+| Maximum size of a single resource   | 10MB    | `spring.servlet.multipart.max-file-size`    |
+| Maximum total size of the request   | 10MB    | `spring.servlet.multipart.max-request-size` |
+| Maximum number of parts per request | 50      | `server.tomcat.max-part-count`              |
+
+A request that exceeds any of these limits is rejected with HTTP status `413`, for example, a request that contains more than 50 resources. In Camunda 8 SaaS, these limits apply to all clusters and cannot be changed. In Self-Managed, you can adjust them as described in [Deployment configuration](/self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration.md).
+
+To stay within the limits, split a large deployment into several requests with fewer resources each. Each request creates a separate deployment, so the resources across requests are not deployed atomically.
+
 ### Naming conventions
 
 Naming across the Orchestration Cluster REST API is simple, intuitive, and consistent to reduce friction when working with multiple endpoints.
@@ -204,4 +218,4 @@ Now that you're familiar with the Orchestration Cluster REST API, here are some 
 - [Build a job worker using the Spring SDK](../camunda-spring-boot-starter/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
 - [Migrate from v1 component REST APIs to the v2 Orchestration Cluster REST API](../migration-manuals/migrate-to-camunda-api.md)
-- [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema
+- [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema

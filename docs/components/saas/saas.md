@@ -54,7 +54,7 @@ The Camunda 8 SaaS platform is built on Amazon Web Services (AWS) and based on a
 
 Camunda Hub is hosted in AWS in the eu-central-1 [region](/components/saas/regions.md). It is where you manage your organization, workspaces, environments, and clusters.
 
-Your processes run on [clusters](/components/saas/clusters.md). Each cluster hosts one or more environments, and you choose its [type](/components/saas/clusters.md#cluster-type) and [size](/components/saas/clusters.md#cluster-size) when you create it. A cluster runs the Orchestration Cluster components such as Zeebe, Tasklist, Operate, Optimize, and Connectors in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
+Your processes run on [clusters](/components/saas/clusters.md). Each cluster hosts one or more environments, and you choose its [type](/components/saas/clusters.md#cluster-type) and [size](/components/saas/clusters.md#cluster-size) when you create it. A cluster runs the Orchestration Cluster (Zeebe, Operate, Tasklist, and Admin), together with Connectors and Optimize, in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
 
 By default, each cluster serves a single [logical tenant](/components/concepts/multi-tenancy.md), with all data associated with the `<default>` tenant.
 

@@ -1,0 +1,114 @@
+---
+id: get-the-upgrade-readiness-status-of-this-cluster
+title: "Get the upgrade-readiness status of this cluster"
+description: "Reports the state of every registered upgrade-readiness condition (e.g. RDBMS schema migration, Elasticsearch/OpenSearch schema migration, RocksDB snapshot migration, exporter flush), grouped by physical tenant. The set of conditions in the response reflects which provider beans are currently registered in this process — not every condition is necessarily present yet, so `upgradeable` should not be treated as meaningful until every planned condition is registered."
+sidebar_label: "Get the upgrade-readiness status of this cluster"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV1Fv2zYQ/isH7mEJoNjuBmyt95S2QRAUSQonxR6SoD5LZ4kNRarkKYlgCNiP2C/cLxmOkmUnTrtgj8OeLIvk8fh9331HrRRjHtT0Sn2qco8ZgSfMtKUQ1E2iMgqp1xVrZ9VUzahyngNwQRAYmcAtge7IN+Ap14HJUwZ1F+hgCASps5mWGLBHo3wEs/dvTy8gpAWVCKXOPcpgAkcGA+s0EPq0GJ9XZC/i4zNTZy69De/fQrBYhcLx9hg9SJrkYWnqUOwnkHtXV5TBooGqaIJO0QCTRcsjuJSzEMtJhjQDaBsP6SlUzgZ5WBpKOcB9odMCKu/udEYeFoQ2AHqCtPaeLJtHUMQwOsj8VID4648/wTruMdvAogNYkhnotWmg8hTIMjTECQQH8x5SXBiaQyhcbbIYZ0HAnpApAwxQElpt82VtoLasTb9NZdBayh5vt0lydG1VotYnDWq6Uj9NJvLzmPzzDypRqbNMlmUUq8roNEI+/hJkykp1PMkTazakpoOqZoMYZv1O6qm6jr/JEiy1D5xsncBiKbTJiwHUa9XNDtcK0DhLCQRtU4J3WNY2Q0AjkmygwABoobaeTMSurA3rg7g6jbSkVDHs9awdkM21pT6XAM4OfGobGG1KYf83wJ2sddxG24wqspkQ2kfSNuiMwFkC59OCAnfShdTUQgrsadnn3kKFnrsTRw0nsB7ozo6+gcDOY077HY/cVAK7W3yhlFWiKu8q8qw7Yrd0tEvwnH1Nc3DWNCAQ7Fb2Bn/fO8H89OR4dnh59H4OS+f7Fbc2pv600uZLNIHmcF+QlYlCWqFtLjh1S5ABjVnThhaorLjZVGFZB4Zu7YKg1IHxlmzceTCbRzAsnDOE8oIesKzk1DGJNlHr9C47VnfhOPr2WX7ctrSFJ7zN3L1N4Jaa5/V78j4RP7Ey9kTEnSPOfbYow0Usn9PoZJTN90dwuBMq0oNVRehDRxMyGMLAUU+DM4nIO5bEh1j0udkZN/MyRyGWTzc5gomDgrkbFxQAF67mPl8E49xtXUGOVdJX3xBJnKG5VvtC7FIb0xkhBph/Ovtwdv772Rw8ckEeuEALrtTMlEWnQwkIKdoNzUGbta9itLnnqR4Uj1l3SDQfH2n/xfN65zpdNxR4N+B2wch12HGuy74f1kHaCIp+c0Pfa4QJbNOzaLYYGf1jFcfWGy3YmPOlml49l/RFnPStTOmliW5lE9hrm0st2bqUG8O69lXSP56cn30+Ofv8cXZ+PDu6uFCJ6gmXq8RQgZt17U0rCTJqs1t/h9LoPCdQ1CXamJv4lnR3g7Zv9aH2S0xj+zsQtXlX9o1boBVzGYTeCfe671FwRz4ITq9Hb0aTWC0i3YbWNwnKgB28Hr2ajCbX6rG7bpAYzrQTVdZBiSz2HlPa6pfraaptpfN+rbWnTBANA2kRkxsZH/YQgJZYm9h9n/GLLWlsU7PG91+n2D7NcruL7BrpTb+iJC5cpqYqpyhh5EJN1VglKpCX6FG4tZfUVl1u7XQ8XhUucDtdCX/tGFOukZ0f93sO1wiVqDv0WnKINSGrHkGkjEvRxNdPi+AULeZUSkPuUgGZJm6spDE4/yTSm18mkxcEiQvbZOsStAlRMFcvCNEvbdv2JlHaLt33r1KHH08Eh56pqXo1+m6eZLPKactb1XFfUG/EOgy3DymG1InopAqe3lXXSoAFLZ2nKBxLD1I31vmDtbx6wqKXB1ySabrbqs7zeJfYCySD8WY2rrzL6pQPinrxw8+TX36N5Ra5CFxivFpGeqbqmDjuuGtZGwPePsxTPFabK+z/nzP/3c+Z3qiZHnhcGdRRTdFrVr0TXSlpSp1tXKnVaoGBPnnTtvL6a02+UdOrm43LyL82UQVhRj5a1y010qZS+ViIdmRq2XPnu0hqeTDD46NL1bZ/A3B7iCY=
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/management-api/specifications/upgrade-readiness/upgrade-readiness-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get the upgrade-readiness status of this cluster"}
+></Heading>
+
+<MethodEndpoint method={"get"} path={"/"} context={"endpoint"}></MethodEndpoint>
+
+Reports the state of every registered upgrade-readiness condition (e.g. RDBMS schema migration, Elasticsearch/OpenSearch schema migration, RocksDB snapshot migration, exporter flush), grouped by physical tenant. The set of conditions in the response reflects which provider beans are currently registered in this process — not every condition is necessarily present yet, so `upgradeable` should not be treated as meaningful until every planned condition is registered.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "OK",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Upgrade Readiness Response",
+            description:
+              'Grouped by physical tenant first, condition name second — not "tenants" alone, since Camunda already has an unrelated multi-tenancy concept (process-engine tenants on process instances); a physical tenant is an independent engine inside one orchestration cluster (its own partition group, its own secondary storage).\n',
+            type: "object",
+            properties: {
+              upgradeable: {
+                description:
+                  "`true` only once every registered condition reports `MIGRATED` for every known physical tenant. `false` whenever nothing is known at all, since an empty response must never be mistaken for readiness.\n",
+                type: "boolean",
+                example: false,
+              },
+              physicalTenants: {
+                description:
+                  'Every known physical tenant\'s condition breakdown, keyed by physical tenant ID, then by condition name (e.g. `rdbmsSchemaMigrated`). A physical tenant only appears once at least one provider has reported it; a condition a provider does not report for a tenant it does know about (e.g. a lookup gap, not "does not apply") is filled in as `UNKNOWN` rather than omitted, so a gap can never be silently read as readiness.\n',
+                type: "object",
+                additionalProperties: {
+                  type: "object",
+                  additionalProperties: {
+                    title: "Migration Condition Status",
+                    description:
+                      "The status of a single upgrade-readiness condition, as reported by a provider.",
+                    type: "object",
+                    properties: {
+                      state: {
+                        allOf: [
+                          {
+                            title: "Migration State",
+                            description:
+                              "The state of a single upgrade-readiness condition.",
+                            type: "string",
+                            enum: [
+                              "MIGRATED",
+                              "MIGRATION_IN_PROGRESS",
+                              "UNKNOWN",
+                            ],
+                            example: "MIGRATED",
+                          },
+                        ],
+                      },
+                      detail: {
+                        description:
+                          'A short, human-readable explanation, surfaced as-is from the reporting provider (e.g. "schema version 8.9.0 has not yet migrated to 8.10.0").\n',
+                        type: "string",
+                        example:
+                          "schema version 8.10.0 matches the application version",
+                      },
+                    },
+                    required: ["state", "detail"],
+                  },
+                },
+                example: {
+                  default: {
+                    rdbmsSchemaMigrated: {
+                      state: "MIGRATED",
+                      detail:
+                        "schema version 8.10.0 matches the application version",
+                    },
+                  },
+                },
+              },
+            },
+            required: ["upgradeable", "physicalTenants"],
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

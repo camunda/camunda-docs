@@ -127,6 +127,7 @@ For Optimize-specific filtering, see [Optimize export filtering](/self-managed/c
 | number-of-shards                 | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | varies       |
 | optimizeModeEnabled              | If `true`, restricts exported record types to those consumed by Optimize. Other value types are dropped. Use only when these indices are dedicated to Optimize.                                            | `false`      |
 | prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
+| priority                         | Priority of the index templates created for the `zeebe-record-*` indices. Raise it when other templates match the same pattern, so the exporter's template wins. Must be `>= 0`.                           | `20`         |
 | process                          | If `true` records related to processes will be exported.                                                                                                                                                   | `true`       |
 | process-event                    | If `true` records related to process events will be exported.                                                                                                                                              | `false`      |
 | process-instance                 | If `true` records related to process instances will be exported.                                                                                                                                           | `true`       |
@@ -289,6 +290,9 @@ camunda:
           index:
             prefix: zeebe-record
             createTemplate: true
+
+            # Priority of the index templates created by the exporter. Raise it if other templates match the same index pattern.
+            priority: 20
 
             command: false
             event: true

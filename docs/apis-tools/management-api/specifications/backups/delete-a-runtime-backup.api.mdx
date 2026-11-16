@@ -1,0 +1,142 @@
+---
+id: delete-a-runtime-backup
+title: "Delete a runtime backup"
+description: "Delete a backup with the given id. Deletes it in every physical tenant unless"
+sidebar_label: "Delete a runtime backup"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVk2P20YM/SsETwmg2k6QBqhu2+4iMNCPxWKLHtYLmJZoabISR5mhvGsY+u/FSONvb5D2VDS+GBhxSL7HxyE3qFR4TB/wrhU1NcOCsqe2wccEc/aZM40aK5jiNVesDBQN4NloCVoyFGbFAiYfwWDiwSgYAV6xW0NTrr3JqAJlIVFopWLvZzLffrjvz+cg5Jx99r1L27CjEBfUghUezQQTbMhRzcou5LtBoZoxxSGdaf6Hu3W8NC+YoOMvrXGcY6qu5QRNyL8hLfEU1DQHu+xDRlRqIe9RjGBwxx7IMYhV8G3TWKecjzBBn5VcE6YbVKNVSOTnwcP0+izKfckwvT6ONIJLp1C3XmERaG6sN2pWDNLW7HoKV1S1PIIrH639TEJulS3C52oN1uXsOIfFOvg0DqbXHt6Qz1hyI8XbBJiyEnybZex9cH4YtvUhbmmKkt1MptegJUmfXON4ZWzr97XQdRMwG1Eu2GGCS+tq0uHo4wdMkF+obgIx7xKsjZi6rTGddF2yq9yxAo7qtqTKbwv3pWW3PuP099fkspfkifRG8FfJArY2qpwnJzczu2LnB9HO5FS1sUhZ1Xpll8BzabISrACBN1JU/EM0jBZgYmbCMM95SW2l8+hsJiR5+Op4aR1DK1lJUoSycUkrY91A8bnCbrdZDYy9JjXTi5pO8SdAHjIrS1O0QSSt5OxgnlHdSk6jrXVE4ucjuNrB0ZJ0JrvLHiQgK8kDv1CmQXrC5wF30I9E49UZKQ4lgsMFwq57DDLwjRXPPmB/P/kQ/o5RxlYzPjZrjl2CP04m55ZTUXZCFbBzNug0s6IsGiypaSqT9eUff/bBfHOB9JtwEbY5nRH+iSV0584AltYBVTGg36O2i8+cBZU3LqhOzYCvZu+p4PPMh7jbz18jz9uatTRSwJJMFcjof4GR9+d+P5HyM62jbegYz5JD6D32uu2ghbNP7EbfHWEXxHYXmVk6W0MR2VMbKYIwNHOwrX5XXHUJhnObY4pDD/YDWktMcTwMlbhQjDenE7oLjxu71XaQt67CFDcDO106Hm9K67VLN2HadmPKtCW1bowJrsgZWlQDumA1QOsfGUyxshlV/fEpk7+RUME1i8IQGoJZP4i6BEOgY08/fZxMvsFJf7E7fKv3LkrV5htcxKtd//QZWdoLO8XBravbaeCBnR8cvht9NU+WvLFG+r7uB2kCSk+cQJhBQ+G2y0QYGr/EYTCQ4rWmXrhxYO9WQHe8K57E3+z74D+wNUZpK7/ouKnISMDWS24TBfuAR4LFBNOzpfIxiXJ7wM1mQZ7/dFXXheNhPQk6zo0P2tyvL6+y8v9fXi6y/sTrS2tfv9Ziihg6YNvh/5DRN3dxd3wL/36nv5h0PCRZH6a6BXMmlO6xS7Bkytn1EAazqyzj5hDr2XgI2Hcv6vXNrzf3N9h1fwNIYdFA
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a runtime backup"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/backupRuntime/{backupIdOrPrefix}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Delete a backup with the given id. Deletes it in every physical tenant unless
+`physicalTenant` narrows the operation to one.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "backupIdOrPrefix",
+      required: true,
+      in: "path",
+      description: "Id of the backup to delete. Prefixes are not supported.",
+      schema: {
+        title: "Backup ID",
+        description:
+          "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+        type: "integer",
+        format: "int64",
+        example: 1,
+        minimum: 0,
+      },
+    },
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "Backup is deleted" },
+    "500": {
+      description: "Internal error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

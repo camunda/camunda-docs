@@ -31,7 +31,7 @@ import OverviewImg from './assets/hero-self-managed.png';
 
 Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Developer and administrator quickstart" href="../quickstart/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
+<p class="link-button">[Developer and administrator quickstart](./quickstart/overview.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

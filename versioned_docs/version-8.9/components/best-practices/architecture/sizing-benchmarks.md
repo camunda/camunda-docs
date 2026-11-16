@@ -12,12 +12,12 @@ The sizing recommendations for [SaaS](sizing-saas.md) and [Self-Managed](sizing-
 
 Camunda uses the following realistic benchmark scenario:
 
-- **Process model:** [bankCustomerComplaintDisputeHandling.bpmn](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) (a credit card fraud dispute handling process from the [Camunda Marketplace blueprint](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling)).
-- **Payload:** [realisticPayload.json](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB).
+- **Process model:** [bankCustomerComplaintDisputeHandling.bpmn](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) (a credit card fraud dispute handling process from the [Camunda Marketplace blueprint](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling)).
+- **Payload:** [realisticPayload.json](https://github.com/camunda/camunda/blob/stable/8.9/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB).
 - This setup produces approximately **101 tasks per second at 1 PI/s** due to internal sub-process instantiation (50 sub-process instances per root instance).
 
 :::note
-The official sizing numbers on this page are produced using the [load-tester](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) tool from the Camunda monorepo.
+The official sizing numbers on this page are produced using the [load-tester](https://github.com/camunda/camunda/tree/stable/8.9/load-tests/load-tester) tool from the Camunda monorepo.
 :::
 
 ## Run your own benchmarks

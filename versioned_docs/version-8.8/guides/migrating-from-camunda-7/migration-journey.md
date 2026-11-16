@@ -314,7 +314,7 @@ Depending on your architecture you might also have to **re-architect** core part
 
 <!--TODO!!! -->
 
-As part of this effort you also have to **adjust your test cases**. If you used [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-platform/tree/master/test-utils/assert), a natural choice is to migrate to [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java). You can also leverage [code conversion patterns](./migration-tooling/code-conversion.md) or [OpenRewrite recipes](https://docs.openrewrite.org/). If you use other means of testing (such as Cucumber, camunda-bpm-scenario, and so on) you must adjust accordingly.
+As part of this effort you also have to **adjust your test cases**. If you used [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-platform/tree/master/test-utils/assert), a natural choice is to migrate to [Camunda Process Test](https://github.com/camunda/camunda/tree/stable/8.8/testing/camunda-process-test-java). You can also leverage [code conversion patterns](./migration-tooling/code-conversion.md) or [OpenRewrite recipes](https://docs.openrewrite.org/). If you use other means of testing (such as Cucumber, camunda-bpm-scenario, and so on) you must adjust accordingly.
 
 The [Code Migration Detector](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/code-migration-detector) (based on ArchUnit) can check how much Camunda 7 API is used in your codebase to allow you refactor to reduce the footprint step-by-step. Ideally, you can remove any Camunda 7 dependency at the end of your refactoring.
 

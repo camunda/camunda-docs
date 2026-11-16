@@ -82,12 +82,12 @@ Use `--force` to disable extension filtering during directory discovery, deployi
 c8 deploy ./my-project --force
 ```
 
-### Building blocks and process applications
+### Building blocks and projects
 
 `c8ctl` recognizes two special folder conventions during deployment:
 
 - Building blocks — folders containing `_bb-` in their name. These are deployed first.
-- Process applications — folders containing a `.process-application` marker file.
+- Projects — folders containing a `camunda.json` file (or, during the transition, the legacy `.process-application` marker file). See [camunda.json](camunda-json.md) and [migrate from process applications](/components/concepts/projects.md#migrate-from-process-applications).
 
 ```text
 my-project/
@@ -96,7 +96,7 @@ my-project/
 │   └── nested/
 │       └── util.bpmn
 ├── my-app/
-│   ├── .process-application
+│   ├── camunda.json
 │   ├── process.bpmn
 │   └── subfolder/
 │       └── form.form
@@ -120,7 +120,7 @@ _bb-shared/nested/util.bpmn     | Process | util       | 1       | 2251799813685
  standalone.bpmn                | Process | standalone | 1       | 2251799813685253
 ```
 
-Building block resources are listed first, followed by process application resources, then standalone resources.
+Building block resources are listed first, followed by project resources, then standalone resources.
 
 ### Duplicate process ID detection
 
@@ -187,10 +187,10 @@ c8 watch --force
 
 By default, `c8ctl` monitors the same extensions used by `deploy`. Use `--extensions` to override. Use `--force` to continue watching after deployment errors.
 
-When watching inside a process application (a folder tree containing a `.process-application` marker file), use `--process-application` (or its alias `--pa`) to watch and redeploy the entire application on each change:
+When watching inside a project (a folder tree containing a `camunda.json` marker file), use `--project` to watch and redeploy the entire project on each change. The legacy flags `--process-application` and `--pa` remain as deprecated aliases:
 
 ```bash
-c8 watch ./my-app --pa
+c8 watch ./my-app --project
 ```
 
 ### Continue watching after deployment errors

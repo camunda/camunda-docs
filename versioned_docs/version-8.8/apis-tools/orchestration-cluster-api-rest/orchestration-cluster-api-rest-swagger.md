@@ -4,7 +4,7 @@ title: "Try with Swagger"
 description: "Explore and test the Orchestration Cluster REST API endpoints interactively with Swagger UI."
 ---
 
-The Orchestration Cluster REST API is documented using the [OpenAPI specification](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml). You can explore, test, and interact with all API endpoints directly using [Swagger UI](https://swagger.io/tools/swagger-ui/) - an interactive documentation interface.
+The Orchestration Cluster REST API is documented using the [OpenAPI specification](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/gateway-protocol/src/main/proto/rest-api.yaml). You can explore, test, and interact with all API endpoints directly using [Swagger UI](https://swagger.io/tools/swagger-ui/) - an interactive documentation interface.
 
 **Use Swagger UI to:**
 
@@ -157,6 +157,6 @@ After exploring the API with Swagger UI:
 - **Review the complete API reference** in the [Overview](./orchestration-cluster-api-rest-overview.md)
 - **Set up proper authentication** following the [Authentication guide](./orchestration-cluster-api-rest-authentication.md)
 - **Learn advanced querying** with [Data Fetching and Search](./orchestration-cluster-api-rest-data-fetching.md)
-- **Download the OpenAPI specification** for [custom client generation](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml)
+- **Download the OpenAPI specification** for [custom client generation](https://github.com/camunda/camunda/blob/stable/8.8/zeebe/gateway-protocol/src/main/proto/rest-api.yaml)
 
 **Need help?** Try the [Getting Started Tutorial](/guides/getting-started-example.md) for a complete workflow walkthrough, or browse the [Postman collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest) for additional examples.

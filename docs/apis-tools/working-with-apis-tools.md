@@ -18,7 +18,7 @@ import { apiCards, clientCards } from './react-components/\_apitools-card-data';
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with the Camunda Java Client" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+<p class="link-button">[Get started with the Camunda Java Client](./java-client/getting-started.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -31,7 +31,7 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 :::info Upgrade to Camunda 8.10
 
 - Existing customer? Upgrade your APIs & tools to 8.10 using the [APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md).
-- See [what's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md), [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md), and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
+- See [what's new in Camunda 8.11](/reference/announcements-release-notes/8110/whats-new-in-811.md), [release announcements](/reference/announcements-release-notes/8110/8110-announcements.md), and [release notes](/reference/announcements-release-notes/8110/8110-release-notes.md).
 
 :::
 

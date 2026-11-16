@@ -33,6 +33,8 @@
     {
       groupName: "docusaurus",
       matchPackageNames: ["/docusaurus/"],
+      // openapi-docs majors peer-depend on Docusaurus minors, so they ship in one PR
+      separateMajorMinor: false,
     },
     {
       // Automerge docusaurus patches
@@ -41,9 +43,9 @@
       automerge: true,
     },
     {
-      // Require Docs team review for minor updates of docusaurus
+      // Require Docs team review for minor and major updates of docusaurus
       matchPackageNames: ["/docusaurus/"],
-      matchUpdateTypes: ["minor"],
+      matchUpdateTypes: ["minor", "major"],
       reviewers: ["@camunda/docs-api-reviewers"],
       automerge: false,
     },

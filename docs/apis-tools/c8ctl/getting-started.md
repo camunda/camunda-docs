@@ -153,7 +153,7 @@ SECRET_OPENAI_API_KEY=sk-... c8 cluster start
 
 ### Local physical tenants
 
-Physical tenants are isolated engines inside one local Camunda process, each with its own data, users, secrets, and Connectors runtime. They require **Camunda 8.10 or newer and a c8run build that includes the physical-tenant CLI**. Older cached 8.10 builds can predate this feature. `cluster start` reuses cached installations, so upgrading c8ctl alone does not upgrade the cached c8run; `cluster install 8.10` checks for an updated distribution. Run `c8 cluster physical-tenants help` to confirm support.
+Physical tenants are isolated engines inside one local Camunda process, each with its own data, users, secrets, and Connectors runtime. Use Camunda 8 Run 8.10.5+ for the physical tenant selection and listing behavior described here. `cluster install 8.10` downloads the latest 8.10 distribution; `cluster start` reuses the cached installation. Run `c8 cluster physical-tenants help` to inspect the available options.
 
 ```bash
 # Install a supporting distribution, then save physical tenants without starting Java
@@ -186,6 +186,10 @@ c8 cluster stop
 
 `cluster physical-tenants` delegates to c8run, which owns physical tenant validation, password prompting, persistence, configuration, and readiness checks. It also supports `reset --yes` and `add <id> --no-connectors`. `remove` and `reset` ask for confirmation; non-interactive use requires `--yes`. `--physical-tenants` is start-only, accepts comma-separated IDs, and can be repeated. The startup output includes per-physical-tenant endpoints and readiness. A failed physical tenant can leave healthy engines running; the command returns a failure and `c8 cluster stop` stops the surviving processes.
 
+Selecting saved physical tenants preserves their dedicated credentials and `--no-connectors` settings. Unsaved IDs use the startup login and Connectors defaults. `--disable-connectors` disables all connector runtimes. Selection leaves the saved configuration unchanged; unreadable or invalid saved configuration prevents locally managed startup.
+
+`c8 cluster physical-tenants list` shows effective startup settings for active physical tenants and saved settings for stopped or pending physical tenants. Active IDs absent from the saved configuration appear as `active (not saved)`. Login and Connectors settings are `unknown` if legacy startup metadata doesn't record them.
+
 Management commands select an explicit leading `--c8-version`, otherwise the running cluster's version, otherwise the highest locally installed version. They never download a distribution automatically. Keep the same version selected when configuring and starting a cluster. Both secrets and physical-tenant commands preserve c8run's output and exit status; `--json` does not convert that output to JSON. Use the `help` subcommand for c8run help, because `--help` belongs to c8ctl. `--dry-run` previews these delegated calls and cluster starts without launching c8run or reading stdin.
 
 `C8RUN_TENANTS_FILE` selects the saved physical tenants file; `C8RUN_SECRETS_DIR` selects the default secrets directory. Relative values and secret import filenames are resolved against the caller's working directory, including on startup. Without overrides, c8run's per-OS-user defaults apply. Each physical tenant's secret directory is a sibling under `tenant-secrets/<id>`. Both `--physical-tenant <id>` and `--physical-tenant=<id>` are supported. c8ctl adds no physical tenant or secret store of its own.
@@ -194,7 +198,7 @@ Physical tenant IDs contain lowercase letters and digits. With the bundled H2 or
 
 #### Inspect a physical tenant with a profile
 
-Physical tenants use a distinct REST base path. For a tenant using the default `demo` login:
+Physical tenants use a distinct REST base path. For a physical tenant using the default `demo` login:
 
 ```bash
 c8 add profile local-sales \
@@ -204,7 +208,7 @@ c8 add profile local-sales \
 c8 --profile local-sales list process-definitions
 ```
 
-Configure the profile's authentication to match a dedicated tenant login when used. Existing `create tenant`, `list tenants`, and `use tenant` commands manage or select **logical tenants inside an engine**; they do not create or select physical engines. Profiles select the physical tenant's API endpoint. No profiles are created or switched automatically by `cluster physical-tenants`.
+Configure the profile's authentication to match a dedicated physical tenant login when used. Existing `create tenant`, `list tenants`, and `use tenant` commands manage or select **logical tenants inside an engine**; they do not create or select physical engines. Profiles select the physical tenant's API endpoint. No profiles are created or switched automatically by `cluster physical-tenants`.
 
 ### Version aliases
 
@@ -212,7 +216,7 @@ The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Down
 
 | Alias    | Resolves to                                              |
 | :------- | :------------------------------------------------------- |
-| `stable` | Highest minor release that is GA (for example, 8.9)      |
+| `stable` | Highest minor release that is GA (for example, 8.10)     |
 | `alpha`  | Highest minor release overall (for example, 8.10-alpha0) |
 
 When no version is specified, `c8 cluster start` defaults to `stable`.
@@ -532,24 +536,24 @@ For scripts that invoke multiple commands, set `C8CTL_OUTPUT_MODE=json` in their
 
 `c8ctl --version` (or `c8ctl -v`) always writes its result to stdout and exits `0`:
 
-| Effective output mode | stdout                                           |
-| :-------------------- | :----------------------------------------------- |
-| Text                  | `c8ctl v<version>`                               |
-| JSON                  | `{"status":"info","message":"c8ctl v<version>"}` |
+| Effective output mode | stdout |
+| :-------------------- | :----- |
+| Text | `c8ctl v<version>` |
+| JSON | `{"status":"info","message":"c8ctl v<version>"}` |
 
 This applies whether JSON mode comes from `--json`, `C8CTL_OUTPUT_MODE`, or the saved preference. The version is primary command output, not a diagnostic, despite the JSON envelope's `status: "info"`. Diagnostics remain on stderr in JSON mode. The version payload is not filtered by `--fields`, and requesting the version does not change the saved preference.
 
 ## Environment variables
 
-| Variable                    | Description                   |
-| :-------------------------- | :---------------------------- |
-| `CAMUNDA_BASE_URL`          | Cluster base URL              |
-| `CAMUNDA_CLIENT_ID`         | OAuth client ID               |
-| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret           |
-| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience          |
-| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint          |
+| Variable                    | Description          |
+| :-------------------------- | :------------------- |
+| `CAMUNDA_BASE_URL`          | Cluster base URL     |
+| `CAMUNDA_CLIENT_ID`         | OAuth client ID      |
+| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
+| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
+| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
 | `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
-| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID             |
+| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
 

@@ -105,6 +105,10 @@ The following features are not currently supported:
 | Pinning a secret to a non-current version                  | AWS Secrets Manager secrets cannot be pinned to a version stage other than `AWSCURRENT`, and GCP Secret Manager secrets cannot be pinned to a version other than `latest`. |
 | Filtering or paginating a `POST /v2/secrets/list` response | See [secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).                                                          |
 
+## Testing
+
+To supply cluster secrets when you test processes with Camunda Process Test, see [cluster secrets in Camunda Process Test](/apis-tools/testing/connectors.md#cluster-secrets).
+
 ## Related resources
 
 - [Secret resolution and job activation](secret-resolution-and-job-activation.md) covers the broker path in detail: the scheduler, retries, and both delivery paths.

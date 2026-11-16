@@ -117,6 +117,77 @@ The `--requestTimeout` option sets the maximum wait time in milliseconds. When o
 c8 cancel pi 2251799813685249
 ```
 
+### Migrate a process instance
+
+Move a running process instance to another process definition — typically a newer version of the same process — without restarting it. The instance keeps its key, variables, and history.
+
+Pass the key of the target process definition (find it with `c8 list pd`) and map every active element of the instance to its counterpart in the target definition with a repeatable `--map <sourceElementId>=<targetElementId>`:
+
+```bash
+c8 migrate pi 2251799813685249 \
+  --targetProcessDefinitionKey 2251799813686001 \
+  --map Task_Review=Task_ReviewV2 \
+  --map Task_Ship=Task_Ship
+```
+
+To migrate all active instances of a process definition at once, omit the instance key and pass the source definition key with `--processDefinitionKey`. This creates an asynchronous batch operation and prints its key:
+
+```bash
+c8 migrate pi \
+  --processDefinitionKey 2251799813685100 \
+  --targetProcessDefinitionKey 2251799813686001 \
+  --map Task_Review=Task_ReviewV2
+```
+
+Add `--dry-run` to preview the request, including the parsed mapping instructions, without migrating anything. The cluster validates the migration itself and rejects unsupported changes with an explanatory error. See [process instance migration](/components/concepts/process-instance-migration.md) for what can be migrated.
+
+### Modify a process instance
+
+Repair a running process instance that is stuck on an element or took an unintended path by changing where its tokens are, without changing its process definition. Each instruction flag is repeatable, and all instructions of one command are applied together or not at all.
+
+- `--activate <elementId>` activates an element.
+- `--terminate <elementId|elementInstanceKey>` terminates an element instance. An element ID terminates every active instance of that element, and a key terminates exactly that one.
+- `--move <source>=<targetElementId>` terminates the instances at the source (an element ID or element instance key) and activates the target. This is the recommended way to relocate a token.
+
+An instruction flag without a value, for example `--activate "$TARGET"` with `TARGET` unset, fails the command instead of being ignored. This way a command never applies only part of the instructions you intended.
+
+Camunda 8.8 supports only `--activate` and `--terminate <elementInstanceKey>` on a single instance. Moving and terminating by element ID require Camunda 8.9 or later; on 8.8, use `--activate <target>` together with `--terminate <elementInstanceKey>` instead.
+
+To find the element instance keys of the elements an instance is waiting on, use `c8 search ws --processInstanceKey <key>` (see [Search wait states](#search-wait-states)).
+
+```bash
+c8 modify pi 2251799813685249 --move Task_Charge=Task_Review
+
+c8 modify pi 2251799813685249 --activate Task_Retry --terminate 2251799813685300
+```
+
+For instructions that need more than an element, such as choosing the ancestor scope of an activation or setting variables while activating or moving, pass the full request body as JSON with `--instructions`, inline or read from a file (`@instructions.json`) or stdin (`@-`). Instructions from `--instructions` are combined with the instruction flags:
+
+```bash
+c8 modify pi 2251799813685249 --instructions @instructions.json
+```
+
+```json
+{
+  "moveInstructions": [
+    {
+      "sourceElementInstruction": { "sourceType": "byId", "sourceElementId": "Task_Charge" },
+      "targetElementId": "Task_Review",
+      "ancestorScopeInstruction": { "ancestorScopeType": "sourceParent" },
+      "variableInstructions": [{ "variables": { "approved": false } }]
+    }
+  ]
+}
+```
+
+To move tokens in all active instances of a process definition at once, omit the instance key and pass the definition key with `--processDefinitionKey`. Batch modification only supports `--move` by element ID. It creates an asynchronous batch operation and prints its key:
+
+```bash
+c8 modify pi --processDefinitionKey 2251799813685100 --move Task_Charge=Task_Review
+```
+
+Add `--dry-run` to preview the request without modifying anything. The cluster validates the instructions and rejects unsupported modifications with an explanatory error. See [process instance modification](/components/concepts/process-instance-modification.md) for what can be modified.
+
 ## User tasks
 
 ### List user tasks
