@@ -649,7 +649,7 @@ The script waits for Management Identity to create its client, assigns `kc-admin
 - It's idempotent. It does nothing if the client already has the scope, or if your Keycloak has no `kc-admin-api` scope (versions earlier than 26.8.2).
 - It reads `CAMUNDA_NAMESPACE` and `CAMUNDA_RELEASE_NAME` from the [environment setup](#step-2-environment-setup). Its other defaults match this guide (pod `keycloak-0`, realm `camunda-platform`). See the script header for the variables that override them.
 - If it can't finish within `KEYCLOAK_ADMIN_API_TIMEOUT_SECONDS` (default `600`), it prints a warning and exits with code `0`. In that case, check that the Identity pod is running before you continue.
-- On OpenShift, set `KUBECTL=oc` if `kubectl` isn't installed.
+- The script uses `oc` automatically if `kubectl` isn't installed. To force it, set `KUBECTL=oc`.
 
 <details>
 <summary>Grant script source</summary>
