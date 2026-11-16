@@ -273,7 +273,7 @@ A secret name containing a character FEEL doesn't allow in a bare identifier (mo
 
 Without the backticks, `camunda.secrets.db-password` parses as a subtraction (`db` minus `password`). FEEL reads the left operand as a reference named `db`, which is not a valid secret reference, so the deployment fails at evaluation.
 
-A secret name can contain only ASCII letters, digits, `_`, and `-`. Rename any secret with other characters before you reference it.
+Name your secrets with ASCII letters, digits, `_`, and `-` only. A backtick-escaped name with other characters, such as ``=camunda.secrets.`tls.crt` ``, still resolves in an input mapping, but not everywhere else. See [reference a name with other characters](secret-resolution.md#reference-a-name-with-other-characters).
 
 ### Output mappings
 

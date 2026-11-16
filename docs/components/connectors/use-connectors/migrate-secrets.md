@@ -93,7 +93,7 @@ For the full rules, see [secret references in input mappings](/components/concep
 
 ## Name your secrets
 
-A secret name can contain only ASCII letters, digits, `_`, and `-`. Rename any secret with other characters before you migrate.
+A secret name can contain only ASCII letters, digits, `_`, and `-`. Rename any secret with other characters before you migrate. To learn where such a name still works, see [reference a name with other characters](/components/concepts/secret-resolution.md#reference-a-name-with-other-characters).
 
 A name with a dash must be backtick-escaped, for example ``=camunda.secrets.`db-password` ``. Without the backticks, FEEL reads `camunda.secrets.db-password` as `db` minus `password`.
 

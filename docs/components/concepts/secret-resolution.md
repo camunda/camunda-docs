@@ -43,7 +43,22 @@ A reference has the form `camunda.secrets.<name>`, where `<name>` is a single, n
 
 An unescaped dashed name is not a reference. FEEL reads `=camunda.secrets.db-password` as the reference `db` minus the variable `password`.
 
-Name every secret with these characters only, including secrets you create, list, or grant permissions on through `/v2/secrets/*`. Rename any secret with other characters before you reference it.
+Name your secrets with these characters only, so a reference works everywhere Camunda reads secrets.
+
+### Reference a name with other characters
+
+A name with other characters, such as `tls.crt` or `résumé`, only works in input mappings on tasks handled by a job worker or an outbound connector. Use such a name only if your secret store already holds it and you can't rename it.
+
+In those input mappings, backtick-escape the name, for example ``=camunda.secrets.`tls.crt` ``. The engine finds a reference by parsing the FEEL expression, so any name FEEL accepts between backticks resolves. Every other place reads secrets through the `/v2/secrets` API, which only accepts names matching `[\p{Alnum}_-]+`.
+
+| Where the reference is used                                                      | `API_TOKEN`, `` `db-password` `` | `` `tls.crt` ``, `` `résumé` `` |
+| :------------------------------------------------------------------------------- | :------------------------------: | :-----------------------------: |
+| Input mapping or connector field on a job worker or outbound connector           |               Yes                |               Yes               |
+| Inbound connector property                                                       |               Yes                |               No                |
+| Camunda Hub credential field                                                     |               Yes                |               No                |
+| Legacy `{{secrets.<name>}}` reference resolved through fallback mode             |               Yes                |               No                |
+| Value of a `SECRET_REFERENCE` cluster variable                                   |               Yes                |               No                |
+| `POST /v2/secrets/resolve`, `POST /v2/secrets/list`, and `SECRET` authorizations |               Yes                |               No                |
 
 ## Resolution paths
 

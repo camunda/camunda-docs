@@ -69,4 +69,4 @@ In SaaS, the secret store is provisioned and managed for you. You don't configur
 
 In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
 
-A key referenced as `camunda.secrets.<key>` can contain only ASCII letters, digits, `_`, and `-`. Rename any key with other characters before you use it this way. A key with a `-` must be backtick-escaped in FEEL (for example, `` =camunda.secrets.`db-password` ``), because a bare `-` is FEEL's minus operator.
+A key referenced as `camunda.secrets.<key>` can contain only ASCII letters, digits, `_`, and `-`. Rename any key with other characters before you use it this way. To learn where such a key still works, see [reference a name with other characters](/components/concepts/secret-resolution.md#reference-a-name-with-other-characters). A key with a `-` must be backtick-escaped in FEEL (for example, `` =camunda.secrets.`db-password` ``), because a bare `-` is FEEL's minus operator.
