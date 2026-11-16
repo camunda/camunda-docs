@@ -85,6 +85,46 @@ Starting with 8.11, when you suspend a process instance, Camunda marks its user 
 </div>
 </div>
 
+## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Kafka Producer connector no longer converts Avro union values to the first record {#kafka-producer-avro-union-record-selection}
+
+Starting with 8.11, the [Kafka Producer connector](/components/connectors/out-of-the-box-connectors/kafka.md) selects the record type of an Avro union value from the value itself, instead of always using the first record of the union.
+
+This change affects you only if you use the **Kafka Producer connector** with the **Schema registry** schema strategy and the Avro schema type. The **No schema** and **Inline schema** strategies, JSON schemas in the schema registry, the **Kafka Consumer connector**, and Avro schemas without union fields are not affected.
+
+Previously, the connector converted every object value of a union field to the first record type of the union. For example, for the field `"payload": ["null", "CreateTask", "CancelTask"]`, the connector always converted the value to `CreateTask` and silently dropped keys that don't belong to that record.
+
+Now, the connector selects the record type as follows:
+
+1. If the value is an object with exactly one key, and that key is the name of a type in the union, the connector uses that type. For example, `{"test.CancelTask": {"taskId": "1", "reason": "duplicate"}}`. The short name also works if only one type in the union has that name.
+2. Otherwise, the connector selects the record that has a field for every key in the value and receives all its required fields. A field is required if it has no default value and isn't nullable. If no record has a field for every key, the connector ignores unknown keys and applies the required-fields rule only.
+3. If the value fits several records or none, the task fails. The error lists the types of the union and shows the type name wrapper to use.
+
+This applies to union fields in a record, array items whose type is a union, and top-level unions. If a union contains only one record type, for example `["null", "Address"]`, the connector uses that record as before.
+
+For example, a `payload` value of `{"taskId": "1", "title": "t", "priority": 1, "reason": "r"}` was previously sent as `CreateTask`, and `reason` was lost. Now, the task fails with the error `The value matches several types of the union [null, test.CreateTask, test.CancelTask]`.
+
+If a union contains several records and a `map` type, a value that matches none of the records is now written as the map. Previously, it was written as the first record.
+
+The following related changes apply to the **Schema registry** strategy with Avro:
+
+- A topic can now carry several record types if its value subject holds a top-level Avro union. Register the union in the schema registry and set the schema source to **From registry**. Previously, every message to such a topic failed with `Not a record schema`.
+- A field that you omit from the message value now gets its default value from the schema. Previously, the connector serialized the field as `null`, and the task failed for non-nullable fields with a non-null default.
+- Arrays whose items are a union, and maps whose values are records, are now converted correctly. Previously, they failed with `Error serializing Avro message`.
+- A union schema with the **Inline** schema source now fails with an error that asks you to register the union and select **From registry**. Previously, it failed with `Not a record schema`.
+
+**Action:** Check the message values that you send to Avro union fields with several record types. If a value contains fields of more than one record, wrap it with the name of the intended type, for example `{"test.CreateTask": {"taskId": "1", "title": "t", "priority": 1}}`, or remove the keys that don't belong to the intended record.
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
