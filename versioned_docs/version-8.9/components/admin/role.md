@@ -41,9 +41,7 @@ To delete a role:
 
 The role is deleted. The authorizations that were granted to the role are also removed.
 
-:::note
-Before Camunda 8.9.29, deleting a role did not remove the role from the tenants it was assigned to. This assignment grants nothing while no role with that ID exists, and it is removed when a role with the same ID is created. To remove it earlier, unassign the role from the tenant with the Orchestration Cluster REST API: `DELETE /v2/tenants/{tenantId}/roles/{roleId}`. The request also works for a role that no longer exists.
-:::
+Roles deleted before Camunda 8.9.29 can remain assigned to tenants. This assignment grants nothing while no role with that ID exists, and Camunda removes it when you create a role with the same ID. To remove it earlier, use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to unassign the role from the tenant: `DELETE /v2/tenants/{tenantId}/roles/{roleId}`. The request also works for a role that no longer exists.
 
 ## Assign authorizations to a role
 
