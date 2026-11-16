@@ -44,9 +44,9 @@ To validate an element in Camunda Hub:
    - Provide realistic sample data to reflect actual execution conditions.
 5. Click **Execute** to run the element.
 
-Camunda Hub automatically deploys the process before executing the element. The element executes on the environment or cluster selected in the **Runtime** selector, using your defined input data. To execute against a different runtime, [change the runtime connection](../modeling/connect-to-a-runtime.md#change-the-runtime-connection). If you're connected to a production runtime, the **Validate** tab shows **You are connected to a production cluster** (or **production environment**), because executing an element there uses production data and can cause real side effects.
+Camunda Hub automatically deploys the process before executing the element. The element executes on the environment or cluster selected in the **Runtime** selector, using your defined input data. To execute against a different runtime, [change the runtime connection](../modeling/connect-to-a-runtime.md#change-the-runtime-connection). If you're connected to a production runtime, the **Validate** tab shows **You are connected to a production environment**, because executing an element there uses production data and can cause real side effects.
 
-<img src={TaskTestingProductionWarningImg} width="400px" alt="Validate tab of the Details panel showing the warning You are connected to a production cluster above the Execute button" />
+<img src={TaskTestingProductionWarningImg} width="400px" alt="Validate tab of the Details panel showing the warning You are connected to a production environment above the Execute button" />
 
 During execution, the log displays each step in real time, including any states where the execution is waiting for an external action to complete. Click **Cancel** to stop waiting. The process instance keeps running on the cluster.
 
