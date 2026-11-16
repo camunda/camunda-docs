@@ -6,7 +6,7 @@ description: Define shareable, low-code test cases for your BPMN processes
 
 Test files let you define shareable, low-code test cases for your BPMN processes.
 
-They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json), so you can use the same files in Test mode and in an automated CPT test suite. You can create, edit, and manage them directly in Camunda Hub. You can also download these files or synchronize them with your Git repository using Git Sync.
+They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json), so you can use the same files in Test mode and in an automated CPT test suite. You can create, edit, and manage them directly in Camunda Hub. You can also download these files or synchronize them with your Git repository using Git Sync.
 
 ## Create a test file
 
@@ -22,7 +22,7 @@ Test files follow the [CPT JSON test cases schema](/apis-tools/testing/json-test
 
 ```json
 {
-  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
+  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json",
   "processId": "order-fulfillment-process",
   "testCases": [
     {
@@ -258,9 +258,30 @@ Checks that one or more process or local variables have expected values. Support
 }
 ```
 
+### Assert a variable with a condition
+
+Checks a single process or local variable against a FEEL expression, an AI judge, or a semantic similarity check. Supports Test mode's [variable assertions](test-your-process.md#variable-assertions).
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "order-process"
+  },
+  "variableName": "orderTotal",
+  "satisfiesExpression": "orderTotal > 0"
+}
+```
+
+Use `satisfiesJudge` (with `expectation`, and optionally `threshold`, `customPrompt`, and `attachDocuments`) or `similarTo` (with `expectedValue`, and optionally `threshold`) instead of `satisfiesExpression` for AI-based checks.
+
+:::note
+Test mode saves `satisfiesJudge` and `similarTo` conditions but skips them when running a test case. They run only with CPT. See the [instruction reference](/apis-tools/testing/json-test-cases.md#assert_variable) for all properties.
+:::
+
 ### Assert an element instance (path)
 
-Checks that a specific element reached an expected state. Supports Test mode's [element (path) assertions](test-your-process.md#element-path-assertions).
+Checks that a specific element reached an expected state. Supports Test mode's [element (path) assertions](test-your-process.md#element-assertions).
 
 ```json
 {
@@ -275,6 +296,26 @@ Checks that a specific element reached an expected state. Supports Test mode's [
 }
 ```
 
+### Assert multiple element instances
+
+Checks the state of several elements at once, for example that they completed in a given order. Supports Test mode's [element assertions](test-your-process.md#element-assertions).
+
+```json
+{
+  "type": "ASSERT_ELEMENT_INSTANCES",
+  "processInstanceSelector": {
+    "processDefinitionId": "order-process"
+  },
+  "elementSelectors": [
+    { "elementId": "processOrder" },
+    { "elementId": "shipOrder" }
+  ],
+  "state": "IS_COMPLETED_IN_ORDER"
+}
+```
+
+This instruction supports the states `IS_ACTIVE`, `IS_COMPLETED`, `IS_TERMINATED`, `IS_NOT_ACTIVE`, `IS_NOT_ACTIVATED`, `IS_ACTIVE_EXACTLY`, and `IS_COMPLETED_IN_ORDER`.
+
 ### Assert a process instance
 
 Checks the overall state of the process instance. Supports Test mode's [process instance assertions](test-your-process.md#process-instance-assertions).
@@ -285,9 +326,12 @@ Checks the overall state of the process instance. Supports Test mode's [process 
   "processInstanceSelector": {
     "processDefinitionId": "order-process"
   },
-  "state": "IS_COMPLETED"
+  "state": "IS_COMPLETED",
+  "hasActiveIncidents": false
 }
 ```
+
+Both `state` and `hasActiveIncidents` are optional.
 
 ## Usage tips
 
