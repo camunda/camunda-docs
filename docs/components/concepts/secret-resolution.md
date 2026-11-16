@@ -43,13 +43,13 @@ A reference has the form `camunda.secrets.<name>`, where `<name>` is a single, n
 
 An unescaped dashed name is not a reference. FEEL reads `=camunda.secrets.db-password` as the reference `db` minus the variable `password`.
 
-Name your secrets with these characters only, so a reference works everywhere Camunda reads secrets.
+Name your secrets with ASCII letters, digits, `_`, and `-` only, so a reference works everywhere Camunda reads secrets.
 
 ### Reference a name with other characters
 
-A name with other characters, such as `tls.crt` or `résumé`, only works in input mappings on tasks handled by a job worker or an outbound connector. Use such a name only if your secret store already holds it and you can't rename it.
+Backtick-escape a name with other characters, such as `tls.crt` or `résumé`, to reference it, for example ``=camunda.secrets.`tls.crt` ``. This only works in input mappings on tasks handled by a job worker or an outbound connector. Use such a name only if your secret store already holds it and you can't rename it.
 
-In those input mappings, backtick-escape the name, for example ``=camunda.secrets.`tls.crt` ``. The engine finds a reference by parsing the FEEL expression, so any name FEEL accepts between backticks resolves. Every other place reads secrets through the `/v2/secrets` API, which only accepts names matching `[\p{Alnum}_-]+`.
+The engine finds a reference by parsing the FEEL expression, so any name FEEL accepts between backticks resolves. Every other place reads secrets through the `/v2/secrets` API, which only accepts names matching `[\p{Alnum}_-]+`.
 
 | Where the reference is used                                                      | `API_TOKEN`, `` `db-password` `` | `` `tls.crt` ``, `` `résumé` `` |
 | :------------------------------------------------------------------------------- | :------------------------------: | :-----------------------------: |
