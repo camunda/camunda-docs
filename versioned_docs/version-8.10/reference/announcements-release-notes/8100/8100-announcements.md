@@ -211,9 +211,10 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 The following key changes were also released as part of an 8.10.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
-| :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| Patch release                                                    | Artifact | Type            | Key change                                                                                                                                |
+| :--------------------------------------------------------------- | :------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression      | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9) | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
 
 ## Agentic orchestration
 
@@ -299,6 +300,31 @@ A new `messageSubscriptionType` enum field is included in each result. Existing 
 ```
 
 <p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#message-subscription-type)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /v2/authentication/me` answers a caller without credentials on an unprotected API {#anonymous-current-user}
+
+Starting with 8.10.9, when the API is unprotected (`camunda.security.authentication.unprotected-api: true`, the default for Camunda 8 Run), [`GET /v2/authentication/me`](/apis-tools/orchestration-cluster-api-rest/specifications/get-authentication.api.mdx) answers a caller without credentials with `200 OK` and an anonymous current user. Previously, it answered `401 Unauthorized`, which no credentials can resolve on an unprotected API.
+
+The `CamundaUserResult` response changes as follows:
+
+- A new required `isAnonymous` field is `true` for a caller without credentials and `false` for every authenticated user.
+- `username` is still required, but it can now be `null`. It's `null` only when `isAnonymous` is `true`. `displayName` and `email` are also `null` then.
+- An anonymous caller gets `["*"]` as `authorizedComponents`, empty `tenants`, `groups`, and `roles`, and `canLogout: false`.
+
+A protected API is not affected at runtime. It still answers `401` to a caller without credentials, and an authenticated user always has a `username`.
+
+**Why this is a breaking change:** A client generated from the API specification types `username` as `string | null` instead of `string`, so code that uses it as a non-null string can fail to compile. A caller without credentials has no user name, so the field can't stay non-null. Camunda chose to fix the unprotected API in 8.10 rather than keep the `401`.
+
+**Action:** If you generate a client from the Orchestration Cluster API specification, check `isAnonymous`, or handle a `null` `username`, before you use the user name.
 
 </div>
 </div>

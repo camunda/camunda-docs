@@ -8,7 +8,7 @@ description: Configure the audit log in Camunda 8 Self-Managed.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Configure the audit log in Camunda 8 Self-Managed.
+Configure the [audit log](/reference/glossary.md#audit-log) in Camunda 8 Self-Managed.
 
 ## Configure recorded operations
 

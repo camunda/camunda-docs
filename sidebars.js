@@ -328,7 +328,6 @@ module.exports = {
         "components/concepts/signals",
         "components/concepts/conditionals",
         "components/concepts/variables",
-        "components/concepts/variable-protection",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
         "components/concepts/decision-instance-deletion",
@@ -473,6 +472,19 @@ module.exports = {
           ],
         },
         "components/wait-states/overview",
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "components/audit-log/overview",
+          },
+          items: [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure",
+          ],
+        },
         {
           type: "category",
           label: "Camunda integrations",
@@ -1170,7 +1182,12 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                {
+                  "AWS EventBridge": [
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-outbound",
+                  ],
+                },
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 {
@@ -2767,6 +2784,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
                 "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component",
               ],
             },
             "self-managed/components/management-identity/authentication",
