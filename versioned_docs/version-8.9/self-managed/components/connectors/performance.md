@@ -90,6 +90,14 @@ performance bottleneck will be due to objective CPU limitations or external syst
 
 We recommend gradually increasing the `max-in-flight` value while monitoring the performance and resource usage of your connector runtime until you reach an optimal configuration.
 
+:::caution Known issue with virtual threads on Java 24 and later
+On Java 24 and later, a connector runtime that uses virtual threads can, in rare cases, stop processing jobs under load. The cause is a known upstream limitation: the JVM pins a virtual thread to its carrier thread while it loads a class (see [JEP 491](https://openjdk.org/jeps/491)), which can deadlock with the class loader of a Spring Boot fat jar (see [spring-boot#51463](https://github.com/spring-projects/spring-boot/issues/51463)).
+
+Camunda is monitoring both issues and has made changes in the connector runtime to make this situation less likely.
+
+If your connector runtime stops processing jobs, [disable virtual threads](#platform-threads-executor) and set both `max-jobs-active` and `execution-threads` as described there.
+:::
+
 ### Platform threads executor
 
 You can disable virtual threads and use platform threads instead by setting the following property:
