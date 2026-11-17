@@ -69,6 +69,8 @@ When a request arrives at an authenticated endpoint, Camunda matches the JWT tok
 
 Both checks are enforced at the API security filter chain level. A token whose `iss` claim matches no configured provider fails with an authentication error naming the unrecognized issuer. A token with a valid issuer but a non-matching audience is also rejected.
 
+The identity provider that verifies the token also determines how Camunda reads it. The principal claims (`username-claim`, `client-id-claim`, and `prefer-username-claim`) and the UserInfo setting (`user-info-enabled`) come from that provider, in the Physical Tenant that received the request. Another Physical Tenant can configure a provider for the same issuer with other settings, and those settings don't apply to tokens received by this Physical Tenant.
+
 ## Per-tenant authorization
 
 Roles, permissions, and mapping rules are local to each Physical Tenant. They are **not** stored or managed in the identity provider.

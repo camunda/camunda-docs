@@ -16,6 +16,7 @@ keywords:
     "process automation platform",
     "process automation software",
     "process orchestration",
+    "agentic orchestration platform",
   ]
 page_rank: 90
 ---
@@ -30,7 +31,7 @@ import { featuresCards, usingCamundaCards } from './react-components/\_using-car
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Orchestrate and automate complex business processes for people, systems, devices, and [AI agents](/reference/glossary.md#ai-agent). Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
+Build [AI agents](/reference/glossary.md#ai-agent) and orchestrate them with people and systems in end-to-end processes. Model BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics.
 
 <p class="link-button">[Learn how to build agentic solutions](../guides/build-with-ai/overview.md)</p>
 

@@ -49,6 +49,25 @@ Releases in each section are listed newest first. For installation instructions,
 ## Alpha
 
 <details>
+<summary>1.1.0-alpha.4 (2026-11-09)</summary>
+
+#### Features
+
+- Split the customer-info gate and validate checks on merge groups
+- Name github release artifacts like the download center
+- Write sparse business notes instead of technical annotations
+- Write human-facing reports in simple English
+- Share the BPMN diff viewer and the Camunda report theme
+- Generate review questions for the migration tier
+
+#### Bug fixes
+
+- Map model-review finding v2 to no-gateway-join-fork
+- Treat four-part version in markdown link as version, not ipv4
+
+</details>
+
+<details>
 <summary>1.1.0-alpha.3 (2026-11-02)</summary>
 
 #### Bug fixes

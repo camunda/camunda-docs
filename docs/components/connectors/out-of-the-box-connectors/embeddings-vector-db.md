@@ -84,7 +84,7 @@ To perform this operation, enter the following:
 
 - **Operation** dropdown: **Retrieve document**.
 - **Search query**: Enter your search query.
-- **Max results**: Enter maximum amount of returned results.
+- **Max results**: Enter the maximum number of results to return. Amazon DynamoDB and Amazon S3 Vectors return at most 100 results per query. A higher value causes the operation to fail.
 - **Min score**: Enter the lowest score threshold similarity value; the value should be between 0 and 1, for example, 0.81.
 - **Embedding model**: Refer to the [relevant section](#embedding-models).
 - **Vector store**: Refer to the [relevant section](#vector-stores).
@@ -118,6 +118,8 @@ Camunda document reference metadata, similarity score, and the actual text conte
   ]
 }
 ```
+
+The **Retrieve document** operation fails if a matching vector store entry has no text, for example an entry the **Embed document** operation didn't write.
 
 </TabItem>
 
@@ -231,7 +233,9 @@ Two authentication methods are supported:
 
 <Tabs groupId="vector" defaultValue="amazon-opensearch" queryString values={
 [
+{label: 'Amazon DynamoDB', value: 'amazon-dynamodb' },
 {label: 'Amazon OpenSearch', value: 'amazon-opensearch' },
+{label: 'Amazon S3 Vectors', value: 'amazon-s3-vectors' },
 {label: 'Azure AI Search', value: 'azure-ai-search' },
 {label: 'Azure Cosmos DB NoSQL', value: 'azure-cosmos-db' },
 {label: 'Elasticsearch', value: 'elasticsearch' },
@@ -278,6 +282,68 @@ Enter the following parameters:
 - **Index name** – Name of the index where you wish to store embeddings.
   - When embedding: If the index is not present, the connector will create a new one.
   - When retrieving: If the index is absent, the connector will raise an error.
+
+</TabItem>
+
+<TabItem value='amazon-s3-vectors'>
+
+Enter the following parameters:
+
+- **Amazon S3 Vectors credential** – (Optional) A reusable [credential](/components/hub/organization/credentials/index.md) that holds the access key and secret key. If you leave it empty, enter **Access key** and **Secret key** instead.
+- **Access key** and **Secret key** – AWS IAM credentials for a user with the permissions listed below.
+- **Region** – AWS region of the vector bucket, for example `us-east-1`.
+- **Vector bucket name** – Name of an existing [S3 vector bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-buckets.html).
+- **Index name** – Name of the vector index where you wish to store embeddings. The name must be 3 to 63 characters long, contain only lowercase letters, digits, hyphens, or dots, and start and end with a letter or digit.
+  - When embedding: If the index is not present, the connector creates it with cosine distance and the dimensions of the embedding model.
+  - When retrieving: If the index is absent, the connector raises an error.
+
+To use an existing index, make sure it:
+
+- Has the same number of dimensions as the embedding model.
+- Declares `_page_content` as a non-filterable metadata key. The connector stores the chunk text in this key.
+
+The connector scores results with the distance metric of the existing index, or cosine distance for an index it creates.
+
+The connector stores only the chunk text, not the metadata parsed from the document, because parsed metadata can exceed the [Amazon S3 Vectors metadata limits](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html).
+
+The IAM user needs permission for the following actions:
+
+- `s3vectors:GetIndex`
+- `s3vectors:PutVectors`
+- `s3vectors:QueryVectors`
+- `s3vectors:GetVectors`
+- `s3vectors:CreateIndex`, only if the connector creates the index.
+
+</TabItem>
+
+<TabItem value='amazon-dynamodb'>
+
+Enter the following parameters:
+
+- **Amazon DynamoDB credential** – (Optional) A reusable [credential](/components/hub/organization/credentials/index.md) that holds the access key and secret key. If you leave it empty, enter **Access key** and **Secret key** instead.
+- **Access key** and **Secret key** – AWS IAM credentials for a user with the permissions listed below.
+- **Region** – AWS region of the table, for example `us-east-1`.
+- **Table name** – Name of the table where you wish to store embeddings. The name must be 3 to 255 characters long and contain only letters, digits, underscores, hyphens, or dots.
+  - When embedding: If the table is not present, the connector creates it in on-demand capacity mode, together with the vector index. The vector index uses cosine distance and the dimensions of the embedding model, and projects all attributes.
+  - When retrieving: If the table is absent, the connector raises an error.
+- **Vector index name** – Name of the vector index used for similarity search. The same naming rules apply as for the table name.
+
+To use an existing table, make sure it:
+
+- Has a string partition key and no sort key.
+- Has a vector index with the given name and the same number of dimensions as the embedding model.
+- Projects the `_page_content` attribute in the vector index, for example by projecting all attributes. The connector stores the chunk text in this attribute.
+
+The connector uses the partition key, vector attribute, and distance function of the existing table and vector index.
+
+DynamoDB indexes new embeddings asynchronously. A **Retrieve document** operation that runs immediately after an **Embed document** operation might not return the new chunks. The **Retrieve document** operation fails if the vector index isn't active yet.
+
+The IAM user needs permission for the following actions:
+
+- `dynamodb:DescribeTable`
+- `dynamodb:BatchWriteItem`
+- `dynamodb:SearchVectors`
+- `dynamodb:CreateTable`, only if the connector creates the table.
 
 </TabItem>
 
