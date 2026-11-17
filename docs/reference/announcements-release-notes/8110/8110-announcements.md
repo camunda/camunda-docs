@@ -26,7 +26,7 @@ Starting with 8.11, events, rejections, and the commands that the engine writes 
 - `authorized_username`
 - `authorized_client_id`
 
-These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands and batch operation commands still contain all entries. The record format does not change.
+These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
 
 Starting with 8.9.29 and 8.10.10, this already applies to events. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only).
 
