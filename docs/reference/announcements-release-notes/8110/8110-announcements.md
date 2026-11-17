@@ -93,11 +93,11 @@ Starting with 8.11, when you suspend a process instance, Camunda marks its user 
 </div>
 <div className="release-announcement-content">
 
-#### Kafka Producer connector no longer converts Avro union values to the first record {#kafka-producer-avro-union-record-selection}
+#### Kafka producer connector no longer converts Avro union values to the first record {#kafka-producer-avro-union-record-selection}
 
-Starting with 8.11, the [Kafka Producer connector](/components/connectors/out-of-the-box-connectors/kafka.md) selects the record type of an Avro union value from the value itself, instead of always using the first record of the union.
+Starting with 8.11, the [Kafka producer connector](/components/connectors/out-of-the-box-connectors/kafka.md) selects the record type of an Avro union value from the value itself, instead of always using the first record of the union.
 
-This change affects you only if you use the **Kafka Producer connector** with the **Schema registry** schema strategy and the Avro schema type. The **No schema** and **Inline schema** strategies, JSON schemas in the schema registry, the **Kafka Consumer connector**, and Avro schemas without union fields are not affected.
+This change affects you only if you use the **Kafka producer connector** with the **Schema registry** schema strategy and the Avro schema type. The **No schema** and **Inline schema** strategies, JSON schemas in the schema registry, the **Kafka consumer connector**, and Avro schemas without union fields are not affected.
 
 Previously, the connector converted every object value of a union field to the first record type of the union. For example, for the field `"payload": ["null", "CreateTask", "CancelTask"]`, the connector always converted the value to `CreateTask` and silently dropped keys that don't belong to that record.
 
