@@ -230,6 +230,19 @@ There is currently no built-in metric that directly reports the size of this bac
 
 Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
+### Protocol: REST or gRPC
+
+Since Camunda 8.8, clients use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. gRPC remains available. Both protocols reach the same engine, but they differ in cost on the brokers.
+
+- **REST (default)** costs more broker CPU and produces more backpressure than gRPC at the same load.
+  - In Camunda load tests on Google Cloud, the same workload used about 10 to 15% more broker CPU over REST than over gRPC.
+  - When the brokers were CPU-saturated, REST also reached up to about 14% lower throughput and rejected more requests.
+  - At a fixed rate with CPU headroom, throughput was equal.
+- **gRPC** is the more efficient choice for high-throughput starters and job workers, and the only protocol that supports [job streaming](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs).
+- **Queries and search** are available through REST only.
+
+Camunda recommends keeping REST for most workloads and planning roughly 10 to 15% more broker CPU headroom for the REST traffic. Consider switching high-volume clients to gRPC if your brokers run close to their CPU limit. Validate the effect with your own workload, because it depends on request mix and payload size. To switch the protocol, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection).
+
 ### Secondary storage
 
 Starting with Camunda 8.9, the platform supports three secondary storage backends, each with different sizing implications.
