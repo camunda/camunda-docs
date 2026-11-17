@@ -1155,10 +1155,12 @@ You can now edit the name and description of a role or tenant directly in Admin,
 
 <!-- https://github.com/camunda/product-hub/issues/3573 -->
 
-Camunda 8.10 introduces support for job and process instance prioritization for pull-based job activation via gRPC and REST (including long polling).
+Camunda 8.10 introduces job prioritization for pull-based job activation via gRPC and REST (including long polling).
 
-- Users can assign an integer priority (for example, 0–99) to process instances and jobs via BPMN model attributes.
-- Job workers can now opt into priority-aware activation, so that ActivateJobs (gRPC) and REST-based long-polling endpoints consider priority when selecting which jobs to return.
+- Assign an integer priority (for example, 0–99) to jobs in BPMN, as a default on the process and as an override on supported tasks. A priority can be a static value or a FEEL expression.
+- Priority ordering is automatic. Job workers don't need any flag or configuration: ActivateJobs (gRPC) and REST-based long-polling activation return higher-priority jobs first.
+- Update the priority of a running job, individually or in a batch, without redeploying the process.
+- Job streaming ignores priority. If you stream and poll the same job type, priority ordering has no effect for that type.
 
 <p class="link-arrow">[Job prioritization](/components/concepts/job-workers.md#job-prioritization)</p>
 
