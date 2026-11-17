@@ -512,13 +512,14 @@ To start the connector runtime locally, run:
 java -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
 ```
 
-The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so it must be launched with `java -jar`. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) no longer works as of connector runtime 8.9.4.
+The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so launch it with `java -jar`, or with Spring Boot's `PropertiesLauncher` as shown below. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) no longer works as of connector runtime 8.9.4.
 
-To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it:
+To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it. Only Spring Boot's `PropertiesLauncher` reads `loader.path`, so start it explicitly instead of using `java -jar`:
 
 ```shell
 java -Dloader.path=/home/user/custom-connectors \
-  -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
+  -cp /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar \
+  org.springframework.boot.loader.launch.PropertiesLauncher
 ```
 
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.

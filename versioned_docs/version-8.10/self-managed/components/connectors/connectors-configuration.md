@@ -255,6 +255,17 @@ The inbound connector type can be found as `<zeebe:property name="inbound.type" 
 the `inbound.type` property [in the element template](https://github.com/camunda/connectors/blob/8d2304754e202b56ae8c821746e99e1e9ef50c73/connectors/webhook/element-templates/webhook-connector-start-message.json#L51)
 or in the `InboundConnector` annotation.
 
+To run only specific connectors instead, provide a comma-separated list of connector types to `CONNECTOR_INBOUND_ENABLED`
+or `CONNECTOR_OUTBOUND_ENABLED`. The runtime then disables every connector of that direction whose type isn't in the list.
+For example, to run only two outbound connectors:
+
+```bash
+CONNECTOR_OUTBOUND_ENABLED=io.camunda:http-json:1,com.acme:custom-connector:2
+```
+
+Connector types are matched case-insensitively. `CONNECTOR_<DIRECTION>_ENABLED` and `CONNECTOR_<DIRECTION>_DISABLED` are mutually exclusive
+for the same direction. If you set both, the runtime throws an `IllegalStateException`.
+
 ## Disabling connector discovery
 
 :::warning
@@ -329,19 +340,21 @@ When no prefix is configured, the connector runtime logs a warning that this mod
 
 The following environment variables can be used to configure the default secret provider:
 
-| Name                                                       | Description                                                                                                                                                       | Default value |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                                                                                                               | `false`       |
+| Name                                                                  | Description                                                                                                                                                                      | Default value |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`                | Whether the default secret provider is enabled.                                                                                                                                  | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`                 | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe).                | `SECRET_`     |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE`            | Whether the secret provider should be tenant-aware.                                                                                                                              | `false`       |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PHYSICALTENANTAWARE`    | Whether the secret name includes the Physical Tenant ID. See [per-tenant secret access](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access). | `false`       |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PROCESSDEFINITIONAWARE` | Whether the secret name includes the BPMN process ID of the process that references the secret.                                                                                  | `false`       |
 
 If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
 
-Example with empty prefix:
+Example with the default prefix `SECRET_`:
 
 ```bash
 export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
-export tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
+export SECRET_tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
 ```
 
 Example with prefix set:
@@ -351,6 +364,8 @@ export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
 export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
 export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
 ```
+
+If the secret provider is process-definition-aware, the BPMN process ID is added to the secret name, for example `${prefix}${processDefinitionId}_${secretName}`. If you enable several of these options, the secret name contains the Physical Tenant ID, the tenant ID, and the BPMN process ID in this order, separated by `_`, followed by the secret name. For example, `SECRET_tenant1_orderProcess_MY_SECRET` for a tenant-aware and process-definition-aware provider.
 
 </TabItem>
 
@@ -380,13 +395,13 @@ Review the documentation on [managing secrets in Helm charts](/self-managed/depl
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/ \
+  -v $PWD/connector.jar:/opt/custom/connector.jar \
   -e SECRET_MY_SECRET=secret \
   -e SECRET_FROM_SHELL \
   --env-file secrets.txt \
@@ -403,7 +418,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/deployment/manual/install.md#connectors-1), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/deployment/manual/install.md#connectors), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
@@ -468,11 +483,12 @@ docker run --rm --name=connectors -d \
   camunda/connectors:latest
 ```
 
-In manual installations, add the JAR to the `-cp` argument of the Java call:
+In manual installations, place the JAR in a separate directory and point the Spring Boot loader at it with `loader.path`:
 
 ```bash
-java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
-    io.camunda.connector.runtime.ConnectorRuntimeApplication
+java -Dloader.path=/path/to/secret-providers/ \
+    -cp 'connector-runtime-application-VERSION-with-dependencies.jar' \
+    org.springframework.boot.loader.launch.PropertiesLauncher
 ```
 
 </TabItem>
@@ -777,7 +793,7 @@ CAMUNDA_CLIENT_TENANTID=myTenant
 This will change the default tenant ID used for fetching jobs and publishing messages
 to the tenant ID `myTenant`.
 
-It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
+It is possible to adjust the polling interval of connectors polling process definitions from the Orchestration Cluster REST API by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. The default is `5000` (5 seconds). For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
 
 Example:
 

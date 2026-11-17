@@ -366,13 +366,13 @@ Review the documentation on [managing secrets in Helm charts](/self-managed/depl
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
+  -v $PWD/connector.jar:/opt/custom/connector.jar \  # Add a connector jar to the classpath
   -e MY_SECRET=secret \              # Set a secret with value
   -e SECRET_FROM_SHELL \             # Set a secret from the environment
   --env-file secrets.txt \           # Set secrets from a file
@@ -389,7 +389,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/deployment/manual/install.md#connectors-1), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/deployment/manual/install.md#connectors), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
@@ -457,7 +457,7 @@ In manual installations, add the JAR to the `-cp` argument of the Java call:
 
 ```bash
 java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
-    io.camunda.connector.runtime.ConnectorRuntimeApplication
+    io.camunda.connector.runtime.app.ConnectorRuntimeApplication
 ```
 
 </TabItem>
@@ -686,7 +686,7 @@ CAMUNDA_CLIENT_TENANTID=myTenant
 This will change the default tenant ID used for fetching jobs and publishing messages
 to the tenant ID `myTenant`.
 
-It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
+It is possible to adjust the polling interval of connectors polling process definitions from the Orchestration Cluster REST API by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. The default is `5000` (5 seconds). For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
 
 Example:
 
