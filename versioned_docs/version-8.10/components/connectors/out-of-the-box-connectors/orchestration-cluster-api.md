@@ -50,7 +50,7 @@ If you are using a Self-Managed cluster, you need to provide two URLs:
 - URL of your OAuth token endpoint
 - Base URL of the Orchestration Cluster REST API (must end with `/v2`)
 
-If you are testing this connector on your local machine with the Camunda 8 Docker Compose setup, set the following URLs:
+If you are testing this connector on your local machine with the [full Camunda 8 Docker Compose configuration](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#full-configuration), which includes Keycloak, set the following URLs:
 
 - OAuth Token endpoint: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
 - Base URL: `http://localhost:8080/v2`
@@ -120,6 +120,10 @@ For **Search**, the following search parameters can be configured:
 - **Page from (offset)**: Zero-based index of the first result, for offset-based pagination.
 
 **Page after**, **Page before**, and **Page from** are mutually exclusive. See [pagination](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#page) for more details.
+
+## Set the connection timeout
+
+In the **Error handling** section, **Connection timeout** sets how many seconds the connector waits to connect to the Orchestration Cluster and to receive the response. The default is 20 seconds. Setting it to `0` disables the timeout, which isn't recommended in production.
 
 ## Handle the API response
 
