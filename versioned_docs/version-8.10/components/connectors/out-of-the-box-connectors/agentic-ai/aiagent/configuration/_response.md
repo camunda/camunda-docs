@@ -6,13 +6,13 @@ Configure the response format by specifying how the model should return its outp
 
 The outcome of an LLM call is stored as an **assistant message** designed to contain multiple content blocks.
 
-- This message always contains a single text content block for the currently supported providers/models.
-- The connector returns the **first content block** when handling the response, either as a text string or as a parsed JSON object.
+- Depending on the provider and model, this message can contain several content blocks, for example reasoning blocks in addition to text blocks.
+- When handling the response, the connector joins the content of all non-empty text blocks and returns it either as a text string or as a parsed JSON object.
 
-| Field                     | Required | Description                                                                                                                                                                                                    |
-| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response format           | Yes      | <p>Instructs the model which response format to return.</p><p><ul><li>This can be either text or JSON.</li><li>JSON format support varies by provider and model.</li></ul></p>                                 |
-| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
+| Field                     | Required | Description                                                                                                                                                                                              |
+| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response format           | Yes      | <p>Instructs the model which response format to return.</p><p><ul><li>This can be either text or JSON.</li><li>JSON format support varies by provider and model.</li></ul></p>                           |
+| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the response text.</p> |
 
 {props.type === "process" && <ConfigurationResponseFieldsProcess />}
 

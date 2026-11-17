@@ -24,7 +24,7 @@ The following is an example of how you can configure a filesystem MCP server:
 3. Create an exclusive gateway after the event to decide whether the MCP client tool call should be executed directly or require confirmation.
 4. Create a flow from the exclusive gateway to the MCP Client service task for direct execution.
 
-- In the condition expression, you can use a FEEL expression like the following to allow tool listing and selected operations directly. This differs from [filtering](#tools), because all tools remain available, but you can decide which tools need user confirmation:
+- In the condition expression, you can use a FEEL expression like the following to allow tool listing and selected operations directly. This differs from [filtering](./agentic-ai-mcp-client-config.md#filters), because all tools remain available, but you can decide which tools need user confirmation:
 
 ```feel
 if toolCall.method = "tools/list" then
