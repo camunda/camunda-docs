@@ -118,6 +118,10 @@ Once set, you cannot update your initial claim name and value using environment 
 
 <h3>Additional considerations</h3>
 
+:::tip Shared audience
+If your OIDC provider allows only one audience across all components, see [scope permissions by component](/self-managed/components/management-identity/configuration/scope-permissions-by-component.md) to avoid components receiving each other's permissions by mistake. The flag corrects misconfiguration and isn't an access-control boundary. See [known limitations](/self-managed/components/management-identity/configuration/scope-permissions-by-component.md#known-limitations).
+:::
+
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
 
 :::tip Optional scopes

@@ -90,24 +90,6 @@ Desktop Modeler no longer ships Carbon or its previous global styles. If your pl
 
 ### Orchestration Cluster
 
-#### Protect sensitive variables with REDACT
-
-<!-- https://github.com/camunda/camunda/issues/64644 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-With variable protection, you can mark a process variable as sensitive when you create a process instance. The `REDACT` protection mode irrecoverably replaces the variable value before it is exported to secondary storage, so the value is not readable through search or variable endpoints. Variable search results show which variables are protected.
-
-:::warning
-In 8.11.0-alpha1, protection is incomplete. Variable values can still appear in other places, such as job, message, and signal payloads or incident messages.
-:::
-
-<ul>
-  <li><span class="link-arrow">[Variable protection](/components/concepts/variable-protection.md)</span></li>
-  <li><span class="link-arrow">[Search variables](/apis-tools/orchestration-cluster-api-rest/specifications/search-variables.api.mdx)</span></li>
-  <li><span class="link-arrow">[Create process instance](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx)</span></li>
-</ul>
-
 #### Evenly distributed record indices in Elasticsearch and OpenSearch
 
 <!-- https://github.com/camunda/camunda/issues/54601, https://github.com/camunda/camunda/pull/56522 -->

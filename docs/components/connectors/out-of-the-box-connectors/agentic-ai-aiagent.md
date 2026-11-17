@@ -35,11 +35,9 @@ New to [agentic orchestration](../../agentic-orchestration/agentic-orchestration
 
 ## Prerequisites
 
-The following prerequisites are required to use this connector:
+Before using this connector, set up an account and authentication details for the LLM model provider and backend you want to use. The required credentials depend on the provider and backend.
 
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
+See [AI Agent model providers](./agentic-ai-aiagent-model-providers.md#supported-providers) for more details.
 
 ## Choose an implementation
 

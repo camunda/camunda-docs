@@ -20,7 +20,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
-Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it.
+Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend and resume already behave this way starting with 8.10.9. Cancel narrows the filter starting with 8.10.1 and follows the same validation rules starting with 8.10.9. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-state-filter).
 
 Previously, the API documentation described the `state` filter as "ignored and overridden". This didn't match the actual behavior, which differed by operation.
 
@@ -45,6 +45,21 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 - Cancel now narrows the filter to root instances instead of replacing it. A filter that matches only child instances selects no instances and doesn't return an error.
 
 **Action:** Remove a conflicting top-level `state` filter from your batch requests, or move it into an `$or` branch. If your integration relied on suspend or resume discarding your `parentProcessInstanceKey` filter, review the filter, because it now limits the batch.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /v2/authentication/me` answers a caller without credentials on an unprotected API {#anonymous-current-user}
+
+On an unprotected API, [`GET /v2/authentication/me`](/apis-tools/orchestration-cluster-api-rest/specifications/get-authentication.api.mdx) answers a caller without credentials with `200 OK` and `isAnonymous: true`, instead of `401 Unauthorized`. The `username` field of `CamundaUserResult` is still required, but it can now be `null`, so a client generated from the API specification can fail to compile. This change is also part of 8.10.9.
+
+**Action:** See the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#anonymous-current-user) for the changed fields and what to do.
 
 </div>
 </div>

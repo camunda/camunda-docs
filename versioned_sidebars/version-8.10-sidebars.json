@@ -559,6 +559,19 @@
         "components/wait-states/overview",
         {
           "type": "category",
+          "label": "Audit log",
+          "link": {
+            "type": "doc",
+            "id": "components/audit-log/overview"
+          },
+          "items": [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure"
+          ]
+        },
+        {
+          "type": "category",
           "label": "Camunda integrations",
           "link": {
             "type": "doc",
@@ -5897,7 +5910,8 @@
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
-                "self-managed/components/management-identity/configuration/initialize-tenants"
+                "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component"
               ]
             },
             "self-managed/components/management-identity/authentication",
