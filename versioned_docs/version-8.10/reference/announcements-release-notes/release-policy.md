@@ -62,6 +62,8 @@ A cluster typically consists of the following components:
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Optimize](/components/optimize/what-is-optimize.md)
+- [Admin](/components/admin/admin-introduction.md)
+- [Connectors](/components/connectors/introduction.md)
 
 You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
 
@@ -87,7 +89,6 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 Non-cluster components include:
 
 - [Camunda Hub](/components/hub/index.md)
-- [Connectors](/components/connectors/introduction.md)
 
 Non-cluster component versions are released continuously.
 
