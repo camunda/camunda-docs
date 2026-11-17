@@ -57,7 +57,7 @@ Select an authentication method for the connector. Learn more about the availabl
 You can authenticate the connector with AWS in the following ways:
 
 - **Credentials**: Use this option if your AWS account administrator provided a pair of access and secret keys. It applies to SaaS and Self-Managed.
-- **Default Credentials Chain (Hybrid/Self-Managed only)**: Use this option if your system relies on an implicit authentication mechanism, such as role-based authentication, credentials supplied through environment variables, or files on the target host. It applies only to Self-Managed or hybrid distributions, and uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
+- **Default Credentials Chain (Hybrid/Self-Managed only)**: Use this option if your system relies on an implicit authentication mechanism, such as role-based authentication, credentials supplied through environment variables, or files on the target host. It applies only to Self-Managed or hybrid distributions, and uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html) to resolve credentials.
 - **AWS credential**: Select a saved credential instead of entering authentication details on the task.
 
 ## Operations
