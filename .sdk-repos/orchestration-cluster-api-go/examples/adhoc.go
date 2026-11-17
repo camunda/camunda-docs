@@ -5,18 +5,17 @@ package examples
 import (
 	"context"
 
-	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
+	camunda "github.com/camunda/orchestration-cluster-api-go/v11"
 )
 
 func activateAdHocSubProcessActivitiesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region ActivateAdHocSubProcessActivities
-	instruction := openapi.NewAdHocSubProcessActivateActivitiesInstruction(
-		[]openapi.AdHocSubProcessActivateActivityReference{
-			*openapi.NewAdHocSubProcessActivateActivityReference("review-task"),
+	instruction := camunda.NewAdHocSubProcessActivateActivitiesInstruction(
+		[]camunda.AdHocSubProcessActivateActivityReference{
+			*camunda.NewAdHocSubProcessActivateActivityReference("review-task"),
 		})
 
 	return client.ActivateAdHocSubProcessActivities(ctx,
-		openapi.MustElementInstanceKey("2251799813685360"), *instruction)
+		camunda.MustElementInstanceKey("2251799813685360"), *instruction)
 	// endregion ActivateAdHocSubProcessActivities
 }

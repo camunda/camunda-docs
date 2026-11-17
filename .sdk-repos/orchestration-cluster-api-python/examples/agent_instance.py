@@ -6,9 +6,9 @@ import datetime
 
 from camunda_orchestration_sdk import (
     AgentInstanceCreationRequest,
-    AgentInstanceCreationRequestDefinition,
-    AgentInstanceHistoryItemRequest,
-    AgentInstanceHistoryItemRequestRole,
+    AgentInstanceHistoryItem,
+    AgentInstanceHistoryItemLimits,
+    AgentInstanceHistoryItemRole,
     AgentInstanceHistorySearchQuery,
     AgentInstanceKey,
     AgentInstanceSearchQuery,
@@ -16,7 +16,9 @@ from camunda_orchestration_sdk import (
     AgentInstanceUpdateRequestStatus,
     CamundaClient,
     ElementInstanceKey,
+    HistoryItemId,
     JobKey,
+    JobLeaseToken,
     TextContent,
     Unset,
 )
@@ -49,17 +51,40 @@ def search_agent_instances_example() -> None:
 
 
 # region CreateAgentInstance
-def create_agent_instance_example(element_instance_key: ElementInstanceKey) -> None:
+def create_agent_instance_example(
+    element_instance_key: ElementInstanceKey,
+    job_key: JobKey,
+    # Engine-minted: take the token from the job activation response, never build one.
+    job_lease_token: JobLeaseToken,
+) -> None:
     client = CamundaClient()
 
     result = client.create_agent_instance(
         data=AgentInstanceCreationRequest(
             element_instance_key=element_instance_key,
-            definition=AgentInstanceCreationRequestDefinition(
-                model="gpt-4o",
-                provider="openai",
-                system_prompt="You are a helpful assistant.",
-            ),
+            job_key=job_key,
+            job_lease_token=job_lease_token,
+            history=[
+                # A CONFIGURATION item is mandatory on creation; it carries the model,
+                # provider and system prompt in role-specific fields, not in content.
+                AgentInstanceHistoryItem(
+                    history_item_id=HistoryItemId("configuration-1"),
+                    loop_iteration=1,
+                    role=AgentInstanceHistoryItemRole.CONFIGURATION,
+                    content=[],
+                    produced_at=datetime.datetime.now(datetime.timezone.utc),
+                    model="gpt-4o",
+                    provider="openai",
+                    system_prompt=[
+                        TextContent(content_type="TEXT", text="You are a helpful assistant."),
+                    ],
+                    limits=AgentInstanceHistoryItemLimits(
+                        max_model_calls=10,
+                        max_tool_calls=20,
+                        max_tokens=100_000,
+                    ),
+                ),
+            ],
         ),
     )
 
@@ -73,45 +98,40 @@ def create_agent_instance_example(element_instance_key: ElementInstanceKey) -> N
 def update_agent_instance_example(
     agent_instance_key: AgentInstanceKey,
     element_instance_key: ElementInstanceKey,
+    job_key: JobKey,
+    # Engine-minted: take the token from the job activation response, never build one.
+    job_lease_token: JobLeaseToken,
 ) -> None:
     client = CamundaClient()
 
-    client.update_agent_instance(
+    # Appending conversation history is part of an update; there is no separate
+    # history-item endpoint.
+    result = client.update_agent_instance(
         agent_instance_key=agent_instance_key,
         data=AgentInstanceUpdateRequest(
             element_instance_key=element_instance_key,
+            job_key=job_key,
+            job_lease_token=job_lease_token,
             status=AgentInstanceUpdateRequestStatus.THINKING,
+            history=[
+                AgentInstanceHistoryItem(
+                    history_item_id=HistoryItemId("assistant-1"),
+                    loop_iteration=1,
+                    role=AgentInstanceHistoryItemRole.ASSISTANT,
+                    content=[
+                        TextContent(content_type="TEXT", text="How can I help you today?"),
+                    ],
+                    produced_at=datetime.datetime.now(datetime.timezone.utc),
+                ),
+            ],
         ),
     )
+
+    for item in result.created_history:
+        print(f"Appended history item {item.history_item_id}: {item.history_item_key}")
 
 
 # endregion UpdateAgentInstance
-
-
-# region CreateAgentInstanceHistoryItem
-def create_agent_instance_history_item_example(
-    agent_instance_key: AgentInstanceKey,
-    element_instance_key: ElementInstanceKey,
-    job_key: JobKey,
-) -> None:
-    client = CamundaClient()
-
-    result = client.create_agent_instance_history_item(
-        agent_instance_key=agent_instance_key,
-        data=AgentInstanceHistoryItemRequest(
-            element_instance_key=element_instance_key,
-            job_key=job_key,
-            job_lease="lease-token",
-            role=AgentInstanceHistoryItemRequestRole.ASSISTANT,
-            content=[TextContent(content_type="TEXT", text="How can I help you today?")],
-            produced_at=datetime.datetime.now(datetime.timezone.utc),
-        ),
-    )
-
-    print(f"Created history item: {result.history_item_key}")
-
-
-# endregion CreateAgentInstanceHistoryItem
 
 
 # region SearchAgentInstanceHistory

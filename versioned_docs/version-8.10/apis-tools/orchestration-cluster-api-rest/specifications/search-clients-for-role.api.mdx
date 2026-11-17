@@ -1,0 +1,585 @@
+---
+id: search-clients-for-role
+title: "Search role clients"
+sidebar_label: "Search role clients"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search role clients"} <MarkerAddedInVersion version="8.8" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/roles/{roleId}/clients/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search clients with assigned role.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "ROLE", permissionType: "READ" }]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "roleId",
+      in: "path",
+      required: true,
+      description: "The role ID.",
+      schema: {
+        example: "admin",
+        description: "The unique identifier of a role.",
+        format: "RoleId",
+        type: "string",
+        title: "RoleId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["clientId"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "RoleClientSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "RoleClientSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The clients with the assigned role.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching clients.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    clientId: {
+                      description: "The ID of the client.",
+                      allOf: [
+                        {
+                          example: "my-application",
+                          description:
+                            "The unique identifier of an OAuth client.\nMinted outside the Camunda REST API: in SaaS by Console, in Self-Managed\nwith OIDC by the external identity provider (e.g. EntraID, Keycloak,\nOkta). In Self-Managed with Basic authentication, machine-to-machine\napplications are modelled as users instead — see the user identifier.\n",
+                          format: "ClientId",
+                          type: "string",
+                          title: "ClientId",
+                        },
+                      ],
+                    },
+                  },
+                  required: ["clientId"],
+                  title: "RoleClientResult",
+                },
+              },
+            },
+            title: "RoleClientSearchResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The role with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

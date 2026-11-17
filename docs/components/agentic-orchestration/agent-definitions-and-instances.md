@@ -6,7 +6,10 @@ description: "Understand agent definitions and agent instances, the entities Cam
 keywords: ["agentic ai", "AI agents", "agent definition", "agent instance"]
 ---
 
-Understand agent definitions and agent instances, the entities Camunda uses to model AI agents.
+import PageDescription from '@site/src/components/PageDescription';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
+
+<PageDescription />
 
 ## About
 
@@ -138,14 +141,22 @@ The following data is available for an agent instance in Operate:
 
 #### Conversation history and loop iterations
 
-The conversation history captures the full reasoning chain of an agent execution, grouped by loop iteration. A loop iteration is one pass through the agent's feedback loop: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration.
+The conversation history captures the full reasoning chain of an agent execution, grouped by loop iteration. A [loop iteration](/reference/glossary.md#loop-iteration) is one pass through the [agent loop](/reference/glossary.md#agent-loop): the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration.
 
 Grouping the history by loop iteration makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a specific loop iteration, for example "on loop iteration five the agent called this tool."
 
 Operate labels each entry in the conversation history simply as `iteration` (for example, `5. iteration`) as shorthand for loop iteration.
+
+#### Model reasoning in conversation history
+
+Operate displays readable model reasoning as a static **Thinking** entry before the assistant’s response. It recognizes non-empty text in the assistant history marked with `camunda.agenticai.content.type: reasoning`.
+
+To display readable model reasoning where supported, [migrate to the AI Agent element templates introduced in Camunda 8.10](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md). If you do not see **Thinking**, confirm that your [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) returns readable reasoning. Opaque or redacted reasoning is not displayed.
 
 #### Visibility for external agents
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.
 
 See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for a step-by-step walkthrough of reporting this data from your own runtime.
+
+<AoGetStartedBanner />

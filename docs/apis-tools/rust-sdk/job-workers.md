@@ -2,7 +2,7 @@
 id: job-workers
 title: "Job workers"
 sidebar_label: "Job workers"
-sidebar_position: 9
+sidebar_position: 10
 mdx:
   format: md
 ---
@@ -39,6 +39,14 @@ A handler returns a `JobAction`:
 
 The `Job` exposes `key()`, `job_type()`, `process_instance_key()`, `variables()`, and
 `variables_as::<T>()` for typed deserialization.
+
+Enable **job leasing** with `JobWorkerConfig::new("...").with_lease(true)`. Each activated
+job then carries a lease token that the worker sends back on complete, fail, and
+throw-error, so the engine fences the command against a superseded activation (for example
+after the job timed out and another worker picked it up). Leasing is off by default and
+needs a server that supports it: rather than silently sending unfenced commands, a worker
+that asked for a lease and is handed a job without a token stops with
+`CamundaError::LeaseNotHonored`.
 
 For managed lifecycle, register workers on the client and stop them all gracefully:
 

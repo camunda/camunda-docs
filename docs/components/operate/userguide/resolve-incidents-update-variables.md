@@ -144,7 +144,7 @@ When we inspect the process instance, we can observe exactly what our incident i
 3. Observe the error message:
 
 ```text
-Expected result of the expression 'orderValue >= 100' to be 'BOOLEAN', but was 'NULL'. The evaluation reported the following warnings:
+Expected result of the condition expression 'orderValue >= 100' of sequence flow 'Flow_1n8m1op' to be 'BOOLEAN', but was 'NULL'. The evaluation reported the following warnings:
 [NOT_COMPARABLE] Can't compare '"99"' with '100'
 ```
 
@@ -159,6 +159,14 @@ We were able to solve this particular problem by **editing** a variable, but itâ
 Lastly, initiate a "retry" of the process instance by selecting **Retry** in the top right corner of the page.
 
 You should now see the incident has been resolved, and the process instance has progressed to the next step.
+
+:::note
+Selecting **Retry** marks the incident as resolved and triggers a retry. It does not verify that the underlying cause has been fixed.
+
+For a [job incident](/components/concepts/incidents.md#resolving), Camunda checks the problem again only when a worker next activates the job. If no worker is connected for the job type, the incident does not reappear even if the cause is still present. As a result, the process instance can appear healthy in Operate even though the problem remains unresolved.
+
+Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if the cause remains unresolved.
+:::
 
 ## Complete a process instance
 

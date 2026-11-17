@@ -52,13 +52,7 @@ The name of the cluster variable. Must be unique within its scope (global or ten
 ### value
 
 ```ts
-value: object;
+value: unknown;
 ```
 
 The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
-
-#### Index Signature
-
-```ts
-[key: string]: unknown
-```

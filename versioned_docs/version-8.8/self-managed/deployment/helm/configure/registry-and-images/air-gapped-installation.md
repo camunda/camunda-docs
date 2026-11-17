@@ -60,7 +60,7 @@ Choose one of the following image options:
 #### Option A: Open-source Bitnami images (community default)
 
 - [bitnamilegacy/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
-- [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) (tag: `bitnami-*`)
+- [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) (tag: `bitnami-*`, no longer rebuilt)
 - [bitnamilegacy/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
 - [bitnamilegacy/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
 
@@ -95,7 +95,7 @@ Camunda provides custom [Keycloak images](https://github.com/camunda/keycloak) t
 For backward compatibility, both variants are also available without the prefix in their respective registries.
 
 :::note
-The open-source variant is based on the `bitnamilegacy` repository and receives no further updates from Bitnami. For production environments, use the enterprise variant or a managed Keycloak service.
+The open-source variant is based on the `bitnamilegacy` repository. Camunda no longer builds this variant. The published `bitnami-*` and non-prefixed tags, including the chart default `26.3.3`, get no more updates, including security fixes. For production environments, use the enterprise variant or a managed Keycloak service.
 :::
 
 :::tip About the original Bitnami Keycloak images

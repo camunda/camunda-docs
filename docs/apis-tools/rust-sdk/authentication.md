@@ -2,7 +2,7 @@
 id: authentication
 title: "Authentication"
 sidebar_label: "Authentication"
-sidebar_position: 5
+sidebar_position: 6
 mdx:
   format: md
 ---

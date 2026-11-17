@@ -1,0 +1,340 @@
+---
+id: create-element-instance-variables
+title: "Update element instance variables"
+sidebar_label: "Update element instance variables"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Update element instance variables"} <MarkerAddedInVersion version="8.6" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/element-instances/{elementInstanceKey}/variables"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
+Specify the element instance in the `elementInstanceKey` parameter.
+Variable updates can be delayed by listener-related processing; if processing exceeds the
+request timeout, this endpoint can return 504. Other gateway timeout causes are also
+possible. Retry with backoff and inspect listener worker availability and logs when this
+repeats.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "UPDATE_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "elementInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the element instance to update the variables for.\nThis can be the process instance key (as obtained during instance creation), or a given\nelement, such as a service task (see the `elementInstanceKey` on the job message).\n",
+      schema: {
+        type: "string",
+        format: "string<ElementInstanceKey>",
+        example: "2251799813686789",
+        description: "System-generated key for a element instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              description:
+                "JSON object representing the variables to set in the element’s scope.",
+              additionalProperties: true,
+              type: "object",
+            },
+            local: {
+              description:
+                "If set to `true`, the variables are merged strictly into the local scope (as specified\nby the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes\nand set at the outermost one.\n\nLet's consider the following example:\nThere are two scopes '1' and '2'. Scope '1' is the parent scope of '2'. The effective\nvariables of the scopes are:\n1 => { \"foo\" : 2 }\n2 => { \"bar\" : 1 }\n\nAn update request with elementInstanceKey as '2', variables { \"foo\": 5 }, and local set\nto `true` leaves scope '1' unchanged and adjusts scope '2' to { \"bar\": 1, \"foo\": 5 }. By\ndefault, with local set to `false`, scope '1' will be { \"foo\": 5 } and scope '2' will be\n{ \"bar\": 1 }.",
+              type: "boolean",
+              default: false,
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          required: ["variables"],
+          title: "SetVariableRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The variables were updated." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description:
+        "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          examples: {
+            taskListenerTimeout: {
+              value: {
+                type: "about:blank",
+                title: "DEADLINE_EXCEEDED",
+                status: 504,
+                detail:
+                  "Expected to handle request, but request timed out between gateway and broker",
+                instance: "/v2/user-tasks/123/completion",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

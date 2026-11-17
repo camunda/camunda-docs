@@ -103,7 +103,7 @@ curl https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/to
 ```
 
 Replace the placeholders with the values for your environment.
-See [Base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self-managed setups.
+See [base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self-managed setups.
 
 #### Using Postman
 
@@ -115,12 +115,12 @@ This request returns information about your cluster topology, confirming that yo
 
 If you're just getting started with process automation, try this simple workflow:
 
-1. **Model a process** – Create a simple BPMN process with a user task using [Camunda Modeler](https://camunda.com/download/modeler/)
+1. **Model a process** – Create a simple BPMN process with a user task using [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md)
 2. **Deploy the process** – Use [`POST /deployments`](./specifications/create-deployment.api.mdx) to deploy your BPMN file
 3. **Start a process instance** – Use [`POST /process-instances`](./specifications/create-process-instance.api.mdx) to create a new process instance
 4. **Complete a user task** – Use [`POST /user-tasks/{userTaskKey}/completion`](./specifications/complete-user-task.api.mdx) to complete the task
 
-For a complete walkthrough with code examples, see our [Getting Started Tutorial](/guides/getting-started-example.md).
+For a complete walkthrough with code examples, see our [getting started tutorial](/guides/getting-started-example.md).
 
 ### Explore the API
 
@@ -134,15 +134,18 @@ This section covers the technical details and conventions you need to understand
 
 #### SaaS
 
-In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**.
+In Camunda Hub:
 
-- For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/v2/`
+1. In the left navigation, under **Clusters**, select a cluster.
+1. Under **Cluster Details**, find your **Region Id** and **Cluster Id**.
 
-- For secure connectivity (AWS PrivateLink), use the private base URL shown in Console. For the Orchestration Cluster REST API, the pattern is:
+For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/v2/`
 
-  `${BASE_URL} = https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/`
+For secure connectivity (AWS PrivateLink), use the private base URL shown in Hub. For the Orchestration Cluster REST API, the pattern is:
 
-  For example: `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
+`${BASE_URL} = https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/`
+
+For example: `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
 
 #### Self-Managed
 
@@ -163,6 +166,20 @@ Adding new endpoints or attributes to existing responses is **not** considered a
 ### Request size limits
 
 The default maximum request size for all requests (for example, to `POST /v2/deployments`) is 4MB. It can be configured in the Zeebe Gateway configuration using the `maxMessageSize` property. For more information, see the [Zeebe Gateway configuration reference](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#gateway-configuration).
+
+#### Deploy resources limits
+
+`POST /v2/deployments` accepts a `multipart/form-data` request in which each resource is one part. The following limits apply to each request:
+
+| Limit                               | Default | Self-Managed property                       |
+| ----------------------------------- | ------- | ------------------------------------------- |
+| Maximum size of a single resource   | 10MB    | `spring.servlet.multipart.max-file-size`    |
+| Maximum total size of the request   | 10MB    | `spring.servlet.multipart.max-request-size` |
+| Maximum number of parts per request | 50      | `server.tomcat.max-part-count`              |
+
+A request that exceeds any of these limits is rejected with HTTP status `413`, for example, a request that contains more than 50 resources. In Camunda 8 SaaS, these limits apply to all clusters and cannot be changed. In Self-Managed, you can adjust them as described in [Deployment configuration](/self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration.md).
+
+To stay within the limits, split a large deployment into several requests with fewer resources each. Each request creates a separate deployment, so the resources across requests are not deployed atomically.
 
 ### Naming conventions
 

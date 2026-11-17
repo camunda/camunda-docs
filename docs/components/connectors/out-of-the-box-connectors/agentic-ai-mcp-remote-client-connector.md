@@ -11,7 +11,7 @@ The MCP Remote Client connector allows connecting an AI agent to a remote MCP se
 
 Since the MCP client functionality is handled by a stateless [job worker](../../concepts/job-workers.md), each activation of an activity using the MCP Remote Client connector requires opening a dedicated HTTP connection/SSE subscription to the MCP server.
 
-For example, each of the following actions in an agentic AI feedback loop opens and closes a dedicated MCP client connection to the remote server:
+For example, each of the following actions in an agent loop opens and closes a dedicated MCP client connection to the remote server:
 
 1. Tool discovery
 2. Tool call
@@ -22,7 +22,7 @@ Due to this overhead, the MCP Remote Client connector is primarily intended for 
 ## Modeling
 
 1. Configure an AI agent ad-hoc sub-process as described in the [example integration](./agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
-2. In a Self-Managed environment, install the **MCP Client** element template. Refer to the [element template index](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/connector-agentic-ai/element-templates/README.md#mcp-client-connectors) to find the correct version for your Camunda release.
+2. In a Self-Managed environment, install the **MCP Client** element template. Refer to the [element template index](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/connector-mcp/element-templates/README.md) to find the correct version for your Camunda release.
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Remote Client** element template.
 4. Configure the transport type and connection settings as described in [Transport type](#transport-type).
 5. Execute your process. You should see tool discovery calls routed to the MCP Client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.
@@ -71,31 +71,31 @@ Select **None** in the **Authentication** dropdown. No authentication headers ar
 
 Sends an `Authorization: Basic <base64(username:password)>` header with each request.
 
-| Field    | Required | Description                                                                                                                                                                   |
-| :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Username | Yes      | The username for authentication.                                                                                                                                              |
-| Password | Yes      | The password for authentication. Camunda recommends using [secrets](/components/hub/organization/manage-clusters/manage-secrets.md). For example, `{{secrets.MCP_PASSWORD}}`. |
+| Field    | Required | Description                                                                                                                                                |
+| :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Username | Yes      | The username for authentication.                                                                                                                           |
+| Password | Yes      | The password for authentication. Camunda recommends using [secrets](/components/saas/clusters/manage-secrets.md). For example, `{{secrets.MCP_PASSWORD}}`. |
 
 ### Bearer token
 
 Sends an `Authorization: Bearer <token>` header with each request.
 
-| Field        | Required | Description                                                                                                                                                              |
-| :----------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bearer token | Yes      | The bearer token value. Camunda recommends using [secrets](/components/hub/organization/manage-clusters/manage-secrets.md). For example, `{{secrets.MCP_BEARER_TOKEN}}`. |
+| Field        | Required | Description                                                                                                                                           |
+| :----------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bearer token | Yes      | The bearer token value. Camunda recommends using [secrets](/components/saas/clusters/manage-secrets.md). For example, `{{secrets.MCP_BEARER_TOKEN}}`. |
 
 ### OAuth 2.0 client credentials
 
 Automatically retrieves and manages access tokens using the OAuth 2.0 client credentials flow (machine-to-machine authentication). Tokens are cached in memory and automatically refreshed when expired.
 
-| Field                 | Required | Description                                                                                                                   |
-| :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| OAuth token endpoint  | Yes      | The URL to obtain access tokens.                                                                                              |
-| Client ID             | Yes      | Your OAuth client identifier.                                                                                                 |
-| Client secret         | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/hub/organization/manage-clusters/manage-secrets.md). |
-| Audience              | No       | Target API identifier (required by some OAuth providers).                                                                     |
-| Scopes                | No       | Space-separated list of scopes to request.                                                                                    |
-| Client authentication | Yes      | **Send credentials in header** (Basic authentication) or **send credentials in body**.                                        |
+| Field                 | Required | Description                                                                                                |
+| :-------------------- | :------- | :--------------------------------------------------------------------------------------------------------- |
+| OAuth token endpoint  | Yes      | The URL to obtain access tokens.                                                                           |
+| Client ID             | Yes      | Your OAuth client identifier.                                                                              |
+| Client secret         | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/saas/clusters/manage-secrets.md). |
+| Audience              | No       | Target API identifier (required by some OAuth providers).                                                  |
+| Scopes                | No       | Space-separated list of scopes to request.                                                                 |
+| Client authentication | Yes      | **Send credentials in header** (Basic authentication) or **send credentials in body**.                     |
 
 For more details on OAuth 2.0 client credentials flow, see [REST connector OAuth](/components/connectors/protocol/rest.md#rest-connector-oauth-token).
 

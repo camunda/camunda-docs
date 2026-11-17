@@ -26,7 +26,7 @@ Some connectors let you select a [credential](/components/hub/organization/crede
 :::
 
 You can use sensitive information in your connectors without exposing it in your BPMN processes by using a [legacy secret reference](/reference/glossary.md#secret-reference-legacy).
-Use Camunda Hub to [create and manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+Use Camunda Hub to [create and manage secrets](/components/saas/clusters/manage-secrets.md).
 
 You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties
 panel. Secrets resolve in every field, not only in a specific subset of fields.
@@ -66,7 +66,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 You can also reference a secret directly in a Connector input mapping by using `camunda.secrets.<name>` in a FEEL expression.
 
-In SaaS, use the [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
+In SaaS, use the [connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
 
 These forms coexist and are handled differently:
 
@@ -76,7 +76,7 @@ These forms coexist and are handled differently:
 
 `{{secrets.*}}` values are not scoped per [physical tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access) unless you opt in to `physicaltenantaware` in the connector runtime's own configuration. Physical tenant scoping of `camunda.secrets.<name>` is separate from that setting: each physical tenant resolves its own configured secret store.
 
-`{{secrets.*}}` and `camunda.secrets.<name>` can be migrated independently of where the value is stored. If you move a secret value into the store that `camunda.secrets.<name>` uses but keep existing process models on the legacy `{{secrets.NAME}}` syntax, set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime: a legacy-style reference whose name isn't found in a configured secret provider is then looked up in that same store. The default, `ON`, only resolves legacy references from the configured providers.
+`{{secrets.*}}` and `camunda.secrets.<name>` can be migrated independently of where the value is stored. If you move a secret value into the store that `camunda.secrets.<name>` uses but keep existing process models on the legacy `{{secrets.NAME}}` syntax, set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime: a legacy-style reference whose name isn't found in a configured secret provider is then looked up in that same store. The default, `ON`, only resolves legacy references from the configured providers. See [Migrate to `camunda.secrets.<name>`](migrate-secrets.md) for step-by-step migration guidance.
 
 ## Variable and response mapping
 
@@ -244,6 +244,27 @@ The Connector runtime does not provide a `createDocuments` function. To extract 
 ```
 
 Before using `createDocument`, configure a document store for the Connector runtime. For configuration details, see [Document handling](/components/document-handling/getting-started.md).
+
+### `getHeader` function {#function-getheader}
+
+Starting with 8.11.0, you can use `getHeader` in the **Result expression** and **Error expression** fields.
+
+HTTP header names are case-insensitive, but a response's `headers` are a regular [FEEL context](/components/modeler/feel/language-guide/feel-data-types.md#context), so keys must match the exact casing the server sent. For example, `response.headers.date` returns `null` if the server sent `Date`. Use `getHeader` to look up a header regardless of its casing.
+
+| Item      | Type    | Description                                                                                                          |
+| --------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| `headers` | Context | The headers to search, for example `response.headers`.                                                               |
+| `name`    | String  | The header name, in any casing.                                                                                      |
+| Result    | Any     | The header value, or a list of values for a header sent multiple times. `null` if the header or `headers` is absent. |
+
+If `headers` contains a key that exactly matches `name`, `getHeader` returns its value. Otherwise, it returns the value of the first key that matches `name` ignoring case.
+
+```feel
+= {
+  contentType: getHeader(response.headers, "content-type"),
+  date: getHeader(response.headers, "Date")
+}
+```
 
 ## Activation
 

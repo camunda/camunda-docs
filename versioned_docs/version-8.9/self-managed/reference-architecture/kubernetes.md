@@ -171,7 +171,7 @@ The Orchestration Cluster can be configured to authenticate with OIDC by connect
 
 This guide focuses on a single-region application, but can be adapted for a multi-region setup once you understand the basics of a single region.
 
-For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/concepts/multi-region/dual-region.md).
+To choose a multi-region strategy, start with the comparison in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md#get-started-choose-your-strategy).
 
 ### Infrastructure
 
@@ -187,14 +187,13 @@ The following are suggested minimum requirements to get started. There is no one
   - CPU: 4 modern cores
   - Memory: 16 GiB
 - **Persistent volumes**
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
   - 32 GiB minimum capacity
   - SSD-backed volumes only. HDD-backed volumes are not supported.
-  - Avoid burstable volume types unless they can sustain the target IOPS and throughput continuously without relying on burst credits.
+  - Avoid burstable volume types unless they can sustain the target IOPS continuously without relying on burst credits.
 
 :::note Storage performance figures are a baseline, not a strict requirement
-The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the IOPS and throughput baseline can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
+The storage performance figures in this section and in the platform-specific sections below are a starting point. The IOPS target comes from our load tests, which run on GKE, and is used for all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes) because the IOPS a broker needs depends on the workload, not the provider. We do not benchmark each provider separately. Disk bandwidth (MiB/s) was not a limiting factor. Actual needs vary with your workload, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the target IOPS can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
 
@@ -240,22 +239,44 @@ The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itse
 If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the Orchestration Cluster REST API instead.
 :::
 
-By default, the Camunda 8 Helm chart is compatible with the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
+Camunda 8 supports both Kubernetes traffic APIs, and you can use either:
 
-`Ingress-nginx` deploys a Network Load Balancer (layer 4).
+| API                                                                             | Support                                        | Setup guide                                                                                                       |
+| ------------------------------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)     | Supported, used by the reference architectures | [Configure the Helm chart with Ingress](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)         |
+| [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) | Supported                                      | [Configure the Helm chart with Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md) |
 
-The following annotation is added by the Helm chart to enable gRPC:
+The reference architectures use the Ingress API with [Contour](https://projectcontour.io/), a CNCF Ingress controller backed by the [Envoy proxy](https://www.envoyproxy.io/), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
+
+Contour is exposed through a `LoadBalancer` Service, so the load balancer your cloud provider creates for it operates at layer 4 (on AWS, a Network Load Balancer).
+
+Contour is a choice, not a requirement. Camunda tests the reference architectures with Contour, so that is what the procedures install, but any Ingress controller supporting gRPC and HTTP/2 works, for example [Traefik](https://traefik.io/traefik/), [HAProxy](https://haproxy-ingress.github.io/), or [Envoy Gateway](https://gateway.envoyproxy.io/). Select your own controller through `global.ingress.className`.
+
+Each controller declares the gRPC upstream differently, and not on the same object:
+
+| Ingress controller | Annotation                                           | Object                                    |
+| ------------------ | ---------------------------------------------------- | ----------------------------------------- |
+| Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
+| Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
+
+Check your controller's documentation for its own equivalent. With Contour, set the annotation on the Orchestration Cluster service, and use `projectcontour.io/upstream-protocol.h2` instead when the upstream itself uses TLS:
 
 ```yaml
-annotations:
-  nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+orchestration:
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: "26500"
 ```
+
+:::note
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures moved to Contour in 8.9.
+:::
 
 ### Application
 
 The Helm chart required for deploying on Kubernetes is [publicly available](https://helm.camunda.io/).
 
-Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda) or [Camunda Enterprise Registry](https://registry.camunda.cloud). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/main/Dockerfile).
+Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda) or [Camunda Enterprise Registry](https://registry.camunda.cloud). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/stable/8.9/camunda.Dockerfile).
 
 ### Database
 
@@ -295,8 +316,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 - Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB memory
 - Number of dedicated nodes: 4
 - Volume type: SSD
-  - 3,000 IOPS baseline per volume
-  - 125 MiB/s throughput baseline per volume
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
 - Unsupported volume types: HDD-backed volumes are not supported.
 
 #### Supported versions
@@ -324,12 +344,11 @@ Our reference architectures are continuously validated against the latest stable
 - Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: SSD `gp3`
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
   - Requires [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to be installed and a `gp3` StorageClass [configured](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)
 - Volume alternative: `gp2`
   - Only if `gp3` isn't available
-  - Performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance); size the disk to sustain the target IOPS and throughput baseline
+  - Performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance); size the disk to sustain the target IOPS
 - Unsupported volume types: `sc1` (Cold HDD) and `st1` (Throughput HDD) are not supported.
 
 :::caution
@@ -372,7 +391,7 @@ If you need more than 128 streams per client, see [Network Load Balancer](#netwo
 
 ##### Network load balancer (NLB)
 
-Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
+Camunda 8 is compatible with [Contour](https://projectcontour.io/), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
 
 ### Microsoft AKS
 
@@ -381,13 +400,12 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
 - Instance type: Standard_D4as_v4 (4 vCPUs, 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Premium SSD v2
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
   - Several [known limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), e.g., lack of [Azure Backup support](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations)
 - Volume alternative: Premium SSD
-  - Performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds); size the disk to sustain the target IOPS and throughput baseline
+  - Performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds); size the disk to sustain the target IOPS
 - Unsupported volume types: Standard HDD is not supported.
-- Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS and throughput continuously without relying on bursting.
+- Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS continuously without relying on bursting.
 
 #### Load balancer
 
@@ -400,9 +418,8 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Instance type: n(1|2)-standard-4 (4 vCPUs, 15 / 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Performance (SSD) persistent disks
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
-  - On `pd-ssd`, IOPS and throughput scale with disk size, so size the disk to meet the baseline (throughput is the binding constraint). See [GCP disk performance](https://cloud.google.com/compute/docs/disks/performance).
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
+  - On `pd-ssd`, IOPS and bandwidth scale with disk size, so size the disk to meet the target IOPS. See [GCP disk performance](https://cloud.google.com/compute/docs/disks/performance).
 - Unsupported volume types: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
 
 #### Load balancer

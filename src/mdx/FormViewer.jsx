@@ -1,6 +1,8 @@
 import React from "react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
+// keep the stylesheet on the same version as the viewer imported below
+import "@bpmn-io/form-js/dist/assets/form-js.css";
 import "../css/formViewer.css";
 
 export default class FormViewer extends React.Component {

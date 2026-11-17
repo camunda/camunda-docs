@@ -22,9 +22,3 @@ items: JobErrorStatisticsItem[];
 ```
 
 The list of per-error statistics items.
-
-### page
-
-```ts
-page: SearchQueryPageResponse;
-```

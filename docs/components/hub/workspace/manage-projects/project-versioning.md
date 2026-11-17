@@ -50,17 +50,32 @@ To manage a project snapshot:
 
 From here, you can perform the following actions on a project snapshot:
 
-| Action                | Description                                                                                                        |
-| :-------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| **View details**      | Open the snapshot details page to review the contents of all files in the snapshot.                                |
-| **Restore as latest** | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project.                    |
-| **Edit details**      | Edit the snapshot tag and description.                                                                             |
-| **Download**          | Download the project as a zip file.                                                                                |
-| **Edit review**       | Update the [review](#request-a-review) status of the snapshot. (Only available if the snapshot has been reviewed.) |
-| **Copy to...**        | Create a new project with the files from the snapshot.                                                             |
-| **Delete**            | Delete the project snapshot.                                                                                       |
+| Action                 | Description                                                                                                                                          |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **View details**       | Open the snapshot details page to review the contents of all files in the snapshot.                                                                  |
+| **Test this snapshot** | Open the snapshot in [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug it against an environment. |
+| **Restore as latest**  | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project.                                                      |
+| **Edit details**       | Edit the snapshot tag and description.                                                                                                               |
+| **Download**           | Download the project as a zip file.                                                                                                                  |
+| **Edit review**        | Update the [review](#request-a-review) status of the snapshot. (Only available if the snapshot has been reviewed.)                                   |
+| **Copy to...**         | Create a new project with the files from the snapshot.                                                                                               |
+| **Delete**             | Delete the project snapshot.                                                                                                                         |
 
 On the snapshot details page (opened via **View details**), the actions menu also includes **Deploy**, which deploys the project snapshot, especially after it has been [reviewed](#request-a-review).
+
+## Test a snapshot
+
+You can test a project snapshot in [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) without restoring it or changing your latest project files.
+
+In the snapshot's vertical ellipsis menu, select **Test this snapshot**. Test mode opens the snapshot in **Read-only** mode.
+
+In the **Set up test run** panel:
+
+1. Click **Select environment**, and choose where to run the test.
+2. Select the resources to deploy, and click **Deploy**. The option **Only this resource** isn't available for snapshots.
+3. Set the start and end elements, and run the test.
+
+See [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md#get-started-with-test-mode) for detailed information.
 
 ## Compare snapshots
 
@@ -132,7 +147,7 @@ A project snapshot restore is a single bulk operation, not a series of individua
 This review capability is most useful for reviews on a business level.
 For technical reviews, you may instead [sync your Git repository](git-sync.md) to put changes into a technical context with related code changes.
 
-After the review is complete, you can promote the project snapshot to the next stage(s) of the [deployment pipeline](./deploy-project.md). For example, promote to your testing cluster/stage, then to staging, and finally to production.
+After the review is complete, you can deploy the approved project snapshot to an [environment](./deploy-project.md). For example, deploy to your testing environment, then to staging, and finally to production. If your organization requires approval for production, only an approved snapshot can be deployed to an environment tagged `prod`. See [production environments](./deploy-project.md#production-environments).
 
 :::info
 If you want to use your own deployment pipeline after the review is complete, you can [sync your Git repository](git-sync.md) at this point to deploy and promote the project through your own pipeline.

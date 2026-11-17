@@ -16,6 +16,7 @@ import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
 import CSVImg from "../img/connector-csv.png";
+import DatabricksImg from "../img/connector-databricks.png";
 import EasypostImg from "../img/connector-easypost.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
@@ -95,14 +96,14 @@ const SearchableTable = () => {
       description:
         "Send events using Amazon EventBridge service within your processes.",
       type: "Outbound",
-      link: "../amazon-eventbridge/?awseventbridge=outbound",
+      link: "../amazon-eventbridge-outbound/",
       image: AmazonEventbridgeImg,
     },
     {
       name: "Amazon EventBridge Webhook",
       description: "Start a process instance triggered by Amazon EventBridge.",
       type: "Inbound",
-      link: "../amazon-eventbridge/?awseventbridge=inbound",
+      link: "../amazon-eventbridge-inbound/",
       image: AmazonEventbridgeImg,
     },
     {
@@ -131,28 +132,28 @@ const SearchableTable = () => {
       name: "Amazon SNS inbound",
       description: "Trigger your process with an Amazon SNS notification.",
       type: "Inbound",
-      link: "../amazon-sns/?amazonsns=inbound",
+      link: "../amazon-sns-inbound/",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SNS outbound",
       description: "Send messages to Amazon SNS from your processes.",
       type: "Outbound",
-      link: "../amazon-sns/?amazonsns=outbound",
+      link: "../amazon-sns-outbound/",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SQS",
       description: "Send messages to Amazon SQS from your processes.",
       type: "Outbound",
-      link: "../amazon-sqs/?amazonsqs=outbound",
+      link: "../amazon-sqs-outbound/",
       image: AmazonSqsImg,
     },
     {
       name: "Amazon SQS",
       description: "Receive messages from Amazon SQS in your processes.",
       type: "Inbound",
-      link: "../amazon-sqs/?amazonsqs=inbound",
+      link: "../amazon-sqs-inbound/",
       image: AmazonSqsImg,
     },
     {
@@ -214,6 +215,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../csv/",
       image: CSVImg,
+    },
+    {
+      name: "Databricks",
+      description:
+        "Run SQL statements, control warehouses, trigger jobs, invoke Model Serving endpoints, and query Vector Search indexes.",
+      type: "Outbound",
+      link: "../databricks/",
+      image: DatabricksImg,
     },
     {
       name: "EasyPost",

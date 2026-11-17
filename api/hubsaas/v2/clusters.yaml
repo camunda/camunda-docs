@@ -190,6 +190,8 @@ components:
       type: object
       required:
         - id
+        - status
+        - unavailableReason
         - processInstances
         - decisionInstances
         - taskUsers
@@ -198,23 +200,60 @@ components:
         id:
           description: The cluster ID.
           type: string
+        status:
+          $ref: "#/components/schemas/UsageMetricsStatus"
+        unavailableReason:
+          description: >-
+            Why the usage metrics are unavailable. Only set if `status` is
+            `UNAVAILABLE`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/UsageMetricsUnavailableReason"
         processInstances:
-          description: Process instance metrics.
-          allOf:
-            - $ref: "#/components/schemas/MetricTotal"
-        decisionInstances:
-          description: Decision instance metrics.
-          allOf:
-            - $ref: "#/components/schemas/MetricTotal"
-        taskUsers:
-          description: Task user metrics.
-          allOf:
-            - $ref: "#/components/schemas/TaskUsersMetric"
-        activeTenants:
-          description: Active tenant metrics.
+          description: >-
+            Process instance metrics. Not set if the usage metrics are
+            unavailable.
           nullable: true
           allOf:
             - $ref: "#/components/schemas/MetricTotal"
+        decisionInstances:
+          description: >-
+            Decision instance metrics. Not set if the usage metrics are
+            unavailable.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+        taskUsers:
+          description: Task user metrics. Not set if the usage metrics are unavailable.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/TaskUsersMetric"
+        activeTenants:
+          description: Active tenant metrics. Not set if the cluster does not report them.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+    UsageMetricsStatus:
+      description: >-
+        Whether the cluster could provide usage metrics. A cluster without data
+        is `UNAVAILABLE`, never reported as zero.
+      type: string
+      enum:
+        - AVAILABLE
+        - UNAVAILABLE
+    UsageMetricsUnavailableReason:
+      description: >-
+        Why a cluster could not provide usage metrics.
+
+        * `UNSUPPORTED`: The cluster does not offer usage metrics, as is the
+        case for clusters below 8.8. * `NOT_CONFIGURED`: The cluster has no URL
+        to request usage metrics from. * `UNREACHABLE`: The cluster did not
+        answer, or answered with an error.
+      type: string
+      enum:
+        - UNSUPPORTED
+        - NOT_CONFIGURED
+        - UNREACHABLE
     MetricTotal:
       type: object
       required:

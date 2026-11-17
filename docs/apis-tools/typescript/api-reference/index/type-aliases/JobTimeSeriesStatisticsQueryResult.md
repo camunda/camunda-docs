@@ -22,9 +22,3 @@ items: JobTimeSeriesStatisticsItem[];
 ```
 
 The list of time-bucketed statistics items, ordered ascending by time.
-
-### page
-
-```ts
-page: SearchQueryPageResponse;
-```

@@ -13,11 +13,13 @@ keywords:
   ]
 ---
 
-Expose a BPMN process as a callable [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tool so that AI agents and LLM-powered applications can discover and invoke it.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 
-You can configure a BPMN process as a callable MCP tool through the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
+You can configure a BPMN process as a callable [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tool through the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
 
 It is built into the Orchestration Cluster and automatically registers processes as MCP tools when they are deployed with the [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md).
 
@@ -34,7 +36,7 @@ If your AI agent and the target process run on the **same** Orchestration Cluste
 
 The [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) is an element template that you apply to a BPMN message start event. When deployed, it registers the process as an MCP tool.
 
-1. Open your BPMN process in Modeler.
+1. Open your BPMN process in [Camunda Hub](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) or Desktop Modeler.
 2. Select the start event (or add a new one).
 3. In the properties panel, click the element template picker and select **MCP start event** from the **AI Tools** category.
 
@@ -80,4 +82,4 @@ See [Enable and connect](/apis-tools/processes-mcp/processes-mcp-setup.md) for e
 
 ## Step 6: Verify
 
-After deployment, you can verify that your process is registered as an MCP tool in the Orchestration Cluster admin UI. See [MCP processes](/self-managed/components/orchestration-cluster/admin/mcp-processes.md) to learn how.
+After deployment, you can verify that your process is registered as an MCP tool in the [Orchestration Cluster admin UI](/components/admin/admin-introduction.md#open-admin). See [MCP processes](/self-managed/components/orchestration-cluster/admin/mcp-processes.md) to learn how.

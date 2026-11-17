@@ -304,7 +304,7 @@ Only release the lock manually after confirming no migration is currently runnin
 -- PostgreSQL/MariaDB: Release the lock
 DELETE FROM databasechangeloglock WHERE locked = true;
 
--- Oracle: Connect as schema owner and release
+-- Oracle and SQL Server: Release the lock (on Oracle, connect as the schema owner)
 DELETE FROM databasechangeloglock WHERE locked = 1;
 ```
 

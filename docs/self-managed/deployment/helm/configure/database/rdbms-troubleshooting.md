@@ -91,7 +91,7 @@ kubectl logs <pod-name> -c fetch-jdbc-drivers
 kubectl logs <pod-name> | grep -i liquibase
 ```
 
-2. Verify `autoDDL` is enabled (default: `true`):
+2. Check whether `autoDDL` was disabled (default: `true`). If it's `false`, Camunda doesn't create the schema automatically. The following example shows a disabled configuration:
 
 ```yaml
 orchestration:
@@ -102,7 +102,7 @@ orchestration:
           data:
             secondary-storage:
               rdbms:
-                auto-ddl: false # Confirm this is set
+                auto-ddl: false # If false, the schema isn't created automatically
 ```
 
 3. Test database user permissions (see [schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
@@ -163,13 +163,13 @@ orchestration:
           data:
             secondary-storage:
               rdbms:
-                flush-interval: PT1S # More frequent flushes
+                flush-interval: PT0.25S # More frequent flushes (default: PT0.5S)
                 queue-size: 5000 # Larger queue for buffering
                 queue-memory-limit: 50 # Increase if needed
 ```
 
-- Smaller `flushInterval` → more frequent writes (increases DB load).
-- Larger `queueSize` → more events buffered before flush (increases memory).
+- Smaller `flush-interval` → more frequent writes (increases DB load).
+- Larger `queue-size` → more events buffered before flush (increases memory).
 
 ## TLS/SSL configuration
 
@@ -272,7 +272,7 @@ kubectl patch secret camunda-db-secret \
 3. Restart the Orchestration Cluster pods:
 
 ```bash
-kubectl rollout restart deployment/camunda-orchestration -n camunda
+kubectl rollout restart statefulset/camunda-zeebe -n camunda
 ```
 
 ### JDBC driver updates

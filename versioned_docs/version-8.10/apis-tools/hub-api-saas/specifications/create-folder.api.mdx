@@ -1,0 +1,472 @@
+---
+id: create-folder
+title: "Create a folder"
+description: "Creates a new folder in the specified project and/or parent folder."
+sidebar_label: "Create a folder"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a folder"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/folders"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates a new folder in the specified project and/or parent folder.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["name", "projectKey"],
+          example: {
+            name: "processes",
+            projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+          },
+          properties: {
+            name: {
+              description: "The name of the folder.",
+              type: "string",
+              minLength: 1,
+              maxLength: 255,
+            },
+            projectKey: {
+              description: "The key of the project this folder belongs to.",
+              allOf: [
+                {
+                  description: "System-generated key for a project.",
+                  type: "string",
+                  format: "ProjectKey",
+                  "x-semantic-type": "ProjectKey",
+                  example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                  title: "ProjectKey",
+                },
+              ],
+            },
+            parentFolderKey: {
+              description:
+                "The key of the parent folder. If omitted or null, the folder is created at project root.\n",
+              nullable: true,
+              allOf: [
+                {
+                  description: "System-generated key for a folder.",
+                  type: "string",
+                  format: "FolderKey",
+                  "x-semantic-type": "FolderKey",
+                  example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                  title: "FolderKey",
+                },
+              ],
+            },
+          },
+          title: "FolderCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The folder was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc",
+              name: "processes",
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+              parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-06-10T14:22:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
+            required: [
+              "folderKey",
+              "name",
+              "projectKey",
+              "parentFolderKey",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+            ],
+            properties: {
+              folderKey: {
+                description: "The unique key identifying this folder.",
+                allOf: [
+                  {
+                    description: "System-generated key for a folder.",
+                    type: "string",
+                    format: "FolderKey",
+                    "x-semantic-type": "FolderKey",
+                    example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                    title: "FolderKey",
+                  },
+                ],
+              },
+              name: { description: "The name of the folder.", type: "string" },
+              projectKey: {
+                description: "The key of the project this folder belongs to.",
+                allOf: [
+                  {
+                    description: "System-generated key for a project.",
+                    type: "string",
+                    format: "ProjectKey",
+                    "x-semantic-type": "ProjectKey",
+                    example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                    title: "ProjectKey",
+                  },
+                ],
+              },
+              parentFolderKey: {
+                description:
+                  "The key of the parent folder. Null if the folder is at project root.",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "System-generated key for a folder.",
+                    type: "string",
+                    format: "FolderKey",
+                    "x-semantic-type": "FolderKey",
+                    example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                    title: "FolderKey",
+                  },
+                ],
+              },
+              created: {
+                description: "The timestamp when the folder was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description: "The user who created the folder.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
+                        type: "string",
+                        format: "email",
+                        nullable: true,
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description: "The timestamp when the folder was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description: "The user who last updated the folder.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
+                        type: "string",
+                        format: "email",
+                        nullable: true,
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "FolderResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -109,25 +109,25 @@ curl --request GET 'http://localhost:8092/actuator/backups/123456'
 ### Example response
 
 ```json
-  {
-    "backupId": 123456,
-    "failureReason": null,
-    "state": "COMPLETE",
-    “details”: [
-      {
-          "snapshotName": "camunda_optimize_123456_8.8.0_part_1_of_2",
-          "state": "SUCCESS",
-          "startTime": "2024-11-09T10:11:36.978+0100",
-          "failures": []
-      },
-      {
-          "snapshotName": "camunda_optimize_123456_8.8.0_part_2_of_2",
-          "state": "SUCCESS",
-          "startTime": "2024-11-09T10:11:37.178+0100",
-          "failures": []
-      }
-    ]
-  }
+{
+  "backupId": 123456,
+  "failureReason": null,
+  "state": "COMPLETE",
+  "details": [
+    {
+      "snapshotName": "camunda_optimize_123456_8.8.0_part_1_of_2",
+      "state": "SUCCESS",
+      "startTime": "2024-11-09T10:11:36.978+0100",
+      "failures": []
+    },
+    {
+      "snapshotName": "camunda_optimize_123456_8.8.0_part_2_of_2",
+      "state": "SUCCESS",
+      "startTime": "2024-11-09T10:11:37.178+0100",
+      "failures": []
+    }
+  ]
+}
 ```
 
 Note that the endpoint will return a single item when called with a `backupId` and a list of items when called without specifying a `backupId`.

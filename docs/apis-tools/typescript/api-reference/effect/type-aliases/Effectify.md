@@ -12,14 +12,18 @@ The Effect API is an **opt-in subpath** (`@camunda8/orchestration-cluster-api/ef
 :::
 
 ```ts
-type Effectify<C> = {
-  [K in FnKeys<C>]: C[K] extends (a: infer A) => infer R
-    ? (a: A) => Effect.Effect<Awaited<R>, DomainError, never>
-    : never;
-} & object & { [K in Exclude<keyof C, FnKeys<C>>]: C[K] };
+type Effectify<C> = { [K in FnKeys<C>]: EffectifyMethod<C[K]> } & object & {
+    [K in Exclude<keyof C, FnKeys<C>>]: C[K];
+  };
 ```
 
 Maps every method of `C` to an Effect-returning method, preserving non-fn members.
+
+## Type Parameters
+
+### C
+
+`C`
 
 ## Type Declaration
 
@@ -28,9 +32,3 @@ Maps every method of `C` to an Effect-returning method, preserving non-fn member
 ```ts
 inner: C;
 ```
-
-## Type Parameters
-
-### C
-
-`C`

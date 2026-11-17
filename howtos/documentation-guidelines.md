@@ -166,7 +166,7 @@ If unsure about who to pick, choose one of the corresponding team representative
 - Desktop Modeler: @camunda/modeling-dev
 - Web Modeler: @marcosbarbero @wollefitz
 - Zeebe: @npepinpe
-- Operate: @ThorbenLindhauer
+- Operate: @phoinixi
 - Tasklist: @camunda/human-task-orchestration
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors

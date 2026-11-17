@@ -26,7 +26,7 @@ Tasklist will then wait for the process to be executed. If the process generates
 
 :::info
 
-To share a process with users inside your organization, but not with external users, you can click on the share icon ![share icon](img/tasklist-processes-share-button.png) to copy a link to the process. This link will only be accessible to users that already have access to Tasklist.
+To share a process that has a start form with users inside your organization, but not with external users, click **Copy link** ![Copy link button](img/tasklist-processes-share-button.png) in the start process dialog to copy a link to the process. This link will only be accessible to users that already have access to Tasklist.
 
 :::
 
@@ -44,4 +44,4 @@ For all the above scenarios, contact your administrator to understand why no pro
 
 Public start forms were removed in Camunda 8.10 together with Tasklist V1.
 
-To start processes with forms in the current version, use authenticated Tasklist starts, or build your own public-facing application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+To start processes with forms in the current version, use authenticated Tasklist starts, or build your own public-facing application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).

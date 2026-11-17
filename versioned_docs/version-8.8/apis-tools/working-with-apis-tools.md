@@ -10,7 +10,6 @@ import "./react-components/\_apitools-card.css";
 import HeroImg from './img/hero-apis.png';
 import ApiGrid from './react-components/\_apitools-card';
 import { apiCards, clientCards } from './react-components/\_apitools-card-data';
-import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
 
@@ -19,7 +18,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with the Camunda Java Client" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+<p class="link-button">[Get started with the Camunda Java Client](./java-client/getting-started.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -59,5 +58,3 @@ Use Camunda Process Test to test your process definitions and automations with a
 If you are migrating from Camunda 7 or from v1 component REST APIs, see the [Camunda 8.8 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for guidance.
 
 <p><a href="../migration-manuals/" class="link-arrow">Camunda 8.8 APIs & tools migration guide</a></p>
-
-<AskAi/>

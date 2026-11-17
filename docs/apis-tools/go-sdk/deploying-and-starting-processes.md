@@ -33,9 +33,9 @@ if _, _, err := client.Raw().ResourceAPI.CreateDeployment(ctx).
 
 // Start an instance by process id. The request body is a first-class facade
 // parameter — no Raw() needed.
-byID := openapi.NewProcessInstanceCreationInstructionById("demo-process")
+byID := camunda.NewProcessInstanceCreationInstructionById(camunda.ProcessDefinitionId("demo-process"))
 byID.SetVariables(map[string]any{"name": "Camunda"})
-instruction := openapi.ProcessInstanceCreationInstructionByIdAsProcessInstanceCreationInstruction(byID)
+instruction := camunda.ProcessInstanceCreationInstructionByIdAsProcessInstanceCreationInstruction(byID)
 
 instance, err := client.CreateProcessInstance(ctx, instruction)
 if err != nil {

@@ -31,7 +31,7 @@ See the [list of Gateway API implementations](https://gateway-api.sigs.k8s.io/im
 
 Choose the scenario that matches your cluster setup.
 
-### Scenario A: Gateway and Camunda in the same namespace (default)
+### Scenario A: Gateway and Camunda in the same namespace
 
 This is the simplest setup. The chart creates the Gateway resource alongside all Camunda components in the same Kubernetes namespace. No cross-namespace configuration is needed.
 

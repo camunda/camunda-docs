@@ -18,7 +18,7 @@ In this context:
 - [Primary storage](/reference/glossary.md#primary-storage) is the broker-managed store for workflow execution state management.
 - [Secondary storage](/reference/glossary.md#secondary-storage) is an external store used for indexing, querying, analytics, and retention.
 
-For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#about-this-mode).
+For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/concepts/secondary-storage/index.md#about-secondary-storage).
 
 ```mermaid
 graph LR

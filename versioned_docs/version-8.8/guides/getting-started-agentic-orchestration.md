@@ -2,7 +2,7 @@
 id: getting-started-agentic-orchestration
 title: "Build your first AI agent"
 sidebar_label: Build your first AI agent
-description: "Get started with Camunda agentic orchestration by running your first AI agent."
+description: "Get started with Camunda agentic orchestration by building and running your first AI agent."
 keywords: [agentic orchestration, ai agent]
 toc_max_heading_level: 2
 ---
@@ -12,11 +12,9 @@ import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 45 minutes</span>
-
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
+<PageDescription />
 
 ## About
 
@@ -116,7 +114,7 @@ The example includes a form linked to the start event, allowing you to submit re
 :::tip Understand the decision model behind this example
 To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [Design and architecture: Define your agent tools](/components/agentic-orchestration/design-architecture.md#define-your-agent-tools).
 
-For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [AI agents: How the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works).
 
 For prompt configuration details, see [AI Agent connector: System prompt, user prompt, and tool descriptions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#system-prompt-user-prompt-and-tool-descriptions).
 :::
@@ -140,7 +138,7 @@ Camunda-provided LLM is only available in SaaS. It is not available in Self-Mana
 
 <TabItem value="camunda-provided-llm">
 
-1. Verify your organization has **AI features enabled**. Camunda-provided LLM is available automatically when AI features are enabled.
+1. Verify your organization has the **Camunda Provided LLM** toggle enabled in [Camunda Console](/components/console/manage-organization/enable-alpha-features.md#enable-camunda-provided-llm). This is a separate toggle from **AI-powered features**.
 1. Keep the AI Agent connector's default settings from the blueprint.
    Most AI blueprints default to use Camunda-provided LLM in SaaS.
    You only need to configure a customer-managed provider if you want custom billing, quotas, or provider control.

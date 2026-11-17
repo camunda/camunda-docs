@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -61,6 +63,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -101,6 +105,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -146,6 +152,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -200,6 +208,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -241,6 +251,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -297,6 +309,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -346,6 +360,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -400,6 +416,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -456,6 +474,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -505,6 +525,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -559,6 +581,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -615,6 +639,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -664,6 +690,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -718,6 +746,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -774,6 +804,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -823,6 +855,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -976,17 +1010,61 @@ components:
           allOf:
             - $ref: "#/components/schemas/RoleFilter"
           description: The role search filters.
-    RoleFilter:
+    RoleFilterFields:
       description: Role filter request
       type: object
       properties:
         roleId:
           description: The role ID search filters.
           allOf:
-            - $ref: "identifiers.yaml#/components/schemas/RoleId"
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         name:
           description: The role name search filters.
-          type: string
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+    RoleFilter:
+      description: Role filter request
+      allOf:
+        - $ref: "#/components/schemas/RoleFilterFields"
+        - type: object
+          properties:
+            $or:
+              description: |
+                Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+
+                Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+                <br>
+                <em>Example:</em>
+
+                ```json
+                {
+                  "name": "Admin",
+                  "$or": [
+                    { "roleId": "role-1" },
+                    { "roleId": "role-2" }
+                  ]
+                }
+                ```
+                This matches roles that:
+
+                <ul style="padding-left: 20px; margin-left: 20px;">
+                  <li style="list-style-type: disc;">have name equal to <em>Admin</em></li>
+                  <li style="list-style-type: disc;">and match either:
+                    <ul style="padding-left: 20px; margin-left: 20px;">
+                      <li style="list-style-type: circle;"><code>roleId</code> is <em>role-1</em>, or</li>
+                      <li style="list-style-type: circle;"><code>roleId</code> is <em>role-2</em></li>
+                    </ul>
+                  </li>
+                </ul>
+                <br>
+                <p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.
+              type: array
+              nullable: true
+              items:
+                $ref: "#/components/schemas/RoleFilterFields"
+          x-properties-added-in-version:
+            - propertyName: $or
+              addedInVersion: "8.10"
     RoleSearchQueryResult:
       description: Role search response.
       required:
@@ -1024,11 +1102,26 @@ components:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       type: object
       properties:
+        filter:
+          description: The user filter criteria.
+          allOf:
+            - $ref: "#/components/schemas/RoleUserFilterRequest"
         sort:
           description: Sort field criteria.
           type: array
           items:
             $ref: "#/components/schemas/RoleUserSearchQuerySortRequest"
+      x-properties-added-in-version:
+        - propertyName: filter
+          addedInVersion: "8.11"
+    RoleUserFilterRequest:
+      description: Role user filter request
+      type: object
+      properties:
+        username:
+          description: The username search filters.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
     RoleUserSearchQuerySortRequest:
       type: object
       properties:

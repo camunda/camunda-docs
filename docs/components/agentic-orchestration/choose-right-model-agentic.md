@@ -2,10 +2,14 @@
 id: choose-right-model-agentic
 title: Choose the right LLM
 sidebar_label: Choose the right LLM
-description: How to select the right LLM or foundation model for orchestrating agentic AI workflows.
+description: Choose the right Large Language Model (LLM) to ensure your AI agent reliably executes tasks in a Camunda process.
 ---
 
-Choose the right Large Language Model (LLM) to ensure your AI agent reliably executes tasks in a Camunda process.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About this guide
 
 This guide helps you evaluate and select the best LLMs based on your deployment requirements and business needs. It explains how to measure agent performance and shows how to leverage LiveBench’s standardized benchmarks to compare models effectively.
 
@@ -105,5 +109,5 @@ See [Camunda-provided LLM](./camunda-provided-llm.md) for more details.
 
 Selecting and benchmarking a model is only the first step. Once your agent is running, validate and continuously evaluate its behavior in practice:
 
-- [Evaluate your AI agents](./evaluate-agents/evaluate-agents-overview.md): Monitor agents in real time with Operate and improve their performance over time with Optimize.
+- [Evaluate your AI agents](./agentic-orchestration-overview.md#evaluate): Monitor agents in real time with Operate and improve their performance over time with Optimize.
 - [Test with CPT](./evaluate-agents/test-ai-agents.md): Write integration tests that assert on tool usage, action completion, and agent output.

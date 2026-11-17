@@ -1,0 +1,406 @@
+---
+id: create-mapping-rule
+title: "Create mapping rule"
+sidebar_label: "Create mapping rule"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Create mapping rule"} <MarkerAddedInVersion version="8.8" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/mapping-rules"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Create a new mapping rule
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "MAPPING_RULE", permissionType: "CREATE" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                claimName: {
+                  type: "string",
+                  description: "The name of the claim to map.",
+                },
+                claimValue: {
+                  type: "string",
+                  description: "The value of the claim to map.",
+                },
+                name: {
+                  type: "string",
+                  description: "The name of the mapping rule.",
+                },
+              },
+              required: ["claimName", "claimValue", "name"],
+              title: "MappingRuleCreateUpdateRequest",
+            },
+          ],
+          properties: {
+            mappingRuleId: {
+              allOf: [
+                {
+                  example: "my-mapping-rule",
+                  description: "The unique identifier of a mapping rule.",
+                  format: "MappingRuleId",
+                  type: "string",
+                  title: "MappingRuleId",
+                },
+              ],
+              description: "The unique ID of the mapping rule.",
+            },
+          },
+          required: ["mappingRuleId"],
+          title: "MappingRuleCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "The mapping rule was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  claimName: {
+                    type: "string",
+                    description: "The name of the claim to map.",
+                  },
+                  claimValue: {
+                    type: "string",
+                    description: "The value of the claim to map.",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The name of the mapping rule.",
+                  },
+                  mappingRuleId: {
+                    allOf: [
+                      {
+                        example: "my-mapping-rule",
+                        description: "The unique identifier of a mapping rule.",
+                        format: "MappingRuleId",
+                        type: "string",
+                        title: "MappingRuleId",
+                      },
+                    ],
+                    description: "The unique ID of the mapping rule.",
+                  },
+                },
+                required: ["claimName", "claimValue", "name", "mappingRuleId"],
+                title: "MappingRuleCreateUpdateResult",
+              },
+            ],
+            title: "MappingRuleCreateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "The request to create a mapping rule was denied.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The request to create a mapping rule was denied.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description: "Mapping rule with this id already exists.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

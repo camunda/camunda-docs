@@ -1,0 +1,758 @@
+# Compilable usage examples for admin, system, and statistics operations.
+# These examples are type-checked during build to guard against API regressions.
+from __future__ import annotations
+
+import datetime
+
+from camunda_orchestration_sdk import (
+    AuditLogKey,
+    AuditLogSearchQueryRequest,
+    CamundaClient,
+    ClockPinRequest,
+    ClusterBalanceResponse,
+    ClusterRebalanceRequest,
+    ClusterRestoreRequest,
+    ClusterVariableName,
+    ClusterVariableSearchQueryRequest,
+    ConditionalEvaluationInstruction,
+    ConditionalEvaluationInstructionVariables,
+    CorrelatedMessageSubscriptionSearchQuery,
+    CreateClusterVariableRequest,
+    CreateClusterVariableRequestValue,
+    CreateGlobalTaskListenerRequest,
+    ExpressionEvaluationRequest,
+    FormKey,
+    GlobalListenerId,
+    GlobalTaskListenerEventTypeEnum,
+    GlobalTaskListenerSearchQueryRequest,
+    IncidentProcessInstanceStatisticsByDefinitionQuery,
+    IncidentProcessInstanceStatisticsByDefinitionQueryFilter,
+    IncidentProcessInstanceStatisticsByErrorQuery,
+    JobErrorStatisticsFilter,
+    JobErrorStatisticsQuery,
+    JobTimeSeriesStatisticsFilter,
+    JobTimeSeriesStatisticsQuery,
+    JobTypeStatisticsQuery,
+    JobWorkerStatisticsFilter,
+    JobWorkerStatisticsQuery,
+    MessageSubscriptionSearchQuery,
+    Mode,
+    ResourceSearchQuery,
+    RestoreRequest,
+    TenantId,
+    Unset,
+    UpdateClusterVariableRequest,
+    UpdateClusterVariableRequestValue,
+    UpdateGlobalTaskListenerRequest,
+)
+
+
+# region GetGlobalClusterVariable
+def get_global_cluster_variable_example(name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    result = client.get_global_cluster_variable(name=name)
+
+    print(f"Variable: {result.name} = {result.value}")
+# endregion GetGlobalClusterVariable
+
+
+# region CreateGlobalClusterVariable
+def create_global_cluster_variable_example(name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    result = client.create_global_cluster_variable(
+        data=CreateClusterVariableRequest(
+            name=name,
+            value=CreateClusterVariableRequestValue.from_dict({"key": "my-value"}),
+        ),
+    )
+
+    print(f"Created variable: {result.name}")
+# endregion CreateGlobalClusterVariable
+
+
+# region UpdateGlobalClusterVariable
+def update_global_cluster_variable_example(name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    result = client.update_global_cluster_variable(
+        name=name,
+        data=UpdateClusterVariableRequest(
+            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-value"}),
+        ),
+    )
+
+    print(f"Updated variable: {result.name}")
+# endregion UpdateGlobalClusterVariable
+
+
+# region DeleteGlobalClusterVariable
+def delete_global_cluster_variable_example(name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    client.delete_global_cluster_variable(name=name)
+# endregion DeleteGlobalClusterVariable
+
+
+# region GetTenantClusterVariable
+def get_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    result = client.get_tenant_cluster_variable(
+        tenant_id=tenant_id,
+        name=name,
+    )
+
+    print(f"Variable: {result.name} = {result.value}")
+# endregion GetTenantClusterVariable
+
+
+# region CreateTenantClusterVariable
+def create_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    result = client.create_tenant_cluster_variable(
+        tenant_id=tenant_id,
+        data=CreateClusterVariableRequest(
+            name=name,
+            value=CreateClusterVariableRequestValue.from_dict({"key": "tenant-value"}),
+        ),
+    )
+
+    print(f"Created variable: {result.name}")
+# endregion CreateTenantClusterVariable
+
+
+# region UpdateTenantClusterVariable
+def update_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    result = client.update_tenant_cluster_variable(
+        tenant_id=tenant_id,
+        name=name,
+        data=UpdateClusterVariableRequest(
+            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-tenant-value"}),
+        ),
+    )
+
+    print(f"Updated variable: {result.name}")
+# endregion UpdateTenantClusterVariable
+
+
+# region DeleteTenantClusterVariable
+def delete_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
+    client = CamundaClient()
+
+    client.delete_tenant_cluster_variable(
+        tenant_id=tenant_id,
+        name=name,
+    )
+# endregion DeleteTenantClusterVariable
+
+
+# region SearchClusterVariables
+def search_cluster_variables_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_cluster_variables(
+        data=ClusterVariableSearchQueryRequest(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for var in result.items:
+            print(f"Variable: {var.name}")
+# endregion SearchClusterVariables
+
+
+# region CreateGlobalTaskListener
+def create_global_task_listener_example() -> None:
+    client = CamundaClient()
+
+    result = client.create_global_task_listener(
+        data=CreateGlobalTaskListenerRequest(
+            id="audit-log-listener",
+            event_types=[GlobalTaskListenerEventTypeEnum.COMPLETING],
+            type_="my-task-listener",
+        ),
+    )
+
+    print(f"Task listener: {result.id}")
+# endregion CreateGlobalTaskListener
+
+
+# region GetGlobalTaskListener
+def get_global_task_listener_example(listener_id: GlobalListenerId) -> None:
+    client = CamundaClient()
+
+    result = client.get_global_task_listener(id=listener_id)
+
+    print(f"Task listener: {result.event_types}")
+# endregion GetGlobalTaskListener
+
+
+# region UpdateGlobalTaskListener
+def update_global_task_listener_example(listener_id: GlobalListenerId) -> None:
+    client = CamundaClient()
+
+    result = client.update_global_task_listener(
+        id=listener_id,
+        data=UpdateGlobalTaskListenerRequest(
+            event_types=[GlobalTaskListenerEventTypeEnum.COMPLETING],
+            type_="updated-task-listener",
+        ),
+    )
+
+    print(f"Updated listener: {result.id}")
+# endregion UpdateGlobalTaskListener
+
+
+# region DeleteGlobalTaskListener
+def delete_global_task_listener_example(listener_id: GlobalListenerId) -> None:
+    client = CamundaClient()
+
+    client.delete_global_task_listener(id=listener_id)
+# endregion DeleteGlobalTaskListener
+
+
+# region SearchGlobalTaskListeners
+def search_global_task_listeners_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_global_task_listeners(
+        data=GlobalTaskListenerSearchQueryRequest(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for listener in result.items:
+            print(f"Listener: {listener.id}")
+# endregion SearchGlobalTaskListeners
+
+
+# region GetLicense
+def get_license_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_license()
+
+    print(f"License type: {result.license_type}")
+# endregion GetLicense
+
+
+# region GetSystemConfiguration
+def get_system_configuration_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_system_configuration()
+
+    print(f"System config: {result}")
+# endregion GetSystemConfiguration
+
+
+# region GetAuthentication
+def get_authentication_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_authentication()
+
+    print(f"Authenticated user: {result.username}")
+# endregion GetAuthentication
+
+
+# region GetTopology
+def get_topology_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_topology()
+
+    print(f"Topology: {result}")
+# endregion GetTopology
+
+
+# region ChangeClusterMode
+def change_cluster_mode_example() -> None:
+    client = CamundaClient()
+
+    # Pass dry_run=True to validate the request and inspect the resulting plan
+    # without applying it. Omit it (or set it to False) to trigger the transition.
+    result = client.change_cluster_mode(
+        mode=Mode.RECOVERING,
+        dry_run=True,
+    )
+
+    # Operations are grouped by physical tenant; a null tenant means the operation
+    # is not scoped to one, such as a broker lifecycle operation.
+    print(f"Cluster change {result.change_id}:")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion ChangeClusterMode
+
+
+# region ChangeClusterModeAsClusterAdmin
+def change_cluster_mode_as_cluster_admin_example() -> None:
+    client = CamundaClient()
+
+    # The cluster-admin variant can target a single physical tenant. Omit
+    # physical_tenant_id to apply the change to every physical tenant.
+    result = client.change_cluster_mode_as_cluster_admin(
+        mode=Mode.RECOVERING,
+        physical_tenant_id="default",
+        dry_run=True,
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion ChangeClusterModeAsClusterAdmin
+
+
+# region Restore
+def restore_example() -> None:
+    client = CamundaClient()
+
+    # The cluster must be in recovery mode before a restore is accepted. Provide
+    # either a list of backup IDs (one per partition) or a time range (from/to)
+    # that selects the backups to restore, but not both.
+    result = client.restore(
+        data=RestoreRequest(backup_ids=[100, 101]),
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion Restore
+
+
+# region GetStatus
+def get_status_example() -> None:
+    client = CamundaClient()
+
+    client.get_status()
+
+    print("Cluster is healthy")
+# endregion GetStatus
+
+
+# region PinClock
+def pin_clock_example() -> None:
+    client = CamundaClient()
+
+    client.pin_clock(
+        data=ClockPinRequest(
+            timestamp=1700000000000,
+        ),
+    )
+# endregion PinClock
+
+
+# region ResetClock
+def reset_clock_example() -> None:
+    client = CamundaClient()
+
+    client.reset_clock()
+# endregion ResetClock
+
+
+# region EvaluateConditionals
+def evaluate_conditionals_example() -> None:
+    client = CamundaClient()
+
+    result = client.evaluate_conditionals(
+        data=ConditionalEvaluationInstruction(
+            variables=ConditionalEvaluationInstructionVariables.from_dict({"orderReady": True}),
+        ),
+    )
+
+    print(f"Result: {result}")
+# endregion EvaluateConditionals
+
+
+# region EvaluateExpression
+def evaluate_expression_example() -> None:
+    client = CamundaClient()
+
+    result = client.evaluate_expression(
+        data=ExpressionEvaluationRequest(
+            expression="= 1 + 2",
+        ),
+    )
+
+    print(f"Result: {result.result}")
+# endregion EvaluateExpression
+
+
+# region GetResource
+def get_resource_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_resource(resource_key="123456")
+
+    print(f"Resource: {result.resource_name}")
+# endregion GetResource
+
+
+# region GetResourceContent
+def get_resource_content_example() -> None:
+    client = CamundaClient()
+
+    content = client.get_resource_content(resource_key="123456")
+
+    print(f"Content: {content}")
+# endregion GetResourceContent
+
+
+# region SearchResources
+def search_resources_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_resources(
+        data=ResourceSearchQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for resource in result.items:
+            print(f"Resource: {resource.resource_name}")
+# endregion SearchResources
+
+
+# region GetUsageMetrics
+def get_usage_metrics_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_usage_metrics(
+        start_time=datetime.datetime(2024, 1, 1),
+        end_time=datetime.datetime(2024, 12, 31),
+    )
+
+    print(f"Metrics: {result}")
+# endregion GetUsageMetrics
+
+
+# region SearchMessageSubscriptions
+def search_message_subscriptions_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_message_subscriptions(
+        data=MessageSubscriptionSearchQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for sub in result.items:
+            print(f"Subscription: {sub.message_name}")
+# endregion SearchMessageSubscriptions
+
+
+# region SearchCorrelatedMessageSubscriptions
+def search_correlated_message_subscriptions_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_correlated_message_subscriptions(
+        data=CorrelatedMessageSubscriptionSearchQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for sub in result.items:
+            print(f"Correlated subscription: {sub.message_name}")
+# endregion SearchCorrelatedMessageSubscriptions
+
+
+# region GetAuditLog
+def get_audit_log_example(audit_log_key: AuditLogKey) -> None:
+    client = CamundaClient()
+
+    result = client.get_audit_log(audit_log_key=audit_log_key)
+
+    print(f"Audit log: {result.audit_log_key}")
+# endregion GetAuditLog
+
+
+# region SearchAuditLogs
+def search_audit_logs_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_audit_logs(
+        data=AuditLogSearchQueryRequest(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for log in result.items:
+            print(f"Audit log: {log.audit_log_key}")
+# endregion SearchAuditLogs
+
+
+# region GetProcessInstanceStatisticsByError
+def get_process_instance_statistics_by_error_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_statistics_by_error(
+        data=IncidentProcessInstanceStatisticsByErrorQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for stat in result.items:
+            print(f"Error: {stat.error_message}")
+# endregion GetProcessInstanceStatisticsByError
+
+
+# region GetProcessInstanceStatisticsByDefinition
+def get_process_instance_statistics_by_definition_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_statistics_by_definition(
+        data=IncidentProcessInstanceStatisticsByDefinitionQuery(
+            filter_=IncidentProcessInstanceStatisticsByDefinitionQueryFilter(
+                error_hash_code=12345,
+            ),
+        ),
+    )
+
+    if not isinstance(result.items, Unset):
+        for stat in result.items:
+            print(f"Definition: {stat.process_definition_key}")
+# endregion GetProcessInstanceStatisticsByDefinition
+
+
+# region GetJobErrorStatistics
+def get_job_error_statistics_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_job_error_statistics(
+        data=JobErrorStatisticsQuery(
+            filter_=JobErrorStatisticsFilter(
+                from_=datetime.datetime(2024, 1, 1),
+                to=datetime.datetime(2024, 12, 31),
+                job_type="payment-processing",
+            ),
+        ),
+    )
+
+    if not isinstance(result.items, Unset):
+        for stat in result.items:
+            print(f"Error: {stat.error_code}")
+# endregion GetJobErrorStatistics
+
+
+# region GetJobTimeSeriesStatistics
+def get_job_time_series_statistics_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_job_time_series_statistics(
+        data=JobTimeSeriesStatisticsQuery(
+            filter_=JobTimeSeriesStatisticsFilter(
+                from_=datetime.datetime(2024, 1, 1),
+                to=datetime.datetime(2024, 12, 31),
+                job_type="payment-processing",
+            ),
+        ),
+    )
+
+    if not isinstance(result.items, Unset):
+        for stat in result.items:
+            print(f"Time series: {stat}")
+# endregion GetJobTimeSeriesStatistics
+
+
+# region GetJobTypeStatistics
+def get_job_type_statistics_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_job_type_statistics(
+        data=JobTypeStatisticsQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for stat in result.items:
+            print(f"Job type: {stat.job_type}")
+# endregion GetJobTypeStatistics
+
+
+# region GetJobWorkerStatistics
+def get_job_worker_statistics_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_job_worker_statistics(
+        data=JobWorkerStatisticsQuery(
+            filter_=JobWorkerStatisticsFilter(
+                from_=datetime.datetime(2024, 1, 1),
+                to=datetime.datetime(2024, 12, 31),
+                job_type="payment-processing",
+            ),
+        ),
+    )
+
+    if not isinstance(result.items, Unset):
+        for stat in result.items:
+            print(f"Worker: {stat.worker}")
+# endregion GetJobWorkerStatistics
+
+
+# region GetGlobalJobStatistics
+def get_global_job_statistics_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_global_job_statistics(
+        from_=datetime.datetime(2024, 1, 1),
+        to=datetime.datetime(2024, 12, 31),
+    )
+
+    print(f"Global job stats: {result}")
+# endregion GetGlobalJobStatistics
+
+
+# region GetFormByKey
+def get_form_by_key_example(form_key: FormKey) -> None:
+    client = CamundaClient()
+
+    result = client.get_form_by_key(form_key=form_key)
+
+    print(f"Form: {result.form_id}")
+# endregion GetFormByKey
+
+
+# region GetResourceContentBinary
+def get_resource_content_binary_example() -> None:
+    client = CamundaClient()
+
+    content = client.get_resource_content_binary(resource_key="123456")
+
+    print(f"Binary content size: {len(content.payload.read())}")
+# endregion GetResourceContentBinary
+
+
+# region GetClusterStatus
+def get_cluster_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_cluster_status()
+
+    print(f"Cluster status: {result.status}")
+# endregion GetClusterStatus
+
+
+# region GetClusterUpgradeStatus
+def get_cluster_upgrade_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_cluster_upgrade_status()
+
+    print(f"Cluster upgrade readiness: {result.status.value}")
+# endregion GetClusterUpgradeStatus
+
+
+# region GetRestoreStatus
+def get_restore_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_restore_status()
+
+    print(f"Restore status: {result.status}")
+# endregion GetRestoreStatus
+
+
+# region GetClusterTopology
+def get_cluster_topology_example() -> None:
+    client = CamundaClient()
+
+    # Returns cluster-wide topology aggregated over all physical tenants.
+    # Use GET /v2/topology for the topology of a single physical tenant.
+    result = client.get_cluster_topology()
+
+    print(f"Cluster {result.cluster_id or 'unknown'}: {result.cluster_size} brokers")
+    print(f"Gateway version: {result.gateway_version}")
+
+    for tenant in result.physical_tenants:
+        print(f"  Physical tenant: {tenant.physical_tenant_id}")
+# endregion GetClusterTopology
+
+
+# region RestoreAsClusterAdmin
+def restore_as_cluster_admin_example() -> None:
+    client = CamundaClient()
+
+    # The targeted physical tenants must be in recovery mode before a restore is
+    # accepted. Provide either backup_ids (one per partition) or a time range
+    # (from_/to), but not both.
+    #
+    # Omit physical_tenant_id to restore every physical tenant. Supply it to
+    # scope the restore to a single tenant (overrides must then be omitted).
+    result = client.restore_as_cluster_admin(
+        data=ClusterRestoreRequest(
+            backup_ids=[100, 101],
+        ),
+        dry_run=True,
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion RestoreAsClusterAdmin
+
+
+# region TriggerClusterRebalance
+def trigger_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Start a dry run first to inspect the plan without transferring any leadership.
+    # Omit dry_run (or set it to False) to execute the rebalance for real.
+    result: ClusterBalanceResponse = client.trigger_cluster_rebalance(
+        data=ClusterRebalanceRequest(
+            replication_lag_threshold=8388608,
+            max_transfer_attempts=3,
+        ),
+        dry_run=True,
+    )
+
+    print(f"Cluster balance state: {result.state}")
+    if result.running_rebalance is not None:
+        print(f"Running rebalance: {result.running_rebalance}")
+    for partition in result.partitions:
+        print(f"  Partition {partition.partition_id}: {partition.state}")
+# endregion TriggerClusterRebalance
+
+
+# region GetClusterRebalance
+def get_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Poll this endpoint after triggering a rebalance to monitor progress.
+    result: ClusterBalanceResponse = client.get_cluster_rebalance()
+
+    print(f"Cluster balance state: {result.state}")
+    if result.running_rebalance is not None:
+        print(f"Running rebalance in progress: {result.running_rebalance}")
+    if result.last_completed_rebalance is not None:
+        print(f"Last completed rebalance: {result.last_completed_rebalance}")
+    for partition in result.partitions:
+        print(f"  Partition {partition.partition_id}: {partition.state}")
+# endregion GetClusterRebalance
+
+
+# region CancelClusterRebalance
+def cancel_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Asks the running rebalance to stop after the in-flight transfer finishes.
+    # Partitions already rebalanced keep their new leaders.
+    result = client.cancel_cluster_rebalance()
+
+    if result.was_running:
+        print("Rebalance was running and has been asked to stop.")
+    else:
+        print("No rebalance was running.")
+# endregion CancelClusterRebalance

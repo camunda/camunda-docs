@@ -12,7 +12,9 @@ This was renamed in 8.9 to reflect its expanded scope and to avoid confusion wit
 
 ## About Admin
 
-The Orchestration Cluster Admin interface centralizes all key administrative jobs for a single cluster. This interface manages identity and access control for cluster components, including Zeebe, Operate, Tasklist, and Orchestration Cluster APIs, while also handling other core features such as cluster variables and the global user task listener, giving administrators one clear place to configure and operate their clusters end to end.
+The Orchestration Cluster Admin interface centralizes all key administrative jobs for a single cluster.
+
+This interface manages identity and access control for cluster components, including Zeebe, Operate, Tasklist, and Orchestration Cluster APIs, while also handling other core features such as cluster variables and the global user task listener. This provides administrators with one central place to configure and operate their clusters end-to-end.
 
 Admin includes the following features:
 
@@ -26,6 +28,20 @@ Admin includes the following features:
 
 For details about authorization concepts, resources, and configuration, see
 [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md).
+
+## Open Admin
+
+From Camunda Hub, you can open Admin in any [environment](/components/concepts/environments.md) you have access to:
+
+1. Log in to Camunda Hub.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Admin.
+1. Under **Applications**, on the **Admin** card, click **Open**. This opens Admin for the environment in a new tab.
+
+You can also expand an environment in the left navigation, and select Admin from its applications.
+
+:::tip
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
+:::
 
 ## Manage access
 

@@ -66,12 +66,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item",
-          label: "Create agent instance history item",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instance-history",
           label: "Search agent instance history",
           className: "api-method post",
@@ -220,6 +214,72 @@ const sidebar: SidebarsConfig = {
           label: "Delete history backup",
           className: "api-method delete",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup-as-cluster-admin",
+          label: "Take a runtime backup on one or every physical tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups-as-cluster-admin",
+          label: "List runtime backups across physical tenants",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup-state-as-cluster-admin",
+          label: "Get runtime backup state across physical tenants",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup-state-as-cluster-admin",
+          label: "Delete runtime backup state across physical tenants",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/sync-runtime-backup-state-as-cluster-admin",
+          label: "Force-write runtime backup state across physical tenants",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup-as-cluster-admin",
+          label: "Get a runtime backup across physical tenants",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup-as-cluster-admin",
+          label: "Delete a runtime backup across physical tenants",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup-as-cluster-admin",
+          label: "Take a history backup on one or every physical tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-history-backups-as-cluster-admin",
+          label: "List history backups across physical tenants",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup-as-cluster-admin",
+          label: "Get a history backup across physical tenants",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-history-backup-as-cluster-admin",
+          label: "Delete a history backup across physical tenants",
+          className: "api-method delete",
+        },
       ],
     },
     {
@@ -270,9 +330,21 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-clock",
+          label: "Get internal clock",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/pin-clock",
           label: "Pin internal clock (alpha)",
           className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/add-clock",
+          label: "Add time to internal clock",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -300,8 +372,32 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/trigger-cluster-rebalance",
+          label: "Trigger a cluster-wide leadership rebalance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-rebalance",
+          label: "Report the cluster's current leadership balance",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-cluster-rebalance",
+          label: "Stop the running rebalance",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-status",
           label: "Get the status of the whole cluster",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-upgrade-status",
+          label: "Get the upgrade-readiness status of the whole cluster",
           className: "api-method get",
         },
         {
@@ -560,6 +656,24 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting",
           label: "Resume exporting",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-exporting-status",
+          label: "Get exporting status of the whole cluster",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/pause-cluster-exporting",
+          label: "Pause exporting across the whole cluster",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-cluster-exporting",
+          label: "Resume exporting across the whole cluster",
           className: "api-method post",
         },
       ],
@@ -1315,13 +1429,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets",
-          label: "Resolve secrets (alpha)",
+          label: "Resolve secrets",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/list-secrets",
-          label: "List secrets (alpha)",
+          label: "List secrets",
           className: "api-method post",
         },
       ],
@@ -1587,6 +1701,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task-form",
           label: "Get user task form",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/lookup-user-task",
+          label: "Look up an active user task (alpha)",
+          className: "api-method post",
         },
         {
           type: "doc",

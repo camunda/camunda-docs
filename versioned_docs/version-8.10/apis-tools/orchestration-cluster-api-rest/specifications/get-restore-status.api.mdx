@@ -1,0 +1,331 @@
+---
+id: get-restore-status
+title: "Get the status of the restore that is currently in progress"
+sidebar_label: "Get the status of the restore that is currently in progress"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get the status of the restore that is currently in progress"}{" "}
+  <MarkerAddedInVersion version="8.10" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/restore"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "BACKUP", permissionType: "RESTORE" }]}
+/>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The status of the restore that is currently in progress.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The status of the restore that is currently in progress.",
+            type: "object",
+            required: ["status", "changeId", "startedAt", "brokers"],
+            properties: {
+              status: {
+                description: "The overall status of the restore.",
+                type: "string",
+                enum: ["IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLED"],
+                example: "IN_PROGRESS",
+              },
+              changeId: {
+                description:
+                  "The ID of the cluster change that performs the restore.",
+                type: "string",
+                example: "-2",
+              },
+              startedAt: {
+                description:
+                  "The time the restore started, as an ISO 8601 timestamp.",
+                type: "string",
+                format: "date-time",
+                nullable: true,
+                example: "2024-01-01T10:00:00Z",
+              },
+              brokers: {
+                description: "The per-broker restore status.",
+                type: "array",
+                items: {
+                  description: "The restore status of a single broker.",
+                  type: "object",
+                  required: [
+                    "brokerId",
+                    "partitionsRestored",
+                    "partitionsToRestore",
+                    "partitions",
+                  ],
+                  properties: {
+                    brokerId: {
+                      description:
+                        "The ID of the broker, including its zone if it belongs to one.",
+                      type: "string",
+                      example: "1",
+                    },
+                    partitionsRestored: {
+                      description:
+                        "The number of the broker's partitions that have been restored so far.",
+                      type: "integer",
+                      format: "int32",
+                      example: 1,
+                    },
+                    partitionsToRestore: {
+                      description:
+                        "The total number of the broker's partitions to restore.",
+                      type: "integer",
+                      format: "int32",
+                      example: 3,
+                    },
+                    partitions: {
+                      description:
+                        "The per-partition restore status for this broker.",
+                      type: "array",
+                      items: {
+                        description:
+                          "The restore status of a single partition on a broker.",
+                        type: "object",
+                        required: [
+                          "partitionId",
+                          "state",
+                          "backupIds",
+                          "completedAt",
+                        ],
+                        properties: {
+                          partitionId: {
+                            description: "The ID of the partition.",
+                            type: "integer",
+                            format: "int32",
+                            example: 1,
+                          },
+                          state: {
+                            description: "The restore state of the partition.",
+                            type: "string",
+                            enum: ["PENDING", "RESTORING", "RESTORED"],
+                            example: "RESTORING",
+                          },
+                          backupIds: {
+                            description:
+                              "The IDs of the backups this partition is restored from.",
+                            type: "array",
+                            items: { type: "integer", format: "int64" },
+                            example: [100, 101],
+                          },
+                          completedAt: {
+                            description:
+                              "The time the partition was restored, as an ISO 8601 timestamp; null unless the partition state is `RESTORED`.",
+                            type: "string",
+                            format: "date-time",
+                            nullable: true,
+                            example: "2024-01-01T10:02:00Z",
+                          },
+                        },
+                        title: "RestorePartitionStatus",
+                      },
+                    },
+                  },
+                  title: "RestoreBrokerStatus",
+                },
+              },
+            },
+            title: "RestoreStatusResponse",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": { description: "No restore is currently in progress." },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

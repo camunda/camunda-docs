@@ -24,21 +24,21 @@ Cluster admin was added in 8.10 alongside [Physical Tenants](/self-managed/conce
 
 ## Cluster-wide operations
 
-Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. Every one of these operations fans out across all Physical Tenants in the cluster.
+Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. These operations can act at cluster scope, with endpoint-specific parameters documented in the generated API reference.
 
-| Area                | Endpoints                                                                                            |
-| ------------------- | ---------------------------------------------------------------------------------------------------- |
-| Status and topology | `GET /cluster/v2/status`, `GET /cluster/v2/topology`                                                 |
-| Backup              | `/cluster/v2/backups/runtime`, `/cluster/v2/backups/runtime/state`, `/cluster/v2/backups/history`    |
-| Exporting           | `GET /cluster/v2/exporting`, `POST /cluster/v2/exporting/pause`, `POST /cluster/v2/exporting/resume` |
-| Recovery            | `POST /cluster/v2/restore`, `PATCH /cluster/v2/mode`                                                 |
-| Partition placement | `POST /cluster/v2/rebalance`                                                                         |
+| Area                | Endpoints                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Status and topology | [`GET /cluster/v2/status`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-status.api.mdx), [`GET /cluster/v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-topology.api.mdx)                                                                                                                                                                                                 |
+| Backup              | [`/cluster/v2/backups/runtime`](/apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups-as-cluster-admin.api.mdx), [`/cluster/v2/backups/runtime/state`](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup-state-as-cluster-admin.api.mdx), [`/cluster/v2/backups/history`](/apis-tools/orchestration-cluster-api-rest/specifications/list-history-backups-as-cluster-admin.api.mdx) |
+| Exporting           | [`GET /cluster/v2/exporting`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-exporting-status.api.mdx), [`POST /cluster/v2/exporting/pause`](/apis-tools/orchestration-cluster-api-rest/specifications/pause-cluster-exporting.api.mdx), [`POST /cluster/v2/exporting/resume`](/apis-tools/orchestration-cluster-api-rest/specifications/resume-cluster-exporting.api.mdx)                                      |
+| Recovery            | [`POST /cluster/v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/restore-as-cluster-admin.api.mdx), [`PATCH /cluster/v2/mode`](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx)                                                                                                                                                                           |
+| Partition placement | [`POST /cluster/v2/rebalance`](/apis-tools/orchestration-cluster-api-rest/specifications/trigger-cluster-rebalance.api.mdx), [`GET /cluster/v2/rebalance`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-rebalance.api.mdx), [`DELETE /cluster/v2/rebalance`](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-cluster-rebalance.api.mdx)                                                      |
 
-Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
+Some operations can target a single Physical Tenant, while others always apply to the whole cluster. See the API reference for each operation's scope and parameters.
 
-For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
+For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
-For request and response schemas, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference.
+For endpoint details, see the [Orchestration Cluster REST API reference](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 Cluster admin protects every operation under this prefix except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers and operators can use it as a health check. Cluster topology is its authenticated counterpart, because topology exposes Physical Tenant identifiers.
 
@@ -102,4 +102,5 @@ Under Basic authentication, an empty or absent user list is accepted silently an
 - [Physical Tenants API routing](/self-managed/concepts/physical-tenants/api-routing.md)
 - [Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 - [Cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md)
+- [Rebalancing partitions](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md)
 - [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md)

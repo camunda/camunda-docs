@@ -1,0 +1,718 @@
+---
+id: create-deployment
+title: "Deploy resources"
+sidebar_label: "Deploy resources"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Deploy resources"} <MarkerAddedInVersion version="8.6" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/deployments"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
+This is an atomic call, i.e. either all resources are deployed or none of them are.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "RESOURCE", permissionType: "CREATE" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          properties: {
+            resources: {
+              type: "array",
+              description:
+                "The binary data to create the deployment resources. It is possible to have more than one form part with different form part names for the binary data to create a deployment.\n",
+              items: { type: "string", format: "binary" },
+            },
+            tenantId: {
+              example: "customer-service",
+              description: "The unique identifier of the tenant.",
+              format: "TenantId",
+              type: "string",
+              title: "TenantId",
+            },
+          },
+          required: ["resources"],
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resources are deployed.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["deploymentKey", "tenantId", "deployments"],
+            properties: {
+              deploymentKey: {
+                allOf: [
+                  {
+                    description: "Key for a deployment.",
+                    format: "DeploymentKey",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "DeploymentKey",
+                  },
+                ],
+                description: "The unique key identifying the deployment.",
+              },
+              tenantId: {
+                description: "The tenant ID associated with the deployment.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+              deployments: {
+                description: "Items deployed by the request.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "processDefinition",
+                    "decisionDefinition",
+                    "decisionRequirements",
+                    "form",
+                    "resource",
+                  ],
+                  properties: {
+                    processDefinition: {
+                      nullable: true,
+                      description: "Deployed process.",
+                      allOf: [
+                        {
+                          description: "A deployed process.",
+                          type: "object",
+                          required: [
+                            "processDefinitionId",
+                            "processDefinitionVersion",
+                            "resourceName",
+                            "processDefinitionKey",
+                            "tenantId",
+                          ],
+                          properties: {
+                            processDefinitionId: {
+                              allOf: [
+                                {
+                                  description:
+                                    "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                  format: "ProcessDefinitionId",
+                                  type: "string",
+                                  example: "new-account-onboarding-workflow",
+                                  title: "ProcessDefinitionId",
+                                },
+                              ],
+                              description:
+                                "The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n",
+                            },
+                            processDefinitionVersion: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned process version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this process was parsed.",
+                            },
+                            tenantId: {
+                              description:
+                                "The tenant ID of the deployed process.",
+                              allOf: [
+                                {
+                                  example: "customer-service",
+                                  description:
+                                    "The unique identifier of the tenant.",
+                                  format: "TenantId",
+                                  type: "string",
+                                  title: "TenantId",
+                                },
+                              ],
+                            },
+                            processDefinitionKey: {
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a deployed process definition.",
+                                  format: "ProcessDefinitionKey",
+                                  example: "2251799813686749",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessDefinitionKey",
+                                },
+                              ],
+                              description:
+                                "The assigned key, which acts as a unique identifier for this process.",
+                            },
+                          },
+                          title: "DeploymentProcessResult",
+                        },
+                      ],
+                    },
+                    decisionDefinition: {
+                      nullable: true,
+                      description: "Deployed decision.",
+                      allOf: [
+                        {
+                          description: "A deployed decision.",
+                          type: "object",
+                          required: [
+                            "decisionDefinitionId",
+                            "decisionDefinitionKey",
+                            "decisionRequirementsId",
+                            "decisionRequirementsKey",
+                            "name",
+                            "tenantId",
+                            "version",
+                          ],
+                          properties: {
+                            decisionDefinitionId: {
+                              allOf: [
+                                {
+                                  description:
+                                    "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
+                                  format: "DecisionDefinitionId",
+                                  type: "string",
+                                  example: "new-hire-onboarding-workflow",
+                                  title: "DecisionDefinitionId",
+                                },
+                              ],
+                              description:
+                                "The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned decision version.",
+                            },
+                            name: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              description:
+                                "The tenant ID of the deployed decision.",
+                              allOf: [
+                                {
+                                  example: "customer-service",
+                                  description:
+                                    "The unique identifier of the tenant.",
+                                  format: "TenantId",
+                                  type: "string",
+                                  title: "TenantId",
+                                },
+                              ],
+                            },
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n",
+                            },
+                            decisionDefinitionKey: {
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a decision definition.",
+                                  format: "DecisionDefinitionKey",
+                                  example: "2251799813326547",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "DecisionDefinitionKey",
+                                },
+                              ],
+                              description:
+                                "The assigned decision key, which acts as a unique identifier for this decision.\n",
+                            },
+                            decisionRequirementsKey: {
+                              allOf: [
+                                {
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  description:
+                                    "System-generated key for a deployed decision requirements definition.",
+                                  format: "DecisionRequirementsKey",
+                                  example: "2251799813683346",
+                                  type: "string",
+                                  title: "DecisionRequirementsKey",
+                                },
+                              ],
+                              description:
+                                "The assigned key of the decision requirements graph that this decision is part of.\n",
+                            },
+                          },
+                          title: "DeploymentDecisionResult",
+                        },
+                      ],
+                    },
+                    decisionRequirements: {
+                      nullable: true,
+                      description: "Deployed decision requirement definition.",
+                      allOf: [
+                        {
+                          description: "Deployed decision requirements.",
+                          type: "object",
+                          required: [
+                            "decisionRequirementsId",
+                            "decisionRequirementsKey",
+                            "decisionRequirementsName",
+                            "resourceName",
+                            "tenantId",
+                            "version",
+                          ],
+                          properties: {
+                            decisionRequirementsId: {
+                              description:
+                                "The id of the deployed decision requirements.",
+                              type: "string",
+                            },
+                            decisionRequirementsName: {
+                              description:
+                                "The name of the deployed decision requirements.",
+                              type: "string",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description:
+                                "The version of the deployed decision requirements.",
+                            },
+                            resourceName: {
+                              description: "The name of the resource.",
+                              type: "string",
+                            },
+                            tenantId: {
+                              description:
+                                "The tenant ID of the deployed decision requirements.",
+                              allOf: [
+                                {
+                                  example: "customer-service",
+                                  description:
+                                    "The unique identifier of the tenant.",
+                                  format: "TenantId",
+                                  type: "string",
+                                  title: "TenantId",
+                                },
+                              ],
+                            },
+                            decisionRequirementsKey: {
+                              allOf: [
+                                {
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  description:
+                                    "System-generated key for a deployed decision requirements definition.",
+                                  format: "DecisionRequirementsKey",
+                                  example: "2251799813683346",
+                                  type: "string",
+                                  title: "DecisionRequirementsKey",
+                                },
+                              ],
+                              description:
+                                "The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n",
+                            },
+                          },
+                          title: "DeploymentDecisionRequirementsResult",
+                        },
+                      ],
+                    },
+                    form: {
+                      nullable: true,
+                      description: "Deployed form.",
+                      allOf: [
+                        {
+                          description: "A deployed form.",
+                          type: "object",
+                          required: [
+                            "formId",
+                            "formKey",
+                            "resourceName",
+                            "tenantId",
+                            "version",
+                          ],
+                          properties: {
+                            formId: {
+                              allOf: [
+                                {
+                                  description:
+                                    "The user-defined id for the form",
+                                  type: "string",
+                                  format: "FormId",
+                                  example: "Form_1nx5hav",
+                                  title: "FormId",
+                                },
+                              ],
+                              description:
+                                "The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n",
+                            },
+                            version: {
+                              description: "The version of the deployed form.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            resourceName: {
+                              description: "The name of the resource.",
+                              type: "string",
+                            },
+                            tenantId: {
+                              example: "customer-service",
+                              description:
+                                "The unique identifier of the tenant.",
+                              format: "TenantId",
+                              type: "string",
+                              title: "TenantId",
+                            },
+                            formKey: {
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a deployed form.",
+                                  format: "FormKey",
+                                  example: "2251799813684365",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "FormKey",
+                                },
+                              ],
+                              description:
+                                "The assigned key, which acts as a unique identifier for this form.",
+                            },
+                          },
+                          title: "DeploymentFormResult",
+                        },
+                      ],
+                    },
+                    resource: {
+                      nullable: true,
+                      description: "Deployed resource.",
+                      allOf: [
+                        {
+                          description: "A deployed Resource.",
+                          type: "object",
+                          required: [
+                            "resourceId",
+                            "resourceKey",
+                            "resourceName",
+                            "tenantId",
+                            "version",
+                          ],
+                          properties: {
+                            resourceId: {
+                              description:
+                                "The resource id of the deployed resource.",
+                              type: "string",
+                            },
+                            resourceName: {
+                              description: "The name of the deployed resource.",
+                              type: "string",
+                            },
+                            version: {
+                              description:
+                                "The description of the deployed resource.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            tenantId: {
+                              example: "customer-service",
+                              description:
+                                "The unique identifier of the tenant.",
+                              format: "TenantId",
+                              type: "string",
+                              title: "TenantId",
+                            },
+                            resourceKey: {
+                              allOf: [
+                                {
+                                  type: "string",
+                                  oneOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                    {
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      description:
+                                        "System-generated key for a deployed decision requirements definition.",
+                                      format: "DecisionRequirementsKey",
+                                      example: "2251799813683346",
+                                      type: "string",
+                                      title: "DecisionRequirementsKey",
+                                    },
+                                    {
+                                      description:
+                                        "System-generated key for a deployed form.",
+                                      format: "FormKey",
+                                      example: "2251799813684365",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "FormKey",
+                                    },
+                                    {
+                                      description:
+                                        "System-generated key for a decision definition.",
+                                      format: "DecisionDefinitionKey",
+                                      example: "2251799813326547",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionDefinitionKey",
+                                    },
+                                  ],
+                                  description:
+                                    "The system-assigned key for this resource.",
+                                  format: "ResourceKey",
+                                  title: "ResourceKey",
+                                },
+                              ],
+                              description:
+                                "The assigned key, which acts as a unique identifier for this Resource.",
+                            },
+                          },
+                          title: "DeploymentResourceResult",
+                        },
+                      ],
+                      "x-added-in-version": "8.7",
+                    },
+                  },
+                  title: "DeploymentMetadataResult",
+                },
+              },
+            },
+            title: "DeploymentResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

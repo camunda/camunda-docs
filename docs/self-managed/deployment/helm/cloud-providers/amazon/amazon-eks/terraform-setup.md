@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 import SecondaryStorageOptionsNote from '../../\_partials/\_secondary-storage-options-note.md'
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 This guide explains how to provision an [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) using Terraform, a widely used Infrastructure as Code (IaC) tool.  
 The EKS cluster serves as the infrastructure foundation for running Camunda 8.
@@ -83,11 +84,7 @@ You are responsible for operating and maintaining the infrastructure. Camunda up
 
 :::
 
-:::danger Cost management
-
-This guide will incur costs on your cloud provider account, specifically for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route 53. For more details, see [AWS EKS pricing](https://aws.amazon.com/eks/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/). Costs vary by region.
-
-:::
+<CostManagement />
 
 ### Variants
 
@@ -507,7 +504,7 @@ Terraform lets you define outputs, which make it easier to retrieve important va
 
 Each module definition set up in the reference contains an output definition at the end of the file. You can adjust them as needed.
 
-Outputs let you easily referenc values such as the **cert-manager** ARN, **external-dns** ARN, and the endpoints for **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
+Outputs let you easily reference values such as the **cert-manager** ARN, **external-dns** ARN, and the endpoints for **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
 
 ### VPN module setup
 

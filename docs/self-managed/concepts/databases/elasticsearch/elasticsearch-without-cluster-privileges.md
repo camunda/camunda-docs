@@ -68,7 +68,7 @@ zeebe.broker.exporters.elasticsearch:
       password: camunda123
 ```
 
-For additional configuration options, see the [common secondary storage configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
+For additional configuration options, see the [common secondary storage configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
 #### Start the schema manager
 
@@ -144,18 +144,18 @@ Create a configuration for the Camunda single application with the following val
 camunda:
   data:
     secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
-      username: camunda-app
-      password: camunda123
-      url: https://localhost:9200
-      # If custom SSL configuration is necessary
-      security:
-        enabled: true
-        self-signed: true
-        verify-hostname: false
-        certificate-path: PATH_TO_CA_CERT
+      type: elasticsearch
+      elasticsearch:
+        # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
+        username: camunda-app
+        password: camunda123
+        url: https://localhost:9200
+        # If custom SSL configuration is necessary
+        security:
+          enabled: true
+          self-signed: true
+          verify-hostname: false
+          certificate-path: PATH_TO_CA_CERT
   database:
     schema-manager:
       createSchema: false
@@ -255,7 +255,7 @@ If the application configurations are managed directly and do not rely on the He
 # Helm chart values file.
 
 orchestration:
-  configuration |
+  configuration: |
     [...] # Any other custom config.
     camunda.database:
       schema-manager:
@@ -468,7 +468,7 @@ camunda_webapps_123_8.8.0_part_6_of_7
 camunda_webapps_123_8.8.0_part_7_of_7
 ```
 
-Once completed, you can proceed with step 7 of the [backup procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
+This application replaces steps 2 and 4 of the [backup procedure](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md#back-up-process). Once it completes, continue with the remaining steps of that procedure.
 
 ### Limitations
 

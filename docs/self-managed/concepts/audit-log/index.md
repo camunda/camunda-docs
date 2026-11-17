@@ -16,3 +16,9 @@ The audit log is enabled by default. Because of the increase in resource usage o
 :::
 
 You can [configure the audit log](./configure.md) to fine tune log thoroughness and resource usage according to your needs.
+
+## Audit logs and Physical Tenants
+
+Audit records are stored in the secondary-storage location configured for the Physical Tenant where the operation occurred. Query a tenant's records through its tenant-scoped API path, for example `POST /physical-tenants/{physicalTenantId}/v2/audit-logs/search`. The unprefixed `POST /v2/audit-logs/search` endpoint queries the default Physical Tenant. See [search audit logs](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx) for request filters and response fields.
+
+The API's `tenantId` field and filter refer to a Logical Tenant within the selected Physical Tenant. They do not select a Physical Tenant. Physical Tenant scope comes from the request path. For details about tenant-scoped API routing, see [API routing for Physical Tenants](/self-managed/concepts/physical-tenants/api-routing.md).

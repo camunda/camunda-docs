@@ -24,6 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
     steps:
       - name: Resolve refs and paths
         id: resolve
@@ -36,7 +39,7 @@ jobs:
             fi
             echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
-            echo "pr_branch=update-python-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-python-sdk-docs-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
@@ -59,14 +62,14 @@ jobs:
           path: python-sdk
 
       - name: Install uv
-        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           version: "latest"
 
       - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: "3.14"
+          python-version: "3.15"
 
       - name: Generate Python SDK (required for docs)
         working-directory: python-sdk
@@ -112,7 +115,7 @@ jobs:
           echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
 
       - name: Set up Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
 
@@ -122,6 +125,8 @@ jobs:
           npm ci
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/python-sdk.md" "$DOCS_ROOT/apis-tools/python-sdk/"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          npx prettier --write --ignore-unknown ".sdk-repos/${VERSION:+version-$VERSION/}orchestration-cluster-api-python/examples"
 
       - name: Verify SDK examples don't break docs generation
         working-directory: docs
@@ -133,8 +138,8 @@ jobs:
             npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
             npx docusaurus gen-api-docs camunda -p api-camunda-openapi
           else
-            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
-            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+            npx docusaurus clean-api-docs:version "camunda:$DOCS_VERSION" -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "camunda:$DOCS_VERSION" -p api-camunda-openapi
           fi
 
           # Discard generated MDX — this step only validates, not commits
@@ -161,12 +166,13 @@ jobs:
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
@@ -175,14 +181,14 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs
@@ -212,6 +218,8 @@ jobs:
     needs:
       - sync-python-sdk-docs
     if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    permissions:
+      id-token: write # OIDC for the Vault JWT login
     uses: ./.github/workflows/notify-failure.yml
     with:
       # If any dependent job fails, set the dependency_status to 'failure',
@@ -219,5 +227,6 @@ jobs:
       dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
     secrets:
       VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
-      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
+      VAULT_JWT_PATH: ${{ secrets.VAULT_JWT_PATH }}
+      VAULT_JWT_ROLE: ${{ secrets.VAULT_JWT_ROLE }}
+      VAULT_JWT_AUDIENCE: ${{ secrets.VAULT_JWT_AUDIENCE }}

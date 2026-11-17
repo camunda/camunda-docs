@@ -1,0 +1,594 @@
+---
+id: list-runtime-backups-as-cluster-admin
+title: "List runtime backups across physical tenants"
+sidebar_label: "List runtime backups across physical tenants"
+hide_title: true
+hide_table_of_contents: true
+api: eJztXP1y4zaSfxUsJynLcxIlz1dmmJ3sKbYy6+zE9lmeTHYtnwWRLRExCTAAaFvrUtU9xD3hPclVA+CHKMnWVFJb+4f+mPKYBIFGf/y6G+j2g6fpTHnBpfc9DW/yzLtqeyIDSTUT/DjyAi9hSp/nXLMU7BDVV4dJrjTIfpQy7rU9BWEumZ57weWDNwEqQfZzHXvB5dWi/eBNqGJh+eCq7UWgQskyXMILvBEf8cvL88F/fTo+Hxxdnw3OfzoeDo9PT4YBzH+8+8cvP2r6y8k/6ed3eTg/fvP54ODd1ZX9aHh4ejYIQktN545FULzpHx0Njq6PT65/HpzjXMFb/6BXvDw8PRkeDy8GJ4d/D4YX56cnH+ybj0xpRXQMRNoNk4ndMRFTArcg5ySL54qFNCEaOOUaX+B4R0KbCFk8EhwIpylEZDIn4+K7C/PZcTRuk5kUeWZf22UIi3wyMMuYd0RCJqRWbmlN5Qw0RG7pNmE8TPKI8VmxniKxSMwDLnSMP6dCEh1TTVjUJkoQWiwleDInSqTgZrOfEjqbSZhRDYpoQcbHJ4enP519HFwMxiQGCQTuaaiTOaGKME0iAYrcxcBJIsQNRCTPSMQkmCH/9z//a+hSmmpAplCCqgSR21xIOZkA0TI3D7Ugis5xNh2DrDO1GClBaSEhIlMpUsK0T/oV4+wuq1015OS2xxShROUZshUiInId4mBJ3ZqUE0oimEka4WsO35bfm/lnwNE0AMljkog7XlGgCEc5ERVTaaRhGM64/TIVERCgYVx8MBUyRSYqM4tlCeWRFaUlx61stYCMj04Hw+uT04vrwS/Hw4sxyXkEEvmAqnuBSgu/5aC02WWSdITsODUICF1R3LtYqEq/Q8q50JbLNCJTyhJrCHexSKqZ64xSLAGOgo6kyDJUNpGX9oCSZnzmkxMqpbizNuUmuWM6XmMQqAH4mRlbszv8dUkIqA5KsyQpyDUMOIffciZB1TWnQxGgSAFPJIwp4z7pJzoW+SwmOmaKlGhnVldkXAHYmHTJuESvMUnYDbitqHKrpzKMQWk3h0NG0j87bpcmgqylYQiZJpRv+CBXIPcUCSVEwDWjiTIWZDTamBFk1Kje8t7q41HvbmnCImOrPvmkgIw/DC5I9/ZF13G065DNsJuGGi2ZEsX4LFkxGt9re7hoChqkMuCOgOYFXlN4XttjCOW/5SDnXtuTVhiRF0xpoqCJ+KisTX1EcrLMbTaMKZ8B0cInnxFeRMq0hsjAq8GbjCoFkVUlygmkmZ7j3nNo1ydAS8iyhFl82QbBcc8qjCGlXvDg6XmG21VaMj7z2h7c0zRL8FEEU5on2luggyu4ImHK7r+QF31iP7O6XUOTNFeapFSHcZsAN6jOeCWrved7PjmeVqyhSTLihd2gKkjQueSA5rG8KabNFqw3J8dH5KwgfANpBrxL0tpkKpJE3FnXVSfIKtMdS6KQyqhtqUfCKa/5uBFXmkqEBys/5P6M3aJUzXKW3ibrM6o1SCTrv0ej6Plo9PyrJYEcfPP6zTfPvQXGFxJUJrgChdt90evhj1UN3OjjS0fbUJX1LtugtrIOhXGC6zhxCYkALaZ11lELUBnITjF7xymiw0zClE8GRqGNqq91/uSOKgvVuDrHWMPqcWocHYqhZL5dHRU7FFwD18gOYxahgaDurwp58rCq91RKiirMNKRqlYn9BgvNBu9QjY2jaxpaEc1gTMJ0u/R2NkAoI4+ICHSj67eNkDgVSVREAQUv3WszlULxmIkp+vY8AWRHcxRiQ30m9MQZqiVuTvmVBorJrxDqJUO+9OyGDfCZ2by2hz4zl3AOFNnZbmCkwsA6k+hsNLOKWc6xVjtZVCBTJT+aJKdTg8MrNrxivGvnID8hqEwA+SEU0+wWCM9TkEZOBj990lekDiOJmOHbZD7iRqGt+tsACHGqRQuF329bwas8DEEpnNwphsGyXOG6MZthCGEjNgyOYMQzCbdM5AqjpiXrZ1zDDCRyV8iUavvozau65R+0vZRxluapFxwsrhaFRNZydStdWzH7elBa2T2a4Jq4V0gX52J86jRufVjOFE4TihxDG6pWIjwTQOKaJb2otEtBec4TUBsSBIcET6mQy+2IU6WhU+dV3tW4Vsb01eRtEoo0y3XdMsthFg8K6/LXwDtwlN+lt8wCr+0dn1yfnZ9+OB8Mh17bK3aO+v5D//ij+U/FEK/tHQ3s+6u6c6hPYlRk2VhXVMU+N2JyIwmbLosiqmBkz1Kyt25fPE8SOkEitMyhTpO3WMWIFUI+b4WmRpVqGFyz0+ZnVYrZ1BamnN6uTSztcvioqaW1XT/hL8xmNgWbSxuiq57lKUReE5JuQuYINOY3q4i8MscTyLwmXt4iYtwCoJYsiwhuJbyCS00cW/VhO3P/feb+B9h4oW0rqx6ZF469uWoIPQNZsdC+W1UBnxwKrinjhQtofAFVtg98K/dVN35riUV+hsZrPQoX6OLjMqiwwerm0ZXPK4+AWBS4X0x6oG6UVRr3uQW1KjRnmsRUFf5QGokU82pRnJAsswznwLi4loQ/BlWFfZyVExSxFZ+KFQMpZcf4VDQkZzfqMpo1RlDCVwN8iqFb4E59VswCTnkyL7Rv1eSrLT0aJ9LavKSf3NG5asSJE5BkJoHq4gxISAK/5aiOghz4T8VtL1949VitZigvt4vbNsDil3FjB4CrLP7BoZ60QPjHgV9otCXq6/ViRUEoTdOMUMQoFsZ1ASNCmaMCcxa7hbCbtJXKF1ENHVzsUYJf9F686PTedQ5eXxy8DA56wcu3/sE3b14fvOq9e/UP3E5Clf6URb9vSzgJye0sq/tqE/BnvjvAsmclGqyK7dXEuocmt1eqx55Nm/7lDFGcZioWW8RKxUjHE8x9jKOxpya1CHadkjX39QjJL9++efni4NXLzuvXnTfveu96b16+fGH/9/rFu1dI9JRJpT+K2ZmBtnX2gKSbUZj9OghEu3iS4kcS1q338BrtJobwJhOM68eJLEkrTjHL75qJwR9M5EFv0fYmUtyA3OIEw4yzSrzWJDS9AV5RvA45H3EpWxPdq7mfiv6fQaqNDL61L3//TtYeam6v13h96ffwuHk566kFDZsTngqFmxC2ZMFrLGOtJtYE3+Th1QIpLFytu9tYuj12uRUGVU+OLUbhuFebjnEzKW4ZGmVENXWBob0GeeTIM5NikkD6H6tHn80jzjM7ktgwntjgDU9r7MCJRYPL8x8OybtXr7+5asVaZyrodu/u7nw5DTsQMS2kL+SsK6ch/sNx+z65MJFsSufmQC6KDHNpQqqwkKgMQjZlIYK9tns1xKAeLWnU2pTYvCs4bLUjV2X+a+4plKY8hNVM2E67egFS2l4u2Zr7gk/nx4SZ+6jpvDg+WKLZfGPz4MCjE5HrYJJQfrOUKRccjESo/JCmOY+oz0SXZqx7+8LvFdLr4JSqO6FRx90tepVCrdLeJFblaUrlvAyqG3RW9HxPI3JeLeD4WK3wCDStqutfLy7OiowvxEvhCissAUtrv+rVMcv+Ru/tb296vTK93GK/nMB9llBO6/6i2DTjJBUSnJYvb99tvdDLOblM6f2PYqIuRD/U7BaP3K9qN8gZlQoi5FSpX09oUkfCFCTgyPU6lVEdryiWkGzGmjtZJh0vPn8VE9WlllCcsw46zrhtNucVQHOw4b7I8SGh4Y1yF6001zFSZWGlfhuLhMRAI3Nz+uB9/vy5068Gw9r7FsccQ8YOuHbAtQOuHXB9CXC9ehS4IFpXdVMWqMA9Ft8UmU2tHGKHRDsk2iHRDom2R6LX63K1Pp6fYAkPTQhIiafzYZhLvKe8i1liljdlA442p487BNoh0A6Bdgj0pQj0csNFEshbFppbDQM+poI55/SWMnPyhhbNlDHomGYZ1p5iBa7gtqzcqaipepe2FljNlYaU2DM2e9qaSVAK71O0wJrGW+Da1fDKW1vla6+OsI5Y5DIEZU8UJ4BsgfuY5rYQg94KZq5ijVwV3vFCcUWtfHJcBGtUubpXw5OCmw5lLdiFxUXx+HwwPP10fji4Hvzy1/6n4cXgaOyTw4SBKUMyt0ChSFPgUVk2y3WOFWBYUoqVI6Z0vGQFneJ9oC0QFdMpXsMyEfnk7yI3tdoJUOk004BFeWRasikFvO5gKjWFywHZhB34exd5JzgS2/0nwAS6GsKYm0LKUHAsslbdwtF0Kp/SfRZTHiWMzzpLa1sE3nmYnYfZeZidh9nWwyza3n2HRhFEHcY7t8UNkrmmMVNr4PjIdk3cwNwL1n3Q9kzNbfEh1q6noGOBfXcz0LbsPUYKXT6+ppPD9N+hX7Fr5TLxAu/BItUi6HYfYqH0InjAEpmFWVEy9HRGNfGdhbPC2hIR0sQ8XqeW+AK7HR5vfjkfDC/IB6rhjs59U+coZGOZt723vbUrmEqep2fvnx07d2oWqANzsQTiw9ol7OAvXcR0FhStREOcwpVx1/odS/11a5uV8Hc7CK/LzH9+KLT6x88XSH6tQ3LzFDjGqCXWHNVLljZ2IKG0S9Xs+QfO0dHQCMN1rRxa5CQDPmMcwNmdVaMCYmdMx/nED0XadUBb/mRK5aBsoduSRZ4dG8zCUCLnxqEWDR+UFGu+Lc+ZsIXr2TMsZ8NoAy3HPnlGBjxPbWk6xjmMz/DF0Eilo1gE2B2TW5CPyjP6KQPTBVE0Xc3dt6bOacQjEeYpcDwSszO3kFQHCGTcP7w4/nkwbpOxAQQY22aFcd/+hkHSiNMkcfPbMg7Gs1zv++S8aD4h1NZQYd27uZunXJg4pdyHirH3rzhyK7w4dffF2NSHeA8yZbaavtjdBGJ6y7CNwjRvVbzAKO8WOEOMRJJHnCny/DkX+vlzcxddKn0GHCWErDOhocReMOyuGB79TZV9jra2acRX6cPaYgTpsGyKFNKGzRJM6MMF75Q7HvGC/dw1W2G0SZBkn/wgpLF6OmEJdunRUAqlDCFtx8MRV+C6RZpcJMtMLCRrw56EhcAVrNH2j/YNcRfX5MDvfYnWTxIx6aaU8a5bQnUP+z99Ojnqdz4eHw5OhoPOgd/z9b3pEPMyoXRKeY0ObDVe6UByO2/2rjZB7KEKV3fN07vm6V3z9K55etc8/e/YPO0iOQ33upsllHEMk4yPeXCB/aXnKMJQDTNBtxKm6C68v2q7KP3Se3iYUAWfZLJY4GPbYYxBf8QUhvQbeozr/uLfvPV6Lcds+rSmwadInjxswt6eB/+qluvHNlN0XFdbuKpSM/uHU1z5SC2D7BszqH210sW7lEF+GGBBOV1OKxqZiC2Ndz0RfF6b++HBjrgQN8AXmDlaIjT+jlXlJgfGs4mhCZtt+plQPkM1m2cwNNw3JYcTwLhqePQ3TGjMiScefqQGmh/c0amLzOxBJFm4kuf/dBHX266oW36nNOSM7X2LEEbVnIdkmvOwhKPH/mrNwMb6rX3yMOIEQ2CF4GiDw/frSGrtm3UI6XbJ2MpvbDUGQ9MVPTlNmd4A1Cqjrq3bTde0C8QuCSpP3IHsumDHpiTGKS7FO27KJ6OepyIe0rITYg26mXFNg+q+X/GuMIP3hN5RVvLSf0oQrQdnjQHZO+g93yOLgs9ITKs+edVKr5zY7OIiAT8Rs9a4cAeN5sGvHlwJdNFxvQiqZybCWoxxUZyvtmgFUm5oo1uzpKFBBSGXXz04J9CU/+KKlO8aKy/wx2LEFwbNnB2dzXVszok22JAxEsfq6yULuVbRDXEmtqTHyNwIpsZCrh2nrh1br6m6dpZ1bVzkNZR20vmOnAgOgeO7NdP3pGEjVnSEPCM2H2ikNmv9gE/OqFKVsVzbx9fMmEsxH4YNJt/UwqQHxbelLU5Zgn+nBN/XMH3lb00U89kGLZf+owm7s4nx83HtT1iYZoyR++sSI89qPKlpu2WEvxU3W5bU97X5Cn6h3hVUF3GxCgr9IiSTjOvWdFS2L9khAXF6vBh5+3XFOXy2WWlykzc7wflLEZU/jG6M+WX5JGGhyT9YSCy4XlB1Y8S6FbCOuDMPu9wtlRuUxj80YFvi6xchLNNl6Gt1q2H7Tu/wsMbFwU6CSM8KZll6ntpiH7nRqsvG4pcrWo/sn1Px+0rlKQywrEq1Rt5BD+VdbfLQYcZnyTR8ZBxaX4289QimSjErlPO3DZA4z9UjbhaPnzYiRBDQjKkgsLNf04wFwVPbP8M/CaS+HfEnZl4Sct1H8+2wx2LOufGDf27tt8n34v7P0RzzlygIzOVmEAzwx3ffFVCcgN6gZUGAWHkN/La1/5dSCDi+acuVYLe06u0YVnkLpzUraBcYgG03hjnlarxa7NfINNr7l28fQZL64gZKEv6n1shzWhU8+4vTK+eI7H9Ob1qt/f2Gsn0QT0Z0I2+a6pE5mup2nR/YcNSFdrly2sD4UlpQhthtvNEmwftt7bQV6vv9EWdT892f3hPOEmTESNs4HR+P+GLEkWXX7YJrwXsiTQpT491IT1PtnyHnpq1RkbQ1webrKLAnNu+/vm2Tr4uwq6X2RyM+8to4z0i7aOID6AIwULmrp6YjFR8lwFvV47Pl6KO170Rztfh/9UOOyA==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"List runtime backups across physical tenants"}{" "}
+  <MarkerAddedInVersion version="8.10" /> <MarkerScope scope="cluster-wide" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/cluster/v2/backups/runtime"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Lists the runtime backups of every physical tenant of the cluster, or of the one named by `physicalTenantId`, grouped by backup id. Every group reports every targeted tenant, including the ones holding nothing for that id, so a backup only some tenants hold aggregates to `INCOMPLETE` here exactly as it does when looked up directly — the state of a listed group can be trusted to say whether the cluster can be restored from it. A backup id that only some physical tenants hold is a supported outcome rather than a degraded one; tenants that generate their own backup ids never share one, so in that mode each backup forms its own group and the other tenants report `DOES_NOT_EXIST` under it.
+
+The request is all-or-nothing: a physical tenant whose backups cannot be read fails the whole request rather than silently dropping out of the listing. Narrow the request with `physicalTenantId` to list the backups of the tenants that can still be read.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/backups/runtime` to act as a single physical tenant.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenantId",
+      in: "query",
+      required: false,
+      description:
+        "The physical tenant to apply the change to. When omitted, or when passed with an empty value, the change is applied to every physical tenant of the cluster.",
+      schema: { type: "string", example: "default" },
+    },
+    {
+      name: "prefix",
+      in: "query",
+      required: false,
+      description:
+        "A prefix that backup ids must match, ending in a single '*'. If omitted, all\nbackups are returned.\n",
+      schema: {
+        title: "Backup ID Prefix",
+        description:
+          "A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id\nstarting with the given prefix.\n",
+        type: "string",
+        pattern: "^\\d*\\*$",
+        example: "17567*",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The runtime backups of every targeted physical tenant, grouped by backup id and sorted in descending order of backup id, as the per-physical-tenant listing is. Empty when every targeted tenant was read and none of them holds a matching backup.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              description:
+                "A runtime backup id, what each physical tenant reports for it, and the state aggregated over every targeted tenant — folded from the per-tenant states by the same rules a per-tenant state is folded from its partitions.",
+              type: "object",
+              required: [
+                "backupId",
+                "state",
+                "failureReason",
+                "physicalTenants",
+              ],
+              properties: {
+                backupId: {
+                  description: "The id of the backup.",
+                  allOf: [
+                    {
+                      title: "Backup ID",
+                      description:
+                        "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                      type: "integer",
+                      format: "int64",
+                      example: 1,
+                      minimum: 1,
+                    },
+                  ],
+                },
+                state: {
+                  description:
+                    "The state aggregated over every targeted physical tenant, whether the backup id was looked up directly or listed. A tenant holding nothing for this id counts as `DOES_NOT_EXIST`, so the aggregate is `INCOMPLETE` unless every targeted tenant holds the backup.",
+                  allOf: [
+                    {
+                      title: "Runtime Backup State",
+                      description:
+                        "The aggregated state of the backup, computed from the state of each partition.",
+                      type: "string",
+                      enum: [
+                        "DOES_NOT_EXIST",
+                        "IN_PROGRESS",
+                        "COMPLETED",
+                        "FAILED",
+                        "INCOMPLETE",
+                        "DELETED",
+                      ],
+                      example: "IN_PROGRESS",
+                    },
+                  ],
+                },
+                failureReason: {
+                  description:
+                    "Reason for failure if the aggregated state is 'FAILED'.",
+                  type: "string",
+                  nullable: true,
+                  example: "",
+                },
+                physicalTenants: {
+                  description:
+                    "What each physical tenant reports for this backup id, ordered by physical tenant id. Every targeted tenant is listed, including the ones reporting `DOES_NOT_EXIST`.",
+                  type: "array",
+                  items: {
+                    description:
+                      "What a single physical tenant reports for a runtime backup id.",
+                    type: "object",
+                    required: [
+                      "physicalTenantId",
+                      "state",
+                      "failureReason",
+                      "details",
+                    ],
+                    properties: {
+                      physicalTenantId: {
+                        description: "The id of the physical tenant.",
+                        type: "string",
+                        example: "default",
+                      },
+                      state: {
+                        description:
+                          "The state of the backup on this physical tenant, aggregated over its partitions.",
+                        allOf: [
+                          {
+                            title: "Runtime Backup State",
+                            description:
+                              "The aggregated state of the backup, computed from the state of each partition.",
+                            type: "string",
+                            enum: [
+                              "DOES_NOT_EXIST",
+                              "IN_PROGRESS",
+                              "COMPLETED",
+                              "FAILED",
+                              "INCOMPLETE",
+                              "DELETED",
+                            ],
+                            example: "IN_PROGRESS",
+                          },
+                        ],
+                      },
+                      failureReason: {
+                        description:
+                          "Reason for failure if the state is 'FAILED'.",
+                        type: "string",
+                        nullable: true,
+                        example: "",
+                      },
+                      details: {
+                        description:
+                          "Detailed status of the backup per partition of this physical tenant. Contains every partition of the tenant when the backup id was looked up directly, including for a tenant that holds no such backup. Empty for a tenant that holds nothing for a listed id: a listing asks each tenant for the backups it has, so there is nothing to report per partition for one it does not.",
+                        type: "array",
+                        items: {
+                          title: "Partition Backup Info",
+                          description:
+                            "Detailed info of the backup for a given partition.",
+                          type: "object",
+                          properties: {
+                            partitionId: {
+                              description: "The id of the partition.",
+                              readOnly: true,
+                              allOf: [
+                                {
+                                  title: "Partition ID",
+                                  description:
+                                    "The id of a partition. Always a positive number greater than or equal to 1.",
+                                  type: "integer",
+                                  format: "int32",
+                                  minimum: 1,
+                                  example: 3,
+                                },
+                              ],
+                            },
+                            state: {
+                              description:
+                                "The state of the backup on this partition.",
+                              readOnly: true,
+                              allOf: [
+                                {
+                                  title: "Runtime Backup State",
+                                  description:
+                                    "The aggregated state of the backup, computed from the state of each partition.",
+                                  type: "string",
+                                  enum: [
+                                    "DOES_NOT_EXIST",
+                                    "IN_PROGRESS",
+                                    "COMPLETED",
+                                    "FAILED",
+                                    "INCOMPLETE",
+                                    "DELETED",
+                                  ],
+                                  example: "IN_PROGRESS",
+                                },
+                              ],
+                            },
+                            failureReason: {
+                              description:
+                                "Failure reason if the state is 'FAILED'.",
+                              type: "string",
+                              nullable: true,
+                              example: "",
+                            },
+                            createdAt: {
+                              description:
+                                "The timestamp at which the backup was started on this partition.",
+                              readOnly: true,
+                              type: "string",
+                              format: "date-time",
+                              nullable: true,
+                              example: "2022-09-15T13:10:38.176514094Z",
+                            },
+                            lastUpdatedAt: {
+                              description:
+                                "The timestamp at which the backup was last updated on this partition, e.g. changed\nstate from 'IN_PROGRESS' to 'COMPLETED'.\n",
+                              readOnly: true,
+                              type: "string",
+                              format: "date-time",
+                              nullable: true,
+                              example: "2022-09-15T13:10:38.176514094Z",
+                            },
+                            snapshotId: {
+                              description:
+                                "The id of the snapshot which is included in this backup.",
+                              type: "string",
+                              readOnly: true,
+                              nullable: true,
+                              example: "238632143-55-690906332-690905294",
+                            },
+                            firstLogPosition: {
+                              description:
+                                "The first log position included in this backup.",
+                              type: "integer",
+                              format: "int64",
+                              readOnly: true,
+                              nullable: true,
+                              example: 5,
+                            },
+                            checkpointPosition: {
+                              description:
+                                "The position of the checkpoint for this backup.",
+                              type: "integer",
+                              format: "int64",
+                              readOnly: true,
+                              nullable: true,
+                              example: 10,
+                            },
+                            brokerId: {
+                              description:
+                                "The id of the broker from which the backup was taken for this partition.",
+                              type: "integer",
+                              format: "int32",
+                              readOnly: true,
+                              nullable: true,
+                              example: 0,
+                              minimum: 0,
+                            },
+                            brokerVersion: {
+                              description:
+                                "The version of the broker from which the backup was taken for this partition.\n",
+                              type: "string",
+                              readOnly: true,
+                              nullable: true,
+                              example: "8.10.0",
+                            },
+                          },
+                          required: [
+                            "partitionId",
+                            "state",
+                            "failureReason",
+                            "createdAt",
+                            "lastUpdatedAt",
+                            "snapshotId",
+                            "firstLogPosition",
+                            "checkpointPosition",
+                            "brokerId",
+                            "brokerVersion",
+                          ],
+                        },
+                      },
+                    },
+                    title: "ClusterRuntimeBackupTenantInfo",
+                  },
+                },
+              },
+              title: "ClusterRuntimeBackupInfo",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The requested `physicalTenantId` does not exist in this cluster.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

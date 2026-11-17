@@ -22,7 +22,7 @@ Refers to a feature or component released as an alpha version, in an early state
 
 ### Alpha release
 
-Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.6.0-alpha1`, `8.6.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
+Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.10.0-alpha1`, `8.10.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
 
 :::note
 
@@ -56,6 +56,7 @@ A cluster typically consists of the following components:
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Optimize](/components/optimize/what-is-optimize.md)
+- [Connectors](/components/connectors/introduction.md)
 
 You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
 
@@ -81,7 +82,6 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 Non-cluster components include:
 
 - [Modeler (Web)](/components/modeler/web-modeler/launch-web-modeler.md)
-- [Connectors](/components/console/introduction-to-console.md)
 - [Console](/components/console/introduction-to-console.md)
 
 Non-cluster component versions are released continuously.

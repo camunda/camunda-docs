@@ -76,7 +76,7 @@ export const developmentCards = [
   },
   {
     link: "../development/dealing-with-problems-and-exceptions/",
-    title: "Dealing with problems and exceptions",
+    title: "Deal with problems and exceptions",
     image: IconPlayImg,
     description:
       "Handle exceptions, leverage retries, and use incidents to deal with problems in your processes.",

@@ -1862,6 +1862,44 @@ N/A
 </tbody>
 </table>
 
+### `camunda.client.cluster-variables`
+
+Deprecated properties for setting cluster variables at startup.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Replacement</th>
+    <th>Hint</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.global" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_GLOBAL"/><a href="#camundaclientclustervariablesglobal" id="camundaclientclustervariablesglobal" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientclustervariablesvariables"><Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES"/></a>
+</td>
+<td>
+Cluster variables are now set in a single list instead of separate maps for global and tenant variables.
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.tenant" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_TENANT"/><a href="#camundaclientclustervariablestenant" id="camundaclientclustervariablestenant" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientclustervariablesvariables"><Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES"/></a>
+</td>
+<td>
+Cluster variables are now set in a single list instead of separate maps for global and tenant variables.
+</td>
+</tr>
+</tbody>
+</table>
+
 ### `camunda.client.identity`
 
 Deprecated properties for identity settings.

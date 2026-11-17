@@ -1,14 +1,15 @@
 ---
 id: idp-configuration
 title: Configure IDP
-description: "Set up and configure intelligent document processing (IDP) in Camunda 8 SaaS and Self-Managed."
+description: "Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials."
 ---
 
 import IdpSecretsImg from './img/idp-connector-secrets.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
+<PageDescription />
 
 ## Prerequisites
 

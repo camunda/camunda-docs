@@ -20,11 +20,3 @@ signalName: string;
 ```
 
 The name of the signal being awaited.
-
-### waitStateType
-
-```ts
-waitStateType: string;
-```
-
-The wait state type discriminator.

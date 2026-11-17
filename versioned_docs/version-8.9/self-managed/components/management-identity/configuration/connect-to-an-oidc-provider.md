@@ -33,6 +33,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
   - Audience
 - A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
 - Your OIDC provider must issue access tokens that contain an `aud` (audience) claim matching the configured audience, as Camunda validates this claim for auth flows. Providers that are not configured to emit, or do not emit, the `aud` claim in their access tokens are not supported. Configure your identity provider to emit this claim if supported. See [known limitations](#oidc-provider-known-limitations) for details.
+- A relational database that Identity can connect to. The database is required regardless of feature flags. See [database configuration](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration) for connection details and supported databases.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -116,6 +117,10 @@ Once set, you cannot update your initial claim name and value using environment 
 :::
 
 <h3>Additional considerations</h3>
+
+:::tip Shared audience
+If your OIDC provider allows only one audience across all components, see [scope permissions by component](/self-managed/components/management-identity/configuration/scope-permissions-by-component.md) to avoid components receiving each other's permissions by mistake. The flag corrects misconfiguration and isn't an access-control boundary. See [known limitations](/self-managed/components/management-identity/configuration/scope-permissions-by-component.md#known-limitations).
+:::
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
 

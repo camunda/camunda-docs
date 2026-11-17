@@ -290,24 +290,6 @@ Expected output showing the policy is attached:
 }
 ```
 
-### Manually creating or updating policies (8.7 and earlier)
-
-For Camunda 8.8+, policies are created automatically by the retention tooling. If you need to manually create or update policies, use the policy names configured in your `values.yaml` with the commands in the [Camunda 8.7 manual policy management guide](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management).
-
-**Camunda 8.8 default policy names** (customizable via Helm values):
-
-- `zeebe-record-retention-policy` - For Zeebe record indices (configured via `orchestration.retention.policyName`)
-- `camunda-history-retention-policy` - For historical Operate, Tasklist, and Camunda indices (configured via `orchestration.history.retention.policyName`)
-- `camunda-usage-metrics-retention-policy` - For usage metrics indices (configured via `orchestration.history.retention.usageMetricsPolicyName`)
-
-**Camunda 8.7 default policy names** (only Zeebe is customizable):
-
-- `zeebe-record-retention-policy` - For Zeebe records (customizable via `zeebe.retention.policyName`)
-- `operate_delete_archived_indices` - For Operate indices (hardcoded)
-- `tasklist_delete_archived_indices` - For Tasklist indices (hardcoded)
-
-The curl commands for creating and applying policies are the same across versions—only the policy names differ. See the [8.7 guide's manual policy section](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management) for complete ILM and ISM policy creation commands.
-
 ### Known limitations
 
 **OpenSearch policy updates:**

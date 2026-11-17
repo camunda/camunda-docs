@@ -5,6 +5,7 @@ description: "Monitor cluster health, track job and process execution, and measu
 ---
 
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
+import { SquareChevronRightIcon } from "@site/docs/components/assets/hub-icons";
 import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
 import AoGrid from '../../../react-components/\_ao-card';
 
@@ -12,10 +13,10 @@ Monitor cluster health, track job and process execution, and measure business va
 
 <AoGrid ao={[
 {
-link: "./hub-dashboard",
-title: "Monitor the Hub dashboard",
-image: DocsIcon,
-description: "View organization activities at a high level.",
+link: "../console",
+title: "View Console",
+image: SquareChevronRightIcon,
+description: "View clusters, usage, alerts, and activity of your organization at a high level.",
 },
 {
 link: "./job-dashboard",

@@ -71,7 +71,7 @@ The BPMN process id of the process definition to start an instance of.
 optional processDefinitionVersion?: number;
 ```
 
-The version of the process. By default, the latest version of the process is used.
+The version of the process. If omitted, the latest active version is used.
 
 ---
 

@@ -32,7 +32,7 @@ For example, given the following `$schema` definition, the application takes `0.
 ## Identification: `id` and `version`
 
 - `id : String` is a required key and must be set.
-- `version : Integer` is optional but Camunda strongly recommends setting it.
+- `version : Integer` is optional but Camunda strongly recommends setting it. When using the [Camunda Hub catalog](/components/hub/organization/manage-catalog/getting-started.md), the version is required.
 
 The `id` key defines the identifier of the template.
 If no `version` is set, templates with the same `id` are regarded as equal, independent of their other key-value pairs.

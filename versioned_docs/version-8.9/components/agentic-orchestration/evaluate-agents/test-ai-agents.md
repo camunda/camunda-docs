@@ -9,8 +9,9 @@ toc_max_heading_level: 2
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/apis-tools/testing/getting-started.md).
+<PageDescription />
 
 ## About
 

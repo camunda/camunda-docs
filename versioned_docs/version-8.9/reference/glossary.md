@@ -202,11 +202,11 @@ A correlation is an attribute within a [message](#message) that is used to match
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
 
-Camunda uses `csap` to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
 
-- [CSAP CLI](/components/camunda-integrations/sap/csap-cli.md)
+- [CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)
 
 ## D
 
@@ -314,7 +314,7 @@ A generation is not a process definition version, a version tag, or a Web Modele
 
 A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
+- [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#the-ai-models-behind-these-features)
 
 ## H
 
@@ -406,7 +406,7 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+- [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#human-oversight)
 
 ## L
 

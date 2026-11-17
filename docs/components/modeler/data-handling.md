@@ -35,6 +35,10 @@ The **Variables** panel helps you explore the variables in your process. Use it 
 1. Open a BPMN diagram in Camunda Hub or Desktop Modeler.
 2. On the right side of the modeling interface, open the **Variables** panel.
 
+:::tip
+If the **Variables** panel is hidden in Desktop Modeler, click **Window > Toggle Variables Panel**.
+:::
+
 ### Selecting elements
 
 The list of variables shown in the panel depends on the element or elements you have selected on the canvas. When you select one or more elements, the panel displays all variables in the scope of those elements, including variables from parent scopes (for example, a sub-process scope or the process scope).

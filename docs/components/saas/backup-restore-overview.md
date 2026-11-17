@@ -44,13 +44,13 @@ When a restore starts, the cluster enters a restoring state and is unavailable u
 
 Camunda SaaS retains backups as count-based retention:
 
-- Manual backups: up to five recent backups per cluster category
-- Scheduled backups: up to five backups per schedule category
+- Manual backups: up to three recent backups per cluster category
+- Scheduled backups: up to three backups per schedule category
 
 ## Limitations and constraints
 
 - Cross-cluster restore is not supported in this release.
-- Cross-region restore is not supported in this release.
+- Cross-region in-place restore isn't supported. To recover a cluster in another region, see [cross-region cold recovery](./cross-region-cold-recovery.md).
 - Cross-organization restore is not supported in this release.
 - Replication factor and node count differences are not blocking constraints for restore.
 - Backups created before the restore feature was introduced are not eligible for restore.

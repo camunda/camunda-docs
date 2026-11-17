@@ -33,6 +33,18 @@ The process instance is not found.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+The process instance cannot be canceled, for example because it is already being
+terminated or because it is a child process instance.
+More details are provided in the response body.
+
+---
+
 ### 500
 
 ```ts

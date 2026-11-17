@@ -6,11 +6,11 @@ sidebar_position: 2
 description: "The Zeebe client gRPC API is exposed through a single gateway service."
 ---
 
-The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/gateway.proto).
+The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/gateway-protocol/src/main/proto/gateway.proto).
 
 ## Default service config
 
-Along with the gateway protocol definition, the gateway service also bundles a [default service configuration file](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
+Along with the gateway protocol definition, the gateway service also bundles a [default service configuration file](https://github.com/camunda/camunda/blob/stable/8.9/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
 This file can be used as is, or as a template to create your own, and defines default retry strategies on a per-RPC basis: when to retry (based on error code), how often, how soon, etc.
 This file is also loaded by the [Camunda Java client](../java-client/getting-started.md) if `useDefaultRetryPolicy` is set to true.
 
@@ -534,6 +534,10 @@ Returned if:
 
 ## `DeleteResource` RPC
 
+Deletes a resource (a process definition, decision requirements definition, or form) identified by its key.
+
+Deleting a process definition that still has running instances no longer fails. The definition starts draining: new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically once its last instance finishes. See [resource deletion](../../components/concepts/resource-deletion.md#draining).
+
 ### Input `DeleteResourceRequest`
 
 ```protobuf
@@ -559,12 +563,6 @@ Returned if:
 
 - No resource exists with the given key.
 - No resource was found with the given key for the tenants the user is authorized to work with.
-
-#### GRPC_STATUS_FAILED_PRECONDITION
-
-Returned if:
-
-- The deleted resource is a process definition, and there are running instances for this process definition.
 
 ## `DeployResource` RPC
 

@@ -9,6 +9,8 @@ from camunda_orchestration_sdk import (
     AuditLogSearchQueryRequest,
     CamundaClient,
     ClockPinRequest,
+    ClusterBalanceResponse,
+    ClusterRebalanceRequest,
     ClusterRestoreRequest,
     ClusterVariableName,
     ClusterVariableSearchQueryRequest,
@@ -16,7 +18,6 @@ from camunda_orchestration_sdk import (
     ConditionalEvaluationInstructionVariables,
     CorrelatedMessageSubscriptionSearchQuery,
     CreateClusterVariableRequest,
-    CreateClusterVariableRequestValue,
     CreateGlobalTaskListenerRequest,
     ExpressionEvaluationRequest,
     FormKey,
@@ -40,7 +41,6 @@ from camunda_orchestration_sdk import (
     TenantId,
     Unset,
     UpdateClusterVariableRequest,
-    UpdateClusterVariableRequestValue,
     UpdateGlobalTaskListenerRequest,
 )
 
@@ -62,7 +62,7 @@ def create_global_cluster_variable_example(name: ClusterVariableName) -> None:
     result = client.create_global_cluster_variable(
         data=CreateClusterVariableRequest(
             name=name,
-            value=CreateClusterVariableRequestValue.from_dict({"key": "my-value"}),
+            value={"key": "my-value"},
         ),
     )
 
@@ -77,7 +77,7 @@ def update_global_cluster_variable_example(name: ClusterVariableName) -> None:
     result = client.update_global_cluster_variable(
         name=name,
         data=UpdateClusterVariableRequest(
-            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-value"}),
+            value={"key": "updated-value"},
         ),
     )
 
@@ -114,7 +114,7 @@ def create_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVar
         tenant_id=tenant_id,
         data=CreateClusterVariableRequest(
             name=name,
-            value=CreateClusterVariableRequestValue.from_dict({"key": "tenant-value"}),
+            value={"key": "tenant-value"},
         ),
     )
 
@@ -130,7 +130,7 @@ def update_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVar
         tenant_id=tenant_id,
         name=name,
         data=UpdateClusterVariableRequest(
-            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-tenant-value"}),
+            value={"key": "updated-tenant-value"},
         ),
     )
 
@@ -639,6 +639,16 @@ def get_cluster_status_example() -> None:
 # endregion GetClusterStatus
 
 
+# region GetClusterUpgradeStatus
+def get_cluster_upgrade_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_cluster_upgrade_status()
+
+    print(f"Cluster upgrade readiness: {result.status.value}")
+# endregion GetClusterUpgradeStatus
+
+
 # region GetRestoreStatus
 def get_restore_status_example() -> None:
     client = CamundaClient()
@@ -691,3 +701,56 @@ def restore_as_cluster_admin_example() -> None:
             print(f"    {operation.operation}{suffix}")
 # endregion RestoreAsClusterAdmin
 
+
+# region TriggerClusterRebalance
+def trigger_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Start a dry run first to inspect the plan without transferring any leadership.
+    # Omit dry_run (or set it to False) to execute the rebalance for real.
+    result: ClusterBalanceResponse = client.trigger_cluster_rebalance(
+        data=ClusterRebalanceRequest(
+            replication_lag_threshold=8388608,
+            max_transfer_attempts=3,
+        ),
+        dry_run=True,
+    )
+
+    print(f"Cluster balance state: {result.state}")
+    if result.running_rebalance is not None:
+        print(f"Running rebalance: {result.running_rebalance}")
+    for partition in result.partitions:
+        print(f"  Partition {partition.partition_id}: {partition.state}")
+# endregion TriggerClusterRebalance
+
+
+# region GetClusterRebalance
+def get_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Poll this endpoint after triggering a rebalance to monitor progress.
+    result: ClusterBalanceResponse = client.get_cluster_rebalance()
+
+    print(f"Cluster balance state: {result.state}")
+    if result.running_rebalance is not None:
+        print(f"Running rebalance in progress: {result.running_rebalance}")
+    if result.last_completed_rebalance is not None:
+        print(f"Last completed rebalance: {result.last_completed_rebalance}")
+    for partition in result.partitions:
+        print(f"  Partition {partition.partition_id}: {partition.state}")
+# endregion GetClusterRebalance
+
+
+# region CancelClusterRebalance
+def cancel_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Asks the running rebalance to stop after the in-flight transfer finishes.
+    # Partitions already rebalanced keep their new leaders.
+    result = client.cancel_cluster_rebalance()
+
+    if result.was_running:
+        print("Rebalance was running and has been asked to stop.")
+    else:
+        print("No rebalance was running.")
+# endregion CancelClusterRebalance

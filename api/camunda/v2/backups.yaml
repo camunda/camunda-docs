@@ -13,6 +13,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -71,6 +73,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -120,6 +124,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -157,6 +163,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -189,6 +197,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -232,6 +242,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -280,6 +292,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -317,6 +331,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -376,6 +392,8 @@ paths:
 
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -439,6 +457,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -488,6 +508,8 @@ paths:
 
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
+        [[SCOPE:physical-tenant]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -525,10 +547,12 @@ components:
   responses:
     HistoryBackupForbidden:
       description: |
-        The request is forbidden, either because the authenticated caller lacks the required
-        `BACKUP` permission, or because the cluster's secondary storage is neither Elasticsearch
-        nor OpenSearch and therefore cannot serve history backups. The problem detail says which
-        of the two applies.
+        The request is forbidden for one of three reasons: the authenticated caller lacks the
+        required `BACKUP` permission; the cluster's secondary storage is neither Elasticsearch nor
+        OpenSearch and therefore cannot serve history backups; or the physical tenant's snapshot
+        repository is absent from the store — configured under a name the store does not have, or
+        not configured at all. The problem detail says which applies. The latter two are deployment
+        faults the caller cannot correct by changing its request.
       content:
         application/problem+json:
           schema:

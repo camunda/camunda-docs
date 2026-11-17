@@ -22,4 +22,4 @@ The following configuration is recommended for impacted reverse proxies:
 
 ## Nginx
 
-Nginx is a known proxy which does not support forward HTTP/2 pings from either side as a form of keepalive. To resolve related gateway timeouts, configure an appropriate `grpc_send_timeout` that it is _higher_ than your job worker stream timeout configuration.
+Nginx is a known proxy which does not support forward HTTP/2 pings from either side as a form of keepalive. To resolve related gateway timeouts, configure an appropriate `grpc_read_timeout` that is _higher_ than your job worker stream timeout configuration.

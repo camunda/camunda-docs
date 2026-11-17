@@ -1,0 +1,403 @@
+---
+id: unassign-user-task
+title: "Unassign user task"
+sidebar_label: "Unassign user task"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Unassign user task"} <MarkerAddedInVersion version="8.5" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/user-tasks/{userTaskKey}/assignee"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      anyOf: [
+        {
+          resourceType: "PROCESS_DEFINITION",
+          permissionType: "UPDATE_USER_TASK",
+        },
+        { resourceType: "USER_TASK", permissionType: "UPDATE" },
+      ],
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task.",
+      schema: {
+        type: "string",
+        format: "string<UserTaskKey>",
+        description: "System-generated key for a user task.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task was unassigned successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user task with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description:
+        "The request timed out between the gateway and the broker. For these endpoints, this often happens when user task listeners are configured and the corresponding listener job is not completed within the request timeout. Common causes include no available job workers for the listener type, busy or crashed job workers, or delayed job completion. As with any gateway timeout, general timeout causes (for example transient network issues) can also result in a 504 response.\nTroubleshooting: - verify that job workers for the listener type are running and healthy - check worker logs for crashes, retries, and completion failures - check network connectivity between workers, gateway, and broker - retry with backoff after transient failures - fail without retries if a problem persists\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          examples: {
+            taskListenerTimeout: {
+              value: {
+                type: "about:blank",
+                title: "DEADLINE_EXCEEDED",
+                status: 504,
+                detail:
+                  "Expected to handle request, but request timed out between gateway and broker",
+                instance: "/v2/user-tasks/123/completion",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

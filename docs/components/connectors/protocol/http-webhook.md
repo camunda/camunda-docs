@@ -180,7 +180,7 @@ This tab displays the URL of the HTTP Webhook connector for every cluster where 
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use HTTP Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, HTTP Webhook connector deployments and URLs will not be displayed in Modeler.
+In that case, HTTP Webhook connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 For self-managed installations, the webhook URL format is:
@@ -188,6 +188,21 @@ For self-managed installations, the webhook URL format is:
 `http(s)://<base URL>/<contextPath>/inbound/<webhook ID>`
 
 If no `contextPath` is specified in the Helm chart, it must be omitted from the URL.
+
+### Request limits
+
+The Connector Runtime applies the following limits to HTTP Webhook requests:
+
+| Request                                   | Default limit                                      | Response when exceeded |
+| ----------------------------------------- | -------------------------------------------------- | ---------------------- |
+| Request body except `multipart/form-data` | 10 MB                                              | HTTP `413`             |
+| `multipart/form-data` request body        | 10 MB total                                        | HTTP `413`             |
+| `multipart/form-data` file                | 10 MB per file                                     | HTTP `413`             |
+| Request rate                              | 1,000 requests per second across all webhook paths | HTTP `429`             |
+
+One global rate limiter is shared by all webhook paths, including unregistered paths. For non-multipart requests, the controller applies the rate limit before it returns HTTP `404` for an unregistered path or reads the request body. The servlet container can parse and size-check `multipart/form-data` requests before the controller applies the rate limit. Requests that exceed the global rate limit return HTTP `429`. HTTP `404`, `413`, and `429` responses have an empty body.
+
+For Self-Managed deployments, you can [configure the request limits](/self-managed/components/connectors/connectors-configuration.md#configure-inbound-webhook-request-limits).
 
 ### Example
 
@@ -442,7 +457,7 @@ For example, given a webhook request with the payload body:
 }
 ```
 
-You can return `myValue1` in a new key `myCustomKey` with a response body expression such as:
+You can return `myValue1` in a new key `myCustomKey` with a response expression such as:
 
 ```json
 ={

@@ -3,7 +3,7 @@
 
 To interact with your Camunda 8 cluster, you'll use the Camunda client. First, you'll need to create credentials.
 
-1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+1. In Camunda Hub, in the left navigation, click **Environments**, and then click **Clusters**.
 2. Select a cluster.
 3. Click the **API** tab.
 4. Click **Create new client**.

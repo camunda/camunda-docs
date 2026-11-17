@@ -73,6 +73,6 @@ On confirmation, the modal closes, the table updates, and your assigned roles ar
 
 2. Navigate to the **Roles** tab.
 
-3. Click the trash icon next to the user you want to remove from the group.
+3. Click the trash icon next to the role you want to remove from the group.
 
 On confirmation, the modal closes, the table updates, and your role is removed from the group.

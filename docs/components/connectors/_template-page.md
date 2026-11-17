@@ -16,7 +16,7 @@ Single concise sentence of what you would use the connector for.
 
 <!-- Provide any further useful overview information about the connector.  -->
 
-The [connector name] connector enables AI agents to integrate with an LLM to provide... This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
+The [connector name] connector enables AI agents to integrate with an LLM to provide... This connector is designed for use with an ad-hoc sub-process in an [agent loop](/reference/glossary.md#agent-loop), providing automated tool selection.
 
 For example, use this connector to...
 

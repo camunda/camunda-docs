@@ -6,14 +6,18 @@ description: "Learn how to apply, remove, update, and replace templates."
 
 ## Applying templates
 
-If you have already published an [element template](/components/modeler/element-templates/about-templates.md) to your workspace:
+To create, append, or change an element with a reusable asset, use **Browse all**. See the [resource discovery guide](../modeling/browse-all-resources.md) for the complete flow. The following steps apply a template to an existing element through the properties panel:
+
+If you have already published an [element template](/components/modeler/element-templates/about-templates.md) to your project or organization:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that matches the element template's type. For example, if you've published a **Task** template, select a **Task** element in your diagram.
 4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Select**. This opens the **Choose element template** modal.
-5. Select the element template
-6. **(Optional)** Instead of selecting a template published to your workspace, you can click the blue shop icon in the top right of the modal to open the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
+5. Select the element template.
+6. (Optional) Instead of selecting a published template, click the blue shop icon in the top right of the modal to open the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
+
+The Marketplace icon in **Choose element template** is a separate template-selection path. **Browse all** applies to the create, append, and change-element modeling menus.
 
 Applying a template stores it via the `modelerTemplate` property and the optional `modelerTemplateVersion` property
 on the selected element:
@@ -38,7 +42,7 @@ Operations are also matched by search, so you can search for the action you want
 To remove an applied template from an element, either the _Unlink_ or _Remove_ function can be used:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that is linked to an element template.
 4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Applied**.
 5. Select either:
@@ -50,7 +54,7 @@ To remove an applied template from an element, either the _Unlink_ or _Remove_ f
 If a template is applied and a new version of the template is found, you can _update_ the template:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that is linked to an element template.
 4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Update available**.
 
@@ -78,7 +82,7 @@ If a template was applied to an element but cannot be found, editing of the elem
 To save a diagram element as a template:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that supports being used as a template.
 4. On the right side of the modeling interface, in the top right of the **Details** pane, click **Save as**.
 5. Provide a **Name** and **Description**.

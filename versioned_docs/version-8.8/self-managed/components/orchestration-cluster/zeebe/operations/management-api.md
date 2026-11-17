@@ -111,7 +111,7 @@ The enable and disable functionality is specifically useful for [dual region dep
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
 
 :::info
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/exporter-api.yaml).
 :::
 
 :::note
@@ -188,3 +188,5 @@ The response is a JSON object that lists all configured exporters with their sta
   }
 ]
 ```
+
+An exporter can also report `CONFIG_NOT_FOUND`. It is still enabled in the dynamic cluster configuration, but its configuration has been removed from the application properties, for example after Optimize or the Elasticsearch subchart was disabled in Helm values. In that state it cannot export and blocks log compaction. Disable it explicitly as described in [Disable an exporter](#disable-an-exporter) rather than relying on the configuration change alone. Before 8.8.25, a broker restart could flip such a disabled exporter back to `ENABLED` ([camunda/camunda#52260](https://github.com/camunda/camunda/issues/52260)).

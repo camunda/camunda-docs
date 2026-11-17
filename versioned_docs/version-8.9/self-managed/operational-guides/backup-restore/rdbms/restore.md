@@ -69,6 +69,8 @@ Persistent volumes or disks must not contain any pre-existing data before restor
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running on this node. The partition count **must be the same** as in the backup.
 
+Make sure `ZEEBE_BROKER_CLUSTER_NODEID` is set on each node to the ID of the broker that will run there.
+
 The number of partitions backed up is also visible via the [backup management API](../zeebe-backup-and-restore.md#list-backups-api).
 If brokers were dynamically scaled between backup and restore, this is not an issue — as long as the partition count remains unchanged.
 :::
@@ -132,6 +134,9 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:543
 # Ensure backup store is configured
 export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
 # ... other store config
+
+# Set this node's ID, from 0 to the cluster size minus one
+export ZEEBE_BROKER_CLUSTER_NODEID=<nodeId>
 
 mkdir -p camunda
 tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
@@ -305,6 +310,10 @@ When using backup ID restore, the RDBMS exporter position is not consulted. You 
 
 ---
 
+:::warning Set the node ID if you don't restore through the Helm chart
+The recommended way to restore on Kubernetes is to change the Helm values of your existing deployment. The Helm chart's startup script then sets the node ID for each pod from its StatefulSet ordinal. If you use `orchestration.command`, a separate Kubernetes Job, or a custom pod instead, make sure that `ZEEBE_BROKER_CLUSTER_NODEID` is properly set on each pod.
+:::
+
 ### Kubernetes-specific behavior
 
 When restoring in Kubernetes using the official [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md), there are specific behaviors to be aware of.
@@ -361,7 +370,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Broker's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Broker's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted. In such cases, the restore application can be configured to ignore the presence of these files and folders. The configuration option `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore. By default, it ignores the `lost+found` folder found on ext4 filesystems. To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.

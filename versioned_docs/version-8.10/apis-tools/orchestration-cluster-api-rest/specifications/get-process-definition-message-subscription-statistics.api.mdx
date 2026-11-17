@@ -1,0 +1,1990 @@
+---
+id: get-process-definition-message-subscription-statistics
+title: "Get message subscription statistics"
+sidebar_label: "Get message subscription statistics"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get message subscription statistics"} <MarkerAddedInVersion version="8.9" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-definitions/statistics/message-subscriptions"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Get message subscription statistics, grouped by process definition.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "READ_PROCESS_INSTANCE",
+    },
+  ]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            page: {
+              description: "Search cursor pagination.",
+              allOf: [
+                {
+                  type: "object",
+                  title: "Cursor-based forward pagination",
+                  properties: {
+                    after: {
+                      description:
+                        "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                      allOf: [
+                        {
+                          description:
+                            "The end cursor in a search query result set.",
+                          format: "base64",
+                          type: "string",
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "EndCursor",
+                        },
+                      ],
+                    },
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 0,
+                      maximum: 10000,
+                    },
+                  },
+                },
+              ],
+            },
+            filter: {
+              description: "The message subscription filters.",
+              allOf: [
+                {
+                  description: "Message subscription search filter.",
+                  type: "object",
+                  properties: {
+                    businessId: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "Filter by the business id inherited from the subscribing process instance when the\nsubscription was opened. Supports advanced string filtering, including `$like` with\n`*`/`?` wildcards.\n",
+                      "x-added-in-version": "8.10",
+                    },
+                    messageSubscriptionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "MessageSubscriptionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a message subscription.",
+                                  format: "MessageSubscriptionKey",
+                                  example: "2251799813632456",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "MessageSubscriptionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced MessageSubscriptionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a message subscription.",
+                                      format: "MessageSubscriptionKey",
+                                      example: "2251799813632456",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "MessageSubscriptionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a message subscription.",
+                                      format: "MessageSubscriptionKey",
+                                      example: "2251799813632456",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "MessageSubscriptionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a message subscription.",
+                                    format: "MessageSubscriptionKey",
+                                    example: "2251799813632456",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "MessageSubscriptionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a message subscription.",
+                                    format: "MessageSubscriptionKey",
+                                    example: "2251799813632456",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "MessageSubscriptionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "MessageSubscriptionKeyFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The message subscription key associated with this message subscription.",
+                    },
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "ProcessDefinitionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a deployed process definition.",
+                                  format: "ProcessDefinitionKey",
+                                  example: "2251799813686749",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessDefinitionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessDefinitionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessDefinitionKeyFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The process definition key associated with this correlated message subscription. This only works for data created with 8.9 and later.",
+                    },
+                    processDefinitionId: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The process definition ID associated with this message subscription.",
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "ProcessInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessInstanceKeyFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The process instance key associated with this message subscription.",
+                    },
+                    elementId: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The element ID associated with this message subscription.",
+                    },
+                    elementInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "ElementInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ElementInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementInstanceKeyFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The element instance key associated with this message subscription.",
+                    },
+                    messageSubscriptionState: {
+                      allOf: [
+                        {
+                          description:
+                            "MessageSubscriptionStateEnum with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The state of message subscription.\n\n**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not\ntracked for these subscriptions. To query correlation history for process start events,\nuse the `/correlated-message-subscriptions/search` endpoint.\n",
+                                  type: "string",
+                                  enum: [
+                                    "CORRELATED",
+                                    "CREATED",
+                                    "DELETED",
+                                    "MIGRATED",
+                                  ],
+                                  title: "MessageSubscriptionStateEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced MessageSubscriptionStateEnum filter",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state of message subscription.\n\n**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not\ntracked for these subscriptions. To query correlation history for process start events,\nuse the `/correlated-message-subscriptions/search` endpoint.\n",
+                                      type: "string",
+                                      enum: [
+                                        "CORRELATED",
+                                        "CREATED",
+                                        "DELETED",
+                                        "MIGRATED",
+                                      ],
+                                      title: "MessageSubscriptionStateEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state of message subscription.\n\n**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not\ntracked for these subscriptions. To query correlation history for process start events,\nuse the `/correlated-message-subscriptions/search` endpoint.\n",
+                                      type: "string",
+                                      enum: [
+                                        "CORRELATED",
+                                        "CREATED",
+                                        "DELETED",
+                                        "MIGRATED",
+                                      ],
+                                      title: "MessageSubscriptionStateEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The state of message subscription.\n\n**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not\ntracked for these subscriptions. To query correlation history for process start events,\nuse the `/correlated-message-subscriptions/search` endpoint.\n",
+                                    type: "string",
+                                    enum: [
+                                      "CORRELATED",
+                                      "CREATED",
+                                      "DELETED",
+                                      "MIGRATED",
+                                    ],
+                                    title: "MessageSubscriptionStateEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "MessageSubscriptionStateFilterProperty",
+                        },
+                      ],
+                      description: "The message subscription state.",
+                    },
+                    lastUpdatedDate: {
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The last updated date of the message subscription.",
+                    },
+                    messageName: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The name of the message associated with the message subscription.",
+                    },
+                    correlationKey: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The correlation key of the message subscription.",
+                    },
+                    tenantId: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description: "The unique external tenant ID.",
+                    },
+                    messageSubscriptionType: {
+                      allOf: [
+                        {
+                          description:
+                            "MessageSubscriptionTypeEnum with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The type of message subscription.\n`START_EVENT` is definition-scoped (process start events). Always has a value; only\ncaptured from Camunda 8.10 onwards.\n`PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have\nno value stored; the API returns `PROCESS_EVENT` as a default for those entries.\n",
+                                  type: "string",
+                                  enum: ["START_EVENT", "PROCESS_EVENT"],
+                                  title: "MessageSubscriptionTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced MessageSubscriptionTypeEnum filter",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of message subscription.\n`START_EVENT` is definition-scoped (process start events). Always has a value; only\ncaptured from Camunda 8.10 onwards.\n`PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have\nno value stored; the API returns `PROCESS_EVENT` as a default for those entries.\n",
+                                      type: "string",
+                                      enum: ["START_EVENT", "PROCESS_EVENT"],
+                                      title: "MessageSubscriptionTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of message subscription.\n`START_EVENT` is definition-scoped (process start events). Always has a value; only\ncaptured from Camunda 8.10 onwards.\n`PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have\nno value stored; the API returns `PROCESS_EVENT` as a default for those entries.\n",
+                                      type: "string",
+                                      enum: ["START_EVENT", "PROCESS_EVENT"],
+                                      title: "MessageSubscriptionTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The type of message subscription.\n`START_EVENT` is definition-scoped (process start events). Always has a value; only\ncaptured from Camunda 8.10 onwards.\n`PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have\nno value stored; the API returns `PROCESS_EVENT` as a default for those entries.\n",
+                                    type: "string",
+                                    enum: ["START_EVENT", "PROCESS_EVENT"],
+                                    title: "MessageSubscriptionTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "MessageSubscriptionTypeFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The type of message subscription to filter by. When omitted, both\n`START_EVENT` and `PROCESS_EVENT` are returned. Only available for data\ncreated with Camunda 8.10 or later.\n",
+                      "x-added-in-version": "8.10",
+                    },
+                    processDefinitionName: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The name of the process definition associated with this message subscription.",
+                      "x-added-in-version": "8.10",
+                    },
+                    processDefinitionVersion: {
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "integer",
+                              format: "int32",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                      description:
+                        "The version of the process definition associated with this message subscription.",
+                      "x-added-in-version": "8.10",
+                    },
+                    toolName: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.",
+                      "x-added-in-version": "8.10",
+                    },
+                    inboundConnectorType: {
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                      description:
+                        "Filter by inbound connector type extracted from the `inbound.type` zeebe:property.",
+                      "x-added-in-version": "8.10",
+                    },
+                  },
+                  title: "MessageSubscriptionFilter",
+                },
+              ],
+            },
+          },
+          title: "ProcessDefinitionMessageSubscriptionStatisticsQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The process definition message subscription statistics result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description:
+                  "The matching process definition message subscription statistics.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "activeSubscriptions",
+                    "processDefinitionId",
+                    "processDefinitionKey",
+                    "processInstancesWithActiveSubscriptions",
+                    "tenantId",
+                  ],
+                  properties: {
+                    processDefinitionId: {
+                      description:
+                        "The process definition ID associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description:
+                        "The tenant ID associated with this message subscription.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      description:
+                        "The process definition key associated with this message subscription.",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                    },
+                    processInstancesWithActiveSubscriptions: {
+                      description:
+                        "The number of process instances with active message subscriptions.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    activeSubscriptions: {
+                      description:
+                        "The total number of active message subscriptions for this process definition key.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  title: "ProcessDefinitionMessageSubscriptionStatisticsResult",
+                },
+              },
+            },
+            title: "ProcessDefinitionMessageSubscriptionStatisticsQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

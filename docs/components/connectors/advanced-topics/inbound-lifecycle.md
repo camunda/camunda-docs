@@ -53,4 +53,17 @@ The lifecycle of an executable starts when the connector runtime detects a chang
 
 When you deploy a new process version, the connector runtime checks whether it can deduplicate inbound connectors in the new version with any currently active executables. If deduplication is possible, the runtime updates the existing executable. If the executable is inactive (for example, in the `CANCELED` or `FAILED_TO_ACTIVATE` state), the runtime also attempts to restart it.
 
-When the executable is no longer needed—for example, when its originating process version is no longer the latest and no active instances are waiting on message subscriptions—the runtime deactivates it.
+When the executable is no longer needed (for example, when its originating process version is no longer the latest and no active instances are waiting on message subscriptions), the runtime deactivates it.
+
+## Modify an existing inbound connector element
+
+Editing certain configuration on an already-deployed inbound connector element can cause unexpected behavior instead of a clean update.
+
+The connector runtime can derive internal state, such as a consumer or subscription identity, from an element's configuration only when the element activates. Editing that configuration in place does not necessarily recompute the derived state to match, which can lead to inconsistent or failed behavior. When in doubt, delete the inbound connector element and create a new one instead of editing its configuration in place.
+
+[Element templates](/components/modeler/element-templates/about-templates.md) are also versioned, and each BPMN element references the specific template version it was created with. When a newer template version adds a new property, an already-deployed element keeps using its original template version, so the property is simply absent from that element, and the element keeps its prior default behavior. Upgrading the Camunda runtime alone does not change this. To adopt a new template version's property or behavior on an existing element, [update the element to the new template version](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) in Camunda Modeler, and redeploy the diagram.
+
+The Kafka consumer connector illustrates both behaviors:
+
+- [Modify an existing inbound Kafka connector](../out-of-the-box-connectors/kafka.md#modify-an-existing-inbound-kafka-connector) shows how editing the **Consumer Group ID** or **Offsets** properties in place can cause message replay or activation failure.
+- [Upgrade from a version without the Consume unmatched events checkbox](../out-of-the-box-connectors/kafka.md#upgrade-from-a-version-without-the-consume-unmatched-events-checkbox) shows how an existing element keeps its prior default for a checkbox added in a later template version until you update its template.

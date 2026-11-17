@@ -3,13 +3,13 @@ id: introduction-to-camunda
 title: Get started with Camunda
 sidebar_label: Get started with Camunda
 slug: /guides/
-description: "Learn about Camunda 8, a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices."
+description: "Learn about Camunda 8, an agentic orchestration platform. Build AI agents and orchestrate them with people and systems in end-to-end processes."
 page_rank: 90
 ---
 
 import DocCardList from '@theme/DocCardList';
 import OverviewImg from './img/hero-get-started.png';
-import AskAi from './react-components/\_banner-ask-ai.md'
+import BuildWithCamundaBanner from '../components/react-components/\_build-with-camunda-banner';
 
 <h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
@@ -18,7 +18,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
+<p class="link-button">[Run your first BPMN process with Camunda 8](./getting-started-hello-world.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -58,4 +58,4 @@ This guide is for users who prefer a low-code approach to process automation, wa
 
 <p><a href="./orchestrate-apis/" class="link-arrow">Get started with API orchestration</a></p>
 
-<AskAi/>
+<BuildWithCamundaBanner />

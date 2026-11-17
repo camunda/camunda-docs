@@ -76,6 +76,39 @@ identityKeycloak:
         userPasswordKey: "identity-keycloak-postgresql-user-password"
 ```
 
+### Configure the bundled Keycloak context path
+
+When you use bundled Keycloak, configure the path served by Keycloak and the path Identity uses to connect to it together.
+
+`identityKeycloak.httpRelativePath` controls the path served by Keycloak. `global.identity.keycloak.contextPath` controls the path Identity uses to reach Keycloak. These settings are independent: changing one does not update the other.
+
+If you use the default `/auth` path, no configuration changes are required.
+
+| Path           | `global.identity.keycloak.contextPath` | `identityKeycloak.httpRelativePath` |
+| -------------- | -------------------------------------- | ----------------------------------- |
+| Default        | `"/auth"`                              | `"/auth/"`                          |
+| Root           | `""`                                   | `"/"`                               |
+| Custom example | `"/sso"`                               | `"/sso/"`                           |
+
+For example, add both settings to your values file to use `/sso`:
+
+```yaml
+global:
+  identity:
+    keycloak:
+      contextPath: "/sso"
+
+identityKeycloak:
+  enabled: true
+  httpRelativePath: "/sso/"
+```
+
+If you explicitly configure issuer URLs, such as `global.identity.auth.publicIssuerUrl`, update them to match the exposed Keycloak endpoint. Ensure your Ingress routes requests to the same endpoint. This is especially important when Keycloak uses the root path and other components share the same host.
+
+If the paths don't match, Keycloak can be ready while Identity logs `Unable to connect to Keycloak.` and requests to the configured path return HTTP 404. Set both values to a matching pair, then apply the updated values to your deployment.
+
+This pairing applies only when `identityKeycloak.enabled` is `true`. For external Keycloak, set `global.identity.keycloak.contextPath` to the path served by that instance; `identityKeycloak.httpRelativePath` does not configure the external server.
+
 ### Configure Management Identity and global defaults
 
 Management Identity configures the internal Keycloak instance during startup. For example, it creates the Camunda realm and other required Keycloak entities. If the Camunda realm doesn’t appear in Keycloak after deployment, the setup process did not complete successfully.
@@ -297,6 +330,16 @@ To review how each component is configured and which OIDC clients are used:
 
 - Run `kubectl get pods` and `kubectl get configmap`, then use `kubectl describe` to inspect component configurations.
 - Log into Keycloak (using your administrative user) to review the OIDC client setup
+
+## Session and token timeouts
+
+Keycloak realm settings control how long users stay signed in to Camunda web applications such as Operate, Tasklist, and Admin. In the Keycloak admin console, go to **Realm settings** and update the following. See the [Keycloak timeouts reference](https://www.keycloak.org/docs/latest/server_admin/#_timeouts) for details.
+
+| Keycloak setting (realm)           | Effect on Camunda web sessions                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sessions > SSO Session Idle**    | Users must sign in again after this period without activity.                                                                                |
+| **Sessions > SSO Session Max**     | Users must sign in again after this period, even if they are active.                                                                        |
+| **Tokens > Access Token Lifespan** | How long an access token is valid before it must be refreshed. A short lifespan doesn't sign users out as long as the SSO session is valid. |
 
 ## Connect to the cluster
 

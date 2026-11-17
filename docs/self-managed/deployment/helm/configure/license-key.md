@@ -30,7 +30,7 @@ global:
 
 ### Provide the key directly
 
-Enter your license key directly in `global.license.key`.
+Enter your license key directly in `global.license.secret.inlineSecret`.
 
 ```yaml
 global:
@@ -53,12 +53,12 @@ For more details on working with secrets, see [Secret management](/self-managed/
    apiVersion: v1
    kind: Secret
    metadata:
-   name: camunda-license
+     name: camunda-license
    stringData:
-   key: >-
-     --------------- BEGIN CAMUNDA LICENSE KEY ---------------
-     [...]
-     ---------------  END CAMUNDA LICENSE KEY  ---------------
+     key: >-
+       --------------- BEGIN CAMUNDA LICENSE KEY ---------------
+       [...]
+       ---------------  END CAMUNDA LICENSE KEY  ---------------
    ```
 
 2. Reference the secret in `values.yaml`:

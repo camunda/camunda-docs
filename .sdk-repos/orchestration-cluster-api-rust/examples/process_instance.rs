@@ -359,12 +359,11 @@ async fn resolve_incidents_batch_operation() -> Result<(), Box<dyn std::error::E
 
     let result = client
         .resolve_incidents_batch_operation(ResolveIncidentsBatchOperationParams {
-            process_instance_incident_resolution_batch_operation_request: Some(
+            process_instance_incident_resolution_batch_operation_request:
                 ProcessInstanceIncidentResolutionBatchOperationRequest {
                     filter: Box::new(ProcessInstanceFilter::default()),
                     ..Default::default()
                 },
-            ),
         })
         .await?;
     println!("{}", result.batch_operation_key);

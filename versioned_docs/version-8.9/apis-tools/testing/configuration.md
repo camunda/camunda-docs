@@ -62,8 +62,12 @@ speed up the test execution.
 
 ### Usage
 
-By default, the runtime uses the same version of the Camunda Docker images as the Maven module. You can change the
-Docker images and other runtime properties in the following way.
+By default, the runtime uses the same version of the Camunda Docker image as the Maven module. The Connectors Docker
+image uses a fixed, published Connectors version instead, because Connectors have a separate release cycle. You can
+change the Docker images and other runtime properties in the following way.
+
+If you change the version of the Camunda Docker image, use the same version as CPT or later. CPT doesn't support older
+Camunda runtimes.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -78,7 +82,7 @@ In your `application.yml` (or `application.properties`):
 camunda:
   process-test:
     # Change the version of the Camunda Docker image
-    camunda-docker-image-version: 8.8.0
+    camunda-docker-image-version: 8.9.0
     # Change the Camunda Docker image
     camunda-docker-image-name: camunda/camunda
     # Set additional Camunda environment variables
@@ -116,7 +120,7 @@ In your `/camunda-container-runtime.properties` file:
 
 ```properties
 # Change the version of the Camunda Docker image
-camundaDockerImageVersion=8.8.0
+camundaDockerImageVersion=8.9.0
 # Change the Camunda Docker image
 camundaDockerImageName=camunda/camunda
 # Set additional Camunda environment variables
@@ -161,7 +165,7 @@ public class MyProcessTest {
     private static final CamundaProcessTestExtension EXTENSION =
             new CamundaProcessTestExtension()
                     // Change the version of the Camunda Docker image
-                    .withCamundaDockerImageVersion("8.8.0")
+                    .withCamundaDockerImageVersion("8.9.0")
                     // Change the Camunda Docker image
                     .withCamundaDockerImageName("camunda/camunda")
                     // Set additional Camunda environment variables
@@ -628,7 +632,8 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 
 ### Prerequisites
 
-- Install a Camunda 8 runtime, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+- Install a Camunda 8 runtime of the same version as CPT or later, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+  CPT doesn't support older Camunda runtimes.
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
 - Enable the management clock endpoint to allow clock manipulations
 

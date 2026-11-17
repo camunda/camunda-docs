@@ -2,8 +2,14 @@
 id: authentication-authorization
 title: "Authentication and authorization for Physical Tenants"
 sidebar_label: "Authentication and authorization"
-description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
+description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Learn how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant. For the resource and permission model and cluster-wide versus tenant-local authorization, see [authorization model](./authorization-model.md).
 
@@ -63,6 +69,8 @@ When a request arrives at an authenticated endpoint, Camunda matches the JWT tok
 
 Both checks are enforced at the API security filter chain level. A token whose `iss` claim matches no configured provider fails with an authentication error naming the unrecognized issuer. A token with a valid issuer but a non-matching audience is also rejected.
 
+The identity provider that verifies the token also determines how Camunda reads it. The principal claims (`username-claim`, `client-id-claim`, and `prefer-username-claim`) and the UserInfo setting (`user-info-enabled`) come from that provider, in the Physical Tenant that received the request. Another Physical Tenant can configure a provider for the same issuer with other settings, and those settings don't apply to tokens received by this Physical Tenant.
+
 ## Per-tenant authorization
 
 Roles, permissions, and mapping rules are local to each Physical Tenant. They are **not** stored or managed in the identity provider.
@@ -109,8 +117,8 @@ camunda:
               resourceType: PROCESS_DEFINITION
               resourceId: "*"
               permissions:
-                - READ
-                - UPDATE
+                - READ_PROCESS_DEFINITION
+                - UPDATE_PROCESS_INSTANCE
 ```
 
 Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant. The block is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:

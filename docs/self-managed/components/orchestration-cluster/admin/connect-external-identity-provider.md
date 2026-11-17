@@ -110,42 +110,8 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 If your OIDC provider needs to be reached using different URLs from the browser and backend (for example, when running in Docker or behind a reverse proxy), you can configure separate URIs instead of a single `issuer-uri`. See [use separate OIDC provider URIs for browser and backend](./special-oidc-cases.md#use-separate-oidc-provider-uris-for-browser-and-backend) for details.
 :::
 
-## Redirect URI
-
-Use the redirect URI to define where the Identity Provider (IdP) sends users back after successful authentication.
-
-By default, the redirect URI is:
-
-`{baseUrl}/sso-callback`
-
-At runtime, `{baseUrl}` resolves to the URL used to access your Orchestration Cluster deployment. In most cases, you do not need to change this value.
-
-You may need to customize the redirect URI in advanced scenarios, such as:
-
-- When your deployment is accessed through reverse proxies or load balancers
-- When you need to pass context information while configuring multiple OIDC providers
-
-Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
-
-Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
-
-:::note
-
-`{baseUrl}` is dynamically resolved for each request based on the URL used to access the Orchestration Cluster instance. It is composed of the following parts:
-
-- `{scheme}`: The transport scheme (`http` or `https`)
-- `{host}`: The hostname used to connect to the instance
-- `{port}`: The port number, if specified (omitted if not used)
-- `{contextPath}`: The context path of the Orchestration Cluster instance, if configured (omitted if none)
-
-For example:
-
-- Accessing the instance via `https://camunda.acme.com/identity` resolves `{baseUrl}` to `https://camunda.acme.com`
-- Accessing the instance via `https://services.acme.com:18080/camunda/` resolves `{baseUrl}` to `https://services.acme.com:18080/camunda`
-
-:::
-
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
+- **Issuer URI**: Set `issuer-uri` to the issuer your IdP declares in its discovery document (`<issuer-uri>/.well-known/openid-configuration`). If your value differs only by a trailing slash, Camunda fetches the discovery document of the other form and uses the issuer your IdP declares. This mismatch occurs, for example, if you configure Microsoft Entra ID or Okta with an extra trailing `/`, or Auth0 without its trailing `/`. Access tokens must carry the declared issuer in their `iss` claim. Any other difference between the configured and declared issuer still fails.
 
 :::info
 If you're using Camunda Hub and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/properties.md#available-authentication-methods)),
@@ -182,9 +148,59 @@ camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
 </TabItem>
 </Tabs>
 
+### Redirect URI
+
+Use the redirect URI to define where the Identity Provider (IdP) sends users back after successful authentication.
+
+By default, the redirect URI is:
+
+`{baseUrl}/sso-callback`
+
+At runtime, `{baseUrl}` resolves to the URL used to access your Orchestration Cluster deployment. In most cases, you do not need to change this value.
+
+You may need to customize the redirect URI in advanced scenarios, such as:
+
+- When your deployment is accessed through reverse proxies or load balancers
+- When you need to pass context information while configuring multiple OIDC providers
+
+Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
+
+The Orchestration Cluster checks the redirect URI at startup and writes a warning if the value cannot expand to a usable callback URL. It still starts. A usable value:
+
+- Starts with `{baseUrl}`, or has an `https` or `http` scheme and a host
+- Has a port between 1 and 65535, if it has a port
+- Has a callback path
+- Has no fragment (`#`)
+
+A value with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`, and the login completes. Any other unusable value stays as configured, so the login fails when the browser returns from the IdP.
+
+The cluster serves the callback at the path that the redirect URI resolves to. The path must be one that the cluster routes to its web applications, and `/sso-callback` is the path that the cluster keeps for this purpose. A path outside that set passes the startup check, but the callback request does not reach the cluster's login handling, and the login does not complete.
+
+The default value `{baseUrl}/sso-callback` is correct. The cluster also checks the redirect URI if you only use API clients, which never use the redirect URI.
+
+Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
+
+:::note
+
+`{baseUrl}` is dynamically resolved for each request based on the URL used to access the Orchestration Cluster instance. It is composed of the following parts:
+
+- `{scheme}`: The transport scheme (`http` or `https`)
+- `{host}`: The hostname used to connect to the instance
+- `{port}`: The port number, if specified (omitted if not used)
+- `{contextPath}`: The context path of the Orchestration Cluster instance, if configured (omitted if none)
+
+For example:
+
+- Accessing the instance via `https://camunda.acme.com/identity` resolves `{baseUrl}` to `https://camunda.acme.com`
+- Accessing the instance via `https://services.acme.com:18080/camunda/` resolves `{baseUrl}` to `https://services.acme.com:18080/camunda`
+
+:::
+
 ### Step 5: Restart the Orchestration Cluster
 
 After updating your configuration, (re)start the Orchestration Cluster for the configuration changes to be applied.
+
+A successful start does not confirm that your IdP is reachable. The cluster contacts a provider at the first request that needs it. If the cluster is up but authentication fails, see [requests fail when an identity provider is unreachable](debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable).
 
 ### Step 6: Test user authentication
 
@@ -249,7 +265,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/admin/mapping-rules.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](/components/admin/mapping-rules.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 
@@ -257,7 +273,7 @@ Configure job workers, connectors, or custom client applications to use the Orch
 
 ### Prerequisites
 
-- The Orchestration Cluster (Self-Managed) user interface is [configured against your IdP](#user-interface).
+- The Orchestration Cluster (Self-Managed) user interface is [configured against your IdP](#web-components).
 - Client credentials (client ID, client secret, authorization server URI) from your IdP.
 
 ### Step 1: Configure the OIDC client id claim
@@ -602,6 +618,37 @@ For hostname and context path configuration, adjust the URL accordingly. For exa
 http://localhost:8080/orchestration/post-logout
 ```
 
+#### Refresh token revocation
+
+On logout, Camunda asks the identity provider to revoke the session's refresh token, so that a copy
+of it cannot be used to obtain new access tokens after the user has signed out. This is an
+[RFC 7009](https://datatracker.ietf.org/doc/html/rfc7009) revocation request sent from Camunda to
+the provider, separate from the browser redirect used for RP-initiated logout.
+
+Revocation is enabled by default and requires no configuration where the provider publishes a
+`revocation_endpoint` in its discovery document, as Keycloak, Okta, and Auth0 do. Where it does not,
+set the endpoint explicitly:
+
+```yaml
+camunda:
+  security:
+    authentication:
+      oidc:
+        revocation-endpoint-uri: https://<YOUR_IDP>/oauth2/revoke
+```
+
+To turn revocation off for a provider, set `revocation-enabled: false`. This also suppresses an
+endpoint that was discovered, so it is the way to opt out of the default behavior.
+
+Two consequences are worth planning for:
+
+- Logout now makes an outbound call from Camunda to the identity provider, so the provider must be
+  reachable from the Camunda deployment. The call is bounded at roughly three seconds and fails
+  soft: if the provider is unreachable or rejects the request, the user is still logged out locally
+  and a warning is logged.
+- Microsoft Entra ID publishes no revocation endpoint, so refresh tokens are not revoked there. Entra
+  deployments are otherwise unaffected.
+
 ## Troubleshooting
 
 ### General authentication issues
@@ -628,6 +675,20 @@ Ensure you either:
 
 - Configure the `issuer-uri` so Admin can retrieve the logout endpoint from the OIDC discovery document, or
 - Explicitly set the `end-session-endpoint-uri`.
+
+#### Refresh token was not revoked
+
+If the identity provider cannot be reached, or rejects the revocation request, logout still
+completes and a warning similar to the following is logged:
+
+```
+Failed to revoke the refresh token for OIDC registration '<id>' at <endpoint> [...]. The local
+session is still terminated, but the refresh token may remain valid until it expires.
+```
+
+Check that the provider's revocation endpoint is reachable from the Camunda deployment and that the
+client credentials Camunda uses are accepted there. To disable revocation for the provider instead,
+set `revocation-enabled: false`.
 
 #### No client registration found
 

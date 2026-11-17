@@ -22,9 +22,3 @@ items: JobTypeStatisticsItem[];
 ```
 
 The list of job type statistics items.
-
-### page
-
-```ts
-page: SearchQueryPageResponse;
-```

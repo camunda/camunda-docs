@@ -2,7 +2,7 @@
 id: reliability-convenience-features
 title: "Reliability & convenience features"
 sidebar_label: "Reliability & convenience features"
-sidebar_position: 8
+sidebar_position: 9
 mdx:
   format: md
 ---

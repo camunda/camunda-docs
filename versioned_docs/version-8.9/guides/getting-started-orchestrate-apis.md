@@ -2,17 +2,18 @@
 id: orchestrate-apis
 title: Get started with API orchestration
 sidebar_label: Orchestrate APIs using connectors
-description: "For low-code developers using Camunda 8 Saas, use connectors to build process automation solutions."
+description: "Build your first low-code API orchestration solution in Camunda 8 using a REST connector."
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
-
 import clsx from "clsx";
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
@@ -58,19 +59,18 @@ Set up your REST connector to get a random cat fact from the [Cat Fact API](http
 ## Handle your response
 
 The HTTP response will be available in a temporary local response variable. This variable can be mapped to the process by specifying **Result Variable**.
-In the **Response Mapping** section use `={"body" : body}` as the **Result Expression** so you can see the entire JSON object returned if it's successful.
+In the **Output mapping** section use `={"body" : body}` as the **Result Expression** so you can see the entire JSON object returned if it's successful.
 
 ## Deploy your process
 
 To deploy your process, take the following steps:
 
 1. Drag the bolded circular end event element from the palette and onto the canvas, or by clicking on the final service task, and then the end event element alongside it. Ensure there is an arrow connecting the service task to the end event.
-2. In the top right corner click the blue **Deploy** button. Your diagram is now deployed to your cluster.
+2. In the top right corner click the blue **Deploy & Run** button. Your diagram is deployed to your cluster and a new [process instance](/reference/glossary.md#process-instance) is started.
    :::note
-   If you have not yet created a cluster, clicking **Deploy** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](create-cluster.md).
+   If you have not yet created a cluster, clicking **Deploy & Run** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](create-cluster.md).
    :::
-3. Start a new [process instance](/reference/glossary.md#process-instance) by clicking on the blue **Run** button.
-4. In the top left corner of the screen, click the square-shaped **Camunda components** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+3. In the top left corner of the screen, click the square-shaped **Camunda components** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ## Wrap up
 

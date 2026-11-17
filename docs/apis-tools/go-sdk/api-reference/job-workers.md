@@ -20,6 +20,21 @@ same type is produced by the REST job worker and the gRPC streaming worker.
 
 ### Methods
 
+#### Clock
+
+```go
+func (j *Job) Clock() Clock
+```
+
+Clock returns the worker's clock. A handler that needs to wait should use this
+rather than time.Sleep, so an injected clock controls it.
+
+For short in-handler coordination only -- spacing a retry, waiting for a resource
+to settle. A long or business wait belongs in the process as a BPMN timer event: a
+handler holding a job for minutes occupies a worker slot, risks the job timeout
+expiring underneath it, and hides the wait from the process model where it cannot
+be seen or changed.
+
 #### CustomHeaders
 
 ```go
@@ -122,6 +137,9 @@ Run polls and dispatches jobs until ctx is canceled, then waits for in-flight
 handlers to finish and returns ctx.Err(). Run blocks; call it in a goroutine to
 run alongside other work.
 
+A worker configured with a startup jitter (CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS)
+first waits out its delay on the client's clock.
+
 When the gateway advertises the FALCON command stream (a nanobpmn gateway) and
 FALCON is enabled, jobs are pushed over a WebSocket subscription instead of
 REST long-polling. If the subscription cannot be established (e.g. a proxy
@@ -146,6 +164,9 @@ connection is held for the worker's lifetime and the stream is reopened (after
 reconnectBackoff) whenever it ends, so in-flight acknowledgements are never cut
 off by a reconnect. Run blocks; call it in a goroutine to run alongside other
 work.
+
+A worker configured with a startup jitter (CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS)
+first waits out its delay on the client's clock.
 
 ## StreamWorkerOption
 
@@ -178,9 +199,11 @@ superseded activation — for example after the job timed out and another worker
 picked it up.
 
 Off by default, matching the gateway's own default. Enabling it requires an
-engine that supports job leases; older gateways ignore the field and keep
-pushing unleased jobs. It covers both channels: the gRPC stream and the REST
-sidecar poll (see WithStreamPollInterval).
+engine that supports job leases: a gateway that ignores the field would leave
+every acknowledgement unfenced, so a job arriving without a token fails the
+activation with ErrLeaseNotHonored rather than being handled unfenced. It
+covers both channels: the gRPC stream and the REST sidecar poll (see
+WithStreamPollInterval).
 
 #### WithStreamJobTimeout
 
@@ -273,8 +296,11 @@ activation — for example after the job timed out and another worker picked it
 up.
 
 Off by default, matching the engine's own default. Enabling it requires an
-engine that supports job leases. It has no effect when jobs arrive over the
-FALCON command stream, which activates them outside the REST activation API.
+engine that supports job leases: a server that ignores the flag would leave
+every acknowledgement unfenced, so a job arriving without a token fails the
+activation with ErrLeaseNotHonored rather than being handled unfenced. It has
+no effect when jobs arrive over the FALCON command stream, which activates them
+outside the REST activation API.
 
 #### WithJobTimeout
 

@@ -1,0 +1,704 @@
+---
+id: search-own-authorizations
+title: "Search own authorizations"
+sidebar_label: "Search own authorizations"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search own authorizations"} <MarkerAddedInVersion version="8.10" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/authentication/me/authorizations/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for the current authenticated principal's own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "ownerId",
+                      "ownerType",
+                      "resourceId",
+                      "resourcePropertyName",
+                      "resourceType",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "AuthorizationSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              allOf: [
+                {
+                  description: "Authorization search filter.",
+                  type: "object",
+                  properties: {
+                    ownerId: {
+                      description: "The ID of the owner of permissions.",
+                      type: "string",
+                    },
+                    ownerType: {
+                      type: "string",
+                      description: "The type of the owner of permissions.",
+                      enum: [
+                        "USER",
+                        "CLIENT",
+                        "ROLE",
+                        "GROUP",
+                        "MAPPING_RULE",
+                        "UNSPECIFIED",
+                      ],
+                      title: "OwnerTypeEnum",
+                    },
+                    resourceIds: {
+                      description:
+                        "The IDs of the resource to search permissions for.",
+                      type: "array",
+                      items: { type: "string" },
+                    },
+                    resourcePropertyNames: {
+                      description:
+                        "The names of the resource properties to search permissions for.",
+                      type: "array",
+                      items: { type: "string" },
+                    },
+                    resourceType: {
+                      description:
+                        "The type of resource to search permissions for.",
+                      allOf: [
+                        {
+                          description:
+                            "The type of resource to add/remove permissions to/from.",
+                          type: "string",
+                          enum: [
+                            "AUDIT_LOG",
+                            "AUTHORIZATION",
+                            "BACKUP",
+                            "BATCH",
+                            "CLUSTER_VARIABLE",
+                            "COMPONENT",
+                            "DECISION_DEFINITION",
+                            "DECISION_REQUIREMENTS_DEFINITION",
+                            "DOCUMENT",
+                            "EXPORTER",
+                            "EXPRESSION",
+                            "GLOBAL_LISTENER",
+                            "GROUP",
+                            "MAPPING_RULE",
+                            "MESSAGE",
+                            "PROCESS_DEFINITION",
+                            "RESOURCE",
+                            "ROLE",
+                            "SECRET",
+                            "SYSTEM",
+                            "TENANT",
+                            "USER",
+                            "USER_TASK",
+                          ],
+                          title: "ResourceTypeEnum",
+                        },
+                      ],
+                    },
+                  },
+                  title: "AuthorizationFilter",
+                },
+              ],
+              description: "The authorization search filters.",
+            },
+          },
+          title: "AuthorizationSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The authorization search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["items"],
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["page"],
+                    properties: {
+                      page: {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        required: [
+                          "totalItems",
+                          "hasMoreTotalItems",
+                          "startCursor",
+                          "endCursor",
+                        ],
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          hasMoreTotalItems: {
+                            description:
+                              "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                            type: "boolean",
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            nullable: true,
+                            allOf: [
+                              {
+                                description:
+                                  "The start cursor in a search query result set.",
+                                format: "base64",
+                                type: "string",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "StartCursor",
+                              },
+                            ],
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            nullable: true,
+                            allOf: [
+                              {
+                                description:
+                                  "The end cursor in a search query result set.",
+                                format: "base64",
+                                type: "string",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "EndCursor",
+                              },
+                            ],
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    },
+                    title: "SearchQueryResponse",
+                  },
+                ],
+                properties: {
+                  items: {
+                    description: "The matching authorizations.",
+                    type: "array",
+                    items: {
+                      required: [
+                        "ownerId",
+                        "ownerType",
+                        "resourceType",
+                        "resourceId",
+                        "resourcePropertyName",
+                        "permissionTypes",
+                        "authorizationKey",
+                      ],
+                      type: "object",
+                      properties: {
+                        ownerId: {
+                          description: "The ID of the owner of permissions.",
+                          type: "string",
+                        },
+                        ownerType: {
+                          type: "string",
+                          description: "The type of the owner of permissions.",
+                          enum: [
+                            "USER",
+                            "CLIENT",
+                            "ROLE",
+                            "GROUP",
+                            "MAPPING_RULE",
+                            "UNSPECIFIED",
+                          ],
+                          title: "OwnerTypeEnum",
+                        },
+                        resourceType: {
+                          description:
+                            "The type of resource that the permissions relate to.",
+                          allOf: [
+                            {
+                              description:
+                                "The type of resource to add/remove permissions to/from.",
+                              type: "string",
+                              enum: [
+                                "AUDIT_LOG",
+                                "AUTHORIZATION",
+                                "BACKUP",
+                                "BATCH",
+                                "CLUSTER_VARIABLE",
+                                "COMPONENT",
+                                "DECISION_DEFINITION",
+                                "DECISION_REQUIREMENTS_DEFINITION",
+                                "DOCUMENT",
+                                "EXPORTER",
+                                "EXPRESSION",
+                                "GLOBAL_LISTENER",
+                                "GROUP",
+                                "MAPPING_RULE",
+                                "MESSAGE",
+                                "PROCESS_DEFINITION",
+                                "RESOURCE",
+                                "ROLE",
+                                "SECRET",
+                                "SYSTEM",
+                                "TENANT",
+                                "USER",
+                                "USER_TASK",
+                              ],
+                              title: "ResourceTypeEnum",
+                            },
+                          ],
+                        },
+                        resourceId: {
+                          description:
+                            "ID of the resource the permission relates to (mutually exclusive with `resourcePropertyName`).",
+                          nullable: true,
+                          type: "string",
+                        },
+                        resourcePropertyName: {
+                          description:
+                            "The name of the resource property the permission relates to (mutually exclusive with `resourceId`).",
+                          nullable: true,
+                          type: "string",
+                        },
+                        permissionTypes: {
+                          description:
+                            "Specifies the types of the permissions.",
+                          type: "array",
+                          items: {
+                            description: "Specifies the type of permissions.",
+                            type: "string",
+                            enum: [
+                              "ACCESS",
+                              "CANCEL_PROCESS_INSTANCE",
+                              "CLAIM",
+                              "CLAIM_USER_TASK",
+                              "COMPLETE",
+                              "COMPLETE_USER_TASK",
+                              "CREATE",
+                              "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE",
+                              "CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION",
+                              "CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE",
+                              "CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION",
+                              "CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE",
+                              "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE",
+                              "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE",
+                              "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT",
+                              "CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE",
+                              "CREATE_BATCH_OPERATION_UPDATE_JOB",
+                              "CREATE_DECISION_INSTANCE",
+                              "CREATE_PROCESS_INSTANCE",
+                              "CREATE_TASK_LISTENER",
+                              "DELETE",
+                              "DELETE_DECISION_INSTANCE",
+                              "DELETE_DRD",
+                              "DELETE_FORM",
+                              "DELETE_PROCESS",
+                              "DELETE_PROCESS_INSTANCE",
+                              "DELETE_RESOURCE",
+                              "DELETE_TASK_LISTENER",
+                              "EVALUATE",
+                              "MODIFY_PROCESS_INSTANCE",
+                              "PAUSE",
+                              "READ",
+                              "READ_DECISION_DEFINITION",
+                              "READ_DECISION_INSTANCE",
+                              "READ_JOB_METRIC",
+                              "READ_PROCESS_DEFINITION",
+                              "READ_PROCESS_INSTANCE",
+                              "READ_USAGE_METRIC",
+                              "READ_USER_TASK",
+                              "READ_TASK_LISTENER",
+                              "RESTORE",
+                              "REVEAL",
+                              "SUSPEND_PROCESS_INSTANCE",
+                              "UPDATE",
+                              "UPDATE_PROCESS_INSTANCE",
+                              "UPDATE_USER_TASK",
+                              "UPDATE_TASK_LISTENER",
+                            ],
+                            title: "PermissionTypeEnum",
+                          },
+                        },
+                        authorizationKey: {
+                          allOf: [
+                            {
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              description:
+                                "System-generated key for an authorization.",
+                              format: "AuthorizationKey",
+                              example: "2251799813684332",
+                              type: "string",
+                              title: "AuthorizationKey",
+                            },
+                          ],
+                          description: "The key of the authorization.",
+                        },
+                      },
+                      title: "AuthorizationResult",
+                    },
+                  },
+                },
+                title: "AuthorizationSearchResult",
+              },
+            ],
+            required: ["authorizationsEnabled"],
+            properties: {
+              authorizationsEnabled: {
+                description:
+                  "Indicates whether authorization checks are enabled for the physical tenant of the request.",
+                type: "boolean",
+              },
+            },
+            title: "OwnAuthorizationSearchResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

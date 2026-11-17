@@ -2,12 +2,9 @@
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
-description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
+description: "Build a Camunda 8 process with a user task, then route the process based on user decision."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
@@ -29,6 +26,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 

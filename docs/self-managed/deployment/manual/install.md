@@ -154,8 +154,8 @@ CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD=
 ```yaml
 camunda:
   data:
-    type: elasticsearch|opensearch # defaults to elasticsearch
     secondary-storage:
+      type: elasticsearch|opensearch # defaults to elasticsearch
       # Elasticsearch
       elasticsearch:
         url: http://localhost:9200
@@ -358,7 +358,6 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json
 // amount of brokers, size, partitions etc. depends on your configuration
@@ -397,8 +396,6 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 }
 ```
 
-  </summary>
-
 </details>
 
 Check the health status of the Orchestration Cluster with the actuator endpoint:
@@ -409,7 +406,6 @@ curl localhost:9600/actuator/health
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json
 {
@@ -441,7 +437,6 @@ curl localhost:9600/actuator/health
 }
 ```
 
-  </summary>
 </details>
 
 ## Connectors
@@ -583,7 +578,6 @@ curl localhost:9090/actuator/health
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json
 {
@@ -630,7 +624,6 @@ curl localhost:9090/actuator/health
 }
 ```
 
-  </summary>
 </details>
 
 ## Next steps

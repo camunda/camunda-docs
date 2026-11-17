@@ -4,9 +4,6 @@ title: Self-Managed resource planning
 description: "Provision Camunda 8 on your Self-Managed cluster with Kubernetes and Helm using these baseline configurations, then adjust sizing based on your workload."
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. Use [Kubernetes with Helm](/self-managed/deployment/helm/index.md) to deploy and manage your Self-Managed cluster.
 
 Use the configurations and guidance below as a baseline, then adjust based on your workload. For background on the factors that drive provisioning requirements, see [Size your environment](sizing-your-environment.md).
@@ -34,7 +31,9 @@ Camunda licensing does not depend on the provisioned hardware resources, making 
 
 ## Baseline performance
 
-Considering this [baseline resource configuration](#baseline-resource-configuration), you can expect the following performance:
+With this [baseline resource configuration](#baseline-resource-configuration), you can expect the following **sustained** performance. This is a reliability target that the configuration has consistently demonstrated it can maintain, not the hardware’s absolute limit.
+
+For the maximum throughput this configuration can achieve under stress using a much simpler process, see the `max`/stress variant in [How we test](#how-we-test).
 
 | Metric                                          | Value                                          |
 | ----------------------------------------------- | ---------------------------------------------- |
@@ -44,88 +43,99 @@ Considering this [baseline resource configuration](#baseline-resource-configurat
 | Data availability (query API latency)           | < 5 seconds                                    |
 
 :::important
-These numbers were measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
+These numbers reflect Camunda 8.8, measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/stable/8.8/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/stable/8.8/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/stable/8.8/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/stable/8.8/docs/testing/reliability-testing.md).
 :::
 
 The realistic reference process starts one root process instance, which spawns 50 sub-process instances via call activities. It covers a wide variety of BPMN elements, including call activities, multi-instance, sub-processes, and DMN. The process is based on the [Credit Card Fraud Dispute Handling](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling) blueprint from the Camunda Marketplace.
 
+## How we test
+
+Camunda runs these load tests as part of its **reliability testing** practices. The goal is to detect performance regressions, memory leaks, and configuration issues before they affect customers, and to confirm that the system performs within its expected bounds over extended periods of continuous operation—not to produce a one-off benchmark for this page.
+
+The numbers presented here reflect a configuration that Camunda has repeatedly demonstrated can sustain this load reliably.
+
+These tests run on a dedicated Kubernetes cluster, using the same [load-tester](https://github.com/camunda/camunda/tree/stable/8.8/load-tests/load-tester) application and [Helm-based setup](https://github.com/camunda/camunda/blob/stable/8.8/load-tests/README.md) used to validate every release before it ships. Reliability testing focuses on two test types, run against `main` and every supported `stable/*` branch:
+
+| Test type                                                                                                                    | Process model                                                            |                          PI/s target | FNI/s target | Purpose                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -----------------------------------: | -----------: | ------------------------------------------------------------------------------------- |
+| **[Weekly (endurance)](https://github.com/camunda/camunda/blob/main/load-tests/README.md#weekly-load-tests-endurance-test)** | Credit card fraud dispute process (call activities, multi-instance, DMN) | 1 root PIs (50 sub PIs)<sup>\*</sup> |          560 | Validates sustained reliability over four weeks (used for the numbers on this page)   |
+| [Daily (stress)](https://github.com/camunda/camunda/blob/main/load-tests/README.md#daily-load-tests-stress-test)             | Single service task                                                      |                                  300 |          900 | Puts the system under stress and finds the throughput ceiling in a bounded 3-hour run |
+
+<sup>\*</sup> One root process instance per second fans out into 50 sub-process instances via call activities, so completed PI/s includes both.
+
+The endurance run supports the numbers on this page:
+
+- A new instance is created every Monday for each variant and runs for four weeks.
+- A configuration is considered validated only after sustaining a continuous, production-like load—not merely a short burst.
+- The stress run answers a different question: how far can the system be pushed? Its ceiling of 300 PI/s is not a target for capacity planning.
+
+See [reliability testing](https://github.com/camunda/camunda/blob/stable/8.8/docs/testing/reliability-testing.md) for the full test-type taxonomy and [load test metrics](https://github.com/camunda/camunda/blob/main/load-tests/docs/metrics.md) for how a run is judged healthy.
+
 ## Baseline resource configuration
 
-<Tabs groupId="optimize" defaultValue="with-optimize" values={
-[
-{ label: 'Without Optimize', value: 'without-optimize', },
-{ label: 'With Optimize', value: 'with-optimize', },
-]}>
+The following table lists the Helm values for Elasticsearch or OpenSearch with Optimize. Optimize is the main driver of Elasticsearch and OpenSearch sizing in this configuration because its importer reads from and writes to the secondary storage indices in addition to the primary export traffic. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
 
-<TabItem value="without-optimize">
+These are the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch and OpenSearch, which use identical resources.
 
-The following configuration provides a baseline equivalent to a 1x SaaS cluster without Optimize enabled.
-
-<!-- TODO: Validate these resource numbers against 8.9 benchmarks. The Orchestration Cluster CPU request of 3 cores reflects the 8.8 streamlined architecture. Confirm max throughput and max stored PI for this configuration. -->
-
-| Component                 |                     | Request | Limit |
-| ------------------------- | ------------------- | ------: | ----: |
-| **Orchestration Cluster** |                     |         |       |
-| Brokers                   | 3                   |         |       |
-| Partitions                | 3                   |         |       |
-| Replication factor        | 3                   |         |       |
-|                           | vCPU \[cores\]      |       3 |     3 |
-|                           | Memory \[GB\]       |       2 |     2 |
-|                           | Disk \[GB\]         |         |   128 |
-| **Connectors**            |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.2 |   0.2 |
-|                           | Memory limit \[GB\] |   0.512 |     1 |
-| **Elastic**               |                     |         |       |
-| #statefulset              | 3                   |         |       |
-|                           | vCPU \[cores\]      |       3 |     3 |
-|                           | Memory limit \[GB\] |       2 |     2 |
-|                           | Disk request \[GB\] |         |   128 |
-
-</TabItem>
-
-<TabItem value="with-optimize">
-
-When Optimize is enabled, additional resources are needed, especially for Elasticsearch, because Optimize's importer reads from and writes to Elasticsearch indices. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for more details.
-
-<!-- TODO: Validate these resource numbers against 8.9 benchmarks. These numbers are based on the Optimize V2 experiment (minimum ES resources for realistic workload at 1 PI/s with 101 tasks/s). -->
-
-| Component                 |                     | Request | Limit |
-| ------------------------- | ------------------- | ------: | ----: |
-| **Orchestration Cluster** |                     |         |       |
-| Brokers                   | 3                   |         |       |
-| Partitions                | 3                   |         |       |
-| Replication factor        | 3                   |         |       |
-|                           | vCPU \[cores\]      |       3 |     3 |
-|                           | Memory \[GB\]       |       2 |     2 |
-|                           | Disk \[GB\]         |         |   128 |
-| **Connectors**            |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.2 |   0.2 |
-|                           | Memory limit \[GB\] |   0.512 |     1 |
-| **Optimize**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.6 |     2 |
-|                           | Memory limit \[GB\] |       1 |     2 |
-| **Elastic**               |                     |         |       |
-| #statefulset              | 3                   |         |       |
-|                           | vCPU \[cores\]      |       7 |     7 |
-|                           | Memory limit \[GB\] |       6 |     8 |
-|                           | Disk request \[GB\] |         |   512 |
+| Component                      |                     | Request | Limit |
+| ------------------------------ | ------------------- | ------: | ----: |
+| **Orchestration Cluster**      |                     |         |       |
+| Brokers                        | 3                   |         |       |
+| Partitions                     | 3                   |         |       |
+| Replication factor             | 3                   |         |       |
+|                                | vCPU \[cores\]      |       4 |     4 |
+|                                | Memory \[GB\]       |       4 |     4 |
+|                                | Disk \[GB\]         |         |    64 |
+|                                | Disk IOPS           |         | 4,000 |
+| **Connectors**                 |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |     0.2 |   0.2 |
+|                                | Memory limit \[GB\] |   0.512 |     1 |
+| **Identity**                   |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |     0.6 |     2 |
+|                                | Memory limit \[GB\] |     0.4 |     2 |
+| **Keycloak**                   |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |       1 |     2 |
+|                                | Memory limit \[GB\] |       1 |     2 |
+| **Optimize**                   |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |     0.6 |     2 |
+|                                | Memory limit \[GB\] |       1 |     2 |
+| **Elasticsearch / OpenSearch** |                     |         |       |
+| #statefulset                   | 3                   |         |       |
+|                                | vCPU \[cores\]      |       7 |     7 |
+|                                | Memory limit \[GB\] |       8 |     8 |
+|                                | Disk request \[GB\] |         |   256 |
 
 :::note
-The numbers in the tables were measured using a [realistic process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) with a [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+If you don't use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. OpenSearch is expected to see a similar impact, but it hasn't been measured separately. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
-</TabItem>
+Identity and Keycloak, including Keycloak's bundled PostgreSQL database, which is not itemized here, are included in each table above because our test harness always authenticates through OIDC, reflecting a production-like setup. If you plan to use an external identity provider instead of the bundled Keycloak, you can omit these rows entirely.
 
-</Tabs>
+In our sizing, retention is set to one day for the Camunda Exporter and three days for the legacy exporter, where applicable. This gives the Optimize importer enough time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. The daily metrics above assume that the load is distributed evenly over 24 hours.
 
 ## Primary storage
 
 Primary storage must use low-latency **SSDs**, as HDD-backed volumes are not supported. Disk **latency**, rather than throughput, is the critical metric. Cloud providers often report similar throughput figures for HDD and SSD volumes, but the difference in latency is what matters for Camunda. In testing, HDD-backed primary storage reduced throughput by approximately 50% compared with SSDs, increased commit latency, and triggered additional Raft snapshot replication between brokers.
 
 See [Command processing path](data-flow.md#command-processing-path) for the architectural context on why disk latency sits on the critical path, the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
+
+### Disk IOPS
+
+Camunda is IOPS-heavy: every broker flushes the log to disk as part of Raft commits, so each broker's volume needs enough sustained IOPS, in addition to the latency requirements in [supported environments](/reference/supported-environments.md#performance). The IOPS a broker needs depends on your workload and scales with the number of partitions it hosts. A cluster with a low load and few partitions can run with far fewer IOPS.
+
+- **Recommended:** provision **4,000 sustained IOPS** per broker for production workloads comparable to the configuration in [Baseline resource configuration](#baseline-resource-configuration), where each broker hosts three partitions. This leaves headroom over what we measured in our load tests, so short bursts do not throttle the volume. Measure your own workload.
+- **Disk bandwidth:** bandwidth (MiB/s) was not a limiting factor. Brokers write many small blocks, so the volume's IOPS limit is reached long before its bandwidth limit, and IOPS is the figure to size for.
+- **Smaller clusters:** clusters with a lower load or fewer partitions per broker need fewer IOPS and can use smaller disks, provided the volume still sustains the IOPS your workload requires.
+
+:::warning
+Many cloud providers scale volume IOPS with disk capacity, or offer burstable volume types that rely on burst credits. A small or burstable volume can run fine until its credits are exhausted, then throttle and cause higher commit latency, backpressure, and lower throughput. Before choosing or shrinking a disk, check the **sustained** (not burst) IOPS the provider guarantees for that size, and size the volume to meet your target IOPS without relying on burst credits.
+:::
+
+Elasticsearch IOPS was not a limiting factor in our tests. See [Elasticsearch scaling](#elasticsearch-scaling) for secondary storage sizing.
 
 ### Disk space
 
@@ -298,7 +308,7 @@ Once you have a baseline configuration running, you can scale in several ways:
 
 Add more brokers and partitions to increase throughput capacity. Partitions can be [scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) but not down, so avoid over-provisioning.
 
-When scaling horizontally, **secondary storage often becomes the limiting factor**. Adding brokers increases export volume to Elasticsearch/OpenSearch. If secondary storage isn't scaled accordingly, it will bottleneck overall throughput. See [Elasticsearch scaling](#elasticsearch-scaling) for guidance.
+When scaling horizontally, **secondary storage often becomes the limiting factor**. Adding brokers increases export volume to Elasticsearch/OpenSearch. If secondary storage isn't scaled accordingly, it will bottleneck overall throughput. See [Elasticsearch scaling](#elasticsearch-scaling) for tuning options, and [secondary storage considerations](#secondary-storage-considerations) for a sharding limitation that adding nodes alone doesn’t resolve.
 
 ### Vertical scaling
 
@@ -308,22 +318,30 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 
 - **Memory:** Increase Elasticsearch memory to store more historical data without performance degradation.
 - **Nodes:** Add Elasticsearch statefulset replicas for more IOPS and query throughput.
-- **Disk size:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
-- **Disk type:** Use SSDs for Elasticsearch storage. Disk latency, not throughput, is the critical factor. HDD-backed Elasticsearch has been observed to cause 8–10s flush durations, a growing export backlog, increased broker memory from in-flight records, and up to ~70% throughput degradation versus an equivalent SSD setup. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for details, and [Export pipeline](data-flow.md#export-pipeline) for background on how slow secondary storage affects overall throughput.
-- **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance. Each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [managing replicas](/self-managed/concepts/secondary-storage-management.md#replicas).
+- **Disk size:** Increase disk size based on your data retention requirements. Our tests use a short retention period—one day for the Camunda Exporter—to prevent test clusters from filling up. With Optimize enabled and a realistic payload of approximately 11 KB, even a 128 GiB disk can fill up in under 12 hours at 1 PI/s if you configure a longer retention period, such as 30 days.
+- **Disk type:** Use SSDs for Elasticsearch storage. Disk latency, not throughput, is the critical factor. HDD-backed Elasticsearch has been observed to cause 8-10s flush durations, a growing export backlog, increased broker memory from in-flight records, and up to ~70% throughput degradation versus an equivalent SSD setup. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for details, and [Export pipeline](data-flow.md#export-pipeline) for background on how slow secondary storage affects overall throughput.
+- **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance: each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [managing replicas](/self-managed/concepts/secondary-storage-management.md#replicas).
 
 ## Secondary storage considerations
 
-The resource tables above assume Elasticsearch as the secondary storage backend. If you are using a different backend:
+The [baseline resource configuration](#baseline-resource-configuration) above provides a sizing table for each secondary storage backend: Elasticsearch and OpenSearch.
 
-- **OpenSearch:** Similar resource profile to Elasticsearch. The tables above generally apply.
-- **RDBMS (PostgreSQL, available from 8.9):** Replace the Elasticsearch resource block with appropriately sized PostgreSQL resources. Adjust throughput expectations **downward by approximately 30%** compared to the Elasticsearch-based tables. Unlike Elasticsearch, RDBMS scales primarily **vertically** (a larger instance) rather than horizontally, so plan your initial sizing with more headroom, as adding capacity later is more disruptive.
+[Dynamically scaling partitions](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) scales the primary storage, but not the secondary storage, so manual steps are necessary:
 
-:::note
-Optimize is not supported with RDBMS. If you need Optimize, you must also run Elasticsearch alongside your RDBMS.
-:::
+- All Zeebe partitions export data to the same Elasticsearch or OpenSearch indices.
+- Write throughput for an index scales with the number of primary shards, not the number of nodes. Reassess the shard count for your indices when scaling the number of partitions. See the [Elasticsearch shards documentation](/self-managed/concepts/secondary-storage-management.md#shards).
 
 See [Secondary storage](sizing-your-environment.md#secondary-storage) for more details.
+
+## Custom exporter considerations
+
+Custom exporters share each partition’s export capacity with the built-in exporters. Test custom exporters under a realistic, steady load before you use them in production. See [How we test](#how-we-test) for how Camunda tests, and [Run benchmarks](sizing-benchmarks.md) to run your own.
+
+- Compare the average export time of your exporter with the built-in exporters. See [performance impact of exporters](/self-managed/concepts/exporters.md#performance-impact) for the metrics.
+- Check that the acknowledged position of your exporter keeps advancing while the load runs. If it falls further and further behind, the exporter does not keep up and the broker delays log compaction.
+- Measure how long data takes to become available in the target system of your exporter, and watch that system for rejections and timeouts. Larger batches and longer flush delays increase the time to availability, and batches that are too large can overwhelm the target. Increase the batch size step by step to find the best value for your system.
+
+Keep the `export()` method fast and batch writes to the target system.
 
 ## Next steps
 

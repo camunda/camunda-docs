@@ -56,10 +56,11 @@ The date when this agent instance was created.
 ### definition
 
 ```ts
-definition: AgentInstanceDefinition;
+definition: AgentInstanceDefinitionResult;
 ```
 
-The static definition of the agent, including model, provider, and system prompt.
+The definition of the agent, including model, provider, and system prompt. Set at
+creation, but can change later via a CONFIGURATION history item.
 
 ---
 
@@ -109,7 +110,9 @@ The configured limits for this agent instance, set once at creation.
 metrics: AgentInstanceMetrics;
 ```
 
-Aggregated metrics across all loopIterations of this agent instance.
+Aggregated metrics across all loopIterations of this agent instance. Includes
+history items later discarded: metrics are counted when an item is accepted,
+not when it's committed.
 
 ---
 

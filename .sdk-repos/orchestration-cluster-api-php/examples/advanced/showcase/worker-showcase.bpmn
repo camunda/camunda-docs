@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="WorkerShowcaseDefinitions" targetNamespace="https://camunda.com/examples/php-sdk" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
+  <bpmn:process id="__EMAIL_PROCESS_ID__" name="Showcase email worker" isExecutable="true">
+    <bpmn:startEvent id="EmailStart" name="Start email worker">
+      <bpmn:outgoing>EmailStartToTask</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="EmailTask" name="Send email">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="email-sending" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>EmailStartToTask</bpmn:incoming>
+      <bpmn:outgoing>EmailTaskToEnd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EmailEnd" name="Complete email worker">
+      <bpmn:incoming>EmailTaskToEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="EmailStartToTask" sourceRef="EmailStart" targetRef="EmailTask" />
+    <bpmn:sequenceFlow id="EmailTaskToEnd" sourceRef="EmailTask" targetRef="EmailEnd" />
+  </bpmn:process>
+  <bpmn:process id="__CPU_PROCESS_ID__" name="Showcase CPU worker" isExecutable="true">
+    <bpmn:startEvent id="CpuStart" name="Start CPU worker">
+      <bpmn:outgoing>CpuStartToTask</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="CpuTask" name="Compute result">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="cpu-intensive-task" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>CpuStartToTask</bpmn:incoming>
+      <bpmn:outgoing>CpuTaskToEnd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="CpuEnd" name="Complete CPU worker">
+      <bpmn:incoming>CpuTaskToEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="CpuStartToTask" sourceRef="CpuStart" targetRef="CpuTask" />
+    <bpmn:sequenceFlow id="CpuTaskToEnd" sourceRef="CpuTask" targetRef="CpuEnd" />
+  </bpmn:process>
+  <bpmn:process id="__PROCESS_PAYMENT_ID__" name="Showcase payment handler" isExecutable="true">
+    <bpmn:startEvent id="PaymentStart" name="Start payment handler">
+      <bpmn:outgoing>PaymentStartToTask</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="PaymentTask" name="Process payment">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="process-payment" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>PaymentStartToTask</bpmn:incoming>
+      <bpmn:outgoing>PaymentTaskToEnd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="PaymentEnd" name="Complete payment handler">
+      <bpmn:incoming>PaymentTaskToEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="PaymentStartToTask" sourceRef="PaymentStart" targetRef="PaymentTask" />
+    <bpmn:sequenceFlow id="PaymentTaskToEnd" sourceRef="PaymentTask" targetRef="PaymentEnd" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="EmailDiagram">
+    <bpmndi:BPMNPlane id="EmailPlane" bpmnElement="__EMAIL_PROCESS_ID__">
+      <bpmndi:BPMNShape id="EmailStart_di" bpmnElement="EmailStart"><dc:Bounds x="180" y="102" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EmailTask_di" bpmnElement="EmailTask"><dc:Bounds x="270" y="80" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EmailEnd_di" bpmnElement="EmailEnd"><dc:Bounds x="430" y="102" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="EmailStartToTask_di" bpmnElement="EmailStartToTask"><di:waypoint x="216" y="120" /><di:waypoint x="270" y="120" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="EmailTaskToEnd_di" bpmnElement="EmailTaskToEnd"><di:waypoint x="370" y="120" /><di:waypoint x="430" y="120" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="CpuDiagram">
+    <bpmndi:BPMNPlane id="CpuPlane" bpmnElement="__CPU_PROCESS_ID__">
+      <bpmndi:BPMNShape id="CpuStart_di" bpmnElement="CpuStart"><dc:Bounds x="180" y="302" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CpuTask_di" bpmnElement="CpuTask"><dc:Bounds x="270" y="280" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CpuEnd_di" bpmnElement="CpuEnd"><dc:Bounds x="430" y="302" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="CpuStartToTask_di" bpmnElement="CpuStartToTask"><di:waypoint x="216" y="320" /><di:waypoint x="270" y="320" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="CpuTaskToEnd_di" bpmnElement="CpuTaskToEnd"><di:waypoint x="370" y="320" /><di:waypoint x="430" y="320" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="PaymentDiagram">
+    <bpmndi:BPMNPlane id="PaymentPlane" bpmnElement="__PROCESS_PAYMENT_ID__">
+      <bpmndi:BPMNShape id="PaymentStart_di" bpmnElement="PaymentStart"><dc:Bounds x="180" y="502" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PaymentTask_di" bpmnElement="PaymentTask"><dc:Bounds x="270" y="480" width="100" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PaymentEnd_di" bpmnElement="PaymentEnd"><dc:Bounds x="430" y="502" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="PaymentStartToTask_di" bpmnElement="PaymentStartToTask"><di:waypoint x="216" y="520" /><di:waypoint x="270" y="520" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="PaymentTaskToEnd_di" bpmnElement="PaymentTaskToEnd"><di:waypoint x="370" y="520" /><di:waypoint x="430" y="520" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

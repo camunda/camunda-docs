@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "scenarios": [
+    {
+      "id": "bootstrap-and-discovery",
+      "title": "Bootstrap and discovery",
+      "summary": "Client construction, semantic values, and platform discovery calls.",
+      "command": "make example-showcase SCENARIO=bootstrap-and-discovery",
+      "sources": [
+        "admin.php",
+        "agent_definition.php",
+        "agent_instance.php",
+        "audit_log.php",
+        "client.php",
+        "cluster.php",
+        "cluster_variable.php",
+        "document.php",
+        "readme.php",
+        "resource.php",
+        "secret.php",
+        "semantic_types.php"
+      ]
+    },
+    {
+      "id": "deployment-and-lifecycle",
+      "title": "Deployment and lifecycle",
+      "summary": "Resource deployment, decisions, process definitions, instances, and batch operations.",
+      "command": "make example-showcase SCENARIO=deployment-and-lifecycle",
+      "sources": [
+        "batch_operation.php",
+        "decision.php",
+        "deployment.php",
+        "process_definition.php",
+        "process_instance.php"
+      ]
+    },
+    {
+      "id": "jobs-and-workers",
+      "title": "Jobs and workers",
+      "summary": "Job activation, completion, errors, retries, worker loops, and task listeners.",
+      "command": "make example-showcase SCENARIO=jobs-and-workers",
+      "sources": ["global_listener.php", "job.php"]
+    },
+    {
+      "id": "runtime-interaction",
+      "title": "Runtime interaction",
+      "summary": "Ad-hoc execution, elements, expressions, incidents, user tasks, and variables.",
+      "command": "make example-showcase SCENARIO=runtime-interaction",
+      "sources": [
+        "adhoc.php",
+        "element_instance.php",
+        "evaluation.php",
+        "incident.php",
+        "user_task.php",
+        "variable.php"
+      ]
+    },
+    {
+      "id": "message-correlation",
+      "title": "Message correlation",
+      "summary": "Message subscription queries, correlated messages, publication, and signals.",
+      "command": "make example-showcase SCENARIO=message-correlation",
+      "sources": ["message_signal.php"]
+    },
+    {
+      "id": "management-and-operations",
+      "title": "Management and operations",
+      "summary": "Authorization, identity, tenant, backup, recovery, export, clock, and system APIs.",
+      "command": "make example-showcase SCENARIO=management-and-operations",
+      "sources": [
+        "authorization.php",
+        "backup.php",
+        "clock.php",
+        "exporting.php",
+        "group.php",
+        "mapping_rule.php",
+        "recovery.php",
+        "role.php",
+        "system.php",
+        "tenant.php",
+        "user.php"
+      ]
+    }
+  ]
+}

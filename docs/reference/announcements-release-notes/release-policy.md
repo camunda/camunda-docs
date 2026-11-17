@@ -28,7 +28,7 @@ Refers to a feature or component released as an alpha version, in an early state
 
 ### Alpha release
 
-Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.6.0-alpha1`, `8.6.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
+Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.10.0-alpha1`, `8.10.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
 
 :::note
 
@@ -62,6 +62,7 @@ A cluster typically consists of the following components:
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Optimize](/components/optimize/what-is-optimize.md)
+- [Connectors](/components/connectors/introduction.md)
 
 You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
 
@@ -87,12 +88,11 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 Non-cluster components include:
 
 - [Camunda Hub](/components/hub/index.md)
-- [Connectors](/components/connectors/introduction.md)
 
 Non-cluster component versions are released continuously.
 
 - Customers are automatically updated to the latest component version when it is ready for release.
-- Admins can [enable alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md) for non-cluster components in organization settings.
+- Admins can [enable alpha features](/components/saas/organization/enable-alpha-features.md) for non-cluster components in organization settings.
 
 ### New Camunda 8 versions
 

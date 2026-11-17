@@ -224,3 +224,15 @@ Agentic orchestration and AI-driven development are native to Camunda. Apply thi
 - **Example selection**: When a page needs an illustrative example, scenario, or use case, consider whether an AI agent is a natural fit as one of the actors, and prefer that framing over a purely human/deterministic example when it's equally illustrative. Applies both when writing a new example and when reviewing content that adds one. Don't override native framing to force this; skip it if an agent-involved example would feel invented for that page.
 - **Plain language**: Avoid marketing or positioning language.
 - **Link, don't duplicate**: Before introducing or changing an agent-related term, check `docs/reference/glossary.md` (which reflects the [agent terminology model](https://github.com/camunda/product-development/blob/main/strategy/decisions/2026-06-23-agent-terminology-model.md) and the [Handbook's AI and agentic orchestration glossary](https://lamppost.camunda-it.rocks/handbook/#departments/marketing/terminology/references/ai-glossary.md)). Link to the [glossary](/reference/glossary.md) or the [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) pages instead of redefining concepts documented there.
+
+### Error handling and troubleshooting
+
+Docs that describe a feature but not what happens when it breaks are a leading cause of support tickets. Apply this pattern to any troubleshooting section, error reference, or "known limitations" list:
+
+- **One entry per distinct symptom**, not one per root cause. If two different root causes produce the same visible symptom, cover both under that symptom rather than duplicating it.
+- **Structure each entry in three parts**: what the reader observes (the literal error text, log line, or symptom), why it happens (the mechanism, in plain terms), and how to fix it (concrete steps, not "check your configuration").
+- **Quote exact error text**, not a paraphrase. Readers search and grep for the literal string, not a summary of it.
+- **Link, don't restate**: if a failure mode is already documented on another page, link to it instead of describing it again with slightly different wording. That's how the same error ends up explained three different ways across the docs.
+- **Pair every cause with a fix**: "this happens because X" without a corresponding action leaves the reader as stuck as before.
+
+See [troubleshoot OIDC authentication](/self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc.md) for a page that follows this pattern end to end.

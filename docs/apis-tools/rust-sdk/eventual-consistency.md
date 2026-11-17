@@ -2,7 +2,7 @@
 id: eventual-consistency
 title: "Eventual consistency"
 sidebar_label: "Eventual consistency"
-sidebar_position: 10
+sidebar_position: 11
 mdx:
   format: md
 ---

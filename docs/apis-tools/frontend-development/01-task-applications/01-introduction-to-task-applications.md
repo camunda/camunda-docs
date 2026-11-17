@@ -48,13 +48,13 @@ The task page is divided into two main areas:
 
 #### Tasks queue
 
-The **tasks queue side panel** lists all tasks pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
+The **tasks queue side panel** lists all tasks pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, follow-up date, or priority.
 
 Learn more how to work with the task queue in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 
 #### Task details
 
-Task details are shown when a task is selected from the queue. A [form](/components/modeler/forms/utilizing-forms.md) is displayed as the task content, which must be filled out to complete the task.
+Task details are shown when a task is selected from the queue. A [form](/components/modeler/desktop-modeler/utilize-forms.md) is displayed as the task content, which must be filled out to complete the task.
 
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.

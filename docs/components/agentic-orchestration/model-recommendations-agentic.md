@@ -5,7 +5,9 @@ sidebar_label: LLM recommendations
 description: Recommendations and best practices for choosing LLMs and designing effective prompts for agentic processes.
 ---
 
-Recommendations and best practices for choosing LLMs and designing effective prompts for agentic processes.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## General model requirements
 

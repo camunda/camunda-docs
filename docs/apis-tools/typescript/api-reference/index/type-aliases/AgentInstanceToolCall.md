@@ -33,7 +33,7 @@ any item, including TOOL_RESULT.
 ### elementId
 
 ```ts
-elementId: string | null;
+elementId: ElementId | null;
 ```
 
 The BPMN element ID handling this tool.

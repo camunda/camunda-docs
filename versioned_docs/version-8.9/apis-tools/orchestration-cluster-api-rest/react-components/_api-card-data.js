@@ -26,7 +26,7 @@ export const apiExplorationCards = [
       "Check out our collections of APIs, or read on for regular updates and upcoming projects.",
   },
   {
-    link: "https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml",
+    link: "https://github.com/camunda/camunda/blob/stable/8.9/zeebe/gateway-protocol/src/main/proto/rest-api.yaml",
     title: "OpenAPI Specification",
     image: OpenApiImg,
     description:

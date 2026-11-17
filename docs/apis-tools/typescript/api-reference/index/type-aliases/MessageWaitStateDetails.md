@@ -28,11 +28,3 @@ messageName: string;
 ```
 
 The name of the message being awaited.
-
-### waitStateType
-
-```ts
-waitStateType: string;
-```
-
-The wait state type discriminator.

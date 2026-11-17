@@ -1,11 +1,11 @@
 import IconPlayImg from "../assets/icon-play.png";
 
-export const msTeamsCard = {
-  link: "../ms-teams/",
-  title: "Microsoft Teams",
+export const appIntegrationsCard = {
+  link: "../app-integrations/",
+  title: "App Integrations",
   image: IconPlayImg,
   description:
-    "Start processes, complete tasks, and get notifications from Camunda in Microsoft Teams.",
+    "Start processes, complete tasks, and get notifications from Camunda in Microsoft Teams and Slack.",
 };
 
 export const sapCard = {

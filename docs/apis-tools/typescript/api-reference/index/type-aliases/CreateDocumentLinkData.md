@@ -13,10 +13,10 @@ type CreateDocumentLinkData = object;
 
 ## Properties
 
-### body?
+### body
 
 ```ts
-optional body?: DocumentLinkRequest;
+body: DocumentLinkRequest;
 ```
 
 ---

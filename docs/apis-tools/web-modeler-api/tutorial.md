@@ -15,7 +15,7 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [M
 
 ## Prerequisites
 
-- Create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will create a project, add a collaborator, and delete a project. Ensure you check the box for the Web Modeler scope.
+- Create your first client by navigating to **Organization > Manage organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will create a project, add a collaborator, and delete a project. Ensure you check the box for the Web Modeler scope.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.

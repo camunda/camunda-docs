@@ -37,7 +37,7 @@ The following relational databases are officially supported when used as an RDBM
 | H2                       | 2.3, 2.4                        |
 
 :::info
-Changes to supported versions are announced in the [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+Changes to supported versions are announced in the [release announcements](/reference/announcements-release-notes/890/890-announcements.md).
 :::
 
 ### Recommended database versions

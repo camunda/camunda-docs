@@ -49,7 +49,7 @@ For services that require an API key for authentication, you can configure the R
 
 We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_API_KEY_SECRET`) so you can reference it later in the connector.
 
 ### Configure API key authentication
@@ -70,7 +70,7 @@ Select the **REST connector** and fill out the following properties under the **
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BASIC_SECRET`) so you can reference it later in the connector.
 
 ### Configure Basic Authentication
@@ -87,7 +87,7 @@ Select the **REST connector** and fill out the following properties under the **
 
 We advise you to keep your **Bearer token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the Bearer token
@@ -103,7 +103,7 @@ Select the **REST connector** and fill out the following properties under the **
 
 We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the connector.
 
 #### Configure the OAuth token
@@ -204,7 +204,7 @@ The following variables are available in the context of the response expression:
 
 - **status**: Response status.
 - **body**: Response body of your request. Populated when the **Response format** is **As text** or **As JSON**.
-- **headers**: Response headers.
+- **headers**: Response headers. Header names keep the casing sent by the server. To look up a header regardless of its casing, use the [`getHeader` FEEL function](/components/connectors/use-connectors/index.md#function-getheader).
 - **document**: Populated when the **Response format** is **Document reference**; represents the stored document:
   - **documentId**: The ID of the stored document.
   - **contentHash**: The hash of the stored document.

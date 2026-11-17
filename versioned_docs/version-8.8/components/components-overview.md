@@ -24,7 +24,6 @@ import OverviewImg from './assets/hero-using-camunda.png';
 import "./react-components/\_using-table.css";
 import UsingGrid from './react-components/\_using-card';
 import { featuresCards, usingCamundaCards } from './react-components/\_using-card-data';
-import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Learn how to use Camunda to orchestrate your processes.</h3>
 
@@ -33,7 +32,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Orchestrate and automate complex business processes for people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Introduction to Camunda 8" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda 8</a>
+<p class="link-button">[Introduction to Camunda 8](./concepts/concepts-overview.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -82,5 +81,3 @@ Reference information for Camunda 8 SaaS, including clusters, regions, and encry
 Explore the glossary and understand definitions for key Camunda 8 terms and abbreviations.
 
 <p><a href="../reference/glossary/" class="link-arrow">Glossary</a></p>
-
-<AskAi/>

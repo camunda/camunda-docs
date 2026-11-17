@@ -44,6 +44,10 @@ Numbers are subject to the following numeric limits:
 If you need arbitrary-precision or very large numbers, consider storing them as strings or in an external data store instead of process variables.
 :::
 
+:::note
+A date-time value with a time zone ID, for example from [`now()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal.md#now), is stored with the zone ID in brackets, such as `2026-09-29T12:31:01.641Z[GMT]`. Some ISO 8601 parsers reject this format, for example Python `datetime.fromisoformat()` and JavaScript `new Date()`. To store the value without the zone ID, [convert it to a fixed offset](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#date-and-timedate-timezone) before storing it, for example `date and time(now(), "Z")`.
+:::
+
 ## Variable size limitation
 
 The payload of a process instance is limited to 4 MB. This limit includes both process variables and workflow engine–internal data, so less than 4 MB is available for variables alone.
@@ -85,6 +89,16 @@ If no scope contains this variable, it's created as a new variable in the root s
 ![variable-propagation](assets/variable-propagation.png)
 
 The job of **Task B** is completed with the variables `b`, `c`, and `d`. The variables `b` and `c` are already defined in higher scopes and are updated with the new values. Variable `d` doesn't exist before and is created in the root scope.
+
+:::warning A local variable blocks later writes of the same name
+If another operation writes a variable with the same name, variable propagation finds the local variable first. This happens when a job completes or an input mapping creates the variable.
+
+Later writes update only the local variable, not the process instance. When the scope exits, Camunda discards the local variable and any updates. The operation appears to succeed, but the change never propagates.
+
+For example, an input mapping creates a local variable `x`. When the element's job completes with a new value for `x` (without an output mapping), it updates the local `x`, not the process instance. The next element still sees the previous value.
+
+To expose a variable outside its scope, use an [output mapping](#inputoutput-variable-mappings).
+:::
 
 ### Variable propagation by BPMN element
 
