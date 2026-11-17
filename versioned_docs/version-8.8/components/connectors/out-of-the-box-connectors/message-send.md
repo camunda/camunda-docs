@@ -15,17 +15,19 @@ The element template allows you to select the mode:
 
 and fill all parameters directly in the modeler.
 
+The element template is available for send tasks, intermediate throw events, and message end events.
+
 ## Publish message (buffered) parameters
 
-| Parameter       | Type   | Description                                                                                                                         | Default / Optional |
-| --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| Message name    | string | Name of the message. Must match a receiving message event.                                                                          | Required           |
-| Correlation key | string | Value for correlating with a process instance. Can be empty to start a new instance.                                                | Optional           |
-| Payload         | JSON   | Variables to transfer to the receiving process instance. Example: `{"customerName": cust_name}`. Multiple variables can be defined. | Required           |
-| Time to live    | int    | Time in milliseconds to buffer the message.                                                                                         | No buffer          |
-| Message ID      | string | Unique message ID for idempotency. Ensures the message is delivered only once until correlated.                                     | Optional           |
-| Tenant ID       | string | Tenant ID of the receiving instance.                                                                                                | `<default>`        |
-| Request timeout | int    | Timeout for the publish message command.                                                                                            | Connector default  |
+| Parameter       | Type              | Description                                                                                                                         | Default / Optional |
+| --------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Message name    | string            | Name of the message. Must match a receiving message event.                                                                          | Required           |
+| Correlation key | string            | Value for correlating with a process instance. Can be empty to start a new instance.                                                | Optional           |
+| Payload         | JSON              | Variables to transfer to the receiving process instance. Example: `{"customerName": cust_name}`. Multiple variables can be defined. | Optional           |
+| Time to live    | ISO 8601 duration | Duration for which the message remains buffered, for example `PT1H`.                                                                | Optional           |
+| Message ID      | string            | Unique message ID for idempotency. Ensures the message is delivered only once until correlated.                                     | Optional           |
+| Tenant ID       | string            | Tenant ID of the receiving instance.                                                                                                | `<default>`        |
+| Request timeout | ISO 8601 duration | Timeout for the publish message command, for example `PT30S`.                                                                       | Connector default  |
 
 ### Response
 
@@ -36,13 +38,13 @@ and fill all parameters directly in the modeler.
 
 ## Correlate message (with result) parameters
 
-| Parameter       | Type   | Description                                                                                                                         | Default / Optional |
-| --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| Message name    | string | Name of the message. Must match a receiving message event.                                                                          | Required           |
-| Correlation key | string | Value for correlating with a process instance. Can be empty to start a new instance.                                                | Optional           |
-| Payload         | JSON   | Variables to transfer to the receiving process instance. Example: `{"customerName": cust_name}`. Multiple variables can be defined. | Required           |
-| Tenant ID       | string | Tenant ID of the receiving instance.                                                                                                | `<default>`        |
-| Request timeout | int    | Timeout for the correlate message command.                                                                                          | Connector default  |
+| Parameter       | Type              | Description                                                                                                                         | Default / Optional |
+| --------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Message name    | string            | Name of the message. Must match a receiving message event.                                                                          | Required           |
+| Correlation key | string            | Value for correlating with a process instance. Can be empty to start a new instance.                                                | Optional           |
+| Payload         | JSON              | Variables to transfer to the receiving process instance. Example: `{"customerName": cust_name}`. Multiple variables can be defined. | Optional           |
+| Tenant ID       | string            | Tenant ID of the receiving instance.                                                                                                | `<default>`        |
+| Request timeout | ISO 8601 duration | Timeout for the correlate message command, for example `PT30S`.                                                                     | Connector default  |
 
 ### Response
 
