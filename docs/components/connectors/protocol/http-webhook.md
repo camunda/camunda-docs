@@ -189,9 +189,12 @@ Once you click the **Deploy** button, your HTTP Webhook will be activated and pu
 You can trigger it by sending a request to the generated URL, using the HTTP method selected in **Webhook method**.
 
 :::warning Webhook endpoints and process versions
-When you deploy a new process version that uses the same webhook endpoint as an existing version, the new version won’t become active until no process instances are running on the older version. Webhook endpoints can’t be shared across multiple active process versions.
+When you deploy a new process version that uses the same webhook endpoint as an existing version:
 
-To activate the new version, complete all process instances on the older version or migrate them using [process instance migration](/components/concepts/process-instance-migration.md). If you need both versions active, use a different webhook endpoint path in the new version.
+- A webhook on a start event or message start event moves to the new version once the connector runtime picks up the new version.
+- A webhook on an intermediate catch event, boundary event, or receive task in the new version won’t become active while the older version still has active message subscriptions. Webhook endpoints can’t be shared across multiple active process versions.
+
+To activate the new version, complete the process instances on the older version that are waiting on message subscriptions, or migrate them using [process instance migration](/components/concepts/process-instance-migration.md). If you need both versions active, use a different webhook endpoint path in the new version.
 
 For related behavior across versions, see [Cross-version deduplication](../advanced-topics/deduplication.md#cross-version-deduplication).
 :::

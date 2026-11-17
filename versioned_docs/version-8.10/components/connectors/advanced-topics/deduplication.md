@@ -54,7 +54,7 @@ To learn more about how inbound connectors behave across process versions, see [
 Webhook connectors and multiple versions
 When using webhook connectors, you cannot reuse the same webhook endpoint for multiple process versions if you want to keep them both active simultaneously.
 
-For intermediate catch event, boundary event, and receive task webhooks, the default behavior is to keep the old version running when you deploy a new version that uses the same endpoint. The new version's connector will not become active until the older version's connector is deactivated, which happens once the older version no longer has active message subscriptions. Start event webhooks are only active for the latest version, so a start event webhook moves to the new version as soon as it is deployed. See [Inbound connector lifecycle](./inbound-lifecycle.md).
+For intermediate catch event, boundary event, and receive task webhooks, the default behavior is to keep the old version running when you deploy a new version that uses the same endpoint. The new version's connector will not become active until the older version's connector is deactivated, which happens once the older version no longer has active message subscriptions. Start event webhooks are only active for the latest version, so a start event webhook moves to the new version once the connector runtime picks up the new version. See [Inbound connector lifecycle](./inbound-lifecycle.md).
 
 To keep both versions active:
 

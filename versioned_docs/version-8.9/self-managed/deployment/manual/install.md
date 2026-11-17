@@ -517,7 +517,7 @@ To start the connector runtime locally, run:
 java -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
 ```
 
-The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so launch it with `java -jar`, or with Spring Boot's `PropertiesLauncher` as shown below. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) no longer works as of connector runtime 8.9.4.
+The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so launch it with `java -jar`, or with Spring Boot's `PropertiesLauncher` as shown below. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) doesn't work with connector runtime 8.9 and later.
 
 To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it. Only Spring Boot's `PropertiesLauncher` reads `loader.path`, so start it explicitly instead of using `java -jar`:
 

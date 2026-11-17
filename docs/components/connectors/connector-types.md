@@ -32,7 +32,7 @@ When the process definition is deleted or replaced with a newer version, the con
 :::note
 The connector Runtime keeps inbound connectors active for the **latest version** of each process definition. For older versions that still have active message subscriptions, intermediate catch event, boundary event, and receive task connectors also stay active. Start event connectors are only active for the latest version.
 
-When you deploy a new process definition version, start event connectors from older versions are deactivated immediately. Other inbound connectors from an older version are deactivated once that version has no active message subscriptions. See [Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md).
+When you deploy a new process definition version, start event connectors from older versions are deactivated once the connector runtime picks up the new version. Other inbound connectors from an older version are deactivated once that version has no active message subscriptions. See [Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md).
 :::
 
 ![Inbound connectors](img/inbound-connectors.png)

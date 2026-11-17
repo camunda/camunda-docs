@@ -55,19 +55,19 @@ cryptographically signed with a [signature](http://docs.oasis-open.org/wss-m/wss
 
 Enter all necessary fields according to your service specification:
 
-| Field                            | Description                                                                                                                                                                |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Certificate type**             | From where the certificate is obtained: **Single certificate** or **Keystore certificate**.                                                                                |
-| **Certificate**                  | For **Single certificate**: the X.509 certificate to use to sign the request.                                                                                              |
-| **Private key**                  | For **Single certificate**: the private key for the certificate.                                                                                                           |
-| **Keystore location**            | For **Keystore certificate**: the path to the keystore file. The keystore file must be mounted to the connector container on this path.                                    |
-| **Keystore password**            | For **Keystore certificate**: the password of the keystore.                                                                                                                |
-| **Certificate alias**            | For **Keystore certificate**: the alias of the certificate in the keystore that is used to sign the SOAP message.                                                          |
-| **Certificate password**         | For **Keystore certificate**: the password of the certificate.                                                                                                             |
-| **Signature algorithm**          | (Optional) Fully qualified name of an alternative signature algorithm. By default, the algorithm is determined by the certificate.                                         |
-| **Digest algorithm**             | (Optional) Fully qualified name of an alternative digest algorithm. The default is SHA-1.                                                                                  |
-| **Timestamp timeout in seconds** | (Optional) If set, adds a timestamp to the SOAP header that is valid for the given number of seconds.                                                                      |
-| **Signature parts**              | (Optional) Array of signature parts, each with a namespace and a local name, that defines which parts of the SOAP message are signed. By default, the SOAP body is signed. |
+| Field                            | Description                                                                                                                                                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Certificate type**             | From where the certificate is obtained: **Single certificate** or **Keystore certificate**.                                                                                                                        |
+| **Certificate**                  | For **Single certificate**: the X.509 certificate to use to sign the request.                                                                                                                                      |
+| **Private key**                  | For **Single certificate**: the private key for the certificate.                                                                                                                                                   |
+| **Keystore location**            | For **Keystore certificate**: the path to the keystore file. The keystore file must be mounted to the connector container on this path.                                                                            |
+| **Keystore password**            | For **Keystore certificate**: the password of the keystore.                                                                                                                                                        |
+| **Certificate alias**            | For **Keystore certificate**: the alias of the certificate in the keystore that is used to sign the SOAP message.                                                                                                  |
+| **Certificate password**         | For **Keystore certificate**: the password of the certificate.                                                                                                                                                     |
+| **Signature algorithm**          | (Optional) Fully qualified name of an alternative signature algorithm. If empty, the default of the underlying WSS4J library applies.                                                                              |
+| **Digest algorithm**             | (Optional) Fully qualified name of an alternative digest algorithm. If empty, the default of the underlying WSS4J library applies.                                                                                 |
+| **Timestamp timeout in seconds** | (Optional) If set, adds a timestamp to the SOAP header that is valid for the given number of seconds.                                                                                                              |
+| **Signature parts**              | (Optional) Array of signature parts, each with a namespace and a local name, that defines which parts of the SOAP message are signed. If empty, the default signature parts of the underlying WSS4J library apply. |
 
 ### Use a reusable SOAP credential
 
@@ -76,7 +76,7 @@ Instead of configuring authentication on the task, you can select a reusable cre
 A SOAP credential can hold a **WSS username token** or a **WSS signature** with a single certificate. The following options are only available inline:
 
 - **Keystore certificate**: The keystore points at a file mounted into the connector runtime.
-- **Signature parts**: A credential can't hold the list of signature parts, so the SOAP body is signed.
+- **Signature parts**: A credential can't hold the list of signature parts, so the default signature parts of the underlying WSS4J library apply.
 
 ## SOAP message
 
