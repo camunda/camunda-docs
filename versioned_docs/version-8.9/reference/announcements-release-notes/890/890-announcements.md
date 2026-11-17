@@ -135,7 +135,7 @@ The following key changes were also released as part of an 8.9.x patch release o
 
 | Patch release                                                       | Artifact   | Type            | Key change                                                                                                                                                                            |
 | :------------------------------------------------------------------ | :--------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [8.9.X](https://github.com/camunda/camunda/releases/tag/8.9.X)      | Core       | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                                                            |
+| [8.9.29](https://github.com/camunda/camunda/releases/tag/8.9.29)    | Core       | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                                                            |
 | [8.9.19](https://github.com/camunda/camunda/releases/tag/8.9.19)    | Core       | Known issue     | [Draining process definition deletion requires 8.9.19+ when upgrading from 8.8](/reference/announcements-release-notes/880/880-announcements.md#draining-deletion-upgrade-constraint) |
 | [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                                                       |
 | [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                                                        |
@@ -187,7 +187,7 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 Since 8.9.0, each exported record contains the full authorization data of the command that caused it. This data includes the token claims of the identity provider, the group claims, and the authorized tenants. With OIDC clients, this made the log about two times larger than in 8.8.
 
-Starting with 8.9.X, events contain only these entries in `Record#getAuthorizations()`:
+Starting with 8.9.29, events contain only these entries in `Record#getAuthorizations()`:
 
 - `authorized_anonymous_user`
 - `authorized_username`

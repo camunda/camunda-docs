@@ -211,11 +211,11 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 The following key changes were also released as part of an 8.10.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Artifact | Type            | Key change                                                                                                                                |
-| :--------------------------------------------------------------- | :------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression      | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
-| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9) | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
-| [8.10.Y](https://github.com/camunda/camunda/releases/tag/8.10.Y) | Core     | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
+| Patch release                                                      | Artifact | Type            | Key change                                                                                                                                |
+| :----------------------------------------------------------------- | :------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7)   | Core     | Regression      | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9)   | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
+| [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
 
 ## Agentic orchestration
 
@@ -288,7 +288,7 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 Since 8.9.0, each exported record contains the full authorization data of the command that caused it. This data includes the token claims of the identity provider, the group claims, and the authorized tenants. With OIDC clients, this made the log about two times larger than in 8.8.
 
-Starting with 8.10.Y, events contain only these entries in `Record#getAuthorizations()`:
+Starting with 8.10.10, events contain only these entries in `Record#getAuthorizations()`:
 
 - `authorized_anonymous_user`
 - `authorized_username`
