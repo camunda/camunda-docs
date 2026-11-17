@@ -256,7 +256,7 @@ The [connector runtime](/components/connectors/custom-built-connectors/connector
 
 ### Connector secrets
 
-The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in Camunda Hub, in the left navigation under **Clusters**; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
+The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in [Camunda Hub](#camunda-hub), in the left navigation under **Clusters**; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
 
 - [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
 - [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets)
@@ -357,7 +357,7 @@ An event represents a state change associated with an aspect of an executing [pr
 
 ### Execution platform version
 
-In Desktop Modeler and Camunda Hub, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+In Desktop Modeler and [Camunda Hub](#camunda-hub), the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
 The execution platform version is not a deployed process definition version, a [file version](#version-file) or [project snapshot](#snapshot-project), or a SaaS cluster generation.
 
@@ -695,7 +695,7 @@ The engine uses process definitions to start [process instances](#process-instan
 
 A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
 
-Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project) in Camunda Hub.
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project) in [Camunda Hub](#camunda-hub).
 
 - [Process definition](#process-definition)
 - [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
@@ -849,7 +849,7 @@ See also: [Parent process instance](#parent-process-instance), [Child process in
 
 ### SaaS-managed secret
 
-A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Camunda Hub, in the left navigation under **Clusters**, currently under the **Cluster secrets** tab of a cluster.
+A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in [Camunda Hub](#camunda-hub), in the left navigation under **Clusters**, currently under the **Cluster secrets** tab of a cluster.
 
 A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
 
@@ -983,7 +983,7 @@ A user task is used to model work that needs to be done by a human and is assist
 
 With 8.7, Camunda offers job worker-based user tasks managed by Camunda, also known as Camunda user tasks (and formerly known as Zeebe user tasks). Note that you may still see references of **Zeebe user tasks** in your XML, but this is the same thing as Camunda user tasks.
 
-Camunda recommends using Camunda user tasks in your process definitions. From 8.7, **job-worker** user tasks are available for querying, but Web Modeler (pre-8.10), Camunda Hub (8.10+), and Desktop Modeler automatically apply the **Camunda user task** and show a warning message for each job worker user task.
+Camunda recommends using Camunda user tasks in your process definitions. From 8.7, **job-worker** user tasks are available for querying, but Web Modeler (pre-8.10), [Camunda Hub](#camunda-hub) (8.10+), and Desktop Modeler automatically apply the **Camunda user task** and show a warning message for each job worker user task.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)
@@ -1010,7 +1010,7 @@ In Camunda 8, version is an overloaded term. Depending on context, it can refer 
 
 A version tag is a user-defined string label for a specific resource or snapshot.
 
-For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Camunda Hub project snapshots, a version tag labels a saved project snapshot.
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In [Camunda Hub](#camunda-hub) project snapshots, a version tag labels a saved project snapshot.
 
 A version tag is not generated automatically and does not replace the numeric process definition version.
 
