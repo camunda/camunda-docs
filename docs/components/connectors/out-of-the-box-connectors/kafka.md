@@ -7,6 +7,7 @@ description: The Kafka Producer connector allows you to connect your BPMN servic
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import KafkaAvroUnions from "../../../components/react-components/\_kafka-avro-unions.md";
 
 ## Reuse a Kafka connection
 
@@ -190,6 +191,12 @@ The following is an example Avro schema and data:
     "emails": ["johndoe@example.com"]
   }
   ```
+
+### Avro unions
+
+This section describes how the Kafka producer connector handles Avro unions. For changes compared to earlier versions, see the [8.11 release announcements](/reference/announcements-release-notes/8110/8110-announcements.md#kafka-producer-avro-union-record-selection).
+
+<KafkaAvroUnions />
 
 ## Kafka Producer connector response
 
@@ -427,6 +434,12 @@ The corresponding Avro schema to describe this message's structure would be:
 ```
 
 This schema defines a structure for a record that includes a name (string), an age (integer), and emails (an array of strings), aligning with the given Kafka message's value format.
+
+### Avro unions
+
+The Kafka consumer connector doesn't use a schema to read messages, so the union handling rules apply to the Kafka producer connector only. The following rules describe how the producer connector handles Avro unions when it publishes messages that you might consume.
+
+<KafkaAvroUnions />
 
 ### Activation condition
 
