@@ -20,19 +20,19 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Engine records contain only the actor in the authorization data {#authorization-actor-only}
 
-Starting with 8.11, events and the commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
+Starting with 8.11, events, rejections, and the commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
 
 - `authorized_anonymous_user`
 - `authorized_username`
 - `authorized_client_id`
 
-These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and rejections still contain all entries. The record format does not change.
+These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands and batch operation commands still contain all entries. The record format does not change.
 
 Starting with 8.9.29 and 8.10.10, this already applies to events. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only).
 
 The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
 
-**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events or on commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
+**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
 
 <p className="link-arrow">[camunda/camunda#69323](https://github.com/camunda/camunda/issues/69323)</p>
 
