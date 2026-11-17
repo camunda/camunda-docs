@@ -9,14 +9,8 @@ on:
 jobs:
   claude-review-secrets:
     name: Wrap Claude review secrets
-    if: |
-      (github.event_name == 'pull_request_review_comment' &&
-       contains(github.event.comment.body, '@claude') &&
-       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)) ||
-      (github.event_name == 'issue_comment' &&
-       github.event.issue.pull_request != null &&
-       contains(github.event.comment.body, '@claude') &&
-       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association))
+    # Temporarily disabled (Wiz finding: publicly exposed CI workflow with secrets access).
+    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,14 +31,8 @@ jobs:
 
   claude-review:
     needs: claude-review-secrets
-    if: |
-      (github.event_name == 'pull_request_review_comment' &&
-       contains(github.event.comment.body, '@claude') &&
-       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)) ||
-      (github.event_name == 'issue_comment' &&
-       github.event.issue.pull_request != null &&
-       contains(github.event.comment.body, '@claude') &&
-       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association))
+    # Temporarily disabled (Wiz finding: publicly exposed CI workflow with secrets access).
+    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: write
