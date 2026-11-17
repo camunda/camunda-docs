@@ -1155,13 +1155,13 @@ You can now edit the name and description of a role or tenant directly in Admin,
 
 <!-- https://github.com/camunda/product-hub/issues/3573 -->
 
-Camunda 8.10 introduces job and process instance prioritization for pull-based job activation: the gRPC `ActivateJobs` call and the REST job activation endpoint, including long polling.
+Camunda 8.10 introduces job and process instance prioritization for pull-based job activation. This covers the gRPC `ActivateJobs` call and the REST job activation endpoint, including long polling.
 
 - Set a priority on a process with `zeebe:jobPriorityDefinition` to apply it to every job its instances create, and override it on supported tasks. Priorities are integers (for example, 0–99), and higher values are activated first.
 - Use a FEEL expression to give each process instance its own priority, for example from a variable set when the instance starts.
 - Priority ordering is automatic. Job workers don't need any flag or configuration.
 - Update the priority of existing jobs, one at a time or in a batch, without redeploying the process.
-- Job streaming (gRPC `StreamActivatedJobs`) doesn't use priority. Jobs pushed to a stream skip priority ordering, so streaming a job type removes the benefit of priority for that type.
+- Job streaming (gRPC `StreamActivatedJobs`) ignores priority. If you pull and stream the same job type, you lose the benefit of priority for that type.
 
 <p class="link-arrow">[Job prioritization](/components/concepts/job-workers.md#job-prioritization)</p>
 
