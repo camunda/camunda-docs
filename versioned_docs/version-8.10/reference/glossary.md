@@ -182,13 +182,19 @@ It is implemented via the [AI Agent connector](/components/connectors/out-of-the
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
 :::
 
+### Camunda Hub
+
+The design and management platform for Camunda. Use [Camunda Hub](/components/hub/index.md) to manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale. Camunda Hub is part of the [management plane](#management-plane), together with [Management Identity](#management-identity).
+
+As of 8.10, Camunda Hub replaces Web Modeler and Console.
+
 ### Camunda project
 
 A [project](#project), the unit you build, test, and deploy together. The term Camunda project distinguishes it from other project concepts, such as a software project in your IDE.
 
 ### Catalog
 
-A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization level in Camunda Hub, and used by delivery teams across workspaces and projects.
+A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization level in [Camunda Hub](#camunda-hub), and used by delivery teams across workspaces and projects.
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
 
@@ -204,7 +210,7 @@ See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-A cluster is the infrastructure that runs Camunda 8. In Camunda Hub, a cluster is an administrative unit that organization admins create, size, update, and back up. Teams deploy to an [environment](#environment) hosted on the cluster, not to the cluster itself.
+A cluster is the infrastructure that runs Camunda 8. In [Camunda Hub](#camunda-hub), a cluster is an administrative unit that organization admins create, size, update, and back up. Teams deploy to an [environment](#environment) hosted on the cluster, not to the cluster itself.
 
 - [Clusters](/components/concepts/clusters.md)
 - [Environments](/components/concepts/environments.md)
@@ -332,7 +338,7 @@ A vector representation of data, including words, sentences, images, in a numeri
 
 ### Environment
 
-An environment is a named deployment target where a team runs [processes](#process) in [Camunda Hub](/components/hub/index.md). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Organization admins assign environments to workspaces, and every project in a workspace can deploy to the environments assigned to it.
+An environment is a named deployment target where a team runs [processes](#process) in [Camunda Hub](#camunda-hub). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Organization admins assign environments to workspaces, and every project in a workspace can deploy to the environments assigned to it.
 
 - [Environments](/components/concepts/environments.md)
 - [Cluster](#cluster)
@@ -416,7 +422,7 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 
 ### Generation
 
-In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Camunda Hub uses generations instead of a single engine version because the underlying component versions can change independently.
+In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. [Camunda Hub](#camunda-hub) uses generations instead of a single engine version because the underlying component versions can change independently.
 
 A generation is not a process definition version, a version tag, or a [file version](#version-file) or [project snapshot](#snapshot-project).
 
@@ -429,6 +435,10 @@ A general-purpose AI model trained on large amounts of data using self-supervisi
 - [AI usage guidelines](/components/agentic-orchestration/ai-usage-guidelines.md#the-ai-models-behind-these-features)
 
 ## H
+
+### Hub
+
+See [Camunda Hub](#camunda-hub).
 
 ### Hallucination
 
@@ -565,11 +575,11 @@ Camunda groups an agent's conversation history by loop iteration in Operate, mak
 
 ### Management Identity
 
-The Management Identity component, available in Self-Managed only, provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties. Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
+The Management Identity component, available in Self-Managed only, provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): [Camunda Hub](#camunda-hub) and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties. Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
 
 ### Management plane
 
-The management plane is the part of a Camunda 8 deployment used to design and manage processes and clusters. It consists of [Camunda Hub](/components/hub/index.md) and [Management Identity](#management-identity), and serves one or more Orchestration Clusters.
+The management plane is the part of a Camunda 8 deployment used to design and manage processes and clusters. It consists of [Camunda Hub](#camunda-hub) and [Management Identity](#management-identity), and serves one or more Orchestration Clusters.
 
 In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
 
@@ -734,7 +744,7 @@ The governance process of [ProcessOS](#processos). ProcessOS Harness is delivere
 
 The unit you build, test, and deploy together to form a Camunda solution. Also called a Camunda project where it needs to be distinguished from other project concepts, such as a software project in your IDE. It supersedes the [process application](#process-application).
 
-In Camunda Hub, a project is an entity within a workspace; locally (Desktop Modeler, `c8ctl`), it is a folder with a `camunda.json` file.
+In [Camunda Hub](#camunda-hub), a project is an entity within a workspace; locally (Desktop Modeler, `c8ctl`), it is a folder with a `camunda.json` file.
 
 - [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
