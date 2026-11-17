@@ -18,6 +18,21 @@ import PageDescription from '@site/src/components/PageDescription';
 </div>
 <div className="release-announcement-content">
 
+#### Events contain only the actor in the authorization data {#event-authorization-actor-only}
+
+Events contain only the actor entries in `Record#getAuthorizations()`. They no longer contain the token claims, the group claims, and the authorized tenants.
+
+**Action:** See the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only) for the changed entries and what to do.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
 Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend and resume already behave this way starting with 8.10.9. Cancel narrows the filter starting with 8.10.1 and follows the same validation rules starting with 8.10.9. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-state-filter).
