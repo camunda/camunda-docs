@@ -100,7 +100,7 @@ The `createLink` function accepts a document and an optional TTL (time-to-live) 
 The `getText` function accepts a document and an optional encoding parameter. It extracts the text content from the document and returns it as a string.
 
 - The optional encoding parameter specifies the character encoding to be used when extracting the text.
-- If not provided, the default encoding is UTF-8.
+- If not provided, the runtime JVM's default charset is used. This is UTF-8 unless overridden in the JVM configuration.
 
 ```json
 {
@@ -216,16 +216,15 @@ To fix it, use a result expression that maps only the fields you need, so the `c
 ## Create a custom function
 
 In **Self-Managed** deployments, you can create custom intrinsic functions by implementing the `IntrinsicFunctionProvider` interface
-included with the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md), and registering it in the connector runtime.
+from the connector runtime's `connector-runtime-core` module, and registering it in the connector runtime.
 
 - The custom function is implemented as a Java method inside the `IntrinsicFunctionProvider` implementation class.
 - The method must be annotated with the `@IntrinsicFunction` annotation. The method arguments are transformed into a list of intrinsic function parameters.
+- The runtime discovers providers using the Java `ServiceLoader` mechanism. To register your provider, add its fully qualified class name to a `META-INF/services/io.camunda.connector.runtime.core.intrinsic.IntrinsicFunctionProvider` file.
 
 ```java
-import io.camunda.document.Document;
-import io.camunda.intrinsic.IntrinsicFunction;
-import io.camunda.intrinsic.IntrinsicFunctionProvider;
-import java.util.Base64;
+import io.camunda.connector.runtime.core.intrinsic.IntrinsicFunction;
+import io.camunda.connector.runtime.core.intrinsic.IntrinsicFunctionProvider;
 
 public class MyFunctionProvider implements IntrinsicFunctionProvider {
 
