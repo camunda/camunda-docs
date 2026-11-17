@@ -184,9 +184,13 @@ This is different from an [external agent](#external-agent), which is the non-na
 
 ### Camunda Hub
 
-The design and management platform for Camunda. Use [Camunda Hub](/components/hub/index.md) to manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale. Camunda Hub is part of the [management plane](#management-plane), together with [Management Identity](#management-identity).
+The design and management platform for Camunda. [Camunda Hub](/components/hub/index.md) is the web application where you:
 
-As of 8.10, Camunda Hub replaces Web Modeler and Console.
+- Model BPMN processes, DMN decisions, and forms, and deploy them to an [environment](#environment).
+- Organize work in an organization, [workspaces](#workspace), and [projects](#project).
+- Manage [clusters](#cluster), environments, users and roles, and the [catalog](#catalog) of reusable assets.
+
+Camunda Hub is part of the [management plane](#management-plane), together with [Management Identity](#management-identity). As of 8.10, it replaces Web Modeler and Console.
 
 ### Camunda project
 
