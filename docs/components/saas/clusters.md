@@ -140,8 +140,7 @@ G3 plans do not map directly to the current cluster types and sizes:
 
 :::note
 To change the size of a G3 cluster, or to move it to a current cluster type and
-size, contact your Camunda account team. Moving between plans may require a
-short downtime.
+size, contact your Camunda account team.
 :::
 
 ## Free Trial clusters
