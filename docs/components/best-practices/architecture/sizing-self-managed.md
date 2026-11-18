@@ -265,13 +265,18 @@ camunda:
 
 #### Segment size and preallocation
 
-Keep the default segment size of 128 MB. A larger segment does not improve throughput and holds more data on disk. In our tests, 512 MB segments used about 1.5 to 2.7 GiB more disk per broker than 128 MB segments.
+Keep the default segment size of 128 MB. A larger segment does not improve throughput. A segment can only be deleted in full, so with larger segments each partition keeps more of its event log on disk on every broker that hosts it.
 
-With the `FILL` preallocation strategy, a larger segment also makes the tail latency worse. The broker zero-fills and flushes every new segment, so the allocation time grows with the segment size. In our tests, allocating a 512 MB segment took about 5 to 6 seconds at the 99th percentile, against about 2 seconds for 128 MB. The 512 MB segments caused more slow commits and a longer request latency tail, and on some versions about 13% lower throughput. The tests ran on 3 brokers with 3 partitions and `pd-balanced` volumes on GKE.
+What a larger segment costs depends on the preallocation strategy and on the write speed of the disk, measured in bytes written per second:
 
-With the `POSIX_OR_FILL` strategy, the broker reserves the segment with `fallocate`, which took about 5 ms in our tests regardless of the segment size, and the difference between 512 MB and 128 MB disappeared. `POSIX_OR_FILL` is the default from 8.9 and `FILL` is the default on 8.7 and 8.8. Configure it with `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`). The effect depends on the file system and the platform. On AWS with EBS `gp3` volumes and `ext4`, a [reported case](https://github.com/camunda/camunda/issues/67137) saw commit and processing latency rise about five times with `POSIX_OR_FILL`, and setting `FILL` restored the previous values.
+- **`FILL`:** the broker writes zeros through the whole new segment and flushes it before the segment is used. The time this takes grows with the segment size and is limited by the disk write speed. On a slower disk, large segments cause long pauses when a new segment is allocated, which shows as slow commits, a longer latency tail, and in tests lower throughput.
+- **`POSIX_OR_FILL`:** the broker reserves the segment with `fallocate` and writes no data. Allocation is fast and does not depend on the segment size or on the disk write speed. The broker falls back to `FILL` if the file system does not support `fallocate`.
 
-Compare both strategies under a representative load on your own platform and volume type before you change the default, and change one broker first.
+`POSIX_OR_FILL` is the default. Configure the strategy with `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`).
+
+Neither strategy is better everywhere. `fallocate` avoids the zero-fill cost on many setups, but on some combinations of file system and volume type, such as `ext4` on network-attached cloud volumes, it has been observed to increase flush, commit, and processing latency instead.
+
+Compare both strategies under a representative load on your own platform and volume type before you change the default. Change one broker first, and watch segment allocation time, flush time, and commit latency.
 
 Other factors are best observed in a production-like system under representative throughput.
 
