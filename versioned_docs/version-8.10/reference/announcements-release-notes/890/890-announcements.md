@@ -135,6 +135,7 @@ The following key changes were also released as part of an 8.9.x patch release o
 
 | Patch release                                                       | Artifact   | Type            | Key change                                                                                                                    |
 | :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.30](https://github.com/camunda/camunda/releases/tag/8.9.30)    | Core       | Breaking change | [Engine records contain only the actor in the authorization data](#event-authorization-actor-only)                                    |
 | [8.9.29](https://github.com/camunda/camunda/releases/tag/8.9.29)    | Core       | Breaking change | [Engine records contain only the actor in the authorization data](#event-authorization-actor-only)                                    |
 | [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
 | [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
@@ -185,11 +186,13 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 Since 8.9.0, each exported record contains the full authorization data of the command that caused it. This data includes the token claims of the identity provider, the group claims, and the authorized tenants. With OIDC clients, this made the log about two times larger than in 8.8.
 
-Starting with 8.9.29, events, rejections, and the other commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
+Starting with 8.9.29, events contain only these entries in `Record#getAuthorizations()`:
 
 - `authorized_anonymous_user`
 - `authorized_username`
 - `authorized_client_id`
+
+Starting with 8.9.30, rejections and the other commands that the engine writes itself also contain only these entries.
 
 These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
 
