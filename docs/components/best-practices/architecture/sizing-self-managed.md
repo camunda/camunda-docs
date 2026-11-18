@@ -263,6 +263,16 @@ camunda:
 | `CAMUNDA_CLUSTER_REPLICATIONFACTOR`                    | `1`     |
 | `CAMUNDA_CLUSTER_SIZE`                                 | `1`     |
 
+#### Segment size and preallocation
+
+Keep the default segment size of 128 MB. A larger segment does not improve throughput and holds more data on disk. In our tests, 512 MB segments used about 1.5 to 2.7 GiB more disk per broker than 128 MB segments.
+
+With the `FILL` preallocation strategy, a larger segment also makes the tail latency worse. The broker zero-fills and flushes every new segment, so the allocation time grows with the segment size. In our tests, allocating a 512 MB segment took about 5 to 6 seconds at the 99th percentile, against about 2 seconds for 128 MB. The 512 MB segments caused more slow commits and a longer request latency tail, and on some versions about 13% lower throughput. The tests ran on 3 brokers with 3 partitions and `pd-balanced` volumes on GKE.
+
+With the `POSIX_OR_FILL` strategy, the broker reserves the segment with `fallocate`, which took about 5 ms in our tests regardless of the segment size, and the difference between 512 MB and 128 MB disappeared. `POSIX_OR_FILL` is the default from 8.9 and `FILL` is the default on 8.7 and 8.8. Configure it with `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`). The effect depends on the file system and the platform. On AWS with EBS `gp3` volumes and `ext4`, a [reported case](https://github.com/camunda/camunda/issues/67137) saw commit and processing latency rise about five times with `POSIX_OR_FILL`, and setting `FILL` restored the previous values.
+
+Compare both strategies under a representative load on your own platform and volume type before you change the default, and change one broker first.
+
 Other factors are best observed in a production-like system under representative throughput.
 
 By default, this data is stored in the following directories:
