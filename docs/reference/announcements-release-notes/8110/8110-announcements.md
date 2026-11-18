@@ -113,7 +113,7 @@ Starting with 8.11, the connector runtime Docker images (`camunda/connectors`, `
 
 #### Disabling virtual threads no longer limits the connector runtime to one job at a time {#connectors-platform-threads-pool-size}
 
-Starting with 8.11, when you disable virtual threads with `camunda.connector.virtual-threads.enabled=false`, the connector runtime sizes its platform thread pool to the larger of `camunda.client.worker.defaults.max-jobs-active` and `camunda.client.execution-threads`. Previously, the pool used `camunda.client.execution-threads` alone, which defaults to `1`, so the runtime processed one job at a time unless you also raised that property.
+Starting with 8.11, when you disable virtual threads with `camunda.connector.virtual-threads.enabled=false`, the connector runtime sizes its platform thread pool to the larger of `camunda.client.worker.defaults.max-jobs-active` and `camunda.client.execution-threads`. Previously, the pool used `camunda.client.execution-threads` alone, which defaults to `1`, so the runtime processed one job at a time unless you also raised that property. This change is also part of 8.10.6 and 8.9.20.
 
 **Action:** No action is required. If you set `camunda.client.execution-threads` only to match `max-jobs-active`, you can remove it.
 

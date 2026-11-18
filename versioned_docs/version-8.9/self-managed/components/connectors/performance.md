@@ -95,7 +95,7 @@ On Java 24 and later, a connector runtime that uses virtual threads can, in rare
 
 Camunda is monitoring both issues and has made changes in the connector runtime to make this situation less likely.
 
-If your connector runtime stops processing jobs, [disable virtual threads](#platform-threads-executor) and set both `max-jobs-active` and `execution-threads` as described there.
+If your connector runtime stops processing jobs, [disable virtual threads](#platform-threads-executor). On versions before 8.9.20, also set `execution-threads` as described there.
 :::
 
 ### Platform threads executor
@@ -112,10 +112,13 @@ When using platform threads, use the configuration options provided by the [Camu
 
 ```
 camunda.client.worker.defaults.max-jobs-active=20
-camunda.client.execution-threads=20
 ```
 
 The `max-jobs-active` property defines the maximum number of jobs that are activated in parallel.
-The `execution-threads` property defines the size of the thread pool used to process jobs.
-If you set `max-jobs-active` higher than `execution-threads`, the connector runtime queues jobs until a thread becomes available for processing.
-If you set `execution-threads` higher than `max-jobs-active`, some threads remain idle while waiting for jobs to be activated.
+The connector runtime sizes its platform thread pool to the larger of `max-jobs-active` and `camunda.client.execution-threads`.
+
+The `max-jobs-active` limit applies to each job worker, and the runtime opens one job worker per connector type, while all workers share the thread pool. If your processes run many connector types at the same time, more jobs can be active than there are threads, and jobs queue until a thread is free. In that case, set `camunda.client.execution-threads` higher than `max-jobs-active`.
+
+:::note
+This pool sizing applies to connector runtime 8.9.20 and later. In earlier 8.9 versions, the thread pool is sized by `camunda.client.execution-threads` alone, which defaults to `1`. On those versions, set `execution-threads` to the same value as `max-jobs-active`, otherwise the runtime processes one job at a time.
+:::
