@@ -263,21 +263,6 @@ camunda:
 | `CAMUNDA_CLUSTER_REPLICATIONFACTOR`                    | `1`     |
 | `CAMUNDA_CLUSTER_SIZE`                                 | `1`     |
 
-#### Segment size and preallocation
-
-Keep the default segment size of 128 MB. A larger segment does not improve throughput. A segment can only be deleted in full, so with larger segments each partition keeps more of its event log on disk on every broker that hosts it.
-
-What a larger segment costs depends on the preallocation strategy and on the write speed of the disk, measured in bytes written per second:
-
-- **`FILL`:** the broker writes zeros through the whole new segment and flushes it before the segment is used. The time this takes grows with the segment size and is limited by the disk write speed. On a slower disk, large segments cause long pauses when a new segment is allocated, which shows as slow commits, a longer latency tail, and in tests lower throughput.
-- **`POSIX_OR_FILL`:** the broker reserves the segment with `fallocate` and writes no data. Allocation is fast and does not depend on the segment size or on the disk write speed. The broker falls back to `FILL` if the file system does not support `fallocate`.
-
-`POSIX_OR_FILL` is the default. Configure the strategy with `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`).
-
-Neither strategy is better everywhere. `fallocate` avoids the zero-fill cost on many setups, but on some combinations of file system and volume type, such as `ext4` on network-attached cloud volumes, it has been observed to increase flush, commit, and processing latency instead.
-
-Compare both strategies under a representative load on your own platform and volume type before you change the default. Change one broker first, and watch segment allocation time, flush time, and commit latency.
-
 Other factors are best observed in a production-like system under representative throughput.
 
 By default, this data is stored in the following directories:
@@ -289,6 +274,21 @@ By default, this data is stored in the following directories:
 :::caution Avoid unbounded log growth
 Do not configure an exporter that does not advance its record position, such as the Debug Exporter. If you configure an exporter, monitor its availability and the health of its dependencies. An exporter that stops advancing prevents log truncation, causing data to accumulate on disk until the issue is resolved. See [effects on disk growth](#effects-on-disk-growth).
 :::
+
+#### Segment size and preallocation
+
+Keep the default segment size of 128 MB. A larger segment does not improve throughput. A segment can only be deleted in full, so with larger segments each partition keeps more of its event log on disk on every broker that hosts it.
+
+What a larger segment costs depends on the preallocation strategy and on the write speed of the disk, measured in bytes written per second:
+
+- **`FILL`:** the broker writes zeros through the whole new segment and flushes it before the segment is used. The time this takes grows with the segment size and is limited by the disk write speed. This write burst happens only when a segment is allocated, so it is separate from the steady-state IOPS needs described in [Disk IOPS](#disk-iops). On a slower disk, large segments cause long pauses when a new segment is allocated, which shows as slow commits, a longer latency tail, and, in tests, lower throughput.
+- **`POSIX_OR_FILL`:** the broker reserves the segment with `fallocate` and writes no data. Allocation is fast and does not depend on the segment size or on the disk write speed. The broker falls back to `FILL` if the file system does not support `fallocate`.
+
+`POSIX_OR_FILL` is the default. Configure the strategy with `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`).
+
+Neither strategy is better everywhere. `fallocate` avoids the zero-fill cost on many setups, but on some combinations of file system and volume type, such as `ext4` on network-attached cloud volumes, it has been observed to increase flush, commit, and processing latency instead.
+
+Compare both strategies under a representative load on your own platform and volume type before you change the default. Change one broker first, and watch segment allocation time, flush time, and commit latency.
 
 ### Event log
 
