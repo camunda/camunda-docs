@@ -236,7 +236,7 @@ Size the worker’s capacity according to its concurrency model and the job time
 
 ### Protocol: REST or gRPC
 
-Since Camunda 8.8, clients use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. gRPC remains available. Both protocols reach the same engine, but they differ in cost on the brokers.
+Since Camunda 8.8, the Camunda Java Client uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. gRPC remains available. Both protocols reach the same engine, but they differ in cost on the brokers.
 
 Camunda's regular load tests, which run both protocols side by side on the same workload, show a consistent difference:
 
@@ -249,7 +249,7 @@ Camunda still recommends REST for most workloads:
 
 - **One API for everything:** queries and search are available through REST only, so a REST client needs no second protocol.
 - **Fewer network requirements:** REST works over HTTP/1.1 and HTTP/2, while gRPC requires HTTP/2.
-- **Cost:** the extra CPU is moderate, so plan roughly 10 to 15% more broker CPU headroom for REST traffic.
+- **Moderate cost:** the sizing recommendations are based on the realistic benchmark scenario, which already includes enough headroom to handle both gRPC and REST reliably. No adjustment is needed.
 
 Consider gRPC for high-volume starters and job workers when your brokers run close to their CPU limit. gRPC is also the only protocol that supports [job streaming](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs). The effect depends on request mix and payload size, so validate it with your own workload. To switch the protocol, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection).
 
