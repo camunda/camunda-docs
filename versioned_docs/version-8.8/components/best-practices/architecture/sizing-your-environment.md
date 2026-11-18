@@ -234,18 +234,18 @@ Size the worker’s capacity according to its concurrency model and the job time
 
 Since Camunda 8.8, the Camunda Java Client uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. gRPC remains available. Both protocols reach the same engine, but they differ in cost on the brokers.
 
-Camunda's regular load tests, which run both protocols side by side on the same workload, show a consistent difference:
+Camunda's regular load tests, which run both protocols side by side on the same workload, show a difference:
 
-- REST uses about 10 to 15% more broker CPU than gRPC.
+- REST typically uses about 10 to 15% more broker CPU than gRPC.
 - REST produces more backpressure.
 - When the brokers are CPU-saturated, REST reaches up to about 14% lower throughput.
 - At a fixed rate with CPU headroom, throughput is equal.
 
 Camunda still recommends REST for most workloads:
 
-- **One API for everything:** queries and search are available through REST only, so a REST client needs no second protocol.
+- **One API for commands and queries:** queries and search are available through REST only, so a REST client needs no second protocol.
 - **Fewer network requirements:** REST works over HTTP/1.1 and HTTP/2, while gRPC requires HTTP/2.
-- **Moderate cost:** the sizing recommendations are based on the realistic benchmark scenario, which already includes enough headroom to handle both gRPC and REST reliably. No adjustment is needed.
+- **Moderate cost:** the sizing recommendations are based on the [reference benchmark scenario](./sizing-benchmarks.md#reference-benchmark-scenario), whose resources have enough CPU headroom for both gRPC and REST at the benchmarked load.
 
 Consider gRPC for high-volume starters and job workers when your brokers run close to their CPU limit. gRPC is also the only protocol that supports [job streaming](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs). The effect depends on request mix and payload size, so validate it with your own workload. To switch the protocol, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection).
 
