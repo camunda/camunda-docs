@@ -1018,6 +1018,16 @@ This option is applicable for Spring Boot users. All you need to do is to includ
 Upon starting your Spring Boot application, you will have a job worker connected to Zeebe, waiting to
 receive jobs for your connectors.
 
+The runtime builds on the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md), so you configure the connection to your Orchestration Cluster with `camunda.client.*` properties in `application.properties`. For example, to connect to a local Self-Managed cluster:
+
+```properties
+camunda.client.mode=self-managed
+camunda.client.grpc-address=http://localhost:26500
+camunda.client.rest-address=http://localhost:8080
+```
+
+For authentication and SaaS properties, see [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md). For all available properties, see the [properties reference](/apis-tools/camunda-spring-boot-starter/properties-reference.md). Properties starting with `zeebe.client` or `camunda.client.zeebe` are [legacy names](/apis-tools/camunda-spring-boot-starter/configuration.md#legacy-property-names) from Camunda 8.7 and earlier.
+
 ### Docker runtime image
 
 This option is applicable for those users who prefer Docker.
