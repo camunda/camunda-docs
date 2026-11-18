@@ -20,7 +20,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Engine records contain only the actor in the authorization data {#authorization-actor-only}
 
-Starting with 8.11, events, rejections, and the commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
+Starting with 8.11, events, rejections, and the other commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
 
 - `authorized_anonymous_user`
 - `authorized_username`
@@ -32,7 +32,7 @@ Starting with 8.9.29 and 8.10.10, this already applies to events. For details, s
 
 The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
 
-**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
+**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or other commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
 
 <p className="link-arrow">[camunda/camunda#69323](https://github.com/camunda/camunda/issues/69323)</p>
 
