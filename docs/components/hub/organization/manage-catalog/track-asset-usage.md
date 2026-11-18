@@ -32,16 +32,16 @@ The **Browse assets** tab shows the same catalog your delivery teams see. The **
 
 ## Review catalog adoption
 
-Four cards at the top of the **Asset usage** tab summarize catalog adoption across your organization:
+The cards at the top of the **Asset usage** tab summarize catalog adoption across your organization. They use these terms:
 
-| Card                 | What it shows                                                                                                                       |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Total assets**     | All assets in your organization's catalog, with the number of [retired](#asset-status-values) assets.                               |
-| **Adoption rate**    | The share of assets that at least one project uses, with the number of used and unused assets.                                      |
-| **Update available** | The number of used assets where at least one project uses an older version, and the number of projects on an older version.         |
-| **Deprecated**       | The number of deprecated or unpublished assets that a project still uses, and the number of projects that need to migrate off them. |
+- **Total assets**: All assets in your organization's catalog.
+- **Adoption rate**: The share of assets that at least one project uses.
+- **Used** and **unused**: Whether at least one project uses an asset.
+- **Retired**, **Update available**, and **Deprecated**: The number of assets with that [status](#asset-status-values).
+- **Projects on an older version**: Projects that use an older version of an asset with an update available.
+- **Projects that need to migrate**: Projects that use a deprecated or unpublished asset.
 
-Hover over the information icon on a card to see what it counts. The project counts on **Update available** and **Deprecated** are highlighted when they are above zero, to point you to pending migrations.
+Hover over the information icon on a card to see what it counts. Project counts above zero are highlighted to point you to pending migrations.
 
 The cards always summarize the whole catalog. They don't change when you search or filter the table.
 
