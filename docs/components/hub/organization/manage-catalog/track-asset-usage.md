@@ -11,7 +11,6 @@ keywords:
     adoption,
     outdated,
     retired,
-    insights,
     governance,
   ]
 ---
@@ -31,20 +30,20 @@ To review adoption across your organization:
 
 The **Browse assets** tab shows the same catalog your delivery teams see. The **Asset usage** tab is visible to organization administrators and owners only and adds the governance view described here.
 
-## Review catalog insights
+## Review catalog adoption
 
-The **Insights** section at the top of the **Asset usage** tab summarizes catalog adoption across your organization in four scorecards:
+Four cards at the top of the **Asset usage** tab summarize catalog adoption across your organization:
 
-| Scorecard            | What it shows                                                                                                                       |
+| Card                 | What it shows                                                                                                                       |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | **Total assets**     | All assets in your organization's catalog, with the number of [retired](#asset-status-values) assets.                               |
 | **Adoption rate**    | The share of assets that at least one project uses, with the number of used and unused assets.                                      |
 | **Update available** | The number of used assets where at least one project uses an older version, and the number of projects on an older version.         |
 | **Deprecated**       | The number of deprecated or unpublished assets that a project still uses, and the number of projects that need to migrate off them. |
 
-Hover over the information icon on a scorecard to see what it counts. The project counts on **Update available** and **Deprecated** are highlighted when they are above zero, to point you to pending migrations.
+Hover over the information icon on a card to see what it counts. The project counts on **Update available** and **Deprecated** are highlighted when they are above zero, to point you to pending migrations.
 
-The scorecards always summarize the whole catalog. They don't change when you search or filter the table.
+The cards always summarize the whole catalog. They don't change when you search or filter the table.
 
 ## Asset status values
 
@@ -66,7 +65,7 @@ The same values are used in the usage table and the usage drawer. **Unused** and
 **Deprecated** and **Retired** differ only in whether the asset is still in use. A **Deprecated** asset still needs migrations. A **Retired** asset has none left, so it's a candidate for [deletion](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) from the catalog.
 :::
 
-The **Insights** scorecards and status filters use the same definitions. Hover over a status filter to see what it means.
+The cards and status filters use the same definitions. Hover over a status filter to see what it means.
 
 Unpublished assets remain in the usage table even though delivery teams can no longer discover them while browsing, so you keep visibility into the remaining usage you need to migrate away.
 
@@ -127,7 +126,7 @@ Because the **Asset usage** tab is limited to organization administrators and ow
 
 To turn the overview into a prioritized list of work:
 
-1. Open the **Asset usage** tab and check the **Update available** and **Deprecated** scorecards to see how many assets and projects are affected.
+1. Open the **Asset usage** tab and check the **Update available** and **Deprecated** cards to see how many assets and projects are affected.
 2. Select the **Update available** and **Deprecated** status filters to hide assets that need no action.
 3. Select **Status** in **Sort by** to bring the most urgent assets to the top.
 4. Compare the **On latest** ratio of each asset to judge how much of the migration is left, and the **Workspaces** and **Projects** counts to judge how many teams a change affects.
