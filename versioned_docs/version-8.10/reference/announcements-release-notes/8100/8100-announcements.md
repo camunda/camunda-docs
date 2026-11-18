@@ -215,8 +215,8 @@ The following key changes were also released as part of an 8.10.x patch release 
 | :----------------------------------------------------------------- | :------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7)   | Core     | Regression      | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
 | [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9)   | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
-| [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Engine records contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
-| [8.10.11](https://github.com/camunda/camunda/releases/tag/8.10.11) | Core     | Breaking change | [Engine records contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
+| [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
+| [8.10.11](https://github.com/camunda/camunda/releases/tag/8.10.11) | Core     | Breaking change | [Rejections and engine commands contain only the actor in the authorization data](#event-authorization-actor-only)                        |
 
 ## Agentic orchestration
 
