@@ -3,9 +3,15 @@ id: zones-and-brokers
 title: "Zones and brokers"
 sidebar_label: "Zones and brokers"
 description: "Set the zones, brokers, replication factor, and partitions of a Camunda 8 Orchestration Cluster on Amazon ECS, and plan for growing to more regions."
+pagination_prev: null
+pagination_next: null
 ---
 
+import { ChoicePanel, GuidedNext, GuidedProgress, GuidedWhen } from "@site/src/components/GuidedDeployment";
+
 The zones of an Orchestration Cluster decide how many brokers it has, how many replicas each partition keeps, and where partition leaders run. This page covers the settings, and how to choose them so that you can add regions later.
+
+<GuidedProgress />
 
 ## Start with zone-aware brokers
 
@@ -16,6 +22,10 @@ Growing to a second region then adds a zone to the running cluster. The brokers 
 See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the concepts.
 
 ## Set zones, brokers, and replicas
+
+<ChoicePanel question="zones" />
+
+<GuidedWhen compute="ecs">
 
 | Variable          | Default                                                       | Meaning                                                                                    |
 | ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -33,12 +43,16 @@ The stage derives the rest from the zone list:
 
 The priority decides where the leaders concentrate. Zeebe puts leaders in the zone with the highest priority, and moves them to the next zone when it fails.
 
+</GuidedWhen>
+
 ## Plan for growth
 
 - You can increase the number of brokers later. You can't reduce it without losing data.
 - Each zone holds `number_of_replicas` replicas of every partition. With one zone of three brokers and three replicas, every partition has three replicas in the region. When you add a zone with three replicas, each region holds a full copy and the replication factor becomes six.
 - Choose the layout before you add the second zone. With two zones, losing a region leaves half of the replicas and processing stops until you remove the failed zone. With three zones, no single zone should hold half of the replicas. See [grow to three regions](../grow/dual-to-three-regions.md).
 - List only zones whose brokers run. A zone in the list receives replicas even if its brokers don't run.
+
+<GuidedWhen compute="ecs">
 
 ## Troubleshoot zones and brokers
 
@@ -58,7 +72,11 @@ The number of brokers that the tasks start doesn't match the zone list. The Camu
 
 The zone name is too long or has an unsupported character. Use letters, digits, and hyphens.
 
+</GuidedWhen>
+
 ## Next steps
 
 - [Deploy the Orchestration Cluster](./overview.md)
 - [Grow to two regions](../grow/single-to-dual-region.md)
+
+<GuidedNext />

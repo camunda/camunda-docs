@@ -1,0 +1,275 @@
+/* Theme-aware: every color comes from Infima variables, which switch with the color mode. */
+
+.progress,
+.panel,
+.architecture {
+  margin: 1.5rem 0;
+}
+
+.progress {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  padding: 0.75rem 1rem;
+  background: var(--ifm-background-surface-color);
+}
+
+.progressHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.progressSteps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  min-width: 7rem;
+  max-width: 14rem;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.progressStep a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--ifm-font-color-base);
+}
+
+.current .stepTitle {
+  font-weight: var(--ifm-font-weight-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.stepMarker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--ifm-color-emphasis-500);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.status-done .stepMarker {
+  background: var(--ifm-color-success);
+  border-color: var(--ifm-color-success);
+  color: var(--ifm-color-white);
+}
+
+.status-info .stepMarker {
+  border-style: dashed;
+}
+
+.stepSelections {
+  margin-left: 1.6rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.status {
+  font-size: 0.85rem;
+  color: var(--ifm-color-success-darkest);
+}
+
+[data-theme="dark"] .status {
+  color: var(--ifm-color-success-lightest);
+}
+
+.question {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  padding: 0.75rem 1rem 1rem;
+  margin: 0 0 1rem;
+}
+
+.question legend {
+  padding: 0 0.35rem;
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.5rem;
+}
+
+.option {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  cursor: pointer;
+  background: var(--ifm-background-color);
+}
+
+.option:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.option:focus-within {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.option input {
+  margin-top: 0.3rem;
+  flex-shrink: 0;
+}
+
+.checked {
+  border-color: var(--ifm-color-primary);
+  box-shadow: inset 0 0 0 1px var(--ifm-color-primary);
+}
+
+.disabled {
+  cursor: not-allowed;
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-600);
+}
+
+.disabled:hover {
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.optionLabel {
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.optionDescription {
+  font-size: 0.85rem;
+}
+
+.reason {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.notApplicable legend {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.notApplicable .reason {
+  margin: 0;
+}
+
+.badge {
+  margin-left: 0.4rem;
+  padding: 0 0.35rem;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: var(--ifm-font-weight-normal);
+}
+
+.clear {
+  margin-top: 0.5rem;
+  padding-left: 0;
+}
+
+.notice {
+  margin: 0.5rem 0 1rem;
+}
+
+.notice p,
+.notice ul {
+  margin-bottom: 0.5rem;
+}
+
+.when {
+  border-left: 3px solid var(--ifm-color-emphasis-300);
+  padding-left: 1rem;
+  margin-bottom: var(--ifm-leading);
+}
+
+.whenNote {
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.next {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ifm-spacing-horizontal);
+  margin: 2rem 0;
+}
+
+.figure {
+  margin: 0 0 1.5rem;
+  overflow-x: auto;
+}
+
+.figure figcaption {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.bom {
+  display: table;
+  width: 100%;
+}
+
+.bom caption {
+  text-align: left;
+  font-weight: var(--ifm-font-weight-bold);
+  margin-bottom: 0.5rem;
+}
+
+.details {
+  margin: 1.5rem 0;
+}
+
+.details summary {
+  cursor: pointer;
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.details pre {
+  margin-top: 0.75rem;
+  max-height: 24rem;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
