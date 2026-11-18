@@ -192,21 +192,6 @@ public class MyProcessTest {
 
 </Tabs>
 
-### Set cluster secrets
-
-Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
-
-Set cluster secrets with the `cluster-secrets` property (Spring) or `withClusterSecret(name, value)` and `withClusterSecrets(map)` (Java builder). You can't set cluster secrets in `camunda-container-runtime.properties`.
-
-- In a managed or shared runtime, CPT writes each secret to a temporary file, copies the file into the Camunda container, and sets `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`.
-- CPT fixes the secrets when the runtime starts. You can't change them per test.
-- Use `connectors-secrets` only for the legacy `{{secrets.X}}` syntax. It doesn't populate the cluster secret store. See [Connectors](./connectors.md#set-cluster-secrets) for examples.
-- To learn how secrets resolve, see [secrets](/components/concepts/secrets.md) and [secret resolution](/components/concepts/secret-resolution.md).
-
-:::warning
-CPT drops trailing newlines from cluster secret values. Don't rely on a trailing newline in a value. This is a known issue ([camunda/camunda#66616](https://github.com/camunda/camunda/issues/66616)).
-:::
-
 ### Shared runtime
 
 By default, CPT creates a new runtime for each test class. You can change this behavior and use a shared Testcontainers
@@ -277,6 +262,66 @@ public class MyProcessTest {
                     // Use a managed runtime for a different configuration
                     .withRuntimeMode(CamundaProcessTestRuntimeMode.MANAGED)
                     .withConnectorsEnabled(true);
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Set cluster secrets
+
+Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference `=camunda.secrets.<NAME>` resolve in your tests. This feature requires Camunda Process Test 8.10.6+.
+
+- In a managed or shared runtime, CPT writes each secret to a temporary file, copies the file into the Camunda container, and sets `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`.
+- In a remote runtime, CPT doesn't write secrets to the cluster secret store. You need to configure the secrets on the cluster instead.
+- CPT fixes the secrets when the runtime starts. You can't change them per test.
+- Use `connectors-secrets` only for the legacy `{{secrets.X}}` syntax. It doesn't populate the cluster secret store. See [Connectors](./connectors.md#connector-secrets) for examples.
+- To learn how secrets resolve, see [secrets](/components/concepts/secrets.md) and [secret resolution](/components/concepts/secret-resolution.md).
+
+You can set cluster secrets in the following way.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
+[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]
+}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    cluster-secrets:
+      GITHUB_TOKEN: ghp_secret
+      SLACK_TOKEN: xoxb-secret
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+clusterSecrets.GITHUB_TOKEN=ghp_secret
+clusterSecrets.SLACK_TOKEN=xoxb-secret
+```
+
+Alternatively, you can register the JUnit extension manually and use the fluent builder:
+
+```java
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+            .withClusterSecret("GITHUB_TOKEN", "ghp_secret")
+            .withClusterSecret("SLACK_TOKEN", "xoxb-secret");
 }
 ```
 
