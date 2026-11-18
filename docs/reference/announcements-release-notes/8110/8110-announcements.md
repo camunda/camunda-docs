@@ -28,7 +28,7 @@ Starting with 8.11, events, rejections, and the other commands that the engine w
 
 These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
 
-Starting with 8.9.29 and 8.10.10, this already applies to events. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only).
+Starting with 8.9.29 and 8.10.10, this already applies. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only).
 
 The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
 

@@ -215,7 +215,7 @@ The following key changes were also released as part of an 8.10.x patch release 
 | :----------------------------------------------------------------- | :------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7)   | Core     | Regression      | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
 | [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9)   | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
-| [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
+| [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Engine records contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
 
 ## Agentic orchestration
 
@@ -284,21 +284,21 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 </div>
 <div className="release-announcement-content">
 
-#### Events contain only the actor in the authorization data {#event-authorization-actor-only}
+#### Engine records contain only the actor in the authorization data {#event-authorization-actor-only}
 
 Since 8.9.0, each exported record contains the full authorization data of the command that caused it. This data includes the token claims of the identity provider, the group claims, and the authorized tenants. With OIDC clients, this made the log about two times larger than in 8.8.
 
-Starting with 8.10.10, events contain only these entries in `Record#getAuthorizations()`:
+Starting with 8.10.10, events, rejections, and the other commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
 
 - `authorized_anonymous_user`
 - `authorized_username`
 - `authorized_client_id`
 
-Events no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Commands and rejections still contain all entries. The record format does not change.
+These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
 
 The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
 
-**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, change it. Use the actor entries, or read the full claims from the client command that caused the event.
+**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or other commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
 
 <p className="link-arrow">[camunda/camunda#69323](https://github.com/camunda/camunda/issues/69323)</p>
 
