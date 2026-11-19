@@ -177,20 +177,20 @@
   },
   "additionalReleases": {
     "orchestrationCluster": {
-      "version": "8.10.9",
-      "date": "Nov 5, 2026",
+      "version": "8.10.10",
+      "date": "Nov 18, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/camunda/releases/tag/8.10.9"
+        "url": "https://github.com/camunda/camunda/releases/tag/8.10.10"
       },
       "previousVersions": "https://github.com/camunda/camunda/releases"
     },
     "connectors": {
-      "version": "8.10.5",
-      "date": "Nov 6, 2026",
+      "version": "8.10.6",
+      "date": "Nov 18, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/connectors/releases/tag/8.10.5"
+        "url": "https://github.com/camunda/connectors/releases/tag/8.10.6"
       },
       "previousVersions": "https://github.com/camunda/connectors/releases"
     },
