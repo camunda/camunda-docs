@@ -1352,3 +1352,24 @@ The Tasklist V1 API is deprecated and will be removed in Camunda 8.10. Consider 
 
 </div>
 </div>
+
+## Web Modeler
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Git sync rejects Git provider hosts on private networks by default {#git-sync-private-ip-addresses}
+
+Starting with Camunda 8.8.28, Git sync in Web Modeler rejects Git provider URLs that resolve to private, loopback, or link-local IP addresses. Git sync requests to these hosts fail with a `400 Bad Request` error. Git sync with Azure DevOps keeps its existing checks.
+
+This affects Self-Managed installations that sync with a self-hosted GitLab, GitHub Enterprise, or Bitbucket Data Center instance on a private network. If an HTTP proxy is configured, the proxy resolves hostnames, so the check covers only IP address literals and protection for hostnames depends on the egress rules of your proxy.
+
+**Action:** If your Git provider runs on a private network, set `CAMUNDA_MODELER_GITSYNC_ALLOWPRIVATEIPADDRESS` to `true` before you upgrade.
+
+<p className="link-arrow">[Git sync configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync)</p>
+
+</div>
+</div>

@@ -650,7 +650,7 @@ For more details, including Kubernetes probe configuration examples and `websock
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](../../../../../components/modeler/web-modeler/process-applications/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
+Web Modeler supports syncing files via [Git Sync](../../../../../components/modeler/web-modeler/process-applications/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance. By default, Git sync rejects provider URLs that resolve to private, loopback, or link-local IP addresses. If your self-hosted provider runs on a private network, set the `allow-private-ip-address` option to `true`.
 
 <Tabs groupId="git-sync" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
@@ -659,17 +659,18 @@ Web Modeler supports syncing files via [Git Sync](../../../../../components/mode
 
 <TabItem value="envVars">
 
-| Provider      | Environment variable                                | Description                                                                                                                   | Default value                                 |
-| ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                          |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
-| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
-| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                       |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                         |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`           |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_SCOPE`               | OAuth scope requested for Azure DevOps authentication.                                                                        | `https://app.vssps.visualstudio.com/.default` |
-| Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`  |
+| Provider      | Environment variable                                | Description                                                                                                                                                                  | Default value                                 |
+| ------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                                                                         | `50`                                          |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced.                                                | `4MB`                                         |
+| All providers | `CAMUNDA_MODELER_GITSYNC_ALLOWPRIVATEIPADDRESS`     | Allows Git sync to connect to Git provider hosts on private, loopback, or link-local IP addresses. Set to `true` if your self-hosted Git provider runs on a private network. | `false`                                       |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                                                                            | `https://api.github.com`                      |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                                                                            | `https://gitlab.com/api/v4`                   |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                                                               | `https://dev.azure.com`                       |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                                                                        | `7.1`                                         |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                                                                 | `https://login.microsoftonline.com`           |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_SCOPE`               | OAuth scope requested for Azure DevOps authentication.                                                                                                                       | `https://app.vssps.visualstudio.com/.default` |
+| Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                                                                             | `https://api.bitbucket.org/2.0/repositories`  |
 
 </TabItem>
 
@@ -680,6 +681,7 @@ camunda.modeler:
   gitsync:
     max-files: 50 # default
     max-in-memory-size: 4MB # default
+    allow-private-ip-address: false # default; set to true if your Git provider runs on a private network
     github:
       base-url: https://api.github.com # default
     gitlab:
