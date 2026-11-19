@@ -39,11 +39,11 @@ Use for MCP servers exposing a Streamable HTTP endpoint.
 This is the recommended transport for new implementations.
 :::
 
-| Field        | Required | Description                                                                                                                                                |
-| :----------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| URL          | Yes      | The Streamable HTTP endpoint URL. Typically ends in `/mcp`.                                                                                                |
-| HTTP headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`.                                                                         |
-| Timeout      | No       | Timeout for connecting to the MCP server and for each request to it, such as initialization and tool calls, as an ISO 8601 duration. For example, `PT60S`. |
+| Field        | Required | Description                                                                                                                                                                              |
+| :----------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| URL          | Yes      | The Streamable HTTP endpoint URL. Typically ends in `/mcp`.                                                                                                                              |
+| HTTP headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`.                                                                                                       |
+| Timeout      | No       | Timeout as an ISO 8601 duration. For example, `PT60S`. The timeout applies to the connection to the MCP server and to each request to the server, such as initialization and tool calls. |
 
 ### Server-Sent Events (SSE)
 
@@ -53,11 +53,11 @@ Use for MCP servers exposing a Server-Sent Events (SSE) endpoint.
 This transport type is considered legacy; use Streamable HTTP for new implementations where possible.
 :::
 
-| Field        | Required | Description                                                                                                                                                |
-| :----------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| URL          | Yes      | The SSE endpoint URL. Typically ends in `/sse`.                                                                                                            |
-| HTTP headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`.                                                                         |
-| Timeout      | No       | Timeout for connecting to the MCP server and for each request to it, such as initialization and tool calls, as an ISO 8601 duration. For example, `PT60S`. |
+| Field        | Required | Description                                                                                                                                                                              |
+| :----------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| URL          | Yes      | The SSE endpoint URL. Typically ends in `/sse`.                                                                                                                                          |
+| HTTP headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`.                                                                                                       |
+| Timeout      | No       | Timeout as an ISO 8601 duration. For example, `PT60S`. The timeout applies to the connection to the MCP server and to each request to the server, such as initialization and tool calls. |
 
 ## Authentication
 
