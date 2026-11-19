@@ -103,3 +103,37 @@ The dashboards of 8.11 require Grafana 13 or later. Earlier Grafana versions can
 
 </div>
 </div>
+
+## Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Variable propagation stops at the first scope that holds the variable {#variable-propagation-stops-at-existing-variable}
+
+Starting with 8.11, when Camunda propagates a variable to higher scopes, it stops at the first scope that already has a variable with that name, even if the value is unchanged. Camunda updates the variable in that scope and doesn't propagate it further. This matches how [variable propagation](/components/concepts/variables.md#variable-propagation) is documented, and fixes a [known bug](https://github.com/camunda/camunda/issues/55491).
+
+Previously, an unchanged value didn't stop the propagation. Camunda continued to the higher scopes, where it could create the variable or overwrite a different value without any error.
+
+You're affected if your process relies on a variable that reached a higher scope only because of the previous behavior. This happens when all of the following are true:
+
+- A scope below the process instance, such as a sub-process, holds a variable, for example because an input mapping created it.
+- An element inside that scope writes the same variable with the same value, through an output mapping, a job result, a message payload, or the variables a call activity returns with default propagation.
+- An element after that scope reads the variable, or expects the write to have changed a variable with the same name in the process instance.
+
+Camunda keeps the previous behavior for a variable that already exists in the scope of the element itself when the element is a multi-instance activity, a task or event without output mappings, or a job-based ad-hoc sub-process.
+
+**Example:** A sub-process has an input mapping that sets the local variable `status` to `"approved"`. A task inside the sub-process has an output mapping that sets `status` to `"approved"` again.
+
+- **Before 8.11:** The value is unchanged, so Camunda propagates `status` to the process instance. Elements after the sub-process can read it, and it replaces any other value of `status` there.
+- **From 8.11:** Camunda updates only the local `status` of the sub-process and discards it when the sub-process completes.
+
+**Action:** Check your processes for sub-processes and call activities that create variables through input mappings, and for elements after them that read those variables. To make a variable available outside a scope, add an output mapping to the sub-process or call activity that propagates it, such as the source expression `= status` with the target `status`. Alternatively, set the variable in the scope that needs it. To check an upgrade, run your processes on an 8.11 test cluster and compare the process instance variables with your 8.10 results in Operate.
+
+<p className="link-arrow">[Variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element)</p>
+
+</div>
+</div>
