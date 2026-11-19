@@ -13,6 +13,13 @@
       "label": "Activate jobs"
     }
   ],
+  "addClock": [
+    {
+      "file": "clock.rs",
+      "region": "AddClock",
+      "label": "Add a duration to the internal clock (alpha)"
+    }
+  ],
   "assignClientToGroup": [
     {
       "file": "group.rs",
@@ -487,6 +494,13 @@
       "file": "agent_instance.rs",
       "region": "GetAgentInstance",
       "label": "Get agent instance"
+    }
+  ],
+  "getClock": [
+    {
+      "file": "clock.rs",
+      "region": "GetClock",
+      "label": "Get the internal clock"
     }
   ],
   "getAuditLog": [
@@ -1098,6 +1112,13 @@
       "label": "Resume exporting"
     }
   ],
+  "resumeProcessDefinitions": [
+    {
+      "file": "process_definition.rs",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
+  ],
   "resumeProcessInstance": [
     {
       "file": "process_instance.rs",
@@ -1399,6 +1420,13 @@
       "label": "Search user task effective variables"
     }
   ],
+  "lookupUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
+    }
+  ],
   "searchUserTaskVariables": [
     {
       "file": "user_task.rs",
@@ -1453,6 +1481,13 @@
       "file": "batch_operation.rs",
       "region": "SuspendBatchOperation",
       "label": "Suspend Batch operation"
+    }
+  ],
+  "suspendProcessDefinitions": [
+    {
+      "file": "process_definition.rs",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
     }
   ],
   "suspendProcessInstance": [
