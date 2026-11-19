@@ -20,7 +20,9 @@ use Camunda\Orchestration\Auth\AuthProviderFactory;
 use Camunda\Orchestration\CamundaAsyncClient;
 use Camunda\Orchestration\CamundaClient;
 use Camunda\Orchestration\Config\CamundaConfiguration;
+use Camunda\Orchestration\Exception\RetryExhaustedException;
 use Camunda\Orchestration\Http\AuthMiddleware;
+use Camunda\Orchestration\Http\RetryMiddleware;
 use Camunda\Orchestration\Semantic\ProcessDefinitionId;
 use Camunda\Orchestration\Worker\JobActionClient;
 use Camunda\Orchestration\Worker\JobHandler;
@@ -157,6 +159,51 @@ function custom_http_client(CamundaConfiguration $configuration): CamundaClient
     );
 }
 // endregion ReadmeCustomHttpClient
+
+// region ReadmeRetryConfig
+function retry_config_client(): CamundaClient
+{
+    // Same options and defaults as the JS SDK: 3 attempts, 100 ms base delay, 2 s cap.
+    // Equivalent environment variables: CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS,
+    // CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS and CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS.
+    return CamundaClient::fromConfiguration(new CamundaConfiguration(
+        restAddress: 'https://my-cluster.example.com/v2',
+        authStrategy: 'NONE',
+        httpRetryMaxAttempts: 5,
+        httpRetryBaseDelayMs: 200,
+        httpRetryMaxDelayMs: 5_000,
+    ));
+}
+// endregion ReadmeRetryConfig
+
+// region ReadmeRetryExhausted
+function retry_exhausted(CamundaClient $client): void
+{
+    try {
+        $client->completeJob('2251799813686200');
+    } catch (RetryExhaustedException $e) {
+        // The final status (429 here) and the number of requests actually sent.
+        error_log(sprintf('gave up with HTTP %d after %d attempts', $e->getCode(), $e->getAttempts()));
+    }
+}
+// endregion ReadmeRetryExhausted
+
+// region ReadmeRetryCustomHttpClient
+function custom_http_client_with_retry(CamundaConfiguration $configuration): CamundaClient
+{
+    // A client you supply is not wrapped by the SDK: push the retry middleware yourself
+    // if you want the same behaviour.
+    $stack = HandlerStack::create();
+    // Push retry before auth so that every attempt picks up a fresh auth header.
+    $stack->push(new RetryMiddleware(maxAttempts: 3, baseDelayMs: 100, maxDelayMs: 2_000), 'camunda_retry');
+    $stack->push(new AuthMiddleware(AuthProviderFactory::fromConfiguration($configuration)), 'camunda_auth');
+
+    return CamundaClient::fromConfiguration(
+        $configuration,
+        new GuzzleClient(['handler' => $stack, 'http_errors' => false]),
+    );
+}
+// endregion ReadmeRetryCustomHttpClient
 
 // region ReadmeDeployResources
 function readme_deploy_resources(): void
