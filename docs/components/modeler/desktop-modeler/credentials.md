@@ -1,6 +1,7 @@
 ---
 id: credentials
-title: Use credentials
+title: Use credentials in Desktop Modeler
+sidebar_label: Use credentials
 description: "Select, create, edit, and upgrade a credential from the properties panel in Desktop Modeler."
 keywords: [credential, credentials, desktop modeler, authentication]
 ---
@@ -19,7 +20,7 @@ Selecting a credential stores only a reference to it in your diagram. The creden
 
 If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the Camunda instance you are connected to, or it was created for a different credential type.
 
-## What you can do in the chooser
+## Check which actions are available
 
 What the chooser offers depends on whether Desktop Modeler is connected to Camunda, and on your permissions there. Desktop Modeler checks your permissions once per connection.
 
@@ -61,7 +62,7 @@ A credential you create from Desktop Modeler is stored on the Camunda instance y
 
 To manage it centrally, find it on the [**Environments only** tab in Camunda Hub](/components/hub/organization/credentials/index.md#environments-only-credentials) and add it.
 
-## Additional resources
+## Related topics
 
 - [Manage credentials](/components/hub/organization/credentials/index.md)
 - [Use connectors](./use-connectors.md)

@@ -4,9 +4,9 @@ title: Deploy a diagram
 description: "Follow these steps to directly deploy diagrams and start process instances in Camunda 8."
 ---
 
-Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8. Follow the steps below to deploy a diagram to Camunda.
+Deploy a diagram from Desktop Modeler to Camunda 8. You need a diagram open in the editor.
 
-1. Set up and select a connection by following [Connect to Camunda 8](./connect-to-camunda-8.md) guide.
+1. Set up and select a connection by following [Connect to Camunda 8](./connect-to-camunda-8.md).
 
    ![Connection selector showing the Dev connection selected](./img/connection-selector-dev-connection.png)
 
@@ -18,10 +18,11 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
    ![deploy diagram](./img/deploy-diagram.png)
 
-4. If the deployment is successful, you will see a confirmation message:
+4. If the deployment is successful, Desktop Modeler shows a confirmation message:
 
    ![deployment successful](./img/deploy-diagram-success.png)
 
-:::note
-As a next step, [start a new process instance](./start-instance.md).
-:::
+## Next steps
+
+- [Start a new process instance](./start-instance.md)
+- [Deploy a project](./work-with-projects.md#deploy-a-project)

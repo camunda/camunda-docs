@@ -1,10 +1,11 @@
 ---
 id: connect-to-camunda-8
 title: Connect to Camunda 8
+sidebar_label: Connect to Camunda 8
 description: "Set up a connection from Desktop Modeler to Camunda."
 ---
 
-To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to Camunda. Follow the steps below to connect to **Camunda 8 SaaS**. To connect to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
+Connect Desktop Modeler to Camunda 8 SaaS so you can deploy diagrams, start process instances, and test tasks. To connect to a local installation, see the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
 
 1. Click the connection selector. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
@@ -24,12 +25,12 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    ![Connection manager with new connection information filled in](./img/connection-manager-new-connection-loading.png)
 
-   :::caution
-   When connecting to a tenant, the API client must be assigned to it through [Orchestration Cluster Admin](../../admin/admin-introduction.md).
+   :::warning
+   When connecting to a tenant, assign the API client to it through [Orchestration Cluster Admin](../../admin/admin-introduction.md).
    :::
 
    Desktop Modeler automatically validates the connection.
-   If you have issues connecting, see the [troubleshooting page](./troubleshooting.md#debug-zeebe-connection-issues).
+   If the connection fails, see [Debug Zeebe connection issues](./troubleshooting.md#debug-zeebe-connection-issues).
 
    ![Connection manager showing connection error](./img/connection-manager-new-connection-error.png)
 
@@ -40,6 +41,8 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 5. Select the connection you just created to use it for [deployment](./deploy-diagram.md), [starting a new process instance](./start-instance.md), or [task testing](./task-testing.md).
 
    ![New connection selected in connection manager](./img/connection-selector-new-connection.png)
-   :::note
-   As a next step, [deploy your diagram](./deploy-diagram.md).
-   :::
+
+## Next steps
+
+- [Deploy a diagram](./deploy-diagram.md)
+- [Start a new process instance](./start-instance.md)

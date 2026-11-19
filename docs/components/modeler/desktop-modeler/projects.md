@@ -1,19 +1,17 @@
 ---
 id: projects
-title: Projects
+title: Projects in Desktop Modeler
+sidebar_label: Projects
 description: Desktop Modeler supports Camunda projects with editor intelligence, deployment, and execution features in the context of your project.
 keywords: ["process application", "camunda project", "project"]
 ---
 
 import GroupingImg from './img/process-applications/grouping.png'
-import LinkResourcesImg from './img/process-applications/link-resources.png'
 import OverlayImg from './img/process-applications/overlay.png'
-import DeployImg from './img/process-applications/deploy.png'
-import StartInstanceImg from './img/process-applications/start-instance.png'
 
 Desktop Modeler supports [Camunda projects](../../concepts/projects.md). It recognizes a project by the [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file in the root of your project folder.
 
-Within a project, Desktop Modeler offers advanced editor intelligence, deployment, and execution features.
+Within a project, Desktop Modeler offers editor intelligence, deployment, and execution features. To work with projects, see [Work with projects](./work-with-projects.md).
 
 :::tip
 Camunda projects supersede process applications. Your existing process applications keep working; see [Migrate from process applications](/components/concepts/projects.md#migrate-from-process-applications) when you are ready to switch.
@@ -21,7 +19,7 @@ Camunda projects supersede process applications. Your existing process applicati
 
 In professional software development, a typical project contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured may vary depending on the implementation language, libraries, and frameworks you use.
 
-## Example: Consumer loan application
+## Example: consumer loan application
 
 Consider a project implementing consumer loan approval. It may contain:
 
@@ -57,53 +55,21 @@ consumer-loan-application/
 └── README.md
 ```
 
-## Editor support for projects
+## How Desktop Modeler recognizes a project
 
-When you open a file, Modeler checks for a `camunda.json` file in the same folder or a parent folder to determine whether the file belongs to a project. Within a project, Modeler offers improved navigation and assistance.
+When you open a file, Desktop Modeler checks for a `camunda.json` file in the same folder or a parent folder to determine whether the file belongs to a project. Any file within the project folder or its subfolders is part of the project. Within a project, Desktop Modeler offers improved navigation and assistance.
 
-### Indicating context
+## How Desktop Modeler indicates project context
 
-Modeler opens and closes projects implicitly. A blue item in the status bar indicates whether a diagram belongs to a project and makes all related diagrams available for navigation.
+Desktop Modeler opens and closes projects implicitly. A blue item in the status bar indicates whether a diagram belongs to a project and makes all related diagrams available for navigation.
 
 <p><img src={OverlayImg} alt="Status bar item showing that the open diagram belongs to a project" /></p>
 
-When files from more than one project are open, they are grouped visually.
+When files from more than one project are open, Desktop Modeler groups them visually.
 
 <p><img src={GroupingImg} alt="Open files grouped visually by project" /></p>
 
-### Creating a project
+## Related topics
 
-Create a project by creating a `camunda.json` file in the root of your project folder. An empty object (`{}`) is enough to mark the folder. Alternatively, create it in the Modeler UI:
-
-1. Click **File > New Project...**.
-2. Choose a folder.
-3. Click **Select folder**.
-
-Modeler creates a `camunda.json` file in the selected folder and recognizes the folder as the project root. Any file within the folder or its subfolders is part of the project.
-
-### Linking resources
-
-Any file within a project can be linked as a resource. Linking a resource can be achieved in several ways:
-
-- Using the append feature
-- Using the replace feature
-- Using the create feature
-- Manually by setting the process, decision, or form ID in the properties panel
-
-<p><img src={LinkResourcesImg} alt="Linking resources by using the replace feature" /></p>
-
-### Deploying a project
-
-You can deploy projects using the [deploy feature](./deploy-diagram.md). When you deploy a project, Modeler deploys all files that are part of it.
-
-<p><img src={DeployImg} alt="Deploy dialog for deploying all files of a project" /></p>
-
-### Starting a process instance
-
-:::note
-Before starting a process instance, all project files will be deployed to reflect the state of the project.
-:::
-
-You can start an instance for any process in a project using the [start instance feature](./start-instance.md).
-
-<p><img src={StartInstanceImg} alt="Starting an instance of a process" /></p>
+- [Work with projects](./work-with-projects.md)
+- [Camunda projects](../../concepts/projects.md)

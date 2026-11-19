@@ -1,37 +1,54 @@
 ---
 id: model-your-first-diagram
 title: Model your first diagram
+sidebar_label: Tutorial - Model your first diagram
 description: "Learn how to model your first diagram using Desktop Modeler and BPMN."
 ---
 
-After starting [Desktop Modeler](./index.md), you can model your first BPMN diagram. Follow the steps below:
+<span class="badge badge--beginner">Beginner</span>
 
-1. Create a [BPMN](../bpmn/bpmn.md) diagram by selecting **BPMN diagram**:
+In this tutorial, you model a simple BPMN process with a start event, a service task, and an end event, and save it to your computer. You need [Desktop Modeler installed](./install-the-modeler.md).
 
-![empty application](./img/empty.png)
+## Create the diagram
 
-The BPMN diagram opens with a start event. [Events](/components/modeler/bpmn/events.md) in BPMN represent things that happen. A process can react to events and emit events, for example:
+1. Start Desktop Modeler and select **BPMN diagram**.
 
-![new diagram](./img/new-diagram.png)
+   ![empty application](./img/empty.png)
 
-1. The basic elements of BPMN processes are [tasks](/components/modeler/bpmn/tasks.md), or atomic units of work composed to create a meaningful result. Click on the start event and select the rectangular task element. This creates a task directly following the start event, connected by an arrow. Next, double-click the task and type in a name for the element. For example, `My Service Task`.
+   The diagram opens with a start event. A [start event](/components/modeler/bpmn/events.md) marks where a process begins.
 
-1. Click on the task and select the dark circle in the top left. This attaches an end event directly to the task. On the left side of the screen you will find the element palette, where you can also drag and drop elements onto the canvas.
+   ![new diagram](./img/new-diagram.png)
 
-![elements](./img/elements.png)
+1. Click the start event and select the rectangular task icon. Desktop Modeler creates a [task](/components/modeler/bpmn/tasks.md) after the start event, connected by an arrow.
+1. Double-click the task and enter a name, for example `My Service Task`.
+1. Click the task and select the dark circle in the top left. Desktop Modeler attaches an end event to the task.
 
-Above, you can see that elements that support different types can be reconfigured by clicking on the corresponding icon. In this case, the task can be converted to a [service task](../bpmn/service-tasks/service-tasks.md), for example, by clicking on the element and selecting the **Change element** menu icon.
+   You can also drag elements from the palette on the left side of the screen onto the canvas.
 
-![task configuration](img/element-configuration.png)
+   ![elements](./img/elements.png)
 
-You can also [orchestrate human tasks](/guides/getting-started-orchestrate-human-tasks.md). Review the [complete list of supported BPMN elements](/components/modeler/bpmn/bpmn-coverage.md)
+## Change the task type
 
-1. Open the properties panel by selecting the light gray arrow on the right side of the page halfway down the canvas. Here, you can edit the properties of the currently selected element:
+1. Click the task and select the **Change element** (wrench) icon.
+1. Select **Service task**.
 
-![properties panel](img/properties-panel.png)
+   ![task configuration](img/element-configuration.png)
 
-For example, you might name your element and give it an ID under the **General** section.
+The task is now a [service task](../bpmn/service-tasks/service-tasks.md).
 
-1. Save the diagram using **File > Save**, **File > Save As**, or the keyboard shortcut (`Cmd + S` on macOS or `Ctrl + S` on Windows and Linux). Desktop Modeler saves the file to the location you choose on your local file system; it does not store diagrams in a separate internal workspace. To find the file again, reopen it from that folder or from the recent files list on the Desktop Modeler start screen.
+## Edit element properties
 
-1. Once you finish modeling and configuring your diagram, you can deploy it to [Camunda](./connect-to-camunda-8.md).
+1. Open the properties panel by selecting the light gray arrow on the right side of the page, halfway down the canvas.
+1. Select the service task. In the **General** section, enter a name and an ID.
+
+   ![properties panel](img/properties-panel.png)
+
+## Save the diagram
+
+Select **File > Save**, **File > Save As**, or press `Cmd + S` (macOS) or `Ctrl + S` (Windows and Linux). Desktop Modeler saves the file to the location you choose on your local file system. It doesn't store diagrams in a separate internal workspace. To find the file again, reopen it from that folder or from the recent files list on the start screen.
+
+## Next steps
+
+- [Connect to Camunda 8](./connect-to-camunda-8.md) and [deploy your diagram](./deploy-diagram.md).
+- [Build and deploy your first form](./utilize-forms.md).
+- Review the [supported BPMN elements](/components/modeler/bpmn/bpmn-coverage.md) or [orchestrate human tasks](/guides/getting-started-orchestrate-human-tasks.md).

@@ -1,75 +1,56 @@
 ---
-title: Utilize forms
+title: Build and deploy your first form
+sidebar_label: Tutorial - Build a form
 description: "Learn how to use, model, and deploy Camunda Forms."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
-## About
+In this tutorial, you build a form in Desktop Modeler, link it to a user task, and deploy and run the process. Tasklist renders the form for every task assigned to it. You need a BPMN diagram with a user task and a [connection to Camunda 8](./connect-to-camunda-8.md).
 
-The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.
+## Create a form
 
-After deploying a diagram with a linked form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
-
-## Quickstart
-
-### Create new form
-
-To start building a form in Desktop Modeler, click **File > New file > Form (Camunda 8)**.
-
-In this example, you'll build a form to help with a task in obtaining an email message.
-
-### Build your form
-
-Within Forms, you can add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
-
-1. From the **Components** palette on the left, drag and drop a **Text area** to the **Form definition** editor.
+1. Click **File > New file > Form (Camunda 8)**.
+1. From the **Components** palette on the left, drag a **Text area** to the **Form definition** editor.
 1. Select the **Text area**.
-1. In the properties panel on the right, open the **General** section.
-1. Provide the following data:
-   - **Field label:** "Email content"
-   - **Field description:** "The content of the email message"
-1. Deselect the text area, so the form's properties are shown in the properties panel.
-1. In the **General** section, copy the form's ID. You'll use this when you link the form to a user task.
-1. Click **File > Save File As...**
-1. Name the file `email-form`.
+1. In the properties panel on the right, open the **General** section and enter the following:
 
-:::tip
-Refer to the [camunda forms reference](/components/modeler/forms/camunda-forms-reference.md) to explore all form elements and configuration options in detail.
-:::
+   | Field             | Value                              |
+   | ----------------- | ---------------------------------- |
+   | Field label       | `Email content`                    |
+   | Field description | `The content of the email message` |
 
-### Link your form to a BPMN diagram
+1. Deselect the text area so the properties panel shows the form's properties.
+1. In the **General** section, copy the form's ID.
+1. Click **File > Save File As...** and name the file `email-form`.
 
-Implement a task form into a diagram. In tandem, link your form to a user task or start event:
+To explore all form elements, see the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md).
 
-1. Open the diagram where you'd like to apply your form.
-1. Select the user task requiring the help of a form.
-1. In the properties panel on the right, in the **Form** section, select type **Camunda Form**.
-1. For the **Form ID**, paste the ID you copied when you built your form.
-1. Save your BPMN file.
+## Link the form to a user task
 
-## Deploy and run
+1. Open the diagram where you want to use the form.
+1. Select the user task.
+1. In the properties panel, in the **Form** section, select type **Camunda Form**.
+1. For **Form ID**, paste the ID you copied.
+1. Save the BPMN file.
 
-You need to deploy both the form and process before running a process instance.
+## Deploy a form
 
-Deploy your form:
+Deploy both the form and the process before you run a process instance.
 
-1. Open your form.
-2. At the bottom of the view, configure a connection, and click the rocket-shaped **Deploy** icon to deploy your form.
-3. Click **Deploy Form**.
+1. Open the form.
+1. At the bottom of the view, select a connection, and click the rocket-shaped **Deploy** icon.
+1. Click **Deploy Form**.
+1. Open the BPMN process, click the **Deploy** icon, and click **Deploy BPMN**.
 
-Deploy your process:
+## Run the process
 
-1. Open your BPMN process.
-2. At the bottom of the view, configure a connection, and click the rocket-shaped **Deploy** icon to deploy your process.
-3. Click **Deploy BPMN**.
+1. Click the play icon, then click **Start BPMN process instance**.
+1. Monitor the instance in [Operate](/components/operate/operate-introduction.md).
+1. To complete the user task, open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
 
-With both resources deployed, you can run a process instance. Click the play icon, then click **Start BPMN process instance**.
-
-You can now monitor your instances in [Operate](/components/operate/operate-introduction.md). To complete a user task, navigate to [Tasklist](/components/tasklist/introduction-to-tasklist.md).
-
-## Additional resources
+## Next steps
 
 - [Utilize forms in Camunda Hub](/components/hub/workspace/modeler/modeling/utilize-forms.md)
 - [User task reference](/components/modeler/bpmn/user-tasks/user-tasks.md)

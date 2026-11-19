@@ -1030,34 +1030,45 @@ module.exports = {
         id: "components/modeler/desktop-modeler/index",
       },
       items: [
-        "components/modeler/desktop-modeler/install-the-modeler",
-        "components/modeler/desktop-modeler/model-your-first-diagram",
-        "components/modeler/desktop-modeler/connect-to-camunda-8",
-        "components/modeler/desktop-modeler/deploy-diagram",
-        "components/modeler/desktop-modeler/start-instance",
-        "components/modeler/desktop-modeler/projects",
-        "components/modeler/desktop-modeler/utilize-forms",
-        "components/modeler/desktop-modeler/use-connectors",
-        "components/modeler/desktop-modeler/credentials",
         {
-          "Element templates": [
-            "components/modeler/desktop-modeler/element-templates/configuring-templates",
-            "components/modeler/desktop-modeler/element-templates/hosting-template-sources",
-            "components/modeler/desktop-modeler/element-templates/using-templates",
+          Tutorials: [
+            "components/modeler/desktop-modeler/model-your-first-diagram",
+            "components/modeler/desktop-modeler/utilize-forms",
           ],
         },
         {
-          "Additional configuration": [
-            "components/modeler/desktop-modeler/flags/flags",
+          "How-to guides": [
+            "components/modeler/desktop-modeler/install-the-modeler",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/deploy-diagram",
+            "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/work-with-projects",
+            "components/modeler/desktop-modeler/task-testing",
+            "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/credentials",
+            {
+              "Work with element templates": [
+                "components/modeler/desktop-modeler/element-templates/using-templates",
+                "components/modeler/desktop-modeler/element-templates/configuring-templates",
+                "components/modeler/desktop-modeler/element-templates/hosting-template-sources",
+              ],
+            },
             "components/modeler/desktop-modeler/plugins/plugins",
             "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
+            "components/modeler/desktop-modeler/troubleshooting",
+          ],
+        },
+        {
+          Reference: [
+            "components/modeler/desktop-modeler/settings/settings",
+            "components/modeler/desktop-modeler/flags/flags",
             "components/modeler/desktop-modeler/search-paths/search-paths",
             "components/modeler/desktop-modeler/telemetry/telemetry",
           ],
         },
-        "components/modeler/desktop-modeler/settings/settings",
-        "components/modeler/desktop-modeler/task-testing",
-        "components/modeler/desktop-modeler/troubleshooting",
+        {
+          Explanation: ["components/modeler/desktop-modeler/projects"],
+        },
       ],
     },
     {
