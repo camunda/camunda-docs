@@ -98,4 +98,4 @@ If the re-engineered process is expected to use AI agents, the Camunda cluster t
 - A connector runtime. Camunda 8 SaaS and `c8run` include one by default. On Self-Managed, make sure connectors are enabled.
 - Credentials for a supported [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md), if its authentication method needs them. Store them as [connector secrets](/components/saas/clusters/manage-secrets.md).
 
-These credentials are separate from the credentials of your [AI coding agent](#ai-coding-agent).
+These credentials are usually different from those used by your [AI coding agent](#ai-coding-agent).
