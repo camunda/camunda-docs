@@ -111,9 +111,7 @@ Camunda 8 supports multiple authentication methods depending on the environment:
 For API documentation, link to the centralized authentication overview instead of repeating environment defaults.
 
 :::warning
-The Operate, Tasklist, and Zeebe REST APIs are deprecated and should not be used for new development. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
-
-Authentication for these APIs works the same way. See [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for details.
+The Operate and Tasklist REST APIs were removed in Camunda 8.10, and the Zeebe REST API is removed in Camunda 8.11. Use the Orchestration Cluster REST API instead. See the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md) and [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 :::
 
 ### Users and clients

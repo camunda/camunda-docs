@@ -45,7 +45,7 @@ flowchart LR
             Tasklist <-.-> Job[Job worker-based tasks]
             Tasklist <-.-> ZeebeTasks
             Rest <-.-> Forms
-            Zeebe[Zeebe REST API] <-.-> ZeebeTasks[Zeebe-based tasks]
+            Zeebe[Orchestration Cluster REST API] <-.-> ZeebeTasks[Zeebe-based tasks]
         end
 
         BFF -->|Query Tasks\n<small>Job-Based or Zeebe</small>| Tasklist
@@ -71,10 +71,10 @@ style ExtData fill:#a5caef,stroke:#2272c9
 style Tasklist stroke:#10c95d,color:#000
 
 click Forms "../../forms/introduction-to-forms"
-click Rest "../../../tasklist-api-rest/tasklist-api-rest-overview"
+click Rest "../../../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"
 click Job "../../../migration-manuals/migrate-to-camunda-user-tasks"
 click ZeebeTasks "../../../migration-manuals/migrate-to-camunda-user-tasks"
-click ZeebeRest "../../../zeebe-api-rest/zeebe-api-rest-overview"
+click ZeebeRest "../../../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"
 ```
 
 Follow these resources to learn more about the individual components:
