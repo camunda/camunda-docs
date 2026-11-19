@@ -4,15 +4,16 @@
 
 This folder defines how Camunda documentation is organized, so new content is consistent, predictable, and easy for both people and AI agents to navigate. It contains:
 
-| File                                                             | Purpose                                                        |
-| ---------------------------------------------------------------- | -------------------------------------------------------------- |
-| This README                                                      | The framework: content types, decision guide, and shared rules |
-| [templates/landing-page.md](./templates/landing-page.md)         | Standard feature landing page                                  |
-| [templates/concept.md](./templates/concept.md)                   | Explanation: what it is and why                                |
-| [templates/tutorial.md](./templates/tutorial.md)                 | Learning-oriented, end-to-end guided experience                |
-| [templates/how-to-guide.md](./templates/how-to-guide.md)         | Task-oriented steps for a user who knows what they want        |
-| [templates/reference.md](./templates/reference.md)               | Facts to look up: properties, limits, options                  |
-| [templates/folder-structure.md](./templates/folder-structure.md) | Standard folder tree for every new feature                     |
+| File                                                             | Purpose                                                                    |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| This README                                                      | The framework: content types, decision guide, and shared rules             |
+| [templates/landing-page.md](./templates/landing-page.md)         | Standard feature landing page                                              |
+| [templates/concept.md](./templates/concept.md)                   | Explanation: what it is and why                                            |
+| [templates/tutorial.md](./templates/tutorial.md)                 | Learning-oriented, end-to-end guided experience                            |
+| [templates/how-to-guide.md](./templates/how-to-guide.md)         | Task-oriented steps for a user who knows what they want                    |
+| [templates/reference.md](./templates/reference.md)               | Facts to look up: properties, limits, options                              |
+| [templates/folder-structure.md](./templates/folder-structure.md) | Standard folder tree for every new feature                                 |
+| [examples/desktop-modeler.md](./examples/desktop-modeler.md)     | Worked example: audit and proposed restructure of the Desktop Modeler docs |
 
 Templates are copy-and-fill starting points. They are **not** published on the docs site (this folder is outside `docs/`).
 
