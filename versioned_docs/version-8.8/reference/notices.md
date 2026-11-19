@@ -40,7 +40,7 @@ November 19, 2026
 ### Products affected
 
 - Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
-- Camunda Zeebe, Operate, and Tasklist (8.7)
+- Camunda Zeebe, Operate, and Tasklist (8.7 and 8.6)
 - Camunda Optimize
 - Camunda Management Identity (Identity in 8.6)
 - Camunda Connectors
