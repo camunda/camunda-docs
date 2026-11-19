@@ -16,7 +16,7 @@ Cluster API. It wraps the generated REST client with configuration,
 authentication, adaptive backpressure, and transient retry. Its per-operation
 methods are generated in facade_generated.go.
 
-`CamundaClient` exposes **252** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **257** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ```go
 import camunda "github.com/camunda/orchestration-cluster-api-go/v11"
@@ -39,6 +39,7 @@ a ready-to-use client. Options take precedence over the environment.
 | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`ActivateAdHocSubProcessActivities`](#activateadhocsubprocessactivities)                                 | ActivateAdHocSubProcessActivities calls the ActivateAdHocSubProcessActivities operation.                                                                                 |
 | [`ActivateJobs`](#activatejobs)                                                                           | ActivateJobs calls the ActivateJobs operation.                                                                                                                           |
+| [`AddClock`](#addclock)                                                                                   | AddClock calls the AddClock operation.                                                                                                                                   |
 | [`AssignClientToGroup`](#assignclienttogroup)                                                             | AssignClientToGroup calls the AssignClientToGroup operation.                                                                                                             |
 | [`AssignClientToTenant`](#assignclienttotenant)                                                           | AssignClientToTenant calls the AssignClientToTenant operation.                                                                                                           |
 | [`AssignGroupToTenant`](#assigngrouptotenant)                                                             | AssignGroupToTenant calls the AssignGroupToTenant operation.                                                                                                             |
@@ -113,6 +114,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`GetAuthentication`](#getauthentication)                                                                 | GetAuthentication calls the GetAuthentication operation.                                                                                                                 |
 | [`GetAuthorization`](#getauthorization)                                                                   | GetAuthorization calls the GetAuthorization operation.                                                                                                                   |
 | [`GetBatchOperation`](#getbatchoperation)                                                                 | GetBatchOperation calls the GetBatchOperation operation.                                                                                                                 |
+| [`GetClock`](#getclock)                                                                                   | GetClock calls the GetClock operation.                                                                                                                                   |
 | [`GetClusterExportingStatus`](#getclusterexportingstatus)                                                 | GetClusterExportingStatus calls the GetClusterExportingStatus operation.                                                                                                 |
 | [`GetClusterRebalance`](#getclusterrebalance)                                                             | GetClusterRebalance calls the GetClusterRebalance operation.                                                                                                             |
 | [`GetClusterStatus`](#getclusterstatus)                                                                   | GetClusterStatus calls the GetClusterStatus operation.                                                                                                                   |
@@ -178,6 +180,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`ListRuntimeBackups`](#listruntimebackups)                                                               | ListRuntimeBackups calls the ListRuntimeBackups operation.                                                                                                               |
 | [`ListRuntimeBackupsAsClusterAdmin`](#listruntimebackupsasclusteradmin)                                   | ListRuntimeBackupsAsClusterAdmin calls the ListRuntimeBackupsAsClusterAdmin operation.                                                                                   |
 | [`ListSecrets`](#listsecrets)                                                                             | ListSecrets calls the ListSecrets operation.                                                                                                                             |
+| [`LookupUserTask`](#lookupusertask)                                                                       | LookupUserTask calls the LookupUserTask operation.                                                                                                                       |
 | [`MigrateProcessInstance`](#migrateprocessinstance)                                                       | MigrateProcessInstance calls the MigrateProcessInstance operation.                                                                                                       |
 | [`MigrateProcessInstancesBatchOperation`](#migrateprocessinstancesbatchoperation)                         | MigrateProcessInstancesBatchOperation calls the MigrateProcessInstancesBatchOperation operation.                                                                         |
 | [`ModifyProcessInstance`](#modifyprocessinstance)                                                         | ModifyProcessInstance calls the ModifyProcessInstance operation.                                                                                                         |
@@ -202,6 +205,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`ResumeBatchOperation`](#resumebatchoperation)                                                           | ResumeBatchOperation calls the ResumeBatchOperation operation.                                                                                                           |
 | [`ResumeClusterExporting`](#resumeclusterexporting)                                                       | ResumeClusterExporting calls the ResumeClusterExporting operation.                                                                                                       |
 | [`ResumeExporting`](#resumeexporting)                                                                     | ResumeExporting calls the ResumeExporting operation.                                                                                                                     |
+| [`ResumeProcessDefinitions`](#resumeprocessdefinitions)                                                   | ResumeProcessDefinitions calls the ResumeProcessDefinitions operation.                                                                                                   |
 | [`ResumeProcessInstance`](#resumeprocessinstance)                                                         | ResumeProcessInstance calls the ResumeProcessInstance operation.                                                                                                         |
 | [`ResumeProcessInstancesBatchOperation`](#resumeprocessinstancesbatchoperation)                           | ResumeProcessInstancesBatchOperation calls the ResumeProcessInstancesBatchOperation operation.                                                                           |
 | [`SearchAgentDefinitions`](#searchagentdefinitions)                                                       | SearchAgentDefinitions calls the SearchAgentDefinitions operation.                                                                                                       |
@@ -253,6 +257,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`SearchUsersForTenant`](#searchusersfortenant)                                                           | SearchUsersForTenant calls the SearchUsersForTenant operation.                                                                                                           |
 | [`SearchVariables`](#searchvariables)                                                                     | SearchVariables calls the SearchVariables operation.                                                                                                                     |
 | [`SuspendBatchOperation`](#suspendbatchoperation)                                                         | SuspendBatchOperation calls the SuspendBatchOperation operation.                                                                                                         |
+| [`SuspendProcessDefinitions`](#suspendprocessdefinitions)                                                 | SuspendProcessDefinitions calls the SuspendProcessDefinitions operation.                                                                                                 |
 | [`SuspendProcessInstance`](#suspendprocessinstance)                                                       | SuspendProcessInstance calls the SuspendProcessInstance operation.                                                                                                       |
 | [`SuspendProcessInstancesBatchOperation`](#suspendprocessinstancesbatchoperation)                         | SuspendProcessInstancesBatchOperation calls the SuspendProcessInstancesBatchOperation operation.                                                                         |
 | [`SyncRuntimeBackupState`](#syncruntimebackupstate)                                                       | SyncRuntimeBackupState calls the SyncRuntimeBackupState operation.                                                                                                       |
@@ -338,6 +343,27 @@ if err != nil {
 for _, job := range result.GetJobs() {
 	fmt.Printf("activated job %v\n", job.GetJobKey())
 }
+```
+
+### AddClock
+
+```go
+func (c *CamundaClient) AddClock(ctx context.Context, body ClockAddRequest, opts ...func(ApiAddClockRequest) ApiAddClockRequest) (*ClockResult, error)
+```
+
+**Types:** [`ClockAddRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ClockAddRequest), [`ApiAddClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiAddClockRequest), [`ClockResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ClockResult)
+
+AddClock calls the AddClock operation.
+
+Example:
+
+```go
+// Move the cluster clock forward by an ISO 8601 duration (negative moves it back).
+clock, err := client.AddClock(ctx, *camunda.NewClockAddRequest("PT1H"))
+if err != nil {
+	return err
+}
+fmt.Println("cluster clock is now:", clock.GetTimestamp().Format(time.RFC3339))
 ```
 
 ### AssignClientToGroup
@@ -1780,6 +1806,27 @@ if err != nil {
 fmt.Printf("%v\n", op)
 ```
 
+### GetClock
+
+```go
+func (c *CamundaClient) GetClock(ctx context.Context, opts ...func(ApiGetClockRequest) ApiGetClockRequest) (*ClockResult, error)
+```
+
+**Types:** [`ApiGetClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiGetClockRequest), [`ClockResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ClockResult)
+
+GetClock calls the GetClock operation.
+
+Example:
+
+```go
+// Read the cluster clock. While the clock is pinned this reports the pinned instant.
+clock, err := client.GetClock(ctx)
+if err != nil {
+	return err
+}
+fmt.Println("cluster clock:", clock.GetTimestamp().Format(time.RFC3339))
+```
+
 ### GetClusterExportingStatus
 
 ```go
@@ -3151,6 +3198,30 @@ for _, reference := range result.GetReferences() {
 }
 ```
 
+### LookupUserTask
+
+```go
+func (c *CamundaClient) LookupUserTask(ctx context.Context, userTaskKey UserTaskKey, body UserTaskLookupRequest, opts ...func(ApiLookupUserTaskRequest) ApiLookupUserTaskRequest) (*UserTaskLookupResult, error)
+```
+
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#UserTaskKey), [`UserTaskLookupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#UserTaskLookupRequest), [`ApiLookupUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiLookupUserTaskRequest), [`UserTaskLookupResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#UserTaskLookupResult)
+
+LookupUserTask calls the LookupUserTask operation.
+
+Example:
+
+```go
+body := camunda.NewUserTaskLookupRequest()
+body.SetFetchVariables([]string{"recommendation", "applicant"})
+result, err := client.LookupUserTask(ctx,
+	camunda.MustUserTaskKey("2251799813685380"),
+	*body)
+if err != nil {
+	return err
+}
+fmt.Printf("state: %s, assignee: %s\n", result.GetState(), result.GetAssignee())
+```
+
 ### MigrateProcessInstance
 
 ```go
@@ -3577,6 +3648,31 @@ Example:
 if err := client.ResumeExporting(ctx); err != nil {
 	return err
 }
+```
+
+### ResumeProcessDefinitions
+
+```go
+func (c *CamundaClient) ResumeProcessDefinitions(ctx context.Context, body ProcessDefinitionResumptionInstruction, opts ...func(ApiResumeProcessDefinitionsRequest) ApiResumeProcessDefinitionsRequest) (*ProcessDefinitionResumptionResult, error)
+```
+
+**Types:** [`ProcessDefinitionResumptionInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ProcessDefinitionResumptionInstruction), [`ApiResumeProcessDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiResumeProcessDefinitionsRequest), [`ProcessDefinitionResumptionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ProcessDefinitionResumptionResult)
+
+ResumeProcessDefinitions calls the ResumeProcessDefinitions operation.
+
+**Example**
+
+```go
+// ProcessDefinitionResumptionInstruction is a union; resume one version by key.
+byKey := camunda.NewProcessDefinitionResumptionInstructionByKey(
+	camunda.MustProcessDefinitionKey("2251799813685330"))
+
+result, err := client.ResumeProcessDefinitions(ctx,
+	camunda.ProcessDefinitionResumptionInstructionByKeyAsProcessDefinitionResumptionInstruction(byKey))
+if err != nil {
+	return err
+}
+fmt.Printf("%v\n", result)
 ```
 
 ### ResumeProcessInstance
@@ -4669,6 +4765,34 @@ Example:
 
 ```go
 return client.SuspendBatchOperation(ctx, "2251799813685290")
+```
+
+### SuspendProcessDefinitions
+
+```go
+func (c *CamundaClient) SuspendProcessDefinitions(ctx context.Context, body ProcessDefinitionSuspensionInstruction, opts ...func(ApiSuspendProcessDefinitionsRequest) ApiSuspendProcessDefinitionsRequest) (*ProcessDefinitionSuspensionResult, error)
+```
+
+**Types:** [`ProcessDefinitionSuspensionInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ProcessDefinitionSuspensionInstruction), [`ApiSuspendProcessDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ApiSuspendProcessDefinitionsRequest), [`ProcessDefinitionSuspensionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ProcessDefinitionSuspensionResult)
+
+SuspendProcessDefinitions calls the SuspendProcessDefinitions operation.
+
+**Example**
+
+```go
+// ProcessDefinitionSuspensionInstruction is a union; suspend every version
+// of a process definition id, including its running process instances.
+byID := camunda.NewProcessDefinitionSuspensionInstructionById("order-process")
+byID.SetIncludeProcessInstances(true)
+
+result, err := client.SuspendProcessDefinitions(ctx,
+	camunda.ProcessDefinitionSuspensionInstructionByIdAsProcessDefinitionSuspensionInstruction(byID))
+if err != nil {
+	return err
+}
+if key, ok := result.GetBatchOperationKeyOk(); ok && key != nil {
+	fmt.Printf("Batch operation: %s\n", *key)
+}
 ```
 
 ### SuspendProcessInstance

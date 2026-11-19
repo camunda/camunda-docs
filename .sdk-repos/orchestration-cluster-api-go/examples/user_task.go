@@ -115,3 +115,18 @@ func searchUserTaskAuditLogsExample(ctx context.Context, client *camunda.Camunda
 	// endregion SearchUserTaskAuditLogs
 	return nil
 }
+
+func lookupUserTaskExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region LookupUserTask
+	body := camunda.NewUserTaskLookupRequest()
+	body.SetFetchVariables([]string{"recommendation", "applicant"})
+	result, err := client.LookupUserTask(ctx,
+		camunda.MustUserTaskKey("2251799813685380"),
+		*body)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("state: %s, assignee: %s\n", result.GetState(), result.GetAssignee())
+	// endregion LookupUserTask
+	return nil
+}
