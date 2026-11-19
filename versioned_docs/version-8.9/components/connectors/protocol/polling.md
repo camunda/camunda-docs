@@ -101,7 +101,7 @@ Monitor a GitHub issue to see when it's closed and if it has a specific label ('
    - **Bearer token**: `{{secrets.BEARER_TOKEN}}`
    - **Method**: `GET`
    - **Headers**: `={"Content-Type": "application/vnd.github+json","X-GitHub-Api-Version": "2022-11-28"}`
-   - **Http request interval**: `PT10M` (Every 10 minutes) – This checks the GitHub issue every 10 minutes.
+   - **Http request interval**: `PT10M` (every 10 minutes). This checks the GitHub issue every 10 minutes.
    - **Correlation Key (process)**: `=issueNumber`
    - **Correlation Key (payload)**: `=body.number`
    - **Activation Condition**: `=(body.state = "closed")`

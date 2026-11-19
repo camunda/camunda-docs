@@ -260,7 +260,7 @@ If your organization uses [Camunda app integrations](/components/camunda-integra
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.
+3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example triggers a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.
 4. In the **Output mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
 5. In the **Output mapping** section, fill the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `app_mention` event: `={senderId: request.body.event.user, text: request.body.event.text}`.
@@ -308,7 +308,7 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
+3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example triggers a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
 4. In the **Output mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
 5. In the **Output mapping** section, fill the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: connectorData.user_id, text: connectorData.text}`.

@@ -5,7 +5,7 @@ sidebar_label: HTTP Webhook
 description: Start a process instance with your custom webhook configuration, triggered by an external HTTP call.
 ---
 
-The **HTTP Webhook connector** is an inbound connector that allows you to start a BPMN process instance, or correlate a message to a running process instance, triggered by an external HTTP call.
+The **HTTP Webhook connector** is an inbound connector that starts a BPMN process instance, or correlates a message to a running process instance, when it receives an external HTTP call.
 
 ## Create an HTTP Webhook connector event
 
@@ -188,7 +188,7 @@ You can trigger it by sending a request to the generated URL, using the HTTP met
 When you deploy a new process version that uses the same webhook endpoint as an existing version:
 
 - A webhook on a start event or message start event moves to the new version once the connector runtime picks up the new version.
-- A webhook on an intermediate catch event, boundary event, or receive task in the new version won’t become active while the older version still has active message subscriptions. Webhook endpoints can’t be shared across multiple active process versions.
+- A webhook on an intermediate catch event, boundary event, or receive task in the new version won't become active while the older version still has active message subscriptions. Webhook endpoints can't be shared across multiple active process versions.
 
 To activate the new version, complete the process instances on the older version that are waiting on message subscriptions, or migrate them using [process instance migration](/components/concepts/process-instance-migration.md). If you need both versions active, use a different webhook endpoint path in the new version.
 
@@ -347,7 +347,7 @@ Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
-The verification expression, configured in the **One time verification response expression** field, allows you to return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
+The verification expression, configured in the **One time verification response expression** field, lets you return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
 
 - **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub).
 - **Request validation**: Reject invalid or malformed requests before a process instance is created.

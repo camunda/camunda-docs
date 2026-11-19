@@ -80,7 +80,7 @@ For example, if you want to send a message in a Microsoft Teams channel, choose 
 For method **Get chat by ID**, you can get more information in the response by using the dropdown property **Expand response**. You can choose one of the following values:
 
 - select **With chat members**, to get information about chat members.
-- select **With last message preview**, to get last message in chat. **Note:** This function doesn't work with [client credentials type authentication](#client-credentials), make sure that you use another authentication type.
+- select **With last message preview**, to get last message in chat. This function doesn't work with [client credentials type authentication](#client-credentials), make sure that you use another authentication type.
 - select **Without expand**, to get main information about chat.
 
 ##### Members property

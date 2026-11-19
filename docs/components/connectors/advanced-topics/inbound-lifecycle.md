@@ -33,7 +33,7 @@ The following endpoints of the Orchestration Cluster API are used as data source
 - [Search process definitions](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-definitions.api.mdx)
 - [Get message subscription statistics](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-message-subscription-statistics.api.mdx)
 
-If a process definition matches at least one of these two criteria (i.e. it is either the latest version of that process definition, or it has active instances waiting on message subscriptions), the connector runtime will create an executable for every inbound connector element in that process and keep it active as long as these criteria are met. For versions other than the latest, start event and message start event connectors are not activated, because new process instances always start on the latest version.
+If a process definition matches at least one of these two criteria (that is, it is either the latest version of that process definition, or it has active instances waiting on message subscriptions), the connector runtime will create an executable for every inbound connector element in that process and keep it active as long as these criteria are met. For versions other than the latest, start event and message start event connectors are not activated, because new process instances always start on the latest version.
 
 If a process definition is deleted from the engine; or it is replaced with a newer version of the same process, and has no active message subscriptions, the connector runtime will deactivate the related executables.
 

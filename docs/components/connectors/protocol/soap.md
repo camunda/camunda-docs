@@ -118,7 +118,7 @@ When **XML compatible JSON** is chosen, enter the **JSON definition**, for examp
 
 Enter the **Namespaces** value, for example `={"camunda":"http://my.service.com/webservicesserver/"}`.
 
-## Timeout
+## Set the connection timeout
 
 **Connection timeout in seconds** sets how long the connector waits to establish a connection with the SOAP service and to read its response. The default value is 20 seconds. To wait indefinitely, set this value to 0 or leave it empty.
 

@@ -5,7 +5,7 @@ sidebar_label: HTTP Webhook
 description: Start a process instance with your custom webhook configuration, triggered by an external HTTP call.
 ---
 
-The **HTTP Webhook connector** is an inbound connector that allows you to start a BPMN process instance, or correlate a message to a running process instance, triggered by an external HTTP call.
+The **HTTP Webhook connector** is an inbound connector that starts a BPMN process instance, or correlates a message to a running process instance, when it receives an external HTTP call.
 
 ## Create an HTTP Webhook connector event
 
@@ -309,7 +309,7 @@ Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
-The verification expression, configured in the **One time verification response expression** field, allows you to return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
+The verification expression, configured in the **One time verification response expression** field, lets you return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
 
 - **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub).
 - **Request validation**: Reject invalid or malformed requests before a process instance is created.

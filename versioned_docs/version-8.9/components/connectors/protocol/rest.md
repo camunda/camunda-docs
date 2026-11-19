@@ -95,7 +95,7 @@ We advise you to keep your **Bearer token** safe and avoid exposing it in the BP
 Select the **REST connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer token** in the **Authentication** section.
-2. Set **Bearer token** to the secret you created (i.e. `{{secrets.REST_BEARER_TOKEN}}`).
+2. Set **Bearer token** to the secret you created (for example, `{{secrets.REST_BEARER_TOKEN}}`).
 
 ### REST connector (OAuth token)
 
@@ -111,7 +111,7 @@ We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it i
 Select the **REST connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **OAuth 2.0 token endpoint** to the secret you created (i.e. `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
+2. Set **OAuth 2.0 token endpoint** to the secret you created (for example, `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
 3. Set **Client ID** to the secret you created (i.e. `{{secrets.CLIENT_ID}}`).
 4. Set **Client secret** to the secret you created (i.e. `{{secrets.CLIENT_SECRET}}`).
 5. (Optional) Set **Scopes** (i.e. `read:clients`). Depending on the OAuth provider you're using, this may or may not be required.

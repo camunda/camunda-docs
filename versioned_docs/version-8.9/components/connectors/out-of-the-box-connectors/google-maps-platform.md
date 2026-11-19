@@ -59,7 +59,7 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 3. (Optional) In the **Input** section, set **Region Code** (i.e `US`). You can find supported region codes [here](https://developers.google.com/maps/documentation/address-validation/coverage).
 4. (Optional) In the **Input** section, set **Locality**, an incorporated city or town political entity (i.e `Mountain View`).
 5. In the **Input** section, set **Address**, an incorporated city or town political entity (i.e `1600 Amphitheatre Pkwy`).
-6. In the **Output** section set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#variable-and-response-mapping) to learn more.
+6. In the **Output** section, set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#variable-and-response-mapping) to learn more.
 7. Find a full example of the **Google Maps Platform connector** response [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). To get postal address and formatted address, set to **Result Expression** in the FEEL expression:
 
 ```
