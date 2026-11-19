@@ -253,7 +253,7 @@ The **Error Expression** property requires a [FEEL](/components/modeler/feel/wha
 BPMN error object in the end. The BPMN error object can be an
 empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty
-`errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by
+`errorType` and a non-empty `errorCode` if the error type is `bpmnError`. You can use all available functionality provided by
 FEEL to produce this result.
 
 Use the provided FEEL functions:

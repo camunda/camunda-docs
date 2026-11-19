@@ -40,6 +40,12 @@ Gradle:
 implementation 'io.camunda:camunda-spring-boot-starter:${8.8.x}'
 ```
 
+## Configuration properties
+
+The Camunda Spring Boot Starter reads `camunda.client.*` properties. Replace `zeebe.client.*` and `camunda.client.zeebe.*` properties with their `camunda.client.*` equivalents.
+
+The starter still reads the legacy properties if you don't set the replacement, but they're deprecated. See [legacy property names](/apis-tools/camunda-spring-boot-starter/configuration.md#legacy-property-names) for the most common renames, and [deprecated properties](/apis-tools/camunda-spring-boot-starter/properties-reference.md#deprecated-properties) for the complete list.
+
 ## Deprecated classes and methods
 
 Please refer to the [Camunda Java Client migration guide](migrate-to-camunda-java-client.md) for details on deprecated classes and methods.

@@ -26,7 +26,7 @@ This connector implementation creates an implicit [agent loop](/reference/glossa
 This is the recommended implementation for most use cases, and offers:
 
 - A simpler process design: you don't need to model the agent loop, and tools are resolved automatically from the activities inside the sub-process.
-- Support for event sub-processes within the ad-hoc sub-process, so the agent can react to events (such as a timer or an incoming message) while it works. The event payload is passed to the LLM, and you can optionally cancel running tool calls. See [event handling](#event-handling).
+- Support for event sub-processes within the ad-hoc sub-process, so the agent can react to events (such as a timer or an incoming message) while it works. The event payload is passed to the LLM, and you can optionally cancel running tool calls. See [event handling](#configuration-event-handling).
 
 :::info
 The [example integration](agentic-ai-aiagent-subprocess-example.md) outlines how to model an agentic AI process using the AI Agent Sub-process implementation.
