@@ -163,4 +163,52 @@ public static class ProcessDefinitionExamples
     }
     // </GetStartProcessForm>
     #endregion GetStartProcessForm
+
+    #region SuspendProcessDefinitions
+
+    // <SuspendProcessDefinitions>
+    public static async Task SuspendProcessDefinitionsExample(ProcessDefinitionId processDefinitionId)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SuspendProcessDefinitionsAsync(
+            new ProcessDefinitionSuspensionInstructionById
+            {
+                ProcessDefinitionId = processDefinitionId,
+                IncludeProcessInstances = true,
+            });
+
+        foreach (var pd in result.ProcessDefinitions)
+        {
+            Console.WriteLine($"Version {pd.ProcessDefinitionVersion}: {pd.Outcome}");
+        }
+
+        if (result.BatchOperationKey is { } batchOperationKey)
+        {
+            Console.WriteLine($"Batch operation: {batchOperationKey}");
+        }
+    }
+    // </SuspendProcessDefinitions>
+    #endregion SuspendProcessDefinitions
+
+    #region ResumeProcessDefinitions
+
+    // <ResumeProcessDefinitions>
+    public static async Task ResumeProcessDefinitionsExample(ProcessDefinitionKey processDefinitionKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.ResumeProcessDefinitionsAsync(
+            new ProcessDefinitionResumptionInstructionByKey
+            {
+                ProcessDefinitionKey = processDefinitionKey,
+            });
+
+        foreach (var pd in result.ProcessDefinitions)
+        {
+            Console.WriteLine($"Version {pd.ProcessDefinitionVersion}: {pd.Outcome}");
+        }
+    }
+    // </ResumeProcessDefinitions>
+    #endregion ResumeProcessDefinitions
 }

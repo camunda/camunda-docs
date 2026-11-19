@@ -7,7 +7,7 @@ mdx:
 
 # Enums
 
-Enumeration types (110 enums).
+Enumeration types (113 enums).
 
 ## AgentDefinitionSearchQuerySortRequestField
 
@@ -1107,6 +1107,7 @@ Specifies the type of permissions.
 | Value                                          | Description |
 | ---------------------------------------------- | ----------- |
 | `ACCESS`                                       |             |
+| `ANSWER`                                       |             |
 | `CANCELPROCESSINSTANCE`                        |             |
 | `CLAIM`                                        |             |
 | `CLAIMUSERTASK`                                |             |
@@ -1148,6 +1149,7 @@ Specifies the type of permissions.
 | `READTASKLISTENER`                             |             |
 | `RESTORE`                                      |             |
 | `REVEAL`                                       |             |
+| `SUSPENDPROCESSDEFINITION`                     |             |
 | `SUSPENDPROCESSINSTANCE`                       |             |
 | `UPDATE`                                       |             |
 | `UPDATEPROCESSINSTANCE`                        |             |
@@ -1201,6 +1203,16 @@ The state of this process definition.
 | `DRAINING` |             |
 | `DELETED`  |             |
 
+## ProcessDefinitionResumptionVersionResultOutcome
+
+`RESUMED` if the version was suspended and is now active again. The resumption applies to all partitions shortly after the response. `ALREADY_RESUMED` if the version was already active, so its state is unchanged. With `includeProcessInstances`, its suspended process instances are still resumed by the batch operation. `DRAINING` if it is being deleted and is left unchanged. This only occurs when the request selects by ID without a version; selecting a single draining version is rejected with 409.
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `RESUMED`        |             |
+| `ALREADYRESUMED` |             |
+| `DRAINING`       |             |
+
 ## ProcessDefinitionSearchQuerySortRequestField
 
 The field to sort by.
@@ -1214,6 +1226,16 @@ The field to sort by.
 | `VersionTag`           |             |
 | `ProcessDefinitionId`  |             |
 | `TenantId`             |             |
+
+## ProcessDefinitionSuspensionVersionResultOutcome
+
+`SUSPENDED` if the version was active and is now suspended. The suspension applies to all partitions shortly after the response. `ALREADY_SUSPENDED` if the version was already suspended, so its state is unchanged. With `includeProcessInstances`, its process instances are still suspended by the batch operation. `DRAINING` if it is being deleted and is left unchanged. This only occurs when the request selects by ID without a version; selecting a single draining version is rejected with 409.
+
+| Value              | Description |
+| ------------------ | ----------- |
+| `SUSPENDED`        |             |
+| `ALREADYSUSPENDED` |             |
+| `DRAINING`         |             |
 
 ## ProcessInstanceSearchQuerySortRequestField
 
@@ -1283,6 +1305,7 @@ The type of resource to add/remove permissions to/from.
 | `GROUP`                          |             |
 | `MAPPINGRULE`                    |             |
 | `MESSAGE`                        |             |
+| `PROBE`                          |             |
 | `PROCESSDEFINITION`              |             |
 | `RESOURCE`                       |             |
 | `ROLE`                           |             |
@@ -1441,6 +1464,19 @@ The field to sort by.
 | `Username` |             |
 | `Name`     |             |
 | `Email`    |             |
+
+## UserTaskLookupStateEnum
+
+The lifecycle state of an active user task. A state ending in `-ING` means a change to the task is in progress, for example waiting for task listeners; the task fields still hold the values from before the change. A claim in progress is reported as `ASSIGNING`, as in the user task search.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `CREATING`   |             |
+| `CREATED`    |             |
+| `ASSIGNING`  |             |
+| `UPDATING`   |             |
+| `COMPLETING` |             |
+| `CANCELING`  |             |
 
 ## UserTaskSearchQuerySortRequestField
 

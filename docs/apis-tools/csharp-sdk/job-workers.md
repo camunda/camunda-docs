@@ -93,6 +93,28 @@ client.CreateJobWorker(config, async (job, ct) =>
 });
 ```
 
+`DueDate` and `FollowUpDate` are cleared with `ClearDueDate()` / `ClearFollowUpDate()`, which send an empty string. Leaving them `null` keeps the task's current value. Assigning the property after a clear replaces it, and the reverse is also true. The same methods exist on `Changeset` for `UpdateUserTaskAsync`:
+
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: JobCorrectionsClearDates -->
+
+```csharp
+client.CreateJobWorker(config, async (job, ct) =>
+{
+    return new JobCompletionRequest
+    {
+        Result = new JobResultUserTask
+        {
+            // Set the due date and remove the follow-up date. Leaving a date
+            // unset (null) keeps the task's current value.
+            Corrections = new JobResultCorrections
+            {
+                DueDate = DateTimeOffset.UtcNow.AddDays(7),
+            }.ClearFollowUpDate(),
+        },
+    };
+});
+```
+
 To deny the user task action (e.g. reject a completion):
 
 <!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: JobCorrectionsDenied -->
