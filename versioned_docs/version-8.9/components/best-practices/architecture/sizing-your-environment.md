@@ -242,7 +242,9 @@ Since Camunda 8.8, the Camunda Java Client uses the [Orchestration Cluster REST 
 Camunda's regular load tests, which run both protocols side by side on the same workload, show a difference:
 
 - REST typically uses about 10 to 15% more broker CPU than gRPC.
-- REST produces more backpressure.
+- REST has more requests rejected with backpressure at the same load.
+  - Backpressure means the broker rejects requests when it receives more than it can process with acceptable latency. See [Backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md).
+  - The client has to retry rejected requests. Occasional rejections are normal, a sustained high rate means the cluster is at its limit.
 - When the brokers are CPU-saturated, REST reaches up to about 14% lower throughput.
 - At a fixed rate with CPU headroom, throughput is equal.
 
