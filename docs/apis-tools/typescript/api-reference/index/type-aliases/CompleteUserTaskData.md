@@ -16,7 +16,7 @@ type CompleteUserTaskData = object;
 ### body?
 
 ```ts
-optional body?: UserTaskCompletionRequest;
+body?: UserTaskCompletionRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the user task to complete.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

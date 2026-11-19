@@ -16,7 +16,7 @@ type SearchCorrelatedMessageSubscriptionsData = object;
 ### body?
 
 ```ts
-optional body?: CorrelatedMessageSubscriptionSearchQuery;
+body?: CorrelatedMessageSubscriptionSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: CorrelatedMessageSubscriptionSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

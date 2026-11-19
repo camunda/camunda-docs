@@ -18,7 +18,7 @@ Agent instance history search request.
 ### filter?
 
 ```ts
-optional filter?: AgentInstanceHistoryFilter;
+filter?: AgentInstanceHistoryFilter;
 ```
 
 The history item search filters.
@@ -26,7 +26,7 @@ The history item search filters.
 ### sort?
 
 ```ts
-optional sort?: AgentInstanceHistorySearchQuerySortRequest[];
+sort?: AgentInstanceHistorySearchQuerySortRequest[];
 ```
 
 Sort field criteria.

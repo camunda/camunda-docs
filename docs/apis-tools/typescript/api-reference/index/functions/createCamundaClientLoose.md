@@ -78,6 +78,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         timeoutMs: number;
      };
      restAddress: string;
+     restAddressExact: boolean;
      supportLog?: {
         enabled: boolean;
         filePath: string;
@@ -87,6 +88,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         log: boolean;
      };
      tokenAudience: string;
+     userAgent?: string;
      validation: {
         raw: string;
         req: ValidationMode;
@@ -110,6 +112,9 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
   activateAdHocSubProcessActivities(...a): CancelablePromise<void>;
   activateJobs(...a): CancelablePromise<{
      jobs: object[];
+  }>;
+  addClock(...a): CancelablePromise<{
+     timestamp: string;
   }>;
   assignClientToGroup(...a): CancelablePromise<void>;
   assignClientToTenant(...a): CancelablePromise<void>;
@@ -178,7 +183,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      tenantId: string;
   }>;
   createDocument(...a): CancelablePromise<{
-     camunda.document.type: "camunda";
+     "camunda.document.type": "camunda";
      contentHash: string | null;
      documentId: string;
      metadata: {
@@ -411,7 +416,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
            | {
            contentType: "DOCUMENT";
            documentReference: {
-              camunda.document.type: "camunda";
+              "camunda.document.type": "camunda";
               contentHash: string | null;
               documentId: string;
               metadata: {
@@ -587,10 +592,15 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      displayName: string | null;
      email: string | null;
      groups: string[];
+     isAnonymous: boolean;
      roles: string[];
      salesPlanType: string | null;
      tenants: object[];
-     username: string;
+     username:   | {
+      [key: number]: string;
+        __brand: "Username";
+      }
+        | null;
   }>;
   getAuthHeaders(...a): Promise<{
    [key: string]: string;
@@ -634,6 +644,9 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      operationsTotalCount: number;
      startDate: string | null;
      state: BatchOperationStateEnum;
+  }>;
+  getClock(...a): CancelablePromise<{
+     timestamp: string;
   }>;
   getClusterExportingStatus(...a): CancelablePromise<{
      status: ExportingStatusCode;
@@ -731,6 +744,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         timeoutMs: number;
      };
      restAddress: string;
+     restAddressExact: boolean;
      supportLog?: {
         enabled: boolean;
         filePath: string;
@@ -740,6 +754,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         log: boolean;
      };
      tokenAudience: string;
+     userAgent?: string;
      validation: {
         raw: string;
         req: ValidationMode;
@@ -805,6 +820,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
       }
         | null;
      state: DecisionInstanceStateEnum;
+     storageOrdinal: number | null;
      tenantId: string;
   }>;
   getDecisionRequirements(...a): CancelablePromise<{
@@ -829,8 +845,16 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         __brand: "IncidentKey";
       }
         | null;
-     processDefinitionId: string;
-     processDefinitionKey: string;
+     processDefinitionId:   | {
+      [key: number]: string;
+        __brand: "ProcessDefinitionId";
+      }
+        | null;
+     processDefinitionKey:   | {
+      [key: number]: string;
+        __brand: "ProcessDefinitionKey";
+      }
+        | null;
      processInstanceKey: string;
      rootProcessInstanceKey:   | {
       [key: number]: string;
@@ -949,6 +973,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
       }
         | null;
      state: IncidentStateEnum;
+     storageOrdinal: number | null;
      tenantId: string;
   }>;
   getJobErrorStatistics(...a): CancelablePromise<{
@@ -1037,7 +1062,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      processDefinitionId: string;
      processDefinitionKey: string;
      resourceName: string;
-     state: "ACTIVE" | "DRAINING" | "DELETED";
+     state: "ACTIVE" | "SUSPENDED" | "DRAINING" | "DELETED";
      tenantId: string;
      version: number;
      versionTag: string | null;
@@ -1128,6 +1153,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         | null;
      startDate: string;
      state: ProcessInstanceStateEnum;
+     storageOrdinal: number | null;
      suspendedDate: string | null;
      tags: string[];
      tenantId: string;
@@ -1379,6 +1405,47 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
      trace(...a): void;
      warn(...a): void;
   };
+  lookupUserTask(...a): CancelablePromise<{
+     assignee: string | null;
+     businessId:   | {
+      [key: number]: string;
+        __brand: "BusinessId";
+      }
+        | null;
+     candidateGroups: string[];
+     candidateUsers: string[];
+     creationDate: string;
+     customHeaders: {
+      [key: string]: string;
+     };
+     dueDate: string | null;
+     elementId: string;
+     elementInstanceKey: string;
+     externalFormReference: string | null;
+     followUpDate: string | null;
+     formKey:   | {
+      [key: number]: string;
+        __brand: "FormKey";
+      }
+        | null;
+     priority: number;
+     processDefinitionId: string;
+     processDefinitionKey: string;
+     processDefinitionVersion: number;
+     processInstanceKey: string;
+     rootProcessInstanceKey:   | {
+      [key: number]: string;
+        __brand: "ProcessInstanceKey";
+      }
+        | null;
+     state: UserTaskLookupStateEnum;
+     tags: string[];
+     tenantId: string;
+     userTaskKey: string;
+     variables: {
+      [key: string]: unknown;
+     };
+  }>;
   migrateProcessInstance(...a): CancelablePromise<void>;
   migrateProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
@@ -1422,6 +1489,14 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
   resumeBatchOperation(...a): CancelablePromise<void>;
   resumeClusterExporting(...a): CancelablePromise<void>;
   resumeExporting(...a): CancelablePromise<void>;
+  resumeProcessDefinitions(...a): CancelablePromise<{
+     batchOperationKey:   | {
+      [key: number]: string;
+        __brand: "BatchOperationKey";
+      }
+        | null;
+     processDefinitions: object[];
+  }>;
   resumeProcessInstance(...a): CancelablePromise<void>;
   resumeProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
@@ -2256,6 +2331,14 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
   }>;
   stopAllWorkers(...a): void;
   suspendBatchOperation(...a): CancelablePromise<void>;
+  suspendProcessDefinitions(...a): CancelablePromise<{
+     batchOperationKey:   | {
+      [key: number]: string;
+        __brand: "BatchOperationKey";
+      }
+        | null;
+     processDefinitions: object[];
+  }>;
   suspendProcessInstance(...a): CancelablePromise<void>;
   suspendProcessInstancesBatchOperation(...a): CancelablePromise<{
      batchOperationKey: string;
@@ -2474,6 +2557,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `timeoutMs`: `number`;
 \};
 `restAddress`: `string`;
+`restAddressExact`: `boolean`;
 `supportLog?`: \{
 `enabled`: `boolean`;
 `filePath`: `string`;
@@ -2483,6 +2567,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `log`: `boolean`;
 \};
 `tokenAudience`: `string`;
+`userAgent?`: `string`;
 `validation`: \{
 `raw`: `string`;
 `req`: [`ValidationMode`](../type-aliases/ValidationMode.md);
@@ -2506,6 +2591,9 @@ signatures), matching the runtime wrappers the constructor installs.
 `activateAdHocSubProcessActivities`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `activateJobs`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `jobs`: `object`[];
+\}\>;
+`addClock`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`timestamp`: `string`;
 \}\>;
 `assignClientToGroup`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `assignClientToTenant`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
@@ -2574,7 +2662,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `tenantId`: `string`;
 \}\>;
 `createDocument`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`camunda.document.type`: `"camunda"`;
+`"camunda.document.type"`: `"camunda"`;
 `contentHash`: `string` \| `null`;
 `documentId`: `string`;
 `metadata`: \{
@@ -2807,7 +2895,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \| \{
 `contentType`: `"DOCUMENT"`;
 `documentReference`: \{
-`camunda.document.type`: `"camunda"`;
+`"camunda.document.type"`: `"camunda"`;
 `contentHash`: `string` \| `null`;
 `documentId`: `string`;
 `metadata`: \{
@@ -2983,10 +3071,15 @@ signatures), matching the runtime wrappers the constructor installs.
 `displayName`: `string` \| `null`;
 `email`: `string` \| `null`;
 `groups`: `string`[];
+`isAnonymous`: `boolean`;
 `roles`: `string`[];
 `salesPlanType`: `string` \| `null`;
 `tenants`: `object`[];
-`username`: `string`;
+`username`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"Username"`;
+\}
+\| `null`;
 \}\>;
 `getAuthHeaders`(...`a`): `Promise`\<\{
 \[`key`: `string`\]: `string`;
@@ -3030,6 +3123,9 @@ signatures), matching the runtime wrappers the constructor installs.
 `operationsTotalCount`: `number`;
 `startDate`: `string` \| `null`;
 `state`: [`BatchOperationStateEnum`](../type-aliases/BatchOperationStateEnum.md);
+\}\>;
+`getClock`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`timestamp`: `string`;
 \}\>;
 `getClusterExportingStatus`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `status`: [`ExportingStatusCode`](../type-aliases/ExportingStatusCode.md);
@@ -3127,6 +3223,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `timeoutMs`: `number`;
 \};
 `restAddress`: `string`;
+`restAddressExact`: `boolean`;
 `supportLog?`: \{
 `enabled`: `boolean`;
 `filePath`: `string`;
@@ -3136,6 +3233,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `log`: `boolean`;
 \};
 `tokenAudience`: `string`;
+`userAgent?`: `string`;
 `validation`: \{
 `raw`: `string`;
 `req`: [`ValidationMode`](../type-aliases/ValidationMode.md);
@@ -3201,6 +3299,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \}
 \| `null`;
 `state`: [`DecisionInstanceStateEnum`](../type-aliases/DecisionInstanceStateEnum.md);
+`storageOrdinal`: `number` \| `null`;
 `tenantId`: `string`;
 \}\>;
 `getDecisionRequirements`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
@@ -3225,8 +3324,16 @@ signatures), matching the runtime wrappers the constructor installs.
 `__brand`: `"IncidentKey"`;
 \}
 \| `null`;
-`processDefinitionId`: `string`;
-`processDefinitionKey`: `string`;
+`processDefinitionId`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"ProcessDefinitionId"`;
+\}
+\| `null`;
+`processDefinitionKey`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"ProcessDefinitionKey"`;
+\}
+\| `null`;
 `processInstanceKey`: `string`;
 `rootProcessInstanceKey`: \| \{
 \[`key`: `number`\]: `string`;
@@ -3345,6 +3452,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \}
 \| `null`;
 `state`: [`IncidentStateEnum`](../type-aliases/IncidentStateEnum.md);
+`storageOrdinal`: `number` \| `null`;
 `tenantId`: `string`;
 \}\>;
 `getJobErrorStatistics`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
@@ -3433,7 +3541,7 @@ signatures), matching the runtime wrappers the constructor installs.
 `processDefinitionId`: `string`;
 `processDefinitionKey`: `string`;
 `resourceName`: `string`;
-`state`: `"ACTIVE"` \| `"DRAINING"` \| `"DELETED"`;
+`state`: `"ACTIVE"` \| `"SUSPENDED"` \| `"DRAINING"` \| `"DELETED"`;
 `tenantId`: `string`;
 `version`: `number`;
 `versionTag`: `string` \| `null`;
@@ -3524,6 +3632,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \| `null`;
 `startDate`: `string`;
 `state`: [`ProcessInstanceStateEnum`](../type-aliases/ProcessInstanceStateEnum.md);
+`storageOrdinal`: `number` \| `null`;
 `suspendedDate`: `string` \| `null`;
 `tags`: `string`[];
 `tenantId`: `string`;
@@ -3775,6 +3884,47 @@ signatures), matching the runtime wrappers the constructor installs.
 `trace`(...`a`): `void`;
 `warn`(...`a`): `void`;
 \};
+`lookupUserTask`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`assignee`: `string` \| `null`;
+`businessId`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"BusinessId"`;
+\}
+\| `null`;
+`candidateGroups`: `string`[];
+`candidateUsers`: `string`[];
+`creationDate`: `string`;
+`customHeaders`: \{
+\[`key`: `string`\]: `string`;
+\};
+`dueDate`: `string` \| `null`;
+`elementId`: `string`;
+`elementInstanceKey`: `string`;
+`externalFormReference`: `string` \| `null`;
+`followUpDate`: `string` \| `null`;
+`formKey`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"FormKey"`;
+\}
+\| `null`;
+`priority`: `number`;
+`processDefinitionId`: `string`;
+`processDefinitionKey`: `string`;
+`processDefinitionVersion`: `number`;
+`processInstanceKey`: `string`;
+`rootProcessInstanceKey`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"ProcessInstanceKey"`;
+\}
+\| `null`;
+`state`: [`UserTaskLookupStateEnum`](../type-aliases/UserTaskLookupStateEnum.md);
+`tags`: `string`[];
+`tenantId`: `string`;
+`userTaskKey`: `string`;
+`variables`: \{
+\[`key`: `string`\]: `unknown`;
+\};
+\}\>;
 `migrateProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `migrateProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
@@ -3818,6 +3968,14 @@ signatures), matching the runtime wrappers the constructor installs.
 `resumeBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `resumeClusterExporting`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `resumeExporting`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`resumeProcessDefinitions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`batchOperationKey`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"BatchOperationKey"`;
+\}
+\| `null`;
+`processDefinitions`: `object`[];
+\}\>;
 `resumeProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `resumeProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;
@@ -4652,6 +4810,14 @@ signatures), matching the runtime wrappers the constructor installs.
 \}\>;
 `stopAllWorkers`(...`a`): `void`;
 `suspendBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
+`suspendProcessDefinitions`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`batchOperationKey`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"BatchOperationKey"`;
+\}
+\| `null`;
+`processDefinitions`: `object`[];
+\}\>;
 `suspendProcessInstance`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>;
 `suspendProcessInstancesBatchOperation`(...`a`): [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `batchOperationKey`: `string`;

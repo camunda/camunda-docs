@@ -18,7 +18,7 @@ Process definition variable name filter request.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The variable name search filter.

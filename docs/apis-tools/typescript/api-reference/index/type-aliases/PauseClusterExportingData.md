@@ -16,7 +16,7 @@ type PauseClusterExportingData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### soft?
 
 ```ts
-optional soft?: boolean;
+soft?: boolean;
 ```
 
 If true, soft-pauses exporting instead of a hard pause.

@@ -16,7 +16,7 @@ type TenantClientSearchQueryRequest = SearchQueryRequest & object;
 ### sort?
 
 ```ts
-optional sort?: TenantClientSearchQuerySortRequest[];
+sort?: TenantClientSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

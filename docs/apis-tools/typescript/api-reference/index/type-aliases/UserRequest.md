@@ -16,7 +16,7 @@ type UserRequest = object;
 ### email?
 
 ```ts
-optional email?: string;
+email?: string;
 ```
 
 The email of the user.
@@ -26,7 +26,7 @@ The email of the user.
 ### name?
 
 ```ts
-optional name?: string;
+name?: string;
 ```
 
 The name of the user.

@@ -20,7 +20,7 @@ for rather than sending it as an explicit null.
 ### cacheCreationTokenCount?
 
 ```ts
-optional cacheCreationTokenCount?: number | null;
+cacheCreationTokenCount?: number | null;
 ```
 
 Cache-creation tokens consumed by this LLM call. Null when not provided.
@@ -30,7 +30,7 @@ Cache-creation tokens consumed by this LLM call. Null when not provided.
 ### cacheReadTokenCount?
 
 ```ts
-optional cacheReadTokenCount?: number | null;
+cacheReadTokenCount?: number | null;
 ```
 
 Cache-read tokens consumed by this LLM call. Null when not provided.
@@ -40,7 +40,7 @@ Cache-read tokens consumed by this LLM call. Null when not provided.
 ### durationMs?
 
 ```ts
-optional durationMs?: number | null;
+durationMs?: number | null;
 ```
 
 Wall-clock duration of the LLM call in milliseconds. Null when not provided.
@@ -50,7 +50,7 @@ Wall-clock duration of the LLM call in milliseconds. Null when not provided.
 ### inputTokens?
 
 ```ts
-optional inputTokens?: number | null;
+inputTokens?: number | null;
 ```
 
 Input tokens consumed by this LLM call. Null when not provided.
@@ -60,7 +60,7 @@ Input tokens consumed by this LLM call. Null when not provided.
 ### outputTokens?
 
 ```ts
-optional outputTokens?: number | null;
+outputTokens?: number | null;
 ```
 
 Output tokens produced by this LLM call. Null when not provided.
@@ -70,7 +70,7 @@ Output tokens produced by this LLM call. Null when not provided.
 ### reasoningTokenCount?
 
 ```ts
-optional reasoningTokenCount?: number | null;
+reasoningTokenCount?: number | null;
 ```
 
 Reasoning tokens consumed by this LLM call. Null when not provided.

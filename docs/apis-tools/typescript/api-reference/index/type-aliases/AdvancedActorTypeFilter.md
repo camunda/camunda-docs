@@ -20,7 +20,7 @@ Advanced AuditLogActorTypeEnum filter.
 ### $eq?
 
 ```ts
-optional $eq?: AuditLogActorTypeEnum;
+$eq?: AuditLogActorTypeEnum;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: AuditLogActorTypeEnum[];
+$in?: AuditLogActorTypeEnum[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like?: LikeFilter;
+$like?: LikeFilter;
 ```
 
 ---
@@ -58,7 +58,7 @@ optional $like?: LikeFilter;
 ### $neq?
 
 ```ts
-optional $neq?: AuditLogActorTypeEnum;
+$neq?: AuditLogActorTypeEnum;
 ```
 
 Checks for inequality with the provided value.

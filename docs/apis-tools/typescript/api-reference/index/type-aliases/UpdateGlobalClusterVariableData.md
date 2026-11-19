@@ -40,7 +40,7 @@ The name of the cluster variable
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

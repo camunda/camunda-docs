@@ -16,7 +16,7 @@ type SearchAgentInstancesData = object;
 ### body?
 
 ```ts
-optional body?: AgentInstanceSearchQuery;
+body?: AgentInstanceSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: AgentInstanceSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

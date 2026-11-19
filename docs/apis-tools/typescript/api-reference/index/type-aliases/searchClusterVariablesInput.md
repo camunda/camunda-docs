@@ -16,5 +16,5 @@ type searchClusterVariablesInput = searchClusterVariablesBody & object;
 ### truncateValues?
 
 ```ts
-optional truncateValues?: searchClusterVariablesQueryParam_truncateValues;
+truncateValues?: searchClusterVariablesQueryParam_truncateValues;
 ```

@@ -16,7 +16,7 @@ type SearchProcessDefinitionsData = object;
 ### body?
 
 ```ts
-optional body?: ProcessDefinitionSearchQuery;
+body?: ProcessDefinitionSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ProcessDefinitionSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

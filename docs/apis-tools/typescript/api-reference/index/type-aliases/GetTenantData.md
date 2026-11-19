@@ -16,7 +16,7 @@ type GetTenantData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

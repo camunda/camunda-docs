@@ -19,7 +19,7 @@ type CamundaUserResult = object;
 authorizedComponents: string[];
 ```
 
-The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `["*"]`, regardless of the user's actual permissions, since access is not restricted in that case.
+The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `["*"]`, regardless of the user's actual permissions, since access is not restricted in that case. An anonymous caller of an unprotected API also gets `["*"]`, for the same reason.
 
 ---
 
@@ -79,6 +79,16 @@ The groups assigned to the user.
 
 ---
 
+### isAnonymous
+
+```ts
+isAnonymous: boolean;
+```
+
+Whether the caller has no identity. Only an unprotected API answers an anonymous caller; a protected API returns `401` instead. When `true`, `username`, `displayName` and `email` are `null` and the lists are empty.
+
+---
+
 ### roles
 
 ```ts
@@ -112,7 +122,7 @@ The tenants the user is a member of.
 ### username
 
 ```ts
-username: Username;
+username: Username | null;
 ```
 
-The username of the user.
+The username of the user. `null` when `isAnonymous` is `true`.

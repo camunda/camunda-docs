@@ -26,7 +26,7 @@ The process definition instance version statistics search filters.
 ### page?
 
 ```ts
-optional page?: OffsetPagination;
+page?: OffsetPagination;
 ```
 
 Pagination criteria.
@@ -36,7 +36,7 @@ Pagination criteria.
 ### sort?
 
 ```ts
-optional sort?: ProcessDefinitionInstanceVersionStatisticsQuerySortRequest[];
+sort?: ProcessDefinitionInstanceVersionStatisticsQuerySortRequest[];
 ```
 
 Sort field criteria.

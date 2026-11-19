@@ -16,7 +16,7 @@ type SearchGroupsData = object;
 ### body?
 
 ```ts
-optional body?: GroupSearchQueryRequest;
+body?: GroupSearchQueryRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: GroupSearchQueryRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

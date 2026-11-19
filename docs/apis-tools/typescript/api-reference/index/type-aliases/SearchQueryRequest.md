@@ -16,7 +16,7 @@ type SearchQueryRequest = object;
 ### page?
 
 ```ts
-optional page?: SearchQueryPageRequest;
+page?: SearchQueryPageRequest;
 ```
 
 Pagination criteria.

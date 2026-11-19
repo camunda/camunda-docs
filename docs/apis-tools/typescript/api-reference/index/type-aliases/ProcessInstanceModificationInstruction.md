@@ -16,7 +16,7 @@ type ProcessInstanceModificationInstruction = object;
 ### activateInstructions?
 
 ```ts
-optional activateInstructions?: ProcessInstanceModificationActivateInstruction[];
+activateInstructions?: ProcessInstanceModificationActivateInstruction[];
 ```
 
 Instructions describing which elements to activate in which scopes and which variables to create or update.
@@ -26,7 +26,7 @@ Instructions describing which elements to activate in which scopes and which var
 ### moveInstructions?
 
 ```ts
-optional moveInstructions?: ProcessInstanceModificationMoveInstruction[];
+moveInstructions?: ProcessInstanceModificationMoveInstruction[];
 ```
 
 Instructions describing which elements to move from one scope to another.
@@ -36,7 +36,7 @@ Instructions describing which elements to move from one scope to another.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```
 
 ---
@@ -44,7 +44,7 @@ optional operationReference?: OperationReference;
 ### terminateInstructions?
 
 ```ts
-optional terminateInstructions?: ProcessInstanceModificationTerminateInstruction[];
+terminateInstructions?: ProcessInstanceModificationTerminateInstruction[];
 ```
 
 Instructions describing which elements to terminate.
