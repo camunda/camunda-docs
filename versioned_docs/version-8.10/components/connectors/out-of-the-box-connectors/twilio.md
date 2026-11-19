@@ -38,9 +38,10 @@ To work with the Twilio connector, choose the required operation type in the **O
 
 ### Operation
 
-Choose an operation type of either sendSms, listMessages, or getMessage in the **Operation** section:
+Choose an operation type in the **Operation** section:
 
 - **Send SMS**: Send an SMS message to a specified phone number from your Twilio account.
+- **Send a WhatsApp message**: Send a WhatsApp message from your Twilio WhatsApp phone number.
 - **List messages**: Retrieve a list of messages sent from your Twilio account within specified filters.
 - **Get message**: Retrieve the details of a specific message sent from your Twilio account.
 
@@ -71,6 +72,18 @@ For more information on authentication and security in Twilio, refer to the [Twi
 :::note
 See the [Twilio documentation](https://www.twilio.com/docs/sms/send-messages) for more details.
 :::
+
+### Send a WhatsApp message operation
+
+Select the **WhatsApp message type**:
+
+- **Free form message**: Set the **WhatsApp message text**, the content of the WhatsApp message that will be sent.
+- **Template message**: Set the **WhatsApp template ID**, which the connector sends to Twilio as `ContentSid`, and the **WhatsApp template parameters**. Provide the parameter values to substitute in the template as a FEEL context with numbered keys, for example, `{"1": "Test", "2": "Message"}`. Make sure all keys and values are strings or are converted to strings.
+
+For both message types, set the following fields:
+
+- `From WhatsApp number`: The originating Twilio WhatsApp phone number used for sending the message.
+- `To WhatsApp number`: The recipient's WhatsApp phone number.
 
 ### List messages operation
 

@@ -23,7 +23,7 @@ The SDK provides APIs for common connector operations, such as:
 - Validating input data
 - Replacing secrets in input data
 
-Additionally, the SDK allows for convenient [testing](#testing) of your connector behavior and
+Additionally, the SDK allows for convenient testing of your connector behavior and
 [executing it in the environments](#runtime-environments) that suit your use cases best.
 
 ## Creating a custom connector
@@ -175,7 +175,7 @@ For example, you can create the domain object `authentication` that contains the
 ```
 
 You can deserialize these authentication properties into a domain object using the SDK.
-Visit the [input data](#outbound-connector-input-data) section for further details.
+Visit the [outbound connector runtime logic](#outbound-connector-runtime-logic) section for further details.
 
 Connectors that offer any kind of result from their invocation should allow users to configure
 how to map the result into their processes. Therefore, connector templates can reuse the two
@@ -226,7 +226,7 @@ BPMN errors. To provide this, connector templates can provide an **Error Express
 
 This object creates a custom header for the jobs created for the tasks that use this template.
 The connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can observe an example of how to use this in the [BPMN errors in connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors-and-failing-jobs).
+You can observe an example of how to use this in the [BPMN errors in connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
 
 ### Outbound connector runtime logic
 
@@ -244,6 +244,7 @@ import io.camunda.connector.api.annotation.OutboundConnector;
 import io.camunda.connector.api.annotation.Variable;
 import io.camunda.connector.api.error.ConnectorException;
 import io.camunda.connector.api.outbound.OutboundConnectorProvider;
+import io.camunda.connector.generator.java.annotation.ElementTemplate;
 import jakarta.validation.constraints.NotNull;
 
 @OutboundConnector( // (1)
@@ -288,7 +289,7 @@ A single `@OutboundConnector` annotated connector (**(1)**) can declare one or m
 
 Every declared operation (**(3)**) can accept one or multiple inputs as parameters.
 
-Describe each operation with the `name`, `description`, and `keywords` attributes of `@Operation`. The element template generator turns them into the template's [`steps` and `presets`](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets), so users can find the operation by searching for the action it performs and select it directly when they apply the template. Once a connector declares more than one operation, every operation must declare at least one keyword, or template generation fails.
+Describe each operation with the `name`, `description`, and `keywords` attributes of `@Operation`. The element template generator turns them into the template's [`steps` and `presets`](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets), so users can find the operation by searching for the action it performs and select it directly when they apply the template. If any operation of a connector declares `keywords`, every operation must declare at least one keyword, or template generation fails. If no operation declares `keywords`, the generator creates no `steps` or `presets`.
 
 Using the `@Variable` annotation, a primitive type has to specify the variable name for example `input` as shown in (**(4)**). Binding to a complex type will use the property names (`a`, `b`) of the type for variable mapping (**(5)**).
 
@@ -301,7 +302,7 @@ error should be associated with a specific error code, the connector can throw a
 a `code` as shown in **(7)**.
 
 We recommend documenting the list of error codes as part of the connector's API. Users can build on those codes
-by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors-and-failing-jobs) in their connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their connector configurations.
 
 ### Inbound connector project outline
 
@@ -363,8 +364,8 @@ A connector template defines the binding to your connector runtime behavior via 
 ```
 
 This type definition `io.camunda:mytestinbound:1` is the connection configuring which version of your connector runtime
-behavior to use. In technical terms, this defines the **Type** of jobs created for tasks in your process model that use
-this template. Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
+behavior to use. In technical terms, this defines which inbound connector implementation the connector runtime activates
+for elements in your process model that use this template.
 
 Besides the type binding, connector templates also define the properties of your connector as `zeebe:property` objects.
 For example, you can create the input variable `sender` of your connector in the element template as follows:
@@ -396,13 +397,19 @@ A minimal recommended outline of a connector function implementation looks as fo
 package io.camunda.connector.inbound;
 
 import io.camunda.connector.api.annotation.InboundConnector;
+import io.camunda.connector.api.inbound.CorrelationFailureHandlingStrategy.ForwardErrorToUpstream;
+import io.camunda.connector.api.inbound.CorrelationFailureHandlingStrategy.Ignore;
+import io.camunda.connector.api.inbound.CorrelationRequest;
+import io.camunda.connector.api.inbound.CorrelationResult;
+import io.camunda.connector.api.inbound.CorrelationResult.Failure;
+import io.camunda.connector.api.inbound.CorrelationResult.Success;
 import io.camunda.connector.api.inbound.InboundConnectorContext;
 import io.camunda.connector.api.inbound.InboundConnectorExecutable;
 import io.camunda.connector.inbound.subscription.MockSubscription;
 import io.camunda.connector.inbound.subscription.MockSubscriptionEvent;
 
 @InboundConnector(name = "MYINBOUNDCONNECTOR", type = "io.camunda:mytestinbound:1")
-public class MyConnectorExecutable implements InboundConnectorExecutable {
+public class MyConnectorExecutable implements InboundConnectorExecutable<InboundConnectorContext> {
 
     private MockSubscription subscription;
     private InboundConnectorContext connectorContext;
@@ -424,7 +431,8 @@ public class MyConnectorExecutable implements InboundConnectorExecutable {
 
     private void onEvent(MockSubscriptionEvent rawEvent) {
         MyConnectorEvent connectorEvent = new MyConnectorEvent(rawEvent);
-        var result = connectorContext.correlateWithResult(connectorEvent);
+        var result = connectorContext.correlate(
+            CorrelationRequest.builder().variables(connectorEvent).build());
         handleResult(result);
     }
 
@@ -502,7 +510,7 @@ implementation "io.camunda.connector:connector-validation:${version.connectors}"
 
 Validation is performed automatically when binding variables to parameters.
 
-This instructs the context to prepare a validator that is provided by an implementation
+The connector runtime uses a validator that is provided by an implementation
 of the `ValidationProvider` interface. The `connector-validation` artifact brings along
 such an implementation. It uses the [Jakarta Bean Validation API](https://beanvalidation.org/)
 together with [Hibernate Validator](https://hibernate.org/validator/).
@@ -513,9 +521,9 @@ attributes to define your requirements:
 ```java
 package io.camunda.connector;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class MyConnectorRequest {
 
@@ -533,8 +541,8 @@ using the `@Valid` annotation. Thus, the `authentication` object will also be va
 ```java
 package io.camunda.connector;
 
-
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 public class Authentication {
 
@@ -560,11 +568,9 @@ handling secrets in input data.
 `{{secrets.*}}` is the legacy syntax, resolved by the connector runtime. The recommended `camunda.secrets.<name>` syntax is resolved by the Orchestration Cluster before the job reaches the connector, so your connector receives the value already in place. See [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md) for how the two syntaxes differ and how to migrate.
 
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
-in the environments that handle connector invocation. We do not pass secrets into the
-Connector function in clear text but only as placeholders that you can replace from
-within the connector function.
+in the environments that handle connector invocation.
 
-Secrets are replaced automatically in the connector input when you use the variable binding or properties access methods of the `InboundConnectorContext`. You will always receive inputs with secrets replaced.
+Secrets are replaced automatically in the connector input when you bind variables to the parameters of an outbound connector operation, or use the properties access methods of the `InboundConnectorContext`. You will always receive inputs with secrets replaced.
 
 The Runtime automatically replaces secrets in String fields or in container types. Using the
 placeholder pattern `{{secrets.*}}` in a String field will replace the placeholder with the secret
@@ -643,8 +649,9 @@ You can start the runtime including your Connector jar by running:
 docker run --rm -i \
   -v $PWD/your-connector.jar:/opt/app/connector.jar \         # Add a connector jar to the classpath
   --network=camunda \                                         # Optional: Attach to the orchestration cluster Docker network
-  -e CAMUNDA_CLIENT_GRPC_ADDRESS=http://orchestration:26500 \ # Specify cluster GRPC API address
-  -e CAMUNDA_CLIENT_REST_ADDRESS=http://orchestration:8080 \  # Specify cluster REST API address
+  -e CAMUNDA_CLIENT_MODE=self-managed \                       # Connect to a Self-Managed cluster
+  -e CAMUNDA_CLIENT_GRPCADDRESS=http://orchestration:26500 \  # Specify cluster gRPC API address
+  -e CAMUNDA_CLIENT_RESTADDRESS=http://orchestration:8080 \   # Specify cluster REST API address
   camunda/connectors:X.Y.Z                                    # Connector docker image version
 ```
 

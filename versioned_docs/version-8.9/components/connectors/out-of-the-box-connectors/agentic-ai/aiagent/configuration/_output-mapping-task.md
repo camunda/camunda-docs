@@ -17,5 +17,5 @@ unexpected results between different agents.
 :::
 
 :::info
-To learn more about output mapping, see [variable/response mapping](/components/connectors/use-connectors/index.md#variableresponse-mapping).
+To learn more about output mapping, see [variable/response mapping](/components/connectors/use-connectors/index.md#variable-and-response-mapping).
 :::
