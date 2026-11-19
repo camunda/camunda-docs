@@ -1038,6 +1038,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-definitions",
+          label: "Resume process definitions",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-definitions",
           label: "Search process definitions",
           className: "api-method post",
@@ -1052,6 +1058,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-statistics",
           label: "Get process instance statistics",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-definitions",
+          label: "Suspend process definitions",
           className: "api-method post",
         },
         {
