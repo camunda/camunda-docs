@@ -44,6 +44,47 @@ A partition is a persistent append-only event stream. Initially, a partition is 
 
 ![partition](assets/partition.png)
 
+## Record keys
+
+Every entity that the engine creates, such as a process instance, a job, or a user task, receives a **key**. A key is a 64-bit integer (a Java `long`) that the partition owning the entity generates. The key has two parts:
+
+- The upper bits hold the **partition ID**. The protocol reserves 13 bits for it.
+- The lower 51 bits hold a counter that is local to the partition.
+
+```
+| partition ID (13 bits) | per-partition counter (51 bits) |
+```
+
+Each partition generates keys only within its own range, which starts at `partitionId << 51` and spans 2^51 values. Because the ranges don't overlap, a key is unique across all partitions. To build a key, the partition ID is shifted left by 51 bits and the counter is added. To read a key, shift it right by 51 bits to get the partition ID, and mask it with 2^51 - 1 to get the counter.
+
+For example, counter value `1` on partition 1 and counter value `5` on partition 3 result in the following keys:
+
+```
+partition 1, counter 1
+  partition ID  0000000000001
+  counter       000000000000000000000000000000000000000000000000001
+  key           0000000000001 000000000000000000000000000000000000000000000000001
+                = (1 << 51) + 1 = 2251799813685249
+
+partition 3, counter 5
+  partition ID  0000000000011
+  counter       000000000000000000000000000000000000000000000000101
+  key           0000000000011 000000000000000000000000000000000000000000000000101
+                = (3 << 51) + 5 = 6755399441055749
+
+decode: key >> 51 = partition ID, key & (2^51 - 1) = counter
+```
+
+The decimal length of a key depends on both the partition ID and the counter, so it varies between partitions and can grow over time.
+
+:::note
+
+- Treat keys as opaque identifiers. Don't rely on their decimal length, their ordering across partitions, or the partition encoding in your own logic.
+- Store keys as 64-bit integers, for example, `BIGINT` in a SQL database.
+- The Orchestration Cluster REST API represents keys as strings, such as `"2251799813690746"`. Keys from partition 4 and above are greater than 2^53 - 1, so they can't be represented exactly as a JavaScript `Number`. Keep keys as strings, or use `BigInt`, in your client code.
+
+:::
+
 ## Replication
 
 For fault tolerance, data in a partition is replicated from the **leader** of the partition to its **followers**. Followers are other Zeebe Broker nodes that maintain a copy of the partition without performing event processing.
