@@ -36,6 +36,8 @@ The proxy closes a stream that sends nothing for longer than its idle timeout (6
 
 Do not combine them in a way that leaves the stream timeout above the proxy timeout.
 
+To recycle only idle streams, set the stream inactivity timeout below the proxy idle timeout (`streamInactivityTimeout` on the job worker builder, or [`camunda.client.worker.defaults.stream-inactivity-timeout`](../../../../../apis-tools/camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreaminactivitytimeout) in the Spring Boot Starter). The timer restarts whenever a job arrives, so busy streams are not recreated. It must be lower than the stream timeout.
+
 Set the stream timeout in the Spring Boot Starter with [`camunda.client.worker.defaults.stream-timeout`](../../../../../apis-tools/camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreamtimeout) (all job types) or for a single job type with `camunda.client.worker.override.<job-type>.stream-timeout`. After a restart, check the effective value in the worker's configuration, because a misspelled property name is silently ignored.
 
 ## Nginx
