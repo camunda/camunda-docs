@@ -23,6 +23,7 @@ from camunda_orchestration_sdk import (
     Unset,
     UserTaskAuditLogSearchQueryRequest,
     UserTaskKey,
+    UserTaskLookupRequest,
 )
 
 
@@ -305,3 +306,16 @@ def search_user_task_effective_variables_example(user_task_key: UserTaskKey) -> 
         for var in result.items:
             print(f"Variable: {var.name}")
 # endregion SearchUserTaskEffectiveVariables
+
+
+# region LookupUserTask
+def lookup_user_task_example(user_task_key: UserTaskKey) -> None:
+    client = CamundaClient()
+
+    result = client.lookup_user_task(
+        user_task_key=user_task_key,
+        data=UserTaskLookupRequest(fetch_variables=["recommendation", "applicant"]),
+    )
+
+    print(f"Task {result.user_task_key} is {result.state}, assignee: {result.assignee}")
+# endregion LookupUserTask

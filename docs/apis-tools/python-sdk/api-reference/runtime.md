@@ -34,7 +34,7 @@ async def aget_headers()
 ## AsyncOAuthClientCredentialsAuthProvider
 
 ```python
-class AsyncOAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None)
+class AsyncOAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None, user_agent=None)
 ```
 
 Bases: `object`
@@ -58,6 +58,7 @@ This is designed for async clients.
 | `timeout`             | `float` \| `None`                    |             |
 | `logger`              | [SdkLogger](#sdklogger) \| `None`    |             |
 | `clock`               | `Clock` \| `None`                    |             |
+| `user_agent`          | `str` \| `None`                      |             |
 
 ### aclose()
 
@@ -163,7 +164,7 @@ def get_headers()
 ## OAuthClientCredentialsAuthProvider
 
 ```python
-class OAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None)
+class OAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None, user_agent=None)
 ```
 
 Bases: `object`
@@ -187,6 +188,7 @@ This is designed for sync clients.
 | `timeout`             | `float` \| `None`                 |             |
 | `logger`              | [SdkLogger](#sdklogger) \| `None` |             |
 | `clock`               | `Clock` \| `None`                 |             |
+| `user_agent`          | `str` \| `None`                   |             |
 
 ### close()
 
@@ -1094,6 +1096,12 @@ CAMUNDA_CLIENT_ID: str
 CAMUNDA_CLIENT_SECRET: str
 ```
 
+### CAMUNDA_HTTP_MAX_CONNECTIONS
+
+```python
+CAMUNDA_HTTP_MAX_CONNECTIONS: str
+```
+
 ### CAMUNDA_LOAD_ENVFILE
 
 ```python
@@ -1202,6 +1210,12 @@ CAMUNDA_TOKEN_CACHE_DIR: str
 CAMUNDA_TOKEN_DISK_CACHE_DISABLE: str
 ```
 
+### CAMUNDA_USER_AGENT
+
+```python
+CAMUNDA_USER_AGENT: str
+```
+
 ### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
 
 ```python
@@ -1241,7 +1255,7 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS_EXACT=False, CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS_EXACT=False, CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_HTTP_MAX_CONNECTIONS=None, CAMUNDA_USER_AGENT=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
 ```
 
 Bases: `BaseModel`
@@ -1273,6 +1287,8 @@ Bases: `BaseModel`
 | `CAMUNDA_WORKER_REQUEST_TIMEOUT`            | `int` \| `None`                                                                |             |
 | `CAMUNDA_WORKER_NAME`                       | `str` \| `None`                                                                |             |
 | `CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS` | `float` \| `None`                                                              |             |
+| `CAMUNDA_HTTP_MAX_CONNECTIONS`              | `int` \| `None`                                                                |             |
+| `CAMUNDA_USER_AGENT`                        | `str` \| `None`                                                                |             |
 | `CAMUNDA_MTLS_CERT_PATH`                    | `str` \| `None`                                                                |             |
 | `CAMUNDA_MTLS_KEY_PATH`                     | `str` \| `None`                                                                |             |
 | `CAMUNDA_MTLS_CA_PATH`                      | `str` \| `None`                                                                |             |
@@ -1321,6 +1337,12 @@ CAMUNDA_CLIENT_ID: str | None
 
 ```python
 CAMUNDA_CLIENT_SECRET: str | None
+```
+
+### CAMUNDA_HTTP_MAX_CONNECTIONS
+
+```python
+CAMUNDA_HTTP_MAX_CONNECTIONS: int | None
 ```
 
 ### CAMUNDA_MTLS_CA
@@ -1423,6 +1445,12 @@ CAMUNDA_TOKEN_CACHE_DIR: str | None
 
 ```python
 CAMUNDA_TOKEN_DISK_CACHE_DISABLE: bool
+```
+
+### CAMUNDA_USER_AGENT
+
+```python
+CAMUNDA_USER_AGENT: str | None
 ```
 
 ### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
