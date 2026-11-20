@@ -9,6 +9,8 @@ Configure Optimize in Camunda 8 Self-Managed to use OpenSearch when deploying wi
 
 This page applies to Optimize only. If the Orchestration Cluster also uses OpenSearch as secondary storage, configure that separately using [use Amazon OpenSearch Service for Orchestration Cluster with Helm](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
+For OpenSearch support scope and upgrades, see [OpenSearch support and upgrades](/self-managed/deployment/helm/configure/infrastructure-dependencies/opensearch-support-and-upgrades.md).
+
 Optimize supports Elasticsearch or OpenSearch only. It does not support RDBMS.
 
 :::info OpenSearch support

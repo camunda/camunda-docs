@@ -11,6 +11,8 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 
 This page applies to the Orchestration Cluster only. If you also deploy Optimize, configure Optimize separately using [use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md).
 
+For OpenSearch support scope and upgrades, see [OpenSearch support and upgrades](/self-managed/deployment/helm/configure/infrastructure-dependencies/opensearch-support-and-upgrades.md).
+
 Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms). For the [quick-install](/self-managed/deployment/helm/install/quick-install.md) scenario, RDBMS with embedded H2 is used instead.
 
 :::info OpenSearch support

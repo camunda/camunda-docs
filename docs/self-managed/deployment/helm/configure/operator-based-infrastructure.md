@@ -154,6 +154,8 @@ While this guide demonstrates manual deployment using command-line tools, these 
 
 **Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.30/)
 
+For PostgreSQL support scope and upgrades, see [PostgreSQL support and upgrades](/self-managed/deployment/helm/configure/infrastructure-dependencies/postgresql-support-and-upgrades.md).
+
 ### Architecture
 
 Our setup provisions three separate PostgreSQL clusters for different Camunda components. Use the latest PostgreSQL version listed in our [supported environments matrix](/reference/supported-environments.md) that is compatible across the required components:
@@ -298,6 +300,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Use the latest Elasticsearch version listed in our [supported environments matrix](../../../../reference/supported-environments.md) and verify compatibility there before deploying.
 
 **Official documentation**: [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+
+For Elasticsearch support scope and upgrades, see [Elasticsearch support and upgrades](/self-managed/deployment/helm/configure/infrastructure-dependencies/elasticsearch-support-and-upgrades.md).
 
 ### Architecture
 
