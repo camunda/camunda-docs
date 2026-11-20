@@ -22,12 +22,12 @@ Every connector has its ID (type definition), and name. Every connector element 
 defines which connector is to be used to execute with a given template.
 
 For example, see a relation between [Kafka element template](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates)
-and [Kafka connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20).
+and [Kafka connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java).
 
 For the hybrid connector runtime to work properly, you must override the connector type.
 
 For the purpose of this guide, imagine you would like to override an HTTP REST connector with type `io.camunda:http-json:1`.
-Refer to the [element template](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector.json#L50) and its related [runtime](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L43).
+Refer to the [element template](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector.json) and its related [runtime](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java).
 
 ## Start connector runtime in hybrid mode
 
@@ -82,8 +82,8 @@ This option allows you to start the connector runtime bundle with provided conne
 Note the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This line means we have to override
 `CONNECTOR_X_TYPE` with a given type. In this case, we want to register a local Self-Managed HTTP REST connector as `io.camunda:http-json:local`.
 
-The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
-`HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
+The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java)
+`HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
 
 ### Use Self-Managed authentication types
@@ -152,7 +152,8 @@ runtime, you must implement the following in the element template for it to func
   "type": "Hidden",
   "value": "io.camunda:http-json:local",
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```
@@ -172,7 +173,8 @@ element template for it to function properly:
   "label": "Task definition type",
   "value": "io.camunda:http-json:local",
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```
@@ -207,7 +209,8 @@ The following example demonstrates this approach:
     }
   ],
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```
