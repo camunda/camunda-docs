@@ -21,17 +21,17 @@ The **Method** and **Parameters** fields accept FEEL expressions and default to 
 
 Configure the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
 
-| Field      | Required | Description                                                                                                                                                                      |
-| :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`.                                |
-| Parameters | No       | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                                                             |
-| Metadata   | No       | MCP `_meta` parameters to pass to the MCP request. The value is forwarded unmodified as the `_meta` field of the MCP request. The MCP server defines which metadata is required. |
+| Field      | Required | Description                                                                                                                                                                                                                                 |
+| :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`.                                                                                           |
+| Parameters | No       | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                                                                                                                        |
+| Metadata   | No       | MCP `_meta` parameters to pass to the MCP request. The value is forwarded unmodified as the `_meta` field of the MCP request. The MCP server defines which metadata is required. Requires Connectors 8.9.7+ and element template version 3. |
 
 ### Standalone mode
 
 Use when invoking MCP operations directly from a BPMN process without an AI Agent. This mode allows you to call MCP servers independently of the agentic orchestration flow.
 
-Select the operation to perform. You can also set the optional **Metadata** field to pass MCP `_meta` parameters with the request. The value is forwarded unmodified as the `_meta` field of the MCP request.
+Select the operation to perform. You can also set the optional **Metadata** field to pass MCP `_meta` parameters with the request. The value is forwarded unmodified as the `_meta` field of the MCP request. The **Metadata** field requires Connectors 8.9.7+ and element template version 3.
 
 | Operation               | Description                                                                                                                                                                   | Configuration                                                                                                                                                                                  |
 | :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
