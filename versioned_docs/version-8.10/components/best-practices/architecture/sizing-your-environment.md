@@ -252,7 +252,7 @@ Camunda still recommends REST for most workloads:
 
 Consider gRPC for high-volume clients, such as job workers and applications that start many process instances, when your brokers run close to their CPU limit. gRPC is also the only protocol that supports [job streaming](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs). The effect depends on request mix and payload size, so validate it with your own workload. To switch the protocol, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection).
 
-For the background, see the Chaos Day posts [Follow up REST API performance](https://camunda.github.io/zeebe-chaos/2025/07/02/Follow-up-REST-API-performance) and [REST data availability and the shared HTTP client](https://camunda.github.io/zeebe-chaos/2026/10/08/REST-Performance-validating-with-k6).
+See [REST API performance](https://camunda.github.io/zeebe-chaos/2025/07/02/Follow-up-REST-API-performance) and [REST data availability and the shared HTTP client](https://camunda.github.io/zeebe-chaos/2026/10/08/REST-Performance-validating-with-k6) for more details.
 
 ### Secondary storage
 
