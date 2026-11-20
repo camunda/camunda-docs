@@ -1939,6 +1939,46 @@ module.exports = {
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
+        {
+          type: "category",
+          label: "Guided deployment",
+          link: { type: "doc", id: "self-managed/reference-architecture/guided/guided-deployment" },
+          items: [
+            "self-managed/reference-architecture/guided/cloud-provider",
+            "self-managed/reference-architecture/guided/network",
+            "self-managed/reference-architecture/guided/compute",
+            "self-managed/reference-architecture/guided/secondary-storage",
+            "self-managed/reference-architecture/guided/object-storage",
+            "self-managed/reference-architecture/guided/exposure",
+            {
+              type: "category",
+              label: "Orchestration Cluster",
+              link: { type: "doc", id: "self-managed/reference-architecture/guided/orchestration-cluster/overview" },
+              items: [
+                "self-managed/reference-architecture/guided/orchestration-cluster/identity",
+                "self-managed/reference-architecture/guided/orchestration-cluster/zones-and-brokers",
+              ],
+            },
+            {
+              type: "category",
+              label: "Management plane",
+              link: { type: "doc", id: "self-managed/reference-architecture/guided/management-plane/overview" },
+              items: [
+                "self-managed/reference-architecture/guided/management-plane/identity-provider",
+                "self-managed/reference-architecture/guided/management-plane/management-identity",
+                "self-managed/reference-architecture/guided/management-plane/camunda-hub",
+              ],
+            },
+            {
+              type: "category",
+              label: "Grow your deployment",
+              items: [
+                "self-managed/reference-architecture/guided/grow/single-to-dual-region",
+                "self-managed/reference-architecture/guided/grow/dual-to-three-regions",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
