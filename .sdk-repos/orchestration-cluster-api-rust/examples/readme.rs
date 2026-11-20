@@ -82,6 +82,80 @@ async fn graceful_shutdown() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+async fn job_corrections() -> Result<(), Box<dyn std::error::Error>> {
+    use camunda_orchestration_sdk::CamundaClient;
+    let client = CamundaClient::from_env()?;
+    // region JobCorrections
+    use camunda_orchestration_sdk::{
+        JobAction, JobWorkerConfig, UserTaskCorrections, UserTaskResult,
+    };
+
+    client
+        .create_job_worker(JobWorkerConfig::new("io.camunda:userTaskListener"))
+        .run(|_job| async move {
+            JobAction::complete_with_variables_and_result(
+                serde_json::json!({ "reviewed": true }),
+                UserTaskResult::new().corrections(
+                    UserTaskCorrections::new()
+                        .assignee("corrected-user")
+                        .candidate_groups(["managers"])
+                        .clear_follow_up_date()
+                        .priority(80),
+                ),
+            )
+        })
+        .await?;
+    // endregion JobCorrections
+    Ok(())
+}
+
+fn job_corrections_denied() -> camunda_orchestration_sdk::JobAction {
+    // region JobCorrectionsDenied
+    use camunda_orchestration_sdk::{JobAction, UserTaskResult};
+
+    JobAction::complete_with_result(UserTaskResult::deny("Insufficient documentation"))
+    // endregion JobCorrectionsDenied
+}
+
+fn ad_hoc_sub_process_result() -> camunda_orchestration_sdk::JobAction {
+    // region AdHocSubProcessResult
+    use camunda_orchestration_sdk::{AdHocSubProcessResult, JobAction};
+
+    JobAction::complete_with_result(
+        AdHocSubProcessResult::new()
+            .activate_element("collect-documents")
+            .activate_element_with("review", serde_json::json!({ "reviewer": "alice" }))
+            .completion_condition_fulfilled(false)
+            .cancel_remaining_instances(false),
+    )
+    // endregion AdHocSubProcessResult
+}
+
+async fn update_user_task_dates() -> Result<(), Box<dyn std::error::Error>> {
+    use camunda_orchestration_sdk::CamundaClient;
+    let client = CamundaClient::from_env()?;
+    let user_task_key = String::from("2251799813685249");
+    // region UpdateUserTaskDates
+    use camunda_orchestration_sdk::apis::user_task_api::UpdateUserTaskParams;
+    use camunda_orchestration_sdk::models::{Changeset, UserTaskUpdateRequest};
+
+    let mut changeset = Changeset::new();
+    changeset.clear_due_date(); // sent as "dueDate": ""
+    changeset.follow_up_date = Some(Some("2026-12-01T09:00:00+01:00".parse()?));
+
+    client
+        .update_user_task(UpdateUserTaskParams {
+            user_task_key,
+            user_task_update_request: Some(UserTaskUpdateRequest {
+                changeset: Some(Some(changeset)),
+                ..UserTaskUpdateRequest::new()
+            }),
+        })
+        .await?;
+    // endregion UpdateUserTaskDates
+    Ok(())
+}
+
 async fn eventual_consistency() -> Result<(), Box<dyn std::error::Error>> {
     use camunda_orchestration_sdk::CamundaClient;
     let client = CamundaClient::from_env()?;
