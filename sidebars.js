@@ -1641,6 +1641,7 @@ module.exports = {
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/physical-tenants",
             "apis-tools/java-client/secrets",
+            "apis-tools/java-client/mtls",
             "apis-tools/java-client/logging",
           ],
         },
