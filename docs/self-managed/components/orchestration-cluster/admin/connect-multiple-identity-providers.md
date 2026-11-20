@@ -173,7 +173,7 @@ A provider without its own `groups-claim` uses the shared `camunda.security.auth
 
 If some providers have a groups claim and others don't:
 
-- Admin shows the group management of Camunda for the users whose groups come from Camunda.
+- Admin shows the group management of Camunda, and the Groups API is enabled. The group memberships you manage there apply only to the users whose groups come from Camunda.
 - Camunda doesn't check that a group you assign to a role, tenant, or authorization exists. Camunda can't tell a mistyped group ID from a group of an identity provider, so it accepts a typo without an error.
 - Admin offers only existing Camunda groups when you assign groups. To assign a group of an identity provider, use the API.
 
