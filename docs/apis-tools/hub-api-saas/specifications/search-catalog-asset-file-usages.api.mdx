@@ -1,0 +1,780 @@
+---
+id: search-catalog-asset-file-usages
+title: "Search the files using a catalog asset"
+description: "Returns the files that use the catalog asset with the given asset key, matching the given search criteria."
+sidebar_label: "Search the files using a catalog asset"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search the files using a catalog asset"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/catalog/assets/{assetKey}/file-usages/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the files that use the catalog asset with the given asset key, matching the given search criteria.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "assetKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the catalog asset.",
+      schema: {
+        description: "System-generated key for a catalog asset.",
+        type: "string",
+        format: "CatalogAssetKey",
+        "x-semantic-type": "CatalogAssetKey",
+        example: "1e8f0c3a-5b6d-4f2e-9c1a-2d3e4f5a6b7c",
+        title: "CatalogAssetKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            page: {
+              description:
+                "Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.",
+              allOf: [
+                {
+                  oneOf: [
+                    {
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      required: ["from"],
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 0,
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                  ],
+                  title: "SearchQueryPage",
+                },
+              ],
+            },
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                required: ["field"],
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["name"],
+                  },
+                  order: {
+                    description: "The sort direction. Defaults to ASC.",
+                    allOf: [
+                      {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    ],
+                  },
+                },
+                title: "CatalogAssetFileUsageSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The file usage search filters.",
+              allOf: [
+                {
+                  type: "object",
+                  description:
+                    "Filter criteria for searching the files using a catalog asset.",
+                  properties: {
+                    fileKey: {
+                      description: "Filter by file key.",
+                      "x-semantic-type": "FileKey",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    name: {
+                      description: "Filter by file name.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    projectKey: {
+                      description: "Filter by project key.",
+                      "x-semantic-type": "ProjectKey",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    status: {
+                      description:
+                        "Filter by per-file usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED` (see the description of the `status` response field for their meaning).\n",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "CatalogAssetFileUsageFilter",
+                },
+              ],
+            },
+          },
+          title: "CatalogAssetFileUsageSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search completed successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items", "page"],
+            properties: {
+              items: {
+                description: "The matching files using the asset.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "fileKey",
+                    "name",
+                    "projectKey",
+                    "status",
+                    "usedVersions",
+                  ],
+                  properties: {
+                    fileKey: {
+                      description: "The unique key identifying this file.",
+                      allOf: [
+                        {
+                          description: "System-generated key for a file.",
+                          type: "string",
+                          format: "FileKey",
+                          "x-semantic-type": "FileKey",
+                          example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+                          title: "FileKey",
+                        },
+                      ],
+                    },
+                    name: {
+                      description: "The name of the file.",
+                      type: "string",
+                    },
+                    projectKey: {
+                      description:
+                        "The key of the project this file belongs to.",
+                      allOf: [
+                        {
+                          description: "System-generated key for a project.",
+                          type: "string",
+                          format: "ProjectKey",
+                          "x-semantic-type": "ProjectKey",
+                          example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                          title: "ProjectKey",
+                        },
+                      ],
+                    },
+                    status: {
+                      description:
+                        "The file's usage status for the asset:\n\n* `UP_TO_DATE`: The asset is active (= neither unpublished nor deprecated), and only its current latest version is used in the file.\n* `UPDATE_AVAILABLE`: The asset is active, but at least one usage in the file is on an older version.\n* `DEPRECATED`: The asset is unpublished, or its latest version is deprecated, but it is still used in the file. Takes priority over `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).\n",
+                      type: "string",
+                      enum: ["UP_TO_DATE", "UPDATE_AVAILABLE", "DEPRECATED"],
+                    },
+                    usedVersions: {
+                      description:
+                        "The distinct version numbers of the asset that are in use within the file, in ascending order.",
+                      type: "array",
+                      items: { type: "integer", format: "int64" },
+                    },
+                  },
+                  title: "CatalogAssetFileUsageResult",
+                },
+              },
+              page: {
+                description: "Pagination information about the search results.",
+                type: "object",
+                required: ["totalItems", "hasMoreTotalItems"],
+                properties: {
+                  totalItems: {
+                    description: "Total items matching the criteria.",
+                    type: "integer",
+                    format: "int64",
+                  },
+                  hasMoreTotalItems: {
+                    description:
+                      "Indicates whether the `totalItems` value has been capped due to system limits.\nWhen true, `totalItems` is a lower bound and the actual number of matching\nitems is greater than the reported value.\n",
+                    type: "boolean",
+                  },
+                },
+                title: "SearchQueryPageResponse",
+              },
+            },
+            title: "CatalogAssetFileUsageSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

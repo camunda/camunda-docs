@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type UserTaskStateFilterProperty =
-  | UserTaskStateExactMatch
-  | AdvancedUserTaskStateFilter;
+  UserTaskStateExactMatch | AdvancedUserTaskStateFilter;
 ```
 
 UserTaskStateEnum property with full advanced search capabilities.

@@ -1,0 +1,50 @@
+name: Notify Failure
+
+on:
+  workflow_call:
+    inputs:
+      dependency_status:
+        required: true
+        type: string
+    secrets:
+      VAULT_ADDR:
+        required: true
+      VAULT_JWT_PATH:
+        required: true
+      VAULT_JWT_ROLE:
+        required: true
+      VAULT_JWT_AUDIENCE:
+        required: true
+
+jobs:
+  notify-failure:
+    name: Send message to Slack on failure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/ci/slack DOCS_NOTIFICATION_WEBHOOK_URL;
+      - id: slack
+        uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
+        with:
+          webhook: ${{ steps.secrets.outputs.DOCS_NOTIFICATION_WEBHOOK_URL }}
+          webhook-type: webhook-trigger
+          payload-templated: true
+          payload: |
+            {
+              "github_server_url": "${{ github.server_url }}",
+              "github_repo": "${{ github.repository }}",
+              "github_run_id": "${{ github.run_id }}",
+              "github_ref_name": "${{ github.ref_name }}",
+              "github_workflow": "${{ github.workflow }}",
+              "dependency_status": "${{ inputs.dependency_status }}"
+            }

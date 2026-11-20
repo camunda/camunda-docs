@@ -35,6 +35,17 @@ import Fifteen from './img/15.jpg';
 
 This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup.
 
+This procedure is the failover and failback runbook for [Dual-Region](/self-managed/concepts/multi-region/dual-region.md). For an overview of Camunda's multi-region resilience options and how Dual-Region compares to Cold Recovery, see [Multi-region resilience tiers](/self-managed/concepts/multi-region/resilience-tiers.md).
+
+:::warning Check your topology before you start
+This procedure applies only to a two-region cluster with Elasticsearch secondary storage and numbered brokers, where even node IDs run in one region and odd node IDs in the other.
+
+- On a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) cluster with three or more regions, don't run it: its force-remove, exporter, and Elasticsearch restore steps don't apply there. Use the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) instead.
+- On a cluster that you [migrated to zone-aware brokers](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md), the node IDs in its commands don't match your brokers. Don't apply them as written.
+- On a two-region cluster with RDBMS secondary storage and database replication, for example the [Amazon ECS dual-region setup](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md), don't run this procedure either. Its Elasticsearch exporter and restore steps don't apply there.
+
+:::
+
 The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
 It has been also validated for the [OpenShift dual-region setup guidance](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 
@@ -71,6 +82,18 @@ Running a dual-region configuration requires users to detect and manage any regi
 We use the same procedure to handle the loss of both active and passive regions. For clarity, this section focuses on the scenario where the passive region is lost while the active region remains operational. The same procedure will be valid in case of active region loss.
 
 **Temporary Loss Scenario:** If a region loss is temporary — such as from transient network issues — Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
+
+:::warning Expect transient cross-region disruptions
+While cross-region connectivity and DNS converge, some failover and failback steps may take longer than expected or return transient errors, and Zeebe brokers may stay `Running` without becoming `Ready`. This is expected, not a failure. Follow the remediation steps below before treating a step as failed.
+:::
+
+Failover and failback depend on cross-region network connectivity and DNS resolution between both regions. For example, Submariner `ServiceExport` resources and clusterset DNS on OpenShift, or VPC peering on Amazon EKS. While this connectivity converges, Zeebe brokers may stay `Running` without becoming `Ready` until they can resolve their peers in the other region.
+
+If a step does not converge on the first attempt:
+
+- Allow extra time for cross-region DNS and Zeebe quorum to stabilize before concluding the step has failed.
+- Re-run the step. These procedures are idempotent.
+- Restart any Zeebe broker that stays `Running` but never becomes `Ready`, so it can resolve its cross-region peers and rejoin the cluster.
 
 #### Key steps to handle passive region loss
 
@@ -332,7 +355,7 @@ In our example, we went with port-forwarding to a localhost, but other alternati
    Depending on which region was lost, you must redistribute to either the even- or odd-numbered brokers. In this example, `region 1` was lost, along with the odd-numbered brokers. Therefore, the load is redistributed to the even-numbered brokers. Run the appropriate command for the surviving region to remove the lost brokers and trigger redistribution.
    Removing the lost (odd-numbered) brokers will automatically redistribute partitions to the remaining (even-numbered) brokers.
 
-<Tabs queryString="lost-region" values={[{label: 'Redistribute to even brokers', value: 'redistribute-to-even'}, {label: 'Redistribute to odd brokers', value: 'redistribute-to-odd'}]}>
+<Tabs queryString="broker-redistribution" values={[{label: 'Redistribute to even brokers', value: 'redistribute-to-even'}, {label: 'Redistribute to odd brokers', value: 'redistribute-to-odd'}]}>
 <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
 
 ```bash
@@ -656,7 +679,7 @@ desired={<img src={Eight} alt="Desired state diagram" style={{border: 'none', tr
 
 This step involves redeploying the recreated region using the same values files from the initial deployment.
 
-The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Keeping them disabled in the newly created region helps prevent data loss, as Operate and Tasklist may still rely on v1 APIs and functionality that are isolated to a single region. Disabling them also prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
+The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Disabling them prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
 
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">
@@ -1544,11 +1567,11 @@ desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none',
     kubectl --context $CLUSTER_SURVIVING port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
     ```
 
-    <Tabs queryString="lost-region" values={[{label: 'Re-add uneven brokers', value: 'redistribute-to-even'}, {label: 'Re-add even brokers', value: 'redistribute-to-odd'}]}>
+    <Tabs queryString="broker-redistribution" values={[{label: 'Re-add uneven brokers', value: 'redistribute-to-even'}, {label: 'Re-add even brokers', value: 'redistribute-to-odd'}]}>
     <TabItem value="redistribute-to-even" label="Add the uneven brokers" default>
 
          ```bash
-         curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+         curl -XPATCH 'http://localhost:9600/actuator/cluster' \
            -H 'Content-Type: application/json' \
            -d '{
              "brokers": {
@@ -1564,7 +1587,7 @@ desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none',
          <TabItem value="redistribute-to-odd" label="Add the even brokers">
 
          ```bash
-         curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+         curl -XPATCH 'http://localhost:9600/actuator/cluster' \
            -H 'Content-Type: application/json' \
            -d '{
              "brokers": {

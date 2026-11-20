@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 This guide provides a detailed tutorial for deploying two [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) in two different [regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool, details of the High Level design are available in the generic [Red Hat OpenShift dual-region for Camunda 8 guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 
@@ -44,11 +45,7 @@ This setup provides a foundational starting point for working with Camunda 8, th
 
 Terraform can initially appear complex. If you're new to it, you might want to start by considering [deployment in a single region](terraform-setup.md) first.
 
-:::warning Cost management
-
-Following this guide will incur costs on your cloud provider account and your Red Hat account, specifically for the managed OpenShift service, OpenShift worker nodes running in EC2, the hosted control plane, Elastic Block Storage (EBS), and Route 53. For more details, refer to [ROSA AWS pricing](https://aws.amazon.com/rosa/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/) as total costs vary by region.
-
-:::
+<CostManagement />
 
 ### Outcome
 
@@ -66,6 +63,7 @@ Following this tutorial and steps will result in:
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
 - [Red Hat OpenShift Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) used to manage the two clusters and configure Submariner.
 - [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) configured on the two clusters to enable cross-namespace and cross-cluster network communication.
+
 <!-- TODO: will be re-included in an other PR - [Route 53](https://aws.amazon.com/en/route53/) configured on [a domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) with an [active-passive failover](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html), enabling access to Camunda 8 on both clusters. -->
 
 ## 1. Configure AWS and initialize Terraform
@@ -174,7 +172,7 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
    ```
 
-7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
+7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize Terraform to configure the backend and download necessary provider plugins:
 
    ```bash
    export S3_TF_BUCKET_KEY_CLUSTERS="camunda-terraform/clusters.tfstate"
@@ -274,7 +272,11 @@ To create the peering between each cluster’s VPC, you need to gather some info
 
 #### Set up the peering module
 
-In the parent directory where your clusters module reside (`clusters`), navigate to the directory called `peering` which contains the VPC peering configuration:
+From the `clusters` directory, navigate to the sibling directory called `peering`, which contains the VPC peering configuration:
+
+```bash
+cd ../peering
+```
 
 We'll re-use the previously configured S3 bucket to store the state of the peering configuration.
 
@@ -343,21 +345,21 @@ For more details, consult the official [AWS VPC Peering documentation](https://d
 
 ### S3 backup bucket module setup
 
-This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda 8.
+This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda 8.
 Read more about the [failover procecure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#procedure).
 
 The S3 bucket is set up following best practices, including encryption, logging, and versioning. These configurations can be customized to suit your specific requirements.
 
 #### Set up the bucket module
 
-In the parent directory where your other modules reside (`clusters` and `peering`), navigate to the directory called `backup_bucket` for the S3 configuration:
+From the `peering` directory, navigate to the sibling directory called `backup_bucket` for the S3 configuration:
 
 ```bash
-ls
+ls ..
 # Example output:
 # clusters  peering backup_bucket
 
-cd backup_bucket
+cd ../backup_bucket
 ```
 
 We'll re-use the previously configured S3 bucket to store the state of the backup bucket configuration.
@@ -410,7 +412,7 @@ The `BACKUP_BUCKET_REGION` will define the region of the bucket, you can pick on
                   -var backup_bucket_region="$BACKUP_BUCKET_REGION"
    ```
 
-1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
+1. After reviewing the execution plan, apply the configuration to create the S3 backup bucket:
 
    ```bash
    terraform apply backup-bucket.plan     # apply the creation

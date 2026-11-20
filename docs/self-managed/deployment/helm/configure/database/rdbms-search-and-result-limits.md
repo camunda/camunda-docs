@@ -141,9 +141,7 @@ track_functions = all
 ```
 
 :::note
-These are PostgreSQL-native settings. How you apply them depends on your deployment model (for example, managed database parameter groups, `postgresql.conf`, or Helm chart values).
-
-If you are using the Bitnami PostgreSQL chart, equivalent settings can be provided via chart-specific keys such as `primary.extendedConfiguration` (for PostgreSQL parameters) and `primary.resources` / `primary.persistence` (for sizing and storage).
+These are PostgreSQL-native settings. How you apply them depends on your deployment model (for example, managed database parameter groups, `postgresql.conf`, or Kubernetes operator configuration such as CloudNativePG).
 
 For production, start conservative and adjust based on your data volume, workload, and hardware. Camunda is a write-heavy application, so prioritize cache and vacuum settings for your environment.
 :::

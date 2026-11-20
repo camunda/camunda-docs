@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="c72e043" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
+  <bpmn:process id="submitting-expense" name="Submit expense" isExecutable="true">
+    <bpmn:startEvent id="receipt_ready_event" name="Receipt ready">
+      <bpmn:outgoing>Flow_1en3tgt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1en3tgt" sourceRef="receipt_ready_event" targetRef="upload_receipt_task" />
+    <bpmn:task id="notify_manager_task" name="Notify manager of receipt">
+      <bpmn:incoming>Flow_1wjy4ec</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wjzey3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1wjy4ec" sourceRef="upload_receipt_task" targetRef="notify_manager_task" />
+    <bpmn:sequenceFlow id="Flow_1wjzey3" sourceRef="notify_manager_task" targetRef="review_receipt_task" />
+    <bpmn:exclusiveGateway id="receipt_approved_gateway" name="Receipt approved?">
+      <bpmn:incoming>Flow_0wircm5</bpmn:incoming>
+      <bpmn:outgoing>approved_sequence</bpmn:outgoing>
+      <bpmn:outgoing>not_approved_sequence</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0wircm5" sourceRef="review_receipt_task" targetRef="receipt_approved_gateway" />
+    <bpmn:sequenceFlow id="approved_sequence" name="Approved" sourceRef="receipt_approved_gateway" targetRef="reimburse_employee_task">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approve_receipt = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="not_approved_sequence" name="Not approved" sourceRef="receipt_approved_gateway" targetRef="request_details_task">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approve_receipt = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="end_gateway">
+      <bpmn:incoming>Flow_13sxfi2</bpmn:incoming>
+      <bpmn:incoming>Flow_03wlm8s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0paqbxl</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_13sxfi2" sourceRef="request_details_task" targetRef="end_gateway" />
+    <bpmn:sequenceFlow id="Flow_03wlm8s" sourceRef="reimburse_employee_task" targetRef="end_gateway" />
+    <bpmn:endEvent id="expense_reviewed_event" name="Expense reviewed">
+      <bpmn:incoming>Flow_0paqbxl</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0paqbxl" sourceRef="end_gateway" targetRef="expense_reviewed_event" />
+    <bpmn:userTask id="upload_receipt_task" name="Upload receipt">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="upload_receipt" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1en3tgt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wjy4ec</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="review_receipt_task" name="Review receipt">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="approve_receipt" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1wjzey3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wircm5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:manualTask id="reimburse_employee_task" name="Reimburse employee">
+      <bpmn:incoming>approved_sequence</bpmn:incoming>
+      <bpmn:outgoing>Flow_03wlm8s</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="request_details_task" name="Request additional details">
+      <bpmn:incoming>not_approved_sequence</bpmn:incoming>
+      <bpmn:outgoing>Flow_13sxfi2</bpmn:outgoing>
+    </bpmn:manualTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="submitting-expense">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="receipt_ready_event">
+        <dc:Bounds x="150" y="200" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="134" y="243" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mnzjv4_di" bpmnElement="notify_manager_task">
+        <dc:Bounds x="440" y="178" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1iy2gbt_di" bpmnElement="receipt_approved_gateway" isMarkerVisible="true">
+        <dc:Bounds x="805" y="193" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="865" y="204" width="53" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_12avfuo_di" bpmnElement="end_gateway" isMarkerVisible="true">
+        <dc:Bounds x="1145" y="193" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ed4wa6_di" bpmnElement="expense_reviewed_event">
+        <dc:Bounds x="1302" y="200" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1298" y="243" width="45" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16cttoh_di" bpmnElement="upload_receipt_task">
+        <dc:Bounds x="260" y="178" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13soxle_di" bpmnElement="review_receipt_task">
+        <dc:Bounds x="620" y="178" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gk68ag_di" bpmnElement="reimburse_employee_task">
+        <dc:Bounds x="940" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xo1aiw_di" bpmnElement="request_details_task">
+        <dc:Bounds x="940" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1en3tgt_di" bpmnElement="Flow_1en3tgt">
+        <di:waypoint x="186" y="218" />
+        <di:waypoint x="260" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wjy4ec_di" bpmnElement="Flow_1wjy4ec">
+        <di:waypoint x="360" y="218" />
+        <di:waypoint x="440" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wjzey3_di" bpmnElement="Flow_1wjzey3">
+        <di:waypoint x="540" y="218" />
+        <di:waypoint x="620" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wircm5_di" bpmnElement="Flow_0wircm5">
+        <di:waypoint x="720" y="218" />
+        <di:waypoint x="805" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09inff0_di" bpmnElement="approved_sequence">
+        <di:waypoint x="830" y="193" />
+        <di:waypoint x="830" y="120" />
+        <di:waypoint x="940" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="836" y="153.5" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09no8uj_di" bpmnElement="not_approved_sequence">
+        <di:waypoint x="830" y="243" />
+        <di:waypoint x="830" y="330" />
+        <di:waypoint x="940" y="330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="836" y="283.5" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13sxfi2_di" bpmnElement="Flow_13sxfi2">
+        <di:waypoint x="1040" y="330" />
+        <di:waypoint x="1170" y="330" />
+        <di:waypoint x="1170" y="243" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03wlm8s_di" bpmnElement="Flow_03wlm8s">
+        <di:waypoint x="1040" y="120" />
+        <di:waypoint x="1170" y="120" />
+        <di:waypoint x="1170" y="193" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0paqbxl_di" bpmnElement="Flow_0paqbxl">
+        <di:waypoint x="1195" y="218" />
+        <di:waypoint x="1302" y="218" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

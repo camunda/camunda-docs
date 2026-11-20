@@ -1,11 +1,6 @@
 ---
 id: sizing-saas
 title: Size your SaaS cluster
-tags:
-  - Performance
-  - Hardware
-  - Sizing
-  - SaaS
 description: "Select the right Camunda 8 SaaS cluster size based on your needs."
 ---
 
@@ -16,7 +11,7 @@ Select the right Camunda 8 SaaS cluster size based on your needs. For an overvie
 
 ## Determine your cluster size
 
-Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) (1x, 2x, 3x, and 4x) you can select after choosing your [cluster type](/components/concepts/clusters.md#cluster-type).
+Camunda 8 defines four [cluster sizes](/components/saas/clusters.md#cluster-size) (1x, 2x, 3x, and 4x) you can select after choosing your [cluster type](/components/saas/clusters.md#cluster-type).
 
 To do so, follow these steps:
 

@@ -119,7 +119,7 @@ The `helm template` command can show you the application's default configuration
 - Use this output as a **reference** to discover the right keys and defaults.
 - Only copy the full content into `<componentName>.configuration` if you intentionally want to **replace** the default config (advanced).
 
-Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](/self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
@@ -220,10 +220,6 @@ camunda:
       level: INFO
 ```
 
-:::note
-`console.overrideConfiguration` is the old way of overriding the default application configuration for Console. It has been deprecated. Please convert to using `console.extraConfiguration`.
-:::
-
 #### Custom configuration loading
 
 **Applies to:** Optimize
@@ -302,10 +298,10 @@ zeebe:
 
 ### Step 2: Generate the default configuration file
 
-Run the following command to render the default configuration file and fill in Helm values:
+Replace `<your-release-name>` with your release name, then run the following command to render the default configuration file and fill in Helm values:
 
 ```bash
-helm template \
+helm template <your-release-name> \
     -f values.yaml \
     camunda/camunda-platform \
     --show-only templates/zeebe/configmap.yaml
@@ -353,9 +349,9 @@ zeebe:
 
 For each environment variable, find the corresponding property in the [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md).
 
-For example, the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` maps to the property `zeebe.broker.data.backup.s3.bucketName`, documented under [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3).
+For example, the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` maps to the legacy property `zeebe.broker.data.backup.s3.bucketName`. The current name of this property, `camunda.data.primary-storage.backup.s3.bucket-name`, is documented under [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundadataprimary-storagebackups3).
 
-Add the property to the configuration file. Add the `data` section under `zeebe.broker`:
+Add the property to the configuration file. This example keeps the legacy `zeebe.broker` tree used in the previous steps, so add the `data` section under `zeebe.broker`:
 
 ```yaml
 zeebe:
@@ -538,13 +534,13 @@ zeebe:
 
 The commented `variable-name` and `bpmn-process-id` sections above only illustrate where to configure exporter-side filters for Optimize in Camunda 8.9 and later. For the complete list of available options, their semantics, and upgrade behavior, see:
 
-- [Elasticsearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
-- [OpenSearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
+- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)
+- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
 
 ## Connectors configuration
 
 :::info
-Connectors are **enabled by default** in Camunda 8.8. This section covers configuration options for Connectors, including how to disable them if needed.
+Connectors are **enabled by default** since Camunda 8.8. This section covers configuration options for Connectors, including how to disable them if needed.
 :::
 
 The Connector runtime is enabled by default. To use connectors, install connector element templates. For details, see [Manage connector templates in Web Modeler](/components/connectors/manage-connector-templates.md) or [Configuring templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
@@ -603,114 +599,6 @@ Setting the `configuration` option replaces the entire contents of the applicati
 - Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
 - Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
 
-## Migrate extraConfiguration from 8.8 to 8.9
-
-In Camunda 8.8 and earlier, `<componentName>.extraConfiguration` was a **map** where each key was a filename and each value was the file content:
-
-```yaml
-# 8.8 format (map)
-identity:
-  extraConfiguration:
-    custom-logging.yaml: |
-      logging:
-        level:
-          ROOT: DEBUG
-          io.camunda.identity: DEBUG
-    custom-cache.yaml: |
-      spring:
-        cache:
-          type: caffeine
-```
-
-Starting with Camunda 8.9, `<componentName>.extraConfiguration` is an **ordered list** of entries, where each entry has a `file` (filename) and `content` (file contents):
-
-```yaml
-# 8.9 format (ordered list)
-identity:
-  extraConfiguration:
-    - file: custom-logging.yaml
-      content: |
-        logging:
-          level:
-            ROOT: DEBUG
-            io.camunda.identity: DEBUG
-    - file: custom-cache.yaml
-      content: |
-        spring:
-          cache:
-            type: caffeine
-```
-
-### Why this changed
-
-Maps in Go templates (used by Helm) do not guarantee iteration order. Since configuration layering is order-dependent — later entries override earlier ones for the same keys — the map format could produce unpredictable results. The ordered list format ensures entries are always applied in the sequence you define them.
-
-### Migration steps
-
-For every component where you use `extraConfiguration`, convert each map entry to a list entry:
-
-1. **Identify all components** in your `values.yaml` that use `extraConfiguration` (for example, `identity`, `orchestration`, `connectors`, `optimize`, `console`, `webModeler`).
-
-2. **Convert each map entry to a list entry.** For every key-value pair in the old map, create a list item with `file:` set to the former key and `content:` set to the former value.
-
-   **Before (8.8):**
-
-   ```yaml
-   orchestration:
-     extraConfiguration:
-       backup-s3.yaml: |
-         zeebe:
-           broker:
-             data:
-               backup:
-                 store: "S3"
-                 s3:
-                   bucketName: "my-bucket"
-       custom-threads.yaml: |
-         zeebe:
-           broker:
-             threads:
-               cpuThreadCount: "4"
-   ```
-
-   **After (8.9):**
-
-   ```yaml
-   orchestration:
-     extraConfiguration:
-       - file: backup-s3.yaml
-         content: |
-           zeebe:
-             broker:
-               data:
-                 backup:
-                   store: "S3"
-                   s3:
-                     bucketName: "my-bucket"
-       - file: custom-threads.yaml
-         content: |
-           zeebe:
-             broker:
-               threads:
-                 cpuThreadCount: "4"
-   ```
-
-3. **Order entries intentionally.** If two entries set the same configuration key, the **last entry in the list wins**. Arrange entries so that your highest-priority overrides appear last.
-
-4. **Validate your configuration** before upgrading by running `helm template` with your updated values file and verifying the rendered ConfigMaps:
-
-   ```bash
-   helm template my-release camunda/camunda-platform \
-     -f values-8.9.yaml \
-     --show-only templates/orchestration/configmap.yaml
-   ```
-
-5. **Proceed with the upgrade** using the updated values file. See the [8.8 to 8.9 upgrade guide](/self-managed/upgrade/helm/880-to-890.md) for additional steps.
-
-:::caution
-The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the list format, Helm will fail during template rendering.
-:::
-
 ## References
 
 For more details on where to find configuration options for specific components, see the following pages:
@@ -720,8 +608,7 @@ For more details on where to find configuration options for specific components,
 - [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
 - [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md)
-- [Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md)
-- [Console](/self-managed/components/hub/configuration/configuration.md)
+- [Camunda Hub](/self-managed/components/hub/configuration/properties.md)
 - [Connectors](/self-managed/components/connectors/connectors-configuration.md)
 - [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration.md)

@@ -1,0 +1,592 @@
+---
+id: search-process-definition-variable-names
+title: "Search process definition variable names"
+sidebar_label: "Search process definition variable names"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search process definition variable names"}{" "}
+  <MarkerAddedInVersion version="8.10" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-definitions/{processDefinitionKey}/variable-names/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for distinct variable names defined on a process definition, optionally narrowed by the name filter.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "READ_PROCESS_INSTANCE",
+    },
+  ]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the process definition, which acts as a unique identifier for this process definition.",
+      schema: {
+        type: "string",
+        format: "string<ProcessDefinitionKey>",
+        example: "2251799813686749",
+        description: "System-generated key for a deployed process definition.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Process definition variable name search query request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              description:
+                "The process definition variable name search filters.",
+              allOf: [
+                {
+                  description:
+                    "Process definition variable name filter request.",
+                  type: "object",
+                  properties: {
+                    name: {
+                      description: "The variable name search filter.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "ProcessDefinitionVariableNameFilter",
+                },
+              ],
+            },
+          },
+          title: "ProcessDefinitionVariableNameSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process definition variable name search result.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "Process definition variable name search query response.",
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching variable names.",
+                type: "array",
+                items: {
+                  description:
+                    "Process definition variable name search response item.",
+                  type: "object",
+                  required: ["name"],
+                  properties: {
+                    name: { description: "The variable name.", type: "string" },
+                  },
+                  title: "ProcessDefinitionVariableNameSearchResult",
+                },
+              },
+            },
+            title: "ProcessDefinitionVariableNameSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

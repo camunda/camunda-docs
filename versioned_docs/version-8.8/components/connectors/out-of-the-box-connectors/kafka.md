@@ -49,7 +49,7 @@ In the **Kafka** section:
    - Select **Schema registry** if you have a Confluent Schema Registry.
 2. Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 3. Set the topic name.
-4. (Optional) Set producer configuration values in the **Headers** field. Only `UTF-8` strings are supported as header values.
+4. (Optional) Set message headers in the **Headers** field of the **Message** section. Only `UTF-8` strings are supported as header values.
 5. (Optional) Set producer configuration values in the **Additional properties** field.
 
 :::info
@@ -69,10 +69,6 @@ Additionally, to learn more about supported producer configurations, see the [of
 In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
 
 ## Schema strategies
-
-:::caution
-Use Schema strategies with caution, as this is an [alpha feature](/components/early-access/alpha/alpha-features.md). Functionality may not be comprehensive and could change.
-:::
 
 This connector supports different schema strategies, offering a compact, fast, and binary data exchange format for Kafka messages.
 
@@ -222,6 +218,8 @@ If any of the fields are not populated, you must configure your security method 
   value.serializer=org.apache.kafka.common.serialization.StringSerializer
   ```
 
+  The `value.serializer` depends on the schema strategy. With **Avro Inline schema**, the connector uses `org.apache.kafka.common.serialization.ByteArraySerializer`. With **Confluent Schema registry**, it uses `io.confluent.kafka.serializers.KafkaAvroSerializer` for Avro or `io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer` for JSON.
+
 - Miscellaneous properties:
 
   ```
@@ -229,6 +227,12 @@ If any of the fields are not populated, you must configure your security method 
   client.dns.lookup=use_all_dns_ips
   acks=all
   delivery.timeout.ms=45000
+  max.block.ms=60000
+  linger.ms=0
+  request.timeout.ms=30000
+  heartbeat.interval.ms=3000
+  default.api.timeout.ms=60000
+  metadata.cluster.check.enable=false
   ```
 
 ### What is the precedence of client properties loading?
@@ -335,8 +339,6 @@ Select **Schema registry** to send messages using a schema registered in a schem
 
 Currently, the Kafka connector supports only the [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html). Other schema registry implementations are not supported at this time.
 
-Schema configuration is required only for the outbound connector. It is not required when using Inbound Connectors.
-
 :::
 
 ### Example Avro schema and data
@@ -391,7 +393,7 @@ This schema defines a structure for a record that includes a name (string), an a
 For example, `=(value.itemId = "a4f6j2")` only triggers the start event or continues the catch event if the Kafka message has a matching itemId in the incoming message payload. Leave this field empty to trigger your process every time.
 
 :::danger
-By default, this connector does not commit the offset if the message cannot be processed. This includes cases where the activation condition is not met.
+This connector does not commit the offset if the message cannot be processed. If **Consume unmatched events** is unchecked, this includes cases where the activation condition is not met.
 This means that if there is a message in the topic that cannot be processed due to an activation condition mismatch, the Kafka subscription will be stopped.
 
 Follow the steps below to configure this behavior.
@@ -528,13 +530,22 @@ If any of the field is not populated, you must configure your security method fo
   value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
   ```
 
+  The `value.deserializer` depends on the schema strategy. With **Avro Inline schema**, the connector uses `org.apache.kafka.common.serialization.ByteArrayDeserializer`. With **Confluent Schema registry**, it uses `io.confluent.kafka.serializers.KafkaAvroDeserializer` for Avro or `io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer` for JSON.
+
 - Miscellaneous properties:
 
   ```
   session.timeout.ms=45000
   client.dns.lookup=use_all_dns_ips
   acks=all
-  group.id=kafka-inbound-connector-{{bpmnProcessId}}
+  delivery.timeout.ms=45000
+  max.block.ms=60000
+  linger.ms=0
+  request.timeout.ms=30000
+  heartbeat.interval.ms=3000
+  default.api.timeout.ms=60000
+  metadata.cluster.check.enable=false
+  group.id=kafka-inbound-connector-<deduplicationId>
   enable.auto.commit=false
   ```
 
@@ -565,7 +576,8 @@ The deserialized object structure:
 The following outcomes are possible:
 
 - If the connector execution is successful and the **Activation condition** was met, the offset is committed.
-- If the **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
+- If the **Activation condition** was not met and **Consume unmatched events** is checked, the offset is committed.
+- If the **Activation condition** was not met and **Consume unmatched events** is unchecked, the offset is not committed.
 - If the connector execution fails due to an unexpected error (for example, Zeebe is unavailable), the offset is not committed.
 
 ### What lifecycle does the Kafka Consumer connector have?

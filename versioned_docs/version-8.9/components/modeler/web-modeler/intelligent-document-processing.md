@@ -19,8 +19,9 @@ import IdpGrid from './idp/react-components/\_idp-card';
 import { gettingStartedCards, configCards } from './idp/react-components/\_idp-card-data';
 import IdpOverviewImg from './img/idp-overview-diagram.png';
 import IdpSecretsImg from './idp/img/idp-connector-secrets.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
+<PageDescription />
 
 ## About IDP
 

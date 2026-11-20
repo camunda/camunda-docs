@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AgentInstanceKeyFilterProperty =
-  | AgentInstanceKeyExactMatch
-  | AdvancedAgentInstanceKeyFilter;
+  AgentInstanceKeyExactMatch | AdvancedAgentInstanceKeyFilter;
 ```
 
 AgentInstanceKey property with full advanced search capabilities.

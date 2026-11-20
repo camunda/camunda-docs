@@ -15,11 +15,11 @@ None of the storage options below with Docker Compose are suitable for productio
 
 If no storage configuration is provided, the default document storage is **in-memory**. It means that documents will be lost when the application is stopped.
 
-To change this to a different storage method, use the environment variables in the section below for every component using it (Zeebe and Tasklist). No additional configuration is required for the **in-memory** storage.
+To change this to a different storage method, add the environment variables in the section below to `.env`. The `orchestration` service loads this file. No additional configuration is required for the **in-memory** storage.
 
 To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `inmemory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
 
-When using [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), Tasklist and Zeebe run in separate containers and do not share memory or volumes, which introduces certain limitations. While the document handling feature will still work, the environment variable below must be set for all components that use it (Zeebe and Tasklist). In this topology, using in-memory or local storage means components cannot access the same data, so documents uploaded by Zeebe may not be visible to Tasklist. This limitation does not apply when using cloud storage options like AWS or GCP, where documents are always stored in a shared, centralized location.
+In the [Docker Compose distribution](/self-managed/quickstart/developer-quickstart/docker-compose.md), Zeebe and Tasklist run in the consolidated `orchestration` service and receive the same document-store settings. Configure the store once in `.env`. In-memory documents are still lost when the service restarts; use persistent or external storage when documents must survive restarts.
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [

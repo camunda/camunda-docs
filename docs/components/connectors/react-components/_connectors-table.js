@@ -8,6 +8,7 @@ import AmazonSnsImg from "../img/connector-amazon-sns.png";
 import AmazonSqsImg from "../img/connector-amazon-sqs.png";
 import AmazonLambdaImg from "../img/connector-aws-lambda.png";
 import AmazonS3Img from "../img/connector-amazon-s3.png";
+import AppIntegrationsImg from "../img/connector-app-integrations.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-azure-openai.png";
@@ -16,6 +17,7 @@ import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
 import CSVImg from "../img/connector-csv.png";
+import DatabricksImg from "../img/connector-databricks.png";
 import EasypostImg from "../img/connector-easypost.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
@@ -62,7 +64,7 @@ const SearchableTable = () => {
       image: AiagentImg,
     },
     {
-      name: "Ad-Hoc Tools Schema Resolver",
+      name: "Ad-hoc Tools Schema Resolver",
       description: "Implement tool resolution of the AI Agent connector.",
       type: "Outbound",
       link: "../agentic-ai-ad-hoc-tools-schema-resolver",
@@ -95,14 +97,14 @@ const SearchableTable = () => {
       description:
         "Send events using Amazon EventBridge service within your processes.",
       type: "Outbound",
-      link: "../amazon-eventbridge/?awseventbridge=outbound",
+      link: "../amazon-eventbridge-outbound/",
       image: AmazonEventbridgeImg,
     },
     {
       name: "Amazon EventBridge Webhook",
       description: "Start a process instance triggered by Amazon EventBridge.",
       type: "Inbound",
-      link: "../amazon-eventbridge/?awseventbridge=inbound",
+      link: "../amazon-eventbridge-inbound/",
       image: AmazonEventbridgeImg,
     },
     {
@@ -131,28 +133,28 @@ const SearchableTable = () => {
       name: "Amazon SNS inbound",
       description: "Trigger your process with an Amazon SNS notification.",
       type: "Inbound",
-      link: "../amazon-sns/?amazonsns=inbound",
+      link: "../amazon-sns-inbound/",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SNS outbound",
       description: "Send messages to Amazon SNS from your processes.",
       type: "Outbound",
-      link: "../amazon-sns/?amazonsns=outbound",
+      link: "../amazon-sns-outbound/",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SQS",
       description: "Send messages to Amazon SQS from your processes.",
       type: "Outbound",
-      link: "../amazon-sqs/?amazonsqs=outbound",
+      link: "../amazon-sqs-outbound/",
       image: AmazonSqsImg,
     },
     {
       name: "Amazon SQS",
       description: "Receive messages from Amazon SQS in your processes.",
       type: "Inbound",
-      link: "../amazon-sqs/?amazonsqs=inbound",
+      link: "../amazon-sqs-inbound/",
       image: AmazonSqsImg,
     },
     {
@@ -162,6 +164,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../amazon-textract/",
       image: AmazonBedrockImg,
+    },
+    {
+      name: "App Integrations",
+      description:
+        "Send messages to Microsoft Teams and Slack, and create channels, from your processes.",
+      type: "Outbound",
+      link: "../app-integrations/",
+      image: AppIntegrationsImg,
     },
     {
       name: "Asana",
@@ -214,6 +224,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../csv/",
       image: CSVImg,
+    },
+    {
+      name: "Databricks",
+      description:
+        "Run SQL statements, control warehouses, trigger jobs, invoke Model Serving endpoints, and query Vector Search indexes.",
+      type: "Outbound",
+      link: "../databricks/",
+      image: DatabricksImg,
     },
     {
       name: "EasyPost",
@@ -377,10 +395,18 @@ const SearchableTable = () => {
       image: OpenaiImg,
     },
     {
+      name: "Orchestration Cluster API",
+      description:
+        "Query process, decision, user task, and audit data from the Orchestration Cluster API.",
+      type: "Outbound",
+      link: "../orchestration-cluster-api/",
+      image: CamundaImg,
+    },
+    {
       name: "Polling",
       description:
         "Poll an endpoint at regular intervals, enabling periodic data fetching.",
-      type: "Outbound",
+      type: "Inbound",
       link: "../../protocol/polling/",
       image: RestImg,
     },

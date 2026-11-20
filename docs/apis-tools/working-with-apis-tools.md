@@ -10,7 +10,6 @@ import "./react-components/\_apitools-card.css";
 import HeroImg from './img/hero-apis.png';
 import ApiGrid from './react-components/\_apitools-card';
 import { apiCards, clientCards } from './react-components/\_apitools-card-data';
-import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
 
@@ -19,7 +18,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with the Camunda Java Client" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+<p class="link-button">[Get started with the Camunda Java Client](./java-client/getting-started.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -29,10 +28,10 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 </div>
 </div>
 
-:::info Upgrade to Camunda 8.9
+:::info Upgrade to Camunda 8.10
 
-- Existing customer? Upgrade your APIs & tools to 8.9 using the [APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md).
-- See [what's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md), [release announcements](/reference/announcements-release-notes/890/890-announcements.md), and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+- Existing customer? Upgrade your APIs & tools to 8.10 using the [APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md).
+- See [what's new in Camunda 8.11](/reference/announcements-release-notes/8110/whats-new-in-811.md), [release announcements](/reference/announcements-release-notes/8110/8110-announcements.md), and [release notes](/reference/announcements-release-notes/8110/8110-release-notes.md).
 
 :::
 
@@ -64,10 +63,8 @@ Use Camunda Process Test to test your process definitions and automations with a
 
 <p class="link-arrow">[Camunda Process Test](/apis-tools/testing/getting-started.md)</p>
 
-## Upgrade to Camunda 8.9
+## Upgrade to Camunda 8.10
 
 If you are migrating from Camunda 7 or from v1 component REST APIs, see the migration guide for guidance.
 
-<p class="link-arrow">[Camunda 8.9 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md)</p>
-
-<AskAi/>
+<p class="link-arrow">[Camunda 8.10 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md)</p>

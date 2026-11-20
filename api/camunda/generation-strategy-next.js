@@ -66,6 +66,8 @@ function processModularSpec(mainSpecPath, specDir, version) {
     if (content.includes("paths:")) {
       addEventualConsistencyAdmonition(filePath);
       addAddedInVersionAnnotation(filePath);
+      addScopeAnnotation(filePath);
+      addRequiredPermissionsAnnotation(filePath);
     }
   }
 
@@ -253,6 +255,8 @@ function processSingleFileSpec(specFilePath, version) {
   fs.writeFileSync(specFilePath, updatedSpec);
   addEventualConsistencyAdmonition(specFilePath);
   addAddedInVersionAnnotation(specFilePath);
+  addScopeAnnotation(specFilePath);
+  addRequiredPermissionsAnnotation(specFilePath);
   removeVendorExtensions(specFilePath);
 }
 
@@ -267,6 +271,14 @@ function postGenerateDocs(config) {
   // Replace added-in-version marker tokens with MDX components and add imports
   replaceAddedInVersionMarkersWithComponents(config.outputDir);
   console.log(`✅ Replaced added-in-version markers in generated MDX files`);
+  // Replace scope marker tokens with MDX components and add imports
+  replaceScopeMarkersWithComponents(config.outputDir);
+  console.log(`✅ Replaced scope markers in generated MDX files`);
+  // Replace required-permissions marker tokens with MDX components and add imports
+  replaceRequiredPermissionsMarkersWithComponents(config.outputDir);
+  console.log(
+    `✅ Replaced required-permissions markers in generated MDX files`
+  );
 }
 
 function addDisclaimer(originalSpec) {
@@ -742,6 +754,196 @@ function addAddedInVersionAnnotation(specFilePath) {
   }
 }
 
+/**
+ * Add a scope token for endpoints annotated with x-scope
+ * ("cluster-wide" | "physical-tenant").
+ */
+function addScopeAnnotation(specFilePath) {
+  const SCOPE_EXTENSION = "x-scope";
+  const SCOPES = ["cluster-wide", "physical-tenant"];
+  const METHODS = [
+    "get",
+    "post",
+    "put",
+    "patch",
+    "delete",
+    "options",
+    "head",
+    "trace",
+  ];
+  try {
+    const spec = yaml.load(fs.readFileSync(specFilePath, "utf8"));
+    if (!spec || !spec.paths) {
+      return;
+    }
+
+    let annotationsAdded = 0;
+    Object.values(spec.paths).forEach((pathItem) => {
+      Object.keys(pathItem || {}).forEach((method) => {
+        const operation = pathItem[method];
+        if (
+          !METHODS.includes(method) ||
+          !operation ||
+          typeof operation !== "object"
+        ) {
+          return;
+        }
+
+        const scope = operation[SCOPE_EXTENSION];
+        if (!SCOPES.includes(scope)) {
+          return;
+        }
+
+        const token = `\n\n[[SCOPE:${scope}]]\n\n`;
+        const currentDescription =
+          typeof operation.description === "string"
+            ? operation.description
+            : "";
+        const cleanedDescription = currentDescription
+          .replace(/\n*\[\[SCOPE:[^\]]+\]\]\n*/g, "\n\n")
+          .trim();
+        const updatedDescription = cleanedDescription
+          ? token + cleanedDescription
+          : token.trim();
+
+        if (operation.description !== updatedDescription) {
+          operation.description = updatedDescription;
+          annotationsAdded++;
+        }
+      });
+    });
+
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      quotingType: '"',
+      forceQuotes: false,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, forceQuoteRefs(updatedYaml), "utf8");
+
+    if (annotationsAdded > 0) {
+      console.log(
+        `  ✅ Added ${annotationsAdded} scope markers to ${path.basename(specFilePath)}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `  ❌ Error processing scope in ${path.basename(specFilePath)}:`,
+      error.message
+    );
+  }
+}
+
+/**
+ * Add a required-permissions token for endpoints annotated with x-required-permissions.
+ *
+ * The extension is an array of entries (ANDed together), where each entry is one of:
+ *   - a static { resourceType, permissionType } pair
+ *   - an { anyOf: [ {resourceType, permissionType}, ... ] } group (ORed)
+ *   - a { dynamic: true, note } marker resolved at runtime
+ * An empty array ([]) marks an explicitly unrestricted (public) endpoint.
+ * An optional x-permission-enforcement ("reject" | "filter") records denial behavior.
+ *
+ * The structured data is captured as base64url-encoded JSON inside a
+ * [[REQUIRED_PERMISSIONS:...]] token, which postGenerateDocs swaps for the
+ * <MarkerRequiredPermissions /> component. base64url keeps the payload free of
+ * characters that could be altered by YAML or Markdown processing.
+ */
+function addRequiredPermissionsAnnotation(specFilePath) {
+  const REQUIRED_PERMISSIONS_EXTENSION = "x-required-permissions";
+  const ENFORCEMENT_EXTENSION = "x-permission-enforcement";
+  try {
+    const fileContents = fs.readFileSync(specFilePath, "utf8");
+    const spec = yaml.load(fileContents);
+
+    if (!spec || !spec.paths) {
+      return;
+    }
+
+    let annotationsAdded = 0;
+    Object.keys(spec.paths).forEach((pathKey) => {
+      const pathItem = spec.paths[pathKey];
+
+      Object.keys(pathItem).forEach((method) => {
+        const operation = pathItem[method];
+
+        if (
+          !operation ||
+          typeof operation !== "object" ||
+          ![
+            "get",
+            "post",
+            "put",
+            "patch",
+            "delete",
+            "options",
+            "head",
+            "trace",
+          ].includes(method)
+        ) {
+          return;
+        }
+
+        const permissions = operation[REQUIRED_PERMISSIONS_EXTENSION];
+        // Only annotate operations that declare the extension. An empty array is
+        // meaningful (explicitly public) and still renders the section; a missing
+        // extension means "not yet annotated" and is left untouched.
+        if (!Array.isArray(permissions)) {
+          return;
+        }
+
+        const payload = { permissions };
+        const enforcement = operation[ENFORCEMENT_EXTENSION];
+        if (enforcement) {
+          payload.enforcement = enforcement;
+        }
+
+        const encoded = Buffer.from(JSON.stringify(payload), "utf8").toString(
+          "base64url"
+        );
+        const token = `\n\n[[REQUIRED_PERMISSIONS:${encoded}]]\n\n`;
+
+        const currentDescription =
+          typeof operation.description === "string"
+            ? operation.description
+            : "";
+        const cleanedDescription = currentDescription
+          .replace(/\n*\[\[REQUIRED_PERMISSIONS:[^\]]+\]\]\n*/g, "\n\n")
+          .trim();
+        const updatedDescription = cleanedDescription
+          ? token + cleanedDescription
+          : token.trim();
+
+        if (operation.description !== updatedDescription) {
+          operation.description = updatedDescription;
+          annotationsAdded++;
+        }
+      });
+    });
+
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      quotingType: '"',
+      forceQuotes: false,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, forceQuoteRefs(updatedYaml), "utf8");
+
+    if (annotationsAdded > 0) {
+      console.log(
+        `  ✅ Added ${annotationsAdded} required-permissions markers to ${path.basename(specFilePath)}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `  ❌ Error processing required-permissions in ${path.basename(specFilePath)}:`,
+      error.message
+    );
+  }
+}
+
 // Remove all vendor extensions recursively (x-eventually-consistent, x-semantic-type, etc.)
 // Preserves x-added-in-version and x-properties-added-in-version — the plugin needs
 // operation-level and schema-level field version annotations to conditionally render
@@ -980,6 +1182,198 @@ function replaceAddedInVersionMarkersWithComponents(outputDir) {
   } catch (err) {
     console.error(
       "❌ Error replacing added-in-version markers in output MDX:",
+      err
+    );
+  }
+}
+
+function replaceScopeMarkersWithComponents(outputDir) {
+  try {
+    const tokenPattern = /\[\[SCOPE:(cluster-wide|physical-tenant)\]\]/;
+    const importLine = 'import MarkerScope from "@site/src/mdx/MarkerScope";';
+
+    const files = listFilesRecursive(outputDir).filter((f) =>
+      f.endsWith(".mdx")
+    );
+    for (const file of files) {
+      const content = fs.readFileSync(file, "utf8");
+      const match = tokenPattern.exec(content);
+      if (!match) continue;
+      const badge = `<MarkerScope scope="${match[1]}" />`;
+
+      let updated = content;
+
+      // Add import after frontmatter if not already present
+      if (!updated.includes(importLine)) {
+        const lines = updated.split("\n");
+        let insertIdx = 0;
+        if (lines[0] && lines[0].startsWith("---")) {
+          const endIdx = lines.indexOf("---", 1);
+          insertIdx = endIdx >= 0 ? endIdx + 1 : 0;
+        }
+        lines.splice(insertIdx, 0, importLine, "");
+        updated = lines.join("\n");
+      }
+
+      // Remove all tokens (they were in descriptions)
+      updated = updated
+        .replace(new RegExp(tokenPattern.source, "g"), "")
+        .replace(/\n{3,}/g, "\n\n");
+
+      // Place the badge inline with the h1 title, after any version badge
+      updated = updated.replace(
+        /(<Heading[\s\S]*?as=\{"h1"\}[\s\S]*?)children=\{("(?:[^"\\]|\\.)*")\}\s*>\s*<\/Heading>/,
+        (_, before, titleStr) =>
+          `${before}>\n  {${titleStr}} ${badge}\n</Heading>`
+      );
+      if (!updated.includes(badge)) {
+        updated = updated.replace(
+          /(<Heading[\s\S]*?as=\{"h1"\}[\s\S]*?)\n<\/Heading>/,
+          (_, before) => `${before} ${badge}\n</Heading>`
+        );
+      }
+
+      // Clean component tags from frontmatter description (they leak via spec description)
+      const fmEnd = updated.indexOf("\n---", 1);
+      if (fmEnd > 0) {
+        const frontmatter = updated.substring(0, fmEnd);
+        const rest = updated.substring(fmEnd);
+        const cleanedFm = frontmatter.replace(
+          /^(description:\s*)(.*)$/m,
+          (_, prefix, val) => {
+            const cleaned = val
+              .replace(/<MarkerScope scope="[a-z-]+" \/>/g, "")
+              .replace(/^["'\s]+|["'\s]+$/g, "")
+              .trim();
+            if (!cleaned) return "";
+            return `${prefix}"${cleaned}"`;
+          }
+        );
+        updated = cleanedFm.replace(/\n{2,}/g, "\n") + rest;
+      }
+
+      if (updated !== content) fs.writeFileSync(file, updated, "utf8");
+    }
+  } catch (err) {
+    console.error("❌ Error replacing scope markers in output MDX:", err);
+  }
+}
+
+function replaceRequiredPermissionsMarkersWithComponents(outputDir) {
+  try {
+    const tokenPattern = /\[\[REQUIRED_PERMISSIONS:([A-Za-z0-9_-]+)\]\]/g;
+    const importLine =
+      'import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";';
+    const files = listFilesRecursive(outputDir).filter((f) =>
+      f.endsWith(".mdx")
+    );
+    for (const file of files) {
+      let content = fs.readFileSync(file, "utf8");
+      if (!tokenPattern.test(content)) continue;
+      // Reset lastIndex after test()
+      tokenPattern.lastIndex = 0;
+
+      let updated = content;
+
+      // Add import after frontmatter if not already present. Match on the module
+      // path (not the exact importLine) so an already-formatted file whose import
+      // was rewritten to double quotes isn't given a second, duplicate import.
+      if (!/import\s+MarkerRequiredPermissions\s+from/.test(updated)) {
+        const lines = updated.split("\n");
+        let insertIdx = 0;
+        if (lines[0] && lines[0].startsWith("---")) {
+          const endIdx = lines.indexOf("---", 1);
+          insertIdx = endIdx >= 0 ? endIdx + 1 : 0;
+        }
+        lines.splice(insertIdx, 0, importLine, "");
+        updated = lines.join("\n");
+      }
+
+      // Decode the (single) token's payload, then build the component string.
+      const match = tokenPattern.exec(updated);
+      tokenPattern.lastIndex = 0;
+      let component = "";
+      if (match) {
+        try {
+          const payload = JSON.parse(
+            Buffer.from(match[1], "base64url").toString("utf8")
+          );
+          const permissionsProp = JSON.stringify(payload.permissions || []);
+          const enforcementProp = payload.enforcement
+            ? ` enforcement={${JSON.stringify(payload.enforcement)}}`
+            : "";
+          component = `<MarkerRequiredPermissions permissions={${permissionsProp}}${enforcementProp} />`;
+        } catch (e) {
+          console.error(
+            `  ❌ Failed to decode required-permissions payload in ${path.basename(file)}:`,
+            e.message
+          );
+        }
+      }
+
+      // Remove the token from the body (it lived in the description) and tidy
+      // up the blank lines it leaves behind.
+      updated = updated.replace(tokenPattern, "").replace(/\n{3,}/g, "\n\n");
+
+      // Render it as its own section after the description, mirroring the
+      // generated "Request"/"Responses" sections. Insert just before the first
+      // of these anchors so it sits between the description and the request
+      // content. Endpoints with no path params and no request body don't emit a
+      // <Heading id="request"> at all, so <ParamsDetails>/<RequestSchema> are
+      // included to keep the marker ahead of the request content on those pages;
+      // the earliest match wins. The anchors are matched with regexes because,
+      // before the final prettier pass, the generated <Heading> tag spreads its
+      // attributes over multiple lines (so a single-line string match would miss
+      // it). [^>]* spans those newlines but stops at the tag's closing ">".
+      if (component) {
+        const anchors = [
+          /<Heading[^>]*id=\{"request"\}/,
+          /<ParamsDetails/,
+          /<RequestSchema/,
+          /<Heading[^>]*id=\{"responses"\}/,
+          /<StatusCodes/,
+        ];
+        let insertAt = -1;
+        for (const anchor of anchors) {
+          const m = updated.match(anchor);
+          if (m && (insertAt === -1 || m.index < insertAt)) insertAt = m.index;
+        }
+        if (insertAt >= 0) {
+          updated =
+            updated.slice(0, insertAt) +
+            component +
+            "\n\n" +
+            updated.slice(insertAt);
+        } else {
+          // No section headings (rare): append at the end of the document.
+          updated = `${updated.replace(/\s+$/, "")}\n\n${component}\n`;
+        }
+      }
+
+      // Clean any leaked component tags / tokens from the frontmatter description.
+      const fmEnd = updated.indexOf("\n---", 1);
+      if (fmEnd > 0) {
+        const frontmatter = updated.substring(0, fmEnd);
+        const rest = updated.substring(fmEnd);
+        const cleanedFm = frontmatter.replace(
+          /^(description:\s*)(.*)$/m,
+          (_, prefix, val) => {
+            const cleaned = val
+              .replace(/<MarkerRequiredPermissions[^/]*\/>/g, "")
+              .replace(/^["'\s]+|["'\s]+$/g, "")
+              .trim();
+            if (!cleaned) return ""; // remove line entirely
+            return `${prefix}"${cleaned}"`;
+          }
+        );
+        updated = cleanedFm.replace(/\n{2,}/g, "\n") + rest;
+      }
+
+      if (updated !== content) fs.writeFileSync(file, updated, "utf8");
+    }
+  } catch (err) {
+    console.error(
+      "❌ Error replacing required-permissions markers in output MDX:",
       err
     );
   }

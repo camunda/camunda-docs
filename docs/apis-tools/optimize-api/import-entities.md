@@ -25,9 +25,9 @@ POST `/api/public/import`
 
 The following request headers have to be provided with every request:
 
-| Header         | Constraints | Value                                              |
-| -------------- | ----------- | -------------------------------------------------- |
-| Authentication | REQUIRED    | [Authentication](./optimize-api-authentication.md) |
+| Header        | Constraints | Value                                              |
+| ------------- | ----------- | -------------------------------------------------- |
+| Authorization | REQUIRED    | [Authentication](./optimize-api-authentication.md) |
 
 ## Query parameters
 
@@ -53,7 +53,7 @@ Possible HTTP response status codes:
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 200  | Request successful.                                                                                                                                                                                      |
 | 400  | The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information. |
-| 401  | Secret incorrect or missing in HTTP header. See [authentication](./optimize-api-authentication.md) on how to authenticate.                                                                               |
+| 401  | Token incorrect or missing in HTTP header. See [authentication](./optimize-api-authentication.md) on how to authenticate.                                                                                |
 | 404  | The given target collection ID does not exist.                                                                                                                                                           |
 | 500  | Some error occurred while processing the request, best check the Optimize log.                                                                                                                           |
 
@@ -61,13 +61,13 @@ Possible HTTP response status codes:
 
 ### Import two entities
 
-Assuming you want to import a report and a dashboard into the collection with ID `123`, this is what it would look like:
+To import a report and a dashboard into the collection with the ID `123`, send the following request:
 
 POST `/api/public/import?collectionId=123`
 
 #### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 #### Request body
 

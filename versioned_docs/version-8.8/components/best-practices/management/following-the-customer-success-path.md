@@ -1,7 +1,5 @@
 ---
 title: "Following the customer success path"
-tags:
-  - Project Management
 description: "Follow certain steps and Best Practices when evaluating and introducing process automation to help make it a success."
 ---
 

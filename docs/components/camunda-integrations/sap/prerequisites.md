@@ -8,9 +8,8 @@ Before setting up the SAP integration, ensure the following requirements are met
 
 ## Camunda setup
 
-- **OData and RFC connectors:** 8.6+
-- **BTP Plugin:** 8.6+
-- **Advanced Event Mesh integration:** 8.6+
+- **OData and RFC connectors:** 8.7+
+- **Advanced Event Mesh integration:** 8.7+
 
 Compatible with both **SaaS** and **Self-Managed** deployments:
 
@@ -30,10 +29,6 @@ Additional services may be required depending on your use case:
 
 - [**SAP Advanced Event Mesh (AEM)**](https://discovery-center.cloud.sap/serviceCatalog/advanced-event-mesh?region=all) – enables event-driven integration between Camunda and SAP.
 
-Required for the BTP Plugin:
-
-- [**PostgreSQL on SAP BTP (Hyperscaler Option)**](https://discovery-center.cloud.sap/serviceCatalog/postgresql-hyperscaler-option?region=all)
-
 ## Authentication and connectivity
 
 - An SAP **technical user** with sufficient authorizations for the relevant S/4HANA or ECC systems
@@ -44,5 +39,4 @@ Required for the BTP Plugin:
 
 ## Tooling
 
-- [**CSAP CLI**](./csap-cli.md): A self-contained binary that runs on any platform without installation.  
-  Copy the binary to the target machine and execute it directly.
+- [**CSAP c8ctl plugin**](./csap-cli.md): A plugin for [c8ctl](/apis-tools/c8ctl/getting-started.md) that runs on any platform with Node.js 22 or later.

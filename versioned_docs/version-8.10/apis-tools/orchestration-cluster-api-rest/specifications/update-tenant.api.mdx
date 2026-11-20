@@ -1,0 +1,386 @@
+---
+id: update-tenant
+title: "Update tenant"
+sidebar_label: "Update tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Update tenant"} <MarkerAddedInVersion version="8.8" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/tenants/{tenantId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates an existing tenant.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "TENANT", permissionType: "UPDATE" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "The new name of the tenant.",
+            },
+            description: {
+              type: "string",
+              description: "The new description of the tenant.",
+            },
+          },
+          required: ["name"],
+          title: "TenantUpdateRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The tenant was updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              tenantId: {
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+                description: "The unique identifier of the updated tenant.",
+              },
+              name: { type: "string", description: "The name of the tenant." },
+              description: {
+                type: "string",
+                nullable: true,
+                description: "The description of the tenant.",
+              },
+            },
+            required: ["tenantId", "name", "description"],
+            title: "TenantUpdateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The tenant was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -1,13 +1,14 @@
 ---
 id: idp-document-extraction
 title: Document extraction
-description: "Document extraction projects form the basis for using intelligent document processing (IDP) in your end-to-end processes. Extract data from a single type of structured or unstructured document."
+description: "Extract data from a single type of structured or unstructured document."
 ---
 
 import IdpExtractionProjectModalImg from './img/idp-create-extraction-project-modal.png';
 import IdpCreateExtractionProvidersImg from './img/idp-create-extraction-providers.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Extract data from a single type of structured or unstructured document.
+<PageDescription />
 
 ## About document extraction
 
@@ -15,6 +16,7 @@ Document extraction templates form the basis for using IDP in your end-to-end pr
 
 - Create a separate document extraction template for each type of document you want to categorize and extract data from, such as an invoice, a report, identity document, and so on.
 - Published document extraction templates can then be used to [integrate IDP into your processes](idp-integrate.md).
+
 <!-- - Published extraction projects can be [integrated into your processes](idp-integrate.md) or linked to a [document automation](idp-document-automation.md) project. -->
 
 ## Create document extraction template

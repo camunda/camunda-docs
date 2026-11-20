@@ -1,8 +1,5 @@
 ---
 title: "Local development with element templates and Camunda 8 Run"
-tags:
-  - Element templates
-  - Camunda 8 Run
 description: "Learn how to use Camunda 8 Run with element templates in your local development environment."
 ---
 

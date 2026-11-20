@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type VariableKeyFilterProperty =
-  | VariableKeyExactMatch
-  | AdvancedVariableKeyFilter;
+  VariableKeyExactMatch | AdvancedVariableKeyFilter;
 ```
 
 VariableKey property with full advanced search capabilities.

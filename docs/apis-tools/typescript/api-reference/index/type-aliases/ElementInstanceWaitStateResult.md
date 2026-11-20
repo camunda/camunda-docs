@@ -15,6 +15,26 @@ An element instance waiting state.
 
 ## Properties
 
+### bpmnProcessId
+
+```ts
+bpmnProcessId: string;
+```
+
+The BPMN process ID of the process definition associated to this element instance.
+
+---
+
+### details
+
+```ts
+details: WaitStateDetails;
+```
+
+Wait-state-specific details, resolved by waitStateType.
+
+---
+
 ### elementId
 
 ```ts
@@ -45,26 +65,6 @@ The BPMN element type of this element instance.
 
 ---
 
-### jobDetails
-
-```ts
-jobDetails: JobWaitStateDetails | null;
-```
-
-Job details, present when waitStateType is JOB.
-
----
-
-### messageDetails
-
-```ts
-messageDetails: MessageWaitStateDetails | null;
-```
-
-Message details, present when waitStateType is MESSAGE.
-
----
-
 ### processInstanceKey
 
 ```ts
@@ -92,13 +92,3 @@ tenantId: TenantId;
 ```
 
 The tenant ID of the element instance.
-
----
-
-### waitStateType
-
-```ts
-waitStateType: WaitStateTypeEnum;
-```
-
-The type of waiting state an element instance is in.

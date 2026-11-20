@@ -1,7 +1,7 @@
 ---
 id: rdbms-benchmark-results
 title: "RDBMS benchmarking results"
-sidebar_label: "RDBMS benchmark results"
+sidebar_label: "Benchmark results"
 description: "Benchmark results and methodology summary for using PostgreSQL as Orchestration Cluster secondary storage compared with Elasticsearch/OpenSearch."
 ---
 

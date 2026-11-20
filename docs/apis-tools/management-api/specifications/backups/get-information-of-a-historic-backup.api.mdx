@@ -1,0 +1,179 @@
+---
+id: get-information-of-a-historic-backup
+title: "Get information of a historic backup"
+description: "A detailed information of the backup with the give backup id. Covers every physical tenant"
+sidebar_label: "Get information of a historic backup"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV9tu20YQ/ZXBPiUoLVFuGqB8c2wjFdqmQe2gD7YBj8gRuQm5y+wOZQsC/72YJSlRlwTJW9EABmzv7tzOnLlwoxhzr5I79Zv2bN0aFph+amr1EKmMfOp0zdoalagLyIhRl5SBNkvrKpQLsEvggnopeNJchP9zvdoe6mwCl3ZFzgOtyK2hLtZep1gCk0HD96YxJXkPj8PFbTh/BIPO2ScPmoEtWEOTe6MiVaPDipicOL5RBitSieqszTMVKUefG+0oUwm7hiKlJYAauVCHUc2z/QhUpHxaUIUq2SjWXIrmN10c86sj8duCYH61r2ICp06hajzDggChtl6z4GOailwAYoVlQxO48P1rf2/QEZQ2l+tyDdZl5CiDxVp0agfzKw8v0KdkMm3ylxEQpgX4Jk3J+xH4wWzjxW6h84LcvZlfARdognO1o5W2jd+By+taYtaGKSenItXlujt6/UpFip6xqgWYWaQqbXTVVCqJ2zbapmI/j3sJWWLph4x8bsitjzB91ydd3LM1uY5nbLe8MocEmsA/BRmwlWamLDqQTEfUuzcHokOS0rLxTC6Cp0KnBVgDCF6bvKSz/mH/AnTvmSF4zGiJTcmPWyKjyeTW0dI6gsakBZpc0kYFrrR1HcTHDHs/eNUh9iWq6cBWPIw/AvSQWrPUeSMkaUxGDh5TrBqT4WR43UfiHydwsQ2HC+R7sxX2YCSyAj3QM6Ys1DN0bHAb+h5pPDtt8jFFVCeAqm0fhAa+tsaTl9jP41h+7Uf51+8qUqk1TIblFuu61GlI5PSjlyebMXydWbv4SKnQrHaSdtadAW+w9oXld4GUmyMnD2lX0cCGQXIvkq6gzoa7szieqTZSnpG/Qf1l4xwZhvD8oDWgB0e1ddwV+HWJnnXqCV1aTP+qydyEP/e8uflweXl9c9N74PhWnw5yW70ZMp2xvDpilq7IM1Y1PEkZjRwLminbM3wen/98Fs/O4tntLE7Cz2QWxz/FcRyLN0vUpRBp5Aw6h1Lnmqnyx062hw79oX0ozF4VVOQ95uRV245byd1+hodUjAEZufMQbautH3VdW78KU021rSh/Fb865uSb0Wzr+s/8CjIbaoWBnrXnyXextnfj2jnrYKiJo7S8JSPTYfsAltYBliWQyPld1X2B/j1qx/F0dofrrxWvtxVxoU0eUkFZQElw+uVU7V6UJVjpfr2HEdAkn8D1DTjixhnKuotdRIFvyExVzWKFLaSOpEBwW4M/HrTnJ/SOW4KMIGEedrN+UVI38qQyyDOkaGTRcMROU9aBrFmkpKx/LDzbSMm5zVSicgqWZQ1M1LRrcX0rmG6G7bGV/kFuNSyXjStVojYdJG0ynW4K67lNNtKv2ymm3CBbN1WRWqHTuCi7kORVF0+YkypRpU2xDMeH8P2JBnOqwngIpkGehV2qjZQY2tf06+s4/gYlQbAdrxs7FQVz/Q0qetE2TG9Z+0+sxSOpi/dzwYGc7xTOJl/1k0xWW23Cch92wQgYP1EEskZlVBIPk8jLOLjs95kOFM8VBrb2O+db4sMPE1l5Jb063W33e85sdpXwX/q+6VnO9MzTukRtJOJAxE1P3zu1R18VqWT7+fMQ9eS7U5vNAj19cGXbynG3bwurM+2Fqbt9/Iuw/P+38ZNof6L1qe+Y8J2mEqWkHoZ6/05EX/zdbzAv4cTX50lvhj3KrMc+DF5uM98+tJEqCDNywafu+iJNqR47f9TyJZhtl3x7fava9l/23aha
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get information of a historic backup"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/backupHistory/{backupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+A detailed information of the backup with the give backup id. Covers every physical tenant
+unless `physicalTenant` narrows it to one.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "backupId",
+      required: true,
+      in: "path",
+      description: "Id of the backup",
+      schema: {
+        title: "Backup ID",
+        description:
+          "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+        type: "integer",
+        format: "int64",
+        example: 1,
+        minimum: 0,
+      },
+    },
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "OK",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              snapshotName: {
+                type: "string",
+                description: "Name of the snapshot",
+                example: "backup-snapshot-001",
+              },
+              state: {
+                type: "string",
+                description:
+                  "Current state of the backup as reported by Elasticsearch/OpenSearch",
+                example: "SUCCESS",
+              },
+              startTime: {
+                type: "string",
+                format: "date-time",
+                description: "Timestamp when the backup started",
+                example: "2023-01-01T10:10:10.100+0000",
+              },
+              failures: {
+                type: "array",
+                items: { type: "string" },
+                description: "List of failure messages",
+              },
+            },
+            required: ["snapshotName", "state", "startTime", "failures"],
+            title: "HistoryBackupDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Backup with given ID does not exist.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "All other errors, e.g. ES returned error response when attempting to create a snapshot.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description:
+        "Elasticsearch is not accessible, the request can be retried when it is back.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

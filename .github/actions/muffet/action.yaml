@@ -11,6 +11,11 @@ inputs:
     description: URL of a page containing links to check with Muffet
     required: true
 
+  exclude_file:
+    default: ""
+    description: Path to a file of URL regexes, one per line, that Muffet should not check
+    required: false
+
   muffet_version:
     default: v2.10.8
     description: Version tag of Muffet CLI tool
@@ -32,7 +37,7 @@ runs:
         echo "Muffet version  : ${{ inputs.muffet_version }}"
         echo "URL to validate : ${{ inputs.url_to_validate }}"
     - name: Restore cache
-      uses: actions/cache@v5
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       id: tool-cache-muffet
       with:
         path: ${{ runner.temp }}/muffet/${{ inputs.muffet_version }}/muffet
@@ -50,7 +55,16 @@ runs:
       shell: bash
       run: |
         echo "$MUFFET_DIR" >> "$GITHUB_PATH"
+
     - name: Validate URLs
       shell: bash
+      env:
+        EXCLUDE_FILE: ${{ inputs.exclude_file }}
       run: |-
-        muffet --one-page-only --verbose ${{ inputs.url_to_validate }}
+        exclude_args=()
+        if [[ -n "$EXCLUDE_FILE" ]]; then
+          while IFS= read -r pattern; do
+            [[ -n "$pattern" ]] && exclude_args+=(--exclude "$pattern")
+          done < "$EXCLUDE_FILE"
+        fi
+        muffet --one-page-only --verbose "${exclude_args[@]}" ${{ inputs.url_to_validate }}

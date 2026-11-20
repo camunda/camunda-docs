@@ -47,9 +47,8 @@ To add values to a spreadsheet, take the following steps:
 2. In the **Select operation** section, select **Add values to spreadsheet**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a new
    value will be added.
-4. _(optional)_ In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, in
-   which a new value will be added. Keep in mind that if not specified, a new value will be added to the first available
-   worksheet in the desired spreadsheet.
+4. In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, in
+   which a new value will be added.
 5. In the **Operation details** section, set the field **Cell ID** to the desired cell, in which a new value a new value
    will be added. Use format ColumnRow (for example A1).
 6. In the **Operation details** section, set the field **Value** to the desired value, which will be added in the
@@ -96,9 +95,8 @@ To create a row, take the following steps:
 2. In the **Select operation** section, select **Create row**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a new row
    will be added.
-4. _(optional)_ In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, in
-   which a new row will be added. Keep in mind that if not specified, a new row will be added to the first available
-   worksheet in the desired spreadsheet.
+4. In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, in
+   which a new row will be added.
 5. _(optional)_ In the **Operation details** section, set the field **Row index** to the desired row index, where a new row will be
    added. Refer to the [relevant appendix entry](#what-is-a-row-index) to find out more. If not set, a new row will be appended to the last row.
 6. In the **Operation details** section, set the field **Enter values** to the desired values, which will be added. This

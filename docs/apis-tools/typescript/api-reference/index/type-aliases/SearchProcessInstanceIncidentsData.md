@@ -30,7 +30,7 @@ path: object;
 #### processInstanceKey
 
 ```ts
-processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKeyWritable;
 ```
 
 The assigned key of the process instance, which acts as a unique identifier for this process instance.

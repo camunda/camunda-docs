@@ -17,7 +17,7 @@ const InstallationCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
-const Installation = () => {
+const Installation = ({ hideHeading = false }) => {
   const InstallationItems = [
     {
       title: "Kubernetes with Helm",
@@ -42,7 +42,7 @@ const Installation = () => {
 
   return (
     <div className="sm-installation">
-      <h2>Installation Methods</h2>
+      {!hideHeading && <h2>Installation Methods</h2>}
       <p>
         Recommended approaches to install Camunda 8 Self-Managed in
         production-ready environments in the cloud or on-premises.

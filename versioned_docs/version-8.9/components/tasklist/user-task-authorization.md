@@ -84,6 +84,8 @@ The table reflects currently-implemented permissions that are enforced by Taskli
 | Complete task (with or without variables) | `COMPLETE`             | `COMPLETE_USER_TASK` or `UPDATE_USER_TASK` |
 | Update user task                          | `UPDATE`               | `UPDATE_USER_TASK`                         |
 
+Getting a user task form requires no separate permission on the form (`Resource` `READ`). Access to the user task includes access to its linked form.
+
 :::note
 Some operations listed in the table (for example, task reassignment) may not yet be available in the Tasklist UI.
 :::

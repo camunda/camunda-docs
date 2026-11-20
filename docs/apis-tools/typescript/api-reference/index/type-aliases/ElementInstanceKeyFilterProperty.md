@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ElementInstanceKeyFilterProperty =
-  | ElementInstanceKeyExactMatch
-  | AdvancedElementInstanceKeyFilter;
+  ElementInstanceKeyExactMatch | AdvancedElementInstanceKeyFilter;
 ```
 
 ElementInstanceKey property with full advanced search capabilities.

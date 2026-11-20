@@ -1,35 +1,39 @@
 ---
 id: index
 title: How to use connectors
-description: Learn how to use connectors in Web Modeler by creating a connector task, configuring a connector, and reviewing potential errors.
+description: Learn how to use connectors in Camunda Hub by creating a connector task, configuring a connector, and reviewing potential errors.
 ---
 
 Any task can be transformed into a connector task. This guide details the basic functionality all connectors share.
 
-Find available connectors in [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+Find available connectors in [built-in connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 To add connectors from your BPMN diagram, visit the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
 
 :::note
 Learn how to [install connectors in Self-Managed](/self-managed/components/connectors/overview.md).
 
-New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools.
-[Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to work with Web Modeler.
+New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to model processes in Camunda Hub.
 :::
+
+## Using credentials
+
+Some connectors let you select a [credential](/components/hub/organization/credentials/index.md) instead of entering authentication and connection settings directly on the task. Create the credential once, then select it on any connector task that supports it. Learn how to select or create one in the [Camunda Hub modeling interface](/components/hub/organization/credentials/modeling-interface.md) or in [Desktop Modeler](/components/modeler/desktop-modeler/credentials.md).
 
 ## Using secrets
 
-:::danger
+:::warning
 `secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
 :::
 
-You can use sensitive information in your connectors without exposing it in your BPMN processes by referencing secrets.
-Use Camunda Hub to [create and manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+You can use sensitive information in your connectors without exposing it in your BPMN processes by using a [legacy secret reference](/reference/glossary.md#secret-reference-legacy).
+Use Camunda Hub to [create and manage secrets](/components/saas/clusters/manage-secrets.md).
 
 You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties
-panel that supports this.
-Each of
-the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
-details which fields support secrets.
+panel. Secrets resolve in every field, not only in a specific subset of fields.
+
+The [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) applies to both
+outbound and inbound connectors. In practice, this means a secret in a connector field only resolves at runtime if
+that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
 Secrets are not variables and must be wrapped in double quotes as follows when used in a FEEL expression:
 
@@ -57,6 +61,22 @@ our [Connector SDK documentation](/components/connectors/custom-built-connectors
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in connector fields.
 Using this in other areas can lead to unexpected results and incidents.
 :::
+
+### Using `camunda.secrets.*` references
+
+You can also reference a secret directly in a Connector input mapping by using `camunda.secrets.<name>` in a FEEL expression.
+
+In SaaS, use the [connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
+
+These forms coexist and are handled differently:
+
+- `{{secrets.*}}` remains fully supported for existing process models. It's still resolved by the connector runtime itself, at execution time, exactly as described above; the runtime keeps receiving it as plain placeholder text in the job's input.
+- `camunda.secrets.<name>` is resolved before the job reaches any worker, including a connector runtime. The connector receives the value already in place, the same way whether the connector runtime is co-located with the cluster or run separately (for example, a self-managed runtime connecting to a SaaS cluster).
+- A [cluster variable](/components/modeler/feel/cluster-variable/data-types.md) of kind `SECRET_REFERENCE` can hold `camunda.secrets.<name>` references in its value. A connector field that reads such a variable, for example `=camunda.vars.env.MY_CONFIG`, receives the resolved value the same way, because the references are recorded on the job and resolved before activation. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
+
+`{{secrets.*}}` values are not scoped per [physical tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access) unless you opt in to `physicaltenantaware` in the connector runtime's own configuration. Physical tenant scoping of `camunda.secrets.<name>` is separate from that setting: each physical tenant resolves its own configured secret store.
+
+`{{secrets.*}}` and `camunda.secrets.<name>` can be migrated independently of where the value is stored. If you move a secret value into the store that `camunda.secrets.<name>` uses but keep existing process models on the legacy `{{secrets.NAME}}` syntax, set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime: a legacy-style reference whose name isn't found in a configured secret provider is then looked up in that same store. The default, `ON`, only resolves legacy references from the configured providers. See [Migrate to `camunda.secrets.<name>`](migrate-secrets.md) for step-by-step migration guidance.
 
 ## Variable and response mapping
 
@@ -185,6 +205,67 @@ In that case, you could declare **Result Expression** as follows:
 }
 ```
 
+### `createDocument` function
+
+Starting with 8.10.0, you can use `createDocument` in the **Result expression** and **Error expression** fields.
+
+The function converts part of a Connector response into a [document reference](/components/document-handling/getting-started.md), so you can store the relevant content without storing the entire response.
+
+| Item    | Type              | Description                                                          |
+| ------- | ----------------- | -------------------------------------------------------------------- |
+| `value` | String or context | Content and optional metadata used to create the document reference. |
+| Result  | Context           | The generated document reference.                                    |
+
+If `value` is a string, `createDocument` treats it as base64-encoded content without metadata:
+
+```feel
+createDocument(response.body.file[1].document.data)
+```
+
+If `value` is a context, it can contain the following fields:
+
+| Field                | Required | Description                                                                                                                                                                                                                       |
+| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content` or `data`  | Yes      | The base64-encoded document content. Either key name is accepted.                                                                                                                                                                 |
+| `name` or `fileName` | No       | The filename. If you omit this field, `createDocument` automatically generates a UUID.                                                                                                                                            |
+| `contentType`        | No       | The MIME type of the content. If you omit this field, `createDocument` infers the type from the file extension in `name` or `fileName`. If neither field contains an extension, the value defaults to `application/octet-stream`. |
+
+```feel
+createDocument({
+  data: response.body.file[1].document.data,
+  name: response.body.file[1].filename
+})
+```
+
+The Connector runtime does not provide a `createDocuments` function. To extract multiple documents, use a FEEL iteration:
+
+```feel
+= { documents: for f in response.body.file return createDocument(f.document) }
+```
+
+Before using `createDocument`, configure a document store for the Connector runtime. For configuration details, see [Document handling](/components/document-handling/getting-started.md).
+
+### `getHeader` function {#function-getheader}
+
+Starting with 8.11.0, you can use `getHeader` in the **Result expression** and **Error expression** fields.
+
+HTTP header names are case-insensitive, but a response's `headers` are a regular [FEEL context](/components/modeler/feel/language-guide/feel-data-types.md#context), so keys must match the exact casing the server sent. For example, `response.headers.date` returns `null` if the server sent `Date`. Use `getHeader` to look up a header regardless of its casing.
+
+| Item      | Type    | Description                                                                                                          |
+| --------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| `headers` | Context | The headers to search, for example `response.headers`.                                                               |
+| `name`    | String  | The header name, in any casing.                                                                                      |
+| Result    | Any     | The header value, or a list of values for a header sent multiple times. `null` if the header or `headers` is absent. |
+
+If `headers` contains a key that exactly matches `name`, `getHeader` returns its value. Otherwise, it returns the value of the first key that matches `name` ignoring case.
+
+```feel
+= {
+  contentType: getHeader(response.headers, "content-type"),
+  date: getHeader(response.headers, "Date")
+}
+```
+
 ## Activation
 
 The **Activation** section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
@@ -246,7 +327,7 @@ The **Error Expression** property requires a [FEEL](/components/modeler/feel/wha
 BPMN error object in the end. The BPMN error object can be an
 empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty
-`errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by
+`errorType` and a non-empty `errorCode` if the error type is `bpmnError`. You can use all available functionality provided by
 FEEL to produce this result.
 
 Use the provided FEEL functions:
@@ -275,6 +356,10 @@ Within the FEEL expression, you access the following temporary variables:
   the [REST connector](/components/connectors/protocol/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code
   is only available if the connector's runtime behavior provided a code in the exception it threw.
+
+:::info
+If a **Result Variable** or **Result Expression** is configured on the connector task, the raw connector response is **not** available as `response` in the error expression. Instead, `response` contains only the mapped output variables. Reference those variables by name (for example, `myVar.status`) rather than using `response.body`.
+:::
 
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on
 technical exceptions thrown by a connector as well as regular results returned by the external system you integrated.
@@ -343,6 +428,32 @@ jobError("job failed", {myVar: myValue})
 ```feel
 jobError("job failed")
 // { errorType: "jobError", errorMessage: "job failed", variables: {}, retries: 0, retryBackoff: @"PT0S" }
+```
+
+### Function backoff
+
+Returns a days-time-duration that grows exponentially with the attempt number. Use it as the `retryBackoff` parameter of [`jobError`](#function-joberror) to increase the delay between retries.
+
+- Parameters:
+  - `attempt`: number, must be `1` or greater
+  - `minDelay`: days-time-duration _(optional), default_ `PT0.05S`
+  - `factor`: number _(optional), default_ `1.6`
+  - `maxDelay`: days-time-duration _(optional), default_ `PT5S`
+  - `jitterFactor`: number _(optional), default_ `0.1`
+- Result: days-time-duration
+
+The delay is `minDelay * factor^(attempt - 1)`, limited to the range from `minDelay` to `maxDelay`. A random jitter of up to `jitterFactor` times the delay is then added or subtracted.
+
+```feel
+backoff(1, @"PT1S", 2, @"PT1M", 0)
+// @"PT1S"
+
+backoff(3, @"PT1S", 2, @"PT1M", 0)
+// @"PT4S"
+```
+
+```feel
+jobError("job failed", {}, 2, backoff(1, @"PT1S", 2, @"PT1M"))
 ```
 
 ### Function ignoreError

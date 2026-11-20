@@ -93,7 +93,7 @@ If you're using the Zeebe Grafana dashboard, you can already visualize this in t
 
 Once you have confirmed that rebalancing is likely to succeed, consider the trade-off: rebalancing can improve long-term cluster performance by achieving an optimal leader distribution, but it causes a temporary performance impact and potential unavailability window. Decide whether the long-term benefit outweighs the short-term disruption.
 
-:::warn
+:::warning
 
 Rebalance only when the cluster is under low load. To determine this, identify what low load means for your specific scenario. What constitutes low load, and whether rebalancing is appropriate at all in a given situation, is ultimately your decision.
 

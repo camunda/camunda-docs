@@ -29,7 +29,7 @@ A collapsed subprocess conceals its internal details, thereby hiding complexity 
 Collapsed subprocesses serve purely display purposes. For the creation of reusable processes, it is recommended to utilize [call activities](../call-activities/call-activities.md).
 
 :::info
-When you add a **collapsed subprocess**, Modeler shows a link for drill-down. This link only opens the embedded subprocess within the same diagram. You can’t target or reuse a different process from that link. To reference another process you’ve already created, use a [call activity](../call-activities/call-activities.md) instead.
+When you add a **collapsed subprocess**, the modeling interface shows a link for drill-down. This link only opens the embedded subprocess within the same diagram. You can’t target or reuse a different process from that link. To reference another process you’ve already created, use a [call activity](../call-activities/call-activities.md) instead.
 :::
 
 ![collapsed-subprocess](assets/collapsed-subprocess.png)
@@ -39,6 +39,8 @@ When you add a **collapsed subprocess**, Modeler shows a link for drill-down. Th
 Input mappings can be used to create new local variables in the scope of the subprocess. These variables are only visible within the subprocess.
 
 By default, the local variables of the subprocess are not propagated (i.e. they are removed with the scope.) This behavior can be customized by defining output mappings at the subprocess. The output mappings are applied on completing the subprocess.
+
+An embedded subprocess produces no result of its own, so its own local variables reach the parent scope only through an output mapping. This doesn't block variables set by tasks inside the subprocess: those still propagate upward through the subprocess scope to the parent scope on completion, per [variable propagation](/components/concepts/variables.md#variable-propagation), unless a same-named variable exists in the subprocess scope. For how an embedded subprocess compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
 ## Additional resources
 

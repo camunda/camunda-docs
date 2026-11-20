@@ -1,0 +1,651 @@
+---
+id: create-project-snapshot
+title: "Create a project snapshot"
+description: "Creates a new project snapshot by taking a snapshot of every file currently in the project. Each file contributes one file version to the snapshot, recorded together with the file's name and folder location at that moment."
+sidebar_label: "Create a project snapshot"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a project snapshot"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/project-snapshots"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates a new project snapshot by taking a snapshot of every file currently in the project. Each file contributes one file version to the snapshot, recorded together with the file's name and folder location at that moment.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["projectKey", "name"],
+          example: {
+            projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+            name: "Release 1.0",
+            description:
+              "First stable release of the order fulfillment application.",
+          },
+          properties: {
+            projectKey: {
+              description: "The key of the project to create a snapshot for.",
+              allOf: [
+                {
+                  description: "System-generated key for a project.",
+                  type: "string",
+                  format: "ProjectKey",
+                  "x-semantic-type": "ProjectKey",
+                  example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                  title: "ProjectKey",
+                },
+              ],
+            },
+            name: {
+              description: "The name for the project snapshot.",
+              type: "string",
+              minLength: 1,
+              maxLength: 255,
+            },
+            description: {
+              description: "An optional description for the project snapshot.",
+              type: "string",
+              maxLength: 255,
+            },
+          },
+          title: "ProjectSnapshotCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The project snapshot was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            description:
+              "A project snapshot and its review state. The example shows a snapshot that has been reviewed, so its pending request is cleared; see ProjectSnapshotDetailResult for one still pending.",
+            example: {
+              projectSnapshotKey: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+              name: "Release 1.0",
+              description:
+                "First stable release of the order fulfillment application.",
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-03-15T10:30:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              reviewRequest: null,
+              latestReview: {
+                reviewKey: "c2f9a1d3-8b4e-4f60-ab2c-3d4e5f6a7b8c",
+                projectSnapshotKey: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+                status: "APPROVED",
+                comment: "Looks good, safe to promote.",
+                created: "2025-03-16T11:20:00.000Z",
+                createdBy: {
+                  name: "John Smith",
+                  email: "john.smith@example.com",
+                },
+              },
+            },
+            required: [
+              "projectSnapshotKey",
+              "projectKey",
+              "name",
+              "description",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+              "reviewRequest",
+              "latestReview",
+            ],
+            properties: {
+              projectSnapshotKey: {
+                description: "The unique key of the project snapshot.",
+                allOf: [
+                  {
+                    description: "System-generated key for a project snapshot.",
+                    type: "string",
+                    format: "ProjectSnapshotKey",
+                    "x-semantic-type": "ProjectSnapshotKey",
+                    example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+                    title: "ProjectSnapshotKey",
+                  },
+                ],
+              },
+              projectKey: {
+                description: "The key of the project this snapshot belongs to.",
+                allOf: [
+                  {
+                    description: "System-generated key for a project.",
+                    type: "string",
+                    format: "ProjectKey",
+                    "x-semantic-type": "ProjectKey",
+                    example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                    title: "ProjectKey",
+                  },
+                ],
+              },
+              name: {
+                description: "The name of the project snapshot.",
+                type: "string",
+              },
+              description: {
+                description: "The description of the project snapshot.",
+                type: "string",
+                nullable: true,
+              },
+              created: {
+                description:
+                  "The timestamp when the project snapshot was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description:
+                  "The user who created the project snapshot. Snapshots created automatically by the system, such as the one recorded before a restore, are attributed to the Camunda system user.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
+                        type: "string",
+                        format: "email",
+                        nullable: true,
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description:
+                  "The timestamp when the project snapshot was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description:
+                  "The user who last updated the project snapshot. Snapshots created automatically by the system, such as the one recorded before a restore, are attributed to the Camunda system user.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
+                        type: "string",
+                        format: "email",
+                        nullable: true,
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              reviewRequest: {
+                description:
+                  "The pending review request for this project snapshot, or null when no review is currently pending (including after a pending request has been reviewed). A snapshot has at most one pending request.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    example: {
+                      reviewRequestKey: "b1e8f0c2-7a3d-4e5f-9a1b-2c3d4e5f6a7b",
+                      projectSnapshotKey:
+                        "a2b3c4d5-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                      created: "2025-03-16T09:00:00.000Z",
+                      createdBy: {
+                        name: "Jane Doe",
+                        email: "jane.doe@example.com",
+                      },
+                    },
+                    required: [
+                      "reviewRequestKey",
+                      "projectSnapshotKey",
+                      "created",
+                      "createdBy",
+                    ],
+                    properties: {
+                      reviewRequestKey: {
+                        description: "The unique key of the review request.",
+                        type: "string",
+                      },
+                      projectSnapshotKey: {
+                        description:
+                          "The unique key of the project snapshot the review request was made for.",
+                        allOf: [
+                          {
+                            description:
+                              "System-generated key for a project snapshot.",
+                            type: "string",
+                            format: "ProjectSnapshotKey",
+                            "x-semantic-type": "ProjectSnapshotKey",
+                            example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+                            title: "ProjectSnapshotKey",
+                          },
+                        ],
+                      },
+                      created: {
+                        description:
+                          "The timestamp when the review was requested.",
+                        type: "string",
+                        format: "date-time",
+                      },
+                      createdBy: {
+                        description:
+                          "The user who requested the review. Reviews requested through the public API are attributed to the public API user rather than a person.",
+                        allOf: [
+                          {
+                            type: "object",
+                            description: "A reference to a user.",
+                            required: ["name", "email"],
+                            properties: {
+                              name: {
+                                description: "The display name of the user.",
+                                type: "string",
+                              },
+                              email: {
+                                description:
+                                  "The email address of the user, or null when the user has none on record.",
+                                type: "string",
+                                format: "email",
+                                nullable: true,
+                              },
+                            },
+                            title: "UserReference",
+                          },
+                        ],
+                      },
+                    },
+                    title: "ProjectSnapshotReviewRequest",
+                  },
+                ],
+              },
+              latestReview: {
+                description:
+                  "The most recent review decision recorded for this project snapshot, or null when none has been submitted.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    example: {
+                      reviewKey: "c2f9a1d3-8b4e-4f60-ab2c-3d4e5f6a7b8c",
+                      projectSnapshotKey:
+                        "a2b3c4d5-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                      status: "APPROVED",
+                      comment: "Looks good, safe to promote.",
+                      created: "2025-03-16T11:20:00.000Z",
+                      createdBy: {
+                        name: "John Smith",
+                        email: "john.smith@example.com",
+                      },
+                    },
+                    required: [
+                      "reviewKey",
+                      "projectSnapshotKey",
+                      "status",
+                      "comment",
+                      "created",
+                      "createdBy",
+                    ],
+                    properties: {
+                      reviewKey: {
+                        description: "The unique key of the review.",
+                        type: "string",
+                      },
+                      projectSnapshotKey: {
+                        description:
+                          "The unique key of the project snapshot the review was submitted for.",
+                        allOf: [
+                          {
+                            description:
+                              "System-generated key for a project snapshot.",
+                            type: "string",
+                            format: "ProjectSnapshotKey",
+                            "x-semantic-type": "ProjectSnapshotKey",
+                            example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+                            title: "ProjectSnapshotKey",
+                          },
+                        ],
+                      },
+                      status: {
+                        description: "The review decision.",
+                        type: "string",
+                        enum: ["APPROVED", "CHANGES_REQUESTED"],
+                      },
+                      comment: {
+                        description:
+                          "The optional comment recorded with the decision.",
+                        type: "string",
+                        nullable: true,
+                      },
+                      created: {
+                        description:
+                          "The timestamp when the review was submitted.",
+                        type: "string",
+                        format: "date-time",
+                      },
+                      createdBy: {
+                        description:
+                          "The user who submitted the review. Reviews submitted through the public API are attributed to the public API user rather than a person.",
+                        allOf: [
+                          {
+                            type: "object",
+                            description: "A reference to a user.",
+                            required: ["name", "email"],
+                            properties: {
+                              name: {
+                                description: "The display name of the user.",
+                                type: "string",
+                              },
+                              email: {
+                                description:
+                                  "The email address of the user, or null when the user has none on record.",
+                                type: "string",
+                                format: "email",
+                                nullable: true,
+                              },
+                            },
+                            title: "UserReference",
+                          },
+                        ],
+                      },
+                    },
+                    title: "ProjectSnapshotReview",
+                  },
+                ],
+              },
+            },
+            title: "ProjectSnapshotResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

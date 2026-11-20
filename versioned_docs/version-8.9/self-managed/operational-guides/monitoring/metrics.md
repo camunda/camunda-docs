@@ -260,7 +260,7 @@ The following image shows an example of the Zeebe Grafana dashboard after import
 
 A pre-built Grafana dashboard is available for the data layer in the repository:
 
-[monitor/grafana/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
+[monitor/grafana/data_layer.json](https://github.com/camunda/camunda/blob/stable/8.9/monitor/grafana/dashboards/data_layer.json)
 
 To use it:
 

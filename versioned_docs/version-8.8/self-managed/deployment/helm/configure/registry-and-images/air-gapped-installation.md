@@ -40,12 +40,12 @@ The following images must be available in your air-gapped environment:
 
 **Optional components:**
 
-- [Web Modeler images](/self-managed/deployment/docker/docker.md#component-images):
+- [Web Modeler images](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
   - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
   - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
-- [Console images](/self-managed/deployment/docker/docker.md#component-images):
-  - `console/console-sm`
+- [Console images](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references):
+  - [camunda/console](https://hub.docker.com/r/camunda/console)
 
 **Infrastructure images:**
 
@@ -60,7 +60,7 @@ Choose one of the following image options:
 #### Option A: Open-source Bitnami images (community default)
 
 - [bitnamilegacy/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
-- [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) (tag: `bitnami-*`)
+- [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) (tag: `bitnami-*`, no longer rebuilt)
 - [bitnamilegacy/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
 - [bitnamilegacy/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
 
@@ -81,7 +81,7 @@ The `vendor-ee` registry provides proxied access to Bitnami Premium images from 
 For detailed configuration and installation instructions, see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
 :::
 
-A helper script is available in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
+A helper script is available in the [camunda-helm-repository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
 
 #### Camunda Keycloak images
 
@@ -95,11 +95,13 @@ Camunda provides custom [Keycloak images](https://github.com/camunda/keycloak) t
 For backward compatibility, both variants are also available without the prefix in their respective registries.
 
 :::note
-The open-source variant is based on the `bitnamilegacy` repository and receives no further updates from Bitnami. For production environments, use the enterprise variant or a managed Keycloak service.
+The open-source variant is based on the `bitnamilegacy` repository. Camunda no longer builds this variant. The published `bitnami-*` and non-prefixed tags, including the chart default `26.3.3`, get no more updates, including security fixes. For production environments, use the enterprise variant or a managed Keycloak service.
 :::
 
 :::tip About the original Bitnami Keycloak images
 If you prefer to use the original Bitnami Keycloak images directly (`bitnamilegacy/keycloak` or `registry.camunda.cloud/vendor-ee/keycloak`), you can override the image in your Helm values. This is not required, as Camunda Keycloak images are fully compatible and recommended.
+
+`registry.camunda.cloud/vendor-ee/keycloak` is a proxied path: its tags are not fully listable (see the [registry migration notice](#access-enterprise-images-with-skopeo)), which can break registry mirrors that sync from the tag list. For enterprise deployments, prefer `registry.camunda.cloud/keycloak-ee/keycloak`, which is fully listable.
 :::
 
 ### Access Camunda images from the Camunda registry
@@ -121,8 +123,10 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 
 ### Access enterprise images with Skopeo
 
-:::info Registry migration notice
-As of November 30, 2025, our image vendor has migrated its repositories. All images downloaded before this date remain available but are no longer listable by the `skopeo` command. The `skopeo` command will return only images added by Bitnami after November 30, 2025.
+:::note Registry migration notice
+On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This does not affect pulling images: you can still pull any image by its exact tag. It does affect tag listing. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI return only the tags cached since the migration, so the listed tags are incomplete. The registry stores cached images, not the full upstream catalog.
+
+For the complete list of available tags (with digests), see [Browse available images and tags](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags) and pick the exact tags to mirror from there. For supported combinations, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:
@@ -196,7 +200,7 @@ camunda-platform
 
 - Keycloak depends on Camunda Identity, and PostgreSQL depends on Keycloak.
 - PostgreSQL is also a dependency for Web Modeler.
-  - This dependency is optional: you can install PostgreSQL with Helm or use an existing [external database](/self-managed/deployment/helm/install/quick-install.md#optional-configure-external-database).
+  - This dependency is optional: you can install PostgreSQL with Helm or use an existing [external database](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 - Elasticsearch is a dependency for the Orchestration Cluster and Optimize.
 - Connectors can run stand-alone, but if you use inbound capabilities, Operate becomes a dependency.
 

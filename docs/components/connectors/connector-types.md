@@ -15,6 +15,7 @@ The Java code to connect to the external system is executed when the workflow re
 ![Outbound connectors](img/outbound-connectors.png)
 
 Use outbound connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing a message to Slack.
+Outbound connectors are also what an [AI agent](/reference/glossary.md#ai-agent) calls as its tools: the process still defines which connectors an agent is allowed to use, the same way it defines which service task runs next.
 
 ## Inbound connectors
 
@@ -29,9 +30,9 @@ The connector object created during deployment will be kept active as long as th
 When the process definition is deleted or replaced with a newer version, the connector object will be removed or updated as well.
 
 :::note
-The connector Runtime currently fetches only the **latest version** of each process definition.
+The connector runtime keeps inbound connectors active for the **latest version** of each process definition. For older versions that still have active message subscriptions, intermediate catch event, boundary event, and receive task connectors also stay active. Start event connectors are only active for the latest version.
 
-Deploying a new process definition version deactivates inbound connectors from older versions. [Migrate older versions](../../concepts/process-instance-migration) if the new inbound connector configuration won't correlate messages for existing instances.
+When you deploy a new process definition version, start event connectors from older versions are deactivated once the connector runtime picks up the new version. Other inbound connectors from an older version are deactivated once that version has no active message subscriptions. See [Inbound connector lifecycle](/components/connectors/advanced-topics/inbound-lifecycle.md).
 :::
 
 ![Inbound connectors](img/inbound-connectors.png)

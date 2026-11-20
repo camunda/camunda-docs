@@ -17,7 +17,7 @@ For an architectural explanation of how secondary storage fits into Camunda 8, s
 | --------------------- | ----- | ------- |
 | Orchestration Cluster | Yes   | Yes     |
 | Optimize              | No    | Yes     |
-| Web Modeler           | Yes   | No      |
+| Camunda Hub           | Yes   | No      |
 | Management Identity   | Yes   | No      |
 
 Use this matrix as a compatibility summary for the main Camunda components and their supported database backends.
@@ -84,7 +84,7 @@ These limits are currently not configurable. In particular, the RDBMS-backed lim
 
 #### Working with variables
 
-When retrieving variables through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the following comparison operators only apply to the first 4000 characters of large String or JSON variables:
+When retrieving variables through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the following comparison operators only apply to the first 8191 characters (or 4000 characters with Oracle) of large String or JSON variables:
 
 - equals
 - notEquals

@@ -61,6 +61,28 @@ historyCleanup:
         cleanupMode: 'variables'
 ```
 
+### Deleting emptied process instance indices
+
+Optimize stores the process instances of each process definition key in its own index, and every index occupies shards in your Elasticsearch or OpenSearch cluster even when it is empty. Process data cleanup removes old process instances, but by default it keeps their index. If many process definition keys stop being used, for example because processes are renamed or replaced, these empty indices accumulate. Once the cluster reaches its shard limit (`cluster.max_shards_per_node`), no new index can be created, which affects all components that use the cluster.
+
+To release these shards, set `historyCleanup.processDataCleanup.deleteEmptyIndices` to `true`. After cleaning up a process definition key, Optimize then deletes that key's process instance index if no process instances are left in it. If new instances of that process are imported later, Optimize recreates the index.
+
+```yaml
+historyCleanup:
+  processDataCleanup:
+    enabled: true
+    deleteEmptyIndices: true
+```
+
+#### Required database privileges
+
+To delete an index safely, Optimize briefly adds a write block to the index, checks again that it is empty, and then deletes it or removes the block. The database user Optimize connects with therefore needs these index privileges on Optimize's indices:
+
+- Elasticsearch: `manage` (to add and remove the write block) and `delete_index`
+- OpenSearch: the `manage` action group, or at least `indices:admin/block/add`, `indices:admin/settings/update` and `indices:admin/delete`
+
+These are included in the default [Elasticsearch](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md#indices-privileges) and [OpenSearch](/self-managed/concepts/databases/elasticsearch/opensearch-privileges.md) privileges. If they are missing, Optimize logs a warning, keeps the index, and tries again on the next cleanup run. Process data cleanup itself isn't affected.
+
 ## Example
 
 Here is an example of what a complete cleanup configuration might look like:
@@ -88,3 +110,13 @@ The above configuration results in the following setup:
 - The `cleanupMode` performed on all process instances that passed the `ttl` period is just clearing their variable data but keeping the overall instance data like activityInstances.
 - There is a process specific setup for the process definition key `'VeryConfidentProcess'` that has a special `ttl` of one month and those will be deleted completely due the specific `cleanupMode: 'all'` configuration for them.
 - There is another process specific setup for the process definition key `'KeepTwoMonthsProcess'` that has a special `ttl` of two months.
+
+## Diagnosing stalled cleanup
+
+If history cleanup runs on schedule but consistently completes in zero seconds, this is expected when all process instances are either still running or have not yet exceeded the configured TTL. No action is needed in that case.
+
+If you know that completed instances are past their TTL but cleanup still finishes in zero seconds, orphaned ACTIVE documents are likely accumulating. Cleanup only deletes process instances that have an `endDate` set. If Optimize never received the completion event for an instance, it has no `endDate` and cleanup cannot remove it regardless of how old it is.
+
+This happens when the Zeebe exporter's ILM retention window is shorter than Optimize's import lag: the exporter deletes Zeebe records before Optimize imports them, so Optimize writes an ACTIVE entry for the creation event but never sets an endDate. These orphaned documents grow the Optimize process instance index without a cleanup path.
+
+To prevent this, set the Zeebe exporter `retention.minimum-age` to at least 3-7 days when running Optimize. See [Zeebe record ILM retention](/components/best-practices/architecture/sizing-your-environment.md#zeebe-record-ilm-retention) in the sizing guide for details.

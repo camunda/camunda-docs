@@ -9,7 +9,7 @@ mdx:
 
 # Deploying Resources
 
-Deploy BPMN, DMN, RPA, Form, or generic resource files from disk:
+Deploy BPMN, DMN, or Form files from disk:
 
 <!-- snippet-source: examples/readme.py | regions: ReadmeDeployResources -->
 

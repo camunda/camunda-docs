@@ -9,8 +9,8 @@
       },
       "items": [
         "guides/getting-started-hello-world",
-        "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
+        "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis"
       ]
@@ -83,77 +83,49 @@
   "BuildWithAI": [
     {
       "type": "category",
-      "label": "Build with AI",
+      "label": "Agentic orchestration",
       "link": {
         "type": "doc",
         "id": "guides/build-with-ai/overview"
       },
-      "items": []
-    },
-    "guides/build-with-ai/ai-usage-guidelines",
-    {
-      "type": "category",
-      "label": "Agentic orchestration",
-      "link": {
-        "type": "doc",
-        "id": "components/agentic-orchestration/agentic-orchestration-overview"
-      },
       "items": [
-        "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/camunda-provided-llm",
-        "components/agentic-orchestration/ao-design",
         {
           "type": "category",
-          "label": "Evaluate your AI agents",
+          "label": "Get started",
           "link": {
             "type": "doc",
-            "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
+            "id": "components/agentic-orchestration/agentic-orchestration-overview"
           },
+          "items": ["components/agentic-orchestration/ai-agents"]
+        },
+        {
+          "type": "category",
+          "label": "Build",
+          "items": [
+            "components/agentic-orchestration/camunda-provided-llm",
+            "components/agentic-orchestration/add-tool-to-ai-agent",
+            "components/agentic-orchestration/rag-ai-agents"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Evaluate",
           "items": [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
             "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
             "components/agentic-orchestration/evaluate-agents/test-ai-agents"
           ]
         },
-        "components/agentic-orchestration/rag-ai-agents",
-        "components/agentic-orchestration/choose-right-model-agentic",
-        "components/agentic-orchestration/model-recommendations-agentic"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Intelligent document processing (IDP)",
-      "link": {
-        "type": "doc",
-        "id": "components/modeler/web-modeler/idp"
-      },
-      "items": [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
-        "components/modeler/web-modeler/idp/idp-document-classification",
         {
           "type": "category",
-          "label": "Document extraction",
-          "link": {
-            "type": "doc",
-            "id": "components/modeler/web-modeler/idp/idp-document-extraction"
-          },
+          "label": "Best practices",
           "items": [
-            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-            "components/modeler/web-modeler/idp/idp-structured-extraction"
+            "components/agentic-orchestration/ai-usage-guidelines",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic"
           ]
-        },
-        {
-          "type": "category",
-          "label": "Integrate IDP into your processes",
-          "link": {
-            "type": "doc",
-            "id": "components/modeler/web-modeler/idp/idp-integrate"
-          },
-          "items": ["components/modeler/web-modeler/idp/idp-example"]
-        },
-        "components/modeler/web-modeler/idp/idp-key-concepts",
-        "components/modeler/web-modeler/idp/idp-reference"
+        }
       ]
     },
     "reference/mcp-docs/docs-mcp"
@@ -262,6 +234,7 @@
             "components/best-practices/management/doing-a-proper-poc"
           ],
           "Architecture": [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               "type": "category",
@@ -316,6 +289,42 @@
         "id": "components/features-integrations/features-integrations"
       },
       "items": [
+        {
+          "type": "category",
+          "label": "Intelligent document processing (IDP)",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp"
+          },
+          "items": [
+            "components/modeler/web-modeler/idp/idp-configuration",
+            "components/modeler/web-modeler/idp/idp-applications",
+            "components/modeler/web-modeler/idp/idp-document-classification",
+            {
+              "type": "category",
+              "label": "Document extraction",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/idp/idp-document-extraction"
+              },
+              "items": [
+                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                "components/modeler/web-modeler/idp/idp-structured-extraction"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Integrate IDP into your processes",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/idp/idp-integrate"
+              },
+              "items": ["components/modeler/web-modeler/idp/idp-example"]
+            },
+            "components/modeler/web-modeler/idp/idp-key-concepts",
+            "components/modeler/web-modeler/idp/idp-reference"
+          ]
+        },
         {
           "type": "category",
           "label": "Robotic Process Automation (RPA)",
@@ -708,6 +717,9 @@
                 "id": "components/modeler/reference/modeling-guidance/index"
               },
               "items": [
+                "components/modeler/reference/modeling-guidance/rules/agent-fromai-contract",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-documentation",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-output-key",
                 "components/modeler/reference/modeling-guidance/rules/called-element",
                 "components/modeler/reference/modeling-guidance/rules/element-type",
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
@@ -840,7 +852,7 @@
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
-                "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous"
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent"
               ]
             },
             {
@@ -1065,11 +1077,26 @@
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                {
+                  "AWS EventBridge": [
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                {
+                  "AWS SNS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns-outbound"
+                  ]
+                },
+                {
+                  "AWS SQS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract"
               ]
@@ -1079,6 +1106,7 @@
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               "Email": [
@@ -1340,6 +1368,21 @@
           ]
         },
         "components/saas/backups",
+        "components/saas/cross-region-cold-recovery",
+        {
+          "type": "category",
+          "label": "Backup and restore",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/backup-restore-overview"
+          },
+          "items": [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting"
+          ]
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
@@ -3188,6 +3231,50 @@
             "apis-tools/camunda-spring-boot-starter/properties-reference"
           ]
         },
+        [
+          {
+            "type": "category",
+            "label": "c8ctl CLI",
+            "link": {
+              "type": "doc",
+              "id": "apis-tools/c8ctl/getting-started"
+            },
+            "items": [
+              "apis-tools/c8ctl/cluster-inspection",
+              "apis-tools/c8ctl/development-workflows",
+              "apis-tools/c8ctl/plugins"
+            ]
+          }
+        ],
+        {
+          "type": "category",
+          "label": "C# SDK",
+          "className": "sidebar-cta-preview",
+          "link": {
+            "type": "doc",
+            "id": "apis-tools/csharp-sdk"
+          },
+          "items": [
+            {
+              "type": "autogenerated",
+              "dirName": "apis-tools/csharp-sdk"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Python SDK",
+          "link": {
+            "type": "doc",
+            "id": "apis-tools/python-sdk"
+          },
+          "items": [
+            {
+              "type": "autogenerated",
+              "dirName": "apis-tools/python-sdk"
+            }
+          ]
+        },
         {
           "type": "category",
           "label": "TypeScript SDK",
@@ -3210,49 +3297,6 @@
                   "dirName": "apis-tools/typescript/api-reference"
                 }
               ]
-            }
-          ]
-        },
-        [
-          {
-            "type": "category",
-            "label": "c8ctl CLI",
-            "link": {
-              "type": "doc",
-              "id": "apis-tools/c8ctl/getting-started"
-            },
-            "items": [
-              "apis-tools/c8ctl/cluster-inspection",
-              "apis-tools/c8ctl/development-workflows",
-              "apis-tools/c8ctl/plugins"
-            ]
-          }
-        ],
-        {
-          "type": "category",
-          "label": "Python SDK",
-          "link": {
-            "type": "doc",
-            "id": "apis-tools/python-sdk"
-          },
-          "items": [
-            {
-              "type": "autogenerated",
-              "dirName": "apis-tools/python-sdk"
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "label": "C# SDK (Technical Preview)",
-          "link": {
-            "type": "doc",
-            "id": "apis-tools/csharp-sdk"
-          },
-          "items": [
-            {
-              "type": "autogenerated",
-              "dirName": "apis-tools/csharp-sdk"
             }
           ]
         },
@@ -3310,7 +3354,8 @@
         "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
-        "apis-tools/migration-manuals/saas-orchestration-architecture"
+        "apis-tools/migration-manuals/saas-orchestration-architecture",
+        "apis-tools/migration-manuals/web-modeler-v1-apis"
       ]
     }
   ],
@@ -3318,25 +3363,15 @@
     "reference/overview",
     {
       "type": "category",
-      "label": "Release announcements and release notes",
+      "label": "Release information",
       "link": {
         "type": "doc",
         "id": "reference/announcements-release-notes/overview"
       },
       "items": [
-        {
-          "type": "category",
-          "label": "8.9",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/890/whats-new-in-89"
-          },
-          "items": [
-            "reference/announcements-release-notes/890/whats-new-in-89",
-            "reference/announcements-release-notes/890/890-announcements",
-            "reference/announcements-release-notes/890/890-release-notes"
-          ]
-        },
+        "reference/announcements-release-notes/890/whats-new-in-89",
+        "reference/announcements-release-notes/890/890-announcements",
+        "reference/announcements-release-notes/890/890-release-notes",
         {
           "type": "category",
           "label": "8.8",
@@ -3349,22 +3384,10 @@
             "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes"
           ]
-        },
-        {
-          "type": "category",
-          "label": "8.7",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/870/870-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/870/870-announcements",
-            "reference/announcements-release-notes/870/870-release-notes"
-          ]
-        },
-        "reference/announcements-release-notes/release-policy"
+        }
       ]
     },
+    "reference/announcements-release-notes/release-policy",
     "reference/notices",
     "reference/release-versions",
     "reference/licenses",
@@ -3486,6 +3509,8 @@
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
+                "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -3601,7 +3626,17 @@
                   "items": [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
+                    {
+                      "type": "category",
+                      "label": "Internal Keycloak",
+                      "link": {
+                        "type": "doc",
+                        "id": "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak"
+                      },
+                      "items": [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades"
+                      ]
+                    },
                     {
                       "type": "category",
                       "label": "External OIDC provider",
@@ -3621,6 +3656,7 @@
                   ]
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
@@ -3635,6 +3671,8 @@
                 "id": "self-managed/deployment/helm/operational-tasks/index"
               },
               "items": [
+                "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
+                "self-managed/deployment/helm/operational-tasks/helm-values-schema-validation",
                 {
                   "type": "category",
                   "label": "Migration from Bitnami",
@@ -3923,6 +3961,15 @@
         },
         {
           "type": "category",
+          "label": "Multi-tenancy",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-tenancy/index"
+          },
+          "items": ["self-managed/concepts/multi-tenancy/logical-tenants"]
+        },
+        {
+          "type": "category",
           "label": "Audit log",
           "link": {
             "type": "doc",
@@ -3939,16 +3986,23 @@
           ]
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
+          "type": "category",
+          "label": "Multi-region",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-region/resilience-tiers"
+          },
+          "items": [
+            "self-managed/concepts/multi-region/cold-recovery",
+            "self-managed/concepts/multi-region/dual-region"
+          ]
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
-        }
+        "self-managed/operational-guides/data-purge"
       ]
     },
     {
       "Components": [
+        "self-managed/components/identity/how-identity-works",
         {
           "type": "category",
           "label": "Orchestration Cluster",
@@ -4021,7 +4075,6 @@
                 {
                   "Operation": [
                     "self-managed/components/orchestration-cluster/zeebe/operations/zeebe-in-production",
-                    "self-managed/components/orchestration-cluster/zeebe/operations/resource-planning",
                     "self-managed/components/orchestration-cluster/zeebe/operations/network-ports",
                     "self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster",
                     "self-managed/components/orchestration-cluster/zeebe/operations/health",
@@ -4159,7 +4212,8 @@
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
-                "self-managed/components/management-identity/configuration/initialize-tenants"
+                "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component"
               ]
             },
             "self-managed/components/management-identity/authentication",
@@ -4225,6 +4279,7 @@
                 "self-managed/components/optimize/configuration/history-cleanup",
                 "self-managed/components/optimize/configuration/localization",
                 "self-managed/components/optimize/configuration/object-variables",
+                "self-managed/components/optimize/configuration/optimize-export-filtering",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy"
               ]
@@ -4233,6 +4288,7 @@
         }
       ]
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.9",

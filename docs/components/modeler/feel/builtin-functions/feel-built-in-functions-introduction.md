@@ -29,5 +29,5 @@ This section is split into functions based on their primary operational data typ
 - [Range](./feel-built-in-functions-range.md)
 
 Additionally, there are [conversion](./feel-built-in-functions-conversion.md) functions that allow
-you to construct new values of a data type (factory functions). Functions not matching any
-of the above categories are listed in the [miscellaneous](./feel-built-in-functions-miscellaneous.md) section.
+you to construct new values of a data type (factory functions), and [AI agent functions](./feel-built-in-functions-ai-agent.md)
+used to declare LLM-provided tool parameters (see the [AI agent functions glossary entry](/reference/glossary.md#ai-agent-function)).

@@ -51,6 +51,25 @@ public static class ProcessDefinitionExamples
     // </SearchProcessDefinitions>
     #endregion SearchProcessDefinitions
 
+    #region SearchProcessDefinitionVariableNames
+
+    // <SearchProcessDefinitionVariableNames>
+    public static async Task SearchProcessDefinitionVariableNamesExample(ProcessDefinitionKey processDefinitionKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchProcessDefinitionVariableNamesAsync(
+            processDefinitionKey,
+            new ProcessDefinitionVariableNameSearchQuery());
+
+        foreach (var variable in result.Items)
+        {
+            Console.WriteLine($"Variable name: {variable.Name}");
+        }
+    }
+    // </SearchProcessDefinitionVariableNames>
+    #endregion SearchProcessDefinitionVariableNames
+
     #region GetProcessDefinitionStatistics
 
     // <GetProcessDefinitionStatistics>

@@ -19,7 +19,7 @@ type TenantSearchQuerySortRequest = object;
 field: "key" | "name" | "tenantId";
 ```
 
-The field to sort by.
+The field to sort by. `key` is deprecated and should not be used anymore.
 
 ---
 

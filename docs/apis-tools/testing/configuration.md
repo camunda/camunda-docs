@@ -62,8 +62,10 @@ speed up the test execution.
 
 ### Usage
 
-By default, the runtime uses the same version of the Camunda Docker images as the Maven module. You can change the
-Docker images and other runtime properties in the following way.
+By default, the runtime uses the same version of the Camunda Docker image as the Maven module. The Connectors Docker image doesn't follow the Camunda version. The runtime uses a fixed, published Connectors version for each CPT release. To use another version, set `connectors-docker-image-version`. You can change the Docker images and other runtime properties in the following way.
+
+If you change the version of the Camunda Docker image, use the same version as CPT or later. CPT doesn't support older
+Camunda runtimes.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -78,7 +80,7 @@ In your `application.yml` (or `application.properties`):
 camunda:
   process-test:
     # Change the version of the Camunda Docker image
-    camunda-docker-image-version: 8.8.0
+    camunda-docker-image-version: 8.11.0
     # Change the Camunda Docker image
     camunda-docker-image-name: camunda/camunda
     # Set additional Camunda environment variables
@@ -98,7 +100,10 @@ camunda:
     # Set additional Connectors environment variables
     connectors-env-vars:
       env_1: value_1
-    # Set Connectors secrets
+    # Set cluster secrets
+    cluster-secrets:
+      secret_1: value_1
+    # Set legacy Connectors secrets
     connectors-secrets:
       secret_1: value_1
     # Expose additional Connectors ports
@@ -116,7 +121,7 @@ In your `/camunda-container-runtime.properties` file:
 
 ```properties
 # Change the version of the Camunda Docker image
-camundaDockerImageVersion=8.8.0
+camundaDockerImageVersion=8.11.0
 # Change the Camunda Docker image
 camundaDockerImageName=camunda/camunda
 # Set additional Camunda environment variables
@@ -136,7 +141,7 @@ connectorsDockerImageName=camunda/connectors
 # Set additional Connectors environment variables
 connectorsEnvVars.env_1=value_1
 connectorsEnvVars.env_2=value_2
-# Set Connectors secrets
+# Set legacy Connectors secrets
 connectorsSecrets.secret_1=value_1
 connectorsSecrets.secret_2=value_2
 # Expose additional Connectors ports
@@ -161,7 +166,7 @@ public class MyProcessTest {
     private static final CamundaProcessTestExtension EXTENSION =
             new CamundaProcessTestExtension()
                     // Change the version of the Camunda Docker image
-                    .withCamundaDockerImageVersion("8.8.0")
+                    .withCamundaDockerImageVersion("8.11.0")
                     // Change the Camunda Docker image
                     .withCamundaDockerImageName("camunda/camunda")
                     // Set additional Camunda environment variables
@@ -176,7 +181,9 @@ public class MyProcessTest {
                     .withConnectorsDockerImageVersion("8.8.0")
                     // Set additional Connectors environment variables
                     .withConnectorsEnv("env_1", "value_1")
-                    // Set Connectors secrets
+                    // Set cluster secrets
+                    .withClusterSecret("secret_1", "value_1")
+                    // Set legacy Connectors secrets
                     .withConnectorsSecret("secret_1", "value_1");
 }
 ```
@@ -255,6 +262,66 @@ public class MyProcessTest {
                     // Use a managed runtime for a different configuration
                     .withRuntimeMode(CamundaProcessTestRuntimeMode.MANAGED)
                     .withConnectorsEnabled(true);
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Set cluster secrets
+
+Cluster secrets are the default way to provide secrets in tests with Camunda 8.10+. They let processes that reference `=camunda.secrets.<NAME>` resolve in your tests.
+
+- In a managed or shared runtime, CPT writes each secret to a temporary file, copies the file into the Camunda container, and sets `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`.
+- In a remote runtime, CPT doesn't write secrets to the cluster secret store. You need to configure the secrets on the cluster instead.
+- CPT fixes the secrets when the runtime starts. You can't change them per test.
+- Use `connectors-secrets` only for the legacy `{{secrets.X}}` syntax. It doesn't populate the cluster secret store. See [Connectors](./connectors.md#connector-secrets) for examples.
+- To learn how secrets resolve, see [secrets](/components/concepts/secrets.md) and [secret resolution](/components/concepts/secret-resolution.md).
+
+You can set cluster secrets in the following way.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
+[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]
+}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    cluster-secrets:
+      GITHUB_TOKEN: ghp_secret
+      SLACK_TOKEN: xoxb-secret
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+clusterSecrets.GITHUB_TOKEN=ghp_secret
+clusterSecrets.SLACK_TOKEN=xoxb-secret
+```
+
+Alternatively, you can register the JUnit extension manually and use the fluent builder:
+
+```java
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+            .withClusterSecret("GITHUB_TOKEN", "ghp_secret")
+            .withClusterSecret("SLACK_TOKEN", "xoxb-secret");
 }
 ```
 
@@ -629,24 +696,12 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 
 ### Prerequisites
 
-- Install a Camunda 8 runtime, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+- Install a Camunda 8 runtime of the same version as CPT or later, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+  CPT doesn't support older Camunda runtimes.
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
-- Enable the management clock endpoint to allow clock manipulations
-
-You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configuration-options) by
-defining a `application.yaml` file with:
-
-```yaml
-zeebe.clock.controlled: true
-```
-
-By default, Camunda 8 Run loads the `application.yaml` from the distribution's root directory. If you use a different
-path, then you need to set the path when starting the application with the command line argument
-`--config=application.yaml`:
-
-```
-./start.sh --config=application.yaml
-```
+- If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, grant the `READ` and `UPDATE`
+  permissions on the `SYSTEM` resource to the user or client that CPT uses to connect to the runtime. CPT needs these
+  permissions to change the clock. You set up this user or client in the [client configuration](#client-configuration).
 
 ### Usage
 
@@ -701,6 +756,8 @@ public class MyProcessTest {
 </TabItem>
 
 </Tabs>
+
+In a remote runtime, the cluster owns its secret store. CPT ignores `cluster-secrets` and logs a warning. Configure secrets on the cluster instead.
 
 ### Change the connection
 
@@ -891,10 +948,99 @@ private static final CamundaProcessTestExtension EXTENSION =
 
 </Tabs>
 
+## Query page limit
+
+CPT paginates the individual search requests used by assertions, utilities, and the coverage report, with a default page limit of 100 results. If your process tests create a lot of data, such as many process instances or a process with a multi-instance activity, assertions can fail or the coverage report can be incomplete. In that case, increase the query page limit.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    query-page-limit: 1000
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+queryPageLimit=1000
+```
+
+</TabItem>
+
+</Tabs>
+
+### Property reference
+
+| Property           | Type      | Default | Description                                              |
+| ------------------ | --------- | ------- | -------------------------------------------------------- |
+| `query-page-limit` | `integer` | `100`   | The maximum number of results to return per paged query. |
+
+## Test cleanup settings {#test-cleanup-settings}
+
+After each test, CPT resets the Camunda runtime clock and deletes all runtime data by default. You can disable either behavior to inspect the process state after a test run.
+
+:::info
+Disabling clock reset or data deletion means state from one test can affect subsequent tests.
+:::
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    # Keep the Camunda runtime clock as-is after each test
+    clock-reset-enabled: false
+    # Skip runtime data deletion after each test
+    data-deletion-mode: none
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Keep the Camunda runtime clock as-is after each test
+clockResetEnabled=false
+# Skip runtime data deletion after each test
+dataDeletionMode=NONE
+```
+
+</TabItem>
+
+</Tabs>
+
+### Property reference
+
+| Property              | Type              | Default         | Description                                                                                                                                          |
+| --------------------- | ----------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clock-reset-enabled` | `boolean`         | `true`          | When `true`, resets the Camunda runtime clock after each test. Set to `false` to keep the clock at its current value for post-run inspection.        |
+| `data-deletion-mode`  | `string` (`enum`) | `CLUSTER_PURGE` | Controls how CPT deletes runtime data after each test. `CLUSTER_PURGE` (default) purges the full cluster state. `NONE` skips data deletion entirely. |
+
 ## Process Test Coverage
 
-CPT generates an HTML and JSON coverage report of your BPMN processes. You can configure the report generation in the
-following way.
+CPT generates an HTML and JSON coverage report of your BPMN processes and DMN decision tables. You can configure the
+report generation in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -911,10 +1057,14 @@ camunda:
     coverage:
       # Change the directory where the report is generated
       reportDirectory: target/coverage-report
-      # Exclude processes from the report
+      # Exclude processes from the report by their process definition ID
       excludedProcesses:
         - process_1
         - process_2
+      # Exclude decisions from the report by their decision definition ID
+      excludedDecisions:
+        - decision_1
+        - decision_2
 ```
 
 </TabItem>
@@ -926,9 +1076,12 @@ In your `/camunda-container-runtime.properties` file:
 ```properties
 # Change the directory where the report is generated
 coverage.reportDirectory=target/coverage-report
-# Exclude processes from the report
+# Exclude processes from the report by their process definition ID
 excludedProcesses[0]=process_1
 excludedProcesses[1]=process_2
+# Exclude decisions from the report by their decision definition ID
+excludedDecisions[0]=decision_1
+excludedDecisions[1]=decision_2
 ```
 
 </TabItem>
@@ -1004,10 +1157,11 @@ Unless noted otherwise, properties in the provider tables are required.
 
 #### Judge settings
 
-| Property              | Type     | Default | Description                                              |
-| --------------------- | -------- | ------- | -------------------------------------------------------- |
-| `judge.threshold`     | `double` | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass. |
-| `judge.custom-prompt` | `string` |         | Custom evaluation prompt replacing the default criteria. |
+| Property                 | Type      | Default | Description                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `judge.threshold`        | `double`  | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass.                                                                                                                                                                                                                                                                                      |
+| `judge.custom-prompt`    | `string`  |         | Custom evaluation prompt replacing the default criteria.                                                                                                                                                                                                                                                                                      |
+| `judge.attach-documents` | `boolean` | `false` | When `true`, resolves Camunda document references in the evaluated variable and attaches their content to the judge. Disabled by default to avoid unnecessary token cost. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON. See [document attachment](#document-attachment). |
 
 The default threshold of `0.5` treats a response as acceptable when it is at least partially satisfied according to the
 judge rubric. This is a practical default for AI-generated output, where wording and level of detail may vary between
@@ -1077,6 +1231,12 @@ camunda:
 
 Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
+
+:::note
+The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) in the chosen region.
+
+If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate `bedrock:InvokeModel` grant; access to one does not imply access to the other.
+:::
 
 | Property                                  | Required                       | Type       | Description                                                                                    |
 | ----------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
@@ -1193,6 +1353,63 @@ camunda:
 </TabItem>
 
 </Tabs>
+
+### Document attachment
+
+When `judge.attach-documents` is enabled, CPT scans the serialized variable JSON for [Camunda document](/components/document-handling/getting-started.md) references, downloads their content, and passes it to the judge alongside the text prompt as structured content blocks. This lets the judge evaluate document content, such as generated PDFs, images, or text files.
+
+Document attachment is disabled by default. Enable it globally:
+
+<Tabs groupId="client" defaultValue="spring-sdk-attach" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-attach' },
+{label: 'Java client', value: 'java-client-attach' },
+]}>
+
+<TabItem value='spring-sdk-attach'>
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      attach-documents: true
+```
+
+</TabItem>
+
+<TabItem value='java-client-attach'>
+
+```properties
+judge.attachDocuments=true
+```
+
+</TabItem>
+
+</Tabs>
+
+You can also enable it per assertion using `withJudgeConfig`:
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config.withAttachDocuments(true))
+    .hasVariableSatisfiesJudge("report", "Contains an executive summary with at least three key findings.");
+```
+
+#### Content type handling
+
+How the document is passed to the judge depends on its MIME content type:
+
+| Content type                                                                                                                                            | Passed to judge as                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `image/*`                                                                                                                                               | Inline image block                                                      |
+| `application/pdf`                                                                                                                                       | PDF file block                                                          |
+| `text/*`, `application/json`, `application/xml`, `application/yaml`, `application/x-yaml`, or types with a structured suffix (`+json`, `+xml`, `+yaml`) | Inline text block (UTF-8)                                               |
+| All other types                                                                                                                                         | Placeholder text only; content is not inspectable. A warning is logged. |
+
+#### Behavior
+
+- Built-in LangChain4j providers implement `MultimodalChatModelAdapter`. Custom `ChatModelAdapter` implementations must implement `MultimodalChatModelAdapter` to receive documents. Otherwise, document attachment does not take effect and the judge evaluates only the raw variable JSON.
+- Documents with the same document ID and store ID are deduplicated and downloaded only once.
+- If a document fails to download, the assertion fails with an `IllegalStateException`.
 
 ### Custom prompt
 
@@ -1366,6 +1583,42 @@ CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
 
 </Tabs>
 
+#### Multimodal support
+
+To use [document attachment](#document-attachment) with a custom adapter, implement `MultimodalChatModelAdapter` instead of `ChatModelAdapter`. `MultimodalChatModelAdapter` extends `ChatModelAdapter` and adds a second `generate` overload that receives the resolved documents.
+
+Each `ResolvedDocument` provides the binary content via `getContent()` and metadata via `getDocumentId()`, `getFileName()`, and `getContentType()`. Pass each document to the provider as a native structured content block (image block, file block, or text block depending on the content type). Prefix each block with a text content header containing the document metadata so the judge can correlate the block back to the document reference in `<actual_value>`:
+
+```java
+public class MyMultimodalAdapter implements MultimodalChatModelAdapter {
+
+    @Override
+    public String generate(String prompt) {
+        return myClient.chat(prompt);
+    }
+
+    @Override
+    public String generate(String prompt, List<ResolvedDocument> documents) {
+        List<Object> parts = new ArrayList<>();
+        parts.add(new TextPart(prompt));
+
+        for (ResolvedDocument doc : documents) {
+            // text header identifying this document block
+            parts.add(new TextPart(
+                "--- documentId=\"" + doc.getDocumentId()
+                + "\" fileName=\"" + doc.getFileName()
+                + "\" contentType=\"" + doc.getContentType() + "\" ---"));
+            // binary content as a native structured block
+            parts.add(new BinaryPart(doc.getContent(), doc.getContentType()));
+        }
+
+        return myClient.chat(parts);
+    }
+}
+```
+
+Replace `TextPart` and `BinaryPart` with the content-block types your provider's SDK defines. If document attachment is enabled but the adapter only implements `ChatModelAdapter`, document attachment does not take effect and the judge evaluates only the raw variable JSON.
+
 ## Semantic similarity configuration
 
 [Semantic similarity assertions](assertions.md#hasvariablesimilarto) use a configured embedding model to compare process variables (or plain values) to an expected string using vector embeddings.
@@ -1470,6 +1723,12 @@ camunda:
 
 It supports Bedrock long-term API keys or AWS IAM credentials. It falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
+
+:::note
+The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured embedding model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) in the chosen region.
+
+If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate bedrock:InvokeModel grant; access to one does not imply access to the other.
+:::
 
 | Property                                            | Required                       | Type       | Description                                                                                    |
 | --------------------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |

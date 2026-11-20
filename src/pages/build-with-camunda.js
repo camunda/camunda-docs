@@ -9,48 +9,18 @@ import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import AwsSvgIcon from "../components/CamundaSelfManaged/icons/aws.svg";
 import GcpSvgIcon from "../components/CamundaSelfManaged/icons/gcp.svg";
 import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
+import IconRunLocally from "../../docs/components/assets/icon-run-locally.svg";
+import IconSaasTrial from "../../docs/components/assets/icon-saas-trial.svg";
+import downloads from "../data/downloads.json";
+
+const GETTING_STARTED = downloads.gettingStarted;
+const CAMUNDA_RUN = downloads.camundaRun;
+const CAMUNDA_RUN_STABLE_MINOR = CAMUNDA_RUN.version
+  .split(".")
+  .slice(0, 2)
+  .join(".");
 
 /* ─── Icon components ─── */
-
-function CloudIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M19.35 10.04A7.49 7.49 0 0012 4a7.48 7.48 0 00-6.93 4.6A6 6 0 006 20h13a5 5 0 00.35-9.96z"
-        fill="#78a9ff"
-      />
-    </svg>
-  );
-}
-
-function TerminalIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <rect
-        x="2"
-        y="4"
-        width="20"
-        height="16"
-        rx="2"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-      />
-      <path
-        d="M6 8l4 4-4 4"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 16h6"
-        stroke="#fc5d0d"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 function CheckIcon({ color = "#78a9ff" }) {
   return (
@@ -547,7 +517,7 @@ function ArrowDown() {
 
 /* ─── Reusable components ─── */
 
-function VersionBadge({ version = "Camunda 8.9+" }) {
+function VersionBadge({ version }) {
   return <span className={styles.versionBadge}>{version}</span>;
 }
 
@@ -696,11 +666,16 @@ function BuildWithCamunda() {
                   Self-Managed
                 </span>
                 <span className={styles.heroCardIcon}>
-                  <TerminalIcon />
+                  <IconRunLocally
+                    role="img"
+                    aria-hidden="true"
+                    width="64"
+                    height="64"
+                  />
                 </span>
                 <h2 className={styles.heroCardTitle}>Run Camunda locally</h2>
                 <p className={styles.heroCardMeta}>
-                  Camunda 8.9+ · macOS, Linux, Windows
+                  Camunda {CAMUNDA_RUN_STABLE_MINOR}+ · macOS, Linux, Windows
                 </p>
                 <p className={styles.heroCardDesc}>
                   Install and start Camunda locally, deploy your first process,
@@ -731,7 +706,12 @@ function BuildWithCamunda() {
                   Cloud
                 </span>
                 <span className={styles.heroCardIcon}>
-                  <CloudIcon />
+                  <IconSaasTrial
+                    role="img"
+                    aria-hidden="true"
+                    width="64"
+                    height="64"
+                  />
                 </span>
                 <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
                 <p className={styles.heroCardMeta}>Fully managed cloud</p>
@@ -744,7 +724,7 @@ function BuildWithCamunda() {
                     <CheckIcon color="#22a06b" /> Zero setup
                   </li>
                   <li>
-                    <CheckIcon color="#22a06b" /> Web Modeler included
+                    <CheckIcon color="#22a06b" /> Modeler included
                   </li>
                   <li>
                     <CheckIcon color="#22a06b" /> AI agent skills built in
@@ -774,7 +754,8 @@ function BuildWithCamunda() {
         >
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Run Camunda locally <VersionBadge />
+              Run Camunda locally{" "}
+              <VersionBadge version={`Camunda ${CAMUNDA_RUN_STABLE_MINOR}+`} />
             </h2>
             <p className={styles.sectionSub}>
               Install the Camunda CLI via npm and start a local Camunda
@@ -810,7 +791,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.10.0-alpha2`}
+              {`$ c8ctl cluster start ${CAMUNDA_RUN.version}`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -847,6 +828,45 @@ function BuildWithCamunda() {
                 requires Node.js 18+.
               </span>
             </p>
+            <p
+              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+              style={{ marginTop: "0.5rem" }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                By downloading our self-managed packages, you agree to our{" "}
+                <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+                  Terms of Use
+                </Link>
+                .
+              </span>
+            </p>
           </div>
 
           {/* ─── Fallback: Download bundle ─── */}
@@ -878,25 +898,25 @@ function BuildWithCamunda() {
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip"
+                  href={GETTING_STARTED.links.mac[0].url}
                 >
                   <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip"
+                  href={GETTING_STARTED.links.mac[1].url}
                 >
                   <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip"
+                  href={GETTING_STARTED.links.windows[0].url}
                 >
                   <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz"
+                  href={GETTING_STARTED.links.linux[0].url}
                 >
                   <DownloadBtnIcon /> Linux
                 </a>
@@ -942,8 +962,9 @@ $ ./camunda-start.sh
                   <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
                 <span>
-                  Camunda 8 Run requires OpenJDK 21–25. Node.js/npm not required
-                  for getting started bundle.
+                  Camunda 8 Run includes a bundled Java runtime, so no local
+                  OpenJDK installation is required. Node.js/npm not required for
+                  getting started bundle.
                 </span>
               </p>
             </div>
@@ -1034,7 +1055,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start 8.9
+                {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
 $ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
@@ -1286,8 +1307,8 @@ Available skills:
                 <DockerIcon />
                 <h3>Docker Compose</h3>
                 <p>
-                  Run the full Camunda stack locally with a single{" "}
-                  <CodeBlock>docker compose up</CodeBlock>.
+                  Run Camunda 8 locally for development and evaluation with{" "}
+                  <CodeBlock>docker compose up -d</CodeBlock>.
                 </p>
               </Link>
               <Link

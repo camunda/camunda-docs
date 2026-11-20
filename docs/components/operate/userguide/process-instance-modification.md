@@ -40,6 +40,8 @@ To enter modification mode:
 
 The UI will change when you enter modification mode, including a blue banner at the top and two buttons for applying or discarding modifications at the bottom.
 
+![A process instance in modification mode, indicated by the blue "Process Instance Modification Mode" banner at the top of the page.](./img/process-instance-modification.png)
+
 ## Cancel all running tokens on an element
 
 To cancel all running tokens on an element, take the following steps:

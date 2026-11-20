@@ -26,10 +26,11 @@ You can use sensitive information in your connectors without exposing it in your
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
 You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties
-panel that supports this.
-Each of
-the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
-details which fields support secrets.
+panel. Secrets resolve in every field, not only in a specific subset of fields.
+
+The [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) applies to both
+outbound and inbound connectors. In practice, this means a secret in a connector field only resolves at runtime if
+that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
 Secrets are not variables and must be wrapped in double quotes as follows when used in a FEEL expression:
 
@@ -246,7 +247,7 @@ The **Error Expression** property requires a [FEEL](/components/modeler/feel/wha
 BPMN error object in the end. The BPMN error object can be an
 empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty
-`errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by
+`errorType` and a non-empty `errorCode` if the error type is `bpmnError`. You can use all available functionality provided by
 FEEL to produce this result.
 
 Use the provided FEEL functions:
@@ -276,6 +277,10 @@ Within the FEEL expression, you access the following temporary variables:
   the [REST connector](/components/connectors/protocol/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code
   is only available if the connector's runtime behavior provided a code in the exception it threw.
+
+:::info
+If a **Result Variable** or **Result Expression** is configured on the connector task, the raw connector response is **not** available as `response` in the error expression. Instead, `response` contains only the mapped output variables. Reference those variables by name (for example, `myVar.status`) rather than using `response.body`.
+:::
 
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on
 technical exceptions thrown by a connector as well as regular results returned by the external system you integrated.

@@ -5,6 +5,8 @@ sidebar_label: Human in the loop
 description: "Learn how to build human-in-the-loop AI workflows by combining MCP with BPMN."
 ---
 
+import HIL_example from './agentic-ai/img/mcp-client-hitl.png';
+
 Learn how to build human-in-the-loop AI workflows in Camunda by combining MCP Client tool discovery with BPMN elements like gateways, intermediate events, and user tasks to control and approve tool execution.
 
 ## About
@@ -22,7 +24,7 @@ The following is an example of how you can configure a filesystem MCP server:
 3. Create an exclusive gateway after the event to decide whether the MCP client tool call should be executed directly or require confirmation.
 4. Create a flow from the exclusive gateway to the MCP Client service task for direct execution.
 
-- In the condition expression, you can use a FEEL expression like the following to allow tool listing and selected operations directly. This differs from [filtering](#tools), because all tools remain available, but you can decide which tools need user confirmation:
+- In the condition expression, you can use a FEEL expression like the following to allow tool listing and selected operations directly. This differs from [filtering](./agentic-ai-mcp-client-config.md#filters), because all tools remain available, but you can decide which tools need user confirmation:
 
 ```feel
 if toolCall.method = "tools/list" then
@@ -58,4 +60,4 @@ The model requested to call the following MCP tool:
 
 See the example diagram below:
 
-![MCP Client connector human-in-the-loop example](agentic-ai/img/mcp-client-hitl.png)
+<img src={HIL_example} alt="MCP Client connector human-in-the-loop example" width="65%"/>

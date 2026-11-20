@@ -37,7 +37,7 @@ The following components are not supported for manual installation:
 
 - Management Identity
 - Optimize
-- Web Modeler
+- Camunda Hub
 
 To install these components, use one of the supported methods:
 
@@ -154,8 +154,8 @@ CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD=
 ```yaml
 camunda:
   data:
-    type: elasticsearch|opensearch # defaults to elasticsearch
     secondary-storage:
+      type: elasticsearch|opensearch # defaults to elasticsearch
       # Elasticsearch
       elasticsearch:
         url: http://localhost:9200
@@ -290,7 +290,7 @@ Once you've downloaded the Orchestration Cluster distribution, extract it into a
 6. Open [http://localhost:8080](http://localhost:8080). On first access, you'll be asked to create an admin user unless [Admin](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Camunda Hub is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
 ### Run the Orchestration Cluster as a service
@@ -358,7 +358,6 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json
 // amount of brokers, size, partitions etc. depends on your configuration
@@ -397,8 +396,6 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 }
 ```
 
-  </summary>
-
 </details>
 
 Check the health status of the Orchestration Cluster with the actuator endpoint:
@@ -409,7 +406,6 @@ curl localhost:9600/actuator/health
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json
 {
@@ -425,23 +421,22 @@ curl localhost:9600/actuator/health
     "brokerStatus": {
       "status": "UP"
     },
-    "indicesCheck": {
-      "status": "UP"
-    },
     "livenessState": {
       "status": "UP"
     },
     "readinessState": {
       "status": "UP"
     },
-    "searchEngineCheck": {
+    "schemaReadinessCheck": {
+      "status": "UP"
+    },
+    "searchEngineStatus": {
       "status": "UP"
     }
   }
 }
 ```
 
-  </summary>
 </details>
 
 ## Connectors
@@ -517,13 +512,14 @@ To start the connector runtime locally, run:
 java -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
 ```
 
-The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so it must be launched with `java -jar`. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) no longer works as of connector runtime 8.9.4.
+The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so launch it with `java -jar`, or with Spring Boot's `PropertiesLauncher` as shown below. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) doesn't work with connector runtime 8.9 and later.
 
-To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it:
+To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it. Only Spring Boot's `PropertiesLauncher` reads `loader.path`, so start it explicitly instead of using `java -jar`:
 
 ```shell
 java -Dloader.path=/home/user/custom-connectors \
-  -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
+  -cp /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar \
+  org.springframework.boot.loader.launch.PropertiesLauncher
 ```
 
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
@@ -583,7 +579,6 @@ curl localhost:9090/actuator/health
 
 <details>
   <summary>Example output</summary>
-  <summary>
 
 ```json
 {
@@ -630,7 +625,6 @@ curl localhost:9090/actuator/health
 }
 ```
 
-  </summary>
 </details>
 
 ## Next steps

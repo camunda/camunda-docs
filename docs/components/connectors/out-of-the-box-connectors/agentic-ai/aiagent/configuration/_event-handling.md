@@ -54,7 +54,9 @@ To provide additional data to the LLM from a handled event, create a `toolCallRe
 The content of this variable is added to the LLM API request as a user message, after any tool call results, as follows:
 
 - If the event subprocess creates a non-empty `toolCallResult`, its contents are added as the event payload of the user message generated from the event.
-- If no `toolCallResult` is created, a generic message is added as the user message, describing that an interrupting/not interrupting event was handled.
+- If no `toolCallResult` is created, a generic message is added as the user message. The message depends on the **Event handling behavior**:
+  - **Wait for tool call results**: `An event was triggered but no content was returned. Execution waited for all in-flight tool executions to complete before proceeding.`
+  - **Cancel tool calls**: `An event was triggered but no content was returned. All in-flight tool executions were canceled.`
 
 #### How event subprocesses work with the AI Agent Sub-process
 
@@ -62,7 +64,7 @@ In standard BPMN, an interrupting event subprocess cancels its parent scope when
 
 For the AI Agent Sub-process (implemented as an ad-hoc sub-process):
 
-- **Only non-interrupting event subprocesses are allowed** on the agent scope, by design and enforced by Modeler.
+- **Only non-interrupting event subprocesses are allowed** on the agent scope, by design and enforced by the modeling interface.
 - The **Event handling behavior** field controls how the agent treats running tool calls when such a (non-interrupting) event subprocess is triggered:
   - [Wait for tool call results](#wait-for-tool-call-results): the event handler runs only after all tool calls complete.
   - [Cancel tool calls](#cancel-tool-calls): running tools are canceled, and their cancellation is surfaced to the LLM, even though the event subprocess itself remains non-interrupting from a BPMN perspective.

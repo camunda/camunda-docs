@@ -1,0 +1,432 @@
+---
+id: get-cluster-usage-metrics
+title: "Get cluster usage metrics"
+description: "Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration Cluster API of the target cluster, so it must additionally include the read:* permission for the orchestration-api audience."
+sidebar_label: "Get cluster usage metrics"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get cluster usage metrics"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/clusters/usage-metrics"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration Cluster API of the target cluster, so it must additionally include the read:\* permission for the orchestration-api audience.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "id",
+      in: "query",
+      required: true,
+      description: "The ID of the cluster.",
+      schema: { type: "string" },
+    },
+    {
+      name: "start",
+      in: "query",
+      required: true,
+      description: "The start of the time range (epoch milliseconds).",
+      schema: { type: "integer", format: "int64" },
+    },
+    {
+      name: "end",
+      in: "query",
+      required: true,
+      description: "The end of the time range (epoch milliseconds).",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The usage metrics were retrieved successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: [
+              "id",
+              "status",
+              "unavailableReason",
+              "processInstances",
+              "decisionInstances",
+              "taskUsers",
+              "activeTenants",
+            ],
+            properties: {
+              id: { description: "The cluster ID.", type: "string" },
+              status: {
+                description:
+                  "Whether the cluster could provide usage metrics. A cluster without data is `UNAVAILABLE`, never reported as zero.",
+                type: "string",
+                enum: ["AVAILABLE", "UNAVAILABLE"],
+                title: "UsageMetricsStatus",
+              },
+              unavailableReason: {
+                description:
+                  "Why the usage metrics are unavailable. Only set if `status` is `UNAVAILABLE`.",
+                nullable: true,
+                allOf: [
+                  {
+                    description:
+                      "Why a cluster could not provide usage metrics.\n* `UNSUPPORTED`: The cluster does not offer usage metrics, as is the case for clusters below 8.8. * `NOT_CONFIGURED`: The cluster has no URL to request usage metrics from. * `UNREACHABLE`: The cluster did not answer, or answered with an error.",
+                    type: "string",
+                    enum: ["UNSUPPORTED", "NOT_CONFIGURED", "UNREACHABLE"],
+                    title: "UsageMetricsUnavailableReason",
+                  },
+                ],
+              },
+              processInstances: {
+                description:
+                  "Process instance metrics. Not set if the usage metrics are unavailable.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                    },
+                    title: "MetricTotal",
+                  },
+                ],
+              },
+              decisionInstances: {
+                description:
+                  "Decision instance metrics. Not set if the usage metrics are unavailable.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                    },
+                    title: "MetricTotal",
+                  },
+                ],
+              },
+              taskUsers: {
+                description:
+                  "Task user metrics. Not set if the usage metrics are unavailable.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total", "assignees"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      assignees: {
+                        description: "The list of assignee identifiers.",
+                        type: "array",
+                        items: { type: "string" },
+                      },
+                    },
+                    title: "TaskUsersMetric",
+                  },
+                ],
+              },
+              activeTenants: {
+                description:
+                  "Active tenant metrics. Not set if the cluster does not report them.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                    },
+                    title: "MetricTotal",
+                  },
+                ],
+              },
+            },
+            title: "UsageMetricsResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

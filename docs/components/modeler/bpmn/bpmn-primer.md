@@ -115,10 +115,7 @@ The following is an introduction to BPMN 2.0, its elements, and their execution 
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md). Learn more by [modeling your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md).
-
-- [Download page](https://camunda.com/download/modeler/)
-- [Source code repository](https://github.com/camunda/camunda-modeler)
+The best tools for modeling BPMN diagrams for Zeebe are [Camunda Hub](/components/hub/workspace/modeler/index.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md). Learn more by [modeling your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md).
 
 ## BPMN elements
 
@@ -215,6 +212,10 @@ Refer to the [events](events.md) section on which types of events are currently 
 When the event is triggered, the subprocess is interrupted, regardless which of its elements is currently active.
 
 Refer to the [subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
+
+:::note
+Swim lanes (pools and lanes) are only available at the top-level process or collaboration level. They cannot be added inside a subprocess. This is a constraint of the BPMN 2.0 specification.
+:::
 
 ## Additional resources
 

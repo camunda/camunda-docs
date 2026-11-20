@@ -5,6 +5,9 @@ title: RDBMS troubleshooting and operations
 description: "Troubleshoot common RDBMS connectivity issues, TLS configuration, and post-deployment operations."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This page covers troubleshooting common issues, TLS configuration, and post-deployment operations for RDBMS deployments. For configuration reference, see [configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 :::note Related pages
@@ -72,7 +75,7 @@ kubectl exec <pod-name> -- ls -la /driver-lib/
 kubectl logs <pod-name> -c fetch-jdbc-drivers
 ```
 
-3. Verify the JDBC URL matches the driver type (e.g., Oracle URL with Oracle driver).
+3. Verify the JDBC URL matches the driver type (for example, Oracle URL with Oracle driver).
 
 **Fix:** Re-apply the init container configuration or verify the custom image includes the driver. See [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
 
@@ -88,7 +91,7 @@ kubectl logs <pod-name> -c fetch-jdbc-drivers
 kubectl logs <pod-name> | grep -i liquibase
 ```
 
-2. Verify `autoDDL` is enabled (default: `true`):
+2. Check whether `autoDDL` was disabled (default: `true`). If it's `false`, Camunda doesn't create the schema automatically. The following example shows a disabled configuration:
 
 ```yaml
 orchestration:
@@ -99,12 +102,12 @@ orchestration:
           data:
             secondary-storage:
               rdbms:
-                auto-ddl: false # Confirm this is set
+                auto-ddl: false # If false, the schema isn't created automatically
 ```
 
-3. Test database user permissions (see [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
+3. Test database user permissions (see [schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
 
-**Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md).
+**Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md).
 
 ## Liquibase lock after pod crash or restart
 
@@ -160,17 +163,24 @@ orchestration:
           data:
             secondary-storage:
               rdbms:
-                flush-interval: PT1S # More frequent flushes
+                flush-interval: PT0.25S # More frequent flushes (default: PT0.5S)
                 queue-size: 5000 # Larger queue for buffering
                 queue-memory-limit: 50 # Increase if needed
 ```
 
-- Smaller `flushInterval` → more frequent writes (increases DB load).
-- Larger `queueSize` → more events buffered before flush (increases memory).
+- Smaller `flush-interval` → more frequent writes (increases DB load).
+- Larger `queue-size` → more events buffered before flush (increases memory).
 
 ## TLS/SSL configuration
 
-### PostgreSQL with TLS
+<Tabs groupId="rdbms-tls" defaultValue="postgresql" values={[
+{label: "PostgreSQL", value: "postgresql"},
+{label: "Oracle", value: "oracle"},
+{label: "SQL Server", value: "mssql"},
+{label: "MariaDB / MySQL", value: "mariadb"},
+]}>
+
+<TabItem value="postgresql">
 
 Add SSL parameters to the JDBC URL:
 
@@ -182,7 +192,8 @@ orchestration:
         url: jdbc:postgresql://hostname:5432/camunda?ssl=true&sslmode=require
 ```
 
-### Oracle with TLS
+</TabItem>
+<TabItem value="oracle">
 
 Oracle uses TCPS (TLS over Oracle protocol):
 
@@ -193,6 +204,38 @@ orchestration:
       rdbms:
         url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST=hostname)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=FREEPDB1)))
 ```
+
+</TabItem>
+<TabItem value="mssql">
+
+SQL Server enables encryption via the JDBC URL:
+
+```yaml
+orchestration:
+  data:
+    secondaryStorage:
+      rdbms:
+        url: jdbc:sqlserver://hostname:1433;databaseName=camunda;encrypt=true;trustServerCertificate=false
+```
+
+</TabItem>
+<TabItem value="mariadb">
+
+MariaDB and MySQL enable SSL via the JDBC URL:
+
+```yaml
+orchestration:
+  data:
+    secondaryStorage:
+      rdbms:
+        # MariaDB
+        url: jdbc:mariadb://hostname:3306/camunda?sslMode=verify-full
+        # MySQL
+        url: jdbc:mysql://hostname:3306/camunda?useSSL=true&requireSSL=true
+```
+
+</TabItem>
+</Tabs>
 
 ### Self-signed certificates
 
@@ -229,7 +272,7 @@ kubectl patch secret camunda-db-secret \
 3. Restart the Orchestration Cluster pods:
 
 ```bash
-kubectl rollout restart deployment/camunda-orchestration -n camunda
+kubectl rollout restart statefulset/camunda-zeebe -n camunda
 ```
 
 ### JDBC driver updates

@@ -1,10 +1,18 @@
 ---
 id: ad-hoc-subprocesses
 title: "Ad-hoc sub-processes"
-description: "The ad-hoc sub-processes allow flexibility while executing inner elements."
+description: "With ad-hoc sub-processes, you can model a flexible set of BPMN activities that execute in any order, any number of times."
 ---
 
-Ad-hoc sub-processes are a special kind of [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
+With ad-hoc sub-processes, you can model a flexible set of BPMN activities that execute in any order, any number of times.
+
+:::info
+With the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), you can implement an AI agent that dynamically selects and invokes tools, using the [job worker implementation](#job-worker-implementation) of an ad-hoc sub-process.
+:::
+
+## About
+
+Ad-hoc sub-processes are a special kind of [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
 by a **~** tilde character). Compared to regular subprocesses, ad-hoc sub-processes allow more flexibility
 for executing inner elements.
 
@@ -118,7 +126,7 @@ The variable contains a list of activatable elements. Each element includes:
 - `elementName`: The name of the element.
 - `documentation`: The documentation of the element.
 - `properties`: The properties defined on the element.
-- `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function.
+- `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function.
 
 :::info
 Do not update the `adHocSubProcessElements` variable. Changing its value can cause unexpected behavior.
@@ -135,9 +143,11 @@ An ad-hoc sub-process can define input and output
 **Output variable mappings** are applied on completing the ad-hoc sub-process. They can be used to propagate local variables
 from the ad-hoc sub-process into the process instance. By default, no local variables are propagated.
 
-## Additional resources
+Variables written by the activities the ad-hoc sub-process activates stay local to each activation and are not propagated on their own. If an output collection is configured, it is propagated to the parent scope when the ad-hoc sub-process completes. For how an ad-hoc sub-process compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
-### XML representation
+## XML representation
+
+An ad-hoc sub-process is represented in BPMN XML using the `adHocSubProcess` element. The following example configures the active elements collection via the Zeebe `adHoc` extension and defines a completion condition.
 
 ```xml
 <bpmn:adHocSubProcess id="ad-hoc-subprocess" name="Ad-hoc sub-process" cancelRemainingInstances="false">

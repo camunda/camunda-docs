@@ -18,8 +18,8 @@ The Microsoft 365 Connector is an outbound connector that allows you to connect 
 Learn more about [creating, configuring, and authorizing a Microsoft app](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 :::note
-Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
-Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your Microsoft credentials as plain text.
+Refer to our documentation on [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft 365 connector task
@@ -39,7 +39,7 @@ By default, an application with Mail API permissions can access _all mailboxes_ 
 ### Bearer token authentication
 
 If you own a bearer token, in the **Authentication** section select **Bearer token** in the **Type** field.
-Enter a bearer token in the field **Bearer token**. Use [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
+Enter a bearer token in the field **Bearer token**. Use [secrets](/components/saas/clusters/manage-secrets.md) to avoid exposing sensitive credentials.
 
 :::note
 The default time-to-live (TTL) for bearer tokens is 3600 seconds. Therefore, this approach might not work for long-living and/or repetitive processes.
@@ -64,6 +64,17 @@ If you own a bearer token, in the **Authentication** section select **OAuth 2.0*
 Enter the above data into the respective fields.
 
 Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+
+### Refresh token authentication
+
+To authenticate with an OAuth 2.0 refresh token, in the **Authentication** section select **Refresh token** in the **Type** field, and fill in the following fields:
+
+- **Tenant ID**: The tenant ID of the Microsoft Entra (Azure AD) application.
+- **Client ID**: The client ID of the application.
+- **Client secret**: (Optional) The secret value of the Azure AD application. This field is optional for public clients.
+- **Refresh token**: The OAuth 2.0 refresh token used to obtain a new access token.
+
+Use [secrets](/components/saas/clusters/manage-secrets.md) to avoid exposing sensitive credentials.
 
 ## Select operation to execute
 
@@ -116,6 +127,7 @@ Related Microsoft Graph API: [user: sendMail](https://learn.microsoft.com/en-us/
 4. Enter desired content in the field **Body content**.
 5. Pass an array of emails into the **To recipients** field, for example `["myuser1@mycompany.com", "myuser2@mycompany.com"]`.
 6. (Optional) Pass an array of emails into the **CC recipients** field, for example `["myuser3@mycompany.com", "myuser4@mycompany.com"]`.
+7. In the **Attachments** field, pass an array of document objects, or an empty array if you don't send attachments. The default value is `=[]`.
 
 ## Handle connector response
 

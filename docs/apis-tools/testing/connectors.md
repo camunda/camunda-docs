@@ -81,8 +81,7 @@ public class MyProcessTest {
 
 ## Connector secrets
 
-If you use [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) in your processes, you can
-add the secrets to the test runtime in the following way.
+If your processes use [connector secrets](/components/connectors/use-connectors/index.md#using-secrets) with the legacy `{{secrets.X}}` syntax, you can add the secrets to the test runtime in the following way. These properties don't populate the cluster secret store. For `=camunda.secrets.X` references, use [cluster secrets](configuration.md#set-cluster-secrets).
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -334,12 +333,13 @@ public class MyProcessTest {
 You can configure the URL of an outbound connector in your BPMN process
 using [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) to replace it in the
 tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/test"`.
+
+Alternatively, you can use [cluster secrets](configuration.md#set-cluster-secrets) by setting the URL expression to `=camunda.secrets.BASE_URL + "/test"` and providing the value with `cluster-secrets` instead of `connectors-secrets`.
 :::
 
 ## Custom connectors
 
-By default, the runtime uses the built-in connectors bundle in the same version as the Maven module. You can change the
-version or use a custom connectors bundle in the following way.
+By default, the runtime uses the built-in connectors bundle in a fixed, published version. This version isn't tied to the Camunda version or the Maven module version. To use another version, set `connectors-docker-image-version`. You can also use a custom connectors bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [

@@ -14,9 +14,9 @@ Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-
 
 Before developing one, you'll need to decide what you would like to achieve with your connector. Currently, the options are:
 
-- Starting a BPMN process, triggered by external service - Use [inbound start event connector template](#inbound-start-event-connector-templates).
-- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
-- Trigger an external service - Use [outbound connector template](#outbound-connector-templates).
+- Starting a BPMN process, triggered by external service. Use [inbound start event connector template](#inbound-start-event-connector-templates).
+- Continue process with an intermediate catch event emitted by external service call. Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
+- Trigger an external service. Use [outbound connector template](#outbound-connector-templates).
 
 :::note
 Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
@@ -69,8 +69,8 @@ a simple JSON configuration:
       "label": "Activation"
     },
     {
-      "id": "variable-mapping",
-      "label": "Variable Mapping"
+      "id": "output",
+      "label": "Output mapping"
     }
   ],
   "properties": [
@@ -80,14 +80,6 @@ a simple JSON configuration:
       "binding": {
         "type": "zeebe:property",
         "name": "inbound.type"
-      }
-    },
-    {
-      "type": "Hidden",
-      "value": "ConfigurableInboundWebhook",
-      "binding": {
-        "type": "zeebe:property",
-        "name": "inbound.subtype"
       }
     },
     {
@@ -189,20 +181,32 @@ a simple JSON configuration:
       "optional": true,
       "binding": {
         "type": "zeebe:property",
-        "name": "inbound.activationCondition"
+        "name": "activationCondition"
       },
       "description": "Condition under which the connector triggers. Leave empty to catch all events. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
     },
     {
-      "label": "Variables",
-      "type": "String",
-      "group": "variable-mapping",
-      "feel": "required",
+      "id": "resultVariable",
+      "label": "Result variable",
+      "description": "Name of variable to store the response in",
+      "group": "output",
       "binding": {
-        "type": "zeebe:property",
-        "name": "inbound.variableMapping"
+        "name": "resultVariable",
+        "type": "zeebe:property"
       },
-      "description": "Map variables from the webhook payload (request) to start the process with. When blank, entire payload is copied over. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
+      "type": "String"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "description": "Expression to map the response into process variables",
+      "feel": "required",
+      "group": "output",
+      "binding": {
+        "name": "resultExpression",
+        "type": "zeebe:property"
+      },
+      "type": "Text"
     }
   ],
   "icon": {
@@ -261,8 +265,8 @@ a simple JSON configuration:
       "label": "Activation"
     },
     {
-      "id": "variable-mapping",
-      "label": "Variable Mapping"
+      "id": "output",
+      "label": "Output mapping"
     }
   ],
   "properties": [
@@ -282,14 +286,6 @@ a simple JSON configuration:
       "binding": {
         "type": "bpmn:Message#property",
         "name": "name"
-      }
-    },
-    {
-      "type": "Hidden",
-      "value": "ConfigurableInboundWebhook",
-      "binding": {
-        "type": "zeebe:property",
-        "name": "inbound.subtype"
       }
     },
     {
@@ -419,20 +415,32 @@ a simple JSON configuration:
       "optional": true,
       "binding": {
         "type": "zeebe:property",
-        "name": "inbound.activationCondition"
+        "name": "activationCondition"
       },
       "description": "Condition under which the connector triggers. Leave empty to catch all events. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
     },
     {
-      "label": "Variables",
-      "type": "String",
-      "group": "variable-mapping",
-      "feel": "required",
+      "id": "resultVariable",
+      "label": "Result variable",
+      "description": "Name of variable to store the response in",
+      "group": "output",
       "binding": {
-        "type": "zeebe:property",
-        "name": "inbound.variableMapping"
+        "name": "resultVariable",
+        "type": "zeebe:property"
       },
-      "description": "Map variables from the webhook payload (request) to start the process with. When blank, entire payload is copied over. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a>"
+      "type": "String"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "description": "Expression to map the response into process variables",
+      "feel": "required",
+      "group": "output",
+      "binding": {
+        "name": "resultExpression",
+        "type": "zeebe:property"
+      },
+      "type": "Text"
     }
   ],
   "icon": {
@@ -1006,7 +1014,7 @@ a simple JSON configuration:
 
 ## Outbound connector templates
 
-You can, for example, allow the user to model and configure the following **REST connector** by providing a JSON configuration for a service task:
+You can, for example, allow the user to model and configure the following **REST connector** by providing a JSON configuration for a service task. This example is a simplified illustration of the template structure for a job worker with the task type `http`. It isn't the template of the out-of-the-box [REST connector](/components/connectors/protocol/rest.md), which uses the task type `io.camunda:http-json:1` and binds `url` and `method` as `zeebe:input` properties.
 
 <Tabs groupId="connectorTemplateOutbound" defaultValue="process" values={
 [

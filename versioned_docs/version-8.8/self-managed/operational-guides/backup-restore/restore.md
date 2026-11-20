@@ -458,7 +458,7 @@ To avoid data loss:
 
 - **Preserve existing indices:** Do not delete dated usage metric indices before restoring. After the restore completes, the indices remain available.
 - **Back up manually:** Back up dated usage metric indices before restoring so you can restore them afterward.
-:::
+  :::
 
 Now that you have successfully restored the templates and stopped the components adding more indices, you must delete the existing indices to be able to successfully restore the snapshots (otherwise these will block a successful restore).
 
@@ -528,7 +528,7 @@ The following uses the [OpenSearch CAT API](https://docs.opensearch.org/docs/lat
 
 ```bash
 for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" \
-   | grep -E 'operate|tasklist|optimize|zeebe'); do
+   | grep -E 'camunda|operate|tasklist|optimize|zeebe'); do
       echo "Deleting index: $index"
       curl -X DELETE "$OPENSEARCH_ENDPOINT/$index"
 done
@@ -639,6 +639,32 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 | Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](backup-and-restore.md#prerequisites).                                                                        |
 | Components stopped | It’s critical that no Camunda components are running during a Zeebe restore. Restored components may propagate an incorrect cluster configuration, potentially disrupting cluster communication. |
 
+:::warning
+From Camunda 8.8 onward, Zeebe data is stored at `/usr/local/camunda/data`. The restore script, the broker container, and any `initContainer` must mount the same persistent volume claim at this path. A leftover `/usr/local/zeebe/data` mount from a pre-8.8 `initContainer` can cause the restore to write outside the persistent volume claim, leaving Zeebe data unrestored.
+:::
+
+Before you start the restore, verify the mount path for every container that touches Zeebe data:
+
+```bash
+kubectl get statefulset <release>-orchestration -o yaml
+```
+
+Confirm that the main container and every `initContainer` mount the same path:
+
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+        - volumeMounts:
+            - mountPath: /usr/local/camunda/data
+      initContainers:
+        - volumeMounts:
+            - mountPath: /usr/local/camunda/data
+```
+
+Confirm any restore script also writes to `/usr/local/camunda/data`.
+
 ### Restore Zeebe Cluster
 
 :::note
@@ -663,6 +689,8 @@ Camunda provides a standalone app which must be run on each node where a Zeebe b
 
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
+
+Make sure `ZEEBE_BROKER_CLUSTER_NODEID` is set on each node to the ID of the broker that will run there.
 
 The amount of partitions backed up are also visible in the backup store of Zeebe, see [how to figure out available backups](#available-backups-of-zeebe-partitions).
 If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
@@ -724,6 +752,10 @@ If you're not using the Camunda Helm chart, you can use a similar approach nativ
 
 :::
 
+:::warning Set the node ID if you don't restore through the Helm chart
+The recommended way to restore on Kubernetes is to change the Helm values of your existing deployment. The Helm chart's startup script then sets the node ID for each pod from its StatefulSet ordinal. If you use `orchestration.command`, a separate Kubernetes Job, or a custom pod instead, make sure that `ZEEBE_BROKER_CLUSTER_NODEID` is properly set on each pod.
+:::
+
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
 After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
@@ -739,7 +771,7 @@ It will not try to import or overwrite the data again but should be noted that y
    </TabItem>
    <TabItem value="manual" label="Manual" default>
 
-To restore a Zeebe Cluster, run the following in each node where the broker will be running:
+To restore a Zeebe Cluster run the following in each node where the broker will be running, while making sure the broker's node ID is set via `ZEEBE_BROKER_CLUSTER_NODEID`:
 
 ```bash
 mkdir -p camunda
@@ -768,7 +800,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Brokers's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.

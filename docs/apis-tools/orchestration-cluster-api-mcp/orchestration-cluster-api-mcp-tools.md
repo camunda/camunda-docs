@@ -48,6 +48,7 @@ Tool names, parameters, and response schemas are fully discoverable by MCP clien
 | :------------------------ | :---------------------------------------------------------------------------------- |
 | `searchUserTasks`         | Search user tasks with filters such as assignee, state, and process definition key. |
 | `getUserTask`             | Retrieve a user task by key.                                                        |
+| `completeUserTask`        | Complete a user task, optionally providing variables or a custom action.            |
 | `assignUserTask`          | Update the assignment of a user task.                                               |
 | `searchUserTaskVariables` | Search variables scoped to a specific user task.                                    |
 

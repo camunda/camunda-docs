@@ -9,11 +9,11 @@ You can implement document uploads in your BPMN processes using [forms](#build-a
 
 ## Build a form for document upload
 
-When [building a form](/components/modeler/forms/utilizing-forms.md) for a process, you can use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files.
+When [building a form](/components/hub/workspace/modeler/modeling/utilize-forms.md) for a process, you can use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files.
 
 In the Filepicker configuration, you can specify whether users can upload a single file or [multiple files](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties) and define the list of [supported file formats](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
 
-Although this example focuses on [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
+Although this example focuses on [Camunda Hub](/components/hub/workspace/modeler/index.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
 
 ![Form with Filepicker](./img/form-with-file-picker.png)
 
@@ -39,7 +39,7 @@ The Filepicker always returns an array with metadata for a single or multiple fi
 
 When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](/components/tasklist/introduction-to-tasklist.md):
 
-![document handling in tasklist](./img/task-with-file-picker-tasklist.png)
+![User task form with a file picker for uploading an ID document in Tasklist](./img/task-with-file-picker-tasklist.png)
 
 ### Upload a document to start a process
 
@@ -77,17 +77,7 @@ Refer to the example array below:
 
 ## Upload a document when using any connector
 
-Documents available for download from an unprotected URL can be added to a process in any connector by specifying them. For example:
-
-```json
-{
-  "camunda.document.type": "external",
-  "url": "https://www.example.com/file.pdf",
-  "name": "my-test-file.pdf"
-}
-```
-
-The `name` field is optional. If not provided, the filename is taken from `content-type` and `content-dispotition` http headers, and a random UUID will be used as a fallback.
+Documents available for download from an unprotected URL can be added to a process in any connector as an **external document**. The full JSON structure and field reference is documented in [document sources](/components/document-handling/send-document-to-external-system.md#external-documents).
 
 ## Upload a document via inbound webhook connector
 

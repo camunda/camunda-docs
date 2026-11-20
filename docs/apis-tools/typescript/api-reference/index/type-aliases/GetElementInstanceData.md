@@ -30,7 +30,7 @@ path: object;
 #### elementInstanceKey
 
 ```ts
-elementInstanceKey: ElementInstanceKey;
+elementInstanceKey: ElementInstanceKeyWritable;
 ```
 
 The assigned key of the element instance, which acts as a unique identifier for this element instance.

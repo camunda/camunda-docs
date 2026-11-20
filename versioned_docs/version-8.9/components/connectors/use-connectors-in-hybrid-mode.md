@@ -25,12 +25,12 @@ Every connector has its ID (type definition), and name. Every connector element 
 defines which connector is to be used to execute with a given template.
 
 For example, see a relation between [Kafka element template](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates)
-and [Kafka connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20).
+and [Kafka connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java).
 
 For the hybrid connector runtime to work properly, you must override the connector type.
 
 For the purpose of this guide, imagine you would like to override an HTTP REST connector with type `io.camunda:http-json:1`.
-Refer to the [element template](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector.json#L50) and its related [runtime](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L43).
+Refer to the [element template](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector.json) and its related [runtime](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java).
 
 ## Start connector runtime in hybrid mode
 
@@ -45,6 +45,12 @@ To use secrets managed by the SaaS environment, add the `Secrets` scope.
 :::note When to use?
 Use this option when you don't need to make any code modifications to either connector runtime, or a specific connector.
 This option allows you to start the connector runtime bundle that runs all of [Camunda's officially-supported connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+:::
+
+Use `camunda/connectors-bundle:<desired-version>` for a customer-managed hybrid runtime, even when connecting to a Camunda SaaS cluster.
+
+:::warning
+Don't use `camunda/connectors-bundle-saas`. This internal image is intended for Camunda-managed SaaS runtimes and won't work for customer-managed hybrid deployments.
 :::
 
 Run the following script:
@@ -72,33 +78,49 @@ This option allows you to start the connector runtime bundle with provided conne
 2. Clone [https://github.com/camunda/connectors](https://github.com/camunda/connectors).
 3. Go to `<connectors-root>/bundle/default-bundle`.
 4. Build a connector image, e.g. `docker build -f Dockerfile -t myorg/my-connectors-bundle:<desired-version> .`.
-5. Run the same `docker run ...` command as in [Option 1](#option-a-get-connectors-runtime-from-docker-registry).
+5. Run the same `docker run ...` command as in [Option 1](#option-1-get-connector-runtime-from-docker-registry), using your custom image.
 
 ### Explanation
 
 Note the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This line means we have to override
 `CONNECTOR_X_TYPE` with a given type. In this case, we want to register a local Self-Managed HTTP REST connector as `io.camunda:http-json:local`.
 
-The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
-`HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
+The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java)
+`HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
 
 #### Common connector types
 
-| Connector                 | Environment variable               | Example value                   |
-| ------------------------- | ---------------------------------- | ------------------------------- |
-| HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`    |
-| AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`      |
-| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:kafka:local`        |
-| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:kafka:local`        |
-| SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`     |
-| Slack                     | `CONNECTOR_SLACK_TYPE`             | `io.camunda:slack:local`        |
-| Gmail                     | `CONNECTOR_GMAIL_TYPE`             | `io.camunda:gmail:local`        |
-| Google Drive              | `CONNECTOR_GOOGLE_DRIVE_TYPE`      | `io.camunda:google-drive:local` |
-| RabbitMQ (Inbound)        | `CONNECTOR_RABBITMQ_CONSUMER_TYPE` | `io.camunda:rabbitmq:local`     |
-| RabbitMQ (Outbound)       | `CONNECTOR_RABBITMQ_PRODUCER_TYPE` | `io.camunda:rabbitmq:local`     |
+| Connector                 | Environment variable               | Example value                         |
+| ------------------------- | ---------------------------------- | ------------------------------------- |
+| HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`          |
+| AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`            |
+| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`           |
+| Slack (Outbound)          | `CONNECTOR_SLACK_OUTBOUND_TYPE`    | `io.camunda:slack:local`              |
+| Google Drive              | `CONNECTOR_GOOGLE_DOCS_TYPE`       | `io.camunda:google-drive:local`       |
+| RabbitMQ (Inbound)        | `CONNECTOR_RABBITMQ_CONSUMER_TYPE` | `io.camunda:connector-rabbitmq:local` |
+| RabbitMQ (Outbound)       | `CONNECTOR_RABBITMQ_PRODUCER_TYPE` | `io.camunda:connector-rabbitmq:local` |
 
 For a complete list of all available connectors and their types, see the [available connectors overview](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) or check the [official connectors repository](https://github.com/camunda/connectors).
+
+### Use Self-Managed authentication types
+
+A hybrid runtime is customer-managed, so it can use authentication types that aren't supported by Camunda-managed SaaS runtimes.
+
+Examples include:
+
+| Connector                                  | Authentication type                                                                  | Credential source                                                                                         |
+| ------------------------------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| AWS connectors, such as Lambda and SQS     | **Default Credentials Chain (Hybrid/Self-Managed only)** (`defaultCredentialsChain`) | The AWS SDK credential provider chain, including environment variables, credential files, or an IAM role. |
+| Embeddings connector with Google Vertex AI | Application default credentials                                                      | Credentials available to the runtime through Google's application default credentials mechanism.          |
+
+Leave `CAMUNDA_CONNECTOR_RUNTIME_SAAS` unset. Some connectors check for the variable's presence, so setting it to `false` still triggers SaaS-only validation. Keep `CAMUNDA_CLIENT_MODE=saas` when connecting to a SaaS cluster; this client setting doesn't mark the connector runtime as Camunda-managed.
+
+If AWS default credentials chain authentication is rejected, the validation error includes `defaultCredentialsChainUsedInSaaS` and `must be false`. Google Vertex AI application default credentials are rejected with `Google application default credentials is not supported on SaaS`. These errors indicate the SaaS runtime marker is set. Use `camunda/connectors-bundle` and remove `CAMUNDA_CONNECTOR_RUNTIME_SAAS` from your deployment configuration. If startup fails with an error referencing `camunda.connector.auth.issuer` after selecting the SaaS image, switch images rather than supplying internal SaaS authentication settings.
+
+For example, to run an AWS SQS outbound connector on Amazon Elastic Container Service (ECS), use `camunda/connectors-bundle` and set `CONNECTOR_AWS_SQS_OUTBOUND_TYPE=io.camunda:aws-sqs:local` in the ECS task definition, alongside the Camunda client settings shown in the Docker example. Assign the ECS task an IAM task role with the required SQS permissions, and select **Default Credentials Chain (Hybrid/Self-Managed only)** in the hybrid element template. The task role supplies AWS credentials; it doesn't replace the Camunda API client credentials.
 
 ## Using SaaS secrets
 
@@ -123,13 +145,15 @@ runtime will be resolved by fetching them from Console.
 
 ## Preparing element template for hybrid mode
 
-As mentioned, to relate connector element templates with connector runtime, you must modify the task definition type.
+Hybrid element templates must use the connector type registered by your customer-managed runtime.
+
+The standard connector templates available in Modeler use the default connector types, not your custom hybrid types. Modeler can't infer your runtime's type overrides, so you must obtain, configure, and publish a template for your hybrid deployment. Using a distinct type prevents the Camunda-managed runtime from executing work intended for your hybrid runtime.
 
 To do this, take the following steps:
 
 1. Obtain a copy of the element template you wish to override. All latest versions of the official element
-   templates can be found in the [official connectors repository](https://github.com/camunda/connectors) at path `connectors/<desired connector>/element-templates/`.
-2. Modify the `value` to the desired new type of the property. Use `zeebe:taskDefinition:type` for outbound connectors, or `inbound.type` for inbound ones.
+   templates can be found in the [official connectors repository](https://github.com/camunda/connectors/tree/main/connectors) at path `connectors/<desired connector>/element-templates/`. Where available, use the `hybrid/` subdirectory, for example `connectors/aws/aws-sqs/element-templates/hybrid/`. Choose the repository tag matching your runtime version.
+2. Modify the `value` to match your runtime's `CONNECTOR_<NAME>_TYPE` override. For outbound connectors, update the property bound to `zeebe:taskDefinition` with `"property": "type"` (or `zeebe:taskDefinition:type` in older templates). For inbound connectors, update `inbound.type`. Hybrid variants expose this field but can still default to the standard connector type, so verify the value before deploying.
 3. Publish the new element template, and use it in your BPMN diagram.
 
 There are several options to deliver element templates to the target user:
@@ -147,7 +171,8 @@ runtime, you must implement the following in the element template for it to func
   "type": "Hidden",
   "value": "io.camunda:http-json:local",
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```
@@ -167,7 +192,8 @@ element template for it to function properly:
   "label": "Task definition type",
   "value": "io.camunda:http-json:local",
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```
@@ -202,11 +228,12 @@ The following example demonstrates this approach:
     }
   ],
   "binding": {
-    "type": "zeebe:taskDefinition:type"
+    "type": "zeebe:taskDefinition",
+    "property": "type"
   }
 }
 ```
 
 ## Appendix
 
-See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json) and [Kafka Consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid).
+See hybrid element template examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json), [Kafka consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid), [AWS Lambda](https://github.com/camunda/connectors/blob/main/connectors/aws/aws-lambda/element-templates/hybrid/aws-lambda-outbound-connector-hybrid.json), and [AWS SQS](https://github.com/camunda/connectors/blob/main/connectors/aws/aws-sqs/element-templates/hybrid/aws-sqs-outbound-connector-hybrid.json). Match the connector type in each template to your runtime override.

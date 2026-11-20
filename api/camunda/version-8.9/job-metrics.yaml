@@ -280,7 +280,6 @@ components:
       type: object
       required:
         - items
-        - page
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -355,7 +354,6 @@ components:
       type: object
       required:
         - items
-        - page
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -430,7 +428,6 @@ components:
       type: object
       required:
         - items
-        - page
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -508,7 +505,6 @@ components:
       type: object
       required:
         - items
-        - page
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:

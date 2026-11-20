@@ -8,10 +8,10 @@ mdx:
 # Type Alias: MessageWaitStateDetails
 
 ```ts
-type MessageWaitStateDetails = object;
+type MessageWaitStateDetails = BaseWaitStateDetails & object;
 ```
 
-## Properties
+## Type Declaration
 
 ### correlationKey
 
@@ -20,8 +20,6 @@ correlationKey: string | null;
 ```
 
 The correlation key for the message subscription (null for start events).
-
----
 
 ### messageName
 

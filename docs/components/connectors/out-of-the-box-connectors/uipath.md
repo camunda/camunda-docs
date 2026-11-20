@@ -31,7 +31,7 @@ You can choose among the available UiPath connector authentication types accordi
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `BEARER_TOKEN_UIPATH`) so you can reference it later in the connector.
 
 #### Configure the bearer token
@@ -47,7 +47,7 @@ Select the **UiPath connector** and fill out the following properties under the 
 
 We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `UIPATH_CLIENT_ID`) so you can reference it later in the connector.
 
 #### Configure the OAuth Token
@@ -75,10 +75,10 @@ This operation allows you to create a new item and add it to a queue from UiPath
 
 For this section, you must fill out the following fields:
 
-1. **Cloud URL**: Comes with a default value of `cloud.uipath.com`. You can always change it, if needed. To use a connector secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
-2. **Cloud organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more. To use a connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
-3. **Cloud tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more. To use a connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
-4. **Organization Unit ID**: Click **Orchestrator** and you will find the ID in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization Unit ID** is `112233`. To use a connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+1. **UiPath instance URL**: Comes with a default value of `cloud.uipath.com`. You can always change it, if needed. To use a connector secret, use a double curly braces notation, for example, `{{secrets.MY_SECRET_VALUE}}`.
+2. **UiPath organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more. To use a connector secret, use a double curly braces notation, for example, `{{secrets.MY_SECRET_VALUE}}`.
+3. **UiPath tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more. To use a connector secret, use a double curly braces notation, for example, `{{secrets.MY_SECRET_VALUE}}`.
+4. **Organization unit ID**: Click **Orchestrator** and you will find the ID in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization unit ID** is `112233`. To use a connector secret, use a double curly braces notation, for example, `{{secrets.MY_SECRET_VALUE}}`.
 
 #### Input
 
@@ -88,7 +88,7 @@ For this section, fill out the following fields:
 2. _(Optional)_ **Defer date**: The earliest date and time at which the item is available for processing. If empty, the item can be processed as soon as possible. Expected date format is `yyyy-MM-dd`.
 3. _(Optional)_ **Due date**: The latest date and time at which the item should be processed. If empty, the item can be processed at any given time. Expected date format is `yyyy-MM-dd`.
 4. _(Optional)_ **Priority**: Select a value from the dropdown list to represent the priority level of the queue item to be added. This property is a criterion for the prioritization of queue items, alongside **Deadline** and **Postpone**.
-5. _(Optional)_ **Specific Content for UiPath Job**: Data that will be passed in to the job. This must be in JSON format.
+5. _(Optional)_ **Specific content for a UiPath job**: Data that will be passed in to the job. This must be in JSON format.
 
 ```
 = {

@@ -13,5 +13,6 @@ type SdkError =
   | ValidationSdkError
   | AuthSdkError
   | NetworkSdkError
-  | CancelSdkError;
+  | CancelSdkError
+  | PresentWhenUnsupportedError;
 ```

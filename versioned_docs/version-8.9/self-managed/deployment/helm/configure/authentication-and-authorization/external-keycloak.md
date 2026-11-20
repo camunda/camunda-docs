@@ -14,6 +14,8 @@ With minimal configuration for administrative access, the Management Identity co
 
 Use this guide if you already have an existing Keycloak instance and want Camunda to automatically configure the required Keycloak entities.
 
+For Keycloak support scope, security fixes, and upgrades, see [Keycloak support, security fixes, and upgrades](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md).
+
 If you prefer Camunda to also create and manage a Keycloak pod, see the [internal Keycloak guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
 
 :::info
@@ -89,7 +91,7 @@ This secret includes the following keys:
 - `literal=webmodeler-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
 - `webmodeler-postgresql-user-password` Password non-privileged user account of the PostgreSQL instance used by Web Modeler (username `web-modeler`).
 
-For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
 ### Prepare global configuration
 
@@ -260,6 +262,16 @@ To review how each component is configured and which OIDC clients are used:
 
 - Run `kubectl get pods` and `kubectl get configmap`, then use `kubectl describe` to inspect component configurations.
 - Log into Keycloak (using your administrative user) to review the OIDC client setup
+
+## Session and token timeouts
+
+Keycloak realm settings control how long users stay signed in to Camunda web applications such as Operate, Tasklist, and Admin. In the Keycloak admin console, go to **Realm settings** and update the following. See the [Keycloak timeouts reference](https://www.keycloak.org/docs/latest/server_admin/#_timeouts) for details.
+
+| Keycloak setting (realm)           | Effect on Camunda web sessions                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sessions > SSO Session Idle**    | Users must sign in again after this period without activity.                                                                                |
+| **Sessions > SSO Session Max**     | Users must sign in again after this period, even if they are active.                                                                        |
+| **Tokens > Access Token Lifespan** | How long an access token is valid before it must be refreshed. A short lifespan doesn't sign users out as long as the SSO session is valid. |
 
 ## Connect to the cluster
 

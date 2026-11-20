@@ -44,5 +44,4 @@ Required for the BTP Plugin:
 
 ## Tooling
 
-- [**CSAP CLI**](./csap-cli.md): A self-contained binary that runs on any platform without installation.  
-  Copy the binary to the target machine and execute it directly.
+- [**CSAP c8ctl plugin**](./csap-cli.md): A plugin for [c8ctl](/apis-tools/c8ctl/getting-started.md) that runs on any platform with Node.js 22 or later.

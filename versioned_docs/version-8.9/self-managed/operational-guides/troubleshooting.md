@@ -137,6 +137,41 @@ To mitigate this, set the following environment variable on your Zeebe brokers t
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 ```
 
+## Zeebe fails with `ClassCircularityError` when using AppDynamics
+
+Zeebe brokers and gateways can fail with a `java.lang.ClassCircularityError` when the AppDynamics Java agent is attached to the JVM.
+
+### Symptoms
+
+One of the following errors appears in the logs:
+
+```text
+java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
+```
+
+```text
+java.lang.IllegalStateException: java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
+```
+
+The error can occur in any code path that runs on virtual threads, for example during S3 backups or while the gateway handles gRPC requests. After the error, the JVM may be left in a broken state:
+
+- A broker tries to shut down, but the shutdown doesn't complete and the JVM process keeps running. Partitions led by that broker stay unavailable.
+- A gateway stops responding to gRPC requests, while health checks such as `/actuator/health/liveness` still report it as healthy.
+
+Because health checks don't always detect the broken state, Kubernetes might not restart the affected pod automatically.
+
+### Cause
+
+Zeebe and several libraries it depends on, such as the AWS SDK and gRPC, run work on Java virtual threads. The AppDynamics Java agent intercepts class definitions to instrument bytecode. On a virtual thread, the agent's own code triggers loading of `jdk/internal/misc/VirtualThreads`, which the agent intercepts again. The JVM detects this circular class loading and throws `ClassCircularityError`, and the JVM can't reliably recover from it.
+
+This is a defect in the AppDynamics Java agent. Zeebe doesn't provide an option to disable virtual threads, because third-party libraries also use them internally.
+
+### Solution
+
+- Don't attach the AppDynamics Java agent to Zeebe brokers or gateways. Remove the AppDynamics `-javaagent` option from the JVM options, for example from the `JAVA_TOOL_OPTIONS` environment variable.
+- If you need AppDynamics for a specific investigation, attach the agent temporarily and remove it afterward. Bytecode instrumentation also adds overhead that can affect performance.
+- If the error occurs, restart the affected pod or JVM process. Don't wait for the process to exit or for health checks to fail, as neither is guaranteed.
+
 ## Enable Azure logging for troubleshooting
 
 When using Azure Blob Storage as a backup store, you can enable logging to
@@ -155,18 +190,18 @@ troubleshoot issues with the Azure SDK. To do this, go through the following ste
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe Gateway externally, you need the following:
 
-1. An Ingress controller that supports `gRPC` ([ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
+1. An Ingress controller that supports `gRPC`. The reference architectures deploy [Contour](https://projectcontour.io/), which supports it through the `projectcontour.io/upstream-protocol.h2c` annotation on the Orchestration Cluster service. [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) supports it through the `nginx.ingress.kubernetes.io/backend-protocol: GRPC` annotation on the Ingress.
 2. TLS (HTTPS) via [Application-Layer Protocol Negotiation (ALPN)](https://www.rfc-editor.org/rfc/rfc7301.html) enabled in the Zeebe Gateway Ingress object.
 
 However, according to the official Kubernetes documentation about [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls):
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
+Therefore, pay attention to the TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -180,11 +215,11 @@ The Web Modeler `restapi` component requires a [database connection](/self-manag
 
 ## Gateway timeout on redirect
 
-A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the `proxy-buffer-size` of your Ingress controller or Ingress. The setting for **ingress-nginx** can be found [here](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size).
+A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the header buffer of your Ingress controller. For **ingress-nginx**, set the [`proxy-buffer-size` annotation](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size). For **Contour**, the limit is enforced by Envoy rather than by an Ingress annotation, so it is raised on the Contour installation itself. See the [Contour configuration reference](https://projectcontour.io/docs/1.33/configuration/).
 
 ## Helm CLI version and installation failures
 
-If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Use Helm CLI 3.10 or a later 3.x version, or Helm CLI 4.x.
 
 ## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
 
@@ -297,10 +332,12 @@ If a check fails, it indicates a deviation from the expected configuration on a 
 For example:
 
 ```
-[FAIL] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
+[FAIL] None of the ingresses declare a gRPC upstream, which is required for the zeebe ingress.
+With ingress-nginx, the zeebe ingress must carry nginx.ingress.kubernetes.io/backend-protocol: GRPC (GRPCS for a TLS upstream).
+With Contour, the service behind it must carry projectcontour.io/upstream-protocol.h2c (.h2 for a TLS upstream) listing the gRPC port.
 ```
 
-The error message suggests adjusting the Ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
+The message names the annotation each controller needs. For ingress-nginx, adjust the Ingress to include it. For Contour, set `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster Service instead, or `projectcontour.io/upstream-protocol.h2` when the gRPC upstream uses TLS. You can also explore the source of the script to have a better understanding of the reason for the failure.
 
 :::note
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
@@ -319,16 +356,20 @@ or use
 
 ## Find available container image versions
 
-When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment. Use [skopeo](https://github.com/containers/skopeo) to list available tags:
+When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment.
+
+For Camunda's own images, use [skopeo](https://github.com/containers/skopeo) to list available tags:
 
 ```shell
-# For open source images (no authentication required)
+# Open source images (no authentication required)
 skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
-
-# For enterprise images (requires authentication)
-skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
-skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
+
+:::note Bitnami Premium (`vendor-ee/*`) images
+Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
+
+Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
+:::
 
 ## Incorrect authorizations when deploying resources from Modeler
 

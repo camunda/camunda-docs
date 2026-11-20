@@ -4,12 +4,22 @@ title: Variable filters
 description: Learn more about variable filters with booleans, strings, and more.
 ---
 
+:::note
+Exporter-level data filters may exclude variables or process definitions from Optimize before they are imported. If a variable or process definition is missing from Optimize, check whether an export filter is active. On SaaS, configure filters in [cluster settings](/components/saas/clusters/settings.md#data-filters). On Self-Managed, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+:::
+
 Use the `Variable Filter` to retrieve only those process instances which hold the specified variable value for the selected variable.
 
 :::note
 Variable filters can only filter for the final value of the variable.
 
 For instance, assume you want to analyze only those process instances which have the variable `department` with the value `marketing`. Say you also have some instances where this variable had the value `marketing` at the start of the execution, yet this was later reassigned to the value `sales`. These instances will not be included in the filter.
+:::
+
+:::tip Variables with the same name at different scopes
+Optimize variable filters are not scope-aware. If a variable has the same name at process scope and at task or subprocess scope, you can't select a scope in the filter, so the process-level value can be ambiguous in reports.
+
+To avoid this, use task-specific names for values that should remain local, and map a task result back to the process variable only when it should update the overall process state.
 :::
 
 To use complex types like object, use the **Variable Import Customization** feature to transform your object variables into primitive type variables.

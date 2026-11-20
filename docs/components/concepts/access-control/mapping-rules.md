@@ -9,7 +9,7 @@ Mapping rules are used to dynamically manage access control by [connecting your 
 
 ## Mapping rules in SaaS and Self-Managed
 
-In Camunda 8 SaaS, mapping rules are not supported.
+In Camunda 8 SaaS, the Mapping Rules UI in Orchestration Cluster Admin becomes available once you [connect an external identity provider](/components/saas/clusters/connect-external-identity-provider.md) to a cluster. The mapping rules API works regardless, but without an external identity provider there are no custom claims to map against.
 
 In Camunda 8 Self-Managed, configure mapping rules in the following components:
 

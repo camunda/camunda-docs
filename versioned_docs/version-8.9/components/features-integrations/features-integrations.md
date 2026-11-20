@@ -25,6 +25,6 @@ Learn more about Camunda integrations.
 
 ## Early access
 
-Introducing early access - a space to explore new features and components currently in development by Camunda
+Explore new features and components currently in development by Camunda
 
 <p><a href="../early-access/overview/" class="link-arrow">Early access</a></p>

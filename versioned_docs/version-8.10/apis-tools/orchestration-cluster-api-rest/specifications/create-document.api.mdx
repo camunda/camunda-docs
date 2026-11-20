@@ -1,0 +1,406 @@
+---
+id: create-document
+title: "Upload document"
+sidebar_label: "Upload document"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Upload document"} <MarkerAddedInVersion version="8.6" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/documents"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Upload a document to the Camunda 8 cluster.
+
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "DOCUMENT", permissionType: "CREATE" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description:
+        "The ID of the document store to upload the documents to. Currently, only a single document store is supported per cluster. However, this attribute is included to allow for potential future support of multiple document stores.",
+      schema: { type: "string" },
+    },
+    {
+      name: "documentId",
+      in: "query",
+      required: false,
+      description:
+        "The ID of the document to upload. If not provided, a new ID will be generated. Specifying an existing ID will result in an error if the document already exists.\n",
+      schema: {
+        description: "Document Id that uniquely identifies a document.",
+        format: "DocumentId",
+        type: "string",
+        title: "DocumentId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          properties: {
+            file: { type: "string", format: "binary" },
+            metadata: {
+              description: "Information about the document.",
+              type: "object",
+              properties: {
+                contentType: {
+                  type: "string",
+                  description: "The content type of the document.",
+                },
+                fileName: {
+                  type: "string",
+                  description: "The name of the file.",
+                },
+                expiresAt: {
+                  type: "string",
+                  format: "date-time",
+                  description: "The date and time when the document expires.",
+                },
+                size: {
+                  type: "integer",
+                  format: "int64",
+                  description: "The size of the document in bytes.",
+                },
+                processDefinitionId: {
+                  allOf: [
+                    {
+                      description:
+                        "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                      format: "ProcessDefinitionId",
+                      type: "string",
+                      example: "new-account-onboarding-workflow",
+                      title: "ProcessDefinitionId",
+                    },
+                  ],
+                  description:
+                    "The ID of the process definition that created the document.",
+                  "x-added-in-version": "8.7",
+                },
+                processInstanceKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a process instance.",
+                      format: "ProcessInstanceKey",
+                      example: "2251799813690746",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessInstanceKey",
+                    },
+                  ],
+                  description:
+                    "The key of the process instance that created the document.",
+                  "x-added-in-version": "8.7",
+                },
+                customProperties: {
+                  type: "object",
+                  description: "Custom properties of the document.",
+                  additionalProperties: true,
+                  "x-added-in-version": "8.7",
+                },
+              },
+              title: "DocumentMetadata",
+            },
+          },
+          required: ["file"],
+        },
+        encoding: { metadata: { contentType: "application/json" } },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "The document was uploaded successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: [
+              "camunda.document.type",
+              "storeId",
+              "documentId",
+              "contentHash",
+              "metadata",
+            ],
+            properties: {
+              "camunda.document.type": {
+                type: "string",
+                description: 'Document discriminator. Always set to "camunda".',
+                enum: ["camunda"],
+                "x-added-in-version": "8.7",
+              },
+              storeId: {
+                type: "string",
+                description: "The ID of the document store.",
+              },
+              documentId: {
+                allOf: [
+                  {
+                    description:
+                      "Document Id that uniquely identifies a document.",
+                    format: "DocumentId",
+                    type: "string",
+                    title: "DocumentId",
+                  },
+                ],
+                description: "The ID of the document.",
+              },
+              contentHash: {
+                type: "string",
+                description: "The hash of the document.",
+                nullable: true,
+                "x-added-in-version": "8.7",
+              },
+              metadata: {
+                description:
+                  "Information about the document that is returned in responses.",
+                type: "object",
+                required: [
+                  "fileName",
+                  "expiresAt",
+                  "size",
+                  "contentType",
+                  "customProperties",
+                  "processDefinitionId",
+                  "processInstanceKey",
+                ],
+                properties: {
+                  contentType: {
+                    type: "string",
+                    description: "The content type of the document.",
+                  },
+                  fileName: {
+                    type: "string",
+                    description: "The name of the file.",
+                  },
+                  expiresAt: {
+                    type: "string",
+                    format: "date-time",
+                    description: "The date and time when the document expires.",
+                    nullable: true,
+                  },
+                  size: {
+                    type: "integer",
+                    format: "int64",
+                    description: "The size of the document in bytes.",
+                  },
+                  processDefinitionId: {
+                    allOf: [
+                      {
+                        description:
+                          "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                        format: "ProcessDefinitionId",
+                        type: "string",
+                        example: "new-account-onboarding-workflow",
+                        title: "ProcessDefinitionId",
+                      },
+                    ],
+                    description:
+                      "The ID of the process definition that created the document.",
+                    nullable: true,
+                    "x-added-in-version": "8.7",
+                  },
+                  processInstanceKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
+                    description:
+                      "The key of the process instance that created the document.",
+                    nullable: true,
+                    "x-added-in-version": "8.7",
+                  },
+                  customProperties: {
+                    type: "object",
+                    description: "Custom properties of the document.",
+                    additionalProperties: true,
+                    "x-added-in-version": "8.7",
+                  },
+                },
+                title: "DocumentMetadataResponse",
+              },
+            },
+            title: "DocumentReference",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "415": {
+      description:
+        "The server cannot process the request because the media type (Content-Type) of the request payload is not supported\nby the server for the requested resource and method.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

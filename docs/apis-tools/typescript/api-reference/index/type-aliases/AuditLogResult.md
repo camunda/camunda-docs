@@ -190,6 +190,26 @@ The key of the form.
 
 ---
 
+### inboundChannelToolName
+
+```ts
+inboundChannelToolName: string | null;
+```
+
+The tool name of the inbound channel (e.g. the MCP tool that triggered the operation).
+
+---
+
+### inboundChannelType
+
+```ts
+inboundChannelType: string | null;
+```
+
+The type of the inbound channel that triggered the operation (e.g. MCP).
+
+---
+
 ### jobKey
 
 ```ts

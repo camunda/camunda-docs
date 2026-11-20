@@ -11,6 +11,12 @@ mdx:
 type CamundaKey<T> = string & object;
 ```
 
+## Type Parameters
+
+### T
+
+`T` _extends_ `string` = `string`
+
 ## Type Declaration
 
 ### \_\_brand
@@ -18,9 +24,3 @@ type CamundaKey<T> = string & object;
 ```ts
 readonly __brand: T;
 ```
-
-## Type Parameters
-
-### T
-
-`T` _extends_ `string` = `string`

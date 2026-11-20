@@ -6,7 +6,7 @@ description: "Find relevant tasks in Tasklist"
 
 When you open the **Tasks** page, you will see the list of all tasks. This is a starting point for managing your workload.
 
-![tasklist-all-tasks](img/task-filters/tasklist-all-tasks.jpg "All open tasks")
+![tasklist-all-tasks](img/task-filters/tasklist-all-tasks.png "All open tasks")
 
 ## Apply a filter
 
@@ -35,11 +35,26 @@ In the dialog, you can define various rules based on task attributes. The suppor
 - Processes tasks belong to
 - Dates (due date and follow up date)
 - Task ID
+- Business ID
 - Task variables
 
-![tasklist-filter-dialog-with-advanced-options](img/task-filters/tasklist-filter-dialog-with-advanced-options.jpg "Available filter attributes")
+![tasklist-filter-dialog-with-advanced-options](img/task-filters/tasklist-filter-dialog-with-advanced-options.png "Available filter attributes")
 
 After defining the rules, click **Apply** to apply the filter. The system will then filter the tasks according to your criteria, displaying only the relevant tasks.
+
+## Business ID filter
+
+A [business ID](/components/concepts/process-instance-creation.md#business-id) is a domain-specific process instance identifier, such as an order number, case reference, or ticket ID. Starting in 8.10, you can filter tasks by business ID directly in the Tasklist filter dialog.
+
+To filter by business ID, open the filter dialog and use the **Business ID** field.
+
+| UI operator   | Behavior                                           | Wildcards                                                   |
+| :------------ | :------------------------------------------------- | :---------------------------------------------------------- |
+| **Equals**    | Exact match on the business ID value.              | —                                                           |
+| **Contains**  | Pattern match.                                     | `*` matches multiple characters, `?` matches one character. |
+| **Is one of** | Matches any business ID in a comma-separated list. | —                                                           |
+
+For additional operators (`$neq`, `$exists`, `$notIn`), use the [search user tasks API](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) with the `businessId` filter field.
 
 ## Save filter for future use
 
@@ -49,11 +64,11 @@ If you need to use the filter again, you can save it:
 2. You will be prompted to enter a name for the filter. Choose a descriptive name that will help you recognize it later.
 3. Click **Save and apply**.
 
-![tasklist-save-filter-dialog](img/task-filters/tasklist-save-filter-dialog.jpg "Add a descriptive name for the filter")
+![tasklist-save-filter-dialog](img/task-filters/tasklist-save-filter-dialog.png "Add a descriptive name for the filter")
 
 The next time you need this filter, select it from your saved filters.
 
-![tasklist-applied-filter-tasks](img/task-filters/tasklist-applied-filter-tasks.jpg "List of tasks for the applied filter")
+![tasklist-applied-filter-tasks](img/task-filters/tasklist-applied-filter-tasks.png "List of tasks for the applied filter")
 
 :::note
 Filters you create are saved locally to your device. Therefore, while you can access and reuse them on the same device, these filters will not be available if you switch to a different device.
@@ -63,7 +78,7 @@ Filters you create are saved locally to your device. Therefore, while you can ac
 
 You can edit or [delete](#delete-a-filter) filters that you saved.
 
-![tasklist-saved-filter-options](img/task-filters/tasklist-saved-filter-options.jpg "Saved filter options")
+![tasklist-saved-filter-options](img/task-filters/tasklist-saved-filter-options.png "Saved filter options")
 
 To change the criteria of an existing filter, take the following steps:
 
@@ -72,7 +87,7 @@ To change the criteria of an existing filter, take the following steps:
 3. Update the filter criteria as needed.
 4. Confirm the changes by clicking **Save and apply**.
 
-![tasklist-edit-filter-dialog](img/task-filters/tasklist-edit-filter-dialog.jpg "Edit filter details")
+![tasklist-edit-filter-dialog](img/task-filters/tasklist-edit-filter-dialog.png "Edit filter details")
 
 ## Delete a filter
 
@@ -82,6 +97,6 @@ To delete a filter, take the following steps:
 2. Click **Delete**.
 3. Click **Confirm deletion** in the dialog.
 
-![tasklist-delete-filter-dialog](img/task-filters/tasklist-delete-filter-dialog.jpg "Confirm filter deletion")
+![tasklist-delete-filter-dialog](img/task-filters/tasklist-delete-filter-dialog.png "Confirm filter deletion")
 
 After deletion, the default filter will be applied, showing the full list of tasks again.

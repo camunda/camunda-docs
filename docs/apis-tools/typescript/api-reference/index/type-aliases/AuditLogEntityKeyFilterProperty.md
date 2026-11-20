@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AuditLogEntityKeyFilterProperty =
-  | AuditLogEntityKeyExactMatch
-  | AdvancedAuditLogEntityKeyFilter;
+  AuditLogEntityKeyExactMatch | AdvancedAuditLogEntityKeyFilter;
 ```
 
 EntityKey property with full advanced search capabilities.

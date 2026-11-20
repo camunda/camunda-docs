@@ -93,6 +93,14 @@ POST actuator/exporting/pause?soft=true
 
 When all partitions soft pause exporting, the response contains `"status": 204`. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
 
+:::warning
+Broker disk usage grows throughout the soft-pause window because log compaction is blocked. Keep the window as short as possible and resume exporting promptly once the backup completes.
+
+Avoid restarting brokers while soft pause is active. After a restart, exporters resume from the last persisted position (before soft-pausing started) and re-export all records from the soft-pause window. Recovery time is proportional to how long soft pause was active.
+
+For a real-world example of disk growth and recovery, see the [full-disk chaos day report](https://camunda.github.io/zeebe-chaos/2026/06/18/Full-disk-due-to-soft-pause-exporters).
+:::
+
 ## Exporters API
 
 The Exporters API allows for enabling, disabling or deleting configured exporters. By default, all configured exporters are enabled.
@@ -103,7 +111,7 @@ The enable and disable functionality is specifically useful for [dual region dep
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
 
 :::info
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/resources/api/cluster/exporter-api.yaml).
 :::
 
 :::note
@@ -140,6 +148,8 @@ POST actuator/exporters/{exporterId}/disable
 ```
 
 After disabling the exporter, no records will be exported to this exporter. Other exporters continue exporting.
+
+Removing an exporter from the cluster configuration through Helm values only drops it from the static configuration. For example, disabling Optimize removes the Elasticsearch or OpenSearch exporter. The exporter is still declared in the dynamic cluster configuration, which prevents log compaction and increases disk usage. To fully deactivate it, explicitly disable it using the request above, and confirm that every broker reports the exporter as `DISABLED` (see [Monitor an exporter](#monitor-an-exporter)).
 
 ### Delete an exporter
 
@@ -178,3 +188,5 @@ The response is a JSON object that lists all configured exporters with their sta
   }
 ]
 ```
+
+An exporter can also report `CONFIG_NOT_FOUND`. It is still enabled in the dynamic cluster configuration, but its configuration has been removed from the application properties, for example after Optimize or the Elasticsearch subchart was disabled in Helm values. In that state it cannot export and blocks log compaction. Disable it explicitly as described in [Disable an exporter](#disable-an-exporter) rather than relying on the configuration change alone. Before 8.8.25, a broker restart could flip such a disabled exporter back to `ENABLED` ([camunda/camunda#52260](https://github.com/camunda/camunda/issues/52260)).

@@ -10,6 +10,6 @@ Specify the tool resolution for an accompanying ad-hoc sub-process.
 :::note
 
 - Leave this section empty if using this connector independently, without an accompanying ad-hoc sub-process.
-- To actually use the tools, you must model your process to include a tools feedback loop, routing into the ad-hoc sub-process and back to the AI agent connector. See [example tools feedback loop](../../../agentic-ai-aiagent-task-example.md#tools-loop).
+- To actually use the tools, you must model your process to include an agent loop, routing into the ad-hoc sub-process and back to the AI agent connector. See [agent loop for tool calls](../../../agentic-ai-aiagent-task-example.md#tools-loop).
 
 :::

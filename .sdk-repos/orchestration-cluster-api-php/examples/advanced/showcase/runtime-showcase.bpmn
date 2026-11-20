@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="ShowcaseDefinitions" targetNamespace="https://camunda.com/examples/php-sdk" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
+  <bpmn:process id="__USER_PROCESS_ID__" name="Showcase user task" isExecutable="true">
+    <bpmn:startEvent id="UserStart" name="Start user task">
+      <bpmn:outgoing>UserStartToTask</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="ShowcaseUserTask" name="Review showcase task">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition externalReference="php-sdk-showcase" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>UserStartToTask</bpmn:incoming>
+      <bpmn:outgoing>UserTaskToEnd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="UserEnd" name="Complete user task">
+      <bpmn:incoming>UserTaskToEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="UserStartToTask" sourceRef="UserStart" targetRef="ShowcaseUserTask" />
+    <bpmn:sequenceFlow id="UserTaskToEnd" sourceRef="ShowcaseUserTask" targetRef="UserEnd" />
+  </bpmn:process>
+  <bpmn:process id="__INCIDENT_PROCESS_ID__" name="Showcase incident" isExecutable="true">
+    <bpmn:startEvent id="IncidentStart" name="Start incident">
+      <bpmn:outgoing>IncidentStartToTask</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ShowcaseIncidentTask" name="Create showcase incident">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="__INCIDENT_JOB_TYPE__" retries="1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>IncidentStartToTask</bpmn:incoming>
+      <bpmn:outgoing>IncidentTaskToEnd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="IncidentEnd" name="Complete incident process">
+      <bpmn:incoming>IncidentTaskToEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="IncidentStartToTask" sourceRef="IncidentStart" targetRef="ShowcaseIncidentTask" />
+    <bpmn:sequenceFlow id="IncidentTaskToEnd" sourceRef="ShowcaseIncidentTask" targetRef="IncidentEnd" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="UserTaskDiagram">
+    <bpmndi:BPMNPlane id="UserTaskPlane" bpmnElement="__USER_PROCESS_ID__">
+      <bpmndi:BPMNShape id="UserStart_di" bpmnElement="UserStart">
+        <dc:Bounds x="180" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ShowcaseUserTask_di" bpmnElement="ShowcaseUserTask">
+        <dc:Bounds x="270" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserEnd_di" bpmnElement="UserEnd">
+        <dc:Bounds x="430" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="UserStartToTask_di" bpmnElement="UserStartToTask">
+        <di:waypoint x="216" y="120" />
+        <di:waypoint x="270" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserTaskToEnd_di" bpmnElement="UserTaskToEnd">
+        <di:waypoint x="370" y="120" />
+        <di:waypoint x="430" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="IncidentDiagram">
+    <bpmndi:BPMNPlane id="IncidentPlane" bpmnElement="__INCIDENT_PROCESS_ID__">
+      <bpmndi:BPMNShape id="IncidentStart_di" bpmnElement="IncidentStart">
+        <dc:Bounds x="180" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ShowcaseIncidentTask_di" bpmnElement="ShowcaseIncidentTask">
+        <dc:Bounds x="270" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IncidentEnd_di" bpmnElement="IncidentEnd">
+        <dc:Bounds x="430" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="IncidentStartToTask_di" bpmnElement="IncidentStartToTask">
+        <di:waypoint x="216" y="320" />
+        <di:waypoint x="270" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="IncidentTaskToEnd_di" bpmnElement="IncidentTaskToEnd">
+        <di:waypoint x="370" y="320" />
+        <di:waypoint x="430" y="320" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

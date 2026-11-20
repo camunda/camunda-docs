@@ -1,0 +1,364 @@
+---
+id: change-cluster-mode
+title: "Change cluster mode"
+sidebar_label: "Change cluster mode"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Change cluster mode"} <MarkerAddedInVersion version="8.10" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/mode"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      anyOf: [
+        { resourceType: "SYSTEM", permissionType: "UPDATE" },
+        { resourceType: "BACKUP", permissionType: "RESTORE" },
+      ],
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "mode",
+      in: "query",
+      required: true,
+      description: "The target cluster mode.",
+      schema: {
+        description: "The operating mode of a cluster's partitions.",
+        type: "string",
+        enum: ["PROCESSING", "RECOVERING"],
+        title: "Mode",
+      },
+    },
+    {
+      name: "dryRun",
+      in: "query",
+      required: false,
+      description:
+        "If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.",
+      schema: { type: "boolean", default: false },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The mode change request was accepted; returns the planned cluster changes.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The planned changes resulting from a cluster mode transition request.",
+            type: "object",
+            required: ["changeId", "plannedChanges"],
+            properties: {
+              changeId: {
+                description:
+                  "The ID of the cluster change that was triggered by the request.",
+                type: "string",
+                example: "7",
+              },
+              plannedChanges: {
+                description:
+                  "The operations that will be applied to complete the change, grouped by the physical tenant they belong to. Groups are transitioned in parallel; the operations within a group are applied in the given order.",
+                type: "array",
+                items: {
+                  description:
+                    "The operations of a cluster mode change that apply to one physical tenant.",
+                  type: "object",
+                  required: ["physicalTenantId", "operations"],
+                  properties: {
+                    physicalTenantId: {
+                      description:
+                        "The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations.",
+                      type: "string",
+                      nullable: true,
+                      example: "default",
+                    },
+                    operations: {
+                      description:
+                        "The ordered list of operations that will be applied to the physical tenant.",
+                      type: "array",
+                      items: {
+                        description:
+                          "A single operation that is part of a cluster mode change.",
+                        type: "object",
+                        required: ["operation", "mode"],
+                        properties: {
+                          operation: {
+                            description: "The type of the operation.",
+                            type: "string",
+                            example: "ModeChangeOperation",
+                          },
+                          mode: {
+                            description:
+                              "The target mode of the operation, if applicable.",
+                            type: "string",
+                            nullable: true,
+                            example: "RECOVERING",
+                          },
+                        },
+                        title: "ClusterModeChangeOperation",
+                      },
+                    },
+                  },
+                  title: "ClusterModeChangePlannedChange",
+                },
+              },
+            },
+            title: "ClusterModeChangeResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

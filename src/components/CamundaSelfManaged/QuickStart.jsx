@@ -16,7 +16,7 @@ const QuickStartCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
-const QuickStart = () => {
+const QuickStart = ({ hideHeading = false }) => {
   const quickStartItems = [
     {
       title: "Developers",
@@ -36,7 +36,7 @@ const QuickStart = () => {
 
   return (
     <div className="sm-quickstart">
-      <h2>Quickstart</h2>
+      {!hideHeading && <h2>Quickstart</h2>}
       <p>
         Whether you're a developer looking to get up and running quickly or an
         operations team planning a production deployment, you'll find the

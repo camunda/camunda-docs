@@ -12,12 +12,12 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-810.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications.
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your projects.
 
 - It is the successor to Zeebe Process Test (ZPT).
 - Starting with version **8.8**, ZPT is deprecated and was removed in version **8.10**. See [release announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
@@ -114,18 +114,11 @@ Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
    Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run) on your machine.
+   Use the same version as CPT or later. See the [remote runtime prerequisites](/apis-tools/testing/configuration.md#prerequisites-1) for the required port and permissions.
 
-2. **Enable the management clock endpoint**  
-   See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):
-   - Create an `application.yaml` file in the root `/c8run` directory.
-   - Add:
-     ```yaml
-     zeebe.clock.controlled: true
-     ```
+2. **Start Camunda 8 Run**.
 
-3. **Start Camunda 8 Run**.
-
-4. **Switch CPT’s runtime mode** to `remote` in your project configuration.
+3. **Switch CPT’s runtime mode** to `remote` in your project configuration.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -597,4 +590,4 @@ When you’re ready, take the next steps to continue your journey:
 
 ## Troubleshooting
 
-If you encounter issues with the migration or notice missing features, please report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
+If you encounter issues with the migration or notice missing features, report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).

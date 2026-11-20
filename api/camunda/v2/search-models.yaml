@@ -26,7 +26,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
           maximum: 10000
     OffsetPagination:
       type: object
@@ -42,7 +42,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
       x-properties-added-in-version:
         - propertyName: from
           addedInVersion: "8.6"
@@ -51,8 +51,6 @@ components:
     CursorForwardPagination:
       type: object
       title: Cursor-based forward pagination
-      required:
-        - after
       properties:
         after:
           description: Use the `endCursor` value from the previous response to fetch the next page of results.
@@ -63,7 +61,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
           maximum: 10000
       x-properties-added-in-version:
         - propertyName: after
@@ -73,8 +71,6 @@ components:
     CursorBackwardPagination:
       type: object
       title: Cursor-based backward pagination
-      required:
-        - before
       properties:
         before:
           description: Use the `startCursor` value from the previous response to fetch the previous page of results.
@@ -85,7 +81,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
           maximum: 10000
       x-properties-added-in-version:
         - propertyName: before

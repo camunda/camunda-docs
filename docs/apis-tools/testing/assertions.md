@@ -412,10 +412,29 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 });
 ```
 
+### hasVariableSatisfiesExpression
+
+Assert that the process instance has a variable with a value that satisfies the given FEEL expression.
+
+The expression is evaluated with a context containing the variable under its name. The expression should access the
+variable in a Boolean expression, for example, with comparisons. Learn more in the
+[FEEL expressions introduction](/components/modeler/feel/language-guide/feel-expressions-introduction.md).
+
+The assertion fails if the variable doesn't exist or the expression doesn't evaluate to `true`.
+
+```java
+assertThat(processInstance)
+    .hasVariableSatisfiesExpression(
+        "order",
+        "order.status = \"approved\" and list contains(order.items.name, \"Oxygen tank\")");
+```
+
 ### hasVariableSatisfiesJudge
 
 Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
 fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+When [document attachment](configuration.md#document-attachment) is enabled, Camunda document references found in the variable value are resolved and their content is passed to the judge.
 
 ```java
 assertThat(processInstance)
@@ -485,11 +504,33 @@ assertThat(processInstance).hasLocalVariableSatisfies(
     });
 ```
 
+### hasLocalVariableSatisfiesExpression
+
+Assert that the process instance has a local variable in the scope of the given element with a value that satisfies the
+given FEEL expression. Use the BPMN element ID or a [ElementSelector](utilities.md#element-selector) to identify the
+element.
+
+The expression is evaluated with a context containing the variable under its name. The expression should access the
+variable in a Boolean expression, for example, with comparisons. Learn more in the
+[FEEL expressions introduction](/components/modeler/feel/language-guide/feel-expressions-introduction.md).
+
+The assertion fails if the variable doesn't exist or the expression doesn't evaluate to `true`.
+
+```java
+assertThat(processInstance)
+    .hasLocalVariableSatisfiesExpression(
+        ElementSelectors.byId("review-order"),
+        "order",
+        "order.status = \"approved\" and list contains(order.items.name, \"Oxygen tank\")");
+```
+
 ### hasLocalVariableSatisfiesJudge
 
 Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
 element ID or an [element selector](utilities.md#element-selector) to identify the element. The expectation is evaluated only once. The assertion
 fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+When [document attachment](configuration.md#document-attachment) is enabled, Camunda document references found in the variable value are resolved and their content is passed to the judge.
 
 ```java
 assertThat(processInstance)
@@ -695,6 +736,83 @@ Asserts that the user task has the expected candidate groups.
 assertThatUserTask(UserTaskSelectors.byTaskName("User Task")).hasCandidateGroups("groupA", "groupB", "groupC");
 ```
 
+## Incident assertions
+
+You can verify the state and details of a single incident using `CamundaAssert.assertThatIncident()`. Use an [IncidentSelector](utilities.md#incident-selector) to identify the incident.
+
+To verify only that a process instance has or doesn't have active incidents, use [hasActiveIncidents](#hasactiveincidents) or [hasNoActiveIncidents](#hasnoactiveincidents) instead.
+
+### With incident selector
+
+Use an [IncidentSelector](utilities.md#incident-selector) to identify the incident. The selector targets the first matching incident.
+
+```java
+// by BPMN element ID
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket")).isActive();
+
+// by process instance key
+assertThatIncident(IncidentSelectors.byProcessInstanceKey(processInstanceKey)).isActive();
+
+// by process definition ID
+assertThatIncident(IncidentSelectors.byProcessDefinitionId("MoonExplorationProcess")).isActive();
+```
+
+### isActive
+
+Assert that the incident is active. The assertion considers an incident in state `ACTIVE`, `PENDING`, or `MIGRATED` as active, and it fails if the incident is resolved or doesn't exist.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket")).isActive();
+```
+
+### isResolved
+
+Assert that the incident is resolved. The assertion fails if the incident is still active or doesn't exist.
+
+```java
+// when: resolve the incident at the element with ID "LaunchRocket"
+processTestContext.resolveIncident(IncidentSelectors.byElementId("LaunchRocket"));
+
+// then
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket")).isResolved();
+```
+
+### hasErrorType
+
+Assert that the incident has the expected error type. Use the `IncidentErrorType` enum of the Camunda Java client, for example, `JOB_NO_RETRIES` or `CONDITION_ERROR`.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket"))
+    .hasErrorType(IncidentErrorType.JOB_NO_RETRIES);
+```
+
+### hasErrorMessage
+
+Assert that the incident has the expected error message. The assertion compares the full message and fails if it differs.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket"))
+    .hasErrorMessage("Fuel pressure out of range");
+```
+
+### hasElementId
+
+Assert that the incident belongs to the expected BPMN element.
+
+```java
+assertThatIncident(IncidentSelectors.byProcessInstanceKey(processInstanceKey))
+    .hasElementId("LaunchRocket");
+```
+
+### hasProcessInstanceKey
+
+Assert that the incident belongs to the expected process instance.
+
+```java
+assertThatIncident(IncidentSelectors.byElementId("LaunchRocket"))
+    .hasProcessInstanceKey(processInstanceKey);
+```
+
 ## Decision assertions
 
 You can verify the decision evaluation state and other properties using `CamundaAssert.assertThat()` or
@@ -805,6 +923,8 @@ same LLM judge and embedding-based similarity checks used for process variables.
 
 Assert that the given value satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The
 assertion fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+[Document attachment](configuration.md#document-attachment) is not supported for value assertions. To evaluate document content, use [hasVariableSatisfiesJudge](#hasvariablesatisfiesjudge) or [hasLocalVariableSatisfiesJudge](#haslocalvariablesatisfiesjudge) instead.
 
 ```java
 assertThatValue("The order has been shipped and will arrive tomorrow.")

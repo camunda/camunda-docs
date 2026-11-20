@@ -30,7 +30,7 @@ path: object;
 #### resourceKey
 
 ```ts
-resourceKey: ResourceKey;
+resourceKey: ResourceKeyWritable;
 ```
 
 The key of the resource to delete.

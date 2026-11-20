@@ -8,6 +8,40 @@ description: The Kafka Producer connector allows you to connect your BPMN servic
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+## Reuse a Kafka connection
+
+Use a **Kafka Connection** credential to share broker and authentication settings between Kafka producer and Kafka consumer connectors.
+
+Reusable credentials require Camunda 8.10 or later and a Kafka element template with the optional **Connection credential** chooser in the **Connection** section. Select the same credential on producer tasks and consumer events, or leave **Connection credential** empty to keep configuring brokers and authentication inline in the **Connection** section.
+
+A Kafka Connection credential stores these required fields:
+
+| Field              | Description                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| `bootstrapServers` | Bootstrap server addresses, separated by commas when you use more than one server. |
+| `username`         | Kafka username. For a secret reference, use `camunda.secrets.MY_KAFKA_USERNAME`.   |
+| `password`         | Kafka password. For a secret reference, use `camunda.secrets.MY_KAFKA_PASSWORD`.   |
+
+Create referenced secrets before using the credential. Inside a credential, use `camunda.secrets.NAME`, not the legacy `{{secrets.NAME}}` syntax. Legacy secret references remain supported in inline connector fields.
+
+Selecting a credential binds the whole object to `kafkaConnectionConfiguration` using `=camunda.vars.env.<name>`, where `<name>` is the credential's cluster variable name. The credential supplies authentication using `SASL_SSL` with the `PLAIN` mechanism. Keep custom authentication configured inline.
+
+The selected credential replaces inline broker and authentication settings. An invalid credential fails execution or consumer activation; the connector doesn't fall back to inline values. Topic, consumer group, offsets, schema settings, and message configuration remain local to each task or event.
+
+:::warning
+**Additional properties** still overrides the final connection and security properties, including `bootstrap.servers`. Selecting a credential doesn't restrict the destination or prevent these overrides.
+:::
+
+### Test a Kafka connection
+
+**Test connection** performs a read-only Kafka metadata probe to check connectivity and authentication, using the connector runtime's trust configuration. It uses bounded timeouts and reports a failure if the connection can't be established.
+
+The result applies only to the stored credential, not to **Additional properties** overrides configured on a task or event.
+
+The test doesn't publish or consume messages, join a consumer group, or change offsets. Success doesn't verify topic, consumer group, publishing, or consumption permissions.
+
+Updating a credential follows the existing consumer activation and reload lifecycle. Don't rely on credential edits automatically rotating the connection of an already-running consumer.
+
 <Tabs groupId="kafka" defaultValue="outbound" queryString values={
 [
 {label: 'Kafka Producer connector', value: 'outbound' },
@@ -23,7 +57,7 @@ The **Kafka Producer connector** is an outbound connector that allows you to con
 To use the **Kafka Producer connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+Use secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
 ## Create a Kafka Producer connector task
@@ -36,9 +70,12 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 To make your **Kafka Producer connector** for publishing messages executable, complete the following sections.
 
-### Authentication
+### Connection
 
-(Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`.
+In the **Connection** section, select a **Connection credential** or configure the connection inline:
+
+1. Set **Bootstrap servers** to the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
+2. (Optional) Set **Username** and **Password**. For example, `{{secrets.MY_KAFKA_USERNAME}}`.
 
 ### Schema
 
@@ -47,10 +84,9 @@ In the **Kafka** section:
 1. Select the schema strategy for your messages.
    - Select **No schema**, **Inline schema** for Avro serialization.
    - Select **Schema registry** if you have a Confluent Schema Registry.
-2. Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
-3. Set the topic name.
-4. (Optional) Set producer configuration values in the **Headers** field. Only `UTF-8` strings are supported as header values.
-5. (Optional) Set producer configuration values in the **Additional properties** field.
+2. Set the topic name.
+3. (Optional) Set message headers in the **Headers** field of the **Message** section. Only `UTF-8` strings are supported as header values.
+4. (Optional) Set producer configuration values in the **Additional properties** field.
 
 :::info
 
@@ -69,10 +105,6 @@ Additionally, to learn more about supported producer configurations, see the [of
 In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
 
 ## Schema strategies
-
-:::caution
-Use Schema strategies with caution, as this is an [alpha feature](/components/early-access/alpha/alpha-features.md). Functionality may not be comprehensive and could change.
-:::
 
 This connector supports different schema strategies, offering a compact, fast, and binary data exchange format for Kafka messages.
 
@@ -222,6 +254,8 @@ If any of the fields are not populated, you must configure your security method 
   value.serializer=org.apache.kafka.common.serialization.StringSerializer
   ```
 
+  The `value.serializer` depends on the schema strategy. With **Avro Inline schema**, the connector uses `org.apache.kafka.common.serialization.ByteArraySerializer`. With **Confluent Schema registry**, it uses `io.confluent.kafka.serializers.KafkaAvroSerializer` for Avro or `io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer` for JSON.
+
 - Miscellaneous properties:
 
   ```
@@ -229,13 +263,19 @@ If any of the fields are not populated, you must configure your security method 
   client.dns.lookup=use_all_dns_ips
   acks=all
   delivery.timeout.ms=45000
+  max.block.ms=60000
+  linger.ms=0
+  request.timeout.ms=30000
+  heartbeat.interval.ms=3000
+  default.api.timeout.ms=60000
+  metadata.cluster.check.enable=false
   ```
 
 ### What is the precedence of client properties loading?
 
 Properties loading consists of three steps:
 
-1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties.
+1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties. If selected, the **Connection credential** supplies authentication and bootstrap servers instead of the inline fields.
 2. Load miscellaneous properties.
 3. Load and **override** properties from the field **Additional properties**.
 
@@ -261,7 +301,7 @@ The **Kafka Consumer connector** allows you to consume messages by subscribing t
 To use the **Kafka Consumer connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+Use secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
 ## Create a Kafka Consumer connector event
@@ -276,13 +316,16 @@ Use Camunda secrets to avoid exposing your sensitive data as plain text. To lear
 
 To make your **Kafka Consumer connector** executable, fill in the required properties.
 
-### Authentication
+### Connection
 
-In the **Authentication** section, select the **Authentication type**. If you selected **Credentials** as the **Authentication type**, set the username and password.
+In the **Connection** section, select a **Connection credential** or configure the connection inline:
+
+1. Set **Bootstrap servers** to the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
+2. Select the **Authentication type**. If you selected **Credentials**, set **Username** and **Password**.
 
 :::note
 
-- Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- Use secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/saas/clusters/manage-secrets.md).
 - To learn more about Kafka authentication, see [Kafka secure authentication](#what-mechanism-is-used-to-authenticate-against-kafka-1).
 
 :::
@@ -295,7 +338,6 @@ In the **Kafka** section, you can configure the following properties:
 - **Schema strategy**: Select the schema strategy for your messages.
   - Select **No schema**, **Inline schema** for Avro serialization.
   - Select **Schema registry** If you have a Confluent Schema Registry.
-- **Bootstrap servers**: Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 - **Topic**: Set the topic name.
 - **Additional properties**: Set consumer configuration values.
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
@@ -308,6 +350,15 @@ The [appendix](#appendix-and-faq-1) provides more information about [pre-configu
 Additionally, to learn more about supported consumer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/consumer-configs/).
 
 :::
+
+### Modify an existing inbound Kafka connector
+
+Editing the **Consumer Group ID** or **Offsets** properties on an already deployed inbound Kafka connector element can cause unexpected behavior. Delete the element and create a new one instead of editing these properties in place.
+
+- **Consumer Group ID**: If you clear this field on an existing element, the connector generates a new ID from its internal deduplication key instead of reusing the previous one. Kafka then treats the connector as a new consumer group, which can cause it to replay already processed messages.
+- **Offsets**: If the number of offsets you provide does not match the topic's actual partition count, activation fails with an error.
+
+This is one example of a general pattern for inbound connectors. See [modify an existing inbound connector element](../advanced-topics/inbound-lifecycle.md#modify-an-existing-inbound-connector-element) for more details.
 
 ### Schema strategy
 
@@ -335,8 +386,6 @@ Select **Schema registry** to send messages using a schema registered in a schem
 :::info
 
 Currently, the Kafka connector supports only the [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html). Other schema registry implementations are not supported at this time.
-
-Schema configuration is required only for the outbound connector. It is not required when using Inbound Connectors.
 
 :::
 
@@ -392,7 +441,7 @@ This schema defines a structure for a record that includes a name (string), an a
 For example, `=(value.itemId = "a4f6j2")` only triggers the start event or continues the catch event if the Kafka message has a matching itemId in the incoming message payload. Leave this field empty to trigger your process every time.
 
 :::danger
-By default, this connector does not commit the offset if the message cannot be processed. This includes cases where the activation condition is not met.
+This connector does not commit the offset if the message cannot be processed. If **Consume unmatched events** is unchecked, this includes cases where the activation condition is not met.
 This means that if there is a message in the topic that cannot be processed due to an activation condition mismatch, the Kafka subscription will be stopped.
 
 Follow the steps below to configure this behavior.
@@ -406,6 +455,14 @@ To ignore messages that do not meet the activation condition and commit the offs
 | Unchecked                             | Matched              | connector is triggered, offsets are commited         |
 | Checked                               | Unmatched            | connector is not triggered, offsets are commited     |
 | Unchecked                             | Unmatched            | connector is not triggered, offsets are not commited |
+
+#### Upgrade from a version without the Consume unmatched events checkbox
+
+If your inbound Kafka connector element was deployed before the **Consume unmatched events** checkbox existed, the underlying property is absent from that element and defaults to unchecked. Upgrading the runtime does not change this default, so the element keeps its original behavior: it does not commit the offset when a message does not match the activation condition.
+
+To adopt the checked behavior on an existing element, update its element template and redeploy it. Creating a new element with a current template also picks up the new default of checked.
+
+This is one example of a general pattern for inbound connectors. See [modify an existing inbound connector element](../advanced-topics/inbound-lifecycle.md#modify-an-existing-inbound-connector-element) for more details.
 
 ### Correlation
 
@@ -529,13 +586,22 @@ If any of the field is not populated, you must configure your security method fo
   value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
   ```
 
+  The `value.deserializer` depends on the schema strategy. With **Avro Inline schema**, the connector uses `org.apache.kafka.common.serialization.ByteArrayDeserializer`. With **Confluent Schema registry**, it uses `io.confluent.kafka.serializers.KafkaAvroDeserializer` for Avro or `io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer` for JSON.
+
 - Miscellaneous properties:
 
   ```
   session.timeout.ms=45000
   client.dns.lookup=use_all_dns_ips
   acks=all
-  group.id=kafka-inbound-connector-{{bpmnProcessId}}
+  delivery.timeout.ms=45000
+  max.block.ms=60000
+  linger.ms=0
+  request.timeout.ms=30000
+  heartbeat.interval.ms=3000
+  default.api.timeout.ms=60000
+  metadata.cluster.check.enable=false
+  group.id=kafka-inbound-connector-<deduplicationId>
   enable.auto.commit=false
   ```
 
@@ -547,7 +613,7 @@ The `group.id` value above is auto-generated when no explicit **Consumer Group I
 
 Properties loading consists of three steps:
 
-1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties.
+1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties. If selected, the **Connection credential** supplies authentication and bootstrap servers instead of the inline fields.
 2. Load miscellaneous properties.
 3. Load and **override** properties from the field **Additional properties**.
 
@@ -570,7 +636,8 @@ The deserialized object structure:
 The following outcomes are possible:
 
 - If the connector execution is successful and the **Activation condition** was met, the offset is committed.
-- If the **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
+- If the **Activation condition** was not met and **Consume unmatched events** is checked, the offset is committed.
+- If the **Activation condition** was not met and **Consume unmatched events** is unchecked, the offset is not committed.
 - If the connector execution fails due to an unexpected error (for example, Zeebe is unavailable), the offset is not committed.
 
 ### What lifecycle does the Kafka Consumer connector have?

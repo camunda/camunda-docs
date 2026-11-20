@@ -1,7 +1,5 @@
 ---
 title: Choosing the resource binding type
-tags:
-  - BPMN
 description: "Choose the resource binding type and understand the differences between 'latest' and 'deployment' binding for linked resources."
 ---
 

@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type WaitStateElementTypeFilterProperty =
-  | WaitStateElementTypeExactMatch
-  | AdvancedWaitStateElementTypeFilter;
+  WaitStateElementTypeExactMatch | AdvancedWaitStateElementTypeFilter;
 ```
 
 Element type property with full advanced search capabilities.

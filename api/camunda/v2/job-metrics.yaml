@@ -4,9 +4,16 @@ paths:
       tags:
         - Job
       operationId: getGlobalJobStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Global job statistics
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -60,9 +67,16 @@ paths:
       tags:
         - Job
       operationId: getJobTypeStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get job statistics by type
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -96,9 +110,16 @@ paths:
       tags:
         - Job
       operationId: getJobWorkerStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get job statistics by worker
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -132,9 +153,16 @@ paths:
       tags:
         - Job
       operationId: getJobTimeSeriesStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get time-series metrics for a job type
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -170,9 +198,16 @@ paths:
       tags:
         - Job
       operationId: getJobErrorStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get error metrics for a job type
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -279,7 +314,6 @@ components:
       description: Job type statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -354,7 +388,6 @@ components:
       description: Job worker statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -429,7 +462,6 @@ components:
       description: Job time-series statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -507,7 +539,6 @@ components:
       description: Job error statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"

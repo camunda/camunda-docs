@@ -134,7 +134,13 @@ public static class VariableElementExamples
 
         foreach (var waitState in result.Items)
         {
-            Console.WriteLine($"{waitState.ElementId}: {waitState.WaitStateType}");
+            var details = waitState.Details switch
+            {
+                JobWaitStateDetails job => $"waiting on job '{job.JobType}'",
+                MessageWaitStateDetails message => $"waiting for message '{message.MessageName}'",
+                _ => "waiting",
+            };
+            Console.WriteLine($"{waitState.ElementId}: {details}");
         }
     }
     // </SearchElementInstanceWaitStates>

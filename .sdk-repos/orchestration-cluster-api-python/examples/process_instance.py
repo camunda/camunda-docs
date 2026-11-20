@@ -9,6 +9,8 @@ from camunda_orchestration_sdk import (
     ProcessCreationByKey,
     ProcessDefinitionId,
     ProcessDefinitionKey,
+    ProcessInstanceBusinessIdAssignmentInstruction,
+    ProcessInstanceKey,
     ProcessInstanceSearchQuery,
     ProcessInstanceSearchQueryFilter,
     ProcessInstanceSearchQuerySortRequest,
@@ -106,3 +108,36 @@ def search_process_instances_example() -> None:
         print(f"{instance.process_instance_key}: {instance.state}")
     print(f"Total: {result.page.total_items}")
 # endregion SearchProcessInstances
+
+
+# region SuspendProcessInstance
+def suspend_process_instance_example(process_instance_key: ProcessInstanceKey) -> None:
+    client = CamundaClient()
+
+    client.suspend_process_instance(
+        process_instance_key=process_instance_key,
+    )
+# endregion SuspendProcessInstance
+
+
+# region ResumeProcessInstance
+def resume_process_instance_example(process_instance_key: ProcessInstanceKey) -> None:
+    client = CamundaClient()
+
+    client.resume_process_instance(
+        process_instance_key=process_instance_key,
+    )
+# endregion ResumeProcessInstance
+
+
+# region AssignProcessInstanceBusinessId
+def assign_process_instance_business_id_example(process_instance_key: ProcessInstanceKey) -> None:
+    client = CamundaClient()
+
+    client.assign_process_instance_business_id(
+        process_instance_key=process_instance_key,
+        data=ProcessInstanceBusinessIdAssignmentInstruction(
+            business_id="order-12345",
+        ),
+    )
+# endregion AssignProcessInstanceBusinessId

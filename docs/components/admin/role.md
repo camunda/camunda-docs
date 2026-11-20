@@ -31,6 +31,23 @@ The role is created and can now be assigned to users or groups.
 
 <img src={CreateRoleImg} alt="Create a role" class="img-700"/>
 
+## Update a role
+
+To update a role:
+
+1. Log in to Admin in your cluster, and select the **Roles** tab.
+2. Click the **pencil icon** next to the role you want to update.
+3. Update the role details:
+   - **Name**: The name of the role.
+   - **Description**: An optional description of the role.
+4. Click the **Save** button.
+
+The role details are updated.
+
+:::note
+Default roles that are automatically created are system entities and cannot be updated.
+:::
+
 ## Delete a role
 
 To delete a role:
@@ -40,6 +57,10 @@ To delete a role:
 3. Confirm the deletion by clicking **Delete** in the confirmation dialog.
 
 The role is deleted. The authorizations that were granted to the role are also removed.
+
+:::note
+Default roles that are automatically created are system entities and cannot be deleted.
+:::
 
 ## Assign authorizations to a role
 
@@ -133,10 +154,8 @@ The client is removed from the role.
 
 ## Manage mapping rules
 
-<span class="badge badge--platform">Self-Managed only</span>
-
 :::note
-[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication.
+[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication. On SaaS, they become available after you [connect an external identity provider](/components/saas/clusters/connect-external-identity-provider.md) to the cluster.
 :::
 
 ### Assign mapping rules to a role

@@ -11,9 +11,10 @@ import IconDataImg from "../img/icon-reference-data.png";
 export const gettingStartedCards = [
   {
     link: "./announcements-release-notes/overview/",
-    title: "Release announcements and release notes",
+    title: "8.8 release information",
     image: IconReleasesImg,
-    description: "Announcements and release notes for all supported versions.",
+    description:
+      "What's new, release notes, announcements, and supporting information for Camunda 8.8.",
   },
   {
     link: "./announcements-release-notes/880/880-announcements/",
@@ -24,6 +25,30 @@ export const gettingStartedCards = [
   },
   {
     link: "./announcements-release-notes/880/880-release-notes/",
+    title: "8.8 release notes",
+    image: IconReleaseNotesImg,
+    description:
+      "New features included in 8.8, including alpha feature releases.",
+  },
+];
+
+export const releaseInfoCards = [
+  {
+    link: "../880/whats-new-in-88/",
+    title: "What's new in Camunda 8.8",
+    image: IconReleasesImg,
+    description:
+      "Important changes to consider when upgrading from Camunda 8.7.",
+  },
+  {
+    link: "../880/880-announcements/",
+    title: "8.8 release announcements",
+    image: IconReleaseAnnouncementsImg,
+    description:
+      "Supported environment changes and breaking changes/deprecations.",
+  },
+  {
+    link: "../880/880-release-notes/",
     title: "8.8 release notes",
     image: IconReleaseNotesImg,
     description:

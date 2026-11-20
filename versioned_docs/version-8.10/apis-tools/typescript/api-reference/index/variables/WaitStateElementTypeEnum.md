@@ -1,0 +1,178 @@
+---
+title: "Variable: WaitStateElementTypeEnum"
+sidebar_label: "WaitStateElementTypeEnum"
+mdx:
+  format: md
+---
+
+# Variable: WaitStateElementTypeEnum
+
+```ts
+const WaitStateElementTypeEnum: object;
+```
+
+The BPMN element type of a waiting element instance.
+
+## Type Declaration
+
+### AD\_HOC\_SUB\_PROCESS
+
+```ts
+readonly AD_HOC_SUB_PROCESS: "AD_HOC_SUB_PROCESS" = 'AD_HOC_SUB_PROCESS';
+```
+
+### AD\_HOC\_SUB\_PROCESS\_INNER\_INSTANCE
+
+```ts
+readonly AD_HOC_SUB_PROCESS_INNER_INSTANCE: "AD_HOC_SUB_PROCESS_INNER_INSTANCE" = 'AD_HOC_SUB_PROCESS_INNER_INSTANCE';
+```
+
+### BOUNDARY\_EVENT
+
+```ts
+readonly BOUNDARY_EVENT: "BOUNDARY_EVENT" = 'BOUNDARY_EVENT';
+```
+
+### BUSINESS\_RULE\_TASK
+
+```ts
+readonly BUSINESS_RULE_TASK: "BUSINESS_RULE_TASK" = 'BUSINESS_RULE_TASK';
+```
+
+### CALL\_ACTIVITY
+
+```ts
+readonly CALL_ACTIVITY: "CALL_ACTIVITY" = 'CALL_ACTIVITY';
+```
+
+### END\_EVENT
+
+```ts
+readonly END_EVENT: "END_EVENT" = 'END_EVENT';
+```
+
+### EVENT\_BASED\_GATEWAY
+
+```ts
+readonly EVENT_BASED_GATEWAY: "EVENT_BASED_GATEWAY" = 'EVENT_BASED_GATEWAY';
+```
+
+### EVENT\_SUB\_PROCESS
+
+```ts
+readonly EVENT_SUB_PROCESS: "EVENT_SUB_PROCESS" = 'EVENT_SUB_PROCESS';
+```
+
+### EXCLUSIVE\_GATEWAY
+
+```ts
+readonly EXCLUSIVE_GATEWAY: "EXCLUSIVE_GATEWAY" = 'EXCLUSIVE_GATEWAY';
+```
+
+### INCLUSIVE\_GATEWAY
+
+```ts
+readonly INCLUSIVE_GATEWAY: "INCLUSIVE_GATEWAY" = 'INCLUSIVE_GATEWAY';
+```
+
+### INTERMEDIATE\_CATCH\_EVENT
+
+```ts
+readonly INTERMEDIATE_CATCH_EVENT: "INTERMEDIATE_CATCH_EVENT" = 'INTERMEDIATE_CATCH_EVENT';
+```
+
+### INTERMEDIATE\_THROW\_EVENT
+
+```ts
+readonly INTERMEDIATE_THROW_EVENT: "INTERMEDIATE_THROW_EVENT" = 'INTERMEDIATE_THROW_EVENT';
+```
+
+### MANUAL\_TASK
+
+```ts
+readonly MANUAL_TASK: "MANUAL_TASK" = 'MANUAL_TASK';
+```
+
+### MULTI\_INSTANCE\_BODY
+
+```ts
+readonly MULTI_INSTANCE_BODY: "MULTI_INSTANCE_BODY" = 'MULTI_INSTANCE_BODY';
+```
+
+### PARALLEL\_GATEWAY
+
+```ts
+readonly PARALLEL_GATEWAY: "PARALLEL_GATEWAY" = 'PARALLEL_GATEWAY';
+```
+
+### PROCESS
+
+```ts
+readonly PROCESS: "PROCESS" = 'PROCESS';
+```
+
+### RECEIVE\_TASK
+
+```ts
+readonly RECEIVE_TASK: "RECEIVE_TASK" = 'RECEIVE_TASK';
+```
+
+### SCRIPT\_TASK
+
+```ts
+readonly SCRIPT_TASK: "SCRIPT_TASK" = 'SCRIPT_TASK';
+```
+
+### SEND\_TASK
+
+```ts
+readonly SEND_TASK: "SEND_TASK" = 'SEND_TASK';
+```
+
+### SEQUENCE\_FLOW
+
+```ts
+readonly SEQUENCE_FLOW: "SEQUENCE_FLOW" = 'SEQUENCE_FLOW';
+```
+
+### SERVICE\_TASK
+
+```ts
+readonly SERVICE_TASK: "SERVICE_TASK" = 'SERVICE_TASK';
+```
+
+### START\_EVENT
+
+```ts
+readonly START_EVENT: "START_EVENT" = 'START_EVENT';
+```
+
+### SUB\_PROCESS
+
+```ts
+readonly SUB_PROCESS: "SUB_PROCESS" = 'SUB_PROCESS';
+```
+
+### TASK
+
+```ts
+readonly TASK: "TASK" = 'TASK';
+```
+
+### UNKNOWN
+
+```ts
+readonly UNKNOWN: "UNKNOWN" = 'UNKNOWN';
+```
+
+### UNSPECIFIED
+
+```ts
+readonly UNSPECIFIED: "UNSPECIFIED" = 'UNSPECIFIED';
+```
+
+### USER\_TASK
+
+```ts
+readonly USER_TASK: "USER_TASK" = 'USER_TASK';
+```

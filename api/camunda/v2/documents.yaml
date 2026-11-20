@@ -4,9 +4,16 @@ paths:
       tags:
         - Document
       operationId: createDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Upload document
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -63,9 +70,16 @@ paths:
       tags:
         - Document
       operationId: createDocuments
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Upload multiple documents
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.7]]
 
@@ -148,9 +162,16 @@ paths:
       tags:
         - Document
       operationId: getDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Download document
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -200,9 +221,16 @@ paths:
       tags:
         - Document
       operationId: deleteDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete document
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkRFTEVURSJ9XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -241,9 +269,16 @@ paths:
       tags:
         - Document
       operationId: createDocumentLink
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create document link
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.7]]
 
@@ -273,7 +308,7 @@ paths:
           schema:
             type: string
       requestBody:
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -354,6 +389,10 @@ components:
           addedInVersion: "8.9"
         - propertyName: title
           addedInVersion: "8.9"
+        - propertyName: fileName
+          addedInVersionOverride: "8.7"
+        - propertyName: detail
+          addedInVersionOverride: "8.7"
     DocumentCreationBatchResponse:
       allOf:
         - type: object
@@ -371,6 +410,11 @@ components:
               description: Documents that failed creation.
               items:
                 $ref: "#/components/schemas/DocumentReference"
+          x-properties-added-in-version:
+            - propertyName: createdDocuments
+              addedInVersionOverride: "8.7"
+            - propertyName: failedDocuments
+              addedInVersionOverride: "8.7"
     DocumentMetadata:
       description: Information about the document.
       type: object

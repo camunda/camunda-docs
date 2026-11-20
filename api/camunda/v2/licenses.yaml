@@ -4,9 +4,14 @@ paths:
       tags:
         - License
       operationId: getLicense
+      security: []
       summary: Get license status
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[SCOPE:physical-tenant]]
 
         [[ADDED_IN_VERSION:8.6]]
 

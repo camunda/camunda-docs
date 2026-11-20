@@ -1,0 +1,684 @@
+---
+id: sync-runtime-backup-state
+title: "Force-write runtime backup state"
+sidebar_label: "Force-write runtime backup state"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Force-write runtime backup state"} <MarkerAddedInVersion version="8.10" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/backups/runtime/state/sync"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Force-writes the checkpoint and backup metadata of every partition of the physical
+tenant to the backup store, independent of any backup being taken or confirmed, and
+returns the updated state.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "BACKUP", permissionType: "CREATE" }]}
+/>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The updated runtime backup state.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Runtime Backup State",
+            description:
+              "Information about the checkpoint and backup state of the physical tenant.",
+            type: "object",
+            properties: {
+              checkpointStates: {
+                type: "array",
+                description: "List of partition checkpoint states.",
+                items: {
+                  title: "Partition Checkpoint State",
+                  description:
+                    "Detailed information about the checkpoint state for a given partition.",
+                  type: "object",
+                  properties: {
+                    checkpointId: {
+                      description: "The id of the checkpoint.",
+                      allOf: [
+                        {
+                          title: "Checkpoint ID",
+                          description:
+                            "The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are\nlogically ordered by their ids (ascending), each successive checkpoint must use a\nhigher id than the previous one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 0,
+                        },
+                      ],
+                    },
+                    checkpointType: {
+                      description: "The type of the checkpoint.",
+                      allOf: [
+                        {
+                          title: "Checkpoint Type",
+                          description: "The type of the checkpoint.",
+                          type: "string",
+                          enum: ["MARKER", "SCHEDULED_BACKUP", "MANUAL_BACKUP"],
+                          example: "MARKER",
+                        },
+                      ],
+                    },
+                    partitionId: {
+                      description: "The id of the partition.",
+                      allOf: [
+                        {
+                          title: "Partition ID",
+                          description:
+                            "The id of a partition. Always a positive number greater than or equal to 1.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 1,
+                          example: 3,
+                        },
+                      ],
+                    },
+                    checkpointPosition: {
+                      description: "The log position of the checkpoint.",
+                      type: "integer",
+                      format: "int64",
+                      example: 1500,
+                    },
+                    checkpointTimestamp: {
+                      description:
+                        "The timestamp at which the checkpoint was created.",
+                      type: "string",
+                      format: "date-time",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                  },
+                  required: [
+                    "checkpointId",
+                    "checkpointType",
+                    "partitionId",
+                    "checkpointPosition",
+                    "checkpointTimestamp",
+                  ],
+                },
+              },
+              backupStates: {
+                type: "array",
+                description: "List of partition backup states.",
+                items: {
+                  title: "Partition Backup State",
+                  description:
+                    "Detailed information about the backup state for a given partition.",
+                  type: "object",
+                  properties: {
+                    checkpointId: {
+                      description:
+                        "The id of the checkpoint this backup is based on.",
+                      allOf: [
+                        {
+                          title: "Checkpoint ID",
+                          description:
+                            "The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are\nlogically ordered by their ids (ascending), each successive checkpoint must use a\nhigher id than the previous one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 0,
+                        },
+                      ],
+                    },
+                    checkpointType: {
+                      description: "The type of the backup.",
+                      allOf: [
+                        {
+                          title: "Backup Type",
+                          description: "The type of the backup.",
+                          type: "string",
+                          enum: ["MANUAL_BACKUP", "SCHEDULED_BACKUP"],
+                          example: "SCHEDULED_BACKUP",
+                        },
+                      ],
+                    },
+                    partitionId: {
+                      description:
+                        "The id of the partition. Omitted when nested inside a backup range's `start`/`end`,\nwhere the partition is already identified by the enclosing range.\n",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Partition ID",
+                          description:
+                            "The id of a partition. Always a positive number greater than or equal to 1.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 1,
+                          example: 3,
+                        },
+                      ],
+                    },
+                    checkpointPosition: {
+                      description:
+                        "The log position of the checkpoint this backup is based on.",
+                      type: "integer",
+                      format: "int64",
+                      example: 1500,
+                    },
+                    firstLogPosition: {
+                      description:
+                        "The first log position included in this backup.",
+                      type: "integer",
+                      format: "int64",
+                      example: 5,
+                    },
+                    checkpointTimestamp: {
+                      description:
+                        "The timestamp at which the checkpoint was created.",
+                      type: "string",
+                      format: "date-time",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                  },
+                  required: [
+                    "checkpointId",
+                    "checkpointType",
+                    "partitionId",
+                    "checkpointPosition",
+                    "firstLogPosition",
+                    "checkpointTimestamp",
+                  ],
+                },
+              },
+              ranges: {
+                type: "array",
+                description: "List of partition backup ranges.",
+                items: {
+                  title: "Partition Backup Range",
+                  description:
+                    "Information about one backup range for a partition.",
+                  type: "object",
+                  properties: {
+                    partitionId: {
+                      description: "The id of the partition.",
+                      allOf: [
+                        {
+                          title: "Partition ID",
+                          description:
+                            "The id of a partition. Always a positive number greater than or equal to 1.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 1,
+                          example: 3,
+                        },
+                      ],
+                    },
+                    start: {
+                      description: "The oldest backup in the range.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Partition Backup State",
+                          description:
+                            "Detailed information about the backup state for a given partition.",
+                          type: "object",
+                          properties: {
+                            checkpointId: {
+                              description:
+                                "The id of the checkpoint this backup is based on.",
+                              allOf: [
+                                {
+                                  title: "Checkpoint ID",
+                                  description:
+                                    "The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are\nlogically ordered by their ids (ascending), each successive checkpoint must use a\nhigher id than the previous one.\n",
+                                  type: "integer",
+                                  format: "int64",
+                                  example: 1,
+                                  minimum: 0,
+                                },
+                              ],
+                            },
+                            checkpointType: {
+                              description: "The type of the backup.",
+                              allOf: [
+                                {
+                                  title: "Backup Type",
+                                  description: "The type of the backup.",
+                                  type: "string",
+                                  enum: ["MANUAL_BACKUP", "SCHEDULED_BACKUP"],
+                                  example: "SCHEDULED_BACKUP",
+                                },
+                              ],
+                            },
+                            partitionId: {
+                              description:
+                                "The id of the partition. Omitted when nested inside a backup range's `start`/`end`,\nwhere the partition is already identified by the enclosing range.\n",
+                              nullable: true,
+                              allOf: [
+                                {
+                                  title: "Partition ID",
+                                  description:
+                                    "The id of a partition. Always a positive number greater than or equal to 1.",
+                                  type: "integer",
+                                  format: "int32",
+                                  minimum: 1,
+                                  example: 3,
+                                },
+                              ],
+                            },
+                            checkpointPosition: {
+                              description:
+                                "The log position of the checkpoint this backup is based on.",
+                              type: "integer",
+                              format: "int64",
+                              example: 1500,
+                            },
+                            firstLogPosition: {
+                              description:
+                                "The first log position included in this backup.",
+                              type: "integer",
+                              format: "int64",
+                              example: 5,
+                            },
+                            checkpointTimestamp: {
+                              description:
+                                "The timestamp at which the checkpoint was created.",
+                              type: "string",
+                              format: "date-time",
+                              example: "2020-01-01T00:00:00Z",
+                            },
+                          },
+                          required: [
+                            "checkpointId",
+                            "checkpointType",
+                            "partitionId",
+                            "checkpointPosition",
+                            "firstLogPosition",
+                            "checkpointTimestamp",
+                          ],
+                        },
+                      ],
+                    },
+                    end: {
+                      description: "The newest backup in the range.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Partition Backup State",
+                          description:
+                            "Detailed information about the backup state for a given partition.",
+                          type: "object",
+                          properties: {
+                            checkpointId: {
+                              description:
+                                "The id of the checkpoint this backup is based on.",
+                              allOf: [
+                                {
+                                  title: "Checkpoint ID",
+                                  description:
+                                    "The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are\nlogically ordered by their ids (ascending), each successive checkpoint must use a\nhigher id than the previous one.\n",
+                                  type: "integer",
+                                  format: "int64",
+                                  example: 1,
+                                  minimum: 0,
+                                },
+                              ],
+                            },
+                            checkpointType: {
+                              description: "The type of the backup.",
+                              allOf: [
+                                {
+                                  title: "Backup Type",
+                                  description: "The type of the backup.",
+                                  type: "string",
+                                  enum: ["MANUAL_BACKUP", "SCHEDULED_BACKUP"],
+                                  example: "SCHEDULED_BACKUP",
+                                },
+                              ],
+                            },
+                            partitionId: {
+                              description:
+                                "The id of the partition. Omitted when nested inside a backup range's `start`/`end`,\nwhere the partition is already identified by the enclosing range.\n",
+                              nullable: true,
+                              allOf: [
+                                {
+                                  title: "Partition ID",
+                                  description:
+                                    "The id of a partition. Always a positive number greater than or equal to 1.",
+                                  type: "integer",
+                                  format: "int32",
+                                  minimum: 1,
+                                  example: 3,
+                                },
+                              ],
+                            },
+                            checkpointPosition: {
+                              description:
+                                "The log position of the checkpoint this backup is based on.",
+                              type: "integer",
+                              format: "int64",
+                              example: 1500,
+                            },
+                            firstLogPosition: {
+                              description:
+                                "The first log position included in this backup.",
+                              type: "integer",
+                              format: "int64",
+                              example: 5,
+                            },
+                            checkpointTimestamp: {
+                              description:
+                                "The timestamp at which the checkpoint was created.",
+                              type: "string",
+                              format: "date-time",
+                              example: "2020-01-01T00:00:00Z",
+                            },
+                          },
+                          required: [
+                            "checkpointId",
+                            "checkpointType",
+                            "partitionId",
+                            "checkpointPosition",
+                            "firstLogPosition",
+                            "checkpointTimestamp",
+                          ],
+                        },
+                      ],
+                    },
+                  },
+                  required: ["partitionId", "start", "end"],
+                },
+              },
+            },
+            required: ["checkpointStates", "backupStates", "ranges"],
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description: "The request from gateway to broker timed out.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

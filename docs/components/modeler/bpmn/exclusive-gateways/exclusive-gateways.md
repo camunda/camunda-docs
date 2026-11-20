@@ -12,7 +12,7 @@ For an exclusive gateway with multiple outgoing sequence flows:
 
 - All but one sequence flow must have a `conditionExpression`.
 - The remaining sequence flow can omit the `conditionExpression`, but the gateway must define it as the default flow.
-- Leaving the `conditionExpression` empty does not automatically make a sequence flow the default flow. In Modeler, set the exclusive gateway's default flow in the gateway properties by selecting the outgoing sequence flow to use as the default.
+- Leaving the `conditionExpression` empty does not automatically make a sequence flow the default flow. In Camunda Hub or Desktop Modeler, set the exclusive gateway's default flow in the gateway properties by selecting the outgoing sequence flow to use as the default.
 - When a process instance reaches the gateway, the system evaluates the `conditionExpression` values in BPMN XML order and takes the first sequence flow whose condition is fulfilled.
   - If no condition is fulfilled, the process instance takes the **default flow**. The default flow should not have a condition, so the system does not evaluate it.
   - If no condition is fulfilled and the gateway has no default flow, an [incident](/components/concepts/incidents.md) is created.

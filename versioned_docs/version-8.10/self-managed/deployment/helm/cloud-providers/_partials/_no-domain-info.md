@@ -1,0 +1,3 @@
+:::warning No-domain deployment
+When running without a domain, you access the platform via `kubectl port-forward`. The IdP issuer URL must be aligned with your port-forward setup. Most external OIDC providers don't allow `localhost` as a redirect URI, so a no-domain deployment generally requires Keycloak deployed in the cluster. If you're using Keycloak via the Keycloak Operator, refer to the [operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) for the no-domain Helm values overlay and host mapping instructions.
+:::

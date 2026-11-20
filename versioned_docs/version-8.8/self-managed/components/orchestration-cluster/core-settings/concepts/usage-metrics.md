@@ -120,12 +120,14 @@ Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instea
 
 Format: `yyyy-MM-dd'T'HH:mm:ss.SSSZZ` (e.g., `1970-11-14T10:50:26.963-0100`)
 
+The actuator endpoint is exposed on the management port, which defaults to `9600`. The URL must include the Operate context path (`/operate` by default).
+
 ### Examples
 
 **Process instances:**
 
 ```
-http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
+http://<host>:9600/operate/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
 ```
 
 _Response:_
@@ -139,7 +141,7 @@ _Response:_
 **Decision instances:**
 
 ```
-http://<host>:<port>/actuator/usage-metrics/decision-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
+http://<host>:9600/operate/actuator/usage-metrics/decision-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
 ```
 
 _Response:_
@@ -153,7 +155,7 @@ _Response:_
 **Task assignments:**
 
 ```
-http://<host>:<port>/actuator/usage-metrics/assignees?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
+http://<host>:9600/operate/actuator/usage-metrics/assignees?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
 ```
 
 _Response:_

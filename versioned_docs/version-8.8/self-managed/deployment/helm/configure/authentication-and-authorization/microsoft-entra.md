@@ -14,6 +14,11 @@ Before you begin, ensure you have:
 - Access to a Microsoft Entra tenant with permission to create applications and app registrations
 - The ID of your tenant
 - An understanding of the structure and claims of access tokens in Entra
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+
+If your Entra issuer presents a certificate signed by a private or internal certificate authority, Camunda components don't trust certificates signed by that CA by default.
+
+Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) to avoid `PKIX path building failed` errors when components connect to the issuer.
 
 ## Configuration
 
@@ -37,6 +42,8 @@ The `offline_access` scope is optional.
 If this scope is included, your OIDC provider issues a refresh token to Camunda components on user login. The components use the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
 
 If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+
+If a refresh fails because the refresh token is no longer valid (for example, because it has expired or been revoked and the provider returns `invalid_grant`) the user is logged out and must sign in again.
 :::
 
 To allow users to successfully authenticate with Entra ID, you must either configure an [admin consent workflow](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent).

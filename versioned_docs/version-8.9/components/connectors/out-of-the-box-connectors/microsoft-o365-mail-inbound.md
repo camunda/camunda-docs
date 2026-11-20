@@ -100,18 +100,21 @@ Choose an authentication type in the **Authentication** section of the connector
 
 To make your **Microsoft 365 Email Inbound connector** executable, fill in the required properties.
 
+<!-- Legacy anchor: already-distributed element templates link to #configuration. Do not remove. -->
+<span id="configuration" />
+
 ### Mailbox configuration
 
-In the **Mailbox** section, configure which mailbox and folder to monitor:
+In the **Listener Information** section, configure which mailbox and folder to monitor:
 
-- **User ID/User Principal Name**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`).
+- **Mailbox Owner**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`).
 - **Folder Identifier Type**: Select how to identify the folder to monitor:
   - **Folder ID** (default): Use a [well-known folder ID](https://learn.microsoft.com/en-us/graph/api/resources/mailfolder?view=graph-rest-1.0#properties) such as `inbox`, `drafts`, or `sentitems`, or a custom folder ID. Prefer this option when using well-known folders.
   - **Folder Name**: Use the display name of the folder. The name must be unique within the mailbox. Use this option for custom folders where you don't know the folder ID.
 
 ### Polling configuration
 
-Configure how frequently the connector checks for new emails using the **Polling Interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes). Review [how to configure a time duration](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for details on the format.
+Configure how frequently the connector checks for new emails using the **Polling interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes). Review [how to configure a time duration](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for details on the format.
 
 :::tip
 Choose an appropriate polling interval based on your use case. More frequent polling increases API usage but provides faster response times.
@@ -131,7 +134,7 @@ The simple filter provides the following options:
 
 #### Advanced filter
 
-For more complex filtering, use the **Advanced Configuration** section to provide an [OData filter query](https://learn.microsoft.com/en-us/graph/query-parameters#filter-parameter).
+For more complex filtering, set **Filter Specification** to **Advanced** and provide an [OData filter query](https://learn.microsoft.com/en-us/graph/query-parameters#filter-parameter) in the **OData Filter String** field.
 
 :::note
 OData filter queries are evaluated at deployment time and can only use static values or [Camunda secrets](/components/console/manage-clusters/manage-secrets.md). They cannot reference process variables. If you need dynamic filtering based on runtime data, use the [Activation Condition](#activation-condition) section instead.
@@ -233,7 +236,7 @@ The **Deduplication** section allows you to configure connector deduplication pa
 By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription.
 
 :::note
-To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
+To learn more about deduplication, see [deduplication](../advanced-topics/deduplication.md).
 :::
 
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure a custom deduplication ID.
@@ -264,10 +267,15 @@ The **Microsoft 365 Email Inbound connector** returns the consumed email message
   "receivedDateTime": "2024-01-15T14:30:00Z",
   "attachments": [
     {
-      "id": "AAMkAGVmMDEzM...",
-      "name": "invoice.pdf",
-      "contentType": "application/pdf",
-      "size": 125000
+      "storeId": "gcp",
+      "documentId": "example-document-id",
+      "contentHash": "fwkhkj34843rfhfwho3297ufdsj0df09",
+      "metadata": {
+        "contentType": "application/pdf",
+        "size": 125000,
+        "fileName": "invoice.pdf"
+      },
+      "camunda.document.type": "camunda"
     }
   ]
 }

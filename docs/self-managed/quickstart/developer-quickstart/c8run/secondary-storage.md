@@ -22,13 +22,14 @@ The default Camunda 8 Run configuration uses an H2 database for secondary storag
 File-based H2 example:
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
-    rdbms:
-      url: jdbc:h2:file:./camunda-data/h2db
-      username: sa
-      password:
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:file:./camunda-data/h2db
+        username: sa
+        password:
 ```
 
 <details>
@@ -172,7 +173,7 @@ docker run -d --name camunda-mysql \
   -e MYSQL_USER=camunda \
   -e MYSQL_PASSWORD=camunda \
   -e MYSQL_DATABASE=camunda_secondary \
-  -p 3306:3306 mysql:8.4
+  -p 3307:3306 mysql:9.7
 ```
 
 :::note
@@ -248,30 +249,22 @@ If you need indexing, search, or full Operate or Tasklist functionality, use an 
 To use Elasticsearch:
 
 ```yaml
-data:
-  secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      url: http://localhost:9200/
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        url: http://localhost:9200/
 ```
 
 Start Camunda 8 Run with `--config <file>` and point the configuration to your external cluster.
 
 ## Switching between storage types and migration notes
 
-- Switching the secondary storage type, for example H2 to Elasticsearch, currently does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
-- If you upgrade from alpha1 or alpha2 and keep the same secondary storage backend, no migration steps are required.
-- To switch storage, update `data.secondary-storage` in `application.yaml` and restart Camunda 8 Run.
+- Switching the secondary storage type, for example H2 to Elasticsearch, does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
+- To switch storage, update `camunda.data.secondary-storage` in `application.yaml` and restart Camunda 8 Run.
 
-Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search and analytics are required.
-
-## Operate limitations in 8.9
-
-Operate can run against the default H2 store, but some user-facing Operate features are intentionally limited:
-
-- Operate may not provide complete analytics, advanced search, or long-running query features when backed by H2.
-- Performance and scaling behavior when using H2 differs from Elasticsearch in production scenarios.
-- Users who require full Operate feature parity should use an external Elasticsearch instance until full H2 parity is confirmed.
+Choose **H2** for quick local development and other supported **RDBMS** or **Elasticsearch** for production-like scenarios.
 
 ## Primary vs. secondary storage
 
@@ -282,11 +275,10 @@ Camunda 8 uses two layers of storage:
 
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).
 
-Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
+Camunda 8 Run uses v2 APIs by default, so you don't need to reconfigure the APIs when switching between secondary storage backends.
 
 ## Known limitations
 
-- Tasklist can use H2 through the v2 APIs. Operate support for H2 is under active development and may have limitations in current alpha versions.
 - H2 is intended for testing and local development only.
 - H2 data persists to the configured file path by default. Keep the path stable to avoid accidental data loss.
 - Performance and memory use may vary depending on the local environment.

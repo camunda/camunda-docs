@@ -23,7 +23,7 @@ The **Twilio connector** allows you to integrate your BPMN service with Twilio's
 Before you can use the Twilio connector, create a Twilio account and obtain an account SID and auth token from the [Twilio Console](https://www.twilio.com/console). You will also need to have a phone number to use as the sender for your SMS messages.
 
 :::note
-Use Camunda secrets to store your account SID and auth token so you don't expose sensitive information directly from the process. See [managing secrets](https://docs.camunda.org/manual/latest/user-guide/process-engine/secrets/) to learn more.
+Use secrets to store your account SID and auth token so you don't expose sensitive information directly from the process. See [managing secrets](https://docs.camunda.org/manual/latest/user-guide/process-engine/secrets/) to learn more.
 :::
 
 ## Create a Twilio connector task
@@ -38,9 +38,10 @@ To work with the Twilio connector, choose the required operation type in the **O
 
 ### Operation
 
-Choose an operation type of either sendSms, listMessages, or getMessage in the **Operation** section:
+Choose an operation type in the **Operation** section:
 
 - **Send SMS**: Send an SMS message to a specified phone number from your Twilio account.
+- **Send a WhatsApp message**: Send a WhatsApp message from your Twilio WhatsApp phone number.
 - **List messages**: Retrieve a list of messages sent from your Twilio account within specified filters.
 - **Get message**: Retrieve the details of a specific message sent from your Twilio account.
 
@@ -71,6 +72,18 @@ For more information on authentication and security in Twilio, refer to the [Twi
 :::note
 See the [Twilio documentation](https://www.twilio.com/docs/sms/send-messages) for more details.
 :::
+
+### Send a WhatsApp message operation
+
+Select the **WhatsApp message type**:
+
+- **Free form message**: Set the **WhatsApp message text**, the content of the WhatsApp message that will be sent.
+- **Template message**: Set the **WhatsApp template ID**, which the connector sends to Twilio as `ContentSid`, and the **WhatsApp template parameters**. Provide the parameter values to substitute in the template as a FEEL context with numbered keys, for example, `{"1": "Test", "2": "Message"}`. Make sure all keys and values are strings or are converted to strings.
+
+For both message types, set the following fields:
+
+- `From WhatsApp number`: The originating Twilio WhatsApp phone number used for sending the message.
+- `To WhatsApp number`: The recipient's WhatsApp phone number.
 
 ### List messages operation
 
@@ -198,7 +211,7 @@ The **Twilio Webhook connector** is an inbound connector that enables you to sta
 3. Select **Enabled** in **HMAC authentication** if you want to use HMAC authentication. After that, set the [Twilio Auth Token](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them) as the shared secret key in the **HMAC secret key** field property.
 
 :::note
-Use Camunda secrets to store your credentials securely. Refer to the [Camunda secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
+Use secrets to store your credentials securely. Refer to the [secrets documentation](/components/saas/clusters/manage-secrets.md) for more details.
 :::
 
 ### Fill in the properties in the **Activation** and **Correlation** sections
@@ -291,9 +304,9 @@ When you click on the event with the Twilio Webhook connector applied to it, a n
 This tab displays the URL of the Twilio Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Twilio Webhook connector in the Desktop Modeler or with Camunda 8 Self-Managed.
-In that case, Twilio Webhook connector deployments and URLs will not be displayed in the Modeler.
+In that case, Twilio Webhook connector deployments and URLs will not be displayed in the Desktop Modeler.
 :::
 
 ## Variable mapping

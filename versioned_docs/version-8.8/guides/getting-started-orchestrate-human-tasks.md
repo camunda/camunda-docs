@@ -2,12 +2,9 @@
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
-description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
+description: "Build a Camunda 8 process with a user task, then route the process based on user decision."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
@@ -29,6 +26,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
@@ -319,7 +321,9 @@ In this case, the token will move through the gateway and (according to the cond
 
 At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
 
-A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+A core value of Camunda 8 lies in the combination of automation and human interaction. The same pattern applies when an [AI agent](/reference/glossary.md#ai-agent) produces the result a person acts on: the user task, form, and gateway you built here work the same way, whichever kind of step supplied the data.
+
+Continue with the [following resources](#additional-resources-and-next-steps) to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
 
 Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 

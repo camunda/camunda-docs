@@ -16,5 +16,8 @@ type ClientOptions = object;
 ### baseUrl
 
 ```ts
-baseUrl: "{schema}://{host}:{port}/v2" | (string & object);
+baseUrl:
+  | "{schema}://{host}:{port}/v2"
+  | "{schema}://{host}:{port}"
+  | string & object;
 ```

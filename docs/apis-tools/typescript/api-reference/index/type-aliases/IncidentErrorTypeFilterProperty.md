@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type IncidentErrorTypeFilterProperty =
-  | IncidentErrorTypeExactMatch
-  | AdvancedIncidentErrorTypeFilter;
+  IncidentErrorTypeExactMatch | AdvancedIncidentErrorTypeFilter;
 ```
 
 IncidentErrorTypeEnum with full advanced search capabilities.

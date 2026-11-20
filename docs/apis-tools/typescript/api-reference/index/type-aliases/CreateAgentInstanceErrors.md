@@ -54,6 +54,16 @@ More details are provided in the response body.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+An agent instance already exists for the given element instance.
+
+---
+
 ### 500
 
 ```ts

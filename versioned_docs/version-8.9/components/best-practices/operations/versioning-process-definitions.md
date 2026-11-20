@@ -1,9 +1,5 @@
 ---
 title: Versioning process definitions
-tags:
-  - Versioning
-  - Version Migration
-  - Long Running Processes
 description: "For real-life applications, it's crucial to understand how Camunda deals with evolving process definitions by means of versioning."
 ---
 

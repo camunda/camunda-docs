@@ -25,6 +25,16 @@ Whether multi-tenancy is enabled.
 
 ---
 
+### isTenantsApiEnabled
+
+```ts
+isTenantsApiEnabled: boolean;
+```
+
+Whether the tenants management API and UI are enabled.
+
+---
+
 ### maxRequestSize
 
 ```ts

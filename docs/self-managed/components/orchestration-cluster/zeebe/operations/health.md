@@ -68,7 +68,7 @@ The Zeebe Gateway exposes three HTTP endpoints to query its health status:
 - Startup probe - `http://{zeebe-gateway}:9600/actuator/health/startup`
 - Liveness probe - `http://{zeebe-gateway}:9600/actuator/health/liveness`
 
-(The default port can be changed in the configuration: `{zeebe.gateway.monitoring.port}`)
+(The default gateway port can be configured using the environment variable `MANAGEMENT_SERVER_PORT` or the system property `-Dmanagement.server.port=`)
 
 ### Health status
 
@@ -107,8 +107,11 @@ Each endpoint returns a status which can be one of the following:
 
 - `UNKNOWN` (HTTP status code 200)
 - `UP` (HTTP status code 200)
+- `DEGRADED` (HTTP status code 200)
 - `DOWN` (HTTP status code 503)
 - `OUT_OF_SERVICE` (HTTP status code 503)
+
+The gateway's cluster health indicator reports `DEGRADED` when at least one partition is healthy, but not all of them are.
 
 If details are enabled (default), the response will also contain additional details.
 

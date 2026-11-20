@@ -1,7 +1,7 @@
 ---
 id: best-practices
 title: Best practices for custom-built element templates
-description: Learn the best practices for creating and managing custom-built element templates in Web Modeler.
+description: Learn the best practices for creating and managing custom-built element templates in Camunda Hub.
 ---
 
 When creating custom-built element templates, consider the following best practices to ensure they are effective, user-friendly, and maintainable.
@@ -24,7 +24,7 @@ For example:
 ### Choosing a name
 
 Choose a clear, easily understandable name. Include the brand name if the template connects to a service or tool; otherwise, describe its main feature.
-The template's name and description appear in the Modeler element template list and properties panel.
+The template's name and description appear in the element template list and properties panel.
 
 ### Description
 
@@ -39,7 +39,7 @@ Keep descriptions brief and clear. Explain what the template does and why it’s
 
 ## Properties panel UI
 
-The element template defines interaction methods, visible and hidden entries, and mandatory fields, which are reflected in the Modeler properties panel UI. Follow these guidelines for a consistent user experience.
+The element template defines interaction methods, visible and hidden entries, and mandatory fields, which are reflected in the properties panel UI. Follow these guidelines for a consistent user experience.
 
 ### Property naming
 

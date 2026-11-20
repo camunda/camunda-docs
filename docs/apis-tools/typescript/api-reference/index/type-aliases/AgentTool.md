@@ -28,7 +28,7 @@ A human-readable description of the tool.
 ### elementId
 
 ```ts
-elementId: string | null;
+elementId: ElementId | null;
 ```
 
 The BPMN element ID of the tool element within the ad-hoc sub-process.

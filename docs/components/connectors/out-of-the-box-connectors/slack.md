@@ -18,6 +18,10 @@ import TabItem from "@theme/TabItem";
 
 The **Slack connector** is an outbound connector that allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
+:::note
+If your organization uses [Camunda app integrations](/components/camunda-integrations/app-integrations/app-integrations.md), the [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md) sends through the app your users already have connected, and carries no credentials in the process model.
+:::
+
 ## Prerequisites
 
 To use the Slack connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
@@ -34,7 +38,7 @@ To make the **Slack connector** executable, fill out the mandatory fields highli
 
 ### Authentication
 
-Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, `{{secrets.SLACK_OAUTH_TOKEN}}`.
+In the **Authentication** section, set **OAuth token** to your Slack OAuth token, which is stored as a secret. For example, `{{secrets.SLACK_OAUTH_TOKEN}}`.
 
 ### Create channel
 
@@ -46,7 +50,7 @@ You need to ensure that your Slack application has related permissions enabled.
 To create a channel, take the following steps:
 
 1. Set **Method** to `Create Channel`.
-2. Set the **New Channel Name**:
+2. Set the **Channel name**:
    - The channel name can be up to 80 characters, and can contain lowercase letters, digits, and symbols `-` and `_`.
    - This can be provided as a FEEL expression.
 3. Set channel **Visibility** as required:
@@ -93,28 +97,29 @@ You need to ensure that your Slack application has related permissions enabled.
 To post a message, take the following steps:
 
 1. Set **Method** to `Post Message`.
-2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
+2. Set **Channel/user name/email** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`) or by using the channel id.
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. (Optional) A **thread** can be specified to start a thread from a specific message. For example, `ts` in the response can be used (see [here](#post-message)). If the message has been posted by a user, we currently have no way to retrieve the `ts` value. Visit the [Slack documentation](https://api.slack.com/methods/chat.postMessage) for additional details.
 4. Select a **Message type**.
    1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
    2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
-5. (Optional) **Attachments** are an array of variables to which **Camunda documents** are assigned. To work with attachments
+5. (Optional) **Attachments** are the documents to include with the message. To work with attachments
    you must add `files:read` and `files:write` permissions for your **Bot Token Scopes** in your Slack app.
 
 :::note
-To work with documents you must upload them first, using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
-The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Attachments** field.
+Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
+
+To use a **Camunda document**, upload it first — using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process instance** so you can reference it in the **Attachments** field.
 :::
 
 :::note
 Starting from version 8.7.0, the Slack connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
-The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/user name/email** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
-`Channel/User Name` property might look like:
+`Channel/user name/email` property might look like:
 
 ```
 #slack-connectors
@@ -126,11 +131,28 @@ The **Channel/User Name** and **Message** can either be given [static values](/c
 = "Order-" + orderId + " was dispatched"
 ```
 
-In the above example, the Channel/User Name is set to the [static value](/components/concepts/expressions.md#expressions-vs-static-values) "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
+In the above example, the **Channel/user name/email** is set to the [static value](/components/concepts/expressions.md#expressions-vs-static-values) "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
 
 :::note
 Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
 :::
+
+### Add reaction
+
+To add an emoji reaction to a message, take the following steps:
+
+1. Set **Method** to **Add reaction**.
+2. In the **Reaction** section, set the following fields:
+   - **Channel**: The channel ID of the message to react to.
+   - **Emoji name**: The name of the emoji, for example, `eyes`.
+   - **Message timestamp**: The timestamp of the Slack message to react to.
+
+### Pin or unpin a message
+
+To pin a message to a channel, set **Method** to **Pin Message**. To unpin it, set **Method** to **Unpin Message**. Then, in the **Pin Message** or **Unpin Message** section, set the following fields:
+
+- **Channel**: The channel ID of the message to pin or unpin.
+- **Message timestamp**: The timestamp of the Slack message to pin or unpin.
 
 ## Slack API response
 
@@ -211,7 +233,7 @@ The **Slack connector** uses an OAuth bearer token (for example, the Slack app b
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the connector.
 
 </TabItem>
@@ -220,6 +242,10 @@ We advise you to keep your Slack bot token safe and avoid exposing it in the BPM
 
 The **Slack inbound connector** is a connector that allows you to start or continue
 a BPMN process triggered by a [Slack](https://slack.com/) message.
+
+:::note
+If your organization uses [Camunda app integrations](/components/camunda-integrations/app-integrations/app-integrations.md), the [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message) receives chat messages through the app your users already have connected.
+:::
 
 ## Create a Slack inbound connector task
 
@@ -234,9 +260,9 @@ a BPMN process triggered by a [Slack](https://slack.com/) message.
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.
-4. In the **Variable mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
-5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example triggers a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.
+4. In the **Output mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+5. In the **Output mapping** section, fill the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `app_mention` event: `={senderId: request.body.event.user, text: request.body.event.text}`.
 
 ### Correlation
@@ -282,9 +308,9 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
-4. In the **Variable mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
-5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example triggers a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
+4. In the **Output mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+5. In the **Output mapping** section, fill the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: connectorData.user_id, text: connectorData.text}`.
 
 When using the **Slack inbound connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
@@ -315,9 +341,9 @@ If you make changes to your **Slack Inbound connector** configuration, you need 
 When you click on the event with **Slack inbound connector** applied to it, a new **Webhooks** tab will appear in the properties panel. This tab displays the URL of the **Slack inbound connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Slack inbound connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, Slack inbound connector deployments and URLs will not be displayed in Modeler.
+In that case, Slack inbound connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Wiring with Slack

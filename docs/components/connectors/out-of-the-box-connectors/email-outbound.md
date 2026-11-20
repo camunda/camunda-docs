@@ -15,8 +15,8 @@ The **Email outbound connector** allows your BPMN service to send and receive em
 To use the **Email connector**, you must have an SMTP, POP3 or IMAP server available to connect to.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text.
-See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+Use secrets to avoid exposing your sensitive data as plain text.
+See [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
 <OutboundConnectorBasics />
@@ -58,16 +58,16 @@ Allow users to fetch a list of emails from the `INBOX` folder, with customizable
 
 #### Parameters
 
-| Parameter            | Description                                                                                                                                                                                                                                       |
-| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
-| `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
-| `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
+| Parameter                             | Description                                                                                                                                                                                                                                       |
+| :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Maximum number of emails to be read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
+| `Sort emails by`                      | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
+| `Sort order`                          | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
 
 #### Sorting and Limiting Behavior
 
 Emails are initially sorted based on the specified sorting field and order. The list is then limited to the number of
-emails as defined by the Max Emails to read parameter. For example, if you sort by Sent date in descending order (DESC)
+emails as defined by the **Maximum number of emails to be read** parameter. For example, if you sort by Sent date in descending order (DESC)
 with a limit of one email, the task will return the most recently sent email.
 
 #### Response Structure
@@ -137,9 +137,9 @@ As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from t
 :::
 
 :::note
-Starting from version 8.7.0, the outbound email connector supports sending Camunda documents as attachments.
+The outbound email connector supports sending documents as attachments. Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL.
 
-For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
+Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents (for example, `=[document1, document2]`).
 
 See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
@@ -333,7 +333,7 @@ Allow users to send an email from the connected email account.
 | `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |
 | `Email Text Content` | The text content of the email. This must only be provided if the `Content Type` is `PLAIN` or `HTML & PlainText`.                                                                                                                                                                             |
 | `Html Text Content`  | The HTML content of the email. This must only be provided if the `Content Type` is `HTML` or `HTML & PlainText`.                                                                                                                                                                              |
-| `Attachment`         | The document reference, either for a single document or as a list for multiple documents.                                                                                                                                                                                                     |
+| `Attachment`         | The document(s) to attach. Select a [document source](/components/document-handling/send-document-to-external-system.md#document-sources) (Camunda document, inline content, or external document); use the **Single/Multiple** toggle for one document or a FEEL array of documents.         |
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expression,
@@ -376,11 +376,11 @@ server, allowing users to view and manage their emails from multiple devices. Un
 offline modes, synchronizes email across devices, and allows manipulation of mailboxes (create, delete, and rename) as
 well as messages (read, delete, or flag) directly on the server.
 
-| Field                    | Description                                                                                            |
-| :----------------------- | :----------------------------------------------------------------------------------------------------- |
-| `IMAP host`              | The host URL of the IMAP server.                                                                       |
-| `IMAP port`              | The host port of the IMAP server.                                                                      |
-| `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
+| Field                 | Description                                                                                            |
+| :-------------------- | :----------------------------------------------------------------------------------------------------- |
+| `IMAP host`           | The host URL of the IMAP server.                                                                       |
+| `IMAP port`           | The host port of the IMAP server.                                                                      |
+| `Encryption protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
 
 ### List Emails
 
@@ -388,17 +388,17 @@ Allow users to fetch a list of emails from a specified folder, with customizable
 
 #### Parameters
 
-| Parameter            | Description                                                                                                                                                                                                                                       |
-| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
-| `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
-| `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
-| `Folder`             | (Optional) the folder to list emails from, default is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                                             |
+| Parameter                             | Description                                                                                                                                                                                                                                                                                                               |
+| :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Maximum number of emails to be read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                                                                                         |
+| `Sort emails by`                      | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Received Date` (default): Sorts emails by the date and time they were received.</li><li>`Sent Date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p> |
+| `Sort order`                          | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p>                                                                         |
+| `Folder`                              | (Optional) the folder to list emails from, default is `INBOX`. For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)                                                                                                                                                            |
 
 #### Sorting and Limiting Behavior
 
 - Emails are initially sorted based on the specified sorting field and order.
-- The list is then limited to the number of emails as defined by the Max Emails to read parameter.
+- The list is then limited to the number of emails as defined by the **Maximum number of emails to be read** parameter.
 
 For example, sort by Sent date in descending order (DESC) with a limit of one email, to return the most recently sent
 email.
@@ -639,7 +639,7 @@ Enable users to transfer an email from one folder to another, streamlining inbox
 | Parameter       | Description                                                                                                                                                                                                                                                     |
 | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                             |
-| `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                        |
+| `Source folder` | The folder from which the email will be moved, for example, `INBOX`. For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)                                                                                            |
 | `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
 
 #### Response Structure

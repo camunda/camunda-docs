@@ -30,7 +30,7 @@ path: object;
 #### auditLogKey
 
 ```ts
-auditLogKey: AuditLogKey;
+auditLogKey: AuditLogKeyWritable;
 ```
 
 The audit log key.

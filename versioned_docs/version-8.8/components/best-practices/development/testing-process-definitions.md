@@ -1,12 +1,5 @@
 ---
 title: "Testing process definitions"
-tags:
-  - Test / Unit Test
-  - Test / Integration Test
-  - Mock
-  - Exception
-  - Java Delegate
-  - JUnit
 description: "Test your executable BPMN processes as they are software. If possible, do automated unit tests with a fast in-memory workflow engine."
 ---
 
@@ -147,7 +140,7 @@ public class InvoiceApprovalTest {
 ```
 
 :::note
-The complete source code for this example test is available on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example/src/test/java/io/camunda/InvoiceApprovalTest.java).
+The complete source code for this example test is available on [GitHub](https://github.com/camunda/camunda/tree/stable/8.8/testing/camunda-process-test-example/src/test/java/io/camunda/InvoiceApprovalTest.java).
 :::
 
 ### Test scope and mocking

@@ -5,10 +5,6 @@ sidebar_label: "Development workflows"
 description: "Use c8ctl to deploy resources, auto-redeploy on file changes, manage profiles, and bridge MCP connections for AI assistants."
 ---
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. Commands and flags may change between releases. For more information, see [Getting started](getting-started.md).
-:::
-
 `c8ctl` includes commands that support local development and deployment workflows. You can deploy resources, run processes, watch for changes, manage profiles and sessions, and bridge MCP connections for AI assistants.
 
 :::tip

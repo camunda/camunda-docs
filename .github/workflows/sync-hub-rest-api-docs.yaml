@@ -9,21 +9,25 @@ jobs:
   sync-sm:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
@@ -31,9 +35,9 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
           repositories: camunda-hub
 
@@ -78,7 +82,7 @@ jobs:
           fi
 
       - name: Checkout Camunda Hub (Self-Managed)
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -94,14 +98,16 @@ jobs:
 
           # Format spec files
           npm ci
-          npx prettier --write api/hubsm/v2/*.yaml
 
           cd api/hubsm/v2
           mv rest-api.yaml camunda-openapi.yaml
           npm run api:generate:hubsm
 
+          # Generate modifies the yaml files
+          npx prettier --write *.yaml
+
       - name: Upload Self-Managed changes
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: sm-changes
           path: |
@@ -111,21 +117,25 @@ jobs:
   sync-saas:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
@@ -133,14 +143,14 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
           repositories: camunda-hub
 
       - name: Checkout Camunda Hub (SaaS)
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -156,14 +166,16 @@ jobs:
 
           # Format spec files
           npm ci
-          npx prettier --write api/hubsaas/v2/*.yaml
 
           cd api/hubsaas/v2
           mv rest-api.yaml camunda-openapi.yaml
           npm run api:generate:hubsaas
 
+          # Generate modifies the yaml files
+          npx prettier --write *.yaml
+
       - name: Upload SaaS changes
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: saas-changes
           path: |
@@ -174,33 +186,37 @@ jobs:
     runs-on: ubuntu-latest
     needs: [sync-sm, sync-saas]
 
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Download Self-Managed changes
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: sm-changes
           path: docs/
 
       - name: Download SaaS changes
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: saas-changes
           path: docs/
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
@@ -208,9 +224,9 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
           repositories: camunda-docs
 
@@ -218,6 +234,19 @@ jobs:
         id: check_changes
         run: |
           cd docs
+
+          # We run lint-staged as a pre-commit hook. One of the format changes it performs
+          # is to remove whitespace-only changes. Therefore, if the REST API spec changes only
+          # include whitespace changes, lint-staged removes them and results in an error:
+          # "[FAILED] Prevented an empty git commit!"
+          # 
+          # To mitigate this, we stage the changes _before_ we check if there are any.
+          # Then, we run lint-staged manually. Finally, we check if there are changes.
+          # This should get rid of the whitespace-only changes and avoid an empty commit.
+          npm ci
+          git add .
+          npx lint-staged --allow-empty
+
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
@@ -228,7 +257,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs
@@ -255,3 +284,21 @@ jobs:
           team-reviewers: camunda/tech-writers
           base: main
           labels: deploy
+  notify-failure:
+    needs:
+      - sync-sm
+      - sync-saas
+      - create-pr
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    permissions:
+      id-token: write # OIDC for the Vault JWT login
+    uses: ./.github/workflows/notify-failure.yml
+    with:
+      # If any dependent job fails, set the dependency_status to 'failure',
+      # otherwise set it to 'success'.
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_JWT_PATH: ${{ secrets.VAULT_JWT_PATH }}
+      VAULT_JWT_ROLE: ${{ secrets.VAULT_JWT_ROLE }}
+      VAULT_JWT_AUDIENCE: ${{ secrets.VAULT_JWT_AUDIENCE }}

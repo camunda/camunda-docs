@@ -92,6 +92,14 @@ When subscriptions are opened for different processes, the message is correlated
 
 A message is _not_ correlated to a message start event subscription if an instance of the process is active and was created by a message with the same correlation key. If the message is buffered, it can be correlated after the active instance is ended. Otherwise, it is discarded.
 
+### Duplicate subscriptions
+
+When multiple process instances subscribe to the same message name and correlation key simultaneously, there is no guarantee about which instance receives the message.
+
+The selection is non-deterministic by design. An alternative approach, for example, routing to the most recently created instance, would mask correlation key design problems during single-instance development testing, and then fail unexpectedly in production when multiple users run concurrent instances. Non-deterministic selection surfaces the problem early.
+
+The optimal solution is to use **unique correlation keys per interaction**, so that each subscription is unambiguous. See [request-reply with unique correlation key](#request-reply-with-unique-correlation-key) for more details.
+
 ## Message uniqueness
 
 A message can have an optional message ID — a unique ID to ensure the message is published and processed only once (i.e. idempotency). The ID can be any string; for example, a request ID, a tracking number, or the offset/position in a message queue.
@@ -143,6 +151,62 @@ By combining the principles of message correlation, message uniqueness, and mess
 | empty string    | set        | set > 0      | Start event        | A new instance is started if there is no [equal message](#message-uniqueness) in the buffer.                                                                                                    |
 | empty string    | set        | set > 0      | Intermediate event | The message is correlated during the lifetime of the message if a matching subscription to the empty string is active and there is no [equal message](#message-uniqueness) in the buffer.       |
 
+## Business ID in message correlation
+
+Starting in Camunda 8.10, you can include a business ID in message publication and correlation. Business ID acts as an additional filter constraint on top of the message name and correlation key.
+
+### Supported combinations
+
+Message name is always required. The following additional fields are supported per event type:
+
+| Event type                                                       | Supported correlation fields                 |
+| :--------------------------------------------------------------- | :------------------------------------------- |
+| Start event                                                      | Message name                                 |
+| Start event                                                      | Message name + business ID                   |
+| Start event                                                      | Message name + correlation key               |
+| Start event                                                      | Message name + correlation key + business ID |
+| Non-start event (intermediate catch, boundary, event subprocess) | Message name + correlation key               |
+| Non-start event                                                  | Message name + correlation key + business ID |
+
+For non-start events, a business ID can only be used together with an existing correlation key. Business ID alone is not sufficient to correlate to a non-start subscription.
+
+When both a correlation key and a business ID are provided, the message correlates only if both fields match the corresponding values stored on the subscription.
+
+### Matching semantics
+
+A business ID on a message is an optional narrowing filter, on top of — never a replacement for — the correlation key. Matching is asymmetric between the two sides:
+
+| Message business ID | Subscription business ID | Correlates?                                      |
+| :------------------ | :----------------------- | :----------------------------------------------- |
+| Not set             | Not set                  | Yes — matches on name and correlation key alone. |
+| Not set             | Set                      | Yes — the subscription's business ID is ignored. |
+| Set                 | Not set                  | No.                                              |
+| Set                 | Set, same value          | Yes.                                             |
+| Set                 | Set, different value     | No.                                              |
+
+A message subscription snapshots the process instance's business ID at the time the subscription is opened.
+
+If a [late business ID assignment](/components/concepts/process-instance-creation.md#late-business-id-assignment) updates a process instance after a subscription is already open, the existing subscription is not updated. Only subscriptions opened after the assignment carry the new business ID.
+
+### Message-start buffering with uniqueness
+
+When business ID uniqueness is enabled, a message-start event that would create a new instance with a business ID already held by an active instance is not dropped immediately. The message stays buffered and is retried until either:
+
+- The active instance releases the business ID (by completing or terminating), or
+- The message's TTL expires.
+
+If the TTL expires before the business ID is released, the message is discarded without starting a new instance.
+
+:::note
+`TTL = 0` (fire-and-forget) message-start events are not retried. They activate on first arrival only and are discarded immediately if blocked by uniqueness.
+:::
+
+### API reference
+
+- [Publish message](/apis-tools/orchestration-cluster-api-rest/specifications/publish-message.api.mdx) — `businessId` request field.
+- [Correlate message](/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx) — `businessId` request field.
+- [Search correlated message subscriptions](/apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-message-subscriptions.api.mdx) — `businessId` as a filter and sort field.
+
 ## Message patterns
 
 The following patterns describe solutions for common problems that can be solved using message correlation.
@@ -178,6 +242,27 @@ Learn more in our [message aggregation guide](./message-aggregation.md).
 The message is published with a `TTL = 0` and a correlation key that identifies the entity.
 
 The first message creates a new process instance. The following messages are discarded and do not create a new instance if they have the same correlation key and the created process instance is still active.
+
+### Request-reply with unique correlation key
+
+**Problem**: An [AI agent](/reference/glossary.md#ai-agent) or service sends a message to an external system (for example, a chat platform or webhook) and waits for a reply. Multiple process instances may be active concurrently, each waiting for its own reply.
+
+**Solution**:
+
+Generate a unique correlation key when the outbound message is sent, pass it to the external system, and subscribe with the same key in the reply catch event.
+
+This avoids the [duplicate subscription problem](#duplicate-subscriptions) that occurs when all instances share the same correlation key (for example, a static user ID or a fixed string).
+
+A common implementation:
+
+1. A service task sends the outbound message and generates a unique key (for example, `chatId + "-" + uuid()`).
+2. The external system receives both the message content and the correlation key.
+3. When the external system replies, it includes the correlation key.
+4. A message catch event subscribes using the same key, so the reply reaches the correct instance.
+
+:::note
+This pattern is the recommended approach for any send-and-wait interaction where process instances can run concurrently.
+:::
 
 ## Message response
 

@@ -23,6 +23,7 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 
 - Name Markdown files in **kebab-case** matching the page title (for example, `introduction-to-camunda-8.md`). Avoid non-alphanumeric characters in file names.
 - Place version-sensitive images in an `img/` (or `assets/`) subdirectory alongside the doc file. Reuse existing co-located directories when they exist (for example, `docs/components/<area>/img/`) before adding new images to `static/img/`. Reserve `static/img/` for cross-cutting, non-versioned assets such as home page card images.
+- For Excalidraw-authored Self-Managed architecture diagrams, follow [the diagram guide](../../howtos/diagrams.md). Keep editable sources and SVG exports together, preserve any source-declared bold-title metadata during export, and review the result at docs-page width. Check contrast separately from brand palette membership.
 - Place BPMN files in `static/bpmn/<section>/`.
 - **Do not** modify `package-lock.json`, generated API docs in `docs/apis-tools/*/specifications/`, or versioned docs unless explicitly asked to.
 
@@ -32,16 +33,15 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 - **Moving a page**: update the sidebar file(s) to reflect the new location, then add a redirect rule to the **top** of `static/.htaccess`.
 - **Removing a page**: remove it from the sidebar file(s) and add a redirect rule to the top of `static/.htaccess` pointing users to relevant content.
 
-## 3. PR workflow
+## 3. PR and issue workflow
 
-- Keep the PR in **draft** while actively working on it. Removing draft status signals it is ready for review.
-- Use **labels** to communicate the component, version, and priority. PRs without labels may be triaged slowly.
-- Add the **`deploy` label** to trigger a preview site deployment. Recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
-- Use the PR template at `.github/pull_request_template.md` when opening a PR. When updating an existing PR description, preserve the full template structure and edit content inside the `## Description` section only, unless explicitly asked to change other sections.
+- Add **labels** to communicate the component, version, and priority. Both PRs and issues without labels may be triaged slowly.
+- Add the **`deploy` label** to a PR to trigger a preview site deployment. This is recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
+- When creating a PR, invoke the `docs-create-pr` skill (`.claude/skills/docs-create-pr/SKILL.md`).
+- When updating an existing PR description, preserve the full template structure and edit content inside the `## Description` section only, unless explicitly asked to change other sections.
 
-## 4. Code formatting and commits
+## 4. Commits
 
-- Code formatting is validated by **Prettier**. Run `npm run format` locally before submitting a PR.
 - Commit messages must follow the format: `{type}(scope): {description}`.
   - Valid types: `build`, `ci`, `deps`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`, `chore`.
   - Keep the commit message header between 72–120 characters.
@@ -53,18 +53,24 @@ These are the main commands for working with the repo:
 
 - `npm install`: Install dependencies.
 - `npm run start`: Start local dev server.
-- `npm run build`: Generate a static build.
+- `npm run build`: Generate a static build. Locally, scope it to the versions your change touches, for example `DOCS_BUILD_VERSIONS=next,current DOCS_SKIP_GENERATED_REFERENCES=true DOCS_SKIP_LLMS_TXT=true DOCUSAURUS_NO_PERSISTENT_CACHE=true DOCUSAURUS_SSG_WORKER_THREAD_COUNT=4 npm run build`. See `howtos/setup.md` → "Scoped builds".
 - `npm run format`: Validate Prettier formatting.
 
-- Run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors when the change touches any of: page adds/moves/removes, link targets (including cross-version links), sidebars, navbar entries in `docusaurus.config.js`, redirects in `static/.htaccess`, or MDX components. Skip the build for small content edits that don't affect links or structure.
+- Validate final changes with a scoped build to catch invalid Markdown, build errors, and broken relative Markdown links when the change touches any of: page adds/moves/removes, link targets, sidebars, navbar entries in `docusaurus.config.js`, redirects in `static/.htaccess`, or MDX components. Skip the build for small content edits that don't affect links or structure.
 - **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
+- **Do not** run the full build (without `DOCS_BUILD_VERSIONS`) locally. It needs more memory than typical machines have. CI owns and executes it.
+- Code formatting is validated by **Prettier**. Run `npm run format` locally before submitting a PR.
 
 ## 6. Versioning
 
 - The "Next" (unreleased) docs live in `/docs/`. Versioned docs live in `/versioned_docs/version-*/`.
 - Sidebar navigation is managed in `sidebars.js` (Next) and `versioned_sidebars/version-*-sidebars.json` (versioned).
-- When edits apply to the current version and beyond, make them in both the most recent versioned folder **and** the Next (`/docs/`) folder.
-- The current released version is set in `src/versions.js` (`currentVersion`) and Docusaurus is configured with `lastVersion: currentVersion`, so the released version is served with no URL prefix. When a new version is cut, `currentVersion` and the unprefixed version shift accordingly.
+- Version configuration: `src/versions.js` sets `currentVersion` (the default released version served without URL prefix), and `versions.json` lists all active maintained versions. Docusaurus is configured with `lastVersion: currentVersion`, so when a new version is cut, `currentVersion` and the unprefixed version shift accordingly.
+- **Which folders to edit** depends on when the change applies:
+  - Unreleased feature (not yet in any versioned release) → edit `docs/` only.
+  - Change applies to the current release and beyond → edit the most recent `versioned_docs/version-*/` folder **and** `docs/`.
+  - Bug fix or clarification to an already-released version → edit the affected `versioned_docs/version-*/` folder(s) and, if still relevant, `docs/`.
+- **Backporting is a PR author decision.** Do not backport a change to additional versions unless the PR author explicitly instructs you to. When in doubt, complete the change for the requested version and ask.
 
 ### Navbar links resolve across every version
 

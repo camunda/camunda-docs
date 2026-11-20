@@ -15,6 +15,18 @@ Message subscription search filter.
 
 ## Properties
 
+### businessId?
+
+```ts
+optional businessId?: StringFilterProperty;
+```
+
+Filter by the business id inherited from the subscribing process instance when the
+subscription was opened. Supports advanced string filtering, including `$like` with
+`*`/`?` wildcards.
+
+---
+
 ### correlationKey?
 
 ```ts

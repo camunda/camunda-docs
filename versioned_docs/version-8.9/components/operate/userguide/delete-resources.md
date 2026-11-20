@@ -18,9 +18,13 @@ Deleting a process definition permanently removes it and has the following effec
 
 To delete a process definition from the **Processes** page, take the following steps:
 
-1. In the **Filter** panel, select a specific process version by filtering by process name and version. Make sure the selected process definition version has no running instances, otherwise it is not possible to delete a process definition. You can [cancel or resolve running process instances](/components/operate/userguide/basic-operate-navigation.md) from the process instances list or from the process instance detail page.
+1. In the **Filter** panel, select a specific process version by filtering by process name and version. In Operate, you can only delete a version that has no running instances; the **Delete** button is disabled otherwise. You can [cancel or resolve running process instances](/components/operate/userguide/basic-operate-navigation.md) from the process instances list or from the process instance detail page.
 2. Click the **Delete** button at the top right.
 3. Confirm the delete operation by checking the checkbox and clicking **Delete**.
+
+:::note
+A process definition that was deleted while it still had running instances (for example, using the [delete resource command](../../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc)) is [draining](../../concepts/resource-deletion.md#draining). Operate marks it with a **Draining** tag and removes it automatically once its last instance finishes. To see which instances are keeping it alive, open the definition and view its running instances.
+:::
 
 ## Delete decision definition
 

@@ -15,6 +15,19 @@ Correlated message subscriptions search filter.
 
 ## Properties
 
+### businessId?
+
+```ts
+optional businessId?: StringFilterProperty;
+```
+
+Filter by the business id stored on the correlated message subscription — for message
+start event correlations the correlating message's business id, and for catch, boundary,
+or intermediate event correlations the subscribing process instance's business id.
+Supports advanced string filtering, including `$like` with `*`/`?` wildcards.
+
+---
+
 ### correlationKey?
 
 ```ts

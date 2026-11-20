@@ -8,7 +8,7 @@ Configure and manage client access to a cluster so the client application has th
 
 ## About client application access
 
-A client is an application that interacts with an Orchestration Cluster via its APIs.
+A client is an application that interacts with an Orchestration Cluster via its APIs. For example, an [external agent](/reference/glossary.md#external-agent)'s runtime can be configured as a client so it can call the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) to report its execution.
 
 This guide describes how to manage client access in SaaS and in Self-Managed environments that use an [external OpenID Connect (OIDC) identity provider](../concepts/access-control/connect-to-identity-provider.md) for authentication.
 
@@ -20,7 +20,7 @@ In Camunda 8 SaaS, client credentials are created and managed in [Camunda Hub](.
 
 ### Step 1: Create client credentials in Camunda Hub
 
-Follow the [guide for creating client credentials in Camunda Hub](../hub/organization/manage-clusters/manage-api-clients.md#create-a-client).
+Follow the [guide for creating client credentials in Camunda Hub](../saas/clusters/manage-api-clients.md#create-a-client).
 
 Copy the **client id** shown in the variables after you have created your client as this is required in the next step.
 
@@ -63,7 +63,7 @@ Once you have your client credentials, you can configure the required permission
 
 #### Authorization based on client ID
 
-This method is suitable when your client application requires a fixed set of permissions. Follow [the steps on how to create authorizations](/components/admin/authorization.md#create-an-authorization) with the following specifics:
+This method is suitable when your client application requires a fixed set of permissions. Follow [the steps on how to create authorizations](/components/admin/authorization.md#create-an-authorization-in-admin) with the following specifics:
 
 - As the **Owner type**, select `Client`.
 - In the **Owner ID** field, enter the **Client ID** that matches your client's value for the configured client id claim.
@@ -75,7 +75,7 @@ You can also assign the client to existing [groups](./group.md) or [roles](./rol
 This method is ideal when you need to dynamically assign permissions based on claims in the OIDC access token, such as scopes or custom claims.
 
 1. [Create a mapping rule](/components/admin/mapping-rules.md#add-a-mapping-rule) that matches a claim from your client's access token.
-2. [Create authorizations](/components/admin/authorization.md#create-an-authorization) for the mapping rule with the following specifics:
+2. [Create authorizations](/components/admin/authorization.md#create-an-authorization-in-admin) for the mapping rule with the following specifics:
    - As the **Owner type**, select `Mapping Rule`.
    - In the **Owner ID** field, enter the **Mapping Rule ID** that you chose in the previous step.
 

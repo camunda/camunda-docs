@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="OrderProcessDefinitions" targetNamespace="https://camunda.com/examples/php-sdk" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
+  <bpmn:process id="order-process" name="Order process" isExecutable="true">
+    <bpmn:startEvent id="OrderReceived" name="Order received">
+      <bpmn:outgoing>Flow_OrderReceived_To_ProcessPayment</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ProcessPayment" name="Process payment">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="payment-processing" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_OrderReceived_To_ProcessPayment</bpmn:incoming>
+      <bpmn:outgoing>Flow_ProcessPayment_To_OrderCompleted</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="OrderCompleted" name="Order completed">
+      <bpmn:incoming>Flow_ProcessPayment_To_OrderCompleted</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_OrderReceived_To_ProcessPayment" sourceRef="OrderReceived" targetRef="ProcessPayment" />
+    <bpmn:sequenceFlow id="Flow_ProcessPayment_To_OrderCompleted" sourceRef="ProcessPayment" targetRef="OrderCompleted" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="OrderProcessDiagram">
+    <bpmndi:BPMNPlane id="OrderProcessPlane" bpmnElement="order-process">
+      <bpmndi:BPMNShape id="OrderReceived_di" bpmnElement="OrderReceived">
+        <dc:Bounds x="180" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcessPayment_di" bpmnElement="ProcessPayment">
+        <dc:Bounds x="270" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OrderCompleted_di" bpmnElement="OrderCompleted">
+        <dc:Bounds x="430" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_OrderReceived_To_ProcessPayment_di" bpmnElement="Flow_OrderReceived_To_ProcessPayment">
+        <di:waypoint x="216" y="120" />
+        <di:waypoint x="270" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ProcessPayment_To_OrderCompleted_di" bpmnElement="Flow_ProcessPayment_To_OrderCompleted">
+        <di:waypoint x="370" y="120" />
+        <di:waypoint x="430" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

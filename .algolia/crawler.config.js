@@ -13,7 +13,7 @@ new Crawler({
   discoveryPatterns: ["https://docs.camunda.io/**"],
   actions: [
     {
-      indexName: "camunda-v2",
+      indexName: "camunda-v3",
       pathsToMatch: ["https://docs.camunda.io/**"],
       recordExtractor: ({ $, helpers, url }) => {
         // Extracting the breadcrumb titles for better accessibility.
@@ -26,11 +26,8 @@ new Crawler({
           [navbarTitle, ...pageBreadcrumbTitles].join(" / ") || "Documentation";
 
         // Page rank.
-        // Use the page rank from the Docusaurus frontmatter if available, if not
-        // calculate it based on the URL depth.
-
-        // Extracting the page rank from a meta tag (it's set by the Docusaurus pages frontmatter).
-        const pageRank = $("meta[name='docsearch:page_rank']").attr("content");
+        // Extracting the page rank from a meta tag (it's set in Docusaurus).
+        const pageRank = $("meta[name='docsearch:page_rank']").text();
         // Set default page rank based on the number of slashes (ignore trailing slash).
         // Set pageRank as inverse of depth, fewer slashes = higher rank.
         const path = new URL(url).pathname.replace(/\/$/, "");
@@ -61,7 +58,7 @@ new Crawler({
   ],
   safetyChecks: { beforeIndexPublishing: { maxLostRecordsPercentage: 30 } },
   initialIndexSettings: {
-    "camunda-v2": {
+    "camunda-v3": {
       attributesForFaceting: [
         "type",
         "lang",
@@ -92,12 +89,15 @@ new Crawler({
       ],
       distinct: true,
       attributeForDistinct: "url",
-      customRanking: ["desc(weight.level)", "asc(weight.position)"],
+      customRanking: [
+        "desc(weight.pageRank)",
+        "desc(weight.level)",
+        "asc(weight.position)",
+      ],
       ranking: [
         "words",
         "filters",
         "typo",
-        "desc(weight.pageRank)",
         "attribute",
         "proximity",
         "exact",

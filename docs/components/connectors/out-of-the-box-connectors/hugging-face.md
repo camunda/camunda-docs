@@ -11,8 +11,8 @@ The **Hugging Face connector** is an outbound connector that allows you to inter
 ## Prerequisites
 
 To begin using the **Hugging Face connector**, you need to have a valid
-[API key](https://huggingface.co/docs/api-inference/quicktour#get-your-api-token),
-and a model deployed with [Inference API](https://huggingface.co/docs/api-inference/index).
+[API key](https://huggingface.co/settings/tokens),
+and a model available through [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers/index).
 
 ## Create a Hugging Face connector task
 
@@ -32,15 +32,17 @@ Fill the **Hugging Face API key** field with a valid Hugging Face API key.
 
 Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (for example, `HUGGING_FACE_SECRET`) so you can reference it later in the connector.
 
 ## Payload
 
-In the **Model** field, enter a model name you wish to use in your BPMN process, for example, `gpt2` if you wish to use
-the [GPT2 model](https://huggingface.co/openai-community/gpt2).
+The connector sends a chat completion request to the Hugging Face router endpoint `https://router.huggingface.co/v1/chat/completions`.
 
-In the **Input** field, enter input parameters for your model, for example, `{"inputs":"What is the Capital of Germany?"}`.
+| Field        | Description                                                                                                                                                                                    |
+| :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Model ID** | The full model repository ID, for example, `meta-llama/Llama-3.2-3B-Instruct`. Browse models on [Hugging Face](https://huggingface.co/models).                                                 |
+| **Messages** | A FEEL expression that returns the chat messages array, in the format `[{"role": "user", "content": "Your message"}]`. Use the `system` role for instructions and the `user` role for queries. |
 
 ## Handle connector response
 
@@ -49,37 +51,25 @@ handling response is still applicable [as described](/components/connectors/prot
 
 ## Usage example
 
-Let's assume you want to use the [BART (large-sized model), fine-tuned on CNN Daily Mail](https://huggingface.co/facebook/bart-large-cnn) model,
-and created the `HUGGING_FACE_SECRET` secret containing your Hugging Face API key.
+Let's assume you want to summarize a text with the `meta-llama/Llama-3.2-3B-Instruct` model, and you created the `HUGGING_FACE_SECRET` secret containing your Hugging Face API key.
 
 Consider the following input:
 
 - **Hugging Face API key**: `{{secrets.HUGGING_FACE_SECRET}}`
-- **Model**: `facebook/bart-large-cnn`
-- **Input**:
+- **Model ID**: `meta-llama/Llama-3.2-3B-Instruct`
+- **Messages**, where `inputText` is a process variable that holds the text to summarize:
 
-```json
-{
-  "inputs": "Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need to recompile. Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying computer architecture. The syntax of Java is similar to C and C++, but has fewer low-level facilities than either of them. The Java runtime provides dynamic capabilities (such as reflection and runtime code modification) that are typically not available in traditional compiled languages. As of March 2024, Java 22 is the latest version. Java 8, 11, 17, and 21 are previous LTS versions still officially supported.",
-  "parameters": { "max_length": 75, "temperature": 10 },
-  "options": { "use_cache": "false" }
-}
+```feel
+=[
+  {"role": "system", "content": "Summarize the text in one sentence."},
+  {"role": "user", "content": inputText}
+]
 ```
 
-- **Result variable**: `myHuggingFaceResponse`.
+- **Result variable**: `myHuggingFaceResponse`
 
-In the `myHuggingFaceResponse` you will find the following result:
+The connector stores the whole HTTP response in `myHuggingFaceResponse`. To store only the generated text, use the following **Result expression**:
 
-```json
-{
-   "status":200,
-   "headers":{
-...
-   },
-   "body":[
-      {
-         "summary_text":" Java is a high-level, class-based, object-oriented programming language. It is intended to let programmers write once, run anywhere. Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying computer architecture. As of March 2024, Java 22 is the latest version."
-      }
-   ]
-}
+```feel
+={summary: response.body.choices[1].message.content}
 ```

@@ -19,13 +19,13 @@ no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
 
 ## Type Declaration
 
-### PROCESS_EVENT
+### PROCESS\_EVENT
 
 ```ts
 readonly PROCESS_EVENT: "PROCESS_EVENT" = 'PROCESS_EVENT';
 ```
 
-### START_EVENT
+### START\_EVENT
 
 ```ts
 readonly START_EVENT: "START_EVENT" = 'START_EVENT';

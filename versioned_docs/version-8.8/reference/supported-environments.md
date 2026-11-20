@@ -45,8 +45,8 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
-- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x
-- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
+- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.0.x, 4.1.x
+- **Helm CLI**: 3.10+ (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
 
@@ -54,7 +54,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
+With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises), and is not tied to a specific Kubernetes version. The Helm chart supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
@@ -100,10 +100,10 @@ If you want to use another NFS, it must meet these requirements:
 
 Regardless of the type, the network storage volumes you use must meet these requirements:
 
-- They must be capable of **at least 1,000 IOPS**.
+- They should provide enough sustained IOPS for your workload, which depends on the number of partitions per broker. See [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops) for a recommendation.
 - The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
 - The p99 latency must be **lower than 300 milliseconds**.
-- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the 1,000 IOPS minimum and single-digit-millisecond latency required for Zeebe, so they are not supported.
+- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the IOPS and single-digit-millisecond latency required for Camunda, so they are not supported.
 
 ### Helm charts version matrix
 

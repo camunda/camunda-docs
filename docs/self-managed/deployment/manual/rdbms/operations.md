@@ -7,16 +7,14 @@ description: Backup, restore, upgrade, troubleshoot, tune, and secure RDBMS for 
 
 Operate and maintain RDBMS secondary storage for manual Camunda 8 installations (VM, bare metal, or standalone Java).
 
-## Operations
+## Backup and restore
 
-### Backup and restore
-
-**DBA owns backups** using native RDBMS tools (pg_dump, mysqldump, RMAN, etc.). Camunda handles consistency.
+**DBA owns backups** using native RDBMS tools (pg_dump, mysqldump, RMAN, and similar). Camunda handles consistency.
 
 - Use vendor-recommended backup procedures.
 - Backup frequency depends on your RPO (Recovery Point Objective).
-- Database backups capture consistent state (Camunda flushes synchronously).
-- Zeebe exporter position is stored in RDBMS.
+- The exporter writes to the database in batches, so a database backup can lag behind the latest Zeebe state.
+- The exporter stores its last exported position in the RDBMS and resumes from that position after a restore.
 
 **Restore procedure**:
 
@@ -24,22 +22,22 @@ Operate and maintain RDBMS secondary storage for manual Camunda 8 installations 
 2. Start Camunda pointing to restored database.
 3. Check logs for Liquibase completion and RdbmsExporter success.
 
-### Schema upgrades
+## Schema upgrades
 
 1. Backup your database.
-2. Download scripts for target version: [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
+2. Download scripts for target version: [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 3. **If using autoDDL (default)**: Liquibase runs on Zeebe startup.
 4. **If using manual schema management**: Apply scripts manually, then start new Camunda version.
 
-### Disabling automatic schema updates
+## Disabling automatic schema updates
 
 For strict change control environments:
 
 ```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL=false
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_AUTODDL=false
 ```
 
-DBA must apply schema changes manually using scripts. Zeebe fails to start if schema is out of date.
+DBA must apply schema changes manually using scripts. Camunda does not validate the schema in this mode. If the schema is missing or out of date, the RdbmsExporter fails with SQL errors (see [Auto-DDL behavior](#auto-ddl-behavior)).
 
 ## Verification and troubleshooting
 
@@ -71,8 +69,6 @@ No errors in RdbmsExporter logs means the exporter is healthy. For more details 
 | `Failed to load driver class oracle.jdbc.OracleDriver`       | Missing JDBC driver             | Verify driver JAR in `/driver-lib` or classpath       |
 | `Table 'camunda.EXPORTER_POSITION' doesn't exist`            | autoDDL=false on empty DB       | Run schema initialization scripts manually            |
 
-**All failure modes above prevent Camunda startup.**
-
 ### Auto-DDL behavior
 
 When started with `auto-ddl=false` on an empty database, the RdbmsExporter throws errors like:
@@ -93,10 +89,10 @@ When started with `auto-ddl=false` on an empty database, the RdbmsExporter throw
 
 ```bash
 # Lower flush interval = lower latency, more frequent writes
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_FLUSHINTERVAL=PT0.1S
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_FLUSHINTERVAL=PT0.1S
 
 # Higher queue size = higher throughput, more memory
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_QUEUESIZE=5000
 ```
 
 ### Connection pooling
@@ -104,11 +100,11 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
 Tune based on your workload. Camunda uses the Hikari connection pool following Spring Boot best practices:
 
 ```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAXIMUM_POOL_SIZE=20
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MINIMUM_IDLE=10
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_IDLE_TIMEOUT=600000
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAX_LIFETIME=1800000
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_CONNECTION_TIMEOUT=30000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MAXIMUMPOOLSIZE=20
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MINIMUMIDLE=10
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_IDLETIMEOUT=600000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MAXLIFETIME=1800000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_CONNECTIONTIMEOUT=30000
 ```
 
 ### Database tuning
@@ -129,17 +125,17 @@ All RDBMS connections must use TLS in production:
 
 ```bash
 # PostgreSQL
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
-
-# See [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md) for other databases
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
 ```
+
+For other databases, see [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 ### Secrets
 
 Never hardcode passwords. Use environment variable injection:
 
 ```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD=$(cat /run/secrets/db_password)
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_PASSWORD=$(cat /run/secrets/db_password)
 ```
 
 ### Database permissions
@@ -151,7 +147,7 @@ Create user with minimum required privileges:
 CREATE ROLE camunda LOGIN PASSWORD 'secure-password';
 GRANT CONNECT ON DATABASE camunda TO camunda;
 GRANT USAGE ON SCHEMA public TO camunda;
-GRANT CREATE ON DATABASE camunda TO camunda;
+GRANT CREATE ON SCHEMA public TO camunda;
 ```
 
 Avoid DROP, TRUNCATE, SUPERUSER, or other unnecessary privileges.
@@ -166,4 +162,4 @@ Before deploying to production, review [secondary storage architecture](/self-ma
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
-- [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
+- [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)

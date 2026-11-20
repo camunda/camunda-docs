@@ -15,7 +15,14 @@ export const getStartedCards = [
     link: "../../../guides/getting-started-agentic-orchestration/",
     title: "Build your first AI agent",
     image: IconAoImg,
-    description: "Get started by building and running your first AI agent.",
+    description: "Get started by running your first AI agent.",
+  },
+  {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
   },
 ];
 
@@ -29,34 +36,32 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "../camunda-provided-llm/",
-    title: "Camunda-provided LLM",
-    image: IconAoLlmImg,
-    description:
-      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-  },
-  {
-    link: "../ao-design/",
-    title: "Design and architecture",
+    link: "../agent-definitions-and-instances/",
+    title: "Definitions and instances",
     image: IconAoDesignImg,
-    description: "Plan and design your agentic orchestration solutions.",
+    description: "Understand how Camunda models AI agents.",
   },
   {
-    link: "../evaluate-agents/evaluate-agents-overview/",
-    title: "Evaluate your AI agents",
-    image: IconTest,
-    description:
-      "Evaluate the performance and effectiveness of your AI agents.",
+    link: "../agent-states-and-metrics/",
+    title: "States and usage metrics",
+    image: IconAoDesignImg,
+    description: "Understand agent states and usage metrics.",
   },
 ];
 
-// Fundamentals cards on introduction page
-export const fundamentalCards_monitoring = [
+// Evaluate cards on the Evaluate AI agents page
+export const evaluateCards = [
   {
     link: "../monitor-ai-agents/",
     title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
+  },
+  {
+    link: "../detect-off-rail-agents/",
+    title: "Detect off-rail agents",
+    image: IconAoAgentImg,
+    description: "Identify a stuck or looping AI agent before it fails.",
   },
   {
     link: "../analyze-ai-agents/",
@@ -72,20 +77,56 @@ export const fundamentalCards_monitoring = [
   },
 ];
 
-// Recommendation cards on introduction page
-export const recommendationCards = [
+// Cards on the Build AI agents page
+export const buildCapabilityCards = [
+  {
+    link: "../add-tool-to-ai-agent/",
+    title: "Add tools to an AI agent",
+    image: IconAoAgentImg,
+    description: "Add BPMN elements as callable tools to your AI agents.",
+  },
   {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,
-    description: "Add long-term memory to your AI agents.",
+    description:
+      "Add long-term memory to your AI agents using RAG and the Vector Database connector.",
   },
+];
+
+export const buildExternalAgentCards = [
+  {
+    link: "../connect-external-agent/",
+    title: "Connect an external agent",
+    image: IconAoAgentImg,
+    description:
+      "Connect an agent built with an external framework, such as LangGraph or CrewAI, to Camunda.",
+  },
+];
+
+export const buildExposeCards = [
   {
     link: "../expose-process-as-mcp-tool/",
     title: "Expose a process as an MCP tool",
     image: IconMCP,
     description:
-      "Configure a BPMN process as a callable MCP tool for AI agents.",
+      "Expose BPMN processes as MCP tools so AI agents can discover and run them.",
+  },
+];
+
+// Best practices cards on the Best practices page
+export const bestPracticeCards = [
+  {
+    link: "../ai-usage-guidelines/",
+    title: "AI usage guidelines",
+    image: IconAoDesignImg,
+    description: "Use Camunda AI features responsibly.",
+  },
+  {
+    link: "../ao-design/",
+    title: "Design and architecture",
+    image: IconAoDesignImg,
+    description: "Plan and design your agentic orchestration solutions.",
   },
   {
     link: "../choose-right-model-agentic/",

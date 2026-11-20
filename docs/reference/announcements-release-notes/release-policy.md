@@ -1,10 +1,16 @@
 ---
 id: release-policy
 title: "Release policy"
-description: "Learn more about Camunda releases, including alpha features and alpha releases."
+description: "Learn more about how Camunda releases, including alpha features, alpha releases, and general availability."
 ---
 
-Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the specific clarifications detailed on this page.
 
 :::info
 You can find deprecation and support announcements on the [announcements](/reference/announcements-release-notes/overview.md#announcements) page.
@@ -22,7 +28,7 @@ Refers to a feature or component released as an alpha version, in an early state
 
 ### Alpha release
 
-Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.6.0-alpha1`, `8.6.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
+Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.10.0-alpha1`, `8.10.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
 
 :::note
 
@@ -56,6 +62,7 @@ A cluster typically consists of the following components:
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Optimize](/components/optimize/what-is-optimize.md)
+- [Connectors](/components/connectors/introduction.md)
 
 You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
 
@@ -81,12 +88,11 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 Non-cluster components include:
 
 - [Camunda Hub](/components/hub/index.md)
-- [Connectors](/components/connectors/introduction.md)
 
 Non-cluster component versions are released continuously.
 
 - Customers are automatically updated to the latest component version when it is ready for release.
-- Admins can [enable alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md) for non-cluster components in organization settings.
+- Admins can [enable alpha features](/components/saas/organization/enable-alpha-features.md) for non-cluster components in organization settings.
 
 ### New Camunda 8 versions
 
@@ -158,3 +164,13 @@ However, Camunda tests against newer Spring Boot minor releases and declares com
 If the library is compatible with a newer Spring version with an active OSS support window, Camunda declares compatibility one month before the support window ends, at the latest.
 
 With this policy, you can safely update your applications to a new Spring Boot version by overriding the default Spring release with another compatible version.
+
+##### Spring Boot major versions
+
+Camunda supports two Spring Boot major versions at a time:
+
+- A numbered `camunda-spring-boot-{n}-starter` artifact is published for each supported major, so you can pin to a major and stay on it.
+- The plain `camunda-spring-boot-starter` always follows the current default major.
+- The previous major stays supported until the end of Spring Commercial support for that major, after which it receives no further updates.
+
+When a new Spring Boot major version reaches GA, Camunda makes it the default artifact in the Camunda release that ships before OSS support for the previous major version ends.

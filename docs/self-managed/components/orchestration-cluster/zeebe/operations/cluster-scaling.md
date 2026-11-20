@@ -12,8 +12,18 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
-- When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
-  :::
+- When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/components/best-practices/architecture/sizing-self-managed.md).
+- You typically add partitions to handle more load, which means more data is exported to secondary storage. Adding partitions does not scale secondary storage, so size it for the higher load first. See [considerations](#considerations) for more details.
+- Optimize does not detect new partitions. After adding partitions, [update Optimize](#5-update-optimize).
+
+:::
+
+## Broker id naming scheme
+
+How brokers are identified and scaled depends on whether the cluster is [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). By default a cluster is **not zone-aware**.
+
+- **Non-zone-aware** clusters use **integer** broker ids: (`0`, `1`, `2`, ...). They are used as examples in this page.
+- **Zone-aware** clusters use **string** broker ids: `${zone}_${n}` (for example, `"zone-a_0"` with double quotes).
 
 ## Considerations
 
@@ -21,8 +31,67 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - Existing partitions continue processing data, but you may notice temporary performance impacts until scaling completes. Plan scaling ahead of anticipated load increases to minimize disruption.
 - When adding new partitions or brokers, partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the load per broker. Use the API endpoints in [dry run](#dry-run) mode to preview partition distribution.
 - Always take a backup before scaling to ensure you can restore if needed.
+- When you add partitions, each new partition is bootstrapped from a snapshot of the global state of partition 1, such as process definitions, decisions, forms, and identity data. This snapshot is transferred in chunks of [`camunda.cluster.raft.snapshot-chunk-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterraft), and each request must complete within `camunda.cluster.raft.bootstrap-snapshot-request-timeout`. If a partition bootstrap repeatedly fails with snapshot request timeouts on a cluster with a large global state, increase that timeout.
+- Scaling is a planned configuration change. The cluster rejects a new configuration change while another one is still running.
+- A dynamic scaling operation does not require a rolling restart. Static configuration changes, such as adding a Physical Tenant, still follow the [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md) restart procedure.
+- Gateway replicas are scaled separately from brokers and partitions. In Helm deployments, adjust `zeebe-gateway.replicas`. Gateway scaling changes shared request capacity but does not change partition placement.
+- Scaling partitions does not scale secondary storage. You usually add partitions to increase throughput, and higher throughput means more data is exported to secondary storage. If secondary storage cannot keep up, it limits the throughput of the entire cluster. Check secondary storage before scaling partitions:
+  - **Elasticsearch or OpenSearch:** All partitions export to the same indices. Write throughput depends on the number of primary shards, not the number of nodes. Adding nodes alone does not help if the shard count stays the same. Check your indices’ shard counts and your nodes’ CPU, memory, and disk resources.
+  - **RDBMS:** The database scales mainly vertically by using a larger instance. Check that the database instance has enough CPU, memory, and connections for the higher load. Adding capacity later is more disruptive than planning for headroom upfront.
+  - **Optimize:** Optimize imports each partition separately and writes to its own indices, so adding partitions also increases the load Optimize places on Elasticsearch or OpenSearch. Optimize sets the shard count ([Elasticsearch](/self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-index-settings), [OpenSearch](/self-managed/components/optimize/configuration/system-configuration.md#opensearch-index-settings)) when it creates an index. It creates one process instance index per process definition when it first imports that definition. If you change the shard count setting later, only indices for new process definitions use the new value. To change existing indices while retaining historical data, you must perform a manual index reshard.
 
-## Scale up brokers
+  For details, see [secondary storage considerations](/components/best-practices/architecture/sizing-self-managed.md#secondary-storage-considerations) in the resource planning guide.
+
+## Scale a cluster with multiple Physical Tenants
+
+<span class="badge badge--platform">Self-Managed only</span>
+
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), each tenant owns its own partition group, while brokers, gateways, and the replication factor are shared. Which scaling dimension you change therefore determines whether the operation is tenant-scoped or cluster-wide.
+
+| Dimension                          | Scope        | How to target it                                                                                                                                                                                                                                                                                                                                                                         |
+| ---------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Partition count                    | Per tenant   | [`PATCH /actuator/cluster?physicalTenant={physicalTenantId}`](/apis-tools/management-api/specifications/cluster/reconfigure-cluster.api.mdx)                                                                                                                                                                                                                                             |
+| Broker count                       | Cluster-wide | [`PATCH /actuator/cluster`](/apis-tools/management-api/specifications/cluster/reconfigure-cluster.api.mdx) or [`POST /actuator/cluster/brokers`](/apis-tools/management-api/specifications/cluster/reconfigure-the-cluster-with-the-given-brokers.api.mdx), without a `physicalTenant` parameter                                                                                         |
+| Replication factor                 | Cluster-wide | [`PATCH /actuator/cluster`](/apis-tools/management-api/specifications/cluster/reconfigure-cluster.api.mdx), without a `physicalTenant` parameter                                                                                                                                                                                                                                         |
+| Partition join, leave, or priority | Per tenant   | `POST` ([add or change priority](/apis-tools/management-api/specifications/cluster/add-a-broker-to-a-partitions-replication-group-or-change-its-priority.api.mdx)) or `DELETE` ([remove](/apis-tools/management-api/specifications/cluster/remove-a-broker-from-a-partitions-replication-group.api.mdx)) `/actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=` |
+| Routing state                      | Per tenant   | [`PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`](/apis-tools/management-api/specifications/cluster/update-the-routing-state.api.mdx)                                                                                                                                                                                                                          |
+
+Partition ids restart at `1` in every Physical Tenant, so a partition is only identified by its id together with its tenant.
+
+### Scale the partitions of a single Physical Tenant
+
+Send the partition count change with the `physicalTenant` query parameter. Only the named tenant's partition group gains partitions, and every other tenant is left untouched:
+
+```
+curl -X 'PATCH' \
+   'http://localhost:9600/orchestration/actuator/cluster?physicalTenant=tenanta' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{ "partitions": { "count": 6 } }'
+```
+
+Requests that combine `physicalTenant` with a broker change or a replication factor change are rejected with `400`, because neither dimension has a tenant to scope it to. An unknown `physicalTenant` is rejected with `404`.
+
+If you use Optimize, update that tenant's Optimize instance afterward, as described in [step 5](#5-update-optimize).
+
+:::note
+A partition count change sent **without** the `physicalTenant` parameter targets the default Physical Tenant only. Read operations behave differently: `GET /actuator/cluster` without the parameter reports every Physical Tenant. Always pass `physicalTenant` explicitly when you intend to scale a non-default tenant.
+:::
+
+### Verify a tenant-scoped scaling operation
+
+Monitor the change with the [monitoring API](#monitoring-api) or [`GET /actuator/cluster/changes`](/apis-tools/management-api/specifications/cluster/list-configuration-changes.api.mdx), then confirm the result through topology:
+
+```
+curl "http://localhost:8080/physical-tenants/tenanta/v2/topology"
+curl "http://localhost:8080/cluster/v2/topology"
+```
+
+Confirm that every expected partition has a leader, that the targeted tenant's partition count matches the requested value, and that the other tenants retain their previous partition counts. Cluster-wide topology requires [cluster admin](/components/admin/cluster-admin.md) access.
+
+Because brokers and gateways are shared, a scaling operation for one tenant changes the capacity available to all of them. Compare tenant-scoped and cluster-wide partition, latency, and storage metrics against your pre-scaling baseline before returning the cluster to normal traffic.
+
+## Scale up
 
 The following shows how to scale up a Zeebe cluster using an example of scaling from cluster size 3 to cluster size 6. The target partition count is 6.
 
@@ -61,9 +130,14 @@ camunda-zeebe-4                                        0/1     Init:0/1   0     
 camunda-zeebe-5                                        0/1     Init:0/1   0          11s
 ```
 
+:::info Starting brokers in a zone-aware cluster
+On a [zone-aware cluster](#broker-id-naming-scheme), each zone is a separate StatefulSet, so you need to scale brokers in each zone.
+
+:::
+
 ### 2. Send scale request to the Zeebe Gateway
 
-Send a POST request to the Zeebe Gateway's management endpoint to add new brokers to the cluster or redistribute partitions. See the [API reference](#api-reference) for details.
+Send a PATCH request to the Zeebe Gateway's management endpoint to add new brokers to the cluster or redistribute partitions. See the [API reference](#api-reference) for details.
 
 If you are running on Kubernetes and haven’t set up Ingress, port-forward to access the Zeebe Gateway on your local machine:
 
@@ -93,6 +167,12 @@ curl -X 'PATCH' \
 
 Here `3`, `4`, and `5` are the newly-added brokers.
 
+:::note Zone aware clusters
+Make sure to use the correct [broker ids](#broker-id-naming-scheme), for example `["zone-a_3", "zone-a_4", "zone-a_5"]`
+
+Brokers from different zones can be added with a single request. Make sure to scale each zone's statefulsets with the required replica count beforehand.
+:::
+
 #### 2.b Scaling brokers and partitions
 
 Run the following to send the request to the Zeebe Gateway to add 3 new brokers to the cluster and set the number of partition to 6.
@@ -112,6 +192,12 @@ curl -X 'PATCH' \
         }
       }'
 ```
+
+For [zone-aware cluster](#broker-id-naming-scheme) you need to change the broker ids accordingly as outlined in [section 2.a](#2a-scale-brokers-only)
+
+:::warning Changing replication factor in a zone-aware cluster
+You cannot change replication factor in a zone-aware cluster with this API. You need to use `PUT /actuator/cluster/partitioning/` instead.
+:::
 
 #### 2.c Scaling only partitions
 
@@ -397,6 +483,33 @@ The response would show that partitions are distributed to new brokers:
 
 </details>
 
+### 5. Update Optimize
+
+:::note
+Skip this step if you didn't change the partition count, or if you don't use Optimize.
+:::
+
+Optimize has its own [`zeebe.partitionCount`](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) setting and doesn't detect new partitions. If you don't update it, process instances on the new partitions are simply missing in Optimize, without any error.
+
+With [multiple Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md), each tenant has its own Optimize instance. Update the Optimize instance of each tenant whose partition count changed, and set it to that tenant's partition count.
+
+1. Set Optimize's `zeebe.partitionCount` to the new partition count. With Helm, use `optimize.extraConfiguration`:
+
+   ```yaml
+   optimize:
+     extraConfiguration:
+       - file: partition-count.yaml
+         content: |
+           zeebe:
+             partitionCount: 6
+   ```
+
+   Without Helm, set the `CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT` environment variable.
+
+2. Apply the change. With Helm, run `helm upgrade` with the updated values. The chart restarts the Optimize pods because the configuration changed. Without Helm, restart Optimize.
+
+Optimize stores its import position per partition. After the restart, it imports the records of the new partitions that still exist in the exporter indices. Make sure the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporter retention keeps these records until Optimize imports them. If the records are deleted first, this data is permanently missing in Optimize.
+
 ## Scale down
 
 We will explain how to scale down a Zeebe cluster via an example of scaling from cluster size 6 to cluster size 3. We assume the cluster is running with 6 brokers.
@@ -407,7 +520,7 @@ Scale down can be performed only on brokers, partition count cannot be decreased
 
 ### 1. Send the scale request to the Zeebe Gateway
 
-Now we should tell Zeebe to move partitions away from the brokers that will be removed. For that, we send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
+Now we should tell Zeebe to move partitions away from the brokers that will be removed. For that, we send a PATCH request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
 
 If you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
@@ -428,6 +541,10 @@ curl -X 'PATCH' \
 ```
 
 Similar to scaling up, the response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology.
+
+:::warning scaling down a zone-aware cluster
+For a zone-aware cluster, the same [changes](#2a-scale-brokers-only) as for scaling up are required.
+:::
 
 ### 2. Query the Zeebe Gateway to monitor progress of scaling
 
@@ -637,16 +754,24 @@ camunda-zeebe-2                                        1/1     Running     0    
 After scaling down the statefulset, you may have to delete the PVCs manually.
 :::
 
+#### Shut down brokers in a zone-aware cluster
+
+On a zone-aware cluster, scale down the StatefulSet of the zone you scaled, once its scaling operation has completed:
+
+```
+kubectl scale statefulset <zone-a-statefulset> --replicas=3
+```
+
 ## API reference
 
-OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml).
 
 ### Reconfiguration API
 
 This API lets you reconfigure a cluster by adding or removing brokers, adding partitions, or changing the `replicationFactor`. You can use this instead of the Scale API.
 
 :::note
-This endpoint does not respect the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. When used, partitions are redistributed using the `ROUND_ROBIN` strategy.
+This endpoint does not support clusters configured with the `FIXED` partitioning scheme. Scaling requests for these clusters are rejected.
 :::
 
 #### Request
@@ -658,6 +783,7 @@ PATCH actuator/cluster
     add: [<brokerIds>]
     remove: [<brokerIds>]
     count: <integer>
+    zone: <string>
   }
   {
     partitions: {
@@ -668,6 +794,10 @@ PATCH actuator/cluster
 }
 
 ```
+
+`zone` is only used on zone-aware clusters, together with `count`, to select which zone's broker count is changed. It must be omitted on non-zone-aware clusters. Broker ids in `add` and `remove` follow the [broker id naming scheme](#broker-id-naming-scheme).
+
+The `physicalTenant` query parameter scopes `partitions.count` to a single [Physical Tenant](/self-managed/concepts/physical-tenants/index.md). See [scale a cluster with multiple Physical Tenants](#scale-a-cluster-with-multiple-physical-tenants).
 
 <details>
   <summary>Example request</summary>
@@ -702,7 +832,7 @@ This is a dangerous operation and must be used with caution. Incorrect use may r
 
 Usually, changes can only be made when all brokers are up. If some brokers are unreachable, you can remove them from the cluster by setting the `force` request parameter to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Deviations from the process may make the cluster unusable.
+This operation is mainly useful for [dual-region setups](/self-managed/concepts/multi-region/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Deviations from the process may make the cluster unusable.
 
 :::note
 Don’t send more than one `force` request at a time.
@@ -733,7 +863,7 @@ See also the [Reconfiguration API](#reconfiguration-api).
 Use this endpoint to scale a cluster up or down by changing the cluster size and redistributing partitions.
 
 :::note
-This endpoint does not respect the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. When used, partitions are redistributed using the `ROUND_ROBIN` strategy.
+This endpoint does not support clusters configured with the `FIXED` partitioning scheme. Scaling requests for these clusters are rejected.
 :::
 
 #### Request
@@ -745,7 +875,9 @@ POST actuator/cluster/brokers/
 ]
 ```
 
-The input is a list of _all_ broker ids that will be in the final cluster after scaling:
+The input is a list of _all_ broker ids that will be in the final cluster after scaling.
+
+On zone-aware clusters, broker ids follow the [broker id naming scheme](#broker-id-naming-scheme).
 
 <details>
   <summary>Example request</summary>
@@ -788,7 +920,7 @@ This is a dangerous operation and must be used with caution. When not used corre
 
 Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
+This operation is mainly useful for [dual-region setups](/self-managed/concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
 
 :::note
 Do not send more than one force request at a time.
@@ -806,7 +938,7 @@ This operation does not re-distribute the partitions that were in the removed br
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml):
 
 ```
 {
@@ -1234,7 +1366,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/zeebe/dynamic-config/openapi/src/main/resources/api/cluster-api.yaml):
 
 ```
 {

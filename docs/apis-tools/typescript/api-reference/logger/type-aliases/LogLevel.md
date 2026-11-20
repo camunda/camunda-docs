@@ -9,11 +9,5 @@ mdx:
 
 ```ts
 type LogLevel =
-  | "silent"
-  | "error"
-  | "warn"
-  | "info"
-  | "debug"
-  | "trace"
-  | "silly";
+  "silent" | "error" | "warn" | "info" | "debug" | "trace" | "silly";
 ```

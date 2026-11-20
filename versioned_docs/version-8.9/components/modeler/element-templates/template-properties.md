@@ -1330,11 +1330,12 @@ For a property value to be used in a condition, the property needs to have an `i
 A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`.
 All the conditions must be met for the property to be active.
 
-There are three possible comparison operators:
+There are four possible comparison operators:
 
 - `equals`: Checks if the value is equal to the value defined in the condition.
 - `oneOf`: Checks if the value is in the list of values defined in the condition.
 - `isActive`: Checks if the referenced property is currently active and not hidden by other conditions.
+- `isEmpty`: Checks if the referenced property's value is empty (empty value or unconfigured).
 
 ```json
 [
@@ -1382,6 +1383,10 @@ There are three possible comparison operators:
         {
           "property": "...",
           "equals": "someValue"
+        },
+        {
+          "property": "...",
+          "isEmpty": true
         }
       ]
     }

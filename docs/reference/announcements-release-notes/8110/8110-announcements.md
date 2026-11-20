@@ -1,0 +1,105 @@
+---
+id: 8110-announcements
+title: "8.11 Release announcements"
+sidebar_label: Release announcements
+description: "Supported environment changes, breaking changes, and deprecations in Camunda 8.11."
+toc_max_heading_level: 3
+---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## APIs & tools
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
+
+Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend and resume already behave this way starting with 8.10.9. Cancel narrows the filter starting with 8.10.1 and follows the same validation rules starting with 8.10.9. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-state-filter).
+
+Previously, the API documentation described the `state` filter as "ignored and overridden". This didn't match the actual behavior, which differed by operation.
+
+| Operation                                                                                                                | Required state           | Previous behavior                             |
+| :----------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
+| [Modify](/apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation.api.mdx)     | `ACTIVE`                 | Combined your filter with the required state. |
+| [Migrate](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation.api.mdx)   | `ACTIVE`                 | Combined your filter with the required state. |
+| [Resolve incidents](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation.api.mdx) | `ACTIVE`                 | Combined your filter with the required state. |
+| [Suspend](/apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation.api.mdx)   | `ACTIVE`                 | Replaced your filter with the required state. |
+| [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx)     | `SUSPENDED`              | Replaced your filter with the required state. |
+| [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx)     | `ACTIVE` and `SUSPENDED` | Combined your filter with the required state. |
+
+The following rules apply to all six operations:
+
+- A top-level `state` filter that uses `$eq` or `$in` with a state outside the required states is rejected with `400 Bad Request`. Modify, migrate, and resolve incidents previously accepted such a filter and created an empty batch. Suspend and resume previously discarded the filter. Cancel already rejected it.
+- States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances. Cancel previously rejected invalid states in `$or` branches.
+- The `$neq`, `$exists`, and `$like` operators on a top-level `state` are applied as given.
+
+The following changes apply to the `parentProcessInstanceKey` filter:
+
+- Suspend and resume now apply the filter as given. Previously, they discarded it and could act on instances outside your filter.
+- Cancel now narrows the filter to root instances instead of replacing it. A filter that matches only child instances selects no instances and doesn't return an error.
+
+**Action:** Remove a conflicting top-level `state` filter from your batch requests, or move it into an `$or` branch. If your integration relied on suspend or resume discarding your `parentProcessInstanceKey` filter, review the filter, because it now limits the batch.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /v2/authentication/me` answers a caller without credentials on an unprotected API {#anonymous-current-user}
+
+On an unprotected API, [`GET /v2/authentication/me`](/apis-tools/orchestration-cluster-api-rest/specifications/get-authentication.api.mdx) answers a caller without credentials with `200 OK` and `isAnonymous: true`, instead of `401 Unauthorized`. The `username` field of `CamundaUserResult` is still required, but it can now be `null`, so a client generated from the API specification can fail to compile. This change is also part of 8.10.9.
+
+**Action:** See the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#anonymous-current-user) for the changed fields and what to do.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### User tasks of suspended process instances are now marked as suspended {#user-tasks-suspended-marker}
+
+Starting with 8.11, when you suspend a process instance, Camunda marks its user tasks as suspended in secondary storage. When you resume the instance, Camunda removes the marker.
+
+- The [search user tasks](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) endpoint returns a new `isSuspended` field and supports filtering by `isSuspended`.
+- Tasklist keeps suspended user tasks visible, labels them as suspended, and disables actions such as assigning, unassigning, and completing them.
+- User tasks belonging to instances suspended in 8.10 or earlier are not marked as suspended after you upgrade. The instances still show as `SUSPENDED`, and Camunda still rejects actions on their tasks, but Tasklist and the search API show them as not suspended.
+
+**Action:** No action is required. If your integration assumes that user tasks returned by the search API are actionable, filter by `isSuspended`. Note that tasks belonging to instances suspended before the upgrade are not marked as suspended.
+
+<p className="link-arrow">[Process instance suspension](/components/concepts/process-instance-suspension.md#suspended-user-tasks-in-secondary-storage)</p>
+
+</div>
+</div>
+
+## Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Grafana dashboards use the v2 dashboard schema and require Grafana 13 or later {#grafana-dashboards-v2-schema}
+
+Starting with Camunda 8.11, the Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/). Camunda 8.10 is the last release that provides the dashboards in the classic format, which [Camunda deprecated in 8.10](/reference/announcements-release-notes/8100/8100-announcements.md#classic-grafana-dashboard-format-deprecated). The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
+
+The dashboards of 8.11 require Grafana 13 or later. Earlier Grafana versions cannot import the v2 dashboard schema.
+
+**Action:** Before you move to the dashboards of 8.11, upgrade your Grafana instance to version 13 or later. To keep using the dashboards in the classic format, import them from the `stable/8.10` branch or from the branch of the release you run.
+
+</div>
+</div>

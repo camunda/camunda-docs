@@ -172,8 +172,8 @@ The **members** property must contain a list of members:
 |        Property         |                                                                                        Methods                                                                                         | Required |       Type        |                                                      Description                                                       |
 | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :---------------: | :--------------------------------------------------------------------------------------------------------------------: |
 |        Group ID         | Create channel <br/> Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members |   Yes    |      string       |                                                Microsoft Teams group ID                                                |
-|       Channel ID        |           Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members            |   Yes    |      string       |                                               Microsoft Teams channel ID                                               |
-|      Display name       |                                                                                     Create channel                                                                                     |    No    |      string       |                                     Displayed name of new Microsoft Teams channel                                      |
+|       Channel ID        |                     Get channel <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members                      |   Yes    |      string       |                                               Microsoft Teams channel ID                                               |
+|      Display name       |                                                                                     Create channel                                                                                     |   Yes    |      string       |                                     Displayed name of new Microsoft Teams channel                                      |
 |       Description       |                                                                                     Create channel                                                                                     |    No    |       text        |                                       Description of new Microsoft Teams channel                                       |
 | Channel membership type |                                                                                     Create channel                                                                                     |   Yes    |     dropdown      | See [teams-channels-overview](https://learn.microsoft.com/microsoftteams/teams-channels-overview) for more information |
 |          Owner          |                                                                Create channel (if Channel membership type != STANDARD)                                                                 |   Yes    |      string       |                        Channel owner; Microsoft Teams user ID or Microsoft Teams principal name                        |
@@ -201,52 +201,50 @@ The **members** property must contain a list of members:
 
 ## Microsoft Teams connector response
 
-The **Microsoft Teams connector** returns the Microsoft Graph API response in `result` wrapper:
+The **Microsoft Teams connector** returns the Microsoft Graph API response, for example:
 
 ```json
 {
-  "result": {
-    "chatType": "ONE_ON_ONE",
-    "createdDateTime": {
-      "dateTime": {
-        "date": {
-          "year": 2022,
-          "month": 11,
-          "day": 29
-        },
-        "time": {
-          "hour": 18,
-          "minute": 10,
-          "second": 33,
-          "nano": 361000000
-        }
+  "chatType": "ONE_ON_ONE",
+  "createdDateTime": {
+    "dateTime": {
+      "date": {
+        "year": 2022,
+        "month": 11,
+        "day": 29
       },
-      "offset": {
-        "totalSeconds": 0
+      "time": {
+        "hour": 18,
+        "minute": 10,
+        "second": 33,
+        "nano": 361000000
       }
     },
-    "lastUpdatedDateTime": {
-      "dateTime": {
-        "date": {
-          "year": 2022,
-          "month": 11,
-          "day": 29
-        },
-        "time": {
-          "hour": 18,
-          "minute": 10,
-          "second": 33,
-          "nano": 361000000
-        }
+    "offset": {
+      "totalSeconds": 0
+    }
+  },
+  "lastUpdatedDateTime": {
+    "dateTime": {
+      "date": {
+        "year": 2022,
+        "month": 11,
+        "day": 29
       },
-      "offset": {
-        "totalSeconds": 0
+      "time": {
+        "hour": 18,
+        "minute": 10,
+        "second": 33,
+        "nano": 361000000
       }
     },
-    "tenantId": "0000000-0000-0000-0000-000000000",
-    "webUrl": "https://teams.microsoft.com/l/chat/19%3Aefb08ac3-0000f-0000-0000-example-chat-id_fe35bf61-0000-0000-0000-ddc97d8903d4%40unq.gbl.spaces/0?tenantId=00000-0000-0000-0000-00000000",
-    "id": "19%3Aefb08ac3-0000f-0000-0000-example-chat-id_fe35bf61-0000-0000-0000-ddc97d8903d4%40unq.gbl.spaces"
-  }
+    "offset": {
+      "totalSeconds": 0
+    }
+  },
+  "tenantId": "0000000-0000-0000-0000-000000000",
+  "webUrl": "https://teams.microsoft.com/l/chat/19%3Aefb08ac3-0000f-0000-0000-example-chat-id_fe35bf61-0000-0000-0000-ddc97d8903d4%40unq.gbl.spaces/0?tenantId=00000-0000-0000-0000-00000000",
+  "id": "19%3Aefb08ac3-0000f-0000-0000-example-chat-id_fe35bf61-0000-0000-0000-ddc97d8903d4%40unq.gbl.spaces"
 }
 ```
 
@@ -259,7 +257,7 @@ You can use an output mapping to map the response:
 
 ```
 = {
-  "chatId": result.id,
-  "tenantId": result.tenantId
+  "chatId": response.id,
+  "tenantId": response.tenantId
 }
 ```

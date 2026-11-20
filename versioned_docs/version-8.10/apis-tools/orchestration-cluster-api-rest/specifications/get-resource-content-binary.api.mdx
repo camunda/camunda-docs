@@ -1,0 +1,255 @@
+---
+id: get-resource-content-binary
+title: "Get resource content as binary"
+sidebar_label: "Get resource content as binary"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get resource content as binary"} <MarkerAddedInVersion version="8.10" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/resources/{resourceKey}/content/binary"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns the content of a deployed resource in binary format (octet-stream).
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
+:::
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "RESOURCE", permissionType: "READ" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "resourceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the resource.",
+      schema: {
+        type: "string",
+        oneOf: [
+          {
+            description:
+              "System-generated key for a deployed process definition.",
+            format: "ProcessDefinitionKey",
+            example: "2251799813686749",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "ProcessDefinitionKey",
+          },
+          {
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            description:
+              "System-generated key for a deployed decision requirements definition.",
+            format: "DecisionRequirementsKey",
+            example: "2251799813683346",
+            type: "string",
+            title: "DecisionRequirementsKey",
+          },
+          {
+            description: "System-generated key for a deployed form.",
+            format: "FormKey",
+            example: "2251799813684365",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "FormKey",
+          },
+          {
+            description: "System-generated key for a decision definition.",
+            format: "DecisionDefinitionKey",
+            example: "2251799813326547",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "DecisionDefinitionKey",
+          },
+        ],
+        description: "The system-assigned key for this resource.",
+        format: "ResourceKey",
+        title: "ResourceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resource content is successfully returned.",
+      content: {
+        "application/octet-stream": {
+          schema: { type: "string", format: "binary" },
+        },
+      },
+    },
+    "404": {
+      description: "A resource with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

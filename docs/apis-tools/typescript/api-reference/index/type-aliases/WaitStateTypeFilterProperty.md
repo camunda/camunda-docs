@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type WaitStateTypeFilterProperty =
-  | WaitStateTypeExactMatch
-  | AdvancedWaitStateTypeFilter;
+  WaitStateTypeExactMatch | AdvancedWaitStateTypeFilter;
 ```
 
 Wait state type property with full advanced search capabilities.

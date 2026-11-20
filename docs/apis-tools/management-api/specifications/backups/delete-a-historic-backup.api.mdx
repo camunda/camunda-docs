@@ -1,0 +1,144 @@
+---
+id: delete-a-historic-backup
+title: "Delete a historic backup"
+description: "Delete a backup with the given id. Deletes it in every physical tenant unless"
+sidebar_label: "Delete a historic backup"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV0tv20YQ/iuDOSUAKzmBG6C8uZXRCmiDoE3Rg2XAo+WI3JjcZXaHsgWB/z0YLiVZlhykt6LRRcDu7Dy++ebBLQqVEfMb/M1G8WEDSzL3XYu3GRYcTbCtWO8wxxnXLAw0CsCDlQqkYijtmh3YYgJJJIIVsA54zWEDbbWJ1lANwo6cQOdqjnHh7nYXH4fzO3AUgn+Ig0rfciC1C+LBO54sHGbYUqCGhYP6u0VHDWOOyZ15gRkG/tzZwAXmEjrO0KrfLUmFz4OZF+BXg6kx3AyjqbghzLcoVmrV/HMKdD47ef6xYpjPjlVM4NwpNF0UWCpurY9W7JrBdQ2HAZM11R1P4CqO0nHhKDDUvtTregM+FBy4gOVGddoA81mEVxQNu8K68nUGTKaC2BnDMaryp2a7qHYrW1YcFm4+A6nIDc61gdfWd/EArmxajdk64ZIDZrjyoSFJR+8uMUN+pKZVYN5k2Fhnm67B/KLvs30qjlN6lJAV1XGXkc8dh80Jpu9fyv+BY8+4NIF/KnbgGyvCRfbspfFrDjGxcOGe03BMkqm7KBwyeKisqcA7IIjWlTX/MAqOEmBHzxzDXcEr6mq5G5UtHLlCbwOvfGDonKnIlZo2rmhtfUgQnzLsw86rhNhLVLMDW+l5/BlQBOPdypadkqRzBQe4M9R0rqDJTnqMJN5N4GofjlQkC7d/HMFpZBVF4EcyotRzfGpwH/oRaaIE68qnFMH0gLDvb5UGsfUuctTY315c6t9xlGOp2QjF0EMK7DO8PCf53ss+RxAdtbHyAsaHZESrQkmTCDOfAT/aKBPM0Hgn7EQ1UtvW1gw0mX6KqnZ7JjnXIfgAO99PEvMrO63ivQCsfACqa2B9Fw/o+OUnNloNbVB2ik04NBwjlXwaYbK7u/4ayNE3LJVGvCJbK2jDL8MfLy5O9V7VNXhl6ehhBjwpJ3D9FwSWLjgu0sUhogctLxLhppURVxOYhimwg/77g/btGb01RbEmMgVTKYudsjT15GXNqTVpM+QoYMjpQAgswXKRQNaJmYbA94Vnn6Ge+wJzTJU/zHmpMMdpGmXjXjLd7gZ9r62Uw3q3B3Shxhy3CZU+n063lY/S59vWB+mnZKQj8WGKGa4pWFrWKSqVSiENLQ1zrL2hejh+juAf5Kjkhp1AMg0qNoy9PkM1dKzpp3cXF9+gZHjYP50MBxWVSPsNKsan/dBorVv5MxvMk1dXH+aKA4eYFL6ZfNVPdkXrrRMt/WFsZyB0zxnoxEsJ260uOqJ+GUdPAiVKQwNhx/Vgv0FWQ0qtOSxfRw5sDwXwH9g6R04LP8q0rck6DW7g3HZk6g0eMRUzzPdL6W028uwGt9slRf471H2vx2kLUgIXNiopD1vSi2j8/3eks2jf8+bcdjlsz5gjKvV3pf0vEX3157iivoYz3wRnvRkPyW2e+rDzcp/5/rbPsGIqOAw+pesrY7h96vxJg9dg9j1xdv379cdr7PsvU4HSoQ==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a historic backup"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/backupHistory/{backupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Delete a backup with the given id. Deletes it in every physical tenant unless
+`physicalTenant` narrows the operation to one.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "backupId",
+      required: true,
+      in: "path",
+      description: "Id of the backup",
+      schema: {
+        title: "Backup ID",
+        description:
+          "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+        type: "integer",
+        format: "int64",
+        example: 1,
+        minimum: 0,
+      },
+    },
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "Backup is deleted" },
+    "404": {
+      description: "Not a single snapshot corresponding to given ID exist.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "All other errors, e.g. ES returned error response when attempting to create a snapshot.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description:
+        "Elasticsearch is not accessible, the request can be retried when it is back.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

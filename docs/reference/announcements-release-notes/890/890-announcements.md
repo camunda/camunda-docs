@@ -11,9 +11,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2027              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 12 October 2027             | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -131,12 +131,20 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 ### 8.9.x patch releases
 
-The following key changes were also released as part of an 8.9.x patch release.
+The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                  | Type            | Key change                                                                                                       |
-| :------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                    |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
+| `8.9 gen13`                                                         | SaaS       | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
+| [8.9.13](https://github.com/camunda/connectors/releases/tag/8.9.13) | Connectors | Breaking change | [Intrinsic function allow-list](#connector-intrinsic-function-allow-list)                                                     |
+| [8.9.10](https://github.com/camunda/connectors/releases/tag/8.9.10) | Connectors | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                     |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
 
 ## Agentic orchestration
 
@@ -158,7 +166,7 @@ The following key changes were also released as part of an 8.9.x patch release.
 ## APIs & tools
 
 :::info 8.9 APIs & Tools migration guide
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md).
+Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md).
 :::
 
 :::tip Client and API compatibility
@@ -176,7 +184,7 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 [Camunda 8.9.1](/reference/announcements-release-notes/890/890-release-notes.md) unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.9.1 or any later 8.9.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
 
-A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.9.x patch.
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and is available in 8.9.9.
 
 **Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
 
@@ -252,7 +260,7 @@ Previously, a shared `DocumentMetadata` schema was used for both creating and re
 | Generated-client users | <ul><li>Regenerate your client.</li><li>Update any code that references `DocumentMetadata` in response handling as it is now `DocumentMetadataResponse`.</li><li>Review nullable annotations on `DocumentReference.contentHash` and `DocumentMetadataResponse` fields.</li></ul> |
 | Custom integrations    | No request-side changes needed. Response fields listed above are now guaranteed to be present (though some may be `null`).                                                                                                                                                       |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
 
 </div>
 </div>
@@ -263,14 +271,14 @@ Previously, a shared `DocumentMetadata` schema was used for both creating and re
 </div>
 <div className="release-announcement-content">
 
-#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
+#### Camunda Spring Boot Starter default now requires Spring Boot 4.0.x
 
-Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+Starting with 8.9.0-alpha3, the default [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter`) is bundled with Spring Boot 4.0.x.
 
-**Action:** To remain compatible, migrate your application to Spring Boot 4.0.x.
+**Action:** Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`. If you're not yet ready to upgrade, switch to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x and has no announced end date. See [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules).
 
 :::info Spring Boot support timeline
-This change aligns with the Spring Boot support policy, as OSS support for Spring Boot 3.x ends in June 2026. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
+OSS support for Spring Boot 3.x ends in June 2026. This is a Spring framework lifecycle change. Camunda will continue to maintain `camunda-spring-boot-3-starter` beyond that date. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for context on Spring's support lifecycle.
 :::
 
 </div>
@@ -304,7 +312,7 @@ Added literals include the following:
 | Generated-client users | Regenerate and add fallback/default handling for enum parsing and matching.                              |
 | Custom integrations    | Review enum branches (for example, exhaustive `switch`/pattern matches) and add handling for new values. |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
 
 </div>
 </div>
@@ -343,7 +351,7 @@ Example request payload update for message subscription filtering:
 | Generated-client users | Regenerate clients and update type mappings/imports.            |
 | Custom integrations    | Update request payload construction and affected typed helpers. |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
 
 </div>
 </div>
@@ -396,7 +404,7 @@ Previously, only the first conversion error was returned. This fix improves cons
 
 <br/>
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#search-filter-validation-errors)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#search-filter-validation-errors)</p>
 
 </div>
 </div>
@@ -428,6 +436,41 @@ The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*
 </div>
 <div className="release-announcement-content">
 
+#### Frontend application URLs now require explicit application prefix {#frontend-path-prefix-required}
+
+In Camunda 8.9, Operate and Tasklist run in a single unified frontend application rather than as separate deployments. This architectural change requires explicit path prefixes to route requests to the correct handler. As a result, the automatic path redirection that previously allowed access without an explicit application prefix has been removed.
+
+Before 8.9, both of the following URLs worked:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/processes/<process-id>
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+```
+
+From 8.9, only the URL with the explicit application prefix is valid:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+https://<region>.tasklist.camunda.io/<cluster-id>/tasklist/tasks/<task-id>
+```
+
+Prefix-less paths now return `404 Not Found` instead of redirecting.
+
+**Impact:** Any bookmarks, external links, scripts, or applications that use prefix-less frontend URLs will break after upgrading to 8.9.
+
+**Action:** Update all stored or constructed frontend URLs to include the explicit application prefix (`/operate/` or `/tasklist/`). If you use reverse proxies or load balancers, consider adding redirect rules to handle legacy URL formats.
+
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#frontend-application-urls-now-require-explicit-application-prefix-breaking)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Type-safe pagination model in the Camunda Java client
 
 Starting with 8.9.0, the Camunda Java client uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint now exposes only the pagination methods it actually supports.
@@ -447,7 +490,7 @@ This change is **not binary-compatible**. Code compiled against the old API will
 | Custom `TypedPageableRequest` implementations                                      | Add a pagination type parameter (1 → 2 generic params).                                                           |
 | Storing direction method returns (for example, `SearchRequestPage r = p.from(10)`) | Use `OffsetPage r = p.from(10)`, `CursorForwardPage r = p.after("c")`, or `CursorBackwardPage r = p.before("c")`. |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safe-pagination)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#type-safe-pagination)</p>
 
 </div>
 </div>
@@ -565,6 +608,54 @@ In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2
 </div>
 <div className="release-announcement-content">
 
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with Connectors 8.9.10, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`.
+
+In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm all connector fields that resolve a secret already reference that secret in the deployed BPMN.
+
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but be aware that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
+- On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/saas/clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Outbound connectors refuse undeclared intrinsic function calls {#connector-intrinsic-function-allow-list}
+
+Starting with Connectors 8.9.13, the connector runtime runs an [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) only if the deployed BPMN process declares that exact call, by function name and field path, in the input mappings of the connector element.
+
+In practice, an intrinsic function call that reaches a connector through a process variable or job variable, instead of being written in the connector element's input mapping, now fails the job. A connector result that contains an object with the `camunda.function.type` key also fails the job when you store it in a result variable or map it with a result expression.
+
+**Action:** Before upgrading, check which processes use intrinsic functions.
+
+- Write each `camunda.function.type` call as a literal in the input mapping of the field that uses it, and redeploy the process.
+- Use a result expression that maps only the fields you need if a response from an external system can contain the `camunda.function.type` key.
+- Don't use `camunda.connector.intrinsic-function.allow-list.mode` set to `DISABLED` as a workaround. This mode refuses every intrinsic function call. No setting restores unrestricted execution.
+
+<p className="link-arrow">[Intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list)</p>
+<p className="link-arrow">[Troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Default secret provider prefix change
 
 Starting with Camunda 8.9, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
@@ -576,7 +667,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 - Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
 
 <p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
-<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
 
 </div>
 </div>
@@ -1367,6 +1458,145 @@ OpenShift dual-region reference architecture now supports ECK (Elastic Cloud on 
 </div>
 </div>
 
+## Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
+
+Camunda 8.9.1 introduced a regression in which output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to propagate to the parent scope.
+
+You're affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+
+1. The sub-process defines an output collection.
+2. One or more elements inside the sub-process define output mappings.
+
+Under these conditions:
+
+- Local variables from inside the sub-process appear in the parent scope and are visible in Operate.
+- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
+
+**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+
+**Fix:** A fix is available in 8.9.9. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+
+- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
+- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
+
+**Action:**
+
+- Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Output mapping behavior change for object variables {#output-mapping-behavior-change}
+
+**Affected versions:** 8.9.1–8.9.8. Fixed in 8.9.9.
+
+Patches 8.9.1–8.9.8 changed how output mappings behave when writing to object variables. Upgrading to 8.9.9+ reverts this change, which can alter the behavior of your running processes.
+
+Before 8.9.1 and from 8.9.9+, assigning an object literal to a variable replaces the variable entirely. In 8.9.1–8.9.8, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
+
+Example: task A sets `result = {a: 1}`, then task B sets `result = {b: 2}`:
+
+- _Replace_ (before 8.9.1 and from 8.9.9+): `result = {"b": 2}` — task A's value is overwritten.
+- _Merge_ (8.9.1–8.9.8): `result = {"a": 1, "b": 2}` — task A's value is preserved.
+
+Replace is the intended long-term behavior. The merge behavior in the affected patches was an unintended regression.
+
+**Action:**
+
+- **Running 8.9.1–8.9.8:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
+- **Upgrading to 8.9.9+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Nested input mappings can silently drop sibling fields {#nested-input-mapping-sibling-fields}
+
+**Affected versions:** 8.9.15. Reverted in 8.9.16.
+
+Camunda 8.9.15 introduced a regression affecting elements with two or more input mappings that write to different nested fields of the same parent variable. Only one of the mapped fields retains its expected value, with the other field silently set to `null` without warning or raised incident.
+
+**Example:** You have a parent-scope variable `foo: {bar: 1, baz: 2}` and an element with these two input mappings that both write into a local `foo` variable:
+
+1. Target `foo.bar` ← (maps from) source `=foo.bar`
+2. Target `foo.baz` ← (maps from) source `=foo.baz`
+
+In this scenario, the local `foo` becomes `{bar: 1, baz: null}`, with `baz` (mapped by the later declaration) no longer able to resolve against the parent scope.
+
+**Action:**
+
+- **Running 8.9.15:** Combine the mappings into a single mapping that rebuilds the whole object at once. For example, target `foo` with source `={bar: foo.bar, baz: foo.baz}` instead of mapping `foo.bar` and `foo.baz` separately.
+
+- **Upgrading to 8.9.16+:** The regression is reverted. Mapping individual fields of the same variable works correctly again. The workaround above is no longer required, but is harmless to keep.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Chained input mappings can silently drop FEEL temporal value types {#chained-input-mapping-temporal-type-loss}
+
+**Affected versions:** 8.9.15. Reverted in 8.9.16.
+
+Camunda 8.9.15 introduced a regression affecting elements with two or more input mappings where one mapping produces a FEEL temporal value (`duration`, `date`, `time`, `date-time`, or their local variants) and a later mapping on the same element reads a property from it. The temporal value loses its type, becoming a plain string due to serialization between mapping evaluations before the later mapping runs, so the property access silently evaluates to `null` instead of the expected value. Only temporal types are affected — other FEEL types (strings, numbers, booleans, lists, and contexts) work correctly.
+
+**Example:** An element with these two input mappings:
+
+1. Target `age` ← (maps from) source `=@"P1D"` (a duration)
+2. Target `ageDays` ← (maps from) source `=age.days`
+
+In this scenario, the mapping results in `ageDays` as `null`, as `age`'s duration type is not preserved between the two mappings.
+
+**Action:**
+
+- **Running 8.9.15:** Combine the mappings into a single mapping, so the duration is created and read in the same expression instead of being written to a variable and read back later. For example, target `ageDays` with source `=@"P1D".days` instead of separate `age` and `ageDays` mappings.
+
+- **Upgrading to 8.9.16+:** The regression is reverted. Chained mappings on temporal values work correctly again.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Message TTL cleanup batch size pacing change {#message-ttl-cleanup-batch-size-pacing-change}
+
+Starting in Camunda 8.9.1, expired-message cleanup `MessageBatchExpireProcessor` no longer resumes its RocksDB scan from a continuation cursor across batches. Each cleanup batch now re-scans from the start of the message deadline index and skips over the tombstones of messages already expired earlier in the same drain sequence. This makes cleanup cost per batch sensitive to `ttlCheckerBatchLimit`: a low value (for example, `10`) requires many more restart-scans to drain a backlog of expired messages, which can cause backpressure on normal process and message processing.
+
+`zeebe.broker.experimental.engine.messages.ttlCheckerBatchLimit` defaults to `100`.
+
+**Action:** If you previously tuned `ttlCheckerBatchLimit` down (for example, to `10`) on an earlier patch to avoid latency peaks, revalidate it after upgrading to 8.9.1 or later. Increasing it (for example, to `500`) reduces the number of restart-scans needed to drain a backlog and restores expected throughput.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1391,6 +1621,27 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 </div>
 </div>
 
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Microsoft Teams notifications require app integrations extensions {#teams-notifications-require-app-integrations-extensions}
+
+Camunda 8 SaaS clusters running generation `8.9 gen13` or later deliver user task notifications to Microsoft Teams only when **Enable app integrations extensions** is turned on in the cluster settings. The setting is disabled by default, and only organization admins can change it.
+
+Clusters running earlier generations are unaffected and continue to deliver notifications without additional configuration.
+
+**Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable app integrations extensions** for existing [notification rules](/components/camunda-integrations/app-integrations/notification-rules.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
+
+<p className="link-arrow">[Enable app integrations extensions](/components/saas/clusters/settings.md#enable-app-integrations-extensions)</p>
+
+</div>
+</div>
+
 ## Modeler
 
 <div className="release-announcement-row">
@@ -1406,7 +1657,7 @@ The separate `webapp` component has been removed and its functionality is now co
 
 This change might require updates to your application configuration.
 
-<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+<p class="link-arrow">[Migrate configuration](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
 
 </div>
 </div>
@@ -1438,7 +1689,7 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 </div>
 </div>
@@ -1478,7 +1729,7 @@ You can now invite users who have not yet logged in to Web Modeler by entering t
 
 Inviting the entire organization only applies to users who have logged in at least once.
 
-<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</p>
 
 </div>
 </div>
@@ -1561,32 +1812,29 @@ Instead, users can set the `versionTag` manually in the properties panel for BPM
 </div>
 </div>
 
-## Engine
+## Tasklist
 
-### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
 
-Camunda 8.9.1 introduced a regression where output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to unexpectedly propagate to the parent scope.
+#### Tasklist V1: candidate group task visibility {#tasklist-v1-candidate-group-task-visibility}
 
-**When are you affected?**
+Camunda 8.9.7 introduced a regression in which user tasks become invisible in the Tasklist V1 API when a candidate group's name differs from its ID ([camunda/camunda#55576](https://github.com/camunda/camunda/issues/55576)).
 
-You are affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+With this regression, the Zeebe engine resolves candidate group names to IDs at task creation time, while the Tasklist V1 API resolves the authenticated user's group IDs to names before comparing them against the stored candidate groups. When a group's name and ID differ, this mismatch causes tasks to be invisible to all members of that group.
 
-1. The sub-process defines an output collection.
-2. One or more elements inside the sub-process define output mappings.
+You're affected if you use the Tasklist V1 API with user task access restrictions enabled and any group used as a candidate group in your processes has a name that differs from its ID.
 
-Under these conditions:
+**Workaround:** Set the Zeebe broker environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION` to `false` (default: `true`) and ensure your BPMN models reference candidate groups by name rather than ID. This restores correct task visibility for newly created tasks. Tasks created while the regression was active remain affected.
 
-- Local variables from inside the sub-process appear on the parent scope and are visible in Operate.
-- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
+**Fix:** The fix was released in [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10). After upgrading, tasks created while the regression was active are also fixed without requiring manual intervention.
 
-**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+:::note
+The Tasklist V1 API is deprecated and will be removed in Camunda 8.10. Consider [migrating to the Tasklist V2 API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to avoid disruption when upgrading to 8.10 or later.
+:::
 
-**Fix:** A fix will be available in a later 8.9.x patch. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
-
-- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
-- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
-
-**Action:**
-
-- Before the fix is available: apply the workaround above.
-- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
+</div>
+</div>

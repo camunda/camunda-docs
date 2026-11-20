@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type JobResult =
-  | (object & JobResultUserTask)
-  | (object & JobResultAdHocSubProcess);
+  (object & JobResultUserTask) | (object & JobResultAdHocSubProcess);
 ```
 
 The result of the completed job as determined by the worker.

@@ -19,7 +19,7 @@ Starting from version 8.8, the connector runtime no longer requires a connection
 
 To connect to the **Orchestration Cluster**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration available in the Spring Boot Starter can also be applied to the connector runtime environment.
 
-Below are some of the most common configuration options for the connector runtime. For a complete list, see the [Camunda Spring Boot Starter configuration reference](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe).
+Below are some of the most common configuration options for the connector runtime. For a complete list, see the [Camunda Spring Boot Starter properties reference](/apis-tools/camunda-spring-boot-starter/properties-reference.md).
 
 :::note
 This guide presents configuration properties as environment variables, while the Camunda Spring Boot Starter documentation uses Java configuration properties. The two formats are interchangeable. You can also use Java configuration properties in the connector runtime environment.
@@ -33,11 +33,11 @@ For example, the Java configuration property `camunda.client.grpc-address` can b
 
 To connect to the Orchestration Cluster, provide the following configuration:
 
-<Tabs groupId="connection-url" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_MODE=self-managed
@@ -46,7 +46,7 @@ CAMUNDA_CLIENT_RESTADDRESS=http://localhost:8080
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -63,18 +63,18 @@ camunda:
 
 If using an HTTPS connection, you may need to provide a certificate to validate the Zeebe Gateway's certificate chain.
 
-<Tabs groupId="https-config" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_CACERTIFICATEPATH=/path/to/certificate.pem
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -177,17 +177,17 @@ If you have configured the audiences property for the Orchestration Cluster (`ca
 </TabItem>
 </Tabs>
 
-See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started#self-managed) for more information on authentication properties.
+See the [Camunda Spring Boot Starter documentation](/apis-tools/camunda-spring-boot-starter/configuration.md#authentication) for more information on authentication properties.
 
 ## Configure the Orchestration Cluster connection for SaaS
 
 To use Camunda 8 SaaS, specify the connection properties:
 
-<Tabs groupId="saas-config" defaultValue="saas-environment-variables" queryString values={[
-{label: 'Environment variables', value: 'saas-environment-variables' },
-{label: 'Application.yaml', value: 'saas-application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="saas-environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
@@ -198,7 +198,7 @@ CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 ```
 
 </TabItem>
-<TabItem value="saas-application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -255,6 +255,17 @@ The inbound connector type can be found as `<zeebe:property name="inbound.type" 
 the `inbound.type` property [in the element template](https://github.com/camunda/connectors/blob/8d2304754e202b56ae8c821746e99e1e9ef50c73/connectors/webhook/element-templates/webhook-connector-start-message.json#L51)
 or in the `InboundConnector` annotation.
 
+To run only specific connectors instead, provide a comma-separated list of connector types to `CONNECTOR_INBOUND_ENABLED`
+or `CONNECTOR_OUTBOUND_ENABLED`. The runtime then disables every connector of that direction whose type isn't in the list.
+For example, to run only two outbound connectors:
+
+```bash
+CONNECTOR_OUTBOUND_ENABLED=io.camunda:http-json:1,com.acme:custom-connector:2
+```
+
+Connector types are matched case-insensitively. `CONNECTOR_<DIRECTION>_ENABLED` and `CONNECTOR_<DIRECTION>_DISABLED` are mutually exclusive
+for the same direction. If you set both, the runtime throws an `IllegalStateException`.
+
 ## Disabling connector discovery
 
 :::warning
@@ -268,9 +279,27 @@ set the following environment variables: `CONNECTOR_INBOUND_DISCOVERY_DISABLED` 
 Note that this does not prevent the registration of connectors via Spring Beans or
 other mechanisms.
 
+## Configure inbound webhook request limits
+
+Use the following Spring properties or equivalent environment variables to configure HTTP Webhook request limits:
+
+| Spring property                                           | Environment variable                                      | Default            | Description                                                                                                     |
+| --------------------------------------------------------- | --------------------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `camunda.connector.webhook.max-request-body-bytes`        | `CAMUNDA_CONNECTOR_WEBHOOK_MAX_REQUEST_BODY_BYTES`        | `10485760` (10 MB) | Maximum request body size in bytes, except for `multipart/form-data`. The value must be a non-negative integer. |
+| `camunda.connector.webhook.rate-limit.enabled`            | `CAMUNDA_CONNECTOR_WEBHOOK_RATE_LIMIT_ENABLED`            | `true`             | Enables the global request rate limit shared by all webhook paths.                                              |
+| `camunda.connector.webhook.rate-limit.permits-per-second` | `CAMUNDA_CONNECTOR_WEBHOOK_RATE_LIMIT_PERMITS_PER_SECOND` | `1000`             | Maximum sustained requests per second across all webhook paths. The value must be positive and finite.          |
+| `spring.servlet.multipart.max-file-size`                  | `SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE`                  | `10MB`             | Maximum size of each file in a `multipart/form-data` request.                                                   |
+| `spring.servlet.multipart.max-request-size`               | `SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE`               | `10MB`             | Maximum total size of a `multipart/form-data` request.                                                          |
+
+Requests that exceed a body or multipart limit receive an HTTP `413` response. Requests that exceed the available rate-limit permits receive an HTTP `429` response. These responses have an empty body.
+
+Spring parses `multipart/form-data` requests before the Connector Runtime applies `camunda.connector.webhook.max-request-body-bytes`, so configure multipart limits separately. The global rate limit also applies to multipart requests, but the servlet container can parse them before the rate limit is evaluated. Rate limiting controls sustained throughput across all webhook paths; it does not limit the number of concurrent requests.
+
+The Connector Runtime fails to start if the request-body limit is negative or an enabled rate limit has an invalid permits-per-second value.
+
 ## Secrets
 
-Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
+Providing values for [legacy secret references](/reference/glossary.md#secret-reference-legacy) to the runtime environment can be achieved in different ways, depending on your setup. To move to the recommended `camunda.secrets.<name>` syntax, resolved by the Orchestration Cluster from a configured secret store, see [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md).
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
 [
@@ -311,19 +340,21 @@ When no prefix is configured, the connector runtime logs a warning that this mod
 
 The following environment variables can be used to configure the default secret provider:
 
-| Name                                                       | Description                                                                                                                                                       | Default value |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                                                                                                               | `false`       |
+| Name                                                                  | Description                                                                                                                                                                      | Default value |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`                | Whether the default secret provider is enabled.                                                                                                                                  | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`                 | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe).                | `SECRET_`     |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE`            | Whether the secret provider should be tenant-aware.                                                                                                                              | `false`       |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PHYSICALTENANTAWARE`    | Whether the secret name includes the Physical Tenant ID. See [per-tenant secret access](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access). | `false`       |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PROCESSDEFINITIONAWARE` | Whether the secret name includes the BPMN process ID of the process that references the secret.                                                                                  | `false`       |
 
 If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
 
-Example with empty prefix:
+Example with the default prefix `SECRET_`:
 
 ```bash
 export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
-export tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
+export SECRET_tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
 ```
 
 Example with prefix set:
@@ -333,6 +364,8 @@ export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
 export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
 export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
 ```
+
+If the secret provider is process-definition-aware, the BPMN process ID is added to the secret name, for example `${prefix}${processDefinitionId}_${secretName}`. If you enable several of these options, the secret name contains the Physical Tenant ID, the tenant ID, and the BPMN process ID in this order, separated by `_`, followed by the secret name. For example, `SECRET_tenant1_orderProcess_MY_SECRET` for a tenant-aware and process-definition-aware provider.
 
 </TabItem>
 
@@ -353,7 +386,7 @@ kind: Secret
 metadata:
   name: camunda-connector-secrets
 stringData:
-  MY_SECRET: foo
+  SECRET_MY_SECRET: foo
 ```
 
 Review the documentation on [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) for additional details.
@@ -362,20 +395,20 @@ Review the documentation on [managing secrets in Helm charts](/self-managed/depl
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
-  -e MY_SECRET=secret \              # Set a secret with value
-  -e SECRET_FROM_SHELL \             # Set a secret from the environment
-  --env-file secrets.txt \           # Set secrets from a file
+  -v $PWD/connector.jar:/opt/custom/connector.jar \
+  -e SECRET_MY_SECRET=secret \
+  -e SECRET_FROM_SHELL \
+  --env-file secrets.txt \
   camunda/connectors-bundle:latest
 ```
 
-The secret `MY_SECRET` value is specified directly in the `docker run` call,
+The `-v` option adds a connector JAR to the classpath. The `SECRET_MY_SECRET` value is specified directly in the `docker run` call,
 whereas the `SECRET_FROM_SHELL` is injected based on the value in the
 current shell environment when `docker run` is executed. The `--env-file`
 option allows using a single file with the format `NAME=VALUE` per line
@@ -385,11 +418,11 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/deployment/manual/install.md#connectors-1), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/deployment/manual/install.md#connectors), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
-export MY_SECRET='foo'
+export SECRET_MY_SECRET='foo'
 ```
 
 Reference the secret in the connector's input in the prefixed style `{{secrets.MY_SECRET}}`.
@@ -443,21 +476,297 @@ connectors:
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
+# Mount the secret provider JAR and set the gRPC address of Zeebe
 docker run --rm --name=connectors -d \
-  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \  # Specify secret provider
-  -e CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://ip.address.of.zeebe:26500 \ # Specify grpc Zeebe address
+  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \
+  -e CAMUNDA_CLIENT_GRPCADDRESS=http://ip.address.of.zeebe:26500 \
   camunda/connectors:latest
 ```
 
-In manual installations, add the JAR to the `-cp` argument of the Java call:
+In manual installations, place the JAR in a separate directory and point the Spring Boot loader at it with `loader.path`:
 
 ```bash
-java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
-    io.camunda.connector.runtime.ConnectorRuntimeApplication
+java -Dloader.path=/path/to/secret-providers/ \
+    -cp 'connector-runtime-application-VERSION-with-dependencies.jar' \
+    org.springframework.boot.loader.launch.PropertiesLauncher
 ```
 
 </TabItem>
 </Tabs>
+
+## Secret filter
+
+The secret filter restricts connectors to resolving only the secrets they declare in their own configuration. This prevents a connector from resolving secrets that are available in the runtime environment but not referenced by that connector.
+
+### How the allow-list is built
+
+Every field you configure in a connector's properties panel is implemented as a Zeebe input mapping under the hood, whether it's an authentication field or a functional field like an email body, an HTTP header, or a query parameter. If a field contains a literal `{{secrets.NAME}}` reference, the filter allow-lists `NAME` for that specific field, identified by its field path — not for the connector element as a whole.
+
+The allow-list is built once per element, from the deployed BPMN model, by scanning the literal text of that element's own fields for `{{secrets.NAME}}` references and recording which field each reference belongs to:
+
+- **It's static, not dynamic.** The filter looks at what's literally written in the model, not at what a process variable resolves to at runtime. If a secret value already resolved by one connector task later flows into a different task's field as a plain process variable (for example, `= myVariable`), that's just data at that point. There's no `{{secrets.*}}` placeholder left for the filter to check, so the filter has no say over it either way.
+- **It's scoped to the field, not just the element.** A secret declared on one field (for example, `authentication.password = {{secrets.AUTH}}`) doesn't become resolvable on a _different_ field of the same task, such as an email body. If that other field's runtime value happens to contain the literal text `{{secrets.AUTH}}` — for example, because it evaluates a process variable crafted to contain that string — the filter checks it against that field's own allow-list entry, not `authentication.password`'s, and leaves it unresolved.
+- **One exception: fields the model itself chains together.** If one field's FEEL expression assigns from a name that another field's expression also references (for example, `url = baseUrl + "/path"`, where `baseUrl` is itself another input on the same element), the secret declared on the first field is also allowed on the second — the model author's own expressions connect them. This is still resolved statically, from the deployed model's FEEL expressions, not from arbitrary runtime process-variable content.
+- **It's still per element, not per process.** A secret referenced only on task A never becomes available to task B: task B's allow-list is built only from task B's own fields.
+
+This closes the gap an element-wide allow-list would leave open: declaring a secret anywhere on a task no longer makes it resolvable from every field on that task — only from the field it was declared on (and fields the model explicitly chains to it).
+
+:::note
+For inbound connectors, the allow-list comes from data already held in memory on the deployed element, so there's no remote lookup that can fail. As a result, `LAX` and `STRICT` behave identically for inbound connectors: both enforce the allow-list unconditionally. The distinction between `LAX` and `STRICT` described below only affects outbound connectors, where building the allow-list requires a lookup against the process definition.
+:::
+
+### Modes
+
+Configure the secret filter with the `camunda.connector.secret-resolver.secret-filter.mode` property:
+
+| Mode       | Behavior                                                                                                                                                                                                                                                                                                               |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STRICT`   | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. This is the default. Choose this mode when strict secret isolation is required.                                                                                                 |
+| `LAX`      | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
+| `DISABLED` | All secrets resolve freely, matching the behavior before this feature was introduced. Choose this mode only for troubleshooting, or if a custom secret provider needs unrestricted access.                                                                                                                             |
+
+The allow-list is derived automatically from the fields of the deployed connector element. No manual configuration of individual secrets is required.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE=LAX
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    secret-resolver:
+      secret-filter:
+        mode: LAX
+```
+
+</TabItem>
+</Tabs>
+
+### Configure the mode in the Helm chart
+
+The Helm chart has no dedicated value for the secret filter. Set the mode through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE
+      value: LAX
+```
+
+### Cache configuration
+
+The secret filter caches process definition lookups to avoid repeated API calls. You can configure the cache with the following properties:
+
+| Property                                                         | Environment variable                                          | Description                                     | Default |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- | ------- |
+| `camunda.connector.secret-resolver.secret-filter.cache.enabled`  | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled.                     | `true`  |
+| `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000`  |
+
+### Secure secret usage best practices
+
+- Keep the mode at `STRICT` (the default) in production environments. Reserve `LAX` for cases where a temporary process definition API outage must not block connector jobs, and reserve `DISABLED` for troubleshooting only.
+- Reference only the secrets a connector task actually needs, in the fields that need them. A task that references fewer secrets has a smaller allow-list, which limits what that task can resolve even when its other field values come from untrusted process variables.
+- Scope secrets narrowly, for example one API key per integration or tenant, instead of reusing a single broad-access secret across multiple connector tasks.
+- Under `STRICT`, you don't need to design BPMN diagrams defensively to keep a secret out of a task's other fields. The runtime enforces the allow-list per field: a secret declared on one field of a task isn't resolvable from a different field on that same task, or from a different task, unless the model itself chains them together with a FEEL expression.
+
+### Troubleshooting a secret that stops resolving under STRICT
+
+If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
+
+- For outbound connectors, the element is a supported BPMN type (`ServiceTask`, `SendTask`, `ScriptTask`, `BusinessRuleTask`, `SubProcess`, `IntermediateThrowEvent`, or `EndEvent`) with a `zeebe:input` mapping that contains the secret reference. Unsupported element types and supported elements without such an input mapping are treated as declaring no secrets and deny all resolution under `STRICT`.
+- The secret is referenced using the `{{secrets.NAME}}` syntax in the same field where you expect it to resolve. A reference declared on one field doesn't resolve on a different field, unless the model chains the two fields together with a FEEL expression.
+- The `{{secrets.NAME}}` reference sits inside a JSON string, like any other field value. An unquoted placeholder on a non-string field (for example, `"count": {{secrets.MAX}}`) is never substituted.
+- The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
+
+If you need to keep jobs processing while you investigate, switch to `LAX` temporarily. It falls back to allowing all secrets when the process definition lookup fails.
+
+## Enable credential validation
+
+Credential validation checks the values of a [credential](/components/hub/organization/credentials/index.md) against the system that credential authenticates against, through the `POST /configurations/validate` endpoint of the connector runtime. Camunda Hub calls this endpoint when it validates a credential.
+
+Validation resolves stored secrets to run a validator, so the endpoint is closed by default. Until you configure one of the two modes below, the connector runtime answers `404` to every request. Camunda Hub reads that `404` as a runtime without credential validation support, and hides the feature instead of reporting an error.
+
+Configure credential validation with the following properties:
+
+| Property                                               | Environment variable                                   | Description                                                                                                                                                                                                                          |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `camunda.connector.auth.self-managed.issuer`           | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER`           | The OIDC issuer URL of the identity provider that authenticates your Camunda Hub users. Its discovery endpoint must be reachable from the runtime at startup, and its JWKS endpoint must be reachable whenever a token is validated. |
+| `camunda.connector.auth.self-managed.audience`         | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE`         | The `aud` claim carried by the tokens Camunda Hub forwards to this connector runtime. Required whenever `issuer` is set.                                                                                                             |
+| `camunda.connector.configuration.validation.unsecured` | `CAMUNDA_CONNECTOR_CONFIGURATION_VALIDATION_UNSECURED` | Set to `true` to open the endpoint without authentication. Defaults to `false`. Cannot be combined with `issuer` or `audience`.                                                                                                      |
+
+The two modes are mutually exclusive:
+
+- **Authenticated**: set `issuer` and `audience`. The runtime then accepts only requests that carry a valid token from that identity provider. Use this mode whenever the cluster is registered in Camunda Hub with bearer token authentication.
+- **Unauthenticated**: set `unsecured` to `true`. The runtime then accepts any request that reaches the endpoint, so only use this mode when network controls keep the runtime unreachable from untrusted networks. This is the only mode available to a cluster registered with `NONE` or `BASIC` authentication, because such a cluster has no token to forward.
+
+The runtime fails to start if `unsecured` is `true` and either `issuer` or `audience` is also set.
+
+### Enable authenticated credential validation
+
+To accept authenticated requests, point the connector runtime at the identity provider whose tokens Camunda Hub forwards, and set both properties together:
+
+- An `issuer` without an `audience` fails startup, because the runtime would otherwise accept every token that identity provider signs for any of its clients.
+- An `audience` without an `issuer` leaves credential validation off, so the endpoint keeps answering `404`.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER=https://keycloak.example.com/auth/realms/camunda
+CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE=connectors
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    auth:
+      self-managed:
+        issuer: https://keycloak.example.com/auth/realms/camunda
+        audience: connectors
+```
+
+</TabItem>
+</Tabs>
+
+The connector runtime then accepts a request to `POST /configurations/validate` only if the request carries an `Authorization: Bearer <token>` header with a token that the configured issuer issued, that verifies against the issuer's keys, that has not expired, and that carries the configured audience. The runtime performs no role or claim check beyond that, so still keep the endpoint off untrusted networks.
+
+Only a cluster registered in Camunda Hub with bearer token authentication can supply such a token. For a cluster registered with `NONE` or `BASIC` authentication, use the unauthenticated mode instead.
+
+### Enable credential validation without authentication
+
+To open the endpoint without authentication, for example for a cluster registered with `NONE` or `BASIC` authentication, set `unsecured` to `true` and leave `issuer` and `audience` unset:
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_CONFIGURATION_VALIDATION_UNSECURED=true
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    configuration:
+      validation:
+        unsecured: true
+```
+
+</TabItem>
+</Tabs>
+
+In this mode the runtime verifies nothing about the caller, so anyone who can reach the connector runtime can trigger a validation that resolves stored secrets. Only use it when network controls, such as a private network, a service mesh policy, or an Ingress restriction, prevent untrusted clients from reaching the runtime.
+
+### Configure credential validation in the Helm chart
+
+Set the properties through the generic `connectors.env` value. For the authenticated mode:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER
+      value: https://keycloak.example.com/auth/realms/camunda
+    - name: CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE
+      value: connectors
+```
+
+For the unauthenticated mode, set `CAMUNDA_CONNECTOR_CONFIGURATION_VALIDATION_UNSECURED` to `true` the same way, and leave the two authentication variables unset.
+
+## Intrinsic function allow-list {#intrinsic-function-allow-list}
+
+The intrinsic function allow-list restricts outbound connectors to running only the [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md) calls that the deployed BPMN process declares. Starting with Connectors 8.10.0, the runtime enforces it by default.
+
+### How the allow-list is built
+
+The runtime builds the allow-list from the deployed BPMN model. It scans the `zeebe:input` mappings of the connector element for calls written as literals, such as `{"camunda.function.type": "getText", "params": [document]}`, and records each call by function name and field path.
+
+- A call runs only if its function name and field path both match a declared call exactly. A declaration doesn't cover a field path beneath it.
+- A call that arrives through a process variable or a job variable, and that the model doesn't declare, is refused before the connector runs. The job fails with an error.
+- The runtime reads the deployed model only when a job's variables contain an intrinsic function call. Jobs without calls don't trigger a lookup.
+- The runtime retrieves the process definition the same way the secret filter does, and caches the result.
+
+For the rules that decide which calls count as declared, see [declare intrinsic function calls in the process model](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls).
+
+### Modes
+
+Configure the allow-list with the `camunda.connector.intrinsic-function.allow-list.mode` property:
+
+| Mode       | Behavior                                                                                                                                                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENABLED`  | Runs only the intrinsic function calls that the deployed BPMN model declares. If the runtime can't retrieve the process definition, the Zeebe job fails and retries are triggered. This is the default.                                      |
+| `DISABLED` | Refuses every intrinsic function call without reading the process definition. This mode doesn't allow all calls. Choose it only if the runtime can't reach the process definition lookup and none of your processes use intrinsic functions. |
+
+Unlike the [secret filter](#secret-filter), the allow-list has no `LAX` mode, and `DISABLED` never turns the check off. The allow-list always fails closed.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_MODE=ENABLED
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    intrinsic-function:
+      allow-list:
+        mode: ENABLED
+```
+
+</TabItem>
+</Tabs>
+
+### Configure the mode in the Helm chart
+
+The Helm chart has no dedicated value for the allow-list. Set the mode through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_MODE
+      value: ENABLED
+```
+
+### Cache configuration
+
+The allow-list caches the declared calls of each process definition to avoid repeated lookups. You can configure the cache with the following properties:
+
+| Property                                                         | Environment variable                                          | Description                                                                                                  | Default |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------- |
+| `camunda.connector.intrinsic-function.allow-list.cache.enabled`  | `CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_CACHE_ENABLED` | Whether caching is enabled.                                                                                  | `true`  |
+| `camunda.connector.intrinsic-function.allow-list.cache.max-size` | `CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_CACHE_MAXSIZE` | Maximum number of process definitions to cache.                                                              | `1000`  |
+| `camunda.connector.bpmn-model.cache.enabled`                     | `CAMUNDA_CONNECTOR_BPMNMODEL_CACHE_ENABLED`                   | Whether the cache of deployed BPMN models is enabled. The secret filter and the allow-list share this cache. | `true`  |
+| `camunda.connector.bpmn-model.cache.max-size`                    | `CAMUNDA_CONNECTOR_BPMNMODEL_CACHE_MAXSIZE`                   | Maximum number of deployed BPMN models to cache.                                                             | `1000`  |
+
+### Troubleshoot refused intrinsic function calls
+
+If an intrinsic function call that previously ran now fails the job, see [troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors).
 
 ## HTTP proxy configuration
 
@@ -472,6 +781,74 @@ To configure the truststore, use the following environment variables:
 - `JAVAX_NET_SSL_TRUSTSTORE`: Path to the truststore file (e.g., `/path/to/truststore.jks`)
 - `JAVAX_NET_SSL_TRUSTSTOREPASSWORD`: Password for the truststore
 
+## Configure the App Integrations connection
+
+The [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md) sends messages to Microsoft Teams and Slack through your organization's Camunda app integrations. The runtime holds the connection, so no process model carries an endpoint or a credential.
+
+Configure this only if you have installed app integrations, as described in [Install app integrations](/components/camunda-integrations/app-integrations/installation.md). Until the runtime is configured, every App Integrations job fails with `APP_INTEGRATIONS_NOT_CONFIGURED` and raises an incident.
+
+### Connection settings
+
+| Environment variable          | Helm value                             | Required       | Description                                                                                            |
+| :---------------------------- | :------------------------------------- | :------------- | :----------------------------------------------------------------------------------------------------- |
+| `APP_INTEGRATIONS_BASE_URL`   | `connectors.appIntegrations.baseUrl`   | Yes            | Base URL of your app integrations deployment.                                                          |
+| `APP_INTEGRATIONS_CLUSTER_ID` | `connectors.appIntegrations.clusterId` | With OAuth 2.0 | The cluster's UUID as declared in the app integrations `clusters` configuration, not the cluster name. |
+
+App integrations use the cluster ID to tell which cluster a call comes from. When the runtime authenticates with an API key, app integrations identify the cluster from the key instead, so the cluster ID is optional.
+
+The physical tenant is not configured here. The connector reads it from the job it is executing, as described in [how the runtime identifies the Physical Tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#how-the-runtime-identifies-the-physical-tenant).
+
+### Choose an authentication method
+
+The runtime authenticates with either OAuth 2.0 client credentials or an API key. The method is selected from the values you set, in this order:
+
+1. If the token endpoint, client ID, and client secret are all set, the runtime uses OAuth 2.0 client credentials. This wins even when an API key is also set.
+1. Otherwise, if an API key is set, the runtime uses API key authentication.
+1. Otherwise the connector is not configured, and every job fails.
+
+| Environment variable                           | Helm value                                              | Required    | Description                                                                            |
+| :--------------------------------------------- | :------------------------------------------------------ | :---------- | :------------------------------------------------------------------------------------- |
+| `APP_INTEGRATIONS_API_KEY`                     | `connectors.appIntegrations.apiKey.secret`              | For API key | Sent in the `X-API-KEY` header.                                                        |
+| `APP_INTEGRATIONS_OAUTH_TOKEN_ENDPOINT`        | `connectors.appIntegrations.oauth.tokenEndpoint`        | For OAuth   | OAuth 2.0 token endpoint.                                                              |
+| `APP_INTEGRATIONS_OAUTH_CLIENT_ID`             | `connectors.appIntegrations.oauth.clientId`             | For OAuth   | OAuth 2.0 client ID.                                                                   |
+| `APP_INTEGRATIONS_OAUTH_CLIENT_SECRET`         | `connectors.appIntegrations.oauth.secret`               | For OAuth   | OAuth 2.0 client secret.                                                               |
+| `APP_INTEGRATIONS_OAUTH_AUDIENCE`              | `connectors.appIntegrations.oauth.audience`             | No          | Identifier of the API the token is requested for.                                      |
+| `APP_INTEGRATIONS_OAUTH_SCOPES`                | `connectors.appIntegrations.oauth.scopes`               | No          | Requested token scopes.                                                                |
+| `APP_INTEGRATIONS_OAUTH_CLIENT_AUTHENTICATION` | `connectors.appIntegrations.oauth.clientAuthentication` | No          | How the credentials are transmitted: `credentialsBody` (default) or `basicAuthHeader`. |
+
+### Configure App Integrations with the Helm chart
+
+The two secret values, `apiKey` and `oauth`, take the chart's standard secret block. Reference an existing Kubernetes Secret in production, and use `inlineSecret` only for local testing.
+
+To authenticate with OAuth 2.0 client credentials:
+
+```yaml
+connectors:
+  appIntegrations:
+    baseUrl: https://app-integrations.example.com
+    clusterId: 11111111-2222-3333-4444-555555555555
+    oauth:
+      tokenEndpoint: https://idp.example.com/oauth/token
+      clientId: camunda-app-integrations
+      secret:
+        existingSecret: app-integrations-oauth
+        existingSecretKey: client-secret
+```
+
+To authenticate with an API key, where the cluster ID can be omitted:
+
+```yaml
+connectors:
+  appIntegrations:
+    baseUrl: https://app-integrations.example.com
+    apiKey:
+      secret:
+        existingSecret: app-integrations-api-key
+        existingSecretKey: api-key
+```
+
+The chart rejects a partially configured OAuth block, and OAuth without a cluster ID, at install time rather than at first job execution.
+
 ## Multi-tenancy
 
 The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Admin](/components/admin/tenant.md).
@@ -479,6 +856,8 @@ The Connector Runtime supports multiple tenants for inbound and outbound connect
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
 Zeebe-related operations like handling jobs and publishing messages.
+
+The tenants described on this page are logical tenants. Camunda 8 Self-Managed also supports [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), which are strongly isolated execution units within a single Orchestration Cluster and are configured separately. One Connector Runtime can serve several Physical Tenants, each with its own client, job workers, and secrets. See [Connectors runtime: Physical Tenant support](/self-managed/concepts/physical-tenants/connectors-runtime.md).
 
 :::info
 Support for **outbound connectors** with multiple tenants requires a dedicated
@@ -517,7 +896,7 @@ CAMUNDA_CLIENT_TENANTID=myTenant
 This will change the default tenant ID used for fetching jobs and publishing messages
 to the tenant ID `myTenant`.
 
-It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
+You can adjust the polling interval of connectors polling process definitions from the Orchestration Cluster REST API by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. The variable controls how often connectors fetch the process definitions, in milliseconds. The default is `5000` (5 seconds). For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` configures the connectors to poll every 20 seconds.
 
 Example:
 
@@ -534,7 +913,7 @@ To run the connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS=`myTenant, otherTenant`
+CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS=myTenant,otherTenant
 ```
 
 In this case, the `CAMUNDA_CLIENT_TENANTID` will **not** be used for the
@@ -548,7 +927,7 @@ To restrict the Connector Runtime inbound connector feature to a single tenant o
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Admin.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across all associated components [if not configured in Helm](../../deployment/helm/configure/configure-logical-tenants.md) so users can view any data from tenants for which they have authorizations configured in Admin.
 
 Find more information (including links to component-specific configuration pages) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 
@@ -559,7 +938,7 @@ Find more information (including links to component-specific configuration pages
 The log level can be changed globally by setting the environment variable `LOGGING_LEVEL_IO_CAMUNDA_CONNECTOR=DEBUG`. This changes the default log level for the `io.camunda.connector` package
 to `DEBUG`.
 
-You can can use this package based log level approach also with custom connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
+You can use this package based log level approach also with custom connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
 
 To change the log level for all packages, change it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
 

@@ -1,0 +1,803 @@
+---
+id: modify-process-instance
+title: "Modify process instance"
+sidebar_label: "Modify process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Modify process instance"} <MarkerAddedInVersion version="8.6" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/modification"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Modifies a running process instance.
+This request can contain multiple instructions to activate an element of the process or
+to terminate an active instance of an element.
+
+Use this to repair a process instance that is stuck on an element or took an unintended path.
+For example, because an external system is not available or doesn't respond as expected.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "MODIFY_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance that should be modified.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+            activateInstructions: {
+              description:
+                "Instructions describing which elements to activate in which scopes and which variables to create or update.",
+              type: "array",
+              items: {
+                description: "Instruction describing an element to activate.",
+                type: "object",
+                properties: {
+                  elementId: {
+                    description: "The id of the element to activate.",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
+                  },
+                  variableInstructions: {
+                    description:
+                      "Instructions describing which variables to create or update.",
+                    type: "array",
+                    items: {
+                      type: "object",
+                      description:
+                        "Instruction describing which variables to create or update.",
+                      properties: {
+                        variables: {
+                          description:
+                            "JSON document that will instantiate the variables at the scope defined by the scopeId.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
+                          additionalProperties: true,
+                          type: "object",
+                        },
+                        scopeId: {
+                          description:
+                            "The id of the element in which scope the variables should be created.\nLeave empty to create the variables in the global scope of the process instance.\n",
+                          type: "string",
+                          default: "",
+                        },
+                      },
+                      required: ["variables"],
+                      title: "ModifyProcessInstanceVariableInstruction",
+                    },
+                  },
+                  ancestorElementInstanceKey: {
+                    description:
+                      "The key of the ancestor scope the element instance should be created in.\nSet to -1 to create the new element instance within an existing element instance of the\nflow scope. If multiple instances of the target element's flow scope exist, choose one\nspecifically with this property by providing its key.\n",
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a element instance.",
+                        format: "ElementInstanceKey",
+                        example: "2251799813686789",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ElementInstanceKey",
+                      },
+                    ],
+                  },
+                },
+                required: ["elementId"],
+                title: "ProcessInstanceModificationActivateInstruction",
+              },
+            },
+            moveInstructions: {
+              description:
+                "Instructions describing which elements to move from one scope to another.",
+              type: "array",
+              items: {
+                type: "object",
+                description:
+                  "Instruction describing a move operation. This instruction will terminate active element\ninstances based on the sourceElementInstruction and activate a new element instance for each terminated\none at targetElementId. Note that, for multi-instance activities, only the multi-instance\nbody instances will activate new element instances at the target id.\n",
+                properties: {
+                  sourceElementInstruction: {
+                    description:
+                      "Defines the source element identifier for the move instruction. It can either be a sourceElementId, or sourceElementInstanceKey.\n",
+                    discriminator: {
+                      propertyName: "sourceType",
+                      mapping: {
+                        byId: {
+                          type: "object",
+                          description:
+                            "Defines an instruction with a sourceElementId. The move instruction with this sourceType will terminate all active element\ninstances with the sourceElementId and activate a new element instance for each terminated\none at targetElementId.\n",
+                          properties: {
+                            sourceType: {
+                              description:
+                                "The type of source element instruction.",
+                              type: "string",
+                              example: "byId",
+                            },
+                            sourceElementId: {
+                              description:
+                                "The id of the source element for the move instruction.\n",
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                            },
+                          },
+                          required: ["sourceElementId", "sourceType"],
+                          title: "SourceElementIdInstruction",
+                        },
+                        byKey: {
+                          type: "object",
+                          description:
+                            "Defines an instruction with a sourceElementInstanceKey. The move instruction with this sourceType will terminate one active element\ninstance with the sourceElementInstanceKey and activate a new element instance at targetElementId.\n",
+                          properties: {
+                            sourceType: {
+                              description:
+                                "The type of source element instruction.",
+                              type: "string",
+                              example: "byKey",
+                            },
+                            sourceElementInstanceKey: {
+                              description:
+                                "The source element instance key for the move instruction.\n",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                            },
+                          },
+                          required: ["sourceElementInstanceKey", "sourceType"],
+                          title: "SourceElementInstanceKeyInstruction",
+                        },
+                      },
+                    },
+                    oneOf: [
+                      {
+                        type: "object",
+                        description:
+                          "Defines an instruction with a sourceElementId. The move instruction with this sourceType will terminate all active element\ninstances with the sourceElementId and activate a new element instance for each terminated\none at targetElementId.\n",
+                        properties: {
+                          sourceType: {
+                            description:
+                              "The type of source element instruction.",
+                            type: "string",
+                            example: "byId",
+                          },
+                          sourceElementId: {
+                            description:
+                              "The id of the source element for the move instruction.\n",
+                            allOf: [
+                              {
+                                description:
+                                  "The model-defined id of an element.",
+                                format: "ElementId",
+                                type: "string",
+                                example: "Activity_106kosb",
+                                title: "ElementId",
+                              },
+                            ],
+                          },
+                        },
+                        required: ["sourceElementId", "sourceType"],
+                        title: "SourceElementIdInstruction",
+                      },
+                      {
+                        type: "object",
+                        description:
+                          "Defines an instruction with a sourceElementInstanceKey. The move instruction with this sourceType will terminate one active element\ninstance with the sourceElementInstanceKey and activate a new element instance at targetElementId.\n",
+                        properties: {
+                          sourceType: {
+                            description:
+                              "The type of source element instruction.",
+                            type: "string",
+                            example: "byKey",
+                          },
+                          sourceElementInstanceKey: {
+                            description:
+                              "The source element instance key for the move instruction.\n",
+                            allOf: [
+                              {
+                                description:
+                                  "System-generated key for a element instance.",
+                                format: "ElementInstanceKey",
+                                example: "2251799813686789",
+                                type: "string",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                    type: "string",
+                                    title: "LongKey",
+                                  },
+                                ],
+                                title: "ElementInstanceKey",
+                              },
+                            ],
+                          },
+                        },
+                        required: ["sourceElementInstanceKey", "sourceType"],
+                        title: "SourceElementInstanceKeyInstruction",
+                      },
+                    ],
+                    title: "SourceElementInstruction",
+                  },
+                  targetElementId: {
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
+                    description: "The target element id.",
+                  },
+                  ancestorScopeInstruction: {
+                    description:
+                      'Defines the ancestor scope for the created element instances. The default behavior resembles\na "direct" scope instruction with an `ancestorElementInstanceKey` of `"-1"`.\n',
+                    discriminator: {
+                      propertyName: "ancestorScopeType",
+                      mapping: {
+                        direct: {
+                          type: "object",
+                          description:
+                            "Provides a concrete key to use as ancestor scope for the created element instance.",
+                          properties: {
+                            ancestorScopeType: {
+                              description:
+                                "The type of ancestor scope instruction.",
+                              type: "string",
+                              example: "direct",
+                            },
+                            ancestorElementInstanceKey: {
+                              description:
+                                "The key of the ancestor scope the element instance should be created in.\nSet to -1 to create the new element instance within an existing element instance of the\nflow scope. If multiple instances of the target element's flow scope exist, choose one\nspecifically with this property by providing its key.\n",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                            },
+                          },
+                          required: [
+                            "ancestorElementInstanceKey",
+                            "ancestorScopeType",
+                          ],
+                          title: "DirectAncestorKeyInstruction",
+                        },
+                        inferred: {
+                          type: "object",
+                          description:
+                            "Instructs the engine to derive the ancestor scope key from the source element's hierarchy. The engine traverses the source element's ancestry to find an instance that matches one of the target element's flow scopes, ensuring the target is activated in the correct scope.\n",
+                          properties: {
+                            ancestorScopeType: {
+                              description:
+                                "The type of ancestor scope instruction.",
+                              type: "string",
+                              example: "inferred",
+                            },
+                          },
+                          required: ["ancestorScopeType"],
+                          title: "InferredAncestorKeyInstruction",
+                        },
+                        sourceParent: {
+                          type: "object",
+                          description:
+                            "Instructs the engine to use the source's direct parent key as the ancestor scope key for the target element. This is a simpler alternative to `inferred` that skips hierarchy traversal and directly uses the source's parent key. This is useful when the source and target elements are siblings within the same flow scope.\n",
+                          properties: {
+                            ancestorScopeType: {
+                              description:
+                                "The type of ancestor scope instruction.",
+                              type: "string",
+                              example: "sourceParent",
+                            },
+                          },
+                          required: ["ancestorScopeType"],
+                          title: "UseSourceParentKeyInstruction",
+                        },
+                      },
+                    },
+                    oneOf: [
+                      {
+                        type: "object",
+                        description:
+                          "Provides a concrete key to use as ancestor scope for the created element instance.",
+                        properties: {
+                          ancestorScopeType: {
+                            description:
+                              "The type of ancestor scope instruction.",
+                            type: "string",
+                            example: "direct",
+                          },
+                          ancestorElementInstanceKey: {
+                            description:
+                              "The key of the ancestor scope the element instance should be created in.\nSet to -1 to create the new element instance within an existing element instance of the\nflow scope. If multiple instances of the target element's flow scope exist, choose one\nspecifically with this property by providing its key.\n",
+                            allOf: [
+                              {
+                                description:
+                                  "System-generated key for a element instance.",
+                                format: "ElementInstanceKey",
+                                example: "2251799813686789",
+                                type: "string",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                    type: "string",
+                                    title: "LongKey",
+                                  },
+                                ],
+                                title: "ElementInstanceKey",
+                              },
+                            ],
+                          },
+                        },
+                        required: [
+                          "ancestorElementInstanceKey",
+                          "ancestorScopeType",
+                        ],
+                        title: "DirectAncestorKeyInstruction",
+                      },
+                      {
+                        type: "object",
+                        description:
+                          "Instructs the engine to derive the ancestor scope key from the source element's hierarchy. The engine traverses the source element's ancestry to find an instance that matches one of the target element's flow scopes, ensuring the target is activated in the correct scope.\n",
+                        properties: {
+                          ancestorScopeType: {
+                            description:
+                              "The type of ancestor scope instruction.",
+                            type: "string",
+                            example: "inferred",
+                          },
+                        },
+                        required: ["ancestorScopeType"],
+                        title: "InferredAncestorKeyInstruction",
+                      },
+                      {
+                        type: "object",
+                        description:
+                          "Instructs the engine to use the source's direct parent key as the ancestor scope key for the target element. This is a simpler alternative to `inferred` that skips hierarchy traversal and directly uses the source's parent key. This is useful when the source and target elements are siblings within the same flow scope.\n",
+                        properties: {
+                          ancestorScopeType: {
+                            description:
+                              "The type of ancestor scope instruction.",
+                            type: "string",
+                            example: "sourceParent",
+                          },
+                        },
+                        required: ["ancestorScopeType"],
+                        title: "UseSourceParentKeyInstruction",
+                      },
+                    ],
+                    title: "AncestorScopeInstruction",
+                  },
+                  variableInstructions: {
+                    description:
+                      "Instructions describing which variables to create or update.",
+                    type: "array",
+                    items: {
+                      type: "object",
+                      description:
+                        "Instruction describing which variables to create or update.",
+                      properties: {
+                        variables: {
+                          description:
+                            "JSON document that will instantiate the variables at the scope defined by the scopeId.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
+                          additionalProperties: true,
+                          type: "object",
+                        },
+                        scopeId: {
+                          description:
+                            "The id of the element in which scope the variables should be created.\nLeave empty to create the variables in the global scope of the process instance.\n",
+                          type: "string",
+                          default: "",
+                        },
+                      },
+                      required: ["variables"],
+                      title: "ModifyProcessInstanceVariableInstruction",
+                    },
+                  },
+                },
+                required: ["sourceElementInstruction", "targetElementId"],
+                title: "ProcessInstanceModificationMoveInstruction",
+              },
+              "x-added-in-version": "8.9",
+            },
+            terminateInstructions: {
+              description:
+                "Instructions describing which elements to terminate.",
+              type: "array",
+              items: {
+                description:
+                  "Instruction describing which elements to terminate.",
+                oneOf: [
+                  {
+                    description:
+                      "Instruction describing which elements to terminate. The element instances are determined\nat runtime by the given id.\n",
+                    type: "object",
+                    properties: {
+                      elementId: {
+                        allOf: [
+                          {
+                            description: "The model-defined id of an element.",
+                            format: "ElementId",
+                            type: "string",
+                            example: "Activity_106kosb",
+                            title: "ElementId",
+                          },
+                        ],
+                        description:
+                          "The id of the elements to terminate. The element instances are determined at runtime.",
+                        "x-added-in-version": "8.9",
+                      },
+                    },
+                    required: ["elementId"],
+                    title:
+                      "ProcessInstanceModificationTerminateByIdInstruction",
+                  },
+                  {
+                    description:
+                      "Instruction providing the key of the element instance to terminate.",
+                    type: "object",
+                    properties: {
+                      elementInstanceKey: {
+                        allOf: [
+                          {
+                            description:
+                              "System-generated key for a element instance.",
+                            format: "ElementInstanceKey",
+                            example: "2251799813686789",
+                            type: "string",
+                            allOf: [
+                              {
+                                description:
+                                  "Zeebe Engine resource key (Java long serialized as string)",
+                                type: "string",
+                                title: "LongKey",
+                              },
+                            ],
+                            title: "ElementInstanceKey",
+                          },
+                        ],
+                        description:
+                          "The key of the element instance to terminate.",
+                      },
+                    },
+                    required: ["elementInstanceKey"],
+                    title:
+                      "ProcessInstanceModificationTerminateByKeyInstruction",
+                  },
+                ],
+                title: "ProcessInstanceModificationTerminateInstruction",
+              },
+            },
+          },
+          title: "ProcessInstanceModificationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is modified." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

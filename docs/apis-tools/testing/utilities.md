@@ -120,9 +120,68 @@ void shouldCompleteJobWithExampleData() {
 
 Add example data during modeling to provide context and make writing FEEL expressions easier. By using the same example
 data for mocks, you keep the data in the BPMN process itself and avoid repeating them in the process tests. This can
-simplify your tests and reducing the maintenance effort.
+simplify your tests and reduce the maintenance effort.
 
 :::
+
+### Complete with dynamic variables
+
+With `thenComplete(Function)`, you can complete jobs with variables derived from the job's own variables. Use it when the output depends on the input, such as in a multi-instance activity that runs the same job type once per item.
+
+Your function receives the job's variables, including the variables of the multi-instance scope such as `loopCounter` and the input element. It returns the variables to complete the job with.
+
+```java
+@Test
+void shouldCompleteJobWithDynamicVariables() {
+    // given: mock job worker for the job type "analyze-sample"
+    processTestContext
+        .mockJobWorker("analyze-sample")
+        .thenComplete(jobVariables -> {
+            final boolean firstSample = jobVariables.get("loopCounter").equals(1);
+
+            return Map.of("sampleType", firstSample ? "regolith" : "basalt");
+        });
+
+    // when: create a process instance
+    // then: verify that the process instance completed all tasks
+}
+```
+
+If the function returns `null` or throws an exception, the job fails. The job's retries decrease by one, and an incident is created when no retries are left.
+
+Because a failing job can be retried, the function can run multiple times for the same job. Keep the function free of side effects. [`getInvocations()`](#inspect-mock-invocations) counts every attempt, including retries.
+
+### Complete with a variables table
+
+With `VariablesTable`, you can complete jobs with variables selected from a table of rows. Each row has a `when` condition that is matched against the job's variables, and the variables to return when it matches. Use it for a fixed set of inputs and outputs, without writing conditional logic in the test.
+
+```java
+@Test
+void shouldCompleteJobWithVariablesTable() {
+    // given: mock job worker for the job type "analyze-sample"
+    processTestContext
+        .mockJobWorker("analyze-sample")
+        .thenComplete(
+            VariablesTable.when(Map.of("loopCounter", 1))
+                .thenReturn(Map.of("sampleType", "regolith"))
+                .when(Map.of("loopCounter", 2))
+                .thenReturn(Map.of("sampleType", "basalt"))
+                .when(Map.of())
+                .thenReturn(Map.of("sampleType", "unknown")));
+
+    // when: create a process instance
+    // then: verify that the process instance completed all tasks
+}
+```
+
+The mock evaluates the rows in order, using the following rules:
+
+- The first matching row wins.
+- A row matches when every entry of `when` is present in the job's variables with an equal value. The job can have additional variables.
+- Nested objects and lists are compared as a whole.
+- A `null` value matches only a job variable that is present and has the value `null`. A missing variable never matches.
+- An empty `when` matches every job. Add it as the last row to define a default.
+- If no row matches, the job completes without variables.
 
 ### Throw BPMN error
 
@@ -205,6 +264,7 @@ void shouldInspectMockInvocations() {
 
 You can mock a child process for a call activity to simulate its output without executing the actual child process.
 The mock deploys a dummy process with the given process ID that returns the given variables.
+You can optionally add a version tag. This is required when the call activity uses `bindingType="versionTag"` to resolve the child process by a specific version.
 
 When to use it:
 
@@ -215,16 +275,20 @@ When to use it:
 ```java
 @Test
 void shouldMockChildProcess() {
-    // given: mock child process with the process ID "payment-process"
+    // given: mock child process with the process ID "lunar-lander"
     // 1) Complete the child process without variables
-    processTestContext.mockChildProcess("payment-process");
+    processTestContext.mockChildProcess().withProcessId("lunar-lander").thenComplete();
 
     // 2) Complete the child process with variables
-    final Map<String, Object> variables = Map.of(
-        "paymentStatus", "completed",
-        "transactionId", "TXN-12345"
-    );
-    processTestContext.mockChildProcess("payment-process", variables);
+    final Map<String, Object> variables = Map.of("landingStatus", "nominal");
+    processTestContext.mockChildProcess().withProcessId("lunar-lander").thenComplete(variables);
+
+    // 3) Complete the child process with a version tag
+    // Use when the call activity has bindingType="versionTag"
+    processTestContext.mockChildProcess()
+        .withProcessId("lunar-lander")
+        .withVersionTag("1.7.1")
+        .thenComplete(variables);
 
     // when: create a process instance
     // then: verify that the process instance completed the call activity
@@ -240,9 +304,10 @@ The handler receives the parent variables and returns the child process variable
 @Test
 void shouldMockChildProcess() {
     // given: mock dynamic child process with the process ID "AstronautTrainingProcess"
-    processTestContext.mockChildProcess(
-        "AstronautTrainingProcess",
-        parentVariables -> {
+    processTestContext
+        .mockChildProcess()
+        .withProcessId("AstronautTrainingProcess")
+        .thenComplete(parentVariables -> {
             final String astronautName = (String) parentVariables.get("astronautName");
             final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
 
@@ -563,11 +628,13 @@ void shouldCompleteUserTask() {
 
 ## Update variables
 
-You can update the variables of a process instance, or local variables of a BPMN element, for example, to trigger a BPMN
-conditional event.
+You can update or create variables of a process instance or in the local scope of a BPMN element, for example, to trigger a BPMN conditional event.
 
-To update the local variables of a BPMN element, you need to identify the element using
-an [ElementSelector](#element-selector).
+To target local variables of a specific BPMN element, use an [ElementSelector](#element-selector).
+
+### Update process instance variables
+
+Use `updateVariables()` to update or create variables on a process instance.
 
 ```java
 @Test
@@ -575,7 +642,6 @@ void shouldTriggerConditionalEvent() {
     // given: a process instance is waiting at the conditional event
 
     // when: update the variables to trigger the conditional event
-    // 1) Update process instance variables
     final Map<String, Object> variables = Map.of(
         "priority", 80,
         "riskLevel", "high"
@@ -584,14 +650,30 @@ void shouldTriggerConditionalEvent() {
         ProcessInstanceSelectors.byKey(processInstanceKey),
         variables);
 
-    // 2) Update local variables of the element with ID "sub-process"
-    processTestContext.updateLocalVariables(
-        ProcessInstanceSelectors.byKey(processInstanceKey),
-        ElementSelectors.byId("sub-process"),
-        variables);
-
     // then: verify that the conditional event is completed
 }
+```
+
+### Update local variables
+
+Use `updateLocalVariables()` to propagate variables starting from a given element's scope. The variables are updated on the element or the nearest parent scope where they already exist. If a variable doesn't exist in any scope, it's created on the process instance scope.
+
+```java
+processTestContext.updateLocalVariables(
+    ProcessInstanceSelectors.byKey(processInstanceKey),
+    ElementSelectors.byId("sub-process"),
+    variables);
+```
+
+### Create local variables
+
+Use `createLocalVariables()` to create variables in the local scope of a given element. The variables are created only in the element's scope and are not propagated to parent scopes.
+
+```java
+processTestContext.createLocalVariables(
+    ProcessInstanceSelectors.byKey(processInstanceKey),
+    ElementSelectors.byId("sub-process"),
+    variables);
 ```
 
 ## Resolve incidents
@@ -700,6 +782,9 @@ instance key.
 Predefined incident selectors are available in the `io.camunda.process.test.api.assertions.IncidentSelectors` class.
 
 ```java
+// Assert an incident by the BPMN element ID "approve_request_task"
+assertThatIncident(IncidentSelectors.byElementId("approve_request_task")).isActive();
+
 // Resolve an incident by the BPMN element ID "approve_request_task"
 processTestContext.resolveIncident(IncidentSelectors.byElementId("approve_request_task"));
 ```

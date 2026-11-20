@@ -14,7 +14,7 @@ View and audit a comprehensive record of operations across process, identity, an
 
 ## About
 
-The audit log provides a record of operations, including who performed an operation, when it was performed, and on which entities the operation was performed.
+The audit log provides a record of operations, including who performed an operation (a user, client, or [AI agent](/reference/glossary.md#ai-agent)), when it was performed, and on which entities the operation was performed.
 
 Use the audit log to:
 
@@ -33,7 +33,7 @@ The audit log is enabled by default. Because of the increase in resource usage o
 
 You can configure the audit log to fine tune log thoroughness and resource usage according to your needs:
 
-- [SaaS](../hub/organization/manage-clusters/configure-audit-log.md)
+- [SaaS](../saas/clusters/configure-audit-log.md)
 - [Self-Managed](../../self-managed/concepts/audit-log/configure.md)
 
 ## Get started

@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type DecisionEvaluationKeyFilterProperty =
-  | DecisionEvaluationKeyExactMatch
-  | AdvancedDecisionEvaluationKeyFilter;
+  DecisionEvaluationKeyExactMatch | AdvancedDecisionEvaluationKeyFilter;
 ```
 
 DecisionEvaluationKey property with full advanced search capabilities.

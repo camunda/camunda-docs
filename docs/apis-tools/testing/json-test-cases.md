@@ -9,11 +9,11 @@ import TabItem from "@theme/TabItem";
 
 You can write your process tests in JSON format instead of coding the test logic in Java. The JSON file describes test cases with instructions that align with CPT's assertions and utilities.
 
-CPT's JSON test cases use the same schema as [test scenario files in Play](/components/hub/workspace/modeler/validation/test-scenario-files.md), so you can edit the same files in Play and execute them with CPT.
+CPT's JSON test cases use the same schema as [test files in Test mode](/components/hub/workspace/modeler/validation/test-files.md), so you can edit the same files in Test mode and execute them with CPT.
 
 ## Write a JSON test case
 
-The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json). It defines the following structure:
+The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json). It defines the following structure:
 
 - `testCases`: An array of test cases to be executed.
   - `name`: The name of the test case.
@@ -25,7 +25,7 @@ The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/
 How to start:
 
 1. Create a new JSON file in your test resources folder (for example, `src/test/resources/test-cases/invoice-approval.json`)
-2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json` in the `$schema` property.
+2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json` in the `$schema` property.
    Use the same schema version as the CPT version you are using to ensure compatibility.
 3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your process test.
 
@@ -33,7 +33,7 @@ The basic structure of the JSON file looks like this:
 
 ```JSON
 {
-  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
+  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json",
   "testCases": [
     {
       "name": "My first test case",
@@ -197,7 +197,7 @@ public class MyProcessTest {
 You can find some example process tests using JSON test cases on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
 
 ```json reference referenceLinkText="Source" title="Invoice Approval JSON test case"
-https://github.com/camunda/camunda/blob/stable/8.9/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
+https://github.com/camunda/camunda/blob/stable/8.10/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
 ```
 
 ## Reference: Instructions
@@ -232,7 +232,7 @@ An instruction to assert the evaluation of a decision. See the [assertions docum
   </tr>
   <tr>
     <td>output</td>
-    <td>Expected output of the decision (any JSON type)</td>
+    <td>Expected output of the decision. Can be any JSON type.</td>
     <td>any</td>
     <td>No</td>
     <td></td>
@@ -397,6 +397,82 @@ Example:
   "state": "IS_COMPLETED_IN_ORDER"
 }
 ```
+
+### ASSERT_INCIDENT
+
+An instruction to assert the state and details of an incident. See the [assertions documentation](assertions.md#incident-assertions) for more details.
+
+The instruction waits until the incident is found and fulfills all given expectations. Specify only the properties you want to assert.
+
+<table>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>Instruction type, must be "ASSERT_INCIDENT"</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>incidentSelector</td>
+    <td>The selector to identify the incident.</td>
+    <td><a href="#incident-selector">IncidentSelector</a></td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>state</td>
+    <td>The expected state of the incident.</td>
+    <td>enum: IS_ACTIVE, IS_RESOLVED</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>errorType</td>
+    <td>The expected error type of the incident, for example, <code>JOB_NO_RETRIES</code>. See the <a href="#incident-error-types">list of error types</a>.</td>
+    <td>enum</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>errorMessage</td>
+    <td>The expected error message of the incident.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>elementId</td>
+    <td>The expected ID of the BPMN element where the incident occurred.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_INCIDENT",
+  "incidentSelector": {
+    "elementId": "LaunchRocket"
+  },
+  "state": "IS_ACTIVE",
+  "errorType": "JOB_NO_RETRIES",
+  "errorMessage": "Fuel pressure out of range"
+}
+```
+
+#### Incident error types
+
+The `errorType` property supports the following values: `UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `EXECUTION_LISTENER_NO_RETRIES`, `TASK_LISTENER_NO_RETRIES`, `AD_HOC_SUB_PROCESS_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`, `RESOURCE_NOT_FOUND`, `SECRET_RESOLUTION_ERROR`, and `UNKNOWN_ENUM_VALUE`.
 
 ### ASSERT_PROCESS_INSTANCE
 
@@ -643,6 +719,12 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>Yes</td>
   </tr>
   <tr>
+    <td>satisfiesExpression</td>
+    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable.</td>
+    <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
     <td>satisfiesJudge</td>
     <td>An LLM judge assertion that evaluates the variable against a semantic expectation.</td>
     <td><a href="#judge-assertion">JudgeAssertion</a></td>
@@ -655,6 +737,19 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "variableName": "mission",
+  "satisfiesExpression": "mission.status = \"completed\" and list contains(mission.astronauts, \"Zee\")"
+}
+```
 
 #### Judge Assertion
 
@@ -683,6 +778,12 @@ An LLM-as-judge assertion that evaluates a variable against a semantic expectati
     <td>customPrompt</td>
     <td>A custom prompt for the judge evaluation. Overrides the configured custom prompt.</td>
     <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>attachDocuments</td>
+    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>judge.attach-documents</code> setting. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON.</td>
+    <td>boolean</td>
     <td>No</td>
   </tr>
 </tbody></table>
@@ -1586,6 +1687,13 @@ An instruction to mock a child process. See the [utilities documentation](utilit
     <td>No</td>
     <td></td>
   </tr>
+  <tr>
+    <td>versionTag</td>
+    <td>The version tag for the deployed stub process. Required when the call activity uses <code>bindingType="versionTag"</code>.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
 </tbody></table>
 
 Example:
@@ -1629,8 +1737,15 @@ An instruction to mock a DMN decision. See the [utilities documentation](utiliti
   </tr>
   <tr>
     <td>variables</td>
-    <td>The variables to set as the decision output.</td>
+    <td>The variables to set as the decision output. Deprecated, use <code>decisionOutput</code>.</td>
     <td>object</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>decisionOutput</td>
+    <td>The decision output to mock. Can be any JSON type.</td>
+    <td>any</td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1642,9 +1757,7 @@ Example:
 {
   "type": "MOCK_DMN_DECISION",
   "decisionDefinitionId": "ChooseRocket",
-  "variables": {
-    "rocket": "Falcon Heavy"
-  }
+  "decisionOutput": "Falcon Heavy"
 }
 ```
 
@@ -1682,13 +1795,35 @@ An instruction to mock a job worker who completes jobs. See the [utilities docum
     <td></td>
   </tr>
   <tr>
+    <td>variablesExpression</td>
+    <td>
+      A FEEL expression to evaluate with the job's variables as context. The result is the variables to complete the job with. The expression must evaluate to an object and must not be blank. The leading <code>=</code> is optional. If the expression fails or doesn't evaluate to an object, the job fails.
+    </td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>variablesTable</td>
+    <td>
+      A list of rows to select the variables to complete the job with. Each row has a <code>when</code> object, which is matched against the job's variables, and a <code>variables</code> object to complete the job with. The first matching row is used. If no row matches, the job completes without variables.
+    </td>
+    <td>array of <a href="#variables-table-row">VariablesTableRow</a></td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
     <td>useExampleData</td>
-    <td>Whether to use example data from the BPMN element. If true, the variables property is ignored.</td>
+    <td>Whether to use example data from the BPMN element. If true, the variables property is ignored. You can't combine it with <code>variablesExpression</code> or a non-empty <code>variablesTable</code>.</td>
     <td>boolean</td>
     <td>No</td>
     <td>false</td>
   </tr>
 </tbody></table>
+
+The `variablesExpression` property uses [FEEL](/components/modeler/feel/what-is-feel.md). See [Complete with dynamic variables](utilities.md#complete-with-dynamic-variables) for its behavior and [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules of `variablesTable`.
+
+Set only one of `variables`, `variablesExpression`, `variablesTable`, or `useExampleData`. If you set `variablesExpression` or `variablesTable` together with another of these properties, the instruction fails.
 
 Example:
 
@@ -1700,6 +1835,64 @@ Example:
     "trajectory": "optimal",
     "fuelConsumption": 450
   }
+}
+```
+
+Example with a FEEL expression that derives the variables from the job's variables:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesExpression": "{ sampleType: if loopCounter = 1 then \"regolith\" else \"basalt\" }"
+}
+```
+
+#### Variables Table Row
+
+A row of a variables table. The rows are evaluated in order, and the job is completed with the `variables` of the first row whose `when` matches. See [Complete with a variables table](utilities.md#complete-with-a-variables-table) for the matching rules.
+
+<table style={{width: '90%'}}>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+  </tr>
+  <tr>
+    <td>when</td>
+    <td>The variables to match against the job's variables. Every entry must be present in the job's variables with an equal value. An empty object matches every job.</td>
+    <td>object</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>variables</td>
+    <td>The variables to complete the job with when the row matches.</td>
+    <td>object</td>
+    <td>Yes</td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "MOCK_JOB_WORKER_COMPLETE_JOB",
+  "jobType": "analyze-sample",
+  "variablesTable": [
+    {
+      "when": { "loopCounter": 1 },
+      "variables": { "sampleType": "regolith" }
+    },
+    {
+      "when": { "loopCounter": 2 },
+      "variables": { "sampleType": "basalt" }
+    },
+    {
+      "when": {},
+      "variables": { "sampleType": "unknown" }
+    }
+  ]
 }
 ```
 
@@ -2010,6 +2203,13 @@ An instruction to create or update process instance variables. See the [utilitie
     <td><a href="#element-selector">ElementSelector</a></td>
     <td>No</td>
     <td></td>
+  </tr>
+  <tr>
+    <td>createLocalVariables</td>
+    <td>Whether to create variables locally in the scope of the element (requires <code>elementSelector</code>). When <code>true</code>, variables are created in the element's local scope and are not propagated to parent scopes.</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>false</td>
   </tr>
 </tbody></table>
 

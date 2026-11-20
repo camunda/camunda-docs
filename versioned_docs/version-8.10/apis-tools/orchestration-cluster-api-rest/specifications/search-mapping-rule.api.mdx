@@ -1,0 +1,868 @@
+---
+id: search-mapping-rule
+title: "Search mapping rules"
+sidebar_label: "Search mapping rules"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search mapping rules"} <MarkerAddedInVersion version="8.8" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/mapping-rules/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for mapping rules based on given criteria.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "MAPPING_RULE", permissionType: "READ" }]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 0,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["mappingRuleId", "claimName", "claimValue", "name"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "MappingRuleSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The mapping rule search filters.",
+              allOf: [
+                {
+                  description: "Mapping rule search filter.",
+                  allOf: [
+                    {
+                      description: "Mapping rule search filter fields.",
+                      type: "object",
+                      properties: {
+                        claimName: {
+                          type: "string",
+                          description:
+                            "The claim name to match against a token.",
+                        },
+                        claimValue: {
+                          type: "string",
+                          description: "The value of the claim to match.",
+                        },
+                        name: {
+                          description: "The name of the mapping rule.",
+                          allOf: [
+                            {
+                              description:
+                                "String property with full advanced search capabilities.",
+                              oneOf: [
+                                {
+                                  type: "string",
+                                  title: "Exact match",
+                                  description: "Matches the value exactly.",
+                                },
+                                {
+                                  title: "Advanced filter",
+                                  description: "Advanced string filter.",
+                                  allOf: [
+                                    {
+                                      title: "Advanced filter",
+                                      description:
+                                        "Basic advanced string filter.",
+                                      type: "object",
+                                      properties: {
+                                        $eq: {
+                                          description:
+                                            "Checks for equality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $neq: {
+                                          description:
+                                            "Checks for inequality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $exists: {
+                                          description:
+                                            "Checks if the current property exists.",
+                                          type: "boolean",
+                                        },
+                                        $in: {
+                                          description:
+                                            "Checks if the property matches any of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                        $notIn: {
+                                          description:
+                                            "Checks if the property matches none of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                      },
+                                    },
+                                    {
+                                      type: "object",
+                                      properties: {
+                                        $like: {
+                                          type: "string",
+                                          description:
+                                            "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                          title: "LikeFilter",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              ],
+                              title: "StringFilterProperty",
+                            },
+                          ],
+                        },
+                        mappingRuleId: {
+                          description: "The ID of the mapping rule.",
+                          allOf: [
+                            {
+                              description:
+                                "String property with full advanced search capabilities.",
+                              oneOf: [
+                                {
+                                  type: "string",
+                                  title: "Exact match",
+                                  description: "Matches the value exactly.",
+                                },
+                                {
+                                  title: "Advanced filter",
+                                  description: "Advanced string filter.",
+                                  allOf: [
+                                    {
+                                      title: "Advanced filter",
+                                      description:
+                                        "Basic advanced string filter.",
+                                      type: "object",
+                                      properties: {
+                                        $eq: {
+                                          description:
+                                            "Checks for equality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $neq: {
+                                          description:
+                                            "Checks for inequality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $exists: {
+                                          description:
+                                            "Checks if the current property exists.",
+                                          type: "boolean",
+                                        },
+                                        $in: {
+                                          description:
+                                            "Checks if the property matches any of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                        $notIn: {
+                                          description:
+                                            "Checks if the property matches none of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                      },
+                                    },
+                                    {
+                                      type: "object",
+                                      properties: {
+                                        $like: {
+                                          type: "string",
+                                          description:
+                                            "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                          title: "LikeFilter",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              ],
+                              title: "StringFilterProperty",
+                            },
+                          ],
+                        },
+                      },
+                      title: "MappingRuleFilterFields",
+                    },
+                    {
+                      type: "object",
+                      properties: {
+                        $or: {
+                          description:
+                            'Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  "$or": [\n    { "mappingRuleId": "rule-1" },\n    { "mappingRuleId": "rule-2" }\n  ]\n}\n```\nThis matches mapping rules whose <code>mappingRuleId</code> is <em>rule-1</em> or <em>rule-2</em>.\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n',
+                          type: "array",
+                          nullable: true,
+                          items: {
+                            description: "Mapping rule search filter fields.",
+                            type: "object",
+                            properties: {
+                              claimName: {
+                                type: "string",
+                                description:
+                                  "The claim name to match against a token.",
+                              },
+                              claimValue: {
+                                type: "string",
+                                description: "The value of the claim to match.",
+                              },
+                              name: {
+                                description: "The name of the mapping rule.",
+                                allOf: [
+                                  {
+                                    description:
+                                      "String property with full advanced search capabilities.",
+                                    oneOf: [
+                                      {
+                                        type: "string",
+                                        title: "Exact match",
+                                        description:
+                                          "Matches the value exactly.",
+                                      },
+                                      {
+                                        title: "Advanced filter",
+                                        description: "Advanced string filter.",
+                                        allOf: [
+                                          {
+                                            title: "Advanced filter",
+                                            description:
+                                              "Basic advanced string filter.",
+                                            type: "object",
+                                            properties: {
+                                              $eq: {
+                                                description:
+                                                  "Checks for equality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $neq: {
+                                                description:
+                                                  "Checks for inequality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $exists: {
+                                                description:
+                                                  "Checks if the current property exists.",
+                                                type: "boolean",
+                                              },
+                                              $in: {
+                                                description:
+                                                  "Checks if the property matches any of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                              $notIn: {
+                                                description:
+                                                  "Checks if the property matches none of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: "object",
+                                            properties: {
+                                              $like: {
+                                                type: "string",
+                                                description:
+                                                  "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                                title: "LikeFilter",
+                                              },
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                    title: "StringFilterProperty",
+                                  },
+                                ],
+                              },
+                              mappingRuleId: {
+                                description: "The ID of the mapping rule.",
+                                allOf: [
+                                  {
+                                    description:
+                                      "String property with full advanced search capabilities.",
+                                    oneOf: [
+                                      {
+                                        type: "string",
+                                        title: "Exact match",
+                                        description:
+                                          "Matches the value exactly.",
+                                      },
+                                      {
+                                        title: "Advanced filter",
+                                        description: "Advanced string filter.",
+                                        allOf: [
+                                          {
+                                            title: "Advanced filter",
+                                            description:
+                                              "Basic advanced string filter.",
+                                            type: "object",
+                                            properties: {
+                                              $eq: {
+                                                description:
+                                                  "Checks for equality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $neq: {
+                                                description:
+                                                  "Checks for inequality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $exists: {
+                                                description:
+                                                  "Checks if the current property exists.",
+                                                type: "boolean",
+                                              },
+                                              $in: {
+                                                description:
+                                                  "Checks if the property matches any of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                              $notIn: {
+                                                description:
+                                                  "Checks if the property matches none of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: "object",
+                                            properties: {
+                                              $like: {
+                                                type: "string",
+                                                description:
+                                                  "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                                title: "LikeFilter",
+                                              },
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                    title: "StringFilterProperty",
+                                  },
+                                ],
+                              },
+                            },
+                            title: "MappingRuleFilterFields",
+                          },
+                          "x-added-in-version": "8.10",
+                        },
+                      },
+                    },
+                  ],
+                  title: "MappingRuleFilter",
+                },
+              ],
+            },
+          },
+          title: "MappingRuleSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The mapping rule search result.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["items"],
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching mapping rules.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    claimName: {
+                      type: "string",
+                      description: "The name of the claim to map.",
+                    },
+                    claimValue: {
+                      type: "string",
+                      description: "The value of the claim to map.",
+                    },
+                    name: {
+                      type: "string",
+                      description: "The name of the mapping rule.",
+                    },
+                    mappingRuleId: {
+                      allOf: [
+                        {
+                          example: "my-mapping-rule",
+                          description:
+                            "The unique identifier of a mapping rule.",
+                          format: "MappingRuleId",
+                          type: "string",
+                          title: "MappingRuleId",
+                        },
+                      ],
+                      description: "The ID of the mapping rule.",
+                    },
+                  },
+                  required: [
+                    "claimName",
+                    "claimValue",
+                    "name",
+                    "mappingRuleId",
+                  ],
+                  title: "MappingRuleResult",
+                },
+              },
+            },
+            title: "MappingRuleSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

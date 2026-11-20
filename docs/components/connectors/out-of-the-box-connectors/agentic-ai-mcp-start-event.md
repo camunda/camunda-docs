@@ -13,7 +13,7 @@ The MCP start event is not handled by the Connector Runtime like other Connector
 
 ## Apply the template
 
-1. Open your BPMN process in Modeler or Modeler.
+1. Open your BPMN process in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 2. Select a start event (or add a new one).
 3. In the properties panel, click the element template picker.
 4. Select **MCP start event** from the **AI Tools** category.

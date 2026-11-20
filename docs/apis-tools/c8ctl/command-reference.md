@@ -5,12 +5,9 @@ sidebar_label: "Command reference"
 description: "Complete reference of all c8ctl CLI commands, flags, resources, and aliases — auto-generated from the command registry."
 ---
 
-<!-- Auto-generated from COMMAND_REGISTRY. Do not edit manually.
+<!-- Auto-generated from COMMAND_REGISTRY in the c8ctl repo. Do not edit manually or in camunda-docs.
+     This page is the source of truth in c8ctl and is synced to camunda-docs automatically.
      Run: node --experimental-strip-types scripts/sync-readme-commands.ts --docs -->
-
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. Commands and flags may change without notice between releases. See [Getting started](getting-started.md) for details.
-:::
 
 ## Global Flags
 
@@ -40,6 +37,7 @@ These flags are accepted by every command.
 | `ut` | `user-task` |
 | `vars` | `variable` |
 | `var` | `variable` |
+| `ws` | `wait-state` |
 
 ## Search Flags
 
@@ -90,6 +88,7 @@ List resources
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Filter by Business ID (Camunda 8.9+) |
 | `--bpmnProcessId` | string |  | Filter by BPMN process ID |
 | `--id` | string |  | Filter by BPMN process ID (alias) |
 | `--processDefinitionId` | string |  | Filter by process definition ID |
@@ -225,7 +224,7 @@ c8ctl list users                                            # List users
 
 Search resources with filters (wildcards, date ranges, case-insensitive)
 
-**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule)
+**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule), ws (wait-state)
 
 **Resource-specific flags:**
 
@@ -249,6 +248,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Filter by Business ID (Camunda 8.9+) |
 | `--bpmnProcessId` | string |  | Filter by BPMN process ID |
 | `--id` | string |  | Filter by BPMN process ID (alias) |
 | `--processDefinitionId` | string |  | Filter by process definition ID |
@@ -385,6 +385,20 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 
 </details>
 
+<details>
+<summary><code>wait-state</code> (<code>ws</code>)</summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--processInstanceKey` / `-k` | string |  | Filter by process instance key |
+| `--rootProcessInstanceKey` / `-r` | string |  | Filter by root process instance key |
+| `--elementInstanceKey` / `-e` | string |  | Filter by element instance key |
+| `--elementId` | string |  | Filter by element ID (supports wildcards, e.g. `*Task*`) |
+| `--elementType` | string |  | Filter by BPMN element type (e.g. SERVICE_TASK, USER_TASK, CALL_ACTIVITY) |
+| `--waitStateType` | string |  | Filter by wait state type (JOB, MESSAGE, TIMER, CONDITION, USER_TASK, SIGNAL) |
+
+</details>
+
 **Examples:**
 
 ```bash
@@ -400,6 +414,8 @@ c8ctl search variables --value=foo                          # Search for variabl
 c8ctl search variables --processInstanceKey=123 --fullValue  # Search variables with full values
 c8ctl search pd --iname='*order*'                           # Case-insensitive search by name
 c8ctl search ut --iassignee=John                            # Case-insensitive search by assignee
+c8ctl search ws --waitStateType=JOB                         # Search wait states of type JOB
+c8ctl search ws --elementType=SERVICE_TASK                  # Search wait states on service tasks
 ```
 
 ---
@@ -476,29 +492,77 @@ Create a resource (process instance, identity)
 
 **Resources:** pi (process-instance), user, role, group, tenant, auth (authorization), mapping-rule
 
-**Verb-level flags:**
+**Resource-specific flags:**
+
+<details>
+<summary><code>process-instance</code> (<code>pi</code>)</summary>
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
 | `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
 | `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
-| `--variables` | string |  | JSON variables |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--awaitCompletion` | boolean |  | Wait for process to complete |
 | `--fetchVariables` | boolean |  | Fetch result variables on completion |
 | `--requestTimeout` | string |  | Await timeout in milliseconds |
+
+</details>
+
+<details>
+<summary><code>user</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--username` | string |  | Username |
 | `--name` | string |  | Display name |
 | `--email` | string |  | Email address |
 | `--password` | string |  | Password |
+
+</details>
+
+<details>
+<summary><code>role</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--roleId` | string |  | Role ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>group</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--groupId` | string |  | Group ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>tenant</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--tenantId` | string |  | Tenant ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>mapping-rule</code> (<code>mr</code>)</summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--mappingRuleId` | string |  | Mapping rule ID |
+| `--name` | string |  | Display name |
 | `--claimName` | string |  | Claim name |
 | `--claimValue` | string |  | Claim value |
 
-**Resource-specific flags:**
+</details>
 
 <details>
 <summary><code>authorization</code> (<code>auth</code>)</summary>
@@ -516,7 +580,7 @@ Create a resource (process instance, identity)
 **Examples:**
 
 ```bash
-c8ctl create pi --id=myProcess                              # Create a process instance
+c8ctl create pi --id=myProcess --businessId=order-123       # Create a process instance with a Business ID
 c8ctl create pi --id=myProcess --awaitCompletion            # Create and await completion
 c8ctl create user --username=john --name='John Doe' --email=john@example.com --password=secret  # Create a user
 ```
@@ -562,6 +626,93 @@ Cancel a process instance
 
 ---
 
+### `suspend`
+
+Suspend a process instance (Camunda 8.10+)
+
+**Usage:** `c8ctl suspend <resource> <key>`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (required)
+
+---
+
+### `resume`
+
+Resume a suspended process instance (Camunda 8.10+)
+
+**Usage:** `c8ctl resume <resource> <key>`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (required)
+
+---
+
+### `migrate`
+
+Migrate a process instance, or all active instances of a definition (batch), to another process definition
+
+**Usage:** `c8ctl migrate <resource> [key]`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (optional)
+
+**Flags:**
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--targetProcessDefinitionKey` | string | Yes | Key of the process definition to migrate to |
+| `--map` | string |  | Element mapping as sourceElementId=targetElementId (repeatable) |
+| `--processDefinitionKey` | string |  | Batch mode: migrate all active instances of this source process definition key (omit the instance key) |
+
+**Examples:**
+
+```bash
+c8ctl migrate pi 2251799813685249 --targetProcessDefinitionKey 2251799813686001 --map Task_A=Task_A2  # Migrate a process instance to a new definition
+```
+
+---
+
+### `modify`
+
+Modify a running process instance by activating elements, terminating element instances or moving tokens, or move tokens in all active instances of a definition (batch)
+
+**Usage:** `c8ctl modify <resource> [key]`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (optional)
+
+**Flags:**
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--activate` | string |  | Element ID to activate (repeatable) |
+| `--terminate` | string |  | Element instance key, or element ID for all its active instances (Camunda 8.9+), to terminate (repeatable) |
+| `--move` | string |  | Move as sourceElementId=targetElementId, or sourceElementInstanceKey=targetElementId (repeatable; Camunda 8.9+ for a single instance) |
+| `--instructions` | string |  | Full modification instructions as JSON (or @file.json / @- to read from file/stdin), for ancestor scopes and variables |
+| `--processDefinitionKey` | string |  | Batch mode: move tokens in all active instances of this process definition key (omit the instance key; --move by element ID only) |
+| `--operationReference` | string |  | Optional operation reference (positive integer) |
+
+**Examples:**
+
+```bash
+c8ctl modify pi 2251799813685249 --move Task_Charge=Task_Review  # Move a process instance's token to another element
+```
+
+---
+
 ### `await`
 
 Create and await process instance completion (server-side waiting)
@@ -577,14 +728,15 @@ Create and await process instance completion (server-side waiting)
 | `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
 | `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
 | `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
-| `--variables` | string |  | JSON variables |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--fetchVariables` | boolean |  | Fetch result variables on completion |
 | `--requestTimeout` | string |  | Await timeout in milliseconds |
 
 **Examples:**
 
 ```bash
-c8ctl await pi --id=myProcess                               # Create and wait for completion
+c8ctl await pi --id=myProcess --businessId=claim-456        # Create with a Business ID and wait for completion
 ```
 
 ---
@@ -606,7 +758,7 @@ Complete a user task or job
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--variables` | string |  | JSON variables |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 
 ---
 
@@ -629,6 +781,33 @@ Mark a job as failed with optional error message and retry count
 
 ---
 
+### `update`
+
+Update the retries or timeout of a job. At least one of --retries or --timeout must be provided.
+
+**Resources:** job
+
+**Positional arguments:**
+
+- **job:** `<key>` (required)
+
+**Flags:**
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--retries` | string |  | New number of retries for the job |
+| `--timeout` | string |  | New job timeout in milliseconds |
+| `--operationReference` | string |  | Optional operation reference (long integer) |
+
+**Examples:**
+
+```bash
+c8ctl update job 12345 --retries 3                          # Set the retry count for a job
+c8ctl update job 12345 --timeout 60000                      # Set the job timeout to 60 seconds
+```
+
+---
+
 ### `activate`
 
 Activate jobs of a specific type for processing
@@ -646,6 +825,8 @@ Activate jobs of a specific type for processing
 | `--maxJobsToActivate` | string |  | Maximum number of jobs to activate |
 | `--timeout` | string |  | Job timeout in milliseconds |
 | `--worker` | string |  | Worker name |
+| `--customHeaders` | boolean |  | Include custom headers in output |
+| `--fetchVariable` | string |  | Comma-separated variable names to fetch from the server and include in output |
 
 ---
 
@@ -676,7 +857,7 @@ Publish a message for message correlation
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--correlationKey` | string |  | Correlation key |
-| `--variables` | string |  | JSON variables |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--timeToLive` | string |  | Time to live in milliseconds |
 
 ---
@@ -696,7 +877,7 @@ Correlate a message to a specific process instance
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--correlationKey` | string | Yes | Correlation key |
-| `--variables` | string |  | JSON variables |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--timeToLive` | string |  | Time to live in milliseconds |
 
 ---
@@ -717,7 +898,7 @@ Set variables on an element instance (process instance or flow element scope). V
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--variables` | string | Yes | JSON object of variables to set (required) |
+| `--variables` | string | Yes | JSON object of variables to set, or @file.json / @- to read from file/stdin (required) |
 | `--local` | boolean |  | Set variables in local scope only (default: propagate to outermost scope) |
 
 **Examples:**
@@ -731,7 +912,7 @@ c8ctl set variable 2251799813685249 --variables='{"x":1}' --local  # Set variabl
 
 ### `deploy`
 
-Deploy files to Camunda (auto-discovers deployable files in directories). When deploying a directory that is inside a process application (a parent directory contains a .process-application marker), the entire application root is deployed. Explicit file paths are not expanded.
+Deploy files to Camunda (auto-discovers deployable files in directories). When deploying a directory that is inside a Camunda project (a parent directory contains a camunda.json or .process-application marker), the entire project root is deployed. Explicit file paths are not expanded.
 
 **Usage:** `c8ctl deploy [path...]`
 
@@ -747,7 +928,7 @@ Deploy files to Camunda (auto-discovers deployable files in directories). When d
 
 ```bash
 c8ctl deploy ./my-process.bpmn                              # Deploy a BPMN file
-c8ctl deploy                                                # Deploy from current directory (detects process application root)
+c8ctl deploy                                                # Deploy from current directory (detects Camunda project root)
 ```
 
 ---
@@ -762,13 +943,14 @@ Deploy and start a process instance from a BPMN file
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--variables` | string |  | JSON variables |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--force` | boolean |  | Deploy any file type, ignoring the default extension allow-list |
 
 **Examples:**
 
 ```bash
-c8ctl run ./my-process.bpmn                                 # Deploy and start process
+c8ctl run ./my-process.bpmn --businessId=order-123          # Deploy and start a process with a Business ID
 ```
 
 ---
@@ -852,8 +1034,9 @@ Watch files for changes and auto-deploy
 | `--force` | boolean |  | Continue watching after all deployment errors |
 | `--extensions` | string |  | Comma-separated list of additional file extensions to watch (merged with defaults, e.g. .md,.txt) |
 | `--all-extensions` | boolean |  | Watch all server-supported file extensions |
-| `--process-application` | boolean |  | Watch and deploy the entire process application (requires .process-application marker) |
-| `--pa` | boolean |  | Alias for --process-application |
+| `--project` | boolean |  | Watch and deploy the entire Camunda project (requires camunda.json or .process-application marker) |
+| `--process-application` | boolean |  | Alias for --project (deprecated) |
+| `--pa` | boolean |  | Alias for --project (deprecated) |
 
 **Examples:**
 
@@ -900,11 +1083,14 @@ Add a profile
 | `--clientSecret` | string |  | OAuth client secret |
 | `--audience` | string |  | OAuth audience |
 | `--oAuthUrl` | string |  | OAuth token URL |
+| `--scope` | string |  | OAuth scope (space-separated) |
 | `--defaultTenantId` | string |  | Default tenant ID |
 | `--username` | string |  | Basic auth username |
 | `--password` | string |  | Basic auth password |
 | `--from-file` | string |  | Import from .env file |
 | `--from-env` | boolean |  | Import from environment variables |
+| `--header` | string |  | Custom HTTP header attached to every request made under this profile (format: "Name: value", repeatable) |
+| `--exactBaseUrl` | boolean |  | Use --baseUrl exactly as given for every request, without appending /v2 |
 
 ---
 

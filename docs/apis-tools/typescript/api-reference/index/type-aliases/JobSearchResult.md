@@ -13,6 +13,18 @@ type JobSearchResult = object;
 
 ## Properties
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business ID of the owning process instance, inherited when the job was created.
+This is `null` for jobs created before version 8.10 and for jobs whose owning process
+instance has no business ID.
+
+---
+
 ### creationTime
 
 ```ts
@@ -62,10 +74,10 @@ The reason provided by the user task listener for denying the work.
 ### elementId
 
 ```ts
-elementId: ElementId | null;
+elementId: ElementId;
 ```
 
-The element ID associated with the job. May be missing on job failure.
+The element ID associated with the job.
 
 ---
 

@@ -177,6 +177,12 @@ Create a `config.yaml` file with your configuration settings. This file will be 
 
 The `auth` block must be configured to match the identity provider used in your environment. The `auth.kind` field selects the provider variant, which determines how OIDC discovery, token endpoints, and audience/issuer values are resolved.
 
+Audiences are configured under `auth.audiences`. On Self-Managed, set `auth.audiences.zeebe` to the audience of your Orchestration Cluster API; App Integrations also uses it as the identity audience when requesting tokens. `auth.audiences.global` applies to SaaS only and should be omitted.
+
+:::warning
+The singular `auth.audience` field was removed. A configuration that still uses it is rejected at startup with `auth.audience has been removed; use auth.audiences.{global,zeebe,app_integrations}`.
+:::
+
 <Tabs groupId="identity-provider" defaultValue="keycloak" values={[
 { label: 'Keycloak', value: 'keycloak' },
 { label: 'Entra', value: 'entra' },
@@ -186,15 +192,16 @@ The `auth` block must be configured to match the identity provider used in your 
 
 Set `auth.kind` to `"keycloak"` for Keycloak-based Camunda Self-Managed installations.
 
-| Field                   | Required | Description                                                                                      |
-| :---------------------- | :------- | :----------------------------------------------------------------------------------------------- |
-| `auth.kind`             | Yes      | Set to `keycloak`.                                                                               |
-| `auth.issuer`           | Yes      | The Keycloak realm URL. For example, `https://<your-camunda-host>/auth/realms/camunda-platform`. |
-| `auth.audience`         | Yes      | Typically `camunda-platform`.                                                                    |
-| `auth.m2m.clientId`     | Yes      | M2M client ID from [Step 1](#step-1-create-applications-in-camunda-identity).                    |
-| `auth.m2m.clientSecret` | Yes      | M2M client secret from [Step 1](#step-1-create-applications-in-camunda-identity).                |
-| `auth.spa.clientId`     | Yes      | SPA client ID from [Step 1](#step-1-create-applications-in-camunda-identity).                    |
-| `auth.spa.clientSecret` | Yes      | SPA client secret from [Step 1](#step-1-create-applications-in-camunda-identity).                |
+| Field                             | Required | Description                                                                                                                            |
+| :-------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| `auth.kind`                       | Yes      | Set to `keycloak`.                                                                                                                     |
+| `auth.issuer`                     | Yes      | The Keycloak realm URL. For example, `https://<your-camunda-host>/auth/realms/camunda-platform`.                                       |
+| `auth.audiences.zeebe`            | Yes      | The audience of the Orchestration Cluster API. Typically `camunda-platform`.                                                           |
+| `auth.audiences.app_integrations` | No       | The audience App Integrations accepts on its own inbound API. Required if the exporter authenticates with OAuth instead of an API key. |
+| `auth.m2m.clientId`               | Yes      | M2M client ID from [Step 1](#step-1-create-applications-in-camunda-identity).                                                          |
+| `auth.m2m.clientSecret`           | Yes      | M2M client secret from [Step 1](#step-1-create-applications-in-camunda-identity).                                                      |
+| `auth.spa.clientId`               | Yes      | SPA client ID from [Step 1](#step-1-create-applications-in-camunda-identity).                                                          |
+| `auth.spa.clientSecret`           | Yes      | SPA client secret from [Step 1](#step-1-create-applications-in-camunda-identity).                                                      |
 
 Example:
 
@@ -208,7 +215,8 @@ auth:
     clientId: <your-spa-client-id>
     clientSecret: <your-spa-client-secret>
   issuer: https://<your-camunda-host>/auth/realms/camunda-platform
-  audience: camunda-platform
+  audiences:
+    zeebe: camunda-platform
 ```
 
 </TabItem>
@@ -217,20 +225,21 @@ auth:
 
 Set `auth.kind` to `"entra"` for Microsoft Entra ID (formerly Azure AD) based setups.
 
-| Field                      | Required | Description                                                                                                              |
-| :------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------- |
-| `auth.kind`                | Yes      | Set to `entra`.                                                                                                          |
-| `auth.issuer`              | No       | Derived automatically as `https://login.microsoftonline.com/<tenantId>/v2.0`. Override only if using a custom authority. |
-| `auth.audience`            | No       | Defaults to `auth.spa.clientId`. Override only if using a different audience.                                            |
-| `auth.m2m.clientId`        | Yes      | Entra App Registration client ID for the M2M application.                                                                |
-| `auth.m2m.clientSecret`    | Yes      | Entra App Registration client secret for the M2M application.                                                            |
-| `auth.spa.clientId`        | Yes      | Entra App Registration client ID for the SPA application.                                                                |
-| `auth.spa.clientSecret`    | Yes      | Entra App Registration client secret for the SPA application.                                                            |
-| `auth.entra.tenantId`      | Yes      | The Entra tenant ID.                                                                                                     |
-| `auth.entra.tokenUrl`      | No       | Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                                            |
-| `auth.entra.jwksUrl`       | No       | Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                                          |
-| `auth.entra.scope`         | No       | Defaults to `openid profile offline_access <spa.clientId>/.default`.                                                     |
-| `auth.entra.usernameClaim` | No       | The ID token claim used to resolve the user's email. Default: `preferred_username`.                                      |
+| Field                             | Required | Description                                                                                                                            |
+| :-------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| `auth.kind`                       | Yes      | Set to `entra`.                                                                                                                        |
+| `auth.issuer`                     | No       | Derived automatically as `https://login.microsoftonline.com/<tenantId>/v2.0`. Override only if using a custom authority.               |
+| `auth.audiences.zeebe`            | Yes      | The audience of the Orchestration Cluster API. In Entra setups this is usually the Application ID URI of the M2M app registration.     |
+| `auth.audiences.app_integrations` | No       | The audience App Integrations accepts on its own inbound API. Required if the exporter authenticates with OAuth instead of an API key. |
+| `auth.m2m.clientId`               | Yes      | Entra App Registration client ID for the M2M application.                                                                              |
+| `auth.m2m.clientSecret`           | Yes      | Entra App Registration client secret for the M2M application.                                                                          |
+| `auth.spa.clientId`               | Yes      | Entra App Registration client ID for the SPA application.                                                                              |
+| `auth.spa.clientSecret`           | Yes      | Entra App Registration client secret for the SPA application.                                                                          |
+| `auth.entra.tenantId`             | Yes      | The Entra tenant ID.                                                                                                                   |
+| `auth.entra.tokenUrl`             | No       | Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                                                          |
+| `auth.entra.jwksUrl`              | No       | Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                                                        |
+| `auth.entra.scope`                | No       | Defaults to `openid profile offline_access <auth.audiences.zeebe>/.default`.                                                           |
+| `auth.entra.usernameClaim`        | No       | The ID token claim used to resolve the user's email. Default: `preferred_username`.                                                    |
 
 Example:
 
@@ -243,6 +252,8 @@ auth:
   spa:
     clientId: <your-entra-spa-client-id>
     clientSecret: <your-entra-spa-client-secret>
+  audiences:
+    zeebe: <your-orchestration-cluster-audience>
   entra:
     tenantId: <your-entra-tenant-id>
 ```
@@ -287,7 +298,7 @@ In your deployment, mount the secrets as environment variables on the container 
 
 Replace the placeholder values with your actual settings.
 
-- Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli).
+- Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-camunda-app-using-cli).
 - The `exporter.apiKey` must match the API key configured in the Orchestration Cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter).
 - For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management).
 - See [Auth configuration](#auth-configuration) for the full `auth` block reference.
@@ -306,7 +317,8 @@ auth:
     clientId: <your-spa-client-id>
     clientSecret: <your-spa-client-secret>
   issuer: https://<your-camunda-host>/auth/realms/camunda-platform
-  audience: camunda-platform
+  audiences:
+    zeebe: camunda-platform
 
 db:
   username: <your-postgres-username>
@@ -356,8 +368,8 @@ subscriptions: {}
 :::note
 The `urls.tasklist` field supports two formats:
 
-- **Simple (legacy) format** — a plain URL string (for example, `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
-- **Extended format** — an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (for example, `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customization of the task URL pattern for environments where the default path does not match.
+- **Simple (legacy) format**: a plain URL string (for example, `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
+- **Extended format**: an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (for example, `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customization of the task URL pattern for environments where the default path does not match.
 
 :::
 
@@ -424,11 +436,12 @@ Below is a reference of each section in the `config.yaml` file.
 |                   | `m2m.clientId` / `m2m.clientSecret` | Machine-to-machine OAuth2 credentials for backend services.                                                                                         |
 |                   | `spa.clientId` / `spa.clientSecret` | Single Page Application OAuth2 credentials for frontend.                                                                                            |
 |                   | `issuer`                            | The OAuth2/OIDC issuer URL. Required for Keycloak; auto-derived for Entra.                                                                          |
-|                   | `audience`                          | The OAuth2 audience. Required for Keycloak (typically `camunda-platform`); defaults to `spa.clientId` for Entra.                                    |
+|                   | `audiences.zeebe`                   | _(Required)_ The audience of the Orchestration Cluster API. Typically `camunda-platform` on Keycloak.                                               |
+|                   | `audiences.app_integrations`        | _(Optional)_ The audience App Integrations accepts on its own inbound API, used when the exporter authenticates with OAuth instead of an API key.   |
 |                   | `entra.tenantId`                    | _(Entra only, required)_ The Entra tenant ID.                                                                                                       |
 |                   | `entra.tokenUrl`                    | _(Entra only, optional)_ Token endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                              |
 |                   | `entra.jwksUrl`                     | _(Entra only, optional)_ JWKS endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                             |
-|                   | `entra.scope`                       | _(Entra only, optional)_ OAuth2 scope. Defaults to `openid profile offline_access <spa.clientId>/.default`.                                         |
+|                   | `entra.scope`                       | _(Entra only, optional)_ OAuth2 scope. Defaults to `openid profile offline_access <auth.audiences.zeebe>/.default`.                                 |
 |                   | `entra.usernameClaim`               | _(Entra only, optional)_ ID token claim for the user's email. Default: `preferred_username`.                                                        |
 | **db**            |                                     | PostgreSQL database connection settings.                                                                                                            |
 |                   | `username`                          | Database username.                                                                                                                                  |

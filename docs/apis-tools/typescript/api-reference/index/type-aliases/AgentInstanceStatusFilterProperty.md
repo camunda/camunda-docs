@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AgentInstanceStatusFilterProperty =
-  | AgentInstanceStatusExactMatch
-  | AdvancedAgentInstanceStatusFilter;
+  AgentInstanceStatusExactMatch | AdvancedAgentInstanceStatusFilter;
 ```
 
 AgentInstanceStatusEnum property with full advanced search capabilities.

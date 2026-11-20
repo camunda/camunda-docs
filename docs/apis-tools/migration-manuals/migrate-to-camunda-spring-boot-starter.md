@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-810.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
@@ -44,6 +44,12 @@ Gradle:
 ```groovy
 implementation 'io.camunda:camunda-spring-boot-starter:${8.8.x}'
 ```
+
+## Configuration properties
+
+The Camunda Spring Boot Starter reads `camunda.client.*` properties. Replace `zeebe.client.*` and `camunda.client.zeebe.*` properties with their `camunda.client.*` equivalents.
+
+The starter still reads the legacy properties if you don't set the replacement, but they're deprecated. See [legacy property names](/apis-tools/camunda-spring-boot-starter/configuration.md#legacy-property-names) for the most common renames, and [deprecated properties](/apis-tools/camunda-spring-boot-starter/properties-reference.md#deprecated-properties) for the complete list.
 
 ## Deprecated classes and methods
 

@@ -1487,6 +1487,18 @@ export const configs = [
     area: ["Data"],
   },
   {
+    name: "camunda.data.primary-storage.backup.read-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.primary-storage.backup.write-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
     name: "camunda.data.primary-storage.backup.s3.bucket-name",
     legacy: [
       "zeebe.broker.data.backup.s3.bucketName",
@@ -1862,6 +1874,14 @@ export const configs = [
   {
     name: "camunda.processing.enable-message-body-on-expired",
     legacy: ["zeebe.broker.experimental.features.enableMessageBodyOnExpired"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.evaluate-boundary-event-correlation-key-in-activity-scope",
+    legacy: [
+      "zeebe.broker.experimental.features.evaluateBoundaryEventCorrelationKeyInActivityScope",
+    ],
     types: ["Direct mapping"],
     area: ["Processing"],
   },
