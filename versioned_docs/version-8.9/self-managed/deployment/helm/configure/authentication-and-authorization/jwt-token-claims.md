@@ -114,13 +114,13 @@ orchestration:
         preferUsernameClaim: <true or false>
 ```
 
-| Provider                           | `usernameClaim`                    | `clientIdClaim`                               | `preferUsernameClaim` | Evidence                                                                                 |
-| ---------------------------------- | ---------------------------------- | --------------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------- |
-| Keycloak                           | `sub`                              | `client_id`                                   | `false`               | Measured against Keycloak 26.4 by an automated test on every Camunda build               |
-| Microsoft Entra                    | `preferred_username`               | `azp`                                         | `true`                | Provider documentation, and the configuration that the Camunda Entra guide already ships |
-| Auth0                              | the custom claim of your Action    | `azp`, or `client_id` on the RFC 9068 profile | `true`                | Measured on a Camunda development tenant, plus the provider documentation                |
-| Okta (custom authorization server) | `uid`                              | `cid`                                         | `true`                | Provider documentation only. Not measured against a tenant                               |
-| PingFederate                       | the user attribute of the contract | `client_id`                                   | `true`                | Provider documentation only. Not measured against a tenant                               |
+| Provider                           | `usernameClaim`                    | `clientIdClaim`                               | `preferUsernameClaim` | Evidence                                                                                                                    |
+| ---------------------------------- | ---------------------------------- | --------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Keycloak                           | `sub`                              | `client_id`                                   | `false`               | Measured against Keycloak 26.4 by an automated test on every Camunda build                                                  |
+| Microsoft Entra                    | `preferred_username`               | `azp`                                         | `true`                | Measured on a Camunda development tenant in November 2026, and the configuration that the Camunda Entra guide already ships |
+| Auth0                              | the custom claim of your Action    | `azp`, or `client_id` on the RFC 9068 profile | `true`                | Measured on a Camunda development tenant in November 2026, plus the provider documentation                                  |
+| Okta (custom authorization server) | `uid`                              | `cid`                                         | `true`                | Provider documentation only. Not measured against a tenant                                                                  |
+| PingFederate                       | the user attribute of the contract | `client_id`                                   | `true`                | Provider documentation only. Not measured against a tenant                                                                  |
 
 Do not treat a row that says "not measured" as verified. Decode the first token that your own deployment issues, and confirm the claims before you rely on them.
 
@@ -128,7 +128,11 @@ Do not treat a row that says "not measured" as verified. Decode the first token 
 
 Microsoft Entra is the one provider where the two goals pull apart.
 
-The stable identifiers of a person in Entra, `sub` and `oid`, also appear in an app-only token, where they name the service principal. Neither can separate the two kinds of token. The only user-only claims are `preferred_username`, `upn` and `name`, and Microsoft states that all three are mutable and must not drive authorization decisions.
+The stable identifiers of a person in Entra, `sub` and `oid`, also appear in an app-only token, where they name the service principal. Neither can separate the two kinds of token. The only user-only claims that identify the person are `preferred_username`, `upn` and `name`, and Microsoft states that all three are mutable and must not drive authorization decisions.
+
+A real token pair carries two further user-only claims, and neither can serve as `usernameClaim`. `scp` holds the granted scopes, so every person who calls the same API gets the same value. `sid` is the session identifier, so it changes at every sign-in.
+
+The claims also depend on the kind of account. A member of the tenant carries `upn`. A guest invited from another tenant carries `email` and `idp` instead, and no `upn`. Decode one token of each kind that your own tenant issues before you choose the claim.
 
 An Entra deployment therefore picks one of two:
 
