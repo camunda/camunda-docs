@@ -59,7 +59,18 @@ Camunda 8 SaaS was mitigated on November 18, 2026, and requires no action.
 
 ### How to determine if the installation is affected
 
-Both of the following are true for your deployment:
+Your installation is affected only if you use one of these component versions:
+
+- Camunda Orchestration Cluster ≤ 8.10.9, ≤ 8.9.28, or ≤ 8.8.46
+- Camunda Zeebe, Operate, or Tasklist ≤ 8.7.45 or ≤ 8.6.42
+- Camunda Optimize ≤ 8.10.9, ≤ 8.9.28, ≤ 8.8.46, ≤ 8.7.31, or ≤ 8.6.29
+- Camunda Connectors ≤ 8.10.5, ≤ 8.9.19, ≤ 8.8.26, ≤ 8.7.32, or ≤ 8.6.36
+- Camunda Management Identity ≤ 8.10.4, ≤ 8.9.14, ≤ 8.8.22, or ≤ 8.7.29
+- Camunda Identity ≤ 8.6.35
+- Hub Self-Managed ≤ 8.10.6
+- Web Modeler Self-Managed ≤ 8.9.15, ≤ 8.8.26, or ≤ 8.7.29
+
+and both of the following are true for the deployment that runs it:
 
 - The component runs a Java runtime of OpenJDK 17.0.6 or later, or any release from 18 onward. OpenJDK 8, 11, and 17.0.0 through 17.0.5 are not affected. Every Camunda container image that Camunda examined runs a Java runtime in the affected range. If you install Camunda from a distribution archive, check the Java runtime that you supply.
 - The host CPU supports the AVX-512 VBMI instruction set, which Intel Xeon Ice Lake and newer, and AMD Zen 4 and newer, support. Deployments on ARM64, including AWS Graviton, on older Intel and AMD server processors, or on emulated x86 are not affected, whatever Java runtime they use.
@@ -68,9 +79,18 @@ To check a node, run `grep -m1 '^flags' /proc/cpuinfo | tr ' ' '\n' | grep avx51
 
 ### Solution
 
-Camunda is preparing releases which apply the mitigation below by default. Camunda expects these releases to be available on November 20, 2026, and updates this notice with the fixed versions.
+Camunda has provided the following releases which apply the mitigation by default:
 
-If you can't wait for these releases, apply the mitigation manually: set the environment variable `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` on each Camunda container, and restart the container. Include the Keycloak and Elasticsearch containers that the Helm chart and Docker Compose files deploy, because they run their own Java runtime. The option disables the vulnerable code path, and stopped the memory corruption in every test that Camunda ran. Workloads that decode a lot of Base64 see a small performance cost.
+- Camunda Orchestration Cluster 8.10.10, 8.9.29, 8.8.47
+- Camunda Zeebe, Operate, and Tasklist 8.7.46, 8.6.43
+- Camunda Optimize 8.10.10, 8.9.29, 8.8.47, 8.7.32, 8.6.30
+- Camunda Connectors 8.10.6, 8.9.20, 8.8.27, 8.7.33, 8.6.37
+- Camunda Management Identity 8.10.5, 8.9.15, 8.8.23, 8.7.30
+- Camunda Identity 8.6.36
+- Hub Self-Managed 8.10.7
+- Web Modeler Self-Managed 8.9.16, 8.8.27, 8.7.30
+
+If you can't upgrade yet, apply the mitigation manually: set the environment variable `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` on each Camunda container, and restart the container. Include the Keycloak and Elasticsearch containers that the Helm chart and Docker Compose files deploy, because they run their own Java runtime. The option disables the vulnerable code path, and stopped the memory corruption in every test that Camunda ran. Workloads that decode a lot of Base64 see a small performance cost.
 
 Use `JDK_JAVA_OPTIONS` rather than `JAVA_OPTS`, because some images ignore `JAVA_OPTS` and others use it to replace their default settings. In the Camunda Helm chart, set the variable through the `env` key of each component, as described in [Helm chart application configuration](/self-managed/deployment/helm/configure/application-configs.md). An `env` list replaces the defaults of the chart rather than adding to them, so merge the variable into the `env` entries that you already set.
 
