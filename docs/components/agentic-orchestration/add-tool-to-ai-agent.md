@@ -16,7 +16,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-Learn how to add [tools](/reference/glossary.md#ai-agent-tool) to an AI agent. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for conceptual details.
+Learn how to add BPMN elements, including connectors, as [tools](/reference/glossary.md#ai-agent-tool) to an AI agent. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for conceptual details.
 
 :::note See a full example
 For this in the context of a running AI agent, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).
