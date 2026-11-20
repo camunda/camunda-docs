@@ -21,13 +21,13 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
 
   /**
    * Parse HTML content to extract individual notices using Cheerio
-   * Each notice is an h2 with id=notice-N
+   * Each notice is an h3 with id=notice-N, under a year-based h2
    */
   function parseNotices(htmlContent, pagePath) {
     const $ = cheerio.load(htmlContent);
     const notices = [];
 
-    $('h2[id^="notice-"]').each((_, elem) => {
+    $('h3[id^="notice-"]').each((_, elem) => {
       const $heading = $(elem);
       const noticeNumber = $heading.attr("id").replace("notice-", "");
 
@@ -37,7 +37,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
 
       while (
         $current.next().length &&
-        !$current.next().is('h2[id^="notice-"]')
+        !$current.next().is('h2, details, h3[id^="notice-"]')
       ) {
         $current = $current.next();
         sectionHtml += $current.clone().wrap("<div>").parent().html();
@@ -48,7 +48,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
 
       // Extract publication date
       const publicationDate =
-        $notice('h3[id="publication-date"], h3[id^="publication-date-"]')
+        $notice('h4[id="publication-date"], h4[id^="publication-date-"]')
           .next("p")
           .text()
           .trim() || null;
@@ -56,7 +56,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
       // Extract products affected
       const products = [];
       const productsSection = $notice(
-        'h3[id="products-affected"], h3[id^="products-affected-"]'
+        'h4[id="products-affected"], h4[id^="products-affected-"]'
       );
 
       if (productsSection.length > 0) {
@@ -76,7 +76,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
       }
 
       // Extract impact summary for description
-      const impactText = $notice('h3[id="impact"], h3[id^="impact-"]')
+      const impactText = $notice('h4[id="impact"], h4[id^="impact-"]')
         .next("p")
         .text()
         .trim();
@@ -84,10 +84,10 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
         impactText.substring(0, 200) + (impactText.length > 200 ? "..." : "");
 
       // Clean HTML: remove redundant sections for better UX
-      $notice('h2[id^="notice-"]').remove(); // Remove notice heading (already in title)
+      $notice('h3[id^="notice-"]').remove(); // Remove notice heading (already in title)
 
       // Remove publication date section (heading + paragraph)
-      $notice('h3[id="publication-date"], h3[id^="publication-date-"]').each(
+      $notice('h4[id="publication-date"], h4[id^="publication-date-"]').each(
         (_, elem) => {
           $notice(elem).next("p").remove();
           $notice(elem).remove();
@@ -95,7 +95,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
       );
 
       // Remove products affected section (heading + list or paragraph)
-      $notice('h3[id="products-affected"], h3[id^="products-affected-"]').each(
+      $notice('h4[id="products-affected"], h4[id^="products-affected-"]').each(
         (_, elem) => {
           const nextElem = $notice(elem).next();
           if (nextElem.is("ul") || nextElem.is("p")) {
@@ -106,7 +106,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
       );
 
       // Remove Impact heading (keep the content, just remove the heading label)
-      $notice('h3[id="impact"], h3[id^="impact-"]').remove();
+      $notice('h4[id="impact"], h4[id^="impact-"]').remove();
 
       // Clean HTML: remove hash links, attributes, and convert relative URLs to absolute
       $notice("a.hash-link").remove();
