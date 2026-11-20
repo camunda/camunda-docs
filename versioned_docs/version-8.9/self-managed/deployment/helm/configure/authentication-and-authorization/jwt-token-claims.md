@@ -128,11 +128,11 @@ Do not treat a row that says "not measured" as verified. Decode the first token 
 
 Microsoft Entra is the one provider where the two goals pull apart.
 
-The stable identifiers of a person in Entra, `sub` and `oid`, also appear in an app-only token, where they name the service principal. Neither can separate the two kinds of token. The only user-only claims that identify the person are `preferred_username`, `upn` and `name`, and Microsoft states that all three are mutable and must not drive authorization decisions.
+The stable identifiers of a person in Entra, `sub` and `oid`, also appear in an app-only token, where they name the service principal. Neither can separate the two kinds of token. The user-only claims that identify the person are `preferred_username`, `upn`, `name` and `email`, and Microsoft states that every one of them is mutable and must not drive authorization decisions. Which of them a token carries depends on the account and on the optional claims the application requests.
 
-A real token pair carries two further user-only claims, and neither can serve as `usernameClaim`. `scp` holds the granted scopes, so every person who calls the same API gets the same value. `sid` is the session identifier, so it changes at every sign-in.
+A real token pair carries two further user-only claims, and neither can serve as `usernameClaim`. `scp` holds the scopes that were requested and consented to, so it describes what the token may do and not who holds it, and any number of people share one value. `sid` is the session identifier, so it changes at every sign-in.
 
-The claims also depend on the kind of account. A member of the tenant carries `upn`. A guest invited from another tenant carries `email` and `idp` instead, and no `upn`. Decode one token of each kind that your own tenant issues before you choose the claim.
+The kind of account changes the shape as well. In tokens measured against a Camunda development tenant in November 2026, a member carried `upn` while a guest invited from another tenant carried `email` and `idp` and no `upn`. That is not a rule for every tenant: the optional claim `include_externally_authenticated_upn` puts a `upn` in a guest token, and the claim configuration of the application changes the rest. Decode one token of each kind that your own tenant issues before you choose the claim.
 
 An Entra deployment therefore picks one of two:
 
