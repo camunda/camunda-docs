@@ -234,8 +234,10 @@ c8 cluster start --debug
 ### Supported platforms
 
 - macOS (x86_64, aarch64)
-- Linux (x86_64, aarch64)
+- Linux (x86_64)
 - Windows (x86_64)
+
+These are the platforms the Camunda Download Center publishes Camunda 8 Run for. On any other platform, such as Linux or Windows on arm64, `c8 cluster install` and `c8 cluster start` stop with an explanation instead of downloading. To use your own build, set `C8CTL_C8RUN_DOWNLOAD_URL` to a mirror with the same layout that hosts it.
 
 Cache locations:
 
@@ -274,6 +276,16 @@ export CAMUNDA_CLIENT_ID=your-client-id
 export CAMUNDA_CLIENT_SECRET=your-client-secret
 c8 list pi
 ```
+
+`CAMUNDA_REST_ADDRESS` — the variable name the Camunda SDKs use — is accepted as an alias for `CAMUNDA_BASE_URL`; when both are set, `CAMUNDA_BASE_URL` wins. `CAMUNDA_AUTH_STRATEGY` (`NONE`, `BASIC`, or `OAUTH`) is honoured the same way the SDK honours it, so an SDK project's `.env` works unchanged:
+
+```bash
+export CAMUNDA_REST_ADDRESS=http://localhost:8088
+export CAMUNDA_AUTH_STRATEGY=NONE
+c8 get topology
+```
+
+When credential variables are set without a cluster address variable, `c8ctl` falls back to the default `local` profile and warns which variables are being ignored.
 
 ### Use a profile
 
@@ -548,11 +560,15 @@ This applies whether JSON mode comes from `--json`, `C8CTL_OUTPUT_MODE`, or the 
 | Variable                    | Description          |
 | :-------------------------- | :------------------- |
 | `CAMUNDA_BASE_URL`          | Cluster base URL     |
+| `CAMUNDA_REST_ADDRESS`      | SDK-standard alias for `CAMUNDA_BASE_URL` (`CAMUNDA_BASE_URL` wins when both are set) |
+| `CAMUNDA_AUTH_STRATEGY`     | Authentication strategy: `NONE`, `BASIC`, or `OAUTH` (default: derived from the credentials present) |
 | `CAMUNDA_CLIENT_ID`         | OAuth client ID      |
 | `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
 | `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
 | `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
 | `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
+| `CAMUNDA_USERNAME`          | Basic auth username  |
+| `CAMUNDA_PASSWORD`          | Basic auth password (alias: `CAMUNDA_BASIC_AUTH_PASSWORD`) |
 | `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
