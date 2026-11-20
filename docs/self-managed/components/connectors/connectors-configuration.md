@@ -627,7 +627,7 @@ camunda:
 </TabItem>
 </Tabs>
 
-The connector runtime then accepts a request to `POST /configurations/validate` only if the request carries an `Authorization: Bearer <token>` header with a token that verifies against the configured issuer's keys, is unexpired, and carries the configured audience. The runtime performs no role or claim check beyond that, so still keep the endpoint off untrusted networks.
+The connector runtime then accepts a request to `POST /configurations/validate` only if the request carries an `Authorization: Bearer <token>` header with a token that the configured issuer issued, that verifies against the issuer's keys, that has not expired, and that carries the configured audience. The runtime performs no role or claim check beyond that, so still keep the endpoint off untrusted networks.
 
 Only a cluster registered in Camunda Hub with bearer token authentication can supply such a token. For a cluster registered with `NONE` or `BASIC` authentication, use the unauthenticated mode instead.
 
@@ -659,7 +659,7 @@ camunda:
 </TabItem>
 </Tabs>
 
-In this mode the runtime verifies nothing about the caller, so anyone who can reach the connector runtime can trigger a validation that resolves stored secrets. Only use it when network controls, such as a private network, a service mesh policy, or an ingress restriction, prevent untrusted clients from reaching the runtime.
+In this mode the runtime verifies nothing about the caller, so anyone who can reach the connector runtime can trigger a validation that resolves stored secrets. Only use it when network controls, such as a private network, a service mesh policy, or an Ingress restriction, prevent untrusted clients from reaching the runtime.
 
 ### Configure credential validation in the Helm chart
 
