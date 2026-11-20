@@ -100,3 +100,27 @@ function get_process_definition_instance_version_statistics(CamundaClient $clien
     $client->getProcessDefinitionInstanceVersionStatistics($processDefinitionInstanceVersionStatisticsQuery);
 }
 // endregion GetProcessDefinitionInstanceVersionStatistics
+
+// region SuspendProcessDefinitions
+/**
+ * Suspend process definitions.
+ */
+function suspend_process_definitions(CamundaClient $client, ProcessDefinitionKey $processDefinitionKey): void
+{
+    $client->suspendProcessDefinitions(new \Camunda\Orchestration\Api\Model\ProcessDefinitionSuspensionInstructionByKey([
+        'processDefinitionKey' => $processDefinitionKey,
+    ]));
+}
+// endregion SuspendProcessDefinitions
+
+// region ResumeProcessDefinitions
+/**
+ * Resume process definitions.
+ */
+function resume_process_definitions(CamundaClient $client, ProcessDefinitionKey $processDefinitionKey): void
+{
+    $client->resumeProcessDefinitions(new \Camunda\Orchestration\Api\Model\ProcessDefinitionResumptionInstructionByKey([
+        'processDefinitionKey' => $processDefinitionKey,
+    ]));
+}
+// endregion ResumeProcessDefinitions

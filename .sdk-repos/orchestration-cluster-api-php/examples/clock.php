@@ -29,3 +29,23 @@ function reset_clock(CamundaClient $client): void
     $client->resetClock();
 }
 // endregion ResetClock
+
+// region AddClock
+/**
+ * Advance internal clock (alpha).
+ */
+function add_clock(CamundaClient $client, \Camunda\Orchestration\Api\Model\ClockAddRequest $clockAddRequest): void
+{
+    $client->addClock($clockAddRequest);
+}
+// endregion AddClock
+
+// region GetClock
+/**
+ * Get internal clock (alpha).
+ */
+function get_clock(CamundaClient $client): void
+{
+    $client->getClock();
+}
+// endregion GetClock

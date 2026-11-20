@@ -117,3 +117,13 @@ function search_user_task_variables(CamundaClient $client, UserTaskKey $userTask
     $client->searchUserTaskVariables((string) $userTaskKey, $truncateValues, $userTaskVariableSearchQueryRequest);
 }
 // endregion SearchUserTaskVariables
+
+// region LookupUserTask
+/**
+ * Look up a user task.
+ */
+function lookup_user_task(CamundaClient $client, UserTaskKey $userTaskKey, ?\Camunda\Orchestration\Api\Model\UserTaskLookupRequest $userTaskLookupRequest = null): void
+{
+    $client->lookupUserTask((string) $userTaskKey, $userTaskLookupRequest);
+}
+// endregion LookupUserTask

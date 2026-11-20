@@ -1721,5 +1721,40 @@
       "region": "DeleteUser",
       "label": "Delete user"
     }
+  ],
+  "addClock": [
+    {
+      "file": "clock.php",
+      "region": "AddClock",
+      "label": "Advance internal clock (alpha)"
+    }
+  ],
+  "getClock": [
+    {
+      "file": "clock.php",
+      "region": "GetClock",
+      "label": "Get internal clock (alpha)"
+    }
+  ],
+  "lookupUserTask": [
+    {
+      "file": "user_task.php",
+      "region": "LookupUserTask",
+      "label": "Look up user task"
+    }
+  ],
+  "suspendProcessDefinitions": [
+    {
+      "file": "process_definition.php",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
+    }
+  ],
+  "resumeProcessDefinitions": [
+    {
+      "file": "process_definition.php",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
   ]
 }
