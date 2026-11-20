@@ -1,8 +1,7 @@
 The AI Agent Task generates the following error codes when creating the tool schema from the process definition XML:
 
-| Error code                           | Description                                                                                                                                                                      |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AD_HOC_SUB_PROCESS_XML_FETCH_ERROR` | The process definition XML could not be fetched.                                                                                                                                 |
-| `AD_HOC_SUB_PROCESS_NOT_FOUND`       | The ad-hoc sub-process with the configured ID could not be found in the process definition XML.                                                                                  |
-| `AD_HOC_TOOL_SCHEMA_INVALID`         | The tool schema could not be generated from the tool parameters, for example because of a duplicate or restricted parameter name. The error message contains additional details. |
-| `AD_HOC_TOOL_DEFINITION_INVALID`     | The ad-hoc sub-process contains invalid tool definitions which can't be transformed into a tool schema.                                                                          |
+| Error code                           | Description                                                                                             |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| `AD_HOC_SUB_PROCESS_XML_FETCH_ERROR` | The process definition XML could not be fetched.                                                        |
+| `AD_HOC_SUB_PROCESS_NOT_FOUND`       | The ad-hoc sub-process with the configured ID could not be found in the process definition XML.         |
+| `AD_HOC_TOOL_DEFINITION_INVALID`     | The ad-hoc sub-process contains invalid tool definitions which can't be transformed into a tool schema. |
