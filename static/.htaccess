@@ -72,12 +72,15 @@ RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 
 #---------------------------------------------------------------------------------
-# Product redirects
+# Short URLs
 #
-# Create human-readable URLs to use in products that can't quickly change
-# to match what's in the actual documentation. This protects product links,
-# gives us more control over what product URLs point to, allows products 
-# to link to anchors, and more.
+# Create human-readable URLs to use in products, courses, and other places that 
+# can't quickly change to match what's in the actual documentation. This protects 
+# product links, gives us more control over what product URLs point to, allows 
+# products to link to anchors, and more.
+#
+# Short URLs are permanent, because they may appear in shipped products, courses,
+# and print. Don't remove them or point them at unrelated content.
 #---------------------------------------------------------------------------------
 
 RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
