@@ -992,6 +992,25 @@ This regression affects both Camunda 8 SaaS and Self-Managed.
 </div>
 <div className="release-announcement-content">
 
+#### Git sync rejects Git provider hosts on private networks by default {#git-sync-private-ip-addresses}
+
+Starting with Camunda 8.10.8, Git sync in Camunda Hub rejects Git provider URLs that resolve to private, loopback, or link-local IP addresses. Git sync requests to these hosts fail with a `400 Bad Request` error. Git sync with Azure DevOps keeps its existing checks.
+
+This affects Self-Managed installations that sync with a self-hosted GitLab, GitHub Enterprise, or Bitbucket Data Center instance on a private network. If an HTTP proxy is configured, the proxy resolves hostnames, so the check covers only IP address literals and protection for hostnames depends on the egress rules of your proxy.
+
+**Action:** If your Git provider runs on a private network, set `camunda.hub.git-sync.allow-private-ip-address` (environment variable `CAMUNDA_HUB_GITSYNC_ALLOWPRIVATEIPADDRESS`) to `true` before you upgrade.
+
+<p className="link-arrow">[Git sync configuration](/self-managed/components/hub/configuration/properties.md#git-sync)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Changed default log file name
 
 The log file name in the default Log4j2 configuration changed from `camunda-modeler.log` to `camunda-hub.log`.
