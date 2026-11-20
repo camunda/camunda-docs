@@ -135,7 +135,7 @@ Type: <code>integer</code>
 
 <td>
 
-A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel.
+A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel. For document downloads, it is the size of the buffer that holds the content until the application reads it, not a limit on the document size. The buffer can grow larger if the application reads more slowly than the network delivers the content.
 
 Type: <code>dataSize</code>
 
