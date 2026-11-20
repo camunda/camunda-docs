@@ -22,14 +22,14 @@ A proxy that closes an idle stream shows up on the job streaming worker at regul
 The worker reopens the stream on its own and keeps polling as a backfill, so jobs are not lost, but a job already pushed when the stream is reset waits for its job timeout. The messages repeat for as long as the proxy closes idle streams, and a stream that does not come back is a risk, so fix the cause instead of ignoring the warning.
 
 :::note
-This configuration is _only_ required for reverse proxies which do not support forwarding HTTP/2 keepalive (on either side). See [this nginx ticket](https://trac.nginx.org/nginx/ticket/1887), for example.
+This configuration is _only_ required for reverse proxies which do not support forwarding HTTP/2 keepalive (on either side). See [this `nginx` ticket](https://trac.nginx.org/nginx/ticket/1887), for example.
 
 Proxies which support forwarding HTTP/2 keepalive do not require any change.
 :::
 
 ## Choose a fix
 
-The proxy closes a stream that sends nothing for longer than its idle timeout (60 seconds by default in nginx and ingress-nginx). Job types with few jobs have idle streams most of the time. Change one of the two sides:
+The proxy closes a stream that sends nothing for longer than its idle timeout (60 seconds by default in `nginx` and `ingress-nginx`). Job types with few jobs have idle streams most of the time. Change one of the two sides:
 
 - **Lower the stream timeout on the worker below the proxy idle timeout (recommended).** The worker closes and recreates each stream itself before the proxy does, without an error. No proxy change or reload is needed, and only the workers restart. The cost is one extra stream registration per stream every interval. For a proxy idle timeout of 60 seconds, set the stream timeout to 45 seconds. See the [Java example](../../../../../apis-tools/java-client/job-worker.md#proxying).
 - **Raise the proxy timeouts above the stream timeout.** Streams stay long-lived. Set an explicit stream timeout of one hour on your client, and set the proxy read and send timeouts slightly higher (for example, an hour and ten minutes).
@@ -40,9 +40,9 @@ Set the stream timeout in the Spring Boot Starter with [`camunda.client.worker.d
 
 ## Nginx
 
-Nginx is a known proxy which does not support forward HTTP/2 pings from either side as a form of keepalive. To resolve related gateway timeouts, configure both `grpc_read_timeout` and `grpc_send_timeout` so that they are _higher_ than your job worker stream timeout configuration. The read timeout is the time nginx waits between two reads from the gateway, so it is the one that closes an idle stream.
+`nginx` is a known proxy which does not support forward HTTP/2 pings from either side as a form of keepalive. To resolve related gateway timeouts, configure both `grpc_read_timeout` and `grpc_send_timeout` so that they are _higher_ than your job worker stream timeout configuration. The read timeout is the time `nginx` waits between two reads from the gateway, so it is the one that closes an idle stream.
 
-With the ingress-nginx controller on Kubernetes, set the following annotations on the gateway gRPC ingress, in seconds. For a gRPC backend, they set the `grpc_*` timeouts as well. For example, `4200` is an hour and ten minutes:
+With the `ingress-nginx` controller on Kubernetes, set the following annotations on the gateway gRPC ingress, in seconds. For a gRPC backend, they set the `grpc_*` timeouts as well. For example, `4200` is an hour and ten minutes:
 
 ```yaml
 nginx.ingress.kubernetes.io/proxy-read-timeout: "4200"
