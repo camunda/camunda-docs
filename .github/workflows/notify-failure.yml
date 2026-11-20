@@ -9,9 +9,11 @@ on:
     secrets:
       VAULT_ADDR:
         required: true
-      VAULT_ROLE_ID:
+      VAULT_JWT_PATH:
         required: true
-      VAULT_SECRET_ID:
+      VAULT_JWT_ROLE:
+        required: true
+      VAULT_JWT_AUDIENCE:
         required: true
 
 jobs:
@@ -21,12 +23,13 @@ jobs:
     steps:
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
             secret/data/products/camunda-docs/ci/slack DOCS_NOTIFICATION_WEBHOOK_URL;

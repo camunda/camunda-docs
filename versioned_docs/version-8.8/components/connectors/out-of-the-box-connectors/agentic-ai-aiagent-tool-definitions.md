@@ -200,7 +200,7 @@ To avoid this, use a [unique correlation key per interaction](../../concepts/mes
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
 set its output to a predefined variable name. For the **AI Agent Sub-process** implementation, this variable is predefined as
-`toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](#tools-loop),
+`toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](./agentic-ai-aiagent-task-example.md#tools-loop),
 but is also typically named `toolCallResult`.
 
 Depending on the used task, setting the variable content can be achieved in multiple ways:

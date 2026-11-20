@@ -406,7 +406,7 @@ const SearchableTable = () => {
       name: "Polling",
       description:
         "Poll an endpoint at regular intervals, enabling periodic data fetching.",
-      type: "Outbound",
+      type: "Inbound",
       link: "../../protocol/polling/",
       image: RestImg,
     },

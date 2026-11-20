@@ -61,6 +61,28 @@ historyCleanup:
         cleanupMode: 'variables'
 ```
 
+### Deleting emptied process instance indices
+
+Optimize stores the process instances of each process definition key in its own index, and every index occupies shards in your Elasticsearch or OpenSearch cluster even when it is empty. Process data cleanup removes old process instances, but by default it keeps their index. If many process definition keys stop being used, for example because processes are renamed or replaced, these empty indices accumulate. Once the cluster reaches its shard limit (`cluster.max_shards_per_node`), no new index can be created, which affects all components that use the cluster.
+
+To release these shards, set `historyCleanup.processDataCleanup.deleteEmptyIndices` to `true`. After cleaning up a process definition key, Optimize then deletes that key's process instance index if no process instances are left in it. If new instances of that process are imported later, Optimize recreates the index.
+
+```yaml
+historyCleanup:
+  processDataCleanup:
+    enabled: true
+    deleteEmptyIndices: true
+```
+
+#### Required database privileges
+
+To delete an index safely, Optimize briefly adds a write block to the index, checks again that it is empty, and then deletes it or removes the block. The database user Optimize connects with therefore needs these index privileges on Optimize's indices:
+
+- Elasticsearch: `manage` (to add and remove the write block) and `delete_index`
+- OpenSearch: the `manage` action group, or at least `indices:admin/block/add`, `indices:admin/settings/update` and `indices:admin/delete`
+
+These are included in the default [Elasticsearch](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md#indices-privileges) and [OpenSearch](/self-managed/concepts/databases/elasticsearch/opensearch-privileges.md) privileges. If they are missing, Optimize logs a warning, keeps the index, and tries again on the next cleanup run. Process data cleanup itself isn't affected.
+
 ## Example
 
 Here is an example of what a complete cleanup configuration might look like:

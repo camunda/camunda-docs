@@ -18,7 +18,7 @@ The connector supports the following operations:
 
 ## Prerequisites
 
-To use the **Amazon DynamoDB connector**, you need an AWS account with an access key and secret key to access DynamoDB, and the region where your DynamoDB tables are located. You can create an account and obtain the keys from the [AWS Console](https://aws.amazon.com/console/).
+To use the **Amazon DynamoDB connector**, you need an AWS account with an access key and secret key to access DynamoDB, and the region where your DynamoDB tables are located. You can create an account and obtain the keys from the [AWS Console](https://aws.amazon.com/console/). The key pair isn't required if you use the default credentials chain (hybrid/Self-Managed only).
 
 Learn more about Amazon DynamoDB in the [Amazon DynamoDB documentation](https://docs.aws.amazon.com/dynamodb/index.html).
 

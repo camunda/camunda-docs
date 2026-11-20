@@ -47,6 +47,7 @@ Under the **Settings** tab, you can:
 
 - Leave the organization
 - [Enable alpha features](/components/saas/organization/enable-alpha-features.md)
+- [Set activity retention](/components/saas/organization/view-organization-activity.md#set-activity-retention)
 
 If you are the owner of the organization, you can change the organization name.
 

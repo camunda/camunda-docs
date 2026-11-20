@@ -17,7 +17,7 @@ Create a custom REST connector based on and using the [Camunda REST connector](/
 
 1. In Web Modeler, add a [task](/components/modeler/bpmn/tasks.md) element to a new or existing BPMN diagram.
 1. Change the task type to [REST connector](/components/connectors/protocol/rest.md).
-1. In the Properties panel, configure the connector as required. For example, define the Authentication URL, HTTP method, and any headers or payload needed for the API request.
+1. In the Properties panel, configure the connector as required. For example, define the URL, HTTP method, and any headers or payload needed for the API request.
 1. Click **Save as Template**.
 1. Enter details for the new connector template, such as a name and description. Save and create the new connector template.
 1. Open the new connector template in the template editor and customize it as required. For example, add or remove fields, adjust default values and input parameters, and update the description and other metadata.
@@ -43,7 +43,7 @@ When creating a new template based on the REST connector, you must ensure that a
       "id": "swresource",
       "label": "Type",
       "description": "Choose the resource type",
-      "value": "Planets",
+      "value": "planets",
       "group": "swapi",
       "binding": {
         "name": "resource",
@@ -188,7 +188,7 @@ Once the new connector template is created, edit and configure it to retrieve da
        "id": "swresource",
        "label": "Type",
        "description": "Choose the resource type",
-       "value": "Planets",
+       "value": "planets",
        "group": "swapi",
        "binding": {
          "name": "resource",
@@ -201,8 +201,8 @@ Once the new connector template is created, edit and configure it to retrieve da
            "value": "planets"
          },
          {
-           "name": "Spaceships",
-           "value": "spaceships"
+           "name": "Starships",
+           "value": "starships"
          },
          {
            "name": "Vehicles",
@@ -217,8 +217,8 @@ Once the new connector template is created, edit and configure it to retrieve da
            "value": "films"
          },
          {
-           "name": "species",
-           "value": "Species"
+           "name": "Species",
+           "value": "species"
          }
        ]
      }

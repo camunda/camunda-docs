@@ -118,15 +118,12 @@ To use **Anthropic Claude** models deployed on Azure AI Foundry, configure the [
 
 Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
 
-| Field              | Required | Description                                                                                                                        |
-| ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                       |
-| **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
-| **Authentication** | Yes      | Select the authentication method you want to use for the connector to authenticate with Google Cloud.                              |
-
-:::note
-Timeout settings are currently not supported for Google Vertex AI models.
-:::
+| Field              | Required | Description                                                                                                                                                                                                             |
+| ------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                                                                                                            |
+| **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.                                                                                      |
+| **Authentication** | Yes      | Select the authentication method you want to use for the connector to authenticate with Google Cloud.                                                                                                                   |
+| **Timeout**        | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 Two authentication methods are currently supported:
 

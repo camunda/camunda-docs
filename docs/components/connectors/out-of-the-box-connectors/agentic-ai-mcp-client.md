@@ -22,7 +22,7 @@ The Orchestration Cluster includes two built-in MCP servers that can be used as 
 Camunda's MCP Client enables you to use the [AI Agent connector](./agentic-ai-aiagent.md) together with MCP clients to access tools provided by MCP servers.
 
 :::info
-The MCP Client supports only tool-related functionality. Other MCP features, such as resources or prompts, are not currently supported.
+In [AI Agent tool mode](./agentic-ai-mcp-client-config.md#ai-agent-tool-mode), the MCP Client connectors support only tool-related functionality (`tools/list` and `tools/call`). In [standalone mode](./agentic-ai-mcp-client-config.md#standalone-mode), they also support listing and reading resources, and listing and getting prompts.
 :::
 
 This includes:
