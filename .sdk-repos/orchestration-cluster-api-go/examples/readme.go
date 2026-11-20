@@ -13,6 +13,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"time"
 
@@ -108,6 +109,60 @@ func streamWorker(client *camunda.CamundaClient) {
 		fmt.Println("stream worker stopped:", err)
 	}
 	// endregion StreamWorker
+}
+
+// jobCorrections is the user task listener example.
+func jobCorrections(client *camunda.CamundaClient) {
+	// region JobCorrections
+	// A CompletionHandler returns a JobCompletion, which can carry a job result
+	// alongside the variables. Adapt it for NewJobWorker or NewStreamJobWorker.
+	worker := client.NewJobWorker("io.camunda:userTaskListener",
+		camunda.CompletionHandler(func(ctx context.Context, job *camunda.Job) (camunda.JobCompletion, error) {
+			corrections := camunda.NewJobResultCorrections()
+			corrections.SetAssignee("corrected-user")
+			corrections.SetPriority(80)
+			corrections.SetFollowUpDate(camunda.ClearedDateTime()) // sent as "": removes the follow-up date
+			return camunda.JobCompletion{Result: camunda.CorrectUserTask(*corrections)}, nil
+		}),
+		camunda.WithMaxConcurrentJobs(5),
+	)
+	// endregion JobCorrections
+	_ = worker
+}
+
+// jobCorrectionsDenial denies a task completion from a user task listener.
+func jobCorrectionsDenial() camunda.JobCompletionHandler {
+	return func(ctx context.Context, job *camunda.Job) (camunda.JobCompletion, error) {
+		// region JobCorrectionsDenial
+		return camunda.JobCompletion{
+			Result: camunda.DenyUserTask("Insufficient documentation"),
+		}, nil
+		// endregion JobCorrectionsDenial
+	}
+}
+
+// adHocSubProcessResult is the ad-hoc sub-process job result example.
+func adHocSubProcessResult(client *camunda.CamundaClient) {
+	// region AdHocSubProcessResult
+	// The job of an ad-hoc sub-process decides which inner elements to activate
+	// next, and whether the sub-process is done.
+	worker := client.NewJobWorker("plan-next-steps",
+		camunda.CompletionHandler(func(ctx context.Context, job *camunda.Job) (camunda.JobCompletion, error) {
+			result := camunda.NewJobResultAdHocSubProcess()
+			result.SetActivateElements([]camunda.JobResultActivateElement{
+				camunda.ActivateAdHocElement("review_document", map[string]any{"reviewer": "alice"}),
+				camunda.ActivateAdHocElement("notify_customer", nil),
+			})
+			result.SetIsCompletionConditionFulfilled(false)
+			result.SetIsCancelRemainingInstances(false)
+			return camunda.JobCompletion{
+				Variables: map[string]any{"planned": true},
+				Result:    camunda.AdHocSubProcessJobResult(*result),
+			}, nil
+		}),
+	)
+	// endregion AdHocSubProcessResult
+	_ = worker
 }
 
 func deployAndStart(ctx context.Context, client *camunda.CamundaClient) error {
@@ -262,6 +317,32 @@ func transientRetry() error {
 		}),
 	)
 	// endregion TransientRetry
+	_, _ = client, err
+	return nil
+}
+
+func customTransport() error {
+	// region CustomTransport
+	// WithTransport replaces the base RoundTripper; the SDK's retry, backpressure
+	// and auth layers still apply on top of it.
+	client, err := camunda.New(camunda.WithTransport(&http.Transport{
+		MaxIdleConns:        1024,
+		MaxIdleConnsPerHost: 1024,
+	}))
+	// endregion CustomTransport
+	_, _ = client, err
+	return nil
+}
+
+func customHTTPClient() error {
+	// region CustomHTTPClient
+	// WithHTTPClient replaces the whole HTTP client; it is used as-is, so the
+	// SDK's retry, backpressure, auth and TLS layers are bypassed.
+	client, err := camunda.New(camunda.WithHTTPClient(&http.Client{
+		Transport: &http.Transport{MaxIdleConnsPerHost: 1024},
+		Timeout:   30 * time.Second,
+	}))
+	// endregion CustomHTTPClient
 	_, _ = client, err
 	return nil
 }
