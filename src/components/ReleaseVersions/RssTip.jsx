@@ -24,8 +24,7 @@ export default function RssTip({
   return (
     <Admonition type="tip" icon={<RssIcon />} title={title}>
       <p>
-        Subscribe to the{" "}
-        <Link to={feedUrl}>RSS feed</Link> for {description}.
+        Subscribe to the <Link to={feedUrl}>RSS feed</Link> for {description}.
       </p>
     </Admonition>
   );

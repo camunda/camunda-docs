@@ -13,7 +13,8 @@ import releaseData from '@site/src/data/release-versions.json';
 export const toc = (() => {
 const entries = [{ value: 'About', id: 'about', level: 2 }];
 const seenMonths = new Set();
-for (const { date } of releaseData) {
+const dates = [...new Set(releaseData.map((r) => r.releaseDate))].sort().reverse();
+for (const date of dates) {
 const [year, month, day] = date.split('-').map(Number);
 const monthKey = date.slice(0, 7);
 if (!seenMonths.has(monthKey)) {

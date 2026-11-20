@@ -2,8 +2,26 @@ import React from "react";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
-import releases from "@site/src/data/release-versions.json";
+import entries from "@site/src/data/release-versions.json";
 import styles from "./styles.module.css";
+
+// Each entry in the data file is one release train:
+// { trainName, releaseDate, trainStartDate?, note?, version }.
+// Group the entries by releaseDate, newest date first. Array#sort is stable, so
+// entries that share a date keep their order from the data file.
+const releases = (() => {
+  const sorted = [...entries].sort((a, b) =>
+    b.releaseDate.localeCompare(a.releaseDate)
+  );
+  const byDate = new Map();
+  for (const { releaseDate, trainName, note, version } of sorted) {
+    if (!byDate.has(releaseDate)) {
+      byDate.set(releaseDate, { date: releaseDate, versions: [] });
+    }
+    byDate.get(releaseDate).versions.push({ ...version, trainName, note });
+  }
+  return [...byDate.values()];
+})();
 
 function formatDate(isoDate) {
   const [year, month, day] = isoDate.split("-").map(Number);
@@ -29,24 +47,35 @@ function monthId(isoDate) {
   return isoDate.slice(0, 7);
 }
 
-function minorVersion(saas) {
-  const match = saas.match(/^(\d+\.\d+)/);
-  return match ? match[1] : saas;
+// The minor line comes from the SaaS name (8.9+gen10), or from the Helm chart
+// version (8.9-14.6.0) when a release has no SaaS part.
+function minorVersion({ saas, helm, trainName }) {
+  const match = (saas || helm || trainName || "").match(/^(\d+\.\d+)/);
+  return match ? match[1] : saas || helm || trainName;
 }
 
 function VersionContent({ version }) {
   return (
     <>
       <p>
-        <strong>SaaS:</strong> {version.saas}
+        {version.saas && (
+          <>
+            <strong>SaaS:</strong> {version.saas}
+          </>
+        )}
+        {version.saas && version.helm && <>&nbsp;&nbsp; </>}
         {version.helm && (
           <>
-            {" "}
-            &nbsp;&nbsp; <strong>Self-Managed:</strong> Helm chart{" "}
+            <strong>Self-Managed:</strong> Helm chart{" "}
             {version.helm.replace(/^\d+\.\d+-/, "")}
           </>
         )}
       </p>
+      {version.note && (
+        <div className="alert alert--warning" role="alert">
+          {version.note}
+        </div>
+      )}
       <table>
         <thead>
           <tr>
@@ -58,46 +87,65 @@ function VersionContent({ version }) {
         </thead>
         <tbody>
           {[
-            ...version.components.filter((c) => c.name === "Camunda Platform (Helm)"),
-            ...version.components.filter((c) => c.name !== "Camunda Platform (Helm)"),
+            ...version.components.filter(
+              (c) => c.name === "Camunda Platform (Helm)"
+            ),
+            ...version.components.filter(
+              (c) => c.name !== "Camunda Platform (Helm)"
+            ),
           ].map((component) => {
-            const showLinks = component.name !== "Web Modeler";
-            const githubLink = showLinks && component.links.find((l) => l.label === "GitHub changelog");
-            const dockerLink = showLinks && component.links.find((l) => l.label === "Docker Hub");
+            const githubLink = component.links.find(
+              (l) => l.label === "GitHub changelog"
+            );
+            const dockerLink = component.links.find(
+              (l) => l.label === "Docker Hub"
+            );
             return (
-            <tr key={component.name}>
-              <td>
-                {component.name}
-                {component.subtext && (
-                  <>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "0.85em",
-                        color: "var(--ifm-color-emphasis-700)",
-                      }}
+              <tr key={component.name}>
+                <td>
+                  {component.name}
+                  {component.subtext && (
+                    <>
+                      <br />
+                      <span
+                        style={{
+                          fontSize: "0.85em",
+                          color: "var(--ifm-color-emphasis-700)",
+                        }}
+                      >
+                        ({component.subtext})
+                      </span>
+                    </>
+                  )}
+                </td>
+                <td>{component.version}</td>
+                <td>
+                  {githubLink ? (
+                    <a
+                      href={githubLink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      ({component.subtext})
-                    </span>
-                  </>
-                )}
-              </td>
-              <td>{component.version}</td>
-              <td>
-                {githubLink ? (
-                  <a href={githubLink.url} target="_blank" rel="noopener noreferrer">
-                    GitHub
-                  </a>
-                ) : "-"}
-              </td>
-              <td>
-                {dockerLink ? (
-                  <a href={dockerLink.url} target="_blank" rel="noopener noreferrer">
-                    Docker Hub
-                  </a>
-                ) : "-"}
-              </td>
-            </tr>
+                      GitHub
+                    </a>
+                  ) : (
+                    "-"
+                  )}
+                </td>
+                <td>
+                  {dockerLink ? (
+                    <a
+                      href={dockerLink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Docker Hub
+                    </a>
+                  ) : (
+                    "-"
+                  )}
+                </td>
+              </tr>
             );
           })}
         </tbody>
@@ -109,6 +157,20 @@ function VersionContent({ version }) {
 function ReleaseEntry({ release }) {
   const { versions } = release;
   const multiVersion = versions.length > 1;
+
+  // Tab values are the minor line, so the chosen tab is shared across the page.
+  // Two releases of the same minor on one date (for example a SaaS generation
+  // and a Helm chart fix) need distinct values, so the later one gets its train
+  // name as a suffix.
+  const seenMinors = new Set();
+  const tabs = versions.map((version) => {
+    const minor = minorVersion(version);
+    const value = seenMinors.has(minor)
+      ? `${minor}-${version.trainName}`
+      : minor;
+    seenMinors.add(minor);
+    return { version, minor, value };
+  });
 
   return (
     <section>
@@ -123,15 +185,11 @@ function ReleaseEntry({ release }) {
         {formatDate(release.date)}
       </Heading>
       {multiVersion ? (
-        <Tabs
-          groupId="camunda-version"
-          defaultValue={minorVersion(versions[0].saas)}
-        >
-          {versions.map((version) => {
-            const minor = minorVersion(version.saas);
+        <Tabs groupId="camunda-version" defaultValue={tabs[0].value}>
+          {tabs.map(({ version, minor, value }) => {
             const label = version.label ? `${minor} ${version.label}` : minor;
             return (
-              <TabItem key={version.saas} value={minor} label={label}>
+              <TabItem key={version.trainName} value={value} label={label}>
                 <VersionContent version={version} />
               </TabItem>
             );
@@ -196,9 +254,9 @@ function MonthGroup({ month, monthReleases, isLatest }) {
 export default function ReleaseVersions() {
   const [filterVersion, setFilterVersion] = React.useState("all");
 
-  const allVersions = [...new Set(
-    releases.flatMap((r) => r.versions.map((v) => minorVersion(v.saas)))
-  )].sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+  const allVersions = [
+    ...new Set(releases.flatMap((r) => r.versions.map((v) => minorVersion(v)))),
+  ].sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
 
   const groups = [];
   const seen = new Map();
@@ -207,7 +265,7 @@ export default function ReleaseVersions() {
     const filteredVersions =
       filterVersion === "all"
         ? release.versions
-        : release.versions.filter((v) => minorVersion(v.saas) === filterVersion);
+        : release.versions.filter((v) => minorVersion(v) === filterVersion);
 
     if (filteredVersions.length === 0) continue;
 
