@@ -1375,6 +1375,12 @@ table .badge:nth-of-type(1) {
   vertical-align: text-top;
 }
 
+/* Tighten the gap between an Enterprise badge and the H2 that follows it */
+.markdown > .badge--enterprise-only + h2,
+.markdown p:has(> .badge--enterprise-only) + h2 {
+  --ifm-h2-vertical-rhythm-top: 1;
+}
+
 .badge--consistent {
   background-color: var(--ifm-color-success);
   color: #ffffff;

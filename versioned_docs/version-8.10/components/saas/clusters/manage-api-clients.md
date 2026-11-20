@@ -4,6 +4,10 @@ title: Manage API clients
 description: "Let's create a client and manage our API clients."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 To interact with an orchestration cluster from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
 
 :::note

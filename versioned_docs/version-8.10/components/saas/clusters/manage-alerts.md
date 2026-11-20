@@ -4,7 +4,9 @@ title: Create an alert
 description: "Camunda 8 can notify you when process instances stop with an error."
 ---
 
-Camunda 8 can notify you when process instances stop with an error.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::note
 This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).

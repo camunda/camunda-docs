@@ -5,7 +5,9 @@ sidebar_label: Connect an external identity provider
 description: "Register a custom OpenID Connect (OIDC) identity provider for a Camunda 8 SaaS cluster so your users can sign in with your organization's own IdP."
 ---
 
-Register one custom OpenID Connect (OIDC) identity provider for a cluster so your users can sign in with your organization's own identity provider (IdP), alongside Camunda's built-in provider.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 This setting requires a cluster on Camunda 8.10.1 or any later version. Only organization admins can change it.
 

@@ -4,6 +4,10 @@ title: Cluster Metrics endpoint
 description: Learn how to expose and consume Camunda 8 SaaS cluster metrics using the Cluster Metrics endpoint.
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 The Cluster Metrics endpoint lets you expose metrics from a Camunda 8 SaaS Orchestration cluster and consume them in your own monitoring system.
 
 ## About

@@ -4,10 +4,11 @@ title: Manage your cluster
 description: "Follow these steps to rename, resume, update, resize, or delete your cluster."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Learn how to rename, resume, update, resize, or delete your cluster.
+<PageDescription />
 
 :::note
 This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).
