@@ -1861,6 +1861,7 @@ module.exports = {
     },
     "reference/announcements-release-notes/release-policy",
     "reference/notices",
+    "reference/release-versions",
     "reference/licenses",
     "reference/public-api",
     "reference/supported-environments",
