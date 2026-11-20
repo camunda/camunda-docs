@@ -96,7 +96,23 @@ If you can't upgrade yet, apply the mitigation manually: set the environment var
 
 Use `JDK_JAVA_OPTIONS` rather than `JAVA_OPTS`, because some images ignore `JAVA_OPTS` and others use it to replace their default settings. In the Camunda Helm chart, set the variable through the `env` key of each component, as described in [Helm chart application configuration](/self-managed/deployment/helm/configure/application-configs.md). An `env` list replaces the defaults of the chart rather than adding to them, so merge the variable into the `env` entries that you already set.
 
-A Java option only applies to processes that start after you set it, so the restart is required. To confirm that a container picked up the setting, run `kubectl logs <pod-name> | grep "Picked up JDK_JAVA_OPTIONS"`.
+A Java option only applies to processes that start after you set it, so the restart is required. To confirm that a container picked up the setting, do these checks. Always set the container with `-c`, because some pods also run init containers.
+
+1. Examine the startup log of the container. The output must show `-XX:-UseBASE64Intrinsics`:
+
+   ```shell
+   kubectl logs <pod-name> -c <container-name> | grep "Picked up JDK_JAVA_OPTIONS"
+   ```
+
+   If the log no longer starts at container startup, do step 2.
+
+2. Examine the environment of the container. The output must show `-XX:-UseBASE64Intrinsics`:
+
+   ```shell
+   kubectl exec <pod-name> -c <container-name> -- printenv JDK_JAVA_OPTIONS
+   ```
+
+Do not use `ps` to find the option. The JVM reads `JDK_JAVA_OPTIONS` from the environment, so the option is not on the process command line.
 
 ## Notice 82
 
