@@ -19,7 +19,7 @@ A proxy that closes an idle stream shows up on the job streaming worker at regul
   io.grpc.StatusRuntimeException: INTERNAL: RST_STREAM closed stream. HTTP/2 error code: INTERNAL_ERROR
   ```
 
-The worker reopens the stream on its own and keeps polling as a backfill, so jobs are not lost. The messages repeat for as long as the proxy closes idle streams, and a stream that does not come back is a risk, so fix the cause instead of ignoring the warning.
+The worker reopens the stream on its own and keeps polling as a backfill, so jobs are not lost, but a job already pushed when the stream is reset waits for its job timeout. The messages repeat for as long as the proxy closes idle streams, and a stream that does not come back is a risk, so fix the cause instead of ignoring the warning.
 
 :::note
 This configuration is _only_ required for reverse proxies which do not support forwarding HTTP/2 keepalive (on either side). See [this nginx ticket](https://trac.nginx.org/nginx/ticket/1887), for example.
@@ -31,12 +31,12 @@ Proxies which support forwarding HTTP/2 keepalive do not require any change.
 
 The proxy closes a stream that sends nothing for longer than its idle timeout (60 seconds by default in nginx and ingress-nginx). Job types with few jobs have idle streams most of the time. Change one of the two sides:
 
-- **Lower the stream timeout on the worker below the proxy idle timeout (recommended).** The worker closes and recreates each stream itself before the proxy does, without an error. No proxy change or reload is needed, and only the workers restart. The cost is one extra stream registration per stream every interval. For a proxy idle timeout of 60 seconds, set the stream timeout to 45 seconds.
-- **Raise the proxy timeouts above the stream timeout.** Streams stay long-lived. Set an explicit stream timeout of one hour on your client, and set the proxy read and send timeouts slightly higher (for example, an hour and ten minutes). See additional examples in [Java](../../../../../apis-tools/java-client/job-worker.md#proxying).
+- **Lower the stream timeout on the worker below the proxy idle timeout (recommended).** The worker closes and recreates each stream itself before the proxy does, without an error. No proxy change or reload is needed, and only the workers restart. The cost is one extra stream registration per stream every interval. For a proxy idle timeout of 60 seconds, set the stream timeout to 45 seconds. See the [Java example](../../../../../apis-tools/java-client/job-worker.md#proxying).
+- **Raise the proxy timeouts above the stream timeout.** Streams stay long-lived. Set an explicit stream timeout of one hour on your client, and set the proxy read and send timeouts slightly higher (for example, an hour and ten minutes).
 
 Do not combine them in a way that leaves the stream timeout above the proxy timeout.
 
-To recycle only idle streams, set the stream inactivity timeout below the proxy idle timeout (`streamInactivityTimeout` on the job worker builder, or [`camunda.client.worker.defaults.stream-inactivity-timeout`](../../../../../apis-tools/camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreaminactivitytimeout) in the Spring Boot Starter). The timer restarts whenever a job arrives, so busy streams are not recreated. It must be lower than the stream timeout.
+To recycle only idle streams, set the stream inactivity timeout below the proxy idle timeout (`streamInactivityTimeout` on the job worker builder, or [`camunda.client.worker.defaults.stream-inactivity-timeout`](../../../../../apis-tools/camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreaminactivitytimeout) in the Spring Boot Starter). The timer restarts whenever a job arrives, so busy streams are not recreated. It must be lower than the stream timeout. If you only lower the stream timeout, the client logs an INFO message that the inactivity timeout (10 minutes by default) will not fire, so prefer setting the inactivity timeout.
 
 Set the stream timeout in the Spring Boot Starter with [`camunda.client.worker.defaults.stream-timeout`](../../../../../apis-tools/camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreamtimeout) (all job types) or for a single job type with `camunda.client.worker.override.<job-type>.stream-timeout`. After a restart, check the effective value in the worker's configuration, because a misspelled property name is silently ignored.
 
