@@ -18,7 +18,7 @@ Decision requirements search filter.
 ### decisionRequirementsId?
 
 ```ts
-optional decisionRequirementsId?: string;
+decisionRequirementsId?: string;
 ```
 
 the DMN ID of the decision requirements.
@@ -28,7 +28,7 @@ the DMN ID of the decision requirements.
 ### decisionRequirementsKey?
 
 ```ts
-optional decisionRequirementsKey?: DecisionRequirementsKey;
+decisionRequirementsKey?: DecisionRequirementsKey;
 ```
 
 ---
@@ -36,7 +36,7 @@ optional decisionRequirementsKey?: DecisionRequirementsKey;
 ### decisionRequirementsName?
 
 ```ts
-optional decisionRequirementsName?: string;
+decisionRequirementsName?: string;
 ```
 
 The DMN name of the decision requirements.
@@ -46,7 +46,7 @@ The DMN name of the decision requirements.
 ### resourceName?
 
 ```ts
-optional resourceName?: string;
+resourceName?: string;
 ```
 
 The name of the resource from which the decision requirements were parsed
@@ -56,7 +56,7 @@ The name of the resource from which the decision requirements were parsed
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 The tenant ID of the decision requirements.
@@ -66,7 +66,7 @@ The tenant ID of the decision requirements.
 ### version?
 
 ```ts
-optional version?: number;
+version?: number;
 ```
 
 The assigned version of the decision requirements.

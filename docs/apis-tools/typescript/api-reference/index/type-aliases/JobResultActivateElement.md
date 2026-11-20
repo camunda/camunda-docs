@@ -18,7 +18,7 @@ Instruction to activate a single BPMN element within an ad‑hoc sub‑process, 
 ### elementId?
 
 ```ts
-optional elementId?: ElementId;
+elementId?: ElementId;
 ```
 
 The element ID to activate.
@@ -28,7 +28,7 @@ The element ID to activate.
 ### variables?
 
 ```ts
-optional variables?:
+variables?:
   | {
 [key: string]: unknown;
 }

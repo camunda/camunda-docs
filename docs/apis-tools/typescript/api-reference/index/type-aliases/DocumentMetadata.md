@@ -18,7 +18,7 @@ Information about the document.
 ### contentType?
 
 ```ts
-optional contentType?: string;
+contentType?: string;
 ```
 
 The content type of the document.
@@ -28,7 +28,7 @@ The content type of the document.
 ### customProperties?
 
 ```ts
-optional customProperties?: object;
+customProperties?: object;
 ```
 
 Custom properties of the document.
@@ -44,7 +44,7 @@ Custom properties of the document.
 ### expiresAt?
 
 ```ts
-optional expiresAt?: string;
+expiresAt?: string;
 ```
 
 The date and time when the document expires.
@@ -54,7 +54,7 @@ The date and time when the document expires.
 ### fileName?
 
 ```ts
-optional fileName?: string;
+fileName?: string;
 ```
 
 The name of the file.
@@ -64,7 +64,7 @@ The name of the file.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: ProcessDefinitionId;
+processDefinitionId?: ProcessDefinitionId;
 ```
 
 The ID of the process definition that created the document.
@@ -74,7 +74,7 @@ The ID of the process definition that created the document.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKey;
+processInstanceKey?: ProcessInstanceKey;
 ```
 
 The key of the process instance that created the document.
@@ -84,7 +84,7 @@ The key of the process instance that created the document.
 ### size?
 
 ```ts
-optional size?: number;
+size?: number;
 ```
 
 The size of the document in bytes.

@@ -16,7 +16,7 @@ type GetProcessDefinitionStatisticsData = object;
 ### body?
 
 ```ts
-optional body?: ProcessDefinitionElementStatisticsQuery;
+body?: ProcessDefinitionElementStatisticsQuery;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the process definition, which acts as a unique identifier fo
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

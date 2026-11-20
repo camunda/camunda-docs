@@ -18,7 +18,7 @@ Global listener search query request.
 ### filter?
 
 ```ts
-optional filter?: GlobalTaskListenerSearchQueryFilterRequest;
+filter?: GlobalTaskListenerSearchQueryFilterRequest;
 ```
 
 The global listener search filters.
@@ -26,7 +26,7 @@ The global listener search filters.
 ### sort?
 
 ```ts
-optional sort?: GlobalTaskListenerSearchQuerySortRequest[];
+sort?: GlobalTaskListenerSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

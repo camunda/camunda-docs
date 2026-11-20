@@ -16,7 +16,7 @@ type DeleteProcessInstanceData = object;
 ### body?
 
 ```ts
-optional body?: DeleteProcessInstanceRequest;
+body?: DeleteProcessInstanceRequest;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the process instance to delete.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

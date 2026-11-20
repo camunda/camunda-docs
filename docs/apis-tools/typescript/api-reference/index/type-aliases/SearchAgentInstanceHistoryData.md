@@ -16,7 +16,7 @@ type SearchAgentInstanceHistoryData = object;
 ### body?
 
 ```ts
-optional body?: AgentInstanceHistorySearchQuery;
+body?: AgentInstanceHistorySearchQuery;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key of the agent instance whose history to search.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

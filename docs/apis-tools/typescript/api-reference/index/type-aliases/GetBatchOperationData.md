@@ -16,7 +16,7 @@ type GetBatchOperationData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key (or operate legacy ID) of the batch operation.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

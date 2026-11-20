@@ -21,8 +21,8 @@ import {
   RetryableJobError,
   TerminalJobError,
   workerLayer,
-} from '@camunda8/orchestration-cluster-api/effect';
-import { Context, Effect, Layer, Schedule, Stream } from 'effect';
+} from "@camunda8/orchestration-cluster-api/effect";
+import { Context, Effect, Layer, Schedule, Stream } from "effect";
 
 // ---------------------------------------------------------------------------
 // Effect client
@@ -33,7 +33,9 @@ async function _readmeEffectClient() {
   const camunda = createCamundaEffectClient();
 
   const program = Effect.gen(function* () {
-    const deployment = yield* camunda.deployResourcesFromFiles(['./bpmn/process.bpmn']);
+    const deployment = yield* camunda.deployResourcesFromFiles([
+      "./bpmn/process.bpmn",
+    ]);
     const { processInstanceKey } = yield* camunda.createProcessInstance({
       processDefinitionKey: deployment.processes[0].processDefinitionKey,
     });
@@ -47,13 +49,17 @@ async function _readmeEffectClient() {
         { consistency: { waitUpToMs: 0 } }
       ),
       (s) => s.items.some((i) => i.processInstanceKey === processInstanceKey),
-      { waitUpTo: '30 seconds', interval: '750 millis' }
+      { waitUpTo: "30 seconds", interval: "750 millis" }
     );
     return { processInstanceKey, search };
   }).pipe(
     // Tagged errors → discriminate with catchTag / catchTags instead of a manual switch.
-    Effect.catchTag('EventualConsistencyTimeout', (e: EventualConsistencyTimeout) =>
-      Effect.logError(`Timed out: ${e.message}`).pipe(Effect.andThen(Effect.fail(e)))
+    Effect.catchTag(
+      "EventualConsistencyTimeout",
+      (e: EventualConsistencyTimeout) =>
+        Effect.logError(`Timed out: ${e.message}`).pipe(
+          Effect.andThen(Effect.fail(e))
+        )
     )
   );
 
@@ -74,7 +80,7 @@ async function _readmeEffectPaginate() {
   // than one page in memory. `Stream.take` stops pulling — and so stops fetching.
   const activeKeys = await Effect.runPromise(
     camunda.searchProcessInstances
-      .paginate({ filter: { state: 'ACTIVE' }, page: { limit: 100 } })
+      .paginate({ filter: { state: "ACTIVE" }, page: { limit: 100 } })
       .items()
       .pipe(
         Stream.map((instance) => instance.processInstanceKey),
@@ -103,26 +109,29 @@ function _readmeEffectWorker() {
     // than inferring it, so a handler with dependencies would stop compiling. See
     // "Injecting Services into a Handler".
     yield* createCamundaEffectWorker({
-      type: 'payment-processing',
+      type: "payment-processing",
       maxJobsToActivate: 10, // activation batch size
       concurrency: 10, // max jobs handled in parallel (backpressure)
-      pollInterval: '1 second', // between empty polls, on the Effect Clock
+      pollInterval: "1 second", // between empty polls, on the Effect Clock
       // Optional: retry the handler in-process on a RetryableJobError before failing the job.
-      handlerRetrySchedule: Schedule.spaced('2 seconds'),
+      handlerRetrySchedule: Schedule.spaced("2 seconds"),
       handler: (job) =>
         Effect.gen(function* () {
           if (!job.variables.amount) {
             // Terminal → raise a BPMN error / incident.
             return yield* Effect.fail(
-              new TerminalJobError({ code: 'INVALID_INPUT', message: 'amount is required' })
+              new TerminalJobError({
+                code: "INVALID_INPUT",
+                message: "amount is required",
+              })
             );
           }
           if (yield* isServiceDown()) {
             // Retryable → failJob(retries - 1) with a re-activation backoff.
             return yield* Effect.fail(
               new RetryableJobError({
-                message: 'downstream unavailable',
-                retryBackoff: '5 seconds',
+                message: "downstream unavailable",
+                retryBackoff: "5 seconds",
               })
             );
           }
@@ -151,12 +160,12 @@ function _readmeEffectWorker() {
 class PaymentGateway extends Context.Service<
   PaymentGateway,
   { readonly charge: (amount: number) => Effect.Effect<string> }
->()('PaymentGateway') {}
+>()("PaymentGateway") {}
 
 // The handler's requirements flow out through the worker's own requirements, so the
 // worker layer asks for `PaymentGateway` just like it asks for the Camunda client.
 const paymentWorker = workerLayer({
-  type: 'payment-processing',
+  type: "payment-processing",
   handler: (job) =>
     Effect.gen(function* () {
       const gateway = yield* PaymentGateway;
@@ -186,7 +195,11 @@ const fakeClient = {
 } as unknown as CamundaEffectClient;
 
 const mockedWorker = paymentWorker.pipe(
-  Layer.provide(Layer.succeed(PaymentGateway, { charge: () => Effect.succeed('mock-receipt') })),
+  Layer.provide(
+    Layer.succeed(PaymentGateway, {
+      charge: () => Effect.succeed("mock-receipt"),
+    })
+  ),
   Layer.provide(Layer.succeed(CamundaEffect, fakeClient))
 );
 //#endregion ReadmeEffectWorkerServices
@@ -196,8 +209,11 @@ const mockedWorker = paymentWorker.pipe(
 // threading from handler to worker, DI would silently break for users and this
 // annotation would stop compiling. Complements the runtime coverage in
 // tests/effect-worker-di.test.ts.
-const _threadsHandlerRequirements: Layer.Layer<never, never, CamundaEffect | PaymentGateway> =
-  paymentWorker;
+const _threadsHandlerRequirements: Layer.Layer<
+  never,
+  never,
+  CamundaEffect | PaymentGateway
+> = paymentWorker;
 
 void _readmeEffectClient;
 void _readmeEffectPaginate;

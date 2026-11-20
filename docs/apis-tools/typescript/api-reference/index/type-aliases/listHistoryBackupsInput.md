@@ -16,7 +16,7 @@ type listHistoryBackupsInput = object;
 ### prefix?
 
 ```ts
-optional prefix?: listHistoryBackupsQueryParam_prefix;
+prefix?: listHistoryBackupsQueryParam_prefix;
 ```
 
 ---
@@ -24,5 +24,5 @@ optional prefix?: listHistoryBackupsQueryParam_prefix;
 ### verbose?
 
 ```ts
-optional verbose?: listHistoryBackupsQueryParam_verbose;
+verbose?: listHistoryBackupsQueryParam_verbose;
 ```

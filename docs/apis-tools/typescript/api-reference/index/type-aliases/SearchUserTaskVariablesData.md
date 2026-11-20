@@ -16,7 +16,7 @@ type SearchUserTaskVariablesData = object;
 ### body?
 
 ```ts
-optional body?: UserTaskVariableSearchQueryRequest;
+body?: UserTaskVariableSearchQueryRequest;
 ```
 
 ---
@@ -40,13 +40,13 @@ The key of the user task.
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### truncateValues?
 
 ```ts
-optional truncateValues?: boolean;
+truncateValues?: boolean;
 ```
 
 When true (default), long variable values in the response are truncated. When false, full variable values are returned.

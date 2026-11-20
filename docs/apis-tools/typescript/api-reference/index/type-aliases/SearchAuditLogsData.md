@@ -16,7 +16,7 @@ type SearchAuditLogsData = object;
 ### body?
 
 ```ts
-optional body?: AuditLogSearchQueryRequest;
+body?: AuditLogSearchQueryRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: AuditLogSearchQueryRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

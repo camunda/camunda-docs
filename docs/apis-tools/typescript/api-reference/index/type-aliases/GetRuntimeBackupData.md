@@ -16,7 +16,7 @@ type GetRuntimeBackupData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The id of the backup.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

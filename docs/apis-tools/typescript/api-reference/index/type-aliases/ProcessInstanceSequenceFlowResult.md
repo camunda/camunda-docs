@@ -28,20 +28,22 @@ The element id for this sequence flow, as provided in the BPMN process.
 ### processDefinitionId
 
 ```ts
-processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId | null;
 ```
 
-The process definition id.
+The process definition id. This field is not present for sequence flows imported by
+Operate 8.1 or earlier.
 
 ---
 
 ### processDefinitionKey
 
 ```ts
-processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey | null;
 ```
 
-The process definition key.
+The process definition key. This field is not present for sequence flows imported
+by Operate 8.1 or earlier.
 
 ---
 

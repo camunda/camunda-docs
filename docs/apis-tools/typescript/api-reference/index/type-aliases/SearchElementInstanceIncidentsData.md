@@ -40,7 +40,7 @@ The unique key of the element instance to search incidents for.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

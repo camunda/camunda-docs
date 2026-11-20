@@ -16,7 +16,7 @@ mdx:
 ### maxPages?
 
 ```ts
-optional maxPages?: number;
+maxPages?: number;
 ```
 
 Safety cap on pages fetched (default: unbounded). A non-positive value
@@ -28,7 +28,7 @@ the first request, so it is always honoured exactly.
 ### mode?
 
 ```ts
-optional mode?: PaginationMode;
+mode?: PaginationMode;
 ```
 
 How to advance. `auto` prefers a cursor, falls back to offset.
@@ -38,7 +38,7 @@ How to advance. `auto` prefers a cursor, falls back to offset.
 ### signal?
 
 ```ts
-optional signal?: AbortSignal;
+signal?: AbortSignal;
 ```
 
 Abort between pages; a fired signal stops further fetches.

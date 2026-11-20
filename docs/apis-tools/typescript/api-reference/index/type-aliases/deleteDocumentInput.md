@@ -24,5 +24,5 @@ documentId: deleteDocumentPathParam_documentId;
 ### storeId?
 
 ```ts
-optional storeId?: deleteDocumentQueryParam_storeId;
+storeId?: deleteDocumentQueryParam_storeId;
 ```

@@ -38,5 +38,5 @@ The job filter. At least one dimension must be set.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

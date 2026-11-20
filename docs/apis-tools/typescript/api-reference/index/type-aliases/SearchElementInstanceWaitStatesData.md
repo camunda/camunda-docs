@@ -16,7 +16,7 @@ type SearchElementInstanceWaitStatesData = object;
 ### body?
 
 ```ts
-optional body?: ElementInstanceWaitStateQuery;
+body?: ElementInstanceWaitStateQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ElementInstanceWaitStateQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

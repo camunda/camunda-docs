@@ -16,7 +16,7 @@ type UserTaskAssignmentRequest = object;
 ### action?
 
 ```ts
-optional action?: string | null;
+action?: string | null;
 ```
 
 A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "assign".
@@ -26,7 +26,7 @@ A custom action value that will be accessible from user task events resulting fr
 ### allowOverride?
 
 ```ts
-optional allowOverride?: boolean | null;
+allowOverride?: boolean | null;
 ```
 
 By default, the task is reassigned if it was already assigned. Set this to `false` to return an error in such cases. The task must then first be unassigned to be assigned again. Use this when you have users picking from group task queues to prevent race conditions.

@@ -16,7 +16,7 @@ type CancelBatchOperationData = object;
 ### body?
 
 ```ts
-optional body?: unknown;
+body?: unknown;
 ```
 
 ---
@@ -40,7 +40,7 @@ The key (or operate legacy ID) of the batch operation.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

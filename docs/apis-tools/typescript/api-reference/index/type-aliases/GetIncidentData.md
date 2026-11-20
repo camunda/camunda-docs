@@ -16,7 +16,7 @@ type GetIncidentData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the incident, which acts as a unique identifier for this inc
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

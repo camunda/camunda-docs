@@ -18,7 +18,7 @@ The user task audit log search filters.
 ### actorId?
 
 ```ts
-optional actorId?: StringFilterProperty;
+actorId?: StringFilterProperty;
 ```
 
 The actor ID search filter.
@@ -28,7 +28,7 @@ The actor ID search filter.
 ### actorType?
 
 ```ts
-optional actorType?: AuditLogActorTypeFilterProperty;
+actorType?: AuditLogActorTypeFilterProperty;
 ```
 
 The actor type search filter.
@@ -38,7 +38,7 @@ The actor type search filter.
 ### operationType?
 
 ```ts
-optional operationType?: OperationTypeFilterProperty;
+operationType?: OperationTypeFilterProperty;
 ```
 
 The audit log operation type search filter.
@@ -48,7 +48,7 @@ The audit log operation type search filter.
 ### result?
 
 ```ts
-optional result?: AuditLogResultFilterProperty;
+result?: AuditLogResultFilterProperty;
 ```
 
 The audit log result search filter.
@@ -58,7 +58,7 @@ The audit log result search filter.
 ### timestamp?
 
 ```ts
-optional timestamp?: DateTimeFilterProperty;
+timestamp?: DateTimeFilterProperty;
 ```
 
 The audit log timestamp filter.

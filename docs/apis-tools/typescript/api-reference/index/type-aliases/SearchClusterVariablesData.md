@@ -16,7 +16,7 @@ type SearchClusterVariablesData = object;
 ### body?
 
 ```ts
-optional body?: ClusterVariableSearchQueryRequest;
+body?: ClusterVariableSearchQueryRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ClusterVariableSearchQueryRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### truncateValues?
 
 ```ts
-optional truncateValues?: boolean;
+truncateValues?: boolean;
 ```
 
 When true (default), long variable values in the response are truncated. When false, full variable values are returned.

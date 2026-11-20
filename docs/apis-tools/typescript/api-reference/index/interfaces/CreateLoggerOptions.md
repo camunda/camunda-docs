@@ -12,7 +12,7 @@ mdx:
 ### level?
 
 ```ts
-optional level?: LogLevel;
+level?: LogLevel;
 ```
 
 ---
@@ -20,7 +20,7 @@ optional level?: LogLevel;
 ### scope?
 
 ```ts
-optional scope?: string;
+scope?: string;
 ```
 
 ---
@@ -28,5 +28,5 @@ optional scope?: string;
 ### transport?
 
 ```ts
-optional transport?: LogTransport;
+transport?: LogTransport;
 ```

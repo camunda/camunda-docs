@@ -16,7 +16,7 @@ type SearchDecisionInstancesData = object;
 ### body?
 
 ```ts
-optional body?: DecisionInstanceSearchQuery;
+body?: DecisionInstanceSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: DecisionInstanceSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

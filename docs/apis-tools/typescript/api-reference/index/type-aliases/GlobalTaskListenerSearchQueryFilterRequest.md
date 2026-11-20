@@ -18,7 +18,7 @@ Global listener filter request.
 ### afterNonGlobal?
 
 ```ts
-optional afterNonGlobal?: boolean;
+afterNonGlobal?: boolean;
 ```
 
 Whether the listener runs after model-level listeners.
@@ -28,7 +28,7 @@ Whether the listener runs after model-level listeners.
 ### eventTypes?
 
 ```ts
-optional eventTypes?: GlobalTaskListenerEventTypeFilterProperty[];
+eventTypes?: GlobalTaskListenerEventTypeFilterProperty[];
 ```
 
 Event types of the global listener.
@@ -38,7 +38,7 @@ Event types of the global listener.
 ### id?
 
 ```ts
-optional id?: StringFilterProperty;
+id?: StringFilterProperty;
 ```
 
 Id of the global listener.
@@ -48,7 +48,7 @@ Id of the global listener.
 ### priority?
 
 ```ts
-optional priority?: IntegerFilterProperty;
+priority?: IntegerFilterProperty;
 ```
 
 Priority of the global listener.
@@ -58,7 +58,7 @@ Priority of the global listener.
 ### retries?
 
 ```ts
-optional retries?: IntegerFilterProperty;
+retries?: IntegerFilterProperty;
 ```
 
 Number of retries of the global listener.
@@ -68,7 +68,7 @@ Number of retries of the global listener.
 ### source?
 
 ```ts
-optional source?: GlobalListenerSourceFilterProperty;
+source?: GlobalListenerSourceFilterProperty;
 ```
 
 How the global listener was defined.
@@ -78,7 +78,7 @@ How the global listener was defined.
 ### type?
 
 ```ts
-optional type?: StringFilterProperty;
+type?: StringFilterProperty;
 ```
 
 Job type of the global listener.

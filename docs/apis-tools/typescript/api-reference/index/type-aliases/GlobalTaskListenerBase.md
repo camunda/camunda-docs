@@ -16,5 +16,5 @@ type GlobalTaskListenerBase = GlobalListenerBase & object;
 ### eventTypes?
 
 ```ts
-optional eventTypes?: GlobalTaskListenerEventTypes;
+eventTypes?: GlobalTaskListenerEventTypes;
 ```

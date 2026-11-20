@@ -16,7 +16,7 @@ type ChangeClusterModeData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -38,7 +38,7 @@ query: object;
 #### dryRun?
 
 ```ts
-optional dryRun?: boolean;
+dryRun?: boolean;
 ```
 
 If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.

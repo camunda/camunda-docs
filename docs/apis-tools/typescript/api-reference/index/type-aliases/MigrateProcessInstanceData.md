@@ -40,7 +40,7 @@ The key of the process instance that should be migrated.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

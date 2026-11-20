@@ -30,7 +30,7 @@ The documents to upload.
 #### metadataList?
 
 ```ts
-optional metadataList?: DocumentMetadata[];
+metadataList?: DocumentMetadata[];
 ```
 
 Optional JSON array of metadata object whose index aligns with each file entry. The metadata array must have the same length as the files array.
@@ -40,7 +40,7 @@ Optional JSON array of metadata object whose index aligns with each file entry. 
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -48,13 +48,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### storeId?
 
 ```ts
-optional storeId?: string;
+storeId?: string;
 ```
 
 The ID of the document store to upload the documents to. Currently, only a single document store is supported per cluster. However, this attribute is included to allow for potential future support of multiple document stores.

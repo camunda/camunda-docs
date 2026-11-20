@@ -18,7 +18,7 @@ Job search filter.
 ### creationTime?
 
 ```ts
-optional creationTime?: DateTimeFilterProperty;
+creationTime?: DateTimeFilterProperty;
 ```
 
 When the job was created. Field is present for jobs created after 8.9.
@@ -28,7 +28,7 @@ When the job was created. Field is present for jobs created after 8.9.
 ### deadline?
 
 ```ts
-optional deadline?: DateTimeFilterProperty | null;
+deadline?: DateTimeFilterProperty | null;
 ```
 
 When the job can next be activated.
@@ -38,7 +38,7 @@ When the job can next be activated.
 ### deniedReason?
 
 ```ts
-optional deniedReason?: StringFilterProperty;
+deniedReason?: StringFilterProperty;
 ```
 
 The reason provided by the user task listener for denying the work.
@@ -48,7 +48,7 @@ The reason provided by the user task listener for denying the work.
 ### elementId?
 
 ```ts
-optional elementId?: StringFilterProperty;
+elementId?: StringFilterProperty;
 ```
 
 The element ID associated with the job.
@@ -58,7 +58,7 @@ The element ID associated with the job.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The element instance key associated with the job.
@@ -68,7 +68,7 @@ The element instance key associated with the job.
 ### endTime?
 
 ```ts
-optional endTime?: DateTimeFilterProperty;
+endTime?: DateTimeFilterProperty;
 ```
 
 When the job ended.
@@ -78,7 +78,7 @@ When the job ended.
 ### errorCode?
 
 ```ts
-optional errorCode?: StringFilterProperty;
+errorCode?: StringFilterProperty;
 ```
 
 The error code provided for the failed job.
@@ -88,7 +88,7 @@ The error code provided for the failed job.
 ### errorMessage?
 
 ```ts
-optional errorMessage?: StringFilterProperty;
+errorMessage?: StringFilterProperty;
 ```
 
 The error message that provides additional context for a failed job.
@@ -98,7 +98,7 @@ The error message that provides additional context for a failed job.
 ### hasFailedWithRetriesLeft?
 
 ```ts
-optional hasFailedWithRetriesLeft?: boolean;
+hasFailedWithRetriesLeft?: boolean;
 ```
 
 Indicates whether the job has failed with retries left.
@@ -108,7 +108,7 @@ Indicates whether the job has failed with retries left.
 ### isDenied?
 
 ```ts
-optional isDenied?: boolean | null;
+isDenied?: boolean | null;
 ```
 
 Indicates whether the user task listener denies the work.
@@ -118,7 +118,7 @@ Indicates whether the user task listener denies the work.
 ### jobKey?
 
 ```ts
-optional jobKey?: JobKeyFilterProperty;
+jobKey?: JobKeyFilterProperty;
 ```
 
 The key, a unique identifier for the job.
@@ -128,7 +128,7 @@ The key, a unique identifier for the job.
 ### kind?
 
 ```ts
-optional kind?: JobKindFilterProperty;
+kind?: JobKindFilterProperty;
 ```
 
 The kind of the job.
@@ -138,7 +138,7 @@ The kind of the job.
 ### lastUpdateTime?
 
 ```ts
-optional lastUpdateTime?: DateTimeFilterProperty;
+lastUpdateTime?: DateTimeFilterProperty;
 ```
 
 When the job was last updated. Field is present for jobs created after 8.9.
@@ -148,7 +148,7 @@ When the job was last updated. Field is present for jobs created after 8.9.
 ### listenerEventType?
 
 ```ts
-optional listenerEventType?: JobListenerEventTypeFilterProperty;
+listenerEventType?: JobListenerEventTypeFilterProperty;
 ```
 
 The listener event type of the job.
@@ -158,7 +158,7 @@ The listener event type of the job.
 ### priority?
 
 ```ts
-optional priority?: IntegerFilterProperty;
+priority?: IntegerFilterProperty;
 ```
 
 The priority of the job. Jobs created before 8.10 have no stored priority and are excluded from results when this filter is applied.
@@ -168,7 +168,7 @@ The priority of the job. Jobs created before 8.10 have no stored priority and ar
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition ID associated with the job.
@@ -178,7 +178,7 @@ The process definition ID associated with the job.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key associated with the job.
@@ -188,7 +188,7 @@ The process definition key associated with the job.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The process instance key associated with the job.
@@ -198,7 +198,7 @@ The process instance key associated with the job.
 ### retries?
 
 ```ts
-optional retries?: IntegerFilterProperty;
+retries?: IntegerFilterProperty;
 ```
 
 The number of retries left.
@@ -208,7 +208,7 @@ The number of retries left.
 ### state?
 
 ```ts
-optional state?: JobStateFilterProperty;
+state?: JobStateFilterProperty;
 ```
 
 The state of the job.
@@ -218,7 +218,7 @@ The state of the job.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant ID.
@@ -228,7 +228,7 @@ The tenant ID.
 ### type?
 
 ```ts
-optional type?: StringFilterProperty;
+type?: StringFilterProperty;
 ```
 
 The type of the job.
@@ -238,7 +238,7 @@ The type of the job.
 ### worker?
 
 ```ts
-optional worker?: StringFilterProperty;
+worker?: StringFilterProperty;
 ```
 
 The name of the worker for this job.
