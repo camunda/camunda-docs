@@ -97,4 +97,6 @@ The numbers are approximate. Each entry states how the agent obtained its values
 
 An entry holds counts, timestamps, model names, effort labels, the agent's session ID, and an optional builder pseudonym. It never contains prompts, transcript content, real names, or email addresses.
 
-ProcessOS Harness never reads an agent's session files. The agent reads its own recorded usage and reports it. Entries stay in `.camunda/usage/` in your project, and no usage data leaves it. The drafts the agent writes before recording are gitignored, so they never end up in a commit.
+ProcessOS Harness never reads an agent's session files. The agent reads its own recorded usage and reports it. ProcessOS Harness stores entries only in `.camunda/usage/` in your project and sends them nowhere itself. Because you commit them, pushing the repository shares them with everyone who can read it. The drafts the agent writes before recording are gitignored, so they never end up in a commit.
+
+The agent that reports its usage runs on an AI platform, which can receive project context. To control what reaches it, see [data handling](../best-practices/data-handling.md#control-what-reaches-the-ai-platform).
