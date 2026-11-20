@@ -26,7 +26,7 @@ ProcessOS Harness requires the following:
 - A [Git-compatible version control system](#project-version-control) to store your projects.
 - A supported [AI coding agent](#ai-coding-agent) to do the re-engineering work.
 - A [builder client](#builder-client) with local tooling, where the agent runs.
-- A [connector runtime and model-provider credentials](#ai-agents-in-the-generated-solution) on the Camunda cluster, if the re-engineered process is expected to use AI agents.
+- A [connector runtime](#ai-agents-in-the-generated-solution) is strongly recommended for the Camunda cluster.
 
 ![System overview: the builder client hosts the AI coding agent and a local Camunda server, syncs status with the ProcessOS governance process on the enterprise Camunda server, uses VCS and an AI platform, and generates a ProcessOS solution deployed back to the enterprise Camunda server.](../img/process-os-system-requirements.excalidraw.svg)
 
@@ -93,9 +93,6 @@ TypeScript and Python are also fully supported worker targets.
 
 ## AI agents in the generated solution
 
-If the re-engineered process is expected to use AI agents, the Camunda cluster that runs it needs:
+A connector runtime is strongly recommended for the Camunda cluster. Camunda 8 SaaS and `c8run` include one by default. On Self-Managed, make sure connectors are enabled.
 
-- A connector runtime. Camunda 8 SaaS and `c8run` include one by default. On Self-Managed, make sure connectors are enabled.
-- Credentials for a supported [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md), if its authentication method needs them. Store them as [connector secrets](/components/saas/clusters/manage-secrets.md).
-
-These credentials are usually different from those used by your [AI coding agent](#ai-coding-agent).
+For generated processes that use AI agents, store [model-provider credentials](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) as [connector secrets](/components/saas/clusters/manage-secrets.md) if the provider's authentication method needs them. These credentials might be separate from your coding agent's LLM access.
