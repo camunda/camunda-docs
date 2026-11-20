@@ -18,6 +18,7 @@ The Camunda Spring Boot Starter is part of the Camunda 8 [public API](/reference
 
 - Uses the new Camunda Java Client under the hood
 - REST is the default protocol (gRPC is configurable)
+- Configuration properties use the `camunda.client.*` prefix instead of `zeebe.client.*` or `camunda.client.zeebe.*`, see [legacy property names](./configuration.md#legacy-property-names)
 - Spring Zeebe SDK will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 

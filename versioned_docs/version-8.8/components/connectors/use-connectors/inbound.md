@@ -18,7 +18,6 @@ Inbound connectors are modeled as **catch events** in [BPMN](/components/modeler
 - **Message start events** – Start a new process instance with a `messageId` to prevent duplicate process instance creation.
 - **Intermediate catch events** – Receive messages in an already running process instance.
 - **Boundary events** – Receive messages in an already running process instance, attached to a task.
-- **Boundary events** – Receive messages in an already running process instance, attached to a task.
 - **Receive tasks** - Receive messages in an already running process instance.
 
 :::info
@@ -127,12 +126,12 @@ To deploy and use the webhook, you need to fill in several fields:
 5. **Activation condition** - FEEL expression that assesses trigger conditions. Note: Unlike other properties, in the activation condition, you cannot use the process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 6. **Result variable** - Name of the process variable that will be created or updated with the result of the webhook. For example, if you want to save the result of the webhook in a variable called `myDocumentId`, you would specify `myDocumentId` as the **Result variable** value.
 7. **Result expression** - FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable mapping** might look as `={myDocumentId: request.body.id}`.
-8. **Response body expression** - FEEL expression that forces a webhook to return a specific response.
-   This might be useful for one-time challenge verification, or acknowledgement response.
+8. **Response expression** - FEEL expression that forces a webhook to return a specific response.
+   This might be useful for an acknowledgement response.
    Given your webhook triggered with body `{"id": 1, "status": "OK"}`, if you wish to return acknowledgement, you can specify the following expression `={message: "received document ID " + string(request.body.id)}` which will produce `{"message":"received document ID 123"}` as a response.
-   Another example, when you wish to return a one-time subscription challenge. Given your webhook triggered with body `{"event": "subscribe", "challenge":"myRandomChallenge"}`. You can return challenge back with the following expression `=if request.body.event = "subscribe" then request.body.challenge else null` which will produce a plain string `"myRandomChallenge"` as a response.
+   To return a one-time subscription challenge, use the **One time verification response expression** field instead. See [verification expression](/components/connectors/protocol/http-webhook.md#verification-expression).
 
-If the Webhook connector is applied to an **intermediate catch event**, you also need to specify the following fields:
+If the Webhook connector is applied to an **intermediate catch event**, **boundary event**, or **receive task**, you also need to specify the following fields. On a **message start event**, these fields are available when you enable **Subprocess correlation required**:
 
 9. **Correlation key (process)** - a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 10. **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
@@ -153,7 +152,7 @@ Learn more about this feature in the [connector deduplication guide](../advanced
 
 ## Working with request context
 
-You can access request context in the **Activation condition**, **Result expression**, and **Response body expression**.
+You can access request context in the **Activation condition**, **Result expression**, and **Response expression**.
 
 Let's consider the following cURL query: `curl -X POST -H "Content-Type: application/json" -H "MyHeader: myValue" -d '{"status": "OK", "id": 123}' "http://<YOUR_HOST>/inbound/myWebhook?param1=val1"`.
 
@@ -182,7 +181,7 @@ A webhook connector context data will arrive as follows:
 }
 ```
 
-This means in scope of the fields **Activation condition**, **Result expression**, and **Response body expression**,
+This means in scope of the fields **Activation condition**, **Result expression**, and **Response expression**,
 you can use not only `request.body.<property>` but also access headers via `request.headers.myheader` or params `request.params.param1`.
 
 There is also a connector-specific special case of `connectorData` that is usually empty and used in rare cases, when body has to be crafted in a special way, but a connectors user might still want access context data.
