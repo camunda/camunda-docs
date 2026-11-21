@@ -265,14 +265,16 @@ If the worker blocks longer than the job's deadline, the job will **not** be pas
 
 #### Proxying
 
-If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/job-streaming).
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts or `RST_STREAM closed stream. HTTP/2 error code: INTERNAL_ERROR` warnings, read our guide on [job streaming](../../../self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/job-streaming).
 
-By default, the Java job workers have a stream timeout of one hour. You can overwrite this by calling the `streamTimeout` of the job worker builder:
+The default stream timeout is higher than the idle timeout of most proxies, so set an explicit value. See the [`stream-timeout` property](../camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreamtimeout) for the default. You can overwrite it by calling the `streamTimeout` of the job worker builder:
 
 ```java
 final JobWorkerBuilderStep3 builder = ...;
-builder.streamTimeout(Duration.ofMinutes(30));
+builder.streamTimeout(Duration.ofSeconds(45));
 ```
+
+The value must be lower than the idle timeout of every proxy between the worker and the gateway. With the Spring Boot Starter, use [`camunda.client.worker.defaults.stream-timeout`](../camunda-spring-boot-starter/properties-reference.md#camundaclientworkerdefaultsstreamtimeout).
 
 ## Multi-tenancy
 
