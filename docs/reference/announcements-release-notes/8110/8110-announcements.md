@@ -85,6 +85,43 @@ Starting with 8.11, when you suspend a process instance, Camunda marks its user 
 </div>
 </div>
 
+## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector Docker images run the runtime from an unpacked layout {#connectors-docker-unpacked-layout}
+
+Starting with 8.11, the connector runtime Docker images (`camunda/connectors`, `camunda/connectors-bundle`, and `camunda/connectors-bundle-saas`) no longer contain the runtime fat jar in `/opt/app`. The jar is unpacked into `/opt/app/runtime`, and the images start it with the class path `/opt/app/runtime:/opt/app/*`. This removes a cause of the connector runtime stalling under load on Java 24 and later, when virtual threads are enabled.
+
+- Mounting your own connectors or libraries into `/opt/custom` or `/opt/app` works as before.
+- The runtime uses about 40 MB more Java heap, because the JVM keeps a separate file handle and index for every library in the runtime.
+
+**Action:** If you override the image's command, entrypoint, or a probe command with `-cp "/opt/app/*"`, change it to `-cp "/opt/app/runtime:/opt/app/*"`. If you build images that copy, patch, or scan the `*-with-dependencies.jar` file in `/opt/app`, work with the files in `/opt/app/runtime` instead. If your connector runtime runs close to its heap or memory limit, increase it.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Disabling virtual threads no longer limits the connector runtime to one job at a time {#connectors-platform-threads-pool-size}
+
+Starting with 8.11, when you disable virtual threads with `camunda.connector.virtual-threads.enabled=false`, the connector runtime sizes its platform thread pool to the larger of `camunda.client.worker.defaults.max-jobs-active` and `camunda.client.execution-threads`. Previously, the pool used `camunda.client.execution-threads` alone, which defaults to `1`, so the runtime processed one job at a time unless you also raised that property. This change is also part of 8.10.6 and 8.9.20.
+
+**Action:** No action is required. If you set `camunda.client.execution-threads` only to match `max-jobs-active`, you can remove it.
+
+<p className="link-arrow">[Connector runtime performance](/self-managed/components/connectors/performance.md#platform-threads-executor)</p>
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
