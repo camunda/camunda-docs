@@ -32,7 +32,7 @@ For wiki systems like [Confluence](https://www.atlassian.com/software/confluence
 Use comments to discuss your diagram:
 
 1. Open a diagram.
-2. On the right side of the modeler interface, in the **Details** panel next to **Properties** and **Test**, select the **Comments** icon.
+2. On the right side of the modeler interface, in the **Details** panel next to **Properties** and **Validate**, select the **Comments** icon.
 
 If a single element is selected, the comments in this panel only apply to the selected element. Otherwise, they apply to the entire diagram.
 

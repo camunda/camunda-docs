@@ -480,7 +480,7 @@ Connect the modeler in Hub to an [environment](#environments) to model, test, an
 
 - View and choose which environment you are connected to from the bottom panel bar of the diagram, in the **Implement** tab.
 - Connector credential names from the connected environment autocomplete in your FEEL expressions and in the properties panel credential picker.
-- [Task testing](/components/modeler/task-testing.md), connector credentials, and the **Webhook** tab follow this connection. Your deploy target doesn't change.
+- [Task testing](/components/modeler/element-validation.md), connector credentials, and the **Webhook** tab follow this connection. Your deploy target doesn't change.
 
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
 Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
