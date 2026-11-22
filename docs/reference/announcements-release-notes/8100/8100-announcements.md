@@ -816,6 +816,23 @@ Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Single-tenant RDBMS nodes no longer fail startup on an unreachable database {#single-tenant-rdbms-startup-retry}
+
+From 8.10.1, an RDBMS node with exactly one Physical Tenant uses the same retrying schema initialization as a node with several Physical Tenants. If the database is unreachable at startup, the node no longer exits. It holds startup and retries the connection, with an unlimited number of retries by default. Only failures that retrying cannot fix still abort startup.
+
+To detect a node that is held at startup, look for warnings such as `Schema initialization for physical tenant '<id>' failed on attempt <n>, retrying in <ms>ms` in the application log, and a node that never becomes ready. While startup is held, the management port does not answer. The schema manager retry settings control how long it retries.
+
+<p className="link-arrow">[Secondary storage failures during startup and runtime](/self-managed/concepts/physical-tenants/storage-isolation.md#startup-behavior)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">

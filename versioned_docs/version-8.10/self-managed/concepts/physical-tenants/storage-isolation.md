@@ -688,7 +688,11 @@ On a node with multiple Physical Tenants, startup uses the following rules:
 
 On nodes that wait at startup, Camunda retries temporary failures before allowing traffic. If every tenant has a failure that retrying cannot fix, startup aborts and the node exits with a non-zero status.
 
-An RDBMS node with exactly one Physical Tenant keeps the existing synchronous, fail-fast behavior. An unreachable database or an unrepairable schema failure aborts startup instead of being retried in the background.
+An RDBMS node with exactly one Physical Tenant follows the same rules. If its database is unreachable, the node holds startup, logs `Holding startup until a physical tenant's RDBMS schema is initialized.`, and keeps retrying schema initialization until the database becomes reachable. Only a failure that retrying cannot fix aborts startup, and the node reports the schema manager's original error.
+
+:::note
+Before 8.10.1, an RDBMS node with exactly one Physical Tenant aborted startup when its database was unreachable. To detect a node that is held at startup, look for `Schema initialization for physical tenant '<id>' failed on attempt <n>` warnings in the application log, and a node that never becomes ready. A finite retry limit changes this, as described below.
+:::
 
 If you configure a finite retry limit and all attempts stop before any tenant becomes ready, startup can complete but the affected tenant remains degraded. On nodes whose readiness probe includes secondary storage, the node remains not ready. The application logs identify the tenant and report that its retry limit was exhausted.
 
