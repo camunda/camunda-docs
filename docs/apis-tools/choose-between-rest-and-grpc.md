@@ -2,8 +2,14 @@
 id: choose-between-rest-and-grpc
 title: "Choose between REST and gRPC"
 sidebar_label: "Choose between REST and gRPC"
-description: "Decide when to use the Orchestration Cluster REST API, the Zeebe gRPC API, or both, and when to use job streaming instead of polling."
+description: "Decide whether to use the Camunda REST API, gRPC, or both, and when job streaming beats polling for your job workers."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. Add the [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md) alongside it only when your job workers need [job streaming](/components/concepts/job-workers.md#job-streaming), or when the [REST job activation limitations](#rest-job-activation-limitations) affect you.
 
@@ -127,7 +133,7 @@ client.newWorker()
 
 Addresses must include the scheme (`http://` or `https://`).
 
-For all client settings, see the [Java client](/apis-tools/java-client/job-worker.md#job-streaming) and [Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/configuration.md) documentation.
+To migrate from `ZeebeClient`, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection). For all client settings, see the [Java client](/apis-tools/java-client/job-worker.md#job-streaming) and [Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/configuration.md) documentation.
 
 ## REST job activation limitations
 
@@ -148,12 +154,3 @@ gRPC needs HTTP/2 end to end, its own port and ingress, and its own TLS settings
 - **Ingress (Helm):** gRPC uses its own Ingress, configured under `orchestration.ingress.grpc`. It inherits nothing from `global.ingress.annotations`. Ingress-nginx needs `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"`.
 - **TLS:** You configure each protocol separately. See [Configure Orchestration REST and gRPC TLS modes](/self-managed/deployment/helm/configure/orchestration-tls-modes.md).
 - **Long-lived streams:** Proxies that close idle HTTP/2 connections end job streams with `504` errors. See [job streaming](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/job-streaming.md).
-
-## Related topics
-
-- [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
-- [Zeebe API (gRPC)](/apis-tools/zeebe-api/grpc.md)
-- [Job workers](/components/concepts/job-workers.md)
-- [Writing good workers](/components/best-practices/development/writing-good-workers.md)
-- [Sizing your environment](/components/best-practices/architecture/sizing-your-environment.md)
-- [Migrate to the Camunda Java Client: REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection)

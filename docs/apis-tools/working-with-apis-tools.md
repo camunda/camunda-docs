@@ -16,7 +16,7 @@ import { apiCards, clientCards } from './react-components/\_apitools-card-data';
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
+Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development. Not sure whether to use REST or gRPC? See [Choose between REST and gRPC](./choose-between-rest-and-grpc.md).
 
 <p class="link-button">[Get started with the Camunda Java Client](./java-client/getting-started.md)</p>
 
