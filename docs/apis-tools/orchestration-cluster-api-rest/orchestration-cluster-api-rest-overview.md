@@ -22,6 +22,10 @@ Use this API to:
 | Integrate user tasks into custom UIs        | Build task management interfaces that connect to Camunda's user task engine.      |
 | Start and monitor external system processes | Trigger process instances and track progress from any application or service.     |
 
+:::tip
+Not sure whether to use REST or gRPC? See [Choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md).
+:::
+
 ## Key features
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/concepts/access-control/authorizations.md).

@@ -1514,6 +1514,7 @@ module.exports = {
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
+    "apis-tools/choose-between-rest-and-grpc",
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),

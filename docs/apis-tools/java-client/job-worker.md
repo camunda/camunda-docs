@@ -229,6 +229,8 @@ public CamundaClientBuilder configureClientMetrics(
 
 ## Job streaming
 
+Job streaming requires the Zeebe API (gRPC). For guidance on when to use streaming instead of polling, see [Choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md#streaming-or-polling).
+
 Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by completely removing the poll request.
 
 ### Usage
