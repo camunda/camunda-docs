@@ -25,17 +25,18 @@ The option names in the tabs below (for example, `rolloverInterval`) are exporte
 
 In Helm, configure these as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
 
+In Camunda 8.8, set these options as exporter arguments with the prefix `zeebe.broker.exporters.camundaexporter.args.`. The `camunda.data.secondary-storage.*` properties do not include these options in 8.8.
+
 For example, set history rollover using:
 
-- `camunda.data.secondary-storage.elasticsearch.history.rollover-interval`
-- `camunda.data.secondary-storage.opensearch.history.rollover-interval`
+- `zeebe.broker.exporters.camundaexporter.args.history.rolloverInterval`
   :::
 
 You can also configure the following properties using exporter `args`:
 
 ```yaml
 zeebe:
-  brokers:
+  broker:
     exporters:
       # Camunda Exporter ----------
       # An example configuration for the camunda exporter:
@@ -64,7 +65,7 @@ values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' }
 <TabItem value="connect">
 
 Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+`zeebe.broker.exporters.camundaexporter.args.connect.`
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
@@ -86,7 +87,7 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 <TabItem value="index">
 
 Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+`zeebe.broker.exporters.camundaexporter.args.index.`
 
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -101,7 +102,7 @@ Helm property path prefix for these options:
 <TabItem value="bulk">
 
 Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.bulk.`
+`zeebe.broker.exporters.camundaexporter.args.bulk.`
 
 To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
@@ -123,7 +124,7 @@ With the default configuration, the exporter will aggregate records and flush th
 <TabItem value="retention">
 
 Helm property path prefix for these options:
-`camunda.data.secondary-storage.retention.`
+`zeebe.broker.exporters.camundaexporter.args.history.retention.`
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
@@ -148,10 +149,10 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 <TabItem value="history">
 
 Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.`
+`zeebe.broker.exporters.camundaexporter.args.history.`
 
 For example, `rolloverInterval` maps to:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.rollover-interval`.
+`zeebe.broker.exporters.camundaexporter.args.history.rolloverInterval`.
 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
@@ -174,7 +175,7 @@ indices. The history can be configured as follows:
 
 <TabItem value="tasklist">
 
-Helm property path prefix for this Tasklist-specific export option: `camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+Helm property path prefix for this Tasklist-specific export option: `zeebe.broker.exporters.camundaexporter.args.`
 
 | Option                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   | Default |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -189,7 +190,7 @@ When `skipVariableWriteWithoutUserTasks` is enabled, task variable data is not e
 <TabItem value="other">
 
 Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.batch-operations.`
+`zeebe.broker.exporters.camundaexporter.args.`
 
 Other miscellaneous properties:
 
