@@ -106,7 +106,7 @@ The `Text` type maps to a multi-line text area. Refer to the [FEEL](#adding-feel
 
 ### Hidden input type
 
-The `Hidden` type is not shown in the properties panel. It is used to set [static](#setting-a-default-value-value) or [generated](#generating-a-value-generatedvalue) values that should not be changed by the user.
+The `Hidden` type is not shown in the properties panel. Use it for values that your template manages, such as [static](#setting-a-default-value-value) or [generated](#generating-a-value-generatedvalue) values. Users cannot change hidden values, and updating an element to a new template version applies the new version's static value. Generated values are kept.
 
 ### Number input type
 
