@@ -1,10 +1,10 @@
 ---
 id: migrate-secrets
 title: "Migrate to `camunda.secrets.<name>`"
-description: "Move connector models from the legacy {{secrets.<name>}} syntax to the recommended camunda.secrets.<name> syntax, using the connector runtime's fallback mode for incremental migration."
+description: "Move connector models from the legacy {{secrets.<name>}} syntax to camunda.secrets.<name>. In SaaS, you only update the references in your models."
 ---
 
-`camunda.secrets.<name>` is the recommended secret reference syntax, resolved centrally by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) rather than by the [connector runtime](/reference/glossary.md#connector-runtime). This page explains how to move existing connector models from the legacy `{{secrets.<name>}}` syntax to `camunda.secrets.<name>`, including a fallback mode that lets you migrate incrementally without updating every model at once.
+`camunda.secrets.<name>` is the recommended secret reference syntax, resolved centrally by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) rather than by the [connector runtime](/reference/glossary.md#connector-runtime). This page explains how to rewrite existing `{{secrets.<name>}}` references in your connector models, and which extra steps apply if you run your own connector runtime.
 
 :::note
 The legacy `{{secrets.<name>}}` syntax remains fully supported, so you can migrate at your own pace.
@@ -21,42 +21,82 @@ Resolving secrets centrally in the Orchestration Cluster gives you capabilities 
 
 ## Feature differences
 
-|                  | `{{secrets.<name>}}` (legacy)                                                                                                                        | `camunda.secrets.<name>` (recommended)                                                                                                  |
-| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| Resolved by      | The connector runtime, at execution time                                                                                                             | The Orchestration Cluster, ahead of job activation or on demand through the API                                                         |
-| Where you use it | Any connector field in the properties panel                                                                                                          | Input mapping FEEL expressions, and connector or credential fields backed by a `SECRET_REFERENCE` cluster variable                      |
-| Value source     | Connector secret providers, for example prefixed environment variables or a custom provider                                                          | A File, environment variable, AWS Secrets Manager, or GCP Secret Manager store in Self-Managed; managed secrets in SaaS                 |
-| Authorization    | None; the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) restricts which fields may resolve a secret | The `SECRET` resource's `READ` and `REVEAL` authorizations govern the `/v2/secrets` API; broker-side resolution is not governed by them |
-| Tenant awareness | Not scoped per physical tenant unless you opt in to a tenant-aware provider in the connector runtime configuration                                   | Each physical tenant resolves its own configured secret store                                                                           |
-| Caching          | Values are read from the provider on each execution                                                                                                  | Cache-first with a configurable cache lifetime, so rotated values become available without a restart                                    |
+|                  | `{{secrets.<name>}}` (legacy)                                                                                                                        | `camunda.secrets.<name>` (recommended)                                                                                                                      |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Resolved by      | The connector runtime, at execution time                                                                                                             | The Orchestration Cluster, ahead of job activation or on demand through the API                                                                             |
+| Where you use it | Any connector field in the properties panel                                                                                                          | Connector fields that take a secret and any input mapping, as a FEEL expression (`=camunda.secrets.<name>`); Camunda Hub credential fields, without the `=` |
+| Value source     | Connector secret providers, for example prefixed environment variables or a custom provider; in SaaS, the cluster's managed secrets                  | A File, environment variable, AWS Secrets Manager, or GCP Secret Manager store in Self-Managed; managed secrets in SaaS                                     |
+| Authorization    | None; the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) restricts which fields may resolve a secret | The `SECRET` resource's `READ` and `REVEAL` authorizations govern the `/v2/secrets` API; broker-side resolution is not governed by them                     |
+| Tenant awareness | Not scoped per physical tenant unless you opt in to a tenant-aware provider in the connector runtime configuration                                   | Each physical tenant resolves its own configured secret store                                                                                               |
+| Caching          | Depends on the provider: environment variables are read on each execution; the SaaS provider caches values and refreshes them periodically           | Cache-first with a configurable cache lifetime, so rotated values become available without a restart                                                        |
 
 For the full behavior of the recommended syntax, see [Secret resolution](/components/concepts/secret-resolution.md) and [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md). For the legacy syntax, see [Using secrets](index.md#using-secrets).
 
-## Migrate incrementally with fallback mode
+## Choose your migration path
 
-You don't have to update every model at once. The connector runtime's `camunda.connector.secret-resolver.legacy.mode` setting controls where legacy references resolve from:
+The steps you need depend on which connector runtime runs your connectors.
 
-- `ON` (default): the runtime resolves `{{secrets.<name>}}` only from its configured secret providers.
+| Your setup                                                          | What you do                                                                                                                                     |
+| :------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| SaaS, with the Camunda-hosted connector runtime                     | Update the references in your models. See [Migrate in SaaS](#migrate-in-saas).                                                                  |
+| Self-Managed, or SaaS with your own connector runtime (hybrid mode) | Move the secret values first, then update your models. See [Migrate with your own connector runtime](#migrate-with-your-own-connector-runtime). |
+
+## Migrate in SaaS
+
+In SaaS with the Camunda-hosted connector runtime, migrating means updating the references in your models. The secrets on a cluster's **Cluster secrets** tab already back both syntaxes, so you don't copy values or change any runtime configuration.
+
+1. Check that each secret your models use exists on the cluster's **Cluster secrets** tab and follows the [secret naming rule](#name-your-secrets).
+1. Replace each `{{secrets.NAME}}` reference with `camunda.secrets.NAME`, as shown in [Rewrite secret references](#rewrite-secret-references).
+1. Deploy the updated models to the cluster that holds the secrets.
+
+If you run your own connector runtime against a SaaS cluster, follow [Migrate with your own connector runtime](#migrate-with-your-own-connector-runtime) instead. In that setup, legacy references resolve from your runtime's own secret providers, not from the **Cluster secrets** tab.
+
+## Migrate with your own connector runtime
+
+When you operate the connector runtime yourself, legacy references resolve from that runtime's secret providers, so you move the values to the Orchestration Cluster's store before you update your models. This applies to Self-Managed and to a self-managed connector runtime connected to a SaaS cluster.
+
+1. Prepare the store. In Self-Managed, [configure a secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) (File, environment variable, AWS Secrets Manager, or GCP Secret Manager) for the Orchestration Cluster. To keep supplying values as environment variables, use the [environment variable store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#environment-variable-store). The connector runtime's secret providers alone are not enough, because `camunda.secrets.<name>` doesn't read them. In SaaS, the store is the cluster's **Cluster secrets** tab.
+1. Copy the secret values. Move each secret value from your connector secret provider into the store under the same name. Follow the [secret naming rule](#name-your-secrets).
+1. (Optional) Enable fallback mode. Set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime, as described in [Migrate incrementally with fallback mode](#migrate-incrementally-with-fallback-mode). Models you haven't updated yet then keep working while you migrate them.
+1. Update your models. Replace each `{{secrets.NAME}}` reference with `camunda.secrets.NAME`, as shown in [Rewrite secret references](#rewrite-secret-references).
+1. Turn off legacy resolution. Once no model contains a `{{secrets.<name>}}` reference, set `camunda.connector.secret-resolver.legacy.mode` to `OFF` and remove the connector secret provider configuration. Any legacy reference you missed then fails with an error naming this setting, instead of resolving from a leftover provider.
+
+### Migrate incrementally with fallback mode
+
+Fallback mode lets models that still use the legacy syntax resolve from the Orchestration Cluster's store, so you don't have to update every model at once. The connector runtime's `camunda.connector.secret-resolver.legacy.mode` setting controls where legacy references resolve from:
+
+- `ON` (default): no fallback. The runtime resolves `{{secrets.<name>}}` only from its configured secret providers.
 - `FALLBACK`: when a legacy reference's name isn't found in a configured secret provider, the runtime looks the name up in the same secret store that backs `camunda.secrets.<name>`.
+- `OFF`: the runtime doesn't resolve legacy references at all. Use it once your migration is complete.
 
-With `FALLBACK` set, you can move a secret's value into the Orchestration Cluster's store first and keep existing models on the legacy syntax. Models you haven't touched keep resolving, now from the store, while you update them field by field. Once no legacy references remain, set the mode back to `ON` and remove the provider configuration.
+With `FALLBACK` set, you can move a secret's value into the Orchestration Cluster's store first and keep existing models on the legacy syntax. Models you haven't touched keep resolving, now from the store, while you update them field by field.
 
-## Backend prerequisites by offering
+This setting only applies to a connector runtime you operate. In SaaS, the Camunda-hosted connector runtime already resolves legacy references from the **Cluster secrets** tab.
 
-Before `camunda.secrets.<name>` can resolve, its store must hold the secret values. What that requires depends on your offering:
+## Rewrite secret references
 
-- **SaaS**: no backend change is needed. The managed secrets you create on a cluster's **Cluster secrets** tab are available to both the legacy syntax and `camunda.secrets.<name>`, so you can start migrating models right away. See [Manage connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
-- **Self-Managed**: an operator must configure a secret store (File, environment variable, AWS Secrets Manager, or GCP Secret Manager) for the Orchestration Cluster. The connector runtime's secret providers alone are not enough: `camunda.secrets.<name>` doesn't read them. To keep supplying values as environment variables, configure the [environment variable store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#environment-variable-store) with a prefix and set the variables on the Orchestration Cluster. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
+A `camunda.secrets.<name>` reference is a FEEL expression, so the field starts with `=` and the reference itself is never quoted. Use these forms directly in connector fields in the properties panel and in input mappings.
 
-## Migrate step by step
+| Use case                    | Legacy reference                           | `camunda.secrets.<name>` reference           |
+| :-------------------------- | :----------------------------------------- | :------------------------------------------- |
+| The whole field is a secret | `{{secrets.MY_API_KEY}}`                   | `=camunda.secrets.MY_API_KEY`                |
+| Text around the secret      | `Bearer {{secrets.MY_API_KEY}}`            | `="Bearer " + camunda.secrets.MY_API_KEY`    |
+| A secret in a FEEL context  | `= { myHeader: "{{secrets.MY_API_KEY}}" }` | `= { myHeader: camunda.secrets.MY_API_KEY }` |
+| A secret name with a dash   | `{{secrets.db-password}}`                  | ``=camunda.secrets.`db-password` ``          |
 
-1. **Prepare the store.** In Self-Managed, [configure a secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for the Orchestration Cluster. In SaaS, confirm the secrets exist on the cluster's **Cluster secrets** tab.
-1. **Copy the secret values.** Move each secret value from your connector secret provider into the store under the same name. Note that a name created or managed through the `/v2/secrets` API must match `[\p{Alnum}_-]+`; see [secret resolution](/components/concepts/secret-resolution.md#reference-syntax) for the naming rules.
-1. **(Optional) Enable fallback mode.** Set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime, as described in [Migrate incrementally with fallback mode](#migrate-incrementally-with-fallback-mode). Legacy references whose names are no longer supplied by a provider then resolve from the store, so models keep working while you migrate them.
-1. **Update your models field by field.** Replace each `{{secrets.NAME}}` reference with `camunda.secrets.NAME`:
-   - In an input mapping, use the FEEL expression `=camunda.secrets.NAME`. See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax rules, including backtick-escaping dashed names.
-   - In a connector or credential field, read the reference from a cluster variable of kind `SECRET_REFERENCE`. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
-1. **Remove the legacy configuration.** Once no model contains a `{{secrets.<name>}}` reference, set `camunda.connector.secret-resolver.legacy.mode` back to `ON` (or remove the setting) and remove the connector secret provider configuration.
+Keep the following in mind when you rewrite a reference:
+
+- Remove the quotes around the reference. A quoted reference, such as `="camunda.secrets.MY_API_KEY"`, is rejected at deployment.
+- Don't put a reference inside a list, such as `=[camunda.secrets.MY_API_KEY]`. This is also rejected at deployment. Give each secret its own field or input mapping instead.
+- In a Camunda Hub credential field, enter the reference without a leading `=`, for example `camunda.secrets.MY_API_KEY`. See [reference a secret from a credential field](/components/hub/organization/credentials/index.md#reference-a-secret-from-a-credential-field).
+
+For the full rules, see [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings). To reuse the same references across processes, you can also store them in a cluster variable of kind `SECRET_REFERENCE`. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
+
+## Name your secrets
+
+A secret name can contain only ASCII letters, digits, `_`, and `-`. Rename any secret with other characters before you migrate. To learn where such a name still works, see [reference a name with other characters](/components/concepts/secret-resolution.md#reference-a-name-with-other-characters).
+
+A name with a dash must be backtick-escaped, for example ``=camunda.secrets.`db-password` ``. Without the backticks, FEEL reads `camunda.secrets.db-password` as `db` minus `password`.
 
 ## Testing
 

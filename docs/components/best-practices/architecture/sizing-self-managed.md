@@ -94,8 +94,8 @@ These are the exact Helm values that Camunda uses in its continuous realistic-lo
 | Brokers                        | 3                   |         |       |
 | Partitions                     | 3                   |         |       |
 | Replication factor             | 3                   |         |       |
-|                                | vCPU \[cores\]      |       3 |     3 |
-|                                | Memory \[GB\]       |       2 |     2 |
+|                                | vCPU \[cores\]      |       4 |     4 |
+|                                | Memory \[GB\]       |       4 |     4 |
 |                                | Disk \[GB\]         |         |    64 |
 |                                | Disk IOPS           |         | 4,000 |
 | **Connectors**                 |                     |         |       |
@@ -138,8 +138,8 @@ Optimize does not support RDBMS as a data source, so running Optimize alongside 
 | Brokers                      | 3                   |         |       |
 | Partitions                   | 3                   |         |       |
 | Replication factor           | 3                   |         |       |
-|                              | vCPU \[cores\]      |       3 |     3 |
-|                              | Memory \[GB\]       |       2 |     2 |
+|                              | vCPU \[cores\]      |       4 |     4 |
+|                              | Memory \[GB\]       |       4 |     4 |
 |                              | Disk \[GB\]         |         |    64 |
 |                              | Disk IOPS           |         | 4,000 |
 | **Connectors**               |                     |         |       |

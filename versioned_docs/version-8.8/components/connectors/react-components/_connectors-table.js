@@ -95,14 +95,14 @@ const SearchableTable = () => {
       description:
         "Send events using Amazon EventBridge service within your processes.",
       type: "Outbound",
-      link: "../amazon-eventbridge/?awseventbridge=outbound",
+      link: "../amazon-eventbridge-outbound/",
       image: AmazonEventbridgeImg,
     },
     {
       name: "Amazon EventBridge Webhook",
       description: "Start a process instance triggered by Amazon EventBridge.",
       type: "Inbound",
-      link: "../amazon-eventbridge/?awseventbridge=inbound",
+      link: "../amazon-eventbridge-inbound/",
       image: AmazonEventbridgeImg,
     },
     {
@@ -379,7 +379,7 @@ const SearchableTable = () => {
       name: "Polling",
       description:
         "Poll an endpoint at regular intervals, enabling periodic data fetching.",
-      type: "Outbound",
+      type: "Inbound",
       link: "../../protocol/polling/",
       image: RestImg,
     },

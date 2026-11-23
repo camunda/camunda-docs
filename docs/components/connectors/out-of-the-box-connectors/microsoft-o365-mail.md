@@ -65,6 +65,17 @@ Enter the above data into the respective fields.
 
 Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
+### Refresh token authentication
+
+To authenticate with an OAuth 2.0 refresh token, in the **Authentication** section select **Refresh token** in the **Type** field, and fill in the following fields:
+
+- **Tenant ID**: The tenant ID of the Microsoft Entra (Azure AD) application.
+- **Client ID**: The client ID of the application.
+- **Client secret**: (Optional) The secret value of the Azure AD application. This field is optional for public clients.
+- **Refresh token**: The OAuth 2.0 refresh token used to obtain a new access token.
+
+Use [secrets](/components/saas/clusters/manage-secrets.md) to avoid exposing sensitive credentials.
+
 ## Select operation to execute
 
 Select the desired operation from the **Operations** section.
@@ -116,6 +127,7 @@ Related Microsoft Graph API: [user: sendMail](https://learn.microsoft.com/en-us/
 4. Enter desired content in the field **Body content**.
 5. Pass an array of emails into the **To recipients** field, for example `["myuser1@mycompany.com", "myuser2@mycompany.com"]`.
 6. (Optional) Pass an array of emails into the **CC recipients** field, for example `["myuser3@mycompany.com", "myuser4@mycompany.com"]`.
+7. In the **Attachments** field, pass an array of document objects, or an empty array if you don't send attachments. The default value is `=[]`.
 
 ## Handle connector response
 

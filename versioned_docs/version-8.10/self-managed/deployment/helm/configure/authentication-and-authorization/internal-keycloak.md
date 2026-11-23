@@ -315,6 +315,16 @@ To review how each component is configured and which OIDC clients are used:
 - Run `kubectl get pods` and `kubectl get configmap`, then use `kubectl describe` to inspect component configurations.
 - Log into Keycloak (using your administrative user) to review the OIDC client setup
 
+## Session and token timeouts
+
+Keycloak realm settings control how long users stay signed in to Camunda web applications such as Operate, Tasklist, and Admin. In the Keycloak admin console, go to **Realm settings** and update the following. See the [Keycloak timeouts reference](https://www.keycloak.org/docs/latest/server_admin/#_timeouts) for details.
+
+| Keycloak setting (realm)           | Effect on Camunda web sessions                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sessions > SSO Session Idle**    | Users must sign in again after this period without activity.                                                                                |
+| **Sessions > SSO Session Max**     | Users must sign in again after this period, even if they are active.                                                                        |
+| **Tokens > Access Token Lifespan** | How long an access token is valid before it must be refreshed. A short lifespan doesn't sign users out as long as the SSO session is valid. |
+
 ## Connect to the cluster
 
 ### Local access with port forwarding

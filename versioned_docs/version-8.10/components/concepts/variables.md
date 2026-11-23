@@ -273,9 +273,7 @@ A secret name containing a character FEEL doesn't allow in a bare identifier (mo
 
 Without the backticks, `camunda.secrets.db-password` parses as a subtraction (`db` minus `password`). FEEL reads the left operand as a reference named `db`, which is not a valid secret reference, so the deployment fails at evaluation.
 
-:::note
-When a reference is written directly in an input mapping source, backtick escaping accepts any name, including a name your secret store accepts but the [`/v2/secrets`](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx) endpoints do not. Those endpoints list and resolve only names matching `[\p{Alnum}_-]+`. A name outside that set, such as `tls.crt`, can be backtick-escaped and resolved from a process model (``=camunda.secrets.`tls.crt` ``) if your secret store holds it under that name, but the same secret cannot be listed or resolved through `/v2/secrets`. This applies to references written directly in an input mapping source, not to references embedded in a [`SECRET_REFERENCE`-kind cluster variable value](/components/modeler/feel/cluster-variable/data-types.md#where-references-can-appear-in-a-value), whose names follow the restricted cluster-variable character set.
-:::
+Name your secrets with ASCII letters, digits, `_`, and `-` only. A backtick-escaped name with other characters, such as ``=camunda.secrets.`tls.crt` ``, still resolves in an input mapping, but not everywhere else. See [reference a name with other characters](secret-resolution.md#reference-a-name-with-other-characters).
 
 ### Output mappings
 

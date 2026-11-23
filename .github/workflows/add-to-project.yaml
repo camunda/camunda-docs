@@ -8,21 +8,25 @@ jobs:
   sync-board:
     if: github.event.requested_reviewer.login == 'christinaausley' || github.event.requested_reviewer.login == 'mesellings' || github.event.requested_team.name == 'Tech Writers'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
     steps:
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          method: jwt
+          role: ${{ secrets.VAULT_JWT_ROLE }}
+          path: ${{ secrets.VAULT_JWT_PATH }}
+          jwtGithubAudience: ${{ secrets.VAULT_JWT_AUDIENCE }}
           exportEnv: false
           secrets: |
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
 
-      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+      - uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         id: app-token
         with:
           client-id: ${{ steps.secrets.outputs.APP_ID }}

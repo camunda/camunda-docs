@@ -143,18 +143,19 @@ steps:
 
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
-| Environment variable         | Description                                      | Default value |
-| :--------------------------- | :----------------------------------------------- | :------------ |
-| RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature.    | false         |
-| MULTITENANCY_ENABLED         | Controls the multi-tenancy feature for Optimize. | false         |
+| Environment variable           | Description                                                                                                                                                                                                                                             | Default value |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
+| RESOURCE_PERMISSIONS_ENABLED   | Controls the resource authorizations feature.                                                                                                                                                                                                           | false         |
+| MULTITENANCY_ENABLED           | Controls the multi-tenancy feature for Optimize.                                                                                                                                                                                                        | false         |
+| SCOPE_PERMISSIONS_BY_COMPONENT | Returns each component only the permissions its own resource server defines when components share an OIDC audience. See [scope permissions by component](/self-managed/components/management-identity/configuration/scope-permissions-by-component.md). | false         |
 
 :::note
-Setting either of the feature flags to `true` requires a database connection. To configure a database
+Setting `RESOURCE_PERMISSIONS_ENABLED` or `MULTITENANCY_ENABLED` to `true` requires a database connection. To configure a database
 connection, see [database configuration](#database-configuration).
 :::
 
 :::note
-When using the Camunda Helm chart, setting `MULTITENANCY_ENABLED: true` alone does not enable the Tenants tab in Management Identity. You must also set `global.multitenancy.enabled: true` in your Helm values. Without the global flag, the Tenants tab does not appear in Management Identity even when `MULTITENANCY_ENABLED` is set to `true`.
+When using the Camunda Helm chart, setting `MULTITENANCY_ENABLED: true` alone does not enable the Tenants tab in Management Identity. You must also set `global.multitenancy.enabled: true` in your Helm values. Without the global flag, the Tenants tab does not appear in Management Identity even when `MULTITENANCY_ENABLED` is set to `true`. The global flag also enables multi-tenancy checks in the Orchestration Cluster. To configure the Orchestration Cluster separately, see [configure multi-tenancy in the Helm chart](/self-managed/deployment/helm/configure/configure-logical-tenants.md).
 :::
 
 ## Logging

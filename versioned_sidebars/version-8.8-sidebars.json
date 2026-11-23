@@ -951,7 +951,12 @@
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                {
+                  "AWS EventBridge": [
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge-outbound"
+                  ]
+                },
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 {
@@ -3287,6 +3292,7 @@
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code"
                   ]
                 },
