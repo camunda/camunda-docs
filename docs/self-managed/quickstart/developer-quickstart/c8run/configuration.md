@@ -205,12 +205,12 @@ Use a dedicated dotenv file for secret values. `c8run secrets` refuses to import
 
 Configure local secret management with the following environment variables. Set them in your environment or the c8run `.env` file before running secret commands or starting Camunda 8 Run.
 
-| Variable                   | Default                     | Valid values                                                              | Behavior                                                                                                                                                                                                                                                                                      |
-| -------------------------- | --------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `C8RUN_SECRETS_MODE`       | `local`                     | `local`, `env`, or `external`                                             | In `local` mode, c8run configures its file store. Set `env` to read secrets from prefixed environment variables. Set `external` whenever you configure another store. In `external` mode, local `c8run secrets` commands are disabled. In `env` mode, only `c8run secrets list` is available. |
-| `C8RUN_SECRETS_ENV_PREFIX` | `-`                         | A prefix matching `[A-Za-z][A-Za-z0-9_]*_`, such as `C8_`                 | Required in `env` mode. Sets the prefix that every secret variable carries. c8run checks the format before any process starts and stops with a message naming the setting when it is missing or invalid.                                                                                      |
-| `C8RUN_SECRETS_DIR`        | Platform-specific directory | An absolute or relative directory path                                    | Sets the file-store path for local secret commands and startup. Relative paths resolve from the current working directory.                                                                                                                                                                    |
-| `C8RUN_SECRETS_CACHE_TTL`  | `20m`                       | A duration expressed as a whole number of minutes, with a minimum of `1m` | Sets how long Camunda caches resolved secret values. Has no effect in `env` mode, because the environment variable store isn't cached, but an invalid value still refuses startup.                                                                                                            |
+| Variable                   | Default                     | Valid values                                                              | Behavior                                                                                                                                                                                                                                                                                        |
+| -------------------------- | --------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `C8RUN_SECRETS_MODE`       | `local`                     | `local`, `env`, or `external`                                             | In `local` mode, `c8run` configures its file store. Set `env` to read secrets from prefixed environment variables. Set `external` whenever you configure another store. In `external` mode, local `c8run secrets` commands are disabled. In `env` mode, only `c8run secrets list` is available. |
+| `C8RUN_SECRETS_ENV_PREFIX` | `-`                         | A prefix matching `[A-Za-z][A-Za-z0-9_]*_`, such as `C8_`                 | Required in `env` mode. Sets the prefix that every secret variable carries. `c8run` checks the format before any process starts and stops with a message naming the setting when it is missing or invalid.                                                                                      |
+| `C8RUN_SECRETS_DIR`        | Platform-specific directory | An absolute or relative directory path                                    | Sets the file-store path for local secret commands and startup. Relative paths resolve from the current working directory.                                                                                                                                                                      |
+| `C8RUN_SECRETS_CACHE_TTL`  | `20m`                       | A duration expressed as a whole number of minutes, with a minimum of `1m` | Sets how long Camunda caches resolved secret values. Has no effect in `env` mode, because the environment variable store isn't cached, but an invalid value still refuses startup.                                                                                                              |
 
 For example, set the cache duration to one minute:
 
@@ -231,7 +231,7 @@ After rotating, importing, or deleting a value, existing cached resolutions can 
 
 On Windows, use PowerShell or Command Prompt for hidden interactive entry. In Git Bash, prefix the command with `winpty`, or use `--stdin`.
 
-Local secret commands manage only the c8run file store. Set `C8RUN_SECRETS_MODE=external` whenever you configure another file path, an environment variable store, AWS Secrets Manager, or Google Secret Manager through `--config`, `application.yaml`, or Spring environment settings such as `CAMUNDA_SECRETS_STORES_ENV_DEFAULT_PREFIX`. c8run doesn't detect explicit store configuration and otherwise configures its local default store, so the physical tenant ends up with two stores and Camunda refuses to start. Use the external store's management tools instead of `c8run secrets`. To read secrets from environment variables, prefer [`C8RUN_SECRETS_MODE=env`](#use-secrets-from-environment-variables), which configures the store for you.
+Local secret commands manage only the `c8run` file store. Set `C8RUN_SECRETS_MODE=external` whenever you configure another file path, an environment variable store, AWS Secrets Manager, or Google Secret Manager through `--config`, `application.yaml`, or Spring environment settings such as `CAMUNDA_SECRETS_STORES_ENV_DEFAULT_PREFIX`. `c8run` doesn't detect explicit store configuration and otherwise configures its local default store, so the physical tenant ends up with two stores and Camunda refuses to start. Use the external store's management tools instead of `c8run secrets`. To read secrets from environment variables, prefer [`C8RUN_SECRETS_MODE=env`](#use-secrets-from-environment-variables), which configures the store for you.
 
 The local secrets directory is for development only. For production, configure a supported managed secret store instead of reusing Camunda 8 Run secrets.
 
@@ -248,16 +248,16 @@ export C8_DEFAULT_OPENAI_API_KEY="<your-api-key>"
 ./c8run start
 ```
 
-You can also set `C8RUN_SECRETS_MODE` and `C8RUN_SECRETS_ENV_PREFIX` in the c8run `.env` file. If you set them only for a single command, such as `C8RUN_SECRETS_MODE=env ./c8run start`, later `./c8run secrets` commands run in the default `local` mode and show the file store instead.
+You can also set `C8RUN_SECRETS_MODE` and `C8RUN_SECRETS_ENV_PREFIX` in the `c8run` `.env` file. If you set them only for a single command, such as `C8RUN_SECRETS_MODE=env ./c8run start`, later `./c8run secrets` commands run in the default `local` mode and show the file store instead.
 
-c8run derives one environment store per tenant from the prefix:
+`c8run` derives one environment store per tenant from the prefix:
 
 | Tenant                         | Variable pattern         | Example (prefix `C8_`, ID `sales`) |
 | ------------------------------ | ------------------------ | ---------------------------------- |
 | Default tenant                 | `<prefix>DEFAULT_<NAME>` | `C8_DEFAULT_OPENAI_API_KEY`        |
 | Physical Tenant with ID `<id>` | `<prefix><ID>_<NAME>`    | `C8_SALES_OPENAI_API_KEY`          |
 
-In the variable name, `<ID>` is the Physical Tenant ID in uppercase. Physical Tenant IDs are lowercase, but c8run uppercases them when it builds the prefix, and the store matches names exactly. For the Physical Tenant `sales`, set `C8_SALES_OPENAI_API_KEY`, not `C8_sales_OPENAI_API_KEY`.
+In the variable name, `<ID>` is the Physical Tenant ID in uppercase. Physical Tenant IDs are lowercase, but `c8run` uppercases them when it builds the prefix, and the store matches names exactly. For the Physical Tenant `sales`, set `C8_SALES_OPENAI_API_KEY`, not `C8_sales_OPENAI_API_KEY`.
 
 Reference a secret from a process model the same way as in local mode:
 
@@ -267,11 +267,12 @@ Reference a secret from a process model the same way as in local mode:
 
 Environment mode has the following behavior:
 
-- Before starting any processes, c8run validates `C8RUN_SECRETS_ENV_PREFIX` against the format `[A-Za-z][A-Za-z0-9_]*_`. If the setting is missing or invalid, c8run stops and reports its name. The server rejects reserved prefixes, such as `CAMUNDA_` or `ZEEBE_`, at startup.
-- Each tenant’s connector runtime sees only that tenant’s secret variables. Variables prefixed for other tenants are removed from its environment.
-- The environment is the source of truth. `./c8run secrets list` reads the current shell environment and displays the default tenant’s secret names without their values. Add `--physical-tenant <id>` to list a physical tenant’s secret names. Like the secrets API, the command omits empty variables and names that don’t match the reference character set. c8run reads its environment at startup, so the list matches the secrets Camunda resolves only if you run the command in the same environment used to start c8run.
-- `./c8run secrets set`, `delete`, `import`, and `path` are not available in environment mode. To change a value, update the corresponding environment variable—for example, `C8_DEFAULT_OPENAI_API_KEY`—and restart c8run.
-- [Physical tenants](#configure-physical-tenants) managed by Camunda 8 Run require `C8RUN_SECRETS_MODE` to be set to `local` or `env`. In `env` mode, c8run refuses to start if physical tenants are declared outside c8run because it cannot assign them a prefix.
+- Before starting any processes, `c8run` validates `C8RUN_SECRETS_ENV_PREFIX` against the format `[A-Za-z][A-Za-z0-9_]*_`. If the setting is missing or invalid, `c8run` stops and reports its name. The server rejects reserved prefixes, such as `CAMUNDA_` or `ZEEBE_`, at startup.
+- Each tenant's connector runtime sees only that tenant's secret variables. `c8run` removes variables prefixed for other tenants from its environment.
+- The environment is the source of truth. `./c8run secrets list` reads the current shell environment and displays the default tenant's secret names without their values. Add `--physical-tenant <id>` to list a Physical Tenant's secret names.
+- Like the secrets API, `./c8run secrets list` omits empty variables and names that don't match the reference character set. The list matches the secrets Camunda resolves only if you run the command in the same environment you used to start c8run.
+- `./c8run secrets set`, `delete`, `import`, and `path` aren't available in environment mode. To change a value, update the corresponding environment variable, for example `C8_DEFAULT_OPENAI_API_KEY`, and restart c8run.
+- [Physical Tenants](#configure-physical-tenants) managed by Camunda 8 Run require `C8RUN_SECRETS_MODE` to be set to `local` or `env`. In `env` mode, `c8run` refuses to start if Physical Tenants are declared outside `c8run` because it can't assign them a prefix.
 
 ## Configure Physical Tenants
 
