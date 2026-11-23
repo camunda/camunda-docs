@@ -23,7 +23,7 @@ Use this API to:
 | Start and monitor external system processes | Trigger process instances and track progress from any application or service.     |
 
 :::tip
-Not sure whether to use REST or gRPC? See [Choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md).
+Not sure whether to use REST or gRPC? See [choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md).
 :::
 
 ## Key features

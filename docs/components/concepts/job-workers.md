@@ -164,7 +164,7 @@ Job timeout can be updated [using the `UpdateJobTimeout` command](../../apis-too
 
 It's also possible to use job workers in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling, which greatly cuts down on overall latency.
 
-Job streaming is available over the Zeebe API (gRPC) only. To decide between streaming and polling, see [Choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md#streaming-or-polling).
+Job streaming is available over the Zeebe API (gRPC) only. To decide between streaming and polling, see [choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md#streaming-or-polling).
 
 ### How it works
 

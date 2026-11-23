@@ -19,7 +19,7 @@ Zeebe clients use gRPC to communicate with the cluster. For example, you can use
 
 ## Why use gRPC?
 
-For guidance on when to use gRPC, REST, or both, see [Choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md).
+For guidance on when to use gRPC, REST, or both, see [choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md).
 
 Using this API may be beneficial if your use-case requires low-latency or high-throughput communication.
 
