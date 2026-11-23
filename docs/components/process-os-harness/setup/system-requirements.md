@@ -35,7 +35,7 @@ Agentic tooling is flexible by nature, so ProcessOS Harness may run on more syst
 
 ## Governance process
 
-The governance process needs a Camunda cluster that's reachable across your organization, because it holds ProcessOS project state and orchestrates SME feedback.
+The governance process needs a Camunda cluster that's reachable across your organization, because it holds the governance process state and orchestrates SME feedback. Project files stay in the [project repository](#project-version-control). See [clusters and collaboration](clusters-and-collaboration.md) for how the governance cluster, the repository, and the deployment target fit together.
 
 | Requirement | Supported                                              |
 | ----------- | ------------------------------------------------------ |

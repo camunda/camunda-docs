@@ -174,6 +174,7 @@ module.exports = {
               ],
             },
             "components/process-os-harness/installation",
+            "components/process-os-harness/setup/clusters-and-collaboration",
             {
               type: "category",
               label: "Build",

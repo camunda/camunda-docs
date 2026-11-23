@@ -84,6 +84,7 @@ To install a newer archive, download it from the Camunda Download Center (Enterp
 
 ## Next steps
 
+- Set up the [governance cluster, shared repository, and deployment target](setup/clusters-and-collaboration.md), especially when several people work on one project.
 - Learn how the [governance process](build/governance-process.md) guides you between milestones.
 - Learn how [review cycles](build/review-cycle.md) bring SMEs into each phase.
 - Start the first phase, described in [discover the as-is process](build/phases/1-discovery.md).
