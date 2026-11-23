@@ -154,8 +154,15 @@ To do so, include the Web Modeler UI's token audience in the configured list of 
 :::
 
 :::info
-If you're using Console, the Orchestration Cluster must also accept Console's token. Console calls the Orchestration Cluster API (for usage metrics, system configuration and job statistics) with the signed-in user's token, which carries Console's audience (`console-api` by default).
-To allow these calls, include Console's token audience in the configured list of audiences. Otherwise, Console gets `401 Unauthorized` responses and shows empty statistics, for example when Console and the Orchestration Cluster run in separate Helm releases.
+If you're using Console, the Orchestration Cluster must also accept Console's token.
+Console calls the Orchestration Cluster API (for usage metrics) with the signed-in user's
+token, which carries Console's audience (`console-api` by default). To allow these calls,
+include Console's token audience in the configured list of audiences. Otherwise, Console
+gets `401 Unauthorized` responses and shows empty statistics.
+
+If you deploy with the Helm chart and Console is enabled in the same release, the chart
+adds this audience for you. Set it yourself when Console and the Orchestration Cluster
+run in separate releases.
 :::
 
 #### Example IdP configuration
