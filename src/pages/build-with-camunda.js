@@ -758,15 +758,15 @@ function BuildWithCamunda() {
               <VersionBadge version={`Camunda ${CAMUNDA_RUN_STABLE_MINOR}+`} />
             </h2>
             <p className={styles.sectionSub}>
-              Install the Camunda CLI via npm and start a local Camunda
-              environment.
+              Install the Camunda 8 CLI (c8ctl) via npm and start a local
+              Camunda environment.
             </p>
           </div>
 
           {/* ─── Primary: CLI install ─── */}
           <div className={styles.cliInstallBlock}>
             <p className={styles.quickStartLabel}>
-              <span className={styles.stepNumber}>1</span> Install the Camunda
+              <span className={styles.stepNumber}>1</span> Install the Camunda 8
               CLI
               <span
                 style={{
@@ -791,7 +791,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start ${CAMUNDA_RUN.version}`}
+              {`$ c8 cluster start ${CAMUNDA_RUN.version}`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -985,8 +985,8 @@ $ ./camunda-start.sh
             <TerminalWindow copyable>
               {`$ git clone https://github.com/camunda/camunda-8-get-started.git
 $ cd camunda-8-get-started/1-rocket-launch/
-$ c8ctl deploy .
-$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
+$ c8 deploy .
+$ c8 run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             </TerminalWindow>
 
             <p className={styles.quickStartLabel}>
@@ -1055,32 +1055,32 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
-$ c8ctl cluster stop`}
+                {`$ c8 cluster start ${CAMUNDA_RUN_STABLE_MINOR}
+$ c8 cluster stop`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
               <h4>Deploy and start processes</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
-$ c8ctl create pi --id=rocket-launch --variables='{"fuelLevel":90}'
-$ c8ctl list pi`}
+                {`$ c8 deploy ./rocket-launch.bpmn plot-destination.dmn
+$ c8 create pi --id=rocket-launch --variables='{"fuelLevel":90}'
+$ c8 list pi`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
               <h4>Interact with processes</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl list jobs --type=launch-approval
-$ c8ctl activate jobs launch-approval
-$ c8ctl complete job 2251799813685252`}
+                {`$ c8 list jobs --type=launch-approval
+$ c8 activate jobs launch-approval
+$ c8 complete job 2251799813685252`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
               <h4>Monitor and debug</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl list inc --state=ACTIVE
-$ c8ctl get inc 2251799813685251
-$ c8ctl resolve inc 2251799813685251`}
+                {`$ c8 list inc --state=ACTIVE
+$ c8 get inc 2251799813685251
+$ c8 resolve inc 2251799813685251`}
               </TerminalWindow>
             </div>
           </div>
@@ -1115,7 +1115,7 @@ $ c8ctl resolve inc 2251799813685251`}
             <span>
               Learn more about using the{" "}
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                Camunda CLI
+                Camunda 8 CLI
               </Link>{" "}
               to manage Camunda directly from the terminal.
             </span>

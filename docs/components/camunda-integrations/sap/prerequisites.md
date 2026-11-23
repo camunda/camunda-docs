@@ -39,4 +39,4 @@ Additional services may be required depending on your use case:
 
 ## Tooling
 
-- [**CSAP c8ctl plugin**](./csap-cli.md): A plugin for [c8ctl](/apis-tools/c8ctl/getting-started.md) that runs on any platform with Node.js 22 or later.
+- [**CSAP c8ctl plugin**](./csap-cli.md): A plugin for the [Camunda 8 CLI (`c8ctl`)](/apis-tools/c8ctl/getting-started.md) that runs on any platform with Node.js 22 or later.

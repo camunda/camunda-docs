@@ -2,10 +2,10 @@
 id: agentic-ai-aiagent-upgrade
 sidebar_label: Upgrade AI Agent element templates
 title: Upgrade AI Agent element templates
-description: Upgrade AI Agent connectors from the legacy element templates to the new element templates with c8ctl or manually, and migrate their model provider configurations.
+description: Upgrade AI Agent connectors from the legacy element templates to the new element templates with the Camunda 8 CLI (c8ctl) or manually, and migrate their model provider configurations.
 ---
 
-Upgrade AI Agent connectors from the legacy element templates to the new element templates, and migrate their model provider configurations. Use c8ctl to do most of the upgrade automatically, or upgrade each element manually in Modeler.
+Upgrade AI Agent connectors from the legacy element templates to the new element templates, and migrate their model provider configurations. Use the Camunda 8 CLI (`c8ctl`) to do most of the upgrade automatically, or upgrade each element manually in Modeler.
 
 ## Legacy and new element templates
 
@@ -42,25 +42,25 @@ Camunda deprecates the legacy element templates in 8.10. They will not receive n
 
 The legacy and new element templates are separate templates, not two versions of the same template. You can upgrade an element in one of two ways:
 
-- [Upgrade with c8ctl](#upgrade-with-c8ctl) (recommended). c8ctl moves the values of all legacy AI Agent elements in a BPMN file to the new template and reports each change.
+- [Upgrade with the Camunda 8 CLI](#upgrade-with-c8ctl) (recommended). The CLI moves the values of all legacy AI Agent elements in a BPMN file to the new template and reports each change.
 - [Upgrade manually in Modeler](#upgrade-manually-in-modeler). You apply the new template to each element and enter the values again.
 
 After the upgrade, [complete the upgrade](#complete-the-upgrade) for both ways.
 
-### Upgrade with c8ctl
+### Upgrade with the Camunda 8 CLI {#upgrade-with-c8ctl}
 
-Use the `c8ctl element-template update` command to move legacy AI Agent elements to the new element templates. The new templates contain a migration recipe. The recipe tells c8ctl how each legacy field maps to the new fields, including the model provider configuration.
+Use the `c8 element-template update` command to move legacy AI Agent elements to the new element templates. The new templates contain a migration recipe. The recipe tells the CLI how each legacy field maps to the new fields, including the model provider configuration.
 
 Prerequisites:
 
-- [c8ctl](/apis-tools/c8ctl/getting-started.md#install) 4.6.1 or later. Earlier versions do not sync the migration recipe that the new templates contain.
-- The BPMN file sets the execution platform version to Camunda 8.10 or later. c8ctl does not change this version. Set it in Modeler or in the `modeler:executionPlatformVersion` attribute of the BPMN file.
+- [Camunda 8 CLI](/apis-tools/c8ctl/getting-started.md#install) 4.6.1 or later. Earlier versions do not sync the migration recipe that the new templates contain.
+- The BPMN file sets the execution platform version to Camunda 8.10 or later. The CLI does not change this version. Set it in Modeler or in the `modeler:executionPlatformVersion` attribute of the BPMN file.
 
 Each legacy template has one new template as its target. Use the element template IDs from the [table of legacy and new element templates](#legacy-and-new-element-templates). For a hybrid template, add the `-hybrid` suffix to both IDs. For example, upgrade `io.camunda.connectors.agenticai.aiagent.v1-hybrid` to `io.camunda.connectors.agenticai.ai-agent-task.v2-hybrid`.
 
 The `update` command selects elements by their legacy template ID:
 
-| Command                                                      | Elements that c8ctl updates                                                                                     |
+| Command                                                      | Elements that the CLI updates                                                                                   |
 | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
 | `update <legacy-id> process.bpmn --to <new-id>`              | All elements in the file that use `<legacy-id>`, in any version. The elements of other templates do not change. |
 | `update <legacy-id> <element-id> process.bpmn --to <new-id>` | Only the element with the ID `<element-id>`. The command fails if this element does not use `<legacy-id>`.      |
@@ -69,20 +69,20 @@ One command accepts one legacy template ID only. If a file contains AI Agent Sub
 
 To upgrade all legacy AI Agent elements in a BPMN file:
 
-1. Refresh the local element template cache, so c8ctl uses the newest templates and their recipes:
+1. Refresh the local element template cache, so the CLI uses the newest templates and their recipes:
 
    ```shell
-   c8ctl element-template sync
+   c8 element-template sync
    ```
 
 2. Preview the upgrade. The `--dry-run` option prints a report and does not change the file:
 
    ```shell
-   c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn \
+   c8 element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn \
      --to io.camunda.connectors.agenticai.ai-agent-subprocess.v2 --dry-run
    ```
 
-   The migration recipe accepts only elements that use legacy template version 12 or later. If an element uses an older version, c8ctl first updates the element to legacy template version 12. Then c8ctl applies the recipe. The report shows this step. The example that follows shows the report for an AI Agent Sub-process element. The element uses legacy template version 7 and the Azure OpenAI provider:
+   The migration recipe accepts only elements that use legacy template version 12 or later. If an element uses an older version, the CLI first updates the element to legacy template version 12. Then the CLI applies the recipe. The report shows this step. The example that follows shows the report for an AI Agent Sub-process element. The element uses legacy template version 7 and the Azure OpenAI provider:
 
    ```text
    AI Agent (AI_Agent)
@@ -117,10 +117,10 @@ To upgrade all legacy AI Agent elements in a BPMN file:
    ```
 
    :::note
-   Look for moved values (marked `>`) and values that the recipe sets (marked `set by recipe`) in the report. If the report shows neither, c8ctl did not use the migration recipe. c8ctl then copies only the values that have the same key. The report gives the reason for each element. A common cause is that your local template cache does not contain the newest template version with the migration recipe. In this case, run `c8ctl element-template sync`. Then do the dry run again.
+   Look for moved values (marked `>`) and values that the recipe sets (marked `set by recipe`) in the report. If the report shows neither, the CLI did not use the migration recipe. The CLI then copies only the values that have the same key. The report gives the reason for each element. A common cause is that your local template cache does not contain the newest template version with the migration recipe. In this case, run `c8 element-template sync`. Then do the dry run again.
    :::
 
-3. Read the report for each element. The report shows each added, changed, moved, and dropped value. It also shows the notes of the recipe, for example when the recipe turns on prompt caching. Compare the report with the **With c8ctl** notes in the [model provider configuration mapping](#model-provider-configuration-mapping).
+3. Read the report for each element. The report shows each added, changed, moved, and dropped value. It also shows the notes of the recipe, for example when the recipe turns on prompt caching. Compare the report with the **With the CLI** notes in the [model provider configuration mapping](#model-provider-configuration-mapping).
 
    :::tip
    If an AI agent or a script reads the report, add the `--json` option to get machine-readable output.
@@ -129,27 +129,27 @@ To upgrade all legacy AI Agent elements in a BPMN file:
 4. Write the upgrade to the file:
 
    ```shell
-   c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn \
+   c8 element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn \
      --to io.camunda.connectors.agenticai.ai-agent-subprocess.v2 --in-place
    ```
 
-   The command upgrades all elements that use the legacy template ID. c8ctl writes the file only if all these elements migrate without data loss. If the report lists dropped values, set them manually after the upgrade, or add the `--allow-lossy` option to accept the loss. Use `--allow-lossy` only after you read the dropped values in the report.
+   The command upgrades all elements that use the legacy template ID. The CLI writes the file only if all these elements migrate without data loss. If the report lists dropped values, set them manually after the upgrade, or add the `--allow-lossy` option to accept the loss. Use `--allow-lossy` only after you read the dropped values in the report.
 
 5. If the file also contains elements of the other legacy template, do steps 2 to 4 again. Use that legacy template ID and its new template ID from the [table of legacy and new element templates](#legacy-and-new-element-templates). For example, use `io.camunda.connectors.agenticai.aiagent.v1` with `--to io.camunda.connectors.agenticai.ai-agent-task.v2`.
 
-If c8ctl cannot use the recipe for an element, the report gives the reason. c8ctl then copies only the values with the same key, and the write requires `--allow-lossy`.
+If the CLI cannot use the recipe for an element, the report gives the reason. The CLI then copies only the values with the same key, and the write requires `--allow-lossy`.
 
-Run `c8ctl element-template update --help` to see all options.
+Run `c8 element-template update --help` to see all options.
 
 #### Stay on the legacy templates
 
 If you are not ready for the new templates, you can keep your elements on the legacy templates. To update the elements to the newest legacy template version, refresh the template cache as in step 1. Then run the `update` command without the `--to` option:
 
 ```shell
-c8ctl element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn --in-place
+c8 element-template update io.camunda.connectors.agenticai.aiagent.jobworker.v1 process.bpmn --in-place
 ```
 
-c8ctl moves each element that uses the legacy template ID to the newest compatible legacy template version. The execution platform version of the BPMN file sets which versions are compatible. The elements keep the legacy job type. The report shows that the template is deprecated. The report also gives the new template as the target for a later upgrade.
+The CLI moves each element that uses the legacy template ID to the newest compatible legacy template version. The execution platform version of the BPMN file sets which versions are compatible. The elements keep the legacy job type. The report shows that the template is deprecated. The report also gives the new template as the target for a later upgrade.
 
 ### Upgrade manually in Modeler
 
@@ -166,9 +166,9 @@ To upgrade an element manually, apply the new template and enter its values agai
 
 ### Complete the upgrade
 
-Do these steps after you upgrade with c8ctl or manually:
+Do these steps after you upgrade with the CLI or manually:
 
-1. If you upgrade an AI Agent Task, [update its tools ad-hoc sub-process](#ai-agent-task-tools-sub-process). The new AI Agent Task template and c8ctl do not change this sub-process.
+1. If you upgrade an AI Agent Task, [update its tools ad-hoc sub-process](#ai-agent-task-tools-sub-process). The new AI Agent Task template and the CLI do not change this sub-process.
 2. Deploy the new process definition version to a non-production environment first. Test a representative prompt and tool-call path. Make sure authentication, endpoint, and model behavior are correct before you promote it. See [testing process definitions](/components/best-practices/development/testing-process-definitions.md) for a test approach. The prior version keeps running until you deploy this one. It remains available as a rollback path.
 3. Once verified, promote the new version to production through your normal release process.
 
@@ -219,7 +219,7 @@ If you extend the AI Agent connector in a Self-Managed or hybrid deployment, for
 
 Model provider configuration changed the most in this redesign, since providers and backends are now decoupled (see [choose a provider and backend](./agentic-ai-aiagent-model-providers.md#choose-a-provider-and-backend)).
 The sections below cover only the fields that changed, comparing legacy and new template fields. Any fields not mentioned carry over unchanged under the same field label.
-Each section ends with a **With c8ctl** note. The note tells you which values the c8ctl migration recipe sets and which steps you must still do manually.
+Each section ends with a **With the CLI** note. The note tells you which values the CLI migration recipe sets and which steps you must still do manually.
 
 ### Anthropic
 
@@ -238,7 +238,7 @@ The custom or compatible backend also supports **OAuth 2.0 client credentials** 
 
 The new template additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a legacy equivalent.
 
-**With c8ctl**: The recipe selects the backend from the legacy endpoint, as the table shows. It copies the endpoint unchanged, so remove a trailing path segment manually. The recipe also turns on **Enable prompt caching**. **Effort** and **Thinking mode** use the model default.
+**With the CLI**: The recipe selects the backend from the legacy endpoint, as the table shows. It copies the endpoint unchanged, so remove a trailing path segment manually. The recipe also turns on **Enable prompt caching**. **Effort** and **Thinking mode** use the model default.
 
 ### AWS Bedrock
 
@@ -275,7 +275,7 @@ Bedrock Mantle requires a different IAM permission policy than Bedrock Runtime. 
 
 The new template additionally exposes **Enable prompt caching** on the AWS Bedrock Converse provider.
 
-**With c8ctl**: The recipe keeps all elements on the **AWS Bedrock Converse** provider and turns on **Enable prompt caching**. To run Claude models on **Anthropic** with the **AWS Bedrock Mantle** backend, change the provider manually after the upgrade. See [Migrating to Anthropic + AWS Bedrock Mantle](#migrating-to-anthropic--aws-bedrock-mantle).
+**With the CLI**: The recipe keeps all elements on the **AWS Bedrock Converse** provider and turns on **Enable prompt caching**. To run Claude models on **Anthropic** with the **AWS Bedrock Mantle** backend, change the provider manually after the upgrade. See [Migrating to Anthropic + AWS Bedrock Mantle](#migrating-to-anthropic--aws-bedrock-mantle).
 
 ### Azure OpenAI
 
@@ -298,7 +298,7 @@ The new template additionally offers an **Entra ID: Managed identity** authentic
 A multi-replica connectors runtime setup means each replica acquires and caches its own Entra ID token independently. Expect parallel credential/token requests against Entra ID rather than a single shared token.
 :::
 
-**With c8ctl**: The recipe sets **API** to **Chat Completions**, as in the legacy template. It moves **Maximum tokens** to **Max completion tokens**. To use the **Responses** API, change **API** manually and enter the value in **Max output tokens**.
+**With the CLI**: The recipe sets **API** to **Chat Completions**, as in the legacy template. It moves **Maximum tokens** to **Max completion tokens**. To use the **Responses** API, change **API** manually and enter the value in **Max output tokens**.
 
 ### OpenAI
 
@@ -312,7 +312,7 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
 
 The legacy template always used the Chat Completions API. The new template defaults its **API** field to the newer **Responses** API. Select **Chat Completions** instead if you need closer parity with legacy behavior. The new template additionally exposes the **Effort** reasoning parameter on both API families.
 
-**With c8ctl**: The recipe sets **API** to **Chat Completions**, as in the legacy template. To use the **Responses** API, change **API** manually and enter the value in **Max output tokens**.
+**With the CLI**: The recipe sets **API** to **Chat Completions**, as in the legacy template. To use the **Responses** API, change **API** manually and enter the value in **Max output tokens**.
 
 ### OpenAI-compatible
 
@@ -338,7 +338,7 @@ The new template additionally supports **OAuth 2.0** client credentials, for a g
 
 Also check the resulting request path. The new template appends `/chat/completions` or `/responses` to **API endpoint** for the selected **API**. This may differ from your legacy endpoint.
 
-**With c8ctl**: The recipe sets **API** to **Chat Completions**. It selects **API key** if the legacy **API key** field has a value, and **None** if not. The recipe does not read an `Authorization` header in **Headers**. If your legacy **Headers** contain an `Authorization` header, apply the rules above manually after the upgrade.
+**With the CLI**: The recipe sets **API** to **Chat Completions**. It selects **API key** if the legacy **API key** field has a value, and **None** if not. The recipe does not read an `Authorization` header in **Headers**. If your legacy **Headers** contain an `Authorization` header, apply the rules above manually after the upgrade.
 
 ### Google Vertex AI
 
@@ -348,11 +348,11 @@ The provider itself changes from **Google Vertex AI** to **Google Gemini**. Vert
 
 **Project ID**, **Region**, **Authentication** (**Service account credentials** / **Application default credentials**), **Model**, **Temperature**, **top P**, and **top K** carry over unchanged.
 
-| Legacy field          | New template guidance                                                                                                                                                       |
-| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Maximum output tokens | Enter the same value as **Maximum tokens**.                                                                                                                                 |
-| Endpoint              | Not available in Modeler. There's no custom/compatible endpoint backend for Google Gemini to switch to, unlike Anthropic or OpenAI. c8ctl keeps the value (see note below). |
+| Legacy field          | New template guidance                                                                                                                                                         |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Maximum output tokens | Enter the same value as **Maximum tokens**.                                                                                                                                   |
+| Endpoint              | Not available in Modeler. There's no custom/compatible endpoint backend for Google Gemini to switch to, unlike Anthropic or OpenAI. The CLI keeps the value (see note below). |
 
 The new template additionally exposes **Thinking budget**/**Thinking level** for reasoning configuration.
 
-**With c8ctl**: The recipe moves a custom **Endpoint** to a hidden field of the new template. The connector uses this endpoint at runtime, but Modeler does not show it and you cannot edit it there.
+**With the CLI**: The recipe moves a custom **Endpoint** to a hidden field of the new template. The connector uses this endpoint at runtime, but Modeler does not show it and you cannot edit it there.

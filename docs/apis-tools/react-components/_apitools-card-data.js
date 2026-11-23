@@ -106,7 +106,7 @@ export const clientCards = [
   },
   {
     link: "../c8ctl/getting-started/",
-    title: "c8ctl CLI",
+    title: "Camunda 8 CLI",
     image: IconCliImg,
     description:
       "Inspect clusters, deploy resources, and manage processes from the terminal.",

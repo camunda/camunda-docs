@@ -46,7 +46,7 @@ For SaaS environments:
 
 1. [Create API client credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) in Camunda Hub. Ensure the **Orchestration Cluster API** scope is enabled.
 2. Use the generated **Client ID**, **Client secret**, **OAuth token endpoint**, and **audience** to obtain an access token via the [OAuth 2.0 client credentials flow](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
-3. Pass the token in the `Authorization: Bearer <token>` header, or use [`c8ctl mcp-proxy`](./orchestration-cluster-api-mcp-setup.md#using-c8ctl-mcp-proxy) to handle this automatically.
+3. Pass the token in the `Authorization: Bearer <token>` header, or use the [`mcp-proxy` command of the Camunda 8 CLI (`c8ctl`)](./orchestration-cluster-api-mcp-setup.md#use-c8ctl-mcp-proxy) to handle this automatically.
 
 For the full authentication reference, including Self-Managed OIDC and basic authentication setup, see [Authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 

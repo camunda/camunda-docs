@@ -10,6 +10,7 @@ keywords:
     "Claude Code",
     "Copilot CLI",
     "bundle",
+    "Camunda 8 CLI",
     "c8ctl",
   ]
 ---
@@ -69,15 +70,15 @@ The agent needs these permissions in your environment:
 
 The AI coding agent runs on the builder's own computer (Windows, macOS, or Unix). The following tools are required in the `latest` version:
 
-| Requirement        | Details                                                                                                               | When to install                                                     |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| AI coding agent    | See [AI coding agent](#ai-coding-agent).                                                                              | Before [installation](../installation.md#install-processos-harness) |
-| Camunda Modeler    | For editing BPMN and DMN files during review.                                                                         | Before [installation](../installation.md#install-processos-harness) |
-| Node.js            | Used as scripting language by ProcessOS Harness skills.                                                               | Before [installation](../installation.md#install-processos-harness) |
-| Git and GitHub CLI | `git`, and the `gh` CLI for the GitHub discovery specialist.                                                          | Before [installation](../installation.md#install-processos-harness) |
-| Maven              | For Java workers only.                                                                                                | Before [installation](../installation.md#install-processos-harness) |
-| c8ctl              | The Camunda 8 CLI, used to deploy and manage Camunda resources and clusters. Available as `c8ctl` and its alias `c8`. | During [installation](../installation.md#install-processos-harness) |
-| Camunda c8run      | A local cluster started with `c8run`, used to validate generated solutions.                                           | During ProcessOS run                                                |
+| Requirement        | Details                                                                                            | When to install                                                     |
+| ------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| AI coding agent    | See [AI coding agent](#ai-coding-agent).                                                           | Before [installation](../installation.md#install-processos-harness) |
+| Camunda Modeler    | For editing BPMN and DMN files during review.                                                      | Before [installation](../installation.md#install-processos-harness) |
+| Node.js            | Used as scripting language by ProcessOS Harness skills.                                            | Before [installation](../installation.md#install-processos-harness) |
+| Git and GitHub CLI | `git`, and the `gh` CLI for the GitHub discovery specialist.                                       | Before [installation](../installation.md#install-processos-harness) |
+| Maven              | For Java workers only.                                                                             | Before [installation](../installation.md#install-processos-harness) |
+| Camunda 8 CLI      | Used to deploy and manage Camunda resources and clusters. Available as `c8ctl` and its alias `c8`. | During [installation](../installation.md#install-processos-harness) |
+| Camunda c8run      | A local cluster started with `c8run`, used to validate generated solutions.                        | During ProcessOS run                                                |
 
 ## Generated solutions
 

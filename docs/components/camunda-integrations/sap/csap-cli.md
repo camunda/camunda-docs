@@ -1,10 +1,10 @@
 ---
 id: csap-cli
 title: CSAP c8ctl plugin
-description: "Use the CSAP plugin for c8ctl to configure all SAP integration artifacts for deployment."
+description: "Use the CSAP plugin for the Camunda 8 CLI (c8ctl) to configure all SAP integration artifacts for deployment."
 ---
 
-The [Camunda SAP Integration CLI](/reference/glossary.md#csap-cli) (CSAP) is a plugin for [c8ctl](/apis-tools/c8ctl/getting-started.md) that simplifies the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
+The [Camunda SAP Integration CLI](/reference/glossary.md#csap-cli) (CSAP) is a plugin for the [Camunda 8 CLI (`c8ctl`)](/apis-tools/c8ctl/getting-started.md) that simplifies the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.
 
 :::warning
 The standalone `csap` binary is deprecated and replaced by the `c8ctl-plugin-csap-cli` plugin. The plugin offers the same functionality. It is a Node.js port of the original tool, so you no longer need Deno. See [migrate from the `csap` binary](#migrate-from-the-csap-binary).
@@ -12,7 +12,7 @@ The standalone `csap` binary is deprecated and replaced by the `c8ctl-plugin-csa
 
 ## Features
 
-- Runs as a c8ctl plugin - no separate binary required.
+- Runs as a plugin for the Camunda 8 CLI, with no separate binary required.
 - Interactive prompts for configuration.
 - Command-line flags for automation.
 - Support for multiple SAP integration modules.
@@ -37,25 +37,25 @@ The plugin downloads the OData and RFC connectors from the [sap-connectors](http
 
 Check your build system meets the following requirements:
 
-- [c8ctl](/apis-tools/c8ctl/getting-started.md#install) is installed.
+- The [Camunda 8 CLI](/apis-tools/c8ctl/getting-started.md#install) is installed.
 - [Node.js](https://nodejs.org/en) 22 or later.
 - (Windows) `npm` uses `cmd` as the shell script executor: `npm config set script-shell cmd`.
 
 ## Installation
 
-Load the plugin into c8ctl from its Git repository:
+Load the plugin into the Camunda 8 CLI from its Git repository:
 
 ```bash
-c8ctl load plugin --from https://github.com/camunda/c8ctl-plugin-csap-cli
+c8 load plugin --from https://github.com/camunda/c8ctl-plugin-csap-cli
 ```
 
 To pin a specific branch or tag, append `#` and the name:
 
 ```bash
-c8ctl load plugin --from https://github.com/camunda/c8ctl-plugin-csap-cli#v1.2.3
+c8 load plugin --from https://github.com/camunda/c8ctl-plugin-csap-cli#v1.2.3
 ```
 
-To verify the installation, run `c8ctl help`. The `csap-setup` command appears under **Plugin Commands**. To manage the plugin afterward, see [extend c8ctl with plugins](/apis-tools/c8ctl/plugins.md#manage-plugins).
+To verify the installation, run `c8 help`. The `csap-setup` command appears under **Plugin Commands**. To manage the plugin afterward, see [extend the Camunda 8 CLI with plugins](/apis-tools/c8ctl/plugins.md#manage-plugins).
 
 ## Usage
 
@@ -93,7 +93,7 @@ export GH_TOKEN=$(gh auth token)
 
 If your CI/CD environment isn't GitHub, you must obtain a GitHub access token, as with [local use](#local-use), to authenticate the plugin's requests to the GitHub API.
 
-For GitHub Actions, all runs are provided a `GITHUB_TOKEN` automatically. Declare it for the respective run of `c8ctl csap-setup` with the `env` YAML declaration:
+For GitHub Actions, all runs are provided a `GITHUB_TOKEN` automatically. Declare it for the respective run of `c8 csap-setup` with the `env` YAML declaration:
 
 ```yaml
 jobs:
@@ -101,7 +101,7 @@ jobs:
   # ...
   steps:
     - run: |
-        c8ctl csap-setup --for #...
+        c8 csap-setup --for #...
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -111,7 +111,7 @@ jobs:
 Run the following command to start the interactive setup:
 
 ```bash
-c8ctl csap-setup
+c8 csap-setup
 ```
 
 The plugin guides you through prompts to collect all required inputs, including the SAP integration module, Camunda version, deployment method, and credentials.
@@ -123,7 +123,7 @@ All prompts are also available as command-line flags, allowing you to automate t
 #### Command syntax
 
 ```bash
-c8ctl csap-setup [options]
+c8 csap-setup [options]
 ```
 
 #### Options
@@ -155,7 +155,7 @@ The plugin can detect Camunda API credentials from environment variables. If the
 #### Example 1: Interactive setup
 
 ```bash
-$> c8ctl csap-setup
+$> c8 csap-setup
 
 # ...
 
@@ -170,7 +170,7 @@ This guides you through the setup process interactively.
 #### Example 2: Setting up all modules, reusing credentials from environment
 
 ```bash
-$> c8ctl csap-setup --for all \
+$> c8 csap-setup --for all \
   --camunda 8.8 \
   --deployment SaaS
 
@@ -191,17 +191,17 @@ This command sets up all available SAP integration modules for Camunda version 8
 
 ## Migrate from the `csap` binary
 
-To migrate from the deprecated `csap` binary to the c8ctl plugin, install the plugin and replace `csap setup` with `c8ctl csap-setup` in your scripts and pipelines.
+To migrate from the deprecated `csap` binary to the CLI plugin, install the plugin and replace `csap setup` with `c8 csap-setup` in your scripts and pipelines.
 
-1. Install c8ctl and [load the plugin](#installation).
-1. Replace `csap setup` with `c8ctl csap-setup` in your scripts and CI/CD pipelines.
+1. Install the Camunda 8 CLI and [load the plugin](#installation).
+1. Replace `csap setup` with `c8 csap-setup` in your scripts and CI/CD pipelines.
 1. Remove the `csap` binary from your `PATH`.
 
 All flags and environment variables keep their names and meaning. The default values for `--for`, `--camunda`, and `--deployment` can differ from the `csap` binary, so pass them explicitly in non-interactive runs.
 
 ## Deploying modules
 
-After each Camunda SAP integration module is set up with `c8ctl csap-setup`, it is ready for deployment. The plugin prints `in directory <path>` after every successful run. Use this path for the deployment.
+After each Camunda SAP integration module is set up with `c8 csap-setup`, it is ready for deployment. The plugin prints `in directory <path>` after every successful run. Use this path for the deployment.
 
 For the OData and RFC connectors, run `cf deploy <directory-printed-by-csap-setup>`.
 
