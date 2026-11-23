@@ -91,7 +91,7 @@ RewriteRule ^p/sendgrid-connector/?$ /docs/components/connectors/out-of-the-box-
 RewriteRule ^p/test-cases/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#test-cases [R=301,NE,L]
 RewriteRule ^p/test-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,NE,L]
 RewriteRule ^p/test-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,NE,L]
-RewriteRule ^p/using-connector-secrets/?$ /docs/components/connectors/use-connectors/#using-secrets [R=301,NE,L]
+RewriteRule ^p/using-secrets-in-connectors/?$ /docs/components/connectors/use-connectors/#using-secrets [R=301,NE,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
