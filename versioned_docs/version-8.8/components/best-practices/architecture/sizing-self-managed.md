@@ -213,18 +213,18 @@ Do not configure an exporter that does not advance its record position, such as 
 
 #### Segment size and preallocation
 
-Keep the default segment size of 128 MB. A larger segment does not improve throughput. A segment can only be deleted in full, so with larger segments each partition keeps more of its event log on disk on every broker that hosts it.
+Keep the default segment size of 128 MB. A larger segment does not improve throughput. Segments can only be deleted in full, so larger segments mean each partition retains more of its event log on disk on every broker that hosts it.
 
-What a larger segment costs depends on the preallocation strategy and on the write speed of the disk, measured in bytes written per second:
+The cost of a larger segment depends on the preallocation strategy and the disk’s write speed, measured in bytes written per second:
 
-- **`FILL`:** the broker writes zeros through the whole new segment and flushes it before the segment is used. The time this takes grows with the segment size and is limited by the disk write speed. This write burst happens only when a segment is allocated, so it is separate from the steady-state IOPS needs described in [Disk IOPS](#disk-iops). On a slower disk, large segments cause long pauses when a new segment is allocated, which shows as slow commits, a longer latency tail, and, in tests, lower throughput.
-- **`POSIX_OR_FILL`:** the broker reserves the segment with `fallocate` and writes no data. Allocation is fast and does not depend on the segment size or on the disk write speed. The broker falls back to `FILL` if the file system does not support `fallocate`.
+- **`FILL`:** The broker writes zeros throughout the new segment and flushes it before use. The time this takes increases with segment size and is limited by disk write speed. This write burst occurs only when a segment is allocated, so it is separate from the steady-state IOPS requirements described in [Disk IOPS](#disk-iops). On a slower disk, large segments cause long allocation pauses, resulting in slow commits, longer tail latency, and, in tests, lower throughput.
+- **`POSIX_OR_FILL`:** The broker reserves the segment using `fallocate` without writing data. Allocation is fast and does not depend on segment size or disk write speed. The broker falls back to `FILL` if the file system does not support `fallocate`.
 
-`FILL` is the default. You can enable `POSIX_OR_FILL` with `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`).
+`POSIX_OR_FILL` is the default. Configure the strategy using `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`).
 
-Neither strategy is better everywhere. `fallocate` avoids the zero-fill cost on many setups, but on some combinations of file system and volume type, such as `ext4` on network-attached cloud volumes, it has been observed to increase flush, commit, and processing latency instead.
+Neither strategy is better in every situation. `fallocate` avoids the cost of zero-filling in many setups, but on some combinations of file system and volume type, such as `ext4` on network-attached cloud volumes, it has been observed to increase flush, commit, and processing latency.
 
-Compare both strategies under a representative load on your own platform and volume type before you change the default. Change one broker first, and watch segment allocation time, flush time, and commit latency.
+Compare both strategies under a representative load on your platform and volume type before changing the default. Change one broker first, and monitor segment allocation time, flush time, and commit latency.
 
 ### Event log
 
