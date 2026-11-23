@@ -79,6 +79,8 @@ If `requestTimeout` is set to a value less than `0`, long polling is disabled fo
 
 If long polling is disabled in the gateway (`camunda.api.long-polling.enabled` / `zeebe.gateway.longPolling.enabled` set to `false`), `requestTimeout` has no effect. The gateway checks each partition once and responds right away, with or without jobs.
 
+Set the gRPC deadline of the request longer than the long poll. The long poll lasts `requestTimeout`, or the gateway's long polling timeout if `requestTimeout` is `0`. Leave a few seconds of room for the gateway to respond. Otherwise, every request that finds no jobs fails with `DEADLINE_EXCEEDED` instead of returning an empty response successfully. For example, the Camunda Java Client sets the deadline to `requestTimeout` plus 10 seconds. See [set a client timeout longer than the long poll](/components/concepts/job-workers.md#set-a-client-timeout-longer-than-the-long-poll).
+
 ### Output: `ActivateJobsResponse`
 
 ```protobuf
