@@ -340,9 +340,9 @@ If your `--config` file, `CAMUNDA_PHYSICALTENANTS_*` environment variables, or `
 
 When Camunda 8 Run manages Physical Tenants locally, an unreadable or invalid saved configuration prevents startup, including with `--physical-tenants`. Correct the reported file or permissions error before retrying.
 
-### Manage Physical Tenants with c8ctl
+### Manage Physical Tenants with the Camunda 8 CLI {#manage-physical-tenants-with-c8ctl}
 
-[c8ctl](/apis-tools/c8ctl/getting-started.md) delegates Physical Tenant management through `c8ctl cluster physical-tenants` and scoped secret management through `c8ctl cluster secrets --physical-tenant <id>`. Use `c8ctl cluster start --physical-tenants <ids>` to select Physical Tenants for one run, with the same selection and listing behavior described above. These commands use the same Physical Tenants file and secrets as Camunda 8 Run. Relative `C8RUN_TENANTS_FILE`, `C8RUN_SECRETS_DIR`, and secret import paths resolve against the caller's working directory.
+The [Camunda 8 CLI (`c8ctl`)](/apis-tools/c8ctl/getting-started.md) delegates Physical Tenant management through `c8 cluster physical-tenants` and scoped secret management through `c8 cluster secrets --physical-tenant <id>`. Use `c8 cluster start --physical-tenants <ids>` to select Physical Tenants for one run, with the same selection and listing behavior described above. These commands use the same Physical Tenants file and secrets as Camunda 8 Run. Relative `C8RUN_TENANTS_FILE`, `C8RUN_SECRETS_DIR`, and secret import paths resolve against the caller's working directory.
 
 Physical Tenants are isolated engines; logical tenants provide tenancy within an engine.
 

@@ -94,7 +94,7 @@ For SaaS, find your **Region Id** and **Cluster Id** in [Camunda Hub](/component
 
 If your Orchestration Cluster does not require authentication, for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), you can connect directly to the MCP server endpoint without any additional tooling.
 
-Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, [use c8ctl `mcp-proxy`](#use-c8ctl-mcp-proxy) instead.
+Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, use the [`mcp-proxy` command](#use-c8ctl-mcp-proxy) of the Camunda 8 CLI (`c8ctl`) instead.
 
 ```json
 {
@@ -107,9 +107,9 @@ Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/s
 }
 ```
 
-### Use c8ctl `mcp-proxy`
+### Use the Camunda 8 CLI `mcp-proxy` command {#use-c8ctl-mcp-proxy}
 
-Many MCP clients, such as VS Code (GitHub Copilot) and Claude Code, do not natively support the OAuth 2.0 client credentials flow required for authenticated environments. The [c8ctl](https://github.com/camunda/c8ctl) `mcp-proxy` command bridges this gap by providing a local STDIO-to-Remote HTTP proxy that handles authentication transparently.
+Many MCP clients, such as VS Code (GitHub Copilot) and Claude Code, do not natively support the OAuth 2.0 client credentials flow required for authenticated environments. The `mcp-proxy` command of the [Camunda 8 CLI](/apis-tools/c8ctl/getting-started.md) bridges this gap by providing a local STDIO-to-Remote HTTP proxy that handles authentication transparently.
 
 The proxy authenticates to the MCP server using OAuth 2.0 client credentials, and exposes a local STDIO MCP interface that your client connects to.
 
@@ -151,10 +151,10 @@ For example, use the following in `claude_desktop_config.json` for Claude Code:
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                              |
 
 :::tip Where to find these values
-When you [create API client credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) in Camunda Hub, all required connection details are displayed on the credentials page. You can also copy a ready-to-use c8ctl configuration snippet directly from the **MCP** tab on the credentials screen.
+When you [create API client credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) in Camunda Hub, all required connection details are displayed on the credentials page. You can also copy a ready-to-use CLI configuration snippet directly from the **MCP** tab on the credentials screen.
 :::
 
-For the full list of supported environment variables, see the [c8ctl documentation](https://github.com/camunda/c8ctl).
+For the full list of supported environment variables, see [Camunda 8 CLI environment variables](/apis-tools/c8ctl/getting-started.md#environment-variables).
 
 ### Use with the MCP Client connectors
 

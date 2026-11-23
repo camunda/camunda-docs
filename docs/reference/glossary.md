@@ -302,7 +302,7 @@ The shape of a [credential](#credential), such as AWS Credential, REST Authentic
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector and OData connector) for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a plugin for the [Camunda 8 CLI (`c8ctl`)](/apis-tools/c8ctl/getting-started.md) (`c8 csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector and OData connector) for deployment.
 
 Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations straightforward and repeatable in environments like Camunda SaaS.
 
@@ -683,7 +683,7 @@ In runtime discussions, [_executing a process_](/components/concepts/processes.m
 
 ### Process application
 
-The former name of the [project](#project): a Web Modeler entity before Camunda 8.10, and a Desktop Modeler concept recognized by a `.process-application` marker file. During the transition, Desktop Modeler and `c8ctl` recognize both `.process-application` and `camunda.json`, so existing process applications keep working.
+The former name of the [project](#project): a Web Modeler entity before Camunda 8.10, and a Desktop Modeler concept recognized by a `.process-application` marker file. During the transition, Desktop Modeler and the Camunda 8 CLI recognize both `.process-application` and `camunda.json`, so existing process applications keep working.
 
 - [Project](#project)
 
@@ -756,7 +756,7 @@ The governance process of [ProcessOS](#processos). ProcessOS Harness is delivere
 
 The unit you build, test, and deploy together to form a Camunda solution. Also called a Camunda project where it needs to be distinguished from other project concepts, such as a software project in your IDE. It supersedes the [process application](#process-application).
 
-In [Camunda Hub](#camunda-hub), a project is an entity within a workspace; locally (Desktop Modeler, `c8ctl`), it is a folder with a `camunda.json` file.
+In [Camunda Hub](#camunda-hub), a project is an entity within a workspace; locally (Desktop Modeler, the Camunda 8 CLI), it is a folder with a `camunda.json` file.
 
 - [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)

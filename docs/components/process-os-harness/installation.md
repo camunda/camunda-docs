@@ -2,8 +2,8 @@
 id: installation
 title: Install ProcessOS Harness and configure a project
 sidebar_label: Installation
-description: "Install ProcessOS Harness into your AI coding agent with c8ctl, and configure your first project with process-scope.md and run.config.yaml."
-keywords: ["ProcessOS Harness", "install", "c8ctl"]
+description: "Install ProcessOS Harness into your AI coding agent with the Camunda 8 CLI (c8ctl), and configure your first project with process-scope.md and run.config.yaml."
+keywords: ["ProcessOS Harness", "install", "Camunda 8 CLI", "c8ctl"]
 ---
 
 This page takes you from nothing to a configured ProcessOS project with the journey running. Camunda recommends completing the [organizational setup](setup/project-setup.md) first and checking the [system requirements](setup/system-requirements.md).
@@ -29,7 +29,7 @@ Only one bundle can be installed at a time.
 
 1. Ensure all [builder client](setup/system-requirements.md#builder-client) requirements are covered.
 
-1. Install or update c8ctl, the Camunda 8 CLI:
+1. Install or update the Camunda 8 CLI (`c8ctl`):
 
    ```bash
    npm install -g @camunda8/cli@latest

@@ -38,13 +38,13 @@ You can treat files in a project as a single bundle or as independent resources.
 
 ## Projects in local development
 
-In local development with [Desktop Modeler](/components/modeler/desktop-modeler/projects.md) and [`c8ctl`](/apis-tools/c8ctl/getting-started.md), a project is a folder with a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file (an empty `{}` is enough).
+In local development with [Desktop Modeler](/components/modeler/desktop-modeler/projects.md) and the [Camunda 8 CLI (`c8ctl`)](/apis-tools/c8ctl/getting-started.md), a project is a folder with a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file (an empty `{}` is enough).
 
-A project works without Camunda Hub. When you deploy a directory inside a project with [`c8 deploy`](/apis-tools/c8ctl/development-workflows.md#deploy-a-directory), `c8ctl` deploys the whole project. Unlike in Camunda Hub, Desktop Modeler always deploys all project resources together.
+A project works without Camunda Hub. When you deploy a directory inside a project with [`c8 deploy`](/apis-tools/c8ctl/development-workflows.md#deploy-a-directory), the CLI deploys the whole project. Unlike in Camunda Hub, Desktop Modeler always deploys all project resources together.
 
 ### Migrate from process applications
 
-Camunda projects supersede process applications, but Desktop Modeler and `c8ctl` continue to support the `.process-application` marker file. To migrate, rename `.process-application` in your project root to `camunda.json`. If a folder contains both files, `camunda.json` takes precedence. For `c8 watch`, the `--project` flag replaces `--process-application` and `--pa`, which remain as deprecated aliases.
+Camunda projects supersede process applications, but Desktop Modeler and the Camunda 8 CLI continue to support the `.process-application` marker file. To migrate, rename `.process-application` in your project root to `camunda.json`. If a folder contains both files, `camunda.json` takes precedence. For `c8 watch`, the `--project` flag replaces `--process-application` and `--pa`, which remain as deprecated aliases.
 
 ## Next steps
 
