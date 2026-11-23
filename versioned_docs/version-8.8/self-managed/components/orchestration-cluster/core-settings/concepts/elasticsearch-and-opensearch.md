@@ -32,24 +32,24 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 `{ES/OS}` in the names below is either `elasticsearch` or `opensearch`.
 :::
 
-| Name                                                               | Description                                  | Default value                                  |
-| ------------------------------------------------------------------ | -------------------------------------------- | ---------------------------------------------- |
-| `camunda.data.secondary-storage.{ES/OS}.cluster-name`              | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
-| `camunda.data.secondary-storage.{ES/OS}.url`                       | URL of the cluster REST API                  | [http://localhost:9200](http://localhost:9200) |
-| `camunda.data.secondary-storage.{ES/OS}.username`                  | Username to access the cluster REST API      | -                                              |
-| `camunda.data.secondary-storage.{ES/OS}.password`                  | Password to access the cluster REST API      | -                                              |
-| `camunda.data.secondary-storage.{ES/OS}.security.certificate-path` | Path to SSL certificate                      | -                                              |
-| `camunda.data.secondary-storage.{ES/OS}.security.self-signed`      | Certificate is self-signed                   | false                                          |
-| `camunda.data.secondary-storage.{ES/OS}.security.verify-hostname`  | Validate hostname for SSL                    | true                                           |
-| `camunda.database.aws-enabled`                                     | Use AWS credentials (OpenSearch only)        | false                                          |
-| `camunda.data.secondary-storage.{ES/OS}.index-prefix`              | Prefix for index names                       | -                                              |
-| `camunda.database.index.number-of-shards`                          | Number of shards for all indices             | 1                                              |
-| `camunda.database.index.number-of-replicas`                        | Number of replicas for all indices           | 1                                              |
+| Name                                                               | Description                                                                                                                                                           | Default value                                  |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `camunda.data.secondary-storage.{ES/OS}.cluster-name`              | Name of the Elasticsearch/OpenSearch cluster                                                                                                                          | elasticsearch / opensearch                     |
+| `camunda.data.secondary-storage.{ES/OS}.url`                       | URL of the cluster REST API                                                                                                                                           | [http://localhost:9200](http://localhost:9200) |
+| `camunda.data.secondary-storage.{ES/OS}.username`                  | Username to access the cluster REST API                                                                                                                               | -                                              |
+| `camunda.data.secondary-storage.{ES/OS}.password`                  | Password to access the cluster REST API                                                                                                                               | -                                              |
+| `camunda.data.secondary-storage.{ES/OS}.security.certificate-path` | Path to SSL certificate                                                                                                                                               | -                                              |
+| `camunda.data.secondary-storage.{ES/OS}.security.self-signed`      | Certificate is self-signed                                                                                                                                            | false                                          |
+| `camunda.data.secondary-storage.{ES/OS}.security.verify-hostname`  | Validate hostname for SSL                                                                                                                                             | true                                           |
+| `camunda.database.aws-enabled`                                     | Use AWS credentials (OpenSearch only). Also set `zeebe.broker.exporters.camundaexporter.args.connect.awsEnabled`. In Helm, `global.opensearch.aws.enabled` sets both. | false                                          |
+| `camunda.data.secondary-storage.{ES/OS}.index-prefix`              | Prefix for index names                                                                                                                                                | -                                              |
+| `camunda.database.index.number-of-shards`                          | Number of shards for all indices                                                                                                                                      | 1                                              |
+| `camunda.database.index.number-of-replicas`                        | Number of replicas for all indices                                                                                                                                    | 1                                              |
 
 :::note
-The Camunda Exporter creates indices too. Set the same values in `zeebe.broker.exporters.camundaexporter.args.index.numberOfShards` and `zeebe.broker.exporters.camundaexporter.args.index.numberOfReplicas`. See [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+The schema initializer creates the indices from `camunda.database.index.*`. The Camunda Exporter `args.index` shard and replica settings do not change the indices. In Helm, set the replica count with `orchestration.index.replicas`.
 
-Shard and replica settings are applied on first startup or during version updates. After indices are created, they can be adjusted in the cluster template and applied to new indices.
+The shard count applies when an index is created. To change it for existing indices, reindex them. The replica count also applies to existing indices: at startup, the schema manager updates their replica count to the configured value.
 :::
 
 ## Application configuration examples

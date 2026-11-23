@@ -25,7 +25,9 @@ The option names in the tabs below (for example, `rolloverInterval`) are exporte
 
 For options without a Helm value, configure them in Helm as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
 
-The Helm chart has values for some history and retention options. Each tab below names them. For all other options, set the exporter argument as an application property with the prefix `zeebe.broker.exporters.camundaexporter.args.`. The `camunda.data.secondary-storage.*` properties do not include these options in Camunda 8.8.
+The Helm chart has values for some history and retention options. Each tab below names them. For all other options, set the exporter argument as an application property with the prefix `zeebe.broker.exporters.camundaexporter.args.`. The `camunda.data.secondary-storage.*` properties do not include these options in Camunda 8.8. The exception is `history.processInstanceEnabled`, see the History tab.
+
+If no other configuration defines the Camunda Exporter, also set `zeebe.broker.exporters.camundaexporter.className: io.camunda.exporter.CamundaExporter`. The Helm chart sets it. Without the class name, the broker cannot load the exporter.
 
 For example, set history rollover using the Helm value `orchestration.history.rolloverInterval`.
 :::
@@ -44,6 +46,7 @@ zeebe:
       # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
       #
       camundaexporter:
+        className: io.camunda.exporter.CamundaExporter
         args:
 ```
 
@@ -77,6 +80,8 @@ versions of Elasticsearch and/or OpenSearch are supported in a Camunda 8 Self-Ma
 | connectTimeout | Determines the timeout in milliseconds until a connection is established.                                                     |                             |
 
 :::note
+To use AWS credentials, set `awsEnabled: true` here and `camunda.database.aws-enabled: true`. In Helm, `global.opensearch.aws.enabled` sets both.
+
 If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/auth/credentials/DefaultCredentialsProvider.html) is used for authentication. For more details on configuring credentials, refer to the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html#credentials-default).
 :::
 
@@ -84,8 +89,12 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="index">
 
-No Helm value. Application property prefix for these options:
+Application property prefix for these options:
 `zeebe.broker.exporters.camundaexporter.args.index.`
+
+:::note
+In Camunda 8.8, the schema initializer creates the indices from `camunda.database.index.*`. The exporter options `numberOfShards`, `numberOfReplicas`, `shardsByIndexName` and `replicasByIndexName` do not change the indices. Set `camunda.database.index.<option>` instead. In Helm, set the replica count with `orchestration.index.replicas`.
+:::
 
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -124,6 +133,8 @@ With the default configuration, the exporter will aggregate records and flush th
 Helm values: `orchestration.history.retention.<option>` (`enabled`, `minimumAge`, `policyName`, `usageMetricsMinimumAge`, `usageMetricsPolicyName`).
 Application property prefix: `zeebe.broker.exporters.camundaexporter.args.history.retention.`
 
+The schema manager creates the ILM policies from `camunda.database.retention.*`, and the exporter applies them. Without Helm, set both property groups with the same values. The Helm values set both.
+
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
 `minimumAge`.
@@ -150,6 +161,8 @@ Helm values: `orchestration.history.<option>` (`elsRolloverDateFormat`, `rollove
 For other options, application property prefix: `zeebe.broker.exporters.camundaexporter.args.history.`
 
 For example, `rolloverInterval` maps to the Helm value `orchestration.history.rolloverInterval`.
+
+Exception: set `processInstanceEnabled` with `camunda.data.secondary-storage.{elasticsearch|opensearch}.history.process-instance-enabled`. If you also set the exporter argument, both values must match, or the Orchestration Cluster does not start.
 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
