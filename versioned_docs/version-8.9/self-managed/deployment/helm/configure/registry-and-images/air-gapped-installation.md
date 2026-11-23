@@ -40,11 +40,11 @@ The following images must be available in your air-gapped environment:
 
 **Optional components:**
 
-- [Web Modeler images](/self-managed/deployment/docker/docker.md#component-images):
+- [Web Modeler images](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
   - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
-- [Console images](/self-managed/deployment/docker/docker.md#component-images):
-  - `console/console-sm`
+- [Console images](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references):
+  - [camunda/console](https://hub.docker.com/r/camunda/console)
 
 **Infrastructure images:**
 
@@ -199,7 +199,7 @@ camunda-platform
 
 - Keycloak depends on Camunda Identity, and PostgreSQL depends on Keycloak.
 - PostgreSQL is also a dependency for Web Modeler.
-  - This dependency is optional: you can install PostgreSQL with Helm or use an existing [external database](/self-managed/deployment/helm/install/quick-install.md#optional-configure-external-database).
+  - This dependency is optional: you can install PostgreSQL with Helm or use an existing [external database](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 - Elasticsearch is a dependency for the Orchestration Cluster and Optimize.
 - Connectors can run stand-alone, but if you use inbound capabilities, Operate becomes a dependency.
 

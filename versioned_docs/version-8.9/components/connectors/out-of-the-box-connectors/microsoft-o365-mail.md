@@ -116,6 +116,7 @@ Related Microsoft Graph API: [user: sendMail](https://learn.microsoft.com/en-us/
 4. Enter desired content in the field **Body content**.
 5. Pass an array of emails into the **To recipients** field, for example `["myuser1@mycompany.com", "myuser2@mycompany.com"]`.
 6. (Optional) Pass an array of emails into the **CC recipients** field, for example `["myuser3@mycompany.com", "myuser4@mycompany.com"]`.
+7. In the **Attachments** field, pass an array of document objects, or an empty array if you don't send attachments. The default value is `=[]`.
 
 ## Handle connector response
 
