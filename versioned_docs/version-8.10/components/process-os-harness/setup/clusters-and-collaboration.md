@@ -2,7 +2,7 @@
 id: clusters-and-collaboration
 title: Set up clusters and collaboration for a ProcessOS project
 sidebar_label: Clusters and collaboration
-description: "Understand the three parts of a ProcessOS engagement, the governance cluster, the project repository, and the deployment target, and set them up for a team."
+description: "Decide where the governance process runs, where project files live, and where the generated solution is validated, and set up a project that several builders work on together."
 keywords:
   [
     "ProcessOS Harness",
@@ -10,7 +10,7 @@ keywords:
     "c8ctl profile",
     "Camunda 8 Run",
     "Git",
-    "partner",
+    "collaboration",
   ]
 ---
 
@@ -18,97 +18,59 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-## The three parts of an engagement
+## Before your first project
 
-A ProcessOS project touches three separate things. Keeping them apart avoids the most common setup mistakes, especially when several people work on one project.
+Every ProcessOS project needs three things. Decide where each one lives before you run `/process-os-governance-start`:
 
-| Part                                      | What it holds                                                                                                                  | Where it lives                                                                                     |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| [Governance cluster](#governance-cluster) | The execution state of the [governance process](../build/governance-process.md): phase, milestones, open jobs and SME reviews. | A Camunda 8 cluster: local, SaaS, or Self-Managed.                                                 |
-| [Project repository](#project-repository) | All project files: scope, generated artifacts, review questions, and the feedback collected in each iteration.                 | A local working copy on the builder's computer, shared through a Git remote.                       |
-| [Deployment target](#deployment-target)   | The generated BPMN, DMN, forms, and job workers, deployed to be exercised and tested.                                          | A Camunda 8 cluster matching the project's target Camunda version, by default local Camunda 8 Run. |
+| You need                                                                         | It holds                                                                         | Working alone       | Working as a team                                               |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------- |
+| A cluster for the [governance process](../build/governance-process.md)           | Where the project stands: the current phase, milestones, open jobs, SME reviews. | Local Camunda 8 Run | A Camunda 8 SaaS or Self-Managed cluster everyone can reach     |
+| A Git repository                                                                 | All project files, including review questions and the feedback you collect.      | A local repository  | A shared Git remote, one clone per builder                      |
+| A cluster to [deploy the solution](#where-the-generated-solution-is-deployed) to | The generated BPMN, DMN, forms, and job workers, while you test them.            | Local Camunda 8 Run | Local Camunda 8 Run, or your team's development or test cluster |
 
-The governance cluster and the deployment target can be the same cluster or two different ones. None of the three synchronizes with the others on its own:
+The governance cluster and the deployment cluster can be the same cluster.
 
-- A shared governance cluster does not share project files. Tasklist can show SME review questions as forms, but the files stay in the repository.
-- Starting or advancing the governance process does not deploy the generated solution. Deployment is a separate step, run in the [implementation phase](../build/phases/3-implementation.md).
-- A `c8ctl` profile only selects the cluster endpoint and credentials for a command. It does not configure a Git remote, copy files, or move process data between clusters.
+## Set up a project for a team
 
-## Recommended setup for a team
+Follow these steps when more than one builder works on a project.
 
-For an engagement with more than one person, such as a partner team working with a customer:
-
-- **Governance cluster:** a Camunda 8 SaaS or Self-Managed cluster that everyone on the project can reach.
-- **Project repository:** a shared Git remote, hosted internally or by an approved provider. Each builder works in their own clone.
-- **Deployment target:** local Camunda 8 Run on each builder's computer for validation, or the team's agreed development or test cluster.
-
-A single builder working alone can run all three locally: a local governance cluster, a local repository, and local Camunda 8 Run.
-
-## Governance cluster
-
-`/process-os-governance-start` configures the governance cluster connection the first time it runs in a project. It asks for the cluster type:
-
-- **local:** Camunda 8 Run started with `c8ctl`. No credentials are needed, and the `local` profile is used.
-- **saas** or **self-managed:** a remote cluster, reached through a named `c8ctl` profile.
-
-For a remote cluster, create the profile when the agent asks for it, with API client credentials authorized for that cluster:
-
-```bash
-c8 add profile <governance-profile> \
-  --baseUrl=https://<governance-cluster-api-url> \
-  --clientId=<client-id> \
-  --clientSecret=<client-secret>
-```
-
-The agent validates the profile against the cluster and records the cluster type and profile name in the project's governance state (`.camunda/governance.json`). Credentials stay inside `c8ctl` and are never written to the project. Governance commands then pass this profile explicitly, so your active `c8ctl` profile (`c8 use profile`) does not change which cluster holds the governance process.
-
-To point an existing project at a different governance cluster, run `/process-os-governance-start --reconnect`.
-
-:::caution
-Never commit credentials, or `.env` files that contain them, to the project repository. If you import a profile with `c8 add profile <name> --from-file <file>`, keep that file out of Git.
-:::
-
-## Project repository
-
-The project folder on a builder's computer is a local working copy. The governance cluster does not share it with anyone. To collaborate:
-
-1. Connect the project to a shared remote, and check it:
+1. **Create API client credentials for the governance cluster.** For SaaS, [create an API client](/components/saas/clusters/manage-api-clients.md) with the Zeebe scope and permission to deploy resources, because ProcessOS Harness deploys the governance process to this cluster.
+1. **The first builder sets up the project.** [Install ProcessOS Harness](../installation.md), push the project to the shared Git remote, and run `/process-os-governance-start`. When the agent asks for the cluster type, choose **saas** or **self-managed**, then create the `c8ctl` profile it asks for:
 
    ```bash
-   git remote -v
+   c8 add profile <profile-name> \
+     --baseUrl=https://<cluster-api-url> \
+     --clientId=<client-id> \
+     --clientSecret=<client-secret>
    ```
 
-1. Push the project, and have collaborators clone it. Use your team's normal branch and review process.
-1. On a collaborator's computer, run `/process-os-governance-start` in the clone. It connects to the governance cluster and offers to attach to the project's active governance process instance, instead of starting a new one.
+1. **Every other builder joins it.** Clone the repository, add a `c8ctl` profile for the same cluster, and run `/process-os-governance-start` in the clone. The agent finds the project's active governance process and offers to attach to it.
+1. **Everyone shares files through Git.** Pull before you start working, and push what you change, using your team's normal branch and review process.
 
-Collaborators need a `c8ctl` profile for the governance cluster on their own computer, with their own credentials.
+ProcessOS Harness remembers the cluster for each project, so switching your active profile with `c8 use profile` does not move the project to another cluster. To connect a project to a different governance cluster, run `/process-os-governance-start --reconnect`.
 
-## Deployment target
+:::caution
+Credentials stay in `c8ctl` and are never written to the project. Keep it that way: don't commit client secrets or `.env` files to the repository.
+:::
 
-In the [implementation phase](../build/phases/3-implementation.md), ProcessOS Harness deploys the generated solution to a cluster that matches the project's target Camunda version, so it can be exercised end-to-end. By default, this is a local Camunda 8 Run cluster that the agent starts with `c8ctl` and addresses through a profile named after the version.
+## What the governance cluster shares, and what it doesn't
 
-To validate against a local cluster yourself, start one that matches the target version. For an 8.10 target:
+The governance cluster shares where the project stands. Every builder sees the same phase, milestones, and open jobs, and SMEs answer review questions in Tasklist.
+
+It does not share project files. Generated artifacts, review questions, and collected feedback are files in each builder's clone, and only reach the others through Git.
+
+## Where the generated solution is deployed
+
+Running the governance process does not deploy anything. The [implementation phase](../build/phases/3-implementation.md) deploys the generated solution to a cluster that matches the project's target Camunda version, so it can be tested end-to-end. By default, the agent starts a local Camunda 8 Run cluster for this, so you don't need to set anything up.
+
+To deploy to your team's development or test cluster instead, add a profile for it, and name the profile on every command that changes that cluster:
 
 ```bash
-c8 cluster start 8.10
-c8 cluster status
+c8 deploy <path> --profile=<test-cluster-profile>
 ```
-
-To deploy to a remote development or test cluster, add a separate profile for it and name that profile explicitly for each deployment:
-
-```bash
-c8 add profile <target-profile> \
-  --baseUrl=https://<target-cluster-api-url> \
-  --clientId=<client-id> \
-  --clientSecret=<client-secret>
-
-c8 deploy ./path/to/process.bpmn --profile=<target-profile>
-```
-
-When more than one profile is configured, pass `--profile` on every command that changes a cluster, and check which cluster you are about to change before you run it.
 
 :::warning
-Validating locally is not the same as deploying to a customer's agreed test, UAT, or production environment. Deploying to production is outside the scope of ProcessOS Harness, and remains your own release process.
+Deploying to production is outside the scope of ProcessOS Harness, and remains your own release process.
 :::
 
 ## Next steps
