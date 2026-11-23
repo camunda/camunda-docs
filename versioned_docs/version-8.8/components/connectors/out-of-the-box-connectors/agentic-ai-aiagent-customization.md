@@ -60,8 +60,6 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
    camunda:
      connector:
        agenticai:
-         aiagent:
-           enabled: true
          ad-hoc-tools-schema-resolver:
            enabled: false
          mcp:
