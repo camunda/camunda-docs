@@ -267,11 +267,11 @@ Reference a secret from a process model the same way as in local mode:
 
 Environment mode has the following behavior:
 
-- c8run checks `C8RUN_SECRETS_ENV_PREFIX` against the format `[A-Za-z][A-Za-z0-9_]*_` before any process starts, and stops with a message naming the setting when it's missing or invalid. The server rejects reserved prefixes such as `CAMUNDA_` or `ZEEBE_` at startup.
-- Each tenant's connector runtime sees only its own tenant's secret variables. Other tenants' prefixed variables are removed from the runtime's environment.
-- The environment is the source of truth. `./c8run secrets list` reads the current shell's environment and shows the default tenant's secret names without values. Add `--physical-tenant <id>` to list a Physical Tenant's names. Like the secrets API, the list omits empty variables and names outside the reference charset. c8run reads its environment once at start, so the list matches what Camunda resolves only if you run it from the same environment you started c8run from.
-- `./c8run secrets set`, `delete`, `import`, and `path` aren't available. `set` and `delete` name the variable to set instead, such as `C8_DEFAULT_OPENAI_API_KEY`. To change a value, update your environment and restart c8run.
-- [Physical Tenants](#configure-physical-tenants) managed by Camunda 8 Run require `C8RUN_SECRETS_MODE=local` or `env`. In `env` mode, c8run refuses to start if Physical Tenants are declared outside c8run, because it can't give them a prefix.
+- Before starting any processes, c8run validates `C8RUN_SECRETS_ENV_PREFIX` against the format `[A-Za-z][A-Za-z0-9_]*_`. If the setting is missing or invalid, c8run stops and reports its name. The server rejects reserved prefixes, such as `CAMUNDA_` or `ZEEBE_`, at startup.
+- Each tenant’s connector runtime sees only that tenant’s secret variables. Variables prefixed for other tenants are removed from its environment.
+- The environment is the source of truth. `./c8run secrets list` reads the current shell environment and displays the default tenant’s secret names without their values. Add `--physical-tenant <id>` to list a physical tenant’s secret names. Like the secrets API, the command omits empty variables and names that don’t match the reference character set. c8run reads its environment at startup, so the list matches the secrets Camunda resolves only if you run the command in the same environment used to start c8run.
+- `./c8run secrets set`, `delete`, `import`, and `path` are not available in environment mode. To change a value, update the corresponding environment variable—for example, `C8_DEFAULT_OPENAI_API_KEY`—and restart c8run.
+- [Physical tenants](#configure-physical-tenants) managed by Camunda 8 Run require `C8RUN_SECRETS_MODE` to be set to `local` or `env`. In `env` mode, c8run refuses to start if physical tenants are declared outside c8run because it cannot assign them a prefix.
 
 ## Configure Physical Tenants
 

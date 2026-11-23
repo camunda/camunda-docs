@@ -42,11 +42,15 @@ The default path below only takes effect once a file store is declared somewhere
 
 ### Environment variable store
 
-The environment variable store resolves `camunda.secrets.<name>` references from environment variables that carry a mandatory prefix. Use it for local, CI, and lightweight setups, and for Helm installations that pass Kubernetes Secrets in as environment variables, so you get centralized secret resolution without running an external vault. It's Self-Managed only: Camunda refuses to start if the store is configured on a SaaS cluster.
+The environment variable store resolves `camunda.secrets.<name>` references from environment variables with a required prefix. Use it for local, CI, and lightweight setups, as well as Helm installations that pass Kubernetes Secrets as environment variables. This provides centralized secret resolution without requiring an external vault.
 
-The store reads the node's environment once at startup and keeps only the prefixed variables, with the prefix stripped from each name. Changing a value requires a restart, because a running JVM cannot see later changes to its environment, and Kubernetes doesn't update a running container's environment either.
+:::note
+The store is available only for Self-Managed: Camunda refuses to start if you configure it on a SaaS cluster.
+:::
 
-Because the store already holds every value in memory, Camunda doesn't put a [secret cache](#secret-cache) in front of it. `camunda.secrets.cache.ttl` and `camunda.secrets.cache.max-size` have no effect on this store, but Camunda still validates them at startup, so an invalid value refuses startup.
+At startup, the store reads the node’s environment and keeps only variables with the required prefix, stripping the prefix from each name. To change a value, you must restart the application: a running JVM cannot see later changes to its environment, and Kubernetes does not update a running container’s environment.
+
+Because the store already holds every value in memory, Camunda does not put a [secret cache](#secret-cache) in front of it. `camunda.secrets.cache.ttl` and `camunda.secrets.cache.max-size` have no effect on this store. However, Camunda still validates these settings at startup and refuses to start if either value is invalid.
 
 <Tabs>
   <TabItem value="secrets-env-yaml" label="Application properties">
@@ -65,13 +69,13 @@ Because the store already holds every value in memory, Camunda doesn't put a [se
   </TabItem>
 </Tabs>
 
-Dedicate a prefix to secrets rather than reuse one the platform already reads. Because the store keeps only the prefixed variables and strips the prefix from each name, it never holds a platform variable such as `CAMUNDA_*` or `AWS_*`, and a name outside the prefix cannot resolve.
+Use a dedicated prefix for secrets rather than reusing one that the platform already reads. The store keeps only variables with that prefix and strips it from each name. This prevents it from holding platform variables such as `CAMUNDA_*` or `AWS_*`, and variables without the prefix cannot be resolved.
 
-The trailing underscore bounds the prefix to whole name segments, so `SECRET_` does not also match `SECRETARY_*`, and a prefix cut short of a reserved one, such as `CAMUNDA` or `C`, is rejected as malformed.
+The trailing underscore ensures the prefix matches only whole name segments. For example, `SECRET_` does not match `SECRETARY_*`. A prefix that stops short of a reserved prefix, such as `CAMUNDA` or `C`, is rejected as malformed.
 
-Camunda refuses to start, with a message naming the setting, when the prefix starts, ignoring case, with a prefix reserved for the platform's own settings and credentials. The reserved prefixes are `CAMUNDA_`, `ZEEBE_`, `OPERATE_`, `TASKLIST_`, `OPTIMIZE_`, `IDENTITY_`, `ELASTICSEARCH_`, `OPENSEARCH_`, `KEYCLOAK_`, `SPRING_`, `SERVER_`, `MANAGEMENT_`, `LOGGING_`, `JAVA_`, `JDK_`, `AWS_`, `AZURE_`, `GOOGLE_`, and `KUBERNETES_`.
+Camunda refuses to start and names the setting in its error message if the prefix starts with a reserved prefix, ignoring case. Reserved prefixes are `CAMUNDA_`, `ZEEBE_`, `OPERATE_`, `TASKLIST_`, `OPTIMIZE_`, `IDENTITY_`, `ELASTICSEARCH_`, `OPENSEARCH_`, `KEYCLOAK_`, `SPRING_`, `SERVER_`, `MANAGEMENT_`, `LOGGING_`, `JAVA_`, `JDK_`, `AWS_`, `AZURE_`, `GOOGLE_`, and `KUBERNETES_`.
 
-The store resolves and lists secrets with the following behavior:
+The store resolves and lists secrets as follows:
 
 | Behavior                   | Description                                                                                                                                                                                                                                                                                                                     |
 | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -82,15 +86,15 @@ The store resolves and lists secrets with the following behavior:
 | Listing                    | The store lists the prefixed variables that have a non-empty value, sorted, with the store prefix stripped and without values. `/v2/secrets/list` returns each one as a reference, so `APP_SECRET_API_KEY` is listed as `camunda.secrets.API_KEY`, and omits names outside the reference charset or longer than 240 characters. |
 | Values pass through as set | Multi-line values, such as a PEM certificate, and JSON values resolve exactly as set, including any trailing newline. The file store, by contrast, strips a single trailing newline from each file.                                                                                                                             |
 
-With several physical tenants, give each tenant its own prefix under `camunda.physical-tenants.<tenant-key>.secrets.stores.env.default.prefix`. When two tenants configure different prefixes and both set `<prefixA>API_KEY` and `<prefixB>API_KEY`, each tenant resolves `API_KEY` to only the value of its own prefixed variable.
+With multiple physical tenants, give each tenant its own prefix using `camunda.physical-tenants.<tenant-key>.secrets.stores.env.default.prefix`. If two tenants configure different prefixes and both define `<prefixA>API_KEY` and `<prefixB>API_KEY`, each tenant resolves `API_KEY` only to the value of its own prefixed variable.
 
-Camunda refuses to start if two physical tenants configure overlapping prefixes, that is, if one tenant's prefix starts with another's. With `SECRET_` for one tenant and `SECRET_PT1_` for another, the first tenant would otherwise resolve the second tenant's `SECRET_PT1_API_KEY` as its own secret `PT1_API_KEY`. A tenant that inherits the root store shares the `default` tenant's prefix, so override the prefix for every additional tenant.
+Camunda refuses to start if two physical tenants configure overlapping prefixes—that is, if one tenant’s prefix starts with another’s. For example, if one tenant uses `SECRET_` and another uses `SECRET_PT1_`, the first tenant would otherwise resolve the second tenant’s `SECRET_PT1_API_KEY` as its own `PT1_API_KEY` secret. A tenant that inherits the root store shares the `default` tenant’s prefix, so override the prefix for each additional tenant.
 
-The environment is the source of truth: the store resolves and lists but never writes or deletes secrets. Manage values through your environment, such as Kubernetes Secrets, systemd, or Docker, and restart to pick up a change.
+The environment is the source of truth: the store resolves and lists secrets but never writes or deletes them. Manage values in the environment—for example, using Kubernetes Secrets, systemd, or Docker—and restart to pick up changes.
 
-Like every store, the environment variable store keeps resolved values out of what Camunda stores: records, runtime state, exported records, and broker logs hold only the `camunda.secrets.<name>` placeholder, which is also what Operate shows. See [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md) for how the broker path keeps resolved values out of these locations.
+Like every store, the environment variable store keeps resolved values out of Camunda’s stored data: records, runtime state, exported records, and broker logs contain only the `camunda.secrets.<name>` placeholder, which is also what Operate shows. See [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md) to learn how the broker path keeps resolved values out of these locations.
 
-A job worker receives resolved values in plaintext. If the worker logs its input variables, the values appear in the worker's logs. If the worker writes a value back into process variables, for example through job completion variables or a connector result, the value appears in runtime state, exported records, and Operate. Learn more about [what a job worker receives](/components/concepts/secret-resolution-and-job-activation.md#understand-what-a-job-worker-receives).
+A job worker receives resolved values in plaintext. If the worker logs its input variables, the values appear in its logs. If it writes a value back to process variables—for example, through job completion variables or a connector result—the value appears in runtime state, exported records, and Operate. Learn more about [what a job worker receives](/components/concepts/secret-resolution-and-job-activation.md#understand-what-a-job-worker-receives).
 
 #### Configure the environment variable store
 
