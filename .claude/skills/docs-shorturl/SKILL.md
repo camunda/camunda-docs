@@ -48,8 +48,10 @@ Rules:
 Search for conflicts before proposing:
 
 ```bash
-grep -n "p/<slug>" product-links.txt static/.htaccess
+grep -nE 'docs\.camunda\.io/p/<slug>$|^RewriteRule \^p/<slug>/\?\$' product-links.txt static/.htaccess
 ```
+
+The pattern anchors on the exact line forms in each file, so `p/test` does not match `p/test-cases` or a slug inside a redirect target.
 
 If the slug already exists, tell the user and propose a different one.
 
