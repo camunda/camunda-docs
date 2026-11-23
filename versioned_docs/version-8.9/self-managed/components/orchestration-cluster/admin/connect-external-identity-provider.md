@@ -153,6 +153,11 @@ both applications must use the same IdP. You also need to make the cluster accep
 To do so, include the Web Modeler UI's token audience in the configured list of audiences.
 :::
 
+:::info
+If you're using Console, the Orchestration Cluster must also accept Console's token. Console calls the Orchestration Cluster API (for usage metrics, system configuration and job statistics) with the signed-in user's token, which carries Console's audience (`console-api` by default).
+To allow these calls, include Console's token audience in the configured list of audiences. Otherwise, Console gets `401 Unauthorized` responses and shows empty statistics, for example when Console and the Orchestration Cluster run in separate Helm releases.
+:::
+
 #### Example IdP configuration
 
 The following examples show typical OIDC settings in `application.yaml`. Adapt the values to your environment and IdP configuration.
