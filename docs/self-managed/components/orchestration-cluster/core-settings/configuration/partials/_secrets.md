@@ -98,7 +98,7 @@ Camunda refuses to start if two Physical Tenants configure overlapping prefixes,
 
 A tenant that inherits the root store shares the `default` tenant's prefix, so override the prefix for each additional tenant.
 
-The environment is the source of truth: the store resolves and lists secrets but never writes or deletes them. Manage values in the environment, for example with Kubernetes Secrets, systemd, or Docker, and restart to pick up changes.
+The environment is the source of truth: the store resolves and lists secrets but never writes or deletes them. Manage values in the environment, for example with Kubernetes Secrets, systemd, or Docker, and restart to pick up changes. To change a value without downtime, see [rotate environment variable secrets](#rotate-environment-variable-secrets).
 
 Like every store, the environment variable store keeps resolved values out of Camunda's stored data: records, runtime state, exported records, and broker logs contain only the `camunda.secrets.<name>` placeholder, which is also what Operate shows. See [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md) to learn how the broker path keeps resolved values out of these locations.
 
@@ -106,7 +106,7 @@ A job worker receives resolved values in plaintext. If the worker logs its input
 
 #### Configure the environment variable store
 
-Set the prefix and the prefixed secret variables on the Orchestration Cluster process, because the broker resolves secret references. In a multi-node cluster, set the same variables on every node. Each example below resolves `camunda.secrets.API_KEY` to the value of `APP_SECRET_API_KEY`.
+Set the prefix and the prefixed secret variables on the Orchestration Cluster process, because the broker resolves secret references. In a multi-node cluster, set the same variables on every node, including nodes that run in `gateway` mode only. Nodes that disagree serve different values, as described in [rotate environment variable secrets](#rotate-environment-variable-secrets). Each example below resolves `camunda.secrets.API_KEY` to the value of `APP_SECRET_API_KEY`.
 
 <Tabs groupId="secrets-env-deployment">
   <TabItem value="secrets-env-jar" label="Manual (JAR)" default>
@@ -193,6 +193,28 @@ APP_SECRET_RISKPROD_API_KEY=<riskprod-api-key>
 ```
 
 To check which secrets the store loaded, call [`POST /v2/secrets/list`](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets). It returns references such as `camunda.secrets.API_KEY`, without the store prefix (`APP_SECRET_`), and never returns values.
+
+#### Rotate environment variable secrets
+
+To rotate a secret in the environment variable store, update its variable on every node, then restart the nodes one at a time. Each node reads its environment only at startup. The broker leading a partition resolves secrets for that partition's jobs from its own environment.
+
+Until every node restarts with the same variables, nodes disagree on a secret's value:
+
+| Node state                       | Effect                                                                                                                                                                                                                                                                          |
+| :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Not yet restarted                | Jobs on partitions this broker leads receive the old value.                                                                                                                                                                                                                     |
+| Missing the variable             | Jobs on partitions this broker leads fail with a [secret resolution error incident](/components/concepts/secret-resolution-incidents.md#resolve-secret-lookup-failures), because a missing secret is a permanent failure. Jobs on other partitions resolve the secret normally. |
+| Runs in `gateway` mode only      | `/v2/secrets/list` and `/v2/secrets/resolve` answer from this node's environment, so their results don't match what jobs receive.                                                                                                                                               |
+| Leadership moves during restarts | Jobs on a partition switch between the old and new value as its leader changes.                                                                                                                                                                                                 |
+
+To rotate a secret without downtime:
+
+1. Issue the new credential in the target system, and keep the old credential valid.
+1. Update the prefixed variable on every node, including nodes that run in `gateway` mode only. With Helm, update the Kubernetes Secret referenced in `orchestration.env`.
+1. Restart the nodes one at a time, and wait for each node to become healthy before restarting the next.
+1. After every node has restarted, revoke the old credential in the target system.
+
+To add or rename a secret, add the new variable to every node and finish the rolling restart before you deploy a process model that references it. Remove the old variable only after no running process instance references it. If a job raised an incident while nodes disagreed, resolve the incident after the restart to retry resolution.
 
 ### AWS Secrets Manager store
 
