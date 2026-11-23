@@ -606,6 +606,7 @@ module.exports = {
               items: [
                 "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
                 "components/early-access/alpha/feel-copilot/feel-copilot",
+                "components/early-access/alpha/idp-templates/idp-templates",
                 {
                   type: "category",
                   label: "A2A Client",
