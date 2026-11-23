@@ -55,7 +55,7 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 
 # Short URLs
 
-https://docs.camunda.io/p/available-connectors-overview
+https://docs.camunda.io/p/available-connectors
 https://docs.camunda.io/p/cluster-auto-pause
 https://docs.camunda.io/p/get-started-with-test-mode
 https://docs.camunda.io/p/introduction-to-connectors

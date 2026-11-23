@@ -80,7 +80,7 @@ RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 # to link to anchors, and more.
 #---------------------------------------------------------------------------------
 
-RewriteRule ^p/available-connectors-overview/?$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,NE,L]
+RewriteRule ^p/available-connectors/?$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,NE,L]
 RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
 RewriteRule ^p/get-started-with-test-mode/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#get-started-with-test-mode [R=301,NE,L]
 RewriteRule ^p/introduction-to-connectors/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,NE,L]
