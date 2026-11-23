@@ -84,7 +84,7 @@ RewriteRule ^p/available-connectors/?$ /docs/components/connectors/out-of-the-bo
 RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
 RewriteRule ^p/get-started-with-test-mode/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#get-started-with-test-mode [R=301,NE,L]
 RewriteRule ^p/introduction-to-connectors/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,NE,L]
-RewriteRule ^p/manage-secrets/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,NE,L]
+RewriteRule ^p/manage-secrets-saas/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,NE,L]
 RewriteRule ^p/organization-credentials/?$ /docs/components/hub/organization/credentials/ [R=301,NE,L]
 RewriteRule ^p/rest-connector/?$ /docs/components/connectors/protocol/rest/ [R=301,NE,L]
 RewriteRule ^p/sendgrid-connector/?$ /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,NE,L]
