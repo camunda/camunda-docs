@@ -119,7 +119,7 @@ The following guidelines ensure templates are intuitive and designed to minimize
 
 #### Hidden vs. visible fields
 
-If certain values are static and do not require user input, prefill them. Hidden fields offer no additional benefit by being visible.
+Hidden fields hold values that your template manages: users do not see or change them. Updating an element to a new template version applies the new version's static values and keeps existing generated values. If certain values are static and do not require user input, prefill them in hidden fields. Values that users provide belong in visible fields.
 
 **Hidden fields example:**
 
