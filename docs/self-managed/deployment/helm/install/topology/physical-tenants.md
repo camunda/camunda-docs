@@ -102,6 +102,8 @@ Every tenant needs its own writer, reader, and Optimize application prefixes, an
 
 A tenant must use the same provider and the same `default` store ID as the root store it overrides. Exactly one default store applies per tenant.
 
+`orchestration.secretStore` configures only the file, AWS, and GCP stores. To use the [environment variable store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#environment-variable-store), leave `orchestration.secretStore` unset and set a distinct prefix per tenant through `orchestration.env`, for example `CAMUNDA_PHYSICALTENANTS_RISKPROD_SECRETS_STORES_ENV_DEFAULT_PREFIX`.
+
 ## Operate releases in dependency order
 
 Use these orders for both Helm and GitOps reconciliation.
