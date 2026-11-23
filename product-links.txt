@@ -66,7 +66,7 @@ https://docs.camunda.io/p/sendgrid-connector
 https://docs.camunda.io/p/test-cases
 https://docs.camunda.io/p/test-files
 https://docs.camunda.io/p/test-your-process
-https://docs.camunda.io/p/using-secrets
+https://docs.camunda.io/p/using-connector-secrets
 
 # Full paths
 
