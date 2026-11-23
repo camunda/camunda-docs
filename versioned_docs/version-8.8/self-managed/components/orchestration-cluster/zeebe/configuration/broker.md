@@ -307,6 +307,45 @@ camunda:
           replication: 1GB
 ```
 
+### camunda.data.primary-storage.rocks-db
+
+| Field                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| memory-allocation-strategy       | Configures how RocksDB memory is allocated. With `PARTITION`, the total memory allocated to RocksDB is the number of partitions times `memory-limit`. With `BROKER`, the total memory equals `memory-limit`. With `FRACTION`, RocksDB is allocated a percentage of total system memory, configured using `memory-fraction`. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY`. | PARTITION     |
+| memory-limit                     | The memory limit for RocksDB, which is used by Zeebe's state management. Only applies when `memory-allocation-strategy` is `BROKER` (total limit for the broker) or `PARTITION` (limit per partition). It is ignored with `FRACTION`. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYLIMIT`.                                                                                                    | 512MB         |
+| memory-fraction                  | The fraction of total system memory to allocate to RocksDB when `memory-allocation-strategy` is `FRACTION`. The value must be between 0 and 1 (exclusive). For example, `0.1` allocates 10% of total system memory. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYFRACTION`.                                                                                                                   | 0.1           |
+| max-open-files                   | The number of files RocksDB keeps open. `-1` means unlimited. Configure this if the maximum number of open files is limited on your system, or if your RocksDB state has thousands of files. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MAXOPENFILES`.                                                                                                                                            | -1            |
+| max-write-buffer-number          | The maximum number of write buffers (memtables) RocksDB keeps in memory. About two thirds of the memory allocated to RocksDB is shared equally by the write buffers, so a higher value means less memory per buffer and more frequent, smaller flushes. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MAXWRITEBUFFERNUMBER`.                                                                         | 6             |
+| min-write-buffer-number-to-merge | The number of full write buffers required before they are merged and flushed to disk. A higher value means less frequent but larger flushes. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MINWRITEBUFFERNUMBERTOMERGE`.                                                                                                                                                                             | 3             |
+| io-rate-bytes-per-second         | A rate limit for RocksDB write I/O. A value less than or equal to `0` disables the limit. A limit can help avoid write spikes consuming all available IOPS, leading to more predictable read rates. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_IORATEBYTESPERSECOND`.                                                                                                                             | 0             |
+| wal-disabled                     | Disables the RocksDB write-ahead log. Zeebe only recovers from point-in-time snapshots, so disabling the write-ahead log can improve performance. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_WALDISABLED`.                                                                                                                                                                                        | true          |
+| sst-partitioning-enabled         | Partitions RocksDB SST files by virtual column families, which improves compaction and reduces write amplification on larger states. This increases the number of files in the runtime and snapshots. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_SSTPARTITIONINGENABLED`.                                                                                                                         | true          |
+| statistics-enabled               | Enables RocksDB statistics, which are written to the RocksDB log file. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_STATISTICSENABLED`.                                                                                                                                                                                                                                                             | false         |
+| access-metrics                   | Configures which RocksDB column family access metrics are exposed. Valid values are `none` and `fine`. `fine` exposes read, write, delete, and iteration latency metrics per partition and column family. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_ACCESSMETRICS`.                                                                                                                              | none          |
+| column-family-options            | Custom RocksDB column family options that override Zeebe's defaults. This setting requires in-depth knowledge of RocksDB. Property names and values are derived from RocksDB's `cf_options.h` and `options_helper.cc`.                                                                                                                                                                                                                                         |               |
+
+#### YAML snippet
+
+```yaml
+camunda:
+  data:
+    primary-storage:
+      rocks-db:
+        memory-allocation-strategy: PARTITION
+        memory-limit: 512MB
+        memory-fraction: 0.1
+        max-open-files: -1
+        max-write-buffer-number: 6
+        min-write-buffer-number-to-merge: 3
+        io-rate-bytes-per-second: 0
+        wal-disabled: true
+        sst-partitioning-enabled: true
+        statistics-enabled: false
+        access-metrics: none
+        column-family-options:
+          compaction_pri: kOldestSmallestSeqFirst
+```
+
 ### camunda.data.backup
 
 Configure backup store.
@@ -650,11 +689,11 @@ camunda:
 
 Replaces the deprecated `zeebe.broker.backpressure` configuration.
 
-| Field       | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Field       | Description                                                                                                                                                                                                                                                                                                                                                 | Example Value |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | enabled     | Set this to enable flow control for user requests. When enabled the broker rejects user requests when the number of inflight requests is greater than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ENABLED`. | true          |
-| algorithm   | The algorithm configures which algorithm to use for the flow control. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ALGORITHM`.                                                                                                           | aimd          |
-| useWindowed | If enabled, will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_USEWINDOWED`.                          | false         |
+| algorithm   | The algorithm configures which algorithm to use for the flow control. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ALGORITHM`.                                                                                                      | aimd          |
+| useWindowed | If enabled, will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_USEWINDOWED`.                     | false         |
 
 #### YAML snippet
 
@@ -802,11 +841,11 @@ write:
 
 ### zeebe.broker.backpressure
 
-| Field       | Description                                                                                                                                                                                                                                                                                                                                        | Example Value |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Field       | Description                                                                                                                                                                                                                                                                                                                                   | Example Value |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | enabled     | Set this to enable or disable backpressure. When enabled the broker rejects user requests when the number of inflight requests is greater than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ENABLED`. | true          |
-| useWindowed | if enabled - will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_USEWINDOWED`.                  | true          |
-| algorithm   | The algorithm configures which algorithm to use for the backpressure. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ALGORITHM`.                                                                                                    | aimd          |
+| useWindowed | if enabled - will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_USEWINDOWED`.             | true          |
+| algorithm   | The algorithm configures which algorithm to use for the backpressure. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ALGORITHM`.                                                                                               | aimd          |
 
 #### YAML snippet
 
