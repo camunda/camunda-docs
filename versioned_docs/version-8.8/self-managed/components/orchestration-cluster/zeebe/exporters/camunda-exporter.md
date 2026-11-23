@@ -23,14 +23,12 @@ Camunda Exporter is enabled by default if secondary storage is configured to use
 :::info Helm values mapping
 The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.
 
-In Helm, configure these as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
+For options without a Helm value, configure them in Helm as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
 
-In Camunda 8.8, set these options as exporter arguments with the prefix `zeebe.broker.exporters.camundaexporter.args.`. The `camunda.data.secondary-storage.*` properties do not include these options in 8.8.
+The Helm chart has values for some history and retention options. Each tab below names them. For all other options, set the exporter argument as an application property with the prefix `zeebe.broker.exporters.camundaexporter.args.`. The `camunda.data.secondary-storage.*` properties do not include these options in Camunda 8.8.
 
-For example, set history rollover using:
-
-- `zeebe.broker.exporters.camundaexporter.args.history.rolloverInterval`
-  :::
+For example, set history rollover using the Helm value `orchestration.history.rolloverInterval`.
+:::
 
 You can also configure the following properties using exporter `args`:
 
@@ -64,7 +62,7 @@ values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' }
 
 <TabItem value="connect">
 
-Helm property path prefix for these options:
+No Helm value. Application property prefix for these options:
 `zeebe.broker.exporters.camundaexporter.args.connect.`
 
 :::note
@@ -86,7 +84,7 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="index">
 
-Helm property path prefix for these options:
+No Helm value. Application property prefix for these options:
 `zeebe.broker.exporters.camundaexporter.args.index.`
 
 | Option                | Description                                                                                                                                                                                 | Default |
@@ -101,7 +99,7 @@ Helm property path prefix for these options:
 
 <TabItem value="bulk">
 
-Helm property path prefix for these options:
+No Helm value. Application property prefix for these options:
 `zeebe.broker.exporters.camundaexporter.args.bulk.`
 
 To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
@@ -123,8 +121,8 @@ With the default configuration, the exporter will aggregate records and flush th
 
 <TabItem value="retention">
 
-Helm property path prefix for these options:
-`zeebe.broker.exporters.camundaexporter.args.history.retention.`
+Helm values: `orchestration.history.retention.<option>` (`enabled`, `minimumAge`, `policyName`, `usageMetricsMinimumAge`, `usageMetricsPolicyName`).
+Application property prefix: `zeebe.broker.exporters.camundaexporter.args.history.retention.`
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
@@ -148,11 +146,10 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 
 <TabItem value="history">
 
-Helm property path prefix for these options:
-`zeebe.broker.exporters.camundaexporter.args.history.`
+Helm values: `orchestration.history.<option>` (`elsRolloverDateFormat`, `rolloverInterval`, `rolloverBatchSize`, `waitPeriodBeforeArchiving`, `delayBetweenRuns`, `maxDelayBetweenRuns`).
+For other options, application property prefix: `zeebe.broker.exporters.camundaexporter.args.history.`
 
-For example, `rolloverInterval` maps to:
-`zeebe.broker.exporters.camundaexporter.args.history.rolloverInterval`.
+For example, `rolloverInterval` maps to the Helm value `orchestration.history.rolloverInterval`.
 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
@@ -175,7 +172,7 @@ indices. The history can be configured as follows:
 
 <TabItem value="tasklist">
 
-Helm property path prefix for this Tasklist-specific export option: `zeebe.broker.exporters.camundaexporter.args.`
+No Helm value. Application property prefix for this Tasklist-specific export option: `zeebe.broker.exporters.camundaexporter.args.`
 
 | Option                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   | Default |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -189,7 +186,7 @@ When `skipVariableWriteWithoutUserTasks` is enabled, task variable data is not e
 
 <TabItem value="other">
 
-Helm property path prefix for these options:
+No Helm value. Application property prefix for these options:
 `zeebe.broker.exporters.camundaexporter.args.`
 
 Other miscellaneous properties:
