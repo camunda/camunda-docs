@@ -277,6 +277,8 @@ The module is locally sourced in your clone. Any changes you make to the module 
    By default, this cluster is accessible from the internet.
    To restrict access, set `private_vpc = true`. This creates a private cluster that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. Optionally, you can expose a public Ingress by setting the `expose_public_elb` variable in the EKS module.
 
+   `private_vpc` makes the Kubernetes API endpoint and the nodes private. It does not make the Ingress private. The public subnets stay in place for the NAT gateway, so the load balancer of the Ingress controller is internet-facing by default. To keep the Ingress private, add the annotation `service.beta.kubernetes.io/aws-load-balancer-internal: "true"` to the Service of the Ingress controller before you install it. The Ingress controller installation script shows this annotation as a comment.
+
    ⚠️ Because private subnets are not reachable from the internet, you must connect your network to the cluster using either a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
    See the [VPN module setup](#vpn-module-setup) to configure an [AWS Client VPN endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) for secure access to the private cluster.
