@@ -34,7 +34,7 @@ To make the **Slack connector** executable, fill out the mandatory fields highli
 
 ### Authentication
 
-Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, `{{secrets.SLACK_OAUTH_TOKEN}}`.
+In the **Authentication** section, set **OAuth token** to your Slack OAuth token, which is stored as a secret. For example, `{{secrets.SLACK_OAUTH_TOKEN}}`.
 
 ### Create channel
 
@@ -46,7 +46,7 @@ You need to ensure that your Slack application has related permissions enabled.
 To create a channel, take the following steps:
 
 1. Set **Method** to `Create Channel`.
-2. Set the **New Channel Name**:
+2. Set the **Channel name**:
    - The channel name can be up to 80 characters, and can contain lowercase letters, digits, and symbols `-` and `_`.
    - This can be provided as a FEEL expression.
 3. Set channel **Visibility** as required:
@@ -93,7 +93,7 @@ You need to ensure that your Slack application has related permissions enabled.
 To post a message, take the following steps:
 
 1. Set **Method** to `Post Message`.
-2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
+2. Set **Channel/user name/email** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`) or by using the channel id.
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. (Optional) A **thread** can be specified to start a thread from a specific message. For example, `ts` in the response can be used (see [here](#post-message)). If the message has been posted by a user, we currently have no way to retrieve the `ts` value. Visit the [Slack documentation](https://api.slack.com/methods/chat.postMessage) for additional details.
@@ -112,7 +112,7 @@ The result of the endpoint must then be assigned to a variable in **Start Proces
 Starting from version 8.7.0, the Slack connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
-The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/user name/email** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 `Channel/User Name` property might look like:
 
@@ -234,9 +234,9 @@ a BPMN process triggered by a [Slack](https://slack.com/) message.
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.
-4. In the **Variable mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
-5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example triggers a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.
+4. In the **Output mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+5. In the **Output mapping** section, fill the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `app_mention` event: `={senderId: request.body.event.user, text: request.body.event.text}`.
 
 ### Correlation
@@ -282,9 +282,9 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
-4. In the **Variable mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
-5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+3. In the **Activation** section, configure **Activation condition** when the Slack event or command can trigger a new BPMN process. The following example triggers a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
+4. In the **Output mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+5. In the **Output mapping** section, fill the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: connectorData.user_id, text: connectorData.text}`.
 
 When using the **Slack inbound connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.

@@ -327,7 +327,7 @@ The **Error Expression** property requires a [FEEL](/components/modeler/feel/wha
 BPMN error object in the end. The BPMN error object can be an
 empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty
-`errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by
+`errorType` and a non-empty `errorCode` if the error type is `bpmnError`. You can use all available functionality provided by
 FEEL to produce this result.
 
 Use the provided FEEL functions:
@@ -428,6 +428,32 @@ jobError("job failed", {myVar: myValue})
 ```feel
 jobError("job failed")
 // { errorType: "jobError", errorMessage: "job failed", variables: {}, retries: 0, retryBackoff: @"PT0S" }
+```
+
+### Function backoff
+
+Returns a days-time-duration that grows exponentially with the attempt number. Use it as the `retryBackoff` parameter of [`jobError`](#function-joberror) to increase the delay between retries.
+
+- Parameters:
+  - `attempt`: number, must be `1` or greater
+  - `minDelay`: days-time-duration _(optional), default_ `PT0.05S`
+  - `factor`: number _(optional), default_ `1.6`
+  - `maxDelay`: days-time-duration _(optional), default_ `PT5S`
+  - `jitterFactor`: number _(optional), default_ `0.1`
+- Result: days-time-duration
+
+The delay is `minDelay * factor^(attempt - 1)`, limited to the range from `minDelay` to `maxDelay`. A random jitter of up to `jitterFactor` times the delay is then added or subtracted.
+
+```feel
+backoff(1, @"PT1S", 2, @"PT1M", 0)
+// @"PT1S"
+
+backoff(3, @"PT1S", 2, @"PT1M", 0)
+// @"PT4S"
+```
+
+```feel
+jobError("job failed", {}, 2, backoff(1, @"PT1S", 2, @"PT1M"))
 ```
 
 ### Function ignoreError
