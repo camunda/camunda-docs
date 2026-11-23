@@ -87,7 +87,7 @@ RewriteRule ^p/introduction-to-connectors/?$ /docs/components/connectors/introdu
 RewriteRule ^p/manage-secrets/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,NE,L]
 RewriteRule ^p/organization-credentials/?$ /docs/components/hub/organization/credentials/ [R=301,NE,L]
 RewriteRule ^p/rest-connector/?$ /docs/components/connectors/protocol/rest/ [R=301,NE,L]
-RewriteRule ^p/sendgrid/?$ /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,NE,L]
+RewriteRule ^p/sendgrid-connector/?$ /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,NE,L]
 RewriteRule ^p/test-cases/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#test-cases [R=301,NE,L]
 RewriteRule ^p/test-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,NE,L]
 RewriteRule ^p/test-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,NE,L]
