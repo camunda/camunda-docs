@@ -99,11 +99,11 @@ A typical case is that it turns out to be _impossible to achieve the result_ of 
 
 <span className="callout">1</span>
 
-The _interrupting boundary error event_ allows us to deal with the fact that the order is not readable. As this prevents us from properly judging the completeness of the order, we cannot reach one of the expected results of our activity ("complete" or "not complete"), but instead deal with the problem by interrupting the activity and assuming the order to be declined.
+The _interrupting boundary error event_ lets us handle the fact that the order is not readable. Because this prevents us from properly judging the order's completeness, we cannot reach one of the expected results of our activity ("complete" or "not complete"). Instead, we interrupt the activity and assume the order is declined.
 
-When modeling for business process automation, "dealing with errors" might be a highly technical concern. As a rule of thumb, we just want to show the _"business related" problems_ in a process model: those problems and errors which cause that our business process must move along a different path, because different work must be carried out as a reaction.
+When modeling for business process automation, "dealing with errors" can be a highly technical concern. As a rule of thumb, we want to show only the _"business-related" problems_ in a process model: problems and errors that cause the process to move along a different path because different work must be carried out in response.
 
-An example for a typical technical concern would be that we currently cannot reach a system, which is why, for example, we want to re-attempt it another time later on. We do not show such purely technical problems in a business process diagram, not even in an executable one: (1) It would clutter the diagram, and (2) There are more suitable ways to deal with technical issues potentially occuring almost anywhere. Read our Best Practice about [dealing-with-problems-and-exceptions](../../development/dealing-with-problems-and-exceptions) from a more technical point of view to learn more about the border between business related shown in a process diagram and purely technical concerns not shown in a process diagram.
+A typical technical concern might be that we currently cannot reach a system, so, for example, we want to re-attempt it later. We do not show such purely technical problems in a business process diagram, not even in an executable one: (1) It would clutter the diagram, and (2) There are more suitable ways to deal with technical issues potentially occurring almost anywhere. Read our best practice about [dealing with problems and exceptions](../../development/dealing-with-problems-and-exceptions.md) from a more technical point of view to learn more about the border between business-related concerns shown in a process diagram and purely technical concerns not shown in a process diagram.
 
 ### Dealing with work on top of usual work
 
