@@ -43,10 +43,12 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 | `camunda.data.{ES/OS}.security.verify-hostname`  | Validate hostname for SSL                    | false                                          |
 | awsEnabled                                       | Use AWS credentials (OpenSearch only)        | false                                          |
 | `camunda.data.{ES/OS}.index-prefix: ''`          | Prefix for index names                       | operate / tasklist                             |
-| `camunda.data.{ES/OS}.number-of-shards`          | Number of shards for all indices             | 1                                              |
-| `camunda.data.{ES/OS}.number-of-replicas`        | Number of replicas for all indices           | 0                                              |
+| `camunda.database.index.number-of-shards`        | Number of shards for all indices             | 1                                              |
+| `camunda.database.index.number-of-replicas`      | Number of replicas for all indices           | 1                                              |
 
 :::note
+The Camunda Exporter creates indices too. Set the same values in `zeebe.broker.exporters.camundaexporter.args.index.numberOfShards` and `zeebe.broker.exporters.camundaexporter.args.index.numberOfReplicas`. See [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+
 Shard and replica settings are applied on first startup or during version updates. After indices are created, they can be adjusted in the cluster template and applied to new indices.
 :::
 
