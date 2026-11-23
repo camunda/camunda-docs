@@ -86,7 +86,7 @@ module.exports = {
       label: "Agentic orchestration",
       link: {
         type: "doc",
-        id: "guides/build-with-ai/overview",
+        id: "components/agentic-orchestration/overview",
       },
       items: [
         {
