@@ -1,0 +1,44 @@
+/* Reuses the global .doc-page-action* classes from
+   src/theme/DocItem/Footer/index.css for look and feel. */
+
+.root {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.group {
+  display: inline-flex;
+}
+
+.primary {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.toggle {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 50;
+  min-width: 16rem;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  background: var(--ifm-background-surface-color, var(--ifm-background-color));
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.15);
+}
+
+.menu li + li {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
