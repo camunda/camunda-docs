@@ -1074,6 +1074,31 @@ camunda:
         retry-backoff: PT10S
 ```
 
+## Keep the default Camunda JSON mapper
+
+8.10.11 fixes a regression: since 8.9.0, the starter ignored a Jackson 2 `ObjectMapper` that Spring Boot or a library
+auto-configured, and used the default Camunda JSON mapper instead
+([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
+The fix can be a breaking change for affected applications, because it changes the JSON your job workers write.
+For example, `java.util.Date` values become ISO strings instead of epoch milliseconds.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#spring-boot-starter-jackson2-object-mapper) for details.
+
+To keep the default Camunda JSON mapper in these cases, set:
+
+```yaml
+camunda:
+  client:
+    use-bare-object-mapper: true
+```
+
+You can also use the environment variable `CAMUNDA_CLIENT_USEBAREOBJECTMAPPER=true`. The property defaults to `false`.
+Your own `JsonMapper` or `ObjectMapper` bean is still used when the property is set.
+
+:::caution
+`camunda.client.use-bare-object-mapper` is deprecated, is only supported in 8.9 and 8.10, and is removed in 8.11.
+The starter logs a deprecation warning when the property takes effect.
+:::
+
 ## Deploy resources on start-up
 
 To deploy process models at application startup, use the `@Deployment` annotation:
