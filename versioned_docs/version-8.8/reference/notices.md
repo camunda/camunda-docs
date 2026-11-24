@@ -130,9 +130,9 @@ November 25, 2026
 
 ### Impact
 
-A bug in the initial-admin setup allowed unauthenticated users to create an administrator user. This applies to installations configured to use basic authentication (`camunda.security.authentication.method: basic`, the default) where admin rights are granted only through groups, and no user is assigned directly to the admin role.
+A bug in the initial-admin setup allowed unauthenticated users to create an administrator user. This applies to installations configured to use Basic authentication (`camunda.security.authentication.method: basic`, the default) where admin rights are granted only through groups, and no user is assigned directly to the admin role.
 
-With basic authentication, a new cluster offers a one-time setup step to create the first admin user. This step uses the create admin user endpoint (`POST /v2/setup/user`), which does not require authentication. It is meant to be available only until the admin role has a member. The check counted only users assigned directly to the admin role. If the admin role had only groups as members, the setup step would remain available, and anyone who could access the REST API could create an additional admin user.
+With Basic authentication, a new cluster offers a one-time setup step to create the first admin user. This step uses the create admin user endpoint (`POST /v2/setup/user`), which does not require authentication. It is meant to be available only until the admin role has a member. The check counted only users assigned directly to the admin role. If the admin role had only groups as members, the setup step would remain available, and anyone who could access the REST API could create an additional admin user.
 
 With the fix, the setup step is available only while the admin role has no members. Existing admin users and groups retain their access, and no configuration changes are needed.
 
@@ -143,7 +143,7 @@ Installations using OIDC are not affected.
 Your installation is affected if all of these conditions are true:
 
 - You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
-- You use basic authentication (`camunda.security.authentication.method: basic`, the default).
+- You use Basic authentication (`camunda.security.authentication.method: basic`, the default).
 - No user is assigned directly to the admin role, for example because only groups are assigned to it in the [configuration](/self-managed/components/orchestration-cluster/identity/overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration), or because an admin removed all users from the role.
 - The Orchestration Cluster REST API is reachable over the network. The create admin user endpoint (`POST /v2/setup/user`) does not require authentication.
 
