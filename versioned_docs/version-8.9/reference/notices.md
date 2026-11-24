@@ -114,6 +114,8 @@ A Java option only applies to processes that start after you set it, so the rest
 
 Do not use `ps` to find the option. The JVM reads `JDK_JAVA_OPTIONS` from the environment, so the option is not on the process command line.
 
+Do not use `java -XX:+PrintFlagsFinal -version` in the container to find the option. This command starts a new JVM, which reads `JDK_JAVA_OPTIONS` but not variables that only a startup script reads, such as `JAVA_OPTS` or `JAVA_OPTS_APPEND`. It does not show the settings of the JVM that runs the component.
+
 ## Notice 82
 
 ### Publication date
