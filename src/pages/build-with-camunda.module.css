@@ -1526,6 +1526,105 @@
   line-height: 1.6;
 }
 
+.optionalSections {
+  max-width: 1200px;
+  padding: 0 40px 5rem;
+}
+
+.optionalIntro {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--muted-color);
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.optionalSection {
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.optionalSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  color: var(--heading-color);
+  cursor: pointer;
+  list-style: none;
+}
+
+.optionalSummary::-webkit-details-marker {
+  display: none;
+}
+
+.optionalSummary h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.optionalSummary::after {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 3px 0 0;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.optionalSection[open] > .optionalSummary::after {
+  margin-top: 4px;
+  transform: rotate(225deg);
+}
+
+.optionalSummary:hover {
+  background: var(--ifm-background-surface-color);
+}
+
+.optionalSummary:focus-visible {
+  outline: 3px solid var(--camunda-brand-purple);
+  outline-offset: -4px;
+}
+
+.optionalContent {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.optionalNote {
+  margin: 0 0 2rem;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .optionalSections {
+    padding: 0 1rem 3rem;
+  }
+
+  .optionalSummary {
+    padding: 1.2rem 1rem;
+  }
+
+  .optionalSummary h2 {
+    font-size: 1.05rem;
+  }
+
+  .optionalContent {
+    padding: 0 1rem 1.25rem;
+  }
+}
+
 /* ─── Start cards (SaaS vs CLI) ─── */
 .startGrid {
   display: grid;

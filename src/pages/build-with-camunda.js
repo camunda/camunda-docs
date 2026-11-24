@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
@@ -12,8 +12,9 @@ import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
 import IconRunLocally from "../../docs/components/assets/icon-run-locally.svg";
 import IconSaasTrial from "../../docs/components/assets/icon-saas-trial.svg";
 import downloads from "../data/downloads.json";
+import LocalOnboarding from "../components/BuildWithCamundaOnboarding";
+import TerminalWindow from "../components/BuildWithCamundaOnboarding/TerminalWindow";
 
-const GETTING_STARTED = downloads.gettingStarted;
 const CAMUNDA_RUN = downloads.camundaRun;
 const CAMUNDA_RUN_STABLE_MINOR = CAMUNDA_RUN.version
   .split(".")
@@ -49,26 +50,6 @@ function DownloadIcon() {
       <path
         d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
         stroke="#fc5d0d"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function DownloadBtnIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      style={{ marginRight: 6, verticalAlign: "-2px" }}
-    >
-      <path
-        d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
-        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -517,97 +498,19 @@ function ArrowDown() {
 
 /* ─── Reusable components ─── */
 
-function VersionBadge({ version }) {
-  return <span className={styles.versionBadge}>{version}</span>;
-}
-
 function CodeBlock({ children }) {
   return <code className={styles.inlineCode}>{children}</code>;
-}
-
-function TerminalWindow({ title, children, copyable = true }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    const text = typeof children === "string" ? children : String(children);
-    const stripped = text
-      .split("\n")
-      .map((line) => line.replace(/^\$\s?/, ""))
-      .filter((line) => !line.startsWith("#") && !line.startsWith("✓"))
-      .join("\n")
-      .trim();
-    if (navigator?.clipboard?.writeText) {
-      navigator.clipboard.writeText(stripped).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      });
-    }
-  };
-
-  return (
-    <div className={styles.terminalWindow}>
-      <div className={styles.terminalHeader}>
-        <span
-          className={styles.terminalDot}
-          style={{ background: "#ff5f57" }}
-        />
-        <span
-          className={styles.terminalDot}
-          style={{ background: "#febc2e" }}
-        />
-        <span
-          className={styles.terminalDot}
-          style={{ background: "#28c840" }}
-        />
-        {title && <span className={styles.terminalTitle}>{title}</span>}
-      </div>
-      <div className={styles.terminalBody}>
-        {copyable && (
-          <button
-            type="button"
-            aria-label={copied ? "Copied" : "Copy code to clipboard"}
-            title={copied ? "Copied" : "Copy"}
-            className={clsx(
-              styles.copyButton,
-              copied && styles.copyButtonCopied
-            )}
-            onClick={handleCopy}
-          >
-            <span className={styles.copyButtonIcons} aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                className={styles.copyIcon}
-                width="16"
-                height="16"
-              >
-                <path
-                  fill="currentColor"
-                  d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
-                />
-              </svg>
-              <svg
-                viewBox="0 0 24 24"
-                className={styles.successIcon}
-                width="16"
-                height="16"
-              >
-                <path
-                  fill="currentColor"
-                  d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
-                />
-              </svg>
-            </span>
-          </button>
-        )}
-        <pre className={styles.terminalPre}>{children}</pre>
-      </div>
-    </div>
-  );
 }
 
 /* ─── Main page ─── */
 
 function BuildWithCamunda() {
+  const cliGuideUrl = useBaseUrl("docs/apis-tools/c8ctl/getting-started/");
+  const clusterMcpGuideUrl = useBaseUrl(
+    "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
+  );
+  const docsMcpGuideUrl = useBaseUrl("docs/reference/mcp-docs/");
+
   return (
     <Layout
       title="Build with Camunda"
@@ -742,201 +645,65 @@ function BuildWithCamunda() {
           </section>
         </div>
 
-        {/* ─── Self-Managed: tabbed install ─── */}
-        <section
-          className={clsx(
-            "container",
-            styles.section,
-            styles.cliInstallSection
-          )}
-          id="self-managed"
-          style={{ scrollMarginTop: "5rem" }}
-        >
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Run Camunda locally{" "}
-              <VersionBadge version={`Camunda ${CAMUNDA_RUN_STABLE_MINOR}+`} />
-            </h2>
-            <p className={styles.sectionSub}>
-              Install the Camunda CLI via npm and start a local Camunda
-              environment.
-            </p>
-          </div>
+        <LocalOnboarding />
 
-          {/* ─── Primary: CLI install ─── */}
-          <div className={styles.cliInstallBlock}>
-            <p className={styles.quickStartLabel}>
-              <span className={styles.stepNumber}>1</span> Install the Camunda
-              CLI
-              <span
-                style={{
-                  marginLeft: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              ></span>
-            </p>
-            <TerminalWindow copyable>
-              {`$ npm install -g @camunda8/cli`}
-            </TerminalWindow>
+        <div className={clsx("container", styles.optionalSections)}>
+          <p className={styles.optionalIntro}>
+            The sections below are optional references and alternative setups.
+            You don't need to repeat the steps that <code>c8ctl setup</code>{" "}
+            completed.
+          </p>
 
-            <p className={styles.quickStartLabel}>
-              <span className={styles.stepNumber}>2</span> Start Camunda 8 Run
-              <span
-                style={{
-                  marginLeft: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              ></span>
-            </p>
-            <TerminalWindow copyable>
-              {`$ c8ctl cluster start ${CAMUNDA_RUN.version}`}
-            </TerminalWindow>
-
-            <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              <span>
-                <Link
-                  to="https://www.npmjs.com/package/@camunda8/cli"
-                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                >
-                  Install via npm
-                </Link>{" "}
-                requires Node.js 18+.
-              </span>
-            </p>
-            <p
-              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
-              style={{ marginTop: "0.5rem" }}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              <span>
-                By downloading our self-managed packages, you agree to our{" "}
-                <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
-                  Privacy Policy
-                </Link>{" "}
-                and{" "}
-                <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
-                  Terms of Use
-                </Link>
-                .
-              </span>
-            </p>
-          </div>
-
-          {/* ─── Fallback: Download bundle ─── */}
-          <details className={styles.bundleFallback}>
-            <summary className={styles.bundleFallbackSummary}>
-              <span>
-                No Node.js or npm? Download and run the getting started bundle
-                instead
-              </span>
+          <details className={styles.optionalSection} id="cli-reference">
+            <summary className={styles.optionalSummary}>
+              <h2>Manage Camunda from your terminal</h2>
             </summary>
-            <div className={styles.bundleFallbackContent}>
-              <ol className={styles.bundleFallbackDesc}>
-                <li>
-                  Download, extract, and run the getting started bundle for a
-                  Camunda 8 Run environment.
-                </li>
-                <li>
-                  Follow the instructions in{" "}
-                  <Link
-                    to={useBaseUrl(
-                      "/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
-                    )}
-                  >
-                    run your first BPMN process
-                  </Link>{" "}
-                  to deploy and run your model.
-                </li>
-              </ol>
-              <div className={styles.downloadButtons}>
-                <a
-                  className={styles.downloadButton}
-                  href={GETTING_STARTED.links.mac[0].url}
-                >
-                  <DownloadBtnIcon /> macOS (Apple Silicon)
-                </a>
-                <a
-                  className={styles.downloadButton}
-                  href={GETTING_STARTED.links.mac[1].url}
-                >
-                  <DownloadBtnIcon /> macOS (Intel)
-                </a>
-                <a
-                  className={styles.downloadButton}
-                  href={GETTING_STARTED.links.windows[0].url}
-                >
-                  <DownloadBtnIcon /> Windows
-                </a>
-                <a
-                  className={styles.downloadButton}
-                  href={GETTING_STARTED.links.linux[0].url}
-                >
-                  <DownloadBtnIcon /> Linux
-                </a>
+            <div className={styles.optionalContent}>
+              <p className={styles.optionalNote}>
+                If you selected the local cluster and example project, setup has
+                already started a process for you. Use these commands for
+                further development, not as additional setup steps. Run the
+                deployment commands from the generated example project folder.
+                The <code>--profile=local</code> flag targets your local
+                cluster.
+              </p>
+              <div className={styles.commandGrid}>
+                <div className={styles.commandCard}>
+                  <h4>Manage your clusters</h4>
+                  <TerminalWindow title="Terminal">
+                    {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
+$ c8ctl cluster stop`}
+                  </TerminalWindow>
+                </div>
+                <div className={styles.commandCard}>
+                  <h4>Deploy and start processes</h4>
+                  <TerminalWindow title="Terminal">
+                    {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn --profile=local
+$ c8ctl create pi --id=rocket-launch --profile=local --variables='{"missionName":"Odyssey","fuelLevel":95}'
+$ c8ctl list pi --profile=local`}
+                  </TerminalWindow>
+                </div>
+                <div className={styles.commandCard}>
+                  <h4>Interact with processes</h4>
+                  <TerminalWindow title="Terminal">
+                    {`$ c8ctl list jobs --type=launch-approval --profile=local
+$ c8ctl activate jobs launch-approval --profile=local
+$ c8ctl complete job 2251799813685252 --profile=local`}
+                  </TerminalWindow>
+                </div>
+                <div className={styles.commandCard}>
+                  <h4>Monitor and debug</h4>
+                  <TerminalWindow title="Terminal">
+                    {`$ c8ctl list inc --state=ACTIVE --profile=local
+$ c8ctl get inc 2251799813685251 --profile=local
+$ c8ctl resolve inc 2251799813685251 --profile=local`}
+                  </TerminalWindow>
+                </div>
               </div>
-              <TerminalWindow copyable>
-                {`# macOS / Linux
-$ unzip camunda8-getting-started-bundle-*.zip
-$ cd camunda8-getting-started-bundle-*
-$ ./camunda-start.sh
 
-# Windows
-# Extract the .zip and run camunda-start.bat`}
-              </TerminalWindow>
               <p
-                className={styles.cliInfoNote}
-                style={{
-                  textAlign: "left",
-                  justifyContent: "flex-start",
-                  marginTop: "1.5rem",
-                }}
+                className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+                style={{ marginTop: "2.5rem" }}
               >
                 <svg
                   width="16"
@@ -962,191 +729,40 @@ $ ./camunda-start.sh
                   <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
                 <span>
-                  Camunda 8 Run includes a bundled Java runtime, so no local
-                  OpenJDK installation is required. Node.js/npm not required for
-                  getting started bundle.
+                  Learn more about using the{" "}
+                  <Link to={cliGuideUrl}>Camunda CLI</Link> to manage Camunda
+                  directly from the terminal.
                 </span>
               </p>
             </div>
           </details>
 
-          {/* ─── Deploy your first process ─── */}
-          <div className={styles.pillSeparator}>
-            <span className={styles.sectionPill}>
-              Deploy your first process
-            </span>
-          </div>
-
-          <div className={styles.cliInstallBlock}>
-            <p className={styles.quickStartLabel}>
-              <span className={styles.stepNumber}>3</span> Deploy and run the
-              example process
-            </p>
-            <TerminalWindow copyable>
-              {`$ git clone https://github.com/camunda/camunda-8-get-started.git
-$ cd camunda-8-get-started/1-rocket-launch/
-$ c8ctl deploy .
-$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
-            </TerminalWindow>
-
-            <p className={styles.quickStartLabel}>
-              <span className={styles.stepNumber}>4</span> See the process
-              running in Operate
-            </p>
-            <TerminalWindow copyable={false}>
-              {`# Open Operate at http://localhost:8080/operate
-# Log in with demo / demo
-# Find the Rocket Launch process and click your running instance`}
-            </TerminalWindow>
-
-            <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              <span>
-                Your process instance appears once data has synced to Operate.
-                See{" "}
-                <Link
-                  to={useBaseUrl(
-                    "/docs/guides/getting-started-hello-world#step-3-explore-your-process-in-operate"
-                  )}
-                >
-                  explore your process in Operate
-                </Link>
-                .
-              </span>
-            </p>
-          </div>
-
-          <div className={styles.pillSeparator}>
-            <span className={styles.sectionPill}>How to use the CLI</span>
-          </div>
-
-          {/* Everything from your terminal (moved into CLI section) */}
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Manage Camunda from your terminal
-            </h2>
-            <p className={styles.sectionSub}>
-              Use the CLI for the full Camunda lifecycle. No browser required.
-            </p>
-          </div>
-          <div className={styles.commandGrid}>
-            <div className={styles.commandCard}>
-              <h4>Manage your clusters</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
-$ c8ctl cluster stop`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Deploy and start processes</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
-$ c8ctl create pi --id=rocket-launch --variables='{"fuelLevel":90}'
-$ c8ctl list pi`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Interact with processes</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl list jobs --type=launch-approval
-$ c8ctl activate jobs launch-approval
-$ c8ctl complete job 2251799813685252`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Monitor and debug</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl list inc --state=ACTIVE
-$ c8ctl get inc 2251799813685251
-$ c8ctl resolve inc 2251799813685251`}
-              </TerminalWindow>
-            </div>
-          </div>
-
-          <p
-            className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
-            style={{ marginTop: "2.5rem" }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle
-                cx="8"
-                cy="8"
-                r="7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="none"
-              />
-              <path
-                d="M8 7v4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-            </svg>
-            <span>
-              Learn more about using the{" "}
-              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                Camunda CLI
-              </Link>{" "}
-              to manage Camunda directly from the terminal.
-            </span>
-          </p>
-
-          <div className={styles.pillSeparator}>
-            <span className={styles.sectionPill}>AI agent integration</span>
-          </div>
-
-          {/* Teach AI agent (moved into CLI section) */}
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Train your AI agents on Camunda
-            </h2>
-            <p className={styles.sectionSub}>
-              Deploy processes, manage clusters, and query instances directly
-              from your AI workflow.
-            </p>
-          </div>
-          <div className={styles.aiGrid}>
-            <div className={styles.aiCard}>
-              <h4 style={{ display: "flex", alignItems: "center" }}>
-                Add Camunda Skills as Claude plugin
-              </h4>
-              <TerminalWindow title="Terminal">
-                {`$ claude plugin marketplace add camunda/skills
-$ claude plugin install camunda-skills@camunda-skills
-
-Available skills:
-  /camunda-c8ctl                    — install and configure c8ctl
-  /camunda-ai-agent                 — build AI agents in BPMN
+          <details className={styles.optionalSection} id="ai-tools">
+            <summary className={styles.optionalSummary}>
+              <h2>Train your AI agents on Camunda</h2>
+            </summary>
+            <div className={styles.optionalContent}>
+              <p className={styles.optionalNote}>
+                If you selected <strong>AI assistant skills</strong> and{" "}
+                <strong>Cluster MCP server</strong>, setup installs skills and
+                connects supported AI assistants already on your machine. You
+                don't need to repeat that configuration. Select{" "}
+                <strong>Docs MCP server</strong> during setup to also add
+                documentation search; it asks you to sign in in a browser on
+                first use.
+              </p>
+              <div className={styles.aiGrid}>
+                <div className={styles.aiCard}>
+                  <h4 style={{ display: "flex", alignItems: "center" }}>
+                    Add Camunda Skills as Claude plugin
+                  </h4>
+                  <TerminalWindow title="Terminal">
+                    {`$ claude plugin marketplace add camunda/skills
+$ claude plugin install camunda-skills@camunda-skills`}
+                  </TerminalWindow>
+                  <TerminalWindow title="Available skills" copyable={false}>
+                    {`  /camunda-c8ctl                    — install and configure c8ctl
+  /camunda-ai-agents                — build AI agents in BPMN
   /camunda-bpmn                     — create and edit BPMN 2.0 processes
   /camunda-connectors               — configure pre-built connectors
   /camunda-connectors-development   — build custom connectors
@@ -1156,14 +772,18 @@ Available skills:
   /camunda-forms                    — create Camunda Form schemas
   /camunda-job-workers              — implement job workers (Java, Spring, TypeScript)
   /camunda-process-mgmt             — deploy, operate, and debug processes`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.aiCard}>
-              <h4 style={{ display: "flex", alignItems: "center" }}>
-                Connect to Camunda via MCP
-              </h4>
-              <TerminalWindow title="Terminal">
-                {`// mcp.json
+                  </TerminalWindow>
+                </div>
+                <div className={styles.aiCard}>
+                  <h4 style={{ display: "flex", alignItems: "center" }}>
+                    Connect to Camunda via MCP
+                  </h4>
+                  <p>
+                    This example uses the VS Code configuration format. Other
+                    assistants use different configuration formats.
+                  </p>
+                  <TerminalWindow title="Terminal">
+                    {`// mcp.json
 {
   "servers": {
     // Locally running C8Run instance
@@ -1178,234 +798,228 @@ Available skills:
     }
   }
 }`}
-              </TerminalWindow>
-            </div>
-          </div>
-          <p
-            className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
-            style={{ marginTop: "2.5rem" }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle
-                cx="8"
-                cy="8"
-                r="7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="none"
-              />
-              <path
-                d="M8 7v4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-            </svg>
-            <span>
-              Learn more about{" "}
-              <Link
-                to="https://github.com/camunda/skills"
-                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  </TerminalWindow>
+                </div>
+              </div>
+              <p
+                className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+                style={{ marginTop: "2.5rem" }}
               >
-                Camunda Skills
-              </Link>
-              {", and the "}
-              <Link
-                to={useBaseUrl(
-                  "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
-                )}
-                style={{ fontWeight: 400, fontSize: "0.85rem" }}
-              >
-                Orchestration Cluster MCP
-              </Link>{" "}
-              and{" "}
-              <Link
-                to={useBaseUrl("docs/reference/mcp-docs/")}
-                style={{ fontWeight: 400, fontSize: "0.85rem" }}
-              >
-                Docs MCP
-              </Link>{" "}
-              servers.
-            </span>
-          </p>
-          <div className={styles.aiExamples}>
-            <h4>...then ask your agent</h4>
-            <p className={styles.aiExamplesSub}>
-              Try one of these prompts to see Camunda Skills in action.
-            </p>
-            <div className={styles.aiExampleGrid}>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Create an invoice approval process with a user task for review
-                and an HTTP connector to notify accounting"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Build an AI agent to triage and route customer support tickets
-                to the correct team"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Deploy order-process.bpmn and start an instance with
-                orderId=42"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
-                "Investigate incidents on the payment-flow process and resolve
-                any that are caused by missing payment details"
-              </div>
-            </div>
-
-            <div className={styles.aiExamplesCta}>
-              <Link className={styles.heroCardCta} to="#self-managed">
-                Start building
                 <svg
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
                   fill="none"
-                  style={{ marginLeft: 6 }}
+                  aria-hidden="true"
                 >
-                  <path
-                    d="M8 13V3M4 7l4-4 4 4"
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="7"
                     stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    fill="none"
                   />
+                  <path
+                    d="M8 7v4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── More ways to run (duplicate) ─── */}
-        <section className={clsx(styles.moreSection, styles.darkSection)}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>
-                More ways to run Camunda locally
-              </h2>
-              <p className={styles.sectionSub}>
-                Choose the setup that fits your workflow and infrastructure.
+                <span>
+                  Learn more about{" "}
+                  <Link
+                    to="https://github.com/camunda/skills"
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    Camunda Skills
+                  </Link>
+                  {", and the "}
+                  <Link
+                    to={clusterMcpGuideUrl}
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    Orchestration Cluster MCP
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    to={docsMcpGuideUrl}
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    Docs MCP
+                  </Link>{" "}
+                  servers.
+                </span>
               </p>
-            </div>
-            <div className={styles.waysGrid}>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
-                )}
-                className={styles.wayCard}
-              >
-                <DockerIcon />
-                <h3>Docker Compose</h3>
-                <p>
-                  Run Camunda 8 locally for development and evaluation with{" "}
-                  <CodeBlock>docker compose up -d</CodeBlock>.
+              <div className={styles.aiExamples}>
+                <h4>...then ask your agent</h4>
+                <p className={styles.aiExamplesSub}>
+                  Try one of these prompts to see Camunda Skills in action.
                 </p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/deployment/helm/install/quick-install/"
-                )}
-                className={styles.wayCard}
-              >
-                <KubernetesIcon />
-                <h3>Kubernetes</h3>
-                <p>
-                  Deploy to any Kubernetes cluster with the official Camunda
-                  Helm chart.
-                </p>
-              </Link>
-            </div>
-          </div>
-        </section>
+                <div className={styles.aiExampleGrid}>
+                  <div className={styles.aiExampleItem}>
+                    <span className={styles.aiPromptIcon}>💬</span>
+                    "Create an invoice approval process with a user task for
+                    review and an HTTP connector to notify accounting"
+                  </div>
+                  <div className={styles.aiExampleItem}>
+                    <span className={styles.aiPromptIcon}>💬</span>
+                    "Build an AI agent to triage and route customer support
+                    tickets to the correct team"
+                  </div>
+                  <div className={styles.aiExampleItem}>
+                    <span className={styles.aiPromptIcon}>💬</span>
+                    "Deploy order-process.bpmn and start an instance with
+                    orderId=42"
+                  </div>
+                  <div className={styles.aiExampleItem}>
+                    <span className={styles.aiPromptIcon}>💬</span>
+                    "Investigate incidents on the payment-flow process and
+                    resolve any that are caused by missing payment details"
+                  </div>
+                </div>
 
-        {/* ─── Production deployments ─── */}
-        <section className={styles.exploreSection}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>
-                Production deployment options
-              </h2>
-              <p className={styles.sectionSub}>
-                Run Camunda at scale on the infrastructure you already trust.
-              </p>
+                <div className={styles.aiExamplesCta}>
+                  <Link className={styles.heroCardCta} to="#self-managed">
+                    Start building
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      style={{ marginLeft: 6 }}
+                    >
+                      <path
+                        d="M8 13V3M4 7l4-4 4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className={styles.deployGrid}>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
-                )}
-                className={styles.deployCard}
-              >
-                <AWSIcon />
-                <h4>Amazon EKS</h4>
-                <p>Deploy on AWS with managed Kubernetes.</p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
-                )}
-                className={styles.deployCard}
-              >
-                <GCPIcon />
-                <h4>Google GKE</h4>
-                <p>Run on Google Cloud with native GKE support.</p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/deployment/helm/install/quick-install/"
-                )}
-                className={styles.deployCard}
-              >
-                <HelmIcon />
-                <h4>Kubernetes + Helm</h4>
-                <p>Flexible deployment with the official Helm chart.</p>
-              </Link>
-            </div>
-          </div>
-        </section>
+          </details>
 
-        {/* ─── Camunda downloads ─── */}
-        <section
-          id="downloads"
-          className={clsx(
-            styles.moreSection,
-            styles.darkSection,
-            styles.noTopBorder,
-            styles.exploreSectionLast
-          )}
-          style={{
-            scrollMarginTop: "5rem",
-            paddingTop: "3rem",
-            paddingBottom: "8rem",
-          }}
-        >
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Camunda downloads</h2>
-              <p className={styles.sectionSub}>
-                Download everything you need for local Camunda 8 development.
+          {/* ─── More ways to run (duplicate) ─── */}
+          <details
+            className={styles.optionalSection}
+            id="other-local-deployments"
+          >
+            <summary className={styles.optionalSummary}>
+              <h2>More ways to run Camunda locally</h2>
+            </summary>
+            <div className={styles.optionalContent}>
+              <p className={styles.optionalNote}>
+                Setup uses Camunda 8 Run, so you don't need Docker or Kubernetes
+                for the quickstart. Setup doesn't configure these alternative
+                deployments.
               </p>
+              <div className={styles.waysGrid}>
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
+                  )}
+                  className={styles.wayCard}
+                >
+                  <DockerIcon />
+                  <h3>Docker Compose</h3>
+                  <p>
+                    Run Camunda 8 locally for development and evaluation with{" "}
+                    <CodeBlock>docker compose up -d</CodeBlock>.
+                  </p>
+                </Link>
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/deployment/helm/install/quick-install/"
+                  )}
+                  className={styles.wayCard}
+                >
+                  <KubernetesIcon />
+                  <h3>Kubernetes</h3>
+                  <p>
+                    Deploy to any Kubernetes cluster with the official Camunda
+                    Helm chart.
+                  </p>
+                </Link>
+              </div>
             </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Link
-                to={useBaseUrl("/downloads")}
-                className={styles.heroCardCtaAlt}
-              >
-                Go to downloads <ArrowRight />
-              </Link>
+          </details>
+
+          {/* ─── Production deployments ─── */}
+          <details
+            className={styles.optionalSection}
+            id="production-deployments"
+          >
+            <summary className={styles.optionalSummary}>
+              <h2>Production deployment options</h2>
+            </summary>
+            <div className={styles.optionalContent}>
+              <p className={styles.optionalNote}>
+                Use these guides for production. <code>c8ctl setup</code>{" "}
+                creates a local development environment; it doesn't provision
+                production infrastructure.
+              </p>
+              <div className={styles.deployGrid}>
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
+                  )}
+                  className={styles.deployCard}
+                >
+                  <AWSIcon />
+                  <h4>Amazon EKS</h4>
+                  <p>Deploy on AWS with managed Kubernetes.</p>
+                </Link>
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
+                  )}
+                  className={styles.deployCard}
+                >
+                  <GCPIcon />
+                  <h4>Google GKE</h4>
+                  <p>Run on Google Cloud with native GKE support.</p>
+                </Link>
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/deployment/helm/install/quick-install/"
+                  )}
+                  className={styles.deployCard}
+                >
+                  <HelmIcon />
+                  <h4>Kubernetes + Helm</h4>
+                  <p>Flexible deployment with the official Helm chart.</p>
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
+          </details>
+
+          {/* ─── Camunda downloads ─── */}
+          <details id="downloads" className={styles.optionalSection}>
+            <summary className={styles.optionalSummary}>
+              <h2>Camunda downloads</h2>
+            </summary>
+            <div className={styles.optionalContent}>
+              <p className={styles.optionalNote}>
+                Setup downloads Camunda 8 Run and Desktop Modeler when selected.
+                Use the catalog for other components or versions.
+              </p>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Link
+                  to={useBaseUrl("/downloads")}
+                  className={styles.heroCardCtaAlt}
+                >
+                  Go to downloads <ArrowRight />
+                </Link>
+              </div>
+            </div>
+          </details>
+        </div>
       </div>
     </Layout>
   );
