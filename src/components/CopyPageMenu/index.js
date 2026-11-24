@@ -76,10 +76,10 @@ function useVersion() {
 }
 
 // Category index pages have a docs version but no doc, so useDoc() throws.
-function useEditUrl() {
+function useDocMetadata() {
   try {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    return useDoc().metadata.editUrl;
+    return useDoc().metadata;
   } catch {
     return undefined;
   }
@@ -142,7 +142,11 @@ async function copyPage(mdUrl) {
 export default function CopyPageMenu() {
   const { pathname } = useLocation();
   const version = useVersion();
-  const editUrl = useEditUrl();
+  const docMetadata = useDocMetadata();
+  const editUrl = docMetadata?.editUrl;
+  // Generated category index pages have no doc (so no .md export), and neither
+  // do API specification pages.
+  const markdownAvailable = Boolean(docMetadata) && hasMarkdown(pathname);
   const versionLabel = version?.label;
   const {
     siteConfig: { baseUrl, customFields = {} },
@@ -191,7 +195,7 @@ export default function CopyPageMenu() {
   const getMdUrl = () => markdownUrlFor(pathname, window.location.origin);
   // Pages without a generated .md (API specifications) share the HTML page.
   const getAiPageUrl = () =>
-    hasMarkdown(pathname) ? getMdUrl() : `${window.location.origin}${pathname}`;
+    markdownAvailable ? getMdUrl() : `${window.location.origin}${pathname}`;
 
   const handleCopy = async () => {
     setOpen(false);
@@ -290,7 +294,7 @@ export default function CopyPageMenu() {
 
   const menuItems = [
     ...linkItems,
-    ...(hasMarkdown(pathname)
+    ...(markdownAvailable
       ? [
           {
             key: "markdown",
@@ -384,7 +388,9 @@ export default function CopyPageMenu() {
                 role="menuitem"
                 className="doc-page-action__menu-item"
                 onClick={item.onClick}
-                ref={i === 0 ? (el) => el?.focus() : undefined}
+                // autoFocus only runs on mount, so re-renders (for example when the
+                // copy status timer clears) do not steal focus back.
+                autoFocus={i === 0}
               >
                 <span
                   className="doc-page-action__menu-item-icon"

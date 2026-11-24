@@ -41,8 +41,9 @@
   right: 0;
   top: calc(100% + 0.35rem);
   z-index: 50;
-  min-width: 20rem;
-  max-width: 28rem;
+  /* Stay inside the viewport (minus content padding) on narrow screens. */
+  min-width: min(20rem, calc(100vw - 2rem));
+  max-width: min(28rem, calc(100vw - 2rem));
   margin: 0;
   padding: 0.25rem 0;
   list-style: none;

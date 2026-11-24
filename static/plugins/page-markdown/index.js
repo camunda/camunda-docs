@@ -7,17 +7,84 @@
 // the current release. This plugin works from the docs plugin's loaded
 // content instead, so each version gets its own files.
 //
-// NOTE: This relies on internals of docusaurus-plugin-llms
-// (lib/utils: resolvePartialImports, cleanMarkdownContent) so the output stays
-// consistent with the files that plugin generates. Revisit when upgrading it.
+// NOTE: This relies on an internal of docusaurus-plugin-llms
+// (lib/utils: cleanMarkdownContent) so the output stays consistent with the
+// files that plugin generates. Revisit when upgrading it.
 const { mkdir, readFile, writeFile } = require("node:fs/promises");
-const { dirname, join } = require("node:path");
-const {
-  resolvePartialImports,
-  cleanMarkdownContent,
-} = require("docusaurus-plugin-llms/lib/utils");
+const { dirname, join, resolve } = require("node:path");
+const { cleanMarkdownContent } = require("docusaurus-plugin-llms/lib/utils");
 
 const BATCH_SIZE = 50;
+
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// Inline partial imports (`import Foo from "./_foo.mdx"` plus `<Foo />`).
+// docusaurus-plugin-llms has an equivalent, but it treats the specifier as a
+// literal path, so MDX-escaped specifiers such as "./partials/\_api.md" fail
+// to resolve. Decode the escapes before resolving, at every nesting level.
+async function resolvePartialImports(content, filePath, chain = new Set()) {
+  const importRegex =
+    /^\s*import\s+(?:(\w+)|{\s*(\w+)\s*})\s+from\s+(['"])([^'"]+_[^'"]+\.mdx?)\3;?\s*$/gm;
+  const imports = new Map();
+  for (const match of content.matchAll(importRegex)) {
+    imports.set(match[1] || match[2], match[4]);
+  }
+
+  let resolved = content;
+  for (const [name, rawSpecifier] of imports) {
+    const specifier = rawSpecifier.replace(/\\(.)/g, "$1");
+    const importLine = new RegExp(
+      `^\\s*import\\s+(?:${escapeRegex(name)}|{\\s*${escapeRegex(name)}\\s*})\\s+from\\s+['"]${escapeRegex(rawSpecifier)}['"];?\\s*$`,
+      "gm"
+    );
+    const removeUsage = new RegExp(
+      `<${escapeRegex(name)}(?:\\s+[^>]*)?\\s*\\/?>(?:[\\s\\S]*?<\\/${escapeRegex(name)}>)?`,
+      "g"
+    );
+    const partialPath = resolve(dirname(filePath), specifier);
+    resolved = resolved.replace(importLine, "");
+    try {
+      if (chain.has(partialPath)) throw new Error("circular import");
+      const partial = await resolvePartialImports(
+        stripFrontMatter(await readFile(partialPath, "utf8")),
+        partialPath,
+        new Set(chain).add(partialPath)
+      );
+      const usage = new RegExp(
+        `<${escapeRegex(name)}\\s*(?:[^>]*?)(?:/>|>[^<]*</${escapeRegex(name)}>)`,
+        "g"
+      );
+      resolved = resolved.replace(usage, () => partial.trim());
+    } catch (err) {
+      console.warn(
+        `[page-markdown] Could not resolve partial ${specifier} from ${filePath}: ${err.message}`
+      );
+      resolved = resolved.replace(removeUsage, "");
+    }
+  }
+  return resolved;
+}
+
+// Relative links such as "./agentic-orchestration/overview.md" are written
+// against the source file, but the export lives at the page's permalink, so
+// they would point at missing files. Rewrite those that resolve to another doc
+// in the same version to that doc's absolute .md URL.
+function rewriteRelativeLinks(content, sourcePath, sourceToPermalink, siteUrl) {
+  return content.replace(
+    /\]\(([^)\s]+)((?:\s+"[^"]*")?)\)/g,
+    (whole, target, title) => {
+      if (/^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(target)) return whole;
+      const [pathPart, hash = ""] = target.split(/(?=#)/);
+      if (!/\.mdx?$/.test(pathPart)) return whole;
+      const permalink = sourceToPermalink.get(
+        resolve(dirname(sourcePath), decodeURI(pathPart))
+      );
+      if (!permalink) return whole;
+      const mdUrl = `${siteUrl}${permalink.replace(/\/+$/, "")}.md`;
+      return `](${mdUrl}${hash}${title})`;
+    }
+  );
+}
 
 // Convert a simple glob (supports "*") to a RegExp matched against doc IDs.
 function globToRegExp(glob) {
@@ -56,6 +123,13 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
       for (const plugin of plugins) {
         if (plugin.name !== "docusaurus-plugin-content-docs") continue;
         for (const version of plugin.content?.loadedVersions ?? []) {
+          const sourceToPermalink = new Map();
+          for (const doc of version.docs) {
+            sourceToPermalink.set(
+              doc.source.replace(/^@site\//, `${siteDir}/`),
+              doc.permalink
+            );
+          }
           for (const doc of version.docs) {
             if (doc.frontMatter?.draft) continue;
             if (ignoreRegExps.some((re) => re.test(doc.id))) continue;
@@ -63,6 +137,7 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
               doc,
               versionLabel: version.label,
               isLast: version.isLast,
+              sourceToPermalink,
             });
           }
         }
@@ -71,7 +146,12 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
       let written = 0;
       let skipped = 0;
 
-      const generate = async ({ doc, versionLabel, isLast }) => {
+      const generate = async ({
+        doc,
+        versionLabel,
+        isLast,
+        sourceToPermalink,
+      }) => {
         const sourcePath = doc.source.replace(/^@site\//, `${siteDir}/`);
         let raw;
         try {
@@ -83,6 +163,12 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
         let content = stripFrontMatter(raw);
         content = await resolvePartialImports(content, sourcePath);
         content = cleanMarkdownContent(content, true, true);
+        content = rewriteRelativeLinks(
+          content,
+          sourcePath,
+          sourceToPermalink,
+          url
+        );
 
         const permalink = doc.permalink.replace(/\/*$/, "/");
         const pageUrl = `${url}${permalink}`;
@@ -118,3 +204,7 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
     },
   };
 };
+
+// Exposed for unit tests.
+module.exports.resolvePartialImports = resolvePartialImports;
+module.exports.rewriteRelativeLinks = rewriteRelativeLinks;
