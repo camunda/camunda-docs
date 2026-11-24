@@ -21,13 +21,37 @@ A single docs link, for example `https://docs.camunda.io/docs/components/saas/cl
 
 1. Convert the link to a repo path. `/docs/<path>/` maps to `docs/<path>.md` or `docs/<path>/index.md`. `/docs/next/<path>/` maps to `docs/next/...`. Find the file.
    - If it doesn't exist, check `static/.htaccess` for a redirect whose source matches the link. The page may have moved or been renamed. Follow the redirect chain to the current page.
-   - If the page moved, or the `#anchor` no longer exists in the current page, tell the user in plain terms ("that page was renamed, here is the current one"), find the current equivalent anchor, and use the current page and anchor for the target and slug. The user confirms them in step 3. Never base the slug on the stale link.
+   - If the page moved, or the `#anchor` no longer exists in the current page, tell the user in plain terms ("that page was renamed, here is the current one"), find the current equivalent anchor, and use the current page and anchor for the target and slug. The user confirms them in step 4. Never base the slug on the stale link.
    - If you can't find a current equivalent, stop and tell the user.
 2. Read the file's frontmatter `id`. If there is none, use the filename without extension. For an `index.md`, use the parent folder name.
 3. If there is an `#anchor`, confirm a matching heading exists in the file (or an explicit `{#anchor}` ID). Warn the user if you can't verify it.
 4. Build the redirect target as a site-root-relative path, such as `/docs/components/saas/clusters/#auto-pause`. Keep the version segment from the link the user gave (`/docs/next/...` stays `next`).
 
-### 2. Propose a slug
+### 2. Check for an existing short URL for the target
+
+Never create a second short URL for the same target. Before proposing a slug, search the `^p/` rules in `static/.htaccess` for the target from step 1:
+
+```bash
+grep -nE '^RewriteRule \^p/.*\$ <target> \[' static/.htaccess
+```
+
+Escape regex characters in the target (`.`, `?`, `+`). Also check these variants, because an existing rule may use a different form of the same target:
+
+- With and without the trailing slash before the `#anchor`.
+- The `/docs/next/` and `/docs/` versions of the same page.
+- The original link the user gave, if step 1 found it was stale, in case a rule still points to the old path.
+
+A match needs the same page **and** the same `#anchor`. A rule for the same page with a different anchor, or with no anchor, is a different target. Don't treat it as a duplicate.
+
+If a rule matches:
+
+- Stop. Do not create a branch, edit files, or open a PR.
+- Tell the user in plain language that a short URL already exists for that page (or section) and give the full URL, `https://docs.camunda.io/p/<existing-slug>`.
+- Offer only to proceed if the user explicitly wants a different slug for the same target. Then tell them the docs team may decline the PR as a duplicate, and wait for their answer.
+
+If no rule matches, continue to step 3.
+
+### 3. Propose a slug
 
 Prefer the **anchor** when one was given. Use the **doc file ID** only when there is no anchor, or when the anchor is too generic to give enough context on its own.
 
@@ -45,7 +69,7 @@ Rules:
 - If the doc ID is used and is too generic to be unique or meaningful (for example, `index`, `overview`, `introduction`), use the parent folder name plus the doc ID.
 - Keep it short. Drop repeated words (`clusters-clusters`).
 
-Search for conflicts before proposing:
+Search for slug conflicts before proposing:
 
 ```bash
 grep -nE 'docs\.camunda\.io/p/<slug>$|^RewriteRule \^p/<slug>/\?\$' product-links.txt static/.htaccess
@@ -55,16 +79,16 @@ The pattern anchors on the exact line forms in each file, so `p/test` does not m
 
 If the slug already exists, tell the user and propose a different one.
 
-### 3. Confirm with the user
+### 4. Confirm with the user
 
-Use AskUserQuestion. Show the full short URL and the page it will open. Offer the slug from step 2 as the recommended option (first), with an alternative if you have one. If the link was stale, state the current page in the question. The user can always type their own through "Other".
+Use AskUserQuestion. Show the full short URL and the page it will open. Offer the slug from step 3 as the recommended option (first), with an alternative if you have one. If the link was stale, state the current page in the question. The user can always type their own through "Other".
 
-- **Confirmed:** continue to step 4.
+- **Confirmed:** continue to step 5.
 - **Rejected:** ask the user what slug they want to use. Validate it against the slug rules and the conflict check, then continue.
 
 Do not edit any file before the slug is confirmed.
 
-### 4. Create a branch
+### 5. Create a branch
 
 Start from a clean `main` so the PR contains only the short URL change:
 
@@ -77,7 +101,7 @@ git switch -c docs/short-url-<slug> origin/main
 - If `git status --short` shows uncommitted changes, stop and ask the user how to proceed. Never stash, discard, or include unrelated changes.
 - If the branch name already exists, append `-2`, `-3`, and so on.
 
-### 5. Add the record to `product-links.txt`
+### 6. Add the record to `product-links.txt`
 
 Under the `# Short URLs` heading, add one line with the full short URL. Keep the list alphabetical and keep the blank line before `# Full paths`.
 
@@ -85,7 +109,7 @@ Under the `# Short URLs` heading, add one line with the full short URL. Keep the
 https://docs.camunda.io/p/<slug>
 ```
 
-### 6. Add the redirect to `static/.htaccess`
+### 7. Add the redirect to `static/.htaccess`
 
 Under the "Short URLs" banner in section 1 (Universal rules), add the rule after the existing `^p/...` rules, keeping them alphabetical by slug:
 
@@ -96,7 +120,7 @@ RewriteRule ^p/<slug>/?$ <target> [R=301,NE,L]
 - `NE` (no escape) is required so that an `#anchor` isn't URL-encoded. Keep it on every rule for consistency.
 - Do not add the rule to any other section.
 
-### 7. Commit and push
+### 8. Commit and push
 
 Follow the commit conventions in `.github/instructions/repo.instructions.md` § 4.
 
@@ -106,7 +130,7 @@ git commit -m "docs(short-url): add <slug> short URL"
 git push -u origin HEAD
 ```
 
-### 8. Open the PR
+### 9. Open the PR
 
 Open the PR with `/docs-create-pr`, which reads the PR template and applies labels. Apply these settings:
 
@@ -119,7 +143,7 @@ Open the PR with `/docs-create-pr`, which reads the PR template and applies labe
 
 Do not add a `deploy` label. Do not backport. Short URL rules are unversioned.
 
-### 9. Report
+### 10. Report
 
 Tell the user, in plain language:
 
@@ -130,6 +154,7 @@ Tell the user, in plain language:
 ## Rules
 
 - Edit only `product-links.txt` and `static/.htaccess`, and commit only those two files.
+- Never create a second short URL for a target that already has one (step 2).
 - Open the PR only after the slug is confirmed. Never push to `main` directly.
 - Don't tell the user to do follow-up docs maintenance, such as updating rules when a version is released. The docs team handles that in internal processes.
 - Changing an existing short URL's target is fine. Removing one is not, because products may link to it.
