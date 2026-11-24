@@ -11,13 +11,7 @@ import {
   pageLinkOptions,
   mcpOptions,
 } from "./urls";
-import {
-  claudeIcon,
-  githubIcon,
-  mcpIcon,
-  openaiIcon,
-  vscodeIcon,
-} from "./brandIcons";
+import { claudeIcon, mcpIcon, openaiIcon, vscodeIcon } from "./brandIcons";
 import styles from "./styles.module.css";
 
 const svgProps = {
@@ -143,7 +137,6 @@ export default function CopyPageMenu() {
   const { pathname } = useLocation();
   const version = useVersion();
   const docMetadata = useDocMetadata();
-  const editUrl = docMetadata?.editUrl;
   // Generated category index pages have no doc (so no .md export), and neither
   // do API specification pages.
   const markdownAvailable = Boolean(docMetadata) && hasMarkdown(pathname);
@@ -332,17 +325,6 @@ export default function CopyPageMenu() {
         openExternal(aiChatUrl("chatgpt", getAiPageUrl(), versionLabel)),
     },
     ...mcpItems,
-    ...(editUrl
-      ? [
-          {
-            key: "edit",
-            separator: true,
-            icon: githubIcon,
-            label: "Edit page on GitHub",
-            onClick: () => openExternal(editUrl),
-          },
-        ]
-      : []),
   ];
 
   return (

@@ -1,7 +1,7 @@
 // Why is this swizzled?
 //   - Adds a PushFeedback widget to every doc.
-//   - Removes the "Edit this page" text link. ("Edit page on GitHub" and
-//     "Copy page link" now live in the CopyPageMenu.)
+//   - Replaces the "Edit this page" text link with a styled button in the
+//     footer action row. ("Copy page link" now lives in the CopyPageMenu.)
 
 import React, { useEffect } from "react";
 import clsx from "clsx";
@@ -13,6 +13,48 @@ import { FeedbackButton } from "pushfeedback-react";
 import { defineCustomElements } from "pushfeedback/loader";
 import "pushfeedback/dist/pushfeedback/pushfeedback.css";
 import "./index.css";
+
+const editIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+  </svg>
+);
+
+function EditThisPageButton({ editUrl }) {
+  return (
+    <a
+      href={editUrl}
+      className="doc-page-action"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      {editIcon}
+      <span>Edit this page</span>
+    </a>
+  );
+}
+
+function PageActions() {
+  const { metadata } = useDoc();
+
+  return (
+    <div className="doc-page-actions">
+      {metadata.editUrl && <EditThisPageButton editUrl={metadata.editUrl} />}
+    </div>
+  );
+}
 
 // ── Feedback widget ──────────────────────────────────────────────────────────
 
@@ -129,6 +171,9 @@ export default function FooterWrapper() {
             ThemeClassNames.docs.docFooterEditMetaRow
           )}
         >
+          <div className="col">
+            <PageActions />
+          </div>
           <div className="col doc-footer-last-updated">
             {(lastUpdatedAt || lastUpdatedBy) && (
               <LastUpdated
