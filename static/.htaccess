@@ -221,6 +221,10 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Removed in 8.11: Zeebe REST API
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?$ /docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+
 # AI usage guidelines moved into agentic orchestration best practices
 RewriteRule ^docs/next/guides/build-with-ai/ai-usage-guidelines/?$ /docs/next/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
 RewriteRule ^docs/guides/build-with-ai/ai-usage-guidelines/?$ /docs/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]

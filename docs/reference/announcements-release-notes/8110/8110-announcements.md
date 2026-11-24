@@ -18,6 +18,31 @@ import PageDescription from '@site/src/components/PageDescription';
 </div>
 <div className="release-announcement-content">
 
+#### Removal of the Zeebe REST API {#zeebe-rest-api-removed}
+
+Starting with Camunda 8.11, Camunda removes the deprecated [Zeebe REST API (8.10 documentation)](/versioned_docs/version-8.10/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md). Its `/v1` endpoints on the Orchestration Cluster are no longer available, and requests to them return `404 Not Found`:
+
+- `GET /v1/topology`
+- `POST /v1/user-tasks/{userTaskKey}/completion`
+- `POST /v1/user-tasks/{userTaskKey}/assignment`
+- `PATCH /v1/user-tasks/{userTaskKey}`
+- `DELETE /v1/user-tasks/{userTaskKey}/assignee`
+
+The [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) provides the same endpoints under `/v2`.
+
+**Action:** Before you upgrade, update clients, scripts, and health checks that call `/v1/topology` or `/v1/user-tasks/*` to use the `/v2` endpoints instead.
+
+<p className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
 Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend and resume already behave this way starting with 8.10.9. Cancel narrows the filter starting with 8.10.1 and follows the same validation rules starting with 8.10.9. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-state-filter).
