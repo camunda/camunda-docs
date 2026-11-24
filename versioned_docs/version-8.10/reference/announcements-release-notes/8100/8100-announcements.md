@@ -217,6 +217,7 @@ The following key changes were also released as part of an 8.10.x patch release 
 | [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9)   | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
 | [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
 | [8.10.11](https://github.com/camunda/camunda/releases/tag/8.10.11) | Core     | Breaking change | [Rejections and engine commands contain only the actor in the authorization data](#event-authorization-actor-only)                        |
+| [8.10.11](https://github.com/camunda/camunda/releases/tag/8.10.11) | Core     | Regression      | [Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default](#spring-boot-starter-jackson2-object-mapper) |
 
 ## Agentic orchestration
 
@@ -499,6 +500,45 @@ As a result, when `deleteHistory` is `true`, the `batchOperation` field in the r
 Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
 
 **Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default {#spring-boot-starter-jackson2-object-mapper}
+
+**Affected versions:** 8.10.0 to 8.10.10. **Fixed in:** 8.10.11.
+
+Since 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) has ignored
+an auto-configured Jackson 2 `ObjectMapper` and used the default Camunda JSON mapper instead, so `java.time` values in
+job variables fail to serialize ([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
+8.9.30 and 8.10.11 fix this regression: the starter uses a copy of the application's `ObjectMapper` by default, as in 8.8.
+
+This fix can be a breaking change if you rely on the default mapper's output. For example:
+
+- `java.util.Date` values are written as ISO strings (`"2026-11-19T00:00:00.000+00:00"`) instead of epoch
+  milliseconds (`1795046400000`). FEEL and DMN expressions that compare them as numbers evaluate to `null`.
+  Variables that are already stored keep their format.
+- Your `spring.jackson.*` (Spring Boot 3) or `spring.jackson2.*` (Spring Boot 4) properties, customizer beans, and
+  Jackson `Module` beans now apply to job variables.
+
+Affected, unless you define your own `JsonMapper` or `ObjectMapper` bean:
+
+- Spring Boot 4 applications with `spring-boot-jackson2`, and applications that get a Jackson 2 `ObjectMapper`
+  from a library.
+- Spring Boot 3 applications on 8.10 only. On 8.9 they already use Spring Boot's `ObjectMapper`.
+
+Spring Boot 4 applications that use only Jackson 3 aren't affected.
+
+**Action:** To keep the earlier behavior, set `camunda.client.use-bare-object-mapper=true`. This property is
+deprecated, logs a warning, is only supported in 8.9 and 8.10, and is removed in 8.11.
+
+<p className="link-arrow">[Keep the default Camunda JSON mapper](/apis-tools/camunda-spring-boot-starter/configuration.md#keep-the-default-camunda-json-mapper)</p>
 
 </div>
 </div>
