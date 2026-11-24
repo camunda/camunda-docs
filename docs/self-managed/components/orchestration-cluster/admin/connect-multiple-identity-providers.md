@@ -106,11 +106,13 @@ camunda.security.authentication.providers.oidc.entraid.scope:
 The `issuer-uri` property is required for each provider configuration.
 :::
 
+Two providers whose `issuer-uri` values differ only by a trailing slash, such as `https://idp.example.com` and `https://idp.example.com/`, name the same issuer. Your IdP declares one of the two forms, and both providers resolve to it. Camunda assigns the tokens of that issuer to the provider configured first, and logs a warning that names the other provider. Configure each issuer for one provider only.
+
 You can repeat these variables for any number of OIDC IdPs by using a unique `<provider-id>` for each.
 
 ### Configure global OIDC claims
 
-The following OIDC-related properties are shared by all configured providers and must be the same for every IdP:
+The following OIDC-related properties are shared by all configured providers. Except for `groups-claim`, which each provider can override, they must be the same for every IdP:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
@@ -139,7 +141,43 @@ These define:
 - The claim containing group information (if applicable)
 - The claim for organization or tenant assignment
 
-All IdPs must use the same claims for these purposes.
+All IdPs must use the same client ID, username, and organization claims. Each IdP can use its own groups claim. See [Set the groups claim for each provider](#set-the-groups-claim-for-each-provider).
+
+### Set the groups claim for each provider
+
+Each provider can read the groups of its users from its own claim. Camunda reads the groups of a user from the claim of the provider that issued the token.
+
+Set `groups-claim` for a provider:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda.security.authentication.providers.oidc.<provider-id>.groups-claim: <YOUR_GROUPSCLAIM>
+```
+
+</TabItem>
+<TabItem value="env">
+```
+CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_OIDC_<provider-id>_GROUPSCLAIM=
+```
+</TabItem>
+</Tabs>
+
+A provider without its own `groups-claim` uses the shared `camunda.security.authentication.oidc.groups-claim`. The groups of its users depend on the provider that issued their token:
+
+| Provider setting                                                    | Where the groups of its users come from                    |
+| ------------------------------------------------------------------- | ---------------------------------------------------------- |
+| The provider has a groups claim, its own or the shared one          | The token. Camunda doesn't manage these groups.            |
+| The provider has no groups claim, and no shared groups claim is set | Camunda. You manage these groups in Admin or with the API. |
+
+If some providers have a groups claim and others don't:
+
+- Admin shows the group management of Camunda, and the Groups API is enabled. The group memberships you manage there apply only to the users whose groups come from Camunda.
+- Camunda doesn't check that a group you assign to a role, tenant, or authorization exists. Camunda can't tell a mistyped group ID from a group of an identity provider, so it accepts a typo without an error.
+- Admin offers only existing Camunda groups when you assign groups. To assign a group of an identity provider, use the API.
+
+Several providers with the same issuer are not supported for groups. Camunda assigns the tokens of an issuer to the first provider configured for it, so the groups claim of that provider applies to every token of the issuer. This includes logins through the later providers of the same issuer.
 
 ### Login page behavior
 
@@ -155,7 +193,7 @@ If an access token’s issuer is not configured, the request is denied.
 
 - Each IdP should use a unique and meaningful `<provider-id>`.
 - Ensure the `issuer URI` is present and correct for each provider.
-- Configure claims consistently across all IdPs (for example, client ID, username, and groups).
+- Configure claims consistently across all IdPs (for example, client ID and username). You can set a different groups claim for each IdP.
 
 ### Overall workflow
 

@@ -99,25 +99,26 @@ camunda:
       physical-tenant-id: default
       auth:
         client-id: connector-default
-        client-secret: ${SECRET_DEFAULT}
+        client-secret: ${CLIENT_SECRET_DEFAULT}
       primary: true # resolves the default @Autowired CamundaClient
     tenanta:
       mode: self-managed
       physical-tenant-id: tenanta
       auth:
         client-id: connector-tenanta
-        client-secret: ${SECRET_TENANTA}
+        client-secret: ${CLIENT_SECRET_TENANTA}
     tenantb:
       mode: self-managed
       physical-tenant-id: tenantb
       auth:
         client-id: connector-tenantb
-        client-secret: ${SECRET_TENANTB}
+        client-secret: ${CLIENT_SECRET_TENANTB}
 ```
 
 - The client name (`tenanta`) is a free-form label and does not have to match the `physical-tenant-id`.
 - `physical-tenant-id` must be lowercase alphanumeric, maximum 64 characters.
 - Mark one entry `primary: true` when configuring multiple clients. With a single client, it is the primary implicitly.
+- Don't give the environment variables that hold client credentials the connector secret prefix (`SECRET_` by default). The [environment secret provider](/self-managed/components/connectors/connectors-configuration.md#secrets) exposes every environment variable with that prefix as a connector secret, so connectors could resolve these credentials through secret references.
 - Existing single-client deployments using `camunda.client.*` are unaffected. At startup, `camunda.client.*` transparently maps to `camunda.clients.default.*`.
 
 ## Outbound connectors
@@ -150,7 +151,7 @@ With `physicaltenantaware` left at its default of `false`, all configured client
 
 Reference secrets in connector properties using a [legacy secret reference](/reference/glossary.md#secret-reference-legacy), `{{secrets.MY_SECRET}}`. The runtime replaces references when it binds the job's variables, and does not write resolved values back to the variable store, Operate, Tasklist, or logs.
 
-Independently of tenant scoping, `camunda.connector.secret-resolver.secret-filter.mode` controls whether a connector element may reference secret keys it has not declared. It defaults to `DISABLED`, meaning no key-level restriction is enforced. Set it to `LAX` or `STRICT` to restrict each element to the secret keys declared in its process definition.
+Independently of tenant scoping, `camunda.connector.secret-resolver.secret-filter.mode` controls whether a connector element may reference secret keys it has not declared. It defaults to `STRICT`, which restricts each element to the secret keys declared in its process definition. See [Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) for the `LAX` and `DISABLED` modes.
 
 ## Inbound connectors
 
@@ -210,7 +211,7 @@ A failure in one tenant's job workers does not affect workers registered for oth
 On the inbound side, a polling failure for one Physical Tenant is logged and does not stop the other tenants from completing their imports in the same cycle. The runtime's readiness signal is shared across tenants, however, so a persistent polling failure for a single tenant marks the whole runtime instance as not ready.
 
 :::note App integrations (MS Teams and similar)
-App integrations with Physical Tenant support are implemented and will be documented in a follow-up section once the configuration details are finalized. Multiple Keycloak (separate IdP per tenant in the connector context) is not supported.
+To configure App Integrations for Physical Tenants, see [App Integrations and Physical Tenants](/self-managed/concepts/physical-tenants/app-integrations.md). Multiple Keycloak (separate IdP per tenant in the connector context) is not supported.
 :::
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>

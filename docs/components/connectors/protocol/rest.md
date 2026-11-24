@@ -36,6 +36,10 @@ In Self-Managed environments, you can configure the connector runtime to route H
 
 You can choose among the available authentication type according to your authentication requirements.
 
+#### Use a reusable authentication credential
+
+Instead of configuring authentication on the task, you can select a reusable REST authentication credential in the **Authentication credential** field. When you select a credential, the authentication fields described below are hidden. The **URL** field then overrides the URL carried by the credential, and is required if the credential doesn't carry a URL. Learn more about [using credentials](/components/connectors/use-connectors/index.md#using-credentials).
+
 ### REST connector (None)
 
 Click **None** in the **Authentication** section.
@@ -95,7 +99,7 @@ We advise you to keep your **Bearer token** safe and avoid exposing it in the BP
 Select the **REST connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `{{secrets.REST_BEARER_TOKEN}}`).
+2. Set **Bearer token** to the secret you created (for example, `{{secrets.REST_BEARER_TOKEN}}`).
 
 ### REST connector (OAuth token)
 
@@ -111,7 +115,7 @@ We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it i
 Select the **REST connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **OAuth token endpoint** to the secret you created (i.e. `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
+2. Set **OAuth 2.0 token endpoint** to the secret you created (for example, `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
 3. Set **Client ID** to the secret you created (i.e. `{{secrets.CLIENT_ID}}`).
 4. Set **Client secret** to the secret you created (i.e. `{{secrets.CLIENT_SECRET}}`).
 5. (Optional) Set **Scopes** (i.e. `read:clients`). Depending on the OAuth provider you're using, this may or may not be required.
@@ -119,6 +123,32 @@ Select the **REST connector** and fill out the following properties under the **
 7. Choose **Client authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
 Find more information about the OAuth client credentials flow at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
+
+### REST connector (OAuth 2.0 refresh token)
+
+Use **OAuth 2.0 Refresh Token** to obtain a new access token from a refresh token. We advise you to store the client secret and refresh token as [secrets](/components/saas/clusters/manage-secrets.md).
+
+Select the **REST connector** and fill out the following properties under the **Authentication** section:
+
+1. Click **OAuth 2.0 Refresh Token** in the **Authentication** section.
+2. Set **OAuth 2.0 token endpoint**.
+3. Set **Client ID** to your application's client ID from the OAuth client.
+4. (Optional) Set **Client secret** to your application's client secret from the OAuth client.
+5. Set **Refresh token** to the refresh token used to obtain a new access token.
+6. (Optional) Set **Scopes** to the scopes to request authorization for, separated by spaces.
+
+Find more information about refreshing an access token at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-6).
+
+### Client certificate (mTLS)
+
+Use the **Client certificate (mTLS)** section to authenticate the connector to the server with a client certificate. All fields are optional.
+
+| Field                            | Description                                                                                                      |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Client certificate (PEM)**     | PEM-encoded client certificate chain presented to the server for mTLS. Provide it together with the private key. |
+| **Client private key (PEM)**     | PEM-encoded private key (PKCS#1, PKCS#8, or EC), optionally encrypted.                                           |
+| **Private key password**         | Password protecting the private key. Leave empty if the key isn't encrypted.                                     |
+| **Trusted CA certificate (PEM)** | PEM-encoded CA certificates used to validate the server. If empty, the JVM's default trust store is used.        |
 
 ## Request
 
@@ -172,6 +202,8 @@ You can provide a body for your request under the **Payload** section in the **R
 }
 ```
 
+To omit fields with `null` values from a JSON request body, select **Ignore null values**.
+
 #### File upload
 
 To upload a file, you can take advantage of [Camunda document handling](/components/document-handling/getting-started.md).
@@ -203,8 +235,8 @@ To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disable
 The following variables are available in the context of the response expression:
 
 - **status**: Response status.
-- **body**: Response body of your request. Populated when the **Response format** is **As text** or **As JSON**.
-- **headers**: Response headers.
+- **body**: Response body of your request. Populated when the **Response format** is **as text** or **as JSON**.
+- **headers**: Response headers. Header names keep the casing sent by the server. To look up a header regardless of its casing, use the [`getHeader` FEEL function](/components/connectors/use-connectors/index.md#function-getheader).
 - **document**: Populated when the **Response format** is **Document reference**; represents the stored document:
   - **documentId**: The ID of the stored document.
   - **contentHash**: The hash of the stored document.
@@ -220,17 +252,17 @@ The following variables are available in the context of the response expression:
 
 Choose how the response body is returned with the **Response format** dropdown, a [return format](/components/document-handling/send-document-to-external-system.md#return-formats):
 
-- **As JSON** (default): the body is parsed as JSON and returned in `body`.
-- **As text**: the body is decoded as a string (with an optional encoding, default UTF-8) and returned in `body`.
+- **as JSON** (default): the body is parsed as JSON and returned in `body`.
+- **as text**: the body is decoded as a string (with an optional encoding, default UTF-8) and returned in `body`.
 - **Document reference**: the body is streamed to the Camunda document store and a reference is returned in `document`.
 
 :::note
-The **As JSON** default fails the job when the response body is not valid JSON. Use **As text** for non-JSON responses.
+The **as JSON** default fails the job when the response body is not valid JSON. Use **as text** for non-JSON responses.
 
-**As text** and **As JSON** are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large responses.
+Both **as text** and **as JSON** are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large responses.
 :::
 
-To store part of the response as a document, use the [`createDocument` FEEL function](/components/connectors/use-connectors/index.md#function-createdocument) in the **Result expression** field.
+To store part of the response as a document, use the [`createDocument` FEEL function](/components/connectors/use-connectors/index.md#createdocument-function) in the **Result expression** field.
 
 ## Output mapping
 

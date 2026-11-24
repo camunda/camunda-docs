@@ -540,7 +540,7 @@ The commented `variable-name` and `bpmn-process-id` sections above only illustra
 ## Connectors configuration
 
 :::info
-Connectors are **enabled by default** in Camunda 8.8. This section covers configuration options for Connectors, including how to disable them if needed.
+Connectors are **enabled by default** since Camunda 8.8. This section covers configuration options for Connectors, including how to disable them if needed.
 :::
 
 The Connector runtime is enabled by default. To use connectors, install connector element templates. For details, see [Manage connector templates in Web Modeler](/components/connectors/manage-connector-templates.md) or [Configuring templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).

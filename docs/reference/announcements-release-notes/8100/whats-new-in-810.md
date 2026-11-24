@@ -720,7 +720,7 @@ Camunda 8.10 provides a structured multi-region resilience framework for Self-Ma
 
 <img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-900"/>
 
-- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable. On SaaS, [cross-region cold recovery](/components/saas/cross-region-cold-recovery.md) is also available for AWS and GCP region pairs marked **Failover supported**.
+- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable. On SaaS, [cross-region cold recovery](/components/saas/cross-region-cold-recovery.md) is also available for AWS and GCP region pairs marked **Cold recovery supported**.
 
 - **[Dual-Region](/self-managed/concepts/multi-region/dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 

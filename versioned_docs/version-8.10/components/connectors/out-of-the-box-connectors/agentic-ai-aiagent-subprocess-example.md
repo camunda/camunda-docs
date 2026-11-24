@@ -7,14 +7,14 @@ description: Example integration using the AI Agent Sub-process connector to imp
 
 import AgentProcessImg from '../img/ai-agent-subprocess.png';
 
-This worked example demonstrates how to use the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) applied to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model an AI Agent [agent loop for tools and response interaction](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#agent-loop-use-cases).
+This worked example demonstrates how to use the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) applied to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model an AI Agent [agent loop for tools and response interaction](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-execution-model.md#agent-loop-use-cases).
 
 ## Create an AI Agent element
 
 As the **AI Agent Sub-process** implementation implicitly creates an [agent loop](/reference/glossary.md#agent-loop) for tools, you only need to add an ad-hoc sub-process with an applied AI Agent connector template to the process.
 
 :::info
-For more information on how to model the tools available to the AI agent, see [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
+To model the tools available to the AI agent, add activities inside the ad-hoc sub-process. See [add a tool to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md) and [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
 :::
 
 <img src={AgentProcessImg} alt="AI Agent Sub-process" class="img-700"/>
@@ -31,7 +31,7 @@ For example, your **User Prompt** field could contain the following FEEL express
 =if (is defined(followUpInput)) then followUpInput else initialUserInput
 ```
 
-With the **AI Agent Sub-process** implementation, the follow-up needs to be modeled to loop back to the AI Agent ad-hoc sub-process:
+With the **AI Agent Sub-process** implementation, the follow-up needs to be modeled to loop back to the AI Agent ad-hoc sub-process.
 
 ![AI Agent Sub-process with response follow-up](../img/ai-agent-subprocess-follow-up.png)
 
