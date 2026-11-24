@@ -286,6 +286,8 @@ To configure the orchestration cluster securely, it's essential to set up a secu
   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-service-ca-secret.sh
   ```
 
+  The Secret is a copy of the ConfigMap at creation time. It does not change when OpenShift rotates the service CA. After a service CA rotation, run `create-service-ca-secret.sh` again, then restart the Camunda pods with `oc rollout restart`. As an alternative to the manual restart, set `global.tls.caBundle.autoRollout: true`. The next `helm upgrade` then restarts the pods when the CA changes. This option requires `get` permission on Secrets and does not work with `helm template`.
+
 Merge the orchestration route overlay into your `values.yml` file:
 
 ```bash
