@@ -104,10 +104,29 @@ async function fetchMarkdown(mdUrl) {
   return res.text();
 }
 
-// Safari drops the user-gesture permission if the fetch is awaited before the
-// clipboard write, so hand the pending promise to a ClipboardItem.
-async function copyMarkdown(mdUrl) {
-  const text = fetchMarkdown(mdUrl);
+// Text of the rendered doc body, used when there is no .md file (for example
+// in `npm start` or on generated pages). Leaves out the footer (feedback, edit
+// link, tags), prev/next links and breadcrumbs that sit around it in <article>.
+function renderedPageText() {
+  return (
+    document.querySelector("article .theme-doc-markdown") ??
+    document.querySelector("article")
+  )?.innerText;
+}
+
+// Safari drops the user-gesture permission if anything is awaited before the
+// clipboard write, so hand ONE pending promise to a ClipboardItem. The
+// plain-text fallback is resolved inside that promise rather than starting a
+// second write after the fetch has failed. Returns whether the fallback was
+// used.
+async function copyPage(mdUrl) {
+  let usedFallback = false;
+  const text = fetchMarkdown(mdUrl).catch((err) => {
+    const fallback = renderedPageText();
+    if (!fallback) throw err;
+    usedFallback = true;
+    return fallback;
+  });
   if (window.ClipboardItem && navigator.clipboard?.write) {
     await navigator.clipboard.write([
       new ClipboardItem({
@@ -117,6 +136,7 @@ async function copyMarkdown(mdUrl) {
   } else {
     await navigator.clipboard.writeText(await text);
   }
+  return usedFallback;
 }
 
 export default function CopyPageMenu() {
@@ -176,25 +196,10 @@ export default function CopyPageMenu() {
   const handleCopy = async () => {
     setOpen(false);
     try {
-      await copyMarkdown(getMdUrl());
-      flash("copied");
+      flash((await copyPage(getMdUrl())) ? "copiedText" : "copied");
     } catch (err) {
-      // No .md file (for example in `npm start` or on generated index pages):
-      // fall back to the rendered article text.
-      try {
-        // Just the doc body: leaves out the footer (feedback, edit link, tags),
-        // prev/next links and breadcrumbs that sit around it in <article>.
-        const text = (
-          document.querySelector("article .theme-doc-markdown") ??
-          document.querySelector("article")
-        )?.innerText;
-        if (!text) throw err;
-        await navigator.clipboard.writeText(text);
-        flash("copiedText");
-      } catch (fallbackErr) {
-        console.error("Failed to copy page:", fallbackErr);
-        flash("error");
-      }
+      console.error("Failed to copy page:", err);
+      flash("error");
     }
   };
 
