@@ -6,6 +6,16 @@
     ":automergeDisabled",
     ":semanticCommits",
   ],
+  customManagers: [
+    {
+      // Version + digest pairs annotated with `# renovate:` in workflow files
+      customType: "regex",
+      managerFilePatterns: ["/^\\.github/workflows/.+\\.ya?ml$/"],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+\\w+_VERSION: (?<currentValue>\\S+)\\s+\\w+_SHA256: (?<currentDigest>[a-f0-9]{64})",
+      ],
+    },
+  ],
   lockFileMaintenance: {
     enabled: true,
     automerge: true,
