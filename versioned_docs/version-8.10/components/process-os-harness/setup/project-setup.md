@@ -52,6 +52,37 @@ Treat these ranges as planning inputs rather than fixed prices. The following fa
 
 Involve your SMEs early. ProcessOS Harness changes their role from main contributor to reviewer, which reduces their total effort, but they still need to be available at the review gates in each phase. A project stalls when a review cycle has no reviewer.
 
+## Use ProcessOS as a team
+
+Several builders can work on one ProcessOS project when they share one governance cluster and one Git remote.
+
+ProcessOS Harness has no separate team feature. Use the setup in this section as the recommended practice. For the components of a project, see [the main components of ProcessOS Harness](../overview.md#what-are-the-main-components-of-processos-harness).
+
+| Component          | Working alone                                          | Working as a team                                                                                                                                                  |
+| ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| AI coding agent    | One agent on your computer.                            | One agent for each builder, on the builder's own computer.                                                                                                         |
+| Governance cluster | Local Camunda 8 Run, or a cluster your SMEs can reach. | One Camunda 8 SaaS or Self-Managed cluster that all builders and SMEs can reach.                                                                                   |
+| Git project        | A local repository.                                    | One shared Git remote. Each builder works in their own clone.                                                                                                      |
+| Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer. For a SaaS or Self-Managed target cluster, the agent uses an existing profile, for example the governance profile. |
+
+### Set up a project for a team
+
+1. Create API client credentials for the governance cluster. The credentials must let ProcessOS Harness deploy the governance process and start process instances. For SaaS, see [manage API clients](/components/saas/clusters/manage-api-clients.md).
+1. The first builder [installs ProcessOS Harness](../installation.md#install), pushes the project to the shared Git remote, and runs `/process-os-governance-start`. When the agent asks for the cluster type, choose **saas** or **self-managed**, then [create the `c8ctl` profile](../installation.md#connect-the-governance-cluster). The agent starts a new governance process instance and shows its key.
+1. The first builder shares the process instance key with the team. On a shared cluster, `/process-os-governance-start` lists the active governance process instances of all projects on that cluster, by key and start date only.
+1. Every other builder prepares their computer: the [builder client requirements](system-requirements.md#builder-client), and `c8ctl` with the ProcessOS Harness plugin, as in [install ProcessOS Harness](../installation.md#install).
+1. Every other builder clones the repository and adds a `c8ctl` profile for the same governance cluster. The profile name can be different for each builder.
+1. Every other builder runs `/process-os-governance-start` in their clone, chooses the same cluster type, enters their profile name, and selects the process instance with the shared key. If the agent reports `Could not reach the cluster using profile`, run `/process-os-governance-start --reconnect`.
+1. All builders share files through Git. Pull before you start working, and push what you change, with your team's normal branch and review process.
+
+Don't commit client secrets or `.env` files to the repository. Credentials stay in `c8ctl`.
+
+### Know what the governance cluster shares
+
+The governance cluster shares the project state with every builder: the current phase, milestones, and open jobs. SMEs answer review questions in Camunda Tasklist.
+
+The governance cluster doesn't share project files. Generated artifacts and collected feedback are files in each builder's clone. They reach the other builders only through Git.
+
 ## Next steps
 
 1. [Understand the builder workspace](builder-workspace.md).
