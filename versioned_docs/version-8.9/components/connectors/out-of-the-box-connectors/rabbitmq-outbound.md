@@ -186,17 +186,17 @@ However, you can refer to connector secrets using placeholder syntax. For exampl
 For example, given a RabbitMQ message contains the payload `{"role": "USER", "action": "LOGIN""}`, the **Activation Condition** value might look like `=(message.body.role="USER")`.
 This way, the connector is triggered only if the message body contains the `role` field with the value `USER`. Leave this field empty to trigger your connector for every incoming message.
 
-By default, messages with unmatched activation conditions are rejected without re-queuing. You can set up a dead-letter queue in RabbitMQ to handle these messages. Learn more about dead-letter queues in the [RabbitMQ documentation](https://www.rabbitmq.com/dlx.html).
+If the **Consume unmatched events** checkbox is unchecked, messages with unmatched activation conditions are rejected without re-queuing. You can set up a dead-letter queue in RabbitMQ to handle these messages. Learn more about dead-letter queues in the [RabbitMQ documentation](https://www.rabbitmq.com/dlx.html).
 
 You can also configure the RabbitMQ inbound connector to acknowledge messages that don't match the activation condition. In this case, the message will not end up in the dead-letter queue, but will be acknowledged and removed from the queue.
-To acknowledge messages that don't match the activation condition, check the **Consume unmatched events** checkbox.
+To acknowledge messages that don't match the activation condition, check the **Consume unmatched events** checkbox. In the current element templates, this checkbox is checked by default for new elements. Elements created before the checkbox existed behave as if it is unchecked.
 
 | **Consume unmatched events** checkbox | Activation condition | Outcome                                            |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | Checked                               | Matched              | Message is acknowledged and removed from the queue |
 | Unchecked                             | Matched              | Message is acknowledged and removed from the queue |
 | Checked                               | Unmatched            | Message is acknowledged and removed from the queue |
-| Unchecked                             | Unmatched            | Message is rejected and re-queued                  |
+| Unchecked                             | Unmatched            | Message is rejected without re-queuing             |
 
 ### Correlation
 
@@ -313,7 +313,8 @@ However, if the body only contains a primitive value, such as a string, a number
 The following outcomes are possible:
 
 - If connector execution is successful and **Activation condition** was met, the message is acknowledged and removed from the queue.
-- If **Activation condition** was not met, the message is rejected and removed from the queue.
+- If **Activation condition** was not met and **Consume unmatched events** is checked, the message is acknowledged and removed from the queue.
+- If **Activation condition** was not met and **Consume unmatched events** is unchecked, the message is rejected without re-queuing. If you configured a dead-letter queue, RabbitMQ moves the message there.
 - If connector execution fails due to an unexpected error (e.g. Zeebe is unavailable), the message is rejected and re-queued.
 
 ### What lifecycle does the RabbitMQ Consumer connector have?

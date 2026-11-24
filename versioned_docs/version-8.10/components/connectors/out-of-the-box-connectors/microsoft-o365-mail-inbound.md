@@ -105,16 +105,16 @@ To make your **Microsoft 365 Email Inbound connector** executable, fill in the r
 
 ### Mailbox configuration
 
-In the **Mailbox** section, configure which mailbox and folder to monitor:
+In the **Listener Information** section, configure which mailbox and folder to monitor:
 
-- **User ID/User Principal Name**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`).
+- **Mailbox Owner**: The email address or user principal name of the mailbox to monitor (for example, `user@company.com`).
 - **Folder Identifier Type**: Select how to identify the folder to monitor:
   - **Folder ID** (default): Use a [well-known folder ID](https://learn.microsoft.com/en-us/graph/api/resources/mailfolder?view=graph-rest-1.0#properties) such as `inbox`, `drafts`, or `sentitems`, or a custom folder ID. Prefer this option when using well-known folders.
   - **Folder Name**: Use the display name of the folder. The name must be unique within the mailbox. Use this option for custom folders where you don't know the folder ID.
 
 ### Polling configuration
 
-Configure how frequently the connector checks for new emails using the **Polling Interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes). Review [how to configure a time duration](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for details on the format.
+Configure how frequently the connector checks for new emails using the **Polling interval** field. Specify the time between polls in ISO 8601 duration format (for example, `PT30S` for 30 seconds, `PT5M` for 5 minutes). Review [how to configure a time duration](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for details on the format.
 
 :::tip
 Choose an appropriate polling interval based on your use case. More frequent polling increases API usage but provides faster response times.
@@ -134,7 +134,7 @@ The simple filter provides the following options:
 
 #### Advanced filter
 
-For more complex filtering, use the **Advanced Configuration** section to provide an [OData filter query](https://learn.microsoft.com/en-us/graph/query-parameters#filter-parameter).
+For more complex filtering, set **Filter Specification** to **Advanced** and provide an [OData filter query](https://learn.microsoft.com/en-us/graph/query-parameters#filter-parameter) in the **OData Filter String** field.
 
 :::note
 OData filter queries are evaluated at deployment time and can only use static values or [secrets](/components/saas/clusters/manage-secrets.md). They cannot reference process variables. If you need dynamic filtering based on runtime data, use the [Activation Condition](#activation-condition) section instead.
@@ -184,6 +184,12 @@ The activation condition is evaluated after the email filter. Use email filters 
 :::
 
 When an email matches the filter but does not meet the activation condition, the connector does not trigger and the email is not processed (not marked as read, deleted, or moved). This means the email will be fetched again on the next polling cycle. To change this behavior, enable the **Consume unmatched events** checkbox in the **Activation** section. Learn more about [consuming unmatched events](../use-connectors/inbound.md#consume-unmatched-events).
+
+To filter on attachment properties without downloading the attachment, use `attachmentMetadata`. For more information, see [Output mapping](#output-mapping). For example, the following condition matches emails with at least one PDF attachment:
+
+```feel
+=(some a in attachmentMetadata satisfies a.contentType = "application/pdf")
+```
 
 ### Correlation
 
@@ -236,7 +242,7 @@ The **Deduplication** section allows you to configure connector deduplication pa
 By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription.
 
 :::note
-To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
+To learn more about deduplication, see [deduplication](../advanced-topics/deduplication.md).
 :::
 
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure a custom deduplication ID.
@@ -265,6 +271,16 @@ The **Microsoft 365 Email Inbound connector** returns the consumed email message
   "cc": [],
   "bcc": [],
   "receivedDateTime": "2024-01-15T14:30:00Z",
+  "hasAttachments": true,
+  "attachmentMetadata": [
+    {
+      "id": "AAMkAGVmMDEzM...",
+      "name": "invoice.pdf",
+      "contentType": "application/pdf",
+      "size": 125000,
+      "isInline": false
+    }
+  ],
   "attachments": [
     {
       "id": "AAMkAGVmMDEzM...",
@@ -275,6 +291,10 @@ The **Microsoft 365 Email Inbound connector** returns the consumed email message
   ]
 }
 ```
+
+The connector resolves `attachmentMetadata` while polling, before it evaluates the activation condition and before it downloads any attachment content. Use it to filter on file name, type, or size without the cost of a download. It also includes inline attachments, such as embedded signature images. To exclude them, check `isInline`.
+
+The `attachments` array contains the downloaded document references. It stays empty until the activation condition matches.
 
 You can use an output mapping to map the response:
 
@@ -318,7 +338,7 @@ To monitor multiple folders, create separate connector instances with different 
 
 ### How are email attachments handled?
 
-Email attachments are automatically fetched and stored using [Camunda document handling](/components/document-handling/getting-started.md). The attachment metadata is included in the connector output (see [Output Mapping](#output-mapping)), and each attachment is available as a document reference that you can use in subsequent process steps.
+Email attachments are automatically fetched and stored using [Camunda document handling](/components/document-handling/getting-started.md). The connector resolves lightweight attachment metadata before the download and includes it as `attachmentMetadata` in the connector output. Each downloaded attachment is available as a document reference in `attachments`, which you can use in subsequent process steps. For more information, see [Output mapping](#output-mapping).
 
 For example, to pass an attachment to another connector or download it, use the document reference from the `attachments` array:
 

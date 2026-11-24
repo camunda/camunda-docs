@@ -6,6 +6,8 @@ description: "Learn how to host a custom connector developed with Connector SDK.
 
 This guide explains how to host your own **Connectors** developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
+The environment variables in this guide are the environment variable form of `camunda.client.*` properties from the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/properties-reference.md). For all connection and authentication properties, see [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md).
+
 ## Prerequisites
 
 - Ensure you have to have a working Camunda cluster in SaaS or Self-Managed.
@@ -50,48 +52,43 @@ Run the following command:
 ```shell
 docker run --rm --name=CustomConnectorInSMCore \
     -v $PWD/connector.jar:/opt/app/connector.jar \
-    --network=camunda-platform_camunda-platform \
-    -e CAMUNDA_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
-    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
-    -e CAMUNDA_OPERATE_CLIENT_URL=http://operate:8080 \
-    -e CAMUNDA_OPERATE_CLIENT_USERNAME=demo \
-    -e CAMUNDA_OPERATE_CLIENT_PASSWORD=demo \
+    --network=camunda \
+    -e CAMUNDA_CLIENT_MODE=self-managed \
+    -e CAMUNDA_CLIENT_GRPCADDRESS=http://orchestration:26500 \
+    -e CAMUNDA_CLIENT_RESTADDRESS=http://orchestration:8080 \
         camunda/connectors-bundle:<desired-version>
 ```
 
 :::note
-Exact values of the environment variables related to Zeebe, Operate, or network may depend on your own configuration.
+Exact values of the environment variables related to the Orchestration Cluster or network may depend on your own configuration.
 :::
 
 ## Wiring your connector with Camunda Docker instance (with Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
 [Camunda Platform Docker Compose variant with Keycloak](https://github.com/camunda/camunda-distributions/tree/main/docker-compose).
+The `connectors` client and its secret (`CONNECTORS_CLIENT_SECRET`) are defined in the `.env` file of the Docker Compose distribution.
 
 Run the following command:
 
 ```shell
 docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -v $PWD/connector.jar:/opt/app/connector.jar \
-    --network=camunda-platform_camunda-platform \
-    -e CAMUNDA_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
-    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
-    -e CAMUNDA_CLIENT_ID=<YOUR_CAMUNDA_CLIENT_ID> \
-    -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
-    -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
-    -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak-service:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
-    -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
-    -e CAMUNDA_IDENTITY_AUDIENCE=operate-api \
-    -e CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:18080/auth/realms/camunda-platform \
-    -e CAMUNDA_IDENTITY_CLIENT_ID=connectors \
-    -e CAMUNDA_IDENTITY_CLIENT_SECRET=<CONNECTORS_CLIENT_SECRET> \
-    -e CAMUNDA_OPERATE_CLIENT_URL=http://operate:8080 \
+    --network=camunda-platform \
+    --add-host=host.docker.internal:host-gateway \
+    -e CAMUNDA_CLIENT_MODE=self-managed \
+    -e CAMUNDA_CLIENT_GRPCADDRESS=http://orchestration:26500 \
+    -e CAMUNDA_CLIENT_RESTADDRESS=http://orchestration:8080 \
+    -e CAMUNDA_CLIENT_AUTH_METHOD=oidc \
+    -e CAMUNDA_CLIENT_AUTH_CLIENTID=connectors \
+    -e CAMUNDA_CLIENT_AUTH_CLIENTSECRET=<YOUR_CONNECTORS_CLIENT_SECRET> \
+    -e CAMUNDA_CLIENT_AUTH_TOKENURL=http://host.docker.internal:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
+    -e CAMUNDA_CLIENT_AUTH_AUDIENCE=orchestration-api \
         camunda/connectors-bundle:<desired-version>
 ```
 
 :::note
-Exact values of the environment variables related to Zeebe, Operate, Keycloak, or network may depend on
-your own configuration.
+Exact values of the environment variables related to the Orchestration Cluster, Keycloak, or network may depend on your own configuration.
 :::
 
 ## Wiring your connector with Camunda Helm charts
@@ -100,7 +97,7 @@ There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
 Refer to the [official guide](/self-managed/setup/overview.md) to learn more.
 
 For the purpose of this section, imagine you installed Helm charts with `helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION`,
-and forwarded the Zeebe and Operate ports. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also forward the Keycloak port:
+and forwarded the Orchestration Cluster gRPC and REST ports. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also forward the Keycloak port:
 
 ```bash
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
@@ -112,31 +109,26 @@ kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-Now, you need to obtain both Zeebe and connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
-and `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.
+Now, you need to obtain the secret of the `connectors` OAuth client. You can do it with `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode`.
 
 Run the following command:
 
 ```shell
 docker run --rm --name=CustomConnectorInSMWithHelm \
     -v $PWD/connector.jar:/opt/app/connector.jar \
-    -e CAMUNDA_CLIENT_BROKER_GATEWAY-ADDRESS=host.docker.internal:26500 \
-    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
-    -e CAMUNDA_CLIENT_ID=zeebe \
-    -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
-    -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
-    -e ZEEBE_AUTHORIZATION_SERVER_URL=http://host.docker.internal:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
-    -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
-    -e CAMUNDA_IDENTITY_AUDIENCE=operate-api \
-    -e CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://host.docker.internal:18080/auth/realms/camunda-platform \
-    -e CAMUNDA_IDENTITY_CLIENT_ID=connectors \
-    -e CAMUNDA_IDENTITY_CLIENT_SECRET=<YOUR_OPERATE_CLIENT_SECRET> \
-    -e CAMUNDA_OPERATE_CLIENT_URL=http://host.docker.internal:8081 \
+    -e CAMUNDA_CLIENT_MODE=self-managed \
+    -e CAMUNDA_CLIENT_GRPCADDRESS=http://host.docker.internal:26500 \
+    -e CAMUNDA_CLIENT_RESTADDRESS=http://host.docker.internal:8080 \
+    -e CAMUNDA_CLIENT_AUTH_METHOD=oidc \
+    -e CAMUNDA_CLIENT_AUTH_CLIENTID=connectors \
+    -e CAMUNDA_CLIENT_AUTH_CLIENTSECRET=<YOUR_CONNECTORS_CLIENT_SECRET> \
+    -e CAMUNDA_CLIENT_AUTH_TOKENURL=http://host.docker.internal:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
+    -e CAMUNDA_CLIENT_AUTH_AUDIENCE=orchestration-api \
         camunda/connectors-bundle:<desired-version>
 ```
 
 :::note
-Exact values of the environment variables related to Zeebe, Operate, Keycloak, or network may depend on
+Exact values of the environment variables related to the Orchestration Cluster, Keycloak, or network may depend on
 your own configuration.
 :::
 

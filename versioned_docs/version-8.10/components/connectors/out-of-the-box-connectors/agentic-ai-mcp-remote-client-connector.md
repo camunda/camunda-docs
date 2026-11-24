@@ -22,10 +22,10 @@ Due to this overhead, the MCP Remote Client connector is primarily intended for 
 ## Modeling
 
 1. Configure an AI agent ad-hoc sub-process as described in the [example integration](./agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
-2. In a Self-Managed environment, install the **MCP Client** element template. Refer to the [element template index](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/connector-mcp/element-templates/README.md) to find the correct version for your Camunda release.
+2. In a Self-Managed environment, install the **MCP Remote Client** element template. Refer to the [element template index](https://github.com/camunda/connectors/blob/stable/8.10/connectors/agentic-ai/connector-agentic-ai/element-templates/README.md#mcp-client-connectors) to find the correct version for your Camunda release.
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Remote Client** element template.
 4. Configure the transport type and connection settings as described in [Transport type](#transport-type).
-5. Execute your process. You should see tool discovery calls routed to the MCP Client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.
+5. Execute your process. You should see tool discovery calls routed to the MCP Remote Client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.
 
 ## Transport type
 
@@ -39,11 +39,11 @@ Use for MCP servers exposing a Streamable HTTP endpoint.
 This is the recommended transport for new implementations.
 :::
 
-| Field   | Required | Description                                                                        |
-| :------ | :------- | :--------------------------------------------------------------------------------- |
-| URL     | Yes      | The Streamable HTTP endpoint URL. Typically ends in `/mcp`.                        |
-| Headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`. |
-| Timeout | No       | Connection timeout as an ISO 8601 duration. For example, `PT60S`.                  |
+| Field        | Required | Description                                                                                                                                        |
+| :----------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| URL          | Yes      | The Streamable HTTP endpoint URL. Typically ends in `/mcp`.                                                                                        |
+| HTTP headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`.                                                                 |
+| Timeout      | No       | Timeout as an ISO 8601 duration. For example, `PT60S`. The timeout applies to the connection to the MCP server and to every request to the server. |
 
 ### Server-Sent Events (SSE)
 
@@ -53,11 +53,11 @@ Use for MCP servers exposing a Server-Sent Events (SSE) endpoint.
 This transport type is considered legacy; use Streamable HTTP for new implementations where possible.
 :::
 
-| Field   | Required | Description                                                                        |
-| :------ | :------- | :--------------------------------------------------------------------------------- |
-| URL     | Yes      | The SSE endpoint URL. Typically ends in `/sse`.                                    |
-| Headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`. |
-| Timeout | No       | Connection timeout as an ISO 8601 duration. For example, `PT60S`.                  |
+| Field        | Required | Description                                                                                                                                        |
+| :----------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| URL          | Yes      | The SSE endpoint URL. Typically ends in `/sse`.                                                                                                    |
+| HTTP headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`.                                                                 |
+| Timeout      | No       | Timeout as an ISO 8601 duration. For example, `PT60S`. The timeout applies to the connection to the MCP server and to every request to the server. |
 
 ## Authentication
 
@@ -88,14 +88,14 @@ Sends an `Authorization: Bearer <token>` header with each request.
 
 Automatically retrieves and manages access tokens using the OAuth 2.0 client credentials flow (machine-to-machine authentication). Tokens are cached in memory and automatically refreshed when expired.
 
-| Field                 | Required | Description                                                                                                |
-| :-------------------- | :------- | :--------------------------------------------------------------------------------------------------------- |
-| OAuth token endpoint  | Yes      | The URL to obtain access tokens.                                                                           |
-| Client ID             | Yes      | Your OAuth client identifier.                                                                              |
-| Client secret         | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/saas/clusters/manage-secrets.md). |
-| Audience              | No       | Target API identifier (required by some OAuth providers).                                                  |
-| Scopes                | No       | Space-separated list of scopes to request.                                                                 |
-| Client authentication | Yes      | **Send credentials in header** (Basic authentication) or **send credentials in body**.                     |
+| Field                    | Required | Description                                                                                                |
+| :----------------------- | :------- | :--------------------------------------------------------------------------------------------------------- |
+| OAuth 2.0 token endpoint | Yes      | The URL to obtain access tokens.                                                                           |
+| Client ID                | Yes      | Your OAuth client identifier.                                                                              |
+| Client secret            | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/saas/clusters/manage-secrets.md). |
+| Audience                 | No       | Target API identifier (required by some OAuth providers).                                                  |
+| Scopes                   | No       | Space-separated list of scopes to request.                                                                 |
+| Client authentication    | Yes      | **Send as Basic Auth header** or **Send client credentials in body**.                                      |
 
 For more details on OAuth 2.0 client credentials flow, see [REST connector OAuth](/components/connectors/protocol/rest.md#rest-connector-oauth-token).
 
@@ -105,7 +105,7 @@ To reduce the connection overhead described in [Limitations](#limitations), the 
 
 ### Per-client caching options
 
-Enable the **Client cache** checkbox in the connector properties to reuse the MCP client connection for as long as configured on the runtime.
+Select **Enable client caching** in the **Options** section of the connector properties to reuse the MCP client connection for as long as configured on the runtime.
 
 :::warning
 Enable client caching **only** when authentication credentials do not depend on process-specific data. Cached clients reuse the authentication context from the first connection, which may conflict with process-specific credentials in subsequent calls.

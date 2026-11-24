@@ -2,7 +2,7 @@
 id: email-inbound
 title: Email connector
 sidebar_label: Email inbound
-description: Connect your BPMN service to email using SMTP, POP3, or IMAP, and trigger process instances from incoming emails.
+description: Connect your BPMN service to email using IMAP, and trigger process instances from incoming emails.
 ---
 
 import InboundConnectorBasics from '../../../components/react-components/\_connector-inbound-basics.md'
@@ -35,6 +35,16 @@ This method allows the user to connect to any IMAP server using an email address
 | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
 | `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
+
+## IMAP details
+
+In the **Imap Details** section, configure the connection to your IMAP server.
+
+| Parameter             | Description                                                                                                                                                        |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `IMAP Host`           | The address of the IMAP server used to retrieve your emails, for example, `imap.example.com`.                                                                      |
+| `IMAP Port`           | The port number for connecting to the IMAP server. Default is `993`. Common ports are 993 for secure connections using SSL/TLS, or 143 for non-secure connections. |
+| `Encryption protocol` | The encryption protocol for email security: `TLS`, `SSL`, or `None`. Default is `TLS`.                                                                             |
 
 ## Listener information
 
