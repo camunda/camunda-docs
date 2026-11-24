@@ -1,5 +1,6 @@
 const {
   markdownUrlFor,
+  hasMarkdown,
   aiPrompt,
   askAiQuery,
   aiChatUrl,
@@ -203,5 +204,20 @@ describe("askAiQuery", () => {
 
   it("omits the version when unknown", () => {
     expect(askAiQuery("https://x.test/", undefined)).not.toContain("version");
+  });
+});
+
+describe("hasMarkdown", () => {
+  it("is true for normal doc pages", () => {
+    expect(hasMarkdown("/docs/components/foo/")).toBe(true);
+    expect(hasMarkdown("/docs/8.9/apis-tools/foo/")).toBe(true);
+  });
+
+  it("is false for generated API specification pages", () => {
+    expect(
+      hasMarkdown(
+        "/docs/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities/"
+      )
+    ).toBe(false);
   });
 });

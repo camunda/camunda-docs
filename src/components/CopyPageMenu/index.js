@@ -5,6 +5,7 @@ import { useDoc, useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   markdownUrlFor,
+  hasMarkdown,
   aiChatUrl,
   askAiQuery,
   pageLinkOptions,
@@ -168,6 +169,9 @@ export default function CopyPageMenu() {
   };
 
   const getMdUrl = () => markdownUrlFor(pathname, window.location.origin);
+  // Pages without a generated .md (API specifications) share the HTML page.
+  const getAiPageUrl = () =>
+    hasMarkdown(pathname) ? getMdUrl() : `${window.location.origin}${pathname}`;
 
   const handleCopy = async () => {
     setOpen(false);
@@ -281,12 +285,16 @@ export default function CopyPageMenu() {
 
   const menuItems = [
     ...linkItems,
-    {
-      key: "markdown",
-      icon: markdownIcon,
-      label: "View as Markdown",
-      onClick: () => openExternal(getMdUrl()),
-    },
+    ...(hasMarkdown(pathname)
+      ? [
+          {
+            key: "markdown",
+            icon: markdownIcon,
+            label: "View as Markdown",
+            onClick: () => openExternal(getMdUrl()),
+          },
+        ]
+      : []),
     {
       key: "ask-ai",
       separator: true,
@@ -305,14 +313,14 @@ export default function CopyPageMenu() {
       icon: claudeIcon,
       label: "Open in Claude",
       onClick: () =>
-        openExternal(aiChatUrl("claude", getMdUrl(), versionLabel)),
+        openExternal(aiChatUrl("claude", getAiPageUrl(), versionLabel)),
     },
     {
       key: "chatgpt",
       icon: openaiIcon,
       label: "Open in ChatGPT",
       onClick: () =>
-        openExternal(aiChatUrl("chatgpt", getMdUrl(), versionLabel)),
+        openExternal(aiChatUrl("chatgpt", getAiPageUrl(), versionLabel)),
     },
     ...mcpItems,
     ...(editUrl

@@ -13,6 +13,17 @@ function markdownUrlFor(pathname, origin) {
 }
 
 /**
+ * Whether the page has a generated .md file. API reference specification pages
+ * (".../specifications/<operation>/") are generated from OpenAPI, not from
+ * Markdown sources, so the page-markdown plugin writes nothing for them.
+ *
+ * @param {string} pathname
+ */
+function hasMarkdown(pathname) {
+  return !/\/specifications\/[^/]+/.test(pathname);
+}
+
+/**
  * Prompt for an AI assistant. It passes the .md URL, never the page content,
  * because long pages would exceed URL length limits.
  */
@@ -163,6 +174,7 @@ function mcpOptions(serverUrl = MCP_SERVER_URL) {
 
 module.exports = {
   markdownUrlFor,
+  hasMarkdown,
   aiPrompt,
   askAiQuery,
   aiChatUrl,
