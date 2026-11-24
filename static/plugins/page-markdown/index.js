@@ -18,13 +18,20 @@ const BATCH_SIZE = 50;
 
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-// Inline partial imports (`import Foo from "./_foo.mdx"` plus `<Foo />`).
+// Inline Markdown imports (`import Foo from "./_foo.mdx"` plus `<Foo />`).
+// Any .md/.mdx import is inlined, not only underscore-prefixed partials, since
+// docs also import shared content such as react-components/licensing.md.
 // docusaurus-plugin-llms has an equivalent, but it treats the specifier as a
 // literal path, so MDX-escaped specifiers such as "./partials/\_api.md" fail
 // to resolve. Decode the escapes before resolving, at every nesting level.
-async function resolvePartialImports(content, filePath, chain = new Set()) {
+async function resolvePartialImports(
+  content,
+  filePath,
+  rewrite = (text) => text,
+  chain = new Set()
+) {
   const importRegex =
-    /^\s*import\s+(?:(\w+)|{\s*(\w+)\s*})\s+from\s+(['"])([^'"]+_[^'"]+\.mdx?)\3;?\s*$/gm;
+    /^\s*import\s+(?:(\w+)|{\s*(\w+)\s*})\s+from\s+(['"])([^'"]+\.mdx?)\3;?\s*$/gm;
   const imports = new Map();
   for (const match of content.matchAll(importRegex)) {
     imports.set(match[1] || match[2], match[4]);
@@ -45,10 +52,17 @@ async function resolvePartialImports(content, filePath, chain = new Set()) {
     resolved = resolved.replace(importLine, "");
     try {
       if (chain.has(partialPath)) throw new Error("circular import");
-      const partial = await resolvePartialImports(
-        stripFrontMatter(await readFile(partialPath, "utf8")),
-        partialPath,
-        new Set(chain).add(partialPath)
+      // Nested partials are inlined (and their links rebased) first. Then
+      // rebase this partial's own links, which are relative to ITS directory,
+      // before it is inserted into a page in a different directory.
+      const partial = rewrite(
+        await resolvePartialImports(
+          stripFrontMatter(await readFile(partialPath, "utf8")),
+          partialPath,
+          rewrite,
+          new Set(chain).add(partialPath)
+        ),
+        partialPath
       );
       const usage = new RegExp(
         `<${escapeRegex(name)}\\s*(?:[^>]*?)(?:/>|>[^<]*</${escapeRegex(name)}>)`,
@@ -65,23 +79,30 @@ async function resolvePartialImports(content, filePath, chain = new Set()) {
   return resolved;
 }
 
-// Relative links such as "./agentic-orchestration/overview.md" are written
-// against the source file, but the export lives at the page's permalink, so
-// they would point at missing files. Rewrite those that resolve to another doc
-// in the same version to that doc's absolute .md URL.
-function rewriteRelativeLinks(content, sourcePath, sourceToPermalink, siteUrl) {
+// Document links such as "./agentic-orchestration/overview.md" (relative to
+// the source file) or "/reference/glossary.md" (relative to the version's
+// content root) are written against the source tree, but the export lives at
+// the page's permalink, so they would point at missing files. Rewrite those
+// that resolve to another doc in the same version to that doc's absolute .md
+// URL. External URLs, anchors and static assets are left alone.
+function rewriteDocLinks(
+  content,
+  sourcePath,
+  { sourceToPermalink, contentRoot, siteUrl }
+) {
   return content.replace(
     /\]\(([^)\s]+)((?:\s+"[^"]*")?)\)/g,
     (whole, target, title) => {
-      if (/^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(target)) return whole;
+      if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(target)) return whole;
       const [pathPart, hash = ""] = target.split(/(?=#)/);
       if (!/\.mdx?$/.test(pathPart)) return whole;
-      const permalink = sourceToPermalink.get(
-        resolve(dirname(sourcePath), decodeURI(pathPart))
-      );
+      const decoded = decodeURI(pathPart);
+      const absolute = decoded.startsWith("/")
+        ? resolve(contentRoot, `.${decoded}`)
+        : resolve(dirname(sourcePath), decoded);
+      const permalink = sourceToPermalink.get(absolute);
       if (!permalink) return whole;
-      const mdUrl = `${siteUrl}${permalink.replace(/\/+$/, "")}.md`;
-      return `](${mdUrl}${hash}${title})`;
+      return `](${siteUrl}${permalink.replace(/\/+$/, "")}.md${hash}${title})`;
     }
   );
 }
@@ -124,6 +145,7 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
         if (plugin.name !== "docusaurus-plugin-content-docs") continue;
         for (const version of plugin.content?.loadedVersions ?? []) {
           const sourceToPermalink = new Map();
+          const contentRoot = resolve(siteDir, version.contentPath);
           for (const doc of version.docs) {
             sourceToPermalink.set(
               doc.source.replace(/^@site\//, `${siteDir}/`),
@@ -137,7 +159,7 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
               doc,
               versionLabel: version.label,
               isLast: version.isLast,
-              sourceToPermalink,
+              linkContext: { sourceToPermalink, contentRoot, siteUrl: url },
             });
           }
         }
@@ -146,12 +168,7 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
       let written = 0;
       let skipped = 0;
 
-      const generate = async ({
-        doc,
-        versionLabel,
-        isLast,
-        sourceToPermalink,
-      }) => {
+      const generate = async ({ doc, versionLabel, isLast, linkContext }) => {
         const sourcePath = doc.source.replace(/^@site\//, `${siteDir}/`);
         let raw;
         try {
@@ -161,18 +178,15 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
           return;
         }
         let content = stripFrontMatter(raw);
-        content = await resolvePartialImports(content, sourcePath);
+        const rewrite = (text, fromPath) =>
+          rewriteDocLinks(text, fromPath, linkContext);
+        content = await resolvePartialImports(content, sourcePath, rewrite);
         content = cleanMarkdownContent(content, true, true);
-        content = rewriteRelativeLinks(
-          content,
-          sourcePath,
-          sourceToPermalink,
-          url
-        );
+        content = rewrite(content, sourcePath);
 
         const permalink = doc.permalink.replace(/\/*$/, "/");
         const pageUrl = `${url}${permalink}`;
-        const header = `> Camunda 8 documentation, version ${versionLabel}. HTML version: ${pageUrl}. Documentation index: ${url}/llms.txt`;
+        const header = `> Camunda 8 documentation, version ${versionLabel}. HTML version: ${pageUrl}. Documentation index: ${url}${baseUrl.replace(/\/+$/, "")}/llms.txt`;
         const output = `# ${doc.title}\n\n${header}\n\n${content.trim()}\n`;
 
         const outPaths = [outputPathFor(doc.permalink, baseUrl)];
@@ -207,4 +221,4 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
 
 // Exposed for unit tests.
 module.exports.resolvePartialImports = resolvePartialImports;
-module.exports.rewriteRelativeLinks = rewriteRelativeLinks;
+module.exports.rewriteDocLinks = rewriteDocLinks;

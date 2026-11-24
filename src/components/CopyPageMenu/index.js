@@ -387,7 +387,12 @@ export default function CopyPageMenu() {
                 type="button"
                 role="menuitem"
                 className="doc-page-action__menu-item"
-                onClick={item.onClick}
+                onClick={() => {
+                  // The menu unmounts on activation; keep the keyboard
+                  // position by returning focus to the toggle first.
+                  buttonRef.current?.focus();
+                  item.onClick();
+                }}
                 // autoFocus only runs on mount, so re-renders (for example when the
                 // copy status timer clears) do not steal focus back.
                 autoFocus={i === 0}
