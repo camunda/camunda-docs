@@ -286,7 +286,6 @@ export default function CopyPageMenu() {
   }));
 
   const menuItems = [
-    ...linkItems,
     ...(markdownAvailable
       ? [
           {
@@ -325,6 +324,8 @@ export default function CopyPageMenu() {
         openExternal(aiChatUrl("chatgpt", getAiPageUrl(), versionLabel)),
     },
     ...mcpItems,
+    // Page links last, as their own group.
+    ...linkItems.map((item, i) => ({ ...item, separator: i === 0 })),
   ];
 
   return (
@@ -363,7 +364,7 @@ export default function CopyPageMenu() {
             <li
               key={item.key}
               role="none"
-              className={item.separator ? styles.separator : undefined}
+              className={item.separator && i > 0 ? styles.separator : undefined}
             >
               <button
                 type="button"
