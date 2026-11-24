@@ -9,19 +9,31 @@
 
 .group {
   display: inline-flex;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-surface-color, var(--ifm-background-color));
+  overflow: hidden;
 }
 
-.primary {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+.group:hover,
+.group:has([aria-expanded="true"]) {
+  border-color: var(--ifm-color-emphasis-400);
 }
 
-.toggle {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-left: 0;
+.group .primary,
+.group .toggle {
+  border: 0;
+  border-radius: 0;
+}
+
+.group .toggle {
+  border-left: 1px solid var(--ifm-color-emphasis-300);
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.group :global(.doc-page-action:focus-visible) {
+  outline-offset: -2px;
 }
 
 .menu {
@@ -29,7 +41,8 @@
   right: 0;
   top: calc(100% + 0.35rem);
   z-index: 50;
-  min-width: 16rem;
+  min-width: 20rem;
+  max-width: 28rem;
   margin: 0;
   padding: 0.25rem 0;
   list-style: none;
@@ -39,6 +52,6 @@
   box-shadow: 0 10px 28px rgba(17, 24, 39, 0.15);
 }
 
-.menu li + li {
+.menu li.separator {
   border-top: 1px solid var(--ifm-color-emphasis-200);
 }

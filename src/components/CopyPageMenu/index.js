@@ -1,8 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useLocation } from "@docusaurus/router";
-import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
-import { markdownUrlFor, aiChatUrl } from "./urls";
+import { useDoc, useDocsVersion } from "@docusaurus/plugin-content-docs/client";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import {
+  markdownUrlFor,
+  aiChatUrl,
+  askAiQuery,
+  pageLinkOptions,
+  mcpOptions,
+} from "./urls";
+import {
+  claudeIcon,
+  githubIcon,
+  mcpIcon,
+  openaiIcon,
+  vscodeIcon,
+} from "./brandIcons";
 import styles from "./styles.module.css";
 
 const svgProps = {
@@ -24,19 +38,23 @@ const copyIcon = (
     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
   </svg>
 );
-const markdownIcon = (
+const checkIcon = (
   <svg {...svgProps}>
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-    <polyline points="14 2 14 8 20 8"></polyline>
-    <line x1="8" y1="13" x2="16" y2="13"></line>
-    <line x1="8" y1="17" x2="14" y2="17"></line>
+    <polyline points="20 6 9 17 4 12"></polyline>
   </svg>
 );
-const externalIcon = (
+const markdownIcon = (
   <svg {...svgProps}>
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-    <polyline points="15 3 21 3 21 9"></polyline>
-    <line x1="10" y1="14" x2="21" y2="3"></line>
+    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+    <polyline points="6 15 6 9 9 12 12 9 12 15"></polyline>
+    <line x1="17" y1="9" x2="17" y2="15"></line>
+    <polyline points="15 13 17 15 19 13"></polyline>
+  </svg>
+);
+const sparkleIcon = (
+  <svg {...svgProps}>
+    <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path>
+    <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path>
   </svg>
 );
 const chevron = (
@@ -47,14 +65,37 @@ const chevron = (
 
 // DocBreadcrumbs is also rendered on generated category index pages, which
 // have a docs version but no doc context, so avoid useDoc() here.
-function useVersionLabel() {
+function useVersion() {
   try {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    return useDocsVersion().label;
+    return useDocsVersion();
   } catch {
     return undefined;
   }
 }
+
+// Category index pages have a docs version but no doc, so useDoc() throws.
+function useEditUrl() {
+  try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useDoc().metadata.editUrl;
+  } catch {
+    return undefined;
+  }
+}
+
+const mcpIcons = {
+  "mcp-vscode": vscodeIcon,
+  "mcp-claude-code": claudeIcon,
+  "mcp-codex": openaiIcon,
+};
+
+const linkIcon = (
+  <svg {...svgProps}>
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+);
 
 async function fetchMarkdown(mdUrl) {
   const res = await fetch(mdUrl, { headers: { Accept: "text/markdown" } });
@@ -79,7 +120,12 @@ async function copyMarkdown(mdUrl) {
 
 export default function CopyPageMenu() {
   const { pathname } = useLocation();
-  const versionLabel = useVersionLabel();
+  const version = useVersion();
+  const editUrl = useEditUrl();
+  const versionLabel = version?.label;
+  const {
+    siteConfig: { baseUrl, customFields = {} },
+  } = useDocusaurusContext();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState(null); // "copied" | "copiedText" | "error"
   const rootRef = useRef(null);
@@ -132,7 +178,12 @@ export default function CopyPageMenu() {
       // No .md file (for example in `npm start` or on generated index pages):
       // fall back to the rendered article text.
       try {
-        const text = document.querySelector("article")?.innerText;
+        // Just the doc body: leaves out the footer (feedback, edit link, tags),
+        // prev/next links and breadcrumbs that sit around it in <article>.
+        const text = (
+          document.querySelector("article .theme-doc-markdown") ??
+          document.querySelector("article")
+        )?.innerText;
         if (!text) throw err;
         await navigator.clipboard.writeText(text);
         flash("copiedText");
@@ -140,6 +191,28 @@ export default function CopyPageMenu() {
         console.error("Failed to copy page:", fallbackErr);
         flash("error");
       }
+    }
+  };
+
+  const handleCopyText = async (text, status = "copiedLink") => {
+    setOpen(false);
+    try {
+      await navigator.clipboard.writeText(text);
+      flash(status);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+      flash("error");
+    }
+  };
+
+  const handleCopyLink = async (url) => {
+    setOpen(false);
+    try {
+      await navigator.clipboard.writeText(url);
+      flash("copiedLink");
+    } catch (err) {
+      console.error("Failed to copy link:", err);
+      flash("error");
     }
   };
 
@@ -170,36 +243,89 @@ export default function CopyPageMenu() {
   const label =
     status === "copied"
       ? "Copied!"
-      : status === "copiedText"
-        ? "Copied as plain text"
-        : status === "error"
-          ? "Copy failed"
-          : "Copy page";
+      : status === "copiedLink"
+        ? "Link copied!"
+        : status === "copiedText"
+          ? "Copied!"
+          : status === "error"
+            ? "Copy failed"
+            : "Copy page";
+
+  const linkItems = version
+    ? pageLinkOptions({
+        pathname,
+        baseUrl,
+        versionName: version.version,
+        isLast: version.isLast,
+        versionLabel,
+        customFields,
+      }).map((o) => ({
+        key: o.key,
+        icon: linkIcon,
+        label: o.label,
+        description: o.description,
+        url: o.url,
+        onClick: () => handleCopyLink(o.url),
+      }))
+    : [];
+
+  const mcpItems = mcpOptions().map((o) => ({
+    key: o.key,
+    icon: mcpIcons[o.key] || mcpIcon,
+    label: o.label,
+    description: o.description,
+    separator: o.key === "mcp",
+    onClick: () =>
+      o.action === "open" ? openExternal(o.value) : handleCopyText(o.value),
+  }));
 
   const menuItems = [
+    ...linkItems,
     {
       key: "markdown",
       icon: markdownIcon,
       label: "View as Markdown",
-      description: "Open this page as plain Markdown",
       onClick: () => openExternal(getMdUrl()),
     },
     {
+      key: "ask-ai",
+      separator: true,
+      icon: sparkleIcon,
+      label: "Ask AI about this page",
+      onClick: () => {
+        setOpen(false);
+        window.Kapa?.open?.({
+          query: askAiQuery(window.location.href, versionLabel),
+          submit: true,
+        });
+      },
+    },
+    {
       key: "claude",
-      icon: externalIcon,
+      icon: claudeIcon,
       label: "Open in Claude",
-      description: "Ask Claude about this page",
       onClick: () =>
         openExternal(aiChatUrl("claude", getMdUrl(), versionLabel)),
     },
     {
       key: "chatgpt",
-      icon: externalIcon,
+      icon: openaiIcon,
       label: "Open in ChatGPT",
-      description: "Ask ChatGPT about this page",
       onClick: () =>
         openExternal(aiChatUrl("chatgpt", getMdUrl(), versionLabel)),
     },
+    ...mcpItems,
+    ...(editUrl
+      ? [
+          {
+            key: "edit",
+            separator: true,
+            icon: githubIcon,
+            label: "Edit page on GitHub",
+            onClick: () => openExternal(editUrl),
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -210,7 +336,9 @@ export default function CopyPageMenu() {
           className={clsx("doc-page-action", styles.primary)}
           onClick={handleCopy}
         >
-          {copyIcon}
+          {["copied", "copiedText", "copiedLink"].includes(status)
+            ? checkIcon
+            : copyIcon}
           <span aria-live="polite">{label}</span>
         </button>
         <button
@@ -233,7 +361,11 @@ export default function CopyPageMenu() {
           onKeyDown={onMenuKeyDown}
         >
           {menuItems.map((item, i) => (
-            <li key={item.key} role="none">
+            <li
+              key={item.key}
+              role="none"
+              className={item.separator ? styles.separator : undefined}
+            >
               <button
                 type="button"
                 role="menuitem"
@@ -251,9 +383,16 @@ export default function CopyPageMenu() {
                   <span className="doc-page-action__menu-item-label">
                     {item.label}
                   </span>
-                  <span className="doc-page-action__menu-item-desc">
-                    {item.description}
-                  </span>
+                  {item.description && (
+                    <span className="doc-page-action__menu-item-desc">
+                      {item.description}
+                    </span>
+                  )}
+                  {item.url && (
+                    <span className="doc-page-action__menu-item-url">
+                      {item.url.replace(/^https?:\/\//, "")}
+                    </span>
+                  )}
                 </span>
               </button>
             </li>

@@ -1,4 +1,11 @@
-const { markdownUrlFor, aiPrompt, aiChatUrl } = require("./urls");
+const {
+  markdownUrlFor,
+  aiPrompt,
+  askAiQuery,
+  aiChatUrl,
+  pageLinkOptions,
+  mcpOptions,
+} = require("./urls");
 
 const ORIGIN = "https://docs.camunda.io";
 
@@ -70,5 +77,131 @@ describe("aiChatUrl", () => {
 
   it("throws for an unknown provider", () => {
     expect(() => aiChatUrl("other", mdUrl, "8.10")).toThrow();
+  });
+});
+
+describe("pageLinkOptions", () => {
+  const customFields = {
+    canonicalUrlRoot: "https://docs.camunda.io",
+    currentVersion: "8.10",
+    nextVersion: "8.11",
+  };
+  const base = { baseUrl: "/", customFields };
+
+  it("offers a pinned and a rolling link on the latest version", () => {
+    const [pinned, rolling] = pageLinkOptions({
+      ...base,
+      pathname: "/docs/components/foo/",
+      versionName: "8.10",
+      isLast: true,
+      versionLabel: "8.10",
+    });
+    expect(pinned.url).toBe(
+      "https://docs.camunda.io/docs/8.10/components/foo/"
+    );
+    expect(rolling.url).toBe("https://docs.camunda.io/docs/components/foo/");
+    expect(rolling.label).toBe("Copy page link (latest)");
+  });
+
+  it("offers a pinned and a rolling link on next", () => {
+    const [pinned, rolling] = pageLinkOptions({
+      ...base,
+      pathname: "/docs/next/components/foo/",
+      versionName: "current",
+      isLast: false,
+      versionLabel: "Next",
+    });
+    expect(pinned.url).toBe(
+      "https://docs.camunda.io/docs/8.11/components/foo/"
+    );
+    expect(rolling.url).toBe(
+      "https://docs.camunda.io/docs/next/components/foo/"
+    );
+  });
+
+  it("offers a single link on older versions", () => {
+    const options = pageLinkOptions({
+      ...base,
+      pathname: "/docs/8.9/components/foo/",
+      versionName: "8.9",
+      isLast: false,
+      versionLabel: "8.9",
+    });
+    expect(options).toHaveLength(1);
+    expect(options[0].url).toBe(
+      "https://docs.camunda.io/docs/8.9/components/foo/"
+    );
+    expect(options[0].label).toBe("Copy page link (8.9)");
+  });
+
+  it("respects a /pr-123/ base URL", () => {
+    const [pinned] = pageLinkOptions({
+      baseUrl: "/pr-123/",
+      customFields: {
+        ...customFields,
+        canonicalUrlRoot: "https://preview.docs.camunda.cloud",
+      },
+      pathname: "/pr-123/docs/components/foo/",
+      versionName: "8.10",
+      isLast: true,
+      versionLabel: "8.10",
+    });
+    expect(pinned.url).toBe(
+      "https://preview.docs.camunda.cloud/pr-123/docs/8.10/components/foo/"
+    );
+  });
+});
+
+describe("mcpOptions", () => {
+  const options = mcpOptions("https://example.mcp.test");
+
+  it("returns the four connect entries", () => {
+    expect(options.map((o) => o.key)).toEqual([
+      "mcp",
+      "mcp-vscode",
+      "mcp-claude-code",
+      "mcp-codex",
+    ]);
+  });
+
+  it("copies the bare URL for generic clients", () => {
+    expect(options[0]).toMatchObject({
+      action: "copy",
+      value: "https://example.mcp.test",
+    });
+  });
+
+  it("builds a VSCode install deep link with encoded config", () => {
+    const { action, value } = options[1];
+    expect(action).toBe("open");
+    expect(value.startsWith("vscode:mcp/install?")).toBe(true);
+    expect(
+      JSON.parse(decodeURIComponent(value.slice("vscode:mcp/install?".length)))
+    ).toEqual({
+      name: "camunda-docs",
+      type: "http",
+      url: "https://example.mcp.test",
+    });
+  });
+
+  it("builds CLI commands for Claude Code and Codex", () => {
+    expect(options[2].value).toBe(
+      "claude mcp add --transport http camunda-docs https://example.mcp.test"
+    );
+    expect(options[3].value).toBe(
+      "codex mcp add camunda-docs --url https://example.mcp.test"
+    );
+  });
+});
+
+describe("askAiQuery", () => {
+  it("includes the page URL and version", () => {
+    const q = askAiQuery("https://docs.camunda.io/docs/foo/", "8.9");
+    expect(q).toContain("https://docs.camunda.io/docs/foo/");
+    expect(q).toContain("version 8.9");
+  });
+
+  it("omits the version when unknown", () => {
+    expect(askAiQuery("https://x.test/", undefined)).not.toContain("version");
   });
 });
