@@ -18,9 +18,36 @@ import PageDescription from '@site/src/components/PageDescription';
 </div>
 <div className="release-announcement-content">
 
+#### Engine records contain only the actor in the authorization data {#authorization-actor-only}
+
+Starting with 8.11, events, rejections, and the other commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
+
+- `authorized_anonymous_user`
+- `authorized_username`
+- `authorized_client_id`
+
+These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
+
+Starting with 8.9.29 and 8.10.10, this already applies to events. Starting with 8.9.30 and 8.10.11, it also applies to rejections and the other commands that the engine writes itself. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only).
+
+The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
+
+**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or other commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
+
+<p className="link-arrow">[camunda/camunda#69323](https://github.com/camunda/camunda/issues/69323)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
-Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it.
+Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend and resume already behave this way starting with 8.10.9. Cancel narrows the filter starting with 8.10.1 and follows the same validation rules starting with 8.10.9. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-state-filter).
 
 Previously, the API documentation described the `state` filter as "ignored and overridden". This didn't match the actual behavior, which differed by operation.
 
@@ -45,6 +72,21 @@ The following changes apply to the `parentProcessInstanceKey` filter:
 - Cancel now narrows the filter to root instances instead of replacing it. A filter that matches only child instances selects no instances and doesn't return an error.
 
 **Action:** Remove a conflicting top-level `state` filter from your batch requests, or move it into an `$or` branch. If your integration relied on suspend or resume discarding your `parentProcessInstanceKey` filter, review the filter, because it now limits the batch.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /v2/authentication/me` answers a caller without credentials on an unprotected API {#anonymous-current-user}
+
+On an unprotected API, [`GET /v2/authentication/me`](/apis-tools/orchestration-cluster-api-rest/specifications/get-authentication.api.mdx) answers a caller without credentials with `200 OK` and `isAnonymous: true`, instead of `401 Unauthorized`. The `username` field of `CamundaUserResult` is still required, but it can now be `null`, so a client generated from the API specification can fail to compile. This change is also part of 8.10.9.
+
+**Action:** See the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#anonymous-current-user) for the changed fields and what to do.
 
 </div>
 </div>
@@ -85,6 +127,39 @@ Starting with Camunda 8.11, the Grafana dashboards published in [`monitor/grafan
 The dashboards of 8.11 require Grafana 13 or later. Earlier Grafana versions cannot import the v2 dashboard schema.
 
 **Action:** Before you move to the dashboards of 8.11, upgrade your Grafana instance to version 13 or later. To keep using the dashboards in the classic format, import them from the `stable/8.10` branch or from the branch of the release you run.
+
+</div>
+</div>
+
+## Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unchanged variable values no longer propagate past the scope that holds them {#unchanged-variable-propagation}
+
+Starting with 8.11, variable propagation stops at the first scope that already has a variable with that name, even if the new value is the same as the existing one. This matches the documented [variable propagation](/components/concepts/variables.md#variable-propagation) and fixes a [known bug](https://github.com/camunda/camunda/issues/55491): previously, an unchanged value kept propagating to higher scopes, where it could create the variable or silently overwrite a different value.
+
+Most processes aren't affected. You're affected only if a process reads a variable after a sub-process completes, and that variable got there because an element inside the sub-process wrote back the **same name and the same value** the sub-process already held, through an output mapping, job variables, a message payload, or a called process's result.
+
+Multi-instance activities, elements without output mappings, and job-based ad-hoc sub-processes keep the previous behavior for variables in their own scope. This doesn't apply to elements inside a multi-instance sub-process.
+
+**Example:** A sub-process has an input mapping that sets the local variable `status` to `"approved"`. A task inside the sub-process has an output mapping that sets `status` to `"approved"` again.
+
+- **Before 8.11:** The value is unchanged, so Camunda propagates `status` to the process instance. Elements after the sub-process can read it, and it replaces any other value of `status` there.
+- **From 8.11:** Camunda updates only the local `status` of the sub-process and discards it when the sub-process completes.
+
+**Action:**
+
+- If a variable must be available after a sub-process, add an explicit output mapping to the sub-process, for example source `= status` and target `status`.
+- Before upgrading, run your processes on an 8.11 test cluster. After each sub-process completes, check in Operate for process instance variables that are missing or have different values compared to 8.10.
+
+Whether a process is affected depends on the variable values at runtime, so you can't reliably spot it in the BPMN diagram alone.
+
+<p className="link-arrow">[Variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element)</p>
 
 </div>
 </div>

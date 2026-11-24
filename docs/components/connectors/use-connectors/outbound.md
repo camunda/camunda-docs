@@ -22,9 +22,14 @@ Each connector defines its own set of properties you can fill in. Find the detai
 
 ## Retries
 
-By default, connector execution is repeated `3` times if execution fails. The retries are executed sequentially without delays.
+By default, connector execution is repeated `3` times if execution fails.
 
-To change the default retries value, edit the BPMN XML file and set the `retries` attribute at the `zeebe:taskDefinition`. For example:
+Out-of-the-box connector element templates expose the retry settings in the **Retries** group of the properties panel:
+
+- **Retries**: The number of retries. Defaults to `3`.
+- **Retry backoff**: The interval between retries, as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) duration. Defaults to `PT30S`.
+
+If your element template doesn't expose these properties, you can change the retries value by editing the BPMN XML file and setting the `retries` attribute at the `zeebe:taskDefinition`. For example:
 
 ```xml
 ...
@@ -32,7 +37,7 @@ To change the default retries value, edit the BPMN XML file and set the `retries
 ...
 ```
 
-The connector runtime also supports custom intervals between retries (**retry backoff**). To configure a custom retry interval, you need to add a special property to the connector element template. The property must bind to the `retryBackoff` task header, and the value must be a valid [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) duration.
+The connector runtime also supports custom intervals between retries (**retry backoff**). To configure a custom retry interval in such a template, you need to add a special property to the connector element template. The property must bind to the `retryBackoff` task header, and the value must be a valid [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) duration.
 
 ```json
 {
@@ -45,7 +50,7 @@ The connector runtime also supports custom intervals between retries (**retry ba
 }
 ```
 
-In the example above, the retry attempts will be spaced 30 seconds apart, instead of the default behavior of retrying immediately.
+In the example above, the retry attempts will be spaced 30 seconds apart. Without a `retryBackoff` task header, the retries are executed immediately.
 
 If necessary, the **retry backoff** property can be made visible and editable in the properties panel by changing the property `type` to `String`.
 

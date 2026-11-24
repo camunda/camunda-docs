@@ -107,7 +107,7 @@ Learn more about correlation in [HTTP Webhook connector](../protocol/http-webhoo
 
 When you deploy your BPMN diagram, the connector is activated and ready to receive events. The webhook URL follows this pattern:
 
-`http(s)://<base URL>/webhooks/<webhook ID>`
+`http(s)://<base URL>/inbound/<webhook ID>`
 
 - `<base URL>` is the URL of the connectors component deployment. In Camunda 8 SaaS, it typically contains your **region ID** and **cluster ID**, found in your client credentials under the **API** tab of your cluster.
 - `<webhook ID>` is the **Webhook ID** you configured.

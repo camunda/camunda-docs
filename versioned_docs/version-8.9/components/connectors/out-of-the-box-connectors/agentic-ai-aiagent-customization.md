@@ -68,7 +68,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
    ```
 
 3. Configure the SDK to connect to your cluster according
-   to [the Camunda SDK documentation](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
+   to [the Camunda SDK documentation](../../../apis-tools/camunda-spring-boot-starter/getting-started.md).
 4. To only run the AI Agent Client connector, disable the other agentic AI connectors provided by the `connector-agentic-ai` dependency in your `application.yml`:
 
    ```yaml
@@ -185,7 +185,7 @@ public interface ConversationSession {
 }
 ```
 
-After implementing the custom store, you can reference the store type in your AI Agent connector configuration (see [memory configuration](./agentic-ai-aiagent.md#memory)):
+After implementing the custom store, you can reference the store type in your AI Agent connector configuration (see the memory configuration for the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md#memory) or the [AI Agent Task](./agentic-ai-aiagent-task.md#memory)):
 
 1. In the **Memory** group of the AI Agent connector properties, set the **Memory storage type** to **Custom implementation**.
 2. In the **Implementation type** field, enter the type value of your custom store implementation (`my-conversation` in the example above).

@@ -211,9 +211,14 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 The following key changes were also released as part of an 8.10.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Artifact | Type       | Key change                                                                                                                                |
-| :--------------------------------------------------------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7) | Core     | Regression | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| Patch release                                                      | Artifact | Type            | Key change                                                                                                                                |
+| :----------------------------------------------------------------- | :------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.10.1](https://github.com/camunda/camunda/releases/tag/8.10.1)   | Core     | Regression      | [Batch cancellation narrows and validates the `state` filter](#batch-cancel-state-filter)                                                 |
+| [8.10.7](https://github.com/camunda/camunda/releases/tag/8.10.7)   | Core     | Regression      | [Batch cancellation filtered by parent process instance cancels all root process instances](#batch-cancel-parent-process-instance-filter) |
+| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9)   | Core     | Regression      | [Batch suspend and resume narrow and validate the `state` filter](#batch-suspend-resume-state-filter)                                     |
+| [8.10.9](https://github.com/camunda/camunda/releases/tag/8.10.9)   | Core     | Breaking change | [`GET /v2/authentication/me` answers a caller without credentials on an unprotected API](#anonymous-current-user)                         |
+| [8.10.10](https://github.com/camunda/camunda/releases/tag/8.10.10) | Core     | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
+| [8.10.11](https://github.com/camunda/camunda/releases/tag/8.10.11) | Core     | Breaking change | [Rejections and engine commands contain only the actor in the authorization data](#event-authorization-actor-only)                        |
 
 ## Agentic orchestration
 
@@ -282,6 +287,35 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 </div>
 <div className="release-announcement-content">
 
+#### Engine records contain only the actor in the authorization data {#event-authorization-actor-only}
+
+Since 8.9.0, each exported record contains the full authorization data of the command that caused it. This data includes the token claims of the identity provider, the group claims, and the authorized tenants. With OIDC clients, this made the log about two times larger than in 8.8.
+
+Starting with 8.10.10, events contain only these entries in `Record#getAuthorizations()`:
+
+- `authorized_anonymous_user`
+- `authorized_username`
+- `authorized_client_id`
+
+Starting with 8.10.11, rejections and the other commands that the engine writes itself also contain only these entries.
+
+These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
+
+The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
+
+**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or other commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
+
+<p className="link-arrow">[camunda/camunda#69323](https://github.com/camunda/camunda/issues/69323)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### `POST /v2/message-subscriptions/search` now returns start event subscriptions
 
 Starting with 8.10, the `POST /v2/message-subscriptions/search` endpoint returns both start event and intermediate event message subscriptions. Previously, only intermediate event subscriptions were returned.
@@ -299,6 +333,31 @@ A new `messageSubscriptionType` enum field is included in each result. Existing 
 ```
 
 <p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#message-subscription-type)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /v2/authentication/me` answers a caller without credentials on an unprotected API {#anonymous-current-user}
+
+Starting with 8.10.9, when the API is unprotected (`camunda.security.authentication.unprotected-api: true`, the default for Camunda 8 Run), [`GET /v2/authentication/me`](/apis-tools/orchestration-cluster-api-rest/specifications/get-authentication.api.mdx) answers a caller without credentials with `200 OK` and an anonymous current user. Previously, it answered `401 Unauthorized`, which no credentials can resolve on an unprotected API.
+
+The `CamundaUserResult` response changes as follows:
+
+- A new required `isAnonymous` field is `true` for a caller without credentials and `false` for every authenticated user.
+- `username` is still required, but it can now be `null`. It's `null` only when `isAnonymous` is `true`. `displayName` and `email` are also `null` then.
+- An anonymous caller gets `["*"]` as `authorizedComponents`, empty `tenants`, `groups`, and `roles`, and `canLogout: false`.
+
+A protected API is not affected at runtime. It still answers `401` to a caller without credentials, and an authenticated user always has a `username`.
+
+**Why this is a breaking change:** A client generated from the API specification types `username` as `string | null` instead of `string`, so code that uses it as a non-null string can fail to compile. A caller without credentials has no user name, so the field can't stay non-null. Camunda chose to fix the unprotected API in 8.10 rather than keep the `401`.
+
+**Action:** If you generate a client from the Orchestration Cluster API specification, check `isAnonymous`, or handle a `null` `username`, before you use the user name.
 
 </div>
 </div>
@@ -461,6 +520,62 @@ A cluster upgraded without these changes stops reporting license information to 
 **Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-8100.md#broker-ping-configuration) in the upgrade guide.
 
 <p className="link-arrow">[Camunda Hub ping configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch cancellation narrows and validates the `state` filter {#batch-cancel-state-filter}
+
+Starting with 8.10.1, the batch operation to [cancel process instances](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx) narrows your `state` filter with `ACTIVE` and `SUSPENDED`, and validates it. Previously, it discarded your `state` filter, so a batch could cancel instances outside your filter.
+
+| `state` filter                         | 8.10.0                                  | 8.10.1 and later                                   |
+| :------------------------------------- | :-------------------------------------- | :------------------------------------------------- |
+| None                                   | Active and suspended instances canceled | Active and suspended instances canceled            |
+| `ACTIVE`                               | Active and suspended instances canceled | Active instances canceled                          |
+| `SUSPENDED`                            | Active and suspended instances canceled | Suspended instances canceled                       |
+| Any other state through `$eq` or `$in` | Active and suspended instances canceled | Rejected with `400 Bad Request`                    |
+| `$neq`, `$exists`, or `$like`          | Ignored                                 | Applied, limited to active and suspended instances |
+
+From 8.10.1 to 8.10.8, a state other than `ACTIVE` or `SUSPENDED` inside an `$or` branch is also rejected with `400 Bad Request`. Starting with [8.10.9](#batch-suspend-resume-state-filter), states inside `$or` branches aren't validated.
+
+**Action:** Remove a top-level `state` filter other than `ACTIVE` or `SUSPENDED` from your batch cancellation requests. If your integration filtered for `ACTIVE` or `SUSPENDED` and relied on both being canceled, remove the `state` filter.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Batch suspend and resume narrow and validate the `state` filter {#batch-suspend-resume-state-filter}
+
+Starting with 8.10.9, the batch operations to suspend and resume process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, they discarded your `state` and `parentProcessInstanceKey` filters, so a batch could act on instances outside your filter. For example, a batch suspension filtered by `parentProcessInstanceKey` suspended every active process instance that matched the remaining filter criteria.
+
+Batch cancellation narrows your `state` filter starting with [8.10.1](#batch-cancel-state-filter), and your `parentProcessInstanceKey` filter starting with [8.10.7](#batch-cancel-parent-process-instance-filter). Starting with 8.10.9, it no longer rejects states inside `$or` branches, so all three operations follow the same rules.
+
+| Operation                                                                                                              | Required state           | Previous behavior                             |
+| :--------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
+| [Suspend](/apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation.api.mdx) | `ACTIVE`                 | Replaced your filter with the required state. |
+| [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx)   | `SUSPENDED`              | Replaced your filter with the required state. |
+| [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx)   | `ACTIVE` and `SUSPENDED` | Combined your filter with the required state. |
+
+Starting with 8.10.9, the following rules apply to all three operations:
+
+- A top-level `state` filter that uses `$eq` or `$in` with a state outside the required states is rejected with `400 Bad Request`. Suspend and resume previously discarded the filter. Cancel already rejected it.
+- States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances. Cancel previously rejected invalid states in `$or` branches.
+- The `$neq`, `$exists`, and `$like` operators on a top-level `state` are applied as given.
+
+Suspend and resume now apply the `parentProcessInstanceKey` filter as given. Cancel keeps its root-only behavior.
+
+**Action:** Remove a conflicting top-level `state` filter from your batch requests, or move it into an `$or` branch. If your integration relied on suspend or resume discarding your `parentProcessInstanceKey` filter, review the filter, because it now limits the batch.
 
 </div>
 </div>

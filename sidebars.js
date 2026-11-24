@@ -86,7 +86,7 @@ module.exports = {
       label: "Agentic orchestration",
       link: {
         type: "doc",
-        id: "guides/build-with-ai/overview",
+        id: "components/agentic-orchestration/overview",
       },
       items: [
         {
@@ -328,7 +328,6 @@ module.exports = {
         "components/concepts/signals",
         "components/concepts/conditionals",
         "components/concepts/variables",
-        "components/concepts/variable-protection",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
         "components/concepts/decision-instance-deletion",
@@ -473,6 +472,19 @@ module.exports = {
           ],
         },
         "components/wait-states/overview",
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "components/audit-log/overview",
+          },
+          items: [
+            "components/audit-log/overview/access-control",
+            "components/audit-log/overview/recorded-operations",
+            "components/audit-log/overview/operation-structure",
+          ],
+        },
         {
           type: "category",
           label: "Camunda integrations",
@@ -2575,6 +2587,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code",
                   ],
                 },
@@ -2772,6 +2785,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
                 "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component",
               ],
             },
             "self-managed/components/management-identity/authentication",

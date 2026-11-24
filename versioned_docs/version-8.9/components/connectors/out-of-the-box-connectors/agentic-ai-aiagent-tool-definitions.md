@@ -12,7 +12,7 @@ Understand what an AI agent tool is, how tools are defined, and how their names,
 
 ## What is a tool
 
-A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
+An [AI agent tool](/reference/glossary.md#ai-agent-tool) is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
 
 - A **name**: the element ID, used by the LLM to identify the tool.
 - A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
@@ -205,7 +205,7 @@ To avoid this, use a [unique correlation key per interaction](../../concepts/mes
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
 set its output to a predefined variable name. For the **AI Agent Sub-process** implementation, this variable is predefined as
-`toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](#tools-loop),
+`toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](./agentic-ai-aiagent-task-example.md#tools-loop),
 but is also typically named `toolCallResult`.
 
 Depending on the used task, setting the variable content can be achieved in multiple ways:
@@ -239,7 +239,7 @@ When serializing the tool call response to JSON, document references are transfo
 
 Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
 
-To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
+To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/template-properties.md#extension-properties-zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
 
 Because the tools behind a gateway activity are discovered dynamically rather than resolved from the BPMN model, their input schemas are not derived from [`fromAi`](#ai-generated-parameters-via-fromai) function calls in the gateway activity's input mappings.
 Instead, each discovered tool's input schema is provided by the external source itself, for example, the input schema included in the `tools/list` response returned by an MCP server. Any `fromAi` calls configured on a gateway tool activity's input mappings are ignored.

@@ -10,6 +10,24 @@ The Orchestration Cluster REST API supports file and multipart uploads when depl
 
 This guide walks you through adjusting these settings.
 
+### Default multipart limits
+
+By default, the REST API applies the following limits to each `POST /v2/deployments` request:
+
+| Limit                               | Default | Property                                    |
+| ----------------------------------- | ------- | ------------------------------------------- |
+| Maximum size of a single resource   | 10MB    | `spring.servlet.multipart.max-file-size`    |
+| Maximum total size of the request   | 10MB    | `spring.servlet.multipart.max-request-size` |
+| Maximum number of parts per request | 50      | `server.tomcat.max-part-count`              |
+
+A request that exceeds any of these limits is rejected with HTTP status `413`, and the cluster logs a `MaxUploadSizeExceededException`. For example, a request with more than 50 resources exceeds the part count limit.
+
+Besides increasing the limits as described in the following sections, you can split a large deployment into several requests with fewer resources each. Each request creates a separate deployment, so the resources across requests are not deployed atomically.
+
+:::note
+In Camunda 8 SaaS, these limits apply to all clusters and cannot be changed.
+:::
+
 ### Gateway and Broker configuration
 
 The `maxMessageSize` default value is 4MB for raw Zeebe deployments (10MB for Helm). You can configure this setting in the:

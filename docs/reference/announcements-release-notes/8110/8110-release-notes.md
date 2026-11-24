@@ -11,6 +11,32 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
+## 8.11.0-alpha2
+
+| Release date    | Changelog(s)                                                                                                                                                                                 |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8 December 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.11.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.11.0-alpha2)</li></ul> |
+
+### Orchestration Cluster
+
+#### Resolve secrets from environment variables
+
+<!-- https://github.com/camunda/camunda/issues/67203, https://github.com/camunda/camunda/issues/67220, https://github.com/camunda/camunda/issues/67221 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Centralized secret resolution adds an environment variable store that resolves `camunda.secrets.<name>` references from environment variables carrying a mandatory prefix. Use it for local, CI, and lightweight setups, and for Helm installations that pass Kubernetes Secrets in as environment variables, without running an external vault.
+
+The store reads the environment once at startup, so changing a value requires a restart. A missing, malformed, or reserved prefix such as `CAMUNDA_` or `ZEEBE_` refuses startup with a message naming the setting.
+
+Camunda 8 Run supports the store through `C8RUN_SECRETS_MODE=env` and `C8RUN_SECRETS_ENV_PREFIX`, with a separate variable prefix for each Physical Tenant.
+
+<ul>
+  <li><span class="link-arrow">[Environment variable store configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#environment-variable-store)</span></li>
+  <li><span class="link-arrow">[Use secrets from environment variables in Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#use-secrets-from-environment-variables)</span></li>
+  <li><span class="link-arrow">[Secret resolution](/components/concepts/secret-resolution.md)</span></li>
+</ul>
+
 ## 8.11.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                                 |
@@ -89,24 +115,6 @@ Desktop Modeler no longer ships Carbon or its previous global styles. If your pl
 </ul>
 
 ### Orchestration Cluster
-
-#### Protect sensitive variables with REDACT
-
-<!-- https://github.com/camunda/camunda/issues/64644 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-With variable protection, you can mark a process variable as sensitive when you create a process instance. The `REDACT` protection mode irrecoverably replaces the variable value before it is exported to secondary storage, so the value is not readable through search or variable endpoints. Variable search results show which variables are protected.
-
-:::warning
-In 8.11.0-alpha1, protection is incomplete. Variable values can still appear in other places, such as job, message, and signal payloads or incident messages.
-:::
-
-<ul>
-  <li><span class="link-arrow">[Variable protection](/components/concepts/variable-protection.md)</span></li>
-  <li><span class="link-arrow">[Search variables](/apis-tools/orchestration-cluster-api-rest/specifications/search-variables.api.mdx)</span></li>
-  <li><span class="link-arrow">[Create process instance](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx)</span></li>
-</ul>
 
 #### Evenly distributed record indices in Elasticsearch and OpenSearch
 

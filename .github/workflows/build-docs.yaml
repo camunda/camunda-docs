@@ -76,12 +76,23 @@ jobs:
           path: build
       - name: Install hyperlink
         run: npm install -g @untitaker/hyperlink
+      - name: Install GitHub CLI for hyperlink attestation
+        env:
+          # Renovate updates the version and the linux_amd64 tarball digest together.
+          # renovate: datasource=github-release-attachments depName=cli/cli
+          GH_CLI_VERSION: v2.103.3
+          GH_CLI_SHA256: 4c806978ffce1cec70853302a56d70ac6da4f19bae7adca4e1a8ab00633dd91d
+        run: |
+          cd "$RUNNER_TEMP"
+          gh_dir="gh_${GH_CLI_VERSION#v}_linux_amd64"
+          curl -fsSL --retry 3 -o gh.tar.gz "https://github.com/cli/cli/releases/download/${GH_CLI_VERSION}/${gh_dir}.tar.gz"
+          echo "${GH_CLI_SHA256}  gh.tar.gz" | sha256sum -c -
+          tar -xzf gh.tar.gz "${gh_dir}/bin/gh"
+          echo "$RUNNER_TEMP/${gh_dir}/bin" >> "$GITHUB_PATH"
       - name: Check internal links
         uses: untitaker/hyperlink@9375bc4063712ad490d5eb3d54df0b6aade15e54 # 0.3.2
         env:
-          # The runner image ships a gh CLI (2.45.0) without `gh attestation`, which the install
-          # script uses to verify its binary. Skip the check, as before gh was added to the image.
-          HYPERLINK_SKIP_ATTESTATION: 1
+          HYPERLINK_FORCE_ATTESTATION: 1
         with:
           args: build/
       - name: Remove https redirect
@@ -169,6 +180,9 @@ jobs:
       - build-docs
       - validate-links
     if: failure() && fromJSON(github.run_attempt) < 3
+    permissions:
+      contents: read
+      id-token: write # OIDC for the Vault JWT login
     steps:
       - name: Retry job
         uses: camunda/infra-global-github-actions/rerun-failed-run@475528365f4010480dccff71ccac554cc3352e7c # rerun-failed-run-1.1.2
@@ -179,5 +193,7 @@ jobs:
           run-id: ${{ github.run_id }}
           repository: ${{ github.repository }}
           vault-addr: ${{ secrets.VAULT_ADDR }}
-          vault-role-id: ${{ secrets.VAULT_ROLE_ID }}
-          vault-secret-id: ${{ secrets.VAULT_SECRET_ID }}
+          vault-auth-method: jwt
+          vault-jwt-path: ${{ secrets.VAULT_JWT_PATH }}
+          vault-jwt-role: ${{ secrets.VAULT_JWT_ROLE }}
+          vault-jwt-audience: ${{ secrets.VAULT_JWT_AUDIENCE }}
