@@ -33,7 +33,7 @@ The following prerequisites are required to use this connector:
 1. Create a service task.
 2. [Apply](../use-connectors/outbound.md) the **Ad-hoc Tools Schema** element template.
 3. Configure the **Ad-hoc sub-process ID** to reference the element ID of the ad-hoc sub-process.
-4. Configure [a result variable or a result expression](../use-connectors/index.md#variableresponse-mapping) to map the
+4. Configure [a result variable or a result expression](../use-connectors/index.md#variable-and-response-mapping) to map the
    connector results to process variables.
 
 ## Tool Definitions
@@ -94,6 +94,8 @@ use the definitions with different LLMs or transform them into the required form
   ]
 }
 ```
+
+If the ad-hoc sub-process contains [gateway tools](./agentic-ai-aiagent-tool-definitions.md#gateway-tool-definitions), such as MCP Client connectors, they are not listed in `toolDefinitions`. Instead, the response contains an additional `gatewayToolDefinitions` list. This list is omitted if the ad-hoc sub-process contains no gateway tools.
 
 You can either configure a result variable to contain the whole response or use a result expression to map parts of the
 response into your process.

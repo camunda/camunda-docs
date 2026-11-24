@@ -49,43 +49,36 @@ export const fundamentalCards = [
   },
 ];
 
-// Evaluate cards on introduction page
+// Evaluate cards on the Evaluate AI agents page
 export const evaluateCards = [
   {
-    link: "../evaluate-agents/monitor-ai-agents/",
+    link: "../monitor-ai-agents/",
     title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
   },
   {
-    link: "../evaluate-agents/detect-off-rail-agents/",
+    link: "../detect-off-rail-agents/",
     title: "Detect off-rail agents",
     image: IconAoAgentImg,
     description: "Identify a stuck or looping AI agent before it fails.",
   },
   {
-    link: "../evaluate-agents/analyze-ai-agents/",
+    link: "../analyze-ai-agents/",
     title: "Analyze with Optimize",
     image: IconOptimize,
     description: "Analyze your AI agents with Optimize.",
   },
   {
-    link: "../evaluate-agents/test-ai-agents/",
+    link: "../test-ai-agents/",
     title: "Test with CPT",
     image: IconTest,
     description: "Test your AI agents with Camunda Process Test.",
   },
 ];
 
-// Build cards on introduction page
-export const buildCards = [
-  {
-    link: "../camunda-provided-llm/",
-    title: "Camunda-provided LLM",
-    image: IconAoLlmImg,
-    description:
-      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-  },
+// Cards on the Build AI agents page
+export const buildCapabilityCards = [
   {
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
@@ -96,25 +89,39 @@ export const buildCards = [
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,
-    description: "Add long-term memory to your AI agents.",
+    description:
+      "Add long-term memory to your AI agents using RAG and the Vector Database connector.",
   },
+];
+
+export const buildExternalAgentCards = [
   {
     link: "../connect-external-agent/",
     title: "Connect an external agent",
     image: IconAoAgentImg,
-    description: "Connect an external agent to Camunda.",
+    description:
+      "Connect an agent built with an external framework, such as LangGraph or CrewAI, to Camunda.",
   },
+];
+
+export const buildExposeCards = [
   {
     link: "../expose-process-as-mcp-tool/",
     title: "Expose a process as an MCP tool",
     image: IconMCP,
     description:
-      "Configure a BPMN process as a callable MCP tool for AI agents.",
+      "Expose BPMN processes as MCP tools so AI agents can discover and run them.",
   },
 ];
 
-// Best practices cards on introduction page
+// Best practices cards on the Best practices page
 export const bestPracticeCards = [
+  {
+    link: "../ai-usage-guidelines/",
+    title: "AI usage guidelines",
+    image: IconAoDesignImg,
+    description: "Use Camunda AI features responsibly.",
+  },
   {
     link: "../ao-design/",
     title: "Design and architecture",

@@ -31,6 +31,158 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 83
+
+### Publication date
+
+November 19, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe, Operate, and Tasklist (8.7 and 8.6)
+- Camunda Optimize
+- Camunda Management Identity (Identity in 8.6)
+- Camunda Connectors
+- Hub Self-Managed 8.10
+- Web Modeler Self-Managed 8.6, 8.7, 8.8, and 8.9
+- Camunda Keycloak images, and the Elasticsearch images that the Helm chart and Docker Compose files deploy
+- Camunda 7 (7.23 and 7.24), Camunda 7 Optimize, Cawemo EE, and IAM
+
+### Impact
+
+Camunda components run on a Java runtime affected by [CVE-2026-114938](https://nvd.nist.gov/vuln/detail/CVE-2026-114938), also called Java4Shell, a heap buffer overflow in the Base64 decoding intrinsic of the OpenJDK HotSpot JVM. The vulnerability is in the Java runtime, not in Camunda code.
+
+A single unauthenticated HTTP request makes the JVM write 62 bytes past a 50-byte heap buffer, which crashes the JVM when a live object sits immediately after that buffer. Camunda reproduced a crash through unauthenticated request paths in the Orchestration Cluster, Management Identity, Connectors, and Camunda 7 Run. On an unmodified JVM the write usually lands in unused heap space, so a reliable crash requires an attacker to shape the heap first. Camunda treats the issue as exploitable. Camunda has not demonstrated code execution.
+
+Camunda 8 SaaS was mitigated on November 18, 2026, and requires no action.
+
+### How to determine if the installation is affected
+
+Your installation is affected only if you use one of these component versions:
+
+- Camunda Orchestration Cluster ≤ 8.10.9, ≤ 8.9.28, or ≤ 8.8.46
+- Camunda Zeebe, Operate, or Tasklist ≤ 8.7.45 or ≤ 8.6.42
+- Camunda Optimize ≤ 8.10.9, ≤ 8.9.28, ≤ 8.8.46, ≤ 8.7.31, or ≤ 8.6.29
+- Camunda Connectors ≤ 8.10.5, ≤ 8.9.19, ≤ 8.8.26, ≤ 8.7.32, or ≤ 8.6.36
+- Camunda Management Identity ≤ 8.10.4, ≤ 8.9.14, ≤ 8.8.22, or ≤ 8.7.29
+- Camunda Identity ≤ 8.6.35
+- Hub Self-Managed ≤ 8.10.6
+- Web Modeler Self-Managed ≤ 8.9.15, ≤ 8.8.26, or ≤ 8.7.29
+
+and both of the following are true for the deployment that runs it:
+
+- The component runs a Java runtime of OpenJDK 17.0.6 or later, or any release from 18 onward. OpenJDK 8, 11, and 17.0.0 through 17.0.5 are not affected. Every Camunda container image that Camunda examined runs a Java runtime in the affected range. If you install Camunda from a distribution archive, check the Java runtime that you supply.
+- The host CPU supports the AVX-512 VBMI instruction set, which Intel Xeon Ice Lake and newer, and AMD Zen 4 and newer, support. Deployments on ARM64, including AWS Graviton, on older Intel and AMD server processors, or on emulated x86 are not affected, whatever Java runtime they use.
+
+To check a node, run `grep -m1 '^flags' /proc/cpuinfo | tr ' ' '\n' | grep avx512vbmi`. If the command returns nothing, the workloads on that node are not affected.
+
+### Solution
+
+Camunda has provided the following releases which apply the mitigation by default:
+
+- Camunda Orchestration Cluster 8.10.10, 8.9.29, 8.8.47
+- Camunda Zeebe, Operate, and Tasklist 8.7.46, 8.6.43
+- Camunda Optimize 8.10.10, 8.9.29, 8.8.47, 8.7.32, 8.6.30
+- Camunda Connectors 8.10.6, 8.9.20, 8.8.27, 8.7.33, 8.6.37
+- Camunda Management Identity 8.10.5, 8.9.15, 8.8.23, 8.7.30
+- Camunda Identity 8.6.36
+- Hub Self-Managed 8.10.7
+- Web Modeler Self-Managed 8.9.16, 8.8.27, 8.7.30
+
+If you can't upgrade yet, apply the mitigation manually: set the environment variable `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` on each Camunda container, and restart the container. Include the Keycloak and Elasticsearch containers that the Helm chart and Docker Compose files deploy, because they run their own Java runtime. The option disables the vulnerable code path, and stopped the memory corruption in every test that Camunda ran. Workloads that decode a lot of Base64 see a small performance cost.
+
+Use `JDK_JAVA_OPTIONS` rather than `JAVA_OPTS`, because some images ignore `JAVA_OPTS` and others use it to replace their default settings. In the Camunda Helm chart, set the variable through the `env` key of each component, as described in [Helm chart application configuration](/self-managed/deployment/helm/configure/application-configs.md). An `env` list replaces the defaults of the chart rather than adding to them, so merge the variable into the `env` entries that you already set.
+
+A Java option only applies to processes that start after you set it, so the restart is required. To confirm that a container picked up the setting, do these checks. Always set the container with `-c`, because some pods also run init containers.
+
+1. Examine the startup log of the container. The output must show `-XX:-UseBASE64Intrinsics`:
+
+   ```shell
+   kubectl logs <pod-name> -c <container-name> | grep "Picked up JDK_JAVA_OPTIONS"
+   ```
+
+   If the log no longer starts at container startup, do step 2.
+
+2. Examine the environment of the container. The output must show `-XX:-UseBASE64Intrinsics`:
+
+   ```shell
+   kubectl exec <pod-name> -c <container-name> -- printenv JDK_JAVA_OPTIONS
+   ```
+
+Do not use `ps` to find the option. The JVM reads `JDK_JAVA_OPTIONS` from the environment, so the option is not on the process command line.
+
+## Notice 82
+
+### Publication date
+
+November 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763), an uncontrolled
+resource consumption flaw in Apache Tomcat (which is used as the embedded servlet container in Web Modeler's `restapi`
+component). A memory leak occurs in the HTTP/2 handling when a client resets a stream, potentially allowing a
+denial-of-service attack through memory exhaustion.
+
+Web Modeler does not enable HTTP/2 by default. An installation is only affected if HTTP/2 is explicitly enabled
+(`server.http2.enabled: true`) and Tomcat directly terminates HTTP/2 connections. For example, if an Ingress or load
+balancer terminates HTTP/2 and forwards HTTP/1.1 internally, Tomcat never sees the HTTP/2 frames (and the vulnerable
+code path would not be executed).
+
+### How to determine if the installation is affected
+
+You are using Web Modeler Self-Managed ≤ 8.9.10 with a custom HTTP/2 setup (see above).
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.11
+
+**Note**: Update to the latest available patch version 8.9.15.
+
+## Notice 81
+
+### Publication date
+
+November 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
+HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
+memory exhaustion by sending messages with an excessive number of headers or excessively long headers.
+
+The vulnerable library is only used in outgoing HTTP requests from Web Modeler to the Camunda 8 Orchestration Cluster
+API. To exploit the vulnerability, an attacker would need to be able to control or intercept the API responses through a
+prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code path is not
+reachable from external, untrusted client traffic.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.24, or ≤ 8.7.28
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.8, 8.8.25, 8.7.29
+
+**Note**: For 8.9 and 8.8, update to the latest available patch versions 8.9.15 and 8.8.26.
+
+The fix was deployed to Web Modeler SaaS on August 25, 2026, 13:31 CET.
+
 ## Notice 80
 
 ### Publication date
@@ -78,7 +230,7 @@ You are using:
 - Camunda Management Identity ≤ 8.10.1, ≤ 8.9.11, ≤ 8.8.19, or ≤ 8.7.26
 - Camunda Identity ≤ 8.6.33
 - Hub Self-Managed ≤ 8.10.4
-- Web Modeler Self-Managed ≤ 8.9.13 or ≤ 8.8.24, or any 8.6 or 8.7 version
+- Web Modeler Self-Managed ≤ 8.9.13, ≤ 8.8.24, ≤ 8.7.28, or ≤ 8.6.28
 - Console Self-Managed ≤ 8.9.129, ≤ 8.8.146, or ≤ 8.7.114
 - A Camunda Keycloak image built before October 22, 2026, or a Camunda Keycloak image for Keycloak 23, 24, or 25
 
@@ -95,7 +247,7 @@ Camunda has provided the following releases which contain the fix for CVE-2026-9
 - Camunda Connectors 8.10.2, 8.9.17, 8.8.24, 8.7.30, 8.6.34
 - Camunda Management Identity 8.10.2, 8.9.12, 8.8.20, 8.7.27
 - Hub Self-Managed 8.10.5
-- Web Modeler Self-Managed 8.9.14, 8.8.25
+- Web Modeler Self-Managed 8.9.14, 8.8.25, 8.7.29, 8.6.29
 - Camunda Identity 8.6.34
 - Console Self-Managed 8.9.130, 8.8.147, 8.7.115
 - Camunda Keycloak images built on or after October 22, 2026:
@@ -107,9 +259,23 @@ If you use one of these Keycloak tags, pull the image again and restart Keycloak
 
 The base images for Keycloak 23, 24, and 25 receive no more updates, so these Camunda Keycloak images do not get the fix. If you use Keycloak 23, 24, or 25, upgrade to a fixed Keycloak 26 image. Refer to [Prepare a Keycloak upgrade](/self-managed/deployment/helm/configure/authentication-and-authorization/keycloak-support-and-upgrades.md#prepare-a-keycloak-upgrade).
 
-The releases above still trust "emSign Root CA - G1", which CVE-2026-114820 also removes. Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, remove it with the workaround below. We will update this notice when we release images without it.
+Camunda has provided the following releases that also contain the fix for CVE-2026-114820 ("emSign Root CA - G1" and "emSign Root CA - G2" are also removed from the trust stores):
 
-A fix for Web Modeler Self-Managed 8.6 and 8.7 is not available yet. Their REST API images still trust the root certificates. Use the workaround below. We will update this notice when we release the fix. Camunda Operate, Tasklist, and Optimize 8.6 are not affected. Their images use a trust store that does not contain the root certificates.
+- Camunda Orchestration Cluster 8.10.9, 8.9.28, 8.8.46
+- Camunda Zeebe, Operate, and Tasklist 8.7.45
+- Camunda Zeebe 8.6.42
+- Camunda Optimize 8.10.9, 8.9.28, 8.8.46, 8.7.31, 8.6.29
+- Camunda Connectors 8.10.4, 8.9.19, 8.8.26, 8.7.32, 8.6.36
+- Camunda Management Identity 8.10.4, 8.9.14, 8.8.22, 8.7.29
+- Camunda Identity 8.6.35
+- Hub Self-Managed 8.10.6
+- Web Modeler Self-Managed 8.9.15, 8.8.26, 8.7.29, 8.6.29
+- `camunda/keycloak` with the `quay-26.8.1`, `quay-optimized-26.8.1`, or `latest` tag, built on or after November 5, 2026
+- `registry.camunda.cloud/keycloak-ee/keycloak` with the `26.8.2` tag, built on or after November 7, 2026. The `26.8.1` tag does not get this fix. Set the `26.8.2` tag in `values-enterprise.yaml`.
+
+The other releases in the first list still trust "emSign Root CA - G1". Eclipse Temurin and Mozilla keep this root because it is not related to the compromised intermediates. To follow CVE-2026-114820, upgrade to a release in the second list or remove the root with the workaround below. The `camunda/keycloak:26.3.3` image does not get this fix, because this tag receives no more updates. Move to a fixed Keycloak 26 image.
+
+Camunda Operate, Tasklist, and Optimize 8.6 are not affected by CVE-2026-91403. Their images use a trust store that does not contain the root certificates.
 
 If you can't upgrade immediately, remove the four root certificates from the Java truststore of the Camunda Java components that the Helm chart deploys. This procedure does not cover Keycloak or Console. For older versions of Camunda, read the guide to remove a CA from the JVM truststore in [8.6](https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/guides/remove-ca-jvm-truststore/) or [8.7](https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/guides/remove-ca-jvm-truststore/).
 
@@ -884,6 +1050,11 @@ Camunda has provided the following releases that contain the fix:
 
 ## Notice 58
 
+:::info
+This notice contains incorrect information regarding the affected and patched versions, as the CVE was mistakenly attributed to a different library.
+It was superseded by [notice 81](#notice-81).
+:::
+
 ### Publication date
 
 July 14, 2026
@@ -905,15 +1076,19 @@ path is not reachable from external, untrusted client traffic.
 
 ### How to determine if the installation is affected
 
-- You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.
+- ~~You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.~~
+
+**Update (November 9, 2026)**: The versions are incorrect; see [notice 81](#notice-81) for the correct values.
 
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
+- ~~Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24~~
 
-The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.
+~~The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.~~
+
+**Update (November 9, 2026)**: The versions and the SaaS deploy date are incorrect; see [notice 81](#notice-81) for the correct values.
 
 ## Notice 57
 

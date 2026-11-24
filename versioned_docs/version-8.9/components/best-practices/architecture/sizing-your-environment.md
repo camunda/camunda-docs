@@ -127,6 +127,7 @@ These ratios are specific to the benchmark's payload and process models; they ar
 - **Run Optimize on a separate Elasticsearch/OpenSearch instance.** Contention is bidirectional: Optimize's write spikes degrade Operate, Tasklist, and the Camunda Exporter, while heavy exporter activity degrades Optimize import. Isolation removes this mutual interference.
 - **Tune retention periods.** Shorter retention means less data in Elasticsearch/OpenSearch and better performance.
 - **Increase import throughput if Optimize lags.** If you notice a significant lag between the rate of exported Zeebe records and imported Optimize data, raise `CAMUNDA_OPTIMIZE_ZEEBE_MAX_IMPORT_PAGE_SIZE` so each import cycle fetches more exported records. This helps Optimize keep pace under high load, but increases memory use per fetch and can negatively impact individual record latency, as Optimize must wait to fill larger batches before processing.
+- **Set the Optimize index shard count from your cluster topology.** Optimize creates the index of each process and decision definition with one primary shard by default ([`CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_NUMBER_OF_SHARDS`](/self-managed/components/optimize/configuration/system-configuration.md) or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_NUMBER_OF_SHARDS`). With one primary and one replica, each index sits on only two nodes, so a few busy definitions can make those nodes a bottleneck and spread disk usage unevenly across a larger cluster. A three-node Elasticsearch cluster in the Camunda load tests runs with three shards. Every shard counts against the [shard budget](#elasticsearchopensearch-shard-budget), so choose the lowest value that spreads the load across your data nodes. Optimize reads the setting when it creates an index, so set it before Optimize imports your process definitions. Existing indices keep their shard count.
 
 #### Elasticsearch/OpenSearch shard budget
 
@@ -233,6 +234,26 @@ There is currently no built-in metric that directly reports the size of this bac
 :::
 
 Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
+
+### Protocol: REST or gRPC
+
+Since Camunda 8.8, the Camunda Java Client uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. gRPC remains available. Both protocols reach the same engine, but they differ in cost on the brokers.
+
+Camunda's regular load tests, which run both protocols side by side on the same workload, show a difference:
+
+- REST typically uses about 10 to 15% more broker CPU than gRPC.
+- When the brokers are CPU-saturated, REST reaches up to about 14% lower throughput.
+- At a fixed rate with CPU headroom, throughput is equal.
+
+Camunda still recommends REST for most workloads:
+
+- **One API for commands and queries:** queries and search are available through REST only, so a REST client needs no second protocol.
+- **Fewer network requirements:** REST works over HTTP/1.1 and HTTP/2, while gRPC requires HTTP/2.
+- **Moderate cost:** the sizing recommendations are based on the [reference benchmark scenario](./sizing-benchmarks.md#reference-benchmark-scenario), whose resources have enough CPU headroom for both gRPC and REST at the benchmarked load.
+
+Consider gRPC for high-volume clients, such as job workers and applications that start many process instances, when your brokers run close to their CPU limit. gRPC is also the only protocol that supports [job streaming](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs). The effect depends on request mix and payload size, so validate it with your own workload. To switch the protocol, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection).
+
+See [REST API performance](https://camunda.github.io/zeebe-chaos/2025/07/02/Follow-up-REST-API-performance) and [REST data availability and the shared HTTP client](https://camunda.github.io/zeebe-chaos/2026/10/08/REST-Performance-validating-with-k6) for more details.
 
 ### Secondary storage
 

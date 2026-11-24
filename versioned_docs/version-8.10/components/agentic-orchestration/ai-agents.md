@@ -21,7 +21,7 @@ AI agents can perform a variety of functions, including making decisions, solvin
 
 Camunda supports two types of agent:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task). To give a Camunda AI agent tools, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md). To give a Camunda AI agent tools, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 
 - **[External agents](/reference/glossary.md#external-agent)** run their [agent loop](/reference/glossary.md#agent-loop) in an external runtime, such as LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine. Camunda orchestrates when the agent runs as part of the process, but it can only surface what the runtime reports back. To make an external agent visible in Camunda, see [connect an external agent](/components/agentic-orchestration/connect-external-agent.md).
 
@@ -70,7 +70,7 @@ Think of the ad-hoc sub-process as a governed toolbox:
 - The LLM chooses a path from the allowed options, while Camunda enforces process boundaries and execution reliability.
 
 :::tip
-Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md), the [example AI Agent Task connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md), and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
 
 #### Example: an export compliance agent
