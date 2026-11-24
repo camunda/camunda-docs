@@ -19,6 +19,7 @@ import CamundaImg from "../img/connector-camunda.png";
 import CSVImg from "../img/connector-csv.png";
 import DatabricksImg from "../img/connector-databricks.png";
 import EasypostImg from "../img/connector-easypost.png";
+import ElevenlabsImg from "../img/connector-elevenlabs.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
 import GitlabImg from "../img/connector-gitlab.png";
@@ -240,6 +241,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../easy-post/",
       image: EasypostImg,
+    },
+    {
+      name: "ElevenLabs",
+      description:
+        "Generate speech, transcribe audio, and run AI voice agent calls from your processes.",
+      type: "Outbound",
+      link: "../elevenlabs/",
+      image: ElevenlabsImg,
     },
     {
       name: "Email",

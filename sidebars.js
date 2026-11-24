@@ -1224,6 +1224,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/elevenlabs",
             {
               Email: [
                 "components/connectors/out-of-the-box-connectors/email-inbound",
