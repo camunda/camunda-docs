@@ -58,13 +58,7 @@ Templates are updated according to the following rules:
 
 ### Replacing templates
 
-If a template is deprecated with a new element template and you want to keep the same input values as in the
-deprecated template, you can:
-
-1. **Unlink**: Remove the current template that is deprecated from the `modelerTemplate` property, but keep the properties
-   which
-   were set.
-2. **Select** and apply the new element template.
+If a template is deprecated in favor of a different template, replace it: select the element, open the **Change element** menu, and select the new template. Values of compatible properties are kept. Review the remaining configuration, and follow the hints in the deprecation message.
 
 ## Missing templates
 
