@@ -212,15 +212,39 @@ Check that a process or local variable has an expected value.
 
 1. Click **Add assertion** > **Variable**.
 2. Select a variable name from the dropdown list, populated from the variables observed in the most recent test run.
-3. Enter the expected value for that variable.
+3. Enter the expected value for that variable, or check one of the following conditions instead:
+
+   | Condition                 | Description                                                                                                                                                                                                                  |
+   | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Matches a rule (FEEL)** | Enter a [FEEL](/components/modeler/feel/what-is-feel.md) expression that must evaluate to `true` for the variable, for example `amount > 0.8`. The editor suggests the process variables and flags syntax errors.            |
+   | **Similar to**            | Enter an **Expected value** that the variable must be semantically similar to. Optionally set a **Threshold** between `0` (lenient) and `1` (strict). The default is `0.5`.                                                  |
+   | **Evaluated by AI**       | Enter an **Expectation** that an AI judge checks the variable against. Optionally set a **Threshold**, a **Custom prompt**, and **Attach Camunda document references** so the judge can use referenced documents as context. |
+
+:::note
+**Similar to** and **Evaluated by AI** are tagged **CPT only**. Test mode saves them to the test file but skips them when running a test case. They run only when you run the test file with [Camunda Process Test (CPT)](/apis-tools/testing/json-test-cases.md). Because these checks use AI, results can vary between runs.
+:::
 
 #### Element assertions
 
 Check that a specific element reached an expected state.
 
 1. Click **Add assertion** > **Element**.
-2. Select the element on the canvas, or search for it by name in the list.
-3. Choose the expected state from the dropdown list (for example, completed, active, or terminated).
+2. Select one or more elements on the canvas, or search for them by name in the list. Click a selected element again on the canvas to deselect it.
+3. Choose the expected state from the dropdown list:
+
+   | State                        | Description                                                                             |
+   | ---------------------------- | --------------------------------------------------------------------------------------- |
+   | **Active**                   | The element is active.                                                                  |
+   | **Completed**                | The element completed.                                                                  |
+   | **Terminated**               | The element was terminated.                                                             |
+   | **Not active**               | The element is not active.                                                              |
+   | **Never activated**          | The element was never activated.                                                        |
+   | **The only active elements** | Only the selected elements are active. Any other active element fails the assertion.    |
+   | **Completed in this order**  | The selected elements completed in the listed order. Drag the elements to reorder them. |
+
+   Select at least two elements for **Completed in this order**.
+
+4. (Optional) For **Active**, **Completed**, or **Terminated** on a single element, enter a **Number of instances** to assert how many instances of the element are in that state. Leave it empty to accept any number.
 
 #### Process instance assertions
 
@@ -228,13 +252,14 @@ Check the overall state of the process instance.
 
 1. Click **Add assertion** > **Process instance**.
 2. Choose the process instance state from the dropdown list (for example, created, active, completed, or terminated).
+3. (Optional) Check **Has active incidents** to assert that the process instance has active incidents.
 
 #### Update or remove an assertion
 
 Open a saved test case's detail view in the side panel, then edit or delete any existing assertion the same way you added it. After you save a test case for the first time, assertion changes save automatically—no extra save step is needed.
 
 :::note
-Test mode's variable, path, and process instance assertions use the same instructions as [test files](test-files.md#instructions): `ASSERT_VARIABLES`, `ASSERT_ELEMENT_INSTANCE`, and `ASSERT_PROCESS_INSTANCE`. See the [full instruction reference](/apis-tools/testing/json-test-cases.md#reference-instructions) for the underlying schema.
+Test mode's variable, path, and process instance assertions use the same instructions as [test files](test-files.md#instructions): `ASSERT_VARIABLES`, `ASSERT_VARIABLE`, `ASSERT_ELEMENT_INSTANCE`, `ASSERT_ELEMENT_INSTANCES`, and `ASSERT_PROCESS_INSTANCE`. See the [full instruction reference](/apis-tools/testing/json-test-cases.md#reference-instructions) for the underlying schema.
 :::
 
 ### Edit a test case
@@ -374,8 +399,6 @@ In Camunda 8 SaaS, Test mode is available to all Camunda Hub users with commente
 Additionally, within their organization, users need to have a [role](/components/hub/organization/users-and-roles.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the environment, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
-
-<!-- NEEDS VERIFICATION -->
 
 In Self-Managed, Test mode is controlled by the `camunda.hub.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Camunda Hub. This is `true` by default for the Docker and Kubernetes distributions.
 

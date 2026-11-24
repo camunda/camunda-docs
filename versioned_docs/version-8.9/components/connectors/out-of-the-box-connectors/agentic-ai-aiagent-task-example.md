@@ -14,17 +14,19 @@ This worked example demonstrates how to use the [AI Agent Task connector](/compo
 First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in an agent loop to connect the agent to the tools it needs.
 
 :::info
-For more information on how to model the tools available to the AI agent, see [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
+To model the tools available to the AI agent, see [add a tool to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md) and [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
 :::
 
 <img src={AgentTaskImg} alt="AI Agent Task with tool calling loop" class="img-700"/>
 
 After adding the element, open the properties panel to configure the connection to your model provider and adapt the system and user prompts as needed.
 
-It is important to align the **Agent context** field and the result variable. The following defaults should be set to ensure re-entering the process will pick up the previous context value:
+It is important to align the **Agent context** field and the result variable. Set the following values so re-entering the AI Agent connector picks up the previous context:
 
-- **Agent context**: `agent.context`
-- **Result variable**: `agent`
+| Field           | Value            |
+| :-------------- | :--------------- |
+| Agent context   | `=agent.context` |
+| Result variable | `agent`          |
 
 ## Agent loop for tool calls {#tools-loop}
 
@@ -37,7 +39,7 @@ It is important to align the **Agent context** field and the result variable. Th
 1. A loop is modeled into the sub-process and back to the AI Agent connector.
    - The `no` flow of the `Contains tool calls?` gateway is marked as the default flow.
 
-   - The `yes` flow condition is configured to activate when the AI Agent response contains a list of tool calls. For example, if the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
+   - The `yes` flow condition is configured to activate when the AI Agent response contains a list of tool calls. For example, if the suggested default values for the [result variable/expression](agentic-ai-aiagent-task.md#output-mapping) are used, this condition could be configured as follows:
 
      ```feel
      not(agent.toolCalls = null) and count(agent.toolCalls) > 0
@@ -60,7 +62,7 @@ This allows:
 The following properties for the ad-hoc sub-process must be configured. You can use the following suggested values as a starting point and change as required or if dealing with multiple agents within the same process.
 
 - **Input collection**: Set this to the list of tool calls your AI Agent connector returns, for example `agent.toolCalls`.
-- **Input element**: Contains the individual tool call, including LLM-generated input parameters based on the [tool definition](agentic-ai-aiagent-tool-definitions.md#tool-definitions). Must aways be set to `toolCall`.
+- **Input element**: Contains the individual tool call, including LLM-generated input parameters based on the [tool definition](agentic-ai-aiagent-tool-definitions.md#tool-definitions). Must always be set to `toolCall`.
 - **Output collection**: Collects the results of all the requested tool calls. Suggested value: `toolCallResults`. Make sure you pass this value as [Tool Call Results](agentic-ai-aiagent-task.md#tools) in the AI Agent configuration.
 - **Output element**: Collects the individual tool call result as returned by an individual tool (see [Tool Call Responses](agentic-ai-aiagent-tool-definitions.md#tool-call-responses)). When changing this `toolCallResult` to a different value, make sure you also change your tools to write to the updated variable name.
   ```feel

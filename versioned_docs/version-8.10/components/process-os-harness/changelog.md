@@ -49,6 +49,59 @@ Releases in each section are listed newest first. For installation instructions,
 ## Alpha
 
 <details>
+<summary>2.0.0-alpha.1 (2026-11-19)</summary>
+
+#### Features
+
+- Enforce model-review findings as lint errors on generated bpmn
+- Compare two transformation tiers side by side
+- Show a dark factory status timeline and give workers room to finish
+- Answer and resolve review threads, with a highlights-only summary
+- Draw grouped stages collapsed with drill-down diagrams
+- Record agent-reported session usage entries
+- Drop the feature lane and take only tasks and bugs
+
+#### Bug fixes
+
+- Read modeling best practices and review findings on every generation path
+- Unblock dark factory reviews: allow the App, stop on failed reviewers, read statuses
+- Read commit statuses with the workflow token
+- Fix model-review findings and report the rest as unresolved
+- Require node 22.18 or later
+- Keep human-only checks from the fix agent, and give the agents more room
+- Allow the Jackson library name in the name gate
+- Check a retried review at once, retry the config read, and number rounds as the status does
+- Group steps into sub-processes instead of folding them
+- List every named system as its own source artifact
+- Cite benign commit in github specialist output
+- Report prerequisites before asking, and ask step 3 in plain text
+- Count transformation gateway markers
+- Make subagent dispatch resilient to stalls and lost outputs
+- Correct c8ctl smoke-test command and add HTTP 413 triage row
+- Report unknown response ids
+
+</details>
+
+<details>
+<summary>1.1.0-alpha.4 (2026-11-09)</summary>
+
+#### Features
+
+- Split the customer-info gate and validate checks on merge groups
+- Name github release artifacts like the download center
+- Write sparse business notes instead of technical annotations
+- Write human-facing reports in simple English
+- Share the BPMN diff viewer and the Camunda report theme
+- Generate review questions for the migration tier
+
+#### Bug fixes
+
+- Map model-review finding v2 to no-gateway-join-fork
+- Treat four-part version in markdown link as version, not ipv4
+
+</details>
+
+<details>
 <summary>1.1.0-alpha.3 (2026-11-02)</summary>
 
 #### Bug fixes

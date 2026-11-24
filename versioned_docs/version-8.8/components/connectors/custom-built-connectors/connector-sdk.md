@@ -227,7 +227,7 @@ BPMN errors. To provide this, connector templates can provide an **Error Express
 
 This object creates a custom header for the jobs created for the tasks that use this template.
 The connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can observe an example of how to use this in the [BPMN errors in connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors-and-failing-jobs).
+You can observe an example of how to use this in the [BPMN errors in connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
 
 ### Outbound connector runtime logic
 
@@ -319,7 +319,7 @@ error should be associated with a specific error code, the connector can throw a
 a `code` as shown in **(3)**.
 
 We recommend documenting the list of error codes as part of the connector's API. Users can build on those codes
-by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors-and-failing-jobs) in their connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their connector configurations.
 
 As shown in **(5)**, the connector can also throw a `ConnectorRetryException` to signal a retryable error (external API call in this case). Such errors will enable the connector to override the job retries and backoff duration values. Here are some specifics about the `ConnectorRetryException`:
 
@@ -433,8 +433,8 @@ A connector template defines the binding to your connector runtime behavior via 
 ```
 
 This type definition `io.camunda:mytestinbound:1` is the connection configuring which version of your connector runtime
-behavior to use. In technical terms, this defines the **Type** of jobs created for tasks in your process model that use
-this template. Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
+behavior to use. In technical terms, this defines which inbound connector implementation the connector runtime activates
+for elements in your process model that use this template.
 
 Besides the type binding, connector templates also define the properties of your connector as `zeebe:property` objects.
 For example, you can create the input variable `sender` of your connector in the element template as follows:
@@ -466,13 +466,19 @@ A minimal recommended outline of a connector function implementation looks as fo
 package io.camunda.connector.inbound;
 
 import io.camunda.connector.api.annotation.InboundConnector;
+import io.camunda.connector.api.inbound.CorrelationFailureHandlingStrategy.ForwardErrorToUpstream;
+import io.camunda.connector.api.inbound.CorrelationFailureHandlingStrategy.Ignore;
+import io.camunda.connector.api.inbound.CorrelationRequest;
+import io.camunda.connector.api.inbound.CorrelationResult;
+import io.camunda.connector.api.inbound.CorrelationResult.Failure;
+import io.camunda.connector.api.inbound.CorrelationResult.Success;
 import io.camunda.connector.api.inbound.InboundConnectorContext;
 import io.camunda.connector.api.inbound.InboundConnectorExecutable;
 import io.camunda.connector.inbound.subscription.MockSubscription;
 import io.camunda.connector.inbound.subscription.MockSubscriptionEvent;
 
 @InboundConnector(name = "MYINBOUNDCONNECTOR", type = "io.camunda:mytestinbound:1")
-public class MyConnectorExecutable implements InboundConnectorExecutable {
+public class MyConnectorExecutable implements InboundConnectorExecutable<InboundConnectorContext> {
 
     private MockSubscription subscription;
     private InboundConnectorContext connectorContext;
@@ -494,7 +500,8 @@ public class MyConnectorExecutable implements InboundConnectorExecutable {
 
     private void onEvent(MockSubscriptionEvent rawEvent) {
         MyConnectorEvent connectorEvent = new MyConnectorEvent(rawEvent);
-        var result = connectorContext.correlateWithResult(connectorEvent);
+        var result = connectorContext.correlate(
+            CorrelationRequest.builder().variables(connectorEvent).build());
         handleResult(result);
     }
 
@@ -582,9 +589,9 @@ attributes to define your requirements:
 ```java
 package io.camunda.connector;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class MyConnectorRequest {
 
@@ -602,8 +609,8 @@ using the `@Valid` annotation. Thus, the `authentication` object will also be va
 ```java
 package io.camunda.connector;
 
-
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 public class Authentication {
 
@@ -824,9 +831,7 @@ the connector SDK out of the box. That way, all connectors can use the same stan
 handling secrets in input data.
 
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
-in the environments that handle connector invocation. We do not pass secrets into the
-Connector function in clear text but only as placeholders that you can replace from
-within the connector function.
+in the environments that handle connector invocation.
 
 Secrets are replaced automatically in the connector input when you use the variable access methods
 of the `OutboundConnectorContext` or properties access methods of the `InboundConnectorContext`.
@@ -1017,6 +1022,16 @@ This option is applicable for Spring Boot users. All you need to do is to includ
 
 Upon starting your Spring Boot application, you will have a job worker connected to Zeebe, waiting to
 receive jobs for your connectors.
+
+The runtime builds on the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md), so you configure the connection to your Orchestration Cluster with `camunda.client.*` properties in `application.properties`. For example, to connect to a local Self-Managed cluster:
+
+```properties
+camunda.client.mode=self-managed
+camunda.client.grpc-address=http://localhost:26500
+camunda.client.rest-address=http://localhost:8080
+```
+
+For authentication and SaaS properties, see [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md). For all available properties, see the [properties reference](/apis-tools/camunda-spring-boot-starter/properties-reference.md). Properties starting with `zeebe.client` or `camunda.client.zeebe` are [legacy names](/apis-tools/camunda-spring-boot-starter/configuration.md#legacy-property-names) from Camunda 8.7 and earlier.
 
 ### Docker runtime image
 

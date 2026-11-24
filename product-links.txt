@@ -55,7 +55,18 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 
 # Short URLs
 
+https://docs.camunda.io/p/available-connectors
 https://docs.camunda.io/p/cluster-auto-pause
+https://docs.camunda.io/p/get-started-with-test-mode
+https://docs.camunda.io/p/introduction-to-connectors
+https://docs.camunda.io/p/manage-secrets-saas
+https://docs.camunda.io/p/organization-credentials
+https://docs.camunda.io/p/rest-connector
+https://docs.camunda.io/p/sendgrid-connector
+https://docs.camunda.io/p/test-cases
+https://docs.camunda.io/p/test-files
+https://docs.camunda.io/p/test-your-process
+https://docs.camunda.io/p/using-secrets-in-connectors
 
 # Full paths
 
