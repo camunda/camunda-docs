@@ -75,6 +75,7 @@ Specifies the intended audience of the token.
 | Auth0           | a custom claim added by an Action | `azp`, or `client_id` on the RFC 9068 profile | Client ID                                   |
 | Okta            | `uid`                             | `cid`                                         | Client ID                                   |
 | PingFederate    | `sub`                             | `client_id`                                   | Shared Access Token Manager for all clients |
+| PingOne         | `sub`                             | `client_id`                                   | Per-application, via resource/scope grants  |
 
 Notes on the table:
 
@@ -86,14 +87,9 @@ Notes on the table:
 
 ## Tell a user token from a client token
 
-A Camunda client application such as c8ctl or Desktop Modeler signs a user in itself, and then calls the API with the access token of that user. A machine client calls the same API with a token of the client credentials flow. Both arrive as `Authorization: Bearer <token>`, so Camunda reads the claims of the token to tell the two apart:
+A Camunda client application such as c8ctl or Desktop Modeler signs a user in itself, and then calls the API with the access token of that user. A machine client calls the same API with a token of the client credentials flow. Both arrive as `Authorization: Bearer <token>`, so Camunda reads the claims of the token to tell the two apart.
 
-1. If the client claim is present, the caller is a client.
-2. If the client claim is absent and the user claim is present, the caller is a user.
-3. With `preferUsernameClaim: true`, steps 1 and 2 change places.
-4. If neither claim is present, Camunda refuses the token.
-
-The two settings must therefore name a claim that only one kind of token carries.
+For the order in which the Orchestration Cluster reads those claims, what `preferUsernameClaim` changes, and which claim to check first, see [how principal identification works](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#how-principal-identification-works). This page covers what that guide leaves to you: which claim to name for each provider.
 
 The claim that `usernameClaim` names also becomes the identity of the person. Every group membership and every authorization is keyed to it. Prefer a claim that the provider never rewrites and never gives to another account. If the provider later gives the same value to a new account, that account inherits every authorization that is still keyed to the old value.
 
@@ -140,8 +136,6 @@ An Entra deployment therefore picks one of two:
 - **Keep a stable identity.** Leave `clientIdClaim` unset and set `usernameClaim: oid`. Every token then becomes a user, and the API cannot tell a machine token from a user token.
 
 A deployment that needs both at once is not served by these settings today.
-
-These settings, and the evidence behind each row, come from [ADR-0048 in the Camunda Security Library](https://github.com/camunda/camunda-security-library/blob/main/docs/adr/0048-recognising-user-tokens-on-the-api-chains.md).
 
 ## Verify audience configuration
 
