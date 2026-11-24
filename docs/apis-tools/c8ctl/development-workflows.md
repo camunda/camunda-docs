@@ -32,15 +32,15 @@ c8ctl skills install --harness claude-code
 c8ctl skills install --harness github-copilot
 c8ctl skills install --harness cursor
 c8ctl skills list
-c8ctl skills remove --dry-run
-c8ctl skills remove --harness claude-code --yes
+c8ctl skills uninstall --dry-run
+c8ctl skills uninstall --harness claude-code --yes
 ```
 
-Without `--harness`, c8ctl detects Claude Code (`claude` or `~/.claude`) and GitHub Copilot CLI (`copilot` or `~/.copilot`) for install, list, and remove. Explicit harness values are GitHub CLI agent IDs; use `gh skill install --help` for the supported list. c8ctl passes the selected ID and user scope to GitHub CLI, which resolves the host-specific skill directory for the current OS. `c8ctl skills list` shows Camunda skills installed in the selected or detected harnesses.
+Without `--harness`, c8ctl detects Claude Code (`claude` or `~/.claude`) and GitHub Copilot CLI (`copilot` or `~/.copilot`) for install, list, and uninstall. Explicit harness values are GitHub CLI agent IDs; use `gh skill install --help` for the supported list. c8ctl passes the selected ID and user scope to GitHub CLI, which resolves the host-specific skill directory for the current OS. `c8ctl skills list` shows Camunda skills installed in the selected or detected harnesses.
 
-GitHub CLI 2.90 or later is required; its skill commands are currently in preview. GitHub CLI resolves the latest tagged version of `camunda/skills`, or the default branch's current commit when the repository has no release tags. Re-running checks for upstream updates and updates the same skill directories without duplicates. If a skill is already up to date, c8ctl leaves it in place, so local edits are preserved. An upstream update may replace edited files.
+GitHub CLI 2.95 or later is required; its skill commands are currently in preview. GitHub CLI resolves the latest tagged version of `camunda/skills`, or the default branch's current commit when the repository has no release tags. Re-running checks for upstream updates and updates the same skill directories without duplicates. If a skill is already up to date, c8ctl leaves it in place, so local edits are preserved. An upstream update may replace edited files.
 
-`c8ctl skills remove` previews the Camunda skill directories before deleting them. In an interactive terminal, confirm the prompt; in non-interactive or JSON mode, pass `--yes` to remove them. `--dry-run` prints a JSON preview without deleting. Removal deletes the full listed directories, including local edits, and leaves other skills untouched. Pass skill names (for example, `c8ctl skills remove camunda-c8ctl`) to remove only those; an unknown name fails before anything is deleted. Without `--skill-path`, a name selects every matching installation. When the same name exists at multiple paths, pair each positional name with one `--skill-path <listed-path>` value in the same order to select exact installations; an unknown name/path pair fails before anything is deleted.
+`c8ctl skills uninstall` previews the Camunda skill directories before deleting them (`skills remove` remains a compatibility alias). In an interactive terminal, confirm the prompt; in non-interactive or JSON mode, pass `--yes` to remove them. `--dry-run` prints a JSON preview without deleting. Removal deletes the full listed directories, including local edits, and leaves other skills untouched. Pass skill names (for example, `c8ctl skills uninstall camunda-c8ctl`) to remove only those; an unknown name fails before anything is deleted. Without `--skill-path`, a name selects every matching installation. When the same name exists at multiple paths, pair each positional name with one `--skill-path <listed-path>` value in the same order to select exact installations; an unknown name/path pair fails before anything is deleted.
 
 To deliberately restore one skill to upstream content, first find its name and installed path with `gh skill list --scope user --agent <agent-id>`, then run:
 
