@@ -107,6 +107,22 @@ function rewriteDocLinks(
   );
 }
 
+// <PageDescription /> renders the page's description (front matter, or the
+// first paragraph when unset) as a paragraph. Inline that text instead of
+// leaving the component tag in the export. Also drops its import line, which
+// would otherwise survive when the page imports nothing else.
+function inlinePageDescription(content, description) {
+  return content
+    .replace(
+      /^\s*import\s+PageDescription\s+from\s+['"][^'"]*PageDescription['"];?\s*$/gm,
+      ""
+    )
+    .replace(
+      /<PageDescription\s*\/>|<PageDescription>\s*<\/PageDescription>/g,
+      () => (description ?? "").trim()
+    );
+}
+
 // Convert a simple glob (supports "*") to a RegExp matched against doc IDs.
 function globToRegExp(glob) {
   const escaped = glob
@@ -180,6 +196,7 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
         let content = stripFrontMatter(raw);
         const rewrite = (text, fromPath) =>
           rewriteDocLinks(text, fromPath, linkContext);
+        content = inlinePageDescription(content, doc.description);
         content = await resolvePartialImports(content, sourcePath, rewrite);
         content = cleanMarkdownContent(content, true, true);
         content = rewrite(content, sourcePath);
@@ -222,3 +239,4 @@ module.exports = function pageMarkdownPlugin(context, opts = {}) {
 // Exposed for unit tests.
 module.exports.resolvePartialImports = resolvePartialImports;
 module.exports.rewriteDocLinks = rewriteDocLinks;
+module.exports.inlinePageDescription = inlinePageDescription;

@@ -1,7 +1,11 @@
 const { mkdtemp, mkdir, writeFile } = require("node:fs/promises");
 const { tmpdir } = require("node:os");
 const { dirname, join } = require("node:path");
-const { resolvePartialImports, rewriteDocLinks } = require("./index.js");
+const {
+  resolvePartialImports,
+  rewriteDocLinks,
+  inlinePageDescription,
+} = require("./index.js");
 
 describe("resolvePartialImports", () => {
   let dir;
@@ -114,5 +118,25 @@ describe("resolvePartialImports link rebasing and naming", () => {
       rewrite
     );
     expect(out).toContain("ABS:/configuration/licensing.md");
+  });
+});
+
+describe("inlinePageDescription", () => {
+  const page =
+    "import PageDescription from '@site/src/components/PageDescription';\n\n<PageDescription />\n\n## Next";
+
+  it("replaces the component with the description and drops the import", () => {
+    const out = inlinePageDescription(page, "Manage resources.");
+    expect(out).toContain("Manage resources.\n\n## Next");
+    expect(out).not.toContain("PageDescription");
+    expect(out).not.toContain("import");
+  });
+
+  it("removes the tag when there is no description", () => {
+    expect(inlinePageDescription(page, undefined)).not.toContain("<");
+  });
+
+  it("leaves pages without the component unchanged", () => {
+    expect(inlinePageDescription("Plain text", "x")).toBe("Plain text");
   });
 });
