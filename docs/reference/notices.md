@@ -33,6 +33,130 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 87
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+Camunda 8.10 was affected by a bug that allowed job workers to receive jobs from tenants they were not assigned to if multi-tenancy was enabled.
+
+A job worker that opens a job stream names the tenants it wants jobs from. The worker could also name tenants it is not assigned to and then receive those tenants' jobs, including their variables. These jobs stayed locked for that worker until their timeout, so the tenant's own workers did not receive them in the meantime.
+
+Job polling (activating jobs on demand) is unaffected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Camunda Orchestration Cluster ≤ 8.10.10. Versions 8.9 and earlier are not affected.
+- Multi-tenancy is enabled.
+- At least one job worker has job streaming enabled.
+- An authenticated client opens a job stream for tenants it is not assigned to.
+
+### Solution
+
+Camunda has provided the following release, which contains the fix:
+
+- Camunda Orchestration Cluster 8.10.11
+
+No configuration workaround is available.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+## Notice 86
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+A bug in the permission and tenant checks for some search and statistics endpoints allowed users to read data they did not have permission to access, such as data from other tenants. This did not allow users to change data.
+
+If you use an RDBMS as secondary storage:
+
+- **Variable search:** If the search was filtered by the variable value using `$like`, it also returned variables with large values, such as long text or large JSON documents. These variables came from all tenants and process definitions, including ones the user had no access to.
+- **User task search:** Some users had only [property-based user task authorizations](/components/admin/authorization.md#configure-property-based-user-task-authorizations), which grant access to tasks where the user is the assignee, a candidate user, or a member of a candidate group. If none of these authorizations applied to the user, they saw all user tasks of their tenants instead of none. Example: a user who isn't a member of any group and whose only authorization covers tasks for their candidate groups.
+- **Audit log search:** Users with permission to read the audit log but not assigned to any tenant could view entries from all tenants.
+- **Role member search:** Users with read permission for one role saw the members of all roles.
+- **Usage metrics:** Users without the `READ_USAGE_METRIC` permission saw usage numbers. The number of task users also counted all tenants, not only the user's tenants.
+- **Batch operation item search:** Users without read permission for batch operations saw all batch operation items.
+
+With all secondary storages (Elasticsearch, OpenSearch, and RDBMS):
+
+- **Job error statistics:** Users with permissions to some processes saw the error codes and messages for all processes.
+- **Batch operation search:** Users with read permission for some batch operations saw all batch operations.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
+- At least one of the following applies:
+  - You use an RDBMS as secondary storage, and enable authorizations or multi-tenancy.
+  - Authorizations are enabled, and some users have permissions only for specific process definitions or batch operations.
+- An authenticated user calls the affected endpoints of the Orchestration Cluster REST API.
+
+In 8.8, only the **variable search**, **usage metrics**, **batch operation item search**, and **batch operation search** are affected.
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+
+No configuration workaround is available.
+
+On Camunda 8 SaaS, only the job error statistics and the batch operation search are affected, because SaaS uses Elasticsearch as secondary storage, not an RDBMS. The fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+## Notice 85
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+A bug in the initial-admin setup allowed unauthenticated users to create an administrator user. This applies to installations configured to use Basic authentication (`camunda.security.authentication.method: basic`, the default) where admin rights are granted only through groups, and no user is assigned directly to the admin role.
+
+With Basic authentication, a new cluster offers a one-time setup step to create the first admin user. This step uses the create admin user endpoint (`POST /v2/setup/user`), which does not require authentication. It is meant to be available only until the admin role has a member. The check counted only users assigned directly to the admin role. If the admin role had only groups as members, the setup step would remain available, and anyone who could access the REST API could create an additional admin user.
+
+With the fix, the setup step is available only while the admin role has no members. Existing admin users and groups retain their access, and no configuration changes are needed.
+
+Installations using OIDC are not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
+- You use Basic authentication (`camunda.security.authentication.method: basic`, the default).
+- No user is assigned directly to the admin role, for example because only groups are assigned to it in the [configuration](/self-managed/components/orchestration-cluster/admin/overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration), or because an admin removed all users from the role.
+- The Orchestration Cluster REST API is reachable over the network. The create admin user endpoint (`POST /v2/setup/user`) does not require authentication.
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+
+Camunda 8 SaaS uses OIDC and is not affected.
+
 ## Notice 83
 
 ### Publication date
