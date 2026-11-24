@@ -80,11 +80,18 @@ RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 # to link to anchors, and more.
 #---------------------------------------------------------------------------------
 
+RewriteRule ^p/available-connectors/?$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,NE,L]
 RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
 RewriteRule ^p/get-started-with-test-mode/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#get-started-with-test-mode [R=301,NE,L]
+RewriteRule ^p/introduction-to-connectors/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,NE,L]
+RewriteRule ^p/manage-secrets-saas/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,NE,L]
+RewriteRule ^p/organization-credentials/?$ /docs/components/hub/organization/credentials/ [R=301,NE,L]
+RewriteRule ^p/rest-connector/?$ /docs/components/connectors/protocol/rest/ [R=301,NE,L]
+RewriteRule ^p/sendgrid-connector/?$ /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,NE,L]
 RewriteRule ^p/test-cases/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/#test-cases [R=301,NE,L]
 RewriteRule ^p/test-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,NE,L]
 RewriteRule ^p/test-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,NE,L]
+RewriteRule ^p/using-secrets-in-connectors/?$ /docs/components/connectors/use-connectors/#using-secrets [R=301,NE,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
@@ -219,6 +226,10 @@ RewriteRule ^docs/next/guides/build-with-ai/ai-usage-guidelines/?$ /docs/next/co
 RewriteRule ^docs/guides/build-with-ai/ai-usage-guidelines/?$ /docs/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
 RewriteRule ^docs/8.9/guides/build-with-ai/ai-usage-guidelines/?$ /docs/8.9/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
 RewriteRule ^docs/8.8/guides/build-with-ai/ai-usage-guidelines/?$ /docs/8.8/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
+
+# Agentic orchestration overview moved from guides/build-with-ai into components/agentic-orchestration
+RewriteRule ^docs/next/guides/build-with-ai/overview/?$ /docs/next/components/agentic-orchestration/overview/ [R=301,L]
+RewriteRule ^docs/guides/build-with-ai/overview/?$ /docs/components/agentic-orchestration/overview/ [R=301,L]
 
 # Evaluate AI agents landing page removed (agentic orchestration sidebar restructure)
 RewriteRule ^docs/next/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview/?$ /docs/next/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]

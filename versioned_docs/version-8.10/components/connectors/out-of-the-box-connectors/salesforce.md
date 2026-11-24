@@ -41,10 +41,12 @@ While the static access token is useful for getting started, it is recommended t
 
 ### Operation types
 
-Currently, this connector supports two types of operation:
+This connector supports the following operation types:
 
 - [SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
 - [sObject records](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
+- [Apex REST](#apex-rest)
+- [Composite Request](#composite-request)
 
 ### SOQL Query
 
@@ -126,6 +128,22 @@ As an update does not return a body, you will not be able to map any data from t
 [These delete the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_delete.htm).
 
 As a delete does not return a body, you will not be able to map any data from the response back to the process.
+
+### Apex REST
+
+Use **Apex REST** to invoke a custom Apex REST endpoint.
+
+- **Method:** The HTTP method of the request: `GET` (default), `POST`, `PATCH`, `DELETE`, or `PUT`.
+- **Path:** The path appended to `/services/apexrest/` to build the request URL, for example, `MyApexClass` or `MyApexClass/action`.
+- **Request body:** (Optional) The request payload for the Apex REST call, provided as a FEEL context. This field is available for the `POST`, `PATCH`, and `PUT` methods.
+
+### Composite Request
+
+Use **Composite Request** to batch any combination of Salesforce REST API calls into a single request. The connector sends the request to `/services/data/<Salesforce API version>/composite`.
+
+- **All or none:** Roll back all subrequests if any of them fails. If disabled, subrequests are processed independently. Enabled by default.
+- **Collate subrequests:** Batch compatible subrequests together where possible. Disabled by default.
+- **Subrequests:** A FEEL list of subrequests, each a context with `method`, `url`, `referenceId`, and optional `body` entries. To reference an earlier subrequest's result in a later subrequest's `url` or `body`, use its `referenceId`. See the [Composite API reference](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_composite.htm).
 
 ## Handle connector response
 
