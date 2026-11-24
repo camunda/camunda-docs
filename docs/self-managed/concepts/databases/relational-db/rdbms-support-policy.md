@@ -44,18 +44,20 @@ Changes to supported versions are announced in the [release announcements](/refe
 
 For **new deployments**, standardize on **one of the latest two supported versions** of a given database whenever possible. Older supported versions remain valid for existing deployments but are not recommended for new deployments.
 
-## Managed PostgreSQL services
+## Managed database services
 
-Camunda supports PostgreSQL as a database engine, not individual managed service implementations.
+Camunda supports the database engines and versions shown in the Supported RDBMS table above. Camunda does not support individual managed service implementations, for example, Amazon RDS, Azure SQL Database, and Google Cloud SQL.
 
-Managed PostgreSQL services are supported when:
+You can use a managed service with Camunda if both of the following conditions are met:
 
-- They are fully compatible with the PostgreSQL versions listed in this policy, and
-- The service provider guarantees compatibility and support for those versions.
+1. The service is fully compatible with a database engine version listed in this policy.
+2. The service provider guarantees this compatibility and supports the version.
 
-Provider-specific operational behavior and service characteristics remain the responsibility of the service provider.
+Camunda tests only the managed services that this policy lists separately. As of November 24, 2026, this is Amazon Aurora PostgreSQL. Camunda does not test other managed services.
 
-Amazon Aurora PostgreSQL is listed separately because it is explicitly tested by Camunda, while other managed PostgreSQL services are supported based on compatibility guarantees provided by the service provider.
+The service provider is responsible for the operation and behavior of the service, including any difference between the service and the database engine. You must test your Camunda setup on the managed service before you use it in production.
+
+If a managed service meets both conditions as outlined above, Camunda Support can help you with issues in Camunda. Camunda Support cannot resolve issues caused by a difference between the service and the listed database engine.
 
 ## New version support
 
