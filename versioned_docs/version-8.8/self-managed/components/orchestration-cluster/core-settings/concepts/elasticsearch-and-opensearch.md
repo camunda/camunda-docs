@@ -47,7 +47,7 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 | `camunda.database.index.number-of-replicas`                        | Number of replicas for all indices                                                                                                                                    | 1                                              |
 
 :::note
-The schema initializer creates the indices from `camunda.database.index.*`. The Camunda Exporter `args.index` shard and replica settings do not change the indices. In Helm, set the replica count with `orchestration.index.replicas`.
+The schema manager creates the indices from `camunda.database.index.*`. The Camunda Exporter `args.index` shard and replica settings do not change the indices. In Helm, set the replica count with `orchestration.index.replicas`.
 
 The shard count applies when an index is created. To change it for existing indices, reindex them. The replica count also applies to existing indices: at startup, the schema manager updates their replica count to the configured value.
 :::
