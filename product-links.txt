@@ -57,9 +57,13 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 
 https://docs.camunda.io/p/available-connectors
 https://docs.camunda.io/p/cluster-auto-pause
+https://docs.camunda.io/p/dmn
+https://docs.camunda.io/p/feel-data-types
+https://docs.camunda.io/p/feel-introduction
 https://docs.camunda.io/p/get-started-with-test-mode
 https://docs.camunda.io/p/introduction-to-connectors
 https://docs.camunda.io/p/manage-secrets-saas
+https://docs.camunda.io/p/modeling-guidance-feel
 https://docs.camunda.io/p/organization-credentials
 https://docs.camunda.io/p/rest-connector
 https://docs.camunda.io/p/sendgrid-connector
