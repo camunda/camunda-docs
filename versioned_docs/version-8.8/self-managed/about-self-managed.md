@@ -22,24 +22,18 @@ Infrastructure,
 ReferenceArchitecture,
 Components,
 } from "@site/src/components/CamundaSelfManaged";
-import OverviewImg from './assets/hero-self-managed.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { selfManagedHero } from './react-components/_hero-data';
 
 <h3 class="subheading">Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={selfManagedHero} href="/self-managed/quickstart/overview/" ariaLabel="Developer and administrator quickstart">
 
 Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
 
 <p class="link-button">[Developer and administrator quickstart](./quickstart/overview.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 :::info Upgrading to Camunda 8.8
 

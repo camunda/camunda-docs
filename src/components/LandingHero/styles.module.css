@@ -129,8 +129,8 @@
   padding: 15px 18px 16px;
   display: flex;
   flex-direction: column;
-  /* Same height whatever the content (list, code or process strip) */
-  min-height: 152px;
+  /* Fixed height so every landing page card matches, whatever the content */
+  height: 164px;
   color: var(--hero-heading);
   font-size: 13px;
   line-height: 1.35;
@@ -275,7 +275,7 @@ a.cardLink:focus-visible {
 /* Notes list */
 .card .notes {
   list-style: none;
-  margin: 0;
+  margin: auto 0;
   padding: 4px 0 1px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content;
@@ -489,7 +489,7 @@ a.cardLink:focus-visible {
   color: var(--hero-info-fg);
 }
 .card .pre {
-  margin: 0 0 12px;
+  margin: auto 0 12px;
   padding: 10px 12px;
   border-radius: 6px;
   background: var(--hero-code);

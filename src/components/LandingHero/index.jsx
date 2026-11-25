@@ -175,10 +175,12 @@ function Code({ card }) {
     <>
       <CardHead title={card.title} meta={card.meta} />
       <pre className={styles.pre}>{card.code}</pre>
-      <div className={styles.resp}>
-        <Cell value={card.status} />
-        <code>{card.result}</code>
-      </div>
+      {card.status && (
+        <div className={styles.resp}>
+          <Cell value={card.status} />
+          <code>{card.result}</code>
+        </div>
+      )}
     </>
   );
 }
