@@ -69,8 +69,6 @@ Only one bundle can be installed at a time. To move to a different agent, run `c
 
 1. Decide which Camunda cluster runs the governance process. For a SaaS or Self-Managed cluster, have the cluster URL and API client credentials ready. Create a `c8ctl` profile for each cluster. See [add a profile](/apis-tools/c8ctl/getting-started.md#add-a-profile).
 
-
-
 1. Start the journey. Launch your AI coding agent, select a smart model (e.g. Opus or similar), then run:
 
    ```text
