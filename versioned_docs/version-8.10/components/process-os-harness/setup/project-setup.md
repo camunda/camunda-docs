@@ -56,14 +56,14 @@ Involve your SMEs early. ProcessOS Harness changes their role from main contribu
 
 ProcessOS allows several builders to collaborate on one ProcessOS project. Use the setup in this section as the recommended practice.
 
-Builders can't work in parallel on one project. The git project is used for the handover between the different builders.
-
 | Component          | Working alone                                          | Working as a team                                                                                |
 | ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | AI coding agent    | One agent on your computer.                            | Each builder has a local ProcessOS Harness installation for the AI coding agent of their choice. |
 | Governance cluster | Local Camunda 8 Run, or a cluster your SMEs can reach. | One Camunda 8 SaaS or Self-Managed cluster that all builders and SMEs can reach.                 |
 | Git project        | A local repository.                                    | One shared Git remote. Each builder works in their own clone.                                    |
 | Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer.                                                  |
+
+Builders can't work in parallel on one project. The git project is used for the handover between the different builders.
 
 ### Set up a ProcessOS project
 
@@ -75,8 +75,8 @@ The first builder:
 Each other builder:
 
 1. Installs the ProcessOS Harness bundle that fits their AI coding agent. See [install ProcessOS Harness](../installation.md).
-1. Clones the Git repository.
-1. Runs `/process-os-governance-start` in their clone.
+1. Clones the Git repository shared by the first builder.
+1. Launches their AI coding agent on the project folder, selects a smart model (e.g. Opus or similar), then runs: `/process-os-governance-start`
 1. Enters the cluster type and the `c8ctl` profile name when the agent asks.
 1. Selects the process instance with the shared key.
 
