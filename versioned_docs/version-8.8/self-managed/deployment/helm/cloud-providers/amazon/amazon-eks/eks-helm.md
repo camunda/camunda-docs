@@ -138,6 +138,10 @@ Additionally, obtain these values by following the guide for either [eksctl](./e
 
 ### ingress-nginx
 
+:::warning
+`ingress-nginx` is archived upstream and no longer receives security fixes. It is affected by [CVE-2026-123007](https://www.cve.org/CVERecord?id=CVE-2026-123007), an HTTP/2 remote code execution vulnerability in NGINX that no `ingress-nginx` release fixes. Do not use it for new deployments. Use a maintained Ingress controller instead, for example Contour, as the 8.9 and later reference architectures do. Existing deployments keep working, but plan a migration.
+:::
+
 [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is an open-source Kubernetes Ingress controller that provides a way to manage external access to services within a Kubernetes cluster. It acts as a reverse proxy and load balancer, routing incoming traffic to the appropriate services based on rules defined in the Ingress resource.
 
 The following installs `ingress-nginx` in the `ingress-nginx` namespace via Helm. For more configuration options, consult the [Helm chart](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx).

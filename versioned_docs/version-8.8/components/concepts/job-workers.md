@@ -49,7 +49,17 @@ This is expensive in terms of resource usage, because both the worker and the se
 
 With **long polling**, a request is kept open while no jobs are available. The request is completed when at least one job becomes available.
 
-**Long polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc).
+You set how long the long poll lasts with the [request timeout of the job activation](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc). If no job becomes available in that time, the gateway returns an empty response. If the request timeout is `0`, the gateway uses its configured long polling timeout (`camunda.api.long-polling.timeout`, default 10 seconds).
+
+If the request timeout is set to a value less than `0`, long polling is disabled for this request. The request completes immediately, even when no job is activated.
+
+#### Set a client timeout longer than the long poll
+
+Most users don't need to act on this. The Camunda Java Client already handles it: it adds 10 seconds to the request timeout over gRPC, and 1 second over REST. This section is for client maintainers, and for anyone who calls the API directly and sets their own timeout.
+
+The job worker's own timeout for the request must be longer than the long poll. Over gRPC, this is the request deadline. Over REST, it is the HTTP request timeout. If the client timeout is too short, the client gives up before the gateway responds. Every poll that finds no jobs then fails with a timeout error, such as gRPC `DEADLINE_EXCEEDED`, instead of returning an empty response successfully.
+
+Leave a few seconds of room. The gateway starts the long poll only after it checks all partitions once. When the long poll ends, the response still needs a few milliseconds plus the network round trip.
 
 ### Job queuing
 
