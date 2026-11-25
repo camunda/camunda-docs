@@ -7,26 +7,20 @@ page_rank: 90
 ---
 
 import "./react-components/\_apitools-card.css";
-import HeroImg from './img/hero-apis.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { apisToolsHero } from './react-components/_hero-data';
 import ApiGrid from './react-components/\_apitools-card';
 import { apiCards, clientCards } from './react-components/\_apitools-card-data';
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={apisToolsHero} href="/apis-tools/java-client/getting-started/" ariaLabel="Get started with the Camunda Java Client">
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
 <p class="link-button">[Get started with the Camunda Java Client](./java-client/getting-started.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={HeroImg} alt="Use Camunda 8 APIs and clients to build, automate, and monitor your applications." title="Use Camunda 8 APIs and clients to build, automate, and monitor your applications." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 :::info Upgrade to Camunda 8.10
 
