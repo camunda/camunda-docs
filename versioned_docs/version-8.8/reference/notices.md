@@ -43,38 +43,30 @@ November 25, 2026
 
 ### Impact
 
-When persistent web sessions are enabled, the Orchestration Cluster stores the web login session in its secondary storage: the `camunda-web-session-8.8.0_` index in Elasticsearch or OpenSearch, or the `WEB_SESSION` table in a relational database. In [affected versions](#how-to-determine-if-the-installation-is-affected), it reads the stored session attributes back with Java deserialization that accepts any class.
+A bug in the initial-admin setup allowed unauthenticated users to create an administrator user. This applies to installations configured to use Basic authentication (`camunda.security.authentication.method: basic`, the default) where admin rights are granted only through groups, and no user is assigned directly to the admin role.
 
-The Orchestration Cluster also shipped commons-collections 20040616. This old build doesn't have the protection that commons-collections 3.2.2 added against [CVE-2015-7501](https://nvd.nist.gov/vuln/detail/CVE-2015-7501) (also tracked as SONATYPE-2015-0002).
+With Basic authentication, a new cluster offers a one-time setup step to create the first admin user. This step uses the create admin user endpoint (`POST /v2/setup/user`), which does not require authentication. It is meant to be available only until the admin role has a member. The check counted only users assigned directly to the admin role. If the admin role had only groups as members, the setup step would remain available, and anyone who could access the REST API could create an additional admin user.
 
-Together, these let an attacker who can write to the session index or table store a crafted session. When the Orchestration Cluster reads it, the attacker can run arbitrary code with the permissions of the Orchestration Cluster process. The Orchestration Cluster reads stored sessions when it removes expired sessions and when a request presents a session cookie.
+With the fix, the setup step is available only while the admin role has no members. Existing admin users and groups retain their access, and no configuration changes are needed.
 
-The attack isn't possible through the Orchestration Cluster REST or gRPC APIs. It requires write access to the secondary storage.
+Installations using OIDC are not affected.
 
 ### How to determine if the installation is affected
 
-Your installation is affected only if you use one of these component versions:
+Your installation is affected if all of these conditions are true:
 
-- Camunda Orchestration Cluster ≤ 8.10.9, ≤ 8.9.28, or ≤ 8.8.46
-
-and persistent web sessions are enabled. The Camunda Helm chart enables them by default when secondary storage is configured. Outside the Helm chart, they are enabled when one of these properties is `true`:
-
-- `camunda.persistent.sessions.enabled`
-- `camunda.security.session.persistent.enabled` (8.10)
-- `camunda.operate.persistentSessionsEnabled` (Deprecated)
-- `camunda.operate.persistent.sessions.enabled` (Deprecated)
-- `camunda.tasklist.persistentSessionsEnabled` (Deprecated)
-- `camunda.tasklist.persistent.sessions.enabled` (Deprecated)
+- You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
+- You use Basic authentication (`camunda.security.authentication.method: basic`, the default).
+- No user is assigned directly to the admin role, for example because only groups are assigned to it in the [configuration](/self-managed/components/orchestration-cluster/identity/overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration), or because an admin removed all users from the role.
+- The Orchestration Cluster REST API is reachable over the network. The create admin user endpoint (`POST /v2/setup/user`) does not require authentication.
 
 ### Solution
 
-Camunda has provided the following releases which contain the fix:
+Camunda has provided the following releases that contain the fix:
 
-- Camunda Orchestration Cluster 8.10.10, 8.9.29, 8.8.47
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
 
-These releases ship commons-collections 3.2.2 and only accept the expected classes when they read a stored session.
-
-If you can't upgrade yet, make sure only the Orchestration Cluster can write to its secondary storage: turn on authentication in Elasticsearch, OpenSearch, or the database, and limit network access to it.
+Camunda 8 SaaS uses OIDC and is not affected.
 
 ## Notice 86
 
@@ -167,7 +159,7 @@ On Camunda 8 SaaS, only the job error statistics and the batch operation search 
 
 ### Publication date
 
-November 25, 2026
+November 24, 2026
 
 ### Products affected
 
@@ -175,30 +167,38 @@ November 25, 2026
 
 ### Impact
 
-A bug in the initial-admin setup allowed unauthenticated users to create an administrator user. This applies to installations configured to use Basic authentication (`camunda.security.authentication.method: basic`, the default) where admin rights are granted only through groups, and no user is assigned directly to the admin role.
+When persistent web sessions are enabled, the Orchestration Cluster stores the web login session in its secondary storage: the `camunda-web-session-8.8.0_` index in Elasticsearch or OpenSearch, or the `WEB_SESSION` table in a relational database. In [affected versions](#how-to-determine-if-the-installation-is-affected), it reads the stored session attributes back with Java deserialization that accepts any class.
 
-With Basic authentication, a new cluster offers a one-time setup step to create the first admin user. This step uses the create admin user endpoint (`POST /v2/setup/user`), which does not require authentication. It is meant to be available only until the admin role has a member. The check counted only users assigned directly to the admin role. If the admin role had only groups as members, the setup step would remain available, and anyone who could access the REST API could create an additional admin user.
+The Orchestration Cluster also shipped commons-collections 20040616. This old build doesn't have the protection that commons-collections 3.2.2 added against [CVE-2015-7501](https://nvd.nist.gov/vuln/detail/CVE-2015-7501) (also tracked as SONATYPE-2015-0002).
 
-With the fix, the setup step is available only while the admin role has no members. Existing admin users and groups retain their access, and no configuration changes are needed.
+Together, these let an attacker who can write to the session index or table store a crafted session. When the Orchestration Cluster reads it, the attacker can run arbitrary code with the permissions of the Orchestration Cluster process. The Orchestration Cluster reads stored sessions when it removes expired sessions and when a request presents a session cookie.
 
-Installations using OIDC are not affected.
+The attack isn't possible through the Orchestration Cluster REST or gRPC APIs. It requires write access to the secondary storage.
 
 ### How to determine if the installation is affected
 
-Your installation is affected if all of these conditions are true:
+Your installation is affected only if you use one of these component versions:
 
-- You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
-- You use Basic authentication (`camunda.security.authentication.method: basic`, the default).
-- No user is assigned directly to the admin role, for example because only groups are assigned to it in the [configuration](/self-managed/components/orchestration-cluster/identity/overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration), or because an admin removed all users from the role.
-- The Orchestration Cluster REST API is reachable over the network. The create admin user endpoint (`POST /v2/setup/user`) does not require authentication.
+- Camunda Orchestration Cluster ≤ 8.10.9, ≤ 8.9.28, or ≤ 8.8.46
+
+and persistent web sessions are enabled. The Camunda Helm chart enables them by default when secondary storage is configured. Outside the Helm chart, they are enabled when one of these properties is `true`:
+
+- `camunda.persistent.sessions.enabled`
+- `camunda.security.session.persistent.enabled` (8.10)
+- `camunda.operate.persistentSessionsEnabled` (Deprecated)
+- `camunda.operate.persistent.sessions.enabled` (Deprecated)
+- `camunda.tasklist.persistentSessionsEnabled` (Deprecated)
+- `camunda.tasklist.persistent.sessions.enabled` (Deprecated)
 
 ### Solution
 
-Camunda has provided the following releases that contain the fix:
+Camunda has provided the following releases which contain the fix:
 
-- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+- Camunda Orchestration Cluster 8.10.10, 8.9.29, 8.8.47
 
-Camunda 8 SaaS uses OIDC and is not affected.
+These releases ship commons-collections 3.2.2 and only accept the expected classes when they read a stored session.
+
+If you can't upgrade yet, make sure only the Orchestration Cluster can write to its secondary storage: turn on authentication in Elasticsearch, OpenSearch, or the database, and limit network access to it.
 
 ## Notice 83
 
