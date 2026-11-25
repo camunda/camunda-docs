@@ -1022,8 +1022,8 @@ camunda:
 
 ## Keep the default Camunda JSON mapper
 
-8.9.31 fixes a regression: since 8.9.0, the starter ignored a Jackson 2 `ObjectMapper` that Spring Boot or a library
-auto-configured, and used the default Camunda JSON mapper instead
+8.9.31 fixes a regression: since 8.9.0, the starter ignored a Jackson 2 `ObjectMapper` that a library or
+Spring Boot 4 with `spring-boot-jackson2` auto-configured, and used the default Camunda JSON mapper instead
 ([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
 The fix can be a breaking change for affected applications, because it changes the JSON your job workers write.
 For example, `java.util.Date` values become ISO strings instead of epoch milliseconds.
