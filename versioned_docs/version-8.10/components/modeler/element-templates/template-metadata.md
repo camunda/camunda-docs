@@ -48,7 +48,7 @@ Templates with the same `id` and different `version` values offer an upgrade pat
 }
 ```
 
-Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving element configurations](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best-effort basis.
+Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving element configurations](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best-effort basis. Only publish compatible changes as a new version, see [evolve element templates](./evolving-templates.md).
 
 :::tip
 Versioning is an important cornerstone of template evolution. Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand the foundations of our upgrade mechanism and of the element template lifecycle.
@@ -368,7 +368,7 @@ An element template embeds the configuration template definitions referenced by 
 
 - `deprecated` is an optional key.
 
-Use `deprecated` to mark a [template as deprecated](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#deprecation).
+Use `deprecated` to mark a [template as deprecated](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#deprecation), for example when you [ship breaking changes as a different template](./evolving-templates.md#publish-breaking-changes-as-a-different-template).
 
 :::info
 By deprecating an element template, you prevent its _future use_. Users will no longer see the template when choosing a template, changing an element's type, or creating a new element. Existing uses continue to work, with a deprecation hint shown in the modeler UI.

@@ -1,6 +1,6 @@
 ---
 id: manage-secrets
-title: Manage connector secrets
+title: Manage cluster secrets
 description: Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.
 ---
 
@@ -19,11 +19,8 @@ If you deploy and the secret is missing, [Operate](../../operate/operate-introdu
 
 To manage secrets:
 
-1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
+1. In the left navigation, click **Environments**. Click **Clusters**, then select a cluster.
 1. On the **Cluster secrets** tab, click **Create new secret**.
-
-   ![secrets](./img/cluster-detail-secrets.png)
-
 1. Provide a **Key** for your secret that you will use to reference your secret from your connector.
 1. Provide the **Value** that will be assigned to the **Key**.
 
