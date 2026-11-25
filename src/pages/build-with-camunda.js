@@ -795,6 +795,26 @@ $ claude plugin install camunda-skills@camunda-skills`}
                     {`$ c8ctl mcp install --docs --orchestration
 $ c8ctl mcp list`}
                   </TerminalWindow>
+                  <p className={styles.aiAlternative}>
+                    If c8ctl is not available, add the servers manually in VS
+                    Code:
+                  </p>
+                  <TerminalWindow title="mcp.json">
+                    {`{
+  "servers": {
+    // Locally running C8Run instance
+    "camunda": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp/cluster"
+    },
+    // Knowledge from the Camunda docs website
+    "camunda docs": {
+      "type": "http",
+      "url": "https://camunda-docs.mcp.kapa.ai"
+    }
+  }
+}`}
+                  </TerminalWindow>
                 </div>
               </div>
               <p
