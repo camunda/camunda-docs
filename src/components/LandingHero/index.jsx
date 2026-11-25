@@ -8,7 +8,8 @@ import styles from "./styles.module.css";
  * Landing page hero: copy (children) beside a live UI card on a pixel grid.
  * The card is described by data, see docs/reference/react-components/_hero-data.js.
  * Pass href (a path inside the docs, such as /reference/...) to make the card a
- * link, with ariaLabel as its accessible name and hover tooltip. The path is prefixed with the
+ * link, with ariaLabel describing the destination (it is added after the card's visible
+ * title to form the accessible name, and is also the hover tooltip). The path is prefixed with the
  * current docs version, so on Next it resolves under /next/. Without href the
  * card is decorative.
  * Card kinds: "notes", "table", "flow", "request", "code", "modeler".
@@ -298,6 +299,12 @@ export default function LandingHero({ card, href, ariaLabel, children }) {
   const basePath = version?.path?.replace(/\/$/, "") ?? "";
   const to = href && `${basePath}${href}`;
   const cardClass = clsx(styles.card, href && styles.cardLink);
+  // The accessible name starts with the card's visible title, so speech-input
+  // users can activate the link by what they see, and adds where it goes.
+  const visibleTitle = card.title || card.path;
+  const accessibleName = ariaLabel
+    ? `${visibleTitle}: ${ariaLabel}`
+    : visibleTitle;
   return (
     <div className={styles.hero}>
       <div className={styles.copy}>{children}</div>
@@ -307,7 +314,7 @@ export default function LandingHero({ card, href, ariaLabel, children }) {
           <Link
             to={to}
             className={cardClass}
-            aria-label={ariaLabel}
+            aria-label={accessibleName}
             title={ariaLabel}
           >
             <Body card={card} />

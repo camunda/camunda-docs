@@ -129,8 +129,9 @@
   padding: 15px 18px 16px;
   display: flex;
   flex-direction: column;
-  /* Fixed height so every landing page card matches, whatever the content */
-  height: 164px;
+  /* Every card is at least this tall so they match. A minimum, not a fixed
+     height, so a card can grow when text is enlarged or labels wrap. */
+  min-height: 164px;
   color: var(--hero-heading);
   font-size: 13px;
   line-height: 1.35;
