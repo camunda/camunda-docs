@@ -160,7 +160,7 @@ More details: [FEEL editor support](/components/modeler/element-templates/templa
 
 ### Versioning
 
-If you plan to make changes to your template over time and want to support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), include a version number property in your template, starting from 1. Templates with the same ID and different version values offer an upgrade path.
+Include a version number property in your template (starting from 1) to support [template evolution](/components/modeler/element-templates/evolving-templates.md). Templates with the same ID and different version values offer an upgrade path.
 
 ```json
 {
