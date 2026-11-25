@@ -47,13 +47,45 @@ function DownloadButtonIcon() {
 }
 
 function Requirements() {
+  const openManualSetup = () => {
+    const manualSetup = document.getElementById("manual-setup");
+    if (manualSetup) manualSetup.open = true;
+  };
+
   return (
     <div className={styles.requirements}>
-      <p>
-        Requires{" "}
-        <ExternalLink to="https://nodejs.org/en/download">
-          Node.js 22.18+
-        </ExternalLink>
+      <p className={styles.requirementLine}>
+        <span>
+          Requires{" "}
+          <ExternalLink to="https://nodejs.org/en/download">
+            Node.js 22.18+
+          </ExternalLink>
+        </span>
+        <span className={styles.requirementSeparator} aria-hidden="true">
+          ·
+        </span>
+        <Link
+          className={styles.manualSetupLink}
+          to="#manual-setup"
+          onClick={openManualSetup}
+        >
+          No Node.js? Set up manually
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M8 3v10M4 9l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
       </p>
     </div>
   );
@@ -146,7 +178,10 @@ function DownloadLinks({ product, detectedOS }) {
 
 function ManualSetup({ detectedOS }) {
   return (
-    <details className={pageStyles.bundleFallback}>
+    <details
+      id="manual-setup"
+      className={clsx(pageStyles.bundleFallback, styles.manualSetup)}
+    >
       <summary
         className={clsx(pageStyles.bundleFallbackSummary, styles.manualSummary)}
       >

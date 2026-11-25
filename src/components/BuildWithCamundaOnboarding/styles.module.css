@@ -37,6 +37,24 @@
   font-size: 0.85rem;
 }
 
+.requirementLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.6rem;
+}
+
+.requirementSeparator {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.manualSetupLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
 .requirements a,
 .manualContent p a,
 .reference a {
@@ -69,6 +87,10 @@
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
+}
+
+.manualSetup {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
 }
 
 .manualSummary small {
