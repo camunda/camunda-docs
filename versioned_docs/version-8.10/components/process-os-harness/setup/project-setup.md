@@ -63,7 +63,7 @@ Builders can't work in parallel on one project. The git project is used for the 
 | AI coding agent    | One agent on your computer.                            | Each builder has a local ProcessOS Harness installation for the AI coding agent of their choice.  |
 | Governance cluster | Local Camunda 8 Run, or a cluster your SMEs can reach. | One Camunda 8 SaaS or Self-Managed cluster that all builders and SMEs can reach.                                                                                   |
 | Git project        | A local repository.                                    | One shared Git remote. Each builder works in their own clone.                                                                                                      |
-| Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer. For a SaaS or Self-Managed target cluster, the agent uses an existing profile, for example the governance profile. |
+| Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer. |
 
 ### Set up a ProcessOS project
 
@@ -76,7 +76,9 @@ Each other builder:
 
 1. Installs the ProcessOS Harness bundle that fits their AI coding agent. See [install ProcessOS Harness](../installation.md).
 1. Clones the Git repository.
-1. Runs `/process-os-governance-start` in their clone. The agent asks for the cluster type and the `c8ctl` profile name. Select the process instance with the shared key.
+1. Runs `/process-os-governance-start` in their clone.
+1. Enters the cluster type and the `c8ctl` profile name when the agent asks.
+1. Selects the process instance with the shared key.
 
 All builders share files through Git. Pull before you start working, and push what you change, with your team's normal branch and review process.
 

@@ -50,7 +50,7 @@ Builders get the most out of ProcessOS Harness when they bring:
 
 The main components of ProcessOS Harness are: an AI coding agent, a Camunda cluster for the governance process, a Camunda target cluster to test the generated solution, and a Git project.
 
-![The builder directs the AI coding agent. The AI coding agent reads and commits files in the Git project. It reaches the governance cluster with the governance profile and the target cluster with the target profile. The governance cluster and the target cluster can be the same cluster.](img/process-os-project-parts.excalidraw.svg)
+![The builder directs the AI coding agent. The AI coding agent reads and commits files in the Git project. It reaches the governance cluster and the target cluster. The governance cluster and the target cluster can be the same cluster.](img/process-os-project-parts.excalidraw.svg)
 
 | Component          | What it is                                                                                                                   | What it holds                                                                                                    |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
