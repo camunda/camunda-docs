@@ -16,6 +16,7 @@ Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-r
 - **Every integration needs REST.** Querying process data, such as process instances, user tasks, incidents, and variables, is available only through the REST API.
 - **Job streaming is the main reason to use gRPC.** It is available only over gRPC and pushes jobs to workers without polling.
 - **You don't have to pick one.** The official Java client and Spring Boot Starter can send commands over REST and stream jobs over gRPC at the same time.
+- **Not every client supports both protocols.** The community Go client supports gRPC only. The official Python, C#, and Rust SDKs and the Orchestration Cluster API TypeScript client support REST only. The Go SDK uses REST and adds gRPC job streaming.
 
 ## Compare the protocols
 
@@ -49,13 +50,13 @@ If gRPC can't reach your cluster, stay on REST and tune long polling. Job stream
 
 Both delivery methods reach the same engine, and a worker can use either.
 
-|                      | Long polling                                  | Job streaming                                                                |
-| :------------------- | :-------------------------------------------- | :--------------------------------------------------------------------------- |
-| Protocol             | REST or gRPC                                  | gRPC only                                                                    |
-| Activation latency   | Depends on the poll interval and cluster size | Lower, because the broker pushes jobs as they become available               |
-| Requests at low load | About one activation request per job          | Far fewer activation requests, because most jobs arrive by push              |
-| Draining a backlog   | Serves jobs that are already waiting          | Delivers new jobs only. Polling serves the existing backlog.                 |
-| Network requirements | Standard HTTP                                 | Long-lived HTTP/2 connections that proxies and load balancers must not close |
+|                      | Long polling                                  | Job streaming                                                                                                       |
+| :------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| Protocol             | REST or gRPC                                  | gRPC only                                                                                                           |
+| Activation latency   | Depends on the poll interval and cluster size | Lower, because the broker pushes jobs as they become available                                                      |
+| Requests at low load | About one activation request per job          | Far fewer activation requests, because most jobs arrive by push                                                     |
+| Draining a backlog   | Serves jobs that are already waiting          | Pushes new jobs only. Streaming job workers bundle a backup poll to pick up jobs created before the worker started. |
+| Network requirements | Standard HTTP                                 | Long-lived HTTP/2 connections that proxies and load balancers must not close                                        |
 
 In Camunda's SDK performance tests, streaming and polling reached about the same throughput when draining a backlog. The difference showed up under light and steady load and in large worker fleets:
 
@@ -63,15 +64,15 @@ In Camunda's SDK performance tests, streaming and polling reached about the same
 - **Streaming reduces backpressure on job activation.** In fleets of hundreds of worker processes, polling produced many more `RESOURCE_EXHAUSTED` responses on activation than streaming.
 - **Polling did not cause a thundering herd in these tests.** Each long poll is held open until a job is available, so the number of requests stays close to one per job.
 
-The numbers depend on your workload, so profile your own workers before you tune. For the methodology and results, see the [SDK performance matrix](https://github.com/camunda/sdk-performance-matrix) and the [streaming vs polling findings for the community Go client](https://github.com/camunda-community-hub/zeebe-client-go/issues/102).
+Benchmark results are sensitive to small changes, so treat them as directional, not as figures to size against. Profile your own workload before you tune. For the methodology and results, see the [SDK performance matrix](https://github.com/camunda/sdk-performance-matrix) and the [streaming vs polling findings for the community Go client](https://github.com/camunda-community-hub/zeebe-client-go/issues/102).
 
 ### Tune your workers
 
 - **Scale CPU-bound handlers by adding processes, not workers.** Adding workers within one process doesn't increase throughput when the handler is CPU-bound.
 - **Don't add processes beyond what the cluster can take.** Once the cluster is at its limit, each extra process only adds connections and activation requests.
-- **Use a shared worker name for workers of the same job type.** The gateway merges streams that target the same job type, worker name, timeout, and fetch variables. Workers with unique names each open a separate stream. See [how job streaming works](/components/concepts/job-workers.md#how-it-works).
+- **Share a worker name across small groups of workers.** The gateway aggregates streams that target the same job type, worker name, timeout, and fetch variables. See [how job streaming works](/components/concepts/job-workers.md#how-it-works).
 - **Use `fetchVariables` and a sensible `maxJobsActive`.** Fetch only the variables the handler needs, and size the worker's capacity for its job timeout. See [writing good workers](/components/best-practices/development/writing-good-workers.md).
-- **Back off on `RESOURCE_EXHAUSTED`.** Raise the poll interval or request timeout, or configure a backoff, so that workers don't retry immediately. See [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md).
+- **Check how your client handles `RESOURCE_EXHAUSTED`.** Many Camunda SDKs back off automatically and let you tune the backpressure response profile. Consult the documentation and source code of your client. See also [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md).
 
 ## Choose a client
 
@@ -82,13 +83,17 @@ The numbers depend on your workload, so profile your own workers before you tune
 | [TypeScript SDK (`@camunda8/sdk`)](/apis-tools/typescript/camunda8-sdk.md)                | REST             | Yes                                                       | Yes                                          |
 | [Orchestration Cluster API TypeScript client](/apis-tools/typescript/oca-client.md)       | REST             | No                                                        | No                                           |
 | [C# SDK](/apis-tools/csharp-sdk.md)                                                       | REST             | No                                                        | No                                           |
+| [Python SDK](/apis-tools/python-sdk.md)                                                   | REST             | No                                                        | No                                           |
 | [Go SDK (Technical Preview)](/apis-tools/go-sdk.md)                                       | REST             | Streaming worker only                                     | Yes, with `NewStreamJobWorker`               |
+| [Rust SDK (Technical Preview)](/apis-tools/rust-sdk.md)                                   | REST             | No                                                        | No                                           |
 
 When you configure both addresses and enable streaming, the Java client sends commands and polls over REST and streams jobs over gRPC. Both endpoints must be reachable from the worker.
 
+The Go SDK can stream jobs from 8.7 and 8.8 clusters. It uses REST for all other operations.
+
 ### Community Go client
 
-The community-maintained [`zeebe-client-go`](https://github.com/camunda-community-hub/zeebe-client-go) supports gRPC polling and streaming. Camunda does not support community clients as part of its commercial services.
+The community-maintained [`zeebe-client-go`](https://github.com/camunda-community-hub/zeebe-client-go) supports gRPC only, for both polling and streaming. It doesn't use REST. Camunda does not support community clients as part of its commercial services.
 
 - Before v8.7.0, job streaming can stall under high volume. Use v8.7.0 or later to stream jobs.
 - Use v8.7.1 or later for the fixes that reduce idle polling cost, avoid stranding jobs on shutdown, and recycle streams after a gateway scale-out or restart.
