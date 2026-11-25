@@ -93,6 +93,29 @@ On an unprotected API, [`GET /v2/authentication/me`](/apis-tools/orchestration-c
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter `use-bare-object-mapper` property removed {#spring-boot-starter-use-bare-object-mapper-removed}
+
+8.11 removes the deprecated `camunda.client.use-bare-object-mapper` property.
+It was added in 8.9 and 8.10 as an opt-out from the fix for a JSON mapper regression.
+
+Starting with 8.11, the starter ignores this property and uses a copy of the application's Jackson 2 `ObjectMapper`
+when one exists, unless you define your own `JsonMapper` bean.
+
+**Action:** If you set this property, update FEEL and DMN expressions and other consumers that rely on the default
+Camunda JSON mapper's output, for example epoch milliseconds for `java.util.Date`, before you upgrade to 8.11.
+Then remove the property.
+
+<p className="link-arrow">[Jackson 2 `ObjectMapper` regression fix](/reference/announcements-release-notes/8100/8100-announcements.md#spring-boot-starter-jackson2-object-mapper)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
