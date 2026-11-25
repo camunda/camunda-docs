@@ -135,8 +135,8 @@ The following key changes were also released as part of an 8.9.x patch release o
 
 | Patch release                                                       | Artifact   | Type            | Key change                                                                                                                                |
 | :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.31](https://github.com/camunda/camunda/releases/tag/8.9.31)    | Core       | Regression      | [Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default](#spring-boot-starter-jackson2-object-mapper) |
 | [8.9.30](https://github.com/camunda/camunda/releases/tag/8.9.30)    | Core       | Breaking change | [Rejections and engine commands contain only the actor in the authorization data](#event-authorization-actor-only)                        |
-| [8.9.30](https://github.com/camunda/camunda/releases/tag/8.9.30)    | Core       | Regression      | [Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default](#spring-boot-starter-jackson2-object-mapper) |
 | [8.9.29](https://github.com/camunda/camunda/releases/tag/8.9.29)    | Core       | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
 | [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                            |
 | [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                           |
@@ -324,12 +324,12 @@ OSS support for Spring Boot 3.x ends in June 2026. This is a Spring framework li
 
 #### Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default {#spring-boot-starter-jackson2-object-mapper}
 
-**Affected versions:** 8.9.0 to 8.9.29. **Fixed in:** 8.9.30.
+**Affected versions:** 8.9.0 to 8.9.30. **Fixed in:** 8.9.31.
 
 In the setups listed below, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
 has ignored an auto-configured Jackson 2 `ObjectMapper` and used the default Camunda JSON mapper instead, so
 `java.time` values in job variables fail to serialize ([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
-8.9.30 and 8.10.11 fix this regression: the starter uses a copy of the application's `ObjectMapper` by default, as in 8.8.
+8.9.31 and 8.10.12 fix this regression: the starter uses a copy of the application's `ObjectMapper` by default, as in 8.8.
 
 This fix can be a breaking change if you rely on the default mapper's output. For example:
 
