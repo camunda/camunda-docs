@@ -16,6 +16,10 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 
 ## Prerequisites
 
+:::warning
+`ingress-nginx` is archived upstream and no longer receives security fixes. It is affected by [CVE-2026-123007](https://www.cve.org/CVERecord?id=CVE-2026-123007), an HTTP/2 remote code execution vulnerability in NGINX that no `ingress-nginx` release fixes. Do not use it for new deployments. Use a maintained Ingress controller instead, for example Contour, as the 8.9 and later reference architectures do. Existing deployments keep working, but plan a migration.
+:::
+
 - An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `ingress.className`.
 - TLS configuration is not included in the examples because it varies between different workflows. Configure TLS in one of these ways:
   - Use `ingress.tls` options directly.
