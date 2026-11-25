@@ -33,7 +33,7 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
-## Notice 87
+## Notice 86
 
 ### Publication date
 
@@ -70,7 +70,7 @@ No configuration workaround is available.
 
 On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
 
-## Notice 86
+## Notice 85
 
 ### Publication date
 
@@ -120,7 +120,7 @@ No configuration workaround is available.
 
 On Camunda 8 SaaS, only the job error statistics and the batch operation search are affected, because SaaS uses Elasticsearch as secondary storage, not an RDBMS. The fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
 
-## Notice 85
+## Notice 84
 
 ### Publication date
 
