@@ -700,13 +700,8 @@ module.exports = {
           position: "left",
         },
         {
-          type: "custom-versionAwareDoc",
-          // The overview moved to components/agentic-orchestration in 8.10;
-          // 8.8 and 8.9 still have it under guides/build-with-ai.
-          docIds: [
-            "components/agentic-orchestration/overview",
-            "guides/build-with-ai/overview",
-          ],
+          type: "doc",
+          docId: "components/agentic-orchestration/overview",
           label: "Agentic orchestration",
           position: "left",
         },
