@@ -45,7 +45,7 @@ November 25, 2026
 
 ### Impact
 
-When persistent web sessions are enabled, the Orchestration Cluster stores the web login session in its secondary storage: the `camunda-web-session-8.8.0_` index in Elasticsearch or OpenSearch, or the `WEB_SESSION` table in a relational database. In [affected versions](#how-to-determine-if-the-installation-is-affected), it reads the stored session attributes back with Java deserialization that accepts any class.
+When persistent web sessions are enabled, the Orchestration Cluster stores the web login session in its secondary storage: the `camunda-web-session-8.8.0_` index in Elasticsearch or OpenSearch, or the `WEB_SESSION` table in a relational database. In affected versions, it reads the stored session attributes back with Java deserialization that accepts any class.
 
 The Orchestration Cluster also shipped commons-collections 20040616. This old build doesn't have the protection that commons-collections 3.2.2 added against [CVE-2015-7501](https://nvd.nist.gov/vuln/detail/CVE-2015-7501) (also tracked as SONATYPE-2015-0002).
 
