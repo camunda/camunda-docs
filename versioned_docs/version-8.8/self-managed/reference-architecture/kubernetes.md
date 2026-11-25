@@ -230,6 +230,10 @@ The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itse
 If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the Orchestration Cluster REST API instead.
 :::
 
+:::warning
+`ingress-nginx` is archived upstream and no longer receives security fixes. It is affected by [CVE-2026-123007](https://www.cve.org/CVERecord?id=CVE-2026-123007), an HTTP/2 remote code execution vulnerability in NGINX that no `ingress-nginx` release fixes. Do not use it for new deployments. Use a maintained Ingress controller instead, for example Contour, as the 8.9 and later reference architectures do. Existing deployments keep working, but plan a migration.
+:::
+
 By default, the Camunda 8 Helm chart is compatible with the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
 
 `Ingress-nginx` deploys a Network Load Balancer (layer 4).

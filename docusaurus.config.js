@@ -97,6 +97,7 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
+    "./static/plugins/webpack-node-polyfills",
     [
       // Operate API docs generation
       "@camunda8/docusaurus-plugin-openapi-docs",

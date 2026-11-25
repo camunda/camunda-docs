@@ -21,7 +21,7 @@ jobs:
     # by a job steps may starve the runner agent to the point where communication is lost,
     # forcing GitHub to consider it offline. To prevent this, we can use a separate container
     # with its own resources for the job execution.
-    container: node:24
+    container: node:26
 
     steps:
       # SHA ref is main
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24
+          node-version: 26
       - name: Download build
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
@@ -76,12 +76,23 @@ jobs:
           path: build
       - name: Install hyperlink
         run: npm install -g @untitaker/hyperlink
+      - name: Install GitHub CLI for hyperlink attestation
+        env:
+          # Renovate updates the version and the linux_amd64 tarball digest together.
+          # renovate: datasource=github-release-attachments depName=cli/cli
+          GH_CLI_VERSION: v2.103.3
+          GH_CLI_SHA256: 4c806978ffce1cec70853302a56d70ac6da4f19bae7adca4e1a8ab00633dd91d
+        run: |
+          cd "$RUNNER_TEMP"
+          gh_dir="gh_${GH_CLI_VERSION#v}_linux_amd64"
+          curl -fsSL --retry 3 -o gh.tar.gz "https://github.com/cli/cli/releases/download/${GH_CLI_VERSION}/${gh_dir}.tar.gz"
+          echo "${GH_CLI_SHA256}  gh.tar.gz" | sha256sum -c -
+          tar -xzf gh.tar.gz "${gh_dir}/bin/gh"
+          echo "$RUNNER_TEMP/${gh_dir}/bin" >> "$GITHUB_PATH"
       - name: Check internal links
         uses: untitaker/hyperlink@9375bc4063712ad490d5eb3d54df0b6aade15e54 # 0.3.2
         env:
-          # The runner image ships a gh CLI (2.45.0) without `gh attestation`, which the install
-          # script uses to verify its binary. Skip the check, as before gh was added to the image.
-          HYPERLINK_SKIP_ATTESTATION: 1
+          HYPERLINK_FORCE_ATTESTATION: 1
         with:
           args: build/
       - name: Remove https redirect
