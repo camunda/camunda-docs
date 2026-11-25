@@ -58,12 +58,12 @@ ProcessOS allows several builders to collaborate on one ProcessOS project. Use t
 
 Builders can't work in parallel on one project. The git project is used for the handover between the different builders.
 
-| Component          | Working alone                                          | Working as a team                                                                                                                                                  |
-| ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| AI coding agent    | One agent on your computer.                            | Each builder has a local ProcessOS Harness installation for the AI coding agent of their choice.  |
-| Governance cluster | Local Camunda 8 Run, or a cluster your SMEs can reach. | One Camunda 8 SaaS or Self-Managed cluster that all builders and SMEs can reach.                                                                                   |
-| Git project        | A local repository.                                    | One shared Git remote. Each builder works in their own clone.                                                                                                      |
-| Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer. |
+| Component          | Working alone                                          | Working as a team                                                                                |
+| ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| AI coding agent    | One agent on your computer.                            | Each builder has a local ProcessOS Harness installation for the AI coding agent of their choice. |
+| Governance cluster | Local Camunda 8 Run, or a cluster your SMEs can reach. | One Camunda 8 SaaS or Self-Managed cluster that all builders and SMEs can reach.                 |
+| Git project        | A local repository.                                    | One shared Git remote. Each builder works in their own clone.                                    |
+| Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer.                                                  |
 
 ### Set up a ProcessOS project
 
