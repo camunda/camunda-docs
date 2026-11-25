@@ -2343,6 +2343,11 @@
   margin-top: 1rem;
 }
 
+.aiAlternative {
+  margin: 1rem 0 0.75rem;
+  font-size: 0.9rem;
+}
+
 .aiCard .terminalBody {
   flex: 1;
 }

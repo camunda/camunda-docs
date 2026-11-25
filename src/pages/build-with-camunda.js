@@ -656,8 +656,7 @@ function BuildWithCamunda() {
               If you selected the local cluster and example project, setup has
               already started a process for you. Use these commands for further
               development, not as additional setup steps. Run the deployment
-              commands from the generated example project folder. The{" "}
-              <code>--profile=local</code> flag targets your local cluster.
+              commands from the generated example project folder.
             </p>
             <div className={styles.commandGrid}>
               <div className={styles.commandCard}>
@@ -670,25 +669,25 @@ $ c8ctl cluster stop`}
               <div className={styles.commandCard}>
                 <h4>Deploy and start processes</h4>
                 <TerminalWindow title="Terminal">
-                  {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn --profile=local
-$ c8ctl create pi --id=rocket-launch --profile=local --variables='{"missionName":"Odyssey","fuelLevel":95}'
-$ c8ctl list pi --profile=local`}
+                  {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
+$ c8ctl create pi --id=rocket-launch --variables='{"missionName":"Odyssey","fuelLevel":95}'
+$ c8ctl list pi`}
                 </TerminalWindow>
               </div>
               <div className={styles.commandCard}>
                 <h4>Interact with processes</h4>
                 <TerminalWindow title="Terminal">
-                  {`$ c8ctl list jobs --type=launch-approval --profile=local
-$ c8ctl activate jobs launch-approval --profile=local
-$ c8ctl complete job 2251799813685252 --profile=local`}
+                  {`$ c8ctl list jobs --type=launch-approval
+$ c8ctl activate jobs launch-approval
+$ c8ctl complete job 2251799813685252`}
                 </TerminalWindow>
               </div>
               <div className={styles.commandCard}>
                 <h4>Monitor and debug</h4>
                 <TerminalWindow title="Terminal">
-                  {`$ c8ctl list inc --state=ACTIVE --profile=local
-$ c8ctl get inc 2251799813685251 --profile=local
-$ c8ctl resolve inc 2251799813685251 --profile=local`}
+                  {`$ c8ctl list inc --state=ACTIVE
+$ c8ctl get inc 2251799813685251
+$ c8ctl resolve inc 2251799813685251`}
                 </TerminalWindow>
               </div>
             </div>
@@ -743,17 +742,29 @@ $ c8ctl resolve inc 2251799813685251 --profile=local`}
                 If you selected <strong>AI assistant skills</strong> and{" "}
                 <strong>Cluster MCP server</strong>, setup installs skills and
                 connects supported AI assistants already on your machine. You
-                don't need to repeat that configuration. Select{" "}
-                <strong>Docs MCP server</strong> during setup to also add
-                documentation search; it asks you to sign in in a browser on
-                first use.
+                don't need to repeat that configuration. Otherwise, use c8ctl to
+                install the skills and connect your detected AI coding
+                harnesses.
               </p>
               <div className={styles.aiGrid}>
                 <div className={styles.aiCard}>
                   <h4 style={{ display: "flex", alignItems: "center" }}>
-                    Add Camunda Skills as Claude plugin
+                    Install Camunda Skills
                   </h4>
+                  <p>
+                    c8ctl installs or updates the skills for supported harnesses
+                    detected on your machine. It requires GitHub CLI 2.95 or
+                    later.
+                  </p>
                   <TerminalWindow title="Terminal">
+                    {`$ c8ctl skills install
+$ c8ctl skills list`}
+                  </TerminalWindow>
+                  <p className={styles.aiAlternative}>
+                    If c8ctl is not available, install the same skills as a
+                    Claude Code plugin:
+                  </p>
+                  <TerminalWindow title="Claude Code">
                     {`$ claude plugin marketplace add camunda/skills
 $ claude plugin install camunda-skills@camunda-skills`}
                   </TerminalWindow>
@@ -773,28 +784,16 @@ $ claude plugin install camunda-skills@camunda-skills`}
                 </div>
                 <div className={styles.aiCard}>
                   <h4 style={{ display: "flex", alignItems: "center" }}>
-                    Connect to Camunda via MCP
+                    Connect AI assistants via MCP
                   </h4>
                   <p>
-                    This example uses the VS Code configuration format. Other
-                    assistants use different configuration formats.
+                    Install the Orchestration Cluster and Docs MCP servers for
+                    supported harnesses. The Docs server asks you to sign in on
+                    first use.
                   </p>
                   <TerminalWindow title="Terminal">
-                    {`// mcp.json
-{
-  "servers": {
-    // Locally running C8Run instance
-    "camunda": {
-      "type": "http",
-      "url": "http://localhost:8080/mcp/cluster"
-    },
-    // Knowledge from the Camunda docs website
-    "camunda docs": {
-      "type": "http",
-      "url": "https://camunda-docs.mcp.kapa.ai"
-    }
-  }
-}`}
+                    {`$ c8ctl mcp install --docs --orchestration
+$ c8ctl mcp list`}
                   </TerminalWindow>
                 </div>
               </div>
