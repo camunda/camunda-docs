@@ -527,7 +527,7 @@ This fix can be a breaking change if you rely on the default mapper's output. Fo
 - Your `spring.jackson.*` (Spring Boot 3) or `spring.jackson2.*` (Spring Boot 4) properties, customizer beans, and
   Jackson `Module` beans now apply to job variables.
 
-Affected, unless you define your own `JsonMapper` or `ObjectMapper` bean:
+You're affected if you use one of the following and don't define your own `JsonMapper` or `ObjectMapper` bean:
 
 - Spring Boot 4 applications with `spring-boot-jackson2`, and applications that get a Jackson 2 `ObjectMapper`
   from a library.

@@ -1083,7 +1083,7 @@ The fix can be a breaking change for affected applications, because it changes t
 For example, `java.util.Date` values become ISO strings instead of epoch milliseconds.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#spring-boot-starter-jackson2-object-mapper) for details.
 
-To keep the default Camunda JSON mapper in these cases, set:
+To keep the default Camunda JSON mapper, set:
 
 ```yaml
 camunda:
@@ -1094,10 +1094,8 @@ camunda:
 You can also use the environment variable `CAMUNDA_CLIENT_USEBAREOBJECTMAPPER=true`. The property defaults to `false`.
 Your own `JsonMapper` or `ObjectMapper` bean is still used when the property is set.
 
-:::caution
-`camunda.client.use-bare-object-mapper` is deprecated, is only supported in 8.9 and 8.10, and is removed in 8.11.
+The `camunda.client.use-bare-object-mapper` property is deprecated. It's supported in 8.9 and 8.10, and removed in 8.11.
 The starter logs a deprecation warning when the property takes effect.
-:::
 
 ## Deploy resources on start-up
 
