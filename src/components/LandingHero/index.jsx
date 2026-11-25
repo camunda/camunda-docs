@@ -12,7 +12,9 @@ import styles from "./styles.module.css";
  * title to form the accessible name, and is also the hover tooltip). The path is prefixed with the
  * current docs version, so on Next it resolves under /next/. Without href the
  * card is decorative.
- * Card kinds: "notes", "table", "flow", "request", "code", "modeler".
+ * Set unversioned for a site page outside the docs (such as /build-with-camunda/),
+ * so the version prefix is not added.
+ * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc".
  */
 
 function Cell({ value }) {
@@ -284,6 +286,85 @@ function Modeler({ card }) {
   );
 }
 
+// Ad-hoc sub-process agent pattern: the AI agent picks among the tools inside,
+// and an event sub-process handles incoming messages.
+function AdHoc({ card }) {
+  return (
+    <>
+      <CardHead title={card.title} meta={card.meta} />
+      <div className={styles.modeler}>
+        <svg
+          className={clsx(styles.canvas, styles.canvasTall)}
+          viewBox="0 0 285 132"
+          preserveAspectRatio="xMidYMid meet"
+          aria-hidden="true"
+        >
+          <defs>
+            <marker
+              id="lh-arrow-adhoc"
+              viewBox="0 0 10 10"
+              refX="9"
+              refY="5"
+              markerWidth="7"
+              markerHeight="7"
+              orient="auto"
+            >
+              <path d="M0 0 10 5 0 10Z" fill="currentColor" />
+            </marker>
+          </defs>
+          <g fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="8" cy="66" r="7" />
+            <path d="M16 66H43" markerEnd="url(#lh-arrow-adhoc)" />
+            <rect x="44" y="4" width="197" height="124" rx="8" />
+            <path d="M241 66H268" markerEnd="url(#lh-arrow-adhoc)" />
+            <circle cx="276" cy="66" r="6.5" strokeWidth="3" />
+            <rect x="54" y="34" width="56" height="28" rx="5" />
+            <path d="M110 48H128" markerEnd="url(#lh-arrow-adhoc)" />
+            <circle cx="137" cy="48" r="8" strokeWidth="2.4" />
+            <path d="M133 45.5h8v5h-8zM133 45.5l4 2.8 4-2.8" strokeWidth="1" />
+            <rect x="170" y="34" width="56" height="28" rx="5" />
+            <rect
+              x="54"
+              y="76"
+              width="172"
+              height="36"
+              rx="5"
+              strokeWidth="1.3"
+              strokeDasharray="1.5 3"
+            />
+            <circle cx="92" cy="94" r="6" strokeDasharray="3 2" />
+            <path d="M98 94H116" markerEnd="url(#lh-arrow-adhoc)" />
+            <rect x="117" y="80" width="76" height="28" rx="5" />
+            <path
+              d="M134.5 119c1.5-3 3-3 4.5 0s3 3 4.500 0"
+              strokeWidth="1.4"
+            />
+          </g>
+          <circle cx="58" cy="14" r="6.5" fill="var(--hero-agent)" />
+          <path
+            d="M58 9.2 59.4 12.6 62.8 14 59.4 15.4 58 18.8 56.6 15.4 53.2 14 56.6 12.6Z"
+            fill="#fff"
+          />
+          <g textAnchor="middle" fontSize="8" fill="currentColor">
+            <text x="142.5" y="17" fontSize="9">
+              {card.agent}
+            </text>
+            <text x="82" y="51">
+              {card.tool}
+            </text>
+            <text x="198" y="51">
+              {card.userTask}
+            </text>
+            <text x="155" y="97">
+              {card.handler}
+            </text>
+          </g>
+        </svg>
+      </div>
+    </>
+  );
+}
+
 const KINDS = {
   notes: Notes,
   table: Table,
@@ -291,13 +372,20 @@ const KINDS = {
   request: Request,
   code: Code,
   modeler: Modeler,
+  adhoc: AdHoc,
 };
 
-export default function LandingHero({ card, href, ariaLabel, children }) {
+export default function LandingHero({
+  card,
+  href,
+  ariaLabel,
+  unversioned,
+  children,
+}) {
   const Body = KINDS[card.kind];
   const version = useActiveVersion();
   const basePath = version?.path?.replace(/\/$/, "") ?? "";
-  const to = href && `${basePath}${href}`;
+  const to = href && (unversioned ? href : `${basePath}${href}`);
   const cardClass = clsx(styles.card, href && styles.cardLink);
   // The accessible name starts with the card's visible title, so speech-input
   // users can activate the link by what they see, and adds where it goes.

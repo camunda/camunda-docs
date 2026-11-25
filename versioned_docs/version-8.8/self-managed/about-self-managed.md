@@ -27,7 +27,7 @@ import { selfManagedHero } from './react-components/_hero-data';
 
 <h3 class="subheading">Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
 
-<LandingHero card={selfManagedHero} href="/self-managed/quickstart/overview/" ariaLabel="Developer and administrator quickstart">
+<LandingHero card={selfManagedHero} href="/build-with-camunda/#self-managed" unversioned ariaLabel="Build with Camunda, self-managed options">
 
 Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
 

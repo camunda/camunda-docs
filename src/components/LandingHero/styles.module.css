@@ -47,6 +47,19 @@
   --hero-people: #c6e65a;
 }
 
+@media (min-width: 997px) {
+  .hero {
+    align-items: flex-start;
+  }
+  /* .art has 24px top padding; match it so the copy meets the card top. */
+  .hero .copy {
+    margin-top: 24px;
+  }
+  .hero .copy :global(.link-button) {
+    padding-top: 10px;
+  }
+}
+
 .copy {
   flex: 1.35;
   min-width: 0;
@@ -441,6 +454,9 @@ a.cardLink:focus-visible {
   height: auto;
   max-height: 82px;
   color: var(--hero-heading);
+}
+.canvasTall {
+  max-height: 132px;
 }
 .selection {
   fill: none;
