@@ -10,7 +10,7 @@ keywords: [<term>, <term>]
 TEMPLATE: Concept (explanation)
 Purpose: help the reader understand what something is, how it works, and why it behaves that way.
 No step-by-step instructions and no property tables. Link to how-to and reference pages.
-File location: docs/<area>/<feature>/concepts/<concept-name>.md
+File location: docs/<area>/<feature>/about/<concept-name>.md (concept pages live in the About folder)
 Delete every "TEMPLATE:" comment before committing.
 -->
 
@@ -38,8 +38,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <!-- TEMPLATE: 2–4 links, most likely first. Say why to follow each. -->
 
-- [Get started with <feature>](../get-started/get-started-<feature>.md) to try it hands-on.
-- [<How-to title>](../how-to/<task>.md) to <achieve goal>.
+- [Get started with <feature>](../get-started-with-<feature>.md) to try it hands-on.
+- [<How-to title>](../<task>.md) to <achieve goal>.
 - [<Reference title>](../reference/<name>.md) for all options and limits.
 
 <!--
@@ -47,5 +47,5 @@ TEMPLATE checklist
 - [ ] Explains what and why, not how-to steps.
 - [ ] No tables of properties or options (move to reference).
 - [ ] Title is a noun phrase.
-- [ ] Ends with Next steps linking to a tutorial or how-to and a reference.
+- [ ] Ends with Next steps linking to a how-to and a reference.
 -->

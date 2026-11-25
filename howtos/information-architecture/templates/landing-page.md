@@ -9,7 +9,7 @@ keywords: [<feature>, <related term>, <related term>]
 <!--
 TEMPLATE: Landing page
 Based on: Agentic orchestration (guides/build-with-ai/overview), MCP Client, and IDP landing pages.
-Purpose: orient the reader and route them to the right tutorial, how-to, concept, or reference.
+Purpose: orient the reader and route them to the right get started page, how-to, concept, or reference page.
 A landing page contains NO instructions and NO reference facts. If it grows beyond one screen of prose, move content to a concept page.
 File location: docs/<area>/<feature>/<feature>.md (see folder-structure.md). Set as the category link in the sidebar.
 Delete every "TEMPLATE:" comment before committing.
@@ -28,7 +28,7 @@ import AoGrid from '<relative path>/react-components/\_ao-card';
 
 <Feature> lets you <do what> so you can <benefit>. Use it when <situation>.
 
-[Learn what <feature> is](./concepts/what-is-<feature>.md)
+[Learn what <feature> is](./about/about-<feature>.md)
 
 ## Get started
 
@@ -36,7 +36,7 @@ import AoGrid from '<relative path>/react-components/\_ao-card';
 
 <AoGrid columns={3} ao={[
 {
-link: "./get-started/get-started-<feature>/",
+link: "./get-started-with-<feature>/",
 title: "Get started with <feature>",
 image: <IconImg>,
 description: "<One sentence outcome.>",
@@ -48,7 +48,7 @@ description: "<One sentence outcome.>",
 <!-- TEMPLATE: Concept pages. Include only if the feature has concepts to learn before use. -->
 
 <AoGrid columns={3} ao={[
-{ link: "./concepts/<concept>/", title: "<Concept>", image: <IconImg>, description: "<What the reader will understand.>" },
+{ link: "./about/<concept>/", title: "<Concept>", image: <IconImg>, description: "<What the reader will understand.>" },
 ]} />
 
 ## Build and configure
@@ -56,7 +56,7 @@ description: "<One sentence outcome.>",
 <!-- TEMPLATE: How-to guides, grouped by user goal, not by UI structure. Use a task verb in card titles. -->
 
 <AoGrid columns={3} ao={[
-{ link: "./how-to/<task>/", title: "<Verb> <object>", image: <IconImg>, description: "<The goal this achieves.>" },
+{ link: "./<task>/", title: "<Verb> <object>", image: <IconImg>, description: "<The goal this achieves.>" },
 ]} />
 
 ## Reference

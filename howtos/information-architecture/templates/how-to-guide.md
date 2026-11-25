@@ -11,7 +11,8 @@ TEMPLATE: How-to guide (task-oriented)
 Purpose: help a reader who already knows what they want accomplish a specific real-world task.
 Assume basic knowledge. Do not teach concepts and do not list every option.
 Be opinionated: give the recommended path. Put alternatives in a separate how-to.
-File location: docs/<area>/<feature>/how-to/<verb>-<object>.md
+File location: docs/<area>/<feature>/<verb>-<object>.md (how-tos sit in the feature folder and are grouped as "How-tos" in the sidebar).
+Also use this template for the optional Get started page: docs/<area>/<feature>/get-started-with-<feature>.md
 Delete every "TEMPLATE:" comment before committing.
 -->
 

@@ -39,34 +39,32 @@
 
 ## Proposed folder tree
 
-Applies [folder-structure.md](../templates/folder-structure.md) unchanged, plus one adaptation (see [learnings](#learnings-for-the-templates)).
+Applies [folder-structure.md](../templates/folder-structure.md), plus one adaptation (see [learnings](#learnings-for-the-templates)).
 
 ```text
 docs/components/modeler/desktop-modeler/
 ├── desktop-modeler.md                                  # Landing page
-├── get-started/
-│   ├── get-started-desktop-modeler.md                  # Tutorial: install check, model, connect, deploy, start (merges 4 pages)
-│   └── build-your-first-form.md                        # Tutorial (from utilize-forms)
-├── concepts/
-│   ├── what-is-desktop-modeler.md                      # Concept (from index.md)
+├── get-started-with-desktop-modeler.md                 # Get started: install check, model, connect, deploy, start (merges 4 pages)
+├── about/
+│   ├── about-desktop-modeler.md                        # About landing page (from index.md)
 │   ├── projects.md                                     # Concept (from projects.md)
 │   └── connector-template-fetching.md                  # Concept (from use-connectors.md)
-├── how-to/
-│   ├── install-desktop-modeler.md
-│   ├── connect-to-camunda.md
-│   ├── deploy-a-diagram.md
-│   ├── start-a-process-instance.md
-│   ├── work-with-projects.md
-│   ├── use-connectors.md
-│   ├── use-credentials.md
-│   ├── test-a-task.md
-│   ├── use-element-templates.md
-│   ├── configure-element-template-sources.md
-│   ├── host-an-element-template-source.md
-│   ├── configure-flags.md
-│   ├── add-custom-lint-rules.md
-│   ├── develop-a-plugin.md
-│   └── troubleshoot-desktop-modeler.md
+├── install-desktop-modeler.md                          # How-tos sit in the feature folder
+├── connect-to-camunda.md
+├── deploy-a-diagram.md
+├── start-a-process-instance.md
+├── build-your-first-form.md                            # From utilize-forms
+├── work-with-projects.md
+├── use-connectors.md
+├── use-credentials.md
+├── test-a-task.md
+├── use-element-templates.md
+├── configure-element-template-sources.md
+├── host-an-element-template-source.md
+├── configure-flags.md
+├── add-custom-lint-rules.md
+├── develop-a-plugin.md
+├── troubleshoot-desktop-modeler.md
 ├── reference/
 │   ├── flags-reference.md
 │   ├── settings-reference.md
@@ -86,18 +84,17 @@ Self-Managed connection pages (`docs/self-managed/components/modeler/desktop-mod
   label: "Desktop Modeler",
   link: { type: "doc", id: "components/modeler/desktop-modeler/desktop-modeler" },
   items: [
-    "components/modeler/desktop-modeler/get-started/get-started-desktop-modeler",
-    "components/modeler/desktop-modeler/get-started/build-your-first-form",
+    "components/modeler/desktop-modeler/get-started-with-desktop-modeler",
     {
       type: "category",
-      label: "Concepts",
+      label: "About",
+      link: { type: "doc", id: "components/modeler/desktop-modeler/about/about-desktop-modeler" },
       items: [
-        "components/modeler/desktop-modeler/concepts/what-is-desktop-modeler",
-        "components/modeler/desktop-modeler/concepts/projects",
-        "components/modeler/desktop-modeler/concepts/connector-template-fetching",
+        "components/modeler/desktop-modeler/about/projects",
+        "components/modeler/desktop-modeler/about/connector-template-fetching",
       ],
     },
-    { type: "category", label: "How-to guides", items: [/* the 15 pages above */] },
+    { type: "category", label: "How-tos", items: [/* the 16 how-to pages above */] },
     { type: "category", label: "Reference", items: [/* the 5 pages above */] },
   ],
 }
@@ -129,19 +126,19 @@ Desktop Modeler (also known as Camunda Modeler) is a desktop application for mod
 
 Use it to design executable diagrams, validate them with lint rules, and deploy and test them against a Camunda cluster without leaving the application.
 
-[Learn what Desktop Modeler is](./concepts/what-is-desktop-modeler.md)
+[Learn what Desktop Modeler is](./about/about-desktop-modeler.md)
 
 ## Get started
 
 <AoGrid columns={3} ao={[
 {
-link: "./get-started/get-started-desktop-modeler/",
+link: "./get-started-with-desktop-modeler/",
 title: "Get started with Desktop Modeler",
 image: IconPlay,
 description: "Model, deploy, and run your first process.",
 },
 {
-link: "./get-started/build-your-first-form/",
+link: "./build-your-first-form/",
 title: "Build your first form",
 image: IconFormsImg,
 description: "Design a form and link it to a user task.",
@@ -151,19 +148,19 @@ description: "Design a form and link it to a user task.",
 ## Learn the fundamentals
 
 <AoGrid columns={3} ao={[
-{ link: "./concepts/projects/", title: "Projects", image: IconProjectsImg, description: "Group BPMN, DMN, forms, and code, and get project-aware editing and deployment." },
-{ link: "./concepts/connector-template-fetching/", title: "Connector template fetching", image: IconConnectorsImg, description: "How Desktop Modeler discovers and caches connector templates." },
+{ link: "./about/projects/", title: "Projects", image: IconProjectsImg, description: "Group BPMN, DMN, forms, and code, and get project-aware editing and deployment." },
+{ link: "./about/connector-template-fetching/", title: "Connector template fetching", image: IconConnectorsImg, description: "How Desktop Modeler discovers and caches connector templates." },
 ]} />
 
 ## Build and configure
 
 <AoGrid columns={3} ao={[
-{ link: "./how-to/install-desktop-modeler/", title: "Install Desktop Modeler", image: IconDownloadImg, description: "Install on Windows, macOS, or Linux." },
-{ link: "./how-to/connect-to-camunda/", title: "Connect to Camunda", image: IconClusterImg, description: "Connect to SaaS or a Self-Managed cluster." },
-{ link: "./how-to/test-a-task/", title: "Test a task", image: IconPlay, description: "Run one task without running the whole process." },
-{ link: "./how-to/use-connectors/", title: "Use connectors", image: IconConnectorsImg, description: "Apply connector templates to tasks." },
-{ link: "./how-to/use-credentials/", title: "Use credentials", image: IconCredentialsImg, description: "Select or create credentials from the properties panel." },
-{ link: "./how-to/develop-a-plugin/", title: "Develop a plugin", image: IconCodeImg, description: "Extend the application." },
+{ link: "./install-desktop-modeler/", title: "Install Desktop Modeler", image: IconDownloadImg, description: "Install on Windows, macOS, or Linux." },
+{ link: "./connect-to-camunda/", title: "Connect to Camunda", image: IconClusterImg, description: "Connect to SaaS or a Self-Managed cluster." },
+{ link: "./test-a-task/", title: "Test a task", image: IconPlay, description: "Run one task without running the whole process." },
+{ link: "./use-connectors/", title: "Use connectors", image: IconConnectorsImg, description: "Apply connector templates to tasks." },
+{ link: "./use-credentials/", title: "Use credentials", image: IconCredentialsImg, description: "Select or create credentials from the properties panel." },
+{ link: "./develop-a-plugin/", title: "Develop a plugin", image: IconCodeImg, description: "Extend the application." },
 ]} />
 
 ## Reference
@@ -182,24 +179,24 @@ description: "Design a form and link it to a user task.",
 <p><a href="https://github.com/camunda/camunda-modeler/issues" class="link-arrow" target="_blank">Report an issue</a></p>
 ```
 
-## Draft: merged first-run tutorial (outline)
+## Draft: merged Get started page (outline)
 
-Applies the [tutorial template](../templates/tutorial.md). Merges `model-your-first-diagram`, `connect-to-camunda-8`, `deploy-diagram`, and `start-instance`. The existing text is reused, not rewritten.
+Applies the [how-to guide template](../templates/how-to-guide.md). Merges `model-your-first-diagram`, `connect-to-camunda-8`, `deploy-diagram`, and `start-instance`. The existing text is reused, not rewritten.
 
-| Section             | Content                                                                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| About this tutorial | Audience: developers new to Camunda. Outcome: a BPMN process running on a cluster, in about 15 minutes                                                        |
-| Prerequisites       | Desktop Modeler [installed](../../../../docs/components/modeler/desktop-modeler/install-the-modeler.md); a Camunda 8 cluster (SaaS) and an API client         |
-| Steps               | 1. Create a BPMN diagram. 2. Add a task and an end event. 3. Save the file. 4. Add a connection (SaaS tab, Self-Managed tab). 5. Deploy. 6. Start an instance |
-| Result              | Link to the instance in Operate, and how to verify it ran                                                                                                     |
-| Next steps          | Build your first form; Use connectors; Understand projects                                                                                                    |
+| Section          | Content                                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| About this guide | Audience: developers new to Camunda. Outcome: a BPMN process running on a cluster, in about 15 minutes                                                        |
+| Prerequisites    | Desktop Modeler [installed](../../../../docs/components/modeler/desktop-modeler/install-the-modeler.md); a Camunda 8 cluster (SaaS) and an API client         |
+| Steps            | 1. Create a BPMN diagram. 2. Add a task and an end event. 3. Save the file. 4. Add a connection (SaaS tab, Self-Managed tab). 5. Deploy. 6. Start an instance |
+| Result           | Link to the instance in Operate, and how to verify it ran                                                                                                     |
+| Next steps       | Build your first form; Use connectors; Understand projects                                                                                                    |
 
-Content removed from the tutorial and relocated: task and event explanations (link to BPMN concept pages), the Linux install variants (how-to), and the "orchestrate human tasks" cross-link (Next steps).
+Content removed from the Get started page and relocated: task and event explanations (link to BPMN concept pages), the Linux install variants (how-to), and the "orchestrate human tasks" cross-link (Next steps).
 
 ## Learnings for the templates
 
 1. **Tools versus features.** The folder tree was written for a feature. Desktop Modeler is a product surface with an extension track (plugins, flags, lint rules). It fit by treating extension pages as how-to and reference, with no new folder. If more tool-like areas behave this way, add a short "Applying to a tool or application" note to `folder-structure.md`.
-2. **A tutorial often spans multiple existing pages.** The template assumes one page. Merging is the main reorganization cost and needs redirects for four URLs. Consider allowing a tutorial to be a short folder when it has more than about 8 steps.
+2. **A Get started page often spans multiple existing pages.** The how-to guide template assumes one page. Merging is the main reorganization cost and needs redirects for four URLs. Consider whether a guide with more than about 8 steps needs its own template or a short folder.
 3. **Title patterns need a list of exceptions.** Titles like `Flags`, `Settings`, and `Telemetry` are noun phrases that are correct for reference pages. The framework title pattern `<Feature> reference` would rename them, and it is not obvious that renaming gains much. Decide whether the `reference` suffix is required or only recommended.
 4. **Prerequisites.** `task-testing` shows a good prerequisites section (version, connection type). The templates should recommend version and connection requirements as the first prerequisite item.
 5. **Next steps as notes.** Several pages end with a `:::note` containing one next step. The templates' `## Next steps` section replaces it, and writers need a short rule to convert them.
@@ -210,5 +207,5 @@ Content removed from the tutorial and relocated: task and event explanations (li
 ## Suggested next steps
 
 - Agree on the open questions in the framework README, using this example as evidence.
-- Decide whether to implement the restructure for Desktop Modeler as a follow-up PR (moves, redirects to `static/.htaccess`, sidebar change, merged tutorial).
+- Decide whether to implement the restructure for Desktop Modeler as a follow-up PR (moves, redirects to `static/.htaccess`, sidebar change, merged Get started page).
 - Repeat this exercise on a second area (for example, Connectors or Operate) to test whether the tree generalizes.
