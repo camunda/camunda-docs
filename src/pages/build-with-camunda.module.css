@@ -1531,6 +1531,11 @@
   padding: 0 40px 5rem;
 }
 
+.cliBasics {
+  margin-bottom: 3rem;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
 .optionalIntro {
   max-width: 800px;
   margin: 0 auto 2rem;
@@ -2329,9 +2334,13 @@
 .aiCard .terminalWindow {
   max-width: 100%;
   margin: 0;
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+.aiCard .terminalWindow + .terminalWindow {
+  margin-top: 1rem;
 }
 
 .aiCard .terminalBody {

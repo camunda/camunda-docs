@@ -8,16 +8,7 @@ import styles from "./downloads.module.css";
 import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
 import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import downloads from "../data/downloads.json";
-
-/* ─── OS detection ─── */
-
-function detectOS() {
-  if (typeof navigator === "undefined") return "mac";
-  const ua = navigator.userAgent.toLowerCase();
-  if (ua.includes("win")) return "windows";
-  if (ua.includes("linux")) return "linux";
-  return "mac";
-}
+import { detectOS } from "../utils/detectOS";
 
 /* ─── Icon components ─── */
 

@@ -648,94 +648,91 @@ function BuildWithCamunda() {
         <LocalOnboarding />
 
         <div className={clsx("container", styles.optionalSections)}>
-          <p className={styles.optionalIntro}>
-            The sections below are optional references and alternative setups.
-            You don't need to repeat the steps that <code>c8ctl setup</code>{" "}
-            completed.
-          </p>
-
-          <details className={styles.optionalSection} id="cli-reference">
-            <summary className={styles.optionalSummary}>
-              <h2>Manage Camunda from your terminal</h2>
-            </summary>
-            <div className={styles.optionalContent}>
-              <p className={styles.optionalNote}>
-                If you selected the local cluster and example project, setup has
-                already started a process for you. Use these commands for
-                further development, not as additional setup steps. Run the
-                deployment commands from the generated example project folder.
-                The <code>--profile=local</code> flag targets your local
-                cluster.
-              </p>
-              <div className={styles.commandGrid}>
-                <div className={styles.commandCard}>
-                  <h4>Manage your clusters</h4>
-                  <TerminalWindow title="Terminal">
-                    {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
+          <section className={styles.cliBasics} id="cli-reference">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Essential commands</h2>
+            </div>
+            <p className={styles.optionalNote}>
+              If you selected the local cluster and example project, setup has
+              already started a process for you. Use these commands for further
+              development, not as additional setup steps. Run the deployment
+              commands from the generated example project folder. The{" "}
+              <code>--profile=local</code> flag targets your local cluster.
+            </p>
+            <div className={styles.commandGrid}>
+              <div className={styles.commandCard}>
+                <h4>Manage your clusters</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
 $ c8ctl cluster stop`}
-                  </TerminalWindow>
-                </div>
-                <div className={styles.commandCard}>
-                  <h4>Deploy and start processes</h4>
-                  <TerminalWindow title="Terminal">
-                    {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn --profile=local
+                </TerminalWindow>
+              </div>
+              <div className={styles.commandCard}>
+                <h4>Deploy and start processes</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn --profile=local
 $ c8ctl create pi --id=rocket-launch --profile=local --variables='{"missionName":"Odyssey","fuelLevel":95}'
 $ c8ctl list pi --profile=local`}
-                  </TerminalWindow>
-                </div>
-                <div className={styles.commandCard}>
-                  <h4>Interact with processes</h4>
-                  <TerminalWindow title="Terminal">
-                    {`$ c8ctl list jobs --type=launch-approval --profile=local
+                </TerminalWindow>
+              </div>
+              <div className={styles.commandCard}>
+                <h4>Interact with processes</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl list jobs --type=launch-approval --profile=local
 $ c8ctl activate jobs launch-approval --profile=local
 $ c8ctl complete job 2251799813685252 --profile=local`}
-                  </TerminalWindow>
-                </div>
-                <div className={styles.commandCard}>
-                  <h4>Monitor and debug</h4>
-                  <TerminalWindow title="Terminal">
-                    {`$ c8ctl list inc --state=ACTIVE --profile=local
+                </TerminalWindow>
+              </div>
+              <div className={styles.commandCard}>
+                <h4>Monitor and debug</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl list inc --state=ACTIVE --profile=local
 $ c8ctl get inc 2251799813685251 --profile=local
 $ c8ctl resolve inc 2251799813685251 --profile=local`}
-                  </TerminalWindow>
-                </div>
+                </TerminalWindow>
               </div>
-
-              <p
-                className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
-                style={{ marginTop: "2.5rem" }}
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <circle
-                    cx="8"
-                    cy="8"
-                    r="7"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                  <path
-                    d="M8 7v4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-                </svg>
-                <span>
-                  Learn more about using the{" "}
-                  <Link to={cliGuideUrl}>Camunda CLI</Link> to manage Camunda
-                  directly from the terminal.
-                </span>
-              </p>
             </div>
-          </details>
+
+            <p
+              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+              style={{ marginTop: "2.5rem" }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                Learn more about using the{" "}
+                <Link to={cliGuideUrl}>Camunda CLI</Link> to manage Camunda
+                directly from the terminal.
+              </span>
+            </p>
+          </section>
+
+          <p className={styles.optionalIntro}>
+            The sections below are optional references to show the basic
+            commands. You don't need to repeat the steps that{" "}
+            <code>c8ctl setup</code> completed (e.g. starting a cluster).
+          </p>
 
           <details className={styles.optionalSection} id="ai-tools">
             <summary className={styles.optionalSummary}>

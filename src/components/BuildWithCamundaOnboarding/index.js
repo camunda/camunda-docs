@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import CodeBlock from "@theme/CodeBlock";
@@ -7,6 +7,7 @@ import TerminalWindow from "./TerminalWindow";
 import pageStyles from "../../pages/build-with-camunda.module.css";
 import downloads from "../../data/downloads.json";
 import styles from "./styles.module.css";
+import { detectOS } from "../../utils/detectOS";
 
 const INSTALL_COMMAND = "$ npm install -g @camunda8/cli";
 const SETUP_COMMAND = "$ c8ctl setup";
@@ -24,6 +25,27 @@ function ExternalLink({ children, ...props }) {
   );
 }
 
+function DownloadButtonIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      style={{ marginRight: 6, verticalAlign: "-2px" }}
+    >
+      <path
+        d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function Requirements() {
   return (
     <div className={styles.requirements}>
@@ -33,7 +55,6 @@ function Requirements() {
           Node.js 22.18+
         </ExternalLink>
       </p>
-      <p>macOS (Apple Silicon or Intel), Windows (x64), or Linux (x64)</p>
     </div>
   );
 }
@@ -47,32 +68,6 @@ function ExploreProcess() {
   );
 }
 
-function ExploreLink() {
-  return (
-    <Link
-      className={styles.exploreLink}
-      to="/docs/guides/getting-started-hello-world/#step-3-explore-your-process-in-operate"
-    >
-      Explore the example
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M5 12h14m-6-6 6 6-6 6"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </Link>
-  );
-}
-
 function Guided() {
   return (
     <ol className={styles.steps} role="list">
@@ -82,12 +77,8 @@ function Guided() {
         </span>
         <section aria-labelledby="install-cli">
           <h3 id="install-cli">Install the Camunda CLI</h3>
-          <p>Open a terminal in your projects folder.</p>
-          <Requirements />
           <TerminalWindow title="Terminal">{INSTALL_COMMAND}</TerminalWindow>
-          <p className={styles.stepResult}>
-            You can now use <code>c8ctl</code> from your terminal.
-          </p>
+          <Requirements />
         </section>
       </li>
       <li>
@@ -97,14 +88,15 @@ function Guided() {
         <section aria-labelledby="run-setup">
           <h3 id="run-setup">Run guided setup</h3>
           <p>
-            Choose <strong>Rocket Launch</strong> in the wizard. Keep{" "}
-            <strong>Local cluster</strong>, <strong>Desktop Modeler</strong>,
-            and <strong>Example project</strong> selected.
+            Keep <strong>Local cluster</strong>,{" "}
+            <strong>Desktop Modeler</strong>, and{" "}
+            <strong>Example project</strong> selected.
           </p>
           <TerminalWindow title="Terminal">{SETUP_COMMAND}</TerminalWindow>
           <p className={styles.stepResult}>
-            The wizard downloads the components, deploys the example, and starts
-            a process instance. AI integrations are optional.
+            The setup downloads the components, starts your cluster, deploys the
+            example, and starts a process instance. It optionally sets up
+            integrations with your AI agent.
           </p>
         </section>
       </li>
@@ -119,40 +111,47 @@ function Guided() {
             Open the example in Desktop Modeler to see how it works and try your
             own changes.
           </p>
-          <ExploreLink />
         </section>
       </li>
     </ol>
   );
 }
 
-function DownloadLinks({ product }) {
+function DownloadLinks({ product, detectedOS }) {
   return (
     <div className={styles.downloadLinks}>
       {Object.entries(product.links).flatMap(([os, releases]) =>
         releases.stable.map((link) => (
-          <ExternalLink
+          <a
             key={link.url}
-            to={link.url}
-            className={pageStyles.downloadButton}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={clsx(
+              pageStyles.downloadButton,
+              os === detectedOS && styles.detectedDownload
+            )}
           >
-            {os === "mac" ? `macOS ${link.label}` : link.label}
-          </ExternalLink>
+            <DownloadButtonIcon />
+            {(os === "mac" ? `macOS ${link.label}` : link.label).replace(
+              /\s+\(\.dmg\)$/,
+              ""
+            )}
+          </a>
         ))
       )}
     </div>
   );
 }
 
-function ManualSetup() {
+function ManualSetup({ detectedOS }) {
   return (
     <details className={pageStyles.bundleFallback}>
       <summary
         className={clsx(pageStyles.bundleFallbackSummary, styles.manualSummary)}
       >
         <span>
-          Download and set up manually
-          <small>No CLI required</small>
+          Download and set up manually <small>No Node? No Problem</small>
         </span>
       </summary>
       <div
@@ -177,7 +176,10 @@ function ManualSetup() {
               </Link>
               .
             </p>
-            <DownloadLinks product={downloads.camundaRun} />
+            <DownloadLinks
+              product={downloads.camundaRun}
+              detectedOS={detectedOS}
+            />
           </li>
           <li>
             <h3>
@@ -192,7 +194,10 @@ function ManualSetup() {
               </Link>{" "}
               to edit and deploy your process models.
             </p>
-            <DownloadLinks product={downloads.desktopModeler} />
+            <DownloadLinks
+              product={downloads.desktopModeler}
+              detectedOS={detectedOS}
+            />
           </li>
           <li>
             <h3>Rocket Launch example</h3>
@@ -215,9 +220,11 @@ function ManualSetup() {
               </Link>{" "}
               with these variables:
             </p>
-            <CodeBlock language="json">
-              {'{\n  "missionName": "Odyssey",\n  "fuelLevel": 95\n}'}
-            </CodeBlock>
+            <div className={styles.manualVariables}>
+              <CodeBlock language="json">
+                {'{\n  "missionName": "Odyssey",\n  "fuelLevel": 95\n}'}
+              </CodeBlock>
+            </div>
           </li>
         </ol>
       </div>
@@ -226,6 +233,12 @@ function ManualSetup() {
 }
 
 export default function LocalOnboarding() {
+  const [detectedOS, setDetectedOS] = useState(null);
+
+  useEffect(() => {
+    setDetectedOS(detectOS());
+  }, []);
+
   return (
     <section
       id="self-managed"
@@ -244,27 +257,28 @@ export default function LocalOnboarding() {
           </span>
         </h2>
         <p className={pageStyles.sectionSub}>
-          Install, set up, and explore your first process.
+          Install the Camunda CLI via npm and start a set up your local Camunda
+          environment.
+        </p>
+        <p className={styles.legal}>
+          By downloading our self-managed packages, you agree to our{" "}
+          <ExternalLink to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+            Privacy Policy
+          </ExternalLink>{" "}
+          and{" "}
+          <ExternalLink to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+            Terms of Use
+          </ExternalLink>
+          .
         </p>
       </div>
       <div className={styles.content}>
         <Guided />
-        <ManualSetup />
+        <ManualSetup detectedOS={detectedOS} />
         <p className={styles.reference}>
           <Link to="/docs/apis-tools/c8ctl/getting-started/">
             Explore all CLI commands
           </Link>
-        </p>
-        <p className={styles.legal}>
-          For local development and evaluation. Downloads are subject to our{" "}
-          <ExternalLink to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
-            Terms of Use
-          </ExternalLink>{" "}
-          and{" "}
-          <ExternalLink to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
-            Privacy Policy
-          </ExternalLink>
-          .
         </p>
       </div>
     </section>
