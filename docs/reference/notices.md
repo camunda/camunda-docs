@@ -287,6 +287,20 @@ Do not use `ps` to find the option. The JVM reads `JDK_JAVA_OPTIONS` from the en
 
 Do not use `java -XX:+PrintFlagsFinal -version` in the container to find the option. This command starts a new JVM, which reads `JDK_JAVA_OPTIONS` but not variables that only a startup script reads, such as `JAVA_OPTS` or `JAVA_OPTS_APPEND`. It does not show the settings of the JVM that runs the component.
 
+### Update: releases with a patched Java runtime
+
+_Updated on November 26, 2026._
+
+The releases listed in the [solution](#solution) disable the vulnerable code path, but their container images still contain an affected Java runtime, so container scanners keep reporting CVE-2026-114938 for them. The following releases ship container images with a patched Java runtime (OpenJDK 25.0.5.1, 21.0.13.1, or 17.0.21.1), which fixes the vulnerability:
+
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+- Camunda Optimize 8.10.11, 8.9.30, 8.8.48
+- Camunda Management Identity 8.10.6, 8.9.16, 8.8.24
+
+:::warning
+If you run a distribution archive on a Java runtime that you supply, use OpenJDK 21.0.13.1, 25.0.5.1, or later. If you can't update the Java runtime yet, keep setting `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` as described in the [solution](#solution). Later releases will no longer set `-XX:-UseBASE64Intrinsics`.
+:::
+
 ## Notice 82
 
 ### Publication date
