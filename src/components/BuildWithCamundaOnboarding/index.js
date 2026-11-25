@@ -151,7 +151,7 @@ function ManualSetup({ detectedOS }) {
         className={clsx(pageStyles.bundleFallbackSummary, styles.manualSummary)}
       >
         <span>
-          Download and set up manually <small>No Node? No Problem</small>
+          No Node? No Problem <small>Download and set up manually</small>
         </span>
       </summary>
       <div
