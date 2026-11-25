@@ -326,9 +326,9 @@ OSS support for Spring Boot 3.x ends in June 2026. This is a Spring framework li
 
 **Affected versions:** 8.9.0 to 8.9.29. **Fixed in:** 8.9.30.
 
-Since 8.9.0, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) has ignored
-an auto-configured Jackson 2 `ObjectMapper` and used the default Camunda JSON mapper instead, so `java.time` values in
-job variables fail to serialize ([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
+In the setups listed below, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
+has ignored an auto-configured Jackson 2 `ObjectMapper` and used the default Camunda JSON mapper instead, so
+`java.time` values in job variables fail to serialize ([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
 8.9.30 and 8.10.11 fix this regression: the starter uses a copy of the application's `ObjectMapper` by default, as in 8.8.
 
 This fix can be a breaking change if you rely on the default mapper's output. For example:

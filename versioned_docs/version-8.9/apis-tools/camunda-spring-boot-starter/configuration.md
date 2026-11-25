@@ -1037,7 +1037,8 @@ camunda:
     use-bare-object-mapper: true
 ```
 
-You can also use the environment variable `CAMUNDA_CLIENT_USEBAREOBJECTMAPPER=true`. The property defaults to `false`.
+You can also use the environment variable `CAMUNDA_CLIENT_USEBAREOBJECTMAPPER=true`. The property is available from 8.9.30
+and defaults to `false`.
 Your own `JsonMapper` or `ObjectMapper` bean is still used when the property is set.
 
 The `camunda.client.use-bare-object-mapper` property is deprecated. It's supported in 8.9 and 8.10, and removed in 8.11.
