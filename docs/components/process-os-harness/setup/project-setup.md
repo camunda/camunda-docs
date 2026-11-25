@@ -54,28 +54,31 @@ Involve your SMEs early. ProcessOS Harness changes their role from main contribu
 
 ## Use ProcessOS as a team
 
-ProcessOS allows several builder to collaborate working on one ProcessOS project. Use the setup in this section as the recommended practice. 
+ProcessOS allows several builders to collaborate on one ProcessOS project. Use the setup in this section as the recommended practice.
 
 Builders can't work in parallel on one project. The git project is used for the handover between the different builders.
 
 | Component          | Working alone                                          | Working as a team                                                                                                                                                  |
 | ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| AI coding agent    | One agent on your computer.                            | Each builder has a local ProcessOS Harness installation for the AI coding agent of their choice.                                                                                                         |
+| AI coding agent    | One agent on your computer.                            | Each builder has a local ProcessOS Harness installation for the AI coding agent of their choice.  |
 | Governance cluster | Local Camunda 8 Run, or a cluster your SMEs can reach. | One Camunda 8 SaaS or Self-Managed cluster that all builders and SMEs can reach.                                                                                   |
 | Git project        | A local repository.                                    | One shared Git remote. Each builder works in their own clone.                                                                                                      |
 | Target cluster     | Local Camunda 8 Run.                                   | Local Camunda 8 Run on each builder's computer. For a SaaS or Self-Managed target cluster, the agent uses an existing profile, for example the governance profile. |
 
+### Set up a ProcessOS project
 
+The first builder:
 
-### Stup a ProcessOS project
+1. Installs ProcessOS Harness. See [install ProcessOS Harness](../installation.md).
+1. Shares the Git project details and the process instance key of the governance process with the other builders.
 
-1. The first builder installs ProcessOS Harness. See [install ProcessOS Harness](../installation.md#install).
-1. The first builder shares the Git project details and the process instance key of the governance process with the other builders.
-1. Other builders make sure they meet the [builder client requirements](system-requirements.md#builder-client).
-1. Other builders install the ProcessOS Harness bundle that fits their AI coding agent. See [install ProcessOS Harness](../installation.md#install).
-1. Other builders clone the Git repository.
-1. Other builders run `/process-os-governance-start` in their clone. The agent asks for the cluster type and the `c8ctl` profile name. See [connect the governance cluster](../installation.md#connect-the-governance-cluster). Select the process instance with the shared key.
-1. All builders share files through Git. Pull before you start working, and push what you change, with your team's normal branch and review process.
+Each other builder:
+
+1. Installs the ProcessOS Harness bundle that fits their AI coding agent. See [install ProcessOS Harness](../installation.md).
+1. Clones the Git repository.
+1. Runs `/process-os-governance-start` in their clone. The agent asks for the cluster type and the `c8ctl` profile name. Select the process instance with the shared key.
+
+All builders share files through Git. Pull before you start working, and push what you change, with your team's normal branch and review process.
 
 ### Know what the governance cluster shares
 

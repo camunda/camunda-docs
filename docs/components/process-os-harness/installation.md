@@ -67,7 +67,7 @@ Only one bundle can be installed at a time. To move to a different agent, run `c
    git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
    ```
 
-1. Decide which Camunda cluster runs the governance process. For a SaaS or Self-Managed cluster, have the cluster URL and API client credentials ready. For SaaS, see [manage API clients](/components/saas/clusters/manage-api-clients.md). To learn how ProcessOS Harness uses the cluster, see [select clusters with c8ctl profiles](#select-clusters-with-c8ctl-profiles).
+1. Decide which Camunda cluster runs the governance process. For a SaaS or Self-Managed cluster, have the cluster URL and API client credentials ready. Create a `c8ctl` profile for each cluster. See [add a profile](/apis-tools/c8ctl/getting-started.md#add-a-profile).
 
 
 
@@ -87,54 +87,6 @@ To install a newer archive, download it from the Camunda Download Center (Enterp
 | -------------------------------------------- | ---------------------------------------------------------------- |
 | `c8 os switch <claudecode> --zip <file.zip>` | Remove the current installation, then install the given archive. |
 | `c8 os uninstall`                            | Remove the installation, and restore the files it replaced.      |
-
-## Select clusters with c8ctl profiles
-
-ProcessOS Harness uses `c8ctl` profiles to keep the governance cluster and the target cluster apart.
-
-A `c8ctl` profile stores the address and the credentials of one Camunda cluster. ProcessOS Harness names a profile with `--profile` on each `c8ctl` command, so every command reaches the intended cluster. A profile only routes commands. It doesn't share project files, copy data between clusters, or deploy anything.
-
-| Cluster            | Profile                                                                                                                                                                        | When ProcessOS Harness uses it                                                              |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Governance cluster | Local cluster: the built-in `local` profile. SaaS or Self-Managed cluster: a profile you create and name.                                                                      | When you run `/process-os-governance-start`, and for every governance step after it.        |
-| Target cluster     | Local cluster (default): a profile named `Camunda<version>`, for example `Camunda8.10`. SaaS or Self-Managed cluster: an existing profile, for example the governance profile. | When the agent deploys the generated solution, or checks that the solution can be deployed. |
-
-To learn how `c8ctl` resolves profiles, see [credential resolution](/apis-tools/c8ctl/getting-started.md#credential-resolution).
-
-### Connect the governance cluster
-
-`/process-os-governance-start` asks which type of cluster runs the governance process: **local**, **saas**, or **self-managed**.
-
-- **local**: The agent uses the built-in `local` profile. It checks that a local Camunda 8 Run cluster is running, and offers to start it if not.
-- **saas** or **self-managed**: The agent asks for a profile name. If the profile doesn't exist, create it, then confirm to the agent:
-
-  ```bash
-  c8 add profile <profile-name> --baseUrl=<cluster-url> --clientId=<client-id> --clientSecret=<client-secret>
-  ```
-
-  The agent then checks that it can reach the cluster with this profile. For all profile options, see [add a profile](/apis-tools/c8ctl/command-reference.md#add).
-
-Credentials stay in `c8ctl`. ProcessOS Harness stores only the cluster type and the profile name in `.camunda/governance.json`. Project initialization adds this file to `.gitignore`, so each working copy keeps its own record.
-
-Changing the active profile with `c8 use profile` doesn't move a project to another governance cluster. To connect a project to a different governance cluster, run `/process-os-governance-start --reconnect`.
-
-### Understand how the target cluster is selected
-
-The target cluster runs the Camunda version set by `camunda-version` in `run.config.yaml`. The agent selects it in two situations:
-
-| Situation                                                                   | Target cluster                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Deployment, in the [implementation phase](build/phases/3-implementation.md) | By default, the agent starts a local Camunda 8 Run cluster of the project's version and adds the `Camunda<version>` profile for it. For a SaaS or Self-Managed target cluster, the agent uses an existing profile, for example the governance profile, and confirms that the cluster runs the project's version. If the agent uses the governance profile, the governance cluster and the target cluster are the same cluster. |
-| Check after the agent generates the solution                                | The agent prefers the `Camunda<version>` profile. If that profile is missing or can't reach a cluster, the agent uses another profile that reaches a cluster.                                                                                                                                                                                                                                                                  |
-
-The built-in `local` profile and the `Camunda<version>` profile both point to `http://localhost:8080/v2`. With a local governance cluster, both profiles reach the same local Camunda 8 Run cluster.
-
-A check after generation can deploy the generated solution to the governance cluster when no `Camunda<version>` profile reaches a cluster. To keep test deployments off a shared governance cluster, start a local cluster and add the profile before the implementation phase:
-
-```bash
-c8 cluster start <version>
-c8 add profile Camunda<version> --baseUrl=http://localhost:8080/v2
-```
 
 ## Next steps
 
