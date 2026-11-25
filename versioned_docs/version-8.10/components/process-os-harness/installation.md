@@ -67,7 +67,9 @@ Only one bundle can be installed at a time. To move to a different agent, run `c
    git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
    ```
 
-1. Decide which Camunda cluster runs the governance process. For a SaaS or Self-Managed cluster, have the cluster URL and API client credentials ready. See [select clusters with c8ctl profiles](#select-clusters-with-c8ctl-profiles).
+1. Decide which Camunda cluster runs the governance process. For a SaaS or Self-Managed cluster, have the cluster URL and API client credentials ready. For SaaS, see [manage API clients](/components/saas/clusters/manage-api-clients.md). To learn how ProcessOS Harness uses the cluster, see [select clusters with c8ctl profiles](#select-clusters-with-c8ctl-profiles).
+
+
 
 1. Start the journey. Launch your AI coding agent, select a smart model (e.g. Opus or similar), then run:
 
