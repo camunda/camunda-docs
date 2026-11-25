@@ -700,8 +700,12 @@ module.exports = {
           position: "left",
         },
         {
-          type: "doc",
-          docId: "components/agentic-orchestration/overview",
+          type: "custom-versionAwareDoc",
+          // `overview` exists in 8.10+; 8.8 and 8.9 only have the get-started page.
+          docIds: [
+            "components/agentic-orchestration/overview",
+            "components/agentic-orchestration/agentic-orchestration-overview",
+          ],
           label: "Agentic orchestration",
           position: "left",
         },
