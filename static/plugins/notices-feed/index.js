@@ -21,13 +21,14 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
 
   /**
    * Parse HTML content to extract individual notices using Cheerio
-   * Each notice is an h3 with id=notice-N, under a year-based h2
+   * Each notice is a heading with id=notice-N: an h2 for 2026 notices, or an h3 inside the
+   * pre-2026 archive. Subsections (date, products, impact) are one level deeper.
    */
   function parseNotices(htmlContent, pagePath) {
     const $ = cheerio.load(htmlContent);
     const notices = [];
 
-    $('h3[id^="notice-"]').each((_, elem) => {
+    $('h2[id^="notice-"], h3[id^="notice-"]').each((_, elem) => {
       const $heading = $(elem);
       const noticeNumber = $heading.attr("id").replace("notice-", "");
 
@@ -48,7 +49,9 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
 
       // Extract publication date
       const publicationDate =
-        $notice('h4[id="publication-date"], h4[id^="publication-date-"]')
+        $notice(
+          'h3[id="publication-date"], h3[id^="publication-date-"], h4[id="publication-date"], h4[id^="publication-date-"]'
+        )
           .next("p")
           .text()
           .trim() || null;
@@ -56,7 +59,7 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
       // Extract products affected
       const products = [];
       const productsSection = $notice(
-        'h4[id="products-affected"], h4[id^="products-affected-"]'
+        'h3[id="products-affected"], h3[id^="products-affected-"], h4[id="products-affected"], h4[id^="products-affected-"]'
       );
 
       if (productsSection.length > 0) {
@@ -76,7 +79,9 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
       }
 
       // Extract impact summary for description
-      const impactText = $notice('h4[id="impact"], h4[id^="impact-"]')
+      const impactText = $notice(
+        'h3[id="impact"], h3[id^="impact-"], h4[id="impact"], h4[id^="impact-"]'
+      )
         .next("p")
         .text()
         .trim();
@@ -84,29 +89,31 @@ module.exports = function noticesFeedPlugin(_context, opts = {}) {
         impactText.substring(0, 200) + (impactText.length > 200 ? "..." : "");
 
       // Clean HTML: remove redundant sections for better UX
-      $notice('h3[id^="notice-"]').remove(); // Remove notice heading (already in title)
+      $notice('h2[id^="notice-"], h3[id^="notice-"]').remove(); // Remove notice heading (already in title)
 
       // Remove publication date section (heading + paragraph)
-      $notice('h4[id="publication-date"], h4[id^="publication-date-"]').each(
-        (_, elem) => {
-          $notice(elem).next("p").remove();
-          $notice(elem).remove();
-        }
-      );
+      $notice(
+        'h3[id="publication-date"], h3[id^="publication-date-"], h4[id="publication-date"], h4[id^="publication-date-"]'
+      ).each((_, elem) => {
+        $notice(elem).next("p").remove();
+        $notice(elem).remove();
+      });
 
       // Remove products affected section (heading + list or paragraph)
-      $notice('h4[id="products-affected"], h4[id^="products-affected-"]').each(
-        (_, elem) => {
-          const nextElem = $notice(elem).next();
-          if (nextElem.is("ul") || nextElem.is("p")) {
-            nextElem.remove();
-          }
-          $notice(elem).remove();
+      $notice(
+        'h3[id="products-affected"], h3[id^="products-affected-"], h4[id="products-affected"], h4[id^="products-affected-"]'
+      ).each((_, elem) => {
+        const nextElem = $notice(elem).next();
+        if (nextElem.is("ul") || nextElem.is("p")) {
+          nextElem.remove();
         }
-      );
+        $notice(elem).remove();
+      });
 
       // Remove Impact heading (keep the content, just remove the heading label)
-      $notice('h4[id="impact"], h4[id^="impact-"]').remove();
+      $notice(
+        'h3[id="impact"], h3[id^="impact-"], h4[id="impact"], h4[id^="impact-"]'
+      ).remove();
 
       // Clean HTML: remove hash links, attributes, and convert relative URLs to absolute
       $notice("a.hash-link").remove();

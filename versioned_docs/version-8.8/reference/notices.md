@@ -2,7 +2,7 @@
 id: notices
 title: "Security notices"
 description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information."
-toc_max_heading_level: 3
+toc_max_heading_level: 2
 ---
 
 Camunda publishes security notices after fixes are available.
@@ -31,21 +31,19 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
-## Notices from 2026
-
 Security notices published in 2026, newest first.
 
-### Notice 82
+## Notice 82
 
-#### Publication date
+### Publication date
 
 November 9, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763), an uncontrolled
 resource consumption flaw in Apache Tomcat (which is used as the embedded servlet container in Web Modeler's `restapi`
@@ -57,11 +55,11 @@ Web Modeler does not enable HTTP/2 by default. An installation is only affected 
 balancer terminates HTTP/2 and forwards HTTP/1.1 internally, Tomcat never sees the HTTP/2 frames (and the vulnerable
 code path would not be executed).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Web Modeler Self-Managed ≤ 8.9.10 with a custom HTTP/2 setup (see above).
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -69,17 +67,17 @@ Camunda has provided the following releases which contain the fix:
 
 **Note**: Update to the latest available patch version 8.9.15.
 
-### Notice 81
+## Notice 81
 
-#### Publication date
+### Publication date
 
 November 9, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
 HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
@@ -90,13 +88,13 @@ API. To exploit the vulnerability, an attacker would need to be able to control 
 prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code path is not
 reachable from external, untrusted client traffic.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.24, or ≤ 8.7.28
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -106,13 +104,13 @@ Camunda has provided the following releases which contain the fix:
 
 The fix was deployed to Web Modeler SaaS on August 25, 2026, 13:31 CET.
 
-### Notice 80
+## Notice 80
 
-#### Publication date
+### Publication date
 
 November 4, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
 - Camunda Zeebe, Operate, and Tasklist (8.7)
@@ -125,7 +123,7 @@ November 4, 2026
 - Console Self-Managed 8.7, 8.8, and 8.9
 - Camunda Keycloak images (`camunda/keycloak` and `registry.camunda.cloud/keycloak-ee/keycloak`)
 
-#### Impact
+### Impact
 
 The certificate authority eMudhra reported that an attacker compromised some of its intermediate certificate authorities.
 Oracle published two Java security alerts for this compromise:
@@ -141,7 +139,7 @@ Exploitation requires an attacker who also controls the network path, for exampl
 
 We have no evidence that an attacker used this against Camunda. This issue does not affect Camunda keys and secrets. No public Camunda endpoint uses an eMudhra certificate. If you suspect a man-in-the-middle attack on an outgoing connection, rotate the credentials that this connection sends.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -159,7 +157,7 @@ You are using:
 
 To see when an image was built, run `docker inspect -f '{{.Created}}' <image>`.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix for CVE-2026-91403 ("emSign ECC Root CA - G3" and "AAA Certificate Services" are removed from the trust stores):
 
@@ -204,60 +202,60 @@ If you can't upgrade immediately, remove the four root certificates from the Jav
 
 On Camunda 8 SaaS, if you disabled the automatic upgrade of your clusters, we recommend that you update them to the latest available patch version.
 
-### Notice 79
+## Notice 79
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 - Zeebe
 - Operate
 - Tasklist
 - Optimize
 
-#### Impact
+### Impact
 
 [CVE-2026-71290](https://nvd.nist.gov/vuln/detail/CVE-2026-71290) is a TLS hostname verification bypass in the asynchronous client of Apache HttpClient 5 (`httpclient5` 5.4 through 5.6.3). Camunda uses this client to connect to Elasticsearch and OpenSearch. An attacker in a network position to intercept traffic (for example, through DNS spoofing or a compromised host on a shared network segment) can impersonate the search backend with a valid certificate for another domain. This can expose Basic authentication credentials sent to the backend, expose or modify process data in transit, and allow forged responses.
 
 This notice covers the 8.6 line. For the 8.7 fixes, see [Notice 60](#notice-60).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using one of the following components, and it connects to Elasticsearch or OpenSearch over TLS:
 
 - Zeebe, Operate, or Tasklist ≤ 8.6.39
 - Optimize ≤ 8.6.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Zeebe, Operate, Tasklist: 8.6.40
 - Optimize: 8.6.28
 
-### Notice 78
+## Notice 78
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Identity
 
-#### Impact
+### Impact
 
 [CVE-2026-68763](https://nvd.nist.gov/vuln/detail/CVE-2026-68763) is an uncontrolled resource consumption flaw in Apache Tomcat. A memory leak occurs in the HTTP/2 handling when a client resets a stream.
 
 Identity enables HTTP/2 by default, so an attacker who can reach its HTTP port can exhaust memory and cause a denial of service without authenticating. The flaw does not allow reading or changing data. Because Identity is central to multi-tenancy, an outage can disrupt the wider automation stack.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Identity before 8.6.34, with the default `server.http2.enabled: true`, and the Identity port is reachable by untrusted clients.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -265,25 +263,25 @@ Camunda has provided the following releases which contain the fix:
 
 As a workaround, set `server.http2.enabled` to `false`.
 
-### Notice 77
+## Notice 77
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Operate, Tasklist
 
-#### Impact
+### Impact
 
 [CVE-2026-41720](https://nvd.nist.gov/vuln/detail/CVE-2026-41720) is a flaw in Spring LDAP: bind requests with a non-empty username and an empty or null password are not rejected. In Operate or Tasklist with legacy LDAP authentication enabled (`ldap-auth` profile), an attacker who knows a valid username may authenticate with a blank password and gain access to the web application, if the LDAP directory accepts such binds. Other deployments are not affected.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Operate or Tasklist with the `ldap-auth` profile enabled, before 8.6.40.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -291,21 +289,21 @@ Camunda has provided the following releases which contain the fix:
 
 As a workaround, configure your LDAP server to reject unauthenticated (empty-password) binds.
 
-### Notice 76
+## Notice 76
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Zeebe, Operate, Tasklist, Identity, and Optimize
 
-#### Impact
+### Impact
 
 [CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984) is a denial of service in Micrometer's HTTP request instrumentation. Spring Boot applies it automatically to all HTTP endpoints. An unauthenticated attacker who can reach any HTTP endpoint can send a specially crafted request that drives the instrumentation into excessive resource use, making the component unresponsive until restart. This affects availability only; it does not expose or modify data.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using one of the following components with HTTP endpoints reachable by untrusted clients:
 
@@ -313,7 +311,7 @@ You are using one of the following components with HTTP endpoints reachable by u
 - Identity before 8.6.31
 - Optimize before 8.6.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -321,69 +319,69 @@ Camunda has provided the following releases which contain the fix:
 - Identity: 8.6.31
 - Optimize: 8.6.27
 
-### Notice 75
+## Notice 75
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Zeebe
 
-#### Impact
+### Impact
 
 [CVE-2026-40983](https://nvd.nist.gov/vuln/detail/CVE-2026-40983) is a denial of service in Micrometer's gRPC server instrumentation. The Zeebe Gateway applies this interceptor to its public gRPC API with no way to disable it. An unauthenticated attacker with network access can send crafted gRPC requests and exhaust resources, making the gateway unresponsive until it is restarted. All client operations (job polling, deployments, message publication, and process instance creation) are interrupted. Operate, Tasklist, and Identity include the library but do not run a gRPC server, so they are not exploitable.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe before 8.6.40, with the gateway endpoint reachable by untrusted clients.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Zeebe: 8.6.40
 
-### Notice 74
+## Notice 74
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Zeebe
 
-#### Impact
+### Impact
 
 [CVE-2026-42587](https://nvd.nist.gov/vuln/detail/CVE-2026-42587) is a decompression limit bypass in Netty. The `maxAllocation` limit is not enforced when the content encoding is Brotli, zstd, or Snappy. An unauthenticated attacker can send a small compressed payload that causes unbounded memory allocation. This leads to an out-of-memory denial of service on the Zeebe Gateway, whose Netty HTTP/2 endpoint is reachable from outside the cluster. Other components have a much lower likelihood. Data is not disclosed or modified.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe before 8.6.40, with the gateway endpoint reachable by untrusted clients.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Zeebe: 8.6.40
 
-### Notice 73
+## Notice 73
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Zeebe, Operate, Tasklist, Identity, and Optimize
 
-#### Impact
+### Impact
 
 [CVE-2026-42585](https://nvd.nist.gov/vuln/detail/CVE-2026-42585) is an HTTP request smuggling flaw in Netty. It comes from incorrect parsing of malformed `Transfer-Encoding` headers. If an affected component sits behind a reverse proxy, load balancer, or Ingress that parses the request boundary differently, an attacker can smuggle a second request past front-end checks such as authentication or WAF rules. Depending on the setup, this can lead to unauthorized access to protected endpoints, cache poisoning, or session abuse. HTTPS does not prevent it.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using the following components behind a reverse proxy, load balancer, or Ingress:
 
@@ -391,7 +389,7 @@ You are using the following components behind a reverse proxy, load balancer, or
 - Identity before 8.6.31
 - Optimize before 8.6.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -399,50 +397,50 @@ Camunda has provided the following releases which contain the fix:
 - Identity: 8.6.31
 - Optimize: 8.6.27
 
-### Notice 72
+## Notice 72
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Operate, Tasklist, and Zeebe Java Client (`io.camunda:zeebe-client-java`)
 
-#### Impact
+### Impact
 
 [CVE-2026-68494](https://nvd.nist.gov/vuln/detail/CVE-2026-68494) is an incomplete fix for a number-length limit bypass in the non-blocking parser of `jackson-core`. The Zeebe Java Client (`io.camunda:zeebe-client-java`) uses that parser to read chunked API responses. Operate and Tasklist use the Zeebe Java Client and can be affected transitively. A malicious or compromised response could make the client process hang or run out of memory.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Operate or Tasklist before 8.6.40, because these components use the affected Zeebe Java Client dependency
 - Zeebe Java Client (`io.camunda:zeebe-client-java`) before 8.6.40 with a `jackson-core` version in the affected range, connecting to an endpoint you do not fully trust
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Operate, Tasklist, and Zeebe Java Client (`io.camunda:zeebe-client-java`): 8.6.40
 
-### Notice 71
+## Notice 71
 
-#### Publication date
+### Publication date
 
 November 2, 2026
 
-#### Products affected
+### Products affected
 
 Zeebe, Operate, Tasklist, Identity, and Optimize
 
-#### Impact
+### Impact
 
 [CVE-2026-34282](https://nvd.nist.gov/vuln/detail/CVE-2026-34282) is a flaw in the networking component of the Oracle JDK shipped in Camunda container images (OpenJDK 21.0.10). A TLS peer can cause a blocking network call to hang indefinitely, which pins the handling thread. Enough requests can exhaust the web server's thread pool and make the component unresponsive to all users (denial of service).
 
 Exploitation has strong preconditions. The component must run with OpenID Connect (OIDC) authentication against an identity provider reached over HTTPS, and the attacker must control or sit on the path to that identity provider. Confidentiality and integrity are not affected.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -450,7 +448,7 @@ You are using:
 - Identity before 8.6.31
 - Optimize before 8.6.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -458,29 +456,29 @@ Camunda has provided the following releases which contain the fix:
 - Identity: 8.6.31
 - Optimize: 8.6.27
 
-### Notice 70
+## Notice 70
 
-#### Publication date
+### Publication date
 
 October 26, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 Web Modeler Self-Managed is affected by [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/CVE-2026-111497), a critical-severity out-of-bounds write in the Node.js Brotli decoder that can allow remote code execution.
 
 The Web Modeler Self-Managed 8.7 and 8.8 webapp images contain a Node.js runtime. An authenticated Web Modeler user can reach the affected decoder through the "import resources from URL" capability: the webapp server fetches URLs that the user supplies and automatically decodes Brotli-compressed responses. A server controlled by an attacker can return a crafted Brotli response that triggers the out-of-bounds write in the Node.js process.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.7.27, or ≤ 8.8.23
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix (Node.js 24.22.1):
 
@@ -488,37 +486,37 @@ Camunda has provided the following releases which contain the fix (Node.js 24.22
 
 No action is necessary for Camunda SaaS.
 
-### Notice 69
+## Notice 69
 
-#### Publication date
+### Publication date
 
 October 26, 2026
 
-#### Products affected
+### Products affected
 
 - Hub Self-Managed 8.10
 - Web Modeler Self-Managed 8.7, 8.8, and 8.9
 
-#### Impact
+### Impact
 
 Two critical vulnerabilities in PHP ([CVE-2026-109618](https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w) and [CVE-2026-109619](https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp)) were disclosed on 20 October 2026.
 Our security and engineering teams have analyzed both in detail. We found no way to exploit them in any Camunda product.
 Out of an abundance of caution, we have released updated images with the fixed PHP version.
 
-##### Which products are concerned
+#### Which products are concerned
 
 - SaaS: Camunda SaaS does not use PHP and is not affected.
 - Self-Managed: The websockets component of Hub (version ≤ 8.10.3) and Web Modeler (versions ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27) runs PHP 8.5.11, a version in the affected range.
 - No other Camunda 8 component uses PHP.
 
-##### Why the vulnerabilities cannot be exploited
+#### Why the vulnerabilities cannot be exploited
 
 Both vulnerabilities are in the way PHP processes incoming web requests when it runs inside a web server (for example
 PHP-FPM or Apache with mod_php). The websockets component does not run PHP that way. It runs as a standalone process
 that reads and validates requests itself, never uses PHP's request handling, and accepts only small, size-limited
 messages. None of the attack paths described in the CVE advisories can reach it.
 
-##### What you need to do
+#### What you need to do
 
 No immediate action is required. We recommend updating to the new images as part of your normal update process.
 
@@ -530,34 +528,34 @@ Only features that rely on real-time updates are affected while the component is
 - AI copilot (8.8 and later): copilot responses are delivered through the websockets component and are not returned while it is stopped.
 - Intelligent Document Processing (8.8 and later): extraction results are delivered through the websockets component and are not shown in the modeler while it is stopped.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Hub ≤ 8.10.3
 - Web Modeler ≤ 8.9.12, ≤ 8.8.23, or ≤ 8.7.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix (update to PHP 8.5.12):
 
 - Hub 8.10.4
 - Web Modeler 8.9.13, 8.8.24, 8.7.28
 
-### Notice 68
+## Notice 68
 
-#### Publication date
+### Publication date
 
 October 20, 2026
 
-#### Products affected
+### Products affected
 
 - Management Identity Self-Managed 8.8, 8.9, and 8.10
 - Orchestration Cluster 8.9 and 8.10, when PostgreSQL is used as secondary storage (RDBMS)
 - Web Modeler Self-Managed 8.8 and 8.9, when PostgreSQL is used as RDBMS
 - Hub Self-Managed 8.10, when PostgreSQL is used as RDBMS
 
-#### Impact
+### Impact
 
 The PostgreSQL JDBC driver (`org.postgresql:postgresql`) versions 42.7.11 to 42.7.13 used by Camunda are affected by [CVE-2026-107314](https://github.com/pgjdbc/pgjdbc/security/advisories/GHSA-rhp9-mr79-r74h). If the `requireAuth` connection property excludes every authentication method, or lists no method at all, the driver doesn't restrict the authentication method. A man-in-the-middle attacker between Camunda and PostgreSQL can then request cleartext password authentication and obtain the database password.
 
@@ -570,7 +568,7 @@ Severity: High. The upstream CVSS 3.1 base score for the library is 5.9 (`AV:N/A
 
 The `requireAuth` property has no default value, and Camunda doesn't set it. Only installations that set the property as described are affected.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 Your installation is affected if all of these conditions are true:
 
@@ -582,7 +580,7 @@ Your installation is affected if all of these conditions are true:
 - The JDBC URL or datasource properties for the PostgreSQL connection set `requireAuth` to a value that excludes all authentication methods, or that contains no method.
 - The database connection doesn't use TLS with full server verification (`sslmode=verify-full`).
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix (driver version 42.7.14):
 
@@ -598,17 +596,17 @@ If you can't upgrade immediately, use one of these workarounds:
 - Replace the `requireAuth` value with a positive list of allowed methods on your current version, as described above.
 - Connect to PostgreSQL with `sslmode=verify-full`.
 
-### Notice 67
+## Notice 67
 
-#### Publication date
+### Publication date
 
 October 9, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Helm chart for Camunda 8.7, 8.8, and 8.9, when the bundled Keycloak subchart (`identityKeycloak`) uses the default Community Edition image
 
-#### Impact
+### Impact
 
 Keycloak is affected by [CVE-2026-18963](https://github.com/advisories/GHSA-4gv3-mc9p-5wqc), a flaw in the reset-credentials flow. An unauthenticated attacker can force a password reset for any user without the email verification step, set new credentials, and take over the account, including administrator accounts.
 
@@ -618,7 +616,7 @@ The bundled Keycloak subchart in the Camunda 8.7, 8.8, and 8.9 Helm charts defau
 
 Camunda SaaS is not affected.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 The following Keycloak versions are affected:
 
@@ -637,7 +635,7 @@ If you run Keycloak outside the Camunda Helm chart, your installation is affecte
 
 The Camunda 8.10 Helm chart does not include a bundled Keycloak subchart and is not affected. If you use your own Keycloak with Camunda 8.10, check your Keycloak version as described above.
 
-#### Solution
+### Solution
 
 The following Keycloak versions contain the fix:
 
@@ -654,17 +652,17 @@ After you apply the fix, examine Keycloak events and user accounts for password 
 
 No action is necessary for Camunda SaaS.
 
-### Notice 66
+## Notice 66
 
-#### Publication date
+### Publication date
 
 October 7, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize Self-Managed
 
-#### Impact
+### Impact
 
 The Docker images `camunda/optimize:8.10.0` and `camunda/optimize:8.10.1` were available for a short time before the
 Camunda 8.10 release announcement. These images contain a defect in the Optimize access check. In Self-Managed
@@ -677,7 +675,7 @@ possible.
 We removed the affected images from Docker Hub. No official Camunda Helm chart release referenced these images. Camunda
 SaaS is not affected.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 Your installation is affected if all of these conditions are true:
 
@@ -688,7 +686,7 @@ Your installation is affected if all of these conditions are true:
 
 Optimize 8.9 and earlier versions are not affected.
 
-#### Solution
+### Solution
 
 Upgrade Optimize to version 8.10.2 immediately. Optimize 8.10.2 contains the fix.
 
@@ -700,18 +698,18 @@ If you used the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`:
 
 No action is necessary for Camunda SaaS.
 
-### Notice 65
+## Notice 65
 
-#### Publication date
+### Publication date
 
 October 7, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
 - Camunda Zeebe (8.7)
 
-#### Impact
+### Impact
 
 The document endpoint of the Orchestration Cluster REST API rendered uploaded document content in the browser instead
 of downloading it. A user allowed to upload documents could use this to run scripts in the application's origin with
@@ -719,14 +717,14 @@ the privileges of another user who opens the document, including administrators.
 
 Severity: High.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
 - Camunda Zeebe ≤ 8.7.42
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -740,19 +738,19 @@ in the browser.
 On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
 [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
 
-### Notice 64
+## Notice 64
 
-#### Publication date
+### Publication date
 
 September 21, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
 - Camunda Connectors
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 A remote code execution vulnerability was identified in Camunda's FEEL expression engine allowing execution of arbitrary code within the scope of a Camunda 8 server operating system process.
 
@@ -760,7 +758,7 @@ Severity: Critical 9.9 (CVSS v3.1: AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H).
 
 This vulnerability was identified by Camunda's Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned. For further details, see [GHSA-vx3p-v6cf-vfjw](https://github.com/camunda/feel-scala/security/advisories/GHSA-vx3p-v6cf-vfjw).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -788,7 +786,7 @@ Exploitation requires one of the following:
     - By default, this permission is granted as part of the admin role
 - The attacker is an authenticated and authorized user of Camunda Web Modeler ≤ 8.9.8 or ≤ 8.8.19
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -801,58 +799,58 @@ These releases bundle a patched FEEL engine (1.22.1, 1.21.1, 1.20.3, 1.19.6, 1.1
 
 Camunda 8 SaaS was fully remediated on September 12 and 13, 2026, ahead of this notice. All clusters across all supported versions, and Web Modeler SaaS, were updated to patched builds; no action is required on your part. Clusters that were suspended at that time receive the patched version when they resume.
 
-### Notice 63
+## Notice 63
 
-#### Publication date
+### Publication date
 
 September 21, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The application was vulnerable to the following vulnerabilities in the embedded Eclipse Jetty web server:
 
 - [CVE-2026-19203](https://nvd.nist.gov/vuln/detail/CVE-2026-19203), where a flaw in HTTP/1.1 chunked request parsing accepts a lone line feed (`LF`) character as a terminator in parts of chunked requests. When deployed behind an intermediary reverse proxy that requires strict `CRLF` delimiters, this discrepancy in request boundary interpretation can lead to HTTP request smuggling.
 - [CVE-2026-12611](https://nvd.nist.gov/vuln/detail/CVE-2026-12611), where a race condition in the HTTP/2 server implementation when handling concurrent `RST_STREAM` and `GOAWAY` frames from a client can cause write-blocked threads to never be unblocked, potentially leading to thread exhaustion and a Denial of Service. The default Camunda Optimize configuration is not exploitable; this vulnerability only applies when HTTP/2 support is explicitly enabled (`container.http2Enabled: true`).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Camunda Optimize ≤ 8.7.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Camunda Optimize 8.7.28
 
-### Notice 62
+## Notice 62
 
-#### Publication date
+### Publication date
 
 September 8, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-75140](https://nvd.nist.gov/vuln/detail/CVE-2026-75140) in `jsoup`'s
 `XmlTreeBuilder` which could allow an attacker to exhaust JVM heap memory by supplying a deeply nested XML document (in
 this case a BPMN or DMN diagram) with uniquely-namespaced elements.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.18, or ≤ 8.7.25
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases that contain the fix:
 
@@ -860,17 +858,17 @@ Camunda has provided the following releases that contain the fix:
 
 The fix was deployed to Web Modeler SaaS on August 29, 2026, 10:35 CET.
 
-### Notice 61
+## Notice 61
 
-#### Publication date
+### Publication date
 
 September 8, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Connectors
 
-#### Impact
+### Impact
 
 The connector runtime resolves a secret reference (for example, `{{secrets.MY_API_KEY}}`) wherever that literal text appears in a connector's input, without restricting resolution to the field where the reference was declared. Under the following conditions, an attacker may be able to cause a connector to resolve and disclose a secret outside its intended scope:
 
@@ -882,13 +880,13 @@ The connector runtime resolves a secret reference (for example, `{{secrets.MY_AP
 
 Severity: High (CVSS 7.5).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Camunda Connectors 8.1.x through 8.9.x, on Self-Managed or SaaS, with connectors and secrets configured as described above.
 
-#### Solution
+### Solution
 
 Camunda has released a secret filter for the connector runtime, defaulting to `STRICT` mode. In `STRICT` mode, a connector only resolves a secret that's present for that specific field in the deployed BPMN XML, which structurally closes this vulnerability for both outbound and inbound connectors. This is a breaking change: after upgrading, a connector field that relied on resolving an undeclared secret stops resolving it. See [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) for configuration details, including how to change the mode.
 
@@ -906,24 +904,24 @@ On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
   - Sanitize the respective process variable for example by replacing `secrets` keyword: `= replace(emailBody, "secrets?\.", "secretx_", "i")`
 - Rotate any secret that may have been exposed, following your organization's secret-management procedures.
 
-### Notice 60
+## Notice 60
 
-#### Publication date
+### Publication date
 
 September 2, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Zeebe
 - Camunda Tasklist
 - Camunda Operate
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-71290](https://nvd.nist.gov/vuln/detail/CVE-2026-71290), where the embedded `httpclient5` library's asynchronous transport, used to connect to the Elasticsearch/OpenSearch secondary storage, skipped hostname verification during the TLS handshake. An attacker positioned to intercept network traffic between the affected component and its Elasticsearch/OpenSearch backend (for example, via DNS spoofing, BGP hijacking, or a compromised host on a shared network segment) could impersonate the backend, intercept the Basic authentication credentials sent to it, read or tamper with process data (including variables and process instance data) in transit, and inject forged responses back to the application. Exploitation requires this man-in-the-middle network position; it does not require bypassing authentication on the application's own API. Camunda is not aware of any known exploitation of this vulnerability.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -932,7 +930,7 @@ You are using:
 - Camunda Operate ≤ 8.7.37
 - Camunda Optimize ≤ 8.7.26
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -941,17 +939,17 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Operate 8.7.38
 - Camunda Optimize 8.7.27
 
-### Notice 59
+## Notice 59
 
-#### Publication date
+### Publication date
 
 July 29, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `undertow-core` used by Camunda Web Modeler was affected by the following vulnerabilities which could potentially allow an attacker to perform request smuggling by exploiting flaws in the HTTP request header parsing:
 
@@ -959,34 +957,34 @@ The version of `undertow-core` used by Camunda Web Modeler was affected by the f
 - [CVE-2026-28368](https://nvd.nist.gov/vuln/detail/CVE-2026-28368)
 - [CVE-2026-28369](https://nvd.nist.gov/vuln/detail/CVE-2026-28369)
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.8.14, or ≤ 8.7.21
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases that contain the fix:
 
 - Web Modeler Self-Managed 8.8.15, 8.7.22
 
-### Notice 58
+## Notice 58
 
 :::info
 This notice contains incorrect information regarding the affected and patched versions, as the CVE was mistakenly attributed to a different library.
 It was superseded by [notice 81](#notice-81).
 :::
 
-#### Publication date
+### Publication date
 
 July 14, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
 HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
@@ -997,13 +995,13 @@ Cluster API. To exploit the vulnerability, an attacker would need to be able to 
 through a prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code
 path is not reachable from external, untrusted client traffic.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 - ~~You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.~~
 
 **Update (November 9, 2026)**: The versions are incorrect; see [notice 81](#notice-81) for the correct values.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1013,28 +1011,28 @@ Camunda has provided the following releases which contain the fix:
 
 **Update (November 9, 2026)**: The versions and the SaaS deploy date are incorrect; see [notice 81](#notice-81) for the correct values.
 
-### Notice 57
+## Notice 57
 
-#### Publication date
+### Publication date
 
 July 14, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-54291](https://nvd.nist.gov/vuln/detail/CVE-2026-54291), where database
 connections configured with `channelBinding=require` can be silently downgraded from SCRAM-SHA-256-PLUS with channel
 binding to plain SCRAM-SHA-256 without it, losing the man-in-the-middle protection the setting is meant to guarantee.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 - You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.
 - _And_: You are using PostgreSQL with SCRAM authentication over SSL/TLS and `channelBinding=require`.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1042,39 +1040,39 @@ Camunda has provided the following releases which contain the fix:
 
 The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.
 
-### Notice 56
+## Notice 56
 
-#### Publication date
+### Publication date
 
 July 14, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-13006](https://nvd.nist.gov/vuln/detail/CVE-2026-13006), an arbitrary code execution vulnerability in the `logback-core` library used by Camunda Optimize. An attacker who already has write access to the Logback configuration file, or the ability to inject an environment variable evaluated at startup, could execute arbitrary code in the Optimize process. Exploitation also requires the Janino library on the classpath and a Logback configuration that uses conditional (`<if>`) processing, both of which are present in Camunda Optimize. This vulnerability is not remotely exploitable; it requires an attacker to already hold privileged local access to the deployment.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Camunda Optimize ≤ 8.7.24
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains the fix:
 
 - Camunda Optimize 8.7.25
 
-### Notice 55
+## Notice 55
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1082,11 +1080,11 @@ July 1, 2026
 - Camunda Operate
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-40983](https://nvd.nist.gov/vuln/detail/CVE-2026-40983), where an unauthenticated attacker can send a specially crafted gRPC request to trigger uncontrolled resource consumption inside Micrometer's gRPC instrumentation layer, rendering the affected component unresponsive until restarted.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1096,7 +1094,7 @@ You are using:
 - Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Camunda Optimize ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.22
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1106,13 +1104,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Camunda Optimize 8.9.10, 8.8.29, 8.7.23
 
-### Notice 54
+## Notice 54
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1121,11 +1119,11 @@ July 1, 2026
 - Camunda Optimize
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984), where an unauthenticated attacker can send a specially crafted HTTP request to trigger uncontrolled resource consumption inside Micrometer's HTTP instrumentation layer, rendering the affected component unresponsive until restarted.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1136,7 +1134,7 @@ You are using:
 - Camunda Optimize ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.22
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1147,13 +1145,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Optimize 8.9.10, 8.8.29, 8.7.23
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
-### Notice 53
+## Notice 53
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1162,11 +1160,11 @@ July 1, 2026
 - Camunda Optimize
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-11400](https://nvd.nist.gov/vuln/detail/CVE-2026-11400), where a successful exploit grants the attacker elevated database privileges on Amazon Aurora PostgreSQL, potentially enabling unauthorized read/write access to all application data stored in the database.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1179,7 +1177,7 @@ You are using:
 
 And your deployment is running on Amazon Aurora PostgreSQL with the AWS Advanced JDBC Wrapper configured to use the GlobalDatabasePlugin (for example, by setting `wrapperPlugins=globaldb` or equivalent in the JDBC connection URL). This is not the default Camunda configuration.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1190,24 +1188,24 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Optimize 8.9.11
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
-### Notice 52
+## Notice 52
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Zeebe
 - Camunda Tasklist
 - Camunda Operate
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-47691](https://nvd.nist.gov/vuln/detail/CVE-2026-47691), where an attacker controlling a subdomain's name server can provide crafted NS records to poison the DNS cache for parent domains, potentially redirecting users to malicious servers and leading to information disclosure or integrity compromise.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1216,7 +1214,7 @@ You are using:
 - Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1225,24 +1223,24 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
-### Notice 51
+## Notice 51
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Zeebe
 - Camunda Tasklist
 - Camunda Operate
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-45674](https://nvd.nist.gov/vuln/detail/CVE-2026-45674), where a remote attacker can achieve information disclosure or data manipulation by crafting malicious DNS responses.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1251,7 +1249,7 @@ You are using:
 - Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1260,13 +1258,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
-### Notice 50
+## Notice 50
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1274,11 +1272,11 @@ July 1, 2026
 - Camunda Operate
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-41842](https://nvd.nist.gov/vuln/detail/CVE-2026-41842), where an attacker could send requests that are slow to resolve, keeping HTTP connections busy and potentially causing a Denial of Service. This is a Denial of Service vulnerability in Spring MVC and WebFlux static resource resolution. The default Camunda configuration is not exploitable; the vulnerability requires both versioned resource resolution to be enabled (for example, by setting `spring.web.resources.chain.strategy.content.enabled=true`) and static resources to be served from the filesystem (for example, by setting `spring.web.resources.static-locations=file:/...`), neither of which is present in the default configuration.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1290,7 +1288,7 @@ You are using:
 
 And your deployment has versioned resource resolution enabled and static resources served from the filesystem.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1300,13 +1298,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Camunda Optimize 8.9.10, 8.8.29, 8.7.23
 
-### Notice 49
+## Notice 49
 
-#### Publication date
+### Publication date
 
 July 1, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1315,11 +1313,11 @@ July 1, 2026
 - Camunda Optimize
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-41841](https://nvd.nist.gov/vuln/detail/CVE-2026-41841), where an attacker could gain access to a protected static resource if a resource with the same name had previously been resolved from a publicly accessible handler and cached server-side. This is an information disclosure vulnerability in Spring MVC and WebFlux static resource handling. The default Camunda configuration is not exploitable; the vulnerability requires server-side resource-chain caching to be enabled (for example, by setting `spring.web.resources.chain.cache=true`) and at least one resource handler that serves authentication-protected assets, neither of which is present in the default configuration.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1332,7 +1330,7 @@ You are using:
 
 And your deployment has server-side resource-chain caching enabled with at least one access-controlled resource handler configured.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1343,13 +1341,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Optimize 8.9.10, 8.8.29, 8.7.23
 - Camunda Web Modeler 8.9.5, 8.8.16, 8.7.23
 
-### Notice 48
+## Notice 48
 
-#### Publication date
+### Publication date
 
 May 13, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1357,11 +1355,11 @@ May 13, 2026
 - Camunda Operate
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the privileges to impersonate or perform a man-in-the-middle (MITM) attack on the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to high CPU usage inside the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate, and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as the endpoint.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1371,7 +1369,7 @@ You are using:
 - Camunda Operate ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
 - Camunda Web Modeler ≤ 8.9.2, ≤ 8.8.13, or ≤ 8.7.20
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1381,13 +1379,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Operate 8.9.3, 8.8.24, 8.7.29
 - Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
 
-### Notice 47
+## Notice 47
 
-#### Publication date
+### Publication date
 
 May 7, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Identity
 - Camunda Zeebe
@@ -1396,11 +1394,11 @@ May 7, 2026
 - Camunda Optimize
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-40973](https://nvd.nist.gov/vuln/detail/CVE-2026-40973), where a local attacker could take control of the embedded Spring Boot `ApplicationTemp` directory. If `server.servlet.session.persistent` is set to `true`, this could allow session hijacking or arbitrary code execution. Default Camunda 8 deployments are not affected.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1411,7 +1409,7 @@ You are using:
 - Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
 - Camunda Web Modeler ≤ 8.9.1, ≤ 8.8.13, or ≤ 8.7.20
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1422,49 +1420,49 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Optimize 8.9.2, 8.8.24, 8.7.21
 - Camunda Web Modeler 8.9.2, 8.8.14, 8.7.21
 
-### Notice 46
+## Notice 46
 
-#### Publication date
+### Publication date
 
 May 7, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `axios` used by Camunda Web Modeler was affected by [CVE-2026-42264](https://github.com/advisories/GHSA-q8qp-cvcw-x6jj), a prototype pollution vulnerability in the HTTP adapter that could allow credential injection and request hijacking when `Object.prototype` is polluted by another dependency in the same process.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.8.13, or ≤ 8.7.20
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases that contain the fix:
 
 - Web Modeler Self-Managed 8.8.14, 8.7.21
 
-### Notice 45
+## Notice 45
 
-#### Publication date
+### Publication date
 
 April 24, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-5588](https://nvd.nist.gov/vuln/detail/CVE-2026-5588), where the PKIX CompositeVerifier in the embedded Bouncy Castle cryptography library could accept an empty signature sequence as valid, weakening certificate signature verification and potentially allowing acceptance of improperly signed certificates.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1472,7 +1470,7 @@ You are using:
 - Camunda Zeebe 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
 - Camunda Operate 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1480,23 +1478,23 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Zeebe 8.9.1, 8.8.23, 8.7.28
 - Camunda Operate 8.9.1, 8.8.23, 8.7.28
 
-### Notice 44
+## Notice 44
 
-#### Publication date
+### Publication date
 
 April 24, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2025-14813](https://nvd.nist.gov/vuln/detail/CVE-2025-14813), where the GOSTCTR implementation in the embedded Bouncy Castle cryptography library used an incorrect one-byte counter and could not securely encrypt or decrypt more than 255 blocks, potentially compromising the confidentiality and integrity of data encrypted with this algorithm.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1504,7 +1502,7 @@ You are using:
 - Camunda Zeebe 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
 - Camunda Operate 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1512,13 +1510,13 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Zeebe 8.9.1, 8.8.23, 8.7.28
 - Camunda Operate 8.9.1, 8.8.23, 8.7.28
 
-### Notice 43
+## Notice 43
 
-#### Publication date
+### Publication date
 
 April 7, 2026
 
-#### Products affected
+### Products affected
 
 - Management Identity
 - Camunda Tasklist
@@ -1527,11 +1525,11 @@ April 7, 2026
 - Camunda Optimize
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 When applications specify HTTP response headers for servlet applications using Spring Security, there is the possibility that the HTTP headers will not be written. This is related to [CVE-2026-22732](https://nvd.nist.gov/vuln/detail/CVE-2026-22732).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -1542,7 +1540,7 @@ You are using:
 - Optimize 8.7.14 - 8.7.18 or 8.8.2 - 8.8.7
 - Web Modeler Self-Managed ≤ 8.6.26, ≤ 8.7.18, or ≤ 8.8.11
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -1555,53 +1553,53 @@ Camunda has provided the following releases which contain the fix:
 
 The fix was deployed to Web Modeler SaaS on March 23, 2026, 17:26 CET.
 
-### Notice 42
+## Notice 42
 
-#### Publication date
+### Publication date
 
 March 9, 2026
 
-#### Products affected
+### Products affected
 
 - Management Identity
 
-#### Impact
+### Impact
 
 The application was vulnerable to [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734), which allowed an attacker to bypass revocation checks of client SSL certificates if a certain server configuration was used.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Management Identity ≤ 8.8.7, ≤ 8.7.14, or ≤ 8.6.27
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Management Identity 8.8.8, 8.7.15, 8.6.28
 
-### Notice 41
+## Notice 41
 
-#### Publication date
+### Publication date
 
 March 9, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-26278](https://nvd.nist.gov/vuln/detail/CVE-2026-26278), a vulnerability which could be exploited as a vector for denial of service attacks by forcing the parser to do an unlimited amount of entity expansions.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.8.8, ≤ 8.7.16, or ≤ 8.6.25
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases that contain the fix:
 
@@ -1609,55 +1607,55 @@ Camunda has provided the following releases that contain the fix:
 
 This issue does not affect Web Modeler SaaS.
 
-### Notice 40
+## Notice 40
 
-#### Publication date
+### Publication date
 
 February 23, 2026
 
-#### Products affected
+### Products affected
 
 C7 to C8 Migration Tooling
 
-#### Impact
+### Impact
 
 The version of Tomcat used by the Diagram Converter Webapp was affected by:
 
 - [CVE-2025-66614](https://nvd.nist.gov/vuln/detail/CVE-2025-66614)
 - [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734)
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - C7 to C8 Migration Tooling 0.2.0 **AND**
 - the Diagram Converter Webapp
 
-#### Solution
+### Solution
 
 Camunda has released the **C7 to C8 Migration Tooling 0.2.1**, which includes the fix.
 
-### Notice 39
+## Notice 39
 
-#### Publication date
+### Publication date
 
 February 10, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-25128](https://nvd.nist.gov/vuln/detail/CVE-2026-25128), a RangeError vulnerability that could crash any application that processes untrusted XML input.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.8.6, ≤ 8.7.15, or ≤ 8.6.24
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases that contain the fix:
 
@@ -1665,27 +1663,27 @@ Camunda has provided the following releases that contain the fix:
 
 The fix was deployed to Web Modeler SaaS on February 2, 2026, 15:15 CET.
 
-### Notice 38
+## Notice 38
 
-#### Publication date
+### Publication date
 
 January 8, 2026
 
-#### Products affected
+### Products affected
 
 - Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `qs` used by Camunda Web Modeler was affected by CVE-2025-15284, an improper input validation vulnerability that allows HTTP DoS.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Web Modeler Self-Managed ≤ 8.8.4, ≤ 8.7.14, or ≤ 8.6.23
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases that contain the fix:
 
