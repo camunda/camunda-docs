@@ -248,7 +248,7 @@ and both of the following are true for the deployment that runs it:
 
 To check a node, run `grep -m1 '^flags' /proc/cpuinfo | tr ' ' '\n' | grep avx512vbmi`. If the command returns nothing, the workloads on that node are not affected.
 
-### Solution
+### Solution {#notice-83-solution}
 
 Camunda has provided the following releases which apply the mitigation by default:
 
@@ -291,14 +291,14 @@ Do not use `java -XX:+PrintFlagsFinal -version` in the container to find the opt
 
 _Updated on November 26, 2026._
 
-The releases listed in the [solution](#solution) disable the vulnerable code path, but their container images still contain an affected Java runtime, so container scanners keep reporting CVE-2026-114938 for them. The following releases ship container images with a patched Java runtime (OpenJDK 25.0.5.1, 21.0.13.1, or 17.0.21.1), which fixes the vulnerability:
+The releases listed in the [solution](#notice-83-solution) disable the vulnerable code path, but their container images still contain an affected Java runtime, so container scanners keep reporting CVE-2026-114938 for them. The following releases ship container images with a patched Java runtime (OpenJDK 25.0.5.1, 21.0.13.1, or 17.0.21.1), which fixes the vulnerability:
 
 - Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
 - Camunda Optimize 8.10.11, 8.9.30, 8.8.48
 - Camunda Management Identity 8.10.6, 8.9.16, 8.8.24
 
 :::warning
-If you run a distribution archive on a Java runtime that you supply, use OpenJDK 21.0.13.1, 25.0.5.1, or later. If you can't update the Java runtime yet, keep setting `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` as described in the [solution](#solution). Later releases will no longer set `-XX:-UseBASE64Intrinsics`.
+If you run a distribution archive on a Java runtime that you supply, use OpenJDK 21.0.13.1, 25.0.5.1, or later. If you can't update the Java runtime yet, keep setting `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` as described in the [solution](#notice-83-solution). Later releases will no longer set `-XX:-UseBASE64Intrinsics`.
 :::
 
 ## Notice 82
