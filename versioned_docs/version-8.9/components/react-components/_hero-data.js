@@ -39,7 +39,7 @@ export const usingCamundaHubOverlay = {
   action: "Create workspace",
   workspaces: [
     {
-      name: "New Project",
+      name: "Workspace",
       role: "Admin",
       status: "ok",
       counts: "4 members · 2 projects",
