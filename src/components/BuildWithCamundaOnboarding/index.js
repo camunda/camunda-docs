@@ -9,8 +9,8 @@ import downloads from "../../data/downloads.json";
 import styles from "./styles.module.css";
 import { detectOS } from "../../utils/detectOS";
 
-const INSTALL_COMMAND = "$ npm install -g @camunda8/cli";
-const SETUP_COMMAND = "$ c8ctl setup";
+export const INSTALL_COMMAND = "$ npm install -g @camunda8/cli";
+export const SETUP_COMMAND = "$ c8ctl setup";
 const CAMUNDA_MINOR = downloads.camundaRun.version
   .split(".")
   .slice(0, 2)

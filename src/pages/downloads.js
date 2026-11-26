@@ -3,10 +3,16 @@ import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import IconExternalLink from "@theme/Icon/ExternalLink";
 import bwcStyles from "./build-with-camunda.module.css";
 import styles from "./downloads.module.css";
 import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
 import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
+import TerminalWindow from "../components/BuildWithCamundaOnboarding/TerminalWindow";
+import {
+  INSTALL_COMMAND,
+  SETUP_COMMAND,
+} from "../components/BuildWithCamundaOnboarding";
 import downloads from "../data/downloads.json";
 import { detectOS } from "../utils/detectOS";
 
@@ -32,7 +38,7 @@ function DownloadBtnIcon() {
   );
 }
 
-function SparklesIconLg() {
+function TerminalIconLg() {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
       <rect
@@ -43,18 +49,17 @@ function SparklesIconLg() {
         rx="12"
         fill="rgba(252,93,13,0.12)"
       />
-      <path
-        d="M32 18l3.2 9 9 3.2-9 3.2-3.2 9-3.2-9-9-3.2 9-3.2L32 18z"
-        fill="#fc5d0d"
-      />
-      <path
-        d="M46 38l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L46 38z"
-        fill="#fc5d0d"
-      />
-      <path
-        d="M18 42l1.1 3.1 3.1 1.1-3.1 1.1-1.1 3.1-1.1-3.1-3.1-1.1 3.1-1.1L18 42z"
-        fill="#fc5d0d"
-      />
+      <g
+        transform="translate(12,12) scale(1.667)"
+        stroke="#fc5d0d"
+        fill="none"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M8 9l3 3-3 3M13 15h3" />
+      </g>
     </svg>
   );
 }
@@ -371,7 +376,6 @@ function OSTabs({ activeOS, onSelect }) {
 /* ─── Download data ─── */
 
 const {
-  gettingStarted: GETTING_STARTED,
   desktopModeler: DESKTOP_MODELER,
   camundaRun: CAMUNDA_RUN,
   rpaWorker: RPA_WORKER,
@@ -402,60 +406,62 @@ const ADDITIONAL_RELEASES = [
   },
 ];
 
-/* ─── CLI snippet (matches build-with-camunda terminal style) ─── */
+/* ─── Camunda CLI card: guided local setup ─── */
 
-function BundleButtons({ activeOS }) {
-  const links = GETTING_STARTED.links[activeOS] || [];
+const SETUP_COMMANDS = `${INSTALL_COMMAND}\n${SETUP_COMMAND}`;
+
+function CamundaCliCard() {
   return (
-    <div className={styles.downloadCardButtons}>
-      {links.map((link) => (
-        <a key={link.url} href={link.url} className={bwcStyles.downloadButton}>
-          <DownloadBtnIcon /> {link.label}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-/* ─── Getting Started card: version, date, and bundle download ─── */
-
-function GettingStartedCard({ activeOS }) {
-  return (
-    <div className={clsx(styles.downloadCard, styles.downloadCardFeatured)}>
+    <div
+      className={clsx(
+        styles.downloadCard,
+        styles.downloadCardFeatured,
+        styles.cliCard
+      )}
+    >
       <span className={bwcStyles.recommendedBadge}>
         Recommended for new users
       </span>
       <div className={styles.downloadCardIcon}>
-        <SparklesIconLg />
+        <TerminalIconLg />
       </div>
-      <h3 className={bwcStyles.downloadBlockTitle}>Getting Started Package</h3>
+      <h3 className={bwcStyles.downloadBlockTitle}>Camunda CLI</h3>
       <p className={styles.downloadCardDesc}>
-        Prebuilt bundle with Desktop Modeler, the Camunda 8 runtime, and example
-        processes for local development.
+        Set up local development with two commands. Guided setup starts a local
+        cluster, installs Desktop Modeler, runs an example process, and can
+        connect your AI assistant.
       </p>
-      <div className={styles.downloadCardMeta}>
-        <span className={styles.downloadCardVersion}>
-          v{GETTING_STARTED.version}
-        </span>
-        <span className={styles.downloadCardDate}>{GETTING_STARTED.date}</span>
+      <div className={styles.cliTerminal}>
+        <TerminalWindow title="Terminal">{SETUP_COMMANDS}</TerminalWindow>
       </div>
-
-      <BundleButtons activeOS={activeOS} />
-
       <p className={styles.downloadCardNote}>
-        Unzip the bundle and start Camunda 8 Run from the extracted folder with{" "}
-        <code>camunda-start.sh</code> (macOS/Linux) or
-        <code>camunda-start.bat</code> (Windows).
+        Requires{" "}
+        <Link
+          to="https://nodejs.org/en/download"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Node.js 22.18+
+          <IconExternalLink width={12} height={12} />
+        </Link>
+        . No Node.js?{" "}
+        <Link to={useBaseUrl("/build-with-camunda#manual-setup")}>
+          Set up manually
+        </Link>
+        .
       </p>
-
       <div className={styles.downloadCardFooter}>
         <Link
-          to={useBaseUrl(
-            "/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
-          )}
+          to={useBaseUrl("/build-with-camunda#self-managed")}
           className={styles.downloadCardFooterLink}
         >
           Setup guide
+        </Link>
+        <Link
+          to={useBaseUrl("/docs/apis-tools/c8ctl/getting-started/")}
+          className={styles.downloadCardFooterLink}
+        >
+          All CLI commands
         </Link>
       </div>
     </div>
@@ -622,7 +628,7 @@ function Downloads() {
   return (
     <Layout
       title="Downloads"
-      description="Download Camunda 8 components for local development. Get Desktop Modeler, Camunda 8 Run, RPA Worker, and the Getting Started bundle."
+      description="Download Camunda 8 components for local development. Set up everything with the Camunda CLI, or get Desktop Modeler, Camunda 8 Run, and RPA Worker."
     >
       <div className={bwcStyles.page}>
         {/* ─── Hero ─── */}
@@ -753,7 +759,7 @@ function Downloads() {
           <div
             className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridTwo)}
           >
-            <GettingStartedCard activeOS={activeOS} />
+            <CamundaCliCard />
             <DownloadCard
               icon={<PencilIconLg />}
               title="Desktop Modeler"

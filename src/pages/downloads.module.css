@@ -336,3 +336,19 @@
 .downloadCardFooterLink:hover {
   text-decoration: underline !important;
 }
+
+/* ─── Camunda CLI card ─── */
+
+/* Keep content grouped at the top; the footer stays pinned to the bottom */
+.cliCard .downloadCardDesc {
+  flex: none;
+}
+
+.cliTerminal {
+  margin-bottom: 0.75rem;
+}
+
+/* The page styles remove link underlines; mark links like the onboarding does */
+.downloadCardNote a {
+  border-bottom: 1px solid currentColor;
+}
