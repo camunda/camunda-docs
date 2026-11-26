@@ -43,6 +43,25 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+## Job Variables Are Untrusted Input
+
+`job.variables` reaches your handler from the server, but its content is set by whoever started or advanced the process instance — an API caller, another worker, or a message payload. Treat it as untrusted input.
+
+`job.custom_headers` has a different origin: it is defined in the BPMN model at modelling time, so it is trustworthy exactly as far as your control over who may deploy a process definition to the cluster. Everything below about what the SDK does and does not check applies to both.
+
+What the SDK does:
+
+- **Deserialisation is JSON-only.** Variables and custom headers are parsed with `json` into plain `dict`, `list`, `str`, `int`, `float`, `bool` and `None` values. No class is ever instantiated from the payload, so nothing a variable contains can decide what code runs. `job.variables.to_dict()` returns those plain values.
+- **Each job gets its own context.** Variables are not shared or mutated across concurrently running jobs.
+
+What the SDK does **not** do:
+
+- **No size limit.** The SDK does not bound the size of a variable payload. Name the variables your handler needs with `WorkerConfig.fetch_variables`; that is the supported way to bound what a worker receives.
+- **No depth limit.** Nesting is bounded only by CPython's own recursion limit during parsing. A handler that walks a variable recursively should bound its own recursion rather than assume the payload is shallow.
+- **No content validation.** A variable's value is whatever was written to it; the SDK does not check it against a schema. Validate it in your handler — `MyModel.model_validate(job.variables.to_dict())` is the shortest route. (`search_variables_as_dto` is a different tool: it derives a query from a model's fields to bound what a _search_ fetches, and returns a `VariableMap` whose values are unvalidated until you call `.validate()`.)
+
+A separate question, what crosses the process pool's pickle boundary, is covered under [Execution Strategies](#execution-strategies).
+
 ## Using the Client in a Job Handler
 
 Because `ConnectedJobContext` and `SyncJobContext` include a `client` reference, your handler can make API calls during job execution — for example, publishing a message to trigger another part of the process.
@@ -162,6 +181,14 @@ client.create_job_worker(
 - Your handler must accept `JobContext`, not `ConnectedJobContext` or `SyncJobContext` — the type checker enforces this via overloaded signatures on `create_job_worker`.
 - `job.log` degrades to a silent no-op logger in the child process (see [Job Logger](#job-logger)).
 - There is additional overhead per job from serialisation and inter-process communication.
+
+**Process strategy trust model:** Pickle is used across the process boundary, and nowhere else in the SDK. Both ends are processes the worker starts itself, connected only by the private queues of the `ProcessPoolExecutor`.
+
+- _Worker to child process:_ your handler and the `JobContext`. The context is built from the server's activated-job JSON, which is parsed with `json`; job variables and custom headers stay plain `dict`/`list`/`str`/`int`/`float`/`bool`/`None` values and are never deserialised into arbitrary classes. The rest of the context is SDK models, enums and semantic-type strings (such as `JobKey`).
+- _Child process to worker:_ your handler's result. **Your handler's return value is pickled in the child process and unpickled in the worker's parent process**, so your handler and the libraries it uses are inside the trust boundary. Return a `dict` of JSON-compatible values or a `JobCompletionRequest`, not arbitrary objects.
+- Bytes from the server, the OAuth token cache (JSON), configuration files or any other source outside the worker's own process pool are never unpickled.
+
+The SDK's acceptance tests guard these properties (`tests/acceptance/test_process_strategy_trust_model.py` in the SDK repository).
 
 ## Worker Configuration
 
