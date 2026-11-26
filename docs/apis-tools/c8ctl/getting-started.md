@@ -334,7 +334,7 @@ export CAMUNDA_CLIENT_SECRET=your-client-secret
 c8 list pi
 ```
 
-`CAMUNDA_REST_ADDRESS` — the variable name the Camunda SDKs use — is accepted as an alias for `CAMUNDA_BASE_URL`; when both are set, `CAMUNDA_BASE_URL` wins. `CAMUNDA_AUTH_STRATEGY` (`NONE`, `BASIC`, or `OAUTH`) is honoured the same way the SDK honours it, so an SDK project's `.env` works unchanged:
+`CAMUNDA_REST_ADDRESS` — the variable name the Camunda SDKs use — is accepted as an alias for `CAMUNDA_BASE_URL`; when both are set, `CAMUNDA_BASE_URL` wins. `CAMUNDA_AUTH_STRATEGY` (`NONE`, `BASIC`, or `OAUTH`) is honored the same way the SDK honors it, so an SDK project's `.env` works unchanged:
 
 ```bash
 export CAMUNDA_REST_ADDRESS=http://localhost:8088
