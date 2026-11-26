@@ -49,7 +49,7 @@ The events could change user records, including those of users in other organiza
 
 This issue only affects Camunda 8 SaaS. Self-Managed installations do not include or expose this endpoint and are not affected.
 
-There are no known exploits of this issue.
+Camunda is not aware of any known exploitation.
 
 ### How to determine if the installation is affected
 
