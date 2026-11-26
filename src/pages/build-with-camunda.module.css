@@ -612,6 +612,25 @@
   color: #171717 !important;
 }
 
+/* The CTA is the card's only link; its overlay keeps the whole card
+   clickable while the link name stays short */
+.heroCardLink::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  content: "";
+}
+
+/* A transform would make the CTA the overlay's containing block */
+.heroCard .heroCardLink:hover {
+  transform: none;
+}
+
+.heroCardLink:focus-visible {
+  outline: 3px solid var(--camunda-brand-purple);
+  outline-offset: 3px;
+}
+
 /* CLI install detail block */
 .cliInstallBlock {
   max-width: 720px;
@@ -719,11 +738,15 @@
   align-items: center;
 }
 
+/* A border triangle instead of a "▶" glyph, which screen readers announce */
 .bundleFallbackSummary::before {
-  content: "▶";
-  font-size: 0.7rem;
+  content: "";
+  flex-shrink: 0;
+  border-style: solid;
+  border-width: 0.3rem 0 0.3rem 0.45rem;
+  border-color: transparent transparent transparent
+    var(--ifm-color-emphasis-500);
   transition: transform 0.2s;
-  color: var(--ifm-color-emphasis-500);
 }
 
 .bundleFallback[open] .bundleFallbackSummary::before {
@@ -1958,6 +1981,48 @@
   font-family: var(--mono-font);
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* One row per command, each with its own copy button */
+.terminalCommand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.terminalCommand > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.terminalLine {
+  display: block;
+}
+
+.copyButtonInline {
+  position: static;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+}
+
+.copyStatus {
+  display: block;
+  margin-top: 0.4rem;
+  color: #ffb4a2;
+  font-size: 0.75rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ─── More ways to run ─── */

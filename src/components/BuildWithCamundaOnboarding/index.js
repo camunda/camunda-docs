@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
+import { useLocation } from "@docusaurus/router";
 import CodeBlock from "@theme/CodeBlock";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 import TerminalWindow from "./TerminalWindow";
@@ -15,8 +16,10 @@ const CAMUNDA_MINOR = downloads.camundaRun.version
   .split(".")
   .slice(0, 2)
   .join(".");
+const MANUAL_SETUP_ID = "manual-setup";
+const OPERATE_URL = "http://localhost:8080/operate";
 
-function ExternalLink({ children, ...props }) {
+export function ExternalLink({ children, ...props }) {
   return (
     <Link {...props} target="_blank" rel="noopener noreferrer">
       {children}
@@ -46,12 +49,12 @@ function DownloadButtonIcon() {
   );
 }
 
-function Requirements() {
-  const openManualSetup = () => {
-    const manualSetup = document.getElementById("manual-setup");
-    if (manualSetup) manualSetup.open = true;
-  };
+function openManualSetup() {
+  const manualSetup = document.getElementById(MANUAL_SETUP_ID);
+  if (manualSetup) manualSetup.open = true;
+}
 
+function Requirements() {
   return (
     <div className={styles.requirements}>
       <p className={styles.requirementLine}>
@@ -66,7 +69,7 @@ function Requirements() {
         </span>
         <Link
           className={styles.manualSetupLink}
-          to="#manual-setup"
+          to={`#${MANUAL_SETUP_ID}`}
           onClick={openManualSetup}
         >
           No Node.js? Set up manually
@@ -94,8 +97,10 @@ function Requirements() {
 function ExploreProcess() {
   return (
     <p>
-      Follow the Operate link printed by setup to inspect your process. Sign in
-      with <code>demo</code> / <code>demo</code>.
+      Open Operate at{" "}
+      <ExternalLink to={OPERATE_URL}>{OPERATE_URL}</ExternalLink> and sign in
+      with <code>demo</code> / <code>demo</code> to inspect your process
+      instance.
     </p>
   );
 }
@@ -122,13 +127,25 @@ function Guided() {
           <p>
             Keep <strong>Local cluster</strong>,{" "}
             <strong>Desktop Modeler</strong>, and{" "}
-            <strong>Example project</strong> selected.
+            <strong>Example project</strong> selected. The{" "}
+            <strong>AI-assisted development</strong> options configure AI coding
+            assistants on your machine on how to use Camunda and connect to the
+            local cluster via MCP.
           </p>
           <TerminalWindow title="Terminal">{SETUP_COMMAND}</TerminalWindow>
           <p className={styles.stepResult}>
-            The setup downloads the components, starts your cluster, deploys the
-            example, and starts a process instance. It optionally sets up
-            integrations with your AI agent.
+            The first run downloads about 1 GB. Setup then starts your cluster,
+            creates the example in a <code>rocket-launch</code> folder in your
+            current directory, deploys it, and starts a process instance. If
+            install or setup fails, see the{" "}
+            <Link to="/docs/guides/getting-started-hello-world/">
+              Hello World guide
+            </Link>{" "}
+            or{" "}
+            <Link to="/docs/self-managed/quickstart/developer-quickstart/c8run-troubleshooting/">
+              Troubleshoot Camunda 8 Run
+            </Link>
+            .
           </p>
         </section>
       </li>
@@ -138,9 +155,14 @@ function Guided() {
         </span>
         <section aria-labelledby="explore-process">
           <h3 id="explore-process">Explore your process</h3>
-          <ExploreProcess />
           <p>
-            Open the example in Desktop Modeler to see how it works and try your
+            Setup ends with a <strong>What's next</strong> summary. Its{" "}
+            <strong>Watch it</strong> link opens your process instance directly
+            in Operate. Sign in with <code>demo</code> / <code>demo</code>.
+          </p>
+          <p>
+            In Desktop Modeler, open <code>rocket-launch.bpmn</code> from the{" "}
+            <code>rocket-launch</code> folder to see how it works and try your
             own changes.
           </p>
         </section>
@@ -157,8 +179,6 @@ function DownloadLinks({ product, detectedOS }) {
           <a
             key={link.url}
             href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
             className={clsx(
               pageStyles.downloadButton,
               os === detectedOS && styles.detectedDownload
@@ -169,6 +189,9 @@ function DownloadLinks({ product, detectedOS }) {
               /\s+\(\.dmg\)$/,
               ""
             )}
+            {os === detectedOS && (
+              <span className={styles.detectedLabel}>Your OS</span>
+            )}
           </a>
         ))
       )}
@@ -177,16 +200,26 @@ function DownloadLinks({ product, detectedOS }) {
 }
 
 function ManualSetup({ detectedOS }) {
+  const { hash } = useLocation();
+
+  // Links such as "Set up manually" on the Downloads page target this section
+  useEffect(() => {
+    if (hash === `#${MANUAL_SETUP_ID}`) openManualSetup();
+  }, [hash]);
+
   return (
     <details
-      id="manual-setup"
+      id={MANUAL_SETUP_ID}
       className={clsx(pageStyles.bundleFallback, styles.manualSetup)}
     >
       <summary
         className={clsx(pageStyles.bundleFallbackSummary, styles.manualSummary)}
       >
         <span>
-          No Node? No Problem <small>Download and set up manually</small>
+          No Node.js? Set up manually{" "}
+          <small>
+            Download Camunda 8 Run, Desktop Modeler, and the example
+          </small>
         </span>
       </summary>
       <div
@@ -260,6 +293,7 @@ function ManualSetup({ detectedOS }) {
                 {'{\n  "missionName": "Odyssey",\n  "fuelLevel": 95\n}'}
               </CodeBlock>
             </div>
+            <ExploreProcess />
           </li>
         </ol>
       </div>
@@ -292,7 +326,7 @@ export default function LocalOnboarding() {
           </span>
         </h2>
         <p className={pageStyles.sectionSub}>
-          Install the Camunda CLI via npm and start a set up your local Camunda
+          Install the Camunda CLI via npm and set up your local Camunda
           environment.
         </p>
         <p className={styles.legal}>

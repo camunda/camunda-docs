@@ -3,13 +3,13 @@ import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import IconExternalLink from "@theme/Icon/ExternalLink";
 import bwcStyles from "./build-with-camunda.module.css";
 import styles from "./downloads.module.css";
 import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
 import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import TerminalWindow from "../components/BuildWithCamundaOnboarding/TerminalWindow";
 import {
+  ExternalLink,
   INSTALL_COMMAND,
   SETUP_COMMAND,
 } from "../components/BuildWithCamundaOnboarding";
@@ -299,19 +299,20 @@ function CheckIcon({ color = "#22a06b" }) {
   );
 }
 
-function ExternalLinkIcon() {
+function ArrowRight() {
   return (
     <svg
-      width="14"
-      height="14"
+      width="16"
+      height="16"
       viewBox="0 0 16 16"
       fill="none"
-      style={{ marginLeft: 6, verticalAlign: "-1px" }}
+      aria-hidden="true"
+      style={{ marginLeft: 6 }}
     >
       <path
-        d="M6 3H3v10h10v-3M9 3h4v4M14 2L7 9"
+        d="M3 8h10M9 4l4 4-4 4"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -323,13 +324,20 @@ function ExternalLinkIcon() {
 
 function OSTabs({ activeOS, onSelect }) {
   return (
-    <div className={styles.osTabs}>
+    <div className={styles.osTabs} role="group" aria-label="Operating system">
       <button
         type="button"
+        aria-pressed={activeOS === "mac"}
         className={clsx(styles.osTab, activeOS === "mac" && styles.osTabActive)}
         onClick={() => onSelect("mac")}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
           <path
             d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
             fill="currentColor"
@@ -339,13 +347,20 @@ function OSTabs({ activeOS, onSelect }) {
       </button>
       <button
         type="button"
+        aria-pressed={activeOS === "windows"}
         className={clsx(
           styles.osTab,
           activeOS === "windows" && styles.osTabActive
         )}
         onClick={() => onSelect("windows")}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
           <path
             d="M3 12V6.5l8-1.1V12H3zm0 .5h8v6.6l-8-1.1V12.5zM11.5 5.3l9.5-1.3v8.5h-9.5V5.3zm0 7.7h9.5v8.5l-9.5-1.3V13z"
             fill="currentColor"
@@ -355,13 +370,20 @@ function OSTabs({ activeOS, onSelect }) {
       </button>
       <button
         type="button"
+        aria-pressed={activeOS === "linux"}
         className={clsx(
           styles.osTab,
           activeOS === "linux" && styles.osTabActive
         )}
         onClick={() => onSelect("linux")}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
           <path
             d="M12 2C9.24 2 7 4.24 7 7v4c0 .83-.67 1.5-1.5 1.5S4 11.83 4 11v-1H2v1c0 1.66 1.34 3 3 3h.17C5.06 14.67 5 15.33 5 16c0 2.76 2.24 5 5 5h4c2.76 0 5-2.24 5-5 0-.67-.06-1.33-.17-2H19c1.66 0 3-1.34 3-3v-1h-2v1c0 .83-.67 1.5-1.5 1.5S17 11.83 17 11V7c0-2.76-2.24-5-5-5zm-2 6a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z"
             fill="currentColor"
@@ -429,22 +451,17 @@ function CamundaCliCard() {
       <p className={styles.downloadCardDesc}>
         Set up local development with two commands. Guided setup starts a local
         cluster, installs Desktop Modeler, runs an example process, and can
-        connect your AI assistant.
+        connect your AI coding assistant.
       </p>
       <div className={styles.cliTerminal}>
         <TerminalWindow title="Terminal">{SETUP_COMMANDS}</TerminalWindow>
       </div>
       <p className={styles.downloadCardNote}>
         Requires{" "}
-        <Link
-          to="https://nodejs.org/en/download"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <ExternalLink to="https://nodejs.org/en/download">
           Node.js 22.18+
-          <IconExternalLink width={12} height={12} />
-        </Link>
-        . No Node.js?{" "}
+        </ExternalLink>
+        . The first setup run downloads about 1 GB. No Node.js?{" "}
         <Link to={useBaseUrl("/build-with-camunda#manual-setup")}>
           Set up manually
         </Link>
@@ -530,14 +547,12 @@ function DownloadCard({
 
       {primaryLink ? (
         <div className={styles.downloadCardLinks}>
-          <a
-            href={primaryLink.url}
+          <ExternalLink
+            to={primaryLink.url}
             className={styles.downloadCardFooterLink}
-            target="_blank"
-            rel="noopener noreferrer"
           >
-            {primaryLink.label} <ExternalLinkIcon />
-          </a>
+            {primaryLink.label}
+          </ExternalLink>
         </div>
       ) : (
         <div className={styles.downloadCardLinks}>
@@ -561,9 +576,10 @@ function DownloadCard({
           <button
             type="button"
             className={styles.experimentalToggle}
+            aria-expanded={showExperimental}
             onClick={() => setShowExperimental(!showExperimental)}
           >
-            <span className={styles.experimentalToggleIcon}>
+            <span className={styles.experimentalToggleIcon} aria-hidden="true">
               {showExperimental ? "▾" : "▸"}
             </span>
             Experimental
@@ -598,14 +614,12 @@ function DownloadCard({
             </Link>
           )}
           {previousVersions && (
-            <a
-              href={previousVersions}
+            <ExternalLink
+              to={previousVersions}
               className={styles.downloadCardFooterLink}
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              Previous versions <ExternalLinkIcon />
-            </a>
+              Previous versions
+            </ExternalLink>
           )}
         </div>
       )}
@@ -661,7 +675,7 @@ function Downloads() {
                 styles.heroIntroTight
               )}
             >
-              <h1 className={bwcStyles.terminalHeroTitle}>Camunda Downloads</h1>
+              <h1 className={bwcStyles.terminalHeroTitle}>Camunda downloads</h1>
               <p className={bwcStyles.terminalHeroSub}>
                 Download everything you need for local Camunda 8 development.
               </p>
@@ -745,13 +759,13 @@ function Downloads() {
             </svg>
             <span>
               By downloading our self-managed packages, you agree to our{" "}
-              <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+              <ExternalLink to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
                 Privacy Policy
-              </Link>{" "}
+              </ExternalLink>{" "}
               and{" "}
-              <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+              <ExternalLink to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
                 Terms of Use
-              </Link>
+              </ExternalLink>
               .
             </span>
           </p>
@@ -845,43 +859,7 @@ function Downloads() {
                 Choose the setup that fits your workflow and infrastructure.
               </p>
             </div>
-            <div className={clsx(bwcStyles.waysGrid, styles.waysGridWide)}>
-              <Link
-                to={useBaseUrl("/build-with-camunda#self-managed")}
-                className={bwcStyles.wayCard}
-              >
-                <span className={styles.cliIconWrap}>
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                    <rect
-                      x="2"
-                      y="4"
-                      width="20"
-                      height="16"
-                      rx="2"
-                      stroke="#fc5d0d"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M6 8l4 4-4 4"
-                      stroke="#fc5d0d"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 16h6"
-                      stroke="#fc5d0d"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                <h3>Camunda CLI</h3>
-                <p>
-                  Install with <code>npm install -g @camunda8/cli</code> and
-                  manage everything from your terminal.
-                </p>
-              </Link>
+            <div className={bwcStyles.waysGrid}>
               <Link
                 to={useBaseUrl(
                   "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
@@ -937,7 +915,7 @@ function Downloads() {
                 to={useBaseUrl("/build-with-camunda")}
                 className={bwcStyles.heroCardCtaAlt}
               >
-                Start building <ExternalLinkIcon />
+                Start building <ArrowRight />
               </Link>
             </div>
           </div>

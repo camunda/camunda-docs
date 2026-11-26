@@ -56,6 +56,7 @@
 }
 
 .requirements a,
+.steps p a,
 .manualContent p a,
 .reference a {
   border-bottom: 1px solid currentColor;
@@ -157,6 +158,19 @@
   box-shadow: 0 0 0 3px var(--camunda-brand-purple-tint);
 }
 
+.detectedLabel {
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.manualVariables {
+  margin-bottom: 0.75rem;
+}
+
 .manualVariables > * {
   margin: 0;
 }
@@ -199,6 +213,14 @@
 
 .steps p {
   font-size: 0.95rem;
+}
+
+.setupOptions {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 .steps .requirements {

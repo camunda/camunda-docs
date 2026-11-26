@@ -12,7 +12,9 @@ import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
 import IconRunLocally from "../../docs/components/assets/icon-run-locally.svg";
 import IconSaasTrial from "../../docs/components/assets/icon-saas-trial.svg";
 import downloads from "../data/downloads.json";
-import LocalOnboarding from "../components/BuildWithCamundaOnboarding";
+import LocalOnboarding, {
+  ExternalLink,
+} from "../components/BuildWithCamundaOnboarding";
 import TerminalWindow from "../components/BuildWithCamundaOnboarding/TerminalWindow";
 
 const CAMUNDA_RUN = downloads.camundaRun;
@@ -463,6 +465,7 @@ function ArrowRight() {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
+      aria-hidden="true"
       style={{ marginLeft: 6 }}
     >
       <path
@@ -483,6 +486,7 @@ function ArrowDown() {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
+      aria-hidden="true"
       style={{ marginLeft: 6 }}
     >
       <path
@@ -538,16 +542,14 @@ function BuildWithCamunda() {
             {/* ─── Hero: 2-card choice ─── */}
             <div className={styles.heroLayoutTwo}>
               {/* Self-Managed (left, priority) */}
-              <Link
-                className={clsx(styles.heroCard, styles.heroCardPriority)}
-                to="#self-managed"
-              >
+              <div className={clsx(styles.heroCard, styles.heroCardPriority)}>
                 <span className={styles.recommendedBadge}>
                   <svg
                     width="14"
                     height="14"
                     viewBox="0 0 24 24"
                     fill="none"
+                    aria-hidden="true"
                     style={{ marginRight: 4 }}
                   >
                     <path
@@ -589,22 +591,23 @@ function BuildWithCamunda() {
                     <CheckIcon color="#22a06b" /> One command to install Camunda
                   </li>
                   <li>
-                    <CheckIcon color="#22a06b" /> AI agent skills built in
+                    <CheckIcon color="#22a06b" /> Skills for your AI coding
+                    assistant
                   </li>
                   <li>
                     <CheckIcon color="#22a06b" /> Data stays on your machine
                   </li>
                 </ul>
-                <span className={styles.heroCardCta}>
+                <Link
+                  className={clsx(styles.heroCardCta, styles.heroCardLink)}
+                  to="#self-managed"
+                >
                   Start building <ArrowDown />
-                </span>
-              </Link>
+                </Link>
+              </div>
 
               {/* SaaS (right) */}
-              <Link
-                className={clsx(styles.heroCard, styles.heroCardSaas)}
-                to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
-              >
+              <div className={clsx(styles.heroCard, styles.heroCardSaas)}>
                 <span className={clsx(styles.cardTag, styles.cardTagCloud)}>
                   Cloud
                 </span>
@@ -630,17 +633,21 @@ function BuildWithCamunda() {
                     <CheckIcon color="#22a06b" /> Modeler included
                   </li>
                   <li>
-                    <CheckIcon color="#22a06b" /> AI agent skills built in
+                    <CheckIcon color="#22a06b" /> Skills for your AI coding
+                    assistant
                   </li>
                   <li>
                     <CheckIcon color="#22a06b" /> Free LLM tokens to run your
-                    first agent!
+                    first AI agent
                   </li>
                 </ul>
-                <span className={styles.heroCardCtaAlt}>
-                  Create free account <ArrowRight />
-                </span>
-              </Link>
+                <ExternalLink
+                  className={clsx(styles.heroCardCtaAlt, styles.heroCardLink)}
+                  to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
+                >
+                  Create free account
+                </ExternalLink>
+              </div>
             </div>
           </section>
         </div>
@@ -656,7 +663,8 @@ function BuildWithCamunda() {
               If you selected the local cluster and example project, setup has
               already started a process for you. Use these commands for further
               development, not as additional setup steps. Run the deployment
-              commands from the generated example project folder.
+              commands from the <code>rocket-launch</code> folder that setup
+              created.
             </p>
             <div className={styles.commandGrid}>
               <div className={styles.commandCard}>
@@ -670,24 +678,24 @@ $ c8ctl cluster stop`}
                 <h4>Deploy and start processes</h4>
                 <TerminalWindow title="Terminal">
                   {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
-$ c8ctl create pi --id=rocket-launch --variables='{"missionName":"Odyssey","fuelLevel":95}'
-$ c8ctl list pi`}
+# Save {"missionName": "Odyssey", "fuelLevel": 95} as variables.json
+$ c8ctl create pi --id=rocket-launch --variables=@variables.json`}
                 </TerminalWindow>
               </div>
               <div className={styles.commandCard}>
-                <h4>Interact with processes</h4>
+                <h4>Inspect process instances</h4>
                 <TerminalWindow title="Terminal">
-                  {`$ c8ctl list jobs --type=launch-approval
-$ c8ctl activate jobs launch-approval
-$ c8ctl complete job 2251799813685252`}
+                  {`$ c8ctl search pi --id=rocket-launch
+$ c8ctl get pi <process-instance-key> --variables
+$ c8ctl search vars --name=missionResult`}
                 </TerminalWindow>
               </div>
               <div className={styles.commandCard}>
                 <h4>Monitor and debug</h4>
                 <TerminalWindow title="Terminal">
                   {`$ c8ctl list inc --state=ACTIVE
-$ c8ctl get inc 2251799813685251
-$ c8ctl resolve inc 2251799813685251`}
+$ c8ctl get inc <incident-key>
+$ c8ctl resolve inc <incident-key>`}
                 </TerminalWindow>
               </div>
             </div>
@@ -728,23 +736,24 @@ $ c8ctl resolve inc 2251799813685251`}
           </section>
 
           <p className={styles.optionalIntro}>
-            The sections below are optional references to show the basic
-            commands. You don't need to repeat the steps that{" "}
-            <code>c8ctl setup</code> completed (e.g. starting a cluster).
+            The optional sections below cover connecting your AI coding
+            assistant, other ways to run Camunda, production deployments, and
+            downloads. You don't need to repeat steps that{" "}
+            <code>c8ctl setup</code> completed, for example, starting a cluster.
           </p>
 
           <details className={styles.optionalSection} id="ai-tools">
             <summary className={styles.optionalSummary}>
-              <h2>Train your AI agents on Camunda</h2>
+              <h2>Connect your AI coding assistant</h2>
             </summary>
             <div className={styles.optionalContent}>
               <p className={styles.optionalNote}>
                 If you selected <strong>AI assistant skills</strong> and{" "}
-                <strong>Cluster MCP server</strong>, setup installs skills and
-                connects supported AI assistants already on your machine. You
-                don't need to repeat that configuration. Otherwise, use c8ctl to
-                install the skills and connect your detected AI coding
-                harnesses.
+                <strong>Cluster MCP server</strong>, setup installed the skills
+                and connected the supported AI coding assistants on your
+                machine. You don't need to repeat that configuration. Otherwise,
+                use c8ctl to install the skills and connect your AI coding
+                assistant.
               </p>
               <div className={styles.aiGrid}>
                 <div className={styles.aiCard}>
@@ -752,9 +761,9 @@ $ c8ctl resolve inc 2251799813685251`}
                     Install Camunda Skills
                   </h4>
                   <p>
-                    c8ctl installs or updates the skills for supported harnesses
-                    detected on your machine. It requires GitHub CLI 2.95 or
-                    later.
+                    c8ctl installs or updates the skills for the supported AI
+                    coding assistants on your machine. It requires GitHub CLI
+                    2.95 or later.
                   </p>
                   <TerminalWindow title="Terminal">
                     {`$ c8ctl skills install
@@ -784,12 +793,12 @@ $ claude plugin install camunda-skills@camunda-skills`}
                 </div>
                 <div className={styles.aiCard}>
                   <h4 style={{ display: "flex", alignItems: "center" }}>
-                    Connect AI assistants via MCP
+                    Connect your AI coding assistant via MCP
                   </h4>
                   <p>
                     Install the Orchestration Cluster and Docs MCP servers for
-                    supported harnesses. The Docs server asks you to sign in on
-                    first use.
+                    supported AI coding assistants. The Docs server asks you to
+                    sign in on first use.
                   </p>
                   <TerminalWindow title="Terminal">
                     {`$ c8ctl mcp install --docs --orchestration
@@ -802,7 +811,7 @@ $ c8ctl mcp list`}
                   <TerminalWindow title="mcp.json">
                     {`{
   "servers": {
-    // Locally running C8Run instance
+    // Locally running Camunda 8 Run instance
     "camunda": {
       "type": "http",
       "url": "http://localhost:8080/mcp/cluster"
@@ -846,12 +855,12 @@ $ c8ctl mcp list`}
                 </svg>
                 <span>
                   Learn more about{" "}
-                  <Link
+                  <ExternalLink
                     to="https://github.com/camunda/skills"
                     style={{ fontWeight: 400, fontSize: "0.85rem" }}
                   >
                     Camunda Skills
-                  </Link>
+                  </ExternalLink>
                   {", and the "}
                   <Link
                     to={clusterMcpGuideUrl}
@@ -870,28 +879,36 @@ $ c8ctl mcp list`}
                 </span>
               </p>
               <div className={styles.aiExamples}>
-                <h4>...then ask your agent</h4>
+                <h4>...then ask your AI coding assistant</h4>
                 <p className={styles.aiExamplesSub}>
                   Try one of these prompts to see Camunda Skills in action.
                 </p>
                 <div className={styles.aiExampleGrid}>
                   <div className={styles.aiExampleItem}>
-                    <span className={styles.aiPromptIcon}>💬</span>
+                    <span className={styles.aiPromptIcon} aria-hidden="true">
+                      💬
+                    </span>
                     "Create an invoice approval process with a user task for
                     review and an HTTP connector to notify accounting"
                   </div>
                   <div className={styles.aiExampleItem}>
-                    <span className={styles.aiPromptIcon}>💬</span>
+                    <span className={styles.aiPromptIcon} aria-hidden="true">
+                      💬
+                    </span>
                     "Build an AI agent to triage and route customer support
                     tickets to the correct team"
                   </div>
                   <div className={styles.aiExampleItem}>
-                    <span className={styles.aiPromptIcon}>💬</span>
+                    <span className={styles.aiPromptIcon} aria-hidden="true">
+                      💬
+                    </span>
                     "Deploy order-process.bpmn and start an instance with
                     orderId=42"
                   </div>
                   <div className={styles.aiExampleItem}>
-                    <span className={styles.aiPromptIcon}>💬</span>
+                    <span className={styles.aiPromptIcon} aria-hidden="true">
+                      💬
+                    </span>
                     "Investigate incidents on the payment-flow process and
                     resolve any that are caused by missing payment details"
                   </div>
@@ -905,6 +922,7 @@ $ c8ctl mcp list`}
                       height="16"
                       viewBox="0 0 16 16"
                       fill="none"
+                      aria-hidden="true"
                       style={{ marginLeft: 6 }}
                     >
                       <path
@@ -951,14 +969,14 @@ $ c8ctl mcp list`}
                 </Link>
                 <Link
                   to={useBaseUrl(
-                    "docs/self-managed/deployment/helm/install/quick-install/"
+                    "docs/self-managed/deployment/helm/cloud-providers/kind/"
                   )}
                   className={styles.wayCard}
                 >
                   <KubernetesIcon />
                   <h3>Kubernetes</h3>
                   <p>
-                    Deploy to any Kubernetes cluster with the official Camunda
+                    Deploy to a local kind cluster with the official Camunda
                     Helm chart.
                   </p>
                 </Link>

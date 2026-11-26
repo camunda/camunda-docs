@@ -65,7 +65,7 @@ test("retained references are collapsed and keyboard-accessible on mobile", asyn
   ).toBeVisible();
 
   const sections = [
-    ["ai-tools", "Train your AI agents on Camunda"],
+    ["ai-tools", "Connect your AI coding assistant"],
     ["other-local-deployments", "More ways to run Camunda locally"],
     ["production-deployments", "Production deployment options"],
     ["downloads", "Camunda downloads"],
@@ -89,4 +89,50 @@ test("retained references are collapsed and keyboard-accessible on mobile", asyn
     await summary.press("Enter");
     await expect(content).toBeHidden();
   }
+});
+
+test("essential commands copy one command at a time", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/build-with-camunda/", { waitUntil: "domcontentloaded" });
+  await context.grantPermissions(["clipboard-read", "clipboard-write"], {
+    origin: new URL(page.url()).origin,
+  });
+
+  const card = page
+    .locator("#cli-reference h4", { hasText: "Manage your clusters" })
+    .locator("..");
+  await card
+    .getByRole("button", { name: "Copy c8ctl cluster stop", exact: true })
+    .click();
+  await expect
+    .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+    .toBe("c8ctl cluster stop");
+  await expect(card.getByRole("status")).toHaveText("Copied to clipboard");
+});
+
+test("downloads fit on phones and open the manual setup", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/downloads/", { waitUntil: "domcontentloaded" });
+
+  await expect(
+    page
+      .getByRole("group", { name: "Operating system" })
+      .locator('button[aria-pressed="true"]')
+  ).toHaveCount(1);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true);
+
+  await page
+    .getByRole("link", { name: "Set up manually", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/build-with-camunda\/?#manual-setup$/);
+  await expect(page.locator("details#manual-setup")).toHaveJSProperty(
+    "open",
+    true
+  );
 });
