@@ -6,22 +6,20 @@ description: "Build Camunda solutions with AI-ready workflows, including agentic
 keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---
 
-import AoGrid from '../../components/react-components/\_ao-card';
-import IconAgenticImg from '../../components/assets/icon-agentic.png';
-import IconConnectorsImg from '../../components/assets/icon-connectors.png';
-import IconBpmnImg from '../../components/assets/icon-bpmn.png';
-import IconLlmImg from '../../components/assets/icon-llm.png';
-import IconRagImg from '../../components/assets/icon-long-term-memory.png';
-import IconOperateImg from '../../components/assets/icon-operate.png';
-import IconOptimizeImg from '../../components/assets/icon-optimize.png';
-import IconConfigImg from '../../components/assets/icon-config.png';
-import IconPlay from '../../components/assets/icon-play.png';
-import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
-import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
-import IconIdpImg from '../../components/assets/icon-idp.png';
-import IconDocsImg from '../../components/assets/icon-docs.png';
-import IconMcpImg from '../../components/assets/icon-mcp.png';
-import AoGetStartedBanner from '../../components/react-components/\_ao-get-started-banner';
+import AoGrid from '../react-components/\_ao-card';
+import IconAgenticImg from '../assets/icon-agentic.png';
+import IconConnectorsImg from '../assets/icon-connectors.png';
+import IconBpmnImg from '../assets/icon-bpmn.png';
+import IconLlmImg from '../assets/icon-llm.png';
+import IconRagImg from '../assets/icon-long-term-memory.png';
+import IconOperateImg from '../assets/icon-operate.png';
+import IconOptimizeImg from '../assets/icon-optimize.png';
+import IconPlay from '../assets/icon-play.png';
+import IconAIAgent from '../assets/hero-build-with-ai.png';
+import IconCopilotImg from '../assets/icon-camunda-copilot.png';
+import IconIdpImg from '../assets/icon-idp.png';
+import IconDocsImg from '../assets/icon-docs.png';
+import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <h3 class="subheading">Orchestrate agents, people, and systems in one process.</h3>
 
@@ -30,7 +28,7 @@ import AoGetStartedBanner from '../../components/react-components/\_ao-get-start
 
 Build and coordinate AI agents, people, and systems across complete processes, combining deterministic execution with AI reasoning and human judgment where each works best.
 
-<p class="link-button">[Get started with agentic orchestration](../../components/agentic-orchestration/agentic-orchestration-overview.md)</p>
+<p class="link-button">[Get started with agentic orchestration](./agentic-orchestration-overview.md)</p>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -58,7 +56,7 @@ image: IconAgenticImg,
 description: "Learn what AI agents are, the agent types Camunda supports, and how the agent loop works.",
 },
 {
-link: "../../getting-started-agentic-orchestration/",
+link: "../../../guides/getting-started-agentic-orchestration/",
 title: "Build your first AI agent",
 image: IconPlay,
 description: "Follow a hands-on guide to build and run your first AI agent in Camunda.",
@@ -112,12 +110,6 @@ link: "../../../components/agentic-orchestration/evaluate-agents/analyze-ai-agen
 title: "Analyze with Optimize",
 image: IconOptimizeImg,
 description: "Analyze your AI agents with Optimize.",
-},
-{
-link: "../../../components/agentic-orchestration/evaluate-agents/test-ai-agents/",
-title: "Test with CPT",
-image: IconConfigImg,
-description: "Test your AI agents with Camunda Process Test.",
 },
 ]} />
 
@@ -179,21 +171,6 @@ description: "Extract structured data from documents and integrate it into your 
 
 ## Integrate via MCP
 
-Use MCP servers to let your AI agents interact with Camunda.
+Retrieve up-to-date Camunda documentation from your AI agents with the Camunda [Docs MCP server](../../reference/mcp-docs/mcp-docs.md).
 
-<AoGrid columns={2} ao={[
-{
-link: "../../../reference/mcp-docs/",
-title: "Docs MCP server",
-image: IconDocsImg,
-description: "Retrieve up-to-date Camunda documentation from your AI agents.",
-},
-{
-link: "../../../apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
-title: "Orchestration Cluster MCP server",
-image: IconMcpImg,
-description: "Give your AI agents access to Camunda’s operational capabilities.",
-},
-]} />
-
-<AoGetStartedBanner href="../../getting-started-agentic-orchestration/" />
+<AoGetStartedBanner href="../../../guides/getting-started-agentic-orchestration/" />
