@@ -13,7 +13,7 @@ mdx:
 The PHP SDK is a **technical preview**. Its API surface may still evolve and changes may not follow semantic versioning. Pin an exact version if you need stability.
 :::
 
-The SDK exposes **244 operations** across **41 API groups**. Every operation is available directly on the client (the flat facade) and through the typed `api()` accessor:
+The SDK exposes **249 operations** across **41 API groups**. Every operation is available directly on the client (the flat facade) and through the typed `api()` accessor:
 
 ```php
 $client = CamundaClient::fromEnvironment();
@@ -35,7 +35,7 @@ $jobs = $client->api(\Camunda\Orchestration\Api\Api\JobApi::class);
 | [Authorization Api](authorization-api.md)                 | 5          |
 | [Backup Api](backup-api.md)                               | 22         |
 | [Batch Operation Api](batch-operation-api.md)             | 6          |
-| [Clock Api](clock-api.md)                                 | 2          |
+| [Clock Api](clock-api.md)                                 | 4          |
 | [Cluster Api](cluster-api.md)                             | 8          |
 | [Cluster Variable Api](cluster-variable-api.md)           | 9          |
 | [Conditional Api](conditional-api.md)                     | 1          |
@@ -55,7 +55,7 @@ $jobs = $client->api(\Camunda\Orchestration\Api\Api\JobApi::class);
 | [Mapping Rule Api](mapping-rule-api.md)                   | 5          |
 | [Message Api](message-api.md)                             | 2          |
 | [Message Subscription Api](message-subscription-api.md)   | 2          |
-| [Process Definition Api](process-definition-api.md)       | 9          |
+| [Process Definition Api](process-definition-api.md)       | 11         |
 | [Process Instance Api](process-instance-api.md)           | 23         |
 | [Recovery Api](recovery-api.md)                           | 5          |
 | [Resource Api](resource-api.md)                           | 6          |
@@ -66,6 +66,6 @@ $jobs = $client->api(\Camunda\Orchestration\Api\Api\JobApi::class);
 | [System Api](system-api.md)                               | 2          |
 | [Tenant Api](tenant-api.md)                               | 20         |
 | [User Api](user-api.md)                                   | 5          |
-| [User Task Api](user-task-api.md)                         | 10         |
+| [User Task Api](user-task-api.md)                         | 11         |
 | [Variable Api](variable-api.md)                           | 2          |
 | [Domain type system](domain-type-system.md)               | —          |

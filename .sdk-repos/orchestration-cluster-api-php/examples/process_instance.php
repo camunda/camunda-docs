@@ -96,7 +96,7 @@ function delete_process_instances_batch_operation(CamundaClient $client, \Camund
 /**
  * Resolve related incidents (batch).
  */
-function resolve_incidents_batch_operation(CamundaClient $client, ?\Camunda\Orchestration\Api\Model\ProcessInstanceIncidentResolutionBatchOperationRequest $processInstanceIncidentResolutionBatchOperationRequest = null): void
+function resolve_incidents_batch_operation(CamundaClient $client, \Camunda\Orchestration\Api\Model\ProcessInstanceIncidentResolutionBatchOperationRequest $processInstanceIncidentResolutionBatchOperationRequest): void
 {
     $client->resolveIncidentsBatchOperation($processInstanceIncidentResolutionBatchOperationRequest);
 }

@@ -23,11 +23,9 @@ function resolve_secrets(CamundaClient $client, \Camunda\Orchestration\Api\Model
 // region ListSecrets
 /**
  * List secret references.
- *
- * @param array<string, mixed>|null $body
  */
-function list_secrets(CamundaClient $client, ?array $body = null): void
+function list_secrets(CamundaClient $client): void
 {
-    $client->listSecrets($body);
+    $client->listSecrets();
 }
 // endregion ListSecrets

@@ -9,12 +9,13 @@ mdx:
 
 # User Task Api
 
-`UserTaskApi` — 10 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\UserTaskApi::class)`.
+`UserTaskApi` — 11 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\UserTaskApi::class)`.
 
 - `assignUserTask()`
 - `completeUserTask()`
 - `getUserTask()`
 - `getUserTaskForm()`
+- `lookupUserTask()`
 - `searchUserTaskAuditLogs()`
 - `searchUserTaskEffectiveVariables()`
 - `searchUserTaskVariables()`

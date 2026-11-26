@@ -9,7 +9,7 @@ mdx:
 
 # Process Definition Api
 
-`ProcessDefinitionApi` — 9 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ProcessDefinitionApi::class)`.
+`ProcessDefinitionApi` — 11 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ProcessDefinitionApi::class)`.
 
 - `getProcessDefinition()`
 - `getProcessDefinitionInstanceStatistics()`
@@ -18,5 +18,7 @@ mdx:
 - `getProcessDefinitionStatistics()`
 - `getProcessDefinitionXML()`
 - `getStartProcessForm()`
+- `resumeProcessDefinitions()`
 - `searchProcessDefinitionVariableNames()`
 - `searchProcessDefinitions()`
+- `suspendProcessDefinitions()`
