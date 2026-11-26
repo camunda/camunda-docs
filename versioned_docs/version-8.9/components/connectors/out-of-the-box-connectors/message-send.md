@@ -23,7 +23,7 @@ The connector always publishes or correlates the message in the tenant of the pr
 
 Older versions of the element template have a **Tenant ID** field:
 
-- If the field is empty or set to the tenant of the process instance, the message is sent to that tenant.
+- If the field is empty or set to the tenant of the process instance, the message is sent to that tenant. In earlier connector versions, an empty field sent the message to the `<default>` tenant.
 - If the field is set to any other tenant, the job fails with an incident that names both tenants. The job isn't retried.
 
 To remove the field from an existing diagram, upgrade the element to the latest template version.
