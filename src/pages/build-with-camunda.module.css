@@ -631,22 +631,6 @@
   outline-offset: 3px;
 }
 
-/* CLI install detail block */
-.cliInstallBlock {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.cliInstallBlock .terminalWindow {
-  max-width: 100%;
-  margin-bottom: 2rem;
-}
-
-.cliInstallBlock .downloadButtons {
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
 /* ─── Install tabs ─── */
 .installTabs {
   display: flex;
@@ -766,53 +750,6 @@
   padding: 0 1.25rem 1.25rem;
 }
 
-.bundleFallbackDesc {
-  font-size: 0.9rem;
-  color: var(--ifm-color-emphasis-700);
-  margin-bottom: 1.25rem;
-}
-
-.bundleFallbackContent .downloadButtons {
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.pillSeparator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 6rem 0 4rem;
-}
-
-/* Rules either side of the pill, so the line never crosses its label */
-.pillSeparator::before,
-.pillSeparator::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--ifm-color-emphasis-300);
-}
-
-.sectionPill {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  background: var(--camunda-brand-purple-tint);
-  color: var(--camunda-brand-purple);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 999px;
-}
-
-[data-theme="dark"] .sectionPill {
-  background: rgba(165, 158, 255, 0.16);
-  color: #c7c2ff;
-}
-
 .cliInstallSection {
   max-width: 1500px !important;
   padding-top: 4rem !important;
@@ -834,58 +771,36 @@
 }
 
 /* Cards in the bottom sections match the AO cards (_ao-table.css) */
-.darkSection .wayCard,
-.exploreSection .deployCard,
-.exploreSection .archBox,
-.exploreSection .agenticCard,
-.exploreSection .exploreCard {
+.darkSection .wayCard {
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
-.darkSection .wayCard:hover,
-.exploreSection .deployCard:hover,
-.exploreSection .archBox:hover,
-.exploreSection .agenticCard:hover,
-.exploreSection .exploreCard:hover {
+.darkSection .wayCard:hover {
   transform: translateY(-5px);
   border-color: #d9d9d9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.darkSection .wayCard p,
-.exploreSection .deployCard p,
-.exploreSection .agenticCard p,
-.exploreSection .exploreCard p {
+.darkSection .wayCard p {
   color: #555;
 }
 
-[data-theme="dark"] .darkSection .wayCard,
-[data-theme="dark"] .exploreSection .deployCard,
-[data-theme="dark"] .exploreSection .archBox,
-[data-theme="dark"] .exploreSection .agenticCard,
-[data-theme="dark"] .exploreSection .exploreCard {
+[data-theme="dark"] .darkSection .wayCard {
   background: #1c1c1c;
   border-color: #3b3a3a;
   box-shadow: 0 8px 16px 4px #00000033;
 }
 
-[data-theme="dark"] .darkSection .wayCard:hover,
-[data-theme="dark"] .exploreSection .deployCard:hover,
-[data-theme="dark"] .exploreSection .archBox:hover,
-[data-theme="dark"] .exploreSection .agenticCard:hover,
-[data-theme="dark"] .exploreSection .exploreCard:hover {
+[data-theme="dark"] .darkSection .wayCard:hover {
   background: transparent;
   border-color: var(--ifm-color-primary);
   box-shadow: 0 8px 16px 4px #78a9ff33;
 }
 
-[data-theme="dark"] .darkSection .wayCard p,
-[data-theme="dark"] .exploreSection .deployCard p,
-[data-theme="dark"] .exploreSection .agenticCard p,
-[data-theme="dark"] .exploreSection .exploreCard p {
+[data-theme="dark"] .darkSection .wayCard p {
   color: #c6c6c6;
 }
 
@@ -945,25 +860,10 @@
   line-height: 1.5;
 }
 
-.downloadHighlight .downloadButtons {
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 1.5rem auto;
-  max-width: 700px;
-}
-
 .wayCardImage {
   margin: 0 auto 0.5rem;
   display: block;
   object-fit: contain;
-}
-
-.wayCard .downloadButtons {
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
 }
 
 .downloadsSection .waysGrid {
@@ -1199,16 +1099,6 @@
 .cliPrimaryDivider {
   border-top: 1px solid var(--card-border);
   margin: 0.5rem 0 1.25rem;
-}
-
-.quickStartLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--heading-color);
-  margin: 0 0 0.75rem;
 }
 
 .stepNumber {
@@ -2287,13 +2177,6 @@
   font-size: 0.9rem;
 }
 
-.downloadButtons {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.5rem;
-  margin-bottom: 0.6rem;
-}
-
 .downloadButton {
   display: inline-flex;
   align-items: center;
@@ -2585,11 +2468,6 @@
 }
 
 /* ─── Explore docs (sand, matching darkSection) ─── */
-.exploreSection {
-  background: var(--sand-bg);
-  padding: 3rem 0 4rem;
-}
-
 .exploreSectionLast {
   background: var(--sand-bg);
 }

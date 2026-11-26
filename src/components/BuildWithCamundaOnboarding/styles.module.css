@@ -62,28 +62,6 @@
   border-bottom: 1px solid currentColor;
 }
 
-.content .exploreLink {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  min-height: 44px;
-  padding: 0.75rem 1.1rem;
-  border: 1px solid var(--heading-color);
-  border-radius: 8px;
-  color: var(--ifm-color-emphasis-0);
-  background: var(--heading-color);
-  font-size: 0.9rem;
-  font-weight: 550;
-}
-
-.content .exploreLink:hover {
-  border-color: var(--camunda-brand-purple);
-  color: var(--heading-color);
-  background: var(--camunda-brand-purple-tint);
-}
-
 .manualSummary > span {
   display: flex;
   align-items: baseline;
@@ -215,14 +193,6 @@
   font-size: 0.95rem;
 }
 
-.setupOptions {
-  margin: 0 0 1rem;
-  padding-left: 1.2rem;
-  color: var(--muted-color);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
 .steps .requirements {
   margin: 0.75rem 0 0;
   text-align: left;
@@ -235,10 +205,6 @@
 .steps .stepResult {
   margin: 0.85rem 0 0;
   font-size: 0.875rem;
-}
-
-.steps .exploreLink {
-  margin-top: 0.35rem;
 }
 
 @media (max-width: 700px) {
