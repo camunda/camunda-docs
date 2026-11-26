@@ -43,7 +43,7 @@ After installation, both `c8ctl` and `c8` are available as commands in your term
 
 ## Guided setup
 
-`c8ctl setup` runs a wizard that sets up a complete local development environment in one pass: it starts a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) cluster (downloading it on first run), installs [Camunda Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md), scaffolds a starter project from a blueprint, deploys and runs it, and configures AI assistant tooling (MCP connections and Camunda skills). Nothing is installed without your say.
+`c8ctl setup` runs a wizard that sets up a complete local development environment in one pass: it starts a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) cluster (downloading it on first run), installs [Camunda Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md), scaffolds the Rocket Launch example, deploys and runs it, and configures AI assistant tooling (MCP connections and Camunda skills). Nothing is installed without your say.
 
 ```bash
 c8ctl setup          # interactive wizard
@@ -52,7 +52,7 @@ c8ctl setup --yes    # set up the defaults, without prompting
 
 Each step announces its title and ends in `[SUCCESS]`, `[ERROR]`, or `[SKIPPED]`; a failed step does not stop the rest. The blueprint project and the cluster MCP connection need the local cluster — deselect the cluster and both options are disabled. A browser window opens when the local cluster reports healthy; the docs MCP connection asks you to sign in in a browser on first use.
 
-A run without a selection (piped output, CI) installs nothing unless you pass `--yes`; a non-interactive `--yes` run uses the Rocket Launch blueprint. `--json` prints the plan without executing it, and `--dry-run` previews it. A re-run reuses finished work where possible; the deploy, process start, and skills install repeat by design. The exit code is `0` when every selected setup step succeeded (or nothing was installed for lack of a go-ahead) and `1` when arguments fail validation or a step failed — other eligible steps still ran, while their dependents were skipped.
+A run without a selection (piped output, CI) installs nothing unless you pass `--yes`. Setup always uses the Rocket Launch example; it does not ask you to choose a blueprint. `--json` prints the plan without executing it, and `--dry-run` previews it. A re-run reuses finished work where possible; the deploy, process start, and skills install repeat by design. The exit code is `0` when every selected setup step succeeded (or nothing was installed for lack of a go-ahead) and `1` when arguments fail validation or a step failed — other eligible steps still ran, while their dependents were skipped.
 
 Use `--modeler` / `--no-modeler` to force or skip the Desktop Modeler step regardless of the selection, and `--docs-mcp` to include the docs MCP connection (off unless selected or flagged).
 
@@ -268,6 +268,25 @@ Stream raw c8run logs during startup:
 ```bash
 c8 cluster start --debug
 ```
+
+### Custom HTTP port
+
+If port 8080 is already in use, start the cluster on another port:
+
+```bash
+c8 cluster start --port 9091
+```
+
+`--port` moves only the main Camunda HTTP port (Operate, Tasklist and the REST API). The gRPC port (26500) and the health port (9600) stay fixed, so you still cannot run two local clusters side by side. The bundled Connectors runtime is pointed at the custom port automatically. `cluster status` reports the URLs for the port the cluster was started with.
+
+The built-in `local` profile keeps targeting port 8080, so point c8ctl at the cluster yourself — the start output prints the commands:
+
+```bash
+c8 add profile local-9091 --baseUrl=http://localhost:9091/v2 --username=demo --password=demo
+c8 use profile local-9091
+```
+
+Set the port with `--port`, not the `SERVER_PORT` environment variable: c8run would pass `SERVER_PORT` to Connectors too, so c8ctl removes it before launching c8run.
 
 ### Supported platforms
 

@@ -369,6 +369,7 @@ c8ctl mcp install claude-code cursor --docs --orchestration
 c8ctl mcp install github-copilot --profile staging --alias camunda-staging
 c8ctl mcp install vscode --docs --dry-run
 c8ctl mcp uninstall claude-code --docs
+c8ctl mcp list
 ```
 
 With no target flag, `install` and `uninstall` select **orchestration**. `--docs` selects **only documentation**; combine `--docs --orchestration` to select both. The entries are independent: removing docs does not remove orchestration.
@@ -404,6 +405,8 @@ Restart or reload your harness after installation. Complete the docs server's Go
 Existing unrelated entries and settings are preserved, including VS Code JSONC comments and client-added tool restrictions. Matching installations and removal of already-absent entries are no-ops. A cluster entry c8ctl installed earlier is updated in place when its connection drifted (for example after moving the install or switching Node versions), keeping any restrictions you added. A foreign entry under the same name or a malformed configuration produces an error instead of being overwritten. Uninstall removes only the selected recognized Camunda entry and does not require the profile to still exist.
 
 `--dry-run` previews the selected entries without writing configuration or displaying unrelated configuration values. Writes use a private temporary file and atomic replacement per configuration file; a multi-harness operation is not a transaction across all files. If a write fails, earlier successful files are reported and remain updated.
+
+`c8ctl mcp list` shows the c8ctl-managed entries across all supported harnesses, or only the named ones, including the profile each orchestration entry points at. Listing is read-only: it never writes configuration, skips harnesses without a configuration file, reports a corrupt or unreadable configuration in its own row, and never surfaces foreign entries.
 
 ## MCP proxy
 
