@@ -33,6 +33,51 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 87
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+When persistent web sessions are enabled, the Orchestration Cluster stores the web login session in its secondary storage: the `camunda-web-session-8.8.0_` index in Elasticsearch or OpenSearch, or the `WEB_SESSION` table in a relational database. In affected versions, it reads the stored session attributes back with Java deserialization that accepts any class.
+
+The Orchestration Cluster also shipped commons-collections 20040616. This old build doesn't have the protection that commons-collections 3.2.2 added against [CVE-2015-7501](https://nvd.nist.gov/vuln/detail/CVE-2015-7501) (also tracked as SONATYPE-2015-0002).
+
+Together, these let an attacker who can write to the session index or table store a crafted session. When the Orchestration Cluster reads it, the attacker can run arbitrary code with the permissions of the Orchestration Cluster process. The Orchestration Cluster reads stored sessions when it removes expired sessions and when a request presents a session cookie.
+
+The attack isn't possible through the Orchestration Cluster REST or gRPC APIs. It requires write access to the secondary storage.
+
+### How to determine if the installation is affected
+
+Your installation is affected only if you use one of these component versions:
+
+- Camunda Orchestration Cluster ≤ 8.10.9, ≤ 8.9.28, or ≤ 8.8.46
+
+and persistent web sessions are enabled. The Camunda Helm chart enables them by default when secondary storage is configured. Outside the Helm chart, they are enabled when one of these properties is `true`:
+
+- `camunda.persistent.sessions.enabled`
+- `camunda.security.session.persistent.enabled` (8.10)
+- `camunda.operate.persistentSessionsEnabled` (Deprecated)
+- `camunda.operate.persistent.sessions.enabled` (Deprecated)
+- `camunda.tasklist.persistentSessionsEnabled` (Deprecated)
+- `camunda.tasklist.persistent.sessions.enabled` (Deprecated)
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.10, 8.9.29, 8.8.47
+
+These releases ship commons-collections 3.2.2 and only accept the expected classes when they read a stored session.
+
+If you can't upgrade yet, make sure only the Orchestration Cluster can write to its secondary storage: turn on authentication in Elasticsearch, OpenSearch, or the database, and limit network access to it.
+
 ## Notice 86
 
 ### Publication date
