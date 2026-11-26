@@ -261,7 +261,7 @@ When no version is specified, `c8 cluster start` defaults to `stable`.
 
 `c8 cluster start` uses the cached alias mapping; `c8 cluster install <alias>` refreshes it from the download server. When a background check finds that the alias's newer target is already installed (for example after `c8 cluster install 8.10`), it advances the cached mapping, so the next `start` uses that version without downloading anything.
 
-`stable` never launches a prerelease build. If the install for its version still holds an alpha build (for example a `8.11` install made through `alpha` before 8.11 went GA), `start` and `install` download the GA build and replace it; if the download fails, the alpha build is kept. A prerelease build that has cluster data is never replaced automatically — run `c8 cluster purge <version>` first.
+`stable` never launches a prerelease build. If the install for its version still holds an alpha build (for example an `8.11` install made through `alpha` before 8.11 went GA), `start` and `install` download the GA build and replace it; if the download fails, the alpha build is kept. A prerelease build that has cluster data is never replaced automatically — run `c8 cluster purge <version>` first.
 
 A `<major>.<minor>` version like `8.8` is treated as a rolling release — the download server directory is updated in-place with new patch releases. `c8 cluster start` uses the local version if available, while `c8 cluster install` always checks for a newer version.
 
