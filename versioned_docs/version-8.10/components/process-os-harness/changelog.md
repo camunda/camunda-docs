@@ -51,6 +51,10 @@ Releases in each section are listed newest first. For installation instructions,
 <details>
 <summary>2.0.0-alpha.1 (2026-11-19)</summary>
 
+#### Breaking changes
+
+- Remove the discovery plugin system — The `process-os-discovery-plugin` skill, discovery plugin specialists and the `plugin-model-<tier>` run-config keys are removed. Discovery runs only its built-in specialists, and `run.config.yaml` drops the old keys on its next write
+
 #### Features
 
 - Enforce model-review findings as lint errors on generated bpmn
