@@ -7,7 +7,7 @@ mdx:
 
 # Enums
 
-Enumeration types (110 enums).
+Enumeration types (118 enums).
 
 ## AgentDefinitionSearchQuerySortRequestField
 
@@ -1107,6 +1107,7 @@ Specifies the type of permissions.
 | Value                                          | Description |
 | ---------------------------------------------- | ----------- |
 | `ACCESS`                                       |             |
+| `ANSWER`                                       |             |
 | `CANCELPROCESSINSTANCE`                        |             |
 | `CLAIM`                                        |             |
 | `CLAIMUSERTASK`                                |             |
@@ -1148,6 +1149,7 @@ Specifies the type of permissions.
 | `READTASKLISTENER`                             |             |
 | `RESTORE`                                      |             |
 | `REVEAL`                                       |             |
+| `SUSPENDPROCESSDEFINITION`                     |             |
 | `SUSPENDPROCESSINSTANCE`                       |             |
 | `UPDATE`                                       |             |
 | `UPDATEPROCESSINSTANCE`                        |             |
@@ -1158,13 +1160,14 @@ Specifies the type of permissions.
 
 Filter by the process definition's state.
 
-When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases). Set to `DRAINING` to return only definitions that are being deleted but still have active process instances draining. Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage.
+When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude draining, deleted, and suspended definitions (recommended for most use cases). Set to `DRAINING` to return only definitions that are being deleted but still have active process instances draining. Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage. Set to `SUSPENDED` to return only definitions that are suspended: no new process instances can be created from them.
 
-| Value      | Description |
-| ---------- | ----------- |
-| `ACTIVE`   |             |
-| `DRAINING` |             |
-| `DELETED`  |             |
+| Value       | Description |
+| ----------- | ----------- |
+| `ACTIVE`    |             |
+| `DRAINING`  |             |
+| `DELETED`   |             |
+| `SUSPENDED` |             |
 
 ## ProcessDefinitionInstanceStatisticsQuerySortRequestField
 
@@ -1193,13 +1196,24 @@ The field to sort by.
 
 The state of this process definition.
 
-`DRAINING` indicates the definition is being deleted but still has active process instances draining before it is removed.
+`DRAINING` indicates the definition is being deleted but still has active process instances draining before it is removed. `SUSPENDED` indicates no new process instances can be created from this definition; it returns to `ACTIVE` when resumed.
 
-| Value      | Description |
-| ---------- | ----------- |
-| `ACTIVE`   |             |
-| `DRAINING` |             |
-| `DELETED`  |             |
+| Value       | Description |
+| ----------- | ----------- |
+| `ACTIVE`    |             |
+| `DRAINING`  |             |
+| `DELETED`   |             |
+| `SUSPENDED` |             |
+
+## ProcessDefinitionResumptionVersionResultOutcome
+
+`RESUMED` if the version was suspended and is now active again. The resumption applies to all partitions shortly after the response. `ALREADY_RESUMED` if the version was already active, so its state is unchanged. With `includeProcessInstances`, its suspended process instances are still resumed by the batch operation. `DRAINING` if it is being deleted and is left unchanged. This only occurs when the request selects by ID without a version; selecting a single draining version is rejected with 409.
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `RESUMED`        |             |
+| `ALREADYRESUMED` |             |
+| `DRAINING`       |             |
 
 ## ProcessDefinitionSearchQuerySortRequestField
 
@@ -1214,6 +1228,16 @@ The field to sort by.
 | `VersionTag`           |             |
 | `ProcessDefinitionId`  |             |
 | `TenantId`             |             |
+
+## ProcessDefinitionSuspensionVersionResultOutcome
+
+`SUSPENDED` if the version was active and is now suspended. The suspension applies to all partitions shortly after the response. `ALREADY_SUSPENDED` if the version was already suspended, so its state is unchanged. With `includeProcessInstances`, its process instances are still suspended by the batch operation. `DRAINING` if it is being deleted and is left unchanged. This only occurs when the request selects by ID without a version; selecting a single draining version is rejected with 409.
+
+| Value              | Description |
+| ------------------ | ----------- |
+| `SUSPENDED`        |             |
+| `ALREADYSUSPENDED` |             |
+| `DRAINING`         |             |
 
 ## ProcessInstanceSearchQuerySortRequestField
 
@@ -1283,6 +1307,7 @@ The type of resource to add/remove permissions to/from.
 | `GROUP`                          |             |
 | `MAPPINGRULE`                    |             |
 | `MESSAGE`                        |             |
+| `PROBE`                          |             |
 | `PROCESSDEFINITION`              |             |
 | `RESOURCE`                       |             |
 | `ROLE`                           |             |
@@ -1367,6 +1392,26 @@ example because it rejected the cluster's own store credentials or the stored va
 | `INVALIDREFERENCE` |             |
 | `UNREADABLE`       |             |
 
+## SecretStatusEnum
+
+The state a secret store reports for a secret.
+
+- `ACTIVE`: the store reports the secret as usable.
+- `DISABLED`: the secret was disabled in its store.
+- `EXPIRED`: the secret's expiry date has passed.
+- `NOT_YET_ACTIVE`: the secret's activation date is in the future.
+
+A secret has exactly one status. When several apply, `DISABLED` wins over `EXPIRED`, and `EXPIRED` over `NOT_YET_ACTIVE`: a secret that is both disabled and expired is listed only as `DISABLED`, so an `EXPIRED` filter skips it.
+
+A store that cannot report states reports every secret as `ACTIVE`.
+
+| Value          | Description |
+| -------------- | ----------- |
+| `ACTIVE`       |             |
+| `DISABLED`     |             |
+| `EXPIRED`      |             |
+| `NOTYETACTIVE` |             |
+
 ## SortOrderEnum
 
 The order in which to sort the related field.
@@ -1442,6 +1487,19 @@ The field to sort by.
 | `Name`     |             |
 | `Email`    |             |
 
+## UserTaskLookupStateEnum
+
+The lifecycle state of an active user task. A state ending in `-ING` means a change to the task is in progress, for example waiting for task listeners; the task fields still hold the values from before the change. A claim in progress is reported as `ASSIGNING`, as in the user task search.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `CREATING`   |             |
+| `CREATED`    |             |
+| `ASSIGNING`  |             |
+| `UPDATING`   |             |
+| `COMPLETING` |             |
+| `CANCELING`  |             |
+
 ## UserTaskSearchQuerySortRequestField
 
 The field to sort by.
@@ -1486,6 +1544,67 @@ The field to sort by.
 | `VariableKey`        |             |
 | `ScopeKey`           |             |
 | `ProcessInstanceKey` |             |
+
+## VariableHistoryItemActorTypeEnum
+
+The type of the actor who performed the operation. Camunda can add values in later versions; clients must handle unknown values gracefully.
+
+| Value     | Description |
+| --------- | ----------- |
+| `USER`    |             |
+| `CLIENT`  |             |
+| `ENGINE`  |             |
+| `UNKNOWN` |             |
+
+## VariableHistoryItemOperationTypeEnum
+
+The type of operation that produced this variable change. Camunda can add values in later versions; clients must handle unknown values gracefully.
+
+| Value    | Description |
+| -------- | ----------- |
+| `CREATE` |             |
+| `UPDATE` |             |
+
+## VariableHistoryItemSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                    | Description |
+| ------------------------ | ----------- |
+| `VariableHistoryItemKey` |             |
+
+## VariableHistoryItemVariableOperationTypeEnum
+
+What wrote this variable value, for example a job completion, a script result, or a multi-instance output collection. Camunda can add values in later versions; clients must handle unknown values gracefully.
+
+| Value                             | Description |
+| --------------------------------- | ----------- |
+| `API`                             |             |
+| `USERTASKCOMPLETION`              |             |
+| `PROCESSINSTANCECREATION`         |             |
+| `PROCESSINSTANCEMODIFICATION`     |             |
+| `JOBCOMPLETION`                   |             |
+| `JOBFAILURE`                      |             |
+| `JOBERROR`                        |             |
+| `EXECUTIONLISTENERCOMPLETION`     |             |
+| `MESSAGECORRELATION`              |             |
+| `SIGNALBROADCAST`                 |             |
+| `CONDITIONALEVALUATION`           |             |
+| `ADHOCSUBPROCESSACTIVATION`       |             |
+| `INPUTMAPPING`                    |             |
+| `OUTPUTMAPPING`                   |             |
+| `SCRIPTRESULT`                    |             |
+| `DECISIONRESULT`                  |             |
+| `CALLACTIVITYINPUT`               |             |
+| `CALLACTIVITYOUTPUT`              |             |
+| `MULTIINSTANCEINPUTELEMENT`       |             |
+| `MULTIINSTANCELOOPCOUNTER`        |             |
+| `MULTIINSTANCEOUTPUTELEMENT`      |             |
+| `MULTIINSTANCEOUTPUTCOLLECTION`   |             |
+| `ADHOCSUBPROCESSMETADATA`         |             |
+| `ADHOCSUBPROCESSOUTPUTELEMENT`    |             |
+| `ADHOCSUBPROCESSOUTPUTCOLLECTION` |             |
+| `UNKNOWN`                         |             |
 
 ## VariableSearchQuerySortRequestField
 

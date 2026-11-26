@@ -140,6 +140,7 @@ CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
 | `DefaultTenantId`                 | `CAMUNDA_DEFAULT_TENANT_ID`                                                                       |
 | `TenantIds`                       | `CAMUNDA_TENANT_IDS` (JSON array or comma-separated string)                                       |
 | `LogLevel`                        | `CAMUNDA_SDK_LOG_LEVEL`                                                                           |
+| `UserAgent`                       | `CAMUNDA_USER_AGENT`                                                                              |
 | `Validation`                      | `CAMUNDA_SDK_VALIDATION`                                                                          |
 | `Auth:Strategy`                   | `CAMUNDA_AUTH_STRATEGY`                                                                           |
 | `Auth:ClientId`                   | `CAMUNDA_CLIENT_ID`                                                                               |
