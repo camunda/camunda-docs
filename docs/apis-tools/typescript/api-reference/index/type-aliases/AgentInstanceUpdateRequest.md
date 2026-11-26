@@ -35,7 +35,7 @@ still active.
 ### history?
 
 ```ts
-optional history?: AgentInstanceHistoryItem[] | null;
+history?: AgentInstanceHistoryItem[] | null;
 ```
 
 A batch of history items to append to the agent instance's conversation
@@ -71,7 +71,7 @@ rather than committed.
 ### status?
 
 ```ts
-optional status?: AgentInstanceUpdateStatusEnum;
+status?: AgentInstanceUpdateStatusEnum;
 ```
 
 The new status of the agent instance.

@@ -1,7 +1,10 @@
 // Compilable usage examples for search pagination (issue #3).
 // These examples are type-checked during build to guard against API regressions.
 
-import { createCamundaClient, type ProcessDefinitionId } from '@camunda8/orchestration-cluster-api';
+import {
+  createCamundaClient,
+  type ProcessDefinitionId,
+} from "@camunda8/orchestration-cluster-api";
 
 //#region PaginateItems
 // Stream every matching process instance across all pages. Cursors are advanced
@@ -10,7 +13,7 @@ async function everyActiveInstanceExample() {
   const camunda = createCamundaClient();
 
   const stream = camunda.searchProcessInstances.paginate({
-    filter: { state: 'ACTIVE' },
+    filter: { state: "ACTIVE" },
     page: { limit: 100 },
   });
 
@@ -25,7 +28,9 @@ async function everyActiveInstanceExample() {
 async function incidentsByPageExample() {
   const camunda = createCamundaClient();
 
-  for await (const page of camunda.searchIncidents.paginate({ page: { limit: 50 } }).pages()) {
+  for await (const page of camunda.searchIncidents
+    .paginate({ page: { limit: 50 } })
+    .pages()) {
     console.log(`${page.items.length} of ${page.page.totalItems}`);
   }
 }
@@ -35,7 +40,9 @@ async function incidentsByPageExample() {
 // Bound the stream with an AbortSignal and a hard page cap. A non-zero
 // `consistency` window is applied to the first page only, so freshly-written
 // data can be waited for without the terminal empty page timing out.
-async function boundedPaginationExample(processDefinitionId: ProcessDefinitionId) {
+async function boundedPaginationExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
   const ac = new AbortController();
   setTimeout(() => ac.abort(), 30_000);
@@ -56,7 +63,9 @@ async function boundedPaginationExample(processDefinitionId: ProcessDefinitionId
 async function collectIncidentsExample() {
   const camunda = createCamundaClient();
 
-  const incidents = await camunda.searchIncidents.paginate({ page: { limit: 100 } }).toArray();
+  const incidents = await camunda.searchIncidents
+    .paginate({ page: { limit: 100 } })
+    .toArray();
 
   return incidents;
 }

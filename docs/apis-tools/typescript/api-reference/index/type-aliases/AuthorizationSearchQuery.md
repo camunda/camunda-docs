@@ -16,7 +16,7 @@ type AuthorizationSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: AuthorizationFilter;
+filter?: AuthorizationFilter;
 ```
 
 The authorization search filters.
@@ -24,7 +24,7 @@ The authorization search filters.
 ### sort?
 
 ```ts
-optional sort?: AuthorizationSearchQuerySortRequest[];
+sort?: AuthorizationSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

@@ -18,7 +18,7 @@ Group search request.
 ### filter?
 
 ```ts
-optional filter?: GroupFilter;
+filter?: GroupFilter;
 ```
 
 The group search filters.
@@ -26,7 +26,7 @@ The group search filters.
 ### sort?
 
 ```ts
-optional sort?: GroupSearchQuerySortRequest[];
+sort?: GroupSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

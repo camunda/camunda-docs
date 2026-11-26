@@ -16,5 +16,5 @@ type restoreInput = restoreBody & object;
 ### dryRun?
 
 ```ts
-optional dryRun?: restoreQueryParam_dryRun;
+dryRun?: restoreQueryParam_dryRun;
 ```

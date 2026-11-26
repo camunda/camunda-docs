@@ -16,7 +16,7 @@ type UserTaskUpdateRequest = object;
 ### action?
 
 ```ts
-optional action?: string | null;
+action?: string | null;
 ```
 
 A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "update".
@@ -26,5 +26,5 @@ A custom action value that will be accessible from user task events resulting fr
 ### changeset?
 
 ```ts
-optional changeset?: Changeset;
+changeset?: Changeset;
 ```

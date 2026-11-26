@@ -18,7 +18,7 @@ User search filter fields.
 ### email?
 
 ```ts
-optional email?: StringFilterProperty;
+email?: StringFilterProperty;
 ```
 
 The email of the user.
@@ -28,7 +28,7 @@ The email of the user.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The name of the user.
@@ -38,7 +38,7 @@ The name of the user.
 ### username?
 
 ```ts
-optional username?: StringFilterProperty;
+username?: StringFilterProperty;
 ```
 
 The username of the user.

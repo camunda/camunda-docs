@@ -16,7 +16,7 @@ type TenantCreateRequest = object;
 ### description?
 
 ```ts
-optional description?: string;
+description?: string;
 ```
 
 The description of the tenant.

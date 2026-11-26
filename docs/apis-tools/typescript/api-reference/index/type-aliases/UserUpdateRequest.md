@@ -16,7 +16,7 @@ type UserUpdateRequest = object;
 ### email?
 
 ```ts
-optional email?: string;
+email?: string;
 ```
 
 The email of the user.
@@ -26,7 +26,7 @@ The email of the user.
 ### name?
 
 ```ts
-optional name?: string;
+name?: string;
 ```
 
 The name of the user.
@@ -36,7 +36,7 @@ The name of the user.
 ### password?
 
 ```ts
-optional password?: string;
+password?: string;
 ```
 
 The password of the user. If blank, the password is unchanged.

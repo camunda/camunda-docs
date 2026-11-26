@@ -18,7 +18,7 @@ Agent instance search filter.
 ### agentDefinitionKey?
 
 ```ts
-optional agentDefinitionKey?: AgentDefinitionKeyFilterProperty;
+agentDefinitionKey?: AgentDefinitionKeyFilterProperty;
 ```
 
 The key of the agent definition this agent instance is an instance of.
@@ -28,7 +28,7 @@ The key of the agent definition this agent instance is an instance of.
 ### agentInstanceKey?
 
 ```ts
-optional agentInstanceKey?: AgentInstanceKeyFilterProperty;
+agentInstanceKey?: AgentInstanceKeyFilterProperty;
 ```
 
 The unique key of the agent instance.
@@ -38,7 +38,7 @@ The unique key of the agent instance.
 ### completionDate?
 
 ```ts
-optional completionDate?: DateTimeFilterProperty;
+completionDate?: DateTimeFilterProperty;
 ```
 
 The completion date of the agent instance.
@@ -48,7 +48,7 @@ The completion date of the agent instance.
 ### creationDate?
 
 ```ts
-optional creationDate?: DateTimeFilterProperty;
+creationDate?: DateTimeFilterProperty;
 ```
 
 The creation date of the agent instance.
@@ -58,7 +58,7 @@ The creation date of the agent instance.
 ### elementId?
 
 ```ts
-optional elementId?: ElementIdFilterProperty;
+elementId?: ElementIdFilterProperty;
 ```
 
 The BPMN element ID of the agent task.
@@ -68,7 +68,7 @@ The BPMN element ID of the agent task.
 ### elementInstanceKeys?
 
 ```ts
-optional elementInstanceKeys?: ElementInstanceKeyFilterProperty[];
+elementInstanceKeys?: ElementInstanceKeyFilterProperty[];
 ```
 
 The keys of element instances associated with this agent instance.
@@ -79,7 +79,7 @@ If multiple keys are provided, the filter matches agent instances associated wit
 ### lastUpdatedDate?
 
 ```ts
-optional lastUpdatedDate?: DateTimeFilterProperty;
+lastUpdatedDate?: DateTimeFilterProperty;
 ```
 
 The date the agent instance was last updated.
@@ -89,7 +89,7 @@ The date the agent instance was last updated.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The BPMN process ID of the process definition associated with this agent instance.
@@ -99,7 +99,7 @@ The BPMN process ID of the process definition associated with this agent instanc
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The key of the process definition associated with this agent instance.
@@ -109,7 +109,7 @@ The key of the process definition associated with this agent instance.
 ### processDefinitionVersion?
 
 ```ts
-optional processDefinitionVersion?: IntegerFilterProperty;
+processDefinitionVersion?: IntegerFilterProperty;
 ```
 
 The version of the process definition associated with this agent instance.
@@ -119,7 +119,7 @@ The version of the process definition associated with this agent instance.
 ### processDefinitionVersionTag?
 
 ```ts
-optional processDefinitionVersionTag?: StringFilterProperty;
+processDefinitionVersionTag?: StringFilterProperty;
 ```
 
 The version tag of the process definition associated with this agent instance.
@@ -129,7 +129,7 @@ The version tag of the process definition associated with this agent instance.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of the process instance that owns this agent instance.
@@ -139,7 +139,7 @@ The key of the process instance that owns this agent instance.
 ### rootProcessInstanceKey?
 
 ```ts
-optional rootProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
+rootProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of the root process instance. Filters agent instances belonging to a specific
@@ -151,7 +151,7 @@ instance hierarchy.
 ### status?
 
 ```ts
-optional status?: AgentInstanceStatusFilterProperty;
+status?: AgentInstanceStatusFilterProperty;
 ```
 
 The current status of the agent instance.
@@ -161,7 +161,7 @@ The current status of the agent instance.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant ID of the agent instance.

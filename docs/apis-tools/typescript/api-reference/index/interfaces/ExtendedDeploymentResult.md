@@ -41,9 +41,7 @@ The unique key identifying the deployment.
 
 #### Inherited from
 
-```ts
-_DataOf.deploymentKey;
-```
+`_DataOf.deploymentKey`
 
 ---
 
@@ -57,9 +55,7 @@ Items deployed by the request.
 
 #### Inherited from
 
-```ts
-_DataOf.deployments;
-```
+`_DataOf.deployments`
 
 ---
 
@@ -97,6 +93,4 @@ The tenant ID associated with the deployment.
 
 #### Inherited from
 
-```ts
-_DataOf.tenantId;
-```
+`_DataOf.tenantId`

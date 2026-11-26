@@ -18,7 +18,7 @@ Group filter request
 ### groupId?
 
 ```ts
-optional groupId?: StringFilterProperty;
+groupId?: StringFilterProperty;
 ```
 
 The group ID search filters.
@@ -28,7 +28,7 @@ The group ID search filters.
 ### name?
 
 ```ts
-optional name?: StringFilterProperty;
+name?: StringFilterProperty;
 ```
 
 The group name search filters.

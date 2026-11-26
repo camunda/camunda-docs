@@ -36,5 +36,5 @@ The migration plan.
 ### operationReference?
 
 ```ts
-optional operationReference?: OperationReference;
+operationReference?: OperationReference;
 ```

@@ -18,7 +18,7 @@ Correlated message subscriptions search filter.
 ### businessId?
 
 ```ts
-optional businessId?: StringFilterProperty;
+businessId?: StringFilterProperty;
 ```
 
 Filter by the business id stored on the correlated message subscription — for message
@@ -31,7 +31,7 @@ Supports advanced string filtering, including `$like` with `*`/`?` wildcards.
 ### correlationKey?
 
 ```ts
-optional correlationKey?: StringFilterProperty;
+correlationKey?: StringFilterProperty;
 ```
 
 The correlation key of the message.
@@ -41,7 +41,7 @@ The correlation key of the message.
 ### correlationTime?
 
 ```ts
-optional correlationTime?: DateTimeFilterProperty;
+correlationTime?: DateTimeFilterProperty;
 ```
 
 The time when the message was correlated.
@@ -51,7 +51,7 @@ The time when the message was correlated.
 ### elementId?
 
 ```ts
-optional elementId?: StringFilterProperty;
+elementId?: StringFilterProperty;
 ```
 
 The element ID that received the message.
@@ -61,7 +61,7 @@ The element ID that received the message.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The element instance key that received the message.
@@ -71,7 +71,7 @@ The element instance key that received the message.
 ### messageKey?
 
 ```ts
-optional messageKey?: BasicStringFilterProperty;
+messageKey?: BasicStringFilterProperty;
 ```
 
 The message key.
@@ -81,7 +81,7 @@ The message key.
 ### messageName?
 
 ```ts
-optional messageName?: StringFilterProperty;
+messageName?: StringFilterProperty;
 ```
 
 The name of the message.
@@ -91,7 +91,7 @@ The name of the message.
 ### partitionId?
 
 ```ts
-optional partitionId?: IntegerFilterProperty;
+partitionId?: IntegerFilterProperty;
 ```
 
 The partition ID that correlated the message.
@@ -101,7 +101,7 @@ The partition ID that correlated the message.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition ID associated with this correlated message subscription.
@@ -111,7 +111,7 @@ The process definition ID associated with this correlated message subscription.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key associated with this correlated message subscription. For intermediate message events, this only works for data created with 8.9 and later.
@@ -121,7 +121,7 @@ The process definition key associated with this correlated message subscription.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The process instance key associated with this correlated message subscription.
@@ -131,7 +131,7 @@ The process instance key associated with this correlated message subscription.
 ### subscriptionKey?
 
 ```ts
-optional subscriptionKey?: MessageSubscriptionKeyFilterProperty;
+subscriptionKey?: MessageSubscriptionKeyFilterProperty;
 ```
 
 The subscription key that received the message.
@@ -141,7 +141,7 @@ The subscription key that received the message.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant ID associated with this correlated message subscription.

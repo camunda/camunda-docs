@@ -182,6 +182,17 @@ state: DecisionInstanceStateEnum;
 
 ---
 
+### storageOrdinal
+
+```ts
+storageOrdinal: number | null;
+```
+
+The storage ordinal this decision instance's data belongs to. This is `null` for
+data exported before storage ordinals were introduced in version 8.11.
+
+---
+
 ### tenantId
 
 ```ts

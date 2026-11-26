@@ -16,7 +16,7 @@ type SearchProcessDefinitionVariableNamesData = object;
 ### body?
 
 ```ts
-optional body?: ProcessDefinitionVariableNameSearchQuery;
+body?: ProcessDefinitionVariableNameSearchQuery;
 ```
 
 ---
@@ -40,7 +40,7 @@ The assigned key of the process definition, which acts as a unique identifier fo
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

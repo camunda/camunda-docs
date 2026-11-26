@@ -18,7 +18,7 @@ Process definition element statistics request.
 ### filter?
 
 ```ts
-optional filter?: ProcessDefinitionStatisticsFilter;
+filter?: ProcessDefinitionStatisticsFilter;
 ```
 
 The process definition statistics search filters.

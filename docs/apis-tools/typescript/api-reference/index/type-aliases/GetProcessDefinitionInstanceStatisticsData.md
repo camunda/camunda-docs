@@ -16,7 +16,7 @@ type GetProcessDefinitionInstanceStatisticsData = object;
 ### body?
 
 ```ts
-optional body?: ProcessDefinitionInstanceStatisticsQuery;
+body?: ProcessDefinitionInstanceStatisticsQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ProcessDefinitionInstanceStatisticsQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

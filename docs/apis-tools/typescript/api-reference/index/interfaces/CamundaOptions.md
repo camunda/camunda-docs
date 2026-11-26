@@ -12,7 +12,7 @@ mdx:
 ### \_\_camundaComponent?
 
 ```ts
-optional __camundaComponent?: "CamundaCore" | "CamundaClient";
+__camundaComponent?: "CamundaCore" | "CamundaClient";
 ```
 
 **`Internal`**
@@ -27,7 +27,7 @@ the real component even when a consumer subclasses the public `CamundaCore` (whe
 ### clock?
 
 ```ts
-optional clock?: Clock;
+clock?: Clock;
 ```
 
 ---
@@ -35,7 +35,7 @@ optional clock?: Clock;
 ### config?
 
 ```ts
-optional config?: Partial<{
+config?: Partial<{
   CAMUNDA_AUTH_STRATEGY: "OAUTH" | "NONE" | "BASIC";
   CAMUNDA_BASIC_AUTH_PASSWORD: string;
   CAMUNDA_BASIC_AUTH_USERNAME: string;
@@ -82,6 +82,7 @@ optional config?: Partial<{
   CAMUNDA_SUPPORT_LOG_FILE_PATH: string;
   CAMUNDA_SUPPORT_LOGGER: boolean;
   CAMUNDA_TOKEN_AUDIENCE: string;
+  CAMUNDA_USER_AGENT: string;
   CAMUNDA_WORKER_MAX_CONCURRENT_JOBS: number;
   CAMUNDA_WORKER_NAME: string;
   CAMUNDA_WORKER_REQUEST_TIMEOUT: number;
@@ -95,7 +96,7 @@ optional config?: Partial<{
 ### env?
 
 ```ts
-optional env?: Record<string, string | undefined>;
+env?: Record<string, string | undefined>;
 ```
 
 ---
@@ -103,7 +104,7 @@ optional env?: Record<string, string | undefined>;
 ### fetch?
 
 ```ts
-optional fetch?: (input, init?) => Promise<Response>;
+fetch?: (input, init?) => Promise<Response>;
 ```
 
 #### Parameters
@@ -125,19 +126,19 @@ optional fetch?: (input, init?) => Promise<Response>;
 ### log?
 
 ```ts
-optional log?: object;
+log?: object;
 ```
 
 #### level?
 
 ```ts
-optional level?: LogLevel;
+level?: LogLevel;
 ```
 
 #### transport?
 
 ```ts
-optional transport?: LogTransport;
+transport?: LogTransport;
 ```
 
 ---
@@ -145,7 +146,7 @@ optional transport?: LogTransport;
 ### random?
 
 ```ts
-optional random?: RandomSource;
+random?: RandomSource;
 ```
 
 ---
@@ -153,7 +154,7 @@ optional random?: RandomSource;
 ### supportLogger?
 
 ```ts
-optional supportLogger?: SupportLogger;
+supportLogger?: SupportLogger;
 ```
 
 ---
@@ -161,25 +162,25 @@ optional supportLogger?: SupportLogger;
 ### telemetry?
 
 ```ts
-optional telemetry?: object;
+telemetry?: object;
 ```
 
 #### correlation?
 
 ```ts
-optional correlation?: boolean;
+correlation?: boolean;
 ```
 
 #### hooks?
 
 ```ts
-optional hooks?: TelemetryHooks;
+hooks?: TelemetryHooks;
 ```
 
 #### mirrorToLog?
 
 ```ts
-optional mirrorToLog?: boolean;
+mirrorToLog?: boolean;
 ```
 
 ---
@@ -187,5 +188,5 @@ optional mirrorToLog?: boolean;
 ### throwOnError?
 
 ```ts
-optional throwOnError?: boolean;
+throwOnError?: boolean;
 ```

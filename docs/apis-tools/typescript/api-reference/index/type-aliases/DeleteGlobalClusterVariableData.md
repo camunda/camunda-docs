@@ -16,7 +16,7 @@ type DeleteGlobalClusterVariableData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The name of the cluster variable
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -16,7 +16,7 @@ type GetTenantClusterVariableData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -48,7 +48,7 @@ The tenant ID
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

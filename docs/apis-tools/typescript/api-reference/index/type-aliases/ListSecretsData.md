@@ -16,7 +16,7 @@ type ListSecretsData = object;
 ### body?
 
 ```ts
-optional body?: SecretListRequest;
+body?: SecretListRequest;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: SecretListRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

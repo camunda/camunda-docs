@@ -20,7 +20,7 @@ Advanced filter on a metadata value (string or number).
 ### $eq?
 
 ```ts
-optional $eq?: string | number;
+$eq?: string | number;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the metadata key exists.
@@ -40,7 +40,7 @@ Checks if the metadata key exists.
 ### $gt?
 
 ```ts
-optional $gt?: number;
+$gt?: number;
 ```
 
 Greater than comparison with the provided value.
@@ -50,7 +50,7 @@ Greater than comparison with the provided value.
 ### $gte?
 
 ```ts
-optional $gte?: number;
+$gte?: number;
 ```
 
 Greater than or equal comparison with the provided value.
@@ -60,7 +60,7 @@ Greater than or equal comparison with the provided value.
 ### $in?
 
 ```ts
-optional $in?: (string | number)[];
+$in?: (string | number)[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -70,7 +70,7 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like?: LikeFilter;
+$like?: LikeFilter;
 ```
 
 ---
@@ -78,7 +78,7 @@ optional $like?: LikeFilter;
 ### $lt?
 
 ```ts
-optional $lt?: number;
+$lt?: number;
 ```
 
 Lower than comparison with the provided value.
@@ -88,7 +88,7 @@ Lower than comparison with the provided value.
 ### $lte?
 
 ```ts
-optional $lte?: number;
+$lte?: number;
 ```
 
 Lower than or equal comparison with the provided value.
@@ -98,7 +98,7 @@ Lower than or equal comparison with the provided value.
 ### $neq?
 
 ```ts
-optional $neq?: string | number;
+$neq?: string | number;
 ```
 
 Checks for inequality with the provided value.

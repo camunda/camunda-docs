@@ -76,20 +76,22 @@ Incident key associated with this element instance.
 ### processDefinitionId
 
 ```ts
-processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId | null;
 ```
 
-The process definition ID associated to this element instance.
+The process definition ID associated to this element instance. This field is not
+present for element instances imported by Operate 8.1 or earlier.
 
 ---
 
 ### processDefinitionKey
 
 ```ts
-processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey | null;
 ```
 
-The process definition key associated to this element instance.
+The process definition key associated to this element instance. This field is not
+present for element instances imported by Operate 8.1.7 or earlier.
 
 ---
 

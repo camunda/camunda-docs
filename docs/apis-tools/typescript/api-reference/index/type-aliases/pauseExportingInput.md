@@ -16,5 +16,5 @@ type pauseExportingInput = object;
 ### soft?
 
 ```ts
-optional soft?: pauseExportingQueryParam_soft;
+soft?: pauseExportingQueryParam_soft;
 ```

@@ -12,8 +12,8 @@ type Changeset = {
   [key: string]: unknown;
   candidateGroups?: string[] | null;
   candidateUsers?: string[] | null;
-  dueDate?: string | null;
-  followUpDate?: string | null;
+  dueDate?: ClearableDateTime;
+  followUpDate?: ClearableDateTime;
   priority?: number | null;
 } | null;
 ```
@@ -44,8 +44,8 @@ This ensures correct event emission for assignee changes.
 [key: string]: unknown;
   candidateGroups?: string[] | null;
   candidateUsers?: string[] | null;
-  dueDate?: string | null;
-  followUpDate?: string | null;
+  dueDate?: ClearableDateTime;
+  followUpDate?: ClearableDateTime;
   priority?: number | null;
 }
 ```
@@ -59,7 +59,7 @@ This ensures correct event emission for assignee changes.
 #### candidateGroups?
 
 ```ts
-optional candidateGroups?: string[] | null;
+candidateGroups?: string[] | null;
 ```
 
 The list of candidate groups of the task. Reset by providing an empty list.
@@ -67,7 +67,7 @@ The list of candidate groups of the task. Reset by providing an empty list.
 #### candidateUsers?
 
 ```ts
-optional candidateUsers?: string[] | null;
+candidateUsers?: string[] | null;
 ```
 
 The list of candidate users of the task. Reset by providing an empty list.
@@ -75,7 +75,7 @@ The list of candidate users of the task. Reset by providing an empty list.
 #### dueDate?
 
 ```ts
-optional dueDate?: string | null;
+dueDate?: ClearableDateTime;
 ```
 
 The due date of the task. Reset by providing an empty String.
@@ -83,7 +83,7 @@ The due date of the task. Reset by providing an empty String.
 #### followUpDate?
 
 ```ts
-optional followUpDate?: string | null;
+followUpDate?: ClearableDateTime;
 ```
 
 The follow-up date of the task. Reset by providing an empty String.
@@ -91,7 +91,7 @@ The follow-up date of the task. Reset by providing an empty String.
 #### priority?
 
 ```ts
-optional priority?: number | null;
+priority?: number | null;
 ```
 
 The priority of the task.
