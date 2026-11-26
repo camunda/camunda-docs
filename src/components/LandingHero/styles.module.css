@@ -269,6 +269,17 @@ a.cardLink:focus-visible {
   font-size: 14px;
   font-weight: 600;
 }
+/* Reset the docs-wide img styles (border, 20px padding, margins, dark-mode
+   white background), which turn a 16px icon into an empty box. */
+.hero .cardTitle .titleIcon {
+  width: 22px;
+  height: 22px;
+  margin: 0 6px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  vertical-align: -6px;
+}
 .cardTitle .agentBadge {
   width: 16px;
   height: 16px;

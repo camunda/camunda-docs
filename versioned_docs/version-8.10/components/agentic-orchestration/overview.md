@@ -23,7 +23,7 @@ import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <h3 class="subheading">Orchestrate agents, people, and systems in one process.</h3>
 
-<LandingHero card={agenticOrchestrationHero} href="/components/agentic-orchestration/agentic-orchestration-overview/" ariaLabel="Get started with agentic orchestration">
+<LandingHero card={agenticOrchestrationHero} href="/components/agentic-orchestration/build-agents/" ariaLabel="Learn how to build AI agents">
 
 Build and coordinate AI agents, people, and systems across complete processes, combining deterministic execution with AI reasoning and human judgment where each works best.
 

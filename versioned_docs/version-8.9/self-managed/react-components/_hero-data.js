@@ -2,7 +2,8 @@
 // The command is from the Camunda 8 Run developer quickstart.
 export const selfManagedHero = {
   kind: "code",
-  title: "Helm chart",
+  title: "Kubernetes with Helm",
+  iconSrc: "/img/icon-kubernetes-mark.svg",
   meta: "Kubernetes",
   code: `helm install camunda \\
   camunda/camunda-platform \\

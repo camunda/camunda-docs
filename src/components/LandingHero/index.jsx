@@ -16,7 +16,8 @@ import styles from "./styles.module.css";
  * so the version prefix is not added.
  * Pass overlay (card data) to float a second card over the bottom-right
  * corner of the main card. It is part of the same link as the main card.
- * Notes cards can set icon: "agent" to show the purple AI agent badge by the title.
+ * Notes cards can set icon: "agent" (purple AI agent badge) and any card
+ * iconSrc (an imported image) to show that image by the title.
  * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc", "hub".
  */
 
@@ -54,12 +55,13 @@ function AgentBadge() {
   );
 }
 
-function CardHead({ title, meta, icon, children }) {
+function CardHead({ title, meta, icon, iconSrc, children }) {
   return (
     <div className={styles.cardHead}>
       {children || (
         <span className={styles.cardTitle}>
           {icon === "agent" && <AgentBadge />}
+          {iconSrc && <img className={styles.titleIcon} src={iconSrc} alt="" />}
           {title}
         </span>
       )}
@@ -71,7 +73,12 @@ function CardHead({ title, meta, icon, children }) {
 function Notes({ card }) {
   return (
     <>
-      <CardHead title={card.title} meta={card.meta} icon={card.icon} />
+      <CardHead
+        title={card.title}
+        meta={card.meta}
+        icon={card.icon}
+        iconSrc={card.iconSrc}
+      />
       <ul className={styles.notes}>
         {card.rows.map(([title, tag]) => (
           <li key={title}>
@@ -199,7 +206,7 @@ function Request({ card }) {
 function Code({ card }) {
   return (
     <>
-      <CardHead title={card.title} meta={card.meta} />
+      <CardHead title={card.title} meta={card.meta} iconSrc={card.iconSrc} />
       <pre className={styles.pre}>{card.code}</pre>
       {card.status && (
         <div className={styles.resp}>

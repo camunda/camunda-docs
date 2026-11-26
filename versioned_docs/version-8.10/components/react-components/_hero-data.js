@@ -2,7 +2,7 @@
 // Illustrative content only.
 export const agenticOrchestrationHero = {
   kind: "adhoc",
-  title: "AI agent",
+  title: "Build AI agents",
   meta: "Ad-hoc sub-process",
   agent: "AI Agent",
   tool: "Tool A",
