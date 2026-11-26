@@ -145,30 +145,6 @@ const ASSET_DEFINITIONS = {
       },
     ],
   }),
-  gettingStarted: {
-    mac: [
-      {
-        label: "Apple Silicon",
-        suffix: "darwin-aarch64.zip",
-      },
-      {
-        label: "Intel",
-        suffix: "darwin-x86_64.zip",
-      },
-    ],
-    windows: [
-      {
-        label: "Windows (x64)",
-        suffix: "windows-x86_64.zip",
-      },
-    ],
-    linux: [
-      {
-        label: "Linux (x64)",
-        suffix: "linux-x86_64.tar.gz",
-      },
-    ],
-  },
 };
 
 function escapeRegExp(value) {
@@ -322,10 +298,7 @@ function parseAssets(html, directoryUrl) {
 // - "alpha": the newest pre-release, such as 8.11.0-alpha1, but only while it
 //   is newer than the newest stable version. Once its minor ships, the alpha is
 //   outdated, so there is no alpha to show until the next minor's first alpha.
-// - "any": the newest version of either channel, for an artifact that ships
-//   with some alphas and some stable releases. A stable release then
-//   supersedes the alphas before it.
-const CHANNELS = ["stable", "alpha", "any"];
+const CHANNELS = ["stable", "alpha"];
 
 // How many of the newest releases to try when a release is missing assets, for
 // example while it is still being uploaded, before the update fails.
@@ -644,32 +617,10 @@ async function fetchRpaWorker() {
   };
 }
 
-function getGithubAssetLinks(release, definitions, prefix) {
-  return Object.fromEntries(
-    Object.entries(definitions).map(([operatingSystem, candidates]) => [
-      operatingSystem,
-      candidates.map(({ label, suffix }) => {
-        const asset = release.assets.find(
-          ({ name }) => name.startsWith(prefix) && name.endsWith(suffix)
-        );
-        if (!asset) {
-          throw new MissingAssetError(
-            `Missing Getting Started asset for ${label} in ${release.tag_name}`
-          );
-        }
-        return {
-          label,
-          url: asset.browser_download_url,
-        };
-      }),
-    ])
-  );
-}
-
 const githubReleases = new Map();
 
-// Reads every page, so an artifact whose newest release is older than the
-// latest 100 releases, such as a discontinued one, stays selectable.
+// Reads every page, so a release older than the latest 100 releases stays
+// selectable.
 function fetchGithubReleases(repository) {
   if (!githubReleases.has(repository)) {
     githubReleases.set(
@@ -692,43 +643,16 @@ function fetchGithubReleases(repository) {
   return githubReleases.get(repository);
 }
 
-function selectGithubRelease(
-  releases,
-  { channel, product, assetPrefix, load = (release) => release }
-) {
+function selectGithubRelease(releases, { channel, product }) {
   return selectRelease(
-    releases.filter(
-      (release) =>
-        !release.draft &&
-        (!assetPrefix ||
-          release.assets.some(({ name }) => name.startsWith(assetPrefix)))
-    ),
+    releases.filter((release) => !release.draft),
     {
       channel,
       product,
       getName: (release) => release.tag_name,
-      load,
+      load: (release) => release,
     }
   );
-}
-
-async function fetchGettingStarted() {
-  const releases = await fetchGithubReleases("camunda/camunda");
-  // The bundle ships with some alphas and some stable releases.
-  return selectGithubRelease(releases, {
-    channel: "any",
-    product: "Getting Started bundle",
-    assetPrefix: "camunda8-getting-started-bundle-",
-    load: (release) => ({
-      version: release.tag_name,
-      date: formatDate(release.published_at),
-      links: getGithubAssetLinks(
-        release,
-        ASSET_DEFINITIONS.gettingStarted,
-        `camunda8-getting-started-bundle-${release.tag_name}-`
-      ),
-    }),
-  });
 }
 
 async function fetchLatestGithubRelease(repository, product) {
@@ -737,20 +661,17 @@ async function fetchLatestGithubRelease(repository, product) {
 }
 
 async function buildCatalog() {
-  const [gettingStarted, desktopModeler, camundaRun, rpaWorker] =
-    await Promise.all([
-      fetchGettingStarted(),
-      fetchModeler(),
-      fetchCamundaRun(),
-      fetchRpaWorker(),
-    ]);
+  const [desktopModeler, camundaRun, rpaWorker] = await Promise.all([
+    fetchModeler(),
+    fetchCamundaRun(),
+    fetchRpaWorker(),
+  ]);
   const [orchestrationCluster, connectors] = await Promise.all([
     fetchLatestGithubRelease("camunda/camunda", "Orchestration Cluster"),
     fetchLatestGithubRelease("camunda/connectors", "Connectors"),
   ]);
 
   return {
-    gettingStarted,
     desktopModeler,
     camundaRun,
     rpaWorker,
