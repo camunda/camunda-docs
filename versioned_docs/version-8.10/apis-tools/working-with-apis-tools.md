@@ -8,13 +8,13 @@ page_rank: 90
 
 import "./react-components/\_apitools-card.css";
 import LandingHero from '@site/src/components/LandingHero';
-import { apisToolsHero } from './react-components/_hero-data';
+import { apisToolsHero, apisToolsRestOverlay } from './react-components/_hero-data';
 import ApiGrid from './react-components/\_apitools-card';
 import { apiCards, clientCards } from './react-components/\_apitools-card-data';
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
 
-<LandingHero card={apisToolsHero} href="/apis-tools/java-client/getting-started/" ariaLabel="Get started with the Camunda Java Client">
+<LandingHero card={apisToolsHero} overlay={apisToolsRestOverlay} href="/apis-tools/java-client/getting-started/" ariaLabel="Get started with the Camunda Java Client">
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 

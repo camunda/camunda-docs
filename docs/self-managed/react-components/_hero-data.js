@@ -2,10 +2,16 @@
 // The command is from the Camunda 8 Run developer quickstart.
 export const selfManagedHero = {
   kind: "code",
-  title: "Camunda 8 CLI",
-  meta: "Local cluster",
-  code: `$ npm install -g @camunda8/cli
-$ c8ctl cluster start 8.10.10`,
-  status: { status: "ok", label: "Started" },
-  result: "localhost:8080/operate",
+  title: "Helm chart",
+  meta: "Kubernetes",
+  code: `helm install camunda \\
+  camunda/camunda-platform \\
+  --values values-quick-install.yaml`,
+};
+
+export const selfManagedPodsOverlay = {
+  kind: "table",
+  title: "Pods",
+  meta: "camunda",
+  rows: [["camunda-zeebe-0", { status: "ok", label: "Running" }]],
 };

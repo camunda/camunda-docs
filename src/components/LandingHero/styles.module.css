@@ -150,21 +150,96 @@
   line-height: 1.35;
 }
 
+/* The main card and the overlay sit in one group (one link when href is set). */
+.group {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 380px;
+}
+.group > .card {
+  max-width: none;
+}
+
+/* Second card floated over the main card's bottom-right corner. */
+.art {
+  --hero-overlay-width: 58%;
+}
+.overlay {
+  position: absolute;
+  right: -8px;
+  bottom: -30px;
+  width: var(--hero-overlay-width);
+  min-height: 0;
+  z-index: 2;
+}
+@media (max-width: 996px) {
+  .overlay {
+    right: 0;
+  }
+}
+
+/* Hub overlay */
+.hubHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 9px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--hero-card-line);
+}
+.hubCreate {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 5px 7px;
+  border-radius: 4px;
+  background: var(--hero-heading);
+  color: var(--hero-card-bg);
+  white-space: nowrap;
+}
+.hubList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.hubTile {
+  display: grid;
+  gap: 3px;
+  padding: 8px 9px;
+  border: 1px solid var(--hero-card-line);
+  border-radius: 6px;
+  margin: 0;
+}
+.hubTileHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11.5px;
+}
+.hubCounts {
+  font-size: 10.5px;
+  color: var(--hero-muted);
+}
 /* Whole card is a link */
 a.cardLink {
-  display: flex;
+  display: block;
+  border-radius: 8px;
   text-decoration: none;
   color: var(--hero-heading);
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    box-shadow 0.2s ease;
 }
 a.cardLink:hover,
 a.cardLink:focus-visible {
   text-decoration: none;
   color: var(--hero-heading);
-  border-color: var(--hero-muted);
   transform: translateY(-2px);
 }
 a.cardLink:focus-visible {
@@ -193,6 +268,12 @@ a.cardLink:focus-visible {
 .cardTitle {
   font-size: 14px;
   font-weight: 600;
+}
+.cardTitle .agentBadge {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -3px;
 }
 .cardMeta {
   font-size: 11.5px;
@@ -235,6 +316,16 @@ a.cardLink:focus-visible {
 }
 .card .table td:first-child {
   white-space: normal;
+}
+.overlay .table td:first-child {
+  white-space: nowrap;
+}
+.overlay .table {
+  font-size: 12px;
+}
+.overlay .table .pill {
+  font-size: 10.5px;
+  padding: 2px 6px;
 }
 .num {
   font-variant-numeric: tabular-nums;
@@ -433,11 +524,12 @@ a.cardLink:focus-visible {
 }
 .palette {
   flex: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 7px 6px;
+  display: grid;
+  grid-template-columns: 13px;
+  gap: 0;
+  align-content: space-between;
+  justify-items: center;
+  padding: 6px 7px;
   border: 1px solid var(--hero-card-line);
   border-radius: 6px;
   background: var(--hero-chrome);
@@ -454,6 +546,15 @@ a.cardLink:focus-visible {
   height: auto;
   max-height: 82px;
   color: var(--hero-heading);
+}
+.canvasDots {
+  border: 1px solid var(--hero-card-line);
+  border-radius: 6px;
+  background-image: radial-gradient(
+    var(--hero-card-line) 0.8px,
+    transparent 0.8px
+  );
+  background-size: 8px 8px;
 }
 .canvasTall {
   max-height: 132px;
@@ -515,6 +616,13 @@ a.cardLink:focus-visible {
   color: var(--hero-fg);
   overflow-x: auto;
   white-space: pre;
+}
+.overlay .pre {
+  margin: 0 0 8px;
+  padding: 6px 9px;
+  font-size: 10.5px;
+  line-height: 1.45;
+  overflow: hidden;
 }
 .jsonKey {
   color: var(--hero-heading);

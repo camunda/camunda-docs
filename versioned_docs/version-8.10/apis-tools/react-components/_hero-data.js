@@ -9,3 +9,11 @@ export const apisToolsHero = {
   status: { status: "ok", label: "Connected" },
   result: "Topology received",
 };
+
+export const apisToolsRestOverlay = {
+  kind: "request",
+  method: "GET",
+  path: "/v2/topology",
+  status: { status: "ok", label: "200" },
+  result: "Topology received",
+};

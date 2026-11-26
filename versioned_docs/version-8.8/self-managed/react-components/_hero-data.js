@@ -2,10 +2,16 @@
 // The command is from the Camunda 8 Run developer quickstart.
 export const selfManagedHero = {
   kind: "code",
-  title: "Camunda 8 Run",
-  meta: "Developer quickstart",
-  code: `# Start Camunda 8 Run
-./c8run start`,
-  status: { status: "ok", label: "Started" },
-  result: "localhost:8080/operate",
+  title: "Helm chart",
+  meta: "Kubernetes",
+  code: `helm install camunda \\
+  camunda/camunda-platform \\
+  --values values-quick-install.yaml`,
+};
+
+export const selfManagedPodsOverlay = {
+  kind: "table",
+  title: "Pods",
+  meta: "camunda",
+  rows: [["camunda-zeebe-0", { status: "ok", label: "Running" }]],
 };

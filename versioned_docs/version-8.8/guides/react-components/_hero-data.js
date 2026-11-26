@@ -10,3 +10,15 @@ export const getStartedHero = {
     ["Generate mission report", { status: "info", label: "Active" }],
   ],
 };
+
+export const getStartedAgentOverlay = {
+  kind: "notes",
+  title: "Build your first agent",
+  icon: "agent",
+  meta: "",
+  rows: [
+    ["Add AI Agent", { status: "ok", label: "Done" }],
+    ["Connect tools", { status: "ok", label: "Done" }],
+    ["Run the agent", { status: "info", label: "Active" }],
+  ],
+};

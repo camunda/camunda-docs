@@ -14,7 +14,10 @@ import styles from "./styles.module.css";
  * card is decorative.
  * Set unversioned for a site page outside the docs (such as /build-with-camunda/),
  * so the version prefix is not added.
- * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc".
+ * Pass overlay (card data) to float a second card over the bottom-right
+ * corner of the main card. It is part of the same link as the main card.
+ * Notes cards can set icon: "agent" to show the purple AI agent badge by the title.
+ * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc", "hub".
  */
 
 function Cell({ value }) {
@@ -38,10 +41,28 @@ function Cell({ value }) {
   return null;
 }
 
-function CardHead({ title, meta, children }) {
+// Purple AI agent badge (circle with a sparkle), as on the Modeler diagram.
+function AgentBadge() {
+  return (
+    <svg className={styles.agentBadge} viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="8" fill="var(--hero-agent)" />
+      <path
+        d="M8 3.2 9.4 6.6 12.8 8 9.4 9.4 8 12.8 6.6 9.4 3.2 8 6.6 6.6Z"
+        fill="#fff"
+      />
+    </svg>
+  );
+}
+
+function CardHead({ title, meta, icon, children }) {
   return (
     <div className={styles.cardHead}>
-      {children || <span className={styles.cardTitle}>{title}</span>}
+      {children || (
+        <span className={styles.cardTitle}>
+          {icon === "agent" && <AgentBadge />}
+          {title}
+        </span>
+      )}
       <span className={styles.cardMeta}>{meta}</span>
     </div>
   );
@@ -50,7 +71,7 @@ function CardHead({ title, meta, children }) {
 function Notes({ card }) {
   return (
     <>
-      <CardHead title={card.title} meta={card.meta} />
+      <CardHead title={card.title} meta={card.meta} icon={card.icon} />
       <ul className={styles.notes}>
         {card.rows.map(([title, tag]) => (
           <li key={title}>
@@ -162,9 +183,11 @@ function Request({ card }) {
           <code>{card.path}</code>
         </div>
       </CardHead>
-      <pre className={styles.pre}>
-        <Json text={card.body} />
-      </pre>
+      {card.body && (
+        <pre className={styles.pre}>
+          <Json text={card.body} />
+        </pre>
+      )}
       <div className={styles.resp}>
         <Cell value={card.status} />
         <code>{card.result}</code>
@@ -196,6 +219,26 @@ function PaletteSymbol({ type }) {
       {type === "start" && (
         <circle cx="8" cy="8" r="6" {...common} strokeWidth="1.3" />
       )}
+      {type === "intermediate" && (
+        <>
+          <circle cx="8" cy="8" r="6" {...common} strokeWidth="1.2" />
+          <circle cx="8" cy="8" r="3.8" {...common} strokeWidth="1.2" />
+        </>
+      )}
+      {type === "subprocess" && (
+        <>
+          <rect
+            x="1.5"
+            y="3.5"
+            width="13"
+            height="9"
+            rx="2"
+            {...common}
+            strokeWidth="1.3"
+          />
+          <path d="M6.5 9.5h3M8 8v3" {...common} strokeWidth="1" />
+        </>
+      )}
       {type === "end" && (
         <circle cx="8" cy="8" r="6" {...common} strokeWidth="2.8" />
       )}
@@ -224,14 +267,21 @@ function Modeler({ card }) {
       <CardHead title={card.title} meta={card.meta} />
       <div className={styles.modeler}>
         <div className={styles.palette}>
-          {["start", "task", "gateway", "end"].map((t) => (
+          {[
+            "start",
+            "intermediate",
+            "end",
+            "gateway",
+            "task",
+            "subprocess",
+          ].map((t) => (
             <PaletteSymbol key={t} type={t} />
           ))}
         </div>
         <svg
-          className={styles.canvas}
-          viewBox="0 0 260 84"
-          preserveAspectRatio="xMidYMid meet"
+          className={clsx(styles.canvas, styles.canvasDots)}
+          viewBox="0 0 240 84"
+          preserveAspectRatio="xMinYMid meet"
           aria-hidden="true"
         >
           <defs>
@@ -240,46 +290,58 @@ function Modeler({ card }) {
               viewBox="0 0 10 10"
               refX="9"
               refY="5"
-              markerWidth="7"
-              markerHeight="7"
+              markerWidth="6"
+              markerHeight="6"
               orient="auto"
             >
               <path d="M0 0 10 5 0 10Z" fill="currentColor" />
             </marker>
           </defs>
-          <g fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="16" cy="42" r="9" />
-            <path d="M25 42H52" markerEnd="url(#lh-arrow)" />
-            <rect x="53" y="26" width="64" height="32" rx="6" />
-            <path d="M118 42H146" markerEnd="url(#lh-arrow)" />
-            <path d="M162 28 176 42 162 56 148 42Z" />
+          <g fill="none" stroke="currentColor" strokeWidth="1.3">
+            <circle cx="12" cy="36" r="7" />
+            <path d="M19 36H29" markerEnd="url(#lh-arrow)" />
+            <rect x="30" y="24" width="48" height="24" rx="4" />
+            <path d="M78 36H95" markerEnd="url(#lh-arrow)" />
+            <rect x="96" y="24" width="48" height="24" rx="4" />
+            <path d="M144 36H158" markerEnd="url(#lh-arrow)" />
+            <path d="M168 26 178 36 168 46 158 36Z" strokeWidth="1.5" />
             <path
-              d="M156.5 36.5 167.5 47.5M167.5 36.5 156.5 47.5"
-              strokeWidth="2"
+              d="M164.5 32.5 171.5 39.5M171.5 32.5 164.5 39.5"
+              strokeWidth="1.8"
             />
-            <path d="M162 28V16H212" markerEnd="url(#lh-arrow)" />
-            <path d="M162 56V68H212" markerEnd="url(#lh-arrow)" />
-            <circle cx="222" cy="16" r="9" strokeWidth="3.2" />
-            <circle cx="222" cy="68" r="9" strokeWidth="3.2" />
+            <path d="M178 36H189" markerEnd="url(#lh-arrow)" />
+            <rect x="190" y="24" width="46" height="24" rx="4" />
+            <path d="M168 46V70H54V49" markerEnd="url(#lh-arrow)" />
           </g>
-          <rect
-            className={styles.selection}
-            x="49"
-            y="22"
-            width="72"
-            height="40"
-            rx="8"
+          <circle cx="37" cy="30" r="4" fill="currentColor" />
+          <circle cx="103" cy="30" r="4.2" fill="var(--hero-agent)" />
+          <path
+            d="M103 27.2 103.8 29.2 105.8 30 103.8 30.8 103 32.8 102.2 30.8 100.2 30 102.2 29.2Z"
+            fill="#fff"
           />
-          <text
-            x="85"
-            y="46"
-            textAnchor="middle"
-            fontSize="11"
-            fontWeight="500"
-            fill="currentColor"
-          >
-            {card.task}
-          </text>
+          <g textAnchor="middle" fontSize="7" fill="currentColor">
+            <text
+              x="37"
+              y="32"
+              fontSize="4.5"
+              fontWeight="700"
+              fill="var(--hero-card-bg)"
+            >
+              R
+            </text>
+            <text x="54" y="39.5">
+              Fetch data
+            </text>
+            <text x="120" y="39.5">
+              Evaluate
+            </text>
+            <text x="213" y="39.5">
+              Review
+            </text>
+            <text x="168" y="20" fontSize="6">
+              Valid?
+            </text>
+          </g>
         </svg>
       </div>
     </>
@@ -365,7 +427,34 @@ function AdHoc({ card }) {
   );
 }
 
+// Simplified Camunda Hub "Workspaces" screen: heading with a create button,
+// then workspace tiles with a role pill, counts, and an Open button.
+function Hub({ card }) {
+  return (
+    <>
+      <div className={styles.hubHead}>
+        <span className={styles.cardTitle}>{card.title}</span>
+        <span className={styles.hubCreate}>{card.action}</span>
+      </div>
+      <ul className={styles.hubList}>
+        {card.workspaces.map((w) => (
+          <li key={w.name} className={styles.hubTile}>
+            <div className={styles.hubTileHead}>
+              <span className={styles.noteTitle}>{w.name}</span>
+              <span className={clsx(styles.pill, styles[w.status])}>
+                {w.role}
+              </span>
+            </div>
+            <span className={styles.hubCounts}>{w.counts}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
 const KINDS = {
+  hub: Hub,
   notes: Notes,
   table: Table,
   flow: Flow,
@@ -380,19 +469,33 @@ export default function LandingHero({
   href,
   ariaLabel,
   unversioned,
+  overlay,
   children,
 }) {
   const Body = KINDS[card.kind];
+  const OverlayBody = overlay && KINDS[overlay.kind];
   const version = useActiveVersion();
   const basePath = version?.path?.replace(/\/$/, "") ?? "";
   const to = href && (unversioned ? href : `${basePath}${href}`);
-  const cardClass = clsx(styles.card, href && styles.cardLink);
   // The accessible name starts with the card's visible title, so speech-input
   // users can activate the link by what they see, and adds where it goes.
   const visibleTitle = card.title || card.path;
   const accessibleName = ariaLabel
     ? `${visibleTitle}: ${ariaLabel}`
     : visibleTitle;
+  // The main card and the overlay are one item: a single link wraps both.
+  const stack = (
+    <>
+      <div className={styles.card}>
+        <Body card={card} />
+      </div>
+      {OverlayBody && (
+        <div className={clsx(styles.card, styles.overlay)} aria-hidden="true">
+          <OverlayBody card={overlay} />
+        </div>
+      )}
+    </>
+  );
   return (
     <div className={styles.hero}>
       <div className={styles.copy}>{children}</div>
@@ -401,15 +504,15 @@ export default function LandingHero({
         {href ? (
           <Link
             to={to}
-            className={cardClass}
+            className={clsx(styles.group, styles.cardLink)}
             aria-label={accessibleName}
             title={ariaLabel}
           >
-            <Body card={card} />
+            {stack}
           </Link>
         ) : (
-          <div className={cardClass} aria-hidden="true">
-            <Body card={card} />
+          <div className={styles.group} aria-hidden="true">
+            {stack}
           </div>
         )}
       </div>

@@ -12,7 +12,20 @@ export const agenticOrchestrationHero = {
 
 export const usingCamundaHero = {
   kind: "modeler",
-  title: "Process",
+  title: "Modeler",
   meta: "BPMN",
-  task: "Review",
+};
+
+export const usingCamundaHubOverlay = {
+  kind: "hub",
+  title: "Hub",
+  action: "Create workspace",
+  workspaces: [
+    {
+      name: "New Project",
+      role: "Admin",
+      status: "ok",
+      counts: "4 members · 2 projects",
+    },
+  ],
 };

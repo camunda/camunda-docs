@@ -9,12 +9,12 @@ page_rank: 90
 
 import DocCardList from '@theme/DocCardList';
 import LandingHero from '@site/src/components/LandingHero';
-import { getStartedHero } from './react-components/_hero-data';
+import { getStartedHero, getStartedAgentOverlay } from './react-components/_hero-data';
 import BuildWithCamundaBanner from '../components/react-components/\_build-with-camunda-banner';
 
 <h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
-<LandingHero card={getStartedHero} href="/guides/getting-started-hello-world/" ariaLabel="Run your first BPMN process with Camunda 8">
+<LandingHero card={getStartedHero} overlay={getStartedAgentOverlay} href="/guides/getting-started-hello-world/" ariaLabel="Run your first BPMN process with Camunda 8">
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 

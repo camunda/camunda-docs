@@ -22,14 +22,14 @@ page_rank: 90
 ---
 
 import LandingHero from '@site/src/components/LandingHero';
-import { usingCamundaHero } from './react-components/_hero-data';
+import { usingCamundaHero, usingCamundaHubOverlay } from './react-components/_hero-data';
 import "./react-components/\_using-table.css";
 import UsingGrid from './react-components/\_using-card';
 import { featuresCards, usingCamundaCards } from './react-components/\_using-card-data';
 
 <h3 class="subheading">Learn how to use Camunda to orchestrate your processes.</h3>
 
-<LandingHero card={usingCamundaHero} href="/components/concepts/concepts-overview/" ariaLabel="Introduction to Camunda 8">
+<LandingHero card={usingCamundaHero} overlay={usingCamundaHubOverlay} href="/components/concepts/concepts-overview/" ariaLabel="Introduction to Camunda 8">
 
 Build [AI agents](/reference/glossary.md#ai-agent) and orchestrate them with people and systems in end-to-end processes. Model BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics.
 
