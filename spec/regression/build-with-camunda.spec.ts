@@ -60,8 +60,11 @@ test("retained references are collapsed and keyboard-accessible on mobile", asyn
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/build-with-camunda/", { waitUntil: "domcontentloaded" });
 
+  await expect(
+    page.getByRole("heading", { level: 2, name: "Essential commands" })
+  ).toBeVisible();
+
   const sections = [
-    ["cli-reference", "Manage Camunda from your terminal"],
     ["ai-tools", "Train your AI agents on Camunda"],
     ["other-local-deployments", "More ways to run Camunda locally"],
     ["production-deployments", "Production deployment options"],
