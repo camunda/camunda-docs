@@ -1315,3 +1315,129 @@ management:
 ```
 
 Access them via [http://localhost:8080/actuator/metrics/](http://localhost:8080/actuator/metrics/).
+
+## Manage job workers at runtime
+
+The `jobworkers` [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html) web endpoint lets you read and change the state of the job workers in your application without restarting it. The endpoint is available since 8.9 whenever Spring Boot Actuator is on the classpath.
+
+Use it to react to operational situations, for example to disable the worker of one job type, or to lower `maxJobsActive` or the poll interval of a worker under load.
+
+### Expose the endpoint
+
+Actuator endpoints are not exposed over HTTP by default. Expose the `jobworkers` endpoint and set the access level:
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: jobworkers
+  endpoint:
+    jobworkers:
+      access: unrestricted
+```
+
+The `management.endpoint.jobworkers.access` property accepts `none`, `read_only`, and `unrestricted`. The default is `unrestricted`. Set it to `read_only` to allow reading the worker state only, or to `none` to disable the endpoint. See the [properties reference](./properties-reference.md#managementendpointjobworkers) for all endpoint properties.
+
+:::warning
+Write operations change the runtime behavior of your job workers, including stopping them. Make sure only administrators can reach the endpoint, for example by securing it with [Spring Security](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints.security), by serving it on a separate management port, or by using `read_only` access.
+:::
+
+### Read job workers
+
+| Operation | Request                           | Description                                                                    |
+| --------- | --------------------------------- | ------------------------------------------------------------------------------ |
+| List      | `GET /actuator/jobworkers`        | Returns all job workers of the application.                                    |
+| Get one   | `GET /actuator/jobworkers/{type}` | Returns the job worker with the given job type. Unknown types return an error. |
+
+Each job worker is returned with its current effective configuration, including values changed at runtime. The `typeSelector` field is the job type you use to address the worker in the URL. It stays the same even if you change the `type` of the worker at runtime.
+
+```shell
+curl http://localhost:8080/actuator/jobworkers/processOrder
+```
+
+```json
+{
+  "typeSelector": "processOrder",
+  "type": "processOrder",
+  "name": "processOrder",
+  "enabled": true,
+  "maxJobsActive": 32,
+  "pollInterval": "PT0.1S",
+  "streamEnabled": false,
+  "tenantFilter": "PROVIDED"
+}
+```
+
+The response contains all configuration fields listed in the [update parameters](#update-job-workers). The example shows a subset.
+
+### Update job workers
+
+| Operation  | Request                            | Description                                     |
+| ---------- | ---------------------------------- | ----------------------------------------------- |
+| Update all | `POST /actuator/jobworkers`        | Updates every job worker of the application.    |
+| Update one | `POST /actuator/jobworkers/{type}` | Updates the job worker with the given job type. |
+
+Send the parameters as a JSON request body. All parameters are optional. Parameters you omit are left unchanged.
+
+| Parameter                 | Type     | Description                                                                                                                                       |
+| ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                    | String   | The name of the job worker.                                                                                                                       |
+| `enabled`                 | Boolean  | Starts (`true`) or stops (`false`) the job worker.                                                                                                |
+| `tenantIds`               | String   | Comma-separated list of tenant IDs to activate jobs for.                                                                                          |
+| `timeout`                 | Duration | The job timeout.                                                                                                                                  |
+| `maxJobsActive`           | Integer  | The maximum number of jobs the worker activates at the same time.                                                                                 |
+| `requestTimeout`          | Duration | The timeout of the job activation request.                                                                                                        |
+| `pollInterval`            | Duration | The interval between job activation requests.                                                                                                     |
+| `fetchVariables`          | String   | Comma-separated list of variable names to fetch. Ignored while `forceFetchAllVariables` is `true`.                                                |
+| `forceFetchAllVariables`  | Boolean  | Fetches all variables. Setting it to `true` clears the list of fetched variables. Setting it to `false` restores the list from before the change. |
+| `streamEnabled`           | Boolean  | Enables or disables job streaming.                                                                                                                |
+| `streamTimeout`           | Duration | The timeout of the job stream.                                                                                                                    |
+| `streamInactivityTimeout` | Duration | The duration after which an inactive job stream is closed.                                                                                        |
+| `maxRetries`              | Integer  | The maximum number of retries for failed jobs.                                                                                                    |
+| `retryBackoff`            | Duration | The backoff between retries of failed jobs.                                                                                                       |
+| `tenantFilter`            | String   | `ASSIGNED` or `PROVIDED`. Case-insensitive.                                                                                                       |
+| `type`                    | String   | The new job type. Available only when updating one job worker.                                                                                    |
+| `reset`                   | Boolean  | If `true`, resets the job worker or all job workers to their configured values and ignores all other parameters.                                  |
+
+Pass durations in ISO-8601 format, for example `PT30S` for 30 seconds.
+
+A successful update returns `204 No Content`.
+
+:::note
+A job worker restarts when a change alters its configuration. Changing a value to the one it already has does nothing. When you update all job workers, only the workers whose configuration changes restart.
+:::
+
+If the same job type runs on several clients in a [multi-client](#multi-client-configuration-physical-tenants) application, an update by job type applies to the workers of every client. Reading by job type returns the worker of one of the clients.
+
+### Reset job workers
+
+Set `reset` to `true` to remove all changes made at runtime. The worker returns to the values from your annotations, `application.yaml`, and customizers. A reset also restarts a worker that you disabled at runtime, unless its configured value is `enabled: false`.
+
+```shell
+curl -X POST http://localhost:8080/actuator/jobworkers/processOrder \
+  -H 'Content-Type: application/json' \
+  -d '{"reset": true}'
+```
+
+### Runtime changes are not persistent
+
+Changes are kept in memory only. They are lost when the application restarts, and they don't affect other instances of your application. To make a change permanent, update your configuration. To change several instances, send the request to each instance.
+
+### Example: disable a worker and reduce its load
+
+Disable the worker for the `processOrder` job type:
+
+```shell
+curl -X POST http://localhost:8080/actuator/jobworkers/processOrder \
+  -H 'Content-Type: application/json' \
+  -d '{"enabled": false}'
+```
+
+Enable it again with lower throughput:
+
+```shell
+curl -X POST http://localhost:8080/actuator/jobworkers/processOrder \
+  -H 'Content-Type: application/json' \
+  -d '{"enabled": true, "maxJobsActive": 4, "pollInterval": "PT1S"}'
+```
