@@ -31,6 +31,53 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 90
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+[Intrinsic functions](/components/connectors/advanced-topics/intrinsic-functions.md) are written as a JSON object with a `camunda.function.type` key, and the connector runtime runs them while it binds a connector's input. In affected versions, the runtime ran such an object wherever it appeared in the connector's input, including when it came from a process variable instead of the process model. Some intrinsic functions operate on documents with the permissions of the connector runtime, not those of whoever supplied the data. Under the following conditions, an attacker may be able to read, or create a public link to, a document stored in the cluster:
+
+- The process uses [outbound connectors](/components/connectors/connector-types.md#outbound-connectors).
+- Untrusted input reaches a process variable, for example through an inbound connector such as a webhook, a user task, or an API call. With an inbound webhook that doesn't require authentication, no credentials are needed.
+- That process variable is passed into a connector field, for example an HTTP request body or an email body.
+- The attacker knows a reference to the document (its document ID, store ID, and content hash), for example because document references appear in process variables they can see.
+- The connector's destination is one the attacker controls or can observe, or the attacker can influence it through another process variable.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- Camunda Connectors ≤ 8.9.12, ≤ 8.8.21, or ≤ 8.7.27
+
+and your processes match the conditions above. Camunda Connectors 8.6 doesn't support intrinsic functions and isn't affected.
+
+### Solution
+
+Camunda has released an intrinsic function allow-list for the connector runtime. The runtime only runs an intrinsic function call that the deployed BPMN process declares in the connector element's own input mappings, and refuses calls that arrive through process variables, job variables, connector results, or inbound connector payloads. The allow-list is enabled by default and always fails closed. This is a breaking change: a process that builds an intrinsic function call in a process variable and passes it to a connector field stops working after the upgrade. Declare the call in the connector's input mappings instead. See [declare intrinsic function calls in the process model](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) and the [intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list) configuration.
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.10.0, 8.9.13, 8.8.22, 8.7.28
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+**Interim mitigation**:
+
+- Review your process deployments against the conditions above.
+- Require authentication on inbound webhooks, for example HMAC or an authorization header.
+- Before untrusted data reaches a connector field, reject or remove values that contain the `camunda.function.type` key.
+- If a process may be affected, review which documents its connectors could reach, and delete documents whose public links may have been shared.
+
 ## Notice 87
 
 ### Publication date
