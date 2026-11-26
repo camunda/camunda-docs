@@ -30,7 +30,7 @@ To use the ElevenLabs connector, you need:
 | ElevenLabs API key               | An [ElevenLabs API key](https://elevenlabs.io/app/settings/api-keys), stored as a [connector secret](/components/saas/clusters/manage-secrets.md) or in a reusable credential. |
 | Document storage                 | **Text to speech** stores the generated audio as a document. See [document handling](/components/document-handling/getting-started.md) to configure document storage.          |
 | ElevenLabs agent (batch calls)   | For **Submit batch call**, an [ElevenLabs agent](https://elevenlabs.io/docs/agents-platform/overview) and a phone number connected to ElevenLabs that the agent calls from.    |
-| Enterprise plan (data residency) | To use a data residency server, an ElevenLabs enterprise plan with data residency.                                                                                             |
+| Enterprise plan (data residency) | To use a data residency server, an ElevenLabs enterprise plan with [data residency](https://elevenlabs.io/docs/overview/administration/data-residency).                        |
 
 :::note
 Use secrets to avoid exposing your ElevenLabs API key as plain text. Refer to our documentation on [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
@@ -50,9 +50,9 @@ Select the operation to run in the **Operation** dropdown. Each operation is des
 
 ### Server
 
-| Property | Type     | Required | Description                                                                                                                                                                                                                                      | Example |
-| :------- | :------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| Server   | Dropdown | Yes      | The ElevenLabs API endpoint: **Global** (`https://api.elevenlabs.io`), **EU data residency**, **India data residency**, or **Singapore data residency**. The data residency endpoints require an ElevenLabs enterprise plan with data residency. | Global  |
+| Property | Type     | Required | Description                                                                                                                                                                                                                                                                                                           | Example |
+| :------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Server   | Dropdown | Yes      | The ElevenLabs API endpoint: **Global** (`https://api.elevenlabs.io`), **EU data residency**, **India data residency**, or **Singapore data residency**. The data residency endpoints require an ElevenLabs enterprise plan with [data residency](https://elevenlabs.io/docs/overview/administration/data-residency). | Global  |
 
 ### Authentication
 
@@ -237,6 +237,7 @@ The following result expressions show common mappings:
 | Get batch call    | `={batchStatus: response.body.status, recipients: response.body.recipients}` |
 | Get conversation  | `={callStatus: response.body.status, transcript: response.body.transcript}`  |
 | Transcribe audio  | `={transcript: response.body.text}`                                          |
+| Get transcript    | `={transcript: response.body.text}`                                          |
 
 ## Example: generate and transcribe speech
 
