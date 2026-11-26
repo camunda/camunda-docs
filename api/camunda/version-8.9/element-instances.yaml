@@ -164,7 +164,7 @@ paths:
             example: "2251799813686789"
             description: System-generated key for a element instance.
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:

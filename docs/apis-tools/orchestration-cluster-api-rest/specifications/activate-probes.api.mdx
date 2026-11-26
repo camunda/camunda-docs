@@ -1,0 +1,522 @@
+---
+id: activate-probes
+title: "Activate probes (alpha)"
+sidebar_label: "Activate probes (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Activate probes (alpha)"} <MarkerAddedInVersion version="8.11" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/probes/activation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Collects probes of the given probe IDs for a worker, up to the requested maximum.
+
+Like job activation, the request goes to every partition. When no probe is waiting, it is
+held until a probe of one of these probe IDs is created or until `requestTimeout`. Probe
+IDs on which the caller lacks the `ANSWER` permission are skipped. The worker answers each
+probe with `POST /v2/probes/{probeKey}/answer` before the probe's `deadline`.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "PROBE", permissionType: "ANSWER" }]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            probeIds: {
+              description:
+                "The probe IDs to collect probes for: 1 to 100 distinct values, each 1 to 256\ncharacters, without whitespace, and not `*`. Probe IDs on which the caller lacks the\n`ANSWER` permission are skipped.\n",
+              type: "array",
+              minItems: 1,
+              maxItems: 100,
+              items: {
+                description:
+                  "The ID of a probe, as its worker registered it: 1 to 256 characters, without whitespace,\nand not `*`. The engine matches it to the probe IDs of polling workers by exact equality.\n",
+                type: "string",
+                format: "ProbeId",
+                example: "validate-configuration/io.camunda:aws-credential:1",
+                title: "ProbeId",
+              },
+              example: [
+                "validate-configuration/io.camunda:aws-credential:1",
+                "validate-configuration/io.camunda:slack:1",
+              ],
+            },
+            worker: {
+              description:
+                "The name of the worker, returned to the client in the answer.",
+              type: "string",
+              example: "connectors-runtime",
+            },
+            maxProbesToActivate: {
+              description:
+                "The maximum number of probes to collect with this request, at least 1.",
+              type: "integer",
+              format: "int32",
+              minimum: 1,
+              example: 10,
+            },
+            requestTimeout: {
+              description:
+                "How long to hold the request until a probe is collected, in milliseconds. With `0` or\nabsent, the cluster's long polling timeout is used. With a value below `0`, long\npolling is off and the request returns at once, also when it collected no probe.\n",
+              type: "integer",
+              format: "int64",
+              example: 60000,
+            },
+            tenantIds: {
+              description:
+                "A list of IDs of tenants for which to collect probes.",
+              type: "array",
+              items: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
+                type: "string",
+                title: "TenantId",
+              },
+            },
+            tenantFilter: {
+              allOf: [
+                {
+                  description:
+                    "The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.\n",
+                  type: "string",
+                  enum: ["PROVIDED", "ASSIGNED"],
+                  title: "TenantFilterEnum",
+                },
+              ],
+              description:
+                "The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.\n",
+              default: "PROVIDED",
+            },
+          },
+          required: ["probeIds", "maxProbesToActivate"],
+          title: "ProbeActivationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The collected probes, none when the request timed out.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The collected probes.",
+            type: "object",
+            required: ["probes"],
+            properties: {
+              probes: {
+                description:
+                  "The collected probes, none when the request timed out.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "probeKey",
+                    "probeId",
+                    "worker",
+                    "deadline",
+                    "tenantId",
+                    "physicalTenantId",
+                    "input",
+                    "secretPointers",
+                  ],
+                  properties: {
+                    probeKey: {
+                      allOf: [
+                        {
+                          description: "System-generated key for a probe.",
+                          format: "ProbeKey",
+                          example: "2251799813685464",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProbeKey",
+                        },
+                      ],
+                      description: "The key to answer the probe with.",
+                    },
+                    probeId: {
+                      allOf: [
+                        {
+                          description:
+                            "The ID of a probe, as its worker registered it: 1 to 256 characters, without whitespace,\nand not `*`. The engine matches it to the probe IDs of polling workers by exact equality.\n",
+                          type: "string",
+                          format: "ProbeId",
+                          example:
+                            "validate-configuration/io.camunda:aws-credential:1",
+                          title: "ProbeId",
+                        },
+                      ],
+                      description:
+                        "The probe ID, to pick the handler when the worker polls several probe IDs.",
+                    },
+                    worker: {
+                      description:
+                        "The name of the worker that collected the probe.",
+                      type: "string",
+                      example: "connectors-runtime",
+                    },
+                    deadline: {
+                      description:
+                        "The deadline of the probe, as a UNIX epoch timestamp in milliseconds. An answer after\nit gets 404.\n",
+                      type: "integer",
+                      format: "int64",
+                      example: 1794232249291,
+                    },
+                    tenantId: {
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                      description: "The ID of the tenant of the probe.",
+                    },
+                    physicalTenantId: {
+                      type: "string",
+                      description:
+                        "The ID of the physical tenant that the activation request was routed to;\nthe default physical tenant when the request did not specify one.\n",
+                    },
+                    input: {
+                      description:
+                        "The evaluated input, with the values of its secrets injected.",
+                      type: "object",
+                      additionalProperties: true,
+                    },
+                    secretPointers: {
+                      description:
+                        "The JSON pointers (RFC 6901) of the `input` values into which the engine injected a\nsecret value; empty when none. Remove these values from logs and error messages.\n",
+                      type: "array",
+                      items: { type: "string" },
+                      example: ["/accessKey"],
+                    },
+                  },
+                  title: "ActivatedProbeResult",
+                },
+              },
+            },
+            title: "ProbeActivationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

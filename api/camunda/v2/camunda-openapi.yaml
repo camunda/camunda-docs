@@ -70,6 +70,7 @@ tags:
   - name: Mapping rule
   - name: Message
   - name: Message subscription
+  - name: Probe
   - name: Process definition
   - name: Process instance
   - name: Recovery
@@ -282,12 +283,22 @@ paths:
     $ref: "messages.yaml#/paths/~1messages~1correlation"
   /messages/publication:
     $ref: "messages.yaml#/paths/~1messages~1publication"
+  /probes:
+    $ref: "probes.yaml#/paths/~1probes"
+  /probes/activation:
+    $ref: "probes.yaml#/paths/~1probes~1activation"
+  /probes/{probeKey}/answer:
+    $ref: "probes.yaml#/paths/~1probes~1{probeKey}~1answer"
+  /process-definitions/resumption:
+    $ref: "process-definitions.yaml#/paths/~1process-definitions~1resumption"
   /process-definitions/search:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1search"
   /process-definitions/statistics/message-subscriptions:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1statistics~1message-subscriptions"
   /process-definitions/statistics/process-instances:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1statistics~1process-instances"
+  /process-definitions/suspension:
+    $ref: "process-definitions.yaml#/paths/~1process-definitions~1suspension"
   /process-definitions/{processDefinitionKey}:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1{processDefinitionKey}"
   /process-definitions/{processDefinitionKey}/form:
@@ -480,6 +491,8 @@ paths:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1lookup"
   /user-tasks/{userTaskKey}/variables/search:
     $ref: "user-tasks.yaml#/paths/~1user-tasks~1{userTaskKey}~1variables~1search"
+  /variables/history/search:
+    $ref: "variables.yaml#/paths/~1variables~1history~1search"
   /variables/search:
     $ref: "variables.yaml#/paths/~1variables~1search"
   /variables/{variableKey}:

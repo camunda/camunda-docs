@@ -1034,8 +1034,38 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Probe",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-probe",
+          label: "Create probe (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/activate-probes",
+          label: "Activate probes (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/answer-probe",
+          label: "Answer probe (alpha)",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Process definition",
       items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-definitions",
+          label: "Resume process definitions",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-definitions",
@@ -1052,6 +1082,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-statistics",
           label: "Get process instance statistics",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-definitions",
+          label: "Suspend process definitions",
           className: "api-method post",
         },
         {
@@ -1720,6 +1756,12 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "Variable",
       items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-variable-history",
+          label: "Search variable history",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-variables",

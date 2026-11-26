@@ -1,0 +1,598 @@
+---
+id: suspend-process-definitions
+title: "Suspend process definitions"
+sidebar_label: "Suspend process definitions"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerScope from "@site/src/mdx/MarkerScope";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Suspend process definitions"} <MarkerAddedInVersion version="8.11" />{" "}
+  <MarkerScope scope="physical-tenant" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-definitions/suspension"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Suspends process definitions so that no new process instances can be created from them.
+The definition is selected either by `processDefinitionKey`, which identifies exactly one
+version, or by `processDefinitionId` with an optional `processDefinitionVersion` and
+`tenantId`. Without a version, all versions of the process definition ID are suspended.
+Set `includeProcessInstances` to also suspend the running process instances of the affected
+versions; the instances are changed by a batch operation, returned as `batchOperationKey`.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "SUSPEND_PROCESS_DEFINITION",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Instruction to suspend process definitions, selected either by key or by ID.\n",
+          oneOf: [
+            {
+              type: "object",
+              title: "Process definition suspension by key",
+              required: ["processDefinitionKey"],
+              properties: {
+                processDefinitionKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a deployed process definition.",
+                      format: "ProcessDefinitionKey",
+                      example: "2251799813686749",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessDefinitionKey",
+                    },
+                  ],
+                  description:
+                    "The key of the process definition version to suspend.",
+                },
+                includeProcessInstances: {
+                  description:
+                    "Whether to also suspend the process instances of the affected\nprocess definition versions. The instances are changed by a batch operation.\n",
+                  type: "boolean",
+                  default: false,
+                },
+              },
+            },
+            {
+              type: "object",
+              title: "Process definition suspension by ID",
+              required: ["processDefinitionId"],
+              properties: {
+                processDefinitionId: {
+                  description: "The BPMN process ID of the process definition.",
+                  allOf: [
+                    {
+                      description:
+                        "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                      format: "ProcessDefinitionId",
+                      type: "string",
+                      example: "new-account-onboarding-workflow",
+                      title: "ProcessDefinitionId",
+                    },
+                  ],
+                },
+                processDefinitionVersion: {
+                  description:
+                    "The version of the process definition. Must be 1 or greater; `-1` is not accepted.\nIf omitted, all versions are affected.\n",
+                  type: "integer",
+                  format: "int32",
+                  minimum: 1,
+                },
+                tenantId: {
+                  allOf: [
+                    {
+                      example: "customer-service",
+                      description: "The unique identifier of the tenant.",
+                      format: "TenantId",
+                      type: "string",
+                      title: "TenantId",
+                    },
+                  ],
+                  description:
+                    "The tenant of the process definition. Required when multi-tenancy is enabled;\nif multi-tenancy is disabled, it can be omitted and the default tenant is used.\n",
+                },
+                includeProcessInstances: {
+                  description:
+                    "Whether to also suspend the process instances of the affected\nprocess definition versions. The instances are changed by a batch operation.\n",
+                  type: "boolean",
+                  default: false,
+                },
+              },
+            },
+          ],
+          title: "ProcessDefinitionSuspensionInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The suspension request was accepted.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["processDefinitions", "batchOperationKey"],
+            properties: {
+              processDefinitions: {
+                description: "The affected process definition versions.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "processDefinitionKey",
+                    "processDefinitionVersion",
+                    "outcome",
+                  ],
+                  properties: {
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key of the process definition version.",
+                    },
+                    processDefinitionVersion: {
+                      description: "The version of the process definition.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    outcome: {
+                      description:
+                        "`SUSPENDED` if the version was active and is now suspended. The suspension applies to\nall partitions shortly after the response.\n`ALREADY_SUSPENDED` if the version was already suspended, so its state is unchanged.\nWith `includeProcessInstances`, its process instances are still suspended by the\nbatch operation.\n`DRAINING` if it is being deleted and is left unchanged. This only occurs when the\nrequest selects by ID without a version; selecting a single draining version is rejected\nwith 409.\n",
+                      type: "string",
+                      enum: ["SUSPENDED", "ALREADY_SUSPENDED", "DRAINING"],
+                    },
+                  },
+                  title: "ProcessDefinitionSuspensionVersionResult",
+                },
+              },
+              batchOperationKey: {
+                description:
+                  "The key of the batch operation that suspends the running process instances.\nNull when `includeProcessInstances` is not set.\n",
+                nullable: true,
+                allOf: [
+                  {
+                    format: "BatchOperationKey | uuid",
+                    type: "string",
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
+              },
+            },
+            title: "ProcessDefinitionSuspensionResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "No process definition matches the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The request conflicts with the current state of the process definition, likely because\nthe process definition is in a state that cannot be suspended.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
