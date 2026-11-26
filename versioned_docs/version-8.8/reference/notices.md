@@ -31,6 +31,43 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 88
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+When Git sync was configured with Bitbucket Cloud or Bitbucket Data Center, Web Modeler returned the stored Bitbucket access token in cleartext in the Git sync settings of a process application.
+Any user with permission to view the Git sync settings of the process application could read the token, including users who don't have permission to manage it.
+
+Git sync with GitHub, GitLab, and Azure DevOps is not affected.
+Bitbucket Git sync is not available in Web Modeler 8.7 and earlier, so these versions are not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Web Modeler Self-Managed ≤ 8.9.8 or ≤ 8.8.19. Hub Self-Managed 8.10.0 and later contain the fix and are not affected.
+- You configured Git sync with Bitbucket Cloud or Bitbucket Data Center for at least one process application.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.9, 8.8.20
+
+**Note**: Update to the latest available patch version of your minor version.
+
+The fix was deployed to Web Modeler SaaS on September 18, 2026, 05:57 UTC. No action is required to apply the fix on Camunda 8 SaaS.
+
+Camunda recommends that you rotate the Bitbucket access tokens used for Git sync in all process applications, and update the Git sync settings with the new tokens.
+
 ## Notice 87
 
 ### Publication date
