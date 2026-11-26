@@ -1,4 +1,4 @@
-// Process definition operations: search, read, XML, forms, and statistics.
+// Process definition operations: search, read, XML, forms, statistics, and suspension.
 package examples
 
 import (
@@ -115,5 +115,40 @@ func getProcessDefinitionMessageSubscriptionStatisticsExample(ctx context.Contex
 	}
 	fmt.Printf("%v\n", result)
 	// endregion GetProcessDefinitionMessageSubscriptionStatistics
+	return nil
+}
+
+func suspendProcessDefinitionsExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region SuspendProcessDefinitions
+	// ProcessDefinitionSuspensionInstruction is a union; suspend every version
+	// of a process definition id, including its running process instances.
+	byID := camunda.NewProcessDefinitionSuspensionInstructionById("order-process")
+	byID.SetIncludeProcessInstances(true)
+
+	result, err := client.SuspendProcessDefinitions(ctx,
+		camunda.ProcessDefinitionSuspensionInstructionByIdAsProcessDefinitionSuspensionInstruction(byID))
+	if err != nil {
+		return err
+	}
+	if key, ok := result.GetBatchOperationKeyOk(); ok && key != nil {
+		fmt.Printf("Batch operation: %s\n", *key)
+	}
+	// endregion SuspendProcessDefinitions
+	return nil
+}
+
+func resumeProcessDefinitionsExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region ResumeProcessDefinitions
+	// ProcessDefinitionResumptionInstruction is a union; resume one version by key.
+	byKey := camunda.NewProcessDefinitionResumptionInstructionByKey(
+		camunda.MustProcessDefinitionKey("2251799813685330"))
+
+	result, err := client.ResumeProcessDefinitions(ctx,
+		camunda.ProcessDefinitionResumptionInstructionByKeyAsProcessDefinitionResumptionInstruction(byKey))
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%v\n", result)
+	// endregion ResumeProcessDefinitions
 	return nil
 }

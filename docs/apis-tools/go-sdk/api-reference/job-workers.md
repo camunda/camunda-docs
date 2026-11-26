@@ -18,6 +18,76 @@ Job workers obtain jobs of a given type — by polling the REST activation endpo
 Job is an activated job passed to a JobHandler. It is transport-agnostic: the
 same type is produced by the REST job worker and the gRPC streaming worker.
 
+### Variables are untrusted input
+
+A job's variables reach the handler through the cluster, but their content is
+set by whoever started the process instance. Treat them as you would the body
+of an HTTP request from an untrusted caller.
+
+What the SDK guarantees:
+
+- Variables are decoded into JSON-shaped values only — a map[string]any,
+
+```go
+via the generated model for REST jobs and encoding/json for gRPC jobs.
+Nothing here can instantiate a type chosen by the payload.
+```
+
+- `Job.Variables` fills only the type the handler author supplied; the
+
+```go
+payload selects values, never a type.
+```
+
+- Nesting is bounded by encoding/json's limit of 10000, so a deeply nested
+
+```go
+payload cannot exhaust the stack. On a gRPC-streamed job the decode error
+is swallowed and the handler sees no variables at all, so check for the
+keys you need rather than expecting a decode failure to surface.
+```
+
+- Variable values are kept out of the SDK's own log records: the worker logs
+
+```go
+job keys and types, never the variable map or a raw frame. A decoding
+error is logged, though, and a Go JSON error can quote the offending
+literal, so a malformed value can reach the log by that route.
+```
+
+- Each job owns its maps, so concurrent handlers never share or mutate the
+
+```go
+same values.
+```
+
+What the SDK does not do:
+
+- It enforces no variable-specific size limit: whatever arrives is decoded.
+
+```go
+Two nearby limits are not that limit — the FALCON command stream caps a
+single frame at 16 MiB (a transport limit that does not apply to REST or
+gRPC), and WithMaxConcurrentJobs / WithStreamMaxConcurrentJobs cap how
+many handlers run at once, bounding neither the bytes in one payload nor
+the jobs buffered before dispatch. Whether the SDK should impose a limit
+of its own is an open question; none is applied today.
+```
+
+- It does not validate or sanitise values beyond what JSON decoding
+
+```go
+requires, and it does not interpret them. A variable holding a path, URL,
+query fragment or shell string is just a string here — if a handler
+passes one to a filesystem, database, template or subprocess, enforcing
+that trust boundary is the handler's job.
+```
+
+`Job.RawVariables` is subject to all of the above: its content is untrusted
+input, and the SDK neither validates nor size-limits it. It returns the job's
+own decoded map, not a copy, so reading from it is safe, but copy it before
+handing it to code that may retain or mutate it.
+
 ### Methods
 
 #### Clock
@@ -41,7 +111,8 @@ be seen or changed.
 func (j *Job) CustomHeaders() map[string]any
 ```
 
-CustomHeaders returns the job's custom headers.
+CustomHeaders returns the job's custom headers. The map is never nil, so a
+handler may read from or write to it on any transport (see RawVariables).
 
 #### ElementID
 
@@ -83,6 +154,16 @@ func (j *Job) RawVariables() map[string]any
 
 RawVariables returns the job variables as a decoded map.
 
+The map is never nil: a job with no variables (absent, null or empty) yields an
+empty, writable map, identically on the REST and gRPC transports. Each job owns
+its map, so a handler may add to it freely without affecting other jobs.
+
+Malformed payloads are handled differently per transport. The gRPC stream
+carries variables as a JSON string, and one that cannot be decoded as an object
+also yields an empty map. On REST the response is decoded before any Job is
+built, so a malformed variables value fails the activation with an error and no
+job reaches the handler.
+
 #### Retries
 
 ```go
@@ -107,6 +188,40 @@ func (j *Job) Variables(v any) error
 
 Variables unmarshals the job variables into v (a pointer to a struct or map).
 
+v selects the target type, never the payload: the decoded variables are
+re-marshalled and unmarshalled into the type the handler author named, so a
+payload cannot cause an arbitrary type to be instantiated. The values are
+still untrusted input and are not validated or size-limited by the SDK; see
+`Job` for the full trust model.
+
+## JobCompletion
+
+JobCompletion is the outcome of a successfully handled job: the variables to
+complete it with and, optionally, a job result.
+
+A job result is how a user task listener corrects or denies the task it
+listens to (see CorrectUserTask and DenyUserTask), and how the job of an
+ad-hoc sub-process tells the engine which elements to activate next (see
+AdHocSubProcessJobResult). Leave Result nil for an ordinary job.
+
+### Fields
+
+| Field       | Type             | Description |
+| ----------- | ---------------- | ----------- |
+| `Variables` | `map[string]any` |             |
+| `Result`    | `*JobResult`     |             |
+
+## JobCompletionHandler
+
+```go
+type JobCompletionHandler func(ctx context.Context, job *Job) (JobCompletion, error)
+```
+
+JobCompletionHandler processes an activated job like a JobHandler, but
+completes it with a JobCompletion, which can carry a job result. Errors are
+handled exactly as for a JobHandler: a *BpmnError throws a BPMN error and any
+other error fails the job. Adapt it with CompletionHandler.
+
 ## JobHandler
 
 ```go
@@ -118,6 +233,30 @@ JobHandler processes an activated job:
 - returning (variables, nil) completes the job with those variables;
 - returning a *BpmnError throws a BPMN error;
 - returning any other error fails the job (decrementing its retries).
+
+To also complete the job with a job result (user task listener corrections or
+denial, or an ad-hoc sub-process result), write a JobCompletionHandler and adapt
+it with CompletionHandler.
+
+### Functions
+
+#### CompletionHandler
+
+```go
+func CompletionHandler(h JobCompletionHandler) JobHandler
+```
+
+CompletionHandler adapts a JobCompletionHandler to a JobHandler, so it can be
+passed to NewJobWorker or NewStreamJobWorker.
+
+The worker sets the result's "type" discriminator from the variant that is
+populated, so it is always correct on the wire. A result with no variant set,
+or with both, is a handler bug: the job is failed with a descriptive error
+rather than completed without the result the handler asked for.
+
+The FALCON command stream cannot carry a job result, so a JobWorker receiving
+jobs over it fails a result-bearing completion; use WithForceREST to send job
+results to a gateway that advertises FALCON.
 
 ## JobWorker
 
@@ -148,8 +287,9 @@ blocks WebSockets) the worker transparently falls back to REST polling.
 ## StreamJobWorker
 
 StreamJobWorker activates jobs over the Zeebe gRPC StreamActivatedJobs stream
-and completes, fails, or throws BPMN errors over gRPC. Unlike the REST
-JobWorker it does not poll: the engine pushes jobs as they become available.
+and completes (with any job result, see CompletionHandler), fails, or throws
+BPMN errors over gRPC. Unlike the REST JobWorker it does not poll: the engine
+pushes jobs as they become available.
 
 ### Methods
 
@@ -168,6 +308,28 @@ work.
 A worker configured with a startup jitter (CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS)
 first waits out its delay on the client's clock.
 
+## StreamPollBackoff
+
+StreamPollBackoff configures how the REST sidecar poll backs off while it
+keeps coming back empty (Camunda Java client parity). After a poll that
+activates no jobs, the next delay is the current delay × Multiplier, capped at
+Max, then jittered by ±Jitter (a fraction of the delay) and clamped to Max
+again. Backoff applies only while the gRPC stream is open; while it is
+disconnected the poll runs at the poll interval. A poll that activates
+at least one job resets the delay to the poll interval (WithStreamPollInterval).
+A failed poll keeps the current delay.
+
+A Multiplier <= 1 disables the backoff: the poll then runs at the fixed poll
+interval regardless of the result.
+
+### Fields
+
+| Field        | Type            | Description |
+| ------------ | --------------- | ----------- |
+| `Multiplier` | `float64`       |             |
+| `Jitter`     | `float64`       |             |
+| `Max`        | `time.Duration` |             |
+
 ## StreamWorkerOption
 
 ```go
@@ -185,6 +347,20 @@ func WithStreamFetchVariables(vars ...string) StreamWorkerOption
 ```
 
 WithStreamFetchVariables restricts the variables fetched with each job. Empty fetches all.
+
+#### WithStreamInactivityTimeout
+
+```go
+func WithStreamInactivityTimeout(d time.Duration) StreamWorkerOption
+```
+
+WithStreamInactivityTimeout sets how long a stream may go without delivering a
+job before it is canceled and reopened (default
+DefaultStreamInactivityTimeout, 10m). The timer resets on every received job,
+and is jittered down by up to 10%. It catches streams whose transport stays
+healthy but which no longer deliver jobs. A value <= 0 disables it. When both
+are enabled it must be less than the max lifetime, or Run returns an ErrConfig
+error.
 
 #### WithStreamJobLease
 
@@ -221,6 +397,34 @@ func WithStreamMaxConcurrentJobs(n int) StreamWorkerOption
 
 WithStreamMaxConcurrentJobs caps the number of jobs handled concurrently.
 
+#### WithStreamMaxLifetime
+
+```go
+func WithStreamMaxLifetime(d time.Duration) StreamWorkerOption
+```
+
+WithStreamMaxLifetime sets the maximum lifetime of one job stream (default
+DefaultStreamMaxLifetime, 8h). When it is reached the stream is closed and a
+new one opened at once, so streams rebalance across gateways after a scale-out
+or restart. Jobs already received keep running and are acknowledged normally.
+Each stream's deadline is jittered down by up to 10% to spread recycling
+across a fleet. A value <= 0 disables it.
+
+Rebalancing only helps when a new stream can reach a different gateway: true
+behind a request-level (L7) gRPC load balancer, but not behind a plain L4 load
+balancer, because the worker reuses its HTTP/2 connection. L4 deployments need
+DNS or client-side balancing to benefit.
+
+#### WithStreamPollBackoff
+
+```go
+func WithStreamPollBackoff(b StreamPollBackoff) StreamWorkerOption
+```
+
+WithStreamPollBackoff sets the empty-poll backoff of the REST sidecar poll.
+Defaults to DefaultStreamPollBackoff; pass StreamPollBackoff{} to disable it
+and poll at the fixed WithStreamPollInterval.
+
 #### WithStreamPollInterval
 
 ```go
@@ -255,7 +459,7 @@ func WithStreamTenantIDs(ids ...string) StreamWorkerOption
 ```
 
 WithStreamTenantIDs restricts job activation to the given tenant ids,
-overriding the client's default tenant.
+overriding the client's default tenant. An empty list keeps the default.
 
 #### WithStreamWorkerName
 
@@ -324,8 +528,9 @@ WithMaxConcurrentJobs caps the number of jobs handled concurrently.
 func WithPollInterval(d time.Duration) WorkerOption
 ```
 
-WithPollInterval sets the pause between polls when idle, at capacity, or after
-an activation error.
+WithPollInterval sets the pause after an empty poll or an activation error. A
+worker at capacity does not wait this interval: it polls again as soon as
+enough slots free up.
 
 #### WithRequestTimeout
 
@@ -350,4 +555,86 @@ func WithWorkerTenantIDs(ids ...string) WorkerOption
 ```
 
 WithWorkerTenantIDs restricts job activation to the given tenant ids,
-overriding the client's default tenant.
+overriding the client's default tenant. An empty list keeps the default.
+
+## Package functions
+
+### ActivateAdHocElement
+
+```go
+func ActivateAdHocElement(elementID ElementId, variables map[string]any) JobResultActivateElement
+```
+
+**Types:** [`ElementId`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#ElementId), [`JobResultActivateElement`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultActivateElement)
+
+ActivateAdHocElement returns an instruction to activate the element elementID
+inside an ad-hoc sub-process, creating variables (which may be nil) in the
+scope of the activated element.
+
+### AdHocSubProcessJobResult
+
+```go
+func AdHocSubProcessJobResult(r JobResultAdHocSubProcess) *JobResult
+```
+
+**Types:** [`JobResultAdHocSubProcess`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultAdHocSubProcess), [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+AdHocSubProcessJobResult wraps an ad-hoc sub-process result as a JobResult with
+the "adHocSubProcess" discriminator set.
+
+### CorrectUserTask
+
+```go
+func CorrectUserTask(c JobResultCorrections) *JobResult
+```
+
+**Types:** [`JobResultCorrections`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultCorrections), [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+CorrectUserTask returns a user task listener result that corrects the task's
+attributes. Only the attributes set on c are corrected; the rest keep their
+persisted value. Clear the assignee with an empty string, the due or follow-up
+date with ClearDueDate or ClearFollowUpDate, and the candidate users or groups
+with an empty, non-nil slice.
+
+### DenyUserTask
+
+```go
+func DenyUserTask(reason string) *JobResult
+```
+
+**Types:** [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+DenyUserTask returns a user task listener result that denies the work, for
+example rejecting a task completion so the task stays active. reason is
+optional; an empty reason is omitted.
+
+### UserTaskJobResult
+
+```go
+func UserTaskJobResult(r JobResultUserTask) *JobResult
+```
+
+**Types:** [`JobResultUserTask`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResultUserTask), [`JobResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v11/client#JobResult)
+
+UserTaskJobResult wraps a user task listener result as a JobResult with the
+"userTask" discriminator set.
+
+## DefaultStreamMaxLifetime, DefaultStreamInactivityTimeout
+
+```go
+const (
+	DefaultStreamMaxLifetime       = 8 * time.Hour
+	DefaultStreamInactivityTimeout = 10 * time.Minute
+)
+```
+
+Defaults for the stream-lifecycle safeguards, matching the Camunda Java client.
+
+## DefaultStreamPollBackoff
+
+```go
+var DefaultStreamPollBackoff = StreamPollBackoff{Multiplier: 1.6, Jitter: 0.1, Max: time.Minute}
+```
+
+DefaultStreamPollBackoff is the sidecar-poll empty-result backoff the Camunda
+Java client uses: ×1.6, ±10% jitter, capped at 60 s.

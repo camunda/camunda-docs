@@ -363,6 +363,25 @@ func IsNotFound(err error) bool
 
 IsNotFound reports whether err is (or wraps) an *APIError with HTTP 404.
 
+### OperationServerOrigin
+
+```go
+func OperationServerOrigin(restAddress string, exact bool) (string, error)
+```
+
+OperationServerOrigin derives the origin (scheme://host[:port]) that
+operation-level servers — the cluster-admin /cluster/v2/* operations, whose
+spec template is "{schema}://{host}:{port}" with no path — resolve against.
+It is the configured REST address with any base path stripped: the spec paths
+for these operations already carry their own prefix, so appending the REST
+base path (/v2, or a gateway-fronted path under ExactRestAddress) would
+double it. The origin is serialized through url.URL, not concatenated, so an
+IPv6 literal keeps its brackets and a scoped literal keeps its
+percent-escaped zone identifier (url.Parse decodes %25 in u.Host; a plain
+scheme+"://"+host join would emit an invalid URL containing a raw "%eth0").
+A REST address that is not a valid http(s) URL is an error, never a
+best-guess origin.
+
 ### Poll
 
 ```go
@@ -405,33 +424,6 @@ SeedEnvVar names the environment variable `SeededRandomFromEnv` reads. A test
 that fails under a seeded source can be replayed by setting it to the seed the
 failure reported.
 
-## ErrConfig, ErrAuth, ErrBackpressureQueueFull, ErrEventualConsistencyTimeout, ErrLeaseNotHonored
-
-```go
-var (
-	// ErrConfig indicates configuration was invalid or incomplete.
-	ErrConfig = errors.New("camunda: configuration error")
-	// ErrAuth indicates a failure obtaining or refreshing an auth token.
-	ErrAuth = errors.New("camunda: authentication error")
-	// ErrBackpressureQueueFull indicates the client-side backpressure controller
-	// rejected the request because its waiter queue is at capacity. It is the same
-	// value the backpressure gate returns, so errors.Is matches it on any request
-	// rejected for this reason (facade, Raw client, or job workers).
-	ErrBackpressureQueueFull = backpressure.ErrQueueFull
-	// ErrEventualConsistencyTimeout indicates an eventual-consistency polling
-	// helper timed out before its predicate was met.
-	ErrEventualConsistencyTimeout = errors.New("camunda: eventual consistency timeout")
-	// ErrLeaseNotHonored indicates a worker activated jobs with a lease but the
-	// server returned a job carrying no lease token.
-	//
-	// The specification declares the token present exactly when the activation sets
-	// the lease flag (see presentwhen.go). A server that predates job leases, or one
-	// that ignores the flag, breaks that quietly: the worker would go on to complete,
-	// fail, or throw an error for the job with no token, so the engine could not fence
-	// the command against a superseded activation. The caller asked for fencing and
-	// would not be getting it, which is worth failing over rather than logging.
-	ErrLeaseNotHonored = errors.New("camunda: activation requested a job lease but the server returned no lease token")
-)
-```
+## ErrConfig, ErrAuth, ErrBackpressureQueueFull, ErrEventualConsistencyTimeout, ErrHandlerPanic, ErrLeaseNotHonored
 
 Sentinel errors. Use errors.Is to test for them.
