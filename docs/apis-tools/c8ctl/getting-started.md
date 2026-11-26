@@ -52,7 +52,7 @@ c8ctl setup --yes    # set up the defaults, without prompting
 
 Each step announces its title and ends in `[SUCCESS]`, `[ERROR]`, or `[SKIPPED]`; a failed step does not stop the rest. The blueprint project and the cluster MCP connection need the local cluster — deselect the cluster and both options are disabled. A browser window opens when the local cluster reports healthy; the docs MCP connection asks you to sign in in a browser on first use.
 
-A run without a selection (piped output, CI) installs nothing unless you pass `--yes`. Setup always uses the Rocket Launch example; it does not ask you to choose a blueprint. `--json` prints the plan without executing it, and `--dry-run` previews it. A re-run reuses finished work where possible; the deploy, process start, and skills install repeat by design. The exit code is `0` when every selected setup step succeeded (or nothing was installed for lack of a go-ahead) and `1` when arguments fail validation or a step failed — other eligible steps still ran, while their dependents were skipped.
+A run without a selection (piped output, CI) installs nothing unless you pass `--yes`. Setup always uses the Rocket Launch example; it does not ask you to choose a blueprint. `--json` prints the plan without executing it, and `--dry-run` previews it. A re-run reuses finished work where possible; the deploy, process start, and skills install repeat by design. The exit code is `0` when every selected setup step succeeded (or nothing was installed for lack of a go-ahead) and `1` when arguments fail validation or a step failed — other eligible steps still ran, while their dependents were skipped. Ctrl+C ends the wizard by signal (`130` on POSIX shells).
 
 Use `--modeler` / `--no-modeler` to force or skip the Desktop Modeler step regardless of the selection, and `--docs-mcp` to include the docs MCP connection (off unless selected or flagged).
 
@@ -65,7 +65,7 @@ c8ctl setup --remove                        # preview what would be removed
 c8ctl setup --remove --yes                  # remove without prompting
 ```
 
-Confirm in the interactive prompt or pass `--yes` in non-interactive use; `--json` and `--dry-run` print only the removal preview. Removal delegates to the owning commands — `c8ctl cluster stop --purge` followed by `c8ctl cluster purge`/`delete` per installed version (the cluster is stopped, and its runtime data and downloaded binaries are deleted — setup-deployed process state goes with the runtime data), `c8ctl mcp uninstall`, `c8ctl skills uninstall`, and `c8ctl modeler uninstall`. Local edits in skill folders and listed blueprint files are removed; untracked blueprint files are kept. Removal exits `0` when every requested action succeeds and `1` if any action fails; the other removal actions still run.
+Confirm in the interactive prompt or pass `--yes` in non-interactive use; `--json` and `--dry-run` print only the removal preview. `--remove` cannot be combined with `--modeler`, `--no-modeler`, or `--docs-mcp`. Removal delegates to the owning commands — `c8ctl cluster stop --purge` followed by `c8ctl cluster purge`/`delete` per installed version (the cluster is stopped, and its runtime data and downloaded binaries are deleted — setup-deployed process state goes with the runtime data), `c8ctl mcp uninstall`, `c8ctl skills uninstall`, and `c8ctl modeler uninstall`. Local edits in skill folders and listed blueprint files are removed; untracked blueprint files are kept. Removal exits `0` when every requested action succeeds and `1` if any action fails; the other removal actions still run.
 
 ## Manage Camunda Desktop Modeler
 
@@ -250,7 +250,7 @@ Configure the profile's authentication to match a dedicated physical tenant logi
 
 ### Version aliases
 
-The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/):
+The `stable` and `alpha` aliases are resolved from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/) and cached locally:
 
 | Alias    | Resolves to                                              |
 | :------- | :------------------------------------------------------- |
@@ -258,6 +258,10 @@ The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Down
 | `alpha`  | Highest minor release overall (for example, 8.10-alpha0) |
 
 When no version is specified, `c8 cluster start` defaults to `stable`.
+
+`c8 cluster start` uses the cached alias mapping; `c8 cluster install <alias>` refreshes it from the download server. When a background check finds that the alias's newer target is already installed (for example after `c8 cluster install 8.10`), it advances the cached mapping, so the next `start` uses that version without downloading anything.
+
+`stable` never launches a prerelease build. If the install for its version still holds an alpha build (for example a `8.11` install made through `alpha` before 8.11 went GA), `start` and `install` download the GA build and replace it; if the download fails, the alpha build is kept. A prerelease build that has cluster data is never replaced automatically — run `c8 cluster purge <version>` first.
 
 A `<major>.<minor>` version like `8.8` is treated as a rolling release — the download server directory is updated in-place with new patch releases. `c8 cluster start` uses the local version if available, while `c8 cluster install` always checks for a newer version.
 
@@ -624,8 +628,8 @@ This applies whether JSON mode comes from `--json`, `C8CTL_OUTPUT_MODE`, or the 
 | `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience                                                                                 |
 | `CAMUNDA_OAUTH_URL`         | OAuth token endpoint                                                                                 |
 | `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated)                                                                        |
-| `CAMUNDA_USERNAME`          | Basic auth username                                                                                  |
-| `CAMUNDA_PASSWORD`          | Basic auth password (alias: `CAMUNDA_BASIC_AUTH_PASSWORD`)                                           |
+| `CAMUNDA_USERNAME`          | Basic authentication username                                                                        |
+| `CAMUNDA_PASSWORD`          | Basic authentication password (alias: `CAMUNDA_BASIC_AUTH_PASSWORD`)                                 |
 | `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID                                                                                    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
