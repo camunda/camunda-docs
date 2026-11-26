@@ -17,6 +17,17 @@ and fill all parameters directly in the modeler.
 
 The element template is available for send tasks, intermediate throw events, and message end events.
 
+## Tenants
+
+The connector always publishes or correlates the message in the tenant of the process instance that runs it. It can't send messages to another tenant.
+
+Older versions of the element template have a **Tenant ID** field:
+
+- If the field is empty or set to the tenant of the process instance, the message is sent to that tenant.
+- If the field is set to any other tenant, the job fails with an incident that names both tenants. The job isn't retried.
+
+To remove the field from an existing diagram, upgrade the element to the latest template version.
+
 ## Publish message (buffered) parameters
 
 | Parameter       | Type              | Description                                                                                                                         | Default / Optional |
@@ -26,7 +37,6 @@ The element template is available for send tasks, intermediate throw events, and
 | Payload         | JSON              | Variables to transfer to the receiving process instance. Example: `{"customerName": cust_name}`. Multiple variables can be defined. | Optional           |
 | Time to live    | ISO 8601 duration | Duration for which the message remains buffered, for example `PT1H`.                                                                | Optional           |
 | Message ID      | string            | Unique message ID for idempotency. Ensures the message is delivered only once until correlated.                                     | Optional           |
-| Tenant ID       | string            | Tenant ID of the receiving instance.                                                                                                | `<default>`        |
 | Request timeout | ISO 8601 duration | Timeout for the publish message command, for example `PT30S`.                                                                       | Connector default  |
 
 ### Response
@@ -43,7 +53,6 @@ The element template is available for send tasks, intermediate throw events, and
 | Message name    | string            | Name of the message. Must match a receiving message event.                                                                          | Required           |
 | Correlation key | string            | Value for correlating with a process instance. Can be empty to start a new instance.                                                | Optional           |
 | Payload         | JSON              | Variables to transfer to the receiving process instance. Example: `{"customerName": cust_name}`. Multiple variables can be defined. | Optional           |
-| Tenant ID       | string            | Tenant ID of the receiving instance.                                                                                                | `<default>`        |
 | Request timeout | ISO 8601 duration | Timeout for the correlate message command, for example `PT30S`.                                                                     | Connector default  |
 
 ### Response
