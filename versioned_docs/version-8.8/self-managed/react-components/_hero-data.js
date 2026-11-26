@@ -3,7 +3,7 @@
 export const selfManagedHero = {
   kind: "code",
   title: "Kubernetes with Helm",
-  iconSrc: "/img/icon-kubernetes-mark.svg",
+  icon: "kubernetes",
   meta: "Kubernetes",
   code: `helm install camunda \\
   camunda/camunda-platform \\

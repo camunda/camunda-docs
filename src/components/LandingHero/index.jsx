@@ -16,8 +16,8 @@ import styles from "./styles.module.css";
  * so the version prefix is not added.
  * Pass overlay (card data) to float a second card over the bottom-right
  * corner of the main card. It is part of the same link as the main card.
- * Notes cards can set icon: "agent" (purple AI agent badge) and any card
- * iconSrc (an imported image) to show that image by the title.
+ * Cards can set icon to show a small icon by the title: "agent" (purple AI
+ * agent badge), "java" or "kubernetes". All are inline SVG.
  * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc", "hub".
  */
 
@@ -55,13 +55,59 @@ function AgentBadge() {
   );
 }
 
-function CardHead({ title, meta, icon, iconSrc, children }) {
+// Inline title icons (no image requests, so they also work under a preview
+// site's base path).
+function JavaIcon() {
+  return (
+    <svg className={styles.titleIcon} viewBox="0 0 512 512" aria-hidden="true">
+      <g fill="#dc3a0c">
+        <path d="M287 48C302 82 270 112 236 142C205 170 184 194 190 228C195 256 224 270 242 278C216 256 206 226 226 196C250 160 296 140 292 96C291 76 289 60 287 48Z" />
+        <path d="M327 138C302 152 256 166 246 200C238 228 254 256 266 290C288 266 292 240 282 218C272 196 306 176 327 138Z" />
+      </g>
+      <g fill="#6fa0ff">
+        <path d="M124 294C152 278 212 272 302 285C338 290 352 293 346 303C300 306 190 301 126 312C114 306 116 299 124 294Z" />
+        <path d="M346 272C396 268 412 296 396 322C386 342 350 352 330 356C360 340 386 320 370 298C364 290 350 285 346 272Z" />
+        <path d="M155 330C190 322 262 322 306 337C250 346 190 349 160 346C149 343 149 335 155 330Z" />
+        <path d="M168 372C200 366 262 372 306 386C262 393 200 391 172 389C160 385 160 376 168 372Z" />
+        <path d="M92 412C150 398 300 400 376 400C388 412 340 440 250 448C200 452 160 451 150 448C300 446 384 420 362 408C300 405 150 410 92 412Z" />
+      </g>
+    </svg>
+  );
+}
+
+function KubernetesIcon() {
+  return (
+    <svg className={styles.titleIcon} viewBox="0 0 512 512" aria-hidden="true">
+      <polygon
+        points="256.0,21.0 439.7,109.5 485.1,308.3 358.0,467.7 154.0,467.7 26.9,308.3 72.3,109.5"
+        fill="#326ce5"
+        stroke="#326ce5"
+        strokeWidth="30"
+        strokeLinejoin="round"
+      />
+      <g fill="none" stroke="#fff" strokeWidth="22" strokeLinecap="round">
+        <circle cx="256" cy="256" r="95" />
+        <line x1="256" y1="216" x2="256" y2="106" />
+        <line x1="287.3" y1="231.1" x2="373.3" y2="162.5" />
+        <line x1="295" y1="264.9" x2="402.2" y2="289.4" />
+        <line x1="273.4" y1="292" x2="321.1" y2="391.1" />
+        <line x1="238.6" y1="292" x2="190.9" y2="391.1" />
+        <line x1="217" y1="264.9" x2="109.8" y2="289.4" />
+        <line x1="224.7" y1="231.1" x2="138.7" y2="162.5" />
+      </g>
+      <circle cx="256" cy="256" r="30" fill="#fff" />
+    </svg>
+  );
+}
+
+function CardHead({ title, meta, icon, children }) {
   return (
     <div className={styles.cardHead}>
       {children || (
         <span className={styles.cardTitle}>
           {icon === "agent" && <AgentBadge />}
-          {iconSrc && <img className={styles.titleIcon} src={iconSrc} alt="" />}
+          {icon === "java" && <JavaIcon />}
+          {icon === "kubernetes" && <KubernetesIcon />}
           {title}
         </span>
       )}
@@ -73,12 +119,7 @@ function CardHead({ title, meta, icon, iconSrc, children }) {
 function Notes({ card }) {
   return (
     <>
-      <CardHead
-        title={card.title}
-        meta={card.meta}
-        icon={card.icon}
-        iconSrc={card.iconSrc}
-      />
+      <CardHead title={card.title} meta={card.meta} icon={card.icon} />
       <ul className={styles.notes}>
         {card.rows.map(([title, tag]) => (
           <li key={title}>
@@ -206,7 +247,7 @@ function Request({ card }) {
 function Code({ card }) {
   return (
     <>
-      <CardHead title={card.title} meta={card.meta} iconSrc={card.iconSrc} />
+      <CardHead title={card.title} meta={card.meta} icon={card.icon} />
       <pre className={styles.pre}>{card.code}</pre>
       {card.status && (
         <div className={styles.resp}>

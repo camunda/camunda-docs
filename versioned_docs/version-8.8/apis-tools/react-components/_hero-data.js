@@ -3,7 +3,7 @@
 export const apisToolsHero = {
   kind: "code",
   title: "Camunda Java Client",
-  iconSrc: "/img/icon-java-mark.svg",
+  icon: "java",
   meta: "CamundaClient",
   code: `client.newTopologyRequest()
   .send().join();`,
