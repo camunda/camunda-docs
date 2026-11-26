@@ -67,6 +67,14 @@
       groupName: "GitHub Actions",
     },
     {
+      // Automerge all updates of the .NET SDK, including majors. The C# SDK docs sync
+      // workflow dry-runs on PRs that change it, which is the gate for this bump.
+      matchManagers: ["github-actions"],
+      matchPackageNames: ["dotnet-sdk"],
+      automerge: true,
+      groupName: "dotnet-sdk",
+    },
+    {
       matchPackageNames: ["node"],
       matchUpdateTypes: ["patch", "minor"],
       groupName: "node",

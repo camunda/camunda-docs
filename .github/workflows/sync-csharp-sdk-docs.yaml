@@ -1,6 +1,10 @@
 name: Sync C# SDK API Reference
 
 on:
+  pull_request:
+    # Dry-run on PRs that change this workflow (for example Renovate bumps of setup-dotnet)
+    paths:
+      - ".github/workflows/sync-csharp-sdk-docs.yaml"
   schedule:
     - cron: "0 16 * * 4" # Runs every Thursday at 4 PM UTC (1h after REST API sync)
   workflow_dispatch:
@@ -177,6 +181,7 @@ jobs:
 
       - name: Import Secrets
         id: secrets
+        if: github.event_name != 'pull_request'
         uses: hashicorp/vault-action@892a26828f195e65540a40b4768ae4571f51ebfc # v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
@@ -190,7 +195,7 @@ jobs:
             secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
 
       - name: Generate token
-        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        if: github.event_name != 'pull_request' && steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
         uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         with:
@@ -198,7 +203,7 @@ jobs:
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
-        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        if: github.event_name != 'pull_request' && steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: "${{ steps.generate_token.outputs.token }}"
@@ -226,7 +231,7 @@ jobs:
   notify-failure:
     needs:
       - sync-csharp-sdk-docs
-    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    if: github.event_name != 'pull_request' && (failure() || (success() && fromJSON(github.run_attempt) > 1))
     permissions:
       id-token: write # OIDC for the Vault JWT login
     uses: ./.github/workflows/notify-failure.yml
