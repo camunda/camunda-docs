@@ -34,6 +34,7 @@ import KafkaImg from "../img/connector-kafka.png";
 import MessageSendImg from "../img/connector-message-send.png";
 import Microsoft365Img from "../img/connector-365.png";
 import MicrosoftTeamsImg from "../img/connector-teams.png";
+import MixpanelImg from "../img/connector-mixpanel.png";
 import OpenaiImg from "../img/connector-openai.png";
 import RestImg from "../img/connector-rest.png";
 import RabbitmqImg from "../img/connector-rabbitmq.png";
@@ -386,6 +387,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../microsoft-teams/",
       image: MicrosoftTeamsImg,
+    },
+    {
+      name: "Mixpanel",
+      description:
+        "Record process milestones as events and read saved reports from your processes.",
+      type: "Outbound",
+      link: "../mixpanel/",
+      image: MixpanelImg,
     },
     {
       name: "OpenAI",
