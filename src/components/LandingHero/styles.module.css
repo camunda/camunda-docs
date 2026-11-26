@@ -27,7 +27,7 @@
 }
 
 :global([data-theme="dark"]) .hero {
-  --hero-grid-tint: #7370e6;
+  --hero-grid-tint: #38386d;
   --hero-grid-gap: #0a0a0a;
   --hero-card-bg: #151517;
   --hero-card-line: #2c2c31;
