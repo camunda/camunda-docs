@@ -42,7 +42,7 @@ To build your first AI agent, see the prerequisites below depending on:
 To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
 
 - [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
-- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [run your first local project](../getting-started-example).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, start [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) locally by running `c8ctl cluster start` with the [Camunda CLI](/apis-tools/c8ctl/getting-started.md).
 
 ### Supported models
 
@@ -85,11 +85,6 @@ Depending on your working environment, follow the corresponding steps below.
 <TabItem value="self-managed">
 
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SM** and download the blueprint files from the repository.
-
-:::note
-If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-getting-started-package), the blueprint was already downloaded as part of it.
-:::
-
 2. Open the blueprint BPMN diagram in Desktop Modeler or [upload them to Camunda Hub](/components/hub/workspace/modeler/modeling/import-diagram.md).
 
 </TabItem>
