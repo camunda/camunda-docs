@@ -129,7 +129,7 @@ To read a series whose name contains spaces, use `get value`. For example, `={si
 The following processes use both operations:
 
 1. A process records each shipped order. After the order is shipped, an **Import event** task has **Event name** `Order shipped`, **Distinct ID** `=customerId`, and **Event properties** `={orderId: orderId}`.
-2. A scheduled process checks the signup trend every morning. A **Query saved report** task reads the saved Insights report with its **Report ID**. A gateway then compares the value in the result expression with a threshold and escalates when it is too low.
+2. A scheduled process checks how many users signed up every morning. A **Query saved report** task reads the saved Insights report with its **Report ID**. A gateway then compares the value in the result expression with a threshold and escalates when it is too low.
 
 <ErrorHandling />
 
