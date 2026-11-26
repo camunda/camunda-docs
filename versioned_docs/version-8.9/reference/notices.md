@@ -33,6 +33,35 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 89
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler SaaS
+
+### Impact
+
+An internal endpoint that processes Auth0 log events in Web Modeler SaaS did not enforce its intended authorization.
+Any authenticated user or API client could send events to this endpoint, instead of only Auth0.
+The events could change user records, including those of users in other organizations.
+
+This issue only affects Camunda 8 SaaS. Self-Managed installations do not include or expose this endpoint and are not affected.
+
+There are no known exploits of this issue.
+
+### How to determine if the installation is affected
+
+Only Camunda 8 SaaS was affected. Self-Managed installations are not affected.
+
+### Solution
+
+The fix was deployed to Web Modeler SaaS on July 20, 2026, 13:57 UTC.
+No action is required.
+
 ## Notice 88
 
 ### Publication date
