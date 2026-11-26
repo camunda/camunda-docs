@@ -84,11 +84,6 @@ Depending on your working environment, follow the corresponding steps below.
 <TabItem value="self-managed">
 
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SM** and download the blueprint files from the repository.
-
-:::note
-If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-camunda-8-starter-package), the blueprint was already downloaded as part of it.
-:::
-
 2. Open the blueprint BPMN diagram in Desktop Modeler.
 
 </TabItem>

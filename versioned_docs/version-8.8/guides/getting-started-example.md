@@ -50,17 +50,15 @@ You will:
   </TabItem>
   </Tabs>
 
-## Download the Getting Started Package
+## Set up Camunda 8 locally
 
-Download the Getting Started Package from [Camunda Downloads](/downloads).
-
-The starter package includes the following components:
+In this section, you'll set up a local Camunda 8 environment with the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
-- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java or JavaScript.
 
-All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
+1. [Install and start Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
+2. [Install Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
 
 ## Example project
 
@@ -70,35 +68,19 @@ The example project, located in the `camunda-8-get-started/2-order-process-with-
 
 The service tasks in the process are executed by job workers. The `java` and `nodejs` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
 
+Clone the [getting started project](https://github.com/camunda/camunda-8-get-started) to get the example project:
+
+```bash
+git clone https://github.com/camunda/camunda-8-get-started.git
+```
+
+If you don't use Git, [download the project as a ZIP file](https://github.com/camunda/camunda-8-get-started/archive/refs/heads/main.zip), extract it, and rename the extracted `camunda-8-get-started-main` folder to `camunda-8-get-started`.
+
 ## Instructions
 
 <ol>
   <li>
-    Unzip the Camunda 8 starter package.
-  </li>
-
-  <li>
-    Start Camunda 8 Run by changing into the directory and running the command:
-    <Tabs groupId="os" defaultValue="maclinux" values={
-[
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-] }>
-<TabItem value="maclinux">
-    ```bash
-./camunda-start.sh
-```
-</TabItem>
-<TabItem value="windows">
-```bash
-.\camunda-start.bat
-```
-</TabItem>
-</Tabs>
-  </li>
-
-  <li>
-    Open the Camunda Modeler application from the starter package.
+    Open Camunda Modeler.
   </li>
 
   <li>
@@ -247,26 +229,4 @@ Find more examples on the [Developer Portal](https://camunda.com/developers/).
 
 ## Teardown
 
-You can stop Camunda 8 Run by executing:
-
-    <Tabs groupId="os" defaultValue="maclinux" values={
-
-[
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-] }>
-<TabItem value="maclinux">
-
-```bash
-./camunda-stop.sh
-
-```
-
-</TabItem>
-<TabItem value="windows">
-```bash
-./camunda-stop.bat
-````
-
-</TabItem>
-</Tabs>
+You can [shut down Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#shut-down-camunda-8-run) from its directory to stop your local environment.

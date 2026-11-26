@@ -27,49 +27,57 @@ In this guide, you’ll deploy and run a **Rocket Launch** BPMN process where yo
 
 After completing this guide, you will have a BPMN process running locally in Camunda 8 and understand how basic concepts, such as variables, DMN, and FEEL expressions, work together in an automated BPMN workflow.
 
-## Step 1: Download the Getting Started Package
+## Step 1: Set up Camunda 8 locally
 
-Download the Getting Started Package from [Camunda Downloads](/downloads).
-
-The starter package includes the following components:
+In this step, you'll set up a local Camunda 8 environment with the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md): A simplified, single-application Camunda configuration for a local development environment.
-- [Camunda Modeler](/components/modeler/about-modeler.md): An application for modeling BPMN, DMN, and Forms.
-- [Getting started project](https://github.com/camunda/camunda-8-get-started): Example projects including the Rocket Launch process used in this guide.
+- [Desktop Modeler](/components/modeler/desktop-modeler/index.md): An application for modeling BPMN, DMN, and Forms.
+- [Getting started project](https://github.com/camunda/camunda-8-get-started): Example projects, including the Rocket Launch process used in this guide.
 
-## Step 2: Deploy and run your model
-
-1. Unzip the Camunda 8 starter package.
-2. Start Camunda 8 Run by changing to its directory and running the following command based on your OS:
-
-<Tabs groupId="os" defaultValue="maclinux" values={
+<Tabs groupId="local-setup" defaultValue="cli" values={
 [
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
+{ label: 'Camunda CLI (recommended)', value: 'cli', },
+{ label: 'Manual setup', value: 'manual', },
 ]}>
 
-<TabItem value="maclinux">
+<TabItem value="cli">
 
-```bash
-./camunda-start.sh
-```
+1. Install the [Camunda CLI](/apis-tools/c8ctl/getting-started.md). It requires [Node.js](https://nodejs.org/en/download) 22.18 or later.
+
+   ```bash
+   npm install -g @camunda8/cli
+   ```
+
+2. Run the guided setup, and keep **Local cluster**, **Desktop Modeler**, and **Example project** selected:
+
+   ```bash
+   c8ctl setup
+   ```
+
+The setup downloads and starts Camunda 8 Run, installs Desktop Modeler, and creates the Rocket Launch project in a `rocket-launch` folder in your current directory. It then deploys the project and starts a process instance, so you can skip to [Step 3: Explore your process in Operate](#step-3-explore-your-process-in-operate).
 
 </TabItem>
 
-<TabItem value="windows">
+<TabItem value="manual">
 
-```bash
-.\camunda-start.bat
-```
+1. Download Camunda 8 Run and Desktop Modeler for your operating system from [Camunda Downloads](/downloads).
+2. Extract Camunda 8 Run and [start it](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run).
+3. [Install Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+4. [Download the example projects](https://github.com/camunda/camunda-8-get-started/archive/refs/heads/main.zip) and extract the archive.
 
 </TabItem>
 </Tabs>
 
-3. Open Camunda Modeler from the starter package.
-4. Click **File**, then **Open File** to open the process model `camunda-8-get-started/1-rocket-launch/rocket-launch.bpmn`.
-5. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy Camunda Project**. This automatically deploys all resources in the [project](../components/concepts/projects.md), including the DMN decision table.
-6. Click the play icon in the bottom toolbar to start a new [process instance](/reference/glossary.md#process-instance).
-7. Run your first model instance by setting the input mission variables. For example:
+## Step 2: Deploy and run your model
+
+If you used `c8ctl setup`, your model is already deployed and running. You can still follow these steps to start more instances from Desktop Modeler.
+
+1. Open Desktop Modeler.
+2. Click **File**, then **Open File** to open the process model `rocket-launch.bpmn`. With `c8ctl setup`, it's in the `rocket-launch` folder. With the manual setup, it's in the `1-rocket-launch` folder of the extracted example projects.
+3. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy Camunda Project**. This automatically deploys all resources in the [project](../components/concepts/projects.md), including the DMN decision table.
+4. Click the play icon in the bottom toolbar to start a new [process instance](/reference/glossary.md#process-instance).
+5. Run the model instance by setting the input mission variables. For example:
 
 ```json
 { "missionName": "Odyssey", "fuelLevel": 95 }
@@ -130,25 +138,25 @@ Fixed rules work when you know the decision in advance, as in this launch sequen
 
 Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level).
 
-You can now stop your Camunda 8 Run local environment by executing the following command based on your OS:
+You can now stop your Camunda 8 Run local environment:
 
-<Tabs groupId="os" defaultValue="maclinux" values={
+<Tabs groupId="local-setup" defaultValue="cli" values={
 [
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-] }>
-<TabItem value="maclinux">
+{ label: 'Camunda CLI (recommended)', value: 'cli', },
+{ label: 'Manual setup', value: 'manual', },
+]}>
+<TabItem value="cli">
 
 ```bash
-./camunda-stop.sh
+c8ctl cluster stop
 ```
+
+To remove everything the setup installed, run `c8ctl setup --remove`. It lists what it will remove and asks you to confirm.
 
 </TabItem>
-<TabItem value="windows">
+<TabItem value="manual">
 
-```bash
-.\camunda-stop.bat
-```
+[Shut down Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#shut-down-camunda-8-run) from its directory.
 
 </TabItem>
 </Tabs>
