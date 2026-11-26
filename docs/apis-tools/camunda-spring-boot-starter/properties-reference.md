@@ -135,7 +135,7 @@ Type: <code>integer</code>
 
 <td>
 
-A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel.
+A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel. For document downloads, it is the size of the buffer that holds the content until the application reads it, not a limit on the document size. The buffer can grow larger if the application reads more slowly than the network delivers the content.
 
 Type: <code>dataSize</code>
 
@@ -990,6 +990,214 @@ Type: <code>boolean</code>
 </td>
 <td>
   <code>false</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+### `camunda.client.mtls`
+
+Mutual TLS (mTLS) material for the cluster connection (gRPC and REST), independent of the OAuth token endpoint keystore.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.ca" env="CAMUNDA_CLIENT_MTLS_CA"/><a href="#camundaclientmtlsca" id="camundaclientmtlsca" class="hash-link"/>
+</td>
+
+<td>
+
+The PEM encoded CA bundle, inline. Alternative to `ca-path`.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.ca-path" env="CAMUNDA_CLIENT_MTLS_CAPATH"/><a href="#camundaclientmtlscapath" id="camundaclientmtlscapath" class="hash-link"/>
+</td>
+
+<td>
+
+The path to a PEM CA bundle used to verify the cluster's server certificate. Mutually exclusive with `camunda.client.ca-certificate-path` and `truststore-path`.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.cert" env="CAMUNDA_CLIENT_MTLS_CERT"/><a href="#camundaclientmtlscert" id="camundaclientmtlscert" class="hash-link"/>
+</td>
+
+<td>
+
+The PEM encoded client certificate chain, inline. Alternative to `cert-path`.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.cert-path" env="CAMUNDA_CLIENT_MTLS_CERTPATH"/><a href="#camundaclientmtlscertpath" id="camundaclientmtlscertpath" class="hash-link"/>
+</td>
+
+<td>
+
+The path to the PEM file with the client certificate chain used for mutual TLS against the cluster.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.key" env="CAMUNDA_CLIENT_MTLS_KEY"/><a href="#camundaclientmtlskey" id="camundaclientmtlskey" class="hash-link"/>
+</td>
+
+<td>
+
+The PEM encoded client private key, inline. Alternative to `key-path`.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.key-passphrase" env="CAMUNDA_CLIENT_MTLS_KEYPASSPHRASE"/><a href="#camundaclientmtlskeypassphrase" id="camundaclientmtlskeypassphrase" class="hash-link"/>
+</td>
+
+<td>
+
+The optional passphrase of an encrypted client private key.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.key-path" env="CAMUNDA_CLIENT_MTLS_KEYPATH"/><a href="#camundaclientmtlskeypath" id="camundaclientmtlskeypath" class="hash-link"/>
+</td>
+
+<td>
+
+The path to the PEM file with the client private key (PKCS#8 encrypted or not, PKCS#1, or EC).
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.keystore-key-password" env="CAMUNDA_CLIENT_MTLS_KEYSTOREKEYPASSWORD"/><a href="#camundaclientmtlskeystorekeypassword" id="camundaclientmtlskeystorekeypassword" class="hash-link"/>
+</td>
+
+<td>
+
+The password of the private key entry in the mTLS keystore. Defaults to the keystore password.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.keystore-password" env="CAMUNDA_CLIENT_MTLS_KEYSTOREPASSWORD"/><a href="#camundaclientmtlskeystorepassword" id="camundaclientmtlskeystorepassword" class="hash-link"/>
+</td>
+
+<td>
+
+The password of the mTLS keystore.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.keystore-path" env="CAMUNDA_CLIENT_MTLS_KEYSTOREPATH"/><a href="#camundaclientmtlskeystorepath" id="camundaclientmtlskeystorepath" class="hash-link"/>
+</td>
+
+<td>
+
+The path to a Java keystore (PKCS#12 or JKS, selected by file extension) holding the client identity. Mutually exclusive with the PEM identity (`cert-path`/`cert` and `key-path`/`key`).
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.truststore-password" env="CAMUNDA_CLIENT_MTLS_TRUSTSTOREPASSWORD"/><a href="#camundaclientmtlstruststorepassword" id="camundaclientmtlstruststorepassword" class="hash-link"/>
+</td>
+
+<td>
+
+The password of the mTLS truststore.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.mtls.truststore-path" env="CAMUNDA_CLIENT_MTLS_TRUSTSTOREPATH"/><a href="#camundaclientmtlstruststorepath" id="camundaclientmtlstruststorepath" class="hash-link"/>
+</td>
+
+<td>
+
+The path to a Java truststore (PKCS#12 or JKS, selected by file extension) with the CA certificates used to verify the cluster's server certificate.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
 </td>
 </tr>
 </tbody>
