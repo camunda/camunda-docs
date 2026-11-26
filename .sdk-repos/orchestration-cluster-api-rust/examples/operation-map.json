@@ -13,6 +13,27 @@
       "label": "Activate jobs"
     }
   ],
+  "activateProbes": [
+    {
+      "file": "probe.rs",
+      "region": "ActivateProbes",
+      "label": "Activate probes"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "clock.rs",
+      "region": "AddClock",
+      "label": "Add a duration to the internal clock (alpha)"
+    }
+  ],
+  "answerProbe": [
+    {
+      "file": "probe.rs",
+      "region": "AnswerProbe",
+      "label": "Answer a probe"
+    }
+  ],
   "assignClientToGroup": [
     {
       "file": "group.rs",
@@ -265,6 +286,13 @@
       "label": "Create mapping rule"
     }
   ],
+  "createProbe": [
+    {
+      "file": "probe.rs",
+      "region": "CreateProbe",
+      "label": "Create a probe"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "process_instance.rs",
@@ -487,6 +515,13 @@
       "file": "agent_instance.rs",
       "region": "GetAgentInstance",
       "label": "Get agent instance"
+    }
+  ],
+  "getClock": [
+    {
+      "file": "clock.rs",
+      "region": "GetClock",
+      "label": "Get the internal clock"
     }
   ],
   "getAuditLog": [
@@ -1098,6 +1133,13 @@
       "label": "Resume exporting"
     }
   ],
+  "resumeProcessDefinitions": [
+    {
+      "file": "process_definition.rs",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
+  ],
   "resumeProcessInstance": [
     {
       "file": "process_instance.rs",
@@ -1399,6 +1441,13 @@
       "label": "Search user task effective variables"
     }
   ],
+  "lookupUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
+    }
+  ],
   "searchUserTaskVariables": [
     {
       "file": "user_task.rs",
@@ -1441,6 +1490,13 @@
       "label": "Search users for tenant"
     }
   ],
+  "searchVariableHistory": [
+    {
+      "file": "variable.rs",
+      "region": "SearchVariableHistory",
+      "label": "Search variable history"
+    }
+  ],
   "searchVariables": [
     {
       "file": "variable.rs",
@@ -1453,6 +1509,13 @@
       "file": "batch_operation.rs",
       "region": "SuspendBatchOperation",
       "label": "Suspend Batch operation"
+    }
+  ],
+  "suspendProcessDefinitions": [
+    {
+      "file": "process_definition.rs",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
     }
   ],
   "suspendProcessInstance": [

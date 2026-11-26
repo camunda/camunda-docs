@@ -13,7 +13,10 @@ async fn get_authentication() -> Result<(), Box<dyn std::error::Error>> {
     let client = CamundaClient::from_env()?;
 
     let result = client.get_authentication().await?;
-    println!("{}", result.username);
+    match &result.username {
+        Some(username) => println!("{username}"),
+        None => println!("anonymous caller"),
+    }
 
     Ok(())
 }

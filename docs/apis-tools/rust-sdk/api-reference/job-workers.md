@@ -9,6 +9,54 @@ mdx:
 
 Job workers poll for jobs of a given type, run a handler, and report the outcome back to the cluster.
 
+## AdHocSubProcessResult
+
+The result of a job raised by an ad-hoc sub-process (`type: "adHocSubProcess"`).
+
+```rust
+use camunda_orchestration_sdk::{AdHocSubProcessResult, JobAction};
+
+let action = JobAction::complete_with_result(
+    AdHocSubProcessResult::new()
+        .activate_element_with("review", serde_json::json!({ "reviewer": "alice" }))
+        .completion_condition_fulfilled(false),
+);
+```
+
+### Methods
+
+| Method                           | Description                                                                                                                                             |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `activate_element`               | Activate the element with this id.                                                                                                                      |
+| `activate_element_with`          | Activate the element with this id, with variables scoped to it. `variables` must serialize to a JSON object; any other value is sent without variables. |
+| `cancel_remaining_instances`     | Set whether the remaining instances of the ad-hoc sub-process are canceled.                                                                             |
+| `completion_condition_fulfilled` | Set whether the completion condition of the ad-hoc sub-process is fulfilled.                                                                            |
+| `into_inner`                     | The underlying generated model.                                                                                                                         |
+| `new`                            | An empty ad-hoc sub-process result: nothing is activated.                                                                                               |
+
+## CompletionResult
+
+The job result a completion carries: the generated `models::JobResult`, plus any
+failure a builder hit while assembling it.
+
+Build one from a `UserTaskResult`, an `AdHocSubProcessResult`, or a
+`models::JobResult`. It serializes to the wire form of the completion `result`.
+
+If a builder failed to serialize part of the result, every way of turning it into a
+payload fails rather than dropping that part: serializing returns a serde error,
+`model` returns the error, and
+`JobAction::complete_with_result`
+fails the job.
+
+### Methods
+
+| Method                  | Description                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `clears_due_date`       | Whether the due date is cleared.                                             |
+| `clears_follow_up_date` | Whether the follow-up date is cleared.                                       |
+| `error`                 | Why this result cannot be sent, if a builder failed to serialize part of it. |
+| `model`                 | The generated model, including any cleared due or follow-up date.            |
+
 ## Job
 
 A job delivered to a worker handler. Wraps the activated job with convenient
@@ -36,22 +84,25 @@ The action a handler asks the worker to take after processing a job.
 
 ### Variants
 
-| Variant    | Payload                                                                                                    | Description                                                              |
-| ---------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `Complete` | `{ variables: Option<Value> }`                                                                             | Complete the job, optionally with output variables.                      |
-| `Fail`     | `{ error_message: String, retries: Option<i32>, retry_backoff_ms: Option<i64>, variables: Option<Value> }` | Fail the job, decrementing retries (unless `retries` is set explicitly). |
-| `Error`    | `{ error_code: String, error_message: Option<String>, variables: Option<Value> }`                          | Throw a BPMN error to be caught by an error boundary event.              |
-| `Leave`    | —                                                                                                          | Take no action; the job remains activated until its timeout elapses.     |
+| Variant              | Payload                                                                                                    | Description                                                                                                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Complete`           | `{ variables: Option<Value> }`                                                                             | Complete the job, optionally with output variables.                                                                                                                  |
+| `CompleteWithResult` | `{ variables: Option<Value>, result: CompletionResult }`                                                   | Complete the job with a job result -- user-task listener corrections or denial, or the elements an ad-hoc sub-process activates -- optionally with output variables. |
+| `Fail`               | `{ error_message: String, retries: Option<i32>, retry_backoff_ms: Option<i64>, variables: Option<Value> }` | Fail the job, decrementing retries (unless `retries` is set explicitly).                                                                                             |
+| `Error`              | `{ error_code: String, error_message: Option<String>, variables: Option<Value> }`                          | Throw a BPMN error to be caught by an error boundary event.                                                                                                          |
+| `Leave`              | —                                                                                                          | Take no action; the job remains activated until its timeout elapses.                                                                                                 |
 
 ### Methods
 
-| Method          | Description                                                                 |
-| --------------- | --------------------------------------------------------------------------- |
-| `complete`      | Complete the job with no output variables.                                  |
-| `complete_with` | Complete the job with output variables.                                     |
-| `error`         | Throw a BPMN error with the given error code.                               |
-| `fail`          | Fail the job with an error message (retries are decremented by the engine). |
-| `leave`         | Leave the job activated (take no action).                                   |
+| Method                               | Description                                                                 |
+| ------------------------------------ | --------------------------------------------------------------------------- |
+| `complete`                           | Complete the job with no output variables.                                  |
+| `complete_with`                      | Complete the job with output variables.                                     |
+| `complete_with_result`               | Complete the job with a job result and no output variables.                 |
+| `complete_with_variables_and_result` | Complete the job with output variables and a job result.                    |
+| `error`                              | Throw a BPMN error with the given error code.                               |
+| `fail`                               | Fail the job with an error message (retries are decremented by the engine). |
+| `leave`                              | Leave the job activated (take no action).                                   |
 
 ## JobHandler
 
@@ -85,34 +136,40 @@ callers.
 
 ### Fields
 
-| Field                        | Type                    | Description                                                                                                                                                                                                                                                                                                    |
-| ---------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `job_type`                   | `String`                | The job type to poll for (required).                                                                                                                                                                                                                                                                           |
-| `max_jobs_to_activate`       | `i32`                   | Maximum number of jobs to activate per poll. Also bounds in-flight concurrency.                                                                                                                                                                                                                                |
-| `job_timeout_ms`             | `i64`                   | How long the engine reserves an activated job for this worker, in milliseconds.                                                                                                                                                                                                                                |
-| `request_timeout_ms`         | `i64`                   | Long-poll timeout for the activate-jobs request, in milliseconds.                                                                                                                                                                                                                                              |
-| `poll_interval_ms`           | `u64`                   | Delay between polls when the last poll returned no jobs, in milliseconds.                                                                                                                                                                                                                                      |
-| `worker_name`                | `String`                | Worker name reported to the engine.                                                                                                                                                                                                                                                                            |
-| `fetch_variables`            | `Option<Vec<String>>`   | Variable names to fetch with each job. `None` fetches all variables.                                                                                                                                                                                                                                           |
-| `tenant_ids`                 | `Option<Vec<String>>`   | Tenant ids to activate jobs for.                                                                                                                                                                                                                                                                               |
-| `startup_jitter_max_seconds` | `u64`                   | Maximum random startup delay before the first poll, in seconds. Spreads the initial activate-jobs stampede when many workers start at once.                                                                                                                                                                    |
-| `with_lease`                 | `bool`                  | Activate jobs with a lease. Each job then carries a lease token that the worker sends back on complete, fail, and throw-error, so the engine can fence the command against a superseded activation (for example after the job timed out and another worker picked it up). Off by default, matching the engine. |
-| `on_ready`                   | `Option<ReadyCallback>` | Optional callback fired once when the worker becomes ready to receive jobs (Falcon subscription established, or REST poll loop entered). Set via `JobWorkerConfig::on_ready`. Excluded from `Debug` output.                                                                                                    |
+| Field                           | Type                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `job_type`                      | `String`                | The job type to poll for (required).                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `max_jobs_to_activate`          | `i32`                   | Maximum number of jobs to activate per poll. Also bounds in-flight concurrency.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `job_timeout_ms`                | `i64`                   | How long the engine reserves an activated job for this worker, in milliseconds.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `request_timeout_ms`            | `i64`                   | Long-poll timeout for the activate-jobs request, in milliseconds.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `poll_interval_ms`              | `u64`                   | Delay between polls when the last poll returned no jobs, in milliseconds.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `worker_name`                   | `String`                | Worker name reported to the engine.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `fetch_variables`               | `Option<Vec<String>>`   | Variable names to fetch with each job. `None` fetches all variables.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `tenant_ids`                    | `Option<Vec<String>>`   | Tenant ids to activate jobs for.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `startup_jitter_max_seconds`    | `u64`                   | Maximum random startup delay before the first poll, in seconds. Spreads the initial activate-jobs stampede when many workers start at once.                                                                                                                                                                                                                                                                                                                                              |
+| `with_lease`                    | `bool`                  | Activate jobs with a lease. Each job then carries a lease token that the worker sends back on complete, fail, and throw-error, so the engine can fence the command against a superseded activation (for example after the job timed out and another worker picked it up). Off by default, matching the engine.                                                                                                                                                                           |
+| `on_ready`                      | `Option<ReadyCallback>` | Optional callback fired once when the worker becomes ready to receive jobs (Falcon subscription established, or REST poll loop entered). Set via `JobWorkerConfig::on_ready`. Excluded from `Debug` output.                                                                                                                                                                                                                                                                              |
+| `max_poll_backoff_ms`           | `u64`                   | Ceiling for the back-off between polls after consecutive poll failures, in milliseconds (default 30 000). A failed `activate_jobs` call (gateway restart, network blip, sustained `503`) does not stop the worker: it waits `poll_interval_ms × 2^n` (jittered, capped here) and polls again, and resets the delay on the next successful poll.                                                                                                                                          |
+| `max_consecutive_poll_failures` | `Option<u32>`           | Stop the worker with the last poll error after this many consecutive poll failures. `None` (the default) retries until the worker is stopped. Set it to fail fast instead of riding out an outage.                                                                                                                                                                                                                                                                                       |
+| `activation_threshold`          | `Option<u32>`           | Minimum number of free in-flight credits the REST poller waits for before it sends the next activation while jobs are still in flight. `None` (the default) uses `max(1, max_jobs_to_activate * 0.3)`, as the Go and Java clients do. When no job is in flight the worker polls immediately regardless. Clamped to `1..=max_jobs_to_activate`. Waiting for a batch of credits avoids a flood of tiny activations (one per finished handler) under load; the in-flight cap is unaffected. |
 
 ### Methods
 
-| Method                       | Description                                                                                                                                                                                                                                                                                                                                          |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetch_variables`            | Restrict fetched variables to the given names.                                                                                                                                                                                                                                                                                                       |
-| `from_defaults`              | Create a config seeded from the SDK's resolved `WorkerDefaults` (env-driven), for the given job type. Builder methods can still override individual fields.                                                                                                                                                                                          |
-| `job_timeout_ms`             | Set the job activation timeout, in milliseconds.                                                                                                                                                                                                                                                                                                     |
-| `max_jobs_to_activate`       | Set the maximum number of jobs activated per poll.                                                                                                                                                                                                                                                                                                   |
-| `new`                        | Create a config for the given job type with sensible defaults.                                                                                                                                                                                                                                                                                       |
-| `on_ready`                   | Register a callback fired once when this worker becomes ready to receive jobs (its Falcon subscription is established, or it has entered the REST poll loop).                                                                                                                                                                                        |
-| `startup_jitter_max_seconds` | Set the maximum random startup delay (seconds) applied before the first poll.                                                                                                                                                                                                                                                                        |
-| `tenant_ids`                 | Set the tenant ids to activate jobs for.                                                                                                                                                                                                                                                                                                             |
-| `with_lease`                 | Activate jobs with a lease (off by default). Each job then carries a lease token the worker sends back on complete, fail, and throw-error, so the engine can fence the command against a superseded activation. Requires a server that supports job leases; see `JobWorkerConfig::with_lease` for the fail-loud behaviour against one that does not. |
-| `worker_name`                | Set the worker name.                                                                                                                                                                                                                                                                                                                                 |
+| Method                          | Description                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `activation_threshold`          | Set the number of free credits the REST poller waits for before activating more jobs while others are in flight. See `JobWorkerConfig::activation_threshold`.                                                                                                                                                                                        |
+| `fetch_variables`               | Restrict fetched variables to the given names.                                                                                                                                                                                                                                                                                                       |
+| `from_defaults`                 | Create a config seeded from the SDK's resolved `WorkerDefaults` (env-driven), for the given job type. Builder methods can still override individual fields.                                                                                                                                                                                          |
+| `job_timeout_ms`                | Set the job activation timeout, in milliseconds.                                                                                                                                                                                                                                                                                                     |
+| `max_consecutive_poll_failures` | Stop the worker after `n` consecutive poll failures instead of retrying until it is stopped (the default). `n` is clamped to at least 1.                                                                                                                                                                                                             |
+| `max_jobs_to_activate`          | Set the maximum number of jobs activated per poll.                                                                                                                                                                                                                                                                                                   |
+| `max_poll_backoff_ms`           | Set the ceiling (milliseconds) for the back-off between polls after consecutive poll failures. See `JobWorkerConfig::max_poll_backoff_ms`.                                                                                                                                                                                                           |
+| `new`                           | Create a config for the given job type with sensible defaults.                                                                                                                                                                                                                                                                                       |
+| `on_ready`                      | Register a callback fired once when this worker becomes ready to receive jobs (its Falcon subscription is established, or it has entered the REST poll loop).                                                                                                                                                                                        |
+| `startup_jitter_max_seconds`    | Set the maximum random startup delay (seconds) applied before the first poll.                                                                                                                                                                                                                                                                        |
+| `tenant_ids`                    | Set the tenant ids to activate jobs for.                                                                                                                                                                                                                                                                                                             |
+| `with_lease`                    | Activate jobs with a lease (off by default). Each job then carries a lease token the worker sends back on complete, fail, and throw-error, so the engine can fence the command against a superseded activation. Requires a server that supports job leases; see `JobWorkerConfig::with_lease` for the fail-loud behaviour against one that does not. |
+| `worker_name`                   | Set the worker name.                                                                                                                                                                                                                                                                                                                                 |
 
 ## JobWorkerHandle
 
@@ -124,13 +181,13 @@ graceful shutdown that lets in-flight jobs drain.
 
 ### Methods
 
-| Method        | Description                                                                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `is_finished` | Whether the worker task has finished.                                                                                                     |
-| `job_type`    | The job type this worker polls for.                                                                                                       |
-| `shutdown`    | Signal the worker to stop and await its graceful shutdown.                                                                                |
-| `stop`        | Signal the worker to stop. It finishes draining any in-flight jobs from the current batch, then exits before the next poll. Non-blocking. |
-| `worker_name` | The worker name reported to the engine.                                                                                                   |
+| Method        | Description                                                                                                                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `is_finished` | Whether the worker task has finished. A worker keeps polling through transient poll failures (with back-off), so it finishes only when stopped, on a configuration error, or after `JobWorkerConfig::max_consecutive_poll_failures`. |
+| `job_type`    | The job type this worker polls for.                                                                                                                                                                                                  |
+| `shutdown`    | Signal the worker to stop and await its graceful shutdown.                                                                                                                                                                           |
+| `stop`        | Signal the worker to stop. It finishes draining any in-flight jobs from the current batch, then exits before the next poll. Non-blocking.                                                                                            |
+| `worker_name` | The worker name reported to the engine.                                                                                                                                                                                              |
 
 ## ReadyCallback
 
@@ -142,3 +199,58 @@ probes; the SDK guarantees it fires at most once per worker run.
 ```rust
 pub type ReadyCallback = Arc<dyn Fn() + Send + Sync>;
 ```
+
+## UserTaskCorrections
+
+Task properties a user task listener corrects. An attribute left unset preserves the
+persisted value.
+
+For the due and follow-up dates, setting and clearing the same date overrides each
+other: the last call wins.
+
+```rust
+use camunda_orchestration_sdk::UserTaskCorrections;
+
+let corrections = UserTaskCorrections::new()
+    .clear_due_date() // sent as "dueDate": ""
+    .priority(80);
+```
+
+### Methods
+
+| Method                 | Description                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- |
+| `assignee`             | Correct the assignee. An empty string clears it.                                                        |
+| `candidate_groups`     | Correct the candidate groups. An empty list clears them.                                                |
+| `candidate_users`      | Correct the candidate users. An empty list clears them.                                                 |
+| `clear_due_date`       | Clear the due date (sent as `"dueDate": ""`). Overrides an earlier `due_date`.                          |
+| `clear_follow_up_date` | Clear the follow-up date (sent as `"followUpDate": ""`). Overrides an earlier `follow_up_date`.         |
+| `due_date`             | Correct the due date. Overrides an earlier `clear_due_date`.                                            |
+| `follow_up_date`       | Correct the follow-up date. Overrides an earlier `clear_follow_up_date`.                                |
+| `into_inner`           | The underlying generated model. A `clear_due_date` / `clear_follow_up_date` is carried as `Some(None)`. |
+| `new`                  | No corrections.                                                                                         |
+| `priority`             | Correct the priority (0-100).                                                                           |
+
+## UserTaskResult
+
+The result of a job raised by a user task listener (`type: "userTask"`).
+
+```rust
+use camunda_orchestration_sdk::{JobAction, UserTaskCorrections, UserTaskResult};
+
+let correct = JobAction::complete_with_result(
+    UserTaskResult::new().corrections(UserTaskCorrections::new().assignee("alice")),
+);
+let deny = JobAction::complete_with_result(UserTaskResult::deny("Missing documents"));
+```
+
+### Methods
+
+| Method          | Description                                                                  |
+| --------------- | ---------------------------------------------------------------------------- |
+| `corrections`   | Correct task properties as part of the completion.                           |
+| `denied`        | Set whether the worker denies the work. Defaults to `false` on the engine.   |
+| `denied_reason` | The reason for denying the work.                                             |
+| `deny`          | Deny the work (for example, reject a task completion), giving a reason.      |
+| `into_inner`    | The underlying generated model, including any cleared due or follow-up date. |
+| `new`           | An empty user-task result: the work is approved and nothing is corrected.    |

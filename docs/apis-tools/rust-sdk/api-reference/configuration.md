@@ -39,6 +39,11 @@ Cloning an `Authentication` shares the same underlying OAuth token cache.
 
 Resolved SDK configuration.
 
+`Debug` is hand-written rather than derived: this struct holds the OAuth client secret
+and the basic-auth password, it is re-exported from the crate root, and every client
+hands out a reference to its resolved config — so `{config:?}` is reachable from user
+code and from anything that embeds a `CamundaConfig` in its own derived `Debug`.
+
 ### Fields
 
 | Field                      | Type                  | Description                                                                                                                                                                                                                               |
@@ -133,6 +138,9 @@ TLS / mutual-TLS configuration (`CAMUNDA_MTLS_*`).
 A client certificate (`cert` + `key`) enables mutual TLS; a `ca` enables trusting a
 private certificate authority. Inline PEM values take precedence over the `*_path`
 file locations.
+
+`Debug` is hand-written for the same reason as `CamundaConfig`'s: the inline PEM
+fields carry private key material.
 
 ### Fields
 

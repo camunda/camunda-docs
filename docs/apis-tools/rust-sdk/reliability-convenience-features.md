@@ -23,7 +23,11 @@ predicate)` retry `404` reads (the symptom of replication lag) until consistent 
   window elapses.
 - **Mutual TLS** — client cert/key/CA from `CAMUNDA_MTLS_*` (inline PEM or file path).
 - **OAuth disk token cache** — set `CAMUNDA_OAUTH_CACHE_DIR` to share tokens across processes
-  (atomic write, namespaced per client/audience).
+  (atomic write, namespaced per client/audience). The cached token is a live credential: on
+  unix the SDK creates the cache file mode `0600` and, when it creates the directory itself,
+  mode `0700` (a directory you created keeps your permissions). Windows has no mode bit, so
+  the file inherits the directory's ACL — point `CAMUNDA_OAUTH_CACHE_DIR` at a per-user
+  location there.
 - **Default-tenant injection** — `CAMUNDA_DEFAULT_TENANT_ID` is applied automatically wherever
   a tenant is accepted.
 - **Configurable logging** — `client.init_logging()` installs a `tracing` subscriber filtered
