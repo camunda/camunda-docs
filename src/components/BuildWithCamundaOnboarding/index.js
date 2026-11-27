@@ -58,36 +58,14 @@ function Requirements() {
   return (
     <div className={styles.requirements}>
       <p className={styles.requirementLine}>
-        <span>
-          Requires{" "}
-          <ExternalLink to="https://nodejs.org/en/download">
-            Node.js 22.18+
-          </ExternalLink>
-        </span>
+        <ExternalLink to="https://nodejs.org/en/download">
+          Requires Node.js 22.18+
+        </ExternalLink>
         <span className={styles.requirementSeparator} aria-hidden="true">
           ·
         </span>
-        <Link
-          className={styles.manualSetupLink}
-          to={`#${MANUAL_SETUP_ID}`}
-          onClick={openManualSetup}
-        >
+        <Link to={`#${MANUAL_SETUP_ID}`} onClick={openManualSetup}>
           No Node.js? Set up manually
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M8 3v10M4 9l4 4 4-4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
         </Link>
       </p>
     </div>
@@ -124,15 +102,17 @@ function Guided() {
         </span>
         <section aria-labelledby="run-setup">
           <h3 id="run-setup">Run guided setup</h3>
-          <p>
-            Keep <strong>Local cluster</strong>,{" "}
-            <strong>Desktop Modeler</strong>, and{" "}
-            <strong>Example project</strong> selected. The{" "}
-            <strong>AI-assisted development</strong> options configure AI coding
-            assistants on your machine on how to use Camunda and connect to the
-            local cluster via MCP.
-          </p>
           <TerminalWindow title="Terminal">{SETUP_COMMAND}</TerminalWindow>
+          <p className={styles.stepNote}>
+            <strong>Essentials:</strong> Keep the <strong>Local cluster</strong>
+            , <strong>Desktop Modeler</strong>, and{" "}
+            <strong>Example project</strong> options selected.
+          </p>
+          <p className={styles.stepNote}>
+            <strong>AI-assisted development:</strong> Configure how AI coding
+            assistants use Camunda and connect to the local cluster via MCP on
+            your machine.
+          </p>
           <p className={styles.stepResult}>
             The first run downloads about 1 GB. Setup then starts your cluster,
             creates the example in a <code>rocket-launch</code> folder in your
@@ -156,14 +136,39 @@ function Guided() {
         <section aria-labelledby="explore-process">
           <h3 id="explore-process">Explore your process</h3>
           <p>
-            Setup ends with a <strong>What's next</strong> summary. Its{" "}
-            <strong>Watch it</strong> link opens your process instance directly
-            in Operate. Sign in with <code>demo</code> / <code>demo</code>.
+            Once setup finishes, your process instance starts running on the
+            local cluster, and you are shown a <strong>What's next</strong>{" "}
+            summary with some example next steps:
+          </p>
+          <TerminalWindow title="Terminal" copyable={false}>
+            {`What's next
+  Process instance is running on the local cluster.
+  Watch it:   http://localhost:8080/operate/processes/2251799813685249
+              (login using demo / demo as username / password)
+  Inspect it: c8ctl get process-instance 2251799813685249 --profile local
+  Run again:  c8ctl run "/Users/you/rocket-launch/rocket-launch.bpmn" --profile local --variables '{"missionName":"Apollo","fuelLevel":80}'
+  Project: /Users/you/rocket-launch
+  Guide: https://docs.camunda.io/docs/guides/getting-started-hello-world/
+  Operate: http://localhost:8080/operate (demo/demo)
+✓ Setup finished.`}
+          </TerminalWindow>
+          <p className={styles.afterTerminal}>
+            <strong>Watch it:</strong> Open your process instance in{" "}
+            <Link to="/docs/components/operate/operate-introduction/">
+              Operate
+            </Link>{" "}
+            and sign in with <code>demo</code> / <code>demo</code>.
           </p>
           <p>
-            In Desktop Modeler, open <code>rocket-launch.bpmn</code> from the{" "}
-            <code>rocket-launch</code> folder to see how it works and try your
-            own changes.
+            <strong>Desktop Modeler:</strong> Open{" "}
+            <code>rocket-launch.bpmn</code> from the <code>rocket-launch</code>{" "}
+            folder to see how it works and try your own changes.
+          </p>
+          <p>
+            <strong>Use the CLI:</strong> Start using CLI commands to explore
+            your process, such as inspecting your process instance, rerunning
+            the process, and more. See{" "}
+            <Link to="#cli-reference">Essential Camunda CLI commands</Link>.
           </p>
         </section>
       </li>
@@ -199,8 +204,13 @@ function DownloadLinks({ product, detectedOS }) {
   );
 }
 
-function ManualSetup({ detectedOS }) {
+export function ManualSetup() {
   const { hash } = useLocation();
+  const [detectedOS, setDetectedOS] = useState(null);
+
+  useEffect(() => {
+    setDetectedOS(detectOS());
+  }, []);
 
   // Links such as "Set up manually" on the Downloads page target this section
   useEffect(() => {
@@ -208,26 +218,14 @@ function ManualSetup({ detectedOS }) {
   }, [hash]);
 
   return (
-    <details
-      id={MANUAL_SETUP_ID}
-      className={clsx(pageStyles.bundleFallback, styles.manualSetup)}
-    >
-      <summary
-        className={clsx(pageStyles.bundleFallbackSummary, styles.manualSummary)}
-      >
-        <span>
-          No Node.js? Set up manually{" "}
-          <small>
-            Download Camunda 8 Run, Desktop Modeler, and the example
-          </small>
-        </span>
+    <details id={MANUAL_SETUP_ID} className={pageStyles.optionalSection}>
+      <summary className={pageStyles.optionalSummary}>
+        <h2>No Node.js? Set up manually</h2>
       </summary>
-      <div
-        className={clsx(pageStyles.bundleFallbackContent, styles.manualContent)}
-      >
+      <div className={clsx(pageStyles.optionalContent, styles.manualContent)}>
         <p>
-          Download the runtime, modeler, and example separately. Choose the
-          downloads for your operating system.
+          Download Camunda 8 Run, Desktop Modeler, and the example separately.
+          Choose the downloads for your operating system.
         </p>
         <ol className={styles.manualSteps}>
           <li>
@@ -302,12 +300,6 @@ function ManualSetup({ detectedOS }) {
 }
 
 export default function LocalOnboarding() {
-  const [detectedOS, setDetectedOS] = useState(null);
-
-  useEffect(() => {
-    setDetectedOS(detectOS());
-  }, []);
-
   return (
     <section
       id="self-managed"
@@ -326,7 +318,7 @@ export default function LocalOnboarding() {
           </span>
         </h2>
         <p className={pageStyles.sectionSub}>
-          Install the Camunda CLI via npm and set up your local Camunda
+          Install the Camunda CLI (c8ctl) via npm and set up your local Camunda
           environment.
         </p>
         <p className={styles.legal}>
@@ -343,12 +335,6 @@ export default function LocalOnboarding() {
       </div>
       <div className={styles.content}>
         <Guided />
-        <ManualSetup detectedOS={detectedOS} />
-        <p className={styles.reference}>
-          <Link to="/docs/apis-tools/c8ctl/getting-started/">
-            Explore all CLI commands
-          </Link>
-        </p>
       </div>
     </section>
   );

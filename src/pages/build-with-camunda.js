@@ -14,6 +14,7 @@ import IconSaasTrial from "../../docs/components/assets/icon-saas-trial.svg";
 import downloads from "../data/downloads.json";
 import LocalOnboarding, {
   ExternalLink,
+  ManualSetup,
 } from "../components/BuildWithCamundaOnboarding";
 import TerminalWindow from "../components/BuildWithCamundaOnboarding/TerminalWindow";
 
@@ -657,14 +658,16 @@ function BuildWithCamunda() {
         <div className={clsx("container", styles.optionalSections)}>
           <section className={styles.cliBasics} id="cli-reference">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Essential commands</h2>
+              <h2 className={styles.sectionTitle}>
+                Essential Camunda CLI commands
+              </h2>
             </div>
             <p className={styles.optionalNote}>
               If you selected the local cluster and example project, setup has
-              already started a process for you. Use these commands for further
-              development, not as additional setup steps. Run the deployment
-              commands from the <code>rocket-launch</code> folder that setup
-              created.
+              already started a process for you. Use the following essential
+              commands for further development, not as additional setup steps.
+              Run the deployment commands from the <code>rocket-launch</code>{" "}
+              folder that setup created.
             </p>
             <div className={styles.commandGrid}>
               <div className={styles.commandCard}>
@@ -701,52 +704,58 @@ $ c8ctl resolve inc <incident-key>`}
             </div>
 
             <p
-              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
-              style={{ marginTop: "2.5rem" }}
+              className={styles.cliLearnMore}
+              style={{ marginTop: "2.5rem", textAlign: "center" }}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              <span>
-                Learn more about using the{" "}
-                <Link to={cliGuideUrl}>Camunda CLI</Link> to manage Camunda
-                directly from the terminal.
-              </span>
+              See the <Link to={cliGuideUrl}>Camunda CLI documentation</Link> to
+              learn more about managing Camunda directly from the terminal.
             </p>
           </section>
 
-          <p className={styles.optionalIntro}>
-            The optional sections below cover connecting your AI coding
-            assistant, other ways to run Camunda, production deployments, and
-            downloads. You don't need to repeat steps that{" "}
-            <code>c8ctl setup</code> completed, for example, starting a cluster.
-          </p>
+          <div
+            className={styles.cliPrimaryDivider}
+            style={{ marginTop: "6rem", marginBottom: "4.5rem" }}
+            aria-hidden="true"
+          />
 
           <details className={styles.optionalSection} id="ai-tools">
             <summary className={styles.optionalSummary}>
-              <h2>Connect your AI coding assistant</h2>
+              <h2>Connect your AI coding assistant (optional)</h2>
             </summary>
             <div className={styles.optionalContent}>
+              <p
+                className={styles.cliInfoNote}
+                style={{ marginBottom: "1.5rem" }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="7"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M8 7v4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+                </svg>
+                <span>
+                  This optional section builds on setup. You do not need to
+                  repeat steps that <code>c8ctl setup</code> completed, such as
+                  starting a cluster for example.
+                </span>
+              </p>
               <p className={styles.optionalNote}>
                 If you selected <strong>AI assistant skills</strong> and{" "}
                 <strong>Cluster MCP server</strong>, setup installed the skills
@@ -939,121 +948,137 @@ $ c8ctl mcp list`}
             </div>
           </details>
 
-          {/* ─── More ways to run (duplicate) ─── */}
-          <details
-            className={styles.optionalSection}
-            id="other-local-deployments"
-          >
-            <summary className={styles.optionalSummary}>
-              <h2>More ways to run Camunda locally</h2>
-            </summary>
-            <div className={styles.optionalContent}>
-              <p className={styles.optionalNote}>
+          <ManualSetup />
+        </div>
+
+        {/* ─── More ways to run ─── */}
+        <section
+          className={clsx(styles.moreSection, styles.darkSection)}
+          id="other-local-deployments"
+        >
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                More ways to run Camunda locally
+              </h2>
+              <p className={styles.sectionSub}>
                 Setup uses Camunda 8 Run, so you don't need Docker or Kubernetes
                 for the quickstart. Setup doesn't configure these alternative
                 deployments.
               </p>
-              <div className={styles.waysGrid}>
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
-                  )}
-                  className={styles.wayCard}
-                >
-                  <DockerIcon />
-                  <h3>Docker Compose</h3>
-                  <p>
-                    Run Camunda 8 locally for development and evaluation with{" "}
-                    <CodeBlock>docker compose up -d</CodeBlock>.
-                  </p>
-                </Link>
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/deployment/helm/cloud-providers/kind/"
-                  )}
-                  className={styles.wayCard}
-                >
-                  <KubernetesIcon />
-                  <h3>Kubernetes</h3>
-                  <p>
-                    Deploy to a local kind cluster with the official Camunda
-                    Helm chart.
-                  </p>
-                </Link>
-              </div>
             </div>
-          </details>
+            <div className={styles.waysGrid}>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
+                )}
+                className={styles.wayCard}
+              >
+                <DockerIcon />
+                <h3>Docker Compose</h3>
+                <p>
+                  Run Camunda 8 locally for development and evaluation with{" "}
+                  <CodeBlock>docker compose up -d</CodeBlock>.
+                </p>
+              </Link>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/cloud-providers/kind/"
+                )}
+                className={styles.wayCard}
+              >
+                <KubernetesIcon />
+                <h3>Kubernetes</h3>
+                <p>
+                  Deploy to a local kind cluster with the official Camunda Helm
+                  chart.
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
 
-          {/* ─── Production deployments ─── */}
-          <details
-            className={styles.optionalSection}
-            id="production-deployments"
-          >
-            <summary className={styles.optionalSummary}>
-              <h2>Production deployment options</h2>
-            </summary>
-            <div className={styles.optionalContent}>
-              <p className={styles.optionalNote}>
+        {/* ─── Production deployments ─── */}
+        <section className={styles.exploreSection} id="production-deployments">
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                Production deployment options
+              </h2>
+              <p className={styles.sectionSub}>
                 Use these guides for production. <code>c8ctl setup</code>{" "}
                 creates a local development environment; it doesn't provision
                 production infrastructure.
               </p>
-              <div className={styles.deployGrid}>
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
-                  )}
-                  className={styles.deployCard}
-                >
-                  <AWSIcon />
-                  <h4>Amazon EKS</h4>
-                  <p>Deploy on AWS with managed Kubernetes.</p>
-                </Link>
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
-                  )}
-                  className={styles.deployCard}
-                >
-                  <GCPIcon />
-                  <h4>Google GKE</h4>
-                  <p>Run on Google Cloud with native GKE support.</p>
-                </Link>
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/deployment/helm/install/quick-install/"
-                  )}
-                  className={styles.deployCard}
-                >
-                  <HelmIcon />
-                  <h4>Kubernetes + Helm</h4>
-                  <p>Flexible deployment with the official Helm chart.</p>
-                </Link>
-              </div>
             </div>
-          </details>
+            <div className={styles.deployGrid}>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
+                )}
+                className={styles.deployCard}
+              >
+                <AWSIcon />
+                <h4>Amazon EKS</h4>
+                <p>Deploy on AWS with managed Kubernetes.</p>
+              </Link>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
+                )}
+                className={styles.deployCard}
+              >
+                <GCPIcon />
+                <h4>Google GKE</h4>
+                <p>Run on Google Cloud with native GKE support.</p>
+              </Link>
+              <Link
+                to={useBaseUrl(
+                  "docs/self-managed/deployment/helm/install/quick-install/"
+                )}
+                className={styles.deployCard}
+              >
+                <HelmIcon />
+                <h4>Kubernetes + Helm</h4>
+                <p>Flexible deployment with the official Helm chart.</p>
+              </Link>
+            </div>
+          </div>
+        </section>
 
-          {/* ─── Camunda downloads ─── */}
-          <details id="downloads" className={styles.optionalSection}>
-            <summary className={styles.optionalSummary}>
-              <h2>Camunda downloads</h2>
-            </summary>
-            <div className={styles.optionalContent}>
-              <p className={styles.optionalNote}>
+        {/* ─── Camunda downloads ─── */}
+        <section
+          id="downloads"
+          className={clsx(
+            styles.moreSection,
+            styles.darkSection,
+            styles.noTopBorder,
+            styles.exploreSectionLast
+          )}
+          style={{
+            scrollMarginTop: "5rem",
+            paddingTop: "3rem",
+            paddingBottom: "8rem",
+          }}
+        >
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Camunda downloads</h2>
+              <p className={styles.sectionSub}>
                 Setup downloads Camunda 8 Run and Desktop Modeler when selected.
                 Use the catalog for other components or versions.
               </p>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <Link
-                  to={useBaseUrl("/downloads")}
-                  className={styles.heroCardCtaAlt}
-                >
-                  Go to downloads <ArrowRight />
-                </Link>
-              </div>
             </div>
-          </details>
-        </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Link
+                to={useBaseUrl("/downloads")}
+                className={styles.heroCardCtaAlt}
+              >
+                Go to downloads <ArrowRight />
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );

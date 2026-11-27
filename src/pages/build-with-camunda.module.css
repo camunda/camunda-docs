@@ -83,6 +83,10 @@
   text-decoration: none !important;
 }
 
+.page .cliLearnMore a {
+  text-decoration: underline !important;
+}
+
 /* ─── Hero (camunda.com gradient) ─── */
 .heroWrapper {
   position: relative;
@@ -689,67 +693,6 @@
   }
 }
 
-/* ─── Bundle fallback (details/summary) ─── */
-.bundleFallback {
-  max-width: 720px;
-  margin: 3rem auto 0;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  background: var(--ifm-color-emphasis-0);
-  overflow: hidden;
-}
-
-.bundleFallbackSummary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ifm-color-emphasis-700);
-  cursor: pointer;
-  list-style: none;
-  transition: background 0.15s;
-}
-
-.bundleFallbackSummary::-webkit-details-marker {
-  display: none;
-}
-
-.bundleFallbackIcon {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-}
-
-/* A border triangle instead of a "▶" glyph, which screen readers announce */
-.bundleFallbackSummary::before {
-  content: "";
-  flex-shrink: 0;
-  border-style: solid;
-  border-width: 0.3rem 0 0.3rem 0.45rem;
-  border-color: transparent transparent transparent
-    var(--ifm-color-emphasis-500);
-  transition: transform 0.2s;
-}
-
-.bundleFallback[open] .bundleFallbackSummary::before {
-  transform: rotate(90deg);
-}
-
-.bundleFallbackSummary:hover {
-  background: var(--ifm-color-emphasis-100);
-}
-
-.bundleFallbackSummary svg {
-  width: 20px;
-  height: 20px;
-}
-
-.bundleFallbackContent {
-  padding: 0 1.25rem 1.25rem;
-}
-
 .cliInstallSection {
   max-width: 1500px !important;
   padding-top: 4rem !important;
@@ -771,36 +714,42 @@
 }
 
 /* Cards in the bottom sections match the AO cards (_ao-table.css) */
-.darkSection .wayCard {
+.darkSection .wayCard,
+.exploreSection .deployCard {
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
-.darkSection .wayCard:hover {
+.darkSection .wayCard:hover,
+.exploreSection .deployCard:hover {
   transform: translateY(-5px);
   border-color: #d9d9d9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.darkSection .wayCard p {
+.darkSection .wayCard p,
+.exploreSection .deployCard p {
   color: #555;
 }
 
-[data-theme="dark"] .darkSection .wayCard {
+[data-theme="dark"] .darkSection .wayCard,
+[data-theme="dark"] .exploreSection .deployCard {
   background: #1c1c1c;
   border-color: #3b3a3a;
   box-shadow: 0 8px 16px 4px #00000033;
 }
 
-[data-theme="dark"] .darkSection .wayCard:hover {
+[data-theme="dark"] .darkSection .wayCard:hover,
+[data-theme="dark"] .exploreSection .deployCard:hover {
   background: transparent;
   border-color: var(--ifm-color-primary);
   box-shadow: 0 8px 16px 4px #78a9ff33;
 }
 
-[data-theme="dark"] .darkSection .wayCard p {
+[data-theme="dark"] .darkSection .wayCard p,
+[data-theme="dark"] .exploreSection .deployCard p {
   color: #c6c6c6;
 }
 
@@ -1447,15 +1396,6 @@
 .cliBasics {
   margin-bottom: 3rem;
   scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
-}
-
-.optionalIntro {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  color: var(--muted-color);
-  text-align: center;
-  font-size: 0.95rem;
-  line-height: 1.65;
 }
 
 .optionalSection {
@@ -2468,6 +2408,12 @@
 }
 
 /* ─── Explore docs (sand, matching darkSection) ─── */
+/* ─── Explore docs (sand, matching darkSection) ─── */
+.exploreSection {
+  background: var(--sand-bg);
+  padding: 3rem 0 4rem;
+}
+
 .exploreSectionLast {
   background: var(--sand-bg);
 }
