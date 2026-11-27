@@ -527,7 +527,7 @@ This fix can be a breaking change if you rely on the default mapper's output. Fo
   milliseconds (`1795046400000`). FEEL and DMN expressions that compare them as numbers evaluate to `null`.
   Variables that are already stored keep their format.
 - Your `spring.jackson.*` (Spring Boot 3) or `spring.jackson2.*` (Spring Boot 4) properties, customizer beans, and
-  Jackson `Module` beans now apply to job variables.
+  Jackson `Module` beans now apply to the client's JSON: job variables and REST requests to the cluster.
 
 You're affected if you use one of the following and don't define your own `JsonMapper` or `ObjectMapper` bean:
 
