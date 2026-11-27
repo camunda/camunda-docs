@@ -24,32 +24,28 @@ Today, you create IDP templates inside a separate [IDP project](/components/hub/
 
 You still design and test the template in the same IDP editor, with the same extraction and classification options.
 
-## What stays the same
+### What stays the same
 
-- **IDP projects keep working.** You can still create, edit, test, and publish templates in IDP projects. Turning on this feature doesn't change or move them.
+- **IDP projects keep working.** You can still create, edit, test, and publish templates in IDP projects. Enabling this feature doesn't change or move them.
 - **The IDP editor and test documents.** You configure fields, prompts, and document types and test them with sample documents as before. Your test documents and results stay in Camunda Hub and are not pushed to Git.
 - **Using templates in processes.** After you publish a template, you use it in an [IDP task](/components/hub/workspace/modeler/idp/idp-integrate.md) in your BPMN diagram as before.
 - **Prerequisites.** You need the same [IDP configuration](/components/hub/workspace/modeler/idp/idp-configuration.md), including the connector secrets for your provider on the cluster.
 
-:::note Upcoming changes
-In a later alpha, existing IDP projects will be migrated to IDP templates in Projects, and IDP projects will be removed. Camunda will announce this in the release notes.
-:::
-
-## Turn on IDP templates in Projects
+## Enable IDP templates in Projects
 
 ### SaaS
 
-An organization admin or owner turns on the feature for the whole organization:
+An organization admin or owner enables the feature for the whole organization:
 
 1. [Accept the alpha terms](/components/saas/organization/enable-alpha-features.md#accept-alpha-terms) for your organization, if you haven't already.
 1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Settings** tab, set the **IDP templates in Projects** toggle to **Enabled**.
 
-If you turn the feature off again, the **IDP template** entry disappears from the **Create new** menu. IDP templates that already exist in your Projects stay there, and you can still open and edit them.
+If you disable the feature again, the **IDP template** entry disappears from the **Create new** menu. IDP templates that already exist in your Projects stay there, and you can still open and edit them.
 
 ### Self-Managed
 
-In Self-Managed alpha releases that include this feature, it is available without extra setup.
+In Self-Managed alpha releases that include this feature, it is available without any additional setup.
 
 ## Create an IDP template in a Project
 
@@ -69,7 +65,7 @@ Make sure your environment's cluster meets the [IDP cluster requirements](/compo
    - **Name**: A name for the template.
 1. Click **Create**. The template opens in the IDP editor.
 
-The types you can pick depend on the version of the environment's cluster:
+The types available depend on the version of the environment's cluster:
 
 | Cluster version | Available types                                                    |
 | :-------------- | :----------------------------------------------------------------- |
