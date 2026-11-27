@@ -46,9 +46,9 @@ November 27, 2026
 
 ### Impact
 
-Git sync sent requests to a user-configured API base URL without validating it. A user who can change the Git sync settings of a process application could make the Hub or Web Modeler server send requests to internal addresses, such as a cloud metadata service or the Kubernetes API (server-side request forgery). On Self-Managed, the Web Modeler and Hub UI doesn't offer this setting, so this requires calling the API directly.
+Git sync sent requests to a user-configured API base URL without validating it. A user who can change the Git sync settings of a process application could make the Hub or Web Modeler server send requests to internal addresses, such as a cloud metadata service or the Kubernetes API (server-side request forgery, SSRF). On Self-Managed, the Web Modeler and Hub UI don't offer this setting, so this requires calling the API directly.
 
-Git sync with Azure DevOps is not affected.
+Git sync with Azure DevOps isn't affected.
 
 This issue affects Camunda 8 SaaS and Self-Managed.
 
