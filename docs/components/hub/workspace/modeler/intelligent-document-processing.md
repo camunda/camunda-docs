@@ -41,7 +41,7 @@ For example, use IDP to extract and use data from invoices and other document ty
 
 Once initial [configuration](idp/idp-configuration.md#configure-idp) is complete, get started with IDP.
 
-<IdpGrid idp={gettingStartedCards} columns={2}/>
+<IdpGrid idp={gettingStartedCards} />
 
 ## IDP concepts
 
