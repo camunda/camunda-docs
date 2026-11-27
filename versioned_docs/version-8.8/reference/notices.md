@@ -31,6 +31,61 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 92
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+On Camunda 8 SaaS, the gRPC API of the Orchestration Cluster accepted access tokens that were issued for another cluster, including clusters of other organizations. The REST API was not affected.
+
+In affected versions, the gRPC API did not check that a token was issued for its cluster. A holder of a client credential of any SaaS cluster could authenticate on the gRPC API of another SaaS cluster. The attacker needs the ID of the target cluster.
+
+The impact depends on the authorization settings of the target cluster:
+
+- If authorizations are disabled, the attacker has full access to the gRPC API. For example, they can deploy resources, start and cancel process instances, and activate and complete jobs, which exposes process variables.
+- If authorizations are enabled, the attacker has no permissions. Commands are rejected, but the topology request still returns the cluster version and partition layout.
+
+This issue only affects Camunda 8 SaaS. Self-Managed installations are not affected.
+
+Camunda is not aware of any known exploitation.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+Only Camunda 8 SaaS clusters were affected that ran one of these versions:
+
+- Camunda 8.10.0-alpha3, 8.10.0-alpha4, and 8.10.0-alpha5.1
+- Camunda 8.10.0 to 8.10.11
+- Camunda 8.11.0-alpha1
+
+Camunda 8.9 and earlier are not affected.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda 8.10.12, part of the Camunda 8.10+gen11 generation on Camunda 8 SaaS
+- A hotfix for Camunda 8.11.0-alpha1, deployed into the existing Camunda 8.11-alpha1 generation on Camunda 8 SaaS
+
+The fix was deployed to Camunda 8 SaaS with a forced update rollout:
+
+- Clusters on Camunda 8.11.0-alpha1: November 26, 2026, 23:08 UTC
+- Clusters on Camunda 8.10: November 27, 2026, 00:53 UTC
+
+Clusters on Camunda 8.10.0-alpha3, 8.10.0-alpha4, and 8.10.0-alpha5.1 don't get the fix. Camunda suspended all of these clusters and will remove them within one week.
+
+No action is required to apply the fix on Camunda 8 SaaS.
+
+**Recommendation**: Review your clusters for unexpected deployments, process instances, or job activity. If you find any, contact Camunda support.
+
 ## Notice 90
 
 ### Publication date
