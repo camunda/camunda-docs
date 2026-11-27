@@ -93,7 +93,7 @@ We recommend gradually increasing the `max-in-flight` value while monitoring the
 :::caution Known issue with virtual threads on Java 24 and later
 On Java 24 and later, a connector runtime that uses virtual threads can, in rare cases, stop processing jobs under load. The cause is a known upstream limitation: the JVM can still pin a virtual thread to its carrier thread while it loads or initializes a class (see [JEP 491](https://openjdk.org/jeps/491)), which can deadlock with the class loader of a Spring Boot fat jar (see [spring-boot#51463](https://github.com/spring-projects/spring-boot/issues/51463)).
 
-Camunda is monitoring both issues and has made changes in the connector runtime to make this situation less likely.
+Camunda is monitoring both issues. The Docker image change that makes this situation less likely is only available in 8.11.
 
 If your connector runtime stops processing jobs, [disable virtual threads](#platform-threads-executor). On versions before 8.10.6, also set `execution-threads` as described there.
 :::
