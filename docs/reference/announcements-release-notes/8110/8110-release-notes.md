@@ -17,20 +17,6 @@ import PageDescription from '@site/src/components/PageDescription';
 | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 8 December 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.11.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.11.0-alpha2)</li></ul> |
 
-### Connectors
-
-#### Mixpanel connector
-
-<!-- https://github.com/camunda/connectors/issues/10825 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
-
-The new Mixpanel connector records process milestones as Mixpanel events and reads saved Insights reports from your processes. **Import event** adds a time and a unique ID to each event, so a retried task is not counted twice.
-
-Authenticate with a reusable Mixpanel credential or a service account, and choose the US, EU, or India data residency.
-
-<p class="link-arrow">[Mixpanel connector](/components/connectors/out-of-the-box-connectors/mixpanel.md)</p>
-
 ### Orchestration Cluster
 
 #### Resolve secrets from environment variables
