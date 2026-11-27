@@ -1,6 +1,7 @@
 /* Landing page hero. Colors follow the docs theme; the dark values mirror the
    [data-theme="dark"] tokens in src/css/custom.css. */
-.hero {
+.hero,
+.inline {
   --hero-grid-tint: #dcd8f7;
   --hero-grid-gap: #ffffff;
   --hero-card-bg: #ffffff;
@@ -26,7 +27,8 @@
   margin-bottom: 50px;
 }
 
-:global([data-theme="dark"]) .hero {
+:global([data-theme="dark"]) .hero,
+:global([data-theme="dark"]) .inline {
   --hero-grid-tint: #38386d;
   --hero-grid-gap: #0a0a0a;
   --hero-card-bg: #151517;
@@ -663,6 +665,83 @@ a.cardLink:focus-visible {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* Card with its pixel grid, outside the hero layout (see HeroCardRow). */
+.inline .art {
+  padding: 32px 8px 84px;
+}
+.inline .row {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+.inline .rowCard {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  min-height: 190px;
+  margin-left: -28px;
+}
+.inline .rowCard:first-child {
+  margin-left: 0;
+}
+.inline .rowCard:nth-child(2) {
+  z-index: 1;
+  margin-top: 18px;
+  margin-bottom: -18px;
+}
+.inline .rowCard:nth-child(3) {
+  z-index: 2;
+}
+/* Smaller card in front, centred across the join of the other cards. */
+.inline .rowFloat {
+  position: absolute;
+  left: 50%;
+  bottom: -62px;
+  z-index: 3;
+  flex: none;
+  width: 36%;
+  min-height: 170px;
+  margin: 0;
+  transform: translateX(-50%);
+}
+.inline .rowFloat .pre {
+  margin: 0;
+  overflow-x: hidden;
+}
+@media (max-width: 700px) {
+  .inline .row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .inline .rowCard,
+  .inline .rowCard:nth-child(2) {
+    margin: 0;
+  }
+  .inline .rowFloat {
+    position: static;
+    width: auto;
+    transform: none;
+  }
+}
+
+/* Screenshot card. Reset the docs-wide img styles (border, padding, margins,
+   dark-mode background). */
+.card .shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  object-fit: cover;
+  object-position: left top;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--hero-card-line);
+  border-radius: 6px;
+  background: transparent;
 }
 
 /* Small screens: card stacks above the copy (the old PNG was hidden here). */

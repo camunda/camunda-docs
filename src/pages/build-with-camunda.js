@@ -15,6 +15,7 @@ import downloads from "../data/downloads.json";
 import LocalOnboarding, {
   ExternalLink,
   ManualSetup,
+  SetupHero,
 } from "../components/BuildWithCamundaOnboarding";
 import TerminalWindow from "../components/BuildWithCamundaOnboarding/TerminalWindow";
 
@@ -656,6 +657,7 @@ function BuildWithCamunda() {
         <LocalOnboarding />
 
         <div className={clsx("container", styles.optionalSections)}>
+          <SetupHero />
           <section className={styles.cliBasics} id="cli-reference">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>

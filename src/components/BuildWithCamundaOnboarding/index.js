@@ -4,8 +4,11 @@ import Link from "@docusaurus/Link";
 import { useLocation } from "@docusaurus/router";
 import CodeBlock from "@theme/CodeBlock";
 import IconExternalLink from "@theme/Icon/ExternalLink";
+import { HeroCardRow } from "../LandingHero";
 import TerminalWindow from "./TerminalWindow";
 import pageStyles from "../../pages/build-with-camunda.module.css";
+import desktopModeler from "./assets/desktop-modeler.png";
+import operateInstance from "./assets/operate-instance.png";
 import downloads from "../../data/downloads.json";
 import styles from "./styles.module.css";
 import { detectOS } from "../../utils/detectOS";
@@ -17,6 +20,29 @@ const CAMUNDA_MINOR = downloads.camundaRun.version
   .slice(0, 2)
   .join(".");
 const MANUAL_SETUP_ID = "manual-setup";
+const SETUP_HERO_CARDS = [
+  {
+    kind: "image",
+    title: "Operate",
+    meta: "Process instance",
+    src: operateInstance,
+    alt: "Operate showing the Rocket Launch process instance with its diagram, instance history and variables",
+  },
+  {
+    kind: "image",
+    title: "Desktop Modeler",
+    meta: "BPMN",
+    src: desktopModeler,
+    alt: "Desktop Modeler showing the Rocket Launch process with its properties panel",
+  },
+  {
+    kind: "code",
+    title: "Camunda CLI",
+    meta: "c8ctl",
+    float: true,
+    code: "# Inspect your process instance\n$ c8ctl get process-instance \\\n    2251800272160253 --profile local",
+  },
+];
 const OPERATE_URL = "http://localhost:8080/operate";
 
 export function ExternalLink({ children, ...props }) {
@@ -296,6 +322,14 @@ export function ManualSetup() {
         </ol>
       </div>
     </details>
+  );
+}
+
+export function SetupHero() {
+  return (
+    <div className={styles.hero}>
+      <HeroCardRow cards={SETUP_HERO_CARDS} />
+    </div>
   );
 }
 

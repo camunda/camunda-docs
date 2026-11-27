@@ -26,6 +26,10 @@
   outline-offset: 4px;
 }
 
+.hero {
+  margin: 0 auto 3.5rem;
+}
+
 .requirements {
   margin-top: 0.9rem;
   text-align: center;
