@@ -92,6 +92,12 @@ The store resolves and lists secrets as follows:
 | Listing                    | The store lists the prefixed variables that have a non-empty value, sorted, with the store prefix stripped and without values. `/v2/secrets/list` returns each one as a reference, so `APP_SECRET_API_KEY` is listed as `camunda.secrets.API_KEY`, and omits names outside the reference charset or longer than 240 characters. |
 | Values pass through as set | Multi-line values, such as a PEM certificate, and JSON values resolve exactly as set, including any trailing newline. The file store, by contrast, strips a single trailing newline from each file.                                                                                                                             |
 
+:::warning
+A secret name containing a dash resolves only if its variable reaches Camunda. The Camunda launch script, `bin/camunda`, runs using the host’s `sh`. When `sh` is `dash`, as on Debian and Ubuntu, the shell silently drops variables whose names contain a dash. This affects the distribution, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#use-secrets-from-environment-variables) on Linux, and custom images based on Debian or Ubuntu. The official Docker image and Helm chart retain names containing dashes.
+
+A dropped variable is absent from `/v2/secrets/list`, and references to it resolve as not found. To avoid this, use only letters, digits, and underscores in secret names. Alternatively, use the [file store](#file-store). Each Physical Tenant supports only one secret store, so switching stores applies to all of the tenant’s secrets.
+:::
+
 With multiple Physical Tenants, give each tenant its own prefix using `camunda.physical-tenants.<tenant-key>.secrets.stores.env.default.prefix`. If two tenants configure different prefixes and both define `<prefixA>API_KEY` and `<prefixB>API_KEY`, each tenant resolves `API_KEY` only to the value of its own prefixed variable.
 
 Camunda refuses to start if two Physical Tenants configure overlapping prefixes, that is, if one tenant's prefix starts with another's. For example, if one tenant uses `SECRET_` and another uses `SECRET_PT1_`, the first tenant would otherwise resolve the second tenant's `SECRET_PT1_API_KEY` as its own `PT1_API_KEY` secret.

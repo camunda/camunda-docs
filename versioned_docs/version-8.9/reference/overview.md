@@ -10,24 +10,18 @@ page_rank: 90
 import "./react-components/\_release-table.css";
 import ReleasesGrid from './react-components/\_release-card';
 import { gettingStartedCards, securityCards } from './react-components/\_release-card-data';
-import OverviewImg from './img/hero-reference.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { referenceHero } from './react-components/_hero-data';
 
 <h3 class="subheading">Camunda 8 reference, including release, security, and support information.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={referenceHero} href="/reference/announcements-release-notes/overview/" ariaLabel="8.9 release information: what's new, release notes, and announcements">
 
 See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information.
 
 <p class="link-button">[8.9 release information](./announcements-release-notes/overview.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={OverviewImg} alt="See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information." title="See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 ## Release information
 
