@@ -235,6 +235,26 @@ There is currently no built-in metric that directly reports the size of this bac
 
 Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
+### Protocol: REST or gRPC
+
+Since Camunda 8.8, the Camunda Java Client uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) by default. gRPC remains available. Both protocols reach the same engine, but they differ in cost on the brokers.
+
+Camunda's regular load tests, which run both protocols side by side on the same workload, show a difference:
+
+- REST typically uses about 10 to 15% more broker CPU than gRPC.
+- When the brokers are CPU-saturated, REST reaches up to about 14% lower throughput.
+- At a fixed rate with CPU headroom, throughput is equal.
+
+Camunda still recommends REST for most workloads:
+
+- **One API for commands and queries:** queries and search are available through REST only, so a REST client needs no second protocol.
+- **Fewer network requirements:** REST works over HTTP/1.1 and HTTP/2, while gRPC requires HTTP/2.
+- **Moderate cost:** the sizing recommendations are based on the [reference benchmark scenario](./sizing-benchmarks.md#reference-benchmark-scenario), whose resources have enough CPU headroom for both gRPC and REST at the benchmarked load.
+
+Consider gRPC for high-volume clients, such as job workers and applications that start many process instances, when your brokers run close to their CPU limit. gRPC is also the only protocol that supports [job streaming](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs). The effect depends on request mix and payload size, so validate it with your own workload. To switch the protocol, see [REST vs gRPC selection](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md#protocol-and-connection-rest-vs-grpc-selection).
+
+See [REST API performance](https://camunda.github.io/zeebe-chaos/2025/07/02/Follow-up-REST-API-performance) and [REST data availability and the shared HTTP client](https://camunda.github.io/zeebe-chaos/2026/10/08/REST-Performance-validating-with-k6) for more details.
+
 ### Secondary storage
 
 Starting with Camunda 8.9, the platform supports three secondary storage backends, each with different sizing implications.

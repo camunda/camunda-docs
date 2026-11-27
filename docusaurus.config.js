@@ -97,6 +97,7 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
+    "./static/plugins/webpack-node-polyfills",
     [
       // Operate API docs generation
       "@camunda8/docusaurus-plugin-openapi-docs",
@@ -700,7 +701,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/build-with-ai/overview",
+          docId: "components/agentic-orchestration/overview",
           label: "Agentic orchestration",
           position: "left",
         },
