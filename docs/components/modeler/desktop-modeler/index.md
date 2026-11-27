@@ -26,9 +26,11 @@ Download the app for Windows, Linux, or macOS from the [Camunda downloads page](
 
 > On Windows and Linux you can carry out [additional steps](./install-the-modeler.md#wire-file-associations) to register Modeler as the default editor for BPMN, DMN, and Form files.
 
-## Get started
+## Set up Desktop Modeler
 
-Learn how to [develop your first process](./model-your-first-diagram.md) and [deploy it](./connect-to-camunda-8.md) to Camunda 8.
+1. [Download and install](./install-the-modeler.md) Desktop Modeler for Windows, Linux, or macOS.
+2. Start the application and [model your first diagram](./model-your-first-diagram.md).
+3. [Connect to Camunda 8](./connect-to-camunda-8.md) to deploy diagrams and start process instances. By default, Desktop Modeler includes a local Camunda 8 Run connection, so you can start without adding one.
 
 ## Resources
 
