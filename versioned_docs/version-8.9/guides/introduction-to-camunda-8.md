@@ -8,25 +8,19 @@ page_rank: 90
 ---
 
 import DocCardList from '@theme/DocCardList';
-import OverviewImg from './img/hero-get-started.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { getStartedHero, getStartedAgentOverlay } from './react-components/_hero-data';
 import BuildWithCamundaBanner from '../components/react-components/\_build-with-camunda-banner';
 
 <h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
-<div class="double-column-container">
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={getStartedHero} overlay={getStartedAgentOverlay} href="/guides/getting-started-hello-world/" ariaLabel="Run your first BPMN process with Camunda 8">
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
 <p class="link-button">[Run your first BPMN process with Camunda 8](./getting-started-hello-world.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={OverviewImg} alt="Run your first local Camunda 8 project" title="Run your first Spring Boot or Node.js project with Camunda 8" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 ## Run your first BPMN process with Camunda 8
 

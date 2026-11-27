@@ -12,7 +12,8 @@ import IconConnectorsImg from '../assets/icon-connectors.png';
 import IconBpmnImg from '../assets/icon-bpmn.png';
 import IconLlmImg from '../assets/icon-llm.png';
 import IconPlay from '../assets/icon-play.png';
-import IconAIAgent from '../assets/hero-build-with-ai.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { agenticOrchestrationHero } from '../react-components/_hero-data';
 import IconCopilotImg from '../assets/icon-camunda-copilot.png';
 import IconIdpImg from '../assets/icon-idp.png';
 import IconDocsImg from '../assets/icon-docs.png';
@@ -22,20 +23,13 @@ import AoGetStartedBanner from '../react-components/\_ao-get-started-banner';
 
 <h3 class="subheading">Orchestrate agents, people, and systems in one process.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
-<div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={agenticOrchestrationHero} href="/components/agentic-orchestration/build-agents/" ariaLabel="Learn how to build AI agents">
 
 Build and coordinate AI agents, people, and systems across complete processes, combining deterministic execution with AI reasoning and human judgment where each works best.
 
 <p class="link-button">[Get started with agentic orchestration](./agentic-orchestration-overview.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={IconAIAgent} alt="Agentic orchestration" title="Build with AI" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 ## Get started
 
