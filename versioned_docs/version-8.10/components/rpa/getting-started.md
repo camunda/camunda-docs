@@ -17,6 +17,8 @@ Use the RPA worker and either Camunda Hub or Desktop Modeler to create, test, an
 
 The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as this [Docker image](../../../self-managed/deployment/docker/).
 
+RPA scripts execute with the worker's operating system permissions, not in an isolated sandbox. Use a development account without production credentials and follow the [worker security guidance](./production.md#secure-the-rpa-worker) before testing scripts.
+
 ## Create your first script
 
 Get started with RPA by creating your first RPA script. With Camunda Hub and Desktop Modeler, you can edit and test your scripts.
@@ -35,12 +37,32 @@ You can get started developing and testing your scripts locally without a Camund
 
 Once you have written your script, you can test it on a local RPA worker.
 
-1. **Start the RPA worker**:
-   1. Download the latest version of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
-   2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
-   3. Start the worker by running the executable.
+:::note
+The API token setup described below requires RPA worker 1.3.3 or later. A Desktop Modeler release that supports worker API tokens is not yet available. You can prepare the worker configuration now, but testing against the patched worker in Desktop Modeler requires that release. Older Desktop Modeler versions can still edit scripts.
 
-2. **Check Desktop Modeler**: Ensure the RPA worker is connected to Desktop Modeler. The worker should automatically connect. If not, click on the connection status to display additional configuration options.
+Once the compatible Desktop Modeler release is available, upgrade the worker first. If you upgrade Desktop Modeler first, you cannot test locally against older workers because they lack the authenticated connection endpoint. Setting the new token property does not add authentication to older workers.
+:::
+
+1. **Start the RPA worker**:
+   1. Download version 1.3.3 or later of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
+   2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
+   3. Generate a random worker API token, for example with `openssl rand -hex 32`, or an equivalent cryptographically secure generator.
+   4. In `rpa-worker.properties` in the worker's working directory, set the following properties. Replace the placeholder with your generated token and restrict access to the file.
+
+      ```properties
+      camunda.rpa.api.token=REPLACE_WITH_YOUR_GENERATED_TOKEN
+      camunda.rpa.sandbox.enabled=true
+      camunda.client.enabled=false
+      ```
+
+      This setup enables local evaluation without connecting to a Camunda cluster. The sandbox and client settings are already the standalone defaults. If your worker is connected to a cluster, preserve its client configuration instead of setting `camunda.client.enabled=false`. Never use your Camunda client secret as the worker API token.
+
+   5. Start the worker from the directory containing the configuration file. Keep the default loopback listener.
+
+2. **Configure Desktop Modeler once the compatible release is available**:
+   1. Click the RPA worker connection status, then expand **Additional configurations**.
+   2. Set **Base URL** to `http://localhost:36227/` and leave the field to commit it. Enter the same worker token in **API token** and leave the field to apply it. Committing a changed base URL clears the token; enter the token after confirming the destination.
+   3. Confirm the authenticated connection succeeds. A reachable health endpoint alone doesn't confirm permission to run scripts.
 
 3. **Test the script**:
    1. Click the test tube (🧪) icon in the footer of Desktop Modeler to open the run dialog. Add any variables required by the process in JSON format. Once you start the execution, the execution tab will open.
@@ -49,6 +71,8 @@ Once you have written your script, you can test it on a local RPA worker.
       <img src={RpaEditorResults} alt="RPA testing panel in Desktop Modeler showing execution results" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 ### Using Camunda Hub
+
+The Desktop Modeler worker API token is separate from the cluster credentials used by Camunda Hub. Do not enter the worker token in Hub's cluster credential fields.
 
 1. In Camunda Hub, open a workspace.
 2. In the workspace, open a project.

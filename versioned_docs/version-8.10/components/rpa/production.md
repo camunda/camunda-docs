@@ -6,6 +6,68 @@ description: Configure your RPA workers for production use cases.
 
 Use the RPA worker’s production configuration options to run RPA scripts reliably at scale.
 
+## Secure the RPA worker
+
+Treat the RPA worker as a code execution service and restrict access to its HTTP API.
+
+### RPA worker security considerations
+
+RPA scripts run with the worker’s operating system permissions and inherited environment, including any Camunda client credentials. The sandbox enables local script evaluation; it does not provide filesystem, process, or network isolation. Authentication does not make untrusted scripts safe.
+
+Run only scripts from trusted authors. Restrict permission to deploy RPA scripts and start processes that invoke them. Use a dedicated operating system account with the minimum permissions required for the automation, and keep development workers separate from production credentials and data.
+
+Keep the worker’s HTTP port, `36227` by default, inaccessible from untrusted networks. Desktop builds bind to loopback by default; container listeners can accept connections on all container interfaces. Do not expose the API through a public load balancer or publish the container port on all host interfaces.
+
+Camunda client authentication protects requests from the worker to the cluster. It does not authenticate incoming requests to the worker’s HTTP API. Disabling local evaluation does not disable the runtime callbacks used for variables, documents, and BPMN errors, so network restrictions remain necessary.
+
+### Upgrade and configure API access
+
+Upgrade to RPA worker 1.3.3 or later with `camunda-utils` 1.3.0 or later and the bundled runtime 0.3.1 or later.
+
+Older Python libraries don't send execution credentials, so their callbacks are rejected by the patched worker. Static runtimes must include the updated library. A Desktop Modeler release supporting worker API tokens is pending. Production workers can be upgraded now, but local testing requires the compatible Desktop Modeler release. Upgrade the worker first; the compatible Modeler integration can't test against older workers. Setting the new token property on an older worker doesn't secure its API.
+
+| Property                        | Environment variable           | Behavior                                                                                                                                                    |
+| ------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.rpa.api.token`         | `CAMUNDA_RPA_API_TOKEN`        | Required for evaluation and other privileged API requests. Without a configured token, these requests are rejected.                                         |
+| `camunda.rpa.api.allowed-hosts` | `CAMUNDA_RPA_API_ALLOWEDHOSTS` | Additional exact Host authorities, including ports. By default, only loopback names with the actual listener port are accepted. Wildcards aren't supported. |
+| `camunda.rpa.sandbox.enabled`   | `CAMUNDA_RPA_SANDBOX_ENABLED`  | Enables local evaluation. Set to `false` in production. Patched container images default to `false`; standalone builds default to `true`.                   |
+
+Generate at least 32 random bytes for the API token, for example with `openssl rand -hex 32`. Tokens must contain at least 32 letters, digits, underscores, or hyphens. Store the token in protected configuration or a deployment secret. Don't reuse cluster credentials or put tokens in URLs, scripts, or source control.
+
+Once the compatible Desktop Modeler release is available, enter the same token under **Additional configurations > API token**. Leave the field to apply it. The integration requires HTTPS for remote workers and permits HTTP only for loopback hosts. Modeler stores the token in plain JSON in its user-data `config.json`; the masked field doesn't encrypt it. Protect the directory and its backups.
+
+Keep port `36227` inaccessible from untrusted networks. Desktop builds bind to loopback; container listeners accept connections on all container interfaces. Production scripts can reach callbacks inside the container, so leave the HTTP port unpublished unless a trusted external client needs it. For local testing, publish only to loopback:
+
+```shell
+-p 127.0.0.1:36227:36227
+```
+
+Don't use `-p 36227:36227`, which exposes the port on all host interfaces. Container evaluation also requires `CAMUNDA_RPA_SANDBOX_ENABLED=true` and an API token. For intentional remote access, use HTTPS, network controls, and the exact external authority in `camunda.rpa.api.allowed-hosts`. Preserve an allowed Host authority through proxies. Host validation reduces DNS-rebinding exposure but doesn't replace authentication or a firewall.
+
+### Protect callbacks and monitoring
+
+Each running script receives a separate execution credential through the worker-managed `RPA_CALLBACK_TOKEN` environment variable.
+
+The bundled `Camunda` Python library automatically sends the credential for variable, document, and BPMN error callbacks. The credential authorizes access only to the execution’s workspace and associated job. The worker revokes it when the execution completes, fails, or is canceled. A job key alone cannot authorize a BPMN error, and the worker API token cannot authorize callbacks. Do not configure, persist, log, or reuse execution credentials yourself.
+
+Workspace artifact URLs, including execution report URLs, remain read-only capability URLs: anyone who can reach the worker with a trusted Host authority and knows a URL can read the retained artifact without a bearer token. Keep these URLs private. Revoking the execution credential does not revoke access to artifacts while their workspace is retained.
+
+Read-only `/actuator/health` requests and subpaths bypass Host checks and authentication, so Kubernetes probes can continue using pod IPs. Metrics and Prometheus scrapers must send the worker API bearer token and use a trusted Host authority. Configure the exact scrape target, including its port, in `camunda.rpa.api.allowed-hosts`. Use `GET /api/authentication` to check credentials; health success alone doesn't confirm API access.
+
+The worker excludes `CAMUNDA_RPA_API_TOKEN`, `camunda.rpa.api.token`, `SPRING_APPLICATION_JSON`, and `spring.application.json` from script environments, regardless of case. Both application JSON variables are excluded entirely. This isn't isolation: trusted scripts may still read accessible configuration files.
+
+### Troubleshoot API access
+
+Use the response or Modeler status to identify the required action.
+
+| Symptom                                                                                                         | Cause                                                                         | Action                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **RPA worker API token required**, **RPA worker API token rejected**, or evaluation returns `401 Unauthorized`. | The API token is missing or doesn't match the running worker.                 | Configure the worker token, restart it, and enter the same token in the compatible Desktop Modeler release.          |
+| **Upgrade RPA worker to 1.3.3 or later**.                                                                       | The worker lacks the authenticated connection endpoint.                       | Upgrade the worker and its compatible Python runtime.                                                                |
+| **RPA worker Host authority rejected** or `403 Forbidden`.                                                      | The request's Host authority isn't trusted.                                   | Use loopback with the listener port or configure the exact external authority in `camunda.rpa.api.allowed-hosts`.    |
+| A callback returns `401 Unauthorized`.                                                                          | Its execution credential is missing, expired, or scoped to another execution. | Upgrade the Python library/runtime and use only worker-managed credentials during active execution.                  |
+| Authenticated evaluation returns `404 Not Found`.                                                               | Evaluation is disabled.                                                       | Keep it disabled in production; enable it only for trusted development with authentication and network restrictions. |
+
 ## Configuration options
 
 ### Transition from a development setup
