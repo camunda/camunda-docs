@@ -449,7 +449,7 @@ function CamundaCliCard() {
       </div>
       <h3 className={bwcStyles.downloadBlockTitle}>Camunda CLI</h3>
       <p className={styles.downloadCardDesc}>
-        Set up local development with two commands. Guided setup starts a local
+        Set up local development with just two commands. Setup starts a local
         cluster, installs Desktop Modeler, runs an example process, and can
         connect your AI coding assistant.
       </p>
@@ -461,7 +461,7 @@ function CamundaCliCard() {
         <ExternalLink to="https://nodejs.org/en/download">
           Node.js 22.18+
         </ExternalLink>
-        . The first setup run downloads about 1 GB. No Node.js?{" "}
+        . First setup run downloads about 1 GB. No Node.js?{" "}
         <Link to={useBaseUrl("/build-with-camunda#manual-setup")}>
           Set up manually
         </Link>
