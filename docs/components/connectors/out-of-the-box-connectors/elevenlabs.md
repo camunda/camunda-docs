@@ -186,21 +186,21 @@ Returns the transcript, analysis, and metadata of an ElevenLabs agent conversati
 | Property        | Type   | Required | Description                                                                                                          | Example |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- | :------ |
 | Conversation ID | String | Yes      | The conversation ID, for example the `conversation_id` of a recipient returned by [Get batch call](#get-batch-call). |         |
-| Format          | String | No       | The response format. Defaults to `json`. Set to `opentelemetry` for an OTLP-compatible trace payload.                |         |
+| Format          | String | No       | The response format: `json` or `opentelemetry`, which returns an OTLP-compatible trace payload.                      |         |
 
 ### Transcribe audio
 
 Transcribes an audio or video document to text. Uses the ElevenLabs API operation [Create transcript](https://elevenlabs.io/docs/api-reference/speech-to-text/convert).
 
-The request is sent as `multipart/form-data`. Pass the audio as a [document reference](/components/document-handling/getting-started.md) in the `file` field, for example the `response.document` of a **Text to speech** task or a document uploaded through a form. Alternatively, pass a `cloud_storage_url` instead of a `file`.
+The request is sent as `multipart/form-data`. Pass the audio as a [document reference](/components/document-handling/getting-started.md) in the `file` field, for example the `response.document` of a **Text to speech** task or a document uploaded through a form. Alternatively, pass a `source_url` with the URL of a hosted audio or video file instead of a `file`.
 
 #### Input parameters
 
-| Property       | Type     | Required | Description                                                                                                                                                                                                                                                | Example    |
-| :------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- |
-| Token          | String   | No       | A single-use ElevenLabs token. Not needed when the task authenticates with an API key or a credential.                                                                                                                                                     |            |
-| Enable logging | Dropdown | No       | Set to `false` to use zero retention mode, which disables log and transcript storage for this request. Zero retention mode is only available to ElevenLabs enterprise customers.                                                                           |            |
-| Request body   | String   | Yes      | The request as a FEEL context. Requires `model_id`, and either `file` (a document) or `cloud_storage_url`. See [Create transcript](https://elevenlabs.io/docs/api-reference/speech-to-text/convert) for all fields, such as `language_code` and `diarize`. | See below. |
+| Property       | Type     | Required | Description                                                                                                                                                                                                                                         | Example    |
+| :------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- |
+| Token          | String   | No       | A single-use ElevenLabs token. Not needed when the task authenticates with an API key or a credential.                                                                                                                                              |            |
+| Enable logging | Dropdown | No       | Set to `false` to use zero retention mode, which disables log and transcript storage for this request. Zero retention mode is only available to ElevenLabs enterprise customers.                                                                    |            |
+| Request body   | String   | Yes      | The request as a FEEL context. Requires `model_id`, and either `file` (a document) or `source_url`. See [Create transcript](https://elevenlabs.io/docs/api-reference/speech-to-text/convert) for all fields, such as `language_code` and `diarize`. | See below. |
 
 For example, where `audioDocument` is a process variable that holds a document reference:
 
