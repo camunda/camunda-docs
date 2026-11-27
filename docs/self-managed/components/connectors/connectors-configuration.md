@@ -299,7 +299,7 @@ The Connector Runtime fails to start if the request-body limit is negative or an
 
 ## Secure the management API
 
-The Connector Runtime exposes a management API that lists active connectors, including the properties of inbound connector elements such as webhook paths, authentication types, and activation and correlation expressions. It can also reset inbound connector executables. By default, this API doesn't require authentication.
+By default, the Connector Runtime management API doesn't require authentication. The API lists active connectors, including the properties of inbound connector elements such as webhook paths, authentication types, and activation and correlation expressions. It can also reset inbound connector executables.
 
 To require an OIDC bearer token on the management API, set the following Spring properties or equivalent environment variables:
 
@@ -309,7 +309,7 @@ To require an OIDC bearer token on the management API, set the following Spring 
 | `camunda.connector.auth.self-managed.issuer`                | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER`                | -       | OIDC issuer URL. The runtime must be able to reach its discovery and JWKS endpoints.          |
 | `camunda.connector.auth.self-managed.audience`              | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE`              | -       | Required `aud` claim. Set it to the audience of the tokens Camunda Hub sends to this runtime. |
 
-The runtime then accepts requests only with an `Authorization: Bearer <token>` header carrying a token that is signed by the issuer, unexpired, and issued for the configured audience. The runtime fails to start if `secure-management-api` is enabled without both `issuer` and `audience`.
+With `secure-management-api` enabled, the runtime accepts requests only with an `Authorization: Bearer <token>` header carrying a token that is signed by the issuer, unexpired, and issued for the configured audience. The runtime fails to start if `secure-management-api` is enabled without both `issuer` and `audience`.
 
 The following routes require a token:
 
@@ -320,9 +320,7 @@ The following routes require a token:
 
 Webhook endpoints under `/inbound/<path>` and `/actuator/**` stay unauthenticated, so webhook calls and health probes keep working.
 
-:::note
 Camunda Hub only sends a token to the Connector Runtime when the cluster is registered with `BEARER_TOKEN` authentication. With `NONE` authentication, the connector management views in Hub stop working once you enable this property. Any other client of these routes, such as a monitoring script, must send a token from the configured issuer.
-:::
 
 ## Secrets
 
