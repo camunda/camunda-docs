@@ -86,6 +86,52 @@ No action is required to apply the fix on Camunda 8 SaaS.
 
 **Recommendation**: Review your clusters for unexpected deployments, process instances, or job activity. If you find any, contact Camunda support.
 
+## Notice 91
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Hub
+- Camunda Web Modeler
+
+### Impact
+
+Git sync sent requests to a user-configured API base URL without validating it. A user who can change the Git sync settings of a process application could make the Hub or Web Modeler server send requests to internal addresses, such as a cloud metadata service or the Kubernetes API (server-side request forgery, SSRF). On Self-Managed, the Web Modeler and Hub UI don't offer this setting, so this requires calling the API directly.
+
+Git sync with Azure DevOps isn't affected.
+
+This issue affects Camunda 8 SaaS and Self-Managed.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Hub Self-Managed ≤ 8.10.7, or Web Modeler Self-Managed ≤ 8.9.16, ≤ 8.8.27, or ≤ 8.7.29.
+- A user has permission to change the Git sync settings of a process application, for example with the Modeler role on a project they own.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Hub Self-Managed 8.10.8
+- Web Modeler Self-Managed 8.9.17, 8.8.28, 8.7.30
+
+The fix validates the API base URL, and the address it resolves to, before each Git sync request. Hub and Web Modeler reject private, loopback, and link-local addresses.
+
+**Note**: Update to the latest available patch version of your minor version.
+
+The fix was deployed to Hub SaaS on November 19, 2026, 18:52 UTC. No action is required to apply the fix on Camunda 8 SaaS.
+
+**Interim mitigation**:
+
+- Restrict who can change the Git sync settings of process applications.
+- Use network policies or egress filtering to block the Hub or Web Modeler server from reaching internal and cloud metadata addresses.
+
 ## Notice 90
 
 ### Publication date
