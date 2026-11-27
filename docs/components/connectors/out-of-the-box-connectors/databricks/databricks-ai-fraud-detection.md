@@ -156,7 +156,7 @@ Store the webhook credential and the OpenAI and SendGrid API keys as [secrets](/
 
 How you create them depends on where your cluster runs:
 
-- **SaaS**: In Camunda Hub, under **Console** in the left navigation, click **Clusters**, select your cluster, and open the **Cluster secrets** tab. Click **Create new secret** for each key in the table.
+- **SaaS**: In Camunda Hub, in the left navigation, click **Environments**. Click **Clusters**, select your cluster, and open the **Cluster secrets** tab. Click **Create new secret** for each key in the table.
 - **Self-Managed**: Secrets aren't managed in the UI. Ask an operator to add these keys as described in [connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md).
 
 Reference the secrets from Connector fields so their values aren't stored as plain text in the BPMN model. Reference them from a connector task as `{{secrets.FraudWebhookKey}}`, `{{secrets.OpenAI}}`, or `{{secrets.SendGrid}}`.

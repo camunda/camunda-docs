@@ -125,6 +125,30 @@ To learn more about choosing your cluster size, see [sizing your environment](/c
 To increase the cluster size beyond the maximum 4x size, [reach out to Camunda](https://camunda.com/contact-us/). This requires custom sizing and pricing.
 :::
 
+## Legacy cluster plans (G3)
+
+Clusters created before cluster types and sizes were introduced may use a
+legacy G3 cluster plan. Camunda Hub shows these clusters with their plan name
+instead of a cluster type and size:
+
+- G3-Dev
+- G3-S
+- G3-M
+- G3-L
+
+G3 clusters remain fully supported and receive updates as usual.
+
+G3 plans do not map directly to the current cluster types and sizes:
+
+- The Availability Target for a G3 cluster is defined in your agreement with
+  Camunda.
+- G3 sizes (S, M, L) do not correspond to cluster sizes 1x–4x.
+
+:::note
+To change the size of a G3 cluster, or to move it to a current cluster type and
+size, contact your Camunda account team.
+:::
+
 ## Free Trial clusters
 
 Free Trial clusters have the same functionality as a production cluster, but are of a Basic type and 1x size, and only available during your trial period. You cannot convert a Free Trial cluster to a different type of cluster.

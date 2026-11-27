@@ -100,6 +100,13 @@ The category of built-in [FEEL](#feel-expression) functions used to declare LLM-
 
 - [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 
+### AI agent tool
+
+A single BPMN element, or a flow of BPMN elements, inside an [ad-hoc sub-process](#ad-hoc-sub-process) that an [AI agent](#ai-agent) can choose to invoke to complete its goal. Each tool has a name, a description that tells the [LLM](#large-language-model-llm) when to use it, optional input parameters supplied by the LLM using an [AI agent function](#ai-agent-function), and a result returned to the LLM.
+
+- [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md)
+- [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
+
 ### Artificial intelligence (AI)
 
 A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.

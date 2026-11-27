@@ -20,7 +20,7 @@ const features = [
   {
     title: "Agentic orchestration",
     imageUrl: iconBuildWithAi,
-    url: "/docs/guides/build-with-ai/overview/",
+    url: "/docs/components/agentic-orchestration/overview/",
     description: "Orchestrate agents, people, and systems in one process.",
   },
   {

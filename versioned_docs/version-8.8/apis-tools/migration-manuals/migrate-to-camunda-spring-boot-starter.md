@@ -40,6 +40,16 @@ Gradle:
 implementation 'io.camunda:camunda-spring-boot-starter:${8.8.x}'
 ```
 
+## Configuration properties
+
+The Camunda Spring Boot Starter reads `camunda.client.*` properties. Replace `zeebe.client.*` and `camunda.client.zeebe.*` properties with their `camunda.client.*` equivalents.
+
+The starter still reads the legacy properties if you don't set the replacement, but they're deprecated. See [legacy property names](/apis-tools/camunda-spring-boot-starter/configuration.md#legacy-property-names) for the most common renames, and [deprecated properties](/apis-tools/camunda-spring-boot-starter/properties-reference.md#deprecated-properties) for the complete list.
+
 ## Deprecated classes and methods
+
+:::caution Legacy `ActivatedJob` and variable fetching
+In 8.8.x, job workers that inject the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` don't fetch all variables automatically. If the worker also has `@Variable` parameters, only those variables are fetched. To keep the 8.7 behavior, set `@JobWorker(fetchAllVariables = true)`, list the required variables in `fetchVariables`, or switch to `io.camunda.client.api.response.ActivatedJob`. See the [8.8 announcement](/reference/announcements-release-notes/880/880-announcements.md#spring-legacy-activatedjob-fetch-variables).
+:::
 
 Please refer to the [Camunda Java Client migration guide](migrate-to-camunda-java-client.md) for details on deprecated classes and methods.

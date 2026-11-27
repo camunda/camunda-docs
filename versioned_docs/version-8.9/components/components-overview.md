@@ -20,27 +20,21 @@ keywords:
 page_rank: 90
 ---
 
-import OverviewImg from './assets/hero-using-camunda.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { usingCamundaHero, usingCamundaConsoleOverlay } from './react-components/_hero-data';
 import "./react-components/\_using-table.css";
 import UsingGrid from './react-components/\_using-card';
 import { featuresCards, usingCamundaCards } from './react-components/\_using-card-data';
 
 <h3 class="subheading">Learn how to use Camunda to orchestrate your processes.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={usingCamundaHero} overlay={usingCamundaConsoleOverlay} href="/components/concepts/concepts-overview/" ariaLabel="Introduction to Camunda 8">
 
 Orchestrate and automate complex business processes for people, systems, devices, and [AI agents](/reference/glossary.md#ai-agent). Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<p class="link-button">[Learn how to build agentic solutions](../guides/build-with-ai/overview.md)</p>
+<p class="link-button">[Introduction to Camunda 8](./concepts/concepts-overview.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={OverviewImg} alt="Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics." title="Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 ## Introduction to Camunda 8
 

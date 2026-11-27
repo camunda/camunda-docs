@@ -280,6 +280,13 @@ To configure the orchestration cluster securely, it's essential to set up a secu
 
 - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$CAMUNDA_DOMAIN`) for the gRPC proxy, different from the one used by other services (`$CAMUNDA_DOMAIN`). We also note that the port used for gRPC is `443`.
 - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
+- We set `global.tls.caBundle` to the **Service CA Secret** (`camunda-platform-service-ca`) so that the Camunda components trust the gRPC certificate. The OpenShift service CA signs this certificate. The `install-chart.sh` script creates this Secret before the Helm installation. It copies the `service-ca.crt` key from the `openshift-service-ca.crt` ConfigMap in the Camunda namespace. If you install the chart with your own commands, create the Secret before you run Helm:
+
+  ```bash reference
+  https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/openshift/single-region/procedure/create-service-ca-secret.sh
+  ```
+
+  The Secret is a copy of the ConfigMap at creation time. It does not change when OpenShift rotates the service CA. After a service CA rotation, run `create-service-ca-secret.sh` again, then restart the Camunda pods with `oc rollout restart`. As an alternative to the manual restart, set `global.tls.caBundle.autoRollout: true`. The next `helm upgrade` then restarts the pods when the CA changes. This option requires `get` permission on Secrets and does not work with `helm template`.
 
 Merge the orchestration route overlay into your `values.yml` file:
 
@@ -748,6 +755,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generi
 
 This command:
 
+- Creates the `camunda-platform-service-ca` Secret from the OpenShift service CA. The `global.tls.caBundle` setting uses this Secret.
 - Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.

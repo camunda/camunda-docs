@@ -86,7 +86,7 @@ module.exports = {
       label: "Agentic orchestration",
       link: {
         type: "doc",
-        id: "guides/build-with-ai/overview",
+        id: "components/agentic-orchestration/overview",
       },
       items: [
         {
@@ -2630,6 +2630,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/orchestration-cluster-api-rest-deployment-configuration",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code",
                   ],
                 },
@@ -2827,6 +2828,7 @@ module.exports = {
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
                 "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component",
               ],
             },
             "self-managed/components/management-identity/authentication",

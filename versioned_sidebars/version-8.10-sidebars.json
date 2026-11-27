@@ -86,7 +86,7 @@
       "label": "Agentic orchestration",
       "link": {
         "type": "doc",
-        "id": "guides/build-with-ai/overview"
+        "id": "components/agentic-orchestration/overview"
       },
       "items": [
         {
@@ -307,6 +307,7 @@
                   ]
                 },
                 "components/modeler/element-templates/element-templates-with-dependencies",
+                "components/modeler/element-templates/evolving-templates",
                 "components/modeler/element-templates/additional-resources"
               ]
             },
@@ -5956,7 +5957,8 @@
                 "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
-                "self-managed/components/management-identity/configuration/initialize-tenants"
+                "self-managed/components/management-identity/configuration/initialize-tenants",
+                "self-managed/components/management-identity/configuration/scope-permissions-by-component"
               ]
             },
             "self-managed/components/management-identity/authentication",

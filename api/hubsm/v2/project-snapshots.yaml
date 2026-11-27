@@ -39,8 +39,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
-        "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 

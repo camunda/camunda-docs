@@ -19,7 +19,7 @@ Starting from version 8.8, the connector runtime no longer requires a connection
 
 To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration available in the Spring Boot Starter can also be applied to the connector runtime environment.
 
-Below are some of the most common configuration options for the connector runtime. For a complete list, see the [Camunda Spring Boot Starter configuration reference](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe).
+Below are some of the most common configuration options for the connector runtime. For a complete list, see the [Camunda Spring Boot Starter properties reference](/apis-tools/camunda-spring-boot-starter/properties-reference.md).
 
 :::note
 This guide presents configuration properties as environment variables, while the Camunda Spring Boot Starter documentation uses Java configuration properties. The two formats are interchangeable. You can also use Java configuration properties in the connector runtime environment.
@@ -177,7 +177,7 @@ If you have configured the audiences property for the Orchestration Cluster (`ca
 </TabItem>
 </Tabs>
 
-See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started#self-managed) for more information on authentication properties.
+See the [Camunda Spring Boot Starter documentation](/apis-tools/camunda-spring-boot-starter/configuration.md#authentication) for more information on authentication properties.
 
 ## Configure the Orchestration Cluster connection for SaaS
 
@@ -286,6 +286,32 @@ Spring parses `multipart/form-data` requests before the Connector Runtime applie
 
 The Connector Runtime fails to start if the request-body limit is negative or an enabled rate limit has an invalid permits-per-second value.
 
+## Secure the management API
+
+By default, the Connector Runtime management API doesn't require authentication. The API lists active inbound connectors, including the properties of inbound connector elements such as webhook paths, authentication types, and activation and correlation expressions. It can also reset inbound connector executables.
+
+To require an OIDC bearer token on the management API, set the following Spring properties or equivalent environment variables:
+
+| Spring property                                             | Environment variable                                        | Default | Description                                                                               |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `camunda.connector.auth.self-managed.secure-management-api` | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_SECURE_MANAGEMENT_API` | `false` | Requires a bearer token on the management API.                                            |
+| `camunda.connector.auth.self-managed.issuer`                | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER`                | -       | OIDC issuer URL. The runtime must be able to reach its discovery and JWKS endpoints.      |
+| `camunda.connector.auth.self-managed.audience`              | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE`              | -       | Required `aud` claim. Set it to the audience of the tokens Console sends to this runtime. |
+
+With `secure-management-api` enabled, the runtime accepts requests only with an `Authorization: Bearer <token>` header carrying a token that is signed by the issuer, unexpired, and issued for the configured audience. The runtime fails to start if `secure-management-api` is enabled without both `issuer` and `audience`.
+
+The following routes require a token:
+
+- `/inbound` (exact path only)
+- `/tenants/**`
+- `/inbound-instances/**`
+
+Webhook endpoints under `/inbound/<path>` and `/actuator/**` stay unauthenticated, so webhook calls and health probes keep working.
+
+Console forwards the logged-in user's token to the Connector Runtime for its connector management views. Set `audience` to the `aud` claim of Console's tokens, or these views stop working once you enable this property. Any other client of these routes, such as a monitoring script, must send a token from the configured issuer.
+
+Enabling this property also enables Spring Security's request firewall for all requests, including webhook calls. Requests whose path contains `;`, an encoded slash (`%2F`), or `//` are rejected with HTTP `400`. With the property disabled, request handling is unchanged.
+
 ## Secrets
 
 Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
@@ -366,13 +392,13 @@ Review the documentation on [managing secrets in Helm charts](/self-managed/depl
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
+  -v $PWD/connector.jar:/opt/custom/connector.jar \  # Add a connector jar to the classpath
   -e MY_SECRET=secret \              # Set a secret with value
   -e SECRET_FROM_SHELL \             # Set a secret from the environment
   --env-file secrets.txt \           # Set secrets from a file
@@ -389,7 +415,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/deployment/manual/install.md#connectors-1), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/deployment/manual/install.md#connectors), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
@@ -457,7 +483,7 @@ In manual installations, add the JAR to the `-cp` argument of the Java call:
 
 ```bash
 java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
-    io.camunda.connector.runtime.ConnectorRuntimeApplication
+    io.camunda.connector.runtime.app.ConnectorRuntimeApplication
 ```
 
 </TabItem>
@@ -632,6 +658,60 @@ The allow-list caches the declared calls of each process definition to avoid rep
 
 If an intrinsic function call that previously ran now fails the job, see [troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors).
 
+## External document host validation {#external-document-host-validation}
+
+The connector runtime validates the host of every external document URL before it downloads the document. A connector input can reference an [external document](/components/document-handling/upload-document-to-bpmn-process.md#upload-a-document-when-using-any-connector) by URL, and the runtime downloads it when it binds the input. In Connectors 8.8.30+, the runtime checks the URL as follows:
+
+- Only `http` and `https` URLs are downloaded.
+- The runtime resolves the host name and checks every address it resolves to. If any address is a loopback, link-local, private, or other reserved or special-use address, the download is refused. This includes addresses such as `127.0.0.1`, `169.254.169.254`, `10.0.0.0/8`, `192.168.0.0/16`, and `fc00::/7`.
+- Redirects aren't followed.
+
+When the download is refused, the connector fails with the error `The external document URL is not allowed`. The error doesn't say whether the host couldn't be resolved or resolved to a non-public address.
+
+The check is enabled by default. Disable it if your connectors download external documents from hosts in your internal network, or if the connector runtime can't resolve external host names itself, for example because all outbound traffic goes through a forward proxy. To disable it, set the following property:
+
+| Property                                                      | Environment variable                                         | Description                                                                         | Default |
+| ------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------- | ------- |
+| `camunda.connector.document.external.host-validation.enabled` | `CAMUNDA_CONNECTOR_DOCUMENT_EXTERNAL_HOSTVALIDATION_ENABLED` | Whether the runtime checks the host of an external document URL before downloading. | `true`  |
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_DOCUMENT_EXTERNAL_HOSTVALIDATION_ENABLED=false
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    document:
+      external:
+        host-validation:
+          enabled: false
+```
+
+</TabItem>
+</Tabs>
+
+In the Helm chart, set the environment variable through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_DOCUMENT_EXTERNAL_HOSTVALIDATION_ENABLED
+      value: "false"
+```
+
+:::warning
+With the check disabled, any process variable or message payload that sets an external document URL can make the connector runtime send requests to hosts in your internal network. Restrict the runtime's outbound traffic, for example with a network policy or an egress proxy that denies internal addresses.
+:::
+
 ## Truststore
 
 If your connector runtime needs to connect to external systems over HTTPS, you might need to provide a custom truststore.
@@ -686,7 +766,7 @@ CAMUNDA_CLIENT_TENANTID=myTenant
 This will change the default tenant ID used for fetching jobs and publishing messages
 to the tenant ID `myTenant`.
 
-It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the connectors to poll every 20 seconds.
+You can adjust the polling interval of connectors polling process definitions from the Orchestration Cluster REST API by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. The variable controls how often connectors fetch the process definitions, in milliseconds. The default is `5000` (5 seconds). For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` configures the connectors to poll every 20 seconds.
 
 Example:
 

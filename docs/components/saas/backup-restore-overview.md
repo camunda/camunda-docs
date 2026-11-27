@@ -81,7 +81,7 @@ These operations remain available:
 
 - Delete a stored backup
 - View backups and schedules
-- Manage connector secrets
+- Manage cluster secrets
 - Manage API clients
 - View alerts
 

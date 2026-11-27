@@ -28,8 +28,8 @@ If the HTTP Polling connector encounters an execution exception while polling, i
 
 ## Setting up the HTTP Polling connector
 
-1. Add an **Intermediate Event** to your BPMN diagram.
-2. Change its template to the **HTTP Polling connector**.
+1. Add an **Intermediate Event** or a **Boundary Event** to your BPMN diagram.
+2. Change its template to the **HTTP Polling connector**. For a boundary event, use the **HTTP Polling Boundary Catch Event Connector** template.
 3. Populate all mandatory fields, like the endpoint URL, polling interval, and required headers.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the **HTTP Polling connector**.
@@ -40,14 +40,17 @@ If the HTTP Polling connector encounters an execution exception while polling, i
 
 Navigate to the **Authentication** section and select your desired **Authentication type** (e.g., Basic, OAuth). Refer to the [Authentication section of the REST connector documentation](/components/connectors/protocol/rest.md#authentication) for a comprehensive guide.
 
+Instead of configuring authentication on the event, you can select a reusable authentication credential in the **Authentication credential** field. When you select a credential, the **URL** field overrides the URL carried by the credential, and is required if the credential doesn't carry a URL. Learn more about [using credentials](/components/connectors/use-connectors/index.md#using-credentials).
+
 ### HTTP polling configuration
 
 - **Method**: Choose the HTTP method for your request, e.g., GET, POST, PUT.
 - **URL**: Enter the URL of the targeted HTTP endpoint.
 - **Headers** (Optional): Input required headers as per the external service. Learn more about headers in the [REST connector headers](/components/connectors/protocol/rest.md#http-headers) section.
 - **Query Parameters** (Optional): Add necessary query parameters for the endpoint. More details can be found in the [REST connector query parameters](/components/connectors/protocol/rest.md#query-parameters) section.
-- **Interval** (Optional): Set the frequency for polling the endpoint in ISO 8601 durations format. The default interval is 50 seconds. Review [how to configure a time duration](../../modeler/bpmn/timer-events/timer-events.md#time-duration) for details.
-- **Connection Timeout**: Define how long (in seconds) the connector waits before timing out. Further information on this can be found [here](/components/connectors/protocol/rest.md#connection-timeout).
+- **Follow redirects** (Optional): When enabled, HTTP 3xx redirects are followed automatically. Disabled by default.
+- **Http request interval**: Set the delay between HTTP requests in ISO 8601 duration format. The default interval is 50 seconds. Review [how to configure a time duration](../../modeler/bpmn/timer-events/timer-events.md#time-duration) for details.
+- **Connection timeout in seconds** and **Read timeout in seconds**: Define how long (in seconds) the connector waits to establish a connection and to read data from the server. The default for both is 20 seconds. Use 0 for an infinite timeout. Learn more about [network communication timeouts](/components/connectors/protocol/rest.md#network-communication-timeouts).
 
 ### Payload configuration (optional)
 
@@ -100,7 +103,7 @@ Monitor a GitHub issue to see when it's closed and if it has a specific label ('
    - **Bearer token**: `{{secrets.BEARER_TOKEN}}`
    - **Method**: `GET`
    - **Headers**: `={"Content-Type": "application/vnd.github+json","X-GitHub-Api-Version": "2022-11-28"}`
-   - **Interval**: `PT10M` (Every 10 minutes) – This checks the GitHub issue every 10 minutes.
+   - **Http request interval**: `PT10M` (every 10 minutes). This checks the GitHub issue every 10 minutes.
    - **Correlation Key (process)**: `=issueNumber`
    - **Correlation Key (payload)**: `=body.number`
    - **Activation Condition**: `=(body.state = "closed")`
@@ -136,7 +139,7 @@ Suppose you're overseeing an e-commerce platform. It's vital to ensure certain p
    - **Authorization Type**: Basic Authentication
    - **Username**: `[YourInventoryAPIUsername]`
    - **Password**: `{{secrets.PASSWORD}}`
-   - **Interval**: `PT1H` (Every hour)
+   - **Http request interval**: `PT1H` (Every hour)
    - **Correlation Key (process)**: `=productID`
    - **Correlation Key (payload)**: `=body.productID`
    - **Activation Condition**: `=(body.stockLevel < 10)`

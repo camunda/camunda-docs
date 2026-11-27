@@ -89,19 +89,6 @@ Example:
 - ✅ chatCompletion_apiVersion
 - ✅ completion_apiVersion
 
-### Versioning
-
-If you plan to make changes to your template over time and want to support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), include a version number property in your template, starting from 1. Templates with the same ID and different version values offer an upgrade path.
-
-```json
-{
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name": "My Connector",
-  "id": "org.my.connector",
-  "version": 1
-}
-```
-
 ### JSON structure
 
 The JSON structure should mirror the visual presentation to maintain alignment with the UI order. This ensures groups and properties are organized accordingly, even if some elements are hidden.  
@@ -119,7 +106,7 @@ The following guidelines ensure templates are intuitive and designed to minimize
 
 #### Hidden vs. visible fields
 
-If certain values are static and do not require user input, prefill them. Hidden fields offer no additional benefit by being visible.
+Hidden fields hold values that your template manages: users do not see or change them. Updating an element to a new template version applies the new version's static values and keeps existing generated values. If certain values are static and do not require user input, prefill them in hidden fields. Values that users provide belong in visible fields.
 
 **Hidden fields example:**
 
@@ -168,3 +155,22 @@ More details: [FEEL editor support](/components/modeler/element-templates/templa
   "condition": { "property": "operationType", "oneOf": ["addQueueItem"] }
 }
 ```
+
+## Evolve your template
+
+### Versioning
+
+Include a version number property in your template (starting from 1) to support [template evolution](/components/modeler/element-templates/evolving-templates.md). Templates with the same ID and different version values offer an upgrade path.
+
+```json
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "My Connector",
+  "id": "org.my.connector",
+  "version": 1
+}
+```
+
+### Breaking changes
+
+Users can update their elements to a new template version in a single step. Only publish compatible changes as a new version. Ship breaking changes, such as a renamed binding or a removed choice, as a different template, and deprecate the previous one. See [publish breaking changes as a different template](/components/modeler/element-templates/evolving-templates.md#publish-breaking-changes-as-a-different-template).
