@@ -53,7 +53,7 @@ Releases in each section are listed newest first. For installation instructions,
 
 #### Breaking changes
 
-- Remove the discovery plugin system — The `process-os-discovery-plugin` skill, discovery plugin specialists and the `plugin-model-<tier>` run-config keys are removed. Discovery runs only its built-in specialists, and `run.config.yaml` drops the old keys on its next write. With the stable 2.x.x release, a new, more powerful plugin system will replace the removed one
+- Remove the discovery plugin system. The `process-os-discovery-plugin` skill, discovery plugin specialists, and `plugin-model-<tier>` run configuration keys have been removed. Discovery now runs only its built-in specialists, and `run.config.yaml` removes the old keys the next time it is written. A new, more powerful plugin system will replace the previous one in the stable 2.x.x release.
 
 #### Features
 
