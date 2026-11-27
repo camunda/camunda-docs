@@ -413,6 +413,7 @@ module.exports = {
           items: [
             "components/hub/workspace/modeler/idp/idp-configuration",
             "components/hub/workspace/modeler/idp/idp-projects",
+            "components/hub/workspace/modeler/idp/idp-templates-in-projects",
             "components/hub/workspace/modeler/idp/idp-document-classification",
             {
               type: "category",

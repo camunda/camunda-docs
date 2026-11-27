@@ -319,13 +319,15 @@ The module is locally sourced in your clone. Any changes you make to the module 
    :::note Private cluster
 
    By default, this cluster is accessible from the internet.
-   To restrict access, set `private_vpc = true`. This creates a private cluster that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. Optionally, you can expose a public Ingress by setting the `expose_public_elb` variable in the EKS module.
+   To restrict access, set `private_vpc = true`. This creates a private cluster that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. The `expose_public_elb` variable only adds the `kubernetes.io/role/elb` tag to the public subnets. It does not change the scheme of the load balancer.
 
    ⚠️ Because private subnets are not reachable from the internet, you must connect your network to the cluster using either a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
    See the [VPN module setup](#vpn-module-setup) to configure an [AWS Client VPN endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) for secure access to the private cluster.
 
    :::
+
+   If you set `private_vpc = true`, keep the Ingress private too. `private_vpc` makes the Kubernetes API endpoint and the nodes private, but not the Ingress. The public subnets stay in place for the NAT gateway. Thus, the load balancer of the Ingress controller is internet-facing by default. Before you install the Ingress controller, add the annotation `service.beta.kubernetes.io/aws-load-balancer-internal: "true"` to its Service. The installation script of the Ingress controller shows this annotation as a comment.
 
 ### PostgreSQL module setup
 

@@ -31,6 +31,493 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 95
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda RPA worker
+
+### Impact
+
+The RPA worker accepts script evaluation requests without authenticating the caller when its local sandbox is enabled, which is the default in the reported version. A caller who can reach the HTTP API can submit a Robot Framework script and execute code with the worker's operating system permissions.
+
+Scripts inherit the worker's environment, which can include Camunda client credentials and other secrets. The sandbox is a local testing feature, not an isolation boundary.
+
+Container deployments are particularly exposed when the worker port is published on all host interfaces. The default HTTP port is `36227`.
+
+### How to determine if the installation is affected
+
+RPA worker 1.3.2 is confirmed to be affected. The complete affected version range is pending confirmation.
+
+The script execution issue applies when local evaluation is enabled (`camunda.rpa.sandbox.enabled=true`) and an untrusted caller can reach the worker API. Camunda client credentials authenticate outbound cluster requests; they do not protect incoming worker API requests.
+
+### Solution
+
+Upgrade to [RPA worker 1.3.3](https://github.com/camunda/rpa-worker/releases/tag/1.3.3) or later. Upgrading is required to remediate this vulnerability; the configuration measures below are alternatives to reduce exposure if you can't upgrade immediately.
+
+The patched worker requires a separately configured bearer token for script evaluation and other privileged worker APIs. It also disables local evaluation by default in container images. A Desktop Modeler release supporting worker API tokens is pending. Once that release is available, generate a worker API token and enter it in Desktop Modeler to resume local testing. Older Desktop Modeler versions can still edit scripts but cannot test them against the patched worker.
+
+If you can't upgrade immediately:
+
+- Disable local evaluation in production with `camunda.rpa.sandbox.enabled=false`.
+- Restrict the worker API to trusted local clients using loopback binding and network access controls. Leave container ports unpublished unless required; for local access, use `-p 127.0.0.1:36227:36227` instead of `-p 36227:36227`.
+- Run only trusted scripts under a dedicated operating system account with the minimum permissions required. Keep development workers separate from production credentials and data.
+
+Disabling evaluation does not protect the BPMN-error callback described in Notice 93.
+
+## Notice 94
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda RPA worker
+
+### Impact
+
+The RPA worker does not validate the Host header or authenticate script evaluation requests in affected versions. Binding the API to loopback does not, by itself, prevent an attacker-controlled website from attempting to access it through DNS rebinding.
+
+If a browser permits the rebinding request, a malicious page could submit scripts to a worker with local evaluation enabled and read the results. Those scripts run with the worker's permissions and can access its environment. Exploitation depends on the user visiting the malicious page while the worker is running and on the browser's local-network protections.
+
+The absence of permissive CORS headers does not establish protection against DNS rebinding.
+
+### How to determine if the installation is affected
+
+RPA worker 1.3.2 is confirmed to accept an untrusted Host header. The complete affected version range is pending confirmation.
+
+A local worker with evaluation enabled may be exposed even when its listener is bound to loopback. Browser-specific protections can limit exploitation but do not correct the worker's missing checks.
+
+### Solution
+
+Upgrade to [RPA worker 1.3.3](https://github.com/camunda/rpa-worker/releases/tag/1.3.3) or later. Upgrading is required to remediate this vulnerability.
+
+The patched worker validates exact Host authorities, including ports, and requires authentication for privileged API requests. Additional authorities for intentional remote deployments must be explicitly configured. Host validation complements authentication and network restrictions; it does not replace them.
+
+If you can't upgrade immediately, disable local evaluation when it is not needed, stop development workers when they are not in use, and avoid browsing untrusted websites from an account running a worker. These measures reduce exposure but do not correct the missing checks. Network restrictions remain necessary but do not alone resolve browser-mediated loopback access. Browser local-network protections provide defense in depth, not a substitute for upgrading.
+
+## Notice 93
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda RPA worker
+
+### Impact
+
+The RPA worker's BPMN-error callback accepts a job key, an error code, and variables without authenticating the caller or checking that the job belongs to the calling script's active execution. The worker forwards the command to Camunda using its configured cluster credentials.
+
+An untrusted caller who can reach the worker API and supply an applicable job key can attempt to interrupt process execution and inject variables. Successful exploitation depends on the worker's cluster permissions and the job state. Camunda client authentication does not protect this incoming callback.
+
+The callback remains available when `camunda.rpa.sandbox.enabled=false`, because production scripts use it.
+
+### How to determine if the installation is affected
+
+RPA worker 1.3.2 is confirmed to be affected. The complete affected version range is pending confirmation.
+
+An installation is exposed when an untrusted caller can reach the worker's HTTP API and the worker has permission to send the requested BPMN error to Camunda. Disabling local evaluation alone does not remove this exposure.
+
+### Solution
+
+Upgrade to [RPA worker 1.3.3](https://github.com/camunda/rpa-worker/releases/tag/1.3.3) or later, including its compatible Python runtime. Upgrading is required to remediate this vulnerability; network restrictions are an alternative to reduce exposure if you can't upgrade immediately.
+
+The patched worker requires a separate short-lived credential for each script execution and binds BPMN-error callbacks to the execution's associated job. The worker revokes the credential when execution completes, fails, or is canceled. The worker API token cannot authorize callbacks.
+
+The updated `Camunda` Python library sends execution credentials automatically. Upgrade the worker and its Python runtime together; older libraries cannot authenticate callbacks to an upgraded worker. Static runtimes must include the updated library.
+
+If you can't upgrade immediately, prevent untrusted access to the worker API through loopback binding, firewalls, and container network restrictions. Production jobs do not require a published container HTTP port. Restrict the worker's cluster permissions to those required by its tasks. Do not disable runtime callbacks as a workaround, because doing so breaks script functionality.
+
+## Notice 92
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+On Camunda 8 SaaS, the gRPC API of the Orchestration Cluster accepted access tokens that were issued for another cluster, including clusters of other organizations. The REST API was not affected.
+
+In affected versions, the gRPC API did not check that a token was issued for its cluster. Anyone with client credentials for any SaaS cluster could authenticate on the gRPC API of another SaaS cluster. The attacker needs the ID of the target cluster.
+
+The impact depends on the authorization settings of the target cluster:
+
+- If authorizations are disabled, the attacker has full access to the gRPC API. For example, they can deploy resources, start and cancel process instances, and activate and complete jobs. Activating jobs exposes process variables.
+- If authorizations are enabled, the attacker has no permissions. Commands are rejected, but the topology request still returns the cluster version and partition layout.
+
+This issue only affects Camunda 8 SaaS. Self-Managed installations are not affected.
+
+Camunda is not aware of any exploitation.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+Only Camunda 8 SaaS clusters that ran one of these versions were affected:
+
+- Camunda 8.10.0-alpha3, 8.10.0-alpha4, and 8.10.0-alpha5.1
+- Camunda 8.10.0 to 8.10.11
+- Camunda 8.11.0-alpha1
+
+Camunda 8.9 and earlier are not affected.
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Camunda 8.10.12, part of the Camunda 8.10+gen11 [generation](/reference/glossary.md#generation) on Camunda 8 SaaS
+- A hotfix for Camunda 8.11.0-alpha1, deployed into the existing Camunda 8.11-alpha1 generation on Camunda 8 SaaS
+
+The fix was deployed to Camunda 8 SaaS with a forced update rollout:
+
+- Clusters on Camunda 8.11.0-alpha1: November 26, 2026, 23:08 UTC
+- Clusters on Camunda 8.10: November 27, 2026, 00:53 UTC
+
+Clusters on Camunda 8.10.0-alpha3, 8.10.0-alpha4, and 8.10.0-alpha5.1 don't get the fix. Camunda suspended all of these clusters and will remove them within one week.
+
+No action is required to apply the fix on Camunda 8 SaaS.
+
+**Recommendation**: Review your clusters for unexpected deployments, process instances, or job activity. If you find any, contact Camunda support.
+
+## Notice 91
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Hub
+- Camunda Web Modeler
+
+### Impact
+
+Git sync sent requests to a user-configured API base URL without validating it. A user who can change the Git sync settings of a process application could make the Hub or Web Modeler server send requests to internal addresses, such as a cloud metadata service or the Kubernetes API (server-side request forgery, SSRF). On Self-Managed, the Web Modeler and Hub UI don't offer this setting, so this requires calling the API directly.
+
+Git sync with Azure DevOps isn't affected.
+
+This issue affects Camunda 8 SaaS and Self-Managed.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Hub Self-Managed ≤ 8.10.7, or Web Modeler Self-Managed ≤ 8.9.16, ≤ 8.8.27, or ≤ 8.7.29.
+- A user has permission to change the Git sync settings of a process application, for example with the Modeler role on a project they own.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Hub Self-Managed 8.10.8
+- Web Modeler Self-Managed 8.9.17, 8.8.28, 8.7.30
+
+The fix validates the API base URL, and the address it resolves to, before each Git sync request. Hub and Web Modeler reject private, loopback, and link-local addresses.
+
+**Note**: Update to the latest available patch version of your minor version.
+
+The fix was deployed to Hub SaaS on November 19, 2026, 18:52 UTC. No action is required to apply the fix on Camunda 8 SaaS.
+
+**Interim mitigation**:
+
+- Restrict who can change the Git sync settings of process applications.
+- Use network policies or egress filtering to block the Hub or Web Modeler server from reaching internal and cloud metadata addresses.
+
+## Notice 90
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+[Intrinsic functions](/components/connectors/advanced-topics/intrinsic-functions.md) are written as a JSON object with a `camunda.function.type` key, and the connector runtime runs them while it binds a connector's input. In affected versions, the runtime ran such an object wherever it appeared in the connector's input, including when it came from a process variable instead of the process model. Some intrinsic functions operate on documents with the permissions of the connector runtime, not those of whoever supplied the data. Under the following conditions, an attacker may be able to read, or create a public link to, a document stored in the cluster:
+
+- The process uses [outbound connectors](/components/connectors/connector-types.md#outbound-connectors).
+- Untrusted input reaches a process variable, for example through an inbound connector such as a webhook, a user task, or an API call. With an inbound webhook that doesn't require authentication, no credentials are needed.
+- That process variable is passed into a connector field, for example an HTTP request body or an email body.
+- The attacker knows a reference to the document (its document ID, store ID, and content hash), for example because document references appear in process variables they can see.
+- The connector's destination is one the attacker controls or can observe, or the attacker can influence it through another process variable.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- Camunda Connectors ≤ 8.9.12, ≤ 8.8.21, or ≤ 8.7.27
+
+and your processes match the conditions above. Camunda Connectors 8.6 doesn't support intrinsic functions and isn't affected.
+
+### Solution
+
+Camunda has released an intrinsic function allow-list for the connector runtime. The runtime only runs an intrinsic function call that the deployed BPMN process declares in the connector element's own input mappings, and refuses calls that arrive through process variables, job variables, connector results, or inbound connector payloads. The allow-list is enabled by default and always fails closed. This is a breaking change: a process that builds an intrinsic function call in a process variable and passes it to a connector field stops working after the upgrade. Declare the call in the connector's input mappings instead. See [declare intrinsic function calls in the process model](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) and the [intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list) configuration.
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.10.0, 8.9.13, 8.8.22, 8.7.28
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+**Interim mitigation**:
+
+- Review your process deployments against the conditions above.
+- Require authentication on inbound webhooks, for example HMAC or an authorization header.
+- Before untrusted data reaches a connector field, reject or remove values that contain the `camunda.function.type` key.
+- If a process may be affected, review which documents its connectors could reach, and delete documents whose public links may have been shared.
+
+## Notice 89
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler SaaS
+
+### Impact
+
+An internal endpoint that processes Auth0 log events in Web Modeler SaaS did not enforce its intended authorization.
+Any authenticated user or API client could send events to this endpoint, instead of only Auth0.
+The events could change user records, including those of users in other organizations.
+
+This issue only affects Camunda 8 SaaS. Self-Managed installations do not include or expose this endpoint and are not affected.
+
+Camunda is not aware of any known exploitation.
+
+### How to determine if the installation is affected
+
+Only Camunda 8 SaaS was affected. Self-Managed installations are not affected.
+
+### Solution
+
+The fix was deployed to Web Modeler SaaS on July 20, 2026, 13:57 UTC.
+No action is required.
+
+## Notice 88
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+When Git sync was configured with Bitbucket Cloud or Bitbucket Data Center, Web Modeler returned the stored Bitbucket access token in cleartext in the Git sync settings of a process application.
+Any user with permission to view the Git sync settings of the process application could read the token, including users who don't have permission to manage it.
+
+Git sync with GitHub, GitLab, and Azure DevOps is not affected.
+Bitbucket Git sync is not available in Web Modeler 8.7 and earlier, so these versions are not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Web Modeler Self-Managed ≤ 8.9.8 or ≤ 8.8.19. Hub Self-Managed 8.10.0 and later contain the fix and are not affected.
+- You configured Git sync with Bitbucket Cloud or Bitbucket Data Center for at least one process application.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.9, 8.8.20
+
+**Note**: Update to the latest available patch version of your minor version.
+
+The fix was deployed to Web Modeler SaaS on September 18, 2026, 05:57 UTC. No action is required to apply the fix on Camunda 8 SaaS.
+
+Camunda recommends that you rotate the Bitbucket access tokens used for Git sync in all process applications, and update the Git sync settings with the new tokens.
+
+## Notice 87
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+When persistent web sessions are enabled, the Orchestration Cluster stores the web login session in its secondary storage: the `camunda-web-session-8.8.0_` index in Elasticsearch or OpenSearch, or the `WEB_SESSION` table in a relational database. In affected versions, it reads the stored session attributes back with Java deserialization that accepts any class.
+
+The Orchestration Cluster also shipped commons-collections 20040616. This old build doesn't have the protection that commons-collections 3.2.2 added against [CVE-2015-7501](https://nvd.nist.gov/vuln/detail/CVE-2015-7501) (also tracked as SONATYPE-2015-0002).
+
+Together, these let an attacker who can write to the session index or table store a crafted session. When the Orchestration Cluster reads it, the attacker can run arbitrary code with the permissions of the Orchestration Cluster process. The Orchestration Cluster reads stored sessions when it removes expired sessions and when a request presents a session cookie.
+
+The attack isn't possible through the Orchestration Cluster REST or gRPC APIs. It requires write access to the secondary storage.
+
+### How to determine if the installation is affected
+
+Your installation is affected only if you use one of these component versions:
+
+- Camunda Orchestration Cluster ≤ 8.10.9, ≤ 8.9.28, or ≤ 8.8.46
+
+and persistent web sessions are enabled. The Camunda Helm chart enables them by default when secondary storage is configured. Outside the Helm chart, they are enabled when one of these properties is `true`:
+
+- `camunda.persistent.sessions.enabled`
+- `camunda.security.session.persistent.enabled` (8.10)
+- `camunda.operate.persistentSessionsEnabled` (Deprecated)
+- `camunda.operate.persistent.sessions.enabled` (Deprecated)
+- `camunda.tasklist.persistentSessionsEnabled` (Deprecated)
+- `camunda.tasklist.persistent.sessions.enabled` (Deprecated)
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.10, 8.9.29, 8.8.47
+
+These releases ship commons-collections 3.2.2 and only accept the expected classes when they read a stored session.
+
+If you can't upgrade yet, make sure only the Orchestration Cluster can write to its secondary storage: turn on authentication in Elasticsearch, OpenSearch, or the database, and limit network access to it.
+
+## Notice 86
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+Camunda 8.10 was affected by a bug that allowed job workers to receive jobs from tenants they were not assigned to if multi-tenancy was enabled.
+
+A job worker that opens a job stream names the tenants it wants jobs from. The worker could also name tenants it is not assigned to and then receive those tenants' jobs, including their variables. These jobs stayed locked for that worker until their timeout, so the tenant's own workers did not receive them in the meantime.
+
+Job polling (activating jobs on demand) is unaffected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Camunda Orchestration Cluster ≤ 8.10.10. Versions 8.9 and earlier are not affected.
+- Multi-tenancy is enabled.
+- At least one job worker has job streaming enabled.
+- An authenticated client opens a job stream for tenants it is not assigned to.
+
+### Solution
+
+Camunda has provided the following release, which contains the fix:
+
+- Camunda Orchestration Cluster 8.10.11
+
+No configuration workaround is available.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+## Notice 85
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+A bug in the permission and tenant checks for some search and statistics endpoints allowed users to read data they did not have permission to access, such as data from other tenants. This did not allow users to change data.
+
+If you use an RDBMS as secondary storage:
+
+- **Variable search:** If the search was filtered by the variable value using `$like`, it also returned variables with large values, such as long text or large JSON documents. These variables came from all tenants and process definitions, including ones the user had no access to.
+- **User task search:** Some users had only property-based user task authorizations, which grant access to tasks where the user is the assignee, a candidate user, or a member of a candidate group. If none of these authorizations applied to the user, they saw all user tasks of their tenants instead of none. Example: a user who isn't a member of any group and whose only authorization covers tasks for their candidate groups.
+- **Audit log search:** Users with permission to read the audit log but not assigned to any tenant could view entries from all tenants.
+- **Role member search:** Users with read permission for one role saw the members of all roles.
+- **Usage metrics:** Users without the `READ_USAGE_METRIC` permission saw usage numbers. The number of task users also counted all tenants, not only the user's tenants.
+- **Batch operation item search:** Users without read permission for batch operations saw all batch operation items.
+
+With all secondary storages (Elasticsearch, OpenSearch, and RDBMS):
+
+- **Job error statistics:** Users with permissions to some processes saw the error codes and messages for all processes.
+- **Batch operation search:** Users with read permission for some batch operations saw all batch operations.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
+- At least one of the following applies:
+  - You use an RDBMS as secondary storage, and enable authorizations or multi-tenancy.
+  - Authorizations are enabled, and some users have permissions only for specific process definitions or batch operations.
+- An authenticated user calls the affected endpoints of the Orchestration Cluster REST API.
+
+In 8.8, only the **variable search**, **usage metrics**, **batch operation item search**, and **batch operation search** are affected.
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+
+No configuration workaround is available.
+
+On Camunda 8 SaaS, only the job error statistics and the batch operation search are affected, because SaaS uses Elasticsearch as secondary storage, not an RDBMS. The fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+## Notice 84
+
+### Publication date
+
+November 25, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+A bug in the initial-admin setup allowed unauthenticated users to create an administrator user. This applies to installations configured to use Basic authentication (`camunda.security.authentication.method: basic`, the default) where admin rights are granted only through groups, and no user is assigned directly to the admin role.
+
+With Basic authentication, a new cluster offers a one-time setup step to create the first admin user. This step uses the create admin user endpoint (`POST /v2/setup/user`), which does not require authentication. It is meant to be available only until the admin role has a member. The check counted only users assigned directly to the admin role. If the admin role had only groups as members, the setup step would remain available, and anyone who could access the REST API could create an additional admin user.
+
+With the fix, the setup step is available only while the admin role has no members. Existing admin users and groups retain their access, and no configuration changes are needed.
+
+Installations using OIDC are not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Camunda Orchestration Cluster ≤ 8.10.10, ≤ 8.9.29, or ≤ 8.8.47.
+- You use Basic authentication (`camunda.security.authentication.method: basic`, the default).
+- No user is assigned directly to the admin role, for example because only groups are assigned to it in the [configuration](/self-managed/components/orchestration-cluster/identity/overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration), or because an admin removed all users from the role.
+- The Orchestration Cluster REST API is reachable over the network. The create admin user endpoint (`POST /v2/setup/user`) does not require authentication.
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+
+Camunda 8 SaaS uses OIDC and is not affected.
+
 ## Notice 83
 
 ### Publication date
@@ -77,7 +564,7 @@ and both of the following are true for the deployment that runs it:
 
 To check a node, run `grep -m1 '^flags' /proc/cpuinfo | tr ' ' '\n' | grep avx512vbmi`. If the command returns nothing, the workloads on that node are not affected.
 
-### Solution
+### Solution {#notice-83-solution}
 
 Camunda has provided the following releases which apply the mitigation by default:
 
@@ -93,6 +580,8 @@ Camunda has provided the following releases which apply the mitigation by defaul
 If you can't upgrade yet, apply the mitigation manually: set the environment variable `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` on each Camunda container, and restart the container. Include the Keycloak and Elasticsearch containers that the Helm chart and Docker Compose files deploy, because they run their own Java runtime. The option disables the vulnerable code path, and stopped the memory corruption in every test that Camunda ran. Workloads that decode a lot of Base64 see a small performance cost.
 
 Use `JDK_JAVA_OPTIONS` rather than `JAVA_OPTS`, because some images ignore `JAVA_OPTS` and others use it to replace their default settings. In the Camunda Helm chart, set the variable through the `env` key of each component, as described in [Helm chart application configuration](/self-managed/deployment/helm/configure/application-configs.md). An `env` list replaces the defaults of the chart rather than adding to them, so merge the variable into the `env` entries that you already set.
+
+If you use the bundled `identityKeycloak` subchart of Camunda 8.7 to 8.9, set `JDK_JAVA_OPTIONS` through `identityKeycloak.extraEnvVars`. Do not put the option in `JAVA_OPTS_APPEND`. The subchart sets `JAVA_OPTS_APPEND` to `-Djgroups.dns.query=...`, and a `JAVA_OPTS_APPEND` entry in `extraEnvVars`, `extraEnvVarsCM`, or `extraEnvVarsSecret` replaces this value. Keycloak then does not start and logs `dns_query can not be null or empty`. The chart adds the flag to a `JDK_JAVA_OPTIONS` value that you set in `extraEnvVars`, but not to a value from `valueFrom`, `extraEnvVarsCM`, or `extraEnvVarsSecret`. In these sources, include `-XX:-UseBASE64Intrinsics` yourself.
 
 A Java option only applies to processes that start after you set it, so the restart is required. To confirm that a container picked up the setting, do these checks. Always set the container with `-c`, because some pods also run init containers.
 
@@ -113,6 +602,20 @@ A Java option only applies to processes that start after you set it, so the rest
 Do not use `ps` to find the option. The JVM reads `JDK_JAVA_OPTIONS` from the environment, so the option is not on the process command line.
 
 Do not use `java -XX:+PrintFlagsFinal -version` in the container to find the option. This command starts a new JVM, which reads `JDK_JAVA_OPTIONS` but not variables that only a startup script reads, such as `JAVA_OPTS` or `JAVA_OPTS_APPEND`. It does not show the settings of the JVM that runs the component.
+
+### Update: releases with a patched Java runtime
+
+_Updated on November 26, 2026._
+
+The releases listed in the [solution](#notice-83-solution) disable the vulnerable code path, but their container images still contain an affected Java runtime, so container scanners keep reporting CVE-2026-114938 for them. The following releases ship container images with a patched Java runtime (OpenJDK 25.0.5.1, 21.0.13.1, or 17.0.21.1), which fixes the vulnerability:
+
+- Camunda Orchestration Cluster 8.10.11, 8.9.30, 8.8.48
+- Camunda Optimize 8.10.11, 8.9.30, 8.8.48
+- Camunda Management Identity 8.10.6, 8.9.16, 8.8.24
+
+:::warning
+If you run a distribution archive on a Java runtime that you supply, use OpenJDK 21.0.13.1, 25.0.5.1, or later. If you can't update the Java runtime yet, keep setting `JDK_JAVA_OPTIONS=-XX:-UseBASE64Intrinsics` as described in the [solution](#notice-83-solution). Later releases will no longer set `-XX:-UseBASE64Intrinsics`.
+:::
 
 ## Notice 82
 

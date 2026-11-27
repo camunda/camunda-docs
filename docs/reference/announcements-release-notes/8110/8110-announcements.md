@@ -18,6 +18,33 @@ import PageDescription from '@site/src/components/PageDescription';
 </div>
 <div className="release-announcement-content">
 
+#### Engine records contain only the actor in the authorization data {#authorization-actor-only}
+
+Starting with 8.11, events, rejections, and the other commands that the engine writes itself contain only these entries in `Record#getAuthorizations()`:
+
+- `authorized_anonymous_user`
+- `authorized_username`
+- `authorized_client_id`
+
+These records no longer contain `user_token_claims`, `user_groups_claims`, and `authorized_tenants`. Client commands, batch operation commands, and the commands that the engine distributes for a client command still contain all entries. The record format does not change.
+
+Starting with 8.9.29 and 8.10.10, this already applies to events. Starting with 8.9.30 and 8.10.11, it also applies to rejections and the other commands that the engine writes itself. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#event-authorization-actor-only).
+
+The built-in Elasticsearch, OpenSearch, Camunda, and RDBMS exporters are unaffected. The audit log uses only the actor entries and is also unaffected.
+
+**Action:** If you maintain a custom exporter that reads `user_token_claims`, `user_groups_claims`, or `authorized_tenants` on events, rejections, or other commands that the engine writes itself, change it. Use the actor entries, or read the full claims from the client command.
+
+<p className="link-arrow">[camunda/camunda#69323](https://github.com/camunda/camunda/issues/69323)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
 Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Suspend and resume already behave this way starting with 8.10.9. Cancel narrows the filter starting with 8.10.1 and follows the same validation rules starting with 8.10.9. For details, see the [8.10 announcement](/reference/announcements-release-notes/8100/8100-announcements.md#batch-suspend-resume-state-filter).
@@ -86,6 +113,25 @@ Starting with 8.11, when you suspend a process instance, Camunda marks its user 
 </div>
 
 ## Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
+
+The Camunda 8.11 Helm chart (16.x) keeps the 8.10 behavior. It warns about each chart-owned key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The check doesn't cover `global` values, the values of dependency charts, or free-form maps such as annotations and labels.
+
+Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
+
+**Action:** Remove or correct the keys that the `[camunda][warning] UNKNOWN VALUES KEY` messages name. To make unknown keys fail now, set `global.strictValues: true`.
+
+<p className="link-arrow">[Find unknown keys in your values](/self-managed/deployment/helm/operational-tasks/helm-values-schema-validation.md#find-unknown-keys)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

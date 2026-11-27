@@ -20,6 +20,7 @@ module.exports = {
       ],
     },
     "components/modeler/element-templates/element-templates-with-dependencies",
+    "components/modeler/element-templates/evolving-templates",
     "components/modeler/element-templates/additional-resources",
   ],
 };
