@@ -680,6 +680,60 @@ The allow-list caches the declared calls of each process definition to avoid rep
 
 If an intrinsic function call that previously ran now fails the job, see [troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors).
 
+## External document host validation {#external-document-host-validation}
+
+The connector runtime validates the host of every external document URL before it downloads the document. A connector input can reference an [external document](/components/document-handling/upload-document-to-bpmn-process.md#upload-a-document-when-using-any-connector) by URL, and the runtime downloads it when it binds the input. In Connectors 8.9.23+, the runtime checks the URL as follows:
+
+- Only `http` and `https` URLs are downloaded.
+- The runtime resolves the host name and checks every address it resolves to. If any address is a loopback, link-local, private, or other reserved or special-use address, the download is refused. This includes addresses such as `127.0.0.1`, `169.254.169.254`, `10.0.0.0/8`, `192.168.0.0/16`, and `fc00::/7`.
+- Redirects aren't followed.
+
+When the download is refused, the connector fails with the error `The external document URL is not allowed`. The error doesn't say whether the host couldn't be resolved or resolved to a non-public address.
+
+The check is enabled by default. Disable it if your connectors download external documents from hosts in your internal network, or if the connector runtime can't resolve external host names itself, for example because all outbound traffic goes through a forward proxy. To disable it, set the following property:
+
+| Property                                                      | Environment variable                                         | Description                                                                         | Default |
+| ------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------- | ------- |
+| `camunda.connector.document.external.host-validation.enabled` | `CAMUNDA_CONNECTOR_DOCUMENT_EXTERNAL_HOSTVALIDATION_ENABLED` | Whether the runtime checks the host of an external document URL before downloading. | `true`  |
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_DOCUMENT_EXTERNAL_HOSTVALIDATION_ENABLED=false
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    document:
+      external:
+        host-validation:
+          enabled: false
+```
+
+</TabItem>
+</Tabs>
+
+In the Helm chart, set the environment variable through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_DOCUMENT_EXTERNAL_HOSTVALIDATION_ENABLED
+      value: "false"
+```
+
+:::warning
+With the check disabled, any process variable or message payload that sets an external document URL can make the connector runtime send requests to hosts in your internal network. Restrict the runtime's outbound traffic, for example with a network policy or an egress proxy that denies internal addresses.
+:::
+
 ## HTTP proxy configuration
 
 You can configure connectors to route HTTP requests through a proxy server. See [HTTP proxy configuration](./http-proxy-configuration.md) for details.
