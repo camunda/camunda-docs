@@ -1,5 +1,5 @@
 ---
-id: idp-templates
+id: idp-templates-in-projects
 title: IDP templates in Projects
 sidebar_label: IDP templates in Projects
 description: "Create IDP extraction and classification templates as files inside your Projects, next to your BPMN diagrams, DMN tables, and forms."
@@ -7,10 +7,12 @@ keywords:
   [IDP, "IDP templates", "intelligent document processing", alpha, projects]
 ---
 
+<span class="badge badge--alpha">Alpha</span>
+
 Create [intelligent document processing (IDP)](/components/hub/workspace/modeler/intelligent-document-processing.md) templates as files inside your Projects, next to your BPMN diagrams, DMN tables, and forms.
 
-:::caution Alpha feature
-IDP templates in Projects is an [alpha feature](/components/early-access/alpha/alpha-features.md). It is not intended for production use, and its behavior can change in later releases.
+:::note
+IDP templates in Projects is an [alpha feature](/components/early-access/alpha/alpha-features.md). It is not intended for production use, and its behavior can change in later releases. To use it on SaaS, [enable it](#enable-idp-templates-in-projects) through the [alpha features](/components/saas/organization/enable-alpha-features.md) settings of your organization.
 :::
 
 ## About IDP templates in Projects

@@ -413,6 +413,7 @@ module.exports = {
           items: [
             "components/hub/workspace/modeler/idp/idp-configuration",
             "components/hub/workspace/modeler/idp/idp-projects",
+            "components/hub/workspace/modeler/idp/idp-templates-in-projects",
             "components/hub/workspace/modeler/idp/idp-document-classification",
             {
               type: "category",
@@ -606,7 +607,6 @@ module.exports = {
               items: [
                 "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
                 "components/early-access/alpha/feel-copilot/feel-copilot",
-                "components/early-access/alpha/idp-templates/idp-templates",
                 {
                   type: "category",
                   label: "A2A Client",
