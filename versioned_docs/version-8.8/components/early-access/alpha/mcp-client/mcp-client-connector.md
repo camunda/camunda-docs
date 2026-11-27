@@ -107,7 +107,7 @@ this for your specific use case varies on the connector runtime you are using.
    needed.
 3. Edit `connectors-application.properties` and add the following line to include your custom config file:
    ```properties
-   spring.config.import=file:./mcp-client.yml
+   spring.config.import=file:./mcp-clients.yml
    ```
 4. [Start Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
 5. While starting up, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
@@ -152,7 +152,7 @@ this for your specific use case varies on the connector runtime you are using.
    </project>
    ```
 
-3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
+3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started.md).
 4. In your application configuration file (e.g., `application.yml`), add the MCP client configuration as shown above.
 5. If you only want to run the MCP Client connector (for example, because you're connecting the runtime to SaaS), disable the other Agentic AI connectors provided by the `connector-agentic-ai` dependency:
 
@@ -161,7 +161,10 @@ this for your specific use case varies on the connector runtime you are using.
      connector:
        agenticai:
          aiagent:
-           enabled: false
+           outbound-connector:
+             enabled: false
+           job-worker:
+             enabled: false
          ad-hoc-tools-schema-resolver:
            enabled: false
          mcp:

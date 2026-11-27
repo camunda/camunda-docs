@@ -72,14 +72,74 @@ Specifies the intended audience of the token.
 
 ## Common claim patterns by provider
 
-| Provider        | User claim                      | Client claim         | Audience default                            |
-| --------------- | ------------------------------- | -------------------- | ------------------------------------------- |
-| Microsoft Entra | `preferred_username`            | `azp`                | Client ID                                   |
-| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May require configuration                   |
-| Auth0           | `email`                         | `client_id`          | Client ID                                   |
-| Okta            | `email`                         | `client_id`          | Client ID                                   |
-| PingFederate    | `sub`                           | `client_id`          | Shared Access Token Manager for all clients |
-| PingOne         | `sub`                           | `client_id`          | Per-application, via resource/scope grants  |
+| Provider        | User claim                        | Client claim                                  | Audience default                            |
+| --------------- | --------------------------------- | --------------------------------------------- | ------------------------------------------- |
+| Microsoft Entra | `preferred_username`              | `azp`                                         | Client ID                                   |
+| Keycloak        | `sub`                             | `client_id`                                   | May require configuration                   |
+| Auth0           | a custom claim added by an Action | `azp`, or `client_id` on the RFC 9068 profile | Client ID                                   |
+| Okta            | `uid`                             | `cid`                                         | Client ID                                   |
+| PingFederate    | `sub`                             | `client_id`                                   | Shared Access Token Manager for all clients |
+| PingOne         | `sub`                             | `client_id`                                   | Per-application, via resource/scope grants  |
+
+Notes on the table:
+
+- **Keycloak.** Do not use `azp` as the client claim. A Keycloak user token carries `azp` as well, so `clientIdClaim: azp` makes every user a client. Keycloak adds `client_id` to a service account token only, through the `service_account` client scope. `sub` is the stable identifier of the user. The chart default is `preferred_username`, which an administrator can change, and `email` is mutable in the same way. A change to `usernameClaim` changes the username of every user that already exists, so plan it as a migration.
+- **Okta.** A custom authorization server emits `cid` for the client that requested the token, and `uid` for the user. Okta leaves `uid` out when no user is bound to the token, which is every client credentials token. `email` is not a reserved claim of an Okta access token. It reaches the access token only if you add it as a custom claim.
+- **Auth0.** An Auth0 access token carries no claim that only a user has. Add an Auth0 Action that writes a custom claim for user logins, and put the stable `user_id` in it. The name of the client claim follows the JSON Web Token (JWT) profile of the API: the Auth0 profile emits `azp`, and the RFC 9068 profile emits `client_id`.
+- **Microsoft Entra.** `preferred_username` is mutable. Read [Entra cannot do both at once](#entra-cannot-do-both-at-once) before you use this row.
+- **PingFederate.** Every claim of a PingFederate access token comes from the attribute contract that you define on the access token manager. The table shows one such mapping, not a fixed token shape.
+
+## Tell a user token from a client token
+
+A Camunda client application such as c8ctl or Desktop Modeler signs a user in itself, and then calls the API with the access token of that user. A machine client calls the same API with a token of the client credentials flow. Both arrive as `Authorization: Bearer <token>`, so Camunda reads the claims of the token to tell the two apart.
+
+For the order in which the Orchestration Cluster reads those claims, what `preferUsernameClaim` changes, and which claim to check first, see [how principal identification works](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#how-principal-identification-works). This page covers what that guide leaves to you: which claim to name for each provider.
+
+The claim that `usernameClaim` names also becomes the identity of the person. Every group membership and every authorization is keyed to it. Prefer a claim that the provider never rewrites and never gives to another account. If the provider later gives the same value to a new account, that account inherits every authorization that is still keyed to the old value.
+
+Set `clientIdClaim` only if the deployment must recognize machine tokens as well. If you leave it unset, every token becomes a user, which is the behavior of earlier releases.
+
+### Minimal configuration per provider
+
+Put the three settings under the Orchestration Cluster:
+
+```yaml
+orchestration:
+  security:
+    authentication:
+      oidc:
+        audience: "<audience>"
+        usernameClaim: <user claim>
+        clientIdClaim: <client claim>
+        preferUsernameClaim: <true or false>
+```
+
+| Provider                           | `usernameClaim`                    | `clientIdClaim`                               | `preferUsernameClaim` | Evidence                                                                                                                    |
+| ---------------------------------- | ---------------------------------- | --------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Keycloak                           | `sub`                              | `client_id`                                   | `false`               | Measured against Keycloak 26.4 by an automated test on every Camunda build                                                  |
+| Microsoft Entra                    | `preferred_username`               | `azp`                                         | `true`                | Measured on a Camunda development tenant in November 2026, and the configuration that the Camunda Entra guide already ships |
+| Auth0                              | the custom claim of your Action    | `azp`, or `client_id` on the RFC 9068 profile | `true`                | Measured on a Camunda development tenant in November 2026, plus the provider documentation                                  |
+| Okta (custom authorization server) | `uid`                              | `cid`                                         | `true`                | Provider documentation only. Not measured against a tenant                                                                  |
+| PingFederate                       | the user attribute of the contract | `client_id`                                   | `true`                | Provider documentation only. Not measured against a tenant                                                                  |
+
+Do not treat a row that says "not measured" as verified. Decode the first token that your own deployment issues, and confirm the claims before you rely on them.
+
+### Entra cannot do both at once
+
+Microsoft Entra is the one provider where the two goals pull apart.
+
+The stable identifiers of a person in Entra, `sub` and `oid`, also appear in an app-only token, where they name the service principal. Neither can separate the two kinds of token. The user-only claims that identify the person are `preferred_username`, `upn`, `name` and `email`, and Microsoft states that every one of them is mutable and must not drive authorization decisions. Which of them a token carries depends on the account and on the optional claims the application requests.
+
+A real token pair carries two further user-only claims, and neither can serve as `usernameClaim`. `scp` holds the scopes that were requested and consented to, so it describes what the token may do and not who holds it, and any number of people share one value. `sid` is the session identifier, so it changes at every sign-in.
+
+The kind of account changes the shape as well. In tokens measured against a Camunda development tenant in November 2026, a member carried `upn` while a guest invited from another tenant carried `email` and `idp` and no `upn`. That is not a rule for every tenant: the optional claim `include_externally_authenticated_upn` puts a `upn` in a guest token, and the claim configuration of the application changes the rest. Decode one token of each kind that your own tenant issues before you choose the claim.
+
+An Entra deployment therefore picks one of two:
+
+- **Recognize machine tokens.** Use the row above. The identity of a person is then `preferred_username`, and a rename in Entra gives that person a new identity in Camunda, with no groups and no authorizations until an operator creates them again.
+- **Keep a stable identity.** Leave `clientIdClaim` unset and set `usernameClaim: oid`. Every token then becomes a user, and the API cannot tell a machine token from a user token.
+
+A deployment that needs both at once is not served by these settings today.
 
 ## Verify audience configuration
 

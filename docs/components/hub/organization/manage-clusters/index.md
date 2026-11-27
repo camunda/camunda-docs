@@ -78,7 +78,7 @@ You can manage a cluster with the following actions:
 | :----------------------------------------------------- | :-------------------------------------------------------------------------- |
 | Rename, resume, update, resize, or delete a cluster    | [Manage your cluster](/components/saas/clusters/manage-cluster.md)          |
 | Create and manage API clients                          | [Manage API clients](/components/saas/clusters/manage-api-clients.md)       |
-| Create secrets for your connectors                     | [Manage connector secrets](/components/saas/clusters/manage-secrets.md)     |
+| Create cluster secrets                                 | [Manage cluster secrets](/components/saas/clusters/manage-secrets.md)       |
 | Get notified when process instances stop with an error | [Create an alert](/components/saas/clusters/manage-alerts.md)               |
 | Restrict access to the cluster                         | [Manage IP allowlists](/components/saas/clusters/manage-ip-allowlists.md)   |
 | Back up the cluster                                    | [Create cluster backups](/components/saas/clusters/cluster-backups.md)      |

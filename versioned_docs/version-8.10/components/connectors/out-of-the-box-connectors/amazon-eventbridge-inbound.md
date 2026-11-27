@@ -36,10 +36,10 @@ Some properties apply only to certain BPMN elements. The **Description** column 
 
 ### Webhook
 
-| Property       | Type     | Required | Description                                                                                                                                                                                                                                                                               | Example |
-| :------------- | :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| Webhook method | Dropdown | Yes      | The HTTP method that triggers the webhook: **Any** (default), **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it isn't essential to specify a method for the webhook trigger.                                                                                                |         |
-| Webhook ID     | String   | Yes      | The ID is part of the webhook URL. The URL has the pattern `http(s)://<base URL>/webhooks/<webhook ID>`. Learn how to [find the webhook URL](/components/connectors/protocol/http-webhook.md#activate-the-http-webhook-connector-by-deploying-your-diagram) after deploying your diagram. |         |
+| Property       | Type     | Required | Description                                                                                                                                                                                                                                                                              | Example |
+| :------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Webhook method | Dropdown | Yes      | The HTTP method that triggers the webhook: **Any** (default), **Get**, **Post**, **Put**, or **Delete**. Select **Any** if it isn't essential to specify a method for the webhook trigger.                                                                                               |         |
+| Webhook ID     | String   | Yes      | The ID is part of the webhook URL. The URL has the pattern `http(s)://<base URL>/inbound/<webhook ID>`. Learn how to [find the webhook URL](/components/connectors/protocol/http-webhook.md#activate-the-http-webhook-connector-by-deploying-your-diagram) after deploying your diagram. |         |
 
 ### Authorization
 

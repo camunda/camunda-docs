@@ -15,6 +15,32 @@ For example, the property `camunda.client.worker.defaults.max-jobs-active` is re
 For a full set of properties, head over to the [properties reference](./properties-reference.md)
 :::
 
+## Legacy property names {#legacy-property-names}
+
+The Camunda Spring Boot Starter 8.8 and later reads `camunda.client.*` properties, while older Spring SDK versions used other prefixes. For example, the default maximum of active jobs per worker is configured as follows:
+
+| Camunda version | Library                     | Property                                         |
+| :-------------- | :-------------------------- | :----------------------------------------------- |
+| 8.8 and later   | Camunda Spring Boot Starter | `camunda.client.worker.defaults.max-jobs-active` |
+| 8.6 and 8.7     | Spring Zeebe SDK            | `camunda.client.zeebe.defaults.max-jobs-active`  |
+| 8.5 and earlier | Spring Zeebe SDK            | `zeebe.client.worker.max-jobs-active`            |
+
+The starter still reads legacy properties if you don't set their replacement, and logs a warning at startup. A legacy property can also override the defaults of a [mode](#modes), so rename legacy properties when you upgrade. These are the most common renames:
+
+| Legacy property                                                                           | Replacement                                       |
+| :---------------------------------------------------------------------------------------- | :------------------------------------------------ |
+| `zeebe.client.broker.gateway-address`, `camunda.client.zeebe.grpc-address`                | `camunda.client.grpc-address`                     |
+| `zeebe.client.broker.rest-address`, `camunda.client.zeebe.rest-address`                   | `camunda.client.rest-address`                     |
+| `zeebe.client.security.plaintext`                                                         | None. Use `http://` or `https://` in the address. |
+| `zeebe.client.cloud.cluster-id`, `camunda.client.cluster-id`                              | `camunda.client.cloud.cluster-id`                 |
+| `zeebe.client.cloud.client-id`, `zeebe.client.id`                                         | `camunda.client.auth.client-id`                   |
+| `zeebe.client.cloud.client-secret`, `zeebe.client.secret`                                 | `camunda.client.auth.client-secret`               |
+| `zeebe.client.worker.override.<job-type>.*`, `camunda.client.zeebe.override.<job-type>.*` | `camunda.client.worker.override.<job-type>.*`     |
+
+For the complete list, see the [deprecated properties](./properties-reference.md#deprecated-properties) in the properties reference.
+
+The same renames apply to environment variables. Environment variables that only the Java client reads, such as `CAMUNDA_CLIENT_ID`, `CAMUNDA_CLIENT_SECRET`, and `CAMUNDA_GRPC_ADDRESS`, don't apply to the starter. Use the variable that matches the Spring property instead, such as `CAMUNDA_CLIENT_AUTH_CLIENTID`.
+
 ## Modes
 
 The Camunda Spring Boot Starter has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
