@@ -31,6 +31,80 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 96
+
+### Publication date
+
+TODO (Security): publication date
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+The [SQL Database connector](/components/connectors/out-of-the-box-connectors/sql.md) uses the Microsoft JDBC Driver for SQL Server to connect to Microsoft SQL Server databases. The connection URL and the driver properties of the connector are passed to this driver. In affected versions, the connector didn't restrict driver options that act on the connector runtime itself:
+
+- With Always Encrypted and secure enclaves turned on, the driver fetches an attestation URL. This URL can point to a local file. A database server can make the driver read that file, and the file content then appears in the error message of the connector job.
+- Some authentication modes use the identity of the connector runtime instead of the credentials in the connection, for example managed identity, default, and integrated authentication. The driver then sends a token of the runtime's identity to the database server.
+- Other options make the driver read local files, such as key stores, trust stores, and certificates, or load classes by name.
+
+An attacker can point the connector at a database server they control and use these options. On Self-Managed, this can expose files that the connector runtime can read, for example Kubernetes service account tokens, keys, and configuration files, and tokens of the runtime's Azure identity if it has one.
+
+An attacker must be able to do one of the following:
+
+- Deploy a process that uses the SQL Database connector.
+- Control the connection details of a SQL Database connector through a process variable.
+- On Camunda Connectors 8.10 and later: validate a SQL Database credential in Camunda Hub, if credential validation is turned on. The validation opens a connection to the database server in the credential.
+
+This vulnerability is a variant of [notice 93](#notice-93), through another database driver. The fix for notice 93 doesn't cover it.
+
+TODO (Security): exploitation statement.
+
+Severity: TODO (Security). [?]
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- TODO (Security): Camunda Connectors ≤ 8.10.x, ≤ 8.9.x, ≤ 8.8.x, ≤ 8.7.x, or ≤ 8.6.x
+- TODO (Security): Camunda Connectors 8.11.0 alphas
+
+Earlier versions, which are no longer supported, are also affected.
+
+### Solution
+
+Camunda has released a fix: the SQL Database connector now checks SQL Server driver options before it connects, whatever the connection URL or driver properties say. This also applies to credential validation. The connector rejects these options unless they keep their default value:
+
+- Always Encrypted and enclave attestation: `columnEncryptionSetting`, `enclaveAttestationUrl`, `enclaveAttestationProtocol`, and all `keyStore*` and `keyVaultProvider*` options
+- the runtime's own identity: `integratedSecurity`, `authenticationScheme`, `useDefaultGSSCredential`, `jaasConfigurationName`, `useDefaultJaasConfig`, and `msiClientId`
+- class names: `socketFactoryClass`, `socketFactoryConstructorArg`, `trustManagerClass`, `trustManagerConstructorArg`, and `accessTokenCallbackClass`
+- local files: `trustStore`, `serverCertificate`, `clientCertificate`, and `clientKey`
+
+The `authentication` option only accepts `NotSpecified`, `SqlPassword`, `ActiveDirectoryPassword`, and `ActiveDirectoryServicePrincipal`, which use the credentials in the connection.
+
+This is a breaking change: a SQL Server connection that uses one of these options fails with an error that names the option. This includes connections that use Always Encrypted, and managed identity, default, integrated, interactive, or service principal certificate authentication.
+
+Camunda has provided the following releases which contain the fix:
+
+- TODO (Security): Camunda Connectors 8.10.x, 8.9.x, 8.8.x, 8.7.x, 8.6.x
+
+TODO (Security): 8.11 alpha that contains the fix.
+
+TODO (Security): Camunda 8 SaaS rollout. You don't need to do anything to get the fix on Camunda 8 SaaS. However, the breaking change described above also applies there: processes that use an option the fix now rejects fail and must be changed.
+
+**Recommendation** for Self-Managed: Upgrade to one of the releases above. This is the only complete fix.
+
+**Interim mitigation**: Use these measures only if you can't upgrade right away, and only until you upgrade. They reduce the risk but don't remove the vulnerability.
+
+- Only allow trusted users to deploy processes, and don't map untrusted input into the connection details of the SQL Database connector.
+- If you don't use the SQL Database connector, turn it off:
+  - Camunda Connectors 8.8 and later: set `CONNECTOR_OUTBOUND_DISABLED=io.camunda:connector-jdbc:1`.
+  - Camunda Connectors 8.6 and 8.7: set `CONNECTOR_SQL_DATABASE_CONNECTOR_TYPE` to an unused job type. Jobs of the SQL Database connector are then no longer processed.
+- On Camunda Connectors 8.10 and later, turning off the connector doesn't turn off credential validation. If you turned credential validation on, turn it off until you upgrade, as described in [notice 93](#notice-93).
+- Restrict outbound network traffic from the connector runtime to the database servers it needs.
+- If the connector runtime runs with an Azure managed identity or workload identity, limit the permissions of that identity to what the runtime needs.
+
 ## Notice 95
 
 ### Publication date
