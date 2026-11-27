@@ -22,6 +22,14 @@ Before you begin, review the [RPA known issues](https://github.com/camunda/rpa-w
 
 To start building RPA scripts, see [Get started with RPA](./getting-started.md).
 
+## Security notice
+
+RPA scripts run with the worker’s operating system permissions and can access its files, network, and inherited environment, including cluster credentials. The local testing feature, called the sandbox, does not isolate scripts from the host.
+
+Run only trusted scripts, restrict access to the worker’s HTTP API, and keep development workers separate from production credentials and data. Authenticating the worker to Camunda does not authenticate incoming requests to the worker.
+
+Before starting a worker, review the [RPA security configuration and upgrade requirements](./production.md#secure-the-rpa-worker).
+
 ## Further resources
 
 - Learn how to configure your RPA workers for [production use cases](./production.md).

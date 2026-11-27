@@ -33,7 +33,7 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
-## Notice 95
+## Notice 98
 
 ### Publication date
 
@@ -90,7 +90,7 @@ On Camunda 8 SaaS, Camunda deployed the fix to all running clusters with a force
   - Camunda Connectors 8.7: set `CONNECTOR_IDP_EXTRACTION_OUTBOUND_CONNECTOR_TYPE` to an unused job type. Jobs of the IDP connector are then no longer processed.
 - Restrict outbound network traffic from the connector runtime to the hosts it needs, and block access to cloud metadata endpoints.
 
-## Notice 94
+## Notice 97
 
 ### Publication date
 
@@ -161,7 +161,7 @@ On Camunda 8 SaaS, Camunda deployed the fix to all running clusters with a force
   - Camunda Connectors 8.6 and 8.7: set `CONNECTOR_KAFKA_PRODUCER_TYPE` and `CONNECTOR_KAFKA_CONSUMER_TYPE` to unused types.
 - Restrict outbound network traffic from the connector runtime to the Kafka brokers and schema registries it needs.
 
-## Notice 93
+## Notice 96
 
 ### Publication date
 
@@ -220,6 +220,110 @@ On Camunda 8 SaaS, Camunda deployed the fix to all running clusters with a force
   - Camunda Connectors 8.6 and 8.7: set `CONNECTOR_SQL_DATABASE_CONNECTOR_TYPE` to an unused job type. Jobs of the SQL Database connector are then no longer processed.
 - On Camunda Connectors 8.10 and later, turning off the connector doesn't turn off credential validation. If you turned [credential validation](/self-managed/components/connectors/connectors-configuration.md#enable-credential-validation) on, turn it off until you upgrade: leave `camunda.connector.configuration.validation.unsecured` unset or `false`, and remove `camunda.connector.auth.self-managed.issuer` and `camunda.connector.auth.self-managed.audience`. The endpoint then answers `404`. If you also use these two properties to secure the management API, restrict network access to the `/configurations` endpoint to Camunda Hub instead.
 - Restrict outbound network traffic from the connector runtime to the database servers it needs.
+
+## Notice 95
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda RPA worker
+
+### Impact
+
+The RPA worker accepts script evaluation requests without authenticating the caller when its local sandbox is enabled, which is the default in the reported version. A caller who can reach the HTTP API can submit a Robot Framework script and execute code with the worker's operating system permissions.
+
+Scripts inherit the worker's environment, which can include Camunda client credentials and other secrets. The sandbox is a local testing feature, not an isolation boundary.
+
+Container deployments are particularly exposed when the worker port is published on all host interfaces. The default HTTP port is `36227`.
+
+### How to determine if the installation is affected
+
+RPA worker 1.3.2 is confirmed to be affected. The complete affected version range is pending confirmation.
+
+The script execution issue applies when local evaluation is enabled (`camunda.rpa.sandbox.enabled=true`) and an untrusted caller can reach the worker API. Camunda client credentials authenticate outbound cluster requests; they do not protect incoming worker API requests.
+
+### Solution
+
+Upgrade to [RPA worker 1.3.3](https://github.com/camunda/rpa-worker/releases/tag/1.3.3) or later. Upgrading is required to remediate this vulnerability; the configuration measures below are alternatives to reduce exposure if you can't upgrade immediately.
+
+The patched worker requires a separately configured bearer token for script evaluation and other privileged worker APIs. It also disables local evaluation by default in container images. A Desktop Modeler release supporting worker API tokens is pending. Once that release is available, generate a worker API token and enter it in Desktop Modeler to resume local testing. Older Desktop Modeler versions can still edit scripts but cannot test them against the patched worker.
+
+If you can't upgrade immediately:
+
+- Disable local evaluation in production with `camunda.rpa.sandbox.enabled=false`.
+- Restrict the worker API to trusted local clients using loopback binding and network access controls. Leave container ports unpublished unless required; for local access, use `-p 127.0.0.1:36227:36227` instead of `-p 36227:36227`.
+- Run only trusted scripts under a dedicated operating system account with the minimum permissions required. Keep development workers separate from production credentials and data.
+
+Disabling evaluation does not protect the BPMN-error callback described in Notice 93.
+
+## Notice 94
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda RPA worker
+
+### Impact
+
+The RPA worker does not validate the Host header or authenticate script evaluation requests in affected versions. Binding the API to loopback does not, by itself, prevent an attacker-controlled website from attempting to access it through DNS rebinding.
+
+If a browser permits the rebinding request, a malicious page could submit scripts to a worker with local evaluation enabled and read the results. Those scripts run with the worker's permissions and can access its environment. Exploitation depends on the user visiting the malicious page while the worker is running and on the browser's local-network protections.
+
+The absence of permissive CORS headers does not establish protection against DNS rebinding.
+
+### How to determine if the installation is affected
+
+RPA worker 1.3.2 is confirmed to accept an untrusted Host header. The complete affected version range is pending confirmation.
+
+A local worker with evaluation enabled may be exposed even when its listener is bound to loopback. Browser-specific protections can limit exploitation but do not correct the worker's missing checks.
+
+### Solution
+
+Upgrade to [RPA worker 1.3.3](https://github.com/camunda/rpa-worker/releases/tag/1.3.3) or later. Upgrading is required to remediate this vulnerability.
+
+The patched worker validates exact Host authorities, including ports, and requires authentication for privileged API requests. Additional authorities for intentional remote deployments must be explicitly configured. Host validation complements authentication and network restrictions; it does not replace them.
+
+If you can't upgrade immediately, disable local evaluation when it is not needed, stop development workers when they are not in use, and avoid browsing untrusted websites from an account running a worker. These measures reduce exposure but do not correct the missing checks. Network restrictions remain necessary but do not alone resolve browser-mediated loopback access. Browser local-network protections provide defense in depth, not a substitute for upgrading.
+
+## Notice 93
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda RPA worker
+
+### Impact
+
+The RPA worker's BPMN-error callback accepts a job key, an error code, and variables without authenticating the caller or checking that the job belongs to the calling script's active execution. The worker forwards the command to Camunda using its configured cluster credentials.
+
+An untrusted caller who can reach the worker API and supply an applicable job key can attempt to interrupt process execution and inject variables. Successful exploitation depends on the worker's cluster permissions and the job state. Camunda client authentication does not protect this incoming callback.
+
+The callback remains available when `camunda.rpa.sandbox.enabled=false`, because production scripts use it.
+
+### How to determine if the installation is affected
+
+RPA worker 1.3.2 is confirmed to be affected. The complete affected version range is pending confirmation.
+
+An installation is exposed when an untrusted caller can reach the worker's HTTP API and the worker has permission to send the requested BPMN error to Camunda. Disabling local evaluation alone does not remove this exposure.
+
+### Solution
+
+Upgrade to [RPA worker 1.3.3](https://github.com/camunda/rpa-worker/releases/tag/1.3.3) or later, including its compatible Python runtime. Upgrading is required to remediate this vulnerability; network restrictions are an alternative to reduce exposure if you can't upgrade immediately.
+
+The patched worker requires a separate short-lived credential for each script execution and binds BPMN-error callbacks to the execution's associated job. The worker revokes the credential when execution completes, fails, or is canceled. The worker API token cannot authorize callbacks.
+
+The updated `Camunda` Python library sends execution credentials automatically. Upgrade the worker and its Python runtime together; older libraries cannot authenticate callbacks to an upgraded worker. Static runtimes must include the updated library.
+
+If you can't upgrade immediately, prevent untrusted access to the worker API through loopback binding, firewalls, and container network restrictions. Production jobs do not require a published container HTTP port. Restrict the worker's cluster permissions to those required by its tasks. Do not disable runtime callbacks as a workaround, because doing so breaks script functionality.
 
 ## Notice 92
 

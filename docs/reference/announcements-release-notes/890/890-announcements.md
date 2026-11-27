@@ -133,20 +133,21 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                    |
-| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| [8.9.30](https://github.com/camunda/camunda/releases/tag/8.9.30)    | Core       | Breaking change | [Rejections and engine commands contain only the actor in the authorization data](#event-authorization-actor-only)            |
-| [8.9.29](https://github.com/camunda/camunda/releases/tag/8.9.29)    | Core       | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                    |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
-| `8.9 gen13`                                                         | SaaS       | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
-| [8.9.13](https://github.com/camunda/connectors/releases/tag/8.9.13) | Connectors | Breaking change | [Intrinsic function allow-list](#connector-intrinsic-function-allow-list)                                                     |
-| [8.9.10](https://github.com/camunda/connectors/releases/tag/8.9.10) | Connectors | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                     |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                                |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.31](https://github.com/camunda/camunda/releases/tag/8.9.31)    | Core       | Regression      | [Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default](#spring-boot-starter-jackson2-object-mapper) |
+| [8.9.30](https://github.com/camunda/camunda/releases/tag/8.9.30)    | Core       | Breaking change | [Rejections and engine commands contain only the actor in the authorization data](#event-authorization-actor-only)                        |
+| [8.9.29](https://github.com/camunda/camunda/releases/tag/8.9.29)    | Core       | Breaking change | [Events contain only the actor in the authorization data](#event-authorization-actor-only)                                                |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                            |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                           |
+| `8.9 gen13`                                                         | SaaS       | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions)             |
+| [8.9.13](https://github.com/camunda/connectors/releases/tag/8.9.13) | Connectors | Breaking change | [Intrinsic function allow-list](#connector-intrinsic-function-allow-list)                                                                 |
+| [8.9.10](https://github.com/camunda/connectors/releases/tag/8.9.10) | Connectors | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                                 |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                              |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                          |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                    |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                   |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                             |
 
 ## Agentic orchestration
 
@@ -311,6 +312,43 @@ Starting with 8.9.0-alpha3, the default [Camunda Spring Boot Starter](../../../a
 :::info Spring Boot support timeline
 OSS support for Spring Boot 3.x ends in June 2026. This is a Spring framework lifecycle change. Camunda will continue to maintain `camunda-spring-boot-3-starter` beyond that date. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for context on Spring's support lifecycle.
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now uses the application's Jackson 2 `ObjectMapper` by default {#spring-boot-starter-jackson2-object-mapper}
+
+**Affected versions:** 8.9.0 to 8.9.30. **Fixed in:** 8.9.31.
+
+In the setups listed below, the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
+has ignored an auto-configured Jackson 2 `ObjectMapper` and used the default Camunda JSON mapper instead, so
+`java.time` values in job variables fail to serialize ([camunda/camunda#70033](https://github.com/camunda/camunda/issues/70033)).
+8.9.31 and 8.10.12 fix this regression: the starter uses a copy of the application's `ObjectMapper` by default, as in 8.8.
+
+This fix can be a breaking change if you rely on the default mapper's output. For example:
+
+- `java.util.Date` values are written as ISO strings (`"2026-11-19T00:00:00.000+00:00"`) instead of epoch
+  milliseconds (`1795046400000`). FEEL and DMN expressions that compare them as numbers evaluate to `null`.
+  Variables that are already stored keep their format.
+- Your `spring.jackson.*` (Spring Boot 3) or `spring.jackson2.*` (Spring Boot 4) properties, customizer beans, and
+  Jackson `Module` beans now apply to the client's JSON: job variables and REST requests to the cluster.
+
+You're affected if you use one of the following and don't define your own `JsonMapper` or `ObjectMapper` bean:
+
+- Spring Boot 4 applications with `spring-boot-jackson2`, and applications that get a Jackson 2 `ObjectMapper`
+  from a library.
+- Spring Boot 3 applications on 8.10 only. On 8.9 they already use Spring Boot's `ObjectMapper`.
+
+Spring Boot 4 applications that use only Jackson 3 aren't affected.
+
+**Action:** To keep the earlier behavior, set `camunda.client.use-bare-object-mapper=true`. This property is
+deprecated, logs a warning, is only supported in 8.9 and 8.10, and is removed in 8.11.
 
 </div>
 </div>
