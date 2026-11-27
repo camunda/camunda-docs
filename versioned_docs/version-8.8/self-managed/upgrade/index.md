@@ -10,24 +10,18 @@ import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 import './react-components/\_card.css';
 
-import OverviewImg from '../assets/hero-upgrade.png';
+import LandingHero from '@site/src/components/LandingHero';
+import { upgradeHero } from './react-components/_hero-data';
 
 <h3 class="subheading">Upgrade your Camunda 8 Self-Managed deployment from version 8.7 to 8.8.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
-<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+<LandingHero card={upgradeHero} href="/self-managed/upgrade/prepare-for-upgrade/" ariaLabel="Prepare for upgrade">
 
 Get started by preparing your Self-Managed environment for upgrade to Camunda 8.8. Confirm upgrade eligibility, understand platform-level changes, and identify actions you might need to take before upgrading.
 
 <p class="link-button">[Prepare for upgrade](./prepare-for-upgrade.md)</p>
 
-</div>
-<div class="double-column-right" style={{flex: '1'}}>
-
-<img src={OverviewImg} alt="Upgrade your Camunda 8 Self-Managed deployment from version 8.7 to 8.8" title="Upgrade your Camunda 8 Self-Managed deployment from version 8.7 to 8.8" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-</div>
+</LandingHero>
 
 ## About
 

@@ -1,0 +1,682 @@
+/* Landing page hero. Colors follow the docs theme; the dark values mirror the
+   [data-theme="dark"] tokens in src/css/custom.css. */
+.hero {
+  --hero-grid-tint: #dcd8f7;
+  --hero-grid-gap: #ffffff;
+  --hero-card-bg: #ffffff;
+  --hero-card-line: #e0e0e3;
+  --hero-card-shadow:
+    0 1px 2px rgba(23, 23, 40, 0.05), 0 10px 28px -10px rgba(23, 23, 60, 0.16);
+  --hero-heading: #27272a;
+  --hero-fg: #3f3f46;
+  --hero-muted: #71717a;
+  --hero-chrome: #f4f4f5;
+  --hero-code: #f4f4f5;
+  --hero-ok-bg: #ddfae5;
+  --hero-ok-fg: #214929;
+  --hero-info-bg: #dfeffd;
+  --hero-info-fg: #1e3f63;
+  --hero-agent: #6967ff;
+  --hero-system: #fc5d0d;
+  --hero-people: #a8c54d;
+
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  margin-bottom: 50px;
+}
+
+:global([data-theme="dark"]) .hero {
+  --hero-grid-tint: #38386d;
+  --hero-grid-gap: #0a0a0a;
+  --hero-card-bg: #151517;
+  --hero-card-line: #2c2c31;
+  --hero-card-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.7);
+  --hero-heading: #fafafa;
+  --hero-fg: #d4d4d4;
+  --hero-muted: #a1a1aa;
+  --hero-chrome: #141414;
+  --hero-code: #18181b;
+  --hero-ok-bg: #12301c;
+  --hero-ok-fg: #8ee6a8;
+  --hero-info-bg: #12294a;
+  --hero-info-fg: #9cc8f5;
+  --hero-agent: #8785ff;
+  --hero-system: #ff905c;
+  --hero-people: #c6e65a;
+}
+
+@media (min-width: 997px) {
+  .hero {
+    align-items: flex-start;
+  }
+  /* .art has 24px top padding; match it so the copy meets the card top. */
+  .hero .copy {
+    margin-top: 24px;
+  }
+  .hero .copy :global(.link-button) {
+    padding-top: 10px;
+  }
+}
+
+.copy {
+  flex: 1.35;
+  min-width: 0;
+}
+
+.art {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  padding: 24px 8px 36px;
+}
+
+/* Pixel grid: tint cut into 14px cells by two gradients in the page color
+   (Infima's --ifm-background-color is transparent in light mode, so it is not
+   used),
+   faded out at every edge with two crossed linear masks (a radial mask reads
+   as a sphere). */
+.field {
+  position: absolute;
+  inset: -8% -10% -4%;
+  z-index: -1;
+  background-color: var(--hero-grid-tint);
+  background-image:
+    linear-gradient(var(--hero-grid-gap) 2px, transparent 2px),
+    linear-gradient(90deg, var(--hero-grid-gap) 2px, transparent 2px);
+  background-size: 14px 14px;
+  background-position: -1px -1px;
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 10%,
+      #000 28%,
+      #000 72%,
+      rgba(0, 0, 0, 0.25) 90%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 12%,
+      #000 32%,
+      #000 68%,
+      rgba(0, 0, 0, 0.25) 88%,
+      transparent 100%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 10%,
+      #000 28%,
+      #000 72%,
+      rgba(0, 0, 0, 0.25) 90%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 12%,
+      #000 32%,
+      #000 68%,
+      rgba(0, 0, 0, 0.25) 88%,
+      transparent 100%
+    );
+  mask-composite: intersect;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--hero-card-bg);
+  border: 1px solid var(--hero-card-line);
+  border-radius: 8px;
+  box-shadow: var(--hero-card-shadow);
+  padding: 15px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  /* Every card is at least this tall so they match. A minimum, not a fixed
+     height, so a card can grow when text is enlarged or labels wrap. */
+  min-height: 164px;
+  color: var(--hero-heading);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* The main card and the overlay sit in one group (one link when href is set). */
+.group {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 380px;
+}
+.group > .card {
+  max-width: none;
+}
+
+/* Second card floated over the main card's bottom-right corner. */
+.art {
+  --hero-overlay-width: 58%;
+}
+.overlay {
+  position: absolute;
+  right: -8px;
+  bottom: -30px;
+  width: var(--hero-overlay-width);
+  min-height: 0;
+  z-index: 2;
+}
+@media (max-width: 996px) {
+  .overlay {
+    right: 0;
+  }
+}
+
+/* Hub overlay */
+.hubHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 9px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--hero-card-line);
+}
+.hubCreate {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 5px 7px;
+  border-radius: 4px;
+  background: var(--hero-heading);
+  color: var(--hero-card-bg);
+  white-space: nowrap;
+}
+.hubList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.hubTile {
+  display: grid;
+  gap: 3px;
+  padding: 8px 9px;
+  border: 1px solid var(--hero-card-line);
+  border-radius: 6px;
+  margin: 0;
+}
+.hubTileHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11.5px;
+}
+.hubCounts {
+  font-size: 10.5px;
+  color: var(--hero-muted);
+}
+/* Whole card is a link */
+a.cardLink {
+  display: block;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--hero-heading);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+a.cardLink:hover,
+a.cardLink:focus-visible {
+  text-decoration: none;
+  color: var(--hero-heading);
+  transform: translateY(-2px);
+}
+a.cardLink:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  a.cardLink {
+    transition: none;
+  }
+  a.cardLink:hover,
+  a.cardLink:focus-visible {
+    transform: none;
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--hero-card-line);
+  margin-bottom: 10px;
+}
+.cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+/* Reset the docs-wide img styles (border, 20px padding, margins, dark-mode
+   white background), which turn a 16px icon into an empty box. */
+.hero .cardTitle .titleIcon {
+  width: 22px;
+  height: 22px;
+  margin: 0 6px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  vertical-align: -6px;
+}
+.cardTitle .agentBadge {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -3px;
+}
+.cardMeta {
+  font-size: 11.5px;
+  color: var(--hero-muted);
+  white-space: nowrap;
+}
+
+/* Table */
+.card .table {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+.card .table th,
+.card .table td {
+  border: 0;
+  background: transparent;
+  padding: 4px 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: left;
+}
+.card .table th {
+  font-weight: 400;
+  color: var(--hero-muted);
+  font-size: 12px;
+  padding-bottom: 6px;
+}
+.card .table tr {
+  background: transparent;
+  border: 0;
+}
+.card .table th:not(:first-child),
+.card .table td:not(:first-child) {
+  padding-left: 12px;
+}
+.card .table td:first-child {
+  white-space: normal;
+}
+.overlay .table td:first-child {
+  white-space: nowrap;
+}
+.overlay .table {
+  font-size: 12px;
+}
+.overlay .table .pill {
+  font-size: 10.5px;
+  padding: 2px 6px;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+  color: var(--hero-fg);
+}
+
+/* Status pills and participant markers */
+.pill {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.ok {
+  background: var(--hero-ok-bg);
+  color: var(--hero-ok-fg);
+}
+.info {
+  background: var(--hero-info-bg);
+  color: var(--hero-info-fg);
+}
+.neutral {
+  background: var(--hero-chrome);
+  color: var(--hero-fg);
+  box-shadow: inset 0 0 0 1px var(--hero-card-line);
+}
+.role {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--hero-fg);
+}
+.role i {
+  width: 8px;
+  height: 8px;
+  display: block;
+  flex: none;
+}
+.role.agent i {
+  background: var(--hero-agent);
+}
+.role.system i {
+  background: var(--hero-system);
+}
+.role.people i {
+  background: var(--hero-people);
+}
+
+/* Notes list */
+.card .notes {
+  list-style: none;
+  margin: auto 0;
+  padding: 4px 0 1px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 8px 16px;
+  align-items: center;
+}
+.card .notes li {
+  display: contents;
+  margin: 0;
+}
+.tag {
+  justify-self: end;
+}
+.noteTitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hero-heading);
+  min-width: 0;
+}
+
+/* Process strip: start, tasks, end. Solid = done or running, dashed = not
+   reached yet. Marker square = participant. */
+.flow {
+  display: flex;
+  align-items: center;
+  margin: auto 0;
+  padding: 8px 2px 2px;
+}
+.event {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--hero-heading);
+  background: var(--hero-card-bg);
+}
+.end {
+  border-width: 3px;
+  border-color: var(--hero-muted);
+}
+.seq {
+  flex: 0 0 12px;
+  height: 0;
+  border-top: 1.5px solid var(--hero-heading);
+  position: relative;
+}
+.seq::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4.75px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid var(--hero-heading);
+}
+.future {
+  border-top-style: dashed;
+  border-top-color: var(--hero-muted);
+}
+.future::after {
+  border-left-color: var(--hero-muted);
+}
+.task {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 46px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 6px 4px;
+  border: 1.5px solid var(--hero-heading);
+  border-radius: 6px;
+  background: var(--hero-card-bg);
+  font-size: 11.5px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-align: center;
+  color: var(--hero-heading);
+}
+.marker {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  display: block;
+}
+.task.system .marker {
+  background: var(--hero-system);
+}
+.task.agent .marker {
+  background: var(--hero-agent);
+}
+.task.people .marker {
+  background: var(--hero-people);
+}
+.task.active {
+  border-color: var(--hero-agent);
+  background: color-mix(in srgb, var(--hero-agent) 9%, var(--hero-card-bg));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hero-agent) 22%, transparent);
+}
+.task.next {
+  border-style: dashed;
+  border-color: var(--hero-muted);
+  color: var(--hero-fg);
+}
+.adhoc {
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--hero-agent);
+}
+.doneBadge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--hero-ok-bg);
+  color: var(--hero-ok-fg);
+  box-shadow: 0 0 0 2px var(--hero-card-bg);
+}
+.doneBadge svg {
+  width: 10px;
+  height: 10px;
+}
+/* Mini Modeler: palette plus diagram canvas */
+.modeler {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+.palette {
+  flex: none;
+  display: grid;
+  grid-template-columns: 13px;
+  gap: 0;
+  align-content: space-between;
+  justify-items: center;
+  padding: 6px 7px;
+  border: 1px solid var(--hero-card-line);
+  border-radius: 6px;
+  background: var(--hero-chrome);
+  color: var(--hero-fg);
+}
+.palette svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+.canvas {
+  flex: 1;
+  min-width: 0;
+  height: auto;
+  max-height: 82px;
+  color: var(--hero-heading);
+}
+.canvasDots {
+  border: 1px solid var(--hero-card-line);
+  border-radius: 6px;
+  background-image: radial-gradient(
+    var(--hero-card-line) 0.8px,
+    transparent 0.8px
+  );
+  background-size: 8px 8px;
+}
+.canvasTall {
+  max-height: 132px;
+}
+.selection {
+  fill: none;
+  stroke: var(--hero-info-fg);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+}
+@keyframes agentPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--hero-agent) 22%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--hero-agent) 8%, transparent);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .task.active {
+    animation: agentPulse 2.4s ease-in-out infinite;
+  }
+}
+
+/* API request */
+.reqLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.reqLine code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 12.5px;
+  color: var(--hero-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.method {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--hero-info-bg);
+  color: var(--hero-info-fg);
+}
+.card .pre {
+  margin: auto 0 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--hero-code);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--hero-fg);
+  overflow-x: auto;
+  white-space: pre;
+}
+.overlay .pre {
+  margin: 0 0 8px;
+  padding: 6px 9px;
+  font-size: 10.5px;
+  line-height: 1.45;
+  overflow: hidden;
+}
+.jsonKey {
+  color: var(--hero-heading);
+}
+.jsonString {
+  color: var(--hero-info-fg);
+}
+.resp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.resp code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 11.5px;
+  color: var(--hero-muted);
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Small screens: card stacks above the copy (the old PNG was hidden here). */
+@media (max-width: 996px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .art {
+    padding: 16px 4px 28px;
+  }
+  .card {
+    max-width: 420px;
+  }
+}
