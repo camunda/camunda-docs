@@ -40,18 +40,11 @@ export const gettingStartedCards = [
       "Start by creating an IDP project on the Projects page in which to store and manage your IDP templates.",
   },
   {
-    link: "./idp-document-classification",
-    title: "Document classification",
-    image: IconIdpExtraction,
+    link: "./idp-templates-in-projects",
+    title: "IDP templates in Projects",
+    image: IconIdpApplication,
     description:
-      "Publish a document classification template to automatically classify documents by type.",
-  },
-  {
-    link: "./idp-document-extraction",
-    title: "Document extraction",
-    image: IconIdpExtraction,
-    description:
-      "Publish a document extraction template for each type of document you want to extract data from.",
+      "Create IDP extraction and classification templates as files next to your BPMN diagrams, DMN tables, and forms.",
   },
   {
     link: "./idp-document-classification",
