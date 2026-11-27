@@ -31,6 +31,220 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 92
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+
+### Impact
+
+On Camunda 8 SaaS, the gRPC API of the Orchestration Cluster accepted access tokens that were issued for another cluster, including clusters of other organizations. The REST API was not affected.
+
+In affected versions, the gRPC API did not check that a token was issued for its cluster. Anyone with client credentials for any SaaS cluster could authenticate on the gRPC API of another SaaS cluster. The attacker needs the ID of the target cluster.
+
+The impact depends on the authorization settings of the target cluster:
+
+- If authorizations are disabled, the attacker has full access to the gRPC API. For example, they can deploy resources, start and cancel process instances, and activate and complete jobs. Activating jobs exposes process variables.
+- If authorizations are enabled, the attacker has no permissions. Commands are rejected, but the topology request still returns the cluster version and partition layout.
+
+This issue only affects Camunda 8 SaaS. Self-Managed installations are not affected.
+
+Camunda is not aware of any exploitation.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+Only Camunda 8 SaaS clusters that ran one of these versions were affected:
+
+- Camunda 8.10.0-alpha3, 8.10.0-alpha4, and 8.10.0-alpha5.1
+- Camunda 8.10.0 to 8.10.11
+- Camunda 8.11.0-alpha1
+
+Camunda 8.9 and earlier are not affected.
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Camunda 8.10.12, part of the Camunda 8.10+gen11 [generation](/reference/glossary.md#generation) on Camunda 8 SaaS
+- A hotfix for Camunda 8.11.0-alpha1, deployed into the existing Camunda 8.11-alpha1 generation on Camunda 8 SaaS
+
+The fix was deployed to Camunda 8 SaaS with a forced update rollout:
+
+- Clusters on Camunda 8.11.0-alpha1: November 26, 2026, 23:08 UTC
+- Clusters on Camunda 8.10: November 27, 2026, 00:53 UTC
+
+Clusters on Camunda 8.10.0-alpha3, 8.10.0-alpha4, and 8.10.0-alpha5.1 don't get the fix. Camunda suspended all of these clusters and will remove them within one week.
+
+No action is required to apply the fix on Camunda 8 SaaS.
+
+**Recommendation**: Review your clusters for unexpected deployments, process instances, or job activity. If you find any, contact Camunda support.
+
+## Notice 91
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Hub
+- Camunda Web Modeler
+
+### Impact
+
+Git sync sent requests to a user-configured API base URL without validating it. A user who can change the Git sync settings of a process application could make the Hub or Web Modeler server send requests to internal addresses, such as a cloud metadata service or the Kubernetes API (server-side request forgery, SSRF). On Self-Managed, the Web Modeler and Hub UI don't offer this setting, so this requires calling the API directly.
+
+Git sync with Azure DevOps isn't affected.
+
+This issue affects Camunda 8 SaaS and Self-Managed.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Hub Self-Managed ≤ 8.10.7, or Web Modeler Self-Managed ≤ 8.9.16, ≤ 8.8.27, or ≤ 8.7.29.
+- A user has permission to change the Git sync settings of a process application, for example with the Modeler role on a project they own.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Hub Self-Managed 8.10.8
+- Web Modeler Self-Managed 8.9.17, 8.8.28, 8.7.30
+
+The fix validates the API base URL, and the address it resolves to, before each Git sync request. Hub and Web Modeler reject private, loopback, and link-local addresses.
+
+**Note**: Update to the latest available patch version of your minor version.
+
+The fix was deployed to Hub SaaS on November 19, 2026, 18:52 UTC. No action is required to apply the fix on Camunda 8 SaaS.
+
+**Interim mitigation**:
+
+- Restrict who can change the Git sync settings of process applications.
+- Use network policies or egress filtering to block the Hub or Web Modeler server from reaching internal and cloud metadata addresses.
+
+## Notice 90
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+[Intrinsic functions](/components/connectors/advanced-topics/intrinsic-functions.md) are written as a JSON object with a `camunda.function.type` key, and the connector runtime runs them while it binds a connector's input. In affected versions, the runtime ran such an object wherever it appeared in the connector's input, including when it came from a process variable instead of the process model. Some intrinsic functions operate on documents with the permissions of the connector runtime, not those of whoever supplied the data. Under the following conditions, an attacker may be able to read, or create a public link to, a document stored in the cluster:
+
+- The process uses [outbound connectors](/components/connectors/connector-types.md#outbound-connectors).
+- Untrusted input reaches a process variable, for example through an inbound connector such as a webhook, a user task, or an API call. With an inbound webhook that doesn't require authentication, no credentials are needed.
+- That process variable is passed into a connector field, for example an HTTP request body or an email body.
+- The attacker knows a reference to the document (its document ID, store ID, and content hash), for example because document references appear in process variables they can see.
+- The connector's destination is one the attacker controls or can observe, or the attacker can influence it through another process variable.
+
+Severity: Critical.
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- Camunda Connectors ≤ 8.9.12, ≤ 8.8.21, or ≤ 8.7.27
+
+and your processes match the conditions above. Camunda Connectors 8.6 doesn't support intrinsic functions and isn't affected.
+
+### Solution
+
+Camunda has released an intrinsic function allow-list for the connector runtime. The runtime only runs an intrinsic function call that the deployed BPMN process declares in the connector element's own input mappings, and refuses calls that arrive through process variables, job variables, connector results, or inbound connector payloads. The allow-list is enabled by default and always fails closed. This is a breaking change: a process that builds an intrinsic function call in a process variable and passes it to a connector field stops working after the upgrade. Declare the call in the connector's input mappings instead. See [declare intrinsic function calls in the process model](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) and the [intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list) configuration.
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.10.0, 8.9.13, 8.8.22, 8.7.28
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+**Interim mitigation**:
+
+- Review your process deployments against the conditions above.
+- Require authentication on inbound webhooks, for example HMAC or an authorization header.
+- Before untrusted data reaches a connector field, reject or remove values that contain the `camunda.function.type` key.
+- If a process may be affected, review which documents its connectors could reach, and delete documents whose public links may have been shared.
+
+## Notice 89
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler SaaS
+
+### Impact
+
+An internal endpoint that processes Auth0 log events in Web Modeler SaaS did not enforce its intended authorization.
+Any authenticated user or API client could send events to this endpoint, instead of only Auth0.
+The events could change user records, including those of users in other organizations.
+
+This issue only affects Camunda 8 SaaS. Self-Managed installations do not include or expose this endpoint and are not affected.
+
+Camunda is not aware of any known exploitation.
+
+### How to determine if the installation is affected
+
+Only Camunda 8 SaaS was affected. Self-Managed installations are not affected.
+
+### Solution
+
+The fix was deployed to Web Modeler SaaS on July 20, 2026, 13:57 UTC.
+No action is required.
+
+## Notice 88
+
+### Publication date
+
+November 26, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+When Git sync was configured with Bitbucket Cloud or Bitbucket Data Center, Web Modeler returned the stored Bitbucket access token in cleartext in the Git sync settings of a process application.
+Any user with permission to view the Git sync settings of the process application could read the token, including users who don't have permission to manage it.
+
+Git sync with GitHub, GitLab, and Azure DevOps is not affected.
+Bitbucket Git sync is not available in Web Modeler 8.7 and earlier, so these versions are not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You use Web Modeler Self-Managed ≤ 8.9.8 or ≤ 8.8.19. Hub Self-Managed 8.10.0 and later contain the fix and are not affected.
+- You configured Git sync with Bitbucket Cloud or Bitbucket Data Center for at least one process application.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.9, 8.8.20
+
+**Note**: Update to the latest available patch version of your minor version.
+
+The fix was deployed to Web Modeler SaaS on September 18, 2026, 05:57 UTC. No action is required to apply the fix on Camunda 8 SaaS.
+
+Camunda recommends that you rotate the Bitbucket access tokens used for Git sync in all process applications, and update the Git sync settings with the new tokens.
+
 ## Notice 87
 
 ### Publication date

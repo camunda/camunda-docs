@@ -89,6 +89,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 | [8.8.19](https://github.com/camunda/connectors/releases/tag/8.8.19) | Connectors | Breaking change | [Connector secret filter](#connector-secret-filter)                                                                                                   |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Regression      | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.0](https://github.com/camunda/camunda/releases/tag/8.8.0)      | Core       | Regression      | [Spring SDK: workers with legacy `ActivatedJob` don't fetch all variables](#spring-legacy-activatedjob-fetch-variables)                               |
 
 ### APIs & tools
 
@@ -142,6 +143,32 @@ io.camunda.zeebe.client.api.command.MalformedResponseException:
 **Required action**
 
 You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Spring SDK: workers with legacy `ActivatedJob` don't fetch all variables {#spring-legacy-activatedjob-fetch-variables}
+
+**Affected versions:** All 8.8.x releases from 8.8.0 through 8.8.44.
+
+In Camunda 8.8, a job worker in the Camunda Spring Boot Starter fetches all variables only if it injects an `ActivatedJob` parameter of the new type `io.camunda.client.api.response.ActivatedJob`. Workers that still inject the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` don't get this behavior. Instead, the fetched variables are inferred only from `@Variable` (or `@VariablesAsType`) parameters.
+
+As a result, variables that your handler reads only through the job (for example, via `job.getVariablesAsMap()`) are silently missing, without any warning or incident. In 8.7, these workers received all variables. This regression affects both Camunda 8 SaaS and Self-Managed.
+
+**Example:** A worker injects the legacy `ActivatedJob` and one `@Variable("orderId")` parameter, and reads `amount` through `job.getVariablesAsMap()`. Only `orderId` is fetched, so `amount` is `null`.
+
+A fix is tracked in [camunda/camunda#67704](https://github.com/camunda/camunda/issues/67704).
+
+**Action:** If your 8.8 Spring workers use the legacy `io.camunda.zeebe.client.api.response.ActivatedJob` type, do one of the following:
+
+- Set `@JobWorker(fetchAllVariables = true)`, or list the required variable names in `@JobWorker(fetchVariables = {...})`.
+- Migrate the worker to the `io.camunda.client` types, as described in the [Camunda Spring Boot Starter migration guide](/apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter.md).
 
 </div>
 </div>
