@@ -63,7 +63,7 @@ Choose a reusable credential, or enter a service account in the task. The connec
 | Project ID     | String   | Yes      | The ID of the Mixpanel project: the number after `/project/` in the Mixpanel URL. Both operations send it as the `project_id` query parameter.                                                                                | `12345`      |
 | Data residency | Dropdown | Yes      | Where the project's data is stored: **US (default)**, **EU**, or **India**. Use **EU** or **India** only if the project is enrolled in that data residency. The connector calls the Mixpanel host for the selected residency. | US (default) |
 
-The two operations use different Mixpanel hosts:
+The two operations use different Mixpanel hosts. The table shows the base URL. The connector adds `/import` to it for **Import event**, and `/insights` for **Query saved report**.
 
 | Data residency | Import event                  | Query saved report                  |
 | :------------- | :---------------------------- | :---------------------------------- |
@@ -122,7 +122,7 @@ The following result expressions show common mappings:
 | Import event       | `={imported: response.body.num_records_imported}` |
 | Query saved report | `={series: response.body.series}`                 |
 
-To read a series whose name contains spaces, use `get value`. For example, `={signups: get value(response.body.series, ["Signed up", "2026-11-01T00:00:00Z"])}`.
+To read a series whose name contains spaces, use `get value`. For example, `={signups: get value(response.body.series, ["Signed up", "2026-11-01T00:00:00-07:00"])}`. Date keys include the project's time zone offset, so copy a key exactly as the response shows it.
 
 ## Example: record a milestone and check a KPI
 
