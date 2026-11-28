@@ -2,107 +2,182 @@
 id: easy-post
 title: EasyPost connector
 sidebar_label: EasyPost
-description: Allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments.
+description: Create addresses, parcels, and shipments, as well as purchase and verify shipments with EasyPost.
 ---
 
-The **EasyPost connector** is an outbound connector that allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost Service](https://www.easypost.com/) from your BPMN process.
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
+
+Create addresses, parcels, and shipments, and buy and track shipments with EasyPost from your BPMN process.
+
+## About this connector
+
+The EasyPost connector is an outbound connector that integrates your process with the [EasyPost](https://www.easypost.com/) shipping service. Use it to create and verify addresses, create parcels and shipments, buy a shipment, and retrieve the status of a tracker.
+
+The connector is built on top of the [REST connector](/components/connectors/protocol/rest.md), so the response is handled as [described for the REST connector](/components/connectors/protocol/rest.md#response).
 
 ## Prerequisites
 
-To use the **EasyPost connector**, sign up for an EasyPost account, enter your carrier-specific credentials on the [Carrier Account Dashboard](https://www.easypost.com/account/carriers), and get your [API key](https://www.easypost.com/account/api-keys).
+To use the EasyPost connector, you need:
+
+- An EasyPost account.
+- Your carrier-specific credentials, entered on the [Carrier Account Dashboard](https://www.easypost.com/account/carriers).
+- An EasyPost [API key](https://www.easypost.com/account/api-keys).
 
 :::note
-Use secrets to avoid exposing your EasyPost API key as plain text. Refer to our documentation on [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your EasyPost API key as plain text. Refer to [manage secrets](/components/saas/clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an EasyPost connector task
+<OutboundConnectorBasics />
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+## Configuration
 
-<ConnectorTask/>
+### Authentication
 
-## Authentication
+| Property | Type   | Required | Description                                                                                                         |
+| :------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------ |
+| API key  | String | Yes      | Your EasyPost API key. Find it in the [API key dashboard](https://www.easypost.com/account/api-keys). Use a secret. |
 
-In the **Authentication** section, provide an **API key**, which you can find in the [API Key dashboard](https://www.easypost.com/account/api-keys).
+### Operation
 
-## Select operation to execute
+| Property       | Type     | Required | Description                                                                                                                                                                                                                                                                                                                     |
+| :------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Operation type | Dropdown | Yes      | The operation to run: [Create an address](#create-an-address), [Create a parcel](#create-a-parcel), [Create a shipment](#create-a-shipment), [Buy a shipment](#buy-a-shipment), [Verify a created address](#verify-a-created-address), or [Retrieve a tracker by ID](#retrieve-a-tracker-by-id). The other inputs depend on it. |
 
-The **EasyPost connector** currently supports the following operations:
+### Advanced
 
-### Create address
+| Property           | Type   | Required | Description                                                                                                                     | Example |
+| :----------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------ | :------ |
+| Connection timeout | String | No       | Timeout in seconds for the connection to EasyPost. Accepts a number of seconds or a FEEL expression. The default is 20 seconds. | `20`    |
 
-Allows you to create an address, save it, and get an address ID to use in follow-up operations.
-Set address information in the **Input** section.
-Refer to [address object documentation](https://docs.easypost.com/docs/addresses) to learn more about address object and to observe response examples.
+## Operations
 
-### Verify a created address
+### Create an address
 
-Allows you to verify an address by **Address ID** and return verified address object.
+Creates and saves an address, and returns an address ID to use in follow-up operations. For details about the address object and example responses, refer to the [EasyPost address documentation](https://docs.easypost.com/docs/addresses).
+
+#### Input parameters
+
+| Property           | Type   | Required | Description                        |
+| :----------------- | :----- | :------- | :--------------------------------- |
+| Name               | String | No       | Name of the person at the address. |
+| Company            | String | No       | Company name.                      |
+| Phone              | String | No       | Phone number.                      |
+| Address line 1     | String | No       | First line of the street address.  |
+| Address line 2     | String | No       | Second line of the street address. |
+| City               | String | No       | City.                              |
+| State or province  | String | No       | State or province.                 |
+| Email              | String | No       | Email address.                     |
+| ZIP or postal code | String | No       | ZIP or postal code.                |
+| Country            | String | No       | Country.                           |
+| Federal tax ID     | String | No       | Federal tax ID of the address.     |
+| State tax ID       | String | No       | State tax ID of the address.       |
+
+#### Output
+
+The pre-filled **Result expression** returns the ID of the created address:
+
+```feel
+={addressId: response.body.id}
+```
 
 ### Create a parcel
 
-Allows you to create a parcel, save it, and get a parcel ID to use in follow-up operations.
-Set required properties in the **Input** section.
-Refer to the [parcel object documentation](https://docs.easypost.com/docs/parcels) to learn more about the parcel object and to observe response examples.
+Creates and saves a parcel, and returns a parcel ID to use in follow-up operations. For details about the parcel object and example responses, refer to the [EasyPost parcel documentation](https://docs.easypost.com/docs/parcels).
+
+#### Input parameters
+
+| Property           | Type   | Required    | Description                                                                                                                                                          |
+| :----------------- | :----- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Weight             | String | Yes         | Weight of the parcel in ounces.                                                                                                                                      |
+| Length             | String | Conditional | Length of the parcel in inches. Required if you set the width or height.                                                                                             |
+| Width              | String | Conditional | Width of the parcel in inches. Required if you set the length or height.                                                                                             |
+| Height             | String | Conditional | Height of the parcel in inches. Required if you set the length or width.                                                                                             |
+| Predefined package | String | No          | Predefined package type. Refer to the [EasyPost service levels and parcels](https://www.easypost.com/service-levels-and-parcels) page, which lists the valid values. |
+
+#### Output
+
+The pre-filled **Result expression** returns the ID of the created parcel:
+
+```feel
+={parcelId: response.body.id}
+```
 
 ### Create a shipment
 
-Allows you to create a shipment, save it, and get the shipment ID for use in follow-up operations.
-Set required properties in the **Input** section: ID of destination address, ID of origin address, and ID of parcel.
-Refer to the [shipment object documentation](https://docs.easypost.com/docs/shipments) to learn more about the shipment object and to observe response examples.
-In the **Output** section, the pre-filled **Result Expression** returns the ID of the shipment and the ID of [rate](https://docs.easypost.com/docs/shipments/rates).
+Creates and saves a shipment from existing addresses and a parcel, and returns a shipment ID to use in follow-up operations. For details about the shipment object and example responses, refer to the [EasyPost shipment documentation](https://docs.easypost.com/docs/shipments).
 
-FEEL expression:
+#### Input parameters
 
+| Property     | Type   | Required | Description                    |
+| :----------- | :----- | :------- | :----------------------------- |
+| To address   | String | Yes      | ID of the destination address. |
+| From address | String | Yes      | ID of the origin address.      |
+| Parcel       | String | Yes      | ID of the parcel.              |
+
+#### Output
+
+The pre-filled **Result expression** returns the ID of the created shipment:
+
+```feel
+={shipmentId: response.body.id}
 ```
-{priorityRate: response.body.rates[item.service = "Priority"], shipmentId: priorityRate[1].shipment_id, rateId: priorityRate[1].id}
-```
 
-Response:
+To also get the ID of a [rate](https://docs.easypost.com/docs/shipments/rates) for the shipment, which you need to buy it, replace the **Result expression**. For example, to select the rate of the `Priority` service. The available service names depend on the carrier, and `[1]` fails when no rate matches:
 
-```
-{
-      "shipment_id": "shp...",
-      "rateId": "rate...."
- }
+```feel
+={priorityRate: response.body.rates[item.service = "Priority"], shipmentId: priorityRate[1].shipment_id, rateId: priorityRate[1].id}
 ```
 
 ### Buy a shipment
 
-Allows you to buy a shipment. Set required properties in the **Input** section: IDs of rate and shipment.
-Refer to the [shipment object documentation](https://docs.easypost.com/docs/shipments#buy-a-shipment) to learn more about the shipment object and to observe response examples.
-In the **Output** section the pre-filled **Result Expression** returns the ID of a tracker, tracking code, and status of the shipment.
+Buys a shipment. For details about buying a shipment and example responses, refer to the [EasyPost shipment documentation](https://docs.easypost.com/docs/shipments#buy-a-shipment).
 
-FEEL expression:
+#### Input parameters
 
-```
-{trackerId: response.body.tracker.id, trackingCode: response.body.tracking_code, shipmentstatus:response.body.status}
+| Property    | Type   | Required | Description                |
+| :---------- | :----- | :------- | :------------------------- |
+| Shipment ID | String | Yes      | ID of the shipment to buy. |
+| Rate ID     | String | Yes      | ID of the rate to buy.     |
+
+#### Output
+
+The pre-filled **Result expression** returns the ID of the tracker, the tracking code, and the status of the shipment:
+
+```feel
+={trackerId: response.body.tracker.id, trackingCode: response.body.tracking_code, shipmentstatus: response.body.status}
 ```
 
-Response:
+### Verify a created address
 
-```
-{
-      "shipmentstatus": "shp...",
-      "trackerId": "trk....",
-      "trackingCode: :"track...."
- }
-```
+Verifies an address by its ID.
+
+#### Input parameters
+
+| Property   | Type   | Required | Description                  |
+| :--------- | :----- | :------- | :--------------------------- |
+| Address ID | String | Yes      | ID of the address to verify. |
+
+#### Output
+
+This operation has no pre-filled **Result expression**. Set a **Result variable** to store the response, or enter a **Result expression** to map the data you need from `response.body`. For details about the response, refer to the [EasyPost address documentation](https://docs.easypost.com/docs/addresses).
 
 ### Retrieve a tracker by ID
 
-Allows you to retrieve a tracker by ID and get information about the status of the tracker.
-Set required properties in the **Input** section: Tracker ID fetched after buying shipment).
-Refer to the [tracker object documentation](https://docs.easypost.com/docs/trackers#tracker-object) to learn more about the tracker object and to observe response examples.
-In the **Output** section, the pre-filled **Result Expression** returns the ID of the tracker, tracking code, and status of the shipment.
+Retrieves a tracker by its ID and returns the status of the tracker. For details about the tracker object and example responses, refer to the [EasyPost tracker documentation](https://docs.easypost.com/docs/trackers#tracker-object).
 
-FEEL expression:
+#### Input parameters
 
+| Property   | Type   | Required | Description                                                   |
+| :--------- | :----- | :------- | :------------------------------------------------------------ |
+| Tracker ID | String | Yes      | ID of the tracker, which you receive after buying a shipment. |
+
+#### Output
+
+The pre-filled **Result expression** returns the status of the tracker:
+
+```feel
+={trackerStatus: response.body.status}
 ```
-{trackerStatus: response.body.status}
-```
 
-## Handle connector response
-
-The **EasyPost connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
-handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
+<ErrorHandling />
