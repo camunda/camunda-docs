@@ -2,188 +2,60 @@
 id: google-gemini
 title: Google Gemini connector
 sidebar_label: Google Gemini
-description: The Gemini large language models (LLMs) that are used by Gemini for Google Cloud are trained on datasets of publicly available code, Google Cloud-specific material, and other relevant technical information in addition to the datasets used to train the Gemini [foundation models](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf).
+description: Generate text and multimodal content with Google Gemini models on Vertex AI from your BPMN process.
 ---
 
-:::info
-The **Google Gemini connector** is available for `8.7.0` or later.
-:::
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-The **Google Gemini connector** is an outbound connector that allows you to access Gemini multimodal models from Google. It is capable of understanding virtually any input, and can combine different types of information in a BPMN process.
+Use the Google Gemini connector to send text and media prompts to Gemini models from your BPMN process and use the generated content in your process.
 
-## Create a Google Gemini connector task
+## About this connector
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+The **Google Gemini connector** is an outbound connector that calls Gemini models from Google through Vertex AI. Gemini models are multimodal, so a prompt can combine text with media such as images, audio, and video. For example, use this connector to summarize a video, answer questions about a document, or call a function that returns structured data.
 
-<ConnectorTask/>
+The connector supports system instructions, grounding with a Vertex AI data store, safety filter settings, generation settings such as temperature and output token limit, and function calling.
 
-## Make your Google Gemini connector executable
+## Prerequisites
 
-To execute this connector, ensure all mandatory fields are correctly filled.
+To use the **Google Gemini connector**, you need:
+
+- A Google Cloud project with access to Vertex AI. You enter the project ID and region in the connector.
+- Credentials for Google Cloud: a short-lived JWT bearer token, or an OAuth client ID, client secret, and refresh token. See [Google authentication types](#google-authentication-types).
+- (Optional) A Vertex AI data store, if you want to use grounding.
 
 :::note
-All the mandatory and non-mandatory fields and required settings depending on the operation selection you choose are covered in the upcoming sections.
+Use secrets to store credentials and avoid exposing sensitive information from the process.
+See [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
-## Authentication
+<OutboundConnectorBasics />
 
-Choose an authentication type from the **Type** dropdown. For details on authentication types, see [Google authentication types](#google-authentication-types).
+## Configuration
 
-## Project ID
+### Authentication
 
-Enter your google cloud project identifier.
+Select a reusable Google credential, or choose an authentication type and enter the authentication details on the element.
 
-## Region
+| Property          | Type          | Required                                     | Description                                                                                                                                                                                                                                                                             | Example                            |
+| :---------------- | :------------ | :------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- |
+| Google credential | Configuration | No                                           | A reusable Google credential. Available from Camunda 8.11. If you select a credential, it supplies the authentication details and the **Type** property and the properties below are hidden. See [using credentials](/components/connectors/use-connectors/index.md#using-credentials). |                                    |
+| Type              | Dropdown      | Yes, if no **Google credential** is selected | The authentication type: **Bearer token** or **Refresh token**. The default is **Refresh token**. See [Google authentication types](#google-authentication-types).                                                                                                                      |                                    |
+| Bearer token      | String        | Yes, if **Type** is **Bearer token**         | A short-lived JWT bearer token with access to Vertex AI.                                                                                                                                                                                                                                | `{{secrets.GOOGLE_BEARER_TOKEN}}`  |
+| Client ID         | String        | Yes, if **Type** is **Refresh token**        | The client ID of your OAuth client.                                                                                                                                                                                                                                                     |                                    |
+| Client secret     | String        | Yes, if **Type** is **Refresh token**        | The client secret of your OAuth client.                                                                                                                                                                                                                                                 | `{{secrets.GOOGLE_CLIENT_SECRET}}` |
+| Refresh token     | String        | Yes, if **Type** is **Refresh token**        | The refresh token of your OAuth client.                                                                                                                                                                                                                                                 | `{{secrets.GOOGLE_REFRESH_TOKEN}}` |
 
-Enter the region where your project is located. For example, `us-central1 (lowa)`, `us-west1 (Oregon)`.
+#### Google authentication types
 
-## Model
+The **Google Gemini connector** supports two methods for authentication and authorization:
 
-Select a model from the dropdown. The following models are currently supported:
+- A short-lived JWT bearer token.
+- A refresh token.
 
-- gemini-1.5-flash-001
-- gemini-1.5-flash-002
-- gemini-1.5-pro-001
-- gemini-1.5-pro-002
-- gemini-1.0-pro-001
-- gemini-1.0-pro-002
-- gemini-1.0-pro-vision-001
+Google supports multiple ways to obtain both types of token. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) for current instructions, or see the following examples.
 
-## Prompt
-
-Enter a prompt as a FEEL expression, providing text and media.
-
-- To provide text to Gemini, your expression should contain key _"text"_ and text data. For example, _"text"_ : _"your text"_
-- To provide media to Gemini, your expression should contain key _"mime"_ and mime type text, and key _"uri"_ and media URI. For example, _"mime"_: _"mime type"_, _"uri"_: _"your URI"_.
-
-For example:
-
-```feel
-= [{"text": "who is this video about"},
-{"mime": "video/*", "uri": "https://youtu.be/..."}]
-```
-
-## System instructions
-
-Enter system instructions as a string, to determine how the model should respond.
-
-To learn more about system instructions, refer to [Google system instructions](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instructions?hl=en).
-
-## Grounding
-
-Grounding connects the model output to the verifiable sources of information.
-
-- This is useful in situations where accuracy and reliability are important.
-- To use grounding, select the _Grounding_ checkbox and input the path to the data store.
-
-To learn more about grounding, refer to [Google grounding overview](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=en).
-
-## Safety Filter Settings
-
-You can adjust the likelihood of receiving a model response which might contain harmful content.
-
-- Content is blocked based on the probability that it is harmful.
-- To use safety filter settings, select the _Safety Filter Settings_ checkbox and select the desired level from dropdown.
-- By default, all filters are set to OFF.
-
-To learn more about safety filters, refer to [Google responsible AI safety filters and settings](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/responsible-ai?hl=en#safety_filters_and_attributes).
-
-## Add stop sequence
-
-A stop sequence is a series of characters (including spaces) that stops response generation if encountered by the model.
-
-The stop sequence should be inserted as a string list.
-
-For example:
-
-```feel
-= ["text 1", "text 2"]
-```
-
-## Temperature
-
-The **Temperature** controls the randomness in token selection.
-
-- A lower temperature is good when you expect a true or correct response. A temperature of `0` means the highest probability token is usually selected.
-- A higher temperature can lead to diverse or unexpected results. Some models have a higher temperature max to encourage more random responses.
-
-## Output token limit
-
-The **Output token limit** Determines the maximum amount of text output from a single prompt. A token is approximately four characters.
-
-## Seed
-
-Setting a **Seed** value is useful if you make repeated requests and want the same model response.
-
-Deterministic outcome isn’t guaranteed. Changing the model or other settings can cause variations in the response even when you use the same seed value.
-
-## Top-K
-
-The **Top-K** specifies the number of candidate tokens when the model is selecting an output token.
-
-- Use a lower value for less random responses and a higher value for more random responses.
-- Only the _gemini-1.0-pro-vision-001_ model supports Top-K.
-
-## Top-P
-
-The **Top-P** changes how the model selects tokens for output.
-
-- Tokens are selected from the most probable to the least probable, until the sum of their probabilities equals the top-p value.
-- For example, if tokens A, B, and C have a probability of .3, .2, and .1 and the top-p value is .5, then the model will select either A or B as the next token (using temperature).
-- For the least variable results, set top-P to 0.
-
-## Functional call description
-
-**Function calling** is a feature of Gemini models that makes it easier to get structured data outputs from generative models.
-
-- The **Functional call description** must be provided in fell format.
-- It is important that all types must be registered with capslock.
-
-To learn more about function calling, refer to [Google function calling](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/function-calling).
-
-For example:
-
-```fell
-[
-  {
-    "name": "get_exchange_rate",
-    "description":"Get the exchange rate for currencies between countries",
-    "parameters": {
-      "type": "OBJECT",
-      "properties": {
-        "currency_date": {
-          "type": "STRING",
-          "description": "A date that must always be in YYYY-MM-DD format or the value 'latest' if a time period is not specified"
-        },
-        "currency_from": {
-          "type": "STRING",
-          "description": "The currency to convert from in ISO 4217 format"
-        },
-        "currency_to": {
-          "type": "STRING",
-          "description": "The currency to convert to in ISO 4217 format"
-        }
-      },
-      "required":[
-        "currency_date",
-        "currency_from",
-        "currency_to"
-      ]
-    }
-  }
-]
-```
-
-### Google authentication types
-
-The **Google Gemini connector** currently supports two methods for authentication and authorization:
-
-- Based on a short-lived JWT bearer token.
-- Based on a refresh token.
-
-Google supports multiple ways to obtain both types of token. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) for current instructions, or see the examples below.
-
-#### Example 1: Obtain JWT bearer token with a service account
+##### Example 1: Obtain a JWT bearer token with a service account
 
 :::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -196,7 +68,7 @@ Assuming you have created a service account and downloaded a JSON file with keys
 import google.auth
 import google.auth.transport.requests
 from google.oauth2 import service_account
-# Scopes required to execute 'create' endpoind with Google Drive API
+# Scope required to call the Vertex AI API.
 SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/generative-language.retriever']
 # File with keys
 SERVICE_ACCOUNT_FILE = 'google-service-account-creds.json'
@@ -207,7 +79,7 @@ credentials.refresh(auth_req)
 print(credentials.token)
 ```
 
-#### Example 2: Obtain bearer and refresh token with OAuth client
+##### Example 2: Obtain a bearer and refresh token with an OAuth client
 
 :::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -231,3 +103,178 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+### Project and region
+
+| Property   | Type   | Required | Description                                            | Example                   |
+| :--------- | :----- | :------- | :----------------------------------------------------- | :------------------------ |
+| Project ID | String | Yes      | The identifier of your Google Cloud project.           |                           |
+| Region     | String | Yes      | The region where your Google Cloud project is located. | `us-central1`, `us-west1` |
+
+## Operations
+
+### Generate content
+
+Send a prompt to a Gemini model and return the generated content.
+
+#### Input parameters
+
+Select the model and enter the prompt.
+
+| Property            | Type     | Required                        | Description                                                                                                                                                                                           | Example |
+| :------------------ | :------- | :------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Model               | Dropdown | Yes                             | The Gemini model to use: **gemini-2.5-pro**, **gemini-2.5-flash**, **gemini-2.5-flash-image**, **gemini-2.5-flash-lite**, **gemini-2.0-flash**, **gemini-2.0-flash-lite**, or **Custom**.             |         |
+| Custom model name   | String   | Yes, if **Model** is **Custom** | The name of the model to use. Supports [FEEL](/components/modeler/feel/what-is-feel.md) expressions.                                                                                                  |         |
+| Prompts             | String   | Yes                             | A [FEEL](/components/modeler/feel/what-is-feel.md) expression that returns a list of prompts with text and media. See [prompts](#prompts).                                                            |         |
+| System instructions | String   | No                              | Instructions that tell the model how to respond. Use them to give the model context, get more custom responses, and follow specific guidelines. They apply each time you send a request to the model. |         |
+
+Learn more about [Google system instructions](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instructions?hl=en).
+
+##### Prompts
+
+The **Prompts** property is a FEEL expression that returns a list. Each entry in the list is one of the following:
+
+- A text prompt: an object with a single `text` key and the text as its value.
+- A media prompt: an object with exactly two keys, `mime` for the MIME type and `uri` for the media URI.
+
+For example:
+
+```feel
+= [{"text": "Who is this video about?"},
+{"mime": "video/*", "uri": "https://youtu.be/..."}]
+```
+
+#### Grounding
+
+Grounding connects the model output to verifiable sources of information. This is useful when accuracy and reliability are important.
+
+| Property                  | Type    | Required | Description                                                                                                                                               | Example |
+| :------------------------ | :------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Grounding                 | Boolean | No       | Select this to connect the model output to your data. It is cleared by default.                                                                           |         |
+| Vertex AI data store path | String  | No       | The path of the Vertex AI data store. Shown when **Grounding** is selected. The value must match `projects/{}/locations/{}/collections/{}/dataStores/{}`. |         |
+
+Learn more about [Google grounding](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=en).
+
+#### Safety filter settings
+
+Adjust the likelihood of receiving a model response that might contain harmful content. Content is blocked based on the probability that it's harmful.
+
+| Property                  | Type     | Required | Description                                                                                                                  | Example |
+| :------------------------ | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------- | :------ |
+| Safety Filter Settings    | Boolean  | No       | Select this to configure the filters below. It is cleared by default.                                                        |         |
+| Hate speech               | Dropdown | No       | The blocking level for hate speech. Shown when **Safety Filter Settings** is selected. The default is **OFF**.               |         |
+| Dangerous content         | Dropdown | No       | The blocking level for dangerous content. Shown when **Safety Filter Settings** is selected. The default is **OFF**.         |         |
+| Sexually explicit content | Dropdown | No       | The blocking level for sexually explicit content. Shown when **Safety Filter Settings** is selected. The default is **OFF**. |         |
+| Harassment content        | Dropdown | No       | The blocking level for harassment content. Shown when **Safety Filter Settings** is selected. The default is **OFF**.        |         |
+
+Each filter has the following levels:
+
+| Level          | Behavior                                     |
+| :------------- | :------------------------------------------- |
+| **OFF**        | Blocks nothing.                              |
+| **Block few**  | Blocks only high-probability content.        |
+| **Block some** | Blocks medium-probability content and above. |
+| **Block most** | Blocks low-probability content and above.    |
+
+Learn more about [Google safety filters and attributes](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/responsible-ai?hl=en#safety_filters_and_attributes).
+
+#### Generation settings
+
+| Property                          | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          | Example                  |
+| :-------------------------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- |
+| Add stop sequence                 | String | No       | A [FEEL](/components/modeler/feel/what-is-feel.md) expression that returns a list of strings. A stop sequence is a series of characters, including spaces, that stops response generation when the model encounters it. The sequence isn't included in the response. You can add up to five stop sequences.                                                                                                                                          | `= ["text 1", "text 2"]` |
+| Temperature                       | Number | No       | Controls the randomness in token selection. A lower temperature is good when you expect a true or correct response, and `0` means the highest probability token is usually selected. A higher temperature can lead to diverse or unexpected results. Enter a value from 0 to 2 in increments of 0.1.                                                                                                                                                 |                          |
+| Output token limit from 1 to 8192 | Number | Yes      | The maximum amount of text output from one prompt. A token is approximately four characters. Enter a whole number from 1 to 8192.                                                                                                                                                                                                                                                                                                                    |                          |
+| Seed                              | Number | No       | Use a seed value if you make repeated requests and want the same model response. A deterministic outcome isn't guaranteed. Changing the model or other settings can cause variations in the response, even with the same seed value. Enter a whole number from -2,147,483,647 to 2,147,483,647.                                                                                                                                                      |                          |
+| Top-K                             | Number | No       | The number of candidate tokens when the model selects an output token. Use a lower value for less random responses and a higher value for more random responses. Enter an integer from 1 to 40.                                                                                                                                                                                                                                                      |                          |
+| Top-P                             | Number | No       | Changes how the model selects tokens for output. Tokens are selected from most probable to least probable until the sum of their probabilities equals the Top-P value. For example, if tokens A, B, and C have a probability of 0.3, 0.2, and 0.1 and the Top-P value is 0.5, the model selects either A or B as the next token (using temperature). For the least variable results, set Top-P to 0. Enter a value from 0 to 1 in increments of 0.1. |                          |
+
+#### Function calling
+
+Function calling is a feature of Gemini models that makes it easier to get structured data outputs from generative models.
+
+| Property                  | Type   | Required | Description                                                                                                                                                                     | Example |
+| :------------------------ | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------ |
+| Function call description | String | No       | A [FEEL](/components/modeler/feel/what-is-feel.md) expression that returns a list of function declarations. Register all types in uppercase, for example `OBJECT` and `STRING`. |         |
+
+For example:
+
+```feel
+= [
+  {
+    "name": "get_exchange_rate",
+    "description": "Get the exchange rate for currencies between countries",
+    "parameters": {
+      "type": "OBJECT",
+      "properties": {
+        "currency_date": {
+          "type": "STRING",
+          "description": "A date that must always be in YYYY-MM-DD format or the value 'latest' if a time period is not specified"
+        },
+        "currency_from": {
+          "type": "STRING",
+          "description": "The currency to convert from in ISO 4217 format"
+        },
+        "currency_to": {
+          "type": "STRING",
+          "description": "The currency to convert to in ISO 4217 format"
+        }
+      },
+      "required": [
+        "currency_date",
+        "currency_from",
+        "currency_to"
+      ]
+    }
+  }
+]
+```
+
+Learn more about [Google function calling](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/function-calling).
+
+#### Output
+
+The connector returns the content generated by the model as a JSON object. The object contains the role and a list of parts, such as the generated text:
+
+```json
+{
+  "role": "model",
+  "parts": [
+    {
+      "text": "The video is about ..."
+    }
+  ]
+}
+```
+
+To use the generated text in your process, store the response with **Result variable**, or map it with **Result expression**. For example, the following expression stores the text of the first part in the `generatedText` process variable:
+
+```feel
+= {
+  "generatedText": response.parts[1].text
+}
+```
+
+<ErrorHandling />
+
+### Invalid prompt format
+
+**Error:** `Invalid prompt format: <prompt>`
+
+A prompt entry doesn't match the supported format. Each entry must be an object with only a `text` key, or only the `mime` and `uri` keys, and the values can't be blank. An empty object (`{}`) also causes this error. Correct the entry in **Prompts**. See [prompts](#prompts).
+
+### Prompt can not be empty
+
+**Error:** `Prompt can not be empty`
+
+The **Prompts** list contains a `null` entry. Remove the `null` entry from the list.
+
+### Function call deserialization
+
+**Error:** `Exception during function call deserialization`
+
+The **Function call description** can't be read as a function declaration. Check that the expression returns a list of valid function declarations, and that all types are in uppercase. See [function calling](#function-calling).
+
+## Further resources
+
+- [Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2)
