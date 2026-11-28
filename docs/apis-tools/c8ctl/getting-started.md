@@ -41,6 +41,44 @@ npm install @camunda8/cli -g
 
 After installation, both `c8ctl` and `c8` are available as commands in your terminal.
 
+## Guided setup
+
+`c8ctl setup` runs a wizard that sets up a complete local development environment in one pass: it starts a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) cluster (downloading it on first run), installs [Camunda Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md), scaffolds the Rocket Launch example, deploys and runs it, and configures AI assistant tooling (MCP connections and Camunda skills). Nothing is installed without your say.
+
+```bash
+c8ctl setup          # interactive wizard
+c8ctl setup --yes    # set up the defaults, without prompting
+```
+
+Each step announces its title and ends in `[SUCCESS]`, `[ERROR]`, or `[SKIPPED]`; a failed step does not stop the rest. The blueprint project and the cluster MCP connection need the local cluster — deselect the cluster and both options are disabled. A browser window opens when the local cluster reports healthy; the docs MCP connection asks you to sign in in a browser on first use.
+
+A run without a selection (piped output, CI) installs nothing unless you pass `--yes`. Setup always uses the Rocket Launch example; it does not ask you to choose a blueprint. `--json` prints the plan without executing it, and `--dry-run` previews it. A re-run reuses finished work where possible; the deploy, process start, and skills install repeat by design. The exit code is `0` when every selected setup step succeeded (or nothing was installed for lack of a go-ahead) and `1` when arguments fail validation or a step failed — other eligible steps still ran, while their dependents were skipped. Ctrl+C ends the wizard by signal (`130` on POSIX shells).
+
+Use `--modeler` / `--no-modeler` to force or skip the Desktop Modeler step regardless of the selection, and `--docs-mcp` to include the docs MCP connection (off unless selected or flagged).
+
+### Remove what setup installed
+
+`--remove` shows the setup-managed MCP entries, Camunda skills, a c8ctl-managed Desktop Modeler installation, the marker-listed blueprint files, and the local cluster before removing them:
+
+```bash
+c8ctl setup --remove                        # preview what would be removed
+c8ctl setup --remove --yes                  # remove without prompting
+```
+
+Confirm in the interactive prompt or pass `--yes` in non-interactive use; `--json` and `--dry-run` print only the removal preview. `--remove` cannot be combined with `--modeler`, `--no-modeler`, or `--docs-mcp`. Removal delegates to the owning commands — `c8ctl cluster stop --purge` followed by `c8ctl cluster purge`/`delete` per installed version (the cluster is stopped, and its runtime data and downloaded binaries are deleted — setup-deployed process state goes with the runtime data), `c8ctl mcp uninstall`, `c8ctl skills uninstall`, and `c8ctl modeler uninstall`. Local edits in skill folders and listed blueprint files are removed; untracked blueprint files are kept. The cluster step removes every cached Camunda 8 Run installation — including versions downloaded before or outside setup — together with their runtime data. Removal exits `0` when every requested action succeeds and `1` if any action fails; the other removal actions still run.
+
+## Manage Camunda Desktop Modeler
+
+`c8ctl modeler` installs, updates, and removes [Camunda Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) on macOS, Windows, and Linux:
+
+```bash
+c8ctl modeler install             # install the latest stable release
+c8ctl modeler update              # update to the latest stable release
+c8ctl modeler uninstall --dry-run # preview removal
+```
+
+On macOS, the installer uses Homebrew when available and otherwise downloads the Camunda-signed release into `/Applications` (or `~/Applications` when `/Applications` is not writable). On Windows, it uses winget and registers file types and a Start Menu shortcut. On Linux (x64), it installs into `/usr/bin` as root and registers file types with Modeler's bundled support scripts. `update` reuses the same installation method, and `uninstall` removes a c8ctl-managed installation (`modeler remove` remains a compatibility alias).
+
 ## Quick start with a local cluster
 
 `c8ctl` includes a built-in `cluster` command that downloads and manages a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) instance. This is the fastest way to get a cluster running for development.
@@ -212,7 +250,7 @@ Configure the profile's authentication to match a dedicated physical tenant logi
 
 ### Version aliases
 
-The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/):
+The `stable` and `alpha` aliases are resolved from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/) and cached locally:
 
 | Alias    | Resolves to                                              |
 | :------- | :------------------------------------------------------- |
@@ -220,6 +258,10 @@ The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Down
 | `alpha`  | Highest minor release overall (for example, 8.10-alpha0) |
 
 When no version is specified, `c8 cluster start` defaults to `stable`.
+
+`c8 cluster start` uses the cached alias mapping; `c8 cluster install <alias>` refreshes it from the download server. When a background check finds that the alias's newer target is already installed (for example after `c8 cluster install 8.10`), it advances the cached mapping, so the next `start` uses that version without downloading anything.
+
+`stable` never launches a prerelease build. If the install for its version still holds an alpha build (for example an `8.11` install made through `alpha` before 8.11 went GA), `start` and `install` download the GA build and replace it; if the download fails, the alpha build is kept. A prerelease build that has cluster data is never replaced automatically — run `c8 cluster purge <version>` first.
 
 A `<major>.<minor>` version like `8.8` is treated as a rolling release — the download server directory is updated in-place with new patch releases. `c8 cluster start` uses the local version if available, while `c8 cluster install` always checks for a newer version.
 
@@ -231,11 +273,32 @@ Stream raw c8run logs during startup:
 c8 cluster start --debug
 ```
 
+### Custom HTTP port
+
+If port 8080 is already in use, start the cluster on another port:
+
+```bash
+c8 cluster start --port 9091
+```
+
+`--port` moves only the main Camunda HTTP port (Operate, Tasklist and the REST API). The gRPC port (26500) and the health port (9600) stay fixed, so you still cannot run two local clusters side by side. The bundled Connectors runtime is pointed at the custom port automatically. `cluster status` reports the URLs for the port the cluster was started with.
+
+The built-in `local` profile keeps targeting port 8080, so point c8ctl at the cluster yourself — the start output prints the commands:
+
+```bash
+c8 add profile local-9091 --baseUrl=http://localhost:9091/v2 --username=demo --password=demo
+c8 use profile local-9091
+```
+
+Set the port with `--port`, not the `SERVER_PORT` environment variable: c8run would pass `SERVER_PORT` to Connectors too, so c8ctl removes it before launching c8run.
+
 ### Supported platforms
 
 - macOS (x86_64, aarch64)
-- Linux (x86_64, aarch64)
+- Linux (x86_64)
 - Windows (x86_64)
+
+These are the platforms the Camunda Download Center publishes Camunda 8 Run for. On any other platform, such as Linux or Windows on arm64, `c8 cluster install` and `c8 cluster start` stop with an explanation instead of downloading. To use your own build, set `C8CTL_C8RUN_DOWNLOAD_URL` to a mirror with the same layout that hosts it.
 
 Cache locations:
 
@@ -274,6 +337,16 @@ export CAMUNDA_CLIENT_ID=your-client-id
 export CAMUNDA_CLIENT_SECRET=your-client-secret
 c8 list pi
 ```
+
+`CAMUNDA_REST_ADDRESS` — the variable name the Camunda SDKs use — is accepted as an alias for `CAMUNDA_BASE_URL`; when both are set, `CAMUNDA_BASE_URL` wins. `CAMUNDA_AUTH_STRATEGY` (`NONE`, `BASIC`, or `OAUTH`) is honored the same way the SDK honors it, so an SDK project's `.env` works unchanged:
+
+```bash
+export CAMUNDA_REST_ADDRESS=http://localhost:8088
+export CAMUNDA_AUTH_STRATEGY=NONE
+c8 get topology
+```
+
+When credential variables are set without a cluster address variable, `c8ctl` falls back to the default `local` profile and warns which variables are being ignored.
 
 ### Use a profile
 
@@ -536,24 +609,28 @@ For scripts that invoke multiple commands, set `C8CTL_OUTPUT_MODE=json` in their
 
 `c8ctl --version` (or `c8ctl -v`) always writes its result to stdout and exits `0`:
 
-| Effective output mode | stdout |
-| :-------------------- | :----- |
-| Text | `c8ctl v<version>` |
-| JSON | `{"status":"info","message":"c8ctl v<version>"}` |
+| Effective output mode | stdout                                           |
+| :-------------------- | :----------------------------------------------- |
+| Text                  | `c8ctl v<version>`                               |
+| JSON                  | `{"status":"info","message":"c8ctl v<version>"}` |
 
 This applies whether JSON mode comes from `--json`, `C8CTL_OUTPUT_MODE`, or the saved preference. The version is primary command output, not a diagnostic, despite the JSON envelope's `status: "info"`. Diagnostics remain on stderr in JSON mode. The version payload is not filtered by `--fields`, and requesting the version does not change the saved preference.
 
 ## Environment variables
 
-| Variable                    | Description          |
-| :-------------------------- | :------------------- |
-| `CAMUNDA_BASE_URL`          | Cluster base URL     |
-| `CAMUNDA_CLIENT_ID`         | OAuth client ID      |
-| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
-| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
-| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
-| `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
-| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
+| Variable                    | Description                                                                                          |
+| :-------------------------- | :--------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_BASE_URL`          | Cluster base URL                                                                                     |
+| `CAMUNDA_REST_ADDRESS`      | SDK-standard alias for `CAMUNDA_BASE_URL` (`CAMUNDA_BASE_URL` wins when both are set)                |
+| `CAMUNDA_AUTH_STRATEGY`     | Authentication strategy: `NONE`, `BASIC`, or `OAUTH` (default: derived from the credentials present) |
+| `CAMUNDA_CLIENT_ID`         | OAuth client ID                                                                                      |
+| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret                                                                                  |
+| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience                                                                                 |
+| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint                                                                                 |
+| `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated)                                                                        |
+| `CAMUNDA_USERNAME`          | Basic authentication username                                                                        |
+| `CAMUNDA_PASSWORD`          | Basic authentication password (alias: `CAMUNDA_BASIC_AUTH_PASSWORD`)                                 |
+| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID                                                                                    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
 
