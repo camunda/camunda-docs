@@ -1258,6 +1258,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/mixpanel",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/orchestration-cluster-api",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
