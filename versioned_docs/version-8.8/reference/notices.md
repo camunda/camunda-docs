@@ -147,7 +147,7 @@ November 27, 2026
 
 ### Impact
 
-On Camunda 8 SaaS, the gRPC API of the Orchestration Cluster accepted access tokens that were issued for another cluster, including clusters of other organizations. The REST API was not affected.
+On Camunda 8 SaaS, the gRPC API of the Orchestration Cluster could accept access tokens that were issued for another cluster, including clusters of other organizations. The REST API was not affected.
 
 In affected versions, the gRPC API did not check that a token was issued for its cluster. Anyone with client credentials for any SaaS cluster could authenticate on the gRPC API of another SaaS cluster. The attacker needs the ID of the target cluster.
 
