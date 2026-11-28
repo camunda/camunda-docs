@@ -80,8 +80,8 @@ jobs:
         env:
           # Renovate updates the version and the linux_amd64 tarball digest together.
           # renovate: datasource=github-release-attachments depName=cli/cli
-          GH_CLI_VERSION: v2.103.3
-          GH_CLI_SHA256: 4c806978ffce1cec70853302a56d70ac6da4f19bae7adca4e1a8ab00633dd91d
+          GH_CLI_VERSION: v2.106.0
+          GH_CLI_SHA256: a476449fa9625413c54a3734eded62e9e480e49f421ff08e7f3b3879c059a033
         run: |
           cd "$RUNNER_TEMP"
           gh_dir="gh_${GH_CLI_VERSION#v}_linux_amd64"
