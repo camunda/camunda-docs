@@ -405,3 +405,69 @@ When `deprecated` is a boolean (`true`), a deprecation hint appears in the prope
 :::tip
 Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and the template lifecycle.
 :::
+
+## Guiding updates and migrations: `updatePaths`
+
+- `updatePaths` is an optional key.
+
+Use `updatePaths` to guide elements to the latest version of your template, when you [evolve it](./evolving-templates.md). A path describes what changed and, with hints, moves user input to new bindings.
+
+`updatePaths` is a list of paths, oldest first. Each path is either:
+
+- An _update_, within this template. It applies to elements on a version below its `beforeVersion`. Use it to keep an update compatible, for example when you rename a binding.
+- A _migration_, from a different template. It applies to elements that use the template identified by its `templateId`, and the modeler offers it to their users.
+
+Each path has the following attributes:
+
+- `beforeVersion : Number`: Updates only. The path applies to elements on a version of this template below it.
+- `templateId : String`: Migrations only. The `id` of the template to migrate from.
+- `message : String`: Migrations only. Text shown where the migration is offered.
+- `changes : String`: What changed, and what users need to check or do, as Markdown. Applications may show it before users update or migrate.
+- `hints : Array<Object>`: Optional. Values to move. Each hint moves the value of the `from` binding to the `to` binding:
+  - `from : Object`: The binding to read the value from.
+  - `to : Object`: The binding to move the value to.
+  - `values : Object`: Maps values, for example `{ "GET": "get" }`. Use `*` to map any other value; empty values are not moved. To set a value that depends on a choice, map the binding that holds the choice, for example `provider.type`.
+
+```json
+{
+  ...,
+  "id": "my.other.custom.task",
+  "version": 2,
+  "updatePaths": [
+    {
+      "templateId": "my.custom.task",
+      "message": "Migrate to My Other Custom Task to use the new API.",
+      "changes": "- URL is now called endpoint.\n- HTTP methods are lower case.",
+      "hints": [
+        {
+          "from": { "type": "zeebe:input", "name": "url" },
+          "to": { "type": "zeebe:input", "name": "endpoint" }
+        },
+        {
+          "from": { "type": "zeebe:taskHeader", "key": "method" },
+          "to": { "type": "zeebe:taskHeader", "key": "method" },
+          "values": { "GET": "get", "POST": "post" }
+        }
+      ]
+    },
+    {
+      "beforeVersion": 2,
+      "changes": "- Timeout is now called request timeout.",
+      "hints": [
+        {
+          "from": { "type": "zeebe:input", "name": "timeout" },
+          "to": { "type": "zeebe:input", "name": "requestTimeout" }
+        }
+      ]
+    }
+  ]
+}
+```
+
+Follow these rules when you author update paths:
+
+- When you publish a new version, append its paths, and keep the previous ones. The latest version carries all paths that older elements need.
+- Write a migration against the latest version of the template users migrate from, and against the version of your template you add it in. Elements on older versions of the other template are updated along its own paths first.
+- Migrations do not chain: if your template migrates from `B`, and `B` migrates from `A`, declare a migration from `A`, too, to migrate elements on `A` directly.
+- Once other templates migrate from your template, keep the bindings they read.
+- Values move as stored. `Boolean` and `Number` inputs are stored as FEEL, for example `=true`. To move them to a different kind of binding, map them, for example `{ "=true": true, "=false": false }`.

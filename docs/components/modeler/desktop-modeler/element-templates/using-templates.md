@@ -55,6 +55,15 @@ Templates are updated according to the following rules:
 - If the property is not defined in the new template, it will unset.
 - Sub-properties of complex properties (for example, `zeebe:input`, `zeebe:output`) are handled
   according to these rules if they can be identified.
+- Values are moved to new bindings, as the template's update paths declare.
+
+To learn what changes before you update, select **Review changes**, if available.
+
+### Migrating templates
+
+If a different template supersedes the applied one, the properties panel shows **Migration available**. Select **Migrate** to change the element to the new template, moving its values as the template declares. To learn what changes before you migrate, select **Review changes**, if available.
+
+After migrating, review the configuration. The properties panel highlights values that you need to provide or correct.
 
 ### Replacing templates
 
