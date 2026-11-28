@@ -109,32 +109,32 @@ curl --request GET 'http://localhost:8092/actuator/backups/123456'
 ### Example response
 
 ```json
-  {
-    "backupId": 123456,
-    "failureReason": null,
-    "state": "COMPLETE",
-    “details”: [
-      {
-          "snapshotName": "camunda_optimize_123456_8.8.0_part_1_of_2",
-          "state": "SUCCESS",
-          "startTime": "2024-11-09T10:11:36.978+0100",
-          "failures": []
-      },
-      {
-          "snapshotName": "camunda_optimize_123456_8.8.0_part_2_of_2",
-          "state": "SUCCESS",
-          "startTime": "2024-11-09T10:11:37.178+0100",
-          "failures": []
-      }
-    ]
-  }
+{
+  "backupId": 123456,
+  "failureReason": null,
+  "state": "COMPLETED",
+  "details": [
+    {
+      "snapshotName": "camunda_optimize_123456_8.8.0_part_1_of_2",
+      "state": "SUCCESS",
+      "startTime": "2024-11-09T10:11:36.978+0100",
+      "failures": []
+    },
+    {
+      "snapshotName": "camunda_optimize_123456_8.8.0_part_2_of_2",
+      "state": "SUCCESS",
+      "startTime": "2024-11-09T10:11:37.178+0100",
+      "failures": []
+    }
+  ]
+}
 ```
 
 Note that the endpoint will return a single item when called with a `backupId` and a list of items when called without specifying a `backupId`.
 
 Possible states of the backup:
 
-- `COMPLETE`: The backup can be used for restoring data.
+- `COMPLETED`: The backup can be used for restoring data.
 - `IN_PROGRESS`: The backup process for this backup ID is still in progress.
 - `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html)/[OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) get snapshot status API for each of the snapshots included in the given backup.
 - `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch/OpenSearch version.
