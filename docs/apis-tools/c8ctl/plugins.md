@@ -185,8 +185,8 @@ At runtime, `c8ctl` injects a global object via `globalThis.c8ctl` that plugins 
 | `createClient(profile?, sdkConfig?)` | Create a Camunda SDK client. Optionally pass a profile name to use specific credentials. |
 | `resolveTenantId(profile?)`          | Resolve the active tenant ID using the same fallback logic as built-in commands.         |
 | `getLogger()`                        | Get the `c8ctl` logger instance (respects the current output mode).                      |
-| `getUserDataDir()`                   | Absolute path of the `c8ctl` user data directory (honours `C8CTL_DATA_DIR`).             |
-| `getModelerDataDir()`                | Absolute path of the Camunda Desktop Modeler user data directory (honours `C8CTL_MODELER_DIR`). |
+| `getUserDataDir()`                   | Absolute path of the `c8ctl` user data directory (honors `C8CTL_DATA_DIR`).             |
+| `getModelerDataDir()`                | Absolute path of the Camunda Desktop Modeler user data directory (honors `C8CTL_MODELER_DIR`). |
 | `npm({ args, stdout?, stdio? })`     | Run npm the way `c8ctl` does, portably. See [Running npm from a plugin](#running-npm-from-a-plugin). |
 | `version`                            | `c8ctl` version string.                                                                  |
 | `nodeVersion`                        | Node.js version.                                                                         |
@@ -200,6 +200,8 @@ At runtime, `c8ctl` injects a global object via `globalThis.c8ctl` that plugins 
 ### Logger output
 
 `logger.info(message)` formats messages for the current output mode: plain text on stdout in text mode, or `{"status":"info","message":"..."}` on stderr in JSON mode. For a message that is the command's primary result, use `logger.info(message, { stream: "stdout" })`. Use `{ stream: "stderr" }` to keep a diagnostic on stderr in either mode. The override affects only that call, preserves formatting, and does not apply `--fields` filtering.
+
+With `--quiet`, `logger.info` and `logger.success` print nothing, except that `logger.success(message, key)` still prints the key (bare on stdout in text mode; JSON mode keeps the record). Pass `{ essential: true }` to `logger.info` when the message is the command's answer or explains a warning or error, so it still prints. Data written with `logger.output`, `logger.json` or `logger.table`, warnings and errors are never hidden.
 
 `logger.output(content)` writes raw content to stdout without formatting it, while `logger.json(data)` writes structured data with `--fields` filtering.
 
