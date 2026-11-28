@@ -33,6 +33,194 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 98
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+The [IDP connectors](/components/hub/workspace/modeler/idp/idp-configuration.md) can use the GCP provider with **Service account** authentication. With this authentication type, the connector takes the content of a Google service account key file. In affected versions, the connector accepted other Google credential types in this field, such as external account credentials. An external account credential tells the connector runtime where to read a token and where to send it. An attacker can use this to make the runtime read a local file or an internal URL, for example a cloud metadata endpoint, and send the result to a server the attacker controls.
+
+On Self-Managed, this can expose any file that the connector runtime can read, and credentials of the runtime's cloud identity. Examples include connector secrets, client credentials, and Kubernetes service account tokens.
+
+An attacker must be able to do one of the following:
+
+- Deploy a process that uses an IDP connector.
+- Control the service account credential of an IDP connector through a process variable.
+
+No evidence of exploitation was found.
+
+Severity: High (CVSS v4.0 7.1) for Self-Managed. Critical (CVSS v4.0 9.2) for Camunda 8 SaaS.
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- Camunda Connectors ≤ 8.10.9, ≤ 8.9.23, ≤ 8.8.30, or ≤ 8.7.35
+- Camunda Connectors 8.11.0-alpha1 and 8.11.0-alpha2
+
+Camunda Connectors 8.6 doesn't include the IDP connector and isn't affected.
+
+### Solution
+
+Camunda has released a fix: the IDP connector now accepts only Google credentials of type `service_account` for service account authentication. The other GCP connectors already did this. This is a breaking change: a process that passes any other credential type, for example `external_account`, `authorized_user`, or `impersonated_service_account`, fails after the upgrade. Use a service account key, or the bearer token or refresh token authentication type.
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.10.10, 8.9.24, 8.8.31, 8.7.36
+
+The fix is also part of Camunda Connectors 8.11.0-alpha3.
+
+On Camunda 8 SaaS, Camunda deployed the fix to all running clusters with a forced update rollout, completed on November 26, 2026, 22:53 UTC. Suspended clusters get the fix when they are resumed. Suspended clusters on Camunda 8.10.0-alpha4 or an earlier alpha can't be resumed and so can't run an affected version. You don't need to do anything to get the fix on Camunda 8 SaaS. However, the breaking change described above also applies there: processes that use a credential type the fix now rejects fail and must be changed.
+
+**Recommendation** for Self-Managed: Upgrade to one of the releases above. This is the only complete fix.
+
+**Interim mitigation**: Use these measures only if you can't upgrade right away, and only until you upgrade. They reduce the risk but don't remove the vulnerability.
+
+- Only allow trusted users to deploy processes, and don't map untrusted input into the IDP connector's authentication fields.
+- If you don't use the IDP connectors, turn them off:
+  - Camunda Connectors 8.9 and later: set `CONNECTOR_OUTBOUND_DISABLED=io.camunda:idp-extraction-connector-template:1,io.camunda:idp-classification-connector-template:1,io.camunda:idp-structured-connector-template:1,io.camunda:idp-unstructured-connector-template:1`.
+  - Camunda Connectors 8.8: set `CONNECTOR_OUTBOUND_DISABLED=io.camunda:idp-extraction-connector-template:1`.
+  - Camunda Connectors 8.7: set `CONNECTOR_IDP_EXTRACTION_OUTBOUND_CONNECTOR_TYPE` to an unused job type. Jobs of the IDP connector are then no longer processed.
+- Restrict outbound network traffic from the connector runtime to the hosts it needs, and block access to cloud metadata endpoints.
+
+## Notice 97
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+The [Kafka connectors](/components/connectors/out-of-the-box-connectors/kafka.md) pass **Additional properties** to the Kafka client. In affected versions, the connector didn't check these properties. An attacker can set a property that turns on a Kafka config provider. The Kafka client then reads a file or an environment variable of the connector runtime and puts its value into the connection settings it sends to the Kafka broker or the schema registry. Other properties could make the client load arbitrary classes from the runtime's classpath. Both the Kafka producer (outbound) and the Kafka consumer (inbound) connector are affected.
+
+On Self-Managed, this can expose any file that the connector runtime can read, and its environment variables. Examples include connector secrets, client credentials, and Kubernetes service account tokens.
+
+An attacker must be able to do one of the following:
+
+- Deploy a process that uses a Kafka connector.
+- Control the additional properties of a Kafka connector through a process variable.
+
+The attacker also needs a Kafka broker or schema registry that they control and that the connector runtime can reach.
+
+No evidence of exploitation was found.
+
+Severity: High (CVSS v4.0 7.1) for Self-Managed. Critical (CVSS v4.0 9.2) for Camunda 8 SaaS.
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- Camunda Connectors ≤ 8.10.9, ≤ 8.9.23, ≤ 8.8.30, ≤ 8.7.35, or ≤ 8.6.39
+- Camunda Connectors 8.11.0-alpha1 and 8.11.0-alpha2
+
+Earlier versions, which are no longer supported, are also affected.
+
+### Solution
+
+Camunda has released a fix: the Kafka connectors now check additional properties before passing them to the Kafka client. The connectors reject these properties:
+
+- config providers
+- `sasl.jaas.config` with a login module other than PLAIN or SCRAM, for example OAUTHBEARER (OAuth/OIDC) or GSSAPI (Kerberos), and all `sasl.oauthbearer.*` and `sasl.kerberos.*` properties
+- properties that name a class, unless the class is one of the standard serializers, partitioners, assignors, or subject name strategies. Examples are interceptors, metric reporters, custom serializers, partitioners, callback handlers, and `ssl.engine.factory.class`
+- `default.list.key.serde.inner`, `default.list.value.serde.inner`, `default.list.key.serde.type`, and `default.list.value.serde.type`, unless they name a standard class
+- `specific.avro.reader` and `schema.reflection`, unless set to `false`
+- schema registry rule executors and actions, and bearer token sources that load a class or fetch from a configurable URL
+
+The same checks apply to schema registry client settings with the `schema.registry.` prefix. SASL PLAIN and SCRAM, `ssl.*` settings (including mTLS) except `ssl.engine.factory.class`, schema registry Basic authentication and bearer tokens, and all tuning properties keep working.
+
+This is a breaking change: a process that uses one of the rejected properties fails with the error `Kafka additional property '<key>' is not allowed, or its value is not allowed for this property`. Note that `specific.avro.reader=true` is a common setting: Kafka consumer connectors that use it stop working after the upgrade.
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.10.10, 8.9.24, 8.8.31, 8.7.36, 8.6.40
+
+The fix is also part of Camunda Connectors 8.11.0-alpha3.
+
+On Camunda 8 SaaS, Camunda deployed the fix to all running clusters with a forced update rollout, completed on November 26, 2026, 22:53 UTC. Suspended clusters get the fix when they are resumed. Suspended clusters on Camunda 8.10.0-alpha4 or an earlier alpha can't be resumed and so can't run an affected version. You don't need to do anything to get the fix on Camunda 8 SaaS. However, the breaking change described above also applies there: processes that use a property the fix now rejects fail and must be changed.
+
+**Recommendation** for Self-Managed: Upgrade to one of the releases above. This is the only complete fix.
+
+**Interim mitigation**: Use these measures only if you can't upgrade right away, and only until you upgrade. They reduce the risk but don't remove the vulnerability.
+
+- Start the connector runtime with the JVM system property `-Dorg.apache.kafka.automatic.config.providers=none`, for example through `JAVA_TOOL_OPTIONS`. The Kafka client then refuses all config providers. This blocks the config provider path, but not the loading of classes through other properties. Don't set it if other code in the same runtime uses Kafka config providers.
+- On Camunda Connectors 8.6.13 to 8.6.39 and 8.7.3 to 8.7.35, also set `-Dorg.apache.kafka.sasl.oauthbearer.allowed.urls=https://localhost/none`. Without it, an OAuth login configured through additional properties can still read a local file through a `file:` URL. Earlier 8.6 and 8.7 patch releases don't support this setting. Upgrade those first. Camunda Connectors 8.8 and later block these URLs by default.
+- Only allow trusted users to deploy processes, and don't map untrusted input into the additional properties of a Kafka connector.
+- If you don't use the Kafka connectors, turn them off:
+  - Camunda Connectors 8.8 and later: set `CONNECTOR_OUTBOUND_DISABLED=io.camunda:connector-kafka:1` and `CONNECTOR_INBOUND_DISABLED=io.camunda:connector-kafka-inbound:1`.
+  - Camunda Connectors 8.6 and 8.7: set `CONNECTOR_KAFKA_PRODUCER_TYPE` and `CONNECTOR_KAFKA_CONSUMER_TYPE` to unused types.
+- Restrict outbound network traffic from the connector runtime to the Kafka brokers and schema registries it needs.
+
+## Notice 96
+
+### Publication date
+
+November 27, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+The [SQL Database connector](/components/connectors/out-of-the-box-connectors/sql.md) uses MariaDB Connector/J to connect to MariaDB and MySQL databases. This driver allows `LOAD DATA LOCAL INFILE` by default. With this statement, the database server can ask the client to upload a local file. In affected versions, the connector didn't turn this off. An attacker can point the connector at a database server they control and make the connector runtime upload any file it can read. The connector also accepted driver credential plugins that send an environment variable or system property of the runtime as the login, and connection details that add further driver options to the connection URL.
+
+On Self-Managed, this can expose any file that the connector runtime can read. Examples include connector secrets, client credentials, and Kubernetes service account tokens.
+
+An attacker must be able to do one of the following:
+
+- Deploy a process that uses the SQL Database connector.
+- Control the connection details of a SQL Database connector through a process variable.
+- On Camunda Connectors 8.10 and later: validate a SQL Database credential in Camunda Hub, if [credential validation](/self-managed/components/connectors/connectors-configuration.md#enable-credential-validation) is turned on. The validation opens a connection to the database server in the credential.
+
+This vulnerability was exploited on Camunda 8 SaaS.
+
+Severity: High (CVSS v4.0 7.1) for Self-Managed. Critical (CVSS v4.0 9.2) for Camunda 8 SaaS.
+
+### How to determine if the installation is affected
+
+You are using one of these component versions:
+
+- Camunda Connectors ≤ 8.10.9, ≤ 8.9.23, ≤ 8.8.30, ≤ 8.7.35, or ≤ 8.6.39
+- Camunda Connectors 8.11.0-alpha1 and 8.11.0-alpha2
+
+### Solution
+
+Camunda has released a fix: the SQL Database connector now opens MariaDB and MySQL connections with local file upload turned off, whatever the connection URL or driver properties say. This also applies to credential validation. The `ENV` and `PROPERTY` credential types are rejected, and the host, port, and database name of the connection are validated. This is a breaking change: the following configurations now fail with an error:
+
+- `allowLocalInfile` turned on through the connection URL or the driver properties
+- `credentialType=ENV` or `credentialType=PROPERTY`
+- a host that isn't a host name or IP address, a port that isn't a number, or a database name that contains `?`, `&`, `;`, `#`, `{`, `}`, or control characters
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.10.10, 8.9.24, 8.8.31, 8.7.36, 8.6.40
+
+The fix is also part of Camunda Connectors 8.11.0-alpha3.
+
+On Camunda 8 SaaS, Camunda deployed the fix to all running clusters with a forced update rollout, completed on November 26, 2026, 15:53 UTC. Suspended clusters get the fix when they are resumed. Suspended clusters on Camunda 8.10.0-alpha4 or an earlier alpha can't be resumed and so can't run an affected version. You don't need to do anything to get the fix on Camunda 8 SaaS. However, the breaking change described above also applies there: processes that use a configuration the fix now rejects fail and must be changed.
+
+**Recommendation** for Self-Managed: Upgrade to one of the releases above. This is the only complete fix.
+
+**Interim mitigation**: Use these measures only if you can't upgrade right away, and only until you upgrade. They reduce the risk but don't remove the vulnerability.
+
+- Only allow trusted users to deploy processes, and don't map untrusted input into the connection details of the SQL Database connector.
+- If you don't use the SQL Database connector, turn it off:
+  - Camunda Connectors 8.8 and later: set `CONNECTOR_OUTBOUND_DISABLED=io.camunda:connector-jdbc:1`.
+  - Camunda Connectors 8.6 and 8.7: set `CONNECTOR_SQL_DATABASE_CONNECTOR_TYPE` to an unused job type. Jobs of the SQL Database connector are then no longer processed.
+- On Camunda Connectors 8.10 and later, turning off the connector doesn't turn off credential validation. If you turned [credential validation](/self-managed/components/connectors/connectors-configuration.md#enable-credential-validation) on, turn it off until you upgrade: leave `camunda.connector.configuration.validation.unsecured` unset or `false`, and remove `camunda.connector.auth.self-managed.issuer` and `camunda.connector.auth.self-managed.audience`. The endpoint then answers `404`. If you also use these two properties to secure the management API, restrict network access to the `/configurations` endpoint to Camunda Hub instead.
+- Restrict outbound network traffic from the connector runtime to the database servers it needs.
+
 ## Notice 95
 
 ### Publication date
