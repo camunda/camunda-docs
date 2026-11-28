@@ -16,7 +16,7 @@ type GetGlobalJobStatisticsData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -46,7 +46,7 @@ Start of the time window to filter metrics. ISO 8601 date-time format.
 #### jobType?
 
 ```ts
-optional jobType?: string;
+jobType?: string;
 ```
 
 Optional job type to limit the aggregation to a single job type.

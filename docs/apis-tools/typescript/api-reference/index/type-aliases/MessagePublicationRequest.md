@@ -16,7 +16,7 @@ type MessagePublicationRequest = object;
 ### businessId?
 
 ```ts
-optional businessId?: BusinessId;
+businessId?: BusinessId;
 ```
 
 An optional business id used to enforce uniqueness of the process instance that a
@@ -30,7 +30,7 @@ effect when the message correlates to a catch, boundary, or intermediate event.
 ### correlationKey?
 
 ```ts
-optional correlationKey?: string;
+correlationKey?: string;
 ```
 
 The correlation key of the message.
@@ -40,7 +40,7 @@ The correlation key of the message.
 ### messageId?
 
 ```ts
-optional messageId?: string;
+messageId?: string;
 ```
 
 The unique ID of the message. This is used to ensure only one message with the given ID
@@ -61,7 +61,7 @@ The name of the message.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 The tenant of the message sender.
@@ -71,7 +71,7 @@ The tenant of the message sender.
 ### timeToLive?
 
 ```ts
-optional timeToLive?: number;
+timeToLive?: number;
 ```
 
 Timespan (in ms) to buffer the message on the broker.
@@ -81,7 +81,7 @@ Timespan (in ms) to buffer the message on the broker.
 ### variables?
 
 ```ts
-optional variables?: object;
+variables?: object;
 ```
 
 The message variables as JSON document.

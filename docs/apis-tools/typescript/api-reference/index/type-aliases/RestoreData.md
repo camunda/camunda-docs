@@ -24,7 +24,7 @@ body: RestoreRequest;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### dryRun?
 
 ```ts
-optional dryRun?: boolean;
+dryRun?: boolean;
 ```
 
 If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.

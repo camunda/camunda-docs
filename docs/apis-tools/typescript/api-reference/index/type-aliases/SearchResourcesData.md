@@ -16,7 +16,7 @@ type SearchResourcesData = object;
 ### body?
 
 ```ts
-optional body?: ResourceSearchQuery;
+body?: ResourceSearchQuery;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: ResourceSearchQuery;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,7 +32,7 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

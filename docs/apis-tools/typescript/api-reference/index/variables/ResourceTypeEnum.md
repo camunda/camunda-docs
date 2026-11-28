@@ -105,6 +105,12 @@ readonly MAPPING_RULE: "MAPPING_RULE" = 'MAPPING_RULE';
 readonly MESSAGE: "MESSAGE" = 'MESSAGE';
 ```
 
+### PROBE
+
+```ts
+readonly PROBE: "PROBE" = 'PROBE';
+```
+
 ### PROCESS\_DEFINITION
 
 ```ts

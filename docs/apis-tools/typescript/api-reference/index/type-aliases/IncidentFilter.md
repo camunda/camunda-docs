@@ -18,7 +18,7 @@ Incident search filter.
 ### creationTime?
 
 ```ts
-optional creationTime?: DateTimeFilterProperty;
+creationTime?: DateTimeFilterProperty;
 ```
 
 Date of incident creation.
@@ -28,7 +28,7 @@ Date of incident creation.
 ### elementId?
 
 ```ts
-optional elementId?: StringFilterProperty;
+elementId?: StringFilterProperty;
 ```
 
 The element ID associated to this incident.
@@ -38,7 +38,7 @@ The element ID associated to this incident.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey?: ElementInstanceKeyFilterProperty;
+elementInstanceKey?: ElementInstanceKeyFilterProperty;
 ```
 
 The element instance key associated to this incident.
@@ -48,7 +48,7 @@ The element instance key associated to this incident.
 ### errorMessage?
 
 ```ts
-optional errorMessage?: StringFilterProperty;
+errorMessage?: StringFilterProperty;
 ```
 
 The error message of this incident. For `$eq`, `$neq`, `$in`, and `$notIn`, matching is case-insensitive and matches if the incident's error message contains the given value as a phrase, not necessarily the entire error message. `$like` matches on individual words of the error message and does not support multi-word patterns.
@@ -58,7 +58,7 @@ The error message of this incident. For `$eq`, `$neq`, `$in`, and `$notIn`, matc
 ### errorType?
 
 ```ts
-optional errorType?: IncidentErrorTypeFilterProperty;
+errorType?: IncidentErrorTypeFilterProperty;
 ```
 
 Incident error type with a defined set of values.
@@ -68,7 +68,7 @@ Incident error type with a defined set of values.
 ### incidentKey?
 
 ```ts
-optional incidentKey?: BasicStringFilterProperty;
+incidentKey?: BasicStringFilterProperty;
 ```
 
 The assigned key, which acts as a unique identifier for this incident.
@@ -78,7 +78,7 @@ The assigned key, which acts as a unique identifier for this incident.
 ### jobKey?
 
 ```ts
-optional jobKey?: JobKeyFilterProperty;
+jobKey?: JobKeyFilterProperty;
 ```
 
 The job key, if exists, associated with this incident.
@@ -88,7 +88,7 @@ The job key, if exists, associated with this incident.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: StringFilterProperty;
+processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition ID associated to this incident.
@@ -98,7 +98,7 @@ The process definition ID associated to this incident.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
+processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key associated to this incident.
@@ -108,7 +108,7 @@ The process definition key associated to this incident.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
+processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The process instance key associated to this incident.
@@ -118,7 +118,7 @@ The process instance key associated to this incident.
 ### state?
 
 ```ts
-optional state?: IncidentStateFilterProperty;
+state?: IncidentStateFilterProperty;
 ```
 
 State of this incident with a defined set of values.
@@ -128,7 +128,7 @@ State of this incident with a defined set of values.
 ### tenantId?
 
 ```ts
-optional tenantId?: StringFilterProperty;
+tenantId?: StringFilterProperty;
 ```
 
 The tenant ID of the incident.

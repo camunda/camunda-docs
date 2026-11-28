@@ -18,7 +18,7 @@ Tenant search request
 ### filter?
 
 ```ts
-optional filter?: TenantFilter;
+filter?: TenantFilter;
 ```
 
 The tenant search filters.
@@ -26,7 +26,7 @@ The tenant search filters.
 ### sort?
 
 ```ts
-optional sort?: TenantSearchQuerySortRequest[];
+sort?: TenantSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

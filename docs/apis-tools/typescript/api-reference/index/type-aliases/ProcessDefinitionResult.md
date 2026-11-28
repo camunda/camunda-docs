@@ -66,12 +66,13 @@ Resource name for this process definition.
 ### state
 
 ```ts
-state: "ACTIVE" | "DRAINING" | "DELETED";
+state: "ACTIVE" | "DRAINING" | "DELETED" | "SUSPENDED";
 ```
 
 The state of this process definition.
 `DRAINING` indicates the definition is being deleted but still has active process
 instances draining before it is removed.
+`SUSPENDED` indicates no new process instances can be created from this definition; it returns to `ACTIVE` when resumed.
 
 ---
 

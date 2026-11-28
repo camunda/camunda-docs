@@ -20,7 +20,7 @@ Advanced DecisionDefinitionKey filter.
 ### $eq?
 
 ```ts
-optional $eq?: DecisionDefinitionKey;
+$eq?: DecisionDefinitionKey;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: DecisionDefinitionKey[];
+$in?: DecisionDefinitionKey[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq?: DecisionDefinitionKey;
+$neq?: DecisionDefinitionKey;
 ```
 
 Checks for inequality with the provided value.
@@ -60,7 +60,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn?: DecisionDefinitionKey[];
+$notIn?: DecisionDefinitionKey[];
 ```
 
 Checks if the property matches none of the provided values.

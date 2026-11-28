@@ -546,8 +546,10 @@ Certain operations that help drain work or complete execution are _exempt_ from 
 - `failJob`
 - `throwJobError`
 - `completeUserTask`
+- `activateProbes`
+- `answerProbe`
 
-These continue immediately even during severe backpressure to promote system recovery.
+These continue immediately even during severe backpressure to promote system recovery. The probe pair is exempt because `createProbe` holds its permit until a worker answers: if activating and answering queued behind it, a client at concurrency one could never complete its own probe.
 
 ### Interaction With HTTP Retry
 
@@ -947,6 +949,45 @@ If `validateSchemas` is true:
 - Incoming `variables` are parsed with `inputSchema` (fail => job is failed with a validation error message).
 - Incoming `customHeaders` parsed with `customHeadersSchema` if provided.
 - Completion payload `variables` parsed with `outputSchema` (warns & proceeds on failure).
+
+### Job variables are untrusted input
+
+`job.variables` reach your handler from the Orchestration Cluster, but their **content is set by whoever started the process instance or wrote to it since** — a form submission, an API caller, an upstream service, a message payload. Treat every value as attacker-controlled: validate it before using it in a database query, a file path, a shell command, an outbound URL or a template.
+
+`job.customHeaders` have a different provenance: they are defined during modelling and reach you from the deployed process model, so they are controlled by whoever deploys processes rather than by whoever starts an instance. That is a narrower trust boundary, not an absent one — validate them too if your handler uses a header to pick a code path, a destination or a credential.
+
+What the SDK does:
+
+- **JSON only.** Variables are deserialized as plain JSON. No constructor is invoked and no user class is instantiated from the payload — there is no mechanism in the worker path that can turn a payload into an arbitrary object.
+- **No sharing between jobs.** Each activated job owns its own variables object. Nothing is shared or mutated across concurrently running jobs, including across threads in a threaded worker.
+
+What the SDK does **not** do:
+
+- **No size or depth limit.** The SDK enforces no limit of its own on the size or nesting depth of a variable payload, over and above whatever the cluster accepts. If you need a bound, impose it in your schema (`z.string().max(...)`, a closed object shape) or in your handler.
+- **No shape validation by default.** `validateSchemas` is `false` unless you set it.
+
+Constraining the shape of what reaches your handler is what `validateSchemas` with an `inputSchema` is for. With it enabled, variables that do not match the schema are rejected and the job is failed with a validation error **before** your handler runs:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeJobVariablesUntrusted -->
+
+```ts
+client.createJobWorker({
+  jobType: "charge-card",
+  validateSchemas: true,
+  inputSchema: z
+    .object({
+      orderId: z.string().uuid(),
+      amountCents: z.number().int().positive(),
+    })
+    .strict(), // reject variables the process sent that this handler does not expect
+  jobHandler: async (job) => {
+    // job.variables is now known to match the schema
+    return job.complete();
+  },
+});
+```
+
+Without it, `job.variables` is handed to your handler exactly as deserialized, and the TypeScript type you get from `inputSchema` is a compile-time convenience only — it is not enforced at runtime.
 
 ### Graceful Shutdown
 

@@ -18,7 +18,7 @@ Agent instance search request.
 ### filter?
 
 ```ts
-optional filter?: AgentInstanceFilter;
+filter?: AgentInstanceFilter;
 ```
 
 The agent instance search filters.
@@ -26,7 +26,7 @@ The agent instance search filters.
 ### sort?
 
 ```ts
-optional sort?: AgentInstanceSearchQuerySortRequest[];
+sort?: AgentInstanceSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

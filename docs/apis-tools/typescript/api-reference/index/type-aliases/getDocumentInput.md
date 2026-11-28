@@ -16,7 +16,7 @@ type getDocumentInput = object;
 ### contentHash?
 
 ```ts
-optional contentHash?: getDocumentQueryParam_contentHash;
+contentHash?: getDocumentQueryParam_contentHash;
 ```
 
 ---
@@ -32,5 +32,5 @@ documentId: getDocumentPathParam_documentId;
 ### storeId?
 
 ```ts
-optional storeId?: getDocumentQueryParam_storeId;
+storeId?: getDocumentQueryParam_storeId;
 ```

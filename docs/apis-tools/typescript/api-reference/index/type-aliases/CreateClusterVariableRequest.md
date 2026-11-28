@@ -16,7 +16,7 @@ type CreateClusterVariableRequest = object;
 ### kind?
 
 ```ts
-optional kind?: ClusterVariableKindEnum;
+kind?: ClusterVariableKindEnum;
 ```
 
 The kind of the cluster variable. Defaults to JSON if not specified.
@@ -26,7 +26,7 @@ The kind of the cluster variable. Defaults to JSON if not specified.
 ### metadata?
 
 ```ts
-optional metadata?: object;
+metadata?: object;
 ```
 
 A generic key-value metadata bag attached to the cluster variable. Values must be strings or numbers. Limited to 100 entries and a configurable maximum serialized size (default: 100 entries at max key length of a cluster variable name (256 chars) plus the maximum value length, 8192 characters).

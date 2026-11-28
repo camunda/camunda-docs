@@ -18,5 +18,5 @@ A request body that optionally carries a `page` block.
 ### page?
 
 ```ts
-optional page?: SearchPageRequest;
+page?: SearchPageRequest;
 ```

@@ -16,7 +16,7 @@ type MessageSubscriptionSearchQuery = SearchQueryRequest & object;
 ### filter?
 
 ```ts
-optional filter?: MessageSubscriptionFilter;
+filter?: MessageSubscriptionFilter;
 ```
 
 The incident search filters.
@@ -24,7 +24,7 @@ The incident search filters.
 ### sort?
 
 ```ts
-optional sort?: MessageSubscriptionSearchQuerySortRequest[];
+sort?: MessageSubscriptionSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

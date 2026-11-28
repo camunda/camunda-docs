@@ -26,7 +26,7 @@ The ID of the element that should be activated.
 ### variables?
 
 ```ts
-optional variables?: object;
+variables?: object;
 ```
 
 Variables to be set when activating the element.

@@ -43,6 +43,16 @@ Forbidden. The request is not allowed.
 
 ---
 
+### 404
+
+```ts
+404: ProblemDetail;
+```
+
+A requested backup has no completed backup on at least one partition, or the physical tenant does not exist. More details are provided in the response body.
+
+---
+
 ### 409
 
 ```ts

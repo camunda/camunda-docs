@@ -66,16 +66,7 @@ Optional variables to instantiate at the error catch event's scope.
 
 #### Inherited from
 
-```ts
-Data.TaggedError('TerminalJobError')<{
-  / The BPMN error code matched against an error catch event. /
-  readonly code: string;
-  readonly message: string;
-  / Optional variables to instantiate at the error catch event's scope. /
-  readonly variables?: { readonly [key: string]: unknown };
-  readonly cause?: unknown;
-}>.constructor
-```
+`Data.TaggedError('TerminalJobError')<{ /** The BPMN error code matched against an error catch event. */ readonly code: string; readonly message: string; /** Optional variables to instantiate at the error catch event's scope. */ readonly variables?: { readonly [key: string]: unknown }; readonly cause?: unknown; }>.constructor`
 
 ## Properties
 
@@ -89,16 +80,14 @@ The BPMN error code matched against an error catch event.
 
 #### Inherited from
 
-```ts
-Data.TaggedError("TerminalJobError").code;
-```
+`Data.TaggedError('TerminalJobError').code`
 
 ---
 
 ### variables?
 
 ```ts
-readonly optional variables?: object;
+readonly variables?: object;
 ```
 
 Optional variables to instantiate at the error catch event's scope.
@@ -111,6 +100,4 @@ Optional variables to instantiate at the error catch event's scope.
 
 #### Inherited from
 
-```ts
-Data.TaggedError("TerminalJobError").variables;
-```
+`Data.TaggedError('TerminalJobError').variables`

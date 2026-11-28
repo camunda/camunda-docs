@@ -20,7 +20,7 @@ The `page` field of a search request body (cursor-forward or offset).
 ### after?
 
 ```ts
-optional after?: string;
+after?: string;
 ```
 
 Cursor-forward: `endCursor` of the previous page.
@@ -30,7 +30,7 @@ Cursor-forward: `endCursor` of the previous page.
 ### before?
 
 ```ts
-optional before?: string;
+before?: string;
 ```
 
 Cursor-backward: `startCursor` of the previous page (mutually exclusive with `after`/`from`).
@@ -40,7 +40,7 @@ Cursor-backward: `startCursor` of the previous page (mutually exclusive with `af
 ### from?
 
 ```ts
-optional from?: number;
+from?: number;
 ```
 
 Offset: index to start from.
@@ -50,5 +50,5 @@ Offset: index to start from.
 ### limit?
 
 ```ts
-optional limit?: number;
+limit?: number;
 ```

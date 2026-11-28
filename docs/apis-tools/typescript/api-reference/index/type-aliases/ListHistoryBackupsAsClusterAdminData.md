@@ -16,7 +16,7 @@ type ListHistoryBackupsAsClusterAdminData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -24,7 +24,7 @@ optional body?: never;
 ### path?
 
 ```ts
-optional path?: never;
+path?: never;
 ```
 
 ---
@@ -32,13 +32,13 @@ optional path?: never;
 ### query?
 
 ```ts
-optional query?: object;
+query?: object;
 ```
 
 #### physicalTenantId?
 
 ```ts
-optional physicalTenantId?: string;
+physicalTenantId?: string;
 ```
 
 The physical tenant to apply the change to. When omitted, or when passed with an empty value, the change is applied to every physical tenant of the cluster.
@@ -46,7 +46,7 @@ The physical tenant to apply the change to. When omitted, or when passed with an
 #### prefix?
 
 ```ts
-optional prefix?: BackupIdPrefix;
+prefix?: BackupIdPrefix;
 ```
 
 A prefix that backup ids must match, ending in a single '*'. If omitted, all
@@ -55,7 +55,7 @@ backups are returned.
 #### verbose?
 
 ```ts
-optional verbose?: boolean;
+verbose?: boolean;
 ```
 
 Whether to ask the secondary storage for snapshot-level detail. Setting this to

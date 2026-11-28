@@ -23,14 +23,12 @@ against the same server can never satisfy the contract, so it is marked
 ### cause?
 
 ```ts
-optional cause?: unknown;
+cause?: unknown;
 ```
 
 #### Overrides
 
-```ts
-Error.cause;
-```
+`Error.cause`
 
 ---
 
@@ -42,9 +40,7 @@ name: "PresentWhenUnsupportedError";
 
 #### Overrides
 
-```ts
-Error.name;
-```
+`Error.name`
 
 ---
 
@@ -61,5 +57,5 @@ Always `true` — retrying cannot change an unsupported server response shape.
 ### operationId?
 
 ```ts
-optional operationId?: string;
+operationId?: string;
 ```

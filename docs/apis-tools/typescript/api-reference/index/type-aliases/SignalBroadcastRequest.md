@@ -26,7 +26,7 @@ The name of the signal to broadcast.
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 The ID of the tenant that owns the signal.
@@ -36,7 +36,7 @@ The ID of the tenant that owns the signal.
 ### variables?
 
 ```ts
-optional variables?: object;
+variables?: object;
 ```
 
 The signal variables as a JSON object.

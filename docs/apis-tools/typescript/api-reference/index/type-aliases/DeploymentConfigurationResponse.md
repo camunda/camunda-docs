@@ -35,6 +35,16 @@ Whether the tenants management API and UI are enabled.
 
 ---
 
+### isWaitStatesEnabled
+
+```ts
+isWaitStatesEnabled: boolean;
+```
+
+Whether wait-state tracking is enabled.
+
+---
+
 ### maxRequestSize
 
 ```ts

@@ -32,7 +32,7 @@ startTime: getUsageMetricsQueryParam_startTime;
 ### tenantId?
 
 ```ts
-optional tenantId?: getUsageMetricsQueryParam_tenantId;
+tenantId?: getUsageMetricsQueryParam_tenantId;
 ```
 
 ---
@@ -40,5 +40,5 @@ optional tenantId?: getUsageMetricsQueryParam_tenantId;
 ### withTenants?
 
 ```ts
-optional withTenants?: getUsageMetricsQueryParam_withTenants;
+withTenants?: getUsageMetricsQueryParam_withTenants;
 ```

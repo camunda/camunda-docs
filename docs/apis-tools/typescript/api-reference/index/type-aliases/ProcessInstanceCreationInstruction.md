@@ -10,8 +10,9 @@ mdx:
 ```ts
 type ProcessInstanceCreationInstruction =
   | ProcessInstanceCreationInstructionByKey
-  | ProcessInstanceCreationInstructionById;
+  | ProcessInstanceCreationInstructionById
+  | ProcessInstanceCreationInstructionByVersionTag;
 ```
 
 Instructions for creating a process instance. The process definition can be specified
-either by id or by key.
+either by id, by id and version tag, or by key.

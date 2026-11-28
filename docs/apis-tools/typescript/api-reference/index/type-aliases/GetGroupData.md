@@ -16,7 +16,7 @@ type GetGroupData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -40,7 +40,7 @@ The group ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

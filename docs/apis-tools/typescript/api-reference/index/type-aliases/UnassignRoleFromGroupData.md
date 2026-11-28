@@ -16,7 +16,7 @@ type UnassignRoleFromGroupData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -48,7 +48,7 @@ The role ID.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

@@ -21,6 +21,12 @@ Specifies the type of permissions.
 readonly ACCESS: "ACCESS" = 'ACCESS';
 ```
 
+### ANSWER
+
+```ts
+readonly ANSWER: "ANSWER" = 'ANSWER';
+```
+
 ### CANCEL\_PROCESS\_INSTANCE
 
 ```ts
@@ -265,6 +271,12 @@ readonly RESTORE: "RESTORE" = 'RESTORE';
 
 ```ts
 readonly REVEAL: "REVEAL" = 'REVEAL';
+```
+
+### SUSPEND\_PROCESS\_DEFINITION
+
+```ts
+readonly SUSPEND_PROCESS_DEFINITION: "SUSPEND_PROCESS_DEFINITION" = 'SUSPEND_PROCESS_DEFINITION';
 ```
 
 ### SUSPEND\_PROCESS\_INSTANCE

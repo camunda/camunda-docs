@@ -34,9 +34,7 @@ new CamundaClientBase(opts?): CamundaClientBase;
 
 #### Overrides
 
-```ts
-CamundaCore.constructor;
-```
+`CamundaCore.constructor`
 
 ## Accessors
 
@@ -56,9 +54,7 @@ Clock backing SDK-internal cadence. The injected one when supplied, else the liv
 
 #### Inherited from
 
-```ts
-CamundaCore.clock;
-```
+`CamundaCore.clock`
 
 ---
 
@@ -76,9 +72,7 @@ get config(): Readonly<CamundaConfig>;
 
 #### Inherited from
 
-```ts
-CamundaCore.config;
-```
+`CamundaCore.config`
 
 ---
 
@@ -98,9 +92,7 @@ Randomness behind SDK-internal jitter. The injected source when supplied, else t
 
 #### Inherited from
 
-```ts
-CamundaCore.random;
-```
+`CamundaCore.random`
 
 ## Methods
 
@@ -118,9 +110,7 @@ Internal accessor for support logger (no public API commitment yet).
 
 #### Inherited from
 
-```ts
-CamundaCore._getSupportLogger;
-```
+`CamundaCore._getSupportLogger`
 
 ---
 
@@ -169,9 +159,7 @@ Internal invocation helper to apply global backpressure gating + retry + normali
 
 #### Inherited from
 
-```ts
-CamundaCore._invokeWithRetry;
-```
+`CamundaCore._invokeWithRetry`
 
 ---
 
@@ -415,6 +403,213 @@ activateJobs
 ##### Tags
 
 Job
+
+---
+
+### activateProbes()
+
+```ts
+activateProbes(input, options?): CancelablePromise<ProbeActivationResult>;
+```
+
+Activate probes (alpha)
+
+Collects probes of the given probe IDs for a worker, up to the requested maximum.
+
+Like job activation, the request goes to every partition. When no probe is waiting, it is
+held until a probe of one of these probe IDs is created or until `requestTimeout`. Probe
+IDs on which the caller lacks the `ANSWER` permission are skipped. The worker answers each
+probe with `POST /v2/probes/{probeKey}/answer` before the probe's `deadline`.
+
+This endpoint is an alpha feature and may be subject to change
+in future releases.
+
+-
+
+#### Parameters
+
+##### input
+
+[`ProbeActivationRequest`](../type-aliases/ProbeActivationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProbeActivationResult`](../type-aliases/ProbeActivationResult.md)\>
+
+#### Example
+
+**Activate probes**
+
+```ts
+async function activateProbesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.activateProbes({
+    probeIds: [
+      ProbeId.assumeExists(
+        "validate-configuration/io.camunda:aws-credential:1"
+      ),
+      ProbeId.assumeExists("validate-configuration/io.camunda:slack:1"),
+    ],
+    worker: "connectors-runtime",
+    maxProbesToActivate: 10,
+    // A negative timeout turns long polling off: the request returns at once,
+    // with an empty list when no probe is waiting.
+    requestTimeout: -1,
+  });
+
+  for (const probe of result.probes) {
+    console.log(
+      `Probe ${probe.probeKey} (${probe.probeId}) must be answered by ${probe.deadline}`
+    );
+
+    // Answer before the deadline with POST /probes/{probeKey}/answer
+    await camunda.answerProbe({
+      probeKey: probe.probeKey,
+      outcome: "OK",
+      data: { valid: true },
+    });
+  }
+}
+```
+
+#### Operation Id
+
+activateProbes
+
+#### Tags
+
+Probe
+
+---
+
+### addClock()
+
+```ts
+addClock(input, options?): CancelablePromise<ClockResult>;
+```
+
+Add time to internal clock
+
+Moves the Zeebe engine's internal clock forward or backward by the given offset.
+Unlike pinning, the clock keeps ticking in real time after the offset is added. If the
+clock is pinned, it stays pinned and moves to the pinned time plus the offset.
+
+Each request adds to the time of the clock, so adding `PT1H` twice moves the clock two
+hours ahead. Use `POST /v2/clock/reset` to remove all added time and return the clock to
+the system time.
+
+The response contains the new time of the clock. The change reaches all partitions
+shortly after it is accepted, so a request sent right after it may still use the previous
+time.
+
+-
+
+#### Parameters
+
+##### input
+
+[`ClockAddRequest`](../type-aliases/ClockAddRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClockResult`](../type-aliases/ClockResult.md)\>
+
+#### Example
+
+**Add time to the cluster clock**
+
+```ts
+async function addClockExample() {
+  const camunda = createCamundaClient();
+
+  const clock = await camunda.addClock({
+    offset: "PT1H",
+  });
+
+  console.log(`Clock advanced to: ${clock.timestamp}`);
+}
+```
+
+#### Operation Id
+
+addClock
+
+#### Tags
+
+Clock
+
+---
+
+### answerProbe()
+
+```ts
+answerProbe(input, options?): CancelablePromise<void>;
+```
+
+Answer probe (alpha)
+
+Sends a worker's answer to a probe it collected, which ends the probe.
+
+The body is one of three shapes, chosen by `outcome`: `OK` with the result in `data`,
+`UNSUPPORTED`, or `ERROR` with a `message`. The client that created the probe gets this
+answer with the name of the worker that collected the probe.
+
+This endpoint is an alpha feature and may be subject to change
+in future releases.
+
+-
+
+#### Parameters
+
+##### input
+
+[`answerProbeInput`](../type-aliases/answerProbeInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Answer a probe**
+
+```ts
+async function answerProbeExample(probeKey: ProbeKey) {
+  const camunda = createCamundaClient();
+
+  // Answer with `UNSUPPORTED`, or with `ERROR` and a `message`, when the worker
+  // cannot produce a result.
+  await camunda.answerProbe({
+    probeKey,
+    outcome: "OK",
+    data: {
+      valid: true,
+      region: "eu-west-1",
+    },
+  });
+}
+```
+
+#### Operation Id
+
+answerProbe
+
+#### Tags
+
+Probe
 
 ---
 
@@ -1378,12 +1573,10 @@ cancelProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOp
 Cancel process instances (batch)
 
 Cancels multiple active or suspended process instances.
-Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch
-to the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or
-`$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as
-given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,
-both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey
-is ignored and overridden during this batch operation.
+Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled
+together with their root instance. The given filter only narrows the batch, so a filter on
+parentProcessInstanceKey matches no instances. Other `state` operators (`$neq`, `$notIn`,
+`$exists`, `$like`) are applied as given and are not validated.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 -
@@ -1582,9 +1775,7 @@ clearAuthCache(opts?): void;
 
 #### Inherited from
 
-```ts
-CamundaCore.clearAuthCache;
-```
+`CamundaCore.clearAuthCache`
 
 ---
 
@@ -1714,9 +1905,7 @@ configure(next): void;
 
 #### Inherited from
 
-```ts
-CamundaCore.configure;
-```
+`CamundaCore.configure`
 
 ---
 
@@ -2581,6 +2770,96 @@ Mapping rule
 
 ---
 
+### createProbe()
+
+```ts
+createProbe(input, options?): CancelablePromise<ProbeResult>;
+```
+
+Create probe (alpha)
+
+Asks a worker a short question and waits for its answer in the same request.
+
+The probe is routed on `probeId`: a worker that polls for this probe ID with
+`POST /v2/probes/activation` collects it and answers with
+`POST /v2/probes/{probeKey}/answer`. The engine evaluates `input` when the probe is
+created and injects the values of the secrets it references before a worker collects it.
+
+The probe ends at its deadline, `requestTimeout` after the gateway received the request.
+Wait at least `requestTimeout` plus one second for the HTTP response, so that you get the
+reason the probe ended instead of a client-side timeout. With `requestTimeout` absent or
+`0`, the deadline uses the cluster's request timeout, capped at 30 seconds.
+
+This endpoint is an alpha feature and may be subject to change
+in future releases.
+
+-
+
+#### Parameters
+
+##### input
+
+[`ProbeCreationRequest`](../type-aliases/ProbeCreationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProbeResult`](../type-aliases/ProbeResult.md)\>
+
+#### Example
+
+**Create a probe**
+
+```ts
+async function createProbeExample() {
+  const camunda = createCamundaClient();
+
+  try {
+    // Ask the worker registered for this probe ID a question and wait for its answer.
+    // `input` is a FEEL expression; secrets are injected by the engine, never by the client.
+    const result = await camunda.createProbe({
+      probeId: ProbeId.assumeExists(
+        "validate-configuration/io.camunda:aws-credential:1"
+      ),
+      input: '={region: "eu-west-1", accessKey: camunda.secrets.awsKey}',
+      requestTimeout: 10000,
+    });
+
+    switch (result.outcome) {
+      case "OK":
+        console.log(`Worker ${result.worker} answered:`, result.data);
+        break;
+      case "UNSUPPORTED":
+        console.log(`Worker ${result.worker} does not support this probe`);
+        break;
+      case "ERROR":
+        console.log(`Worker ${result.worker} failed: ${result.message}`);
+        break;
+    }
+  } catch (e) {
+    // A 404 means no worker collected the probe before its deadline.
+    if (isSdkError(e) && e.name === "HttpSdkError" && e.status === 404) {
+      console.log("No worker is polling this probe ID");
+    } else {
+      throw e;
+    }
+  }
+}
+```
+
+#### Operation Id
+
+createProbe
+
+#### Tags
+
+Probe
+
+---
+
 ### createProcessInstance()
 
 ```ts
@@ -2591,7 +2870,7 @@ Create process instance
 
 Creates and starts an instance of the specified process.
 The process definition to use to create the instance can be specified either using its unique key
-(as returned by Deploy resources), or using the BPMN process id and a version.
+(as returned by Deploy resources), or using the BPMN process id and either a version or a version tag.
 If only the process definition id is given, the latest ACTIVE version is used.
 If no ACTIVE version exists, the request is rejected as not found.
 
@@ -2606,6 +2885,7 @@ when awaitCompletion is enabled.
 
 \| [`ProcessInstanceCreationInstructionByKey`](../type-aliases/ProcessInstanceCreationInstructionByKey.md)
 \| [`ProcessInstanceCreationInstructionById`](../type-aliases/ProcessInstanceCreationInstructionById.md)
+\| [`ProcessInstanceCreationInstructionByVersionTag`](../type-aliases/ProcessInstanceCreationInstructionByVersionTag.md)
 
 ##### options?
 
@@ -3552,6 +3832,11 @@ to `true`. History deletion is supported for process definitions and decision re
 definitions; for other resource types (forms, generic resources) the flag is ignored and no
 history is deleted.
 
+Deleting a process definition that is already draining is accepted again and changes
+nothing: the definition stays `DRAINING` until its running instances finish. The one repeated
+deletion that is rejected is one with `deleteHistory` set to `true`, because the history
+cannot be deleted before the drain finishes.
+
 The two supported types differ in how the history is removed. For a decision requirements
 definition the history is deleted asynchronously via a batch operation whose details are
 returned in the `batchOperation` field of the response. For a process definition that still
@@ -4037,9 +4322,7 @@ Useful when a custom supportLogger was injected and you still want the canonical
 
 #### Inherited from
 
-```ts
-CamundaCore.emitSupportLogPreamble;
-```
+`CamundaCore.emitSupportLogPreamble`
 
 ---
 
@@ -4302,9 +4585,7 @@ forceAuthRefresh(): Promise<string | undefined>;
 
 #### Inherited from
 
-```ts
-CamundaCore.forceAuthRefresh;
-```
+`CamundaCore.forceAuthRefresh`
 
 ---
 
@@ -4510,7 +4791,7 @@ getAuthentication(options?): CancelablePromise<CamundaUserResult>;
 
 Get current user
 
-Retrieves the current authenticated user. *
+Retrieves the current authenticated user. On an unprotected API (`camunda.security.authentication.unprotected-api=true`) a caller without an identity gets a result with `isAnonymous` set to `true` instead of a `401`, because no credentials can authenticate it there. *
 
 #### Parameters
 
@@ -4558,9 +4839,7 @@ getAuthHeaders(): Promise<Record<string, string>>;
 
 #### Inherited from
 
-```ts
-CamundaCore.getAuthHeaders;
-```
+`CamundaCore.getAuthHeaders`
 
 ---
 
@@ -4670,9 +4949,7 @@ Public accessor for current backpressure adaptive limiter state (stable)
 
 #### Inherited from
 
-```ts
-CamundaCore.getBackpressureState;
-```
+`CamundaCore.getBackpressureState`
 
 ---
 
@@ -4736,6 +5013,59 @@ Batch operation
 #### Consistency
 
 eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getClock()
+
+```ts
+getClock(options?): CancelablePromise<ClockResult>;
+```
+
+Get internal clock
+
+Returns the current time of the Zeebe engine's internal clock.
+If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time
+and this is the engine's current time.
+
+Use this endpoint to check the time that the engine uses, for example after pinning the
+clock with `PUT /v2/clock`, adding time with `POST /v2/clock/add`, or resetting it with
+`POST /v2/clock/reset`. A pin, add, or reset reaches all partitions shortly after it is
+accepted, so a request sent right after it may still return the previous time.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClockResult`](../type-aliases/ClockResult.md)\>
+
+#### Example
+
+**Get the cluster clock**
+
+```ts
+async function getClockExample() {
+  const camunda = createCamundaClient();
+
+  const clock = await camunda.getClock();
+
+  console.log(`Current cluster time: ${clock.timestamp}`);
+}
+```
+
+#### Operation Id
+
+getClock
+
+#### Tags
+
+Clock
 
 ---
 
@@ -5005,9 +5335,7 @@ Use configure(...) to apply changes.
 
 #### Inherited from
 
-```ts
-CamundaCore.getConfig;
-```
+`CamundaCore.getConfig`
 
 ---
 
@@ -5468,9 +5796,7 @@ Internal accessor (read-only) for eventual consistency error mode.
 
 #### Inherited from
 
-```ts
-CamundaCore.getErrorMode;
-```
+`CamundaCore.getErrorMode`
 
 ---
 
@@ -8824,10 +9150,17 @@ A store may hold names outside the reference name charset (for example one conta
 dot); those are omitted, since `/secrets/resolve` would reject them and no permission can
 be granted on them.
 
-A returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,
+A returned reference is usable verbatim with `/secrets/resolve`, although a secret that its
+store does not report as `ACTIVE` may fail to resolve there. In a FEEL expression,
 however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
 a bare dash as the minus operator: a listed `camunda.secrets.db-password` is written
 `` =camunda.secrets.`db-password` `` in a BPMN input mapping.
+
+Pass `filter.status` to list only the secrets in the matching states, either as a single
+status or with the advanced operators (`$in`, `$neq`, ...). A store that does not report
+states reports every secret as `ACTIVE`, so a filter that excludes `ACTIVE` returns
+nothing from it. The status filter does not widen access: a reference the caller may not read is
+never returned, with or without a filter.
 
 -
 
@@ -8895,9 +9228,82 @@ Access a scoped logger (internal & future user emission).
 
 #### Inherited from
 
+`CamundaCore.logger`
+
+---
+
+### lookupUserTask()
+
 ```ts
-CamundaCore.logger;
+lookupUserTask(input, options?): CancelablePromise<UserTaskLookupResult>;
 ```
+
+Look up an active user task (alpha)
+
+Returns an active user task together with the variables visible to it, read from the
+engine's state instead of secondary storage. The task and its variables are read at the
+same point in processing, so they are consistent with each other and with any command the
+engine has already processed, for example the completion of a previous task.
+
+The response includes the task's lifecycle `state`. Use it to interpret the returned
+values: while a change to the task is in progress, the task fields and variables are the
+ones from before the change, and `state` names the pending change. For example, with
+`ASSIGNING` the returned `assignee` is still the previous one, because task listeners can
+deny the new assignment; with `COMPLETING` the variables don't include the ones sent with
+the completion yet.
+
+Only active tasks can be looked up. The lookup returns 404 when the task doesn't exist,
+when it was already completed or canceled (use the user task search for those), or when it
+belongs to a tenant the caller isn't assigned to. It returns 409 when the task's process
+instance is banned: an instance that hit an unrecoverable error and can only be canceled.
+
+Each lookup is processed by the engine. Use it when a task is opened, not for polling.
+
+This endpoint is an alpha feature and may be subject to change
+in future releases.
+
+-
+
+#### Parameters
+
+##### input
+
+[`lookupUserTaskInput`](../type-aliases/lookupUserTaskInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserTaskLookupResult`](../type-aliases/UserTaskLookupResult.md)\>
+
+#### Example
+
+**Look up an active user task**
+
+```ts
+async function lookupUserTaskExample(userTaskKey: UserTaskKey) {
+  const camunda = createCamundaClient();
+
+  const task = await camunda.lookupUserTask({
+    userTaskKey,
+    fetchVariables: ["recommendation", "applicant"],
+  });
+
+  console.log(
+    `Task ${task.userTaskKey} is ${task.state}, assignee: ${task.assignee}`
+  );
+}
+```
+
+#### Operation Id
+
+lookupUserTask
+
+#### Tags
+
+User task
 
 ---
 
@@ -8978,8 +9384,7 @@ migrateProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchO
 Migrate process instances (batch)
 
 Migrate multiple process instances.
-Since only process instances with ACTIVE state can be migrated, any given
-filters for state are ignored and overridden during this batch operation.
+Only ACTIVE process instances are migrated. The given filter only narrows the batch.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 -
@@ -9110,8 +9515,7 @@ modifyProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOp
 Modify process instances (batch)
 
 Modify multiple process instances.
-Since only process instances with ACTIVE state can be modified, any given
-filters for state are ignored and overridden during this batch operation.
+Only ACTIVE process instances are modified. The given filter only narrows the batch.
 In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
 It is only possible to use the element id of the source and target.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -9190,9 +9594,7 @@ onAuthHeaders(h): void;
 
 #### Inherited from
 
-```ts
-CamundaCore.onAuthHeaders;
-```
+`CamundaCore.onAuthHeaders`
 
 ---
 
@@ -9315,6 +9717,8 @@ Pin internal clock (alpha)
 Set a precise, static time for the Zeebe engine's internal clock.
 When the clock is pinned, it remains at the specified time and does not advance.
 To change the time, the clock must be pinned again with a new timestamp.
+To move the clock without stopping it, use `POST /v2/clock/add` instead.
+Use `GET /v2/clock` to read the current time of the clock.
 
 This endpoint is an alpha feature and may be subject to change
 in future releases.
@@ -9430,7 +9834,9 @@ Reset internal clock (alpha)
 
 Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.
 This operation is useful for returning the clock to
-normal behavior after it has been pinned to a specific time.
+normal behavior after it has been pinned to a specific time or moved with
+`POST /v2/clock/add`.
+Use `GET /v2/clock` to read the current time of the clock.
 
 This endpoint is an alpha feature and may be subject to change
 in future releases.
@@ -9529,8 +9935,7 @@ resolveIncidentsBatchOperation(input, options?): CancelablePromise<BatchOperatio
 Resolve related incidents (batch)
 
 Resolves multiple instances of process instances.
-Since only process instances with ACTIVE state can have unresolved incidents, any given
-filters for state are ignored and overridden during this batch operation.
+Only incidents of ACTIVE process instances are resolved. The given filter only narrows the batch.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 -
@@ -9981,6 +10386,62 @@ Exporting
 
 ---
 
+### resumeProcessDefinitions()
+
+```ts
+resumeProcessDefinitions(input, options?): CancelablePromise<ProcessDefinitionResumptionResult>;
+```
+
+Resume process definitions
+
+Resumes suspended process definitions so that process instances can be created from them again.
+The definition is selected either by `processDefinitionKey`, which identifies exactly one
+version, or by `processDefinitionId` with an optional `processDefinitionVersion` and
+`tenantId`. Without a version, all versions of the process definition ID are resumed.
+Set `includeProcessInstances` to also resume the suspended process instances of the affected
+versions; the instances are changed by a batch operation, returned as `batchOperationKey`.
+
+-
+
+#### Parameters
+
+##### input
+
+\| [`ProcessDefinitionResumptionInstructionByKey`](../type-aliases/ProcessDefinitionResumptionInstructionByKey.md)
+\| [`ProcessDefinitionResumptionInstructionById`](../type-aliases/ProcessDefinitionResumptionInstructionById.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionResumptionResult`](../type-aliases/ProcessDefinitionResumptionResult.md)\>
+
+#### Example
+
+**Resume process definitions**
+
+```ts
+async function resumeProcessDefinitionsExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.resumeProcessDefinitions({ processDefinitionKey });
+}
+```
+
+#### Operation Id
+
+resumeProcessDefinitions
+
+#### Tags
+
+Process definition
+
+---
+
 ### resumeProcessInstance()
 
 ```ts
@@ -10043,10 +10504,10 @@ resumeProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOp
 Resume process instances (batch)
 
 Resumes multiple suspended process instances.
-Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only
-SUSPENDED process instances can be resumed and resumption does not cascade between parent
-and child instances, so child instances are resumed independently of their parent or root
-instance.
+Only SUSPENDED process instances are resumed. The given filter only narrows the batch.
+Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are
+not validated. Resumption does not cascade, so child instances are resumed independently of their parent
+or root instance.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 -
@@ -13334,6 +13795,91 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchVariableHistory()
+
+```ts
+searchVariableHistory(
+   input,
+   consistencyManagement,
+   options?
+): CancelablePromise<VariableHistoryItemSearchQueryResult>;
+```
+
+Search variable history
+
+Search for variable history items, which record the changes made to a variable's
+value over time. The audit log configuration decides which changes are recorded;
+by default, only changes made by users are.
+
+Results are sorted by `variableHistoryItemKey` ascending by default, which lists the
+changes of one variable from oldest to newest. Across partitions, the key says nothing
+about time: a search that spans partitions, for example by process definition, lists the
+changes of one partition after the other.
+
+By default, the endpoint truncates long variable values in the response. For the output
+collection of a multi-instance element or an ad-hoc sub-process, the endpoint cuts the
+value at the size limit regardless of the `truncateValues` parameter. The truncation
+size limit is configurable. *
+
+#### Parameters
+
+##### input
+
+[`searchVariableHistoryInput`](../type-aliases/searchVariableHistoryInput.md)
+
+##### consistencyManagement
+
+[`searchVariableHistoryConsistency`](../type-aliases/searchVariableHistoryConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableHistoryItemSearchQueryResult`](../type-aliases/VariableHistoryItemSearchQueryResult.md)\>
+
+#### Example
+
+**Search variable history**
+
+```ts
+async function searchVariableHistoryExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchVariableHistory(
+    {
+      filter: {
+        processInstanceKey,
+      },
+      page: { limit: 10 },
+      truncateValues: true,
+    },
+    { consistency: { waitUpToMs: 0 } }
+  );
+
+  for (const item of result.items ?? []) {
+    console.log(`${item.name} changed at ${item.timestamp}: ${item.value}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchVariableHistory
+
+#### Tags
+
+Variable
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchVariables()
 
 ```ts
@@ -13580,6 +14126,69 @@ Batch operation
 
 ---
 
+### suspendProcessDefinitions()
+
+```ts
+suspendProcessDefinitions(input, options?): CancelablePromise<ProcessDefinitionSuspensionResult>;
+```
+
+Suspend process definitions
+
+Suspends process definitions so that no new process instances can be created from them.
+The definition is selected either by `processDefinitionKey`, which identifies exactly one
+version, or by `processDefinitionId` with an optional `processDefinitionVersion` and
+`tenantId`. Without a version, all versions of the process definition ID are suspended.
+Set `includeProcessInstances` to also suspend the running process instances of the affected
+versions; the instances are changed by a batch operation, returned as `batchOperationKey`.
+
+-
+
+#### Parameters
+
+##### input
+
+\| [`ProcessDefinitionSuspensionInstructionByKey`](../type-aliases/ProcessDefinitionSuspensionInstructionByKey.md)
+\| [`ProcessDefinitionSuspensionInstructionById`](../type-aliases/ProcessDefinitionSuspensionInstructionById.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionSuspensionResult`](../type-aliases/ProcessDefinitionSuspensionResult.md)\>
+
+#### Example
+
+**Suspend process definitions**
+
+```ts
+async function suspendProcessDefinitionsExample(
+  processDefinitionId: ProcessDefinitionId
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.suspendProcessDefinitions({
+    processDefinitionId,
+    includeProcessInstances: true,
+  });
+
+  if (result.batchOperationKey) {
+    console.log(`Batch operation key: ${result.batchOperationKey}`);
+  }
+}
+```
+
+#### Operation Id
+
+suspendProcessDefinitions
+
+#### Tags
+
+Process definition
+
+---
+
 ### suspendProcessInstance()
 
 ```ts
@@ -13642,10 +14251,10 @@ suspendProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchO
 Suspend process instances (batch)
 
 Suspends multiple running process instances.
-Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only
-ACTIVE process instances can be suspended and suspension does not cascade between parent
-and child instances, so child instances are suspended independently of their parent or
-root instance.
+Only ACTIVE process instances are suspended. The given filter only narrows the batch.
+Other `state` operators (`$neq`, `$notIn`, `$exists`, `$like`) are applied as given and are
+not validated. Suspension does not cascade, so child instances are suspended independently of their parent
+or root instance.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 -
@@ -15572,6 +16181,4 @@ withCorrelation<T>(id, fn): Promise<T>;
 
 #### Inherited from
 
-```ts
-CamundaCore.withCorrelation;
-```
+`CamundaCore.withCorrelation`

@@ -20,7 +20,7 @@ Advanced ElementInstanceKey filter.
 ### $eq?
 
 ```ts
-optional $eq?: ElementInstanceKey;
+$eq?: ElementInstanceKey;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: ElementInstanceKey[];
+$in?: ElementInstanceKey[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq?: ElementInstanceKey;
+$neq?: ElementInstanceKey;
 ```
 
 Checks for inequality with the provided value.
@@ -60,7 +60,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn?: ElementInstanceKey[];
+$notIn?: ElementInstanceKey[];
 ```
 
 Checks if the property matches none of the provided values.

@@ -26,7 +26,7 @@ mdx:
 ### autoStart?
 
 ```ts
-optional autoStart?: boolean;
+autoStart?: boolean;
 ```
 
 Immediately start polling for work - default `true`
@@ -36,7 +36,7 @@ Immediately start polling for work - default `true`
 ### customHeadersSchema?
 
 ```ts
-optional customHeadersSchema?: Headers;
+customHeadersSchema?: Headers;
 ```
 
 Zod schema for custom headers in the activated job
@@ -46,7 +46,7 @@ Zod schema for custom headers in the activated job
 ### fetchVariables?
 
 ```ts
-optional fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
+fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
 Optional list of variable names to fetch during activation
@@ -56,7 +56,7 @@ Optional list of variable names to fetch during activation
 ### inputSchema?
 
 ```ts
-optional inputSchema?: In;
+inputSchema?: In;
 ```
 
 Zod schema for variables in the activated job
@@ -66,8 +66,39 @@ Zod schema for variables in the activated job
 ### jobHandler
 
 ```ts
-jobHandler: (job) => "JOB_ACTION_RECEIPT" | Promise<"JOB_ACTION_RECEIPT">;
+jobHandler: (job) => "JOB_ACTION_RECEIPT" | (Promise<"JOB_ACTION_RECEIPT">);
 ```
+
+Your handler for an activated job.
+
+**`job.variables` are untrusted input.** They arrive from the Orchestration Cluster,
+but their content is set by whoever started the process instance or wrote to it since
+— a form, an API caller, an upstream service, a message payload. Treat every value as
+attacker-controlled: validate it before using it in a query, a file path, a shell
+command, a URL or a template.
+
+`job.customHeaders` are defined during modelling and reach you from the deployed
+process model, so they are controlled by whoever deploys processes rather than by
+whoever starts an instance — a narrower trust boundary, not an absent one.
+
+What the SDK does for you:
+
+- **JSON only.** Variables are deserialized as plain JSON. No constructor is invoked
+  and no user class is instantiated from the payload — there is no mechanism here that
+  can turn a payload into an arbitrary object.
+- **No sharing between jobs.** Each activated job owns its own variables object;
+  nothing is shared or mutated across concurrently running jobs.
+
+What it does _not_ do:
+
+- **No size or depth limit.** The SDK enforces no limit of its own on a variable
+  payload, in addition to whatever the cluster accepts.
+- **No shape validation by default.** [validateSchemas](#validateschemas) is `false` unless you
+  set it; with it enabled and an [inputSchema](#inputschema) supplied, variables that do not
+  match are rejected and the job is failed before your handler runs. That is the
+  supported way to constrain the shape of what reaches this function.
+
+See the "Job variables are untrusted input" section of the README.
 
 #### Parameters
 
@@ -84,7 +115,7 @@ jobHandler: (job) => "JOB_ACTION_RECEIPT" | Promise<"JOB_ACTION_RECEIPT">;
 ### jobTimeoutMs?
 
 ```ts
-optional jobTimeoutMs?: number;
+jobTimeoutMs?: number;
 ```
 
 Job activation timeout in ms — default `60000`. Overridden by CAMUNDA_WORKER_TIMEOUT env var.
@@ -104,7 +135,7 @@ Zeebe job type
 ### ~~maxBackoffTimeMs?~~
 
 ```ts
-optional maxBackoffTimeMs?: number;
+maxBackoffTimeMs?: number;
 ```
 
 #### Deprecated
@@ -116,7 +147,7 @@ Not used; pacing handled by long polling + client backpressure. Present only for
 ### maxParallelJobs?
 
 ```ts
-optional maxParallelJobs?: number;
+maxParallelJobs?: number;
 ```
 
 Concurrency limit — default `10`. Overridden by CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var.
@@ -126,7 +157,7 @@ Concurrency limit — default `10`. Overridden by CAMUNDA_WORKER_MAX_CONCURRENT_
 ### outputSchema?
 
 ```ts
-optional outputSchema?: Out;
+outputSchema?: Out;
 ```
 
 Zod schema for variables in the complete command
@@ -136,7 +167,7 @@ Zod schema for variables in the complete command
 ### pollBackoffMaxMs?
 
 ```ts
-optional pollBackoffMaxMs?: number;
+pollBackoffMaxMs?: number;
 ```
 
 Ceiling (ms) of the between-failed-poll exponential backoff. Default `30000`.
@@ -146,7 +177,7 @@ Ceiling (ms) of the between-failed-poll exponential backoff. Default `30000`.
 ### pollBackoffMinMs?
 
 ```ts
-optional pollBackoffMinMs?: number;
+pollBackoffMinMs?: number;
 ```
 
 Floor (ms) of the exponential backoff applied between _failed_ activation
@@ -160,7 +191,7 @@ zero on the first successful poll. Default `1000`. Set to `0` to disable backoff
 ### pollIntervalMs?
 
 ```ts
-optional pollIntervalMs?: number;
+pollIntervalMs?: number;
 ```
 
 Backoff between polls - default 1ms
@@ -170,7 +201,7 @@ Backoff between polls - default 1ms
 ### pollTimeoutMs?
 
 ```ts
-optional pollTimeoutMs?: number;
+pollTimeoutMs?: number;
 ```
 
 The request will be completed when at least one job is activated or after the requestTimeout.
@@ -182,7 +213,7 @@ To immediately complete the request when no job is activated set the requestTime
 ### startupJitterMaxSeconds?
 
 ```ts
-optional startupJitterMaxSeconds?: number;
+startupJitterMaxSeconds?: number;
 ```
 
 Maximum random delay (in seconds) before the worker starts polling.
@@ -195,7 +226,7 @@ initial activation requests to avoid saturating the server.
 ### validateSchemas?
 
 ```ts
-optional validateSchemas?: boolean;
+validateSchemas?: boolean;
 ```
 
 Validate any provided input, output, customheader schema
@@ -206,7 +237,7 @@ default: false
 ### withLease?
 
 ```ts
-optional withLease?: boolean;
+withLease?: boolean;
 ```
 
 Activate jobs with a lease — default `false`.
@@ -231,7 +262,7 @@ need to read it.
 ### workerName?
 
 ```ts
-optional workerName?: string;
+workerName?: string;
 ```
 
 Optional explicit name

@@ -20,7 +20,7 @@ Advanced date-time filter.
 ### $eq?
 
 ```ts
-optional $eq?: string;
+$eq?: string;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $gt?
 
 ```ts
-optional $gt?: string;
+$gt?: string;
 ```
 
 Greater than comparison with the provided value.
@@ -50,7 +50,7 @@ Greater than comparison with the provided value.
 ### $gte?
 
 ```ts
-optional $gte?: string;
+$gte?: string;
 ```
 
 Greater than or equal comparison with the provided value.
@@ -60,7 +60,7 @@ Greater than or equal comparison with the provided value.
 ### $in?
 
 ```ts
-optional $in?: string[];
+$in?: string[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -70,7 +70,7 @@ Checks if the property matches any of the provided values.
 ### $lt?
 
 ```ts
-optional $lt?: string;
+$lt?: string;
 ```
 
 Lower than comparison with the provided value.
@@ -80,7 +80,7 @@ Lower than comparison with the provided value.
 ### $lte?
 
 ```ts
-optional $lte?: string;
+$lte?: string;
 ```
 
 Lower than or equal comparison with the provided value.
@@ -90,7 +90,7 @@ Lower than or equal comparison with the provided value.
 ### $neq?
 
 ```ts
-optional $neq?: string;
+$neq?: string;
 ```
 
 Checks for inequality with the provided value.

@@ -16,7 +16,7 @@ type MessageCorrelationRequest = object;
 ### businessId?
 
 ```ts
-optional businessId?: BusinessId;
+businessId?: BusinessId;
 ```
 
 An optional business id used to enforce uniqueness of the process instance that a
@@ -30,7 +30,7 @@ effect when the message correlates to a catch, boundary, or intermediate event.
 ### correlationKey?
 
 ```ts
-optional correlationKey?: string;
+correlationKey?: string;
 ```
 
 The correlation key of the message.
@@ -50,7 +50,7 @@ The message name as defined in the BPMN process
 ### tenantId?
 
 ```ts
-optional tenantId?: TenantId;
+tenantId?: TenantId;
 ```
 
 the tenant for which the message is published
@@ -60,7 +60,7 @@ the tenant for which the message is published
 ### variables?
 
 ```ts
-optional variables?: object;
+variables?: object;
 ```
 
 The message variables as JSON document

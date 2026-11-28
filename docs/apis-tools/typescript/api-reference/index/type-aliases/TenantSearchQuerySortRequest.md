@@ -26,5 +26,5 @@ The field to sort by. `key` is deprecated and should not be used anymore.
 ### order?
 
 ```ts
-optional order?: SortOrderEnum;
+order?: SortOrderEnum;
 ```

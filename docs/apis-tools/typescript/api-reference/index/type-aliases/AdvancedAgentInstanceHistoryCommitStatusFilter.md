@@ -20,7 +20,7 @@ Advanced AgentInstanceHistoryCommitStatusEnum filter.
 ### $eq?
 
 ```ts
-optional $eq?: AgentInstanceHistoryCommitStatusEnum;
+$eq?: AgentInstanceHistoryCommitStatusEnum;
 ```
 
 Checks for equality with the provided value.
@@ -30,7 +30,7 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists?: boolean;
+$exists?: boolean;
 ```
 
 Checks if the current property exists.
@@ -40,7 +40,7 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in?: AgentInstanceHistoryCommitStatusEnum[];
+$in?: AgentInstanceHistoryCommitStatusEnum[];
 ```
 
 Checks if the property matches any of the provided values.
@@ -50,7 +50,7 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq?: AgentInstanceHistoryCommitStatusEnum;
+$neq?: AgentInstanceHistoryCommitStatusEnum;
 ```
 
 Checks for inequality with the provided value.

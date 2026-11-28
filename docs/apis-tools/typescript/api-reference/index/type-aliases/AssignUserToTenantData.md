@@ -16,7 +16,7 @@ type AssignUserToTenantData = object;
 ### body?
 
 ```ts
-optional body?: never;
+body?: never;
 ```
 
 ---
@@ -48,7 +48,7 @@ The unique identifier of the user.
 ### query?
 
 ```ts
-optional query?: never;
+query?: never;
 ```
 
 ---

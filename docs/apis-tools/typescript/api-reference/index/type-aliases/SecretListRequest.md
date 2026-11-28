@@ -11,11 +11,16 @@ mdx:
 type SecretListRequest = object;
 ```
 
-Reserved for future filtering options. Currently takes no properties. The request body is
-optional: omitting it (or sending an empty object) applies no filters.
+Options for listing secrets. The request body is optional: omitting it, or sending an empty
+object, lists every secret the caller may read.
 
-## Index Signature
+## Properties
+
+### filter?
 
 ```ts
-[key: string]: never
+filter?: SecretListFilter;
 ```
+
+Narrows the listed secrets. Omit it to list secrets in every state. Clusters before 8.11
+reject this property with `400`.
