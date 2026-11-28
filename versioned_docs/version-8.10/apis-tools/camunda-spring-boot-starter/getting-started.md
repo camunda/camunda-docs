@@ -72,7 +72,7 @@ To use the Spring Boot 3 module, replace the default dependency in your project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-spring-boot-3-starter</artifactId>
-  <version>8.9.x</version>
+  <version>8.10.x</version>
 </dependency>
 ```
 
@@ -124,7 +124,7 @@ Add the Camunda Spring Boot Starter to your project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-spring-boot-starter</artifactId>
-  <version>8.9.x</version>
+  <version>8.10.x</version>
 </dependency>
 ```
 
