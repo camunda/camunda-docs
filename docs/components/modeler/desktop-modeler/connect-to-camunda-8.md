@@ -4,7 +4,7 @@ title: Connect to Camunda 8
 description: "Set up a connection from Desktop Modeler to Camunda."
 ---
 
-To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to Camunda. Follow the steps below to connect to **Camunda 8 SaaS**. To connect to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
+To deploy diagrams, start process instances, or validate elements, you must first connect Desktop Modeler to Camunda. Follow the steps below to connect to **Camunda 8 SaaS**. To connect to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
 
 1. Click the connection selector. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
@@ -37,7 +37,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    ![Connection manager showing connection success](./img/connection-manager-new-connection-success.png)
 
-5. Select the connection you just created to use it for [deployment](./deploy-diagram.md), [starting a new process instance](./start-instance.md), or [task testing](./task-testing.md).
+5. Select the connection you just created to use it for [deployment](./deploy-diagram.md), [starting a new process instance](./start-instance.md), or [element validation](./element-validation.md).
 
    ![New connection selected in connection manager](./img/connection-selector-new-connection.png)
    :::note

@@ -7,7 +7,7 @@ description: "Desktop Modeler can directly connect to Camunda 8 Self-Managed."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to Camunda. Follow the steps below to set up a connection. To connect to **Camunda 8 SaaS**, visit the [Camunda 8 SaaS guide](../../../../components/modeler/desktop-modeler/connect-to-camunda-8.md).
+To deploy diagrams, start process instances, or validate elements, you must first connect Desktop Modeler to Camunda. Follow the steps below to set up a connection. To connect to **Camunda 8 SaaS**, visit the [Camunda 8 SaaS guide](../../../../components/modeler/desktop-modeler/connect-to-camunda-8.md).
 
 1. Click the **Connection manager**. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
@@ -75,7 +75,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    If the connection is established successfully, you can leave the settings and go back to the connection manager, where your new connection is now available.
 
-7. Select the connection you just created to use it for [deployment](./deploy-to-self-managed.md) or other tools like [task testing](../../../../components/modeler/desktop-modeler/task-testing.md) or [starting a new process instance](../../../../components/modeler/desktop-modeler/start-instance.md):
+7. Select the connection you just created to use it for [deployment](./deploy-to-self-managed.md) or other tools like [element validation](../../../../components/modeler/desktop-modeler/element-validation.md) or [starting a new process instance](../../../../components/modeler/desktop-modeler/start-instance.md):
 
    ![New connection selected in connection manager](./img/connection-selector-new-connection.png)
    :::note

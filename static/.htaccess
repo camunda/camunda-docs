@@ -234,6 +234,11 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Task testing renamed to element validation
+RewriteRule ^docs/next/components/modeler/task-testing/?$ /docs/next/components/modeler/element-validation/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/desktop-modeler/task-testing/?$ /docs/next/components/modeler/desktop-modeler/element-validation/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/element-validation/ [R=301,L]
+
 # AI usage guidelines moved into agentic orchestration best practices
 RewriteRule ^docs/next/guides/build-with-ai/ai-usage-guidelines/?$ /docs/next/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
 RewriteRule ^docs/guides/build-with-ai/ai-usage-guidelines/?$ /docs/components/agentic-orchestration/ai-usage-guidelines/ [R=301,L]
