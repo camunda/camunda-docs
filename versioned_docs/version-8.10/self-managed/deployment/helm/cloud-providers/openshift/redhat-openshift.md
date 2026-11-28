@@ -762,6 +762,14 @@ This command:
 
 <HelmUpgradeNote />
 
+If you deployed Keycloak with the Keycloak Operator in [Deploy Keycloak](#deploy-keycloak) and it runs version 26.8.2 or later, grant the `kc-admin-api` client scope to Management Identity now. Without this step, Identity fails at startup with `HTTP status code: 401` and goes into `CrashLoopBackOff`. From the repository root, run:
+
+```bash
+generic/kubernetes/operator-based/keycloak/keycloak-grant-identity-admin-api.sh
+```
+
+The script uses `oc` if `kubectl` isn't installed. To force `oc`, set `KUBECTL=oc`. For why this step is needed and how the script behaves, see [Grant the `kc-admin-api` scope to Management Identity](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#grant-kc-admin-api-scope). If you use an external OIDC provider, skip this step.
+
 You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
 <DeploymentReadinessCheck download />

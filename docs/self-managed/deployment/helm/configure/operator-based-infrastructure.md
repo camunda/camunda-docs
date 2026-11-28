@@ -634,6 +634,34 @@ File origin: Every `-f` file corresponds to a configuration you saved in previou
 Component flexibility: Drop files for components you don't deploy (for example, remove `camunda-hub-values.yml` if you're not using Camunda Hub) to reduce footprint.
 :::
 
+### Grant the `kc-admin-api` scope to Management Identity (Keycloak 26.8.2 and later) {#grant-kc-admin-api-scope}
+
+If you use the operator-managed Keycloak in version 26.8.2 or later, grant the `kc-admin-api` client scope to Management Identity after the Helm installation. Keycloak 26.8.2 fixes CVE-2026-19688: the Keycloak Admin REST API only accepts tokens that carry the `kc-admin-api` client scope. Management Identity calls this API with its own `camunda-identity` client, which doesn't get the scope. Without this step, Identity fails at startup with `HTTP status code: 401` and goes into `CrashLoopBackOff`.
+
+From the `generic/kubernetes/operator-based` directory of your copy of the repository, run the grant script:
+
+```bash
+./keycloak/keycloak-grant-identity-admin-api.sh
+```
+
+The script waits for Management Identity to create its client, assigns `kc-admin-api` to it as a default client scope, and restarts Identity:
+
+- It's idempotent. It does nothing if the client already has the scope, or if your Keycloak has no `kc-admin-api` scope (versions earlier than 26.8.2).
+- It reads `CAMUNDA_NAMESPACE` and `CAMUNDA_RELEASE_NAME` from the [environment setup](#step-2-environment-setup). Its other defaults match this guide (pod `keycloak-0`, realm `camunda-platform`). See the script header for the variables that override them.
+- If it can't finish within `KEYCLOAK_ADMIN_API_TIMEOUT_SECONDS` (default `600`), it prints a warning and exits with code `0`. In that case, check that the Identity pod is running before you continue.
+- The script uses `oc` automatically if `kubectl` isn't installed. To force it, set `KUBECTL=oc`.
+
+<details>
+<summary>Grant script source</summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-grant-identity-admin-api.sh
+```
+
+</details>
+
+If you use an external OIDC provider instead of the operator-managed Keycloak, skip this step. This step is temporary until Management Identity assigns the scope itself, tracked in [camunda/camunda#69230](https://github.com/camunda/camunda/issues/69230).
+
 ## Verification and troubleshooting
 
 ### Verify infrastructure deployment

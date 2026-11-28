@@ -16,3 +16,5 @@ yq ". *+ load(\"camunda-values-identity-secrets.yml\")" values.yml > values-merg
 ```
 
 The overlay files are available in the [Keycloak operator-based directory](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/operator-based/keycloak). The identity secrets are created automatically by the Keycloak Operator.
+
+If the operator-managed Keycloak runs version 26.8.2 or later, also grant the `kc-admin-api` client scope to Management Identity after you install Camunda. Without this step, Identity fails at startup with `HTTP status code: 401`. See [Grant the `kc-admin-api` scope to Management Identity](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#grant-kc-admin-api-scope).
