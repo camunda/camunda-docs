@@ -31,7 +31,9 @@ async fn list_secrets() -> Result<(), Box<dyn std::error::Error>> {
     let client = CamundaClient::from_env()?;
 
     let result = client
-        .list_secrets(ListSecretsParams { body: None })
+        .list_secrets(ListSecretsParams {
+            secret_list_request: None,
+        })
         .await?;
     println!("{result:#?}");
 

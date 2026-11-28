@@ -11,15 +11,22 @@ use camunda_orchestration_sdk::apis::process_definition_api::GetProcessDefinitio
 use camunda_orchestration_sdk::apis::process_definition_api::GetProcessDefinitionStatisticsParams;
 use camunda_orchestration_sdk::apis::process_definition_api::GetProcessDefinitionXmlParams;
 use camunda_orchestration_sdk::apis::process_definition_api::GetStartProcessFormParams;
+use camunda_orchestration_sdk::apis::process_definition_api::ResumeProcessDefinitionsParams;
 use camunda_orchestration_sdk::apis::process_definition_api::SearchProcessDefinitionVariableNamesParams;
 use camunda_orchestration_sdk::apis::process_definition_api::SearchProcessDefinitionsParams;
+use camunda_orchestration_sdk::apis::process_definition_api::SuspendProcessDefinitionsParams;
 use camunda_orchestration_sdk::models::ProcessDefinitionElementStatisticsQuery;
 use camunda_orchestration_sdk::models::ProcessDefinitionId;
 use camunda_orchestration_sdk::models::ProcessDefinitionInstanceStatisticsQuery;
 use camunda_orchestration_sdk::models::ProcessDefinitionInstanceVersionStatisticsFilter;
 use camunda_orchestration_sdk::models::ProcessDefinitionInstanceVersionStatisticsQuery;
+use camunda_orchestration_sdk::models::ProcessDefinitionKey;
 use camunda_orchestration_sdk::models::ProcessDefinitionMessageSubscriptionStatisticsQuery;
+use camunda_orchestration_sdk::models::ProcessDefinitionResumptionInstruction;
+use camunda_orchestration_sdk::models::ProcessDefinitionResumptionInstructionByKey;
 use camunda_orchestration_sdk::models::ProcessDefinitionSearchQuery;
+use camunda_orchestration_sdk::models::ProcessDefinitionSuspensionInstruction;
+use camunda_orchestration_sdk::models::ProcessDefinitionSuspensionInstructionById;
 use camunda_orchestration_sdk::models::ProcessDefinitionVariableNameSearchQuery;
 use camunda_orchestration_sdk::CamundaClient;
 
@@ -157,6 +164,33 @@ async fn get_start_process_form(
 }
 // endregion GetStartProcessForm
 
+// region ResumeProcessDefinitions
+async fn resume_process_definitions(
+    process_definition_key: ProcessDefinitionKey,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .resume_process_definitions(ResumeProcessDefinitionsParams {
+            process_definition_resumption_instruction:
+                ProcessDefinitionResumptionInstruction::ProcessDefinitionResumptionInstructionByKey(
+                    Box::new(ProcessDefinitionResumptionInstructionByKey::new(
+                        process_definition_key,
+                    )),
+                ),
+        })
+        .await?;
+    for pd in result.process_definitions {
+        println!(
+            "Version {}: {:?}",
+            pd.process_definition_version, pd.outcome
+        );
+    }
+
+    Ok(())
+}
+// endregion ResumeProcessDefinitions
+
 // region SearchProcessDefinitionVariableNames
 async fn search_process_definition_variable_names(
     process_definition_key: String,
@@ -195,6 +229,37 @@ async fn search_process_definitions() -> Result<(), Box<dyn std::error::Error>> 
     Ok(())
 }
 // endregion SearchProcessDefinitions
+
+// region SuspendProcessDefinitions
+async fn suspend_process_definitions(
+    process_definition_id: ProcessDefinitionId,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .suspend_process_definitions(SuspendProcessDefinitionsParams {
+            process_definition_suspension_instruction:
+                ProcessDefinitionSuspensionInstruction::ProcessDefinitionSuspensionInstructionById(
+                    Box::new(ProcessDefinitionSuspensionInstructionById {
+                        include_process_instances: Some(true),
+                        ..ProcessDefinitionSuspensionInstructionById::new(process_definition_id)
+                    }),
+                ),
+        })
+        .await?;
+    for pd in result.process_definitions {
+        println!(
+            "Version {}: {:?}",
+            pd.process_definition_version, pd.outcome
+        );
+    }
+    if let Some(batch_operation_key) = result.batch_operation_key {
+        println!("Batch operation: {batch_operation_key}");
+    }
+
+    Ok(())
+}
+// endregion SuspendProcessDefinitions
 
 fn main() {
     // Examples above are compiled, not executed.

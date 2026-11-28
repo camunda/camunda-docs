@@ -60,14 +60,14 @@ A point-in-time snapshot of the manager's internal state, for observability.
 
 ### Fields
 
-| Field             | Type                   | Description                                                    |
-| ----------------- | ---------------------- | -------------------------------------------------------------- |
-| `severity`        | `BackpressureSeverity` | Current severity level.                                        |
-| `consecutive`     | `u32`                  | Consecutive backpressure signals since the last healthy decay. |
-| `permits_max`     | `Option<u32>`          | Current permit cap, or `None` when unlimited.                  |
-| `permits_current` | `u32`                  | Permits currently held.                                        |
-| `waiters`         | `u32`                  | Number of callers queued waiting for a permit.                 |
-| `backoff_ms`      | `u64`                  | Current backoff-at-floor delay in milliseconds.                |
+| Field             | Type                   | Description                                                          |
+| ----------------- | ---------------------- | -------------------------------------------------------------------- |
+| `severity`        | `BackpressureSeverity` | Current severity level.                                              |
+| `consecutive`     | `u32`                  | Consecutive backpressure signals since the last successful response. |
+| `permits_max`     | `Option<u32>`          | Current permit cap, or `None` when unlimited.                        |
+| `permits_current` | `u32`                  | Permits currently held.                                              |
+| `waiters`         | `u32`                  | Number of callers queued waiting for a permit.                       |
+| `backoff_ms`      | `u64`                  | Current backoff-at-floor delay in milliseconds.                      |
 
 ## CamundaError
 

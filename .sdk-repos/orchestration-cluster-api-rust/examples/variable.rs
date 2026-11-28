@@ -5,8 +5,12 @@
 #![allow(dead_code, unused_variables, unused_imports)]
 
 use camunda_orchestration_sdk::apis::variable_api::GetVariableParams;
-use camunda_orchestration_sdk::models::VariableSearchQuery;
-use camunda_orchestration_sdk::CamundaClient;
+use camunda_orchestration_sdk::apis::variable_api::SearchVariableHistoryParams;
+use camunda_orchestration_sdk::models::{
+    LimitPagination, SearchQueryPageRequest, StringFilterProperty, VariableHistoryItemFilter,
+    VariableHistoryItemSearchQuery, VariableSearchQuery,
+};
+use camunda_orchestration_sdk::{CamundaClient, ConsistencyOptions};
 
 // region GetVariable
 async fn get_variable(variable_key: String) -> Result<(), Box<dyn std::error::Error>> {
@@ -20,6 +24,50 @@ async fn get_variable(variable_key: String) -> Result<(), Box<dyn std::error::Er
     Ok(())
 }
 // endregion GetVariable
+
+// region SearchVariableHistory
+async fn search_variable_history(variable_name: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let query = VariableHistoryItemSearchQuery {
+        page: Some(Box::new(SearchQueryPageRequest::LimitPagination(Box::new(
+            LimitPagination { limit: Some(20) },
+        )))),
+        filter: Some(Box::new(VariableHistoryItemFilter {
+            name: Some(Box::new(StringFilterProperty::ExactMatch(
+                variable_name.to_owned(),
+            ))),
+            ..Default::default()
+        })),
+        ..Default::default()
+    };
+    let params = SearchVariableHistoryParams {
+        truncate_values: Some(false),
+        variable_history_item_search_query: Some(query),
+    };
+
+    let results = client
+        .eventual_until(
+            ConsistencyOptions::default(),
+            || {
+                let client = client.clone();
+                let params = params.clone();
+                async move { client.search_variable_history(params).await }
+            },
+            |result| !result.items.is_empty(),
+        )
+        .await?;
+
+    for change in results.items {
+        println!(
+            "{} changed at {}: {}",
+            change.name, change.timestamp, change.value
+        );
+    }
+
+    Ok(())
+}
+// endregion SearchVariableHistory
 
 // region SearchVariables
 async fn search_variables() -> Result<(), Box<dyn std::error::Error>> {
