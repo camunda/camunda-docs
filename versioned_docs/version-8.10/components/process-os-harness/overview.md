@@ -46,6 +46,19 @@ Builders get the most out of ProcessOS Harness when they bring:
 - Stakeholder communication skills across engineering, architecture, and business leadership.
 - Comfort with ambiguity.
 
+## What are the main components of ProcessOS Harness
+
+The main components of ProcessOS Harness are: an AI coding agent, a Camunda cluster for the governance process, a Camunda target cluster to test the generated solution, and a Git project.
+
+![The builder directs the AI coding agent. The AI coding agent reads and commits files in the Git project. It reaches the governance cluster and the target cluster. The governance cluster and the target cluster can be the same cluster.](img/process-os-project-parts.excalidraw.svg)
+
+| Component          | What it is                                                                                                                   | What it holds                                                                                                    |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| AI coding agent    | The agent you direct in the terminal, such as Claude Code CLI or GitHub Copilot CLI. ProcessOS Harness is installed into it. | No project data. It reads and commits files in the Git project.                                                  |
+| Governance cluster | The Camunda cluster that runs the [governance process](build/governance-process.md).                                         | The project state: the current phase, milestones, open jobs, and SME reviews.                                    |
+| Target cluster     | The Camunda cluster where the agent deploys the generated solution to test it.                                               | The deployed BPMN models, DMN tables, and Camunda Forms. The job workers connect to this cluster while they run. |
+| Git project        | The project working copy and its Git repository.                                                                             | All project files, including generated artifacts and the feedback you collect.                                   |
+
 ## Key principles
 
 ### A governance process guides the journey

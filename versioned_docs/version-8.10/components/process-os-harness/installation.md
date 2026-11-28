@@ -67,11 +67,15 @@ Only one bundle can be installed at a time. To move to a different agent, run `c
    git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
    ```
 
+1. Decide which Camunda cluster runs the governance process. For a SaaS or Self-Managed cluster, have the cluster URL and API client credentials ready. Create a `c8ctl` profile for each cluster. See [add a profile](/apis-tools/c8ctl/getting-started.md#add-a-profile).
+
 1. Start the journey. Launch your AI coding agent, select a smart model (e.g. Opus or similar), then run:
 
    ```text
    /process-os-governance-start
    ```
+
+   The agent asks for the type of the governance cluster and connects to it with a `c8ctl` profile.
 
 ### Keep an installation up to date
 
@@ -84,6 +88,7 @@ To install a newer archive, download it from the Camunda Download Center (Enterp
 
 ## Next steps
 
+- If several builders work on one project, [use ProcessOS as a team](setup/project-setup.md#use-processos-as-a-team).
 - Learn how the [governance process](build/governance-process.md) guides you between milestones.
 - Learn how [review cycles](build/review-cycle.md) bring SMEs into each phase.
 - Start the first phase, described in [discover the as-is process](build/phases/1-discovery.md).
