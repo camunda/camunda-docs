@@ -133,7 +133,7 @@ balance polling aggressively with minimizing their impact on the cluster, which 
 You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
 :::
 
-As such, we recommend using job streaming if possible.
+As such, we recommend using job streaming for latency-sensitive workers and for large worker fleets. Job streaming requires the gRPC API. To decide between streaming and polling, and between REST and gRPC, see [choose between REST and gRPC](/apis-tools/choose-between-rest-and-grpc.md).
 
 ## Client library examples
 

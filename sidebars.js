@@ -1627,6 +1627,7 @@ module.exports = {
             },
           ],
         },
+        "apis-tools/choose-between-rest-and-grpc",
       ],
     },
     {
