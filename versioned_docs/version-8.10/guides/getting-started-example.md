@@ -76,17 +76,45 @@ You will:
   </TabItem>
   </Tabs>
 
-## Download the Getting Started Package
+## Set up Camunda 8 locally
 
-Download the Getting Started Package from [Camunda Downloads](/downloads).
-
-The starter package includes the following components:
+In this section, you'll set up a local Camunda 8 environment with the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md) – An application for modeling BPMN, DMN, and Forms.
-- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C#.
 
-All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
+<Tabs groupId="local-setup" defaultValue="cli" values={
+[
+{ label: 'Camunda CLI (recommended)', value: 'cli', },
+{ label: 'Manual setup', value: 'manual', },
+]}>
+
+<TabItem value="cli">
+
+1. Install the [Camunda CLI](/apis-tools/c8ctl/getting-started.md). It requires [Node.js](https://nodejs.org/en/download) 22.18 or later.
+
+   ```bash
+   npm install -g @camunda8/cli
+   ```
+
+2. Run the guided setup, and keep **Local cluster** and **Desktop Modeler** selected:
+
+   ```bash
+   c8ctl setup
+   ```
+
+   The setup downloads and starts Camunda 8 Run and installs Desktop Modeler.
+
+</TabItem>
+
+<TabItem value="manual">
+
+1. Download Camunda 8 Run and Desktop Modeler for your operating system from [Camunda Downloads](/downloads).
+2. Extract Camunda 8 Run and [start it](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run).
+3. [Install Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+
+</TabItem>
+</Tabs>
 
 ## Example project
 
@@ -96,35 +124,19 @@ The example project, located in the `camunda-8-get-started/2-order-process-with-
 
 The service tasks in the process are executed by [job workers](/reference/glossary.md#job-worker). The `java`, `nodejs`, `python`, and `csharp` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
 
+Clone the [getting started project](https://github.com/camunda/camunda-8-get-started) to get the example project:
+
+```bash
+git clone https://github.com/camunda/camunda-8-get-started.git
+```
+
+If you don't use Git, [download the project as a ZIP file](https://github.com/camunda/camunda-8-get-started/archive/refs/heads/main.zip), extract it, and rename the extracted `camunda-8-get-started-main` folder to `camunda-8-get-started`.
+
 ## Instructions
 
 <ol>
   <li>
-    Unzip the Camunda 8 starter package.
-  </li>
-
-  <li>
-    Start Camunda 8 Run by changing into the directory and running the command:
-    <Tabs groupId="os" defaultValue="maclinux" values={
-[
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-] }>
-<TabItem value="maclinux">
-    ```bash
-./camunda-start.sh
-```
-</TabItem>
-<TabItem value="windows">
-```bash
-.\camunda-start.bat
-```
-</TabItem>
-</Tabs>
-  </li>
-
-  <li>
-    Open the Desktop Modeler application from the starter package.
+    Open Desktop Modeler.
   </li>
 
   <li>
@@ -309,26 +321,23 @@ To learn more about our SDKs, visit their respective documentation pages:
 
 ## Teardown
 
-You can stop Camunda 8 Run by executing:
+You can stop Camunda 8 Run:
 
-    <Tabs groupId="os" defaultValue="maclinux" values={
-
+<Tabs groupId="local-setup" defaultValue="cli" values={
 [
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-] }>
-<TabItem value="maclinux">
+{ label: 'Camunda CLI (recommended)', value: 'cli', },
+{ label: 'Manual setup', value: 'manual', },
+]}>
+<TabItem value="cli">
 
 ```bash
-./camunda-stop.sh
-
+c8ctl cluster stop
 ```
 
 </TabItem>
-<TabItem value="windows">
-```bash
-./camunda-stop.bat
-````
+<TabItem value="manual">
+
+[Shut down Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#shut-down-camunda-8-run) from its directory.
 
 </TabItem>
 </Tabs>

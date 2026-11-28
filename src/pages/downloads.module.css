@@ -25,15 +25,6 @@
   }
 }
 
-/* ─── CLI icon wrapper (matches 72px footprint of Docker/K8s icons) ─── */
-.cliIconWrap {
-  width: 72px;
-  height: 72px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /* ─── Additional release resources ─── */
 .additionalReleasesSection {
   margin-top: 5rem;
@@ -58,18 +49,6 @@
 /* ─── Last section: extra bottom space (sand bg comes from darkSection) ─── */
 .lastSectionSpaced {
   padding-bottom: 8rem !important;
-}
-
-/* ─── More ways: 3-up wide grid ─── */
-.waysGridWide {
-  grid-template-columns: 1fr 1fr 1fr !important;
-  max-width: 1100px !important;
-}
-
-@media (max-width: 900px) {
-  .waysGridWide {
-    grid-template-columns: 1fr !important;
-  }
 }
 
 /* ─── Hero overrides (tighter than build-with-camunda hero) ─── */
@@ -101,6 +80,7 @@
 /* ─── OS Tabs ─── */
 .osTabs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0;
   margin: 0 auto 4rem;
@@ -138,6 +118,19 @@
 .osTabActive {
   color: var(--card-hover-border);
   border-bottom-color: var(--card-hover-border);
+}
+
+@media (max-width: 600px) {
+  .osTab {
+    gap: 0.35rem;
+    padding: 0.75rem 0.6rem;
+    font-size: 1rem;
+  }
+
+  .osTab svg {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /* ─── OS auto-detected label ─── */
@@ -335,4 +328,20 @@
 
 .downloadCardFooterLink:hover {
   text-decoration: underline !important;
+}
+
+/* ─── Camunda CLI card ─── */
+
+/* Keep content grouped at the top; the footer stays pinned to the bottom */
+.cliCard .downloadCardDesc {
+  flex: none;
+}
+
+.cliTerminal {
+  margin-bottom: 0.75rem;
+}
+
+/* The page styles remove link underlines; mark links like the onboarding does */
+.downloadCardNote a {
+  border-bottom: 1px solid currentColor;
 }

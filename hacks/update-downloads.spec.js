@@ -41,34 +41,19 @@ const rpaFiles = (version) =>
     "2026-04-23T10:00:00Z"
   );
 
-const BUNDLE_SUFFIXES = [
-  "darwin-aarch64.zip",
-  "darwin-x86_64.zip",
-  "windows-x86_64.zip",
-  "linux-x86_64.tar.gz",
-];
-
-// A GitHub release, optionally with the Getting Started bundle.
-const release = (
-  tag,
-  { bundle = false, date = "2026-10-13T10:00:00Z" } = {}
-) => ({
+// A GitHub release.
+const release = (tag, { date = "2026-10-13T10:00:00Z" } = {}) => ({
   tag_name: tag,
   draft: false,
   published_at: date,
   html_url: `https://github.com/camunda/camunda/releases/tag/${tag}`,
-  assets: bundle
-    ? BUNDLE_SUFFIXES.map((suffix) => ({
-        name: `camunda8-getting-started-bundle-${tag}-${suffix}`,
-        browser_download_url: `https://github.com/camunda/camunda/releases/download/${tag}/camunda8-getting-started-bundle-${tag}-${suffix}`,
-      }))
-    : [{ name: `camunda-zeebe-${tag}.tar.gz` }],
+  assets: [{ name: `camunda-zeebe-${tag}.tar.gz` }],
 });
 
 // Mocked fixture data, not the live catalog: a frozen snapshot of release
-// metadata from November 2026 (8.10 is GA, the Getting Started bundle last
-// shipped with 8.10.4, and no 8.11 alpha is out yet) to exercise the selection
-// logic. The script itself reads the live releases on every run.
+// metadata from November 2026 (8.10 is GA and no 8.11 alpha is out yet) to
+// exercise the selection logic. The script itself reads the live releases on
+// every run.
 const NOV_2026_RELEASES = {
   c8run: ["8.9.23", "8.10.0-alpha4", "8.10.0-alpha5", "8.10.6", "8.10.7"],
   modeler: ["5.51.1", "5.52.0"],
@@ -76,11 +61,11 @@ const NOV_2026_RELEASES = {
   camunda: [
     release("8.10.8"),
     release("8.9.24"),
-    release("8.10.4", { bundle: true }),
+    release("8.10.4"),
     release("8.10.0"),
-    release("8.10.0-alpha5", { bundle: true }),
-    release("8.10.0-alpha3", { bundle: true }),
-    release("8.9.0", { bundle: true }),
+    release("8.10.0-alpha5"),
+    release("8.10.0-alpha3"),
+    release("8.9.0"),
   ],
   connectors: [release("8.10.3"), release("8.10.2"), release("8.9.14")],
 };
@@ -162,11 +147,6 @@ describe("update-downloads", () => {
 
     expect(names(versions, "stable")).toEqual(["8.10.7"]);
     expect(names(versions, "alpha")).toEqual(["8.11.0-alpha1"]);
-    expect(names(versions, "any")).toEqual([
-      "8.11.0-alpha1",
-      "8.10.7",
-      "8.10.0-alpha5",
-    ]);
     expect(() => names(versions, "nightly")).toThrow(
       "Unknown release channel: nightly"
     );
@@ -238,10 +218,6 @@ describe("update-downloads", () => {
     mockFetch(NOV_2026_RELEASES);
     const catalog = await loadScript().buildCatalog();
 
-    expect(catalog.gettingStarted.version).toBe("8.10.4");
-    expect(catalog.gettingStarted.links.linux[0].url).toBe(
-      "https://github.com/camunda/camunda/releases/download/8.10.4/camunda8-getting-started-bundle-8.10.4-linux-x86_64.tar.gz"
-    );
     expect(catalog.camundaRun.version).toBe("8.10.7");
     expect(catalog.camundaRun.alphaVersion).toBeUndefined();
     expect(catalog.camundaRun.links.mac.experimental).toEqual([]);
@@ -289,7 +265,6 @@ describe("update-downloads", () => {
     expect(catalog.additionalReleases.orchestrationCluster.version).toBe(
       "8.11.0"
     );
-    expect(catalog.gettingStarted.version).toBe("8.10.4");
   });
 
   test("keeps the previous release while a new one is uploading", async () => {
@@ -324,17 +299,19 @@ describe("update-downloads", () => {
     );
   });
 
-  test("finds the bundle beyond the newest 100 releases", async () => {
-    const newer = Array.from({ length: 150 }, (_, index) =>
-      release(`8.10.${100 + index}`)
+  test("reads releases beyond the newest 100", async () => {
+    const older = Array.from({ length: 100 }, (_, index) =>
+      release(`8.9.${100 + index}`)
     );
     mockFetch({
       ...NOV_2026_RELEASES,
-      camunda: [...newer, ...NOV_2026_RELEASES.camunda],
+      camunda: [...older, ...NOV_2026_RELEASES.camunda],
     });
     const catalog = await loadScript().buildCatalog();
 
-    expect(catalog.gettingStarted.version).toBe("8.10.4");
+    expect(catalog.additionalReleases.orchestrationCluster.version).toBe(
+      "8.10.8"
+    );
     const camundaPages = global.fetch.mock.calls
       .map(([input]) => String(input))
       .filter((url) => url.startsWith(`${GITHUB}camunda/camunda/`));

@@ -18,7 +18,7 @@ import styles from "./styles.module.css";
  * corner of the main card. It is part of the same link as the main card.
  * Cards can set icon to show a small icon by the title: "agent" (purple AI
  * agent badge), "java" or "kubernetes". All are inline SVG.
- * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc", "hub".
+ * Card kinds: "notes", "table", "flow", "request", "code", "modeler", "adhoc", "hub", "image".
  */
 
 function Cell({ value }) {
@@ -501,7 +501,18 @@ function Hub({ card }) {
   );
 }
 
+// A screenshot: card.src (an imported image) and card.alt.
+function Screenshot({ card }) {
+  return (
+    <>
+      <CardHead title={card.title} meta={card.meta} />
+      <img className={styles.shot} src={card.src} alt={card.alt || ""} />
+    </>
+  );
+}
+
 const KINDS = {
+  image: Screenshot,
   hub: Hub,
   notes: Notes,
   table: Table,
@@ -563,6 +574,35 @@ export default function LandingHero({
             {stack}
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// Cards in a row on a pixel grid, each overlapping the previous one slightly,
+// without the hero layout or copy. For placing in another component.
+export function HeroCardRow({ cards }) {
+  return (
+    <div className={styles.inline} aria-hidden="true">
+      <div className={styles.art}>
+        <div className={styles.field} />
+        <div className={styles.row}>
+          {cards.map((card) => {
+            const Body = KINDS[card.kind];
+            return (
+              <div
+                key={card.title}
+                className={clsx(
+                  styles.card,
+                  styles.rowCard,
+                  card.float && styles.rowFloat
+                )}
+              >
+                <Body card={card} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

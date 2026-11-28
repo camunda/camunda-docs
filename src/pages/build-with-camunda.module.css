@@ -83,6 +83,10 @@
   text-decoration: none !important;
 }
 
+.page .cliLearnMore a {
+  text-decoration: underline !important;
+}
+
 /* ─── Hero (camunda.com gradient) ─── */
 .heroWrapper {
   position: relative;
@@ -612,20 +616,23 @@
   color: #171717 !important;
 }
 
-/* CLI install detail block */
-.cliInstallBlock {
-  max-width: 720px;
-  margin: 0 auto;
+/* The CTA is the card's only link; its overlay keeps the whole card
+   clickable while the link name stays short */
+.heroCardLink::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  content: "";
 }
 
-.cliInstallBlock .terminalWindow {
-  max-width: 100%;
-  margin-bottom: 2rem;
+/* A transform would make the CTA the overlay's containing block */
+.heroCard .heroCardLink:hover {
+  transform: none;
 }
 
-.cliInstallBlock .downloadButtons {
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
+.heroCardLink:focus-visible {
+  outline: 3px solid var(--camunda-brand-purple);
+  outline-offset: 3px;
 }
 
 /* ─── Install tabs ─── */
@@ -686,110 +693,6 @@
   }
 }
 
-/* ─── Bundle fallback (details/summary) ─── */
-.bundleFallback {
-  max-width: 720px;
-  margin: 3rem auto 0;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  background: var(--ifm-color-emphasis-0);
-  overflow: hidden;
-}
-
-.bundleFallbackSummary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ifm-color-emphasis-700);
-  cursor: pointer;
-  list-style: none;
-  transition: background 0.15s;
-}
-
-.bundleFallbackSummary::-webkit-details-marker {
-  display: none;
-}
-
-.bundleFallbackIcon {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-}
-
-.bundleFallbackSummary::before {
-  content: "▶";
-  font-size: 0.7rem;
-  transition: transform 0.2s;
-  color: var(--ifm-color-emphasis-500);
-}
-
-.bundleFallback[open] .bundleFallbackSummary::before {
-  transform: rotate(90deg);
-}
-
-.bundleFallbackSummary:hover {
-  background: var(--ifm-color-emphasis-100);
-}
-
-.bundleFallbackSummary svg {
-  width: 20px;
-  height: 20px;
-}
-
-.bundleFallbackContent {
-  padding: 0 1.25rem 1.25rem;
-}
-
-.bundleFallbackDesc {
-  font-size: 0.9rem;
-  color: var(--ifm-color-emphasis-700);
-  margin-bottom: 1.25rem;
-}
-
-.bundleFallbackContent .downloadButtons {
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.pillSeparator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 6rem 0 4rem;
-}
-
-/* Rules either side of the pill, so the line never crosses its label */
-.pillSeparator::before,
-.pillSeparator::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--ifm-color-emphasis-300);
-}
-
-.sectionPill {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  background: var(--camunda-brand-purple-tint);
-  color: var(--camunda-brand-purple);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 999px;
-}
-
-[data-theme="dark"] .sectionPill {
-  background: rgba(165, 158, 255, 0.16);
-  color: #c7c2ff;
-}
-
 .cliInstallSection {
   max-width: 1500px !important;
   padding-top: 4rem !important;
@@ -812,10 +715,7 @@
 
 /* Cards in the bottom sections match the AO cards (_ao-table.css) */
 .darkSection .wayCard,
-.exploreSection .deployCard,
-.exploreSection .archBox,
-.exploreSection .agenticCard,
-.exploreSection .exploreCard {
+.exploreSection .deployCard {
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
@@ -823,46 +723,33 @@
 }
 
 .darkSection .wayCard:hover,
-.exploreSection .deployCard:hover,
-.exploreSection .archBox:hover,
-.exploreSection .agenticCard:hover,
-.exploreSection .exploreCard:hover {
+.exploreSection .deployCard:hover {
   transform: translateY(-5px);
   border-color: #d9d9d9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .darkSection .wayCard p,
-.exploreSection .deployCard p,
-.exploreSection .agenticCard p,
-.exploreSection .exploreCard p {
+.exploreSection .deployCard p {
   color: #555;
 }
 
 [data-theme="dark"] .darkSection .wayCard,
-[data-theme="dark"] .exploreSection .deployCard,
-[data-theme="dark"] .exploreSection .archBox,
-[data-theme="dark"] .exploreSection .agenticCard,
-[data-theme="dark"] .exploreSection .exploreCard {
+[data-theme="dark"] .exploreSection .deployCard {
   background: #1c1c1c;
   border-color: #3b3a3a;
   box-shadow: 0 8px 16px 4px #00000033;
 }
 
 [data-theme="dark"] .darkSection .wayCard:hover,
-[data-theme="dark"] .exploreSection .deployCard:hover,
-[data-theme="dark"] .exploreSection .archBox:hover,
-[data-theme="dark"] .exploreSection .agenticCard:hover,
-[data-theme="dark"] .exploreSection .exploreCard:hover {
+[data-theme="dark"] .exploreSection .deployCard:hover {
   background: transparent;
   border-color: var(--ifm-color-primary);
   box-shadow: 0 8px 16px 4px #78a9ff33;
 }
 
 [data-theme="dark"] .darkSection .wayCard p,
-[data-theme="dark"] .exploreSection .deployCard p,
-[data-theme="dark"] .exploreSection .agenticCard p,
-[data-theme="dark"] .exploreSection .exploreCard p {
+[data-theme="dark"] .exploreSection .deployCard p {
   color: #c6c6c6;
 }
 
@@ -922,25 +809,10 @@
   line-height: 1.5;
 }
 
-.downloadHighlight .downloadButtons {
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 1.5rem auto;
-  max-width: 700px;
-}
-
 .wayCardImage {
   margin: 0 auto 0.5rem;
   display: block;
   object-fit: contain;
-}
-
-.wayCard .downloadButtons {
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
 }
 
 .downloadsSection .waysGrid {
@@ -1176,16 +1048,6 @@
 .cliPrimaryDivider {
   border-top: 1px solid var(--card-border);
   margin: 0.5rem 0 1.25rem;
-}
-
-.quickStartLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--heading-color);
-  margin: 0 0 0.75rem;
 }
 
 .stepNumber {
@@ -1526,6 +1388,101 @@
   line-height: 1.6;
 }
 
+.optionalSections {
+  max-width: 1200px;
+  padding: 0 40px 5rem;
+}
+
+.cliBasics {
+  margin-bottom: 3rem;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.optionalSection {
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.optionalSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  color: var(--heading-color);
+  cursor: pointer;
+  list-style: none;
+}
+
+.optionalSummary::-webkit-details-marker {
+  display: none;
+}
+
+.optionalSummary h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.optionalSummary::after {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 3px 0 0;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.optionalSection[open] > .optionalSummary::after {
+  margin-top: 4px;
+  transform: rotate(225deg);
+}
+
+.optionalSummary:hover {
+  background: var(--ifm-background-surface-color);
+}
+
+.optionalSummary:focus-visible {
+  outline: 3px solid var(--camunda-brand-purple);
+  outline-offset: -4px;
+}
+
+.optionalContent {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.optionalNote {
+  margin: 0 0 2rem;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .optionalSections {
+    padding: 0 1rem 3rem;
+  }
+
+  .optionalSummary {
+    padding: 1.2rem 1rem;
+  }
+
+  .optionalSummary h2 {
+    font-size: 1.05rem;
+  }
+
+  .optionalContent {
+    padding: 0 1rem 1.25rem;
+  }
+}
+
 /* ─── Start cards (SaaS vs CLI) ─── */
 .startGrid {
   display: grid;
@@ -1856,6 +1813,48 @@
   word-break: break-word;
 }
 
+/* One row per command, each with its own copy button */
+.terminalCommand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.terminalCommand > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.terminalLine {
+  display: block;
+}
+
+.copyButtonInline {
+  position: static;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+}
+
+.copyStatus {
+  display: block;
+  margin-top: 0.4rem;
+  color: #ffb4a2;
+  font-size: 0.75rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── More ways to run ─── */
 .waysGrid {
   display: grid;
@@ -2118,13 +2117,6 @@
   font-size: 0.9rem;
 }
 
-.downloadButtons {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.5rem;
-  margin-bottom: 0.6rem;
-}
-
 .downloadButton {
   display: inline-flex;
   align-items: center;
@@ -2230,9 +2222,18 @@
 .aiCard .terminalWindow {
   max-width: 100%;
   margin: 0;
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+.aiCard .terminalWindow + .terminalWindow {
+  margin-top: 1rem;
+}
+
+.aiAlternative {
+  margin: 1rem 0 0.75rem;
+  font-size: 0.9rem;
 }
 
 .aiCard .terminalBody {
@@ -2406,6 +2407,7 @@
   flex-shrink: 0;
 }
 
+/* ─── Explore docs (sand, matching darkSection) ─── */
 /* ─── Explore docs (sand, matching darkSection) ─── */
 .exploreSection {
   background: var(--sand-bg);

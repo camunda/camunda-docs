@@ -8,8 +8,6 @@ keywords:
 toc_max_heading_level: 2
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
@@ -31,49 +29,25 @@ After completing this guide, you will have a BPMN process running locally in Cam
 
 - [JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/): Required by Camunda 8 Run to start the engine locally.
 
-## Step 1: ## Download the Getting Started Package
+## Step 1: Set up Camunda 8 locally
 
-Download the Getting Started Package from [Camunda Downloads](/downloads).
-
-The starter package includes the following components:
+In this step, you'll set up a local Camunda 8 environment with the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md): A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md): An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started): Example projects including the Rocket Launch process used in this guide.
 
+1. [Install and start Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
+2. [Install Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+3. [Download the example projects](https://github.com/camunda/camunda-8-get-started/archive/refs/heads/main.zip) and extract the archive.
+
 ## Step 2: Deploy and run your model
 
-1. Unzip the Camunda 8 starter package.
-2. Start Camunda 8 Run by changing to its directory and running the following command based on your OS:
-
-<Tabs groupId="os" defaultValue="maclinux" values={
-[
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-]}>
-
-<TabItem value="maclinux">
-
-```bash
-./camunda-start.sh
-```
-
-</TabItem>
-
-<TabItem value="windows">
-
-```bash
-.\camunda-start.bat
-```
-
-</TabItem>
-</Tabs>
-
-3. Open Camunda Modeler from the starter package.
-4. Click **File**, then **Open File** to open the process model `camunda-8-get-started/1-rocket-launch/rocket-launch.bpmn`.
-5. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy**. This automatically deploys all resources in the project, including the DMN decision table.
-6. Click **Play** in the bottom toolbar to start a new process instance.
-7. Run your first model instance by setting the input mission variables. For example:
+1. Open Camunda Modeler.
+2. Click **File**, then **Open File** to open the process model `1-rocket-launch/rocket-launch.bpmn` in the extracted example projects.
+3. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy**. This automatically deploys all resources in the project, including the DMN decision table.
+4. Click **Play** in the bottom toolbar to start a new process instance.
+5. Run your first model instance by setting the input mission variables. For example:
 
 ```json
 { "missionName": "Odyssey", "fuelLevel": 95 }
@@ -134,28 +108,7 @@ Fixed rules work when you know the decision in advance, as in this launch sequen
 
 Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level).
 
-You can now stop your Camunda 8 Run local environment by executing the following command based on your OS:
-
-<Tabs groupId="os" defaultValue="maclinux" values={
-[
-{ label: 'Mac OS + Linux', value: 'maclinux', },
-{ label: 'Windows', value: 'windows', },
-] }>
-<TabItem value="maclinux">
-
-```bash
-./camunda-stop.sh
-```
-
-</TabItem>
-<TabItem value="windows">
-
-```bash
-.\camunda-stop.bat
-```
-
-</TabItem>
-</Tabs>
+You can now [shut down Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#shut-down-camunda-8-run) from its directory to stop your local environment.
 
 ## Next steps
 
