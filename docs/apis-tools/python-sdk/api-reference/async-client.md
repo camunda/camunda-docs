@@ -143,6 +143,183 @@ async def activate_jobs_example() -> None:
             print(f"Job {job.job_key}: {job.type_}")
 ```
 
+### activate_probes()
+
+```python
+async def activate_probes(*, data, **kwargs)
+```
+
+Activate probes (alpha)
+
+> Collects probes of the given probe IDs for a worker, up to the requested maximum.
+>
+> Like job activation, the request goes to every partition. When no probe is waiting, it is
+> held until a probe of one of these probe IDs is created or until requestTimeout. Probe
+> IDs on which the caller lacks the ANSWER permission are skipped. The worker answers each
+> probe with POST /v2/probes/{probeKey}/answer before the probe’s deadline.
+>
+> This endpoint is an alpha feature and may be subject to change
+> in future releases.
+
+**Parameters:**
+
+| Parameter | Type                     | Description |
+| --------- | ------------------------ | ----------- |
+| `data`    | `ProbeActivationRequest` |             |
+| `kwargs`  | `Any`                    |             |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ProbeActivationResult
+- **Return type:**
+  ProbeActivationResult
+
+#### Examples
+
+**Activate probes:**
+
+```python
+def activate_probes_example() -> None:
+    client = CamundaClient()
+
+    # Held for up to 5 seconds, then returns with no probes if none was created.
+    result = client.activate_probes(
+        data=ProbeActivationRequest(
+            probe_ids=["validate-configuration/io.camunda:aws-credential:1"],
+            max_probes_to_activate=10,
+            worker="connectors-runtime",
+            request_timeout=5000,
+        )
+    )
+
+    # The activated input holds resolved secret values, so log identifiers only.
+    for probe in result.probes:
+        print(f"Probe {probe.probe_key} for {probe.probe_id}")
+```
+
+### add_clock()
+
+```python
+async def add_clock(*, data, **kwargs)
+```
+
+Add time to internal clock
+
+> Moves the Zeebe engine’s internal clock forward or backward by the given offset.
+>
+> Unlike pinning, the clock keeps ticking in real time after the offset is added. If the
+> clock is pinned, it stays pinned and moves to the pinned time plus the offset.
+>
+> Each request adds to the time of the clock, so adding PT1H twice moves the clock two
+> hours ahead. Use POST /v2/clock/reset to remove all added time and return the clock to
+> the system time.
+>
+> The response contains the new time of the clock. The change reaches all partitions
+> shortly after it is accepted, so a request sent right after it may still use the previous
+> time.
+
+**Parameters:**
+
+| Parameter | Type              | Description |
+| --------- | ----------------- | ----------- |
+| `data`    | `ClockAddRequest` |             |
+| `kwargs`  | `Any`             |             |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ClockResult
+- **Return type:**
+  ClockResult
+
+#### Examples
+
+**Add time to the cluster clock:**
+
+```python
+def add_clock_example() -> None:
+    client = CamundaClient()
+
+    result = client.add_clock(
+        data=ClockAddRequest(
+            offset="PT1H",
+        ),
+    )
+
+    print(f"Engine time: {result.timestamp.isoformat()}")
+```
+
+### answer_probe()
+
+```python
+async def answer_probe(probe_key, *, data, **kwargs)
+```
+
+Answer probe (alpha)
+
+> Sends a worker’s answer to a probe it collected, which ends the probe.
+>
+> The body is one of three shapes, chosen by outcome: OK with the result in data,
+> UNSUPPORTED, or ERROR with a message. The client that created the probe gets this
+> answer with the name of the worker that collected the probe.
+>
+> This endpoint is an alpha feature and may be subject to change
+> in future releases.
+
+**Parameters:**
+
+| Parameter   | Type                                                              | Description                                                      |
+| ----------- | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `probe_key` | `str`                                                             | System-generated key for a probe. Example: 2251799813685464.     |
+| `data`      | `ErrorProbeAnswer` \| `OKProbeAnswer` \| `UnsupportedProbeAnswer` | The answer of the worker, one of three shapes chosen by outcome. |
+| `kwargs`    | `Any`                                                             |                                                                  |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The probe with the given key is not found: it ended already, its deadline passed, or it belongs to a tenant the caller is not assigned to.
+  - **errors.ConflictError** – If the response status code is 409. The probe with the given key is not activated: no worker collected it, or it waits for the values of its secrets.
+  - **errors.PayloadTooLargeError** – If the response status code is 413. The answer is too large to be written to the log. The title is PAYLOAD_TOO_LARGE. Answer with a short ERROR instead, so that the client does not wait for the deadline.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  None
+- **Return type:**
+  None
+
+#### Examples
+
+**Answer a probe:**
+
+```python
+def answer_probe_example(probe_key: ProbeKey) -> None:
+    client = CamundaClient()
+
+    client.answer_probe(
+        probe_key=probe_key,
+        data=OKProbeAnswer(
+            outcome="OK",
+            data=ProbeOkResultData.from_dict({"valid": True}),
+        ),
+    )
+```
+
 ### assign_client_to_group()
 
 ```python
@@ -439,7 +616,7 @@ def assign_process_instance_business_id_example(process_instance_key: ProcessIns
     client.assign_process_instance_business_id(
         process_instance_key=process_instance_key,
         data=ProcessInstanceBusinessIdAssignmentInstruction(
-            business_id="order-12345",
+            business_id=BusinessId("order-12345"),
         ),
     )
 ```
@@ -1046,12 +1223,10 @@ Cancel process instances (batch)
 
 > Cancels multiple active or suspended process instances.
 >
-> Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch
-> to the given states. Requesting any state other than ACTIVE or SUSPENDED through the $eq or
-> $in operators is rejected. Other state operators ($neq, $exists, $like) are applied as
-> given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,
-> both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey
-> is ignored and overridden during this batch operation.
+> Only ACTIVE and SUSPENDED root instances are cancelled; child instances are cancelled
+> together with their root instance. The given filter only narrows the batch, so a filter on
+> parentProcessInstanceKey matches no instances. Other state operators ($neq, $notIn,
+> $exists, $like) are applied as given and are not validated.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -1063,7 +1238,7 @@ Cancel process instances (batch)
 | `kwargs`  | `Any`                                              |                                                                                      |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE or SUSPENDED through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -1956,7 +2131,7 @@ def create_global_task_listener_example() -> None:
 
     result = client.create_global_task_listener(
         data=CreateGlobalTaskListenerRequest(
-            id="audit-log-listener",
+            id=GlobalListenerId("audit-log-listener"),
             event_types=[GlobalTaskListenerEventTypeEnum.COMPLETING],
             type_="my-task-listener",
         ),
@@ -2093,6 +2268,78 @@ def create_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     print(f"Mapping rule: {result.mapping_rule_id}")
 ```
 
+### create_probe()
+
+```python
+async def create_probe(*, data, **kwargs)
+```
+
+Create probe (alpha)
+
+> Asks a worker a short question and waits for its answer in the same request.
+>
+> The probe is routed on probeId: a worker that polls for this probe ID with
+> POST /v2/probes/activation collects it and answers with
+> POST /v2/probes/{probeKey}/answer. The engine evaluates input when the probe is
+> created and injects the values of the secrets it references before a worker collects it.
+>
+> The probe ends at its deadline, requestTimeout after the gateway received the request.
+> Wait at least requestTimeout plus one second for the HTTP response, so that you get the
+> reason the probe ended instead of a client-side timeout. With requestTimeout absent or
+> 0, the deadline uses the cluster’s request timeout, capped at 30 seconds.
+>
+> This endpoint is an alpha feature and may be subject to change
+> in future releases.
+
+**Parameters:**
+
+| Parameter | Type                   | Description |
+| --------- | ---------------------- | ----------- |
+| `data`    | `ProbeCreationRequest` |             |
+| `kwargs`  | `Any`                  |             |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The request is invalid, or the probe ended because of its secrets. The title of the problem tells the two apart: - INVALID_ARGUMENT: the body is invalid, for example a blank input, a probe ID that is not valid, a requestTimeout out of range, or an input that is not a valid expression or does not evaluate to a context. - SECRET_RESOLUTION_ERROR: a secret that the input references could not be resolved, or its value could not be injected into the input.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. No worker collected the probe before its deadline: no worker polls this probe ID, or the workers that poll it lack the ANSWER permission on it. The title is NO_WORKER.
+  - **errors.PayloadTooLargeError** – If the response status code is 413. The request is too large to be written to the log. The title is PAYLOAD_TOO_LARGE.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.GatewayTimeoutError** – If the response status code is 504. The probe got no answer in time. The title of the problem tells why: - WORKER_DID_NOT_ANSWER: a worker collected the probe but did not answer before its deadline. - SECRET_RESOLUTION_TIMEOUT: the probe still waited for the values of its secrets at its deadline. - DEADLINE_EXCEEDED: the gateway timed out before the engine answered, for example after a leader change.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ErrorProbeResult | OKProbeResult | UnsupportedProbeResult
+- **Return type:**
+  ErrorProbeResult | OKProbeResult | UnsupportedProbeResult
+
+#### Examples
+
+**Create a probe:**
+
+```python
+def create_probe_example() -> None:
+    client = CamundaClient()
+
+    # The request is held until a worker polling this probe ID answers, or the
+    # request times out.
+    result = client.create_probe(
+        data=ProbeCreationRequest(
+            probe_id=ProbeId("validate-configuration/io.camunda:aws-credential:1"),
+            input_='={region: "eu-west-1"}',
+            request_timeout=10000,
+        )
+    )
+
+    if isinstance(result, OKProbeResult):
+        print(f"{result.worker} answered: {result.data.to_dict()}")
+    elif isinstance(result, ErrorProbeResult):
+        print(f"{result.worker} failed: {result.message}")
+    else:
+        print(f"{result.worker} does not support this probe")
+```
+
 ### create_process_instance()
 
 ```python
@@ -2104,7 +2351,8 @@ Create process instance
 > Creates and starts an instance of the specified process.
 >
 > The process definition to use to create the instance can be specified either using its unique key
-> (as returned by Deploy resources), or using the BPMN process id and a version.
+> (as returned by Deploy resources), or using the BPMN process id and either a version or a version
+> tag.
 > If only the process definition id is given, the latest ACTIVE version is used.
 > If no ACTIVE version exists, the request is rejected as not found.
 >
@@ -2113,10 +2361,10 @@ Create process instance
 
 **Parameters:**
 
-| Parameter | Type                                            | Description                                                                                                   |
-| --------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `data`    | `ProcessCreationById` \| `ProcessCreationByKey` | Instructions for creating a process instance. The process definition can be specified either by id or by key. |
-| `kwargs`  | `Any`                                           |                                                                                                               |
+| Parameter | Type                                                                             | Description                                                                                                                           |
+| --------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`    | `ProcessCreationById` \| `ProcessCreationByKey` \| `ProcessCreationByVersionTag` | Instructions for creating a process instance. The process definition can be specified either by id, by id and version tag, or by key. |
+| `kwargs`  | `Any`                                                                            |                                                                                                                                       |
 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -2953,6 +3201,11 @@ Delete resource
 > definitions; for other resource types (forms, generic resources) the flag is ignored and no
 > history is deleted.
 >
+> Deleting a process definition that is already draining is accepted again and changes
+> nothing: the definition stays DRAINING until its running instances finish. The one repeated
+> deletion that is rejected is one with deleteHistory set to true, because the history
+> cannot be deleted before the drain finishes.
+>
 > The two supported types differ in how the history is removed. For a decision requirements
 > definition the history is deleted asynchronously via a batch operation whose details are
 > returned in the batchOperation field of the response. For a process definition that still
@@ -2973,6 +3226,7 @@ Delete resource
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.NotFoundError** – If the response status code is 404. The resource is not found.
+  - **errors.ConflictError** – If the response status code is 409. The process definition is still draining, so its history cannot be deleted yet. Retry with deleteHistory set to true once the definition is fully deleted; the batch operation is then created immediately.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -3755,7 +4009,10 @@ async def get_authentication(**kwargs)
 
 Get current user
 
-> Retrieves the current authenticated user.
+> Retrieves the current authenticated user. On an unprotected API
+> (camunda.security.authentication.unprotected-api=true) a caller without an identity gets a result
+> with isAnonymous set to true instead of a 401, because no credentials can authenticate it
+> there.
 
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3870,6 +4127,51 @@ def get_batch_operation_example(batch_operation_key: BatchOperationKey) -> None:
     )
 
     print(f"Batch operation: {result.batch_operation_key}")
+```
+
+### get_clock()
+
+```python
+async def get_clock(**kwargs)
+```
+
+Get internal clock
+
+> Returns the current time of the Zeebe engine’s internal clock.
+>
+> If the clock is pinned, this is the pinned time. Otherwise, the clock ticks in real time
+> and this is the engine’s current time.
+>
+> Use this endpoint to check the time that the engine uses, for example after pinning the
+> clock with PUT /v2/clock, adding time with POST /v2/clock/add, or resetting it with
+> POST /v2/clock/reset. A pin, add, or reset reaches all partitions shortly after it is
+> accepted, so a request sent right after it may still return the previous time.
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ClockResult
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  ClockResult
+
+#### Examples
+
+**Get the cluster clock:**
+
+```python
+def get_clock_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_clock()
+
+    print(f"Engine time: {result.timestamp.isoformat()}")
 ```
 
 ### get_cluster_exporting_status()
@@ -6996,17 +7298,24 @@ List secrets
 > dot); those are omitted, since /secrets/resolve would reject them and no permission can
 > be granted on them.
 >
-> A returned reference is usable verbatim with /secrets/resolve. In a FEEL expression,
+> A returned reference is usable verbatim with /secrets/resolve, although a secret that its
+> store does not report as ACTIVE may fail to resolve there. In a FEEL expression,
 > however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
 > a bare dash as the minus operator: a listed camunda.secrets.db-password is written
 > \`\` =camunda.secrets.\`db-password\` \`\` in a BPMN input mapping.
+>
+> Pass filter.status to list only the secrets in the matching states, either as a single
+> status or with the advanced operators ($in, $neq, …). A store that does not report
+> states reports every secret as ACTIVE, so a filter that excludes ACTIVE returns
+> nothing from it. The status filter does not widen access: a reference the caller may not read is
+> never returned, with or without a filter.
 
 **Parameters:**
 
-| Parameter | Type                           | Description                                                                                                                                                      |
-| --------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`    | `SecretListRequest` \| `Unset` | Reserved for future filtering options. Currently takes no properties. The request body is optional: omitting it (or sending an empty object) applies no filters. |
-| `kwargs`  | `Any`                          |                                                                                                                                                                  |
+| Parameter | Type                           | Description                                                                                                                                 |
+| --------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`    | `SecretListRequest` \| `Unset` | Options for listing secrets. The request body is optional: omitting it, or sending an empty object, lists every secret the caller may read. |
+| `kwargs`  | `Any`                          |                                                                                                                                             |
 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7036,6 +7345,75 @@ def list_secrets_example() -> None:
 
     for reference in result.references:
         print(f"Known secret reference: {reference}")
+```
+
+### lookup_user_task()
+
+```python
+async def lookup_user_task(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+Look up an active user task (alpha)
+
+> Returns an active user task together with the variables visible to it, read from the
+> engine’s state instead of secondary storage. The task and its variables are read at the
+> same point in processing, so they are consistent with each other and with any command the
+> engine has already processed, for example the completion of a previous task.
+>
+> The response includes the task’s lifecycle state. Use it to interpret the returned
+> values: while a change to the task is in progress, the task fields and variables are the
+> ones from before the change, and state names the pending change. For example, with
+> ASSIGNING the returned assignee is still the previous one, because task listeners can
+> deny the new assignment; with COMPLETING the variables don’t include the ones sent with
+> the completion yet.
+>
+> Only active tasks can be looked up. The lookup returns 404 when the task doesn’t exist,
+> when it was already completed or canceled (use the user task search for those), or when it
+> belongs to a tenant the caller isn’t assigned to. It returns 409 when the task’s process
+> instance is banned: an instance that hit an unrecoverable error and can only be canceled.
+>
+> Each lookup is processed by the engine. Use it when a task is opened, not for polling.
+>
+> This endpoint is an alpha feature and may be subject to change
+> in future releases.
+
+**Parameters:**
+
+| Parameter       | Type                               | Description                           |
+| --------------- | ---------------------------------- | ------------------------------------- |
+| `user_task_key` | `str`                              | System-generated key for a user task. |
+| `data`          | `UserTaskLookupRequest` \| `Unset` |                                       |
+| `kwargs`        | `Any`                              |                                       |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. No active user task with the given key is visible to the caller: the task doesn’t exist, was already completed or canceled, or belongs to a tenant the caller isn’t assigned to.
+  - **errors.ConflictError** – If the response status code is 409. The user task can’t be looked up because its process instance is banned: it hit an unrecoverable error and can only be canceled. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  UserTaskLookupResult
+- **Return type:**
+  UserTaskLookupResult
+
+#### Examples
+
+**Look up an active user task:**
+
+```python
+def lookup_user_task_example(user_task_key: UserTaskKey) -> None:
+    client = CamundaClient()
+
+    result = client.lookup_user_task(
+        user_task_key=user_task_key,
+        data=UserTaskLookupRequest(fetch_variables=["recommendation", "applicant"]),
+    )
+
+    print(f"Task {result.user_task_key} is {result.state}, assignee: {result.assignee}")
 ```
 
 ### migrate_process_instance()
@@ -7113,8 +7491,7 @@ Migrate process instances (batch)
 
 > Migrate multiple process instances.
 >
-> Since only process instances with ACTIVE state can be migrated, any given
-> filters for state are ignored and overridden during this batch operation.
+> Only ACTIVE process instances are migrated. The given filter only narrows the batch.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -7126,7 +7503,7 @@ Migrate process instances (batch)
 | `kwargs`  | `Any`                                           |             |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -7223,8 +7600,7 @@ Modify process instances (batch)
 
 > Modify multiple process instances.
 >
-> Since only process instances with ACTIVE state can be modified, any given
-> filters for state are ignored and overridden during this batch operation.
+> Only ACTIVE process instances are modified. The given filter only narrows the batch.
 > In contrast to single modification operation, it is not possible to add variable instructions or
 > modify by element key.
 > It is only possible to use the element id of the source and target.
@@ -7239,7 +7615,7 @@ Modify process instances (batch)
 | `kwargs`  | `Any`                                              |                                                                                                                                                       |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -7383,6 +7759,8 @@ Pin internal clock (alpha)
 >
 > When the clock is pinned, it remains at the specified time and does not advance.
 > To change the time, the clock must be pinned again with a new timestamp.
+> To move the clock without stopping it, use POST /v2/clock/add instead.
+> Use GET /v2/clock to read the current time of the clock.
 >
 > This endpoint is an alpha feature and may be subject to change
 > in future releases.
@@ -7490,7 +7868,9 @@ Reset internal clock (alpha)
 > Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-
 > time.
 > This operation is useful for returning the clock to
-> normal behavior after it has been pinned to a specific time.
+> normal behavior after it has been pinned to a specific time or moved with
+> POST /v2/clock/add.
+> Use GET /v2/clock to read the current time of the clock.
 >
 > This endpoint is an alpha feature and may be subject to change
 > in future releases.
@@ -7571,8 +7951,7 @@ Resolve related incidents (batch)
 
 > Resolves multiple instances of process instances.
 >
-> Since only process instances with ACTIVE state can have unresolved incidents, any given
-> filters for state are ignored and overridden during this batch operation.
+> Only incidents of ACTIVE process instances are resolved. The given filter only narrows the batch.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -7584,7 +7963,7 @@ Resolve related incidents (batch)
 | `kwargs`  | `Any`                                                    |                                                                                                        |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -7758,6 +8137,7 @@ Restore from a backup
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. A requested backup has no completed backup on at least one partition, or the physical tenant does not exist. More details are provided in the response body.
   - **errors.ConflictError** – If the response status code is 409. The cluster is not in recovery mode, so the restore cannot be accepted.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -7988,6 +8368,64 @@ def resume_exporting_example() -> None:
     client.resume_exporting()
 ```
 
+### resume_process_definitions()
+
+```python
+async def resume_process_definitions(*, data, **kwargs)
+```
+
+Resume process definitions
+
+> Resumes suspended process definitions so that process instances can be created from them again.
+>
+> The definition is selected either by processDefinitionKey, which identifies exactly one
+> version, or by processDefinitionId with an optional processDefinitionVersion and
+> tenantId. Without a version, all versions of the process definition ID are resumed.
+> Set includeProcessInstances to also resume the suspended process instances of the affected
+> versions; the instances are changed by a batch operation, returned as batchOperationKey.
+
+**Parameters:**
+
+| Parameter | Type                                                                    | Description                                                                 |
+| --------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `data`    | `ProcessDefinitionResumptionByID` \| `ProcessDefinitionResumptionByKey` | Instruction to resume process definitions, selected either by key or by ID. |
+| `kwargs`  | `Any`                                                                   |                                                                             |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. No process definition matches the request.
+  - **errors.ConflictError** – If the response status code is 409. The request conflicts with the current state of the process definition, likely because the process definition is in a state that cannot be resumed. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ProcessDefinitionResumptionResult
+- **Return type:**
+  ProcessDefinitionResumptionResult
+
+#### Examples
+
+**Resume process definitions:**
+
+```python
+def resume_process_definitions_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.resume_process_definitions(
+        data=ProcessDefinitionResumptionByKey(
+            process_definition_key=process_definition_key,
+        ),
+    )
+
+    for pd in result.process_definitions:
+        print(f"Version {pd.process_definition_version}: {pd.outcome}")
+```
+
 ### resume_process_instance()
 
 ```python
@@ -8046,10 +8484,11 @@ Resume process instances (batch)
 
 > Resumes multiple suspended process instances.
 >
-> Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only
-> SUSPENDED process instances can be resumed and resumption does not cascade between parent
-> and child instances, so child instances are resumed independently of their parent or root
-> instance.
+> Only SUSPENDED process instances are resumed. The given filter only narrows the batch.
+> Other state operators ($neq, $notIn, $exists, $like) are applied as given and are
+> not validated. Resumption does not cascade, so child instances are resumed independently of their
+> parent
+> or root instance.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -8061,7 +8500,7 @@ Resume process instances (batch)
 | `kwargs`  | `Any`                                            |                                                                                     |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than SUSPENDED through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
@@ -10403,6 +10842,72 @@ def search_users_for_tenant_example(tenant_id: TenantId) -> None:
             print(f"User: {user.username}")
 ```
 
+### search_variable_history()
+
+```python
+async def search_variable_history(*, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search variable history
+
+> Search for variable history items, which record the changes made to a variable’s
+> value over time. The audit log configuration decides which changes are recorded;
+> by default, only changes made by users are.
+>
+> Results are sorted by variableHistoryItemKey ascending by default, which lists the
+> changes of one variable from oldest to newest. Across partitions, the key says nothing
+> about time: a search that spans partitions, for example by process definition, lists the
+> changes of one partition after the other.
+>
+> By default, the endpoint truncates long variable values in the response. For the output
+> collection of a multi-instance element or an ad-hoc sub-process, the endpoint cuts the
+> value at the size limit regardless of the truncateValues parameter. The truncation
+> size limit is configurable.
+
+**Parameters:**
+
+| Parameter         | Type                                        | Description                                 |
+| ----------------- | ------------------------------------------- | ------------------------------------------- |
+| `truncate_values` | `bool` \| `Unset`                           |                                             |
+| `data`            | `VariableHistoryItemSearchQuery` \| `Unset` | Variable history item search query request. |
+| `consistency`     | `ConsistencyOptions` \| `None`              |                                             |
+| `kwargs`          | `Any`                                       |                                             |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  VariableHistoryItemSearchQueryResult
+- **Return type:**
+  VariableHistoryItemSearchQueryResult
+
+#### Examples
+
+**Search variable history:**
+
+```python
+def search_variable_history_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.search_variable_history(
+        data=VariableHistoryItemSearchQuery(
+            filter_=VariableHistoryItemSearchQueryFilter(
+                process_instance_key=process_instance_key,
+            ),
+            page=LimitBasedPagination(limit=20),
+        ),
+    )
+
+    for item in result.items:
+        print(f"{item.timestamp}: {item.name} = {item.value}")
+```
+
 ### search_variables()
 
 ```python
@@ -10528,6 +11033,67 @@ def suspend_batch_operation_example(batch_operation_key: BatchOperationKey) -> N
     )
 ```
 
+### suspend_process_definitions()
+
+```python
+async def suspend_process_definitions(*, data, **kwargs)
+```
+
+Suspend process definitions
+
+> Suspends process definitions so that no new process instances can be created from them.
+>
+> The definition is selected either by processDefinitionKey, which identifies exactly one
+> version, or by processDefinitionId with an optional processDefinitionVersion and
+> tenantId. Without a version, all versions of the process definition ID are suspended.
+> Set includeProcessInstances to also suspend the running process instances of the affected
+> versions; the instances are changed by a batch operation, returned as batchOperationKey.
+
+**Parameters:**
+
+| Parameter | Type                                                                    | Description                                                                  |
+| --------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `data`    | `ProcessDefinitionSuspensionByID` \| `ProcessDefinitionSuspensionByKey` | Instruction to suspend process definitions, selected either by key or by ID. |
+| `kwargs`  | `Any`                                                                   |                                                                              |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. No process definition matches the request.
+  - **errors.ConflictError** – If the response status code is 409. The request conflicts with the current state of the process definition, likely because the process definition is in a state that cannot be suspended. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ProcessDefinitionSuspensionResult
+- **Return type:**
+  ProcessDefinitionSuspensionResult
+
+#### Examples
+
+**Suspend process definitions:**
+
+```python
+def suspend_process_definitions_example(
+    process_definition_id: ProcessDefinitionId,
+) -> None:
+    client = CamundaClient()
+
+    result = client.suspend_process_definitions(
+        data=ProcessDefinitionSuspensionByID(
+            process_definition_id=process_definition_id,
+            include_process_instances=True,
+        ),
+    )
+
+    for pd in result.process_definitions:
+        print(f"Version {pd.process_definition_version}: {pd.outcome}")
+    if result.batch_operation_key is not None:
+        print(f"Batch operation: {result.batch_operation_key}")
+```
+
 ### suspend_process_instance()
 
 ```python
@@ -10586,10 +11152,11 @@ Suspend process instances (batch)
 
 > Suspends multiple running process instances.
 >
-> Any given filter for state or parentProcessInstanceKey is ignored and overridden, as only
-> ACTIVE process instances can be suspended and suspension does not cascade between parent
-> and child instances, so child instances are suspended independently of their parent or
-> root instance.
+> Only ACTIVE process instances are suspended. The given filter only narrows the batch.
+> Other state operators ($neq, $notIn, $exists, $like) are applied as given and are
+> not validated. Suspension does not cascade, so child instances are suspended independently of their
+> parent
+> or root instance.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -10601,7 +11168,7 @@ Suspend process instances (batch)
 | `kwargs`  | `Any`                                            |                                                                                       |
 
 - **Raises:**
-  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed. More details are provided in the response body.
+  - **errors.BadRequestError** – If the response status code is 400. The process instance batch operation failed, for example because the filter requests a top-level state other than ACTIVE through $eq or $in. States inside $or branches are not validated. More details are provided in the response body.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.

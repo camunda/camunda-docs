@@ -34,7 +34,7 @@ async def aget_headers()
 ## AsyncOAuthClientCredentialsAuthProvider
 
 ```python
-class AsyncOAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None)
+class AsyncOAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None, user_agent=None)
 ```
 
 Bases: `object`
@@ -58,6 +58,7 @@ This is designed for async clients.
 | `timeout`             | `float` \| `None`                    |             |
 | `logger`              | [SdkLogger](#sdklogger) \| `None`    |             |
 | `clock`               | `Clock` \| `None`                    |             |
+| `user_agent`          | `str` \| `None`                      |             |
 
 ### aclose()
 
@@ -163,7 +164,7 @@ def get_headers()
 ## OAuthClientCredentialsAuthProvider
 
 ```python
-class OAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None)
+class OAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None, user_agent=None)
 ```
 
 Bases: `object`
@@ -187,6 +188,7 @@ This is designed for sync clients.
 | `timeout`             | `float` \| `None`                 |             |
 | `logger`              | [SdkLogger](#sdklogger) \| `None` |             |
 | `clock`               | `Clock` \| `None`                 |             |
+| `user_agent`          | `str` \| `None`                   |             |
 
 ### close()
 
@@ -664,6 +666,31 @@ connection to an engine) – neither of which survives the trip. Handlers that n
 injected clock run under the `async` or `thread` strategies, whose contexts carry
 one; see [`ConnectedJobContext`](#connectedjobcontext) and [`SyncJobContext`](#syncjobcontext).
 
+**Trust model of the** `process` **strategy.** Pickle is used across that boundary, and
+nowhere else in the SDK. Both ends are worker processes the SDK itself starts, linked only
+by the private queues of the `ProcessPoolExecutor` that connects them:
+
+- _Parent to child:_ the handler and this context. The context is built from the
+  server’s activated-job JSON, but that JSON is parsed with `json` and only the parsed
+  result is pickled. Job variables and custom headers stay plain `dict` / `list` /
+  `str` / `int` / `float` / `bool` / `None` values; they are never deserialised
+  into arbitrary classes. Everything else in the context is an SDK model, an enum, a
+  semantic-type string (such as `JobKey`) or the logger (which pickles as a silent
+  `NullLogger`). Which classes unpickling instantiates is decided by the types of the
+  objects the worker built, never by what the job data says.
+- _Child to parent:_ the handler’s result, which is whatever the handler returns (or the
+  failure or error details it raised). **This is the one place pickle carries data that
+  user code controls**: a handler’s return value is pickled in the child and unpickled in
+  the worker’s parent process. The handler, and every library it uses, is therefore
+  inside the trust boundary. Return a `dict` of JSON-compatible values or a
+  `JobCompletionRequest`, not arbitrary objects.
+- _Never unpickled:_ bytes from the server, the OAuth token cache (JSON), configuration
+  or environment files, or any other source outside the worker’s own process pool.
+
+The SDK’s acceptance tests guard these properties: they fail if the SDK gains a pickle
+loader or its own inter-process channel, if a process pool is configured with anything
+but a worker count, or if a `JobContext` holds anything but JSON data and SDK types.
+
 **Parameters:**
 
 | Parameter                    | Type                                                                                                 | Description |
@@ -701,6 +728,26 @@ structured log messages.
 
 - **Type:**
   [SdkLogger](#sdklogger)
+
+### variables
+
+The variables visible to the task scope. **Untrusted input:** their
+content is set by whoever started or advanced the process instance. The SDK
+parses them with `json` into plain `dict` / `list` / `str` / `int`
+/ `float` / `bool` / `None` values and never instantiates a class from
+the payload, and each job gets its own context – but it enforces no size or
+depth limit and validates nothing against a schema. Bound what a worker
+receives with `WorkerConfig.fetch_variables`, bound your own recursion if
+you walk a variable, and validate with
+`MyModel.model_validate(job.variables.to_dict())`. See “Job Variables Are
+Untrusted Input” in the README.
+
+### custom_headers
+
+The task headers defined in the BPMN model at modelling time.
+Not caller-supplied like `variables`, so they are trustworthy as far as
+control over who may deploy a process definition goes; the SDK checks them
+no more than it checks variables.
 
 ### _classmethod_ from_job(job, logger=None)
 
@@ -1094,6 +1141,12 @@ CAMUNDA_CLIENT_ID: str
 CAMUNDA_CLIENT_SECRET: str
 ```
 
+### CAMUNDA_HTTP_MAX_CONNECTIONS
+
+```python
+CAMUNDA_HTTP_MAX_CONNECTIONS: str
+```
+
 ### CAMUNDA_LOAD_ENVFILE
 
 ```python
@@ -1202,6 +1255,12 @@ CAMUNDA_TOKEN_CACHE_DIR: str
 CAMUNDA_TOKEN_DISK_CACHE_DISABLE: str
 ```
 
+### CAMUNDA_USER_AGENT
+
+```python
+CAMUNDA_USER_AGENT: str
+```
+
 ### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
 
 ```python
@@ -1241,7 +1300,7 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS_EXACT=False, CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS_EXACT=False, CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_HTTP_MAX_CONNECTIONS=None, CAMUNDA_USER_AGENT=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
 ```
 
 Bases: `BaseModel`
@@ -1273,6 +1332,8 @@ Bases: `BaseModel`
 | `CAMUNDA_WORKER_REQUEST_TIMEOUT`            | `int` \| `None`                                                                |             |
 | `CAMUNDA_WORKER_NAME`                       | `str` \| `None`                                                                |             |
 | `CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS` | `float` \| `None`                                                              |             |
+| `CAMUNDA_HTTP_MAX_CONNECTIONS`              | `int` \| `None`                                                                |             |
+| `CAMUNDA_USER_AGENT`                        | `str` \| `None`                                                                |             |
 | `CAMUNDA_MTLS_CERT_PATH`                    | `str` \| `None`                                                                |             |
 | `CAMUNDA_MTLS_KEY_PATH`                     | `str` \| `None`                                                                |             |
 | `CAMUNDA_MTLS_CA_PATH`                      | `str` \| `None`                                                                |             |
@@ -1321,6 +1382,12 @@ CAMUNDA_CLIENT_ID: str | None
 
 ```python
 CAMUNDA_CLIENT_SECRET: str | None
+```
+
+### CAMUNDA_HTTP_MAX_CONNECTIONS
+
+```python
+CAMUNDA_HTTP_MAX_CONNECTIONS: int | None
 ```
 
 ### CAMUNDA_MTLS_CA
@@ -1425,6 +1492,12 @@ CAMUNDA_TOKEN_CACHE_DIR: str | None
 CAMUNDA_TOKEN_DISK_CACHE_DISABLE: bool
 ```
 
+### CAMUNDA_USER_AGENT
+
+```python
+CAMUNDA_USER_AGENT: str | None
+```
+
 ### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
 
 ```python
@@ -1491,6 +1564,15 @@ def resolve()
 - **Return type:**
   [_ResolvedCamundaSdkConfiguration_](#resolvedcamundasdkconfiguration)
 
+### DEFAULT_TENANT_ID _= '<default>'_
+
+Tenant identifier used when no default tenant is configured. Matches the
+Camunda Java client’s `CommandWithTenantStep.DEFAULT_TENANT_IDENTIFIER`.
+Tenant-scoped commands (deploy, create process instance, publish/correlate
+message, broadcast signal, evaluate decision/expression/conditionals) send
+this value — or the configured `CAMUNDA_TENANT_ID` — when the caller does
+not pass a tenant. `activate_jobs` sends `[DEFAULT_TENANT_ID]` likewise.
+
 ## ResolvedCamundaSdkConfiguration
 
 ```python
@@ -1524,6 +1606,16 @@ environment: [CamundaSdkConfigPartial](#camundasdkconfigpartial)
 ```python
 explicit: [CamundaSdkConfigPartial](#camundasdkconfigpartial) | None
 ```
+
+### SECRET_CONFIG_KEYS
+
+```python
+SECRET_CONFIG_KEYS: frozenset[str]* *= frozenset({'CAMUNDA_BASIC_AUTH_PASSWORD', 'CAMUNDA_CLIENT_AUTH_CLIENTSECRET', 'CAMUNDA_CLIENT_SECRET', 'CAMUNDA_MTLS_KEY', 'CAMUNDA_MTLS_KEY_PASSPHRASE'})
+```
+
+Configuration keys whose value is a credential. Configuration errors fire at client
+construction, so their messages land in application logs and crash reporters; these
+values are replaced with a placeholder before any error text is built from them.
 
 ### read_environment()
 

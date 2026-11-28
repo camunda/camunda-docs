@@ -437,6 +437,32 @@ Bases: `str`
 - **Return type:**
   [MessageSubscriptionKey](#messagesubscriptionkey)
 
+## ProbeId
+
+```python
+class ProbeId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ProbeId](#probeid)
+
+## ProbeKey
+
+```python
+class ProbeKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ProbeKey](#probekey)
+
 ## ProcessDefinitionId
 
 ```python
@@ -566,6 +592,19 @@ Bases: `str`
   **value** (_str_)
 - **Return type:**
   [Username](#username)
+
+## VariableHistoryItemKey
+
+```python
+class VariableHistoryItemKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [VariableHistoryItemKey](#variablehistoryitemkey)
 
 ## VariableKey
 

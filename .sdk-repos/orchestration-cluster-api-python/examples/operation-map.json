@@ -14,6 +14,27 @@
       "imports": "from camunda_orchestration_sdk import CamundaAsyncClient"
     }
   ],
+  "activate_probes": [
+    {
+      "file": "probe.py",
+      "region": "ActivateProbes",
+      "label": "Activate probes"
+    }
+  ],
+  "add_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "AddClock",
+      "label": "Add time to the cluster clock"
+    }
+  ],
+  "answer_probe": [
+    {
+      "file": "probe.py",
+      "region": "AnswerProbe",
+      "label": "Answer a probe"
+    }
+  ],
   "assign_client_to_group": [
     {
       "file": "group.py",
@@ -262,6 +283,13 @@
       "file": "mapping_rule.py",
       "region": "CreateMappingRule",
       "label": "Create a mapping rule"
+    }
+  ],
+  "create_probe": [
+    {
+      "file": "probe.py",
+      "region": "CreateProbe",
+      "label": "Create a probe"
     }
   ],
   "create_process_instance": [
@@ -529,6 +557,13 @@
       "file": "batch_operation.py",
       "region": "GetBatchOperation",
       "label": "Get a batch operation"
+    }
+  ],
+  "get_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetClock",
+      "label": "Get the cluster clock"
     }
   ],
   "get_cluster_exporting_status": [
@@ -1105,6 +1140,13 @@
       "label": "Resume exporting"
     }
   ],
+  "resume_process_definitions": [
+    {
+      "file": "extended_operations.py",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
+  ],
   "resume_process_instance": [
     {
       "file": "process_instance.py",
@@ -1406,6 +1448,13 @@
       "label": "Search user task effective variables"
     }
   ],
+  "lookup_user_task": [
+    {
+      "file": "additional_operations.py",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
+    }
+  ],
   "search_user_task_variables": [
     {
       "file": "additional_operations.py",
@@ -1448,6 +1497,13 @@
       "label": "Search users for a tenant"
     }
   ],
+  "search_variable_history": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchVariableHistory",
+      "label": "Search variable history"
+    }
+  ],
   "search_variables": [
     {
       "file": "extended_operations.py",
@@ -1460,6 +1516,13 @@
       "file": "batch_operation.py",
       "region": "SuspendBatchOperation",
       "label": "Suspend a batch operation"
+    }
+  ],
+  "suspend_process_definitions": [
+    {
+      "file": "extended_operations.py",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
     }
   ],
   "suspend_process_instance": [

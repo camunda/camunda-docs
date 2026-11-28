@@ -12,6 +12,7 @@ from camunda_orchestration_sdk import (
     ElementInstanceWaitStateQuery,
     IncidentSearchQuery,
     JobWaitStateDetails,
+    LimitBasedPagination,
     MessageWaitStateDetails,
     MigrateProcessInstanceMappingInstruction,
     ProcessDefinitionId,
@@ -20,7 +21,9 @@ from camunda_orchestration_sdk import (
     ProcessDefinitionInstanceVersionStatisticsQueryFilter,
     ProcessDefinitionKey,
     ProcessDefinitionMessageSubscriptionStatisticsQuery,
+    ProcessDefinitionResumptionByKey,
     ProcessDefinitionSearchQuery,
+    ProcessDefinitionSuspensionByID,
     ProcessDefinitionVariableNameSearchQuery,
     ProcessInstanceKey,
     ProcessInstanceMigrationInstruction,
@@ -28,6 +31,8 @@ from camunda_orchestration_sdk import (
     SetVariableRequest,
     SetVariableRequestVariables,
     Unset,
+    VariableHistoryItemSearchQuery,
+    VariableHistoryItemSearchQueryFilter,
     VariableKey,
 )
 
@@ -269,6 +274,47 @@ def search_process_definition_variable_names_example(
 # endregion SearchProcessDefinitionVariableNames
 
 
+# region SuspendProcessDefinitions
+def suspend_process_definitions_example(
+    process_definition_id: ProcessDefinitionId,
+) -> None:
+    client = CamundaClient()
+
+    result = client.suspend_process_definitions(
+        data=ProcessDefinitionSuspensionByID(
+            process_definition_id=process_definition_id,
+            include_process_instances=True,
+        ),
+    )
+
+    for pd in result.process_definitions:
+        print(f"Version {pd.process_definition_version}: {pd.outcome}")
+    if result.batch_operation_key is not None:
+        print(f"Batch operation: {result.batch_operation_key}")
+
+
+# endregion SuspendProcessDefinitions
+
+
+# region ResumeProcessDefinitions
+def resume_process_definitions_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.resume_process_definitions(
+        data=ProcessDefinitionResumptionByKey(
+            process_definition_key=process_definition_key,
+        ),
+    )
+
+    for pd in result.process_definitions:
+        print(f"Version {pd.process_definition_version}: {pd.outcome}")
+
+
+# endregion ResumeProcessDefinitions
+
+
 # region GetProcessDefinitionStatistics
 def get_process_definition_statistics_example(
     process_definition_key: ProcessDefinitionKey,
@@ -385,6 +431,28 @@ def search_variables_example() -> None:
 
 
 # endregion SearchVariables
+
+
+# region SearchVariableHistory
+def search_variable_history_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.search_variable_history(
+        data=VariableHistoryItemSearchQuery(
+            filter_=VariableHistoryItemSearchQueryFilter(
+                process_instance_key=process_instance_key,
+            ),
+            page=LimitBasedPagination(limit=20),
+        ),
+    )
+
+    for item in result.items:
+        print(f"{item.timestamp}: {item.name} = {item.value}")
+
+
+# endregion SearchVariableHistory
 
 
 # region SearchVariablesAsDto
