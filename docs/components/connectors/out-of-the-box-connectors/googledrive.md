@@ -2,98 +2,72 @@
 id: googledrive
 title: Google Drive connector
 sidebar_label: Google Drive
-description: Create folders or files from a Google Drive template from your BPMN process.
+description: Create folders, create files from a Google Docs template, and upload or download files on Google Drive from your BPMN process.
 ---
 
-The **Google Drive connector** is an outbound connector that allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
+
+Create folders, create files from a Google Docs template, and upload or download files on Google Drive from your BPMN process.
+
+## About this connector
+
+The Google Drive connector is an outbound connector that lets your process work with [Google Drive](https://drive.google.com/). Use it to create a folder, create a file from a Google Docs template and fill in the template variables, upload a file from process data, or download a file from Google Drive.
+
+For example, use this connector to generate a personalized letter from a template when an application is approved, and store it in a customer folder.
 
 ## Prerequisites
 
-To start working with the **Google Drive connector**, a relevant OAuth token must be configured and stored as a secret in your cluster. The token must have permission to read and create a folder and/or files from a desired Google Drive instance. Follow the steps from the [appendix](#appendix--faq) to find out more about creating an OAuth token and giving relevant permissions.
+The following prerequisites are required to use this connector:
 
-## Create a Google Drive connector task
+| Prerequisite                         | Description                                                                                                                                                                                                                          |
+| :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Google Drive API and Google Docs API | Enable both APIs for every client that uses the connector. You can do this on the [Google Cloud API Library](https://console.cloud.google.com/apis/library) page.                                                                    |
+| OAuth token                          | A bearer token, or a client ID, client secret, and refresh token. The token must have permission to read and create folders and files in the Google Drive you want to use. Store it as a secret in your cluster, not in the diagram. |
 
-Currently, the Google Drive connector supports two types of operations: create a folder and create a file from a template.
+For instructions to obtain a token, see [obtain an OAuth token](#obtain-an-oauth-token).
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+<OutboundConnectorBasics />
 
-<ConnectorTask/>
+## Configuration
 
-## Make your Google Drive connector executable
+### Authentication
 
-To make the **Google Drive connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
+Choose a reusable credential, or enter the authentication details in the task.
 
-### Create a new folder
+| Property          | Type          | Required    | Description                                                                                                                                                                                                                                                                                             | Example                            |
+| :---------------- | :------------ | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------- |
+| Google credential | Configuration | No          | A reusable Google credential. Available from Camunda 8.11. If you select a credential, its authentication details take precedence and the **Type** property and the properties that depend on it are hidden. See [using credentials](/components/connectors/use-connectors/index.md#using-credentials). |                                    |
+| Type              | Dropdown      | Conditional | The authentication method: **Bearer token** or **Refresh token** (default). Required if you do not select a **Google credential**.                                                                                                                                                                      | Refresh token                      |
+| Bearer token      | String        | Conditional | A valid Google API bearer token, which is short-lived. Shown when **Type** is **Bearer token**. Use a secret to avoid exposing the token.                                                                                                                                                               | `{{secrets.GOOGLE_BEARER_TOKEN}}`  |
+| Client ID         | String        | Conditional | The Google API client ID. Shown when **Type** is **Refresh token**.                                                                                                                                                                                                                                     |                                    |
+| Client secret     | String        | Conditional | The Google API client secret. Shown when **Type** is **Refresh token**. Use a secret to avoid exposing the value.                                                                                                                                                                                       | `{{secrets.GOOGLE_CLIENT_SECRET}}` |
+| Refresh token     | String        | Conditional | A valid Google API refresh token. Shown when **Type** is **Refresh token**. Use a secret to avoid exposing the value.                                                                                                                                                                                   | `{{secrets.GOOGLE_REFRESH_TOKEN}}` |
 
-To create a new folder, take the following steps:
+## Operations
 
-1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
-2. In the **Select Operation** section, set the field value **Operation Type** as **Create Folder**.
-3. In the **Operation Details** section, set the field **Folder name** as the desired name of a folder you wish to create. For example, `MyNewFolder`. Alternatively, you could use a FEEL expression.
-4. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new folder will be created. Keep in mind that if not specified, a new folder will be created in the Google Drive root folder of a user who owns the OAuth token.
-5. _(optional)_ In the **Operation Details** section, you can set the **Additional properties or metadata** field to Google Drive compatible properties. For example, _description_ of the folder. This property requires FEEL input. Check [the appendix](#what-are-the-limitations-of-the-additional-properties-or-metadata) for known values and limitations.
+Select the operation in the **Operation** dropdown of the **Select operation** section. The input parameters depend on the operation you select.
 
-### Create a new file from a template
+### Create folder
 
-To create a new file from a template, take the following steps:
+Create an empty folder on Google Drive. The connector uses the Google Drive [`Files:Create`](https://developers.google.com/drive/api/v3/reference/files/create) API endpoint.
 
-1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
-2. In the **Select Operation** section, set the field value **Operation Type** as **Create File from template**.
-3. In the **Operation Details** section, set the field **File name** as the desired name of a folder you wish to create. You can use FEEL expressions here.
-4. In the **Operation Details** section, set the field **Template ID** of the desired template.
-5. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new file will be created. Keep in mind that if not specified, a new folder will be created in the Google Drive root folder of a user who owns the OAuth token.
-6. In the **Operation Details** section, set the field **Template variables** as desired variables that will be applied to the template. The template variables are compatible with the Google Docs [Requests API](https://developers.google.com/docs/api/reference/rest/v1/documents/request). This property requires FEEL input.
-7. _(optional)_ In the **Operation Details** section, you can set the **Additional properties or metadata** field to Google Drive compatible properties. This property requires FEEL input. Check [the appendix](#what-are-the-limitations-of-the-additional-properties-or-metadata) for known values and limitations.
+#### Input parameters
 
-:::note
-Starting from version 8.7.0, the Google Drive connector supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
-:::
+| Property                          | Type   | Required | Description                                                                                                                                                                                                                              | Example                                        |
+| :-------------------------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
+| New resource name                 | String | Yes      | The name of the folder to create. Supports FEEL expressions.                                                                                                                                                                             | `MyNewFolder`                                  |
+| Parent folder ID                  | String | No       | The folder in which the new folder is created. If you leave it empty, the folder is created in the Google Drive root folder of the user who owns the token. See [where do I get a parent folder ID?](#where-do-i-get-a-parent-folder-id) | `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk` |
+| Additional properties or metadata | String | No       | Google Drive properties to set on the folder, for example a description. Requires a FEEL expression. See [additional properties and metadata](#additional-properties-and-metadata) for known values and limitations.                     | `= {"description": "myDescription"}`           |
 
-### Upload file
+#### Output
 
-To upload a file, take the following steps:
-
-1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
-2. In the **Select Operation** section, set the field value **Operation Type** to **Upload File**.
-3. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new file will be created. If not specified, a new folder is created in the Google Drive root folder of the user who owns the OAuth token.
-4. In the **Document** section, select a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL.
-
-:::note
-Use **inline content** to build a file directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
-
-To upload a **Camunda document**, it must exist first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example. The result of the endpoint must then be assigned to a variable in **Start Process instance** so you can use the variable in the **Document** field.
-:::
-
-### Download file
-
-To download a file, take the following steps:
-
-1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
-2. In the **Select Operation** section, set the field value **Operation Type** to **Download File**.
-3. In the **Operation Details** section, set the field _File ID_ to the google drive file that will be downloaded. For more information, refer to the [file id appendix](#Where-do-I-get-File-ID).
-4. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats) for the downloaded content: **Document reference** (default), **As text** (with an optional encoding, default UTF-8), or **As JSON**.
-
-## Google Drive connector response
-
-The following response types can be returned by the _Google Drive connector response_, depending on the **Operation Type** selected.
-
-### Response type for list of operations
-
-- **Create Folder**
-- **Create File from template**
-- **Upload File**
-
-The **Google Drive connector response** exposes the Google Drive API response as a local variable named "response".
-
-The following fields are available in the response variable:
+The connector exposes the Google Drive API response as a local variable named `response`. The following fields are available:
 
 - `googleDriveResourceId`: The ID of the newly created resource.
-- `googleDriveResourceUrl`: Human-readable URL of the newly created resource.
+- `googleDriveResourceUrl`: The human-readable URL of the newly created resource.
 
-You can use an output mapping to map the response:
-
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. For example:
+For example, use a **Result expression** to map the fields to process variables:
 
 ```
 = {
@@ -102,47 +76,110 @@ You can use an output mapping to map the response:
 }
 ```
 
-### Response type for _Download file_ operation only
+### Create file from template
 
-The response depends on the selected [return format](/components/document-handling/send-document-to-external-system.md#return-formats):
+Create a file by copying a Google Docs template and replacing the placeholders in it. The connector copies the template with the Google Drive [`Files:Copy`](https://developers.google.com/drive/api/v3/reference/files/copy) API endpoint. It then applies your template variables with the Google Docs [Merge](https://developers.google.com/docs/api/how-tos/merge) approach, using the [`Documents:BatchUpdate`](https://developers.google.com/docs/api/reference/rest/v1/documents/batchUpdate) API method.
+
+The connector supports only Google Docs files as templates (MIME type `application/vnd.google-apps.document`).
+
+#### Input parameters
+
+| Property           | Type   | Required | Description                                                                                                                                                                                                                                                                              | Example                                        |
+| :----------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
+| New resource name  | String | Yes      | The name of the file to create. Supports FEEL expressions.                                                                                                                                                                                                                               |                                                |
+| Parent folder ID   | String | No       | The folder in which the new file is created. If you leave it empty, the file is created in the Google Drive root folder of the user who owns the token. See [where do I get a parent folder ID?](#where-do-i-get-a-parent-folder-id)                                                     | `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk` |
+| Template ID        | String | Yes      | The ID of the Google Docs template to copy. See [where do I get a template ID?](#where-do-i-get-a-template-id)                                                                                                                                                                           | `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk` |
+| Template variables | String | No       | The requests that replace placeholders in the copied template. Must be compatible with the Google Docs [Requests API](https://developers.google.com/docs/api/reference/rest/v1/documents/request). Requires a FEEL expression. See the [template example](#example-of-a-valid-template). |                                                |
+
+#### Output
+
+The connector exposes the Google Drive API response as a local variable named `response`. The following fields are available:
+
+- `googleDriveResourceId`: The ID of the newly created resource.
+- `googleDriveResourceUrl`: The human-readable URL of the newly created resource.
+
+### Upload file
+
+Upload a file to Google Drive.
+
+#### Input parameters
+
+| Property         | Type     | Required | Description                                                                                                                                                                                                                          | Example                                        |
+| :--------------- | :------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
+| Parent folder ID | String   | No       | The folder in which the new file is created. If you leave it empty, the file is created in the Google Drive root folder of the user who owns the token. See [where do I get a parent folder ID?](#where-do-i-get-a-parent-folder-id) | `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk` |
+| Document source  | Dropdown | Yes      | Where the document to upload comes from. Defaults to **Camunda Document**. See [document sources](/components/document-handling/send-document-to-external-system.md#document-sources).                                               | Camunda Document                               |
+
+Select one of the following document sources, then complete the fields it reveals:
+
+| Document source      | Property         | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                    |
+| :------------------- | :--------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda Document** | Camunda document | String | Yes      | A reference to a document in the Camunda document store, as a FEEL expression. The document must exist first, for example [created using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx). Assign the result of the endpoint to a variable, then use that variable here. |
+| **Inline Content**   | Content          | String | Yes      | The content to upload, built from process data. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).                                                                                                                                                                                    |
+| **Inline Content**   | File name        | String | No       | The name of the file to create.                                                                                                                                                                                                                                                                                                                |
+| **Inline Content**   | Content type     | String | No       | The content type of the file.                                                                                                                                                                                                                                                                                                                  |
+| **From URL**         | URL              | String | Yes      | The URL to fetch the document from.                                                                                                                                                                                                                                                                                                            |
+| **From URL**         | File name        | String | No       | The name of the file to create.                                                                                                                                                                                                                                                                                                                |
+
+:::note
+Use **Inline Content** to build a file directly from process variables without first storing it in the Camunda document store.
+:::
+
+#### Output
+
+The connector exposes the Google Drive API response as a local variable named `response`. The following fields are available:
+
+- `googleDriveResourceId`: The ID of the newly created resource.
+- `googleDriveResourceUrl`: The human-readable URL of the newly created resource.
+
+### Download file
+
+Download a file from Google Drive.
+
+#### Input parameters
+
+| Property        | Type     | Required | Description                                                                                                                                                                                                    | Example                             |
+| :-------------- | :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------- |
+| File ID         | String   | Yes      | The ID of the Google Drive file to download. See [where do I get a file ID?](#where-do-i-get-a-file-id)                                                                                                        | `1y1td3iIKWOh88gK4hVevGM1WnX7tibCW` |
+| Response format | Dropdown | Yes      | How the downloaded content is returned: **Document reference** (default), **as text**, or **as JSON**. See [return formats](/components/document-handling/send-document-to-external-system.md#return-formats). | Document reference                  |
+| Encoding        | String   | No       | The character set used to decode the content. Shown only when **Response format** is **as text**. Defaults to `UTF-8`.                                                                                         | `UTF-8`                             |
+
+#### Output
+
+The response depends on the selected **Response format**:
 
 - **Document reference** (default) returns a document created in the Camunda document store, identical to the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx). For example:
 
-```
-{
+  ```json
+  {
     "camunda.document.type": "camunda",
     "storeId": "in-memory",
     "documentId": "c3c8e499-321d-421c-afa2-4632d2f5ce48",
     "metadata": {
-        "contentType": "image/png",
-        "fileName": "file name",
-        "size": 66497,
-        "customProperties": {}
+      "contentType": "image/png",
+      "fileName": "file name",
+      "size": 66497,
+      "customProperties": {}
     }
-}
-```
+  }
+  ```
 
-- **As text** returns the content decoded as a string, and **As JSON** returns it parsed as JSON. Both are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large files.
+- **as text** returns the content decoded as a string, and **as JSON** returns it parsed as JSON. Both are subject to a size guard (approximately 1.5 MiB). Use **Document reference** for large files.
 
-## Appendix & FAQ
+<ErrorHandling />
 
-### What Google API does the Google Drive connector use to create a folder?
+### Google API errors
 
-The **Google Drive connector** uses the Google Drive [`Files:Create`](https://developers.google.com/drive/api/v3/reference/files/create) API endpoint.
+When a Google API request fails, the connector throws an error with the HTTP status code returned by Google as the error code. The message has the form `Google API request failed: <status code> <reason>`, where the reason comes from Google. Use the [error expression](/components/connectors/use-connectors/index.md#error-expression) to handle specific status codes.
 
-### What Google API does the Google Drive connector use to create a file from template?
+## Appendix and FAQ
 
-The **Google Drive connector** uses the Google Drive [`Files:Copy`](https://developers.google.com/drive/api/v3/reference/files/copy) API endpoint to copy an original template. Afterwards, the **Google Drive connector** utilizes Google Docs [Merge](https://developers.google.com/docs/api/how-tos/merge) approach via [`Documents:BatchUpdate`](https://developers.google.com/docs/api/reference/rest/v1/documents/batchUpdate) Google Docs API method.
+### Obtain an OAuth token
 
-### How can I authenticate my connector?
+The connector supports two methods for authentication and authorization: a short-lived JWT bearer token, or a refresh token.
 
-The **Google Drive connector** currently supports two methods for authentication and authorization: based on short-lived JWT bearer token, and based on refresh token.
+Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) for up-to-date instructions, or use the following examples.
 
-Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or refer to the examples below.
-
-You also enable _Google Docs API_ and _Google Drive API_ for every client intended to use. You can do this at the [Google Cloud API Library](https://console.cloud.google.com/apis/library) page.
-
-#### Example 1: Obtaining JWT bearer token with a service account
+#### Example 1: Obtain a JWT bearer token with a service account
 
 :::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -155,7 +192,7 @@ Assuming you have created a service account and downloaded a JSON file with keys
 import google.auth
 import google.auth.transport.requests
 from google.oauth2 import service_account
-# Scopes required to execute 'create' endpoind with Google Drive API
+# Scopes required to execute 'create' endpoint with Google Drive API
 SCOPES = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive.appdata']
 # File with keys
 SERVICE_ACCOUNT_FILE = 'google-service-account-creds.json'
@@ -166,9 +203,9 @@ credentials.refresh(auth_req)
 print(credentials.token)
 ```
 
-When using shared drives, you must use an Oauth client instead of a service account. The service account does not have access to shared drives.
+When using shared drives, you must use an OAuth client instead of a service account. The service account does not have access to shared drives.
 
-#### Example 2: Obtaining bearer and refresh tokens with OAuth client
+#### Example 2: Obtain a refresh token with an OAuth client
 
 :::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -195,20 +232,18 @@ if __name__ == "__main__":
 
 ### Where do I get a parent folder ID?
 
-To find the Parent Folder ID for a Google Drive folder, follow these steps:
+To find the ID of a Google Drive folder:
 
 1. Open the Google Drive folder in your web browser.
-2. Look at the URL in the address bar, which will look something like this:
+2. Look at the URL in the address bar, which looks similar to the following:
    ```
    https://docs.google.com/drive/folder/1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk
    ```
-3. The Parent Folder ID is the alphanumeric string after `/folders/`, which in this case is `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
+3. The parent folder ID is the alphanumeric string after `/folders/`, in this case `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
 
-### How do I set additional properties or metadata?
+### Additional properties and metadata
 
-You can set any property from the Google Drive [Create API](https://developers.google.com/drive/api/v3/reference/files/create).
-
-For example:
+**Create folder** accepts additional properties and metadata. You can set any property from the Google Drive [Create API](https://developers.google.com/drive/api/v3/reference/files/create). For example:
 
 ```
 = {
@@ -216,25 +251,23 @@ For example:
 }
 ```
 
-The unknown or mistyped properties will be ignored.
-
-### What are the limitations of the additional properties or metadata?
+Unknown or mistyped properties are ignored.
 
 Some properties are applicable only for the token owners, like `folderColorRgb` and `starred`.
 
-### Where do I get Template ID?
+### Where do I get a template ID?
 
-To find the Template ID for a Google Docs template, follow these steps:
+To find the ID of a Google Docs template:
 
-1. Open the link to the Google Docs template in your web browser. The URL will look something like this:
+1. Open the link to the Google Docs template in your web browser. The URL looks similar to the following:
    ```
    https://docs.google.com/document/d/1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk
    ```
-2. The Template ID is the alphanumeric string after `/d/`, which in this case is `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
+2. The template ID is the alphanumeric string after `/d/`, in this case `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
 
-### Can you show me an example of a valid template?
+### Example of a valid template
 
-Certainly! Here is an example of a valid template:
+The following is an example of a valid Google Docs template:
 
 ```text
         {{CompanyName}} confidential.
@@ -253,7 +286,7 @@ Sincerely,
 
 ```
 
-Now, in the **Template variables** field we can apply the following FEEL JSON object which must be compatible with the Google Docs Requests API:
+In the **Template variables** field, use the following FEEL expression. It must be compatible with the Google Docs Requests API:
 
 ```
 = {
@@ -328,7 +361,7 @@ Now, in the **Template variables** field we can apply the following FEEL JSON ob
 The result should be as follows:
 
 ```text
-        Good Company inc. confidential.
+        Good Company Inc. confidential.
 2022-08-10
 
 John W. Doe
@@ -344,20 +377,16 @@ Jane T. Doe, Executive Director
 
 ```
 
-### Where do I get File ID?
+### Where do I get a file ID?
 
-To find the File ID for a Google file, follow these steps:
+To find the ID of a Google Drive file:
 
-1. Select the desired file on your Google Drive, click on the three horizontal dots to the right of the file name.
-2. Click on the share section.
-3. Click on copy link. The URL will look something like the following:
+1. Select the file on your Google Drive, and click the three horizontal dots to the right of the file name.
+2. Click **Share**.
+3. Click **Copy link**. The URL looks similar to the following:
 
 ```
 https://drive.google.com/file/d/1y1td3iIKWOh88gK4hVevGM1WnX7tibCW/view
 ```
 
-4. The File ID is the alphanumeric string after `/d/`. In this example, this would be `1y1td3iIKWOh88gK4hVevGM1WnX7tibCW`.
-
-### What kind of templates are currently supported?
-
-The **Google Drive connector** currently supports only Google Doc files (MIME type `application/vnd.google-apps.document`).
+4. The file ID is the alphanumeric string after `/d/`, in this case `1y1td3iIKWOh88gK4hVevGM1WnX7tibCW`.
