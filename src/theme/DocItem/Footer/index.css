@@ -10,7 +10,7 @@
   text-align: right;
 }
 
-/* ── Page action buttons (Copy link + Edit this page) ─────────────────────── */
+/* ── Page action buttons (Edit this page, Copy page menu) ─────────────────────── */
 
 .doc-page-actions {
   display: flex;
@@ -53,40 +53,15 @@
   border-color: var(--ifm-color-emphasis-400);
 }
 
-/* ── Copy link dropdown ───────────────────────────────────────────────────── */
-
-.doc-page-action__dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.doc-page-action__menu {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 0.35rem);
-  z-index: 50;
-  min-width: 24rem;
-  max-width: 32rem;
-  margin: 0;
-  padding: 0.25rem 0;
-  list-style: none;
-  background: var(--ifm-background-surface-color, var(--ifm-background-color));
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.15);
-}
-
-.doc-page-action__menu li + li {
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-}
+/* ── Menu items (shared with the Copy page menu) ──────────────────────────── */
 
 .doc-page-action__menu-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
+  gap: 0.6rem;
   width: 100%;
   text-align: left;
-  padding: 0.65rem 0.85rem;
+  padding: 0.55rem 0.85rem;
   background: transparent;
   border: 0;
   font: inherit;
@@ -115,19 +90,19 @@
 .doc-page-action__menu-item-body {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.1rem;
   min-width: 0;
   flex: 1 1 auto;
 }
 
 .doc-page-action__menu-item-label {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ifm-color-emphasis-900);
 }
 
 .doc-page-action__menu-item-desc {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--ifm-color-emphasis-700);
   line-height: 1.35;
 }
