@@ -56,7 +56,7 @@ This High-Level Design describes how the following critical components interact 
 
 In addition to the general prerequisites outlined above, the following CLI tools are required for interacting with the clusters and deploying Camunda 8, these are the same CLI tools required as mentioned in the [OpenShift Guide](redhat-openshift.md#requirements):
 
-- [subctl](https://github.com/submariner-io/subctl) a CLI tool used to interact with [Submariner](https://submariner.io/).
+- [subctl](https://github.com/submariner-io/subctl) a CLI tool used to interact with [Submariner](https://submariner.io/). Use the `subctl` version that matches the Submariner version that ACM installs.
 
 ### OpenShift clusters
 
@@ -303,7 +303,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
 
 4. After deploying Submariner, check that the clusters can communicate with each other by using the `subctl` utility. Keep in mind that it might take several minutes before all status indicators turn green.
 
-   If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/) or execute the following commands:
+   The `subctl` version must match the Submariner version that ACM installs. A different version can fail, for example `subctl export service` with `the server could not find the requested resource`. The following script reads the Submariner version from the installed CSV of the `submariner` Subscription in `CLUSTER_0` and installs the same `subctl` version:
 
    ```bash reference
      https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/install-subctl.sh
