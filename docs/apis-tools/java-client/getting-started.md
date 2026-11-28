@@ -307,6 +307,8 @@ The client will automatically read the environment variables and configure the a
 
 Several identity providers, such as Keycloak, support client mTLS authentication as an alternative to `client_secret_basic`.
 
+This option uses a certificate to authenticate to your identity provider's token endpoint. To present a client certificate on the connection to the Orchestration Cluster itself, see [Connect with mutual TLS (mTLS)](./mtls.md).
+
 **Prerequisites**
 
 - Properly configured KeyStore and TrustStore
