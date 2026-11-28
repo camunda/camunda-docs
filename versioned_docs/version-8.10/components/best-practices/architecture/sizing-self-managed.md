@@ -275,6 +275,21 @@ By default, this data is stored in the following directories:
 Do not configure an exporter that does not advance its record position, such as the Debug Exporter. If you configure an exporter, monitor its availability and the health of its dependencies. An exporter that stops advancing prevents log truncation, causing data to accumulate on disk until the issue is resolved. See [effects on disk growth](#effects-on-disk-growth).
 :::
 
+#### Segment size and preallocation
+
+Keep the default segment size of 128 MB. A larger segment does not improve throughput. Segments can only be deleted in full, so larger segments mean each partition retains more of its event log on disk on every broker that hosts it.
+
+The cost of a larger segment depends on the preallocation strategy and the disk’s write speed, measured in bytes written per second:
+
+- **`FILL`:** The broker writes zeros throughout the new segment and flushes it before use. The time this takes increases with segment size and is limited by disk write speed. This write burst occurs only when a segment is allocated, so it is separate from the steady-state IOPS requirements described in [Disk IOPS](#disk-iops). On a slower disk, large segments cause long allocation pauses, resulting in slow commits, longer tail latency, and, in tests, lower throughput.
+- **`POSIX_OR_FILL`:** The broker reserves the segment using `fallocate` without writing data. Allocation is fast and does not depend on segment size or disk write speed. The broker falls back to `FILL` if the file system does not support `fallocate`.
+
+`POSIX_OR_FILL` is the default. Configure the strategy using `camunda.cluster.raft.segment-preallocation-strategy` (`CAMUNDA_CLUSTER_RAFT_SEGMENTPREALLOCATIONSTRATEGY`).
+
+Neither strategy is better in every situation. `fallocate` avoids the cost of zero-filling in many setups, but on some combinations of file system and volume type, such as `ext4` on network-attached cloud volumes, it has been observed to increase flush, commit, and processing latency.
+
+Compare both strategies under a representative load on your platform and volume type before changing the default. Change one broker first, and monitor segment allocation time, flush time, and commit latency.
+
 ### Event log
 
 The event log for each partition is segmented. By default, the segment size is 128 MB. The event log grows over time unless and until individual segments are deleted.
