@@ -47,6 +47,13 @@
       "description": "Properties for identity settings."
     },
     {
+      "name": "camunda.client.mtls",
+      "type": "io.camunda.client.spring.properties.CamundaClientMtlsProperties",
+      "description": "Mutual TLS (mTLS) material for the cluster connection (gRPC and REST), independent of the OAuth token endpoint keystore.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "sourceMethod": "getMtls()"
+    },
+    {
       "name": "camunda.client.worker",
       "type": "io.camunda.client.spring.properties.CamundaClientWorkerProperties",
       "description": "Properties for the job workers being registered to the Camunda client.",
@@ -419,7 +426,7 @@
     {
       "name": "camunda.client.max-message-size",
       "type": "org.springframework.util.unit.DataSize",
-      "description": "A custom <code>maxMessageSize<\/code> sets the maximum inbound message size the client can receive from Camunda. It specifies the <code>maxInboundMessageSize<\/code> of the gRPC channel.",
+      "description": "A custom <code>maxMessageSize<\/code> sets the maximum inbound message size the client can receive from Camunda. It specifies the <code>maxInboundMessageSize<\/code> of the gRPC channel. For document downloads, it is the size of the buffer that holds the content until the application reads it, not a limit on the document size. The buffer can grow larger if the application reads more slowly than the network delivers the content.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "5MB"
     },
@@ -442,6 +449,78 @@
       "type": "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode",
       "description": "The client mode to use. If not set, <code>saas<\/code> mode is detected based on the presence of a <code>camunda.client.cloud.cluster-id<\/code>.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
+    },
+    {
+      "name": "camunda.client.mtls.ca",
+      "type": "java.lang.String",
+      "description": "The PEM encoded CA bundle, inline. Alternative to <code>ca-path<\/code>.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.ca-path",
+      "type": "java.lang.String",
+      "description": "The path to a PEM CA bundle used to verify the cluster's server certificate. Mutually exclusive with <code>camunda.client.ca-certificate-path<\/code> and <code>truststore-path <\/code>.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.cert",
+      "type": "java.lang.String",
+      "description": "The PEM encoded client certificate chain, inline. Alternative to <code>cert-path<\/code>.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.cert-path",
+      "type": "java.lang.String",
+      "description": "The path to the PEM file with the client certificate chain used for mutual TLS against the cluster.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.key",
+      "type": "java.lang.String",
+      "description": "The PEM encoded client private key, inline. Alternative to <code>key-path<\/code>.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.key-passphrase",
+      "type": "java.lang.String",
+      "description": "The optional passphrase of an encrypted client private key.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.key-path",
+      "type": "java.lang.String",
+      "description": "The path to the PEM file with the client private key (PKCS#8 encrypted or not, PKCS#1, or EC).",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.keystore-key-password",
+      "type": "java.lang.String",
+      "description": "The password of the private key entry in the mTLS keystore. Defaults to the keystore password.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.keystore-password",
+      "type": "java.lang.String",
+      "description": "The password of the mTLS keystore.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.keystore-path",
+      "type": "java.lang.String",
+      "description": "The path to a Java keystore (PKCS#12 or JKS, selected by file extension) holding the client identity. Mutually exclusive with the PEM identity (<code>cert-path<\/code>\/<code>cert<\/code> and <code>key-path<\/code>\/<code>key<\/code>).",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.truststore-password",
+      "type": "java.lang.String",
+      "description": "The password of the mTLS truststore.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
+    },
+    {
+      "name": "camunda.client.mtls.truststore-path",
+      "type": "java.lang.String",
+      "description": "The path to a Java truststore (PKCS#12 or JKS, selected by file extension) with the CA certificates used to verify the cluster's server certificate.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientMtlsProperties"
     },
     {
       "name": "camunda.client.override-authority",
