@@ -55,6 +55,7 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 
 # Short URLs
 
+https://docs.camunda.io/p/accessing-swagger-ui
 https://docs.camunda.io/p/administration-api-authentication
 https://docs.camunda.io/p/available-connectors
 https://docs.camunda.io/p/cluster-auto-pause
@@ -65,6 +66,7 @@ https://docs.camunda.io/p/get-started-with-test-mode
 https://docs.camunda.io/p/hub-api-saas
 https://docs.camunda.io/p/hub-api-sm
 https://docs.camunda.io/p/introduction-to-connectors
+https://docs.camunda.io/p/manage-api-clients
 https://docs.camunda.io/p/manage-secrets-saas
 https://docs.camunda.io/p/modeling-guidance-feel
 https://docs.camunda.io/p/optimize-api-authentication
@@ -76,6 +78,7 @@ https://docs.camunda.io/p/test-cases
 https://docs.camunda.io/p/test-files
 https://docs.camunda.io/p/test-your-process
 https://docs.camunda.io/p/using-secrets-in-connectors
+https://docs.camunda.io/p/working-with-apis-tools
 https://docs.camunda.io/p/zeebe-api-authentication
 
 # Full paths

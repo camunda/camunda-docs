@@ -83,6 +83,7 @@ RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 # and print. Don't remove them or point them at unrelated content.
 #---------------------------------------------------------------------------------
 
+RewriteRule ^p/accessing-swagger-ui/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger/#accessing-swagger-ui [R=301,NE,L]
 RewriteRule ^p/administration-api-authentication/?$ /docs/apis-tools/administration-api/authentication/ [R=301,NE,L]
 RewriteRule ^p/available-connectors/?$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,NE,L]
 RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
@@ -93,6 +94,7 @@ RewriteRule ^p/get-started-with-test-mode/?$ /docs/components/hub/workspace/mode
 RewriteRule ^p/hub-api-saas/?$ /docs/apis-tools/hub-api-saas/overview/ [R=301,NE,L]
 RewriteRule ^p/hub-api-sm/?$ /docs/apis-tools/hub-api-sm/overview/ [R=301,NE,L]
 RewriteRule ^p/introduction-to-connectors/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,NE,L]
+RewriteRule ^p/manage-api-clients/?$ /docs/components/saas/clusters/manage-api-clients/ [R=301,NE,L]
 RewriteRule ^p/manage-secrets-saas/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,NE,L]
 RewriteRule ^p/modeling-guidance-feel/?$ /docs/components/modeler/reference/modeling-guidance/rules/feel/ [R=301,NE,L]
 RewriteRule ^p/optimize-api-authentication/?$ /docs/apis-tools/optimize-api/optimize-api-authentication/ [R=301,NE,L]
@@ -104,6 +106,7 @@ RewriteRule ^p/test-cases/?$ /docs/components/hub/workspace/modeler/validation/t
 RewriteRule ^p/test-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,NE,L]
 RewriteRule ^p/test-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,NE,L]
 RewriteRule ^p/using-secrets-in-connectors/?$ /docs/components/connectors/use-connectors/#using-secrets [R=301,NE,L]
+RewriteRule ^p/working-with-apis-tools/?$ /docs/apis-tools/working-with-apis-tools/ [R=301,NE,L]
 RewriteRule ^p/zeebe-api-authentication/?$ /docs/apis-tools/zeebe-api/zeebe-api-authentication/ [R=301,NE,L]
 
 ##################################################################################
