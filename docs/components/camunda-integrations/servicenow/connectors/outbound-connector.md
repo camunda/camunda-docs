@@ -33,6 +33,14 @@ In Camunda Hub or Desktop Modeler, select **ServiceNow Outbound Connector** from
 | Sys ID           | Required for `Update` and `Delete` operations to identify the target record.                            |
 | Authentication   | ServiceNow credentials (username and password).                                                         |
 
+:::note
+ServiceNow treats everything after an operator (`=`, `!=`, `LIKE`, `NOT LIKE`, `STARTSWITH`, `ENDSWITH`) as part of the value, including a leading space. The connector sends the **Query parameters** value to ServiceNow exactly as you type it, so `short_description=Test` matches "Test", and `short_description= Test` matches " Test".
+
+A space directly after one of these operators therefore changes what the query matches.
+
+Spaces before an operator and around `^` do not change the result.
+:::
+
 :::tip
 Store ServiceNow credentials securely as [secrets](/components/saas/clusters/manage-secrets.md) and reference them in the connector configuration (for example, `{{secrets.snUser}}` and `{{secrets.snPwd}}`).
 :::
