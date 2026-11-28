@@ -15,7 +15,9 @@ keywords:
   ]
 ---
 
-Frequently asked questions and troubleshooting guidance for encryption at rest, encryption key types, and external AWS KMS encryption keys in Camunda 8 SaaS.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## General questions
 

@@ -5,9 +5,15 @@ sidebar_label: Status and updates
 description: "Camunda 8 SaaS is a hosted service for the Camunda 8 stack that runs on the Google Cloud Platform (GCP)."
 ---
 
-Camunda 8 SaaS is a hosted service for the Camunda 8 stack that runs on the Google Cloud Platform (GCP). Like any service, it might occasionally undergo availability changes. When availability changes, Camunda makes sure to provide you with a current service status.
+import PageDescription from '@site/src/components/PageDescription';
 
-To see current and past service availability, visit [Camunda 8 SaaS Status](https://status.camunda.io).
+<PageDescription />
+
+## About
+
+Camunda 8 SaaS can occasionally experience availability changes. When availability changes, Camunda provides you with current and past service status and availability.
+
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Build with AI" href="https://status.camunda.io" style={{marginBottom: '30px', marginTop: '20px'}}>Camunda 8 SaaS Status</a>
 
 ## Subscribe to updates
 

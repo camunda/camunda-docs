@@ -4,7 +4,9 @@ title: Troubleshoot clusters
 description: "Review common issues and how to resolve them."
 ---
 
-Review common issues and how to resolve them.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::note
 This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).

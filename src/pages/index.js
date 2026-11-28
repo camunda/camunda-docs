@@ -6,6 +6,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 import AlgoliaSearchBox from "@theme/SearchBar";
+import { currentVersion } from "../versions";
 import iconBuildWithAi from "../../docs/components/assets/icon-agentic.png";
 
 const features = [
@@ -30,6 +31,13 @@ const features = [
       "Learn how to use Camunda 8 components, features, and integrations.",
   },
   {
+    title: "SaaS",
+    imageUrl: "img/home-saas.svg",
+    url: "/docs/components/saas/",
+    description:
+      "Run Camunda 8 as a fully managed service and manage clusters, security, and data.",
+  },
+  {
     title: "Self-Managed",
     imageUrl: "img/home-self-managed.png",
     url: "/docs/self-managed/about-self-managed/",
@@ -48,7 +56,20 @@ const features = [
     imageUrl: "img/home-reference.png",
     url: "/docs/reference/",
     description:
-      "Release notes, announcements, supported environments, licenses, and more.",
+      "Glossary, supported environments, licenses, and technical reference.",
+  },
+  {
+    title: "Release information",
+    imageUrl: "img/home-release.svg",
+    url: "/docs/reference/announcements-release-notes/overview/",
+    description: `Release notes, announcements, and what's new in Camunda ${currentVersion}.`,
+  },
+  {
+    title: "Build with Camunda",
+    imageUrl: "img/home-build.svg",
+    url: "/build-with-camunda",
+    description:
+      "Try Camunda 8 for free with a SaaS trial, or run it locally in minutes.",
   },
 ];
 
