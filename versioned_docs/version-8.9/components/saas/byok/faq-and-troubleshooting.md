@@ -75,7 +75,7 @@ Setup instructions: [external encryption setup guide](/components/saas/byok/aws-
 | Key rotation issues               | Cluster encryption update not supported                       | Create a new key and associate it with a new cluster. Verify encryption settings before use.                                                                                                |
 
 :::note
-For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/saas/byok/key-state-behavior.md).
+Console shows the status of each external key on the **Encryption at rest** tab. For what each status means and what to do, see [key statuses](/components/saas/byok/key-state-behavior.md#key-statuses). For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/saas/byok/key-state-behavior.md).
 :::
 
 :::note Support
