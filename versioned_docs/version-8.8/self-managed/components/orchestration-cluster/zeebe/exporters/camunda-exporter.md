@@ -21,21 +21,20 @@ When exporting, indexes are created as required and not recreated if they alread
 Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
 :::info Helm values mapping
-The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.
+The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys. For example, set history rollover using the Helm value `orchestration.history.rolloverInterval`.
+:::
 
-In Helm, configure these as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
+The Helm chart has values for some history and retention options. Each tab below names them. For options without a Helm value, configure them in Helm as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
 
-For example, set history rollover using:
+Set these options as exporter arguments with the application property prefix `zeebe.broker.exporters.camundaexporter.args.`. The `camunda.data.secondary-storage.*` properties do not include these options in Camunda 8.8. The exception is `history.processInstanceEnabled`, described in the **History** tab.
 
-- `camunda.data.secondary-storage.elasticsearch.history.rollover-interval`
-- `camunda.data.secondary-storage.opensearch.history.rollover-interval`
-  :::
+If no other configuration defines the Camunda Exporter, also set `zeebe.broker.exporters.camundaexporter.className: io.camunda.exporter.CamundaExporter`. The Helm chart sets it. Without the class name, the broker cannot load the exporter.
 
 You can also configure the following properties using exporter `args`:
 
 ```yaml
 zeebe:
-  brokers:
+  broker:
     exporters:
       # Camunda Exporter ----------
       # An example configuration for the camunda exporter:
@@ -45,6 +44,7 @@ zeebe:
       # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
       #
       camundaexporter:
+        className: io.camunda.exporter.CamundaExporter
         args:
 ```
 
@@ -63,8 +63,7 @@ values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' }
 
 <TabItem value="connect">
 
-Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+No Helm value. Application property prefix for these options: `zeebe.broker.exporters.camundaexporter.args.connect.`
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
@@ -78,6 +77,8 @@ versions of Elasticsearch and/or OpenSearch are supported in a Camunda 8 Self-Ma
 | connectTimeout | Determines the timeout in milliseconds until a connection is established.                                                     |                             |
 
 :::note
+To use AWS credentials, set `zeebe.broker.exporters.camundaexporter.args.connect.awsEnabled: true` and `camunda.database.aws-enabled: true`. In Helm, `global.opensearch.aws.enabled` sets both.
+
 If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/auth/credentials/DefaultCredentialsProvider.html) is used for authentication. For more details on configuring credentials, refer to the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html#credentials-default).
 :::
 
@@ -85,8 +86,11 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="index">
 
-Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+Application property prefix for these options: `zeebe.broker.exporters.camundaexporter.args.index.`
+
+:::note
+In Camunda 8.8, the schema manager creates the indices from `camunda.database.index.*`. The exporter options `numberOfShards`, `numberOfReplicas`, `shardsByIndexName`, and `replicasByIndexName` do not change the indices. Set `camunda.database.index.<option>` instead. In Helm, set the replica count with `orchestration.index.replicas`.
+:::
 
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -100,8 +104,7 @@ Helm property path prefix for these options:
 
 <TabItem value="bulk">
 
-Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.bulk.`
+No Helm value. Application property prefix for these options: `zeebe.broker.exporters.camundaexporter.args.bulk.`
 
 To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
@@ -122,8 +125,10 @@ With the default configuration, the exporter will aggregate records and flush th
 
 <TabItem value="retention">
 
-Helm property path prefix for these options:
-`camunda.data.secondary-storage.retention.`
+- Helm values: `orchestration.history.retention.<option>` (`enabled`, `minimumAge`, `policyName`, `usageMetricsMinimumAge`, `usageMetricsPolicyName`).
+- Application property prefix: `zeebe.broker.exporters.camundaexporter.args.history.retention.`
+
+The schema manager creates the ILM policies from `camunda.database.retention.*`, and the exporter applies them. Without Helm, set both property groups with the same values. The Helm values set both.
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
@@ -147,11 +152,12 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 
 <TabItem value="history">
 
-Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.`
+- Helm values: `orchestration.history.<option>` (`elsRolloverDateFormat`, `rolloverInterval`, `rolloverBatchSize`, `waitPeriodBeforeArchiving`, `delayBetweenRuns`, `maxDelayBetweenRuns`).
+- Application property prefix for other options: `zeebe.broker.exporters.camundaexporter.args.history.`
 
-For example, `rolloverInterval` maps to:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.rollover-interval`.
+For example, `rolloverInterval` maps to the Helm value `orchestration.history.rolloverInterval`.
+
+Exception: set `processInstanceEnabled` with `camunda.data.secondary-storage.{elasticsearch|opensearch}.history.process-instance-enabled`. If you also set the exporter argument, both values must match, or the Orchestration Cluster does not start.
 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
@@ -174,7 +180,7 @@ indices. The history can be configured as follows:
 
 <TabItem value="tasklist">
 
-Helm property path prefix for this Tasklist-specific export option: `camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+No Helm value. Application property prefix for this Tasklist-specific export option: `zeebe.broker.exporters.camundaexporter.args.`
 
 | Option                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   | Default |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -188,8 +194,7 @@ When `skipVariableWriteWithoutUserTasks` is enabled, task variable data is not e
 
 <TabItem value="other">
 
-Helm property path prefix for these options:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.batch-operations.`
+No Helm value. Application property prefix for these options: `zeebe.broker.exporters.camundaexporter.args.`
 
 Other miscellaneous properties:
 
