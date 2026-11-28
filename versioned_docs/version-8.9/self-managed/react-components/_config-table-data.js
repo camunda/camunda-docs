@@ -1479,6 +1479,42 @@ export const configs = [
     types: ["New"],
     area: ["Data"],
   },
+  {
+    name: "camunda.data.secondary-storage.rdbms.exporter-connection-pool",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.exporter-connection-pool.maximum-pool-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.exporter-connection-pool.minimum-idle",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.exporter-connection-pool.idle-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.exporter-connection-pool.max-lifetime",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.exporter-connection-pool.connection-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
   // Section: Data - Primary storage
   {
     name: "camunda.data.primary-storage.backup.store",

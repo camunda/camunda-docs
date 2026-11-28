@@ -107,6 +107,8 @@ export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MAXLIFETIME=1800000
 export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_CONNECTIONTIMEOUT=30000
 ```
 
+The RDBMS exporter has its own pool, tuned with the same variables under `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_EXPORTERCONNECTIONPOOL_*`. See [exporter connection pool](/self-managed/concepts/databases/relational-db/configuration.md#exporter-connection-pool).
+
 ### Database tuning
 
 Consult your database vendor's guides:
