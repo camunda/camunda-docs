@@ -51,6 +51,8 @@ CAMUNDA_MTLS_KEY_PATH=/path/to/client.key
 
 Inline PEM values (`CAMUNDA_MTLS_CERT`, `CAMUNDA_MTLS_KEY`, `CAMUNDA_MTLS_CA`) take precedence over their `_PATH` counterparts. TLS is applied to all outbound calls, including OAuth token requests.
 
+Certificates are read once per client, not per request: the API connection reads them when the client is created, and the OAuth token connection reads them the first time a token is fetched and then reuses that connection. After rotating a certificate or key on disk, create a new client (and dispose the old one) to pick it up.
+
 No code changes are needed — the SDK picks up TLS configuration from environment variables automatically:
 
 <!-- snippet-exempt: trivial env-var usage illustration -->

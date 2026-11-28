@@ -34,12 +34,14 @@ Strongly-typed domain key types provide compile-time safety for entity identifie
 | `LongKey`                       | Zeebe Engine resource key (Java long serialized as string)                                                                                                                                                                     |
 | `MessageKey`                    | System-generated key for an message.                                                                                                                                                                                           |
 | `MessageSubscriptionKey`        | System-generated key for a message subscription.                                                                                                                                                                               |
+| `ProbeKey`                      | System-generated key for a probe.                                                                                                                                                                                              |
 | `ProcessDefinitionKey`          | System-generated key for a deployed process definition.                                                                                                                                                                        |
 | `ProcessInstanceKey`            | System-generated key for a process instance.                                                                                                                                                                                   |
 | `ResourceKey`                   | The system-assigned key for this resource.                                                                                                                                                                                     |
 | `ScopeKey`                      | System-generated key for a scope. A scope can hold variables and represents either an element instance in a BPMN process or the process instance itself.                                                                       |
 | `SignalKey`                     | System-generated key for an signal.                                                                                                                                                                                            |
 | `UserTaskKey`                   | System-generated key for a user task.                                                                                                                                                                                          |
+| `VariableHistoryItemKey`        | System-generated key for a variable history item.                                                                                                                                                                              |
 | `VariableKey`                   | System-generated key for a variable.                                                                                                                                                                                           |
 
 ## Common Methods
@@ -223,6 +225,14 @@ System-generated key for a message subscription.
 public readonly record struct MessageSubscriptionKey : ICamundaKey, IEquatable<MessageSubscriptionKey>
 ```
 
+### ProbeKey
+
+System-generated key for a probe.
+
+```csharp
+public readonly record struct ProbeKey : ICamundaKey, IEquatable<ProbeKey>
+```
+
 ### ProcessDefinitionKey
 
 System-generated key for a deployed process definition.
@@ -269,6 +279,14 @@ System-generated key for a user task.
 
 ```csharp
 public readonly record struct UserTaskKey : ICamundaKey, IEquatable<UserTaskKey>
+```
+
+### VariableHistoryItemKey
+
+System-generated key for a variable history item.
+
+```csharp
+public readonly record struct VariableHistoryItemKey : ICamundaKey, IEquatable<VariableHistoryItemKey>
 ```
 
 ### VariableKey

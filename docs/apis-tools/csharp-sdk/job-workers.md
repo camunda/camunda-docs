@@ -67,6 +67,93 @@ throw new BpmnErrorException("INVALID_ORDER", "Order not found");
 throw new JobFailureException("Service unavailable", retries: 2, retryBackOffMs: 5000);
 ```
 
+## Job Variables Are Untrusted Input
+
+A job's `variables` and `customHeaders` are both **untrusted input**, but they come from different
+places, so they are untrusted for different reasons:
+
+- `variables` carry whatever was written into the process instance — by whoever started it, by an
+  earlier service task, or by a form submission. A handler must treat them the way it would treat
+  an HTTP request body, not the way it would treat its own configuration.
+- `customHeaders` are defined in the process model (during modelling), not written by process
+  starters, service tasks or forms. They are controlled by whoever can deploy or change the model.
+  That is a narrower group than the one that controls `variables`, but it is still not your
+  handler's own code, so validate them before you rely on them for anything sensitive.
+
+What the SDK does:
+
+- **Deserialization is explicit.** Variables reach the handler as `object` (a `JsonElement` at
+  runtime) and are only materialised when you ask for a type, via `job.GetVariables<T>()` or
+  `job.GetCustomHeaders<T>()`. There is no unrestricted type-name resolution: the payload cannot
+  name a type for the SDK to load and instantiate. `System.Text.Json` will dispatch to
+  polymorphic subtypes that _your own_ target type declares (`[JsonDerivedType]`), which is your
+  declaration rather than the payload's choice, and it will use converters you pass yourself.
+- **Two sets of `JsonSerializerOptions` are involved.** The client's options parse the activation
+  response and register a closed set — tolerant enums and the SDK's own key types.
+  `TypedVariables.DefaultOptions`, which `GetVariables<T>()` uses when you pass no options of your
+  own, registers no converters at all. Neither set does payload-driven type resolution.
+- **Depth is bounded, and the bound is on the whole response.** The SDK sets no `MaxDepth` of its
+  own, so the `System.Text.Json` default of **64** applies — to the activation response document
+  as a whole, not to the variable payload in isolation. The envelope around a job (response
+  object → `jobs` array → job object) consumes the first levels of that budget, so a variable
+  payload has the remainder. A response nested deeper fails with a `JsonException` during
+  activation, before the handler runs, rather than recursing without bound.
+- **The SDK does not log variable payloads.** The worker logs job keys, worker names and statuses.
+  There are indirect routes, though, and they differ by where the exception is raised:
+  - An exception that escapes your handler and is not one of the SDK's own control exceptions is
+    logged with its message and stack trace by the default logger, and its message is also sent to
+    the broker as that job's failure message. That includes the `JsonException` that
+    `job.GetVariables<T>()` throws, because you call it from the handler: on a payload that does
+    not fit `T`, its message and path can name payload properties.
+  - `JobFailureException` and `BpmnErrorException` are not logged by the worker, but their
+    messages are sent to the broker (as the failure message, or as the BPMN error message), so
+    they carry the same risk toward the broker. A handler cancelled by worker shutdown is
+    not reported to the broker, and only a debug line naming the job key is logged; the job is
+    left to time out.
+  - A failure while the activation response is parsed (for example, nesting beyond the depth
+    limit) happens before any handler exists. It is logged by the worker's poll loop, with the
+    exception, but it is not sent to the broker, because there is no job to fail yet. A single
+    job that cannot be converted after the response was parsed is logged at warning level with its
+    exception and skipped, and is likewise not reported to the broker.
+  - The exception to the poll-loop log is a parse failure on a lease token the worker asked for
+    (`WithLease`). It does not reach that log: it is replaced by a `LeaseNotHonoredException`
+    that faults the poll task, so it surfaces through the worker's `Completion` task (and
+    `RunWorkersAsync`). That exception names a placeholder job key and the `withLease` flag, not
+    payload content, and the original parse exception is not kept.
+
+  A variable value or property name that ends up in an exception message therefore reaches the
+  broker for handler exceptions, and the log for unexpected ones and activation failures (a
+  rejected lease token excepted, as above). Nothing redacts exception contents: keep variable
+  values out of the exception messages you throw.
+
+- **Each job's payload is its own.** Every activated job gets its own wrapper over its own result,
+  and `JsonElement` is immutable, so nothing is shared or mutated across concurrent handler tasks.
+
+What the SDK does **not** do — your handler owns these:
+
+- **No size limit.** There is no cap on the byte size of a variable payload, beyond the limits the
+  broker itself enforces. A large payload is deserialized as given.
+- **No schema validation.** The SDK checks the payload against no schema. `GetVariables<T>()` is
+  a `System.Text.Json` conversion, so what it does with a mismatched payload is `System.Text.Json`
+  behaviour. By default, for an ordinary DTO, properties that do not match `T` are ignored and
+  missing ones keep their initializer or default (`null` for reference types). Members marked
+  `required` or `[JsonRequired]` make an absent property throw a `JsonException`, and options you
+  pass yourself (for example `UnmappedMemberHandling = Disallow`) can reject unmatched properties.
+  Neither is a substitute for validating the values you depend on — ranges, formats, required
+  fields — in the handler.
+- **No sanitisation.** Strings arrive exactly as stored. Anything you pass onward to a shell, a
+  SQL statement, a file path or an HTML page needs the same escaping you would apply to any
+  external input.
+
+Note on depth: 64 is the `System.Text.Json` default rather than a limit this SDK declares. Treat
+it as the limit that applies today, not as a contract. Passing your own `JsonSerializerOptions`
+to `GetVariables<T>()` can only _tighten_ the bound on a job's variables: that element has already
+been parsed off the activation response, so a larger `MaxDepth` there cannot admit a payload the
+activation parse already rejected. The guarantee is qualified: it holds when no custom `MaxDepth`
+is given and the element came from the activation response. Custom options passed to
+`DeserializeAs` on an element that was parsed elsewhere can raise the limit, and an object that
+is already a typed DTO skips conversion, so no depth bound is applied to it.
+
 ## Job Corrections (User Task Listeners)
 
 When handling jobs from [user task listeners](../../components/concepts/user-task-listeners.md), you can return a `JobCompletionRequest` to apply corrections to the task or deny the action. Return a `JobCompletionRequest` from the handler instead of a plain variables object:
@@ -88,6 +175,28 @@ client.CreateJobWorker(config, async (job, ct) =>
                 Priority = 75,
                 CandidateGroups = new List<string> { "managers" },
             },
+        },
+    };
+});
+```
+
+`DueDate` and `FollowUpDate` are cleared with `ClearDueDate()` / `ClearFollowUpDate()`, which send an empty string. Leaving them `null` keeps the task's current value. Assigning the property after a clear replaces it, and the reverse is also true. The same methods exist on `Changeset` for `UpdateUserTaskAsync`:
+
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: JobCorrectionsClearDates -->
+
+```csharp
+client.CreateJobWorker(config, async (job, ct) =>
+{
+    return new JobCompletionRequest
+    {
+        Result = new JobResultUserTask
+        {
+            // Set the due date and remove the follow-up date. Leaving a date
+            // unset (null) keeps the task's current value.
+            Corrections = new JobResultCorrections
+            {
+                DueDate = DateTimeOffset.UtcNow.AddDays(7),
+            }.ClearFollowUpDate(),
         },
     };
 });

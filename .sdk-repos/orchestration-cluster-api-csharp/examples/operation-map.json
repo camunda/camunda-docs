@@ -340,6 +340,20 @@
       "label": "Get start process form"
     }
   ],
+  "suspendProcessDefinitions": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
+    }
+  ],
+  "resumeProcessDefinitions": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
+  ],
   "getFormByKey": [
     {
       "file": "Admin.cs",
@@ -532,6 +546,27 @@
       "file": "Job.cs",
       "region": "ActivateJobs",
       "label": "Activate and process jobs"
+    }
+  ],
+  "activateProbes": [
+    {
+      "file": "Probe.cs",
+      "region": "ActivateProbes",
+      "label": "Activate and process probes"
+    }
+  ],
+  "answerProbe": [
+    {
+      "file": "Probe.cs",
+      "region": "AnswerProbe",
+      "label": "Answer a probe"
+    }
+  ],
+  "createProbe": [
+    {
+      "file": "Probe.cs",
+      "region": "CreateProbe",
+      "label": "Create a probe"
     }
   ],
   "completeJob": [
@@ -1220,6 +1255,13 @@
       "label": "Get a variable"
     }
   ],
+  "searchVariableHistory": [
+    {
+      "file": "VariableElement.cs",
+      "region": "SearchVariableHistory",
+      "label": "Search variable history"
+    }
+  ],
   "searchVariables": [
     {
       "file": "VariableElement.cs",
@@ -1423,6 +1465,20 @@
       "label": "Check cluster status"
     }
   ],
+  "getClock": [
+    {
+      "file": "Admin.cs",
+      "region": "GetClock",
+      "label": "Read the cluster clock"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "Admin.cs",
+      "region": "AddClock",
+      "label": "Add time to the cluster clock"
+    }
+  ],
   "pinClock": [
     {
       "file": "Admin.cs",
@@ -1526,6 +1582,13 @@
       "file": "UserTask.cs",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "lookupUserTask": [
+    {
+      "file": "UserTask.cs",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
     }
   ],
   "resolveSecrets": [
