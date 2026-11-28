@@ -19,7 +19,8 @@ load spike:
 
 ```go
 // Transient failures (429, 502, 503, 504 and network errors) are retried with
-// exponential backoff and full jitter. Non-transient 4xx are never retried.
+// exponential backoff and full jitter. Non-transient 4xx are never retried, nor is a
+// 504 that reports a probe as over (WORKER_DID_NOT_ANSWER, SECRET_RESOLUTION_TIMEOUT).
 client, err := camunda.New(
 	camunda.WithRetry(camunda.RetryConfig{
 		MaxAttempts: 5,

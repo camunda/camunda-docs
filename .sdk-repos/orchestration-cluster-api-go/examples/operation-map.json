@@ -160,6 +160,20 @@
       "label": "Pin internal clock (alpha)"
     }
   ],
+  "getClock": [
+    {
+      "file": "clock.go",
+      "region": "GetClock",
+      "label": "Get internal clock (alpha)"
+    }
+  ],
+  "addClock": [
+    {
+      "file": "clock.go",
+      "region": "AddClock",
+      "label": "Add time to internal clock (alpha)"
+    }
+  ],
   "resetClock": [
     {
       "file": "clock.go",
@@ -797,6 +811,20 @@
       "label": "Get process definition XML"
     }
   ],
+  "suspendProcessDefinitions": [
+    {
+      "file": "process_definition.go",
+      "region": "SuspendProcessDefinitions",
+      "label": "Suspend process definitions"
+    }
+  ],
+  "resumeProcessDefinitions": [
+    {
+      "file": "process_definition.go",
+      "region": "ResumeProcessDefinitions",
+      "label": "Resume process definitions"
+    }
+  ],
   "getProcessDefinitionInstanceVersionStatistics": [
     {
       "file": "process_definition.go",
@@ -893,6 +921,27 @@
       "file": "secret.go",
       "region": "ListSecrets",
       "label": "List secret references"
+    }
+  ],
+  "createProbe": [
+    {
+      "file": "probe.go",
+      "region": "CreateProbe",
+      "label": "Create a probe"
+    }
+  ],
+  "activateProbes": [
+    {
+      "file": "probe.go",
+      "region": "ActivateProbes",
+      "label": "Activate probes"
+    }
+  ],
+  "answerProbe": [
+    {
+      "file": "probe.go",
+      "region": "AnswerProbe",
+      "label": "Answer a probe"
     }
   ],
   "searchProcessInstances": [
@@ -1441,6 +1490,13 @@
       "label": "Search user task effective variables"
     }
   ],
+  "lookupUserTask": [
+    {
+      "file": "user_task.go",
+      "region": "LookupUserTask",
+      "label": "Look up an active user task"
+    }
+  ],
   "getUserTaskForm": [
     {
       "file": "user_task.go",
@@ -1453,6 +1509,13 @@
       "file": "user_task.go",
       "region": "SearchUserTaskVariables",
       "label": "Search user task variables"
+    }
+  ],
+  "searchVariableHistory": [
+    {
+      "file": "variable.go",
+      "region": "SearchVariableHistory",
+      "label": "Search variable history"
     }
   ],
   "searchVariables": [

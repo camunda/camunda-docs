@@ -63,6 +63,8 @@ Every key type exposes the same surface, shown here for `AgentDefinitionKey`:
 | `MappingRuleId`                 | `string`   | Identifier for a mapping rule.                                                                                                                               |
 | `MessageKey`                    | `string`   | Identifier for a message.                                                                                                                                    |
 | `MessageSubscriptionKey`        | `string`   | Identifier for a message subscription.                                                                                                                       |
+| `ProbeId`                       | `string`   | Identifier for a probe.                                                                                                                                      |
+| `ProbeKey`                      | `string`   | Identifier for a probe.                                                                                                                                      |
 | `ProcessDefinitionId`           | `string`   | Identifier for a process definition.                                                                                                                         |
 | `ProcessDefinitionKey`          | `string`   | Identifier for a process definition.                                                                                                                         |
 | `ProcessInstanceKey`            | `string`   | Identifier for a process instance.                                                                                                                           |
@@ -75,6 +77,7 @@ Every key type exposes the same surface, shown here for `AgentDefinitionKey`:
 | `TenantId`                      | `string`   | Identifier for a tenant.                                                                                                                                     |
 | `UserTaskKey`                   | `string`   | Identifier for a user task.                                                                                                                                  |
 | `Username`                      | `string`   | Validated username value.                                                                                                                                    |
+| `VariableHistoryItemKey`        | `string`   | Identifier for a variable history item.                                                                                                                      |
 | `VariableKey`                   | `string`   | Identifier for a variable.                                                                                                                                   |
 
 Each key also has a matching `<Key>ExactMatch` wrapper used by the search filter models to express an exact-value match.

@@ -94,31 +94,38 @@ Config is the resolved SDK configuration.
 
 ### Fields
 
-| Field                 | Type                  | Description                                                                                                                                                                                                                                                                                                        |
-| --------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `RestAddress`         | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `GrpcAddress`         | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `ExactRestAddress`    | `bool`                | ExactRestAddress opts out of the automatic /v2 suffix normally appended to RestAddress (CAMUNDA_REST_ADDRESS_EXACT). When true, the SDK targets RestAddress exactly as provided — useful behind an API gateway / reverse proxy that mounts the REST API under a prefix that does not follow the .../v2 convention. |
-| `AuthStrategy`        | `AuthStrategy`        |                                                                                                                                                                                                                                                                                                                    |
-| `ClientID`            | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `ClientSecret`        | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `OAuthURL`            | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `TokenAudience`       | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `OAuthScope`          | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `OAuthCacheDir`       | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `BasicAuthUsername`   | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `BasicAuthPassword`   | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `DefaultTenantID`     | `string`              |                                                                                                                                                                                                                                                                                                                    |
-| `Falcon`              | `bool`                | Falcon enables the FALCON (nanobpmn command-stream) transport upgrade when the gateway advertises it (CAMUNDA_FALCON, default true). ForceREST forces the pure-REST path even when FALCON is advertised (CAMUNDA_FORCE_REST), e.g. where WebSockets are blocked. Use FalconEnabled for the resolved state.         |
-| `ForceREST`           | `bool`                |                                                                                                                                                                                                                                                                                                                    |
-| `BackpressureProfile` | `BackpressureProfile` |                                                                                                                                                                                                                                                                                                                    |
-| `LogLevel`            | `LogLevel`            |                                                                                                                                                                                                                                                                                                                    |
-| `EventualPollDefault` | `time.Duration`       |                                                                                                                                                                                                                                                                                                                    |
-| `Retry`               | `RetryConfig`         |                                                                                                                                                                                                                                                                                                                    |
-| `TLS`                 | `TLSConfig`           |                                                                                                                                                                                                                                                                                                                    |
-| `WorkerDefaults`      | `WorkerDefaults`      |                                                                                                                                                                                                                                                                                                                    |
-| `Clock`               | `Clock`               | Clock resolves runtime cadence. Nil selects `LiveClock`.                                                                                                                                                                                                                                                           |
-| `Random`              | `Random`              | Random is the source jitter is drawn from. Nil selects `LiveRandom`.                                                                                                                                                                                                                                               |
+| Field                       | Type                  | Description                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RestAddress`               | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `GrpcAddress`               | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `ExactRestAddress`          | `bool`                | ExactRestAddress opts out of the automatic /v2 suffix normally appended to RestAddress (CAMUNDA_REST_ADDRESS_EXACT). When true, the SDK targets RestAddress exactly as provided — useful behind an API gateway / reverse proxy that mounts the REST API under a prefix that does not follow the .../v2 convention.                                                          |
+| `AuthStrategy`              | `AuthStrategy`        |                                                                                                                                                                                                                                                                                                                                                                             |
+| `ClientID`                  | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `ClientSecret`              | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `OAuthURL`                  | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `TokenAudience`             | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `OAuthScope`                | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `OAuthCacheDir`             | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `BasicAuthUsername`         | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `BasicAuthPassword`         | `string`              |                                                                                                                                                                                                                                                                                                                                                                             |
+| `DefaultTenantID`           | `string`              | DefaultTenantID is the tenant id tenant-scoped commands (deploy, create process instance, publish/correlate message, broadcast signal, evaluate decision/expression/conditionals, activate jobs) address when the caller does not pass one explicitly. When empty, the effective default tenant is DefaultTenantIdentifier ("<default>"), matching the Camunda Java client. |
+| `UserAgent`                 | `string`              | UserAgent is an application identifier (e.g. "my-app/1.2", CAMUNDA_USER_AGENT) appended after the SDK's own camunda-orchestration-sdk-go/<version> token on every REST, OAuth and gRPC request. It never replaces the SDK token.                                                                                                                                            |
+| `Falcon`                    | `bool`                | Falcon enables the FALCON (nanobpmn command-stream) transport upgrade when the gateway advertises it (CAMUNDA_FALCON, default true). ForceREST forces the pure-REST path even when FALCON is advertised (CAMUNDA_FORCE_REST), e.g. where WebSockets are blocked. Use FalconEnabled for the resolved state.                                                                  |
+| `ForceREST`                 | `bool`                |                                                                                                                                                                                                                                                                                                                                                                             |
+| `BackpressureProfile`       | `BackpressureProfile` |                                                                                                                                                                                                                                                                                                                                                                             |
+| `LogLevel`                  | `LogLevel`            |                                                                                                                                                                                                                                                                                                                                                                             |
+| `EventualPollDefault`       | `time.Duration`       |                                                                                                                                                                                                                                                                                                                                                                             |
+| `Retry`                     | `RetryConfig`         |                                                                                                                                                                                                                                                                                                                                                                             |
+| `TLS`                       | `TLSConfig`           |                                                                                                                                                                                                                                                                                                                                                                             |
+| `WorkerDefaults`            | `WorkerDefaults`      |                                                                                                                                                                                                                                                                                                                                                                             |
+| `MaxIdleConns`              | `int`                 | MaxIdleConns and MaxIdleConnsPerHost size the SDK's own HTTP connection pool (CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS / CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS_PER_HOST, or WithMaxIdleConns / WithMaxIdleConnsPerHost). They apply only when the SDK builds the base transport itself — a user-supplied HTTPClient or Transport is used as-is.                                            |
+| `MaxIdleConnsPerHost`       | `int`                 |                                                                                                                                                                                                                                                                                                                                                                             |
+| `MaxIdleConnsPinned`        | `bool`                | MaxIdleConnsPinned / MaxIdleConnsPerHostPinned pin the corresponding pool dimension, disabling automatic growth from worker capacity. They are set when the value comes from WithMaxIdleConns(PerHost) or CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS(_PER_HOST).                                                                                                                       |
+| `MaxIdleConnsPerHostPinned` | `bool`                |                                                                                                                                                                                                                                                                                                                                                                             |
+| `HTTPClient`                | `*http.Client`        | HTTPClient, when set (WithHTTPClient), is used for all REST calls as-is: the SDK's retry, backpressure, auth, and TLS layers are bypassed, and the MaxIdleConns(PerHost) settings do not apply. Mutually exclusive with Transport.                                                                                                                                          |
+| `Transport`                 | `http.RoundTripper`   | Transport, when set (WithTransport), replaces the base RoundTripper at the bottom of the SDK's chain (backpressure -> retry -> auth -> Transport). TLS material is not applied to it, and the MaxIdleConns(PerHost) settings do not apply. Mutually exclusive with HTTPClient.                                                                                              |
+| `Clock`                     | `Clock`               | Clock resolves runtime cadence. Nil selects `LiveClock`.                                                                                                                                                                                                                                                                                                                    |
+| `Random`                    | `Random`              | Random is the source jitter is drawn from. Nil selects `LiveRandom`.                                                                                                                                                                                                                                                                                                        |
 
 ### Functions
 
@@ -143,6 +150,28 @@ FalconEnabled reports whether the FALCON command-stream transport may be used:
 it must be enabled (CAMUNDA_FALCON) and not force-disabled (CAMUNDA_FORCE_REST).
 It only engages when the gateway actually advertises FALCON support; against
 stock Camunda the SDK stays on REST regardless.
+
+#### GoString
+
+```go
+func (c Config) GoString() string
+```
+
+GoString renders the configuration in Go syntax for the %#v verb, with the
+same credential redaction String applies.
+
+#### String
+
+```go
+func (c Config) String() string
+```
+
+String renders the resolved configuration with every credential replaced by a
+redaction marker, so logging a Config (`log.Printf("%+v", cfg)`) cannot spill
+the client secret, the basic-auth password, the inline mTLS certificate or key
+PEM, or the key passphrase. Non-secret settings are rendered in full.
+
+Implementing String also covers the %v, %+v and %s verbs; GoString covers %#v.
 
 #### Validate
 
@@ -261,8 +290,12 @@ panic on first use deep inside the runtime.
 func WithDefaultTenantID(id string) Option
 ```
 
-WithDefaultTenantID sets the default tenant id applied to operations that
-accept one.
+WithDefaultTenantID sets the default tenant id applied to tenant-scoped
+commands (deploy, create process instance, publish/correlate message,
+broadcast signal, evaluate decision/expression/conditionals, activate jobs)
+when the caller does not pass one explicitly. When unset, the effective
+default tenant is "<default>" (camunda.DefaultTenantIdentifier), matching
+the Camunda Java client.
 
 #### WithExactRestAddress
 
@@ -304,6 +337,18 @@ func WithGrpcAddress(addr string) Option
 WithGrpcAddress sets the Zeebe gRPC gateway address (host:port) used by the
 gRPC streaming job worker.
 
+#### WithHTTPClient
+
+```go
+func WithHTTPClient(client *http.Client) Option
+```
+
+WithHTTPClient supplies the *http.Client used for all REST calls. The client
+is used as-is: the SDK's retry, backpressure, auth, and TLS layers are
+bypassed, so the supplied client must carry everything the deployment needs.
+Mutually exclusive with `WithTransport`; setting both fails `New` with a
+configuration error.
+
 #### WithLogLevel
 
 ```go
@@ -311,6 +356,41 @@ func WithLogLevel(l LogLevel) Option
 ```
 
 WithLogLevel sets the SDK log level.
+
+#### WithMaxIdleConns
+
+```go
+func WithMaxIdleConns(n int) Option
+```
+
+WithMaxIdleConns sets the maximum number of idle (keep-alive) connections the
+SDK's HTTP transport keeps open across all hosts. It maps to the
+CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS environment variable and applies only when the
+SDK builds the base transport itself (not with `WithHTTPClient` or
+`WithTransport`).
+
+The SDK default (256) deliberately replaces Go's http.DefaultTransport pool,
+whose 2 idle connections per host force a job worker with many jobs in flight
+to open and close a TCP connection per call — churning sockets into TIME_WAIT
+and exhausting ephemeral ports (camunda/orchestration-cluster-api-go#162).
+Without this option the pool also grows to cover the job workers created on
+the client; setting it pins the value.
+
+#### WithMaxIdleConnsPerHost
+
+```go
+func WithMaxIdleConnsPerHost(n int) Option
+```
+
+WithMaxIdleConnsPerHost sets the maximum number of idle (keep-alive)
+connections the SDK's HTTP transport keeps open per host. It maps to the
+CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS_PER_HOST environment variable and applies only
+when the SDK builds the base transport itself (not with `WithHTTPClient` or
+`WithTransport`). Without this option the SDK grows the pool automatically to
+the sum of the client's workers' MaxConcurrentJobs plus one poller each;
+setting it pins the value. When pinning, the global `WithMaxIdleConns` limit
+still caps the whole idle pool, so raise it as well (to at least this value,
+or 0 for no global limit).
 
 #### WithNoAuth
 
@@ -344,6 +424,13 @@ func WithOAuthCacheDir(dir string) Option
 ```
 
 WithOAuthCacheDir enables the on-disk OAuth token cache at dir.
+
+The cache holds a bearer token. dir is created mode 0700, entries are written
+mode 0600 via an atomic rename, an expired entry is removed, and the cache is
+disabled entirely when dir is writable by group or other. On Windows none of
+that is enforced by the operating system — permission bits are largely ignored
+there and a file inherits its directory's ACL — so do not enable the cache on
+a shared Windows host. See the internal/auth package documentation for detail.
 
 #### WithOAuthScope
 
@@ -382,6 +469,29 @@ func WithRetry(rc RetryConfig) Option
 
 WithRetry sets the transient-error retry policy.
 
+#### WithTransport
+
+```go
+func WithTransport(rt http.RoundTripper) Option
+```
+
+WithTransport replaces the base http.RoundTripper at the bottom of the SDK's
+transport chain (backpressure -> retry -> auth -> Transport), so the SDK's
+resilience layers still apply on top of it. TLS material is not applied to a
+user-supplied transport — configure it on the transport itself. Mutually
+exclusive with `WithHTTPClient`; setting both fails `New` with a
+configuration error.
+
+#### WithUserAgent
+
+```go
+func WithUserAgent(ua string) Option
+```
+
+WithUserAgent names the calling application (e.g. "my-app/1.2"). The value is
+appended after the SDK's camunda-orchestration-sdk-go/<version> token in the
+User-Agent of every REST, OAuth and gRPC request; it never replaces it.
+
 ## RetryConfig
 
 RetryConfig is the transient-error HTTP retry policy.
@@ -413,6 +523,15 @@ over the *Path file locations.
 
 ### Methods
 
+#### GoString
+
+```go
+func (t TLSConfig) GoString() string
+```
+
+GoString renders the TLS material in Go syntax for the %#v verb, with the same
+credential redaction String applies.
+
 #### IsConfigured
 
 ```go
@@ -420,6 +539,18 @@ func (t TLSConfig) IsConfigured() bool
 ```
 
 IsConfigured reports whether any TLS material has been supplied.
+
+#### String
+
+```go
+func (t TLSConfig) String() string
+```
+
+String renders the TLS material with the inline certificate PEM, private key
+PEM and key passphrase replaced by a redaction marker. The CA PEM and the
+*Path file locations are not credentials and are rendered in full.
+
+Implementing String also covers the %v, %+v and %s verbs; GoString covers %#v.
 
 ## WorkerDefaults
 
@@ -434,6 +565,17 @@ WorkerDefaults holds default job-worker settings sourced from CAMUNDA_WORKER_*.
 | `RequestTimeoutMs`        | `int64`  |             |
 | `Name`                    | `string` |             |
 | `StartupJitterMaxSeconds` | `int`    |             |
+
+## DefaultTenantIdentifier
+
+```go
+const DefaultTenantIdentifier = "<default>"
+```
+
+DefaultTenantIdentifier is the tenant id the gateway uses when the caller
+does not address a specific tenant. It is the effective default tenant
+whenever no default tenant is configured (WithDefaultTenantID /
+CAMUNDA_DEFAULT_TENANT_ID), matching the Camunda Java client.
 
 ## ConfigSchema
 

@@ -27,7 +27,13 @@ func resolveSecretsExample(ctx context.Context, client *camunda.CamundaClient) e
 func listSecretsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region ListSecrets
 	// Returns only the references the caller is authorized to see — never values.
-	result, err := client.ListSecrets(ctx)
+	filter := camunda.NewSecretListFilter()
+	status := camunda.SecretStatusExactMatch(camunda.SECRETSTATUSENUM_ACTIVE)
+	filter.SetStatus(camunda.SecretStatusExactMatchAsSecretStatusFilterProperty(&status))
+	req := camunda.NewSecretListRequest()
+	req.SetFilter(*filter)
+
+	result, err := client.ListSecrets(ctx, *req)
 	if err != nil {
 		return err
 	}

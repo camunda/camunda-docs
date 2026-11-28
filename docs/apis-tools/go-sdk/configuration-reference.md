@@ -19,12 +19,13 @@ precedence over both.
 
 ## Connection
 
-| Variable                                          | Default                 | Description                                                                                                                         |
-| ------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `CAMUNDA_REST_ADDRESS` / `ZEEBE_REST_ADDRESS`     | `http://localhost:8080` | Orchestration Cluster REST base address.                                                                                            |
-| `CAMUNDA_REST_ADDRESS_EXACT`                      | —                       | Use `CAMUNDA_REST_ADDRESS` exactly as provided, without appending the `/v2` suffix (for gateway/reverse-proxy fronted deployments). |
-| `CAMUNDA_GRPC_ADDRESS` / `ZEEBE_GRPC_ADDRESS`     | `localhost:26500`       | Zeebe gRPC gateway address (`host:port`) for the streaming job worker.                                                              |
-| `CAMUNDA_DEFAULT_TENANT_ID` / `CAMUNDA_TENANT_ID` | —                       | Default tenant id applied to operations that accept one.                                                                            |
+| Variable                                          | Default                 | Description                                                                                                                                                                                              |
+| ------------------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_REST_ADDRESS` / `ZEEBE_REST_ADDRESS`     | `http://localhost:8080` | Orchestration Cluster REST base address.                                                                                                                                                                 |
+| `CAMUNDA_REST_ADDRESS_EXACT`                      | —                       | Use `CAMUNDA_REST_ADDRESS` exactly as provided, without appending the `/v2` suffix (for gateway/reverse-proxy fronted deployments).                                                                      |
+| `CAMUNDA_GRPC_ADDRESS` / `ZEEBE_GRPC_ADDRESS`     | `localhost:26500`       | Zeebe gRPC gateway address (`host:port`) for the streaming job worker.                                                                                                                                   |
+| `CAMUNDA_DEFAULT_TENANT_ID` / `CAMUNDA_TENANT_ID` | —                       | Default tenant id applied to operations that accept one.                                                                                                                                                 |
+| `CAMUNDA_USER_AGENT`                              | —                       | Application identifier (e.g. `my-app/1.2`) appended after the SDK's `camunda-orchestration-sdk-go/<version>` User-Agent token on REST, OAuth and gRPC requests. Never replaces it. Also `WithUserAgent`. |
 
 ## Authentication
 
@@ -63,10 +64,57 @@ precedence over both.
 
 ## Transport
 
-| Variable             | Default | Description                                                                        |
-| -------------------- | ------- | ---------------------------------------------------------------------------------- |
-| `CAMUNDA_FALCON`     | `true`  | Enable the FALCON command-stream transport upgrade when the gateway advertises it. |
-| `CAMUNDA_FORCE_REST` | —       | Force the pure-REST path even when the gateway advertises FALCON.                  |
+| Variable                                   | Default                     | Description                                                                         |
+| ------------------------------------------ | --------------------------- | ----------------------------------------------------------------------------------- |
+| `CAMUNDA_FALCON`                           | `true`                      | Enable the FALCON command-stream transport upgrade when the gateway advertises it.  |
+| `CAMUNDA_FORCE_REST`                       | —                           | Force the pure-REST path even when the gateway advertises FALCON.                   |
+| `CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS`          | `256`, grown to fit workers | Max idle (keep-alive) HTTP connections across all hosts. Setting it pins the value. |
+| `CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS_PER_HOST` | `256`, grown to fit workers | Max idle (keep-alive) HTTP connections per host. Setting it pins the value.         |
+
+The SDK never uses `http.DefaultTransport` directly: it clones it and sizes the
+idle-connection pool for job-worker workloads. Go's default pool keeps only 2
+idle connections per host, so a worker with many jobs in flight otherwise opens
+and closes a TCP connection per call — churning sockets into `TIME_WAIT`,
+exhausting ephemeral ports, and roughly halving throughput at moderate
+concurrency.
+
+The 256 default is a floor: each time you create a job worker (`NewJobWorker`
+or `NewStreamJobWorker`) the SDK grows the pool so it covers the sum of all the
+client's workers' `MaxConcurrentJobs` plus one activation poll per worker. For
+example, 50 workers × 32 concurrent jobs raises both limits to 1,650. The pool
+is resized by swapping in a resized clone of the SDK's own transport, so
+in-flight requests are never disturbed. The pool never shrinks.
+
+Explicit settings always win: a value set through
+`CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS(_PER_HOST)` or `WithMaxIdleConns(PerHost)` pins
+that limit and turns off automatic growth for it. A transport supplied with
+`WithTransport` / `WithHTTPClient` is never touched. When pinning
+`CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS_PER_HOST`, remember that
+`CAMUNDA_SDK_HTTP_MAX_IDLE_CONNS` caps the idle pool across all hosts, so raise
+it too (or set `0` for no global limit).
+
+For full control, supply your own HTTP plumbing:
+
+```go
+// WithTransport replaces the base RoundTripper; the SDK's retry, backpressure
+// and auth layers still apply on top of it.
+client, err := camunda.New(camunda.WithTransport(&http.Transport{
+	MaxIdleConns:        1024,
+	MaxIdleConnsPerHost: 1024,
+}))
+```
+
+```go
+// WithHTTPClient replaces the whole HTTP client; it is used as-is, so the
+// SDK's retry, backpressure, auth and TLS layers are bypassed.
+client, err := camunda.New(camunda.WithHTTPClient(&http.Client{
+	Transport: &http.Transport{MaxIdleConnsPerHost: 1024},
+	Timeout:   30 * time.Second,
+}))
+```
+
+The two options are mutually exclusive — setting both fails `New` with a
+configuration error.
 
 Invalid values are rejected at construction with a configuration error rather
 than being silently coerced, so a typo in a deployment manifest fails the process
