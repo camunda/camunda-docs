@@ -42,6 +42,10 @@ The group details are updated.
 
 The group is deleted. Users and roles that were assigned to the group will not be affected, but they will no longer be part of the group. The authorizations that were granted to the group will also be removed.
 
+:::note
+Groups deleted before Camunda 8.10.10 can remain assigned to roles and tenants, so a deleted group can still appear in the group list of a role or tenant. This assignment grants nothing while no group with that ID exists, and Camunda removes it when you create a group with the same ID. To remove it earlier, use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to unassign the group: `DELETE /v2/roles/{roleId}/groups/{groupId}` and `DELETE /v2/tenants/{tenantId}/groups/{groupId}`. Both requests also work for a group that no longer exists.
+:::
+
 ## Assign authorizations to a group
 
 See the [authorization](./authorization.md) section to learn how to create authorizations for groups.
